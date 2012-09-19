@@ -1,4 +1,4 @@
-mize-domine
+mize-domain
 ===========
 
-Domine Model
+Domain Model
