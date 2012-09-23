@@ -1,23 +1,26 @@
 package com.mize.domain.user;
 
 import org.codehaus.jackson.annotate.JsonAutoDetect;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.mize.domain.common.Entity;
 import com.mize.domain.common.Gender;
 import com.mize.domain.common.PostalAddress;
 import com.mize.domain.util.JodaDateDeserializer;
 import com.mize.domain.util.JsonDateSerializer;
 
 @JsonAutoDetect
-public class User {
-	private String userId;
+public class User extends Entity {
+	private int userId;
 	private UserType userType;
 	private PostalAddress postalAddress;
 	
 	// Personal Info
+	@JsonProperty 
 	private String firstName;
 	private String lastName;
 	
@@ -33,7 +36,7 @@ public class User {
 		super();
 	}
 	
-	public User(String userId, UserType userType, PostalAddress postalAddress,
+	public User(int userId, UserType userType, PostalAddress postalAddress,
 			String firstName, String lastName, DateTime birthdate, Gender gender) {
 		super();
 		this.userId = userId;
@@ -44,10 +47,10 @@ public class User {
 		this.birthdate = birthdate;
 		this.gender = gender;
 	}
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 	public UserType getUserType() {

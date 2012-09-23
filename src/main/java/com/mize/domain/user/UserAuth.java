@@ -1,6 +1,8 @@
 package com.mize.domain.user;
 
-public class UserAuth {
+import com.mize.domain.common.Entity;
+
+public class UserAuth extends Entity {
 	private int userId;
 	private String userLogin;
 	private String password;
