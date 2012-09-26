@@ -1,9 +1,6 @@
 package com.mize.domain.util;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -16,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class JsonDateSerializer extends org.codehaus.jackson.map.JsonSerializer<DateTime> {
 	
-	private static final DateTimeFormatter  dateFormat = DateTimeFormat.forPattern("yyyy-MM-dd");
+	private static final DateTimeFormatter  dateFormat = DateTimeFormat.forPattern("MM-dd-yyyy");
     @Override
     public void serialize(DateTime date, org.codehaus.jackson.JsonGenerator gen, org.codehaus.jackson.map.SerializerProvider provider)
             throws IOException, org.codehaus.jackson.JsonProcessingException {

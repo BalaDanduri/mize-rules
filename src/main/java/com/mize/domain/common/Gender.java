@@ -6,7 +6,9 @@ public enum Gender {
 	private Gender(String gender) {
 		this.gender = gender;
 	}
-	
+	public String getValue() {
+		return this.gender;
+	}
 	public static final Gender getGender(String gender) {
 		for (Gender s : values() ){
 			if (s.gender.equalsIgnoreCase(gender)) return s;

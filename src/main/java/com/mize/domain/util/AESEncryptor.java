@@ -6,6 +6,7 @@ import javax.crypto.spec.SecretKeySpec;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
+@SuppressWarnings("restriction")
 public class AESEncryptor {
 	
     //shared secret
@@ -58,20 +59,19 @@ public class AESEncryptor {
     }
     
     public static String encrypt(Cipher cipher, byte[] dataBytes) throws Exception{
-        
+
     	byte[] encVal = cipher.doFinal(dataBytes);
-        String encryptedValue = new BASE64Encoder().encode(encVal);
-        return encryptedValue;
+    	String encryptedValue = new BASE64Encoder().encode(encVal);
+    	return encryptedValue;
     }
-    
+
     public static String decrypt(Cipher cipher, String data) throws Exception{
-      
-    	 byte[] decordedValue = new BASE64Decoder().decodeBuffer(data);
-         byte[] decValue = cipher.doFinal(decordedValue);
-         String decryptedValue = new String(decValue);
-         return decryptedValue;
+    	byte[] decordedValue = new BASE64Decoder().decodeBuffer(data);
+    	byte[] decValue = cipher.doFinal(decordedValue);
+    	String decryptedValue = new String(decValue);
+    	return decryptedValue;
     }
-	
+
 	/**
 	 * @param args
 	 */

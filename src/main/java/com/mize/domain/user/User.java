@@ -78,13 +78,14 @@ public class User extends Entity {
 		this.lastName = lastName;
 	}
 	
+	@DateTimeFormat (pattern="MM-dd-yyyy")
 	@JsonSerialize(using=JsonDateSerializer.class)
 	public DateTime getBirthdate() {
 		return birthdate;
 	}
 	
-	@JsonDeserialize(using=JodaDateDeserializer.class) 
-	@DateTimeFormat (pattern="dd-MM-yyyy")
+	@DateTimeFormat (pattern="MM-dd-yyyy")
+	@JsonDeserialize(using=JodaDateDeserializer.class)
 	public void setBirthdate(DateTime birthdate) {
 		this.birthdate = birthdate;
 	}
