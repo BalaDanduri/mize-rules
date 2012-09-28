@@ -18,13 +18,19 @@ public class BrandSupportFeedback extends Entity {
 	private boolean resolved;	
 	private DateTime feedbackDate;
 	private String ticketNo;
+	private Brand brand;
+	private int userId;
+	private int userName;
+	private String supportType;
 	
 	public BrandSupportFeedback(){
 		
 	}
 
 	public BrandSupportFeedback(int supportLogId, int id, int rating,
-			String feedback, boolean resolved, DateTime feedbackDate, String ticketNo) {
+			String feedback, boolean resolved, DateTime feedbackDate,
+			String ticketNo, Brand brand, int userId, int userName,
+			String supportType) {
 		this.supportLogId = supportLogId;
 		this.id = id;
 		this.rating = rating;
@@ -32,6 +38,10 @@ public class BrandSupportFeedback extends Entity {
 		this.resolved = resolved;
 		this.feedbackDate = feedbackDate;
 		this.ticketNo = ticketNo;
+		this.brand = brand;
+		this.userId = userId;
+		this.userName = userName;
+		this.supportType = supportType;
 	}
 
 	public int getSupportLogId() {
@@ -92,5 +102,37 @@ public class BrandSupportFeedback extends Entity {
 
 	public void setTicketNo(String ticketNo) {
 		this.ticketNo = ticketNo;
+	}
+
+	public Brand getBrand() {
+		return brand;
+	}
+
+	public void setBrand(Brand brand) {
+		this.brand = brand;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public int getUserName() {
+		return userName;
+	}
+
+	public void setUserName(int userName) {
+		this.userName = userName;
+	}
+
+	public String getSupportType() {
+		return supportType;
+	}
+
+	public void setSupportType(String supportType) {
+		this.supportType = supportType;
 	}
 }
