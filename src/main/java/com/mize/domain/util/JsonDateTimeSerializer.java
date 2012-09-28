@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class JsonDateTimeSerializer extends org.codehaus.jackson.map.JsonSerializer<DateTime> {
 	
-	private static final DateTimeFormatter  dateFormat = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+	private static final DateTimeFormatter  dateFormat = DateTimeFormat.forPattern("MM-dd-yyyy HH:mm:ss");
     @Override
     public void serialize(DateTime date, org.codehaus.jackson.JsonGenerator gen, org.codehaus.jackson.map.SerializerProvider provider)
             throws IOException, org.codehaus.jackson.JsonProcessingException {
