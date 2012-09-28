@@ -17,19 +17,21 @@ public class BrandSupportFeedback extends Entity {
 	private String feedback;
 	private boolean resolved;	
 	private DateTime feedbackDate;
+	private String ticketNo;
 	
 	public BrandSupportFeedback(){
 		
 	}
 
 	public BrandSupportFeedback(int supportLogId, int id, int rating,
-			String feedback, boolean resolved, DateTime feedbackDate) {
+			String feedback, boolean resolved, DateTime feedbackDate, String ticketNo) {
 		this.supportLogId = supportLogId;
 		this.id = id;
 		this.rating = rating;
 		this.feedback = feedback;
 		this.resolved = resolved;
 		this.feedbackDate = feedbackDate;
+		this.ticketNo = ticketNo;
 	}
 
 	public int getSupportLogId() {
@@ -82,5 +84,13 @@ public class BrandSupportFeedback extends Entity {
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	public void setFeedbackDate(DateTime feedbackDate) {
 		this.feedbackDate = feedbackDate;
+	}
+
+	public String getTicketNo() {
+		return ticketNo;
+	}
+
+	public void setTicketNo(String ticketNo) {
+		this.ticketNo = ticketNo;
 	}
 }
