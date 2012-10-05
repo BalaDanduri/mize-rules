@@ -1,0 +1,157 @@
+package com.mize.domain.auth;
+
+import java.util.List;
+
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.joda.time.DateTime;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.mize.domain.common.Entity;
+import com.mize.domain.util.JodaDateTimeDeserializer;
+import com.mize.domain.util.JsonDateTimeSerializer;
+
+public class User extends Entity {
+	
+    private Long id;
+    private String email;
+    private String name;
+    private DateTime lastLogin;
+    private boolean active;
+    private boolean emailValidated;
+    private List<LinkedAccount> linkedAccounts;
+	
+    
+    public User() {
+		super();
+	}
+
+    public User(Long id) {
+		this.id = id;
+	}
+
+    
+	public User(Long id, String email, String name, DateTime lastLogin,
+			boolean active, boolean emailValidated,
+			List<LinkedAccount> linkedAccounts) {
+		this.id = id;
+		this.email = email;
+		this.name = name;
+		this.lastLogin = lastLogin;
+		this.active = active;
+		this.emailValidated = emailValidated;
+		this.linkedAccounts = linkedAccounts;
+	}
+
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class)	
+	public DateTime getLastLogin() {
+		return lastLogin;
+	}
+	
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)		
+	public void setLastLogin(DateTime lastLogin) {
+		this.lastLogin = lastLogin;
+	}
+	public boolean isActive() {
+		return active;
+	}
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+	public boolean isEmailValidated() {
+		return emailValidated;
+	}
+	public void setEmailValidated(boolean emailValidated) {
+		this.emailValidated = emailValidated;
+	}
+	public List<LinkedAccount> getLinkedAccounts() {
+		return linkedAccounts;
+	}
+	public void setLinkedAccounts(List<LinkedAccount> linkedAccounts) {
+		this.linkedAccounts = linkedAccounts;
+	}
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", email=" + email + ", name=" + name
+				+ ", lastLogin=" + lastLogin + ", active=" + active
+				+ ", emailValidated=" + emailValidated + ", linkedAccounts="
+				+ linkedAccounts + "]";
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (active ? 1231 : 1237);
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + (emailValidated ? 1231 : 1237);
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result
+				+ ((lastLogin == null) ? 0 : lastLogin.hashCode());
+		result = prime * result
+				+ ((linkedAccounts == null) ? 0 : linkedAccounts.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (active != other.active)
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (emailValidated != other.emailValidated)
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (lastLogin == null) {
+			if (other.lastLogin != null)
+				return false;
+		} else if (!lastLogin.equals(other.lastLogin))
+			return false;
+		if (linkedAccounts == null) {
+			if (other.linkedAccounts != null)
+				return false;
+		} else if (!linkedAccounts.equals(other.linkedAccounts))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
+	
+}
