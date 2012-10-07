@@ -14,7 +14,7 @@ import com.mize.domain.util.JodaDateDeserializer;
 import com.mize.domain.util.JsonDateSerializer;
 
 @JsonAutoDetect
-public class User extends Entity {
+public class UserProfile extends Entity {
 	private int userId;
 	private UserType userType;
 	private PostalAddress postalAddress;
@@ -32,11 +32,11 @@ public class User extends Entity {
 		PROFILE_CREATED, PROFILE_UPDATED
 	}
 
-	public User() {
+	public UserProfile() {
 		super();
 	}
 	
-	public User(int userId, UserType userType, PostalAddress postalAddress,
+	public UserProfile(int userId, UserType userType, PostalAddress postalAddress,
 			String firstName, String lastName, DateTime birthdate, Gender gender) {
 		super();
 		this.userId = userId;

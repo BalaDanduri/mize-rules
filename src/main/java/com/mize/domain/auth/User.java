@@ -1,6 +1,10 @@
 package com.mize.domain.auth;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -22,6 +26,19 @@ public class User extends Entity {
     private List<LinkedAccount> linkedAccounts;
 	
     
+    public enum Case {
+		SIGNUP, LOGIN
+	}
+
+    public enum SignupResult {
+		USER_EXISTS, USER_CREATED_UNVERIFIED, USER_CREATED, USER_EXISTS_UNVERIFIED
+	}
+
+    public enum LoginResult {
+		USER_UNVERIFIED, USER_LOGGED_IN, NOT_FOUND, WRONG_PASSWORD,USER_FOUND
+	}
+
+	
     public User() {
 		super();
 	}
@@ -88,9 +105,42 @@ public class User extends Entity {
 	public List<LinkedAccount> getLinkedAccounts() {
 		return linkedAccounts;
 	}
+	
 	public void setLinkedAccounts(List<LinkedAccount> linkedAccounts) {
 		this.linkedAccounts = linkedAccounts;
 	}
+
+	public void  setLinkedAccount(LinkedAccount linkedAccount) {
+		if(linkedAccounts==null) {
+			linkedAccounts = new ArrayList<LinkedAccount>();
+		}
+		linkedAccounts.add(linkedAccount);
+	}
+	
+	public void  addLinkedAccount(LinkedAccount linkedAccount) {
+		if(linkedAccounts==null) {
+			linkedAccounts = new ArrayList<LinkedAccount>();
+		}
+		linkedAccounts.add(linkedAccount);
+	}
+	
+	public void addLinkedAccounts(List<LinkedAccount> linkedaccounts) {
+		if(this.linkedAccounts==null) {
+			this.linkedAccounts = new ArrayList<LinkedAccount>();
+		} else {
+			this.linkedAccounts.clear();
+		}
+		for (LinkedAccount linkedAccount : linkedaccounts) {
+			this.linkedAccounts.add(linkedAccount);
+		}	
+	}
+	
+	public void clearLinkedAccounts() {
+		if(this.linkedAccounts!=null) {
+			this.linkedAccounts.clear();
+		}
+	}
+	
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", email=" + email + ", name=" + name
@@ -153,5 +203,7 @@ public class User extends Entity {
 			return false;
 		return true;
 	}
+
+	
 	
 }

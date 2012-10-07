@@ -1,4 +1,4 @@
-package com.mize.domain.user;
+package com.mize.domain.auth;
 
 import com.mize.domain.common.Entity;
 
@@ -8,19 +8,8 @@ public class UserAuth extends Entity {
 	private String password;
 	private int userSourceId;
 	private AuthProvider provider;
-	
-	public enum Case {
-		SIGNUP, LOGIN
-	}
-
-	public enum SignupResult {
-		USER_EXISTS, USER_CREATED_UNVERIFIED, USER_CREATED, USER_EXISTS_UNVERIFIED
-	}
-
-	public enum LoginResult {
-		USER_UNVERIFIED, USER_LOGGED_IN, NOT_FOUND, WRONG_PASSWORD
-	}
-	
+	private boolean isActive;
+	private boolean isValidated;
 	/**
 	 * 
 	 */
@@ -29,25 +18,29 @@ public class UserAuth extends Entity {
 		// TODO Auto-generated constructor stub
 	}
 
-
 	/**
 	 * @param userId
 	 * @param userLogin
 	 * @param password
 	 * @param userSourceId
 	 * @param provider
+	 * @param isActive
+	 * @param isValidated
 	 */
 	public UserAuth(int userId, String userLogin, String password,
-			int userSourceId, AuthProvider provider) {
+			int userSourceId, AuthProvider provider, boolean isActive,
+			boolean isValidated) {
 		super();
 		this.userId = userId;
 		this.userLogin = userLogin;
 		this.password = password;
 		this.userSourceId = userSourceId;
 		this.provider = provider;
+		this.isActive = isActive;
+		this.isValidated = isValidated;
 	}
-	
-	
+
+
 	public int getUserId() {
 		return userId;
 	}
@@ -77,5 +70,21 @@ public class UserAuth extends Entity {
 	}
 	public void setProvider(AuthProvider provider) {
 		this.provider = provider;
+	}
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+	
+	public boolean isValidated() {
+		return isValidated;
+	}
+	
+	public void setValidated(boolean isValidated) {
+		this.isValidated = isValidated;
 	}
 }

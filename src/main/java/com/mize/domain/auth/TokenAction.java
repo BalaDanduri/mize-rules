@@ -1,10 +1,11 @@
 package com.mize.domain.auth;
 
+import java.util.Date;
+
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
-
 import com.mize.domain.common.Entity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
@@ -12,14 +13,27 @@ import com.mize.domain.auth.User;
 
 public class TokenAction extends Entity {
 	
-	public enum Type {
-       EV, PR
+	public enum TokenType {
+		EV("EV"),
+		PR("PR");
+
+		private String tokenType;
+		private TokenType(String tokenType) {
+			this.tokenType = tokenType;
+		}
+
+		public static final TokenType getTokenType(String tokenType) {
+			for (TokenType s : values() ){
+				if (s.tokenType.equalsIgnoreCase(tokenType)) return s;
+			}
+			return null;
+		}
 	}
 	
 	private Long id;
 	private String token;
 	private User targetUser;
-	private Type type;
+	private TokenType type;
 	private DateTime created;
 	private DateTime expires;
 
@@ -27,7 +41,7 @@ public class TokenAction extends Entity {
 		
 	}
 	
-	public TokenAction(Long id, String token, User targetUser, Type type,
+	public TokenAction(Long id, String token, User targetUser, TokenType type,
 			DateTime created, DateTime expires) {
 		this.id = id;
 		this.token = token;
@@ -55,10 +69,10 @@ public class TokenAction extends Entity {
 	public void setTargetUser(User targetUser) {
 		this.targetUser = targetUser;
 	}
-	public Type getType() {
+	public TokenType getType() {
 		return type;
 	}
-	public void setType(Type type) {
+	public void setType(TokenType type) {
 		this.type = type;
 	}
 	
@@ -84,6 +98,10 @@ public class TokenAction extends Entity {
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	public void setCreated(DateTime created) {
 		this.created = created;
+	}
+	
+	public boolean isValid() {
+		return (this.expires!=null?this.expires.isAfter(new DateTime()) : false);
 	}
 
 	@Override
