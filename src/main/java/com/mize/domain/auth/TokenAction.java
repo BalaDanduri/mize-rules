@@ -2,9 +2,13 @@ package com.mize.domain.auth;
 
 import java.util.Date;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
+import org.junit.Ignore;
 import org.springframework.format.annotation.DateTimeFormat;
 import com.mize.domain.common.Entity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
@@ -100,6 +104,8 @@ public class TokenAction extends Entity {
 		this.created = created;
 	}
 	
+	@JsonProperty("wrapper")
+	@JsonIgnore()
 	public boolean isValid() {
 		return (this.expires!=null?this.expires.isAfter(new DateTime()) : false);
 	}
