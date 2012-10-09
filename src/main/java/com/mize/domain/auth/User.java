@@ -24,7 +24,7 @@ public class User extends Entity {
 	
     
     public enum Case {
-		SIGNUP, LOGIN
+		SIGNUP, LOGIN , LOGOUT
 	}
 
     public enum SignupResult {
