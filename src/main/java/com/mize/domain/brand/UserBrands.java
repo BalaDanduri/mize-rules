@@ -8,14 +8,14 @@ public class UserBrands extends Entity {
 	private int userId;
 	private Brand brand;
 	private int brandSupportId;
-	private char favorite;
+	private String favorite;
 
 	public UserBrands() {
 		
 	}
 	
 	public UserBrands(int id, int userId, Brand brand, int brandSupportId,
-			char favorite) {
+			String favorite) {
 		this.id = id;
 		this.userId = userId;
 		this.brand = brand;
@@ -41,10 +41,10 @@ public class UserBrands extends Entity {
 	public void setBrandSupportId(int brandSupportId) {
 		this.brandSupportId = brandSupportId;
 	}
-	public char getFavorite() {
+	public String getFavorite() {
 		return favorite;
 	}
-	public void setFavorite(char favorite) {
+	public void setFavorite(String favorite) {
 		this.favorite = favorite;
 	}
 	public int getId() {
@@ -67,7 +67,7 @@ public class UserBrands extends Entity {
 		int result = 1;
 		result = prime * result + ((brand == null) ? 0 : brand.hashCode());
 		result = prime * result + brandSupportId;
-		result = prime * result + favorite;
+		result = prime * result + ((favorite == null) ? 0 : favorite.hashCode());
 		result = prime * result + id;
 		result = prime * result + userId;
 		return result;
