@@ -22,6 +22,7 @@ public class Entity {
 		this.message = message;
 	}
 	
+	@JsonIgnore
 	public Set<Message> getMessages() {
 		return messages.getMessages();
 	}
