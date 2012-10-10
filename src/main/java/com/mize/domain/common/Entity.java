@@ -9,7 +9,9 @@ import com.mize.domain.appmessage.ApplicationMessages.Message;
 
 public class Entity {
 	
+	// TODO : remove message and remove ignore from messages once changes are done in code.
 	private String message; // need to use object and have more customized object for messages
+	@JsonIgnore
 	private ApplicationMessages messages;
 
 	public String getMessage() {
