@@ -7,21 +7,23 @@ public class UserBrands extends Entity {
 	private int id;
 	private int userId;
 	private Brand brand;
-	private int brandSupportId;
+	private BrandSupport brandSupport;
 	private String favorite;
 
 	public UserBrands() {
 		
 	}
 	
-	public UserBrands(int id, int userId, Brand brand, int brandSupportId,
-			String favorite) {
+
+	public UserBrands(int id, int userId, Brand brand,
+			BrandSupport brandSupport, String favorite) {
 		this.id = id;
 		this.userId = userId;
 		this.brand = brand;
-		this.brandSupportId = brandSupportId;
+		this.brandSupport = brandSupport;
 		this.favorite = favorite;
 	}
+
 
 	public int getUserId() {
 		return userId;
@@ -35,12 +37,7 @@ public class UserBrands extends Entity {
 	public void setBrand(Brand brand) {
 		this.brand = brand;
 	}
-	public int getBrandSupportId() {
-		return brandSupportId;
-	}
-	public void setBrandSupportId(int brandSupportId) {
-		this.brandSupportId = brandSupportId;
-	}
+
 	public String getFavorite() {
 		return favorite;
 	}
@@ -54,24 +51,38 @@ public class UserBrands extends Entity {
 		this.id = id;
 	}
 
+	public BrandSupport getBrandSupport() {
+		return brandSupport;
+	}
+
+
+	public void setBrandSupport(BrandSupport brandSupport) {
+		this.brandSupport = brandSupport;
+	}
+
+
 	@Override
 	public String toString() {
 		return "UserBrands [id=" + id + ", userId=" + userId + ", brand="
-				+ brand + ", brandSupportId=" + brandSupportId + ", favorite="
+				+ brand + ", brandSupport=" + brandSupport + ", favorite="
 				+ favorite + "]";
 	}
+
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((brand == null) ? 0 : brand.hashCode());
-		result = prime * result + brandSupportId;
-		result = prime * result + ((favorite == null) ? 0 : favorite.hashCode());
+		result = prime * result
+				+ ((brandSupport == null) ? 0 : brandSupport.hashCode());
+		result = prime * result
+				+ ((favorite == null) ? 0 : favorite.hashCode());
 		result = prime * result + id;
 		result = prime * result + userId;
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -87,9 +98,15 @@ public class UserBrands extends Entity {
 				return false;
 		} else if (!brand.equals(other.brand))
 			return false;
-		if (brandSupportId != other.brandSupportId)
+		if (brandSupport == null) {
+			if (other.brandSupport != null)
+				return false;
+		} else if (!brandSupport.equals(other.brandSupport))
 			return false;
-		if (favorite != other.favorite)
+		if (favorite == null) {
+			if (other.favorite != null)
+				return false;
+		} else if (!favorite.equals(other.favorite))
 			return false;
 		if (id != other.id)
 			return false;
@@ -98,5 +115,6 @@ public class UserBrands extends Entity {
 		return true;
 	}
 
+	
 	
 }
