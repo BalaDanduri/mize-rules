@@ -18,6 +18,8 @@ public class UserProfile extends Entity {
 	private int userId;
 	private UserType userType;
 	private PostalAddress postalAddress;
+	private String photoLink;
+	
 	
 	// Personal Info
 	@JsonProperty 
@@ -33,12 +35,12 @@ public class UserProfile extends Entity {
 	}
 
 	public UserProfile() {
-		super();
+		
 	}
 	
 	public UserProfile(int userId, UserType userType, PostalAddress postalAddress,
-			String firstName, String lastName, DateTime birthdate, Gender gender) {
-		super();
+			String firstName, String lastName, DateTime birthdate, Gender gender,String photoLink) {
+		
 		this.userId = userId;
 		this.userType = userType;
 		this.postalAddress = postalAddress;
@@ -46,6 +48,7 @@ public class UserProfile extends Entity {
 		this.lastName = lastName;
 		this.birthdate = birthdate;
 		this.gender = gender;
+		this.photoLink=photoLink;
 	}
 	public int getUserId() {
 		return userId;
@@ -94,5 +97,13 @@ public class UserProfile extends Entity {
 	}
 	public void setGender(Gender gender) {
 		this.gender = gender;
+	}
+	
+	public String getPhotoLink() {
+		return photoLink;
+	}
+
+	public void setPhotoLink(String photoLink) {
+		this.photoLink = photoLink;
 	}
 }
