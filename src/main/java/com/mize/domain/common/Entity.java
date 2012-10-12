@@ -1,19 +1,14 @@
 package com.mize.domain.common;
 
+import java.util.HashSet;
 import java.util.Set;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-
-import com.mize.domain.appmessage.ApplicationMessages;
-import com.mize.domain.appmessage.ApplicationMessages.Message;
+import com.mize.domain.appmessage.ApplicationMessage;
+import com.mize.domain.appmessage.MessageType;
 
 public class Entity {
 	
-	// TODO : remove message and remove ignore from messages once changes are done in code.
 	private String message; // need to use object and have more customized object for messages
-	@JsonIgnore
-	private ApplicationMessages messages;
-
 	public String getMessage() {
 		return message;
 	}
@@ -21,10 +16,29 @@ public class Entity {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+
+	Set<ApplicationMessage> appMessages = new HashSet<ApplicationMessage>();
 	
-	@JsonIgnore
-	public Set<Message> getMessages() {
-		return messages.getMessages();
+	public boolean addMessage(final ApplicationMessage msg) {
+		
+		return appMessages.add(msg);
 	}
 	
+	public boolean addMessage(long id, MessageType messageType, String messageCode,
+			String messageShortDesc, String messageLongDesc,
+			int messageSeverity) {
+	
+			return appMessages.add(new ApplicationMessage(id, messageType, messageCode, messageShortDesc, messageLongDesc, messageSeverity));
+	}
+	
+	public Set<ApplicationMessage> getApplicationMessages() {
+		return appMessages;
+	}
+	
+	public static String STATUS = "status";
+	
+	public enum SUCCESS {
+		TRUE, FALSE
+	}
+
 }
