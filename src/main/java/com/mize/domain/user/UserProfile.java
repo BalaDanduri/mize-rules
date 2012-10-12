@@ -50,6 +50,20 @@ public class UserProfile extends Entity {
 		this.gender = gender;
 		this.photoLink=photoLink;
 	}
+	
+	public UserProfile(int userId, UserType userType, PostalAddress postalAddress,
+			String firstName, String lastName, DateTime birthdate, Gender gender) {
+		
+		this.userId = userId;
+		this.userType = userType;
+		this.postalAddress = postalAddress;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.birthdate = birthdate;
+		this.gender = gender;
+	}
+	
+	
 	public int getUserId() {
 		return userId;
 	}
