@@ -4,6 +4,13 @@ import com.mize.domain.common.Entity;
 import com.mize.domain.auth.User;;
 
 public class LinkedAccount extends Entity {
+	/**
+	 * Adding these constants to avoid hardcoding in the code.
+	 */
+	public static final String PROVIDER_FACEBOOK = "FACEBOOK";
+	public static final String PROVIDER_PASSWORD = "PASSWORD";
+	public static final String PROVIDER_TWITTER= "TWITTER";
+	
     private Long id;
     private User user;
     public String providerUserId;
