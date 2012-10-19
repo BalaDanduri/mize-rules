@@ -31,11 +31,12 @@ public class BrandSupportFeedback extends Entity {
 		
 	}
 
-	public BrandSupportFeedback(int supportLogId, int id, Brand brand, int userId, String userName, String supportType, int rating,
+	public BrandSupportFeedback(int supportLogId, int id, Brand brand, long brandSupportId, int userId, String userName, String supportType, int rating,
 			String feedback, boolean resolved, DateTime feedbackDate, String ticketNo, List<PostToSocialMedia> socialMediaPosts) {
 		this.supportLogId = supportLogId;
 		this.id = id;
 		this.brand = brand;
+		this.brandSupportId = brandSupportId;
 		this.userId = userId;
 		this.userName = userName;
 		this.supportType = supportType;
