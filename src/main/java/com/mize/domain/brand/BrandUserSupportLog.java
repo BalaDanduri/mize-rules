@@ -20,6 +20,7 @@ public class BrandUserSupportLog extends Entity {
 	private DateTime startTime;
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime endTime;
+	private long brandSupportId;
 	
 	public BrandUserSupportLog(){
 		
@@ -27,7 +28,7 @@ public class BrandUserSupportLog extends Entity {
 	
 	public BrandUserSupportLog(int brandId, int id,
 			int userId, String supportType, String countryCode, DateTime startTime,
-			DateTime endTime) {
+			DateTime endTime, long brandSupportId) {
 		this.brandId = brandId;
 		this.id = id;
 		this.userId = userId;
@@ -35,6 +36,7 @@ public class BrandUserSupportLog extends Entity {
 		this.countryCode = countryCode;
 		this.startTime = startTime;
 		this.endTime = endTime;
+		this.brandSupportId = brandSupportId;
 	}
 
 	public int getBrandId() {
@@ -106,6 +108,7 @@ public class BrandUserSupportLog extends Entity {
 		result = prime * result
 				+ ((supportType == null) ? 0 : supportType.hashCode());
 		result = prime * result + userId;
+		
 		return result;
 	}
 
@@ -119,6 +122,8 @@ public class BrandUserSupportLog extends Entity {
 			return false;
 		BrandUserSupportLog other = (BrandUserSupportLog) obj;
 		if (brandId != other.brandId)
+			return false;
+		if (brandSupportId != other.brandSupportId)
 			return false;
 		if (id != other.id)
 			return false;
@@ -147,9 +152,18 @@ public class BrandUserSupportLog extends Entity {
 	@Override
 	public String toString() {
 		return "BrandUserSupportLog [brandId=" + brandId
+				+ ", brandSupportId=" + brandSupportId
 				+ ", brandUserSupportLogId=" + id
 				+ ", userId=" + userId + ", supportType=" + supportType
 				+ ", countryId=" + countryCode + ", startTime=" + startTime
 				+ ", endTime=" + endTime + "]";
+	}
+
+	public long getBrandSupportId() {
+		return brandSupportId;
+	}
+
+	public void setBrandSupportId(long brandSupportId) {
+		this.brandSupportId = brandSupportId;
 	}
 }

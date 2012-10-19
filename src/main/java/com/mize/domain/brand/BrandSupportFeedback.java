@@ -24,6 +24,7 @@ public class BrandSupportFeedback extends Entity {
 	private boolean resolved;	
 	private DateTime feedbackDate;
 	private String ticketNo;
+	private long brandSupportId;
 	private List<PostToSocialMedia> socialMediaPosts;
 
 	public BrandSupportFeedback(){
@@ -150,6 +151,7 @@ public class BrandSupportFeedback extends Entity {
 		StringBuilder sb = new StringBuilder();
 		sb.append("supportLogId = " + supportLogId + ",");
 		sb.append("brand = " + brand + ",");
+		sb.append("brandSupportId = " + brandSupportId + ",");		
 		sb.append("userId = " + userId + ",");
 		sb.append("userName = " + userName + ",");
 		sb.append("supportType = " + supportType + ",");
@@ -160,5 +162,13 @@ public class BrandSupportFeedback extends Entity {
 		sb.append("ticketNo = " + ticketNo + ",");
 		sb.append("socialMediaPosts = " + socialMediaPosts + "} \n");		
 		return sb.toString();
+	}
+
+	public long getBrandSupportId() {
+		return brandSupportId;
+	}
+
+	public void setBrandSupportId(long brandSupportId) {
+		this.brandSupportId = brandSupportId;
 	}
 }
