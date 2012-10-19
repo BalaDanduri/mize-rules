@@ -456,6 +456,7 @@ CREATE TABLE user_support_log  (
 	support_log_id	bigint(20) AUTO_INCREMENT NOT NULL,
 	user_id       	bigint(20) NOT NULL,
 	brand_id      	bigint(20) NULL,
+	brand_support_id bigint(20) NULL,
 	start_ts      	timestamp NOT NULL,
 	end_ts        	timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
 	country_id    	int(11) NULL,
@@ -650,6 +651,9 @@ ALTER TABLE brand_support
 	ON DELETE RESTRICT 
 ON UPDATE RESTRICT
 GO
+alter table brand_support 
+add constraint unique (brand_id, support_qualifier)
+GO
 ALTER TABLE brand_support_temp
 	ADD CONSTRAINT fk_country
 	FOREIGN KEY(country_id)
@@ -740,6 +744,10 @@ ALTER TABLE user_support_log
 	REFERENCES users(id)
 	ON DELETE RESTRICT 
 	ON UPDATE RESTRICT 
+GO
+alter table user_support_log 
+	add foreign key (brand_support_id) 
+	references brand_support (brand_support_id)
 GO
 ALTER TABLE users_security_role
 	ADD CONSTRAINT fk_users_security_role_users_01
