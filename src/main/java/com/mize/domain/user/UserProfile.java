@@ -20,6 +20,11 @@ public class UserProfile extends Entity {
 	private PostalAddress postalAddress;
 	private String photoLink;
 	
+	private String profileName;
+	private String phoneMobile;
+	private String phoneHome;
+	private String phoneWork;
+	
 	
 	// Personal Info
 	@JsonProperty 
@@ -119,5 +124,33 @@ public class UserProfile extends Entity {
 
 	public void setPhotoLink(String photoLink) {
 		this.photoLink = photoLink;
+	}
+	public String getProfileName() {
+		return profileName;
+	}
+
+	public void setProfileName(String profileName) {
+		this.profileName = profileName;
+	}
+	public String getPhoneMobile() {
+		return phoneMobile;
+	}
+
+	public void setPhoneMobile(String phoneMobile) {
+		this.phoneMobile = phoneMobile;
+	}
+	public String getPhoneHome() {
+		return phoneHome;
+	}
+
+	public void setPhoneHome(String phoneHome) {
+		this.phoneHome = phoneHome;
+	}
+	public String getPhoneWork() {
+		return phoneWork;
+	}
+
+	public void setPhoneWork(String phoneWork) {
+		this.phoneWork = phoneWork;
 	}
 }

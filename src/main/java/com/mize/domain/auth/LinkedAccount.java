@@ -7,9 +7,9 @@ public class LinkedAccount extends Entity {
 	/**
 	 * Adding these constants to avoid hardcoding in the code.
 	 */
-	public static final String PROVIDER_FACEBOOK = "FACEBOOK";
-	public static final String PROVIDER_PASSWORD = "PASSWORD";
-	public static final String PROVIDER_TWITTER= "TWITTER";
+	public static final String PROVIDER_FACEBOOK = "facebook";
+	public static final String PROVIDER_PASSWORD = "password";
+	public static final String PROVIDER_TWITTER= "twitter";
 	
     private Long id;
     private User user;
