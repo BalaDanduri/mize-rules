@@ -423,6 +423,7 @@ CREATE TABLE user_permission  (
 )
 GO
 CREATE TABLE user_profile  ( 
+	profile_name	varchar(100) NULL,
 	first_name 		varchar(100) NOT NULL,
 	last_name  		varchar(100) NOT NULL,
 	birth_day  		timestamp NOT NULL,
@@ -436,6 +437,9 @@ CREATE TABLE user_profile  (
 	postal_code		varchar(11) NOT NULL,
 	photo_link 		varchar(250) NOT NULL,
 	user_id    		bigint(20) NOT NULL, 
+	phone_mobile	varchar(20) NULL,
+	phone_home		varchar(20) NULL,
+	phone_work 		varchar(20) NULL,
 	created_by    	bigint(20) NULL,
 	created_date  	datetime NULL,
 	updated_by    	bigint(20) NULL,
