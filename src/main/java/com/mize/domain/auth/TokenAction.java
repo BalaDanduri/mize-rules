@@ -29,6 +29,10 @@ public class TokenAction extends Entity {
 			}
 			return null;
 		}
+		
+		public String toString() {
+			return tokenType;
+		}
 	}
 	
 	private Long id;
