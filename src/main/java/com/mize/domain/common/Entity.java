@@ -4,14 +4,24 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.joda.time.DateTime;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.appmessage.ApplicationMessage;
 import com.mize.domain.appmessage.MessageType;
+import com.mize.domain.util.JodaDateTimeDeserializer;
+import com.mize.domain.util.JsonDateTimeSerializer;
 
 public class Entity {
-	
+	private int createdBy;
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	private DateTime createdDate;
+	private int updatedBy;
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	private DateTime updatedDate;
+ 
 	private String message; // need to use object and have more customized object for messages
 	public String getMessage() {
 		return message;
@@ -43,6 +53,47 @@ public class Entity {
 		return appMessages;
 	}
 	
+	public int getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(int createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	public DateTime getCreatedDate() {
+		return createdDate;
+	}
+
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	public void setCreatedDate(DateTime createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	public int getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(int updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	public DateTime getUpdatedDate() {
+		return updatedDate;
+	}
+	
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	public void setUpdatedDate(DateTime updatedDate) {
+		this.updatedDate = updatedDate;
+	}
+
+
 	@JsonIgnore
 	public static String STATUS = "status";
 	
