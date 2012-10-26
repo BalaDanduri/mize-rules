@@ -15,12 +15,12 @@ import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
 public class Entity {
-	private int createdBy;
+	protected int createdBy;
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private DateTime createdDate;
-	private int updatedBy;
+	protected DateTime createdDate;
+	protected int updatedBy;
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private DateTime updatedDate;
+	protected DateTime updatedDate;
  
 	private String message; // need to use object and have more customized object for messages
 	public String getMessage() {

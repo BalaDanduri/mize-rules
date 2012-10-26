@@ -30,12 +30,6 @@ public class BrandSupport extends Entity {
 	private String twitter;
 	private String facebook;
 	private String countryCode;
-	private int createdBy;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private DateTime createdDate;
-	private int modifiedBy;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private DateTime modifiedDate;
 	
 	public BrandSupport() {
 		
@@ -47,7 +41,7 @@ public class BrandSupport extends Entity {
 			String hoursOfOp, String qualifier, String type, boolean validated,
 			int validatedBy, DateTime validatedDate, String twitter,String facebook,
 			String countryCode, int createdBy, DateTime createdDate,
-			int modifiedBy, DateTime modifiedDate) {
+			int updatedBy, DateTime updatedDate) {
 		this.brand = brand;
 		this.id = id;
 		this.phone = phone;
@@ -66,8 +60,8 @@ public class BrandSupport extends Entity {
 		this.countryCode = countryCode;
 		this.createdBy = createdBy;
 		this.createdDate = createdDate;
-		this.modifiedBy = modifiedBy;
-		this.modifiedDate = modifiedDate;
+		this.updatedBy = updatedBy;
+		this.updatedDate = updatedDate;
 	}
 
 
@@ -201,45 +195,6 @@ public class BrandSupport extends Entity {
 		this.countryCode = countryCode;
 	}
 
-	public int getCreatedBy() {
-		return createdBy;
-	}
-
-	public void setCreatedBy(int createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	public DateTime getCreatedDate() {
-		return createdDate;
-	}
-
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	public void setCreatedDate(DateTime createdDate) {
-		this.createdDate = createdDate;
-	}
-
-	public int getModifiedBy() {
-		return modifiedBy;
-	}
-
-	public void setModifiedBy(int modifiedBy) {
-		this.modifiedBy = modifiedBy;
-	}
-
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	public DateTime getModifiedDate() {
-		return modifiedDate;
-	}
-	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	public void setModifiedDate(DateTime modifiedDate) {
-		this.modifiedDate = modifiedDate;
-	}
 
 
 	@Override
@@ -252,8 +207,8 @@ public class BrandSupport extends Entity {
 				+ ", validatedDate=" + validatedDate + ", twitter=" + twitter
 				+ ", facebook=" + facebook + ", countryCode=" + countryCode
 				+ ", createdBy=" + createdBy + ", createdDate=" + createdDate
-				+ ", modifiedBy=" + modifiedBy + ", modifiedDate="
-				+ modifiedDate  
+				+ ", updatedBy=" + updatedBy + ", updatedDate="
+				+ updatedDate  
 				+ ", getBrand()=" + getBrand() + ", getId()=" + getId()
 				+ ", getPhone()=" + getPhone() + ", getEmail()=" + getEmail()
 				+ ", getSite()=" + getSite() + ", getChatUrl()=" + getChatUrl()
@@ -266,8 +221,8 @@ public class BrandSupport extends Entity {
 				+ ", getFacebook()=" + getFacebook() + ", getCountryCode()="
 				+ getCountryCode() + ", getCreatedBy()=" + getCreatedBy()
 				+ ", getCreatedDate()=" + getCreatedDate()
-				+ ", getModifiedBy()=" + getModifiedBy()
-				+ ", getModifiedDate()=" + getModifiedDate()
+				+ ", getModifiedBy()=" + getUpdatedBy()
+				+ ", getModifiedDate()=" + getUpdatedDate()
 				+ ", getMessage()=" + getMessage()
 				+ ", getApplicationMessages()=" + getApplicationMessages()
 				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
@@ -292,9 +247,9 @@ public class BrandSupport extends Entity {
 		result = prime * result
 				+ ((hoursOfOp == null) ? 0 : hoursOfOp.hashCode());
 		result = prime * result + id;
-		result = prime * result + modifiedBy;
+		result = prime * result + updatedBy;
 		result = prime * result
-				+ ((modifiedDate == null) ? 0 : modifiedDate.hashCode());
+				+ ((updatedDate == null) ? 0 : updatedDate.hashCode());
 		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
 		result = prime * result
 				+ ((qualifier == null) ? 0 : qualifier.hashCode());
@@ -359,12 +314,12 @@ public class BrandSupport extends Entity {
 			return false;
 		if (id != other.id)
 			return false;
-		if (modifiedBy != other.modifiedBy)
+		if (updatedBy != other.updatedBy)
 			return false;
-		if (modifiedDate == null) {
-			if (other.modifiedDate != null)
+		if (updatedDate == null) {
+			if (other.updatedDate != null)
 				return false;
-		} else if (!modifiedDate.equals(other.modifiedDate))
+		} else if (!updatedDate.equals(other.updatedDate))
 			return false;
 		if (phone == null) {
 			if (other.phone != null)
