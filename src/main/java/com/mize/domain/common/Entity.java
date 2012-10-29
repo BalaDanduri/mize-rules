@@ -1,16 +1,11 @@
 package com.mize.domain.common;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.mize.domain.appmessage.ApplicationMessage;
-import com.mize.domain.appmessage.MessageType;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
@@ -22,35 +17,13 @@ public class Entity {
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	protected DateTime updatedDate;
  
-	private String message; // need to use object and have more customized object for messages
-	public String getMessage() {
-		return message;
+	private Messages messages; // need to use object and have more customized object for messages
+	public Messages getMessages() {
+		return messages;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
-	}
-
-	@JsonIgnore
-	Set<ApplicationMessage> appMessages = new HashSet<ApplicationMessage>();
-	
-	@JsonIgnore
-	public boolean addMessage(final ApplicationMessage msg) {
-		
-		return appMessages.add(msg);
-	}
-	
-	@JsonIgnore
-	public boolean addMessage(long id, MessageType messageType, String messageCode,
-			String messageShortDesc, String messageLongDesc,
-			int messageSeverity) {
-	
-			return appMessages.add(new ApplicationMessage(id, messageType, messageCode, messageShortDesc, messageLongDesc, messageSeverity));
-	}
-	
-	@JsonIgnore
-	public Set<ApplicationMessage> getApplicationMessages() {
-		return appMessages;
+	public void setMessages(Messages messages) {
+		this.messages = messages;
 	}
 	
 	public int getCreatedBy() {

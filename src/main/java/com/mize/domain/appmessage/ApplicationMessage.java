@@ -1,8 +1,6 @@
 package com.mize.domain.appmessage;
 
-import com.mize.domain.common.Entity;
-
-public class ApplicationMessage  extends Entity {
+public class ApplicationMessage {
 	
 	private long id;
 	private MessageType messageType;
