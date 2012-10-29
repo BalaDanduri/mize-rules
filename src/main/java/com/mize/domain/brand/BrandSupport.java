@@ -223,8 +223,7 @@ public class BrandSupport extends Entity {
 				+ ", getCreatedDate()=" + getCreatedDate()
 				+ ", getModifiedBy()=" + getUpdatedBy()
 				+ ", getModifiedDate()=" + getUpdatedDate()
-				+ ", getMessage()=" + getMessage()
-				+ ", getApplicationMessages()=" + getApplicationMessages()
+				+ ", getMessages()=" + getMessages()
 				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
 				+ ", toString()=" + super.toString() + "]";
 	}
