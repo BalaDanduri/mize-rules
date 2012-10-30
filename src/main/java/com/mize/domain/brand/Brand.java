@@ -7,6 +7,7 @@ public class Brand extends Entity {
 	private int brandId;
 	private String brandName;
 	private String brandLogoLink;
+	private String logoName;
 	
 	public Brand() {
 		
@@ -18,6 +19,13 @@ public class Brand extends Entity {
 		this.brandLogoLink = brandLogoLink;
 	}
 
+	public Brand(int brandId, String brandName, String brandLogoLink, String logoName) {
+		this.brandId = brandId;
+		this.brandName = brandName;
+		this.brandLogoLink = brandLogoLink;
+		this.logoName = logoName;
+	}
+	
 	public int getBrandId() {
 		return brandId;
 	}
@@ -46,6 +54,9 @@ public class Brand extends Entity {
 				+ ((brandLogoLink == null) ? 0 : brandLogoLink.hashCode());
 		result = prime * result
 				+ ((brandName == null) ? 0 : brandName.hashCode());
+		result = prime * result
+				+ ((logoName == null) ? 0 : logoName.hashCode());
+		
 		return result;
 	}
 
@@ -70,6 +81,11 @@ public class Brand extends Entity {
 				return false;
 		} else if (!brandName.equals(other.brandName))
 			return false;
+		if (logoName == null) {
+			if (other.logoName != null)
+				return false;
+		} else if (!logoName.equals(other.logoName))
+			return false;
 		return true;
 	}
 
@@ -77,7 +93,7 @@ public class Brand extends Entity {
 	public String toString() {
 		return "Brand [brandId=" + brandId + ", brandName=" + brandName
 				+ ", brandLogoLink="
-				+ brandLogoLink + "]";
+				+ brandLogoLink + ", logoName=" + logoName + "]";
 	}
 
 	@Override
@@ -86,5 +102,12 @@ public class Brand extends Entity {
 		return super.clone();
 	}
 	
-	
+
+	public String getLogoName() {
+		return logoName;
+	}
+
+	public void setLogoName(String logoName) {
+		this.logoName = logoName;
+	}
 }

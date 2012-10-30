@@ -1,5 +1,7 @@
 package com.mize.domain.appmessage;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 public class MessageType {
 	private int messageTypeId;
 	private String messageType;
@@ -13,10 +15,12 @@ public class MessageType {
 		this.messageType = messageType;
 	}
 
+	@JsonIgnore
 	public int getMessageTypeId() {
 		return messageTypeId;
 	}
 
+	@JsonIgnore
 	public void setMessageTypeId(int messageTypeId) {
 		this.messageTypeId = messageTypeId;
 	}

@@ -1,5 +1,7 @@
 package com.mize.domain.appmessage;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 public class ApplicationMessage {
 	
 	private long id;
@@ -115,10 +117,11 @@ public class ApplicationMessage {
 			return true;
 		}
 	
+		@JsonIgnore
 		public Long getId() {
 			return id;
 		}
-	
+		@JsonIgnore
 		public void setId(Long id) {
 			this.id = id;
 		}
