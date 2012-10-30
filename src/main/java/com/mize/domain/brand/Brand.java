@@ -3,25 +3,26 @@ package com.mize.domain.brand;
 import com.mize.domain.common.Entity;
 
 public class Brand extends Entity {
+	
 	private int brandId;
 	private String brandName;
-	private String url;
+	private String brandLogoLink;
 	private String logoName;
 	
 	public Brand() {
 		
 	}
 	
-	public Brand(int brandId, String brandName, String url) {
+	public Brand(int brandId, String brandName, String brandLogoLink) {
 		this.brandId = brandId;
 		this.brandName = brandName;
-		this.url = url;
+		this.brandLogoLink = brandLogoLink;
 	}
 
-	public Brand(int brandId, String brandName, String url, String logoName) {
+	public Brand(int brandId, String brandName, String brandLogoLink, String logoName) {
 		this.brandId = brandId;
 		this.brandName = brandName;
-		this.url = url;
+		this.brandLogoLink = brandLogoLink;
 		this.logoName = logoName;
 	}
 	
@@ -37,11 +38,11 @@ public class Brand extends Entity {
 	public void setBrandName(String brandName) {
 		this.brandName = brandName;
 	}
-	public String getUrl() {
-		return url;
+	public String getBrandLogoLink() {
+		return brandLogoLink;
 	}
-	public void setUrl(String url) {
-		this.url = url;
+	public void setBrandLogoLink(String brandLogoLink) {
+		this.brandLogoLink = brandLogoLink;
 	}
 
 	@Override
@@ -50,12 +51,12 @@ public class Brand extends Entity {
 		int result = 1;
 		result = prime * result + brandId;
 		result = prime * result
-				+ ((url == null) ? 0 : url.hashCode());
+				+ ((brandLogoLink == null) ? 0 : brandLogoLink.hashCode());
 		result = prime * result
 				+ ((brandName == null) ? 0 : brandName.hashCode());
 		result = prime * result
 				+ ((logoName == null) ? 0 : logoName.hashCode());
-
+		
 		return result;
 	}
 
@@ -70,10 +71,10 @@ public class Brand extends Entity {
 		Brand other = (Brand) obj;
 		if (brandId != other.brandId)
 			return false;
-		if (url == null) {
-			if (other.url != null)
+		if (brandLogoLink == null) {
+			if (other.brandLogoLink != null)
 				return false;
-		} else if (!url.equals(other.url))
+		} else if (!brandLogoLink.equals(other.brandLogoLink))
 			return false;
 		if (brandName == null) {
 			if (other.brandName != null)
@@ -85,15 +86,14 @@ public class Brand extends Entity {
 				return false;
 		} else if (!logoName.equals(other.logoName))
 			return false;
-
 		return true;
 	}
 
 	@Override
 	public String toString() {
 		return "Brand [brandId=" + brandId + ", brandName=" + brandName
-				+ ", url="
-				+ url  + ", logoName=" + "]";
+				+ ", brandLogoLink="
+				+ brandLogoLink + ", logoName=" + logoName + "]";
 	}
 
 	@Override
@@ -101,6 +101,7 @@ public class Brand extends Entity {
 		// TODO Auto-generated method stub
 		return super.clone();
 	}
+	
 
 	public String getLogoName() {
 		return logoName;
@@ -109,6 +110,4 @@ public class Brand extends Entity {
 	public void setLogoName(String logoName) {
 		this.logoName = logoName;
 	}
-	
-	
 }
