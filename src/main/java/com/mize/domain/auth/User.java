@@ -21,7 +21,7 @@ public class User extends Entity {
     private boolean active;
     private boolean emailValidated;
     private List<LinkedAccount> linkedAccounts;
-	
+    private List<UserConnect> userConnects;
     
     public enum Case {
 		SIGNUP, LOGIN , LOGOUT
@@ -138,12 +138,54 @@ public class User extends Entity {
 		}
 	}
 	
+
+	public List<UserConnect> getUserConnects() {
+		return userConnects;
+	}
+	
+	public void setUserConnects(List<UserConnect> userConnects) {
+		this.userConnects = userConnects;
+	}
+
+	public void  setUserConnect(UserConnect UserConnect) {
+		if(userConnects==null) {
+			userConnects = new ArrayList<UserConnect>();
+		}
+		userConnects.add(UserConnect);
+	}
+	
+	public void  addUserConnect(UserConnect UserConnect) {
+		if(userConnects==null) {
+			userConnects = new ArrayList<UserConnect>();
+		}
+		userConnects.add(UserConnect);
+	}
+	
+	public void addUserConnects(List<UserConnect> userConnects) {
+		if(this.userConnects==null) {
+			this.userConnects = new ArrayList<UserConnect>();
+		} else {
+			this.userConnects.clear();
+		}
+		for (UserConnect UserConnect : userConnects) {
+			this.userConnects.add(UserConnect);
+		}	
+	}
+	
+	public void clearUserConnects() {
+		if(this.userConnects!=null) {
+			this.userConnects.clear();
+		}
+	}
+	
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", email=" + email + ", name=" + name
 				+ ", lastLogin=" + lastLogin + ", active=" + active
 				+ ", emailValidated=" + emailValidated + ", linkedAccounts="
-				+ linkedAccounts + "]";
+				+ linkedAccounts+ ", userConnects="
+						+ userConnects + "]";
 	}
 	@Override
 	public int hashCode() {
@@ -158,6 +200,8 @@ public class User extends Entity {
 		result = prime * result
 				+ ((linkedAccounts == null) ? 0 : linkedAccounts.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result
+				+ ((userConnects == null) ? 0 : userConnects.hashCode());
 		return result;
 	}
 	@Override
@@ -192,6 +236,11 @@ public class User extends Entity {
 			if (other.linkedAccounts != null)
 				return false;
 		} else if (!linkedAccounts.equals(other.linkedAccounts))
+			return false;
+		if (userConnects == null) {
+			if (other.userConnects != null)
+				return false;
+		} else if (!userConnects.equals(other.userConnects))
 			return false;
 		if (name == null) {
 			if (other.name != null)
