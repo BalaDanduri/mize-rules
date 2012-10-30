@@ -3,21 +3,28 @@ package com.mize.domain.brand;
 import com.mize.domain.common.Entity;
 
 public class Brand extends Entity {
-	
 	private int brandId;
 	private String brandName;
-	private String brandLogoLink;
+	private String url;
+	private String logoName;
 	
 	public Brand() {
 		
 	}
 	
-	public Brand(int brandId, String brandName, String brandLogoLink) {
+	public Brand(int brandId, String brandName, String url) {
 		this.brandId = brandId;
 		this.brandName = brandName;
-		this.brandLogoLink = brandLogoLink;
+		this.url = url;
 	}
 
+	public Brand(int brandId, String brandName, String url, String logoName) {
+		this.brandId = brandId;
+		this.brandName = brandName;
+		this.url = url;
+		this.logoName = logoName;
+	}
+	
 	public int getBrandId() {
 		return brandId;
 	}
@@ -30,11 +37,11 @@ public class Brand extends Entity {
 	public void setBrandName(String brandName) {
 		this.brandName = brandName;
 	}
-	public String getBrandLogoLink() {
-		return brandLogoLink;
+	public String getUrl() {
+		return url;
 	}
-	public void setBrandLogoLink(String brandLogoLink) {
-		this.brandLogoLink = brandLogoLink;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	@Override
@@ -43,9 +50,12 @@ public class Brand extends Entity {
 		int result = 1;
 		result = prime * result + brandId;
 		result = prime * result
-				+ ((brandLogoLink == null) ? 0 : brandLogoLink.hashCode());
+				+ ((url == null) ? 0 : url.hashCode());
 		result = prime * result
 				+ ((brandName == null) ? 0 : brandName.hashCode());
+		result = prime * result
+				+ ((logoName == null) ? 0 : logoName.hashCode());
+
 		return result;
 	}
 
@@ -60,30 +70,44 @@ public class Brand extends Entity {
 		Brand other = (Brand) obj;
 		if (brandId != other.brandId)
 			return false;
-		if (brandLogoLink == null) {
-			if (other.brandLogoLink != null)
+		if (url == null) {
+			if (other.url != null)
 				return false;
-		} else if (!brandLogoLink.equals(other.brandLogoLink))
+		} else if (!url.equals(other.url))
 			return false;
 		if (brandName == null) {
 			if (other.brandName != null)
 				return false;
 		} else if (!brandName.equals(other.brandName))
 			return false;
+		if (logoName == null) {
+			if (other.logoName != null)
+				return false;
+		} else if (!logoName.equals(other.logoName))
+			return false;
+
 		return true;
 	}
 
 	@Override
 	public String toString() {
 		return "Brand [brandId=" + brandId + ", brandName=" + brandName
-				+ ", brandLogoLink="
-				+ brandLogoLink + "]";
+				+ ", url="
+				+ url  + ", logoName=" + "]";
 	}
 
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
 		// TODO Auto-generated method stub
 		return super.clone();
+	}
+
+	public String getLogoName() {
+		return logoName;
+	}
+
+	public void setLogoName(String logoName) {
+		this.logoName = logoName;
 	}
 	
 	
