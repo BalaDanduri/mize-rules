@@ -357,8 +357,7 @@ CREATE TABLE user_connect  (
 	created_by    	bigint(20) NULL,
 	created_date  	datetime NULL,
 	updated_by    	bigint(20) NULL,
-	updated_date  	datetime NULL,
-	PRIMARY KEY(id)
+	updated_date  	datetime NULL
 )
 GO
 CREATE TABLE message_type  ( 
