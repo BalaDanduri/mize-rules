@@ -193,6 +193,7 @@ CREATE TABLE brand  (
 	brand_name		varchar(250) NOT NULL,
 	brand_type		int(11) NULL,
 	brand_link		varchar(250) NULL,
+	brand_logo		varchar(50) NULL,
 	created_by       	bigint(20) NULL,
 	created_date     	datetime NULL,
 	updated_by       	bigint(20) NULL,
