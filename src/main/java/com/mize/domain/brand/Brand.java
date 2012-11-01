@@ -6,23 +6,23 @@ public class Brand extends Entity {
 	
 	private int brandId;
 	private String brandName;
-	private String brandLogoLink;
+	private String website;
 	private String logoName;
 	
 	public Brand() {
 		
 	}
 	
-	public Brand(int brandId, String brandName, String brandLogoLink) {
+	public Brand(int brandId, String brandName, String website) {
 		this.brandId = brandId;
 		this.brandName = brandName;
-		this.brandLogoLink = brandLogoLink;
+		this.website = website;
 	}
 
-	public Brand(int brandId, String brandName, String brandLogoLink, String logoName) {
+	public Brand(int brandId, String brandName, String website, String logoName) {
 		this.brandId = brandId;
 		this.brandName = brandName;
-		this.brandLogoLink = brandLogoLink;
+		this.website = website;
 		this.logoName = logoName;
 	}
 	
@@ -38,11 +38,11 @@ public class Brand extends Entity {
 	public void setBrandName(String brandName) {
 		this.brandName = brandName;
 	}
-	public String getBrandLogoLink() {
-		return brandLogoLink;
+	public String getWebsite() {
+		return website;
 	}
-	public void setBrandLogoLink(String brandLogoLink) {
-		this.brandLogoLink = brandLogoLink;
+	public void setWebsite(String website) {
+		this.website = website;
 	}
 
 	@Override
@@ -51,7 +51,7 @@ public class Brand extends Entity {
 		int result = 1;
 		result = prime * result + brandId;
 		result = prime * result
-				+ ((brandLogoLink == null) ? 0 : brandLogoLink.hashCode());
+				+ ((website == null) ? 0 : website.hashCode());
 		result = prime * result
 				+ ((brandName == null) ? 0 : brandName.hashCode());
 		result = prime * result
@@ -71,10 +71,10 @@ public class Brand extends Entity {
 		Brand other = (Brand) obj;
 		if (brandId != other.brandId)
 			return false;
-		if (brandLogoLink == null) {
-			if (other.brandLogoLink != null)
+		if (website == null) {
+			if (other.website != null)
 				return false;
-		} else if (!brandLogoLink.equals(other.brandLogoLink))
+		} else if (!website.equals(other.website))
 			return false;
 		if (brandName == null) {
 			if (other.brandName != null)
@@ -93,7 +93,7 @@ public class Brand extends Entity {
 	public String toString() {
 		return "Brand [brandId=" + brandId + ", brandName=" + brandName
 				+ ", brandLogoLink="
-				+ brandLogoLink + ", logoName=" + logoName + "]";
+				+ website + ", logoName=" + logoName + "]";
 	}
 
 	@Override
