@@ -25,6 +25,12 @@ GO
 ALTER TABLE user_support_log
 	DROP FOREIGN KEY user_support_log_ibfk_1
 GO
+ALTER TABLE user_connect
+	DROP FOREIGN KEY user_connect_ibfk_2
+GO
+ALTER TABLE user_connect
+	DROP FOREIGN KEY user_connect_ibfk_1
+GO
 ALTER TABLE user_profile
 	DROP FOREIGN KEY user_profile_ibfk_4
 GO
@@ -124,6 +130,8 @@ GO
 DROP TABLE users_user_permission
 GO
 DROP TABLE users_security_role
+GO
+DROP TABLE user_connect
 GO
 DROP TABLE users
 GO
@@ -341,6 +349,16 @@ CREATE TABLE linked_account  (
 	updated_by    	bigint(20) NULL,
 	updated_date  	datetime NULL,
 	PRIMARY KEY(id)
+)
+CREATE TABLE user_connect  ( 
+	user_id         	bigint(20) NOT NULL,
+	linked_account_id	bigint(20) NOT NULL,
+	email    		varchar(255) NOT NULL,
+	provider    		varchar(255) NOT NULL,
+	created_by    	bigint(20) NULL,
+	created_date  	datetime NULL,
+	updated_by    	bigint(20) NULL,
+	updated_date  	datetime NULL
 )
 GO
 CREATE TABLE message_type  ( 
@@ -719,6 +737,20 @@ ALTER TABLE user_profile
 	ADD CONSTRAINT user_profile_ibfk_3
 	FOREIGN KEY(country_id)
 	REFERENCES country(country_id)
+	ON DELETE RESTRICT 
+	ON UPDATE RESTRICT 
+GO
+ALTER TABLE user_connect
+	ADD CONSTRAINT user_connect_ibfk_1
+	FOREIGN KEY(user_id)
+	REFERENCES users(id)
+	ON DELETE RESTRICT 
+	ON UPDATE RESTRICT 
+GO
+ALTER TABLE user_connect
+	ADD CONSTRAINT user_connect_ibfk_2
+	FOREIGN KEY(linked_account_id)
+	REFERENCES linked_account(id)
 	ON DELETE RESTRICT 
 	ON UPDATE RESTRICT 
 GO
