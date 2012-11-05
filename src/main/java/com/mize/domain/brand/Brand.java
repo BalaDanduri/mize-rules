@@ -8,6 +8,7 @@ public class Brand extends Entity {
 	private String brandName;
 	private String website;
 	private String logoName;
+	private String feedbackEmail ; 
 	
 	public Brand() {
 		
@@ -109,5 +110,13 @@ public class Brand extends Entity {
 
 	public void setLogoName(String logoName) {
 		this.logoName = logoName;
+	}
+
+	public String getFeedbackEmail() {
+		return feedbackEmail;
+	}
+
+	public void setFeedbackEmail(String feedbackEmail) {
+		this.feedbackEmail = feedbackEmail;
 	}
 }
