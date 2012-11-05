@@ -229,7 +229,7 @@ CREATE TABLE brand_support  (
 	support_phone    	varchar(20) NULL,
 	support_email    	varchar(100) NULL,
 	support_site     	varchar(250) NULL,
-	support_chat     	varchar(250) NULL,
+	support_chat     	varchar(500) NULL,
 	support_phone_tf 	varchar(20) NULL,
 	support_qualifier	varchar(250) NULL,
 	validated_by     	varchar(100) NULL,
