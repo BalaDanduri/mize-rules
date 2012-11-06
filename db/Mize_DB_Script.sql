@@ -76,6 +76,33 @@ GO
 ALTER TABLE application_messages
 	DROP FOREIGN KEY application_messages_ibfk_1
 GO
+ALTER TABLE company_url
+	DROP FOREIGN KEY company_url_ibfk_1
+GO
+ALTER TABLE user_company
+	DROP FOREIGN KEY user_company_ibfk_1
+GO
+ALTER TABLE user_company
+	DROP FOREIGN KEY user_company_ibfk_2
+GO
+ALTER TABLE company_brand
+	DROP FOREIGN KEY company_brand_ibfk_1
+GO
+ALTER TABLE company_brand
+	DROP FOREIGN KEY company_brand_ibfk_2
+GO
+ALTER TABLE user_brand_resp
+	DROP FOREIGN KEY user_brand_resp_ibfk_1
+GO
+ALTER TABLE user_brand_resp
+	DROP FOREIGN KEY user_brand_resp_ibfk_2
+GO
+ALTER TABLE company
+	DROP CONSTRAINT company_name
+GO
+ALTER TABLE company_url
+	DROP CONSTRAINT company_id_access_type_url_type
+GO
 ALTER TABLE token_action
 	DROP INDEX uq_token_action_token
 GO
@@ -85,6 +112,7 @@ GO
 ALTER TABLE application_messages
 	DROP INDEX message_code
 GO
+
 DROP INDEX fk_users_user_permission_user_02 ON users_user_permission
 GO
 DROP INDEX fk_users_security_role_securi_02 ON users_security_role
@@ -175,6 +203,17 @@ DROP TABLE brand
 GO
 DROP TABLE application_messages
 GO
+DROP TABLE company
+GO
+DROP TABLE company_url
+GO
+DROP TABLE user_company
+GO
+DROP TABLE company_brand
+GO
+DROP TABLE user_brand_resp
+GO
+
 ALTER TABLE email
 	DROP CONSTRAINT PRIMARY
 GO
@@ -460,6 +499,7 @@ CREATE TABLE user_profile  (
 	phone_mobile	varchar(20) NULL,
 	phone_home		varchar(20) NULL,
 	phone_work 		varchar(20) NULL,
+	job_title		varchar(100) NULL,	
 	created_by    	bigint(20) NULL,
 	created_date  	datetime NULL,
 	updated_by    	bigint(20) NULL,
@@ -526,8 +566,54 @@ CREATE TABLE users_user_permission  (
 	PRIMARY KEY(users_id,user_permission_id)
 )
 GO
-
-CREATE INDEX message_type_id USING BTREE 
+CREATE TABLE company( 
+	company_id      int(11) AUTO_INCREMENT NOT NULL,
+	company_name    varchar(200) NOT NULL,
+	company_type 	varchar(100) NULL,
+	created_by    	bigint(20) NULL,
+	created_date  	datetime NULL,
+	updated_by    	bigint(20) NULL,
+	updated_date  	datetime NULL,
+	PRIMARY KEY(company_id));
+GO
+CREATE TABLE company_url( 
+    company_url_id  int(11) AUTO_INCREMENT NOT NULL,
+    company_id       int(11) NOT NULL,
+    access_type     varchar(100) NULL,  
+    country_id      int(11) NULL,
+    url             varchar(250) NULL,
+    url_type        varchar(100) NULL,    
+	created_by    	bigint(20) NULL,
+	created_date  	datetime NULL,
+	updated_by    	bigint(20) NULL,
+	updated_date  	datetime NULL,
+PRIMARY KEY(company_url_id)
+);
+GO
+CREATE TABLE user_company( 
+    user_id         bigint(20)  NOT NULL,
+    company_id      int(11) NOT NULL,
+    is_validated    tinyint(1) NULL,
+    validated_by    varchar(100) NULL, 
+    validated_date  datetime NULL,
+    internal_comments varchar(500) NULL,
+	created_by    	bigint(20) NULL,
+	created_date  	datetime NULL,
+	updated_by    	bigint(20) NULL,
+	updated_date  	datetime NULL,
+    PRIMARY KEY (user_id, company_id));
+GO
+CREATE TABLE company_brand( 
+    company_id      int(20),
+    brand_id        bigint(20),
+	created_by    	bigint(20) NULL,
+	created_date  	datetime NULL,
+	updated_by    	bigint(20) NULL,
+	updated_date  	datetime NULL,
+    PRIMARY KEY(company_id, brand_id)
+    );
+GO
+    CREATE INDEX message_type_id USING BTREE 
 	ON application_messages(message_type_id)
 GO
 CREATE INDEX brand_id USING BTREE 
@@ -625,6 +711,14 @@ GO
 ALTER TABLE user_source
 	ADD CONSTRAINT user_source_name
 	UNIQUE (user_source_name)
+GO
+ALTER TABLE company
+	ADD CONSTRAINT company_name
+	UNIQUE (company_name);
+GO
+ALTER TABLE company_url
+	ADD CONSTRAINT company_id_access_type_url_type
+	UNIQUE (company_id, access_type, url_type);
 GO
 ALTER TABLE application_messages
 	ADD CONSTRAINT application_messages_ibfk_1
@@ -815,6 +909,56 @@ ALTER TABLE users_user_permission
 	ON DELETE RESTRICT 
 	ON UPDATE RESTRICT 
 GO
+ALTER TABLE company_url
+	ADD CONSTRAINT company_url_ibfk_1
+	FOREIGN KEY(company_id)
+	REFERENCES company(company_id)
+	ON DELETE RESTRICT 
+	ON UPDATE RESTRICT;
+GO
+ALTER TABLE user_company
+	ADD CONSTRAINT user_company_ibfk_1
+	FOREIGN KEY(user_id)
+	REFERENCES users(id)
+	ON DELETE RESTRICT 
+	ON UPDATE RESTRICT;
+GO
+ALTER TABLE user_company
+	ADD CONSTRAINT user_company_ibfk_2
+	FOREIGN KEY(company_id)
+	REFERENCES company(company_id)
+	ON DELETE RESTRICT 
+	ON UPDATE RESTRICT;
+GO
+ALTER TABLE company_brand
+	ADD CONSTRAINT company_brand_ibfk_1
+	FOREIGN KEY(company_id)
+	REFERENCES company(company_id)
+	ON DELETE RESTRICT 
+	ON UPDATE RESTRICT;
+GO
+ALTER TABLE company_brand
+	ADD CONSTRAINT company_brand_ibfk_2
+	FOREIGN KEY(brand_id)
+	REFERENCES brand(brand_id)
+	ON DELETE RESTRICT 
+	ON UPDATE RESTRICT;
+GO
+ALTER TABLE user_brand_resp
+	ADD CONSTRAINT user_brand_resp_ibfk_1
+	FOREIGN KEY(user_id)
+	REFERENCES users(id)
+	ON DELETE RESTRICT 
+	ON UPDATE RESTRICT;
+GO
+ALTER TABLE user_brand_resp
+	ADD CONSTRAINT user_brand_resp_ibfk_2
+	FOREIGN KEY(brand_id)
+	REFERENCES brand(brand_id)
+	ON DELETE RESTRICT 
+	ON UPDATE RESTRICT;
+GO
+
 INSERT INTO country(country_id, country_name, country_code)
 VALUES(1, 'United States', 'US')
 GO

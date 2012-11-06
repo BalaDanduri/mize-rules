@@ -24,6 +24,7 @@ public class UserProfile extends Entity {
 	private String phoneMobile;
 	private String phoneHome;
 	private String phoneWork;
+	private String jobTitle;
 	
 	
 	// Personal Info
@@ -44,7 +45,7 @@ public class UserProfile extends Entity {
 	}
 	
 	public UserProfile(int userId, UserType userType, PostalAddress postalAddress,
-			String firstName, String lastName, DateTime birthdate, Gender gender,String photoLink) {
+			String firstName, String lastName, DateTime birthdate, Gender gender,String photoLink, String jobTitle) {
 		
 		this.userId = userId;
 		this.userType = userType;
@@ -54,6 +55,7 @@ public class UserProfile extends Entity {
 		this.birthdate = birthdate;
 		this.gender = gender;
 		this.photoLink=photoLink;
+		this.jobTitle=jobTitle;
 	}
 	
 	public UserProfile(int userId, UserType userType, PostalAddress postalAddress,
@@ -152,5 +154,12 @@ public class UserProfile extends Entity {
 
 	public void setPhoneWork(String phoneWork) {
 		this.phoneWork = phoneWork;
+	}
+	public String getJobTitle() {
+		return jobTitle;
+	}
+
+	public void setJobTitle(String jobTitle) {
+		this.jobTitle = jobTitle;
 	}
 }
