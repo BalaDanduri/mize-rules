@@ -14,14 +14,14 @@ import com.mize.domain.util.JsonDateTimeSerializer;
 
 public class User extends Entity {
 	
-    private Long id;
-    private String email;
-    private String name;
-    private DateTime lastLogin;
-    private boolean active;
-    private boolean emailValidated;
-    private List<LinkedAccount> linkedAccounts;
-    private List<UserConnect> userConnects;
+    protected Long id;
+    protected String email;
+    protected String name;
+    protected DateTime lastLogin;
+    protected boolean active;
+    protected boolean emailValidated;
+    protected List<LinkedAccount> linkedAccounts;
+    protected List<UserConnect> userConnects;
     
     public enum Case {
 		SIGNUP, LOGIN , LOGOUT

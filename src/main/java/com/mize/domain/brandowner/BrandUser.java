@@ -8,20 +8,16 @@ public class BrandUser extends User{
 	private UserProfile userProfile;
 	private Company company;
 	private CompanyUrl companyUrl;
-	public String email;
-	public String password;
 	public BrandUser()
 	{
 		
 	}
 	public BrandUser(UserProfile userProfile, Company company,
-			CompanyUrl companyUrl, String email, String password) {
+			CompanyUrl companyUrl) {
 		super();
 		this.userProfile = userProfile;
 		this.company = company;
 		this.companyUrl = companyUrl;
-		this.email = email;
-		this.password = password;
 	}
 	public UserProfile getUserProfile() {
 		return userProfile;
@@ -41,18 +37,6 @@ public class BrandUser extends User{
 	public void setCompanyUrl(CompanyUrl companyUrl) {
 		this.companyUrl = companyUrl;
 	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -60,9 +44,6 @@ public class BrandUser extends User{
 		result = prime * result + ((company == null) ? 0 : company.hashCode());
 		result = prime * result
 				+ ((companyUrl == null) ? 0 : companyUrl.hashCode());
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result
-				+ ((password == null) ? 0 : password.hashCode());
 		result = prime * result
 				+ ((userProfile == null) ? 0 : userProfile.hashCode());
 		return result;
@@ -76,6 +57,40 @@ public class BrandUser extends User{
 		if (getClass() != obj.getClass())
 			return false;
 		BrandUser other = (BrandUser) obj;
+		if (active != other.active)
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (emailValidated != other.emailValidated)
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (lastLogin == null) {
+			if (other.lastLogin != null)
+				return false;
+		} else if (!lastLogin.equals(other.lastLogin))
+			return false;
+		if (linkedAccounts == null) {
+			if (other.linkedAccounts != null)
+				return false;
+		} else if (!linkedAccounts.equals(other.linkedAccounts))
+			return false;
+		if (userConnects == null) {
+			if (other.userConnects != null)
+				return false;
+		} else if (!userConnects.equals(other.userConnects))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
 		if (company == null) {
 			if (other.company != null)
 				return false;
@@ -86,16 +101,6 @@ public class BrandUser extends User{
 				return false;
 		} else if (!companyUrl.equals(other.companyUrl))
 			return false;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (password == null) {
-			if (other.password != null)
-				return false;
-		} else if (!password.equals(other.password))
-			return false;
 		if (userProfile == null) {
 			if (other.userProfile != null)
 				return false;
@@ -105,9 +110,12 @@ public class BrandUser extends User{
 	}
 	@Override
 	public String toString() {
-		return "BrandOwner [userProfile=" + userProfile + ", company="
-				+ company + ", companyUrl=" + companyUrl + ", email=" + email
-				+ ", password=" + password + "]";
+		return "BrandOwner [id=" + id + ", email=" + email + ", name=" + name
+				+ ", lastLogin=" + lastLogin + ", active=" + active
+				+ ", emailValidated=" + emailValidated + ", linkedAccounts="
+				+ linkedAccounts+ ", userConnects="
+						+ userConnects + "userProfile=" + userProfile + ", company="
+				+ company + ", companyUrl=" + companyUrl + "]";
 	}
 	
 	
