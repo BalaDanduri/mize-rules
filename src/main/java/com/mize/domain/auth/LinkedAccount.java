@@ -15,17 +15,18 @@ public class LinkedAccount extends Entity {
     private User user;
     public String providerUserId;
     public String providerKey;
+    public String accessToken;
 
     public LinkedAccount() {
     	
     }
     
-    public LinkedAccount(Long id, User user, String providerUserId,
-			String providerKey) {
+    public LinkedAccount(Long id, User user, String providerUserId, String providerKey, String accessToken) {
 		this.id = id;
 		this.user = user;
 		this.providerUserId = providerUserId;
 		this.providerKey = providerKey;
+		this.accessToken = accessToken;
 	}
 
 	public Long getId() {
@@ -51,5 +52,11 @@ public class LinkedAccount extends Entity {
 	}
 	public void setProviderKey(String providerKey) {
 		this.providerKey = providerKey;
+	}
+	public String getAccessToken() {
+		return accessToken;
+	}
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
 	}
 }
