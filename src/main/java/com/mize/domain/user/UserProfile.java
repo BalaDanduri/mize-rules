@@ -1,6 +1,7 @@
 package com.mize.domain.user;
 
 import org.codehaus.jackson.annotate.JsonAutoDetect;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -25,6 +26,8 @@ public class UserProfile extends Entity {
 	private String phoneHome;
 	private String phoneWork;
 	private String jobTitle;
+	@JsonIgnore
+	private String emailOptOut;
 	
 	
 	// Personal Info
@@ -162,4 +165,13 @@ public class UserProfile extends Entity {
 	public void setJobTitle(String jobTitle) {
 		this.jobTitle = jobTitle;
 	}
+	@JsonIgnore
+	public String getEmailOptOut() {
+		return emailOptOut;
+	}
+	@JsonIgnore
+	public void setEmailOptOut(String emailOptOut) {
+		this.emailOptOut = emailOptOut;
+	}
+	
 }
