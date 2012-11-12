@@ -501,6 +501,7 @@ CREATE TABLE user_profile  (
 	phone_home		varchar(20) NULL,
 	phone_work 		varchar(20) NULL,
 	job_title		varchar(100) NULL,	
+	email_opt_out   varchar(1) NULL default 'N',
 	created_by    	bigint(20) NULL,
 	created_date  	datetime NULL,
 	updated_by    	bigint(20) NULL,
