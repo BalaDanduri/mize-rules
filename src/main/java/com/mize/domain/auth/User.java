@@ -9,6 +9,7 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.common.Entity;
+import com.mize.domain.user.UserProfile;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
@@ -22,6 +23,7 @@ public class User extends Entity {
     private boolean emailValidated;
     private List<LinkedAccount> linkedAccounts;
     private List<UserConnect> userConnects;
+    private UserProfile userProfile;
     
     public enum Case {
 		SIGNUP, LOGIN , LOGOUT
@@ -178,6 +180,13 @@ public class User extends Entity {
 		}
 	}
 	
+	public void setUserProfile(UserProfile userProfile) {
+		this.userProfile = userProfile;
+	}
+	
+	public UserProfile getUserProfile() {
+		return userProfile;
+	}
 
 	@Override
 	public String toString() {
@@ -185,7 +194,7 @@ public class User extends Entity {
 				+ ", lastLogin=" + lastLogin + ", active=" + active
 				+ ", emailValidated=" + emailValidated + ", linkedAccounts="
 				+ linkedAccounts+ ", userConnects="
-						+ userConnects + "]";
+						+ userConnects + ", UserProfile" + userProfile + "]";
 	}
 	@Override
 	public int hashCode() {
@@ -202,6 +211,8 @@ public class User extends Entity {
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result
 				+ ((userConnects == null) ? 0 : userConnects.hashCode());
+		result = prime * result
+				+ ((userProfile == null) ? 0 : userProfile.hashCode());
 		return result;
 	}
 	@Override
@@ -240,8 +251,14 @@ public class User extends Entity {
 		if (userConnects == null) {
 			if (other.userConnects != null)
 				return false;
-		} else if (!userConnects.equals(other.userConnects))
+		} else if (!userConnects.equals(other.userConnects)) {
 			return false;
+		} 
+		if (userProfile == null) {
+			if (other.userProfile != null)
+				return false;
+		} else if (!userProfile.equals(other.userProfile))
+		return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
