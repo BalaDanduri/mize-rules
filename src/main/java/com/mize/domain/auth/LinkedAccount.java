@@ -16,6 +16,7 @@ public class LinkedAccount extends Entity {
     public String providerUserId;
     public String providerKey;
     public String accessToken;
+    public String accessTokenSecret;
 
     public LinkedAccount() {
     	
@@ -58,5 +59,11 @@ public class LinkedAccount extends Entity {
 	}
 	public void setAccessToken(String accessToken) {
 		this.accessToken = accessToken;
+	}
+	public String getAccessTokenSecret() {
+		return accessTokenSecret;
+	}
+	public void setAccessTokenSecret(String accessTokenSecret) {
+		this.accessTokenSecret = accessTokenSecret;
 	}
 }
