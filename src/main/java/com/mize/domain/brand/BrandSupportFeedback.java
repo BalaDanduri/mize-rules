@@ -8,7 +8,9 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.common.Entity;
+import com.mize.domain.util.JodaDateDeserializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
+import com.mize.domain.util.JsonDateSerializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
 public class BrandSupportFeedback extends Entity {
@@ -26,6 +28,7 @@ public class BrandSupportFeedback extends Entity {
 	private String ticketNo;
 	private long brandSupportId;
 	private List<PostToSocialMedia> socialMediaPosts;
+	private DateTime startDate;
 
 	public BrandSupportFeedback(){
 		
@@ -47,6 +50,20 @@ public class BrandSupportFeedback extends Entity {
 		this.ticketNo = ticketNo;
 		this.socialMediaPosts = socialMediaPosts;
 	}
+	
+
+	@DateTimeFormat (pattern="MM-dd-yyyy")
+	@JsonSerialize(using=JsonDateSerializer.class)
+	public DateTime getStartDate() {
+		return startDate;
+	}
+
+	@DateTimeFormat (pattern="MM-dd-yyyy")
+	@JsonDeserialize(using=JodaDateDeserializer.class)
+	public void setStartDate(DateTime startDate) {
+		this.startDate = startDate;
+	}
+
 
 	public int getSupportLogId() {
 		return supportLogId;
