@@ -27,6 +27,7 @@ public class UserProfile extends Entity {
 	private String phoneWork;
 	private String jobTitle;
 	@JsonIgnore
+	
 	private String emailOptOut;
 	
 	
