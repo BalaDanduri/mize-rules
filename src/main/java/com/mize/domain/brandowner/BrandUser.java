@@ -4,14 +4,11 @@ import com.mize.domain.auth.User;
 import com.mize.domain.user.UserProfile;
 
 public class BrandUser extends User{
-	
 	private UserProfile userProfile;
 	private Company company;
 	private CompanyUrl companyUrl;
-	public BrandUser()
-	{
-		
-	}
+	public BrandUser(){}
+	
 	public BrandUser(UserProfile userProfile, Company company,
 			CompanyUrl companyUrl) {
 		super();
