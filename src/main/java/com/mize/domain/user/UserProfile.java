@@ -26,7 +26,6 @@ public class UserProfile extends Entity {
 	private String phoneHome;
 	private String phoneWork;
 	private String jobTitle;
-	@JsonIgnore
 	
 	private String emailOptOut;
 	
@@ -166,11 +165,11 @@ public class UserProfile extends Entity {
 	public void setJobTitle(String jobTitle) {
 		this.jobTitle = jobTitle;
 	}
-	@JsonIgnore
+	
 	public String getEmailOptOut() {
 		return emailOptOut;
 	}
-	@JsonIgnore
+	
 	public void setEmailOptOut(String emailOptOut) {
 		this.emailOptOut = emailOptOut;
 	}

@@ -12,7 +12,6 @@ public class ApplicationMessage {
 	private int messageSeverity;
 		
 	public ApplicationMessage() {
-		
 	}
 	
 	public ApplicationMessage(long id, MessageType messageType, String messageCode,

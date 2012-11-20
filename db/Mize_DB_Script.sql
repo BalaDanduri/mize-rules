@@ -385,6 +385,7 @@ CREATE TABLE linked_account  (
 	provider_user_id	varchar(255) NULL,
 	provider_key    	varchar(255) NULL,
 	access_token    	varchar(255) NULL,
+	access_token_secret    	varchar(255) NULL,
 	created_by    	bigint(20) NULL,
 	created_date  	datetime NULL,
 	updated_by    	bigint(20) NULL,
