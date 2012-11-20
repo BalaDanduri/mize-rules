@@ -23,6 +23,10 @@ public class Product  {
 	public Set<Category> category;
 	public String logoLink;
 	public Integer avgRating;
+	public Long upc;
+	public String qrCode;
+	public ProductSource productSource;
+	
 
 	
 	public Product() {
@@ -61,6 +65,8 @@ public class Product  {
 		prd.category.add(cat1);
 		prd.logoLink = "sampleprd.png";
 		prd.avgRating = new Integer(3);
+		prd.productSource = new ProductSource(1, "AMZ", "ASD10987A");
+		
 		
 		List prdList = new ArrayList();
 		
@@ -81,6 +87,7 @@ public class Product  {
 		
 		prd1.logoLink = "sampleprd.png";
 		prd1.avgRating = new Integer(3);
+		prd1.productSource = new ProductSource(1, "AMZ", "BSX1s87A12");
 		
 		prdList.add(prd1);
 		System.out.println(new ObjectMapper().writeValueAsString(prdList));
@@ -168,5 +175,15 @@ public class Product  {
 				+ shortDescription + ", brand=" + brand + ", price=" + price
 				+ ", category=" + category + ", logoLink=" + logoLink
 				+ ", avgRating=" + avgRating + "]";
+	}
+
+
+	public ProductSource getProductSource() {
+		return productSource;
+	}
+
+
+	public void setProductSource(ProductSource productSource) {
+		this.productSource = productSource;
 	}
 }

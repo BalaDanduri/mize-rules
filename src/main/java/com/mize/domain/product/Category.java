@@ -2,8 +2,10 @@ package com.mize.domain.product;
 
 
 import java.io.IOException;
+import java.util.Set;
 
 import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonPropertyOrder;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -19,6 +21,8 @@ public class Category {
 	public String name;
 	public String link;
 	public Category parent;
+	@JsonIgnore
+	public Set<Category> children;
 	
 	public Category() {
 		// TODO Auto-generated constructor stub
@@ -126,5 +130,16 @@ public class Category {
 		
 		System.out.println(new ObjectMapper().writeValueAsString(cat3));
 		
+	}
+
+
+	@JsonIgnore
+	public Set<Category> getChildren() {
+		return children;
+	}
+
+	@JsonIgnore
+	public void setChildren(Set<Category> children) {
+		this.children = children;
 	}
 }
