@@ -20,12 +20,13 @@ public class Product  {
 	public String shortDescription;
 	public Brand brand;
 	public Float price;
-	public Set<Category> category;
-	public String logoLink;
+	public Set<ProductCategory> category;
+	public String photoLink;
 	public Integer avgRating;
 	public Long upc;
 	public String qrCode;
 	public ProductSource productSource;
+	public Integer mizeRating;
 	
 
 	
@@ -35,7 +36,7 @@ public class Product  {
 	
 
 	public Product(Long id, String name, String shortDescription, Brand brand,
-			Float price, Set<Category> category, String logoLink,
+			Float price, Set<ProductCategory> category, String logoLink,
 			Integer avgRating) {
 		this.id = id;
 		this.name = name;
@@ -43,7 +44,7 @@ public class Product  {
 		this.brand = brand;
 		this.price = price;
 		this.category = category;
-		this.logoLink = logoLink;
+		this.photoLink = logoLink;
 		this.avgRating = avgRating;
 	}
 
@@ -57,13 +58,13 @@ public class Product  {
 		prd.shortDescription = "Sample short Description";
 		prd.brand = new Brand(1, "Sample Brand", "http://brand.co.in/");
 		prd.price = 110.34F;
-		prd.category= new HashSet<Category>();
-		Category cat1 = new Category();
+		prd.category= new HashSet<ProductCategory>();
+		ProductCategory cat1 = new ProductCategory();
 		
 		cat1.id = new Long(1);
 		cat1.name = "sample category";
 		prd.category.add(cat1);
-		prd.logoLink = "sampleprd.png";
+		prd.photoLink = "sampleprd.png";
 		prd.avgRating = new Integer(3);
 		prd.productSource = new ProductSource(1, "AMZ", "ASD10987A");
 		
@@ -78,14 +79,14 @@ public class Product  {
 		prd1.shortDescription = "Sample short Description -- new ";
 		prd1.brand = new Brand(1, "Sample Brand", "http://brand.co.in/");
 		prd1.price = 110.34F;
-		prd1.category= new HashSet<Category>();
-		Category cat2 = new Category();
+		prd1.category= new HashSet<ProductCategory>();
+		ProductCategory cat2 = new ProductCategory();
 		cat2.id = new Long(2);
 		cat2.name = "sample category 2 ";
 		
 		prd1.category.add(cat2);
 		
-		prd1.logoLink = "sampleprd.png";
+		prd1.photoLink = "sampleprd.png";
 		prd1.avgRating = new Integer(3);
 		prd1.productSource = new ProductSource(1, "AMZ", "BSX1s87A12");
 		
@@ -106,7 +107,7 @@ public class Product  {
 				+ ((category == null) ? 0 : category.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result
-				+ ((logoLink == null) ? 0 : logoLink.hashCode());
+				+ ((photoLink == null) ? 0 : photoLink.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((price == null) ? 0 : price.hashCode());
 		result = prime
@@ -145,10 +146,10 @@ public class Product  {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (logoLink == null) {
-			if (other.logoLink != null)
+		if (photoLink == null) {
+			if (other.photoLink != null)
 				return false;
-		} else if (!logoLink.equals(other.logoLink))
+		} else if (!photoLink.equals(other.photoLink))
 			return false;
 		if (name == null) {
 			if (other.name != null)
@@ -173,7 +174,7 @@ public class Product  {
 	public String toString() {
 		return "Product [id=" + id + ", name=" + name + ", shortDescription="
 				+ shortDescription + ", brand=" + brand + ", price=" + price
-				+ ", category=" + category + ", logoLink=" + logoLink
+				+ ", category=" + category + ", logoLink=" + photoLink
 				+ ", avgRating=" + avgRating + "]";
 	}
 
@@ -185,5 +186,115 @@ public class Product  {
 
 	public void setProductSource(ProductSource productSource) {
 		this.productSource = productSource;
+	}
+
+
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+
+	public String getShortDescription() {
+		return shortDescription;
+	}
+
+
+	public void setShortDescription(String shortDescription) {
+		this.shortDescription = shortDescription;
+	}
+
+
+	public Brand getBrand() {
+		return brand;
+	}
+
+
+	public void setBrand(Brand brand) {
+		this.brand = brand;
+	}
+
+
+	public Float getPrice() {
+		return price;
+	}
+
+
+	public void setPrice(Float price) {
+		this.price = price;
+	}
+
+
+	public Set<ProductCategory> getCategory() {
+		return category;
+	}
+
+
+	public void setCategory(Set<ProductCategory> category) {
+		this.category = category;
+	}
+
+
+	public String getPhotoLink() {
+		return photoLink;
+	}
+
+
+	public void setPhotoLink(String photoLink) {
+		this.photoLink = photoLink;
+	}
+
+
+	public Integer getAvgRating() {
+		return avgRating;
+	}
+
+
+	public void setAvgRating(Integer avgRating) {
+		this.avgRating = avgRating;
+	}
+
+
+	public Long getUpc() {
+		return upc;
+	}
+
+
+	public void setUpc(Long upc) {
+		this.upc = upc;
+	}
+
+
+	public String getQrCode() {
+		return qrCode;
+	}
+
+
+	public void setQrCode(String qrCode) {
+		this.qrCode = qrCode;
+	}
+
+
+	public Integer getMizeRating() {
+		return mizeRating;
+	}
+
+
+	public void setMizeRating(Integer mizeRating) {
+		this.mizeRating = mizeRating;
 	}
 }
