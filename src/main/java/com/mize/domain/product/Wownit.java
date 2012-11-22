@@ -6,7 +6,7 @@ public class Wownit {
 
 	Long id;
 	Long userId;
-	Long prodId;
+	Long productId;
 	DateTime createdDate;
 	ProdStatus status;
 	
@@ -14,10 +14,10 @@ public class Wownit {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Wownit(Long id, Long userId, Long prodId, ProdStatus status) {
+	public Wownit(Long id, Long userId, Long productId, ProdStatus status) {
 		this.id = id;
 		this.userId = userId;
-		this.prodId = prodId;
+		this.productId = productId;
 		this.status = status;
 	}
 
@@ -37,12 +37,12 @@ public class Wownit {
 		this.userId = userId;
 	}
 
-	public Long getProdId() {
-		return prodId;
+	public Long getProductId() {
+		return productId;
 	}
 
-	public void setProdId(Long prodId) {
-		this.prodId = prodId;
+	public void setProduct(Long productId) {
+		this.productId = productId;
 	}
 
 	public ProdStatus getStatus() {
@@ -58,7 +58,7 @@ public class Wownit {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((prodId == null) ? 0 : prodId.hashCode());
+		result = prime * result + ((productId == null) ? 0 : productId.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
@@ -78,10 +78,10 @@ public class Wownit {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (prodId == null) {
-			if (other.prodId != null)
+		if (productId == null) {
+			if (other.productId != null)
 				return false;
-		} else if (!prodId.equals(other.prodId))
+		} else if (!productId.equals(other.productId))
 			return false;
 		if (status == null) {
 			if (other.status != null)
@@ -98,7 +98,7 @@ public class Wownit {
 
 	@Override
 	public String toString() {
-		return "Wownit [id=" + id + ", userId=" + userId + ", prodId=" + prodId
+		return "Wownit [id=" + id + ", userId=" + userId + ", prodId=" + productId
 				+ ", status=" + status + "]";
 	}
 

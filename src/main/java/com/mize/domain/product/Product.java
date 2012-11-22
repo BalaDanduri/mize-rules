@@ -66,7 +66,7 @@ public class Product  {
 		prd.category.add(cat1);
 		prd.photoLink = "sampleprd.png";
 		prd.avgRating = new Integer(3);
-		prd.productSource = new ProductSource(1, "AMZ", "ASD10987A");
+		prd.productSource = new ProductSource(new Long(1), new Long(1), "ASD10987A");
 		
 		
 		List prdList = new ArrayList();
@@ -88,7 +88,7 @@ public class Product  {
 		
 		prd1.photoLink = "sampleprd.png";
 		prd1.avgRating = new Integer(3);
-		prd1.productSource = new ProductSource(1, "AMZ", "BSX1s87A12");
+		prd1.productSource = new ProductSource(new Long(1), new Long(1), "BSX1s87A12");
 		
 		prdList.add(prd1);
 		System.out.println(new ObjectMapper().writeValueAsString(prdList));
