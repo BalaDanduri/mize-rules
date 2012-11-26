@@ -2,16 +2,15 @@ package com.mize.domain.product;
 
 import com.mize.domain.common.Entity;
 
-public class ProductReview  extends Entity{
+public class UserProductFeedback  extends Entity{
 	
 	protected Long id;
 	protected String review;
 	protected Integer rating;
 	protected Long userId;
 	protected Product product;
-	protected String commentsBy;
 	
-	public ProductReview() {
+	public UserProductFeedback() {
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -40,7 +39,7 @@ public class ProductReview  extends Entity{
 		result = prime * result
 				+ ((product == null) ? 0 : product.hashCode());
 		result = prime * result + ((review == null) ? 0 : review.hashCode());
-		result = prime * result + ((commentsBy == null) ? 0 : commentsBy.hashCode());
+
 		return result;
 	}
 
@@ -53,7 +52,7 @@ public class ProductReview  extends Entity{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ProductReview other = (ProductReview) obj;
+		UserProductFeedback other = (UserProductFeedback) obj;
 		if (id == null) {
 			if (other.getId() != null)
 				return false;
@@ -79,11 +78,6 @@ public class ProductReview  extends Entity{
 				return false;
 		} else if (!product.equals(other.product))
 			return false;
-		if (commentsBy == null) {
-			if (other.commentsBy != null)
-				return false;
-		} else if (!commentsBy.equals(other.commentsBy))
-			return false;
 		return true;
 	}
 
@@ -91,8 +85,7 @@ public class ProductReview  extends Entity{
 	@Override
 	public String toString() {
 		return "ProductReview [id=" + id + ", review=" + review + ", rating="
-				+ rating + ", userId=" + userId + ", product=" + product
-				+ ", commentsBy=" + commentsBy + "]";
+				+ rating + ", userId=" + userId + ", product=" + product + "]";
 	}
 
 
@@ -122,16 +115,6 @@ public class ProductReview  extends Entity{
 
 	public void setRating(Integer rating) {
 		this.rating = rating;
-	}
-
-
-	public String getComentsBy() {
-		return commentsBy;
-	}
-
-
-	public void setComeentsBy(String commentsBy) {
-		this.commentsBy = commentsBy;
 	}
 
 
