@@ -1,7 +1,9 @@
 package com.mize.domain.product;
 
+import com.mize.domain.common.Entity;
 
-public class ProductSource  {
+
+public class ProductSource  extends Entity{
 	
 	protected Long productId;
 	protected Long sourceId;

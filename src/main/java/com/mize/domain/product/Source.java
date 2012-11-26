@@ -1,6 +1,8 @@
 package com.mize.domain.product;
 
-public class Source {
+import com.mize.domain.common.Entity;
+
+public class Source extends Entity{
 
 	public Integer sourceId;
 	public String sourceName;

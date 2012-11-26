@@ -15,7 +15,7 @@ import com.mize.domain.common.Entity;
 
 @JsonPropertyOrder ({"id", "name", "link", "parent"})
 
-public class ProductCategory {
+public class ProductCategory extends Entity{
 
 	
 	protected Long id;

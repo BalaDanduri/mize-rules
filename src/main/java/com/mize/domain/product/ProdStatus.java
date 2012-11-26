@@ -1,6 +1,8 @@
 package com.mize.domain.product;
 
-public class ProdStatus {
+import com.mize.domain.common.Entity;
+
+public class ProdStatus extends Entity{
 
 	protected int id;
 	protected String type;

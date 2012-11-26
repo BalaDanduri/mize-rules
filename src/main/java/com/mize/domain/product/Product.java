@@ -13,7 +13,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import com.mize.domain.brand.Brand;
 import com.mize.domain.common.Entity;
 
-public class Product  {
+public class Product  extends Entity{
 	
 	protected Long id;
 	protected String name;

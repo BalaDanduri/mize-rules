@@ -5,10 +5,11 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.mize.domain.common.Entity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
-public class Wownit {
+public class Wownit extends Entity{
 
 	protected Long id;
 	protected Long userId;

@@ -5,8 +5,9 @@ import java.util.Map;
 import java.util.Set;
 
 import com.mize.domain.auth.User;
+import com.mize.domain.common.Entity;
 
-public class UserWownit {
+public class UserWownit extends Entity{
 
 	private User user;
 	private Map<String, Set<Product>> wownitProducts; 

@@ -1,6 +1,8 @@
 package com.mize.domain.product;
 
-public class ProductReview  {
+import com.mize.domain.common.Entity;
+
+public class ProductReview  extends Entity{
 	
 	protected Long id;
 	protected String review;
