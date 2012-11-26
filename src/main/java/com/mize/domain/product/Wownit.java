@@ -1,25 +1,32 @@
 package com.mize.domain.product;
 
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.mize.domain.util.JodaDateTimeDeserializer;
+import com.mize.domain.util.JsonDateTimeSerializer;
 
 public class Wownit {
 
-	Long id;
-	Long userId;
-	Product product;
-	DateTime createdDate;
-	ProdStatus status;
+	protected Long id;
+	protected Long userId;
+	protected Product product;
+	protected DateTime createdDate;
+	protected ProdStatus status;
 	
 	public Wownit() {
 		// TODO Auto-generated constructor stub
+		status = new ProdStatus();
 	}
 
-	public Wownit(Long id, Long userId, Product product, ProdStatus status) {
-		this.id = id;
-		this.userId = userId;
-		this.product = product;
-		this.status = status;
-	}
+//	public Wownit(Long id, Long userId, Product product, ProdStatus status) {
+//		this.id = id;
+//		this.userId = userId;
+//		this.product = product;
+//		this.status = status;
+//	}
 
 	public Long getId() {
 		return id;
@@ -102,10 +109,14 @@ public class Wownit {
 				+ ", status=" + status + "]";
 	}
 
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class)	
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
 
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)		
 	public void setCreatedDate(DateTime createdDate) {
 		this.createdDate = createdDate;
 	}

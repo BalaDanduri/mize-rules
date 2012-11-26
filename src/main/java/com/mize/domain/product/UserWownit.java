@@ -1,5 +1,6 @@
 package com.mize.domain.product;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -12,6 +13,7 @@ public class UserWownit {
 	
 	public UserWownit() {
 		// TODO Auto-generated constructor stub
+		wownitProducts = new HashMap<String, Set<Product>>();
 	}
 
 	public User getUser() {

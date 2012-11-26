@@ -2,8 +2,8 @@ package com.mize.domain.product;
 
 public class ProdStatus {
 
-	private int id;
-	private String type;
+	protected int id;
+	protected String type;
 	
 	public ProdStatus() {
 		// TODO Auto-generated constructor stub

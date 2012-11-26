@@ -2,7 +2,7 @@ package com.mize.domain.product;
 
 public class ProdCategorySource extends Source{
 	
-	public String sourceCatId;
+	protected String sourceCatId;
 
 	public ProdCategorySource() {
 		// TODO Auto-generated constructor stub

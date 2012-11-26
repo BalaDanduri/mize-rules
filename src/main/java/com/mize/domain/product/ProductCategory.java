@@ -2,6 +2,7 @@ package com.mize.domain.product;
 
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Set;
 
 import org.codehaus.jackson.JsonGenerationException;
@@ -17,27 +18,30 @@ import com.mize.domain.common.Entity;
 public class ProductCategory {
 
 	
-	public Long id;
-	public String name;
-	public String photoLink;
-	public ProductCategory parent;
+	protected Long id;
+	protected String name;
+	protected String photoLink;
+	protected ProductCategory parent;
 	@JsonIgnore
-	public Set<ProductCategory> children;
-	public boolean isLeaf;
-	public ProdCategorySource sourceCategory;
+	protected Set<ProductCategory> children;
+	protected boolean isLeaf;
+	protected ProdCategorySource sourceCategory;
 	
 	public ProductCategory() {
 		// TODO Auto-generated constructor stub
+		parent = new ProductCategory();
+		children = new HashSet<ProductCategory>();
+		sourceCategory = new ProdCategorySource();
 	}
 
 	
-	public ProductCategory(Long id, String name, String link, ProductCategory parent) {
-		this.id = id;
-		this.name = name;
-		this.photoLink = link;
-		this.parent = parent;
-	}
-
+//	public ProductCategory(Long id, String name, String link, ProductCategory parent) {
+//		this.id = id;
+//		this.name = name;
+//		this.photoLink = link;
+//		this.parent = parent;
+//	}
+//
 
 	public Long getId() {
 		return id;
@@ -126,11 +130,11 @@ public class ProductCategory {
 	
 	public static void main(String args[]) throws JsonGenerationException, JsonMappingException, IOException {
 		
-		ProductCategory cat1 = new ProductCategory(new Long(1), "Electronics", null, null );
-		ProductCategory cat2 = new ProductCategory(new Long(2), "Computer", null, cat1 );
-		ProductCategory cat3 = new ProductCategory(new Long(3), "Laptop", null, cat2 );
-		
-		System.out.println(new ObjectMapper().writeValueAsString(cat3));
+//		ProductCategory cat1 = new ProductCategory(new Long(1), "Electronics", null, null );
+//		ProductCategory cat2 = new ProductCategory(new Long(2), "Computer", null, cat1 );
+//		ProductCategory cat3 = new ProductCategory(new Long(3), "Laptop", null, cat2 );
+//		
+//		System.out.println(new ObjectMapper().writeValueAsString(cat3));
 		
 	}
 

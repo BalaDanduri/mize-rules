@@ -15,39 +15,41 @@ import com.mize.domain.common.Entity;
 
 public class Product  {
 	
-	public Long id;
-	public String name;
-	public String shortDescription;
-	public Brand brand;
-	public Float price;
-	public Set<ProductCategory> category;
-	public String photoLink;
-	public Integer avgRating;
-	public Long upc;
-	public String qrCode;
-	public ProductSource productSource;
-	public Integer mizeRating;
+	protected Long id;
+	protected String name;
+	protected String shortDescription;
+	protected Brand brand;
+	protected Float price;
+	protected Set<ProductCategory> category;
+	protected String photoLink;
+	protected Integer avgRating;
+	protected Long upc;
+	protected String qrCode;
+	protected ProductSource productSource;
+	protected Integer mizeRating;
 	
 
 	
 	public Product() {
 		// TODO Auto-generated constructor stub
+		category = new HashSet<ProductCategory>();
+		productSource = new ProductSource();
 	}
 	
 
-	public Product(Long id, String name, String shortDescription, Brand brand,
-			Float price, Set<ProductCategory> category, String logoLink,
-			Integer avgRating) {
-		this.id = id;
-		this.name = name;
-		this.shortDescription = shortDescription;
-		this.brand = brand;
-		this.price = price;
-		this.category = category;
-		this.photoLink = logoLink;
-		this.avgRating = avgRating;
-	}
-
+//	public Product(Long id, String name, String shortDescription, Brand brand,
+//			Float price, Set<ProductCategory> category, String logoLink,
+//			Integer avgRating) {
+//		this.id = id;
+//		this.name = name;
+//		this.shortDescription = shortDescription;
+//		this.brand = brand;
+//		this.price = price;
+//		this.category = category;
+//		this.photoLink = logoLink;
+//		this.avgRating = avgRating;
+//	}
+//
 	
 
 	public static void main(String args[]) throws JsonGenerationException, JsonMappingException, IOException {
@@ -66,7 +68,10 @@ public class Product  {
 		prd.category.add(cat1);
 		prd.photoLink = "sampleprd.png";
 		prd.avgRating = new Integer(3);
-		prd.productSource = new ProductSource(new Long(1), new Long(1), "ASD10987A");
+		prd.productSource = new ProductSource();
+		prd.productSource.setProductId(new Long(1));
+		prd.productSource.setSourceId(new Long(1));
+		prd.productSource.setSourceProductId("BSX1s87A12");
 		
 		
 		List prdList = new ArrayList();
@@ -88,7 +93,11 @@ public class Product  {
 		
 		prd1.photoLink = "sampleprd.png";
 		prd1.avgRating = new Integer(3);
-		prd1.productSource = new ProductSource(new Long(1), new Long(1), "BSX1s87A12");
+		prd1.productSource = new ProductSource();
+		//new Long(1), new Long(1), "BSX1s87A12"
+		prd1.productSource.setProductId(new Long(1));
+		prd1.productSource.setSourceId(new Long(1));
+		prd1.productSource.setSourceProductId("BSX1s87A12");
 		
 		prdList.add(prd1);
 		System.out.println(new ObjectMapper().writeValueAsString(prdList));

@@ -13,12 +13,12 @@ public class ProductSource  {
 	}
 	
 
-	public ProductSource(Long productId, Long sourceId, String sourceProductId) {
-		this.productId = productId;
-		this.sourceId = sourceId;
-		this.sourceProductId = sourceProductId;
-	}
-
+//	public ProductSource(Long productId, Long sourceId, String sourceProductId) {
+//		this.productId = productId;
+//		this.sourceId = sourceId;
+//		this.sourceProductId = sourceProductId;
+//	}
+//
 	public Long getProductId() {
 		return productId;
 	}
