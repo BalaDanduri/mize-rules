@@ -9,17 +9,16 @@ import com.mize.domain.common.Entity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
-public class Wownit extends Entity{
+public class UserProduct extends Entity{
 
 	protected Long id;
 	protected Long userId;
 	protected Product product;
 	protected DateTime createdDate;
-	protected ProdStatus status;
+	protected String productList;
 	
-	public Wownit() {
+	public UserProduct() {
 		// TODO Auto-generated constructor stub
-		status = new ProdStatus();
 	}
 
 //	public Wownit(Long id, Long userId, Product product, ProdStatus status) {
@@ -53,12 +52,12 @@ public class Wownit extends Entity{
 		this.product = product;
 	}
 
-	public ProdStatus getStatus() {
-		return status;
+	public String getProductList() {
+		return productList;
 	}
 
-	public void setStatus(ProdStatus status) {
-		this.status = status;
+	public void setProductList(String productList) {
+		this.productList = productList;
 	}
 
 	@Override
@@ -67,7 +66,7 @@ public class Wownit extends Entity{
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((product == null) ? 0 : product.hashCode());
-		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		result = prime * result + ((productList == null) ? 0 : productList.hashCode());
 		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
 	}
@@ -80,7 +79,7 @@ public class Wownit extends Entity{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Wownit other = (Wownit) obj;
+		UserProduct other = (UserProduct) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -91,10 +90,10 @@ public class Wownit extends Entity{
 				return false;
 		} else if (!product.equals(other.product))
 			return false;
-		if (status == null) {
-			if (other.status != null)
+		if (productList == null) {
+			if (other.productList != null)
 				return false;
-		} else if (!status.equals(other.status))
+		} else if (!productList.equals(other.productList))
 			return false;
 		if (userId == null) {
 			if (other.userId != null)
@@ -107,7 +106,7 @@ public class Wownit extends Entity{
 	@Override
 	public String toString() {
 		return "Wownit [id=" + id + ", userId=" + userId + ", prodId=" + product
-				+ ", status=" + status + "]";
+				+ ", productList=" + productList + "]";
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
