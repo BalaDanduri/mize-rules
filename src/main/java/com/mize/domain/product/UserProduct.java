@@ -16,6 +16,7 @@ public class UserProduct extends Entity{
 	protected Product product;
 	protected DateTime createdDate;
 	protected String productList;
+	protected boolean active;
 	
 	public UserProduct() {
 		// TODO Auto-generated constructor stub
@@ -60,6 +61,13 @@ public class UserProduct extends Entity{
 		this.productList = productList;
 	}
 
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
