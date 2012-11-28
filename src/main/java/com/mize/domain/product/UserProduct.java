@@ -16,7 +16,7 @@ public class UserProduct extends Entity{
 	protected Product product;
 	protected DateTime createdDate;
 	protected String productList;
-	protected boolean active;
+	protected String active;
 	
 	public UserProduct() {
 		// TODO Auto-generated constructor stub
@@ -61,11 +61,11 @@ public class UserProduct extends Entity{
 		this.productList = productList;
 	}
 
-	public boolean isActive() {
+	public String getActive() {
 		return active;
 	}
 
-	public void setActive(boolean active) {
+	public void setActive(String active) {
 		this.active = active;
 	}
 	@Override
