@@ -15,22 +15,20 @@ import com.mize.domain.common.Entity;
 
 @JsonPropertyOrder ({"id", "name", "link", "parent"})
 
-public class ProductCategory extends Entity{
+public class ProductCategory {
 
 	
 	protected Long id;
 	protected String name;
 	protected String photoLink;
-	protected ProductCategory parent;
+	protected ProductCategory parent = null;
 	@JsonIgnore
-	protected Set<ProductCategory> children;
-	protected ProdCategorySource sourceCategory;
+	protected Set<ProductCategory> children = new HashSet<ProductCategory>();
+	protected ProdCategorySource sourceCategory  = new ProdCategorySource();
 	protected boolean isActive;
 	
 	public ProductCategory() {
-		parent = new ProductCategory();
-		children = new HashSet<ProductCategory>();
-		sourceCategory = new ProdCategorySource();
+		
 	}
 
 	
@@ -83,22 +81,7 @@ public class ProductCategory extends Entity{
 	}
 
 	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((children == null) ? 0 : children.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + (isActive ? 1231 : 1237);
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((parent == null) ? 0 : parent.hashCode());
-		result = prime * result
-				+ ((photoLink == null) ? 0 : photoLink.hashCode());
-		result = prime * result
-				+ ((sourceCategory == null) ? 0 : sourceCategory.hashCode());
-		return result;
-	}
+
 
 
 	@Override
