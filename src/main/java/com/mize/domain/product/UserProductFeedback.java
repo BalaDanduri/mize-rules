@@ -1,5 +1,6 @@
 package com.mize.domain.product;
 
+import com.mize.domain.auth.User;
 import com.mize.domain.common.Entity;
 
 public class UserProductFeedback  extends Entity{
@@ -7,23 +8,12 @@ public class UserProductFeedback  extends Entity{
 	protected Long id;
 	protected String review;
 	protected Integer rating;
-	protected Long userId;
+	protected User user;
 	protected Product product;
 	
 	public UserProductFeedback() {
 		// TODO Auto-generated constructor stub
 	}
-	
-
-//	public ProductReview(Long id, String review, Integer rating, Long userId, Product product, String commentsBy) {
-//		this.id = id;
-//		this.review = review;
-//		this.rating = rating;
-//		this.userId = userId;
-//		this.product = product;
-//		this.commentsBy = commentsBy;
-//	}
-//
 	
 
 	@Override
@@ -35,7 +25,7 @@ public class UserProductFeedback  extends Entity{
 		result = prime * result + ((review == null) ? 0 : review.hashCode());
 		result = prime * result
 				+ ((rating == null) ? 0 : rating.hashCode());
-		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		result = prime * result
 				+ ((product == null) ? 0 : product.hashCode());
 		result = prime * result + ((review == null) ? 0 : review.hashCode());
@@ -68,10 +58,10 @@ public class UserProductFeedback  extends Entity{
 				return false;
 		} else if (!rating.equals(other.getRating()))
 			return false;
-		if (userId == null) {
+		if (user == null) {
 			if (other.getUserId() != null)
 				return false;
-		} else if (!userId.equals(other.userId))
+		} else if (!user.equals(other.user))
 			return false;
 		if (product == null) {
 			if (other.product != null)
@@ -85,7 +75,7 @@ public class UserProductFeedback  extends Entity{
 	@Override
 	public String toString() {
 		return "ProductReview [id=" + id + ", review=" + review + ", rating="
-				+ rating + ", userId=" + userId + ", product=" + product + "]";
+				+ rating + ", userId=" + user + ", product=" + product + "]";
 	}
 
 
@@ -128,13 +118,13 @@ public class UserProductFeedback  extends Entity{
 	}
 
 
-	public Long getUserId() {
-		return userId;
+	public User getUserId() {
+		return user;
 	}
 
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setUserId(User user) {
+		this.user = user;
 	}
 
 
