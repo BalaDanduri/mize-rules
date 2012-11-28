@@ -59,7 +59,7 @@ public class UserProductFeedback  extends Entity{
 		} else if (!rating.equals(other.getRating()))
 			return false;
 		if (user == null) {
-			if (other.getUserId() != null)
+			if (other.getUser() != null)
 				return false;
 		} else if (!user.equals(other.user))
 			return false;
