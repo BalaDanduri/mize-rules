@@ -15,7 +15,7 @@ public class UserProduct extends Entity{
 	protected Long userId;
 	protected Product product;
 	protected DateTime createdDate;
-	protected String productList;
+	protected String listName;
 	protected String active;
 	
 	public UserProduct() {
@@ -53,12 +53,12 @@ public class UserProduct extends Entity{
 		this.product = product;
 	}
 
-	public String getProductList() {
-		return productList;
+	public String getListName() {
+		return listName;
 	}
 
-	public void setProductList(String productList) {
-		this.productList = productList;
+	public void setListName(String listName) {
+		this.listName = listName;
 	}
 
 	public String getActive() {
@@ -74,7 +74,7 @@ public class UserProduct extends Entity{
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((product == null) ? 0 : product.hashCode());
-		result = prime * result + ((productList == null) ? 0 : productList.hashCode());
+		result = prime * result + ((listName == null) ? 0 : listName.hashCode());
 		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
 	}
@@ -98,10 +98,10 @@ public class UserProduct extends Entity{
 				return false;
 		} else if (!product.equals(other.product))
 			return false;
-		if (productList == null) {
-			if (other.productList != null)
+		if (listName == null) {
+			if (other.listName != null)
 				return false;
-		} else if (!productList.equals(other.productList))
+		} else if (!listName.equals(other.listName))
 			return false;
 		if (userId == null) {
 			if (other.userId != null)
@@ -114,7 +114,7 @@ public class UserProduct extends Entity{
 	@Override
 	public String toString() {
 		return "Wownit [id=" + id + ", userId=" + userId + ", prodId=" + product
-				+ ", productList=" + productList + "]";
+				+ ", productList=" + listName + "]";
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
