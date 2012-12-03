@@ -4,23 +4,17 @@ import com.mize.domain.common.Entity;
 
 
 public class ProductSource  extends Entity{
-	
+	public static final String SOURCE_MIZE = "1";
+	public static final String SOURCE_AMAZON = "2";
+	public static final String SOURCE_GOOGLE = "3";
 	protected Long productId;
 	protected Long sourceId;
 	protected String sourceProductId;
 
 	
 	public ProductSource() {
-		// TODO Auto-generated constructor stub
 	}
 	
-
-//	public ProductSource(Long productId, Long sourceId, String sourceProductId) {
-//		this.productId = productId;
-//		this.sourceId = sourceId;
-//		this.sourceProductId = sourceProductId;
-//	}
-//
 	public Long getProductId() {
 		return productId;
 	}
