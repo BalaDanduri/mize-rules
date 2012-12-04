@@ -6,10 +6,10 @@ import java.util.Map;
 public class ProductImage {
 	private String imageType;
 	private String url;
-	private Map<String,Dimention> dimentions;
+	private Map<String,Dimension> dimentions;
 	
 	
-	public ProductImage(String imageType, String url, Map<String, Dimention> dimentions) {
+	public ProductImage(String imageType, String url, Map<String, Dimension> dimentions) {
 		super();
 		this.imageType = imageType;
 		this.url = url;
@@ -19,7 +19,7 @@ public class ProductImage {
 		SwatchImage,SmallImage,ThumbnailImage,TinyImage,MediumImage,LargeImage;
 	}
 	public ProductImage(){
-		dimentions = new  HashMap<String,Dimention>();	
+		dimentions = new  HashMap<String,Dimension>();	
 	}
 	public String getUrl() {
 		return url;
@@ -27,10 +27,10 @@ public class ProductImage {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	public Map<String, Dimention> getDimentions() {
+	public Map<String, Dimension> getDimentions() {
 		return dimentions;
 	}
-	public void setDimentions(Map<String, Dimention> dimentions) {
+	public void setDimentions(Map<String, Dimension> dimentions) {
 		this.dimentions = dimentions;
 	}
 	public String getImageType() {
