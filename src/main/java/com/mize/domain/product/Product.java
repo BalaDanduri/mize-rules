@@ -21,12 +21,13 @@ public class Product  extends Entity{
 	protected Brand brand;
 	protected Float price;
 	protected Set<ProductCategory> category;
-	protected String photoLink;
+	
 	protected Integer avgRating;
-	protected Long upc;
+	protected String upc;
 	protected String qrCode;
 	protected ProductSource productSource;
 	protected Integer mizeRating;
+	private ProductDetails productDetails;
 	
 
 	
@@ -34,6 +35,7 @@ public class Product  extends Entity{
 		// TODO Auto-generated constructor stub
 		category = new HashSet<ProductCategory>();
 		productSource = new ProductSource();
+		productDetails = new ProductDetails();
 	}
 	
 
@@ -66,7 +68,6 @@ public class Product  extends Entity{
 		cat1.id = new Long(1);
 		cat1.name = "sample category";
 		prd.category.add(cat1);
-		prd.photoLink = "sampleprd.png";
 		prd.avgRating = new Integer(3);
 		prd.productSource = new ProductSource();
 		prd.productSource.setProductId(new Long(1));
@@ -91,7 +92,6 @@ public class Product  extends Entity{
 		
 		prd1.category.add(cat2);
 		
-		prd1.photoLink = "sampleprd.png";
 		prd1.avgRating = new Integer(3);
 		prd1.productSource = new ProductSource();
 		//new Long(1), new Long(1), "BSX1s87A12"
@@ -114,9 +114,7 @@ public class Product  extends Entity{
 		result = prime * result + ((brand == null) ? 0 : brand.hashCode());
 		result = prime * result
 				+ ((category == null) ? 0 : category.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result
-				+ ((photoLink == null) ? 0 : photoLink.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());		
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((price == null) ? 0 : price.hashCode());
 		result = prime
@@ -155,11 +153,7 @@ public class Product  extends Entity{
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (photoLink == null) {
-			if (other.photoLink != null)
-				return false;
-		} else if (!photoLink.equals(other.photoLink))
-			return false;
+		
 		if (name == null) {
 			if (other.name != null)
 				return false;
@@ -183,7 +177,7 @@ public class Product  extends Entity{
 	public String toString() {
 		return "Product [id=" + id + ", name=" + name + ", shortDescription="
 				+ shortDescription + ", brand=" + brand + ", price=" + price
-				+ ", category=" + category + ", logoLink=" + photoLink
+				+ ", category=" + category + ", logoLink="
 				+ ", avgRating=" + avgRating + "]";
 	}
 
@@ -258,16 +252,6 @@ public class Product  extends Entity{
 	}
 
 
-	public String getPhotoLink() {
-		return photoLink;
-	}
-
-
-	public void setPhotoLink(String photoLink) {
-		this.photoLink = photoLink;
-	}
-
-
 	public Integer getAvgRating() {
 		return avgRating;
 	}
@@ -278,12 +262,12 @@ public class Product  extends Entity{
 	}
 
 
-	public Long getUpc() {
+	public String getUpc() {
 		return upc;
 	}
 
 
-	public void setUpc(Long upc) {
+	public void setUpc(String upc) {
 		this.upc = upc;
 	}
 
@@ -306,4 +290,15 @@ public class Product  extends Entity{
 	public void setMizeRating(Integer mizeRating) {
 		this.mizeRating = mizeRating;
 	}
+
+
+	public ProductDetails getProductDetails() {
+		return productDetails;
+	}
+
+
+	public void setProductDetails(ProductDetails productDetails) {
+		this.productDetails = productDetails;
+	}
+	
 }

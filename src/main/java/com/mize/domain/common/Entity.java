@@ -10,10 +10,18 @@ import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
 public class Entity {
+	
+	@JsonIgnore
 	protected int createdBy;
+	
+	@JsonIgnore
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	protected DateTime createdDate;
+	
+	@JsonIgnore
 	protected int updatedBy;
+	
+	@JsonIgnore
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	protected DateTime updatedDate;
  
