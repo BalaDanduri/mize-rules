@@ -11,17 +11,13 @@ import com.mize.domain.util.JsonDateTimeSerializer;
 
 public class Entity {
 	
-	@JsonIgnore
 	protected int createdBy;
 	
-	@JsonIgnore
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	protected DateTime createdDate;
 	
-	@JsonIgnore
 	protected int updatedBy;
 	
-	@JsonIgnore
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	protected DateTime updatedDate;
  
@@ -34,42 +30,50 @@ public class Entity {
 		this.messages = messages;
 	}
 	
+	@JsonIgnore
 	public int getCreatedBy() {
 		return createdBy;
 	}
 
+	@JsonIgnore
 	public void setCreatedBy(int createdBy) {
 		this.createdBy = createdBy;
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonIgnore
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	@JsonIgnore
 	public void setCreatedDate(DateTime createdDate) {
 		this.createdDate = createdDate;
 	}
 
+	@JsonIgnore
 	public int getUpdatedBy() {
 		return updatedBy;
 	}
 
+	@JsonIgnore
 	public void setUpdatedBy(int updatedBy) {
 		this.updatedBy = updatedBy;
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonIgnore
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
 	
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	@JsonIgnore
 	public void setUpdatedDate(DateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}
