@@ -1,7 +1,15 @@
 package com.mize.domain.product;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.joda.time.DateTime;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.mize.domain.auth.User;
 import com.mize.domain.common.Entity;
+import com.mize.domain.util.JodaDateTimeDeserializer;
+import com.mize.domain.util.JsonDateTimeSerializer;
 
 public class UserProductFeedback  extends Entity{
 	
@@ -127,5 +135,18 @@ public class UserProductFeedback  extends Entity{
 		this.user = user;
 	}
 
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class)	
+	@JsonIgnore(value=false)
+	public DateTime getCreatedDate() {
+		return createdDate;
+	}
+
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	@JsonIgnore(value=false)
+	public void setCreatedDate(DateTime createdDate) {
+		this.createdDate = createdDate;
+	}
 
 }

@@ -1,5 +1,6 @@
 package com.mize.domain.product;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
@@ -14,7 +15,6 @@ public class UserProduct extends Entity{
 	protected Long id;
 	protected Long userId;
 	protected Product product;
-	protected DateTime createdDate;
 	protected String listName;
 	protected String active;
 	
@@ -119,12 +119,14 @@ public class UserProduct extends Entity{
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class)	
+	@JsonIgnore(value=false)
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)		
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	@JsonIgnore(value=false)
 	public void setCreatedDate(DateTime createdDate) {
 		this.createdDate = createdDate;
 	}
