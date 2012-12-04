@@ -1,5 +1,7 @@
 package com.mize.domain.common;
 
+import java.io.Serializable;
+
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -9,8 +11,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
-public class Entity {
+public class Entity implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	protected int createdBy;
 	
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
@@ -21,11 +28,13 @@ public class Entity {
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	protected DateTime updatedDate;
  
+	@JsonIgnore
 	private Messages messages; // need to use object and have more customized object for messages
+	@JsonIgnore
 	public Messages getMessages() {
 		return messages;
 	}
-
+	@JsonIgnore
 	public void setMessages(Messages messages) {
 		this.messages = messages;
 	}

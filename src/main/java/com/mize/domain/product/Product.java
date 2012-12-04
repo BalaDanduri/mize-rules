@@ -18,15 +18,16 @@ public class Product  extends Entity{
 	protected Long id;
 	protected String name;
 	protected String shortDescription;
-	protected Brand brand;
+	protected Brand brand = new Brand();
 	protected Float price;
-	protected Set<ProductCategory> category;
+	protected Set<ProductCategory> category = new HashSet<ProductCategory>();
 	
 	protected Integer avgRating;
 	protected String upc;
 	protected String qrCode;
-	protected ProductSource productSource;
+	protected ProductSource productSource = new ProductSource();
 	protected Integer mizeRating;
+	protected String imageLink;
 	private ProductDetails productDetails;
 	
 
@@ -299,6 +300,16 @@ public class Product  extends Entity{
 
 	public void setProductDetails(ProductDetails productDetails) {
 		this.productDetails = productDetails;
+	}
+
+
+	public String getImageLink() {
+		return imageLink;
+	}
+
+
+	public void setImageLink(String imageLink) {
+		this.imageLink = imageLink;
 	}
 	
 }
