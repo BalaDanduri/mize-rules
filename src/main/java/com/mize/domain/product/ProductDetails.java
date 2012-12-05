@@ -21,7 +21,7 @@ public class ProductDetails extends Entity{
 	}
 	private List<String> productFeatures;
 	private List<SimilarProduct> similarProducts;
-	private Map<String,Dimension> dimentions;	
+	private Map<String,Dimension> dimensions;	
 	private String detailsDescription;
 	private String warranty;
 	private List<ProductImage> productImages;
@@ -29,7 +29,7 @@ public class ProductDetails extends Entity{
 
 	public ProductDetails(){
 		productFeatures = new ArrayList<String>();
-		dimentions = new HashMap<String, Dimension>();
+		dimensions = new HashMap<String, Dimension>();
 		similarProducts = new ArrayList<SimilarProduct>();
 		productImages = new ArrayList<ProductImage>();
 		imageSets = new ArrayList<ProductImageSet>();
@@ -60,12 +60,12 @@ public class ProductDetails extends Entity{
 		this.similarProducts = similarProducts;
 	}
 
-	public Map<String, Dimension> getDimentions() {
-		return dimentions;
+	public Map<String, Dimension> getDimensions() {
+		return dimensions;
 	}
 
-	public void setDimentions(Map<String, Dimension> dimentions) {
-		this.dimentions = dimentions;
+	public void setDimensions(Map<String, Dimension> dimensions) {
+		this.dimensions = dimensions;
 	}
 
 	public String getDetailsDescription() {

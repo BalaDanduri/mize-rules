@@ -6,20 +6,20 @@ import java.util.Map;
 public class ProductImage {
 	private String imageType;
 	private String url;
-	private Map<String,Dimension> dimentions;
+	private Map<String,Dimension> dimensions;
 	
 	
-	public ProductImage(String imageType, String url, Map<String, Dimension> dimentions) {
+	public ProductImage(String imageType, String url, Map<String, Dimension> dimensions) {
 		super();
 		this.imageType = imageType;
 		this.url = url;
-		this.dimentions = dimentions;
+		this.dimensions = dimensions;
 	}
 	public enum ImageType{
 		SwatchImage,SmallImage,ThumbnailImage,TinyImage,MediumImage,LargeImage;
 	}
 	public ProductImage(){
-		dimentions = new  HashMap<String,Dimension>();	
+		dimensions = new  HashMap<String,Dimension>();	
 	}
 	public String getUrl() {
 		return url;
@@ -27,11 +27,11 @@ public class ProductImage {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	public Map<String, Dimension> getDimentions() {
-		return dimentions;
+	public Map<String, Dimension> getDimensions() {
+		return dimensions;
 	}
-	public void setDimentions(Map<String, Dimension> dimentions) {
-		this.dimentions = dimentions;
+	public void setDimensions(Map<String, Dimension> dimensions) {
+		this.dimensions = dimensions;
 	}
 	public String getImageType() {
 		return imageType;
