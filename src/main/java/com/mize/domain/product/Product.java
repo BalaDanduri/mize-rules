@@ -19,17 +19,17 @@ public class Product  extends Entity{
 	protected String name;
 	protected String shortDescription;
 	protected Brand brand = new Brand();
-	protected Float price;
+	protected Double price;
 	protected Set<ProductCategory> category = new HashSet<ProductCategory>();
 	
-	protected Integer avgRating;
+	protected Double avgRating;
 	protected String upc;
 	protected String qrCode;
 	protected ProductSource productSource = new ProductSource();
-	protected Integer mizeRating;
+	protected Double mizeRating;
 	protected String imageLink;
+	private String listName ;
 	private ProductDetails productDetails;
-	
 
 	
 	public Product() {
@@ -62,14 +62,14 @@ public class Product  extends Entity{
 		prd.name = "Sample Product";
 		prd.shortDescription = "Sample short Description";
 		prd.brand = new Brand(1, "Sample Brand", "http://brand.co.in/");
-		prd.price = 110.34F;
+		prd.price = 110.34;
 		prd.category= new HashSet<ProductCategory>();
 		ProductCategory cat1 = new ProductCategory();
 		
 		cat1.id = new Long(1);
 		cat1.name = "sample category";
 		prd.category.add(cat1);
-		prd.avgRating = new Integer(3);
+		prd.avgRating = new Double(3);
 		prd.productSource = new ProductSource();
 		prd.productSource.setProductId(new Long(1));
 		prd.productSource.setSourceId(new Long(1));
@@ -85,7 +85,7 @@ public class Product  extends Entity{
 		prd1.name = "Sample Product 2 ";
 		prd1.shortDescription = "Sample short Description -- new ";
 		prd1.brand = new Brand(1, "Sample Brand", "http://brand.co.in/");
-		prd1.price = 110.34F;
+		prd1.price = 110.34;
 		prd1.category= new HashSet<ProductCategory>();
 		ProductCategory cat2 = new ProductCategory();
 		cat2.id = new Long(2);
@@ -93,7 +93,7 @@ public class Product  extends Entity{
 		
 		prd1.category.add(cat2);
 		
-		prd1.avgRating = new Integer(3);
+		prd1.avgRating = new Double(3);
 		prd1.productSource = new ProductSource();
 		//new Long(1), new Long(1), "BSX1s87A12"
 		prd1.productSource.setProductId(new Long(1));
@@ -233,12 +233,12 @@ public class Product  extends Entity{
 	}
 
 
-	public Float getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
 
-	public void setPrice(Float price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
@@ -252,13 +252,15 @@ public class Product  extends Entity{
 		this.category = category;
 	}
 
+	
 
-	public Integer getAvgRating() {
+
+	public Double getAvgRating() {
 		return avgRating;
 	}
 
 
-	public void setAvgRating(Integer avgRating) {
+	public void setAvgRating(Double avgRating) {
 		this.avgRating = avgRating;
 	}
 
@@ -282,13 +284,13 @@ public class Product  extends Entity{
 		this.qrCode = qrCode;
 	}
 
-
-	public Integer getMizeRating() {
+	
+	public Double getMizeRating() {
 		return mizeRating;
 	}
 
 
-	public void setMizeRating(Integer mizeRating) {
+	public void setMizeRating(Double mizeRating) {
 		this.mizeRating = mizeRating;
 	}
 
@@ -311,5 +313,15 @@ public class Product  extends Entity{
 	public void setImageLink(String imageLink) {
 		this.imageLink = imageLink;
 	}
+
+
+	public String getListName() {
+		return listName;
+	}
+
+
+	public void setListName(String listName) {
+		this.listName = listName;
+	}	
 	
 }

@@ -15,6 +15,7 @@ public class ProductLookup {
 	protected Long sourceId;
 	protected String lookupKey;
 	protected String lookupId;
+	private Long userId;
 
 	
 	public ProductLookup() {
@@ -42,6 +43,15 @@ public class ProductLookup {
 	
 	public void setLookupId(String LookupId) {
 		this.lookupId = LookupId;
+	}
+	
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
 	@Override

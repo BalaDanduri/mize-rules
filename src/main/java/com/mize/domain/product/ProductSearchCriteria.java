@@ -9,6 +9,7 @@ public class ProductSearchCriteria {
 	private String pageIndex;
 	private String[] filters;
 	private String sortBy;
+	private Long userId;
 	
 	public ProductSearchCriteria() {
 	}
@@ -81,4 +82,15 @@ public class ProductSearchCriteria {
 	public void setFilters(String[] filters) {
 		this.filters = filters;
 	}
+
+
+	public Long getUserId() {
+		return userId;
+	}
+
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+	
 }
