@@ -2,6 +2,7 @@ package com.mize.domain.util;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -15,8 +16,8 @@ public class Formatter {
 	public static final String EMPTY = "";
 	public static final String YES = "Y";
 	public static final String NO = "N";
-	public static final DateTimeFormatter  DATE_FORMATT = DateTimeFormat.forPattern("MM-dd-yyyy HH:mm:ss");
-	public static final DateTimeFormatter  DB_DATE_TIME_FORMATT = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+	public static final DateTimeFormatter  DATE_FORMAT = DateTimeFormat.forPattern("MM-dd-yyyy HH:mm:ss");
+	public static final DateTimeFormatter  DB_DATE_TIME_FORMAT = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
 	
 	private Formatter(){
 		
@@ -29,6 +30,7 @@ public class Formatter {
 		}		
 		return value;
 	}
+	
 	public static long longValue(Long longVal){
 		long value = 0;
 		if(longVal != null){
@@ -36,6 +38,7 @@ public class Formatter {
 		}		
 		return value;
 	}
+	
 	public static double intValue(Double dValue){
 		double value = 0.0;
 		if(dValue != null){
@@ -43,6 +46,7 @@ public class Formatter {
 		}		
 		return value;
 	}
+	
 	public static double doubleValue(BigDecimal decimal){
 		double value = 0.0;
 		if(decimal != null){
@@ -50,6 +54,7 @@ public class Formatter {
 		}		
 		return value;
 	}
+	
 	public static int intValue(String intStr){
 		int value = 0;
 		try{
@@ -58,6 +63,7 @@ public class Formatter {
 		}
 		return value;
 	}
+	
 	public static long longValue(String intStr){
 		long value = 0;
 		try{
@@ -66,6 +72,7 @@ public class Formatter {
 		}
 		return value;
 	}
+	
 	public static float getFloatValue(BigDecimal decimal){
 		float value = 0;
 		if(decimal != null){
@@ -73,47 +80,52 @@ public class Formatter {
 		}		
 		return value;
 	}
+	
 	public static String makeNotNullString(String str){
 		return str == null?EMPTY:str.trim();
 	}
+	
 	public static boolean isNull(String str){
 		return (str == null || str.trim().length()==0);
 	}
+	
 	public static boolean isYorN(String str){
 		if(str == null || !(YES.equalsIgnoreCase(str.trim()) || NO.equalsIgnoreCase(str.trim()))){
 			return false;
 		}
 		return true;
 	}
+	
 	public static boolean charToBoolean(char c) {
 		return ((c == 'Y') || (c == 'y'));
 	}
+	
 	public static boolean stringToBoolean(String str) {
 		return (str == null || NO.equalsIgnoreCase(str) ? false: true);
 	}
+	
 	public static int getLength(String str){
 		return (str == null ? 0: str.trim().length());
 	}
-	@SuppressWarnings("rawtypes")
-	public static boolean isEmpty(List list){
-		return (list == null || list.isEmpty());
-	}
 	
 	@SuppressWarnings("rawtypes")
-	public static boolean isEmpty(Set set){
-		return (set == null || set.isEmpty());
+	public static boolean isEmpty(Collection collection){
+		return (collection == null || collection.isEmpty());
 	}
+	
 	@SuppressWarnings("rawtypes")
 	public static boolean isEmpty(Map map){
 		return (map == null || map.isEmpty());
 	}
 	
-	public String getDBDateTime(DateTime dateTime){
-		return (dateTime == null ? null : dateTime.toString(DB_DATE_TIME_FORMATT));
+	public static String getDBDateTime(DateTime dateTime){
+		return (dateTime == null ? null : dateTime.toString(DB_DATE_TIME_FORMAT));
 	}
-	public String getDateTime(DateTime dateTime){
-		return (dateTime == null ? null : dateTime.toString(DATE_FORMATT));
+	
+	public static String getDateTime(DateTime dateTime){
+		return (dateTime == null ? null : dateTime.toString(DATE_FORMAT));
 	}
+	
 	public static String formStringInClause(List<String> list){
 		StringBuffer sb = new StringBuffer(EMPTY);
 		if(list == null)
@@ -127,6 +139,7 @@ public class Formatter {
 		}
 		return sb.toString();		
 	}
+	
 	public static String formStringInClause(Set<String> set){
 		StringBuffer sb = new StringBuffer(EMPTY);
 		if(set == null)
@@ -143,6 +156,7 @@ public class Formatter {
 		}
 		return sb.toString();		
 	}
+	
 	@SuppressWarnings("rawtypes")
 	public static String formInClause(List list){
 		StringBuffer sb = new StringBuffer(EMPTY);
@@ -164,7 +178,27 @@ public class Formatter {
 			return val/100;
 		return val;
 	}
+	
 	public static double doubleValue(BigInteger value){
 		return value == null ? Double.valueOf(0):value.doubleValue();	
+	}
+	
+	public static DateTime dateTime(String dateTime){
+		DateTime time = null;
+		if(dateTime!= null){
+			try{
+				time = DateTime.parse(dateTime,DATE_FORMAT);
+			}catch(Exception e){
+			}
+		}		
+		return time;
+	}
+	
+	public static String toLowerCase(String value){
+		return value == null ? EMPTY : value.trim().toLowerCase();	
+	}
+	
+	public static String toUpperCase(String value){
+		return value == null ? EMPTY : value.trim().toUpperCase();	
 	}
 }
