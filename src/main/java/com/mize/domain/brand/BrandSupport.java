@@ -1,18 +1,17 @@
 package com.mize.domain.brand;
 
-import com.mize.domain.common.Entity;
-import com.mize.domain.util.JodaDateDeserializer;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateSerializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
-
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.mize.domain.common.Entity;
+import com.mize.domain.util.JodaDateTimeDeserializer;
+import com.mize.domain.util.JsonDateTimeSerializer;
+
 public class BrandSupport extends Entity {
 
+	private static final long serialVersionUID = 8873185292574248278L;
 	private Brand brand;
 	private int id;
 	private String phone;

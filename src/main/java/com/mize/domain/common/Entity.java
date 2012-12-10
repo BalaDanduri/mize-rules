@@ -13,10 +13,7 @@ import com.mize.domain.util.JsonDateTimeSerializer;
 
 public class Entity implements Serializable{
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 6651571123697401305L;
 
 	protected int createdBy;
 	

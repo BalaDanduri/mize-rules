@@ -15,7 +15,8 @@ import com.mize.domain.util.JsonDateTimeSerializer;
 
 public class User extends Entity {
 	
-    protected Long id;
+	private static final long serialVersionUID = 6457591358862233006L;
+	protected Long id;
     protected String email;
     protected String name;
     protected DateTime lastLogin;
