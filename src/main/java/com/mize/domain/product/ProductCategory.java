@@ -25,6 +25,17 @@ public class ProductCategory {
 	@JsonIgnore
 	protected Set<ProductCategory> children = new HashSet<ProductCategory>();
 	protected ProdCategorySource sourceCategory  = new ProdCategorySource();
+	protected String department;
+	public String getDepartment() {
+		return department;
+	}
+
+
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+
+
 	protected boolean isActive;
 	
 	public ProductCategory() {
@@ -76,12 +87,34 @@ public class ProductCategory {
 
 	@Override
 	public String toString() {
-		return "ProductCategory [id=" + id + ", name=" + name + ", link=" + photoLink
-				+ ", parent=" + parent + "]";
+		return "ProductCategory [id=" + id + ", name=" + name + ", photoLink="
+				+ photoLink + ", parent=" + parent + ", children=" + children
+				+ ", sourceCategory=" + sourceCategory + ", department="
+				+ department + ", isActive=" + isActive + "]";
 	}
 
 	
 
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((children == null) ? 0 : children.hashCode());
+		result = prime * result
+				+ ((department == null) ? 0 : department.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + (isActive ? 1231 : 1237);
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((parent == null) ? 0 : parent.hashCode());
+		result = prime * result
+				+ ((photoLink == null) ? 0 : photoLink.hashCode());
+		result = prime * result
+				+ ((sourceCategory == null) ? 0 : sourceCategory.hashCode());
+		return result;
+	}
 
 
 	@Override
@@ -97,6 +130,11 @@ public class ProductCategory {
 			if (other.children != null)
 				return false;
 		} else if (!children.equals(other.children))
+			return false;
+		if (department == null) {
+			if (other.department != null)
+				return false;
+		} else if (!department.equals(other.department))
 			return false;
 		if (id == null) {
 			if (other.id != null)
