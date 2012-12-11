@@ -1,5 +1,8 @@
 package com.mize.domain.product;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ProductLookup {
 		
 	public static final String SOURCE_MIZE = "1";
@@ -14,7 +17,7 @@ public class ProductLookup {
 	
 	protected Long sourceId;
 	protected String lookupKey;
-	protected String lookupId;
+	protected List<String> lookupId = new ArrayList<String>();
 	private Long userId;
 
 	
@@ -37,12 +40,16 @@ public class ProductLookup {
 		this.sourceId = sourceId;
 	}
 
-	public String getLookupId() {
+	public List<String> getLookupId() {
 		return lookupId;
 	}
 	
-	public void setLookupId(String LookupId) {
+	public void setLookupId(List<String> LookupId) {
 		this.lookupId = LookupId;
+	}
+	
+	public void addLookupId(String LookupId) {
+		this.lookupId.add(LookupId);
 	}
 	
 
