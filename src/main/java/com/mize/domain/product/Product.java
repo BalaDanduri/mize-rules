@@ -28,7 +28,7 @@ public class Product  extends Entity{
 	protected ProductSource productSource = new ProductSource();
 	protected Double mizeRating;
 	protected String imageLink;
-	private String listName ;
+	private List<String> listNames ;
 	private ProductDetails productDetails;
 
 	
@@ -315,13 +315,13 @@ public class Product  extends Entity{
 	}
 
 
-	public String getListName() {
-		return listName;
+	public List<String> getListNames() {
+		return listNames;
 	}
 
 
-	public void setListName(String listName) {
-		this.listName = listName;
+	public void setListNames(List<String> listNames) {
+		this.listNames = listNames;
 	}	
 	
 }
