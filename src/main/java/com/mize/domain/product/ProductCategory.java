@@ -88,7 +88,7 @@ public class ProductCategory {
 	@Override
 	public String toString() {
 		return "ProductCategory [id=" + id + ", name=" + name + ", photoLink="
-				+ photoLink + ", parent=" + parent + ", children=" + children
+				+ photoLink + ","
 				+ ", sourceCategory=" + sourceCategory + ", department="
 				+ department + ", isActive=" + isActive + "]";
 	}
@@ -102,13 +102,10 @@ public class ProductCategory {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
-				+ ((children == null) ? 0 : children.hashCode());
-		result = prime * result
 				+ ((department == null) ? 0 : department.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + (isActive ? 1231 : 1237);
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((parent == null) ? 0 : parent.hashCode());
 		result = prime * result
 				+ ((photoLink == null) ? 0 : photoLink.hashCode());
 		result = prime * result
