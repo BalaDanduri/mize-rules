@@ -17,7 +17,6 @@ public class Product  extends Entity{
 	
 	protected Long id;
 	protected String name;
-	protected String shortDescription;
 	protected Brand brand = new Brand();
 	protected Double price;
 	protected Set<ProductCategory> category = new HashSet<ProductCategory>();
@@ -30,6 +29,7 @@ public class Product  extends Entity{
 	protected String imageLink;
 	private List<String> listNames ;
 	private ProductDetails productDetails;
+	private String model;
 
 	
 	public Product() {
@@ -60,7 +60,6 @@ public class Product  extends Entity{
 		Product prd = new Product();
 		prd.id = new Long(1);
 		prd.name = "Sample Product";
-		prd.shortDescription = "Sample short Description";
 		prd.brand = new Brand(1, "Sample Brand", "http://brand.co.in/");
 		prd.price = 110.34;
 		prd.category= new HashSet<ProductCategory>();
@@ -83,7 +82,6 @@ public class Product  extends Entity{
 		Product prd1 = new Product();
 		prd1.id = new Long(2);
 		prd1.name = "Sample Product 2 ";
-		prd1.shortDescription = "Sample short Description -- new ";
 		prd1.brand = new Brand(1, "Sample Brand", "http://brand.co.in/");
 		prd1.price = 110.34;
 		prd1.category= new HashSet<ProductCategory>();
@@ -117,10 +115,7 @@ public class Product  extends Entity{
 				+ ((category == null) ? 0 : category.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());		
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((price == null) ? 0 : price.hashCode());
-		result = prime
-				* result
-				+ ((shortDescription == null) ? 0 : shortDescription.hashCode());
+		result = prime * result + ((price == null) ? 0 : price.hashCode());		
 		return result;
 	}
 
@@ -165,19 +160,14 @@ public class Product  extends Entity{
 				return false;
 		} else if (!price.equals(other.price))
 			return false;
-		if (shortDescription == null) {
-			if (other.shortDescription != null)
-				return false;
-		} else if (!shortDescription.equals(other.shortDescription))
-			return false;
+		
 		return true;
 	}
 
 
 	@Override
 	public String toString() {
-		return "Product [id=" + id + ", name=" + name + ", shortDescription="
-				+ shortDescription + ", brand=" + brand + ", price=" + price
+		return "Product [id=" + id + ", name=" + name + ", brand=" + brand + ", price=" + price
 				+ ", category=" + category + ", logoLink="
 				+ ", avgRating=" + avgRating + "]";
 	}
@@ -210,16 +200,6 @@ public class Product  extends Entity{
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-
-	public String getShortDescription() {
-		return shortDescription;
-	}
-
-
-	public void setShortDescription(String shortDescription) {
-		this.shortDescription = shortDescription;
 	}
 
 
@@ -322,6 +302,16 @@ public class Product  extends Entity{
 
 	public void setListNames(List<String> listNames) {
 		this.listNames = listNames;
+	}
+
+
+	public String getModel() {
+		return model;
+	}
+
+
+	public void setModel(String model) {
+		this.model = model;
 	}	
 	
 }
