@@ -11,7 +11,7 @@ public class UserProfilePrivacy extends Entity {
 	private int userId;
 	private int contact;
 	private int personal;
-	private char displayBirthYear;
+	private String displayBirthYear;
 	private int email;
 	private int friends;
 	private int activity;
@@ -50,10 +50,13 @@ public class UserProfilePrivacy extends Entity {
 		this.contact = contact;
 	}
 
-	public char getDisplayBirthYear() {
+	public String getDisplayBirthYear() {
+		if (displayBirthYear == null) {
+			displayBirthYear = "Y";
+		}
 		return displayBirthYear;
 	}
-	public void setDisplayBirthYear(char displayBirthYear) {
+	public void setDisplayBirthYear(String displayBirthYear) {
 		this.displayBirthYear = displayBirthYear;
 	}
 	public int getEmail() {
