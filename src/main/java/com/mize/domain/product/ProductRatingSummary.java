@@ -57,6 +57,9 @@ public class ProductRatingSummary  {
 	}
 
 	public Long getRating1Count() {
+		if (rating1Count == null) {
+			rating1Count = new Long(0);
+		}
 		return rating1Count;
 	}
 
@@ -65,6 +68,9 @@ public class ProductRatingSummary  {
 	}
 
 	public Long getRating2Count() {
+		if (rating2Count == null) {
+			rating2Count = new Long(0);
+		}
 		return rating2Count;
 	}
 
@@ -73,6 +79,9 @@ public class ProductRatingSummary  {
 	}
 
 	public Long getRating3Count() {
+		if (rating3Count == null) {
+			rating3Count = new Long(0);
+		}
 		return rating3Count;
 	}
 
@@ -81,6 +90,9 @@ public class ProductRatingSummary  {
 	}
 
 	public Long getRating4Count() {
+		if (rating4Count == null) {
+			rating4Count = new Long(0);
+		}
 		return rating4Count;
 	}
 
@@ -89,6 +101,9 @@ public class ProductRatingSummary  {
 	}
 
 	public Long getRating5Count() {
+		if (rating5Count == null) {
+			rating5Count = new Long(0);
+		}
 		return rating5Count;
 	}
 
