@@ -27,10 +27,10 @@ public class State {
 	public void setStateName(String stateName) {
 		this.stateName = stateName;
 	}
-	public String getStareCode() {
+	public String getStateCode() {
 		return stateCode;
 	}
-	public void setStareCode(String stareCode) {
+	public void setStateCode(String stareCode) {
 		this.stateCode = stareCode;
 	}
 	
