@@ -11,7 +11,7 @@ public class UserGroup extends Entity{
 	private String groupName;
 	
 	public UserGroup(){
-		
+		user = new User();
 	}
 
 

@@ -1,5 +1,8 @@
 package com.mize.domain.user;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.mize.domain.common.Entity;
 
 public class UserActivity extends Entity{
@@ -9,8 +12,28 @@ public class UserActivity extends Entity{
 	private String activityName;
 	private String activityDescription;
 	
+	private List<UserActivityLog> activityLogs;
+	public enum Activity{
+		Send_Friend_Invite;
+	}
+	public enum ActivityDesc{
+		Desc("Invitation sent to a user to become a friend");
+		private String desc;
+		ActivityDesc(String desc){
+			this.desc = desc;
+		}
+		public String getDesc(){
+			return desc;
+		}
+	}
+	public enum Status{
+		Sent,Ignore,Accept;
+	}
+	public enum Action{
+		Accept,Ignore;
+	}
 	public UserActivity(){
-		
+		activityLogs = new ArrayList<UserActivityLog>();
 	}
 	public Long getActivityId() {
 		return activityId;
@@ -74,6 +97,12 @@ public class UserActivity extends Entity{
 		} else if (!activityName.equals(other.activityName))
 			return false;
 		return true;
+	}
+	public List<UserActivityLog> getActivityLogs() {
+		return activityLogs;
+	}
+	public void setActivityLogs(List<UserActivityLog> activityLogs) {
+		this.activityLogs = activityLogs;
 	}
 	
 		

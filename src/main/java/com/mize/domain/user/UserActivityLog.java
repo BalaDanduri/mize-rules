@@ -19,7 +19,7 @@ public class UserActivityLog extends Entity{
 	protected DateTime firstActivityTime;
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	protected DateTime lastActivityTime;
-	
+	private String userGroupName;
 	public UserActivityLog(){
 		user = new User();
 	}
@@ -158,6 +158,14 @@ public class UserActivityLog extends Entity{
 		} else if (!user.equals(other.user))
 			return false;
 		return true;
+	}
+
+	public String getUserGroupName() {
+		return userGroupName;
+	}
+
+	public void setUserGroupName(String userGroupName) {
+		this.userGroupName = userGroupName;
 	}
 		
 	

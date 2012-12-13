@@ -9,9 +9,6 @@ import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonPropertyOrder;
 import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;
-
-import com.mize.domain.common.Entity;
 
 @JsonPropertyOrder ({"id", "name", "link", "parent"})
 

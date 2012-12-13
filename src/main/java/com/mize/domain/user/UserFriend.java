@@ -11,7 +11,8 @@ public class UserFriend extends Entity{
 	private Long groupId;
 	
 	public UserFriend(){
-		
+		friendUser = new User();
+		user = new User();
 	}
 
 	
