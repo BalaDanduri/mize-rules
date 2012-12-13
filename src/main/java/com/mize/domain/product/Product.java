@@ -20,7 +20,7 @@ public class Product  extends Entity{
 	protected Brand brand = new Brand();
 	protected Double price;
 	protected Set<ProductCategory> category = new HashSet<ProductCategory>();
-	
+	private String shortDescription;
 	protected Double avgRating;
 	protected String upc;
 	protected String qrCode;
@@ -312,6 +312,16 @@ public class Product  extends Entity{
 
 	public void setModel(String model) {
 		this.model = model;
+	}
+
+
+	public String getShortDescription() {
+		return shortDescription;
+	}
+
+
+	public void setShortDescription(String shortDescription) {
+		this.shortDescription = shortDescription;
 	}	
 	
 }
