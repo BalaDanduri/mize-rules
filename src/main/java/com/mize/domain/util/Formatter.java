@@ -203,10 +203,12 @@ public class Formatter {
 		return value == null ? EMPTY : value.trim().toUpperCase();	
 	}
 	
+
 	public static BigInteger toBigInt(String value) {
 		return value == null ? BigInteger.ZERO : new BigInteger(value)   ;
 	}
 	
+
 	public static String likeString(String value){		
 		return LIKE+toUpperCase(value)+LIKE;
 	}
