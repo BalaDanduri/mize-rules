@@ -18,6 +18,7 @@ public class Formatter {
 	public static final String NO = "N";
 	public static final DateTimeFormatter  DATE_FORMAT = DateTimeFormat.forPattern("MM-dd-yyyy HH:mm:ss");
 	public static final DateTimeFormatter  DB_DATE_TIME_FORMAT = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+	public static final String LIKE = "%";
 	
 	private Formatter(){
 		
@@ -201,4 +202,13 @@ public class Formatter {
 	public static String toUpperCase(String value){
 		return value == null ? EMPTY : value.trim().toUpperCase();	
 	}
+	
+	public static BigInteger toBigInt(String value) {
+		return value == null ? BigInteger.ZERO : new BigInteger(value)   ;
+	}
+	
+	public static String likeString(String value){		
+		return LIKE+toUpperCase(value)+LIKE;
+	}
+
 }

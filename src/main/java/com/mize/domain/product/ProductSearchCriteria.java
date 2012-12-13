@@ -1,5 +1,8 @@
 package com.mize.domain.product;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ProductSearchCriteria {
 
 	private String category;
@@ -7,7 +10,7 @@ public class ProductSearchCriteria {
 	private String browseNode;
 	private String searchIndex;
 	private String pageIndex;
-	private String[] filters;
+	private Map<String, String> filters = new HashMap<String, String>();
 	private String sortBy;
 	private Long userId;
 	
@@ -74,16 +77,23 @@ public class ProductSearchCriteria {
 	}
 
 
-	public String[] getFilters() {
+	public Map<String, String> getFilters() {
 		return filters;
 	}
 
 
-	public void setFilters(String[] filters) {
+	public void setFilters(Map<String, String> filters) {
 		this.filters = filters;
 	}
 
+	public String getFilterValue(String filterKey) {
+		return filters.get(filterKey);
+	}
 
+	public String setFilterValue(String filterKey, String filterValue) {
+		return filters.put(filterKey, filterValue);
+	}
+	
 	public Long getUserId() {
 		return userId;
 	}
@@ -92,5 +102,16 @@ public class ProductSearchCriteria {
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
+
+
+	@Override
+	public String toString() {
+		return "ProductSearchCriteria [category=" + category + ", searchKey="
+				+ searchKey + ", browseNode=" + browseNode + ", searchIndex="
+				+ searchIndex + ", pageIndex=" + pageIndex + ", filters="
+				+ filters + ", sortBy=" + sortBy + ", userId=" + userId + "]";
+	}
+	
+	
 	
 }
