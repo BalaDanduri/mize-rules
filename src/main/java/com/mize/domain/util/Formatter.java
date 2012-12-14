@@ -7,6 +7,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -19,6 +21,8 @@ public class Formatter {
 	public static final DateTimeFormatter  DATE_FORMAT = DateTimeFormat.forPattern("MM-dd-yyyy HH:mm:ss");
 	public static final DateTimeFormatter  DB_DATE_TIME_FORMAT = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
 	public static final String LIKE = "%";
+	private static final Pattern HTML_TAGS_PATTERN = Pattern.compile("<.+?>");
+	private static final String HTML_COMMENTS_PATTERN = "(?s)<!--.*?-->";
 	
 	private Formatter(){
 		
@@ -212,5 +216,16 @@ public class Formatter {
 	public static String likeString(String value){		
 		return LIKE+toUpperCase(value)+LIKE;
 	}
-
+	public static String removeHtml(String value){
+		if(getLength(value) >0){
+			try{
+				value=value.replaceAll(HTML_COMMENTS_PATTERN, EMPTY);
+				Matcher m = HTML_TAGS_PATTERN.matcher(value);
+				value = m.replaceAll(EMPTY);
+			}catch(Exception e){
+			}
+		}	
+		return value;
+	}
+	
 }
