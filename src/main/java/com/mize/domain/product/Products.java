@@ -3,7 +3,9 @@ package com.mize.domain.product;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Products {
+import com.mize.domain.common.BaseEntity;
+
+public class Products extends BaseEntity{
 
 	private long searchResults;
 	private List<Product> product = new ArrayList<Product>();

@@ -3,7 +3,9 @@ package com.mize.domain.product;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ProductImage {
+import com.mize.domain.common.BaseEntity;
+
+public class ProductImage  extends BaseEntity{
 	private String imageType;
 	private String url;
 	private Map<String,Dimension> dimensions;

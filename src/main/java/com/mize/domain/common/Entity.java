@@ -1,7 +1,5 @@
 package com.mize.domain.common;
 
-import java.io.Serializable;
-
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -11,7 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
-public class Entity implements Serializable{
+public class Entity extends BaseEntity{
 	
 	private static final long serialVersionUID = 6651571123697401305L;
 

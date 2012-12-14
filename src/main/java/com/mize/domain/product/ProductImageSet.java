@@ -3,7 +3,9 @@ package com.mize.domain.product;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductImageSet {
+import com.mize.domain.common.BaseEntity;
+
+public class ProductImageSet  extends BaseEntity{
 	private String category;
 	private List<ProductImage> productImages;
 	

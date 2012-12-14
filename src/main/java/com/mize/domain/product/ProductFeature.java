@@ -1,6 +1,8 @@
 package com.mize.domain.product;
 
-public class ProductFeature {
+import com.mize.domain.common.BaseEntity;
+
+public class ProductFeature  extends BaseEntity{
 	private String feature;
 
 	

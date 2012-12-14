@@ -3,7 +3,9 @@ package com.mize.domain.product;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ProductSearchCriteria {
+import com.mize.domain.common.BaseEntity;
+
+public class ProductSearchCriteria extends BaseEntity{
 
 	private String category;
 	private String searchKey;

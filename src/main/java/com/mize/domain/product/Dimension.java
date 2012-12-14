@@ -1,6 +1,8 @@
 package com.mize.domain.product;
 
-public class Dimension {
+import com.mize.domain.common.BaseEntity;
+
+public class Dimension extends BaseEntity{
 
 	public enum Name{
 		Height,Length,Weight,Width;		
