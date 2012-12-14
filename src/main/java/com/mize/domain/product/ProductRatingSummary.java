@@ -12,6 +12,9 @@ public class ProductRatingSummary  {
 	protected Long rating3Count;
 	protected Long rating4Count;
 	protected Long rating5Count;
+	protected Long countOwn;
+	protected Long countWant;
+	protected Long countGift;
 	
 	@Override
 	public String toString() {
@@ -21,7 +24,8 @@ public class ProductRatingSummary  {
 				+ ", rating1Count=" + rating1Count + ", rating2Count="
 				+ rating2Count + ", rating3Count=" + rating3Count
 				+ ", rating4Count=" + rating4Count + ", rating5Count="
-				+ rating5Count + "]";
+				+ rating5Count + ", countOwn=" + countOwn + ", countWant="
+				+ countWant + ", countGift=" + countGift + "]";
 	}
 
 	public Long getProductRatingId() {
@@ -111,10 +115,40 @@ public class ProductRatingSummary  {
 		this.rating5Count = rating5Count;
 	}
 
+	public Long getCountOwn() {
+		return countOwn;
+	}
+
+	public void setCountOwn(Long countOwn) {
+		this.countOwn = countOwn;
+	}
+
+	public Long getCountWant() {
+		return countWant;
+	}
+
+	public void setCountWant(Long countWant) {
+		this.countWant = countWant;
+	}
+
+	public Long getCountGift() {
+		return countGift;
+	}
+
+	public void setCountGift(Long countGift) {
+		this.countGift = countGift;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result
+				+ ((countGift == null) ? 0 : countGift.hashCode());
+		result = prime * result
+				+ ((countOwn == null) ? 0 : countOwn.hashCode());
+		result = prime * result
+				+ ((countWant == null) ? 0 : countWant.hashCode());
 		result = prime * result
 				+ ((productId == null) ? 0 : productId.hashCode());
 		result = prime * result
@@ -145,6 +179,21 @@ public class ProductRatingSummary  {
 		if (getClass() != obj.getClass())
 			return false;
 		ProductRatingSummary other = (ProductRatingSummary) obj;
+		if (countGift == null) {
+			if (other.countGift != null)
+				return false;
+		} else if (!countGift.equals(other.countGift))
+			return false;
+		if (countOwn == null) {
+			if (other.countOwn != null)
+				return false;
+		} else if (!countOwn.equals(other.countOwn))
+			return false;
+		if (countWant == null) {
+			if (other.countWant != null)
+				return false;
+		} else if (!countWant.equals(other.countWant))
+			return false;
 		if (productId == null) {
 			if (other.productId != null)
 				return false;
