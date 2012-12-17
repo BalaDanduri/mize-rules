@@ -31,6 +31,7 @@ public class UserActivityLog extends Entity{
 	private String userGroupName;
 	public UserActivityLog(){
 		user = new User();
+		targetUser = new User();
 	}
 
 	public User getUser() {
