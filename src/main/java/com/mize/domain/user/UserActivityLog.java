@@ -15,6 +15,15 @@ public class UserActivityLog extends Entity{
 	private Long activityKey;
 	private String activityAction;
 	private String activityStatus;
+	private String activityComments;
+	public String getActivityComments() {
+		return activityComments;
+	}
+
+	public void setActivityComments(String activityComments) {
+		this.activityComments = activityComments;
+	}
+
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	protected DateTime firstActivityTime;
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
@@ -89,7 +98,8 @@ public class UserActivityLog extends Entity{
 				+ ", targetUser=" + targetUser + ", activityLogId="
 				+ activityLogId + ", activityKey=" + activityKey
 				+ ", activityAction=" + activityAction + ", activityStatus="
-				+ activityStatus + ", firstActivityTime=" + firstActivityTime
+				+ activityStatus + ", activityComments=" + activityComments
+				+ ", firstActivityTime=" + firstActivityTime
 				+ ", lastActivityTime=" + lastActivityTime + ", userGroupName="
 				+ userGroupName + "]";
 	}
@@ -99,6 +109,9 @@ public class UserActivityLog extends Entity{
 		int result = 1;
 		result = prime * result
 				+ ((activityAction == null) ? 0 : activityAction.hashCode());
+		result = prime
+				* result
+				+ ((activityComments == null) ? 0 : activityComments.hashCode());
 		result = prime * result
 				+ ((activityId == null) ? 0 : activityId.hashCode());
 		result = prime * result
@@ -134,6 +147,11 @@ public class UserActivityLog extends Entity{
 			if (other.activityAction != null)
 				return false;
 		} else if (!activityAction.equals(other.activityAction))
+			return false;
+		if (activityComments == null) {
+			if (other.activityComments != null)
+				return false;
+		} else if (!activityComments.equals(other.activityComments))
 			return false;
 		if (activityId == null) {
 			if (other.activityId != null)
