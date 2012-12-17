@@ -10,7 +10,7 @@ public class UserActivityLog extends Entity{
 	private static final long serialVersionUID = 1172153514372814503L;
 	private Long activityId;
 	private User user;
-	
+	private User targetUser;
 	private Long activityLogId;
 	private Long activityKey;
 	private String activityAction;
@@ -29,6 +29,14 @@ public class UserActivityLog extends Entity{
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public User getTargetUser() {
+		return targetUser;
+	}
+
+	public void setTargetUser(User targetUser) {
+		this.targetUser = targetUser;
 	}
 
 	public Long getActivityId() {
@@ -78,11 +86,12 @@ public class UserActivityLog extends Entity{
 	@Override
 	public String toString() {
 		return "UserActivityLog [activityId=" + activityId + ", user=" + user
-				+ ", activityLogId=" + activityLogId + ", activityKey="
-				+ activityKey + ", activityAction=" + activityAction
-				+ ", activityStatus=" + activityStatus + ", firstActivityTime="
-				+ firstActivityTime + ", lastActivityTime=" + lastActivityTime
-				+ "]";
+				+ ", targetUser=" + targetUser + ", activityLogId="
+				+ activityLogId + ", activityKey=" + activityKey
+				+ ", activityAction=" + activityAction + ", activityStatus="
+				+ activityStatus + ", firstActivityTime=" + firstActivityTime
+				+ ", lastActivityTime=" + lastActivityTime + ", userGroupName="
+				+ userGroupName + "]";
 	}
 	@Override
 	public int hashCode() {
@@ -105,7 +114,11 @@ public class UserActivityLog extends Entity{
 		result = prime
 				* result
 				+ ((lastActivityTime == null) ? 0 : lastActivityTime.hashCode());
+		result = prime * result
+				+ ((targetUser == null) ? 0 : targetUser.hashCode());
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		result = prime * result
+				+ ((userGroupName == null) ? 0 : userGroupName.hashCode());
 		return result;
 	}
 	@Override
@@ -152,10 +165,20 @@ public class UserActivityLog extends Entity{
 				return false;
 		} else if (!lastActivityTime.equals(other.lastActivityTime))
 			return false;
+		if (targetUser == null) {
+			if (other.targetUser != null)
+				return false;
+		} else if (!targetUser.equals(other.targetUser))
+			return false;
 		if (user == null) {
 			if (other.user != null)
 				return false;
 		} else if (!user.equals(other.user))
+			return false;
+		if (userGroupName == null) {
+			if (other.userGroupName != null)
+				return false;
+		} else if (!userGroupName.equals(other.userGroupName))
 			return false;
 		return true;
 	}
