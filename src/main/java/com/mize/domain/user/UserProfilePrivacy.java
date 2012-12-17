@@ -9,14 +9,14 @@ public class UserProfilePrivacy extends Entity {
 	 */
 	private static final long serialVersionUID = 6808879417363134780L;
 	private Long userId;
-	private int contact;
-	private int personal;
+	private Long contact;
+	private Long personal;
 	private String displayBirthYear;
-	private int email;
-	private int friends;
-	private int activity;
-	private int want;
-	private int own;
+	private Long email;
+	private Long friends;
+	private Long activity;
+	private Long want;
+	private Long own;
 	
 	public UserProfilePrivacy() {
 		
@@ -30,78 +30,54 @@ public class UserProfilePrivacy extends Entity {
 		this.userId = userId;
 	}
 	
-	public int getPersonal() {
-		if (personal == 0 ) {
-			personal = 2;
-		}
+	public Long getPersonal() {
 		return personal;
 	}
-	public void setPersonal(int personal) {
+	public void setPersonal(Long personal) {
 		this.personal = personal;
 	}
 
-	public int getContact() {
-		if (contact == 0 ) {
-			contact = 2;
-		}
+	public Long getContact() {
 		return contact;
 	}
-	public void setContact(int contact) {
+	public void setContact(Long contact) {
 		this.contact = contact;
 	}
 
 	public String getDisplayBirthYear() {
-		if (displayBirthYear == null) {
-			displayBirthYear = "Y";
-		}
 		return displayBirthYear;
 	}
 	public void setDisplayBirthYear(String displayBirthYear) {
 		this.displayBirthYear = displayBirthYear;
 	}
-	public int getEmail() {
-		if (email == 0 ) {
-			email = 2;
-		}
+	public Long getEmail() {
 		return email;
 	}
-	public void setEmail(int email) {
+	public void setEmail(Long email) {
 		this.email = email;
 	}
-	public int getFriends() {
-		if (friends == 0 ) {
-			friends = 2;
-		}
+	public Long getFriends() {
 		return friends;
 	}
-	public void setFriends(int friends) {
+	public void setFriends(Long friends) {
 		this.friends = friends;
 	}
-	public int getActivity() {
-		if (activity == 0 ) {
-			activity = 2;
-		}
+	public Long getActivity() {
 		return activity;
 	}
-	public void setActivity(int activity) {
+	public void setActivity(Long activity) {
 		this.activity = activity;
 	}
-	public int getWant() {
-		if (want == 0 ) {
-			want = 2;
-		}
+	public Long getWant() {
 		return want;
 	}
-	public void setWant(int want) {
+	public void setWant(Long want) {
 		this.want = want;
 	}
-	public int getOwn() {
-		if (own == 0 ) {
-			own = 2;
-		}
+	public Long getOwn() {
 		return own;
 	}
-	public void setOwn(int own) {
+	public void setOwn(Long own) {
 		this.own = own;
 	}
 	
