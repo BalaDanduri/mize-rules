@@ -31,7 +31,7 @@ public class MizeException extends RuntimeException {
 	public MizeException() {
 		
 	}
-	public MizeException(String errorMessage, String errorCode) {
+	public MizeException(String errorCode, String errorMessage) {
 		super();
 		this.errorMessage = errorMessage;
 		this.errorCode = errorCode;
