@@ -19,6 +19,7 @@ public class UserProductFeedback  extends Entity{
 	protected Integer rating;
 	protected User user;
 	protected Product product;
+	protected String reviewedBy;
 	
 	public UserProductFeedback() {
 		// TODO Auto-generated constructor stub
@@ -29,7 +30,18 @@ public class UserProductFeedback  extends Entity{
 	public String toString() {
 		return "UserProductFeedback [id=" + id + ", feedbackTitle="
 				+ feedbackTitle + ", review=" + review + ", rating=" + rating
-				+ ", user=" + user + ", product=" + product + "]";
+				+ ", user=" + user + ", product=" + product + ", reviewedBy="
+				+ reviewedBy + "]";
+	}
+
+
+	public String getReviewedBy() {
+		return reviewedBy;
+	}
+
+
+	public void setReviewedBy(String reviewedBy) {
+		this.reviewedBy = reviewedBy;
 	}
 
 
@@ -43,6 +55,8 @@ public class UserProductFeedback  extends Entity{
 		result = prime * result + ((product == null) ? 0 : product.hashCode());
 		result = prime * result + ((rating == null) ? 0 : rating.hashCode());
 		result = prime * result + ((review == null) ? 0 : review.hashCode());
+		result = prime * result
+				+ ((reviewedBy == null) ? 0 : reviewedBy.hashCode());
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
@@ -81,6 +95,11 @@ public class UserProductFeedback  extends Entity{
 			if (other.review != null)
 				return false;
 		} else if (!review.equals(other.review))
+			return false;
+		if (reviewedBy == null) {
+			if (other.reviewedBy != null)
+				return false;
+		} else if (!reviewedBy.equals(other.reviewedBy))
 			return false;
 		if (user == null) {
 			if (other.user != null)
