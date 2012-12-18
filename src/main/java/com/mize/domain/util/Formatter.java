@@ -212,6 +212,13 @@ public class Formatter {
 		return value == null ? BigInteger.ZERO : new BigInteger(value)   ;
 	}
 	
+	public static BigInteger toBigInt(int value) {
+		return value == 0 ? BigInteger.ZERO : new BigInteger(String.valueOf(value))  ;
+	}
+	
+	public static int convertDollortoPennies(String value) {
+		return value == null ? 0 : Integer.parseInt(value) * 100   ;
+	}
 
 	public static String likeString(String value){		
 		return LIKE+toUpperCase(value)+LIKE;
