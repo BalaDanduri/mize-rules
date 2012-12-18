@@ -9,8 +9,6 @@ public class UserProfilePrivacy extends Entity {
 	 */
 	private static final long serialVersionUID = 6808879417363134780L;
 	private Long userId;
-	private Long contact;
-	private Long personal;
 	private String displayBirthYear;
 	private Long email;
 	private Long friends;
@@ -30,20 +28,6 @@ public class UserProfilePrivacy extends Entity {
 		this.userId = userId;
 	}
 	
-	public Long getPersonal() {
-		return personal;
-	}
-	public void setPersonal(Long personal) {
-		this.personal = personal;
-	}
-
-	public Long getContact() {
-		return contact;
-	}
-	public void setContact(Long contact) {
-		this.contact = contact;
-	}
-
 	public String getDisplayBirthYear() {
 		return displayBirthYear;
 	}
