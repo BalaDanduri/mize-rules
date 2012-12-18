@@ -9,6 +9,10 @@ public class ProductFeature{
 		this.feature = feature;
 	}
 
+	public ProductFeature() {
+		super();
+	}
+
 	public String getFeature() {
 		return feature;
 	}
