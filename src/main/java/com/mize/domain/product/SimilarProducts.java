@@ -1,8 +1,6 @@
 package com.mize.domain.product;
 
-import com.mize.domain.common.BaseEntity;
-
-public class SimilarProducts extends BaseEntity{
+public class SimilarProducts{
 
 	private String asin;
 	private String title;

@@ -10,11 +10,10 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonPropertyOrder;
 import org.codehaus.jackson.map.JsonMappingException;
 
-import com.mize.domain.common.BaseEntity;
 
 @JsonPropertyOrder ({"id", "name", "link", "parent"})
 
-public class ProductCategory extends BaseEntity{
+public class ProductCategory {
 
 	
 	protected Long id;

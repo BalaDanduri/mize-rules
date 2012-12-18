@@ -1,9 +1,7 @@
 package com.mize.domain.product;
 
-import com.mize.domain.common.BaseEntity;
 
-
-public class ProductRatingSummary extends BaseEntity {
+public class ProductRatingSummary {
 	
 	protected Long productRatingId;
 	protected Long productSourceId;

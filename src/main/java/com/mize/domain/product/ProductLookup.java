@@ -3,9 +3,8 @@ package com.mize.domain.product;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mize.domain.common.BaseEntity;
 
-public class ProductLookup extends BaseEntity{
+public class ProductLookup {
 		
 	public static final String SOURCE_MIZE = "1";
 	public static final String SOURCE_AMAZON = "2";

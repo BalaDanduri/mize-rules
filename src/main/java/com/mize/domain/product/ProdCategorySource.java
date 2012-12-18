@@ -1,8 +1,6 @@
 package com.mize.domain.product;
 
-import com.mize.domain.common.BaseEntity;
-
-public class ProdCategorySource  extends BaseEntity{
+public class ProdCategorySource{
 	
 	protected String sourceCatId;
 	protected Long sourceId;
