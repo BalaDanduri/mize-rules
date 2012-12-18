@@ -3,19 +3,21 @@ package com.mize.domain.user;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mize.domain.auth.User;
 import com.mize.domain.common.Entity;
 
 public class UserActivity extends Entity{
 
 	private static final long serialVersionUID = -1735215114583875295L;
-	private Long activityId;
-	private String activityName;
-	private String activityDescription;
+	private Activity activity = new Activity();
+	private User user;
 	
 	private List<UserActivityLog> activityLogs;
-	public enum Activity{
-		Send_Friend_Invite;
+	
+	public enum ActivityName{
+		Send_Friend_Invite,Recommend_Product;
 	}
+	
 	public enum ActivityDesc{
 		Desc("Invitation sent to a user to become a friend");
 		private String desc;
@@ -34,29 +36,30 @@ public class UserActivity extends Entity{
 	}
 	public UserActivity(){
 		activityLogs = new ArrayList<UserActivityLog>();
+		user = new User();
 	}
 	public Long getActivityId() {
-		return activityId;
+		return activity.id;
 	}
 	public void setActivityId(Long activityId) {
-		this.activityId = activityId;
+		this.activity.id = activityId;
 	}
 	public String getActivityName() {
-		return activityName;
+		return activity.activityName;
 	}
 	public void setActivityName(String activityName) {
-		this.activityName = activityName;
+		this.activity.activityName = activityName;
 	}
 	public String getActivityDescription() {
-		return activityDescription;
+		return activity.activityDescription;
 	}
 	public void setActivityDescription(String activityDescription) {
-		this.activityDescription = activityDescription;
+		this.activity.activityDescription = activityDescription;
 	}
 	
 	@Override
 	public String toString() {
-		return "UserActivity [activityId=" + activityId + ", activityName=" + activityName + ", activityDescription=" + activityDescription + "]";
+		return "UserActivity [activityId=" + activity.id + ", activityName=" + activity.activityName + ", activityDescription=" + activity.activityDescription + "]";
 	}
 	@Override
 	public int hashCode() {
@@ -64,12 +67,12 @@ public class UserActivity extends Entity{
 		int result = 1;
 		result = prime
 				* result
-				+ ((activityDescription == null) ? 0 : activityDescription
+				+ ((activity.activityDescription == null) ? 0 : activity.activityDescription
 						.hashCode());
 		result = prime * result
-				+ ((activityId == null) ? 0 : activityId.hashCode());
+				+ ((activity.id == null) ? 0 : activity.id.hashCode());
 		result = prime * result
-				+ ((activityName == null) ? 0 : activityName.hashCode());
+				+ ((activity.activityName == null) ? 0 : activity.activityName.hashCode());
 		return result;
 	}
 	@Override
@@ -81,20 +84,20 @@ public class UserActivity extends Entity{
 		if (getClass() != obj.getClass())
 			return false;
 		UserActivity other = (UserActivity) obj;
-		if (activityDescription == null) {
-			if (other.activityDescription != null)
+		if (activity.activityDescription == null) {
+			if (other.activity.activityDescription != null)
 				return false;
-		} else if (!activityDescription.equals(other.activityDescription))
+		} else if (!activity.activityDescription.equals(other.activity.activityDescription))
 			return false;
-		if (activityId == null) {
-			if (other.activityId != null)
+		if (activity.id == null) {
+			if (other.activity.id != null)
 				return false;
-		} else if (!activityId.equals(other.activityId))
+		} else if (!activity.id.equals(other.activity.id))
 			return false;
-		if (activityName == null) {
-			if (other.activityName != null)
+		if (activity.activityName == null) {
+			if (other.activity.activityName != null)
 				return false;
-		} else if (!activityName.equals(other.activityName))
+		} else if (!activity.activityName.equals(other.activity.activityName))
 			return false;
 		return true;
 	}
@@ -103,6 +106,12 @@ public class UserActivity extends Entity{
 	}
 	public void setActivityLogs(List<UserActivityLog> activityLogs) {
 		this.activityLogs = activityLogs;
+	}
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 		

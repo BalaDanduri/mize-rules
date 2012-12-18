@@ -1,5 +1,8 @@
 package com.mize.domain.user;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -7,59 +10,30 @@ import com.mize.domain.auth.User;
 import com.mize.domain.common.Entity;
 
 public class UserActivityLog extends Entity{
+	
 	private static final long serialVersionUID = 1172153514372814503L;
-	private Long activityId;
-	private User user;
-	private User targetUser;
-	private Long activityLogId;
+	private Long id;
+	private List<User> targetUsers;
 	private Long activityKey;
 	private String activityAction;
 	private String activityStatus;
 	private String activityComments;
-	public String getActivityComments() {
-		return activityComments;
-	}
-
-	public void setActivityComments(String activityComments) {
-		this.activityComments = activityComments;
-	}
-
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	protected DateTime firstActivityTime;
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	protected DateTime lastActivityTime;
 	private String userGroupName;
+	
+	
 	public UserActivityLog(){
-		user = new User();
-		targetUser = new User();
+		targetUsers = new ArrayList<User>();
 	}
 
-	public User getUser() {
-		return user;
+	public Long getId() {
+		return id;
 	}
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public User getTargetUser() {
-		return targetUser;
-	}
-
-	public void setTargetUser(User targetUser) {
-		this.targetUser = targetUser;
-	}
-
-	public Long getActivityId() {
-		return activityId;
-	}
-	public void setActivityId(Long activityId) {
-		this.activityId = activityId;
-	}
-	public Long getActivityLogId() {
-		return activityLogId;
-	}
-	public void setActivityLogId(Long activityLogId) {
-		this.activityLogId = activityLogId;
+	public void setId(Long activityLogId) {
+		this.id = activityLogId;
 	}
 	public Long getActivityKey() {
 		return activityKey;
@@ -91,19 +65,30 @@ public class UserActivityLog extends Entity{
 	public void setLastActivityTime(DateTime lastActivityTime) {
 		this.lastActivityTime = lastActivityTime;
 	}
-	
-
-	@Override
-	public String toString() {
-		return "UserActivityLog [activityId=" + activityId + ", user=" + user
-				+ ", targetUser=" + targetUser + ", activityLogId="
-				+ activityLogId + ", activityKey=" + activityKey
-				+ ", activityAction=" + activityAction + ", activityStatus="
-				+ activityStatus + ", activityComments=" + activityComments
-				+ ", firstActivityTime=" + firstActivityTime
-				+ ", lastActivityTime=" + lastActivityTime + ", userGroupName="
-				+ userGroupName + "]";
+	public String getActivityComments() {
+		return activityComments;
 	}
+
+	public void setActivityComments(String activityComments) {
+		this.activityComments = activityComments;
+	}
+
+	public String getUserGroupName() {
+		return userGroupName;
+	}
+
+	public void setUserGroupName(String userGroupName) {
+		this.userGroupName = userGroupName;
+	}
+
+	public List<User> getTargetUsers() {
+		return targetUsers;
+	}
+
+	public void setTargetUsers(List<User> targetUsers) {
+		this.targetUsers = targetUsers;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -114,27 +99,24 @@ public class UserActivityLog extends Entity{
 				* result
 				+ ((activityComments == null) ? 0 : activityComments.hashCode());
 		result = prime * result
-				+ ((activityId == null) ? 0 : activityId.hashCode());
-		result = prime * result
 				+ ((activityKey == null) ? 0 : activityKey.hashCode());
-		result = prime * result
-				+ ((activityLogId == null) ? 0 : activityLogId.hashCode());
 		result = prime * result
 				+ ((activityStatus == null) ? 0 : activityStatus.hashCode());
 		result = prime
 				* result
 				+ ((firstActivityTime == null) ? 0 : firstActivityTime
 						.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime
 				* result
 				+ ((lastActivityTime == null) ? 0 : lastActivityTime.hashCode());
 		result = prime * result
-				+ ((targetUser == null) ? 0 : targetUser.hashCode());
-		result = prime * result + ((user == null) ? 0 : user.hashCode());
+				+ ((targetUsers == null) ? 0 : targetUsers.hashCode());
 		result = prime * result
 				+ ((userGroupName == null) ? 0 : userGroupName.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -154,20 +136,10 @@ public class UserActivityLog extends Entity{
 				return false;
 		} else if (!activityComments.equals(other.activityComments))
 			return false;
-		if (activityId == null) {
-			if (other.activityId != null)
-				return false;
-		} else if (!activityId.equals(other.activityId))
-			return false;
 		if (activityKey == null) {
 			if (other.activityKey != null)
 				return false;
 		} else if (!activityKey.equals(other.activityKey))
-			return false;
-		if (activityLogId == null) {
-			if (other.activityLogId != null)
-				return false;
-		} else if (!activityLogId.equals(other.activityLogId))
 			return false;
 		if (activityStatus == null) {
 			if (other.activityStatus != null)
@@ -179,20 +151,20 @@ public class UserActivityLog extends Entity{
 				return false;
 		} else if (!firstActivityTime.equals(other.firstActivityTime))
 			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
 		if (lastActivityTime == null) {
 			if (other.lastActivityTime != null)
 				return false;
 		} else if (!lastActivityTime.equals(other.lastActivityTime))
 			return false;
-		if (targetUser == null) {
-			if (other.targetUser != null)
+		if (targetUsers == null) {
+			if (other.targetUsers != null)
 				return false;
-		} else if (!targetUser.equals(other.targetUser))
-			return false;
-		if (user == null) {
-			if (other.user != null)
-				return false;
-		} else if (!user.equals(other.user))
+		} else if (!targetUsers.equals(other.targetUsers))
 			return false;
 		if (userGroupName == null) {
 			if (other.userGroupName != null)
@@ -202,13 +174,17 @@ public class UserActivityLog extends Entity{
 		return true;
 	}
 
-	public String getUserGroupName() {
-		return userGroupName;
+	@Override
+	public String toString() {
+		return "UserActivityLog [id=" + id + ", targetUsers=" + targetUsers
+				+ ", activityKey=" + activityKey + ", activityAction="
+				+ activityAction + ", activityStatus=" + activityStatus
+				+ ", activityComments=" + activityComments
+				+ ", firstActivityTime=" + firstActivityTime
+				+ ", lastActivityTime=" + lastActivityTime + ", userGroupName="
+				+ userGroupName + "]";
 	}
-
-	public void setUserGroupName(String userGroupName) {
-		this.userGroupName = userGroupName;
-	}
-		
+	
+	
 	
 }
