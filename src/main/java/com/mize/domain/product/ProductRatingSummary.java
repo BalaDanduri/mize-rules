@@ -3,8 +3,6 @@ package com.mize.domain.product;
 
 public class ProductRatingSummary {
 	
-	protected Long productRatingId;
-	protected Long productSourceId;
 	protected Long productId;
 	protected Double productRating;
 	protected Long rating1Count;
@@ -18,30 +16,13 @@ public class ProductRatingSummary {
 	
 	@Override
 	public String toString() {
-		return "ProductRatingSummary [productRatingId=" + productRatingId
-				+ ", productSourceId=" + productSourceId + ", productId="
-				+ productId + ", productRating=" + productRating
-				+ ", rating1Count=" + rating1Count + ", rating2Count="
-				+ rating2Count + ", rating3Count=" + rating3Count
-				+ ", rating4Count=" + rating4Count + ", rating5Count="
-				+ rating5Count + ", countOwn=" + countOwn + ", countWant="
-				+ countWant + ", countGift=" + countGift + "]";
-	}
-
-	public Long getProductRatingId() {
-		return productRatingId;
-	}
-
-	public void setProductRatingId(Long productRatingId) {
-		this.productRatingId = productRatingId;
-	}
-
-	public Long getProductSourceId() {
-		return productSourceId;
-	}
-
-	public void setProductSourceId(Long productSourceId) {
-		this.productSourceId = productSourceId;
+		return "ProductRatingSummary [productId=" + productId
+				+ ", productRating=" + productRating + ", rating1Count="
+				+ rating1Count + ", rating2Count=" + rating2Count
+				+ ", rating3Count=" + rating3Count + ", rating4Count="
+				+ rating4Count + ", rating5Count=" + rating5Count
+				+ ", countOwn=" + countOwn + ", countWant=" + countWant
+				+ ", countGift=" + countGift + "]";
 	}
 
 	public Long getProductId() {
@@ -154,10 +135,6 @@ public class ProductRatingSummary {
 		result = prime * result
 				+ ((productRating == null) ? 0 : productRating.hashCode());
 		result = prime * result
-				+ ((productRatingId == null) ? 0 : productRatingId.hashCode());
-		result = prime * result
-				+ ((productSourceId == null) ? 0 : productSourceId.hashCode());
-		result = prime * result
 				+ ((rating1Count == null) ? 0 : rating1Count.hashCode());
 		result = prime * result
 				+ ((rating2Count == null) ? 0 : rating2Count.hashCode());
@@ -203,16 +180,6 @@ public class ProductRatingSummary {
 			if (other.productRating != null)
 				return false;
 		} else if (!productRating.equals(other.productRating))
-			return false;
-		if (productRatingId == null) {
-			if (other.productRatingId != null)
-				return false;
-		} else if (!productRatingId.equals(other.productRatingId))
-			return false;
-		if (productSourceId == null) {
-			if (other.productSourceId != null)
-				return false;
-		} else if (!productSourceId.equals(other.productSourceId))
 			return false;
 		if (rating1Count == null) {
 			if (other.rating1Count != null)
