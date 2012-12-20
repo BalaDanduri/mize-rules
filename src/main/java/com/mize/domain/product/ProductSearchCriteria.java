@@ -13,6 +13,7 @@ public class ProductSearchCriteria{
 	private Map<String, String> filters = new HashMap<String, String>();
 	private String sortBy;
 	private Long userId;
+	private String sourceCategory;
 	
 	public ProductSearchCriteria() {
 	}
@@ -110,6 +111,16 @@ public class ProductSearchCriteria{
 				+ searchKey + ", browseNode=" + browseNode + ", searchIndex="
 				+ searchIndex + ", pageIndex=" + pageIndex + ", filters="
 				+ filters + ", sortBy=" + sortBy + ", userId=" + userId + "]";
+	}
+
+
+	public String getSourceCategory() {
+		return sourceCategory;
+	}
+
+
+	public void setSourceCategory(String sourceCategory) {
+		this.sourceCategory = sourceCategory;
 	}
 	
 	

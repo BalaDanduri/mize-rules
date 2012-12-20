@@ -15,6 +15,10 @@ import com.mize.domain.common.Entity;
 
 public class Product  extends Entity{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5379538452565383073L;
 	protected Long id;
 	protected String name;
 	protected Brand brand = new Brand();
@@ -30,6 +34,7 @@ public class Product  extends Entity{
 	private List<String> listNames ;
 	private ProductDetails productDetails;
 	private String model;
+	private String productLink;
 
 	
 	public Product() {
@@ -38,140 +43,6 @@ public class Product  extends Entity{
 		productSource = new ProductSource();
 		productDetails = new ProductDetails();
 	}
-	
-
-//	public Product(Long id, String name, String shortDescription, Brand brand,
-//			Float price, Set<ProductCategory> category, String logoLink,
-//			Integer avgRating) {
-//		this.id = id;
-//		this.name = name;
-//		this.shortDescription = shortDescription;
-//		this.brand = brand;
-//		this.price = price;
-//		this.category = category;
-//		this.photoLink = logoLink;
-//		this.avgRating = avgRating;
-//	}
-//
-	
-
-	public static void main(String args[]) throws JsonGenerationException, JsonMappingException, IOException {
-		
-		Product prd = new Product();
-		prd.id = new Long(1);
-		prd.name = "Sample Product";
-		prd.brand = new Brand(1, "Sample Brand", "http://brand.co.in/");
-		prd.price = 110.34;
-		prd.category= new HashSet<ProductCategory>();
-		ProductCategory cat1 = new ProductCategory();
-		
-		cat1.id = new Long(1);
-		cat1.name = "sample category";
-		prd.category.add(cat1);
-		prd.avgRating = new Double(3);
-		prd.productSource = new ProductSource();
-		prd.productSource.setProductId(new Long(1));
-		prd.productSource.setSourceId(new Long(1));
-		prd.productSource.setSourceProductId("BSX1s87A12");
-		
-		
-		List prdList = new ArrayList();
-		
-		prdList.add(prd);
-		
-		Product prd1 = new Product();
-		prd1.id = new Long(2);
-		prd1.name = "Sample Product 2 ";
-		prd1.brand = new Brand(1, "Sample Brand", "http://brand.co.in/");
-		prd1.price = 110.34;
-		prd1.category= new HashSet<ProductCategory>();
-		ProductCategory cat2 = new ProductCategory();
-		cat2.id = new Long(2);
-		cat2.name = "sample category 2 ";
-		
-		prd1.category.add(cat2);
-		
-		prd1.avgRating = new Double(3);
-		prd1.productSource = new ProductSource();
-		//new Long(1), new Long(1), "BSX1s87A12"
-		prd1.productSource.setProductId(new Long(1));
-		prd1.productSource.setSourceId(new Long(1));
-		prd1.productSource.setSourceProductId("BSX1s87A12");
-		
-		prdList.add(prd1);
-		System.out.println(new ObjectMapper().writeValueAsString(prdList));
-		
-	}
-
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((avgRating == null) ? 0 : avgRating.hashCode());
-		result = prime * result + ((brand == null) ? 0 : brand.hashCode());
-		result = prime * result
-				+ ((category == null) ? 0 : category.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());		
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((price == null) ? 0 : price.hashCode());		
-		return result;
-	}
-
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Product other = (Product) obj;
-		if (avgRating == null) {
-			if (other.avgRating != null)
-				return false;
-		} else if (!avgRating.equals(other.avgRating))
-			return false;
-		if (brand == null) {
-			if (other.brand != null)
-				return false;
-		} else if (!brand.equals(other.brand))
-			return false;
-		if (category == null) {
-			if (other.category != null)
-				return false;
-		} else if (!category.equals(other.category))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
-		if (price == null) {
-			if (other.price != null)
-				return false;
-		} else if (!price.equals(other.price))
-			return false;
-		
-		return true;
-	}
-
-
-	@Override
-	public String toString() {
-		return "Product [id=" + id + ", name=" + name + ", brand=" + brand + ", price=" + price
-				+ ", category=" + category + ", logoLink="
-				+ ", avgRating=" + avgRating + "]";
-	}
-
 
 	public ProductSource getProductSource() {
 		return productSource;
@@ -231,9 +102,6 @@ public class Product  extends Entity{
 	public void setCategory(Set<ProductCategory> category) {
 		this.category = category;
 	}
-
-	
-
 
 	public Double getAvgRating() {
 		return avgRating;
@@ -322,6 +190,66 @@ public class Product  extends Entity{
 
 	public void setShortDescription(String shortDescription) {
 		this.shortDescription = shortDescription;
+	}
+
+
+	public String getProductLink() {
+		return productLink;
+	}
+
+
+	public void setProductLink(String productLink) {
+		this.productLink = productLink;
 	}	
 	
+
+
+	public static void main(String args[]) throws JsonGenerationException, JsonMappingException, IOException {
+		
+		Product prd = new Product();
+		prd.id = new Long(1);
+		prd.name = "Sample Product";
+		prd.brand = new Brand(1, "Sample Brand", "http://brand.co.in/");
+		prd.price = 110.34;
+		prd.category= new HashSet<ProductCategory>();
+		ProductCategory cat1 = new ProductCategory();
+		
+		cat1.id = new Long(1);
+		cat1.name = "sample category";
+		prd.category.add(cat1);
+		prd.avgRating = new Double(3);
+		prd.productSource = new ProductSource();
+		prd.productSource.setProductId(new Long(1));
+		prd.productSource.setSourceId(new Long(1));
+		prd.productSource.setSourceProductId("BSX1s87A12");
+		
+		
+		List prdList = new ArrayList();
+		
+		prdList.add(prd);
+		
+		Product prd1 = new Product();
+		prd1.id = new Long(2);
+		prd1.name = "Sample Product 2 ";
+		prd1.brand = new Brand(1, "Sample Brand", "http://brand.co.in/");
+		prd1.price = 110.34;
+		prd1.category= new HashSet<ProductCategory>();
+		ProductCategory cat2 = new ProductCategory();
+		cat2.id = new Long(2);
+		cat2.name = "sample category 2 ";
+		
+		prd1.category.add(cat2);
+		
+		prd1.avgRating = new Double(3);
+		prd1.productSource = new ProductSource();
+		//new Long(1), new Long(1), "BSX1s87A12"
+		prd1.productSource.setProductId(new Long(1));
+		prd1.productSource.setSourceId(new Long(1));
+		prd1.productSource.setSourceProductId("BSX1s87A12");
+		
+		prdList.add(prd1);
+		System.out.println(new ObjectMapper().writeValueAsString(prdList));
+		
+	}
+
 }

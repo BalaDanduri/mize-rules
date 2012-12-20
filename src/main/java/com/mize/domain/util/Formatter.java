@@ -219,6 +219,10 @@ public class Formatter {
 	public static int convertDollortoPennies(String value) {
 		return value == null ? 0 : Integer.parseInt(value) * 100   ;
 	}
+	
+	public static int convertPenniesDollorto(String value) {
+		return value == null ? 0 : Integer.parseInt(value) / 100   ;
+	}
 
 	public static String likeString(String value){		
 		return LIKE+toUpperCase(value)+LIKE;
