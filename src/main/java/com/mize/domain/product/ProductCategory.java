@@ -2,6 +2,7 @@ package com.mize.domain.product;
 
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,7 +14,7 @@ import org.codehaus.jackson.map.JsonMappingException;
 
 @JsonPropertyOrder ({"id", "name", "link", "parent"})
 
-public class ProductCategory {
+public class ProductCategory implements Comparator<ProductCategory> {
 
 	
 	protected Long id;
@@ -204,5 +205,12 @@ public class ProductCategory {
 
 	public void setSourceCategory(ProdCategorySource sourceCategory) {
 		this.sourceCategory = sourceCategory;
+	}
+
+
+	@Override
+	public int compare(ProductCategory o1, ProductCategory o2) {
+		return (o1.getName().compareToIgnoreCase(o2.getName()));
+		
 	}
 }
