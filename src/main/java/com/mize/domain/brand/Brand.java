@@ -1,5 +1,8 @@
 package com.mize.domain.brand;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.mize.domain.common.Entity;
 
 public class Brand extends Entity {
@@ -10,11 +13,20 @@ public class Brand extends Entity {
 	private String website;
 	private String logoName;
 	private String feedbackEmail ; 
+	private List<BrandSupport> brandSupports = new ArrayList<BrandSupport>();
 	
 	public Brand() {
 		
 	}
 	
+	public List<BrandSupport> getBrandSupports() {
+		return brandSupports;
+	}
+
+	public void setBrandSupports(List<BrandSupport> brandSupports) {
+		this.brandSupports = brandSupports;
+	}
+
 	public Brand(int brandId, String brandName, String website) {
 		this.brandId = brandId;
 		this.brandName = brandName;
@@ -53,12 +65,14 @@ public class Brand extends Entity {
 		int result = 1;
 		result = prime * result + brandId;
 		result = prime * result
-				+ ((website == null) ? 0 : website.hashCode());
-		result = prime * result
 				+ ((brandName == null) ? 0 : brandName.hashCode());
 		result = prime * result
+				+ ((brandSupports == null) ? 0 : brandSupports.hashCode());
+		result = prime * result
+				+ ((feedbackEmail == null) ? 0 : feedbackEmail.hashCode());
+		result = prime * result
 				+ ((logoName == null) ? 0 : logoName.hashCode());
-		
+		result = prime * result + ((website == null) ? 0 : website.hashCode());
 		return result;
 	}
 
@@ -73,20 +87,30 @@ public class Brand extends Entity {
 		Brand other = (Brand) obj;
 		if (brandId != other.brandId)
 			return false;
-		if (website == null) {
-			if (other.website != null)
-				return false;
-		} else if (!website.equals(other.website))
-			return false;
 		if (brandName == null) {
 			if (other.brandName != null)
 				return false;
 		} else if (!brandName.equals(other.brandName))
 			return false;
+		if (brandSupports == null) {
+			if (other.brandSupports != null)
+				return false;
+		} else if (!brandSupports.equals(other.brandSupports))
+			return false;
+		if (feedbackEmail == null) {
+			if (other.feedbackEmail != null)
+				return false;
+		} else if (!feedbackEmail.equals(other.feedbackEmail))
+			return false;
 		if (logoName == null) {
 			if (other.logoName != null)
 				return false;
 		} else if (!logoName.equals(other.logoName))
+			return false;
+		if (website == null) {
+			if (other.website != null)
+				return false;
+		} else if (!website.equals(other.website))
 			return false;
 		return true;
 	}
@@ -94,8 +118,9 @@ public class Brand extends Entity {
 	@Override
 	public String toString() {
 		return "Brand [brandId=" + brandId + ", brandName=" + brandName
-				+ ", brandLogoLink="
-				+ website + ", logoName=" + logoName + "]";
+				+ ", website=" + website + ", logoName=" + logoName
+				+ ", feedbackEmail=" + feedbackEmail + ", brandSupports="
+				+ brandSupports + "]";
 	}
 
 	@Override
