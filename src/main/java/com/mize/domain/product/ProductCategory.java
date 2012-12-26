@@ -14,7 +14,7 @@ import org.codehaus.jackson.map.JsonMappingException;
 
 @JsonPropertyOrder ({"id", "name", "link", "parent"})
 
-public class ProductCategory implements Comparator<ProductCategory> {
+public class ProductCategory {
 
 	
 	protected Long id;
@@ -208,9 +208,5 @@ public class ProductCategory implements Comparator<ProductCategory> {
 	}
 
 
-	@Override
-	public int compare(ProductCategory o1, ProductCategory o2) {
-		return (o1.getName().compareToIgnoreCase(o2.getName()));
-		
-	}
+
 }
