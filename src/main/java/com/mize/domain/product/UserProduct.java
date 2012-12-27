@@ -17,17 +17,13 @@ public class UserProduct extends Entity{
 	protected Product product;
 	protected String listName;
 	protected String active;
+	protected UserProductFeedback productFeedback;
+	protected int pageIndex;
+	
 	
 	public UserProduct() {
 		// TODO Auto-generated constructor stub
 	}
-
-//	public Wownit(Long id, Long userId, Product product, ProdStatus status) {
-//		this.id = id;
-//		this.userId = userId;
-//		this.product = product;
-//		this.status = status;
-//	}
 
 	public Long getId() {
 		return id;
@@ -68,6 +64,23 @@ public class UserProduct extends Entity{
 	public void setActive(String active) {
 		this.active = active;
 	}
+
+	public UserProductFeedback getProductFeedback() {
+		return productFeedback;
+	}
+
+	public void setProductFeedback(UserProductFeedback productFeedback) {
+		this.productFeedback = productFeedback;
+	}
+	public int getPageIndex() {
+		return pageIndex;
+	}
+
+	public void setPageIndex(int pageIndex) {
+		this.pageIndex = pageIndex;
+	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
