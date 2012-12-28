@@ -6,6 +6,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.mize.domain.auth.User;
 import com.mize.domain.common.Entity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
@@ -13,7 +14,7 @@ import com.mize.domain.util.JsonDateTimeSerializer;
 public class UserProduct extends Entity{
 
 	protected Long id;
-	protected Long userId;
+	protected User User = new User();
 	protected Product product;
 	protected String listName;
 	protected String active;
@@ -32,13 +33,13 @@ public class UserProduct extends Entity{
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	public Long getUserId() {
-		return userId;
+	
+	public User getUser() {
+		return User;
 	}
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		User = user;
 	}
 
 	public Product getProduct() {
@@ -91,7 +92,6 @@ public class UserProduct extends Entity{
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((product == null) ? 0 : product.hashCode());
 		result = prime * result + ((listName == null) ? 0 : listName.hashCode());
-		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
 	}
 
@@ -118,18 +118,13 @@ public class UserProduct extends Entity{
 			if (other.listName != null)
 				return false;
 		} else if (!listName.equals(other.listName))
-			return false;
-		if (userId == null) {
-			if (other.userId != null)
-				return false;
-		} else if (!userId.equals(other.userId))
-			return false;
+			return false;		
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Wownit [id=" + id + ", userId=" + userId + ", prodId=" + product
+		return "Wownit [id=" + id + ", prodId=" + product
 				+ ", productList=" + listName + "]";
 	}
 
