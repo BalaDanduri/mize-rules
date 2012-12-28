@@ -1,5 +1,8 @@
 package com.mize.domain.user;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
@@ -8,6 +11,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.mize.domain.auth.User;
 import com.mize.domain.common.Entity;
 import com.mize.domain.common.Gender;
 import com.mize.domain.common.PostalAddress;
@@ -16,7 +20,7 @@ import com.mize.domain.util.JsonDateSerializer;
 
 @JsonAutoDetect
 public class UserProfile extends Entity {
-	private int userId;
+	private Long userId;
 	private UserType userType;
 	private PostalAddress postalAddress;
 	private String photoLink;
@@ -39,6 +43,8 @@ public class UserProfile extends Entity {
 	private DateTime birthdate;
 	private Gender gender;
 	
+	private List<User> friends = new ArrayList<User>();
+	
 	public enum UserProfileResult {
 		PROFILE_CREATED, PROFILE_UPDATED
 	}
@@ -47,7 +53,7 @@ public class UserProfile extends Entity {
 		
 	}
 	
-	public UserProfile(int userId, UserType userType, PostalAddress postalAddress,
+	public UserProfile(Long userId, UserType userType, PostalAddress postalAddress,
 			String firstName, String lastName, DateTime birthdate, Gender gender,String photoLink, String jobTitle) {
 		
 		this.userId = userId;
@@ -61,7 +67,7 @@ public class UserProfile extends Entity {
 		this.jobTitle=jobTitle;
 	}
 	
-	public UserProfile(int userId, UserType userType, PostalAddress postalAddress,
+	public UserProfile(Long userId, UserType userType, PostalAddress postalAddress,
 			String firstName, String lastName, DateTime birthdate, Gender gender) {
 		
 		this.userId = userId;
@@ -74,10 +80,10 @@ public class UserProfile extends Entity {
 	}
 	
 	
-	public int getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 	public UserType getUserType() {
@@ -172,6 +178,14 @@ public class UserProfile extends Entity {
 	
 	public void setEmailOptOut(String emailOptOut) {
 		this.emailOptOut = emailOptOut;
+	}
+
+	public List<User> getFriends() {
+		return friends;
+	}
+
+	public void addFriends(List<User> friends) {
+		this.friends.addAll(friends);
 	}
 	
 }
