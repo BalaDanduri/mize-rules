@@ -73,6 +73,9 @@ public class UserProduct extends Entity{
 		this.productFeedback = productFeedback;
 	}
 	public int getPageIndex() {
+		if (pageIndex == 0) {
+			pageIndex = 1;
+		}
 		return pageIndex;
 	}
 
