@@ -7,7 +7,7 @@ public class UploadFile extends Entity{
 	private static final long serialVersionUID = -4764734738730804430L;
 	private String fileFormat;
 	private String fileName;
-	private String fileType;
+	private String category;
 	private String generatedFileName;
 	private String s3Bucket;
 	private String folder;
@@ -23,12 +23,12 @@ public class UploadFile extends Entity{
 	}
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
+	}	
+	public String getCategory() {
+		return category;
 	}
-	public String getFileType() {
-		return fileType;
-	}
-	public void setFileType(String fileType) {
-		this.fileType = fileType;
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	public String getGeneratedFileName() {
 		return generatedFileName;
