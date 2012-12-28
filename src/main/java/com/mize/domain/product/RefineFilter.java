@@ -7,7 +7,7 @@ import java.util.List;
 import org.codehaus.jackson.annotate.JsonPropertyOrder;
 
 @JsonPropertyOrder({"filterName", "filterItemCount", "params"})
-public class RefineFilter {
+public class RefineFilter implements Comparable<RefineFilter>{
 	
 	private String filterName;
 	private BigInteger filterItemCount;
@@ -63,6 +63,11 @@ public class RefineFilter {
 	public String toString() {
 		return "RefineFilter [filterName=" + filterName + ", filterItemCount="
 				+ filterItemCount + ", params=" + params + "]";
+	}
+
+	@Override
+	public int compareTo(RefineFilter o) {	
+		return filterName.compareToIgnoreCase(o.filterName);
 	}
 
 }
