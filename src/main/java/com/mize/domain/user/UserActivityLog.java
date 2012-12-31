@@ -23,7 +23,7 @@ public class UserActivityLog extends Entity{
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	protected DateTime lastActivityTime;
 	private String userGroupName;
-	
+	private String activityName;
 	
 	public UserActivityLog(){
 		targetUsers = new ArrayList<User>();
@@ -184,7 +184,12 @@ public class UserActivityLog extends Entity{
 				+ ", lastActivityTime=" + lastActivityTime + ", userGroupName="
 				+ userGroupName + "]";
 	}
-	
-	
-	
+
+	public String getActivityName() {
+		return activityName;
+	}
+
+	public void setActivityName(String activityName) {
+		this.activityName = activityName;
+	}	
 }

@@ -15,7 +15,14 @@ public class UserActivity extends Entity{
 	private List<UserActivityLog> activityLogs;
 	
 	public enum ActivityName{
-		Send_Friend_Invite,Recommend_Product;
+		Send_Friend_Invite(1),Recommend_Product(2);
+		private int value;
+		private ActivityName(int val){
+			value = val;
+		}
+		public int getValue(){
+			return value;
+		}
 	}
 	
 	public enum ActivityDesc{
@@ -113,6 +120,5 @@ public class UserActivity extends Entity{
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
 		
 }
