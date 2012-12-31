@@ -2,6 +2,7 @@ package com.mize.domain.util;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -199,6 +200,20 @@ public class Formatter {
 		return time;
 	}
 	
+	public static DateTime dateTime(Timestamp timestamp){
+
+		DateTime time = null;
+
+		if(timestamp!= null){
+
+		time = new DateTime(timestamp);
+
+		}
+
+		return time;
+
+		}
+
 	public static String toLowerCase(String value){
 		return value == null ? EMPTY : value.trim().toLowerCase();	
 	}
