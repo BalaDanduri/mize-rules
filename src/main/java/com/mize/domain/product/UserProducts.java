@@ -1,23 +1,25 @@
 package com.mize.domain.product;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.mize.domain.common.Entity;
 
 public class UserProducts extends Entity{
 	private static final long serialVersionUID = 8309438613443876062L;
-	UserProduct userProduct;
-	
+	Long count;
+	List<UserProduct> userProducts;
 	private Map<String,String> msgMap = new HashMap<String,String>();	
 	public UserProducts() {
-		userProduct = new UserProduct();
+		userProducts = new ArrayList<UserProduct>();
 	}
 	public UserProduct getUserProduct() {
-		return userProduct;
+		return userProducts.get(0);
 	}
 	public void setUserProduct(UserProduct userProduct) {
-		this.userProduct = userProduct;
+		this.userProducts.add(userProduct);
 	}
 	public Map<String, String> getMsgMap() {
 		return msgMap;
@@ -25,5 +27,18 @@ public class UserProducts extends Entity{
 	public void setMsgMap(Map<String, String> msgMap) {
 		this.msgMap = msgMap;
 	}
+	public List<UserProduct> getUserProducts() {
+		return userProducts;
+	}
+	public void setUserProducts(List<UserProduct> userProducts) {
+		this.userProducts = userProducts;
+	}
+	public Long getCount() {
+		return count;
+	}
+	public void setCount(Long count) {
+		this.count = count;
+	}
+	
 	
 }

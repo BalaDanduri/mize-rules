@@ -19,7 +19,16 @@ public class UserProfilePrivacy extends Entity {
 	public UserProfilePrivacy() {
 		
 	}
-	
+	public enum Privacy{
+		All(1),Friends(2),NoOne(3);
+		int num;
+		Privacy(int num){
+			this.num = num;
+		}
+		public int getNum(){
+			return num;
+		}
+	}
 	
 	public Long getUserId() {
 		return userId;

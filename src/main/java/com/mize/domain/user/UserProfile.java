@@ -15,6 +15,7 @@ import com.mize.domain.auth.User;
 import com.mize.domain.common.Entity;
 import com.mize.domain.common.Gender;
 import com.mize.domain.common.PostalAddress;
+import com.mize.domain.product.UserProduct;
 import com.mize.domain.util.JodaDateDeserializer;
 import com.mize.domain.util.JsonDateSerializer;
 
@@ -30,6 +31,10 @@ public class UserProfile extends Entity {
 	private String phoneHome;
 	private String phoneWork;
 	private String jobTitle;
+	private List<UserProduct> want;
+	
+	private List<UserProduct> own;
+	private Long friendUserId;
 	
 	private String emailOptOut;
 	
@@ -187,5 +192,33 @@ public class UserProfile extends Entity {
 	public void addFriends(List<User> friends) {
 		this.friends.addAll(friends);
 	}
+	public List<UserProduct> getWant() {
+		return want;
+	}
+
+	public void setWant(List<UserProduct> want) {
+		this.want = want;
+	}
+
+	public List<UserProduct> getOwn() {
+		return own;
+	}
+
+	public void setOwn(List<UserProduct> own) {
+		this.own = own;
+	}
+
+	public Long getFriendUserId() {
+		return friendUserId;
+	}
+
+	public void setFriendUserId(Long friendUserId) {
+		this.friendUserId = friendUserId;
+	}
+
+	public void setFriends(List<User> friends) {
+		this.friends = friends;
+	}
+
 	
 }
