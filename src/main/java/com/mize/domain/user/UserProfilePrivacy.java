@@ -20,7 +20,7 @@ public class UserProfilePrivacy extends Entity {
 		
 	}
 	public enum Privacy{
-		All(1),Friends(2),NoOne(3);
+		All(1),Friends(2),Private(3);
 		int num;
 		Privacy(int num){
 			this.num = num;
