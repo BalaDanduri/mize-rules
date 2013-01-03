@@ -14,6 +14,7 @@ public class ProductSearchCriteria{
 	private String sortBy;
 	private Long userId;
 	private String sourceCategory;
+	private String upc;
 	
 	public ProductSearchCriteria() {
 	}
@@ -122,7 +123,12 @@ public class ProductSearchCriteria{
 	public void setSourceCategory(String sourceCategory) {
 		this.sourceCategory = sourceCategory;
 	}
-	
-	
+
+	public String getUpc() {
+		return upc;
+	}
+	public void setUpc(String upc) {
+		this.upc = upc;
+	}
 	
 }
