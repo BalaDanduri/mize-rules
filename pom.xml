@@ -43,6 +43,11 @@
   		<artifactId>spring-jdbc</artifactId>
   		<version>3.1.2.RELEASE</version>
   	</dependency>
+  	<dependency>
+		    <groupId>org.milyn</groupId>
+		    <artifactId>milyn-smooks-all</artifactId>
+		    <version>1.5.1</version>
+		</dependency>
   </dependencies>
 
   <build>
