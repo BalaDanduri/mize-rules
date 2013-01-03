@@ -34,12 +34,20 @@ public class UserActivity extends Entity{
 		public String getDesc(){
 			return desc;
 		}
+	}	
+	public static Action getAction(int num){
+		for(Action ac : Action.values()){
+			if(num==ac.ordinal()+1){
+				return ac;
+			}
+		}
+		return null;
+	}
+	public enum Action{
+		Accept,Ignore;	
 	}
 	public enum Status{
 		Sent,Ignore,Accept;
-	}
-	public enum Action{
-		Accept,Ignore;
 	}
 	public UserActivity(){
 		activityLogs = new ArrayList<UserActivityLog>();

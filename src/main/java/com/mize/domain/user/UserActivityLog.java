@@ -15,7 +15,7 @@ public class UserActivityLog extends Entity{
 	private Long id;
 	private List<User> targetUsers;
 	private Long activityKey;
-	private String activityAction;
+	private Integer activityAction;
 	private String activityStatus;
 	private String activityComments;
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
@@ -24,6 +24,7 @@ public class UserActivityLog extends Entity{
 	protected DateTime lastActivityTime;
 	private String userGroupName;
 	private String activityName;
+	private Integer mutualFriendsCount;
 	
 	public UserActivityLog(){
 		targetUsers = new ArrayList<User>();
@@ -40,11 +41,11 @@ public class UserActivityLog extends Entity{
 	}
 	public void setActivityKey(Long activityKey) {
 		this.activityKey = activityKey;
-	}
-	public String getActivityAction() {
+	}	
+	public Integer getActivityAction() {
 		return activityAction;
 	}
-	public void setActivityAction(String activityAction) {
+	public void setActivityAction(Integer activityAction) {
 		this.activityAction = activityAction;
 	}
 	public String getActivityStatus() {
@@ -191,5 +192,14 @@ public class UserActivityLog extends Entity{
 
 	public void setActivityName(String activityName) {
 		this.activityName = activityName;
+	}
+
+	public Integer getMutualFriendsCount() {
+		return mutualFriendsCount;
+	}
+
+	public void setMutualFriendsCount(Integer mutualFriendsCount) {
+		this.mutualFriendsCount = mutualFriendsCount;
 	}	
+	
 }
