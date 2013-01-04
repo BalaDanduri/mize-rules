@@ -19,4 +19,7 @@ public final class ServiceDTO<T> {
 	public void setErrors(List<MizeError> errors) {
 		this.errors = errors;
 	} 
+	public boolean hasErrors(){
+		return (errors!= null && errors.size() > 0) ? true:false;
+	}
 }
