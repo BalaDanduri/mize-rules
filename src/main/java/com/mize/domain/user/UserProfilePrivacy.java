@@ -15,6 +15,8 @@ public class UserProfilePrivacy extends Entity {
 	private Long activity;
 	private Long want;
 	private Long own;
+	private Long birthDate;
+	private Long gender;
 	
 	public UserProfilePrivacy() {
 		
@@ -73,5 +75,18 @@ public class UserProfilePrivacy extends Entity {
 	public void setOwn(Long own) {
 		this.own = own;
 	}
+	public Long getBirthDate() {
+		return birthDate;
+	}
+	public void setBirthDate(Long birthDate) {
+		this.birthDate = birthDate;
+	}
+	public Long getGender() {
+		return gender;
+	}
+	public void setGender(Long gender) {
+		this.gender = gender;
+	}
+	
 	
 }
