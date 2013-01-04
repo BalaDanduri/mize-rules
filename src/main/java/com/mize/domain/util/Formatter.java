@@ -24,6 +24,7 @@ public class Formatter {
 	public static final String LIKE = "%";
 	private static final Pattern HTML_TAGS_PATTERN = Pattern.compile("<.+?>");
 	private static final String HTML_COMMENTS_PATTERN = "(?s)<!--.*?-->";
+	public static final String DATE_SEPARATE = "-";
 	
 	private Formatter(){
 		
@@ -253,5 +254,22 @@ public class Formatter {
 		}	
 		return value;
 	}
-	
+	public String getDateAsMonthDay(DateTime dateTime) {
+		String date = null;
+		if(dateTime != null){
+			date = dateTime.toString(Formatter.DATE_FORMAT);
+			String arr[] = date.split("\\-");
+			int count = 0;
+			date = "";
+			for(String str : arr){
+				if(count++==0){
+					date=date+str;
+				}else{
+					date=date+DATE_SEPARATE+str;
+					break;
+				}
+			} 
+		}
+		return date;
+	}	
 }
