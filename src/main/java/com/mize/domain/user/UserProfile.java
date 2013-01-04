@@ -49,6 +49,7 @@ public class UserProfile extends Entity {
 	private Gender gender;
 	
 	private List<User> friends = new ArrayList<User>();
+	private UserProfilePrivacy privacy;
 	
 	public enum UserProfileResult {
 		PROFILE_CREATED, PROFILE_UPDATED
@@ -220,5 +221,13 @@ public class UserProfile extends Entity {
 		this.friends = friends;
 	}
 
+	public UserProfilePrivacy getPrivacy() {
+		return privacy;
+	}
+
+	public void setPrivacy(UserProfilePrivacy privacy) {
+		this.privacy = privacy;
+	}
+	
 	
 }
