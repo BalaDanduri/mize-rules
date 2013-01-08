@@ -16,7 +16,11 @@ public class UserProducts extends Entity{
 		userProducts = new ArrayList<UserProduct>();
 	}
 	public UserProduct getUserProduct() {
-		return userProducts.get(0);
+		if(userProducts!= null && userProducts.size() > 0){
+			return userProducts.get(0);
+		}else{
+			return null;
+		}
 	}
 	public void setUserProduct(UserProduct userProduct) {
 		this.userProducts.add(userProduct);
