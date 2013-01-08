@@ -2,27 +2,30 @@ package com.mize.domain.product;
 
 public class SimilarProducts{
 
-	private String asin;
-	private String title;
+	private ProductSource productSource;
+	private String name;
 	
 	public SimilarProducts(){
 		
 	}
 
-	public String getAsin() {
-		return asin;
+
+	public String getName() {
+		return name;
 	}
 
-	public void setAsin(String asin) {
-		this.asin = asin;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getTitle() {
-		return title;
+
+	public ProductSource getProductSource() {
+		return productSource;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+
+	public void setProductSource(ProductSource productSource) {
+		this.productSource = productSource;
 	}
 	
 

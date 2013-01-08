@@ -9,6 +9,11 @@ import com.mize.domain.common.Entity;
 
 public class ProductDetails extends Entity{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6338652951554117142L;
+
 	public enum DESC{
 		PRD_DESC("Product Description");
 		private String desc;
@@ -21,6 +26,10 @@ public class ProductDetails extends Entity{
 	}
 	private List<ProductFeature> productFeatures;
 	private List<SimilarProducts> similarProducts;
+	private List<SimilarProducts> accessories;
+	private List<SimilarProducts> similarProductBought;
+	private List<SimilarProducts> similarProductViewed;
+	
 	private Map<String,Dimension> dimensions;	
 	private String detailsDescription;
 	private String warranty;
@@ -33,6 +42,9 @@ public class ProductDetails extends Entity{
 		similarProducts = new ArrayList<SimilarProducts>();
 		productImages = new ArrayList<ProductImage>();
 		imageSets = new ArrayList<ProductImageSet>();
+		accessories = new ArrayList<SimilarProducts>();
+		similarProductBought = new ArrayList<SimilarProducts>();
+		similarProductViewed = new ArrayList<SimilarProducts>();
 	}
 	
 	public String getWarranty() {
@@ -90,6 +102,30 @@ public class ProductDetails extends Entity{
 
 	public void setImageSets(List<ProductImageSet> imageSets) {
 		this.imageSets = imageSets;
+	}
+
+	public List<SimilarProducts> getAccessories() {
+		return accessories;
+	}
+
+	public List<SimilarProducts> getSimilarProductBought() {
+		return similarProductBought;
+	}
+
+	public void setSimilarProductBought(List<SimilarProducts> similarProductBought) {
+		this.similarProductBought = similarProductBought;
+	}
+
+	public List<SimilarProducts> getSimilarProductViewed() {
+		return similarProductViewed;
+	}
+
+	public void setSimilarProductViewed(List<SimilarProducts> similarProductViewed) {
+		this.similarProductViewed = similarProductViewed;
+	}
+
+	public void setAccessories(List<SimilarProducts> accessories) {
+		this.accessories = accessories;
 	}
 	
 }
