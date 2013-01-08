@@ -225,7 +225,16 @@ public class Formatter {
 	
 
 	public static BigInteger toBigInt(String value) {
-		return value == null ? BigInteger.ZERO : new BigInteger(value)   ;
+		BigInteger returnValue = BigInteger.ZERO;
+		if (value != null) {
+			try {
+			returnValue = new BigInteger(value);
+			} catch(Exception e) {
+				Float floatVal = new Float(value);
+				returnValue = new BigInteger(String.valueOf(floatVal.intValue()+1));
+			}
+		}
+		return returnValue   ;
 	}
 	
 	public static BigInteger toBigInt(int value) {
@@ -272,4 +281,10 @@ public class Formatter {
 		}
 		return date;
 	}	
+	
+	public static void main(String[] args) {
+		System.out.print(Formatter.toBigInt("5.99"));
+		System.out.print(Formatter.toBigInt("100"));
+		System.out.print(Formatter.toBigInt("599"));
+	}
 }
