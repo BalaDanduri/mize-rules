@@ -281,10 +281,11 @@ public class Formatter {
 		}
 		return date;
 	}	
-	
-	public static void main(String[] args) {
-		System.out.print(Formatter.toBigInt("5.99"));
-		System.out.print(Formatter.toBigInt("100"));
-		System.out.print(Formatter.toBigInt("599"));
+	public static long getLongValue(Long value){
+		long val = 0;
+		if(value != null){
+			val = value.longValue();
+		}
+		return val;
 	}
 }
