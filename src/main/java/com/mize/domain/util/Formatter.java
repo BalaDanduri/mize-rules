@@ -298,10 +298,18 @@ public class Formatter {
 		return uomConversionForAmazon.get(uom);
 	}
 	
+	public static long getLongValue(Long value){
+		long val = 0;
+		if(value != null){
+			val = value.longValue();
+		}
+		return val;
+	}
+	
 	public static void main(String[] args) {
 		System.out.println(convertUOM("hundredths-pounds"));
 		System.out.println(convertUOM("hundredths-inches"));
 		System.out.println(convertToByHundered(new Double("13008")));
-		
 	}
+
 }
