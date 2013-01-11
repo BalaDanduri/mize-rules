@@ -4,10 +4,12 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -248,6 +250,10 @@ public class Formatter {
 	public static int convertPenniesDollorto(String value) {
 		return value == null ? 0 : Integer.parseInt(value) / 100   ;
 	}
+	
+	public static Double convertToByHundered(Double value) {
+		return value == null ? 0 :value / 100   ;
+	}
 
 	public static String likeString(String value){		
 		return LIKE+toUpperCase(value)+LIKE;
@@ -282,9 +288,20 @@ public class Formatter {
 		return date;
 	}	
 	
+	static Map<String, String> uomConversionForAmazon = new HashMap<String, String>();
+	static {
+		uomConversionForAmazon.put("hundredths-pounds", "pounds");
+		uomConversionForAmazon.put("hundredths-inches", "inches");
+	}
+	
+	public static String convertUOM(String uom) {
+		return uomConversionForAmazon.get(uom);
+	}
+	
 	public static void main(String[] args) {
-		System.out.print(Formatter.toBigInt("5.99"));
-		System.out.print(Formatter.toBigInt("100"));
-		System.out.print(Formatter.toBigInt("599"));
+		System.out.println(convertUOM("hundredths-pounds"));
+		System.out.println(convertUOM("hundredths-inches"));
+		System.out.println(convertToByHundered(new Double("13008")));
+		
 	}
 }
