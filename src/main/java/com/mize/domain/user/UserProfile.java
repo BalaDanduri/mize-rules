@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonAutoDetect;
-import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -37,7 +36,7 @@ public class UserProfile extends Entity {
 	private Long friendUserId;
 	
 	private String emailOptOut;
-	
+	private String pageIndex;
 	
 	// Personal Info
 	@JsonProperty 
@@ -227,6 +226,14 @@ public class UserProfile extends Entity {
 
 	public void setPrivacy(UserProfilePrivacy privacy) {
 		this.privacy = privacy;
+	}
+
+	public String getPageIndex() {
+		return pageIndex;
+	}
+
+	public void setPageIndex(String pageIndex) {
+		this.pageIndex = pageIndex;
 	}
 	
 	
