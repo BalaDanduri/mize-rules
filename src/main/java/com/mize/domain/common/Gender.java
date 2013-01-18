@@ -1,7 +1,7 @@
 package com.mize.domain.common;
 
 public enum Gender {
-	MALE("M"), FEMALE("F");
+	M("M"), F("F");
 	private String gender;
 	private Gender(String gender) {
 		this.gender = gender;
