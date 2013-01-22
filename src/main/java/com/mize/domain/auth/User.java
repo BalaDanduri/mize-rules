@@ -195,7 +195,7 @@ public class User extends Entity {
 	public void setUserProfile(UserProfile userProfile) {
 		this.userProfile = userProfile;
 	}
-	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
+	@JsonView(UserProfileViews.UserProfilePrivacyView.class)
 	public UserProfile getUserProfile() {
 		return userProfile;
 	}
