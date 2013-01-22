@@ -5,11 +5,15 @@ import java.util.List;
 
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.map.annotate.JsonView;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.common.Entity;
 import com.mize.domain.user.UserProfile;
+import com.mize.domain.user.UserProfileViews;
+import com.mize.domain.user.UserProfileViews.PublicView;
+import com.mize.domain.user.UserProfileViews.UserProfilePrivacyView;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
@@ -59,19 +63,22 @@ public class User extends Entity {
 		this.emailValidated = emailValidated;
 		this.linkedAccounts = linkedAccounts;
 	}
-
+	
+	@JsonView(PublicView.class)
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
+	@JsonView(UserProfilePrivacyView.class)
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
 	public String getName() {
 		return name;
 	}
@@ -81,6 +88,7 @@ public class User extends Entity {
 	
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class)	
+	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
 	public DateTime getLastLogin() {
 		return lastLogin;
 	}
@@ -90,18 +98,21 @@ public class User extends Entity {
 	public void setLastLogin(DateTime lastLogin) {
 		this.lastLogin = lastLogin;
 	}
+	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
 	public boolean isActive() {
 		return active;
 	}
 	public void setActive(boolean active) {
 		this.active = active;
 	}
+	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
 	public boolean isEmailValidated() {
 		return emailValidated;
 	}
 	public void setEmailValidated(boolean emailValidated) {
 		this.emailValidated = emailValidated;
 	}
+	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
 	public List<LinkedAccount> getLinkedAccounts() {
 		return linkedAccounts;
 	}
@@ -141,7 +152,7 @@ public class User extends Entity {
 		}
 	}
 	
-
+	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
 	public List<UserConnect> getUserConnects() {
 		return userConnects;
 	}
@@ -149,7 +160,7 @@ public class User extends Entity {
 	public void setUserConnects(List<UserConnect> userConnects) {
 		this.userConnects = userConnects;
 	}
-
+	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
 	public void  setUserConnect(UserConnect UserConnect) {
 		if(userConnects==null) {
 			userConnects = new ArrayList<UserConnect>();
@@ -184,7 +195,7 @@ public class User extends Entity {
 	public void setUserProfile(UserProfile userProfile) {
 		this.userProfile = userProfile;
 	}
-	
+	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
 	public UserProfile getUserProfile() {
 		return userProfile;
 	}
