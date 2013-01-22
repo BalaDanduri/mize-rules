@@ -113,6 +113,7 @@ public class Formatter {
 		return (str == null || NO.equalsIgnoreCase(str) ? false: true);
 	}
 	
+	// returns Length of string
 	public static int getLength(String str){
 		return (str == null ? 0: str.trim().length());
 	}
