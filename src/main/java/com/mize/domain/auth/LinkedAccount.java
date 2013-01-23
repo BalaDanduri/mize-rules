@@ -11,6 +11,7 @@ public class LinkedAccount extends Entity {
 	public static final String PROVIDER_PASSWORD = "password";
 	public static final String PROVIDER_TWITTER= "twitter";
 	public static final String PROVIDER_EBAY= "ebay";
+	public static final String PROVIDER_LINKEDIN= "linkedin";
 	
     private Long id;
     private User user;
