@@ -9,7 +9,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.StringTokenizer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,8 +27,7 @@ public class Formatter {
 	private static final String HTML_COMMENTS_PATTERN = "(?s)<!--.*?-->";
 	public static final String DATE_SEPARATE = "-";
 	
-	private Formatter(){
-		
+	private Formatter(){		
 	}
 	
 	public static int intValue(Integer intVal){
@@ -48,7 +46,7 @@ public class Formatter {
 		return value;
 	}
 	
-	public static double intValue(Double dValue){
+	public static double doubleValue(Double dValue){
 		double value = 0.0;
 		if(dValue != null){
 			value = dValue.doubleValue();
@@ -111,9 +109,8 @@ public class Formatter {
 	
 	public static boolean stringToBoolean(String str) {
 		return (str == null || NO.equalsIgnoreCase(str) ? false: true);
-	}
+	}	
 	
-	// returns Length of string
 	public static int getLength(String str){
 		return (str == null ? 0: str.trim().length());
 	}
@@ -205,18 +202,12 @@ public class Formatter {
 	}
 	
 	public static DateTime dateTime(Timestamp timestamp){
-
 		DateTime time = null;
-
 		if(timestamp!= null){
-
-		time = new DateTime(timestamp);
-
+			time = new DateTime(timestamp);
 		}
-
 		return time;
-
-		}
+	}
 
 	public static String toLowerCase(String value){
 		return value == null ? EMPTY : value.trim().toLowerCase();	
@@ -270,21 +261,10 @@ public class Formatter {
 		}	
 		return value;
 	}
-	public String getDateAsMonthDay(DateTime dateTime) {
+	public static String getMonthAndDay(DateTime dateTime) {
 		String date = null;
 		if(dateTime != null){
-			date = dateTime.toString(Formatter.DATE_FORMAT);
-			String arr[] = date.split("\\-");
-			int count = 0;
-			date = "";
-			for(String str : arr){
-				if(count++==0){
-					date=date+str;
-				}else{
-					date=date+DATE_SEPARATE+str;
-					break;
-				}
-			} 
+			date = dateTime.getMonthOfYear()+DATE_SEPARATE+dateTime.getDayOfMonth();			
 		}
 		return date;
 	}	
@@ -298,19 +278,4 @@ public class Formatter {
 	public static String convertUOM(String uom) {
 		return uomConversionForAmazon.get(uom);
 	}
-	
-	public static long getLongValue(Long value){
-		long val = 0;
-		if(value != null){
-			val = value.longValue();
-		}
-		return val;
-	}
-	
-	public static void main(String[] args) {
-		System.out.println(convertUOM("hundredths-pounds"));
-		System.out.println(convertUOM("hundredths-inches"));
-		System.out.println(convertToByHundered(new Double("13008")));
-	}
-
 }
