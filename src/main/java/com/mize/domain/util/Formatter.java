@@ -278,4 +278,7 @@ public class Formatter {
 	public static String convertUOM(String uom) {
 		return uomConversionForAmazon.get(uom);
 	}
+	public static boolean isTrue(String val){
+		return "True".equalsIgnoreCase(val);
+	}
 }
