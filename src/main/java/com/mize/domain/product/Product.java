@@ -25,7 +25,6 @@ public class Product  extends Entity{
 	protected Double price;
 	protected Set<ProductCategory> category = new HashSet<ProductCategory>();
 	private String shortDescription;
-	protected Double avgRating;
 	protected String upc;
 	protected String qrCode;
 	protected ProductSource productSource = new ProductSource();
@@ -102,16 +101,6 @@ public class Product  extends Entity{
 	public void setCategory(Set<ProductCategory> category) {
 		this.category = category;
 	}
-
-	public Double getAvgRating() {
-		return avgRating;
-	}
-
-
-	public void setAvgRating(Double avgRating) {
-		this.avgRating = avgRating;
-	}
-
 
 	public String getUpc() {
 		return upc;
@@ -217,7 +206,6 @@ public class Product  extends Entity{
 		cat1.id = new Long(1);
 		cat1.name = "sample category";
 		prd.category.add(cat1);
-		prd.avgRating = new Double(3);
 		prd.productSource = new ProductSource();
 		prd.productSource.setProductId(new Long(1));
 		prd.productSource.setSourceId(new Long(1));
@@ -239,8 +227,6 @@ public class Product  extends Entity{
 		cat2.name = "sample category 2 ";
 		
 		prd1.category.add(cat2);
-		
-		prd1.avgRating = new Double(3);
 		prd1.productSource = new ProductSource();
 		//new Long(1), new Long(1), "BSX1s87A12"
 		prd1.productSource.setProductId(new Long(1));
