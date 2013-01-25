@@ -15,7 +15,7 @@ public class UserActivity extends Entity{
 	private List<UserActivityLog> activityLogs;
 	
 	public enum ActivityName{
-		Send_Friend_Invite(1),Recommend_Product(2);
+		Send_Friend_Invite(1),Recommend_Product(2),Friend_Invite_Accepted(3);
 		private int value;
 		private ActivityName(int val){
 			value = val;
@@ -44,7 +44,7 @@ public class UserActivity extends Entity{
 		return null;
 	}
 	public enum Action{
-		Accept,Ignore;	
+		Accept,Ignore,Invite_Accepted;	
 	}
 	public enum Status{
 		Sent,Ignore,Accept;
