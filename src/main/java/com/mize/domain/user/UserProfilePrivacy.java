@@ -1,7 +1,15 @@
 package com.mize.domain.user;
 
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.joda.time.DateTime;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.mize.domain.common.Entity;
+import com.mize.domain.util.JodaDateTimeDeserializer;
+import com.mize.domain.util.JsonDateTimeSerializer;
 
 public class UserProfilePrivacy extends Entity {
 	/**
@@ -17,6 +25,14 @@ public class UserProfilePrivacy extends Entity {
 	private Long own;
 	private Long birthDate;
 	private Long gender;
+	private Long cityState;
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	protected DateTime createdDate;
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	protected DateTime updatedDate;
+	protected int createdBy;
+	protected int updatedBy;
+	
 	
 	public UserProfilePrivacy() {
 		
@@ -87,6 +103,59 @@ public class UserProfilePrivacy extends Entity {
 	public void setGender(Long gender) {
 		this.gender = gender;
 	}
+	public Long getCityState() {
+		return cityState;
+	}
+	public void setCityState(Long cityState) {
+		this.cityState = cityState;
+	}
+
+	@JsonIgnore
+	public int getCreatedBy() {
+		return createdBy;
+	}
+
+	@JsonIgnore
+	public void setCreatedBy(int createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonIgnore
+	public DateTime getCreatedDate() {
+		return createdDate;
+	}
+
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	@JsonIgnore
+	public void setCreatedDate(DateTime createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	@JsonIgnore
+	public int getUpdatedBy() {
+		return updatedBy;
+	}
+
+	@JsonIgnore
+	public void setUpdatedBy(int updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonIgnore
+	public DateTime getUpdatedDate() {
+		return updatedDate;
+	}
 	
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	@JsonIgnore
+	public void setUpdatedDate(DateTime updatedDate) {
+		this.updatedDate = updatedDate;
+	}	
 	
 }
