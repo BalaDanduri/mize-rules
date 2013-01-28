@@ -21,6 +21,9 @@ public class UserProduct extends Entity{
 	protected UserProductFeedback productFeedback;
 	protected int pageIndex;
 	
+	public enum Wownit{
+		own,want,gift,recycle;
+	}
 	
 	public UserProduct() {
 		// TODO Auto-generated constructor stub
