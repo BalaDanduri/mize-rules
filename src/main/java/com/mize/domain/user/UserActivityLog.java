@@ -25,6 +25,9 @@ public class UserActivityLog extends Entity{
 	private String userGroupName;
 	private String activityName;
 	private Integer mutualFriendsCount;
+	private String productName;
+	private String imageLink;
+	private Long productId;
 	
 	public UserActivityLog(){
 		targetUsers = new ArrayList<User>();
@@ -200,6 +203,30 @@ public class UserActivityLog extends Entity{
 
 	public void setMutualFriendsCount(Integer mutualFriendsCount) {
 		this.mutualFriendsCount = mutualFriendsCount;
+	}
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+	public String getImageLink() {
+		return imageLink;
+	}
+
+	public void setImageLink(String imageLink) {
+		this.imageLink = imageLink;
+	}
+
+	public Long getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Long productId) {
+		this.productId = productId;
 	}	
-	
+		
 }
