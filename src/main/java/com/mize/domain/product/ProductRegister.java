@@ -14,7 +14,7 @@ public class ProductRegister extends Entity{
 
 	private static final long serialVersionUID = -6338652951554117142L;
 	
-	private Long productRegistrationId;
+	private Long prodRegnId;
 	private Product product;
 	private User user = new User();;
 	private String serialNumber;
@@ -24,13 +24,14 @@ public class ProductRegister extends Entity{
 	private Double purchasePrice;
 	private String purchaseStore;
 	@DateTimeFormat (pattern="dd-MM-yyyy")
-	private DateTime warrentyExpiryDate;
+	private DateTime warrantyExpiryDate;
 	private String additionalInfo;
-	public Long getProductRegistrationId() {
-		return productRegistrationId;
+	
+	public Long getProdRegnId() {
+		return prodRegnId;
 	}
-	public void setProductRegistrationId(Long productRegistrationId) {
-		this.productRegistrationId = productRegistrationId;
+	public void setProdRegnId(Long prodRegnId) {
+		this.prodRegnId = prodRegnId;
 	}
 	public Product getProduct() {
 		return product;
@@ -76,14 +77,13 @@ public class ProductRegister extends Entity{
 	}
 	@DateTimeFormat (pattern="MM-dd-yyyy")
 	@JsonSerialize(using=JsonDateSerializer.class)
-	public DateTime getWarrentyExpiryDate() {
-		return warrentyExpiryDate;
+	public DateTime getWarrantyExpiryDate() {
+		return warrantyExpiryDate;
 	}
-	
 	@DateTimeFormat (pattern="MM-dd-yyyy")
 	@JsonDeserialize(using=JodaDateDeserializer.class)
-	public void setWarrentyExpiryDate(DateTime warrentyExpiryDate) {
-		this.warrentyExpiryDate = warrentyExpiryDate;
+	public void setWarrantyExpiryDate(DateTime warrantyExpiryDate) {
+		this.warrantyExpiryDate = warrantyExpiryDate;
 	}
 	public String getAdditionalInfo() {
 		return additionalInfo;
@@ -96,14 +96,14 @@ public class ProductRegister extends Entity{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((additionalInfo == null) ? 0 : additionalInfo.hashCode());
+		result = prime * result + ((prodRegnId == null) ? 0 : prodRegnId.hashCode());
 		result = prime * result + ((product == null) ? 0 : product.hashCode());
-		result = prime * result + ((productRegistrationId == null) ? 0 : productRegistrationId.hashCode());
 		result = prime * result + ((purchaseDate == null) ? 0 : purchaseDate.hashCode());
 		result = prime * result + ((purchasePrice == null) ? 0 : purchasePrice.hashCode());
 		result = prime * result + ((purchaseStore == null) ? 0 : purchaseStore.hashCode());
 		result = prime * result + ((serialNumber == null) ? 0 : serialNumber.hashCode());
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
-		result = prime * result + ((warrentyExpiryDate == null) ? 0 : warrentyExpiryDate.hashCode());
+		result = prime * result + ((warrantyExpiryDate == null) ? 0 : warrantyExpiryDate.hashCode());
 		return result;
 	}
 	@Override
@@ -120,15 +120,15 @@ public class ProductRegister extends Entity{
 				return false;
 		} else if (!additionalInfo.equals(other.additionalInfo))
 			return false;
+		if (prodRegnId == null) {
+			if (other.prodRegnId != null)
+				return false;
+		} else if (!prodRegnId.equals(other.prodRegnId))
+			return false;
 		if (product == null) {
 			if (other.product != null)
 				return false;
 		} else if (!product.equals(other.product))
-			return false;
-		if (productRegistrationId == null) {
-			if (other.productRegistrationId != null)
-				return false;
-		} else if (!productRegistrationId.equals(other.productRegistrationId))
 			return false;
 		if (purchaseDate == null) {
 			if (other.purchaseDate != null)
@@ -155,18 +155,18 @@ public class ProductRegister extends Entity{
 				return false;
 		} else if (!user.equals(other.user))
 			return false;
-		if (warrentyExpiryDate == null) {
-			if (other.warrentyExpiryDate != null)
+		if (warrantyExpiryDate == null) {
+			if (other.warrantyExpiryDate != null)
 				return false;
-		} else if (!warrentyExpiryDate.equals(other.warrentyExpiryDate))
+		} else if (!warrantyExpiryDate.equals(other.warrantyExpiryDate))
 			return false;
 		return true;
 	}
 	@Override
 	public String toString() {
-		return "ProductRegister [productRegistrationId=" + productRegistrationId + ", product=" + product + ", user="
-				+ user + ", serialNumber=" + serialNumber + ", purchaseDate=" + purchaseDate + ", purchasePrice="
-				+ purchasePrice + ", purchaseStore=" + purchaseStore + ", warrentyExpiryDate=" + warrentyExpiryDate
+		return "ProductRegister [prodRegnId=" + prodRegnId + ", product=" + product + ", user=" + user
+				+ ", serialNumber=" + serialNumber + ", purchaseDate=" + purchaseDate + ", purchasePrice="
+				+ purchasePrice + ", purchaseStore=" + purchaseStore + ", warrantyExpiryDate=" + warrantyExpiryDate
 				+ ", additionalInfo=" + additionalInfo + "]";
 	}
 	
