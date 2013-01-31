@@ -34,7 +34,7 @@ public class JsonFilterTest1 {
 		List<Product> products = new ArrayList<Product>();
 		products.add(prodyuct1);
 		
-		obj.setProduct(products);
+		obj.setProductList(products);
 	}
 
 	@After
