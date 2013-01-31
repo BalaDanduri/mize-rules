@@ -69,6 +69,9 @@ public class UserProfile extends Entity {
 	private UserProfilePrivacy privacy;
 	private int mutualFriendCount;
 	private int pageIndex;
+	private int mizeUserCount;
+	private int wantCount;
+	private int ownCount;
 
 	
 	public enum UserProfileResult {
@@ -297,6 +300,31 @@ public class UserProfile extends Entity {
 	public void setCityState(String cityState) {
 		this.cityState = cityState;
 	}
+	
+
+	public int getMizeUserCount() {
+		return mizeUserCount;
+	}
+
+	public void setMizeUserCount(int mizeUserCount) {
+		this.mizeUserCount = mizeUserCount;
+	}
+
+	public int getWantCount() {
+		return wantCount;
+	}
+
+	public void setWantCount(int wantCount) {
+		this.wantCount = wantCount;
+	}
+
+	public int getOwnCount() {
+		return ownCount;
+	}
+
+	public void setOwnCount(int ownCount) {
+		this.ownCount = ownCount;
+	}
 
 	@Override
 	public int hashCode() {
@@ -312,8 +340,10 @@ public class UserProfile extends Entity {
 		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
 		result = prime * result + ((jobTitle == null) ? 0 : jobTitle.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result + mizeUserCount;
 		result = prime * result + mutualFriendCount;
 		result = prime * result + ((own == null) ? 0 : own.hashCode());
+		result = prime * result + ownCount;
 		result = prime * result + pageIndex;
 		result = prime * result + ((phoneHome == null) ? 0 : phoneHome.hashCode());
 		result = prime * result + ((phoneMobile == null) ? 0 : phoneMobile.hashCode());
@@ -325,6 +355,7 @@ public class UserProfile extends Entity {
 		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		result = prime * result + ((userType == null) ? 0 : userType.hashCode());
 		result = prime * result + ((want == null) ? 0 : want.hashCode());
+		result = prime * result + wantCount;
 		return result;
 	}
 
@@ -381,12 +412,16 @@ public class UserProfile extends Entity {
 				return false;
 		} else if (!lastName.equals(other.lastName))
 			return false;
+		if (mizeUserCount != other.mizeUserCount)
+			return false;
 		if (mutualFriendCount != other.mutualFriendCount)
 			return false;
 		if (own == null) {
 			if (other.own != null)
 				return false;
 		} else if (!own.equals(other.own))
+			return false;
+		if (ownCount != other.ownCount)
 			return false;
 		if (pageIndex != other.pageIndex)
 			return false;
@@ -437,13 +472,15 @@ public class UserProfile extends Entity {
 				return false;
 		} else if (!want.equals(other.want))
 			return false;
+		if (wantCount != other.wantCount)
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
 		return "UserProfile [userId=" + userId + ", userType=" + userType + ", postalAddress=" + postalAddress + ", photoLink=" + photoLink + ", profileName=" + profileName + ", phoneMobile=" + phoneMobile + ", phoneHome=" + phoneHome + ", phoneWork=" + phoneWork + ", jobTitle=" + jobTitle + ", want=" + want + ", own=" + own + ", friendUserId=" + friendUserId + ", friendStatus=" + friendStatus + ", emailOptOut=" + emailOptOut + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", birthdate=" + birthdate + ", gender=" + gender + ", cityState=" + cityState + ", friends=" + friends + ", privacy=" + privacy + ", mutualFriendCount=" + mutualFriendCount + ", pageIndex=" + pageIndex + "]";
+				+ ", birthdate=" + birthdate + ", gender=" + gender + ", cityState=" + cityState + ", friends=" + friends + ", privacy=" + privacy + ", mutualFriendCount=" + mutualFriendCount + ", pageIndex=" + pageIndex + ", mizeUserCount=" + mizeUserCount + ", wantCount=" + wantCount + ", ownCount=" + ownCount + "]";
 	}
 
 	
