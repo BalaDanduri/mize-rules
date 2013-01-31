@@ -28,6 +28,7 @@ public class UserActivityLog extends Entity{
 	private String productName;
 	private String imageLink;
 	private Long productId;
+	private String sourceProductId;
 	
 	public UserActivityLog(){
 		targetUsers = new ArrayList<User>();
@@ -227,6 +228,15 @@ public class UserActivityLog extends Entity{
 
 	public void setProductId(Long productId) {
 		this.productId = productId;
+	}
+
+	public String getSourceProductId() {
+		return sourceProductId;
+	}
+
+	public void setSourceProductId(String sourceProductId) {
+		this.sourceProductId = sourceProductId;
 	}	
+	
 		
 }
