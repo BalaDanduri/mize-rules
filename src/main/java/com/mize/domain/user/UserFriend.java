@@ -14,6 +14,16 @@ public class UserFriend extends Entity{
 		friendUser = new User();
 		user = new User();
 	}
+	public enum FriendStatus{
+		Friend(1),Not_A_Friend(2),Friend_Request_Pending(3);
+		int value;
+		private FriendStatus(int v){
+			value = v;
+		}
+		public int getValue(){
+			return value;
+		}
+	}
 
 	
 	public User getUser() {
