@@ -2,6 +2,8 @@ package com.mize.domain.util;
 
 import java.util.List;
 
+import org.codehaus.jackson.map.annotate.JsonFilter;
+
 import com.mize.domain.exception.MizeError;
 
 public final class ServiceDTO<T> {
