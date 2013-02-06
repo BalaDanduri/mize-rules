@@ -15,7 +15,7 @@ public class UserActivity extends Entity{
 	private List<UserActivityLog> activityLogs;
 	
 	public enum ActivityName{
-		Send_Friend_Invite(1),Recommend_Product(2),Friend_Invite_Accepted(3);
+		Send_Friend_Invite(1),Recommend_Product(2),Friend_Invite_Accepted(3),Friend_Request_Pending(4);
 		private int value;
 		private ActivityName(int val){
 			value = val;
@@ -25,16 +25,6 @@ public class UserActivity extends Entity{
 		}
 	}
 	
-	public enum ActivityDesc{
-		Desc("Invitation sent to a user to become a friend");
-		private String desc;
-		ActivityDesc(String desc){
-			this.desc = desc;
-		}
-		public String getDesc(){
-			return desc;
-		}
-	}	
 	public static Action getAction(int num){
 		for(Action ac : Action.values()){
 			if(num==ac.ordinal()+1){
@@ -44,10 +34,10 @@ public class UserActivity extends Entity{
 		return null;
 	}
 	public enum Action{
-		Accept,Ignore,Invite_Accepted;	
+		Accept,Ignore,Invite_Accepted,Invite_Accept_Viewed;	
 	}
 	public enum Status{
-		Sent,Ignore,Accept;
+		Sent,Ignore,Accept,Invite_Accepted,Invite_Accept_Viewed;
 	}
 	public UserActivity(){
 		activityLogs = new ArrayList<UserActivityLog>();
