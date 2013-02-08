@@ -22,9 +22,43 @@ public class UserComment extends Entity{
 	private Long commentTypeId;
 	private String commentType;
 	private User user;
-	private String comment;
-	private int like;
+	private String comments;
+	private Integer liked;
 	
+	public enum Like{
+		Thumps_Up(1),Thumps_Down(2),Spam(3);
+		private int value;
+		private Like(int val){
+			value = val;
+		}
+		public int getValue(){
+			return value;
+		}
+	}
+	
+	public static Like getLike(int num) {
+		for (Like li : Like.values()) {
+			if (num == li.ordinal() + 1) {
+				return li;
+			}
+		}
+		return null;
+	}
+	
+	
+	public enum CommentType{
+		prod_feedback,want,own;	
+	}
+	
+	public static CommentType getCommentType(String num){
+		for (CommentType cType : CommentType.values()) {
+			if( cType.toString().equals(num) ){
+				return cType;
+			}
+		}
+		return null;
+	}
+
 	public Long getCommentId() {
 		return commentId;
 	}
@@ -55,19 +89,20 @@ public class UserComment extends Entity{
 	public void setUser(User user) {
 		this.user = user;
 	}
-	public String getComment() {
-		return comment;
+	
+	public String getComments() {
+		return comments;
 	}
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-	public int getLike() {
-		return like;
-	}
-	public void setLike(int like) {
-		this.like = like;
+	public void setComments(String comments) {
+		this.comments = comments;
 	}
 	
+	public Integer getLiked() {
+		return liked;
+	}
+	public void setLiked(Integer liked) {
+		this.liked = liked;
+	}
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class)	
 	@JsonIgnore(value=false)
@@ -81,68 +116,5 @@ public class UserComment extends Entity{
 	public void setCreatedDate(DateTime createdDate) {
 		this.createdDate = createdDate;
 	}
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
-		result = prime * result + ((commentId == null) ? 0 : commentId.hashCode());
-		result = prime * result + ((commentType == null) ? 0 : commentType.hashCode());
-		result = prime * result + ((commentTypeId == null) ? 0 : commentTypeId.hashCode());
-		result = prime * result + like;
-		result = prime * result + ((parentCommentId == null) ? 0 : parentCommentId.hashCode());
-		result = prime * result + ((user == null) ? 0 : user.hashCode());
-		return result;
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		UserComment other = (UserComment) obj;
-		if (comment == null) {
-			if (other.comment != null)
-				return false;
-		} else if (!comment.equals(other.comment))
-			return false;
-		if (commentId == null) {
-			if (other.commentId != null)
-				return false;
-		} else if (!commentId.equals(other.commentId))
-			return false;
-		if (commentType == null) {
-			if (other.commentType != null)
-				return false;
-		} else if (!commentType.equals(other.commentType))
-			return false;
-		if (commentTypeId == null) {
-			if (other.commentTypeId != null)
-				return false;
-		} else if (!commentTypeId.equals(other.commentTypeId))
-			return false;
-		if (like != other.like)
-			return false;
-		if (parentCommentId == null) {
-			if (other.parentCommentId != null)
-				return false;
-		} else if (!parentCommentId.equals(other.parentCommentId))
-			return false;
-		if (user == null) {
-			if (other.user != null)
-				return false;
-		} else if (!user.equals(other.user))
-			return false;
-		return true;
-	}
-	@Override
-	public String toString() {
-		return "UserComment [commentId=" + commentId + ", parentCommentId=" + parentCommentId + ", commentTypeId="
-				+ commentTypeId + ", commentType=" + commentType + ", user=" + user + ", comment=" + comment
-				+ ", like=" + like + "]";
-	}
-	
 	
 }
