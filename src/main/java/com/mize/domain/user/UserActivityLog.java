@@ -30,9 +30,21 @@ public class UserActivityLog extends Entity{
 	private Long productId;
 	private String sourceProductId;
 	private String action;
+	private String activityViewed;
+	private Integer activityLiked;
+	private Long parentActivityLogId;	
+	private boolean isReqPending;
 	
 	public UserActivityLog(){
 		targetUsers = new ArrayList<User>();
+	}
+	
+	public boolean isReqPending() {
+		return isReqPending;
+	}
+
+	public void setReqPending(boolean isReqPending) {
+		this.isReqPending = isReqPending;
 	}
 
 	public Long getId() {
@@ -246,5 +258,31 @@ public class UserActivityLog extends Entity{
 	public void setAction(String action) {
 		this.action = action;
 	}
+
+	public String getActivityViewed() {
+		return activityViewed;
+	}
+
+	public void setActivityViewed(String activityViewed) {
+		this.activityViewed = activityViewed;
+	}
+
+	public Integer getActivityLiked() {
+		return activityLiked;
+	}
+
+	public void setActivityLiked(Integer activityLiked) {
+		this.activityLiked = activityLiked;
+	}
+
+	public Long getParentActivityLogId() {
+		return parentActivityLogId;
+	}
+
+	public void setParentActivityLogId(Long parentActivityLogId) {
+		this.parentActivityLogId = parentActivityLogId;
+	}	
+	
+	
 		
 }
