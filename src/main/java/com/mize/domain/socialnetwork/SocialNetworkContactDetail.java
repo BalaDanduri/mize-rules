@@ -2,11 +2,14 @@ package com.mize.domain.socialnetwork;
 
 public class SocialNetworkContactDetail {
 	
+	public static final String STATUS_NOT_IN_MIZE = "1";
+	public static final String STATUS_IN_MIZE = "2";
+	public static final String STATUS_MIZE_FRIEND = "3";
 	private String providerUserId;
 	private String firstName;
 	private String lastName;
 	private String pictureURL;
-	private String status;
+	private String status = STATUS_NOT_IN_MIZE;
 	public String getProviderUserId() {
 		return providerUserId;
 	}
