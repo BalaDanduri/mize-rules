@@ -15,7 +15,8 @@ public class UserActivity extends Entity{
 	private List<UserActivityLog> activityLogs;
 	
 	public enum ActivityName{
-		Send_Friend_Invite(1),Recommend_Product(2),Friend_Invite_Accepted(3),Friend_Request_Pending(4);
+		Send_Friend_Invite(1),Recommend_Product(2),Friend_Invite_Accepted(3),Friend_Request_Pending(4),
+		Friend_Input_For_Product(5),Pending_Friend_Input_For_Product(6),Friend_Response_For_Product(7);
 		private int value;
 		private ActivityName(int val){
 			value = val;
@@ -25,6 +26,33 @@ public class UserActivity extends Entity{
 		}
 	}
 	
+	public static ActivityName getActivityName(long num){
+		for(ActivityName a : ActivityName.values()){
+			if(num==a.ordinal()+1){
+				return a;
+			}
+		}
+		return null;
+	}
+	
+	public enum Like{
+		Thumps_Up(1),Thumps_Down(2),Spam(3);
+		private int value;
+		private Like(int val){
+			value = val;
+		}
+		public int getValue(){
+			return value;
+		}
+	}
+	public static Like getLike(int num){
+		for(Like li : Like.values()){
+			if(num==li.ordinal()+1){
+				return li;
+			}
+		}
+		return null;
+	}
 	public static Action getAction(int num){
 		for(Action ac : Action.values()){
 			if(num==ac.ordinal()+1){
@@ -34,10 +62,10 @@ public class UserActivity extends Entity{
 		return null;
 	}
 	public enum Action{
-		Accept,Ignore,Invite_Accepted,Invite_Accept_Viewed;	
+		Accept,Ignore,Invite_Accepted,Invite_Accept_Viewed,Product_Response_Viewed;	
 	}
 	public enum Status{
-		Sent,Ignore,Accept,Invite_Accepted,Invite_Accept_Viewed;
+		Sent,Ignore,Accept,Invite_Accepted,Invite_Accept_Viewed,Friend_Response_For_Product;
 	}
 	public UserActivity(){
 		activityLogs = new ArrayList<UserActivityLog>();
