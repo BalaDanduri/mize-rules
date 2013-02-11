@@ -39,5 +39,8 @@ public final class ServiceDTO<T> implements ServiceLiteral{
 		}
 		return  false;
 	}
+	public boolean hasMessages(){
+		return (messages != null && messages.size() > 0);
+	}
 	
 }
