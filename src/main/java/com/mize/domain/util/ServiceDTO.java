@@ -33,7 +33,7 @@ public final class ServiceDTO<T> implements ServiceLiteral{
 		this.messages = messages;
 	}
 	public boolean addMessage(String msgCode,Object msgValue){
-		if(messages.get(msgCode) != null){
+		if(messages.get(msgCode) == null){
 			messages.put(msgCode, msgValue);
 			return true;
 		}
