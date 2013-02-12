@@ -103,18 +103,19 @@ public class UserComment extends Entity{
 	public void setLiked(Integer liked) {
 		this.liked = liked;
 	}
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)	
-	@JsonIgnore(value=false)
-	public DateTime getCreatedDate() {
-		return createdDate;
-	}
 
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonIgnore(value=false)
+	public DateTime getUpdatedDate() {
+		return updatedDate;
+	}
+	
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(value=false)
-	public void setCreatedDate(DateTime createdDate) {
-		this.createdDate = createdDate;
+	public void setUpdatedDate(DateTime updatedDate) {
+		this.updatedDate = updatedDate;
 	}
 	
 }
