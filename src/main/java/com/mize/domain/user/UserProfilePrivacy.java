@@ -111,7 +111,7 @@ public class UserProfilePrivacy extends Entity {
 	}
 
 	@JsonIgnore
-	public int getCreatedBy() {
+	public Integer getCreatedBy() {
 		return createdBy;
 	}
 
@@ -135,7 +135,7 @@ public class UserProfilePrivacy extends Entity {
 	}
 
 	@JsonIgnore
-	public int getUpdatedBy() {
+	public Integer getUpdatedBy() {
 		return updatedBy;
 	}
 
