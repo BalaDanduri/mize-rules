@@ -34,7 +34,7 @@ public class UserActivityLog extends Entity{
 	private Integer activityLiked;
 	private Long parentActivityLogId;	
 	private boolean isReqPending;
-	
+	private UserActivityLog parentActivityLog;
 	public UserActivityLog(){
 		targetUsers = new ArrayList<User>();
 	}
@@ -281,6 +281,14 @@ public class UserActivityLog extends Entity{
 
 	public void setParentActivityLogId(Long parentActivityLogId) {
 		this.parentActivityLogId = parentActivityLogId;
+	}
+
+	public UserActivityLog getParentActivityLog() {
+		return parentActivityLog;
+	}
+
+	public void setParentActivityLog(UserActivityLog parentActivityLog) {
+		this.parentActivityLog = parentActivityLog;
 	}	
 	
 	
