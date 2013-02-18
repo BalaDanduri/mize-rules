@@ -1,14 +1,15 @@
 package com.mize.domain.socialnetwork;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SocialNetworkContactResponse {
 
 	private String providerName;
 	private Long userId;
-	private List<SocialNetworkContactDetail> mizeFriends;
-	private List<SocialNetworkContactDetail> mizeContacts;
-	private List<SocialNetworkContactDetail> nonmizeContacts;
+	private List<SocialNetworkContactDetail> mizeFriends = new ArrayList<SocialNetworkContactDetail>();
+	private List<SocialNetworkContactDetail> mizeContacts = new ArrayList<SocialNetworkContactDetail>();
+	private List<SocialNetworkContactDetail> nonmizeContacts = new ArrayList<SocialNetworkContactDetail>();
 	public String getProviderName() {
 		return providerName;
 	}
