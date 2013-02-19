@@ -29,6 +29,7 @@ public class User extends Entity {
     protected List<LinkedAccount> linkedAccounts;
     protected List<UserConnect> userConnects;
     protected UserProfile userProfile;
+    protected Long referralId;
     
     public enum Case {
 		SIGNUP, LOGIN , LOGOUT
@@ -200,13 +201,20 @@ public class User extends Entity {
 		return userProfile;
 	}
 
+	public Long getReferralId() {
+		return referralId;
+	}
+
+	public void setReferralId(Long referralId) {
+		this.referralId = referralId;
+	}
+
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", name=" + name
-				+ ", lastLogin=" + lastLogin + ", active=" + active
-				+ ", emailValidated=" + emailValidated + ", linkedAccounts="
-				+ linkedAccounts+ ", userConnects="
-						+ userConnects + ", UserProfile" + userProfile + "]";
+		return "User [id=" + id + ", email=" + email + ", name=" + name + ", lastLogin=" + lastLogin + ", active="
+				+ active + ", emailValidated=" + emailValidated + ", linkedAccounts=" + linkedAccounts
+				+ ", userConnects=" + userConnects + ", userProfile=" + userProfile + ", referralId=" + referralId
+				+ "]";
 	}
 	@Override
 	public int hashCode() {
