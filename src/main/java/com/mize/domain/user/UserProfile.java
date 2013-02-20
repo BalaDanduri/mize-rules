@@ -72,10 +72,13 @@ public class UserProfile extends Entity {
 	private int mizeUserCount;
 	private int wantCount;
 	private int ownCount;
-
+	private String timezone;
 	
 	public enum UserProfileResult {
 		PROFILE_CREATED, PROFILE_UPDATED
+	}
+	public enum Timezone {
+		EST,CST;
 	}
 
 	public UserProfile() {
@@ -324,6 +327,15 @@ public class UserProfile extends Entity {
 
 	public void setOwnCount(int ownCount) {
 		this.ownCount = ownCount;
+	}
+
+	
+	public String getTimezone() {
+		return timezone;
+	}
+
+	public void setTimezone(String timezone) {
+		this.timezone = timezone;
 	}
 
 	@Override
