@@ -26,6 +26,7 @@ public class Formatter {
 	private static final Pattern HTML_TAGS_PATTERN = Pattern.compile("<.+?>");
 	private static final String HTML_COMMENTS_PATTERN = "(?s)<!--.*?-->";
 	public static final String DATE_SEPARATE = "-";
+	public static final String MORE_TEXT = "...";
 	
 	private Formatter(){		
 	}
