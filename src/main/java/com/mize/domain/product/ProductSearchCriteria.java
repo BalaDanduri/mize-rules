@@ -15,12 +15,13 @@ public class ProductSearchCriteria{
 	private Long userId;
 	private String sourceCategory;
 	private String upc;
+	private Long sourceId;
 	
 	public ProductSearchCriteria() {
 	}
 
 
-	public String getCategory() {
+	public String getCategory() { 
 		return category;
 	}
 
@@ -111,7 +112,7 @@ public class ProductSearchCriteria{
 		return "ProductSearchCriteria [category=" + category + ", searchKey="
 				+ searchKey + ", browseNode=" + browseNode + ", searchIndex="
 				+ searchIndex + ", pageIndex=" + pageIndex + ", filters="
-				+ filters + ", sortBy=" + sortBy + ", userId=" + userId + "]";
+				+ filters + ", sortBy=" + sortBy + ", userId=" + userId + "sourceId=" + sourceId +"]";
 	}
 
 
@@ -129,6 +130,16 @@ public class ProductSearchCriteria{
 	}
 	public void setUpc(String upc) {
 		this.upc = upc;
+	}
+
+
+	public Long getSourceId() {
+		return sourceId;
+	}
+
+
+	public void setSourceId(Long sourceId) {
+		this.sourceId = sourceId;
 	}
 	
 }
