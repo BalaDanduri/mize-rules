@@ -12,6 +12,28 @@ public class ProductImages extends Entity{
 	private String note;
 	private Long sourceId;
 	private Long localeId;
+	private Long prodId;
+	private String type;
+	private String status;
+	
+	public Long getProdId() {
+		return prodId;
+	}
+	public void setProdId(Long prodId) {
+		this.prodId = prodId;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public Long getId() {
 		return id;
 	}

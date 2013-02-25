@@ -21,4 +21,14 @@ public class SmooksDateTimeDecoder extends org.milyn.javabean.decoders.DateDecod
 		}		
 		return dateTime;
 	}
+	public static DateTime decodeTime(String date){
+		DateTime dateTime = null;
+		if(date!= null){
+			try{
+				dateTime = DateTime.parse(date,DATE_TIME_FORMAT);
+			}catch(Exception e){
+			}
+		}		
+		return dateTime;
+	}
 }

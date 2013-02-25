@@ -25,6 +25,7 @@ public class Product extends Entity{
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	protected DateTime modifiedDate;
 	
+	private ProductToSource productToSource;
 	private ProductAccessories accessories;
 	private ProductAttribute attribute;
 	private ProductDescription prdDescription;

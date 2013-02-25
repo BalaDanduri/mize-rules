@@ -5,11 +5,11 @@ public class SearchAttribute extends Entity{
 	private static final long serialVersionUID = -6127521446685342752L;
 	private Long prodId;
 	private Long attributeId;
-	private Long localeId;
 	private String absoluteValue;
-	private String isAbsolute;
-	private Double value;
-	private Long unitId;
+	private Integer isAbsolute;
+	private Long valueId;
+	private Long localeId;
+	
 	public Long getProdId() {
 		return prodId;
 	}
@@ -34,23 +34,19 @@ public class SearchAttribute extends Entity{
 	public void setAbsoluteValue(String absoluteValue) {
 		this.absoluteValue = absoluteValue;
 	}
-	public String getIsAbsolute() {
+	
+	public Integer getIsAbsolute() {
 		return isAbsolute;
 	}
-	public void setIsAbsolute(String isAbsolute) {
+	public void setIsAbsolute(Integer isAbsolute) {
 		this.isAbsolute = isAbsolute;
 	}
-	public Double getValue() {
-		return value;
+	public Long getValueId() {
+		return valueId;
 	}
-	public void setValue(Double value) {
-		this.value = value;
+	public void setValueId(Long valueId) {
+		this.valueId = valueId;
 	}
-	public Long getUnitId() {
-		return unitId;
-	}
-	public void setUnitId(Long unitId) {
-		this.unitId = unitId;
-	}
+	
 	
 }

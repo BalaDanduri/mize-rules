@@ -4,71 +4,47 @@ package com.mize.domain.prod;
 public class ProductAccessories extends Entity{
 
 	private static final long serialVersionUID = -632231234234531123L;
-	
-	private String type;
-	private String status;
-	private Long sourceId;
-	private String url;
-	private String thumbLink;
-	private String quality;
-	private Double height;
-	private Double width;
-	private Double size;
-	
-	public String getType() {
-		return type;
+	private Long prodId;
+	private Long accessoryId;
+	private Integer isActive;
+	private Integer isPreferred;
+	private Integer isOption;
+	private String note;
+	public Long getProdId() {
+		return prodId;
 	}
-	public void setType(String type) {
-		this.type = type;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	public Long getSourceId() {
-		return sourceId;
-	}
-	public void setSourceId(Long sourceId) {
-		this.sourceId = sourceId;
-	}
-	public String getUrl() {
-		return url;
-	}
-	public void setUrl(String url) {
-		this.url = url;
-	}
-	public String getThumbLink() {
-		return thumbLink;
-	}
-	public void setThumbLink(String thumbLink) {
-		this.thumbLink = thumbLink;
-	}
-	public String getQuality() {
-		return quality;
-	}
-	public void setQuality(String quality) {
-		this.quality = quality;
-	}
-	public Double getHeight() {
-		return height;
-	}
-	public void setHeight(Double height) {
-		this.height = height;
-	}
-	public Double getWidth() {
-		return width;
-	}
-	public void setWidth(Double width) {
-		this.width = width;
-	}
-	public Double getSize() {
-		return size;
-	}
-	public void setSize(Double size) {
-		this.size = size;
+	public void setProdId(Long prodId) {
+		this.prodId = prodId;
 	}
 	
-	
+	public Long getAccessoryId() {
+		return accessoryId;
+	}
+	public void setAccessoryId(Long accessoryId) {
+		this.accessoryId = accessoryId;
+	}
+	public Integer getIsActive() {
+		return isActive;
+	}
+	public void setIsActive(Integer isActive) {
+		this.isActive = isActive;
+	}
+	public Integer getIsPreferred() {
+		return isPreferred;
+	}
+	public void setIsPreferred(Integer isPreferred) {
+		this.isPreferred = isPreferred;
+	}
+	public Integer getIsOption() {
+		return isOption;
+	}
+	public void setIsOption(Integer isOption) {
+		this.isOption = isOption;
+	}
+	public String getNote() {
+		return note;
+	}
+	public void setNote(String note) {
+		this.note = note;
+	}
 }

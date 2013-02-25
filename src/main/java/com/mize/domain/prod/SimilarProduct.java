@@ -7,8 +7,8 @@ public class SimilarProduct extends Entity{
 	
 	private Long id;
 	private Long localeId;
-	private Long sourceId;
-	private String preferredOption;
+	private Long prodId;
+	
 	public Long getId() {
 		return id;
 	}
@@ -22,18 +22,11 @@ public class SimilarProduct extends Entity{
 	public void setLocaleId(Long localeId) {
 		this.localeId = localeId;
 	}
-	public Long getSourceId() {
-		return sourceId;
+	public Long getProdId() {
+		return prodId;
 	}
-	public void setSourceId(Long sourceId) {
-		this.sourceId = sourceId;
-	}
-	public String getPreferredOption() {
-		return preferredOption;
-	}
-	public void setPreferredOption(String preferredOption) {
-		this.preferredOption = preferredOption;
-	}
-	 
+	public void setProdId(Long prodId) {
+		this.prodId = prodId;
+	} 
 	
 }
