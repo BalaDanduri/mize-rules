@@ -19,17 +19,19 @@ public class LinkedAccount extends Entity {
     public String providerKey;
     public String accessToken;
     public String accessTokenSecret;
+    public String userName;
 
     public LinkedAccount() {
     	
     }
     
-    public LinkedAccount(Long id, User user, String providerUserId, String providerKey, String accessToken) {
+    public LinkedAccount(Long id, User user, String providerUserId, String providerKey, String accessToken, String userName) {
 		this.id = id;
 		this.user = user;
 		this.providerUserId = providerUserId;
 		this.providerKey = providerKey;
 		this.accessToken = accessToken;
+		this.userName = userName;
 	}
 
 	public Long getId() {
@@ -68,4 +70,19 @@ public class LinkedAccount extends Entity {
 	public void setAccessTokenSecret(String accessTokenSecret) {
 		this.accessTokenSecret = accessTokenSecret;
 	}
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	@Override
+	public String toString() {
+		return "LinkedAccount [id=" + id + ", user=" + user + ", providerUserId=" + providerUserId + ", providerKey="
+				+ providerKey + ", accessToken=" + accessToken + ", accessTokenSecret=" + accessTokenSecret
+				+ ", userName=" + userName + "]";
+	}
+
 }
