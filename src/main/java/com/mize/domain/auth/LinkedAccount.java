@@ -20,6 +20,7 @@ public class LinkedAccount extends Entity {
     public String accessToken;
     public String accessTokenSecret;
     public String userName;
+    public String firstTime;
 
     public LinkedAccount() {
     	
@@ -78,11 +79,19 @@ public class LinkedAccount extends Entity {
 		this.userName = userName;
 	}
 
+	public String getFirstTime() {
+		return firstTime;
+	}
+
+	public void setFirstTime(String firstTime) {
+		this.firstTime = firstTime;
+	}
+
 	@Override
 	public String toString() {
 		return "LinkedAccount [id=" + id + ", user=" + user + ", providerUserId=" + providerUserId + ", providerKey="
 				+ providerKey + ", accessToken=" + accessToken + ", accessTokenSecret=" + accessTokenSecret
-				+ ", userName=" + userName + "]";
+				+ ", userName=" + userName + ", firstTime=" + firstTime + "]";
 	}
 
 }
