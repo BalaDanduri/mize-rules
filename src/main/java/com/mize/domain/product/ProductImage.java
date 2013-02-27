@@ -16,7 +16,7 @@ public class ProductImage  {
 		this.dimensions = dimensions;
 	}
 	public enum ImageType{
-		SwatchImage,SmallImage,ThumbnailImage,TinyImage,MediumImage,LargeImage;
+		SwatchImage,SmallImage,ThumbnailImage,TinyImage,MediumImage,LargeImage,Thumbnail;
 	}
 	public ProductImage(){
 		dimensions = new  HashMap<String,Dimension>();	
