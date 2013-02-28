@@ -13,18 +13,39 @@ import com.mize.domain.util.JsonDateTimeSerializer;
 public class ProductSku extends Entity{
 	private static final long serialVersionUID = -6722341511569003526L;	
 	
-	private Long localeId;
+	private Long prodId;
 	private DateTime discontinueDate;
+	private DateTime addedDate;
 	private String name;
 	private String sku;
+	private Long localeId;
 	
 	public Long getLocaleId() {
 		return localeId;
 	}
+
 	public void setLocaleId(Long localeId) {
 		this.localeId = localeId;
 	}
-	
+
+	public Long getProdId() {
+		return prodId;
+	}
+
+	public void setProdId(Long prodId) {
+		this.prodId = prodId;
+	}
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	public DateTime getAddedDate() {
+		return addedDate;
+	}
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	public void setAddedDate(DateTime addedDate) {
+		this.addedDate = addedDate;
+	}
+
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class)
 	public DateTime getDiscontinueDate() {

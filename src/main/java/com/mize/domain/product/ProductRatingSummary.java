@@ -4,7 +4,7 @@ package com.mize.domain.product;
 public class ProductRatingSummary {
 	
 	protected Long productId;
-	protected Double productRating;
+	protected Double mizeRating;
 	protected Long rating1Count;
 	protected Long rating2Count;
 	protected Long rating3Count;
@@ -16,13 +16,10 @@ public class ProductRatingSummary {
 	
 	@Override
 	public String toString() {
-		return "ProductRatingSummary [productId=" + productId
-				+ ", productRating=" + productRating + ", rating1Count="
-				+ rating1Count + ", rating2Count=" + rating2Count
-				+ ", rating3Count=" + rating3Count + ", rating4Count="
-				+ rating4Count + ", rating5Count=" + rating5Count
-				+ ", countOwn=" + countOwn + ", countWant=" + countWant
-				+ ", countGift=" + countGift + "]";
+		return "ProductRatingSummary [productId=" + productId + ", mizeRating=" + mizeRating + ", rating1Count="
+				+ rating1Count + ", rating2Count=" + rating2Count + ", rating3Count=" + rating3Count
+				+ ", rating4Count=" + rating4Count + ", rating5Count=" + rating5Count + ", countOwn=" + countOwn
+				+ ", countWant=" + countWant + ", countGift=" + countGift + "]";
 	}
 
 	public Long getProductId() {
@@ -33,12 +30,12 @@ public class ProductRatingSummary {
 		this.productId = productId;
 	}
 
-	public Double getProductRating() {
-		return productRating;
+	public Double getMizeRating() {
+		return mizeRating;
 	}
 
-	public void setProductRating(Double productRating) {
-		this.productRating = productRating;
+	public void setMizeRating(Double mizeRating) {
+		this.mizeRating = mizeRating;
 	}
 
 	public Long getRating1Count() {
@@ -124,26 +121,16 @@ public class ProductRatingSummary {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((countGift == null) ? 0 : countGift.hashCode());
-		result = prime * result
-				+ ((countOwn == null) ? 0 : countOwn.hashCode());
-		result = prime * result
-				+ ((countWant == null) ? 0 : countWant.hashCode());
-		result = prime * result
-				+ ((productId == null) ? 0 : productId.hashCode());
-		result = prime * result
-				+ ((productRating == null) ? 0 : productRating.hashCode());
-		result = prime * result
-				+ ((rating1Count == null) ? 0 : rating1Count.hashCode());
-		result = prime * result
-				+ ((rating2Count == null) ? 0 : rating2Count.hashCode());
-		result = prime * result
-				+ ((rating3Count == null) ? 0 : rating3Count.hashCode());
-		result = prime * result
-				+ ((rating4Count == null) ? 0 : rating4Count.hashCode());
-		result = prime * result
-				+ ((rating5Count == null) ? 0 : rating5Count.hashCode());
+		result = prime * result + ((countGift == null) ? 0 : countGift.hashCode());
+		result = prime * result + ((countOwn == null) ? 0 : countOwn.hashCode());
+		result = prime * result + ((countWant == null) ? 0 : countWant.hashCode());
+		result = prime * result + ((mizeRating == null) ? 0 : mizeRating.hashCode());
+		result = prime * result + ((productId == null) ? 0 : productId.hashCode());
+		result = prime * result + ((rating1Count == null) ? 0 : rating1Count.hashCode());
+		result = prime * result + ((rating2Count == null) ? 0 : rating2Count.hashCode());
+		result = prime * result + ((rating3Count == null) ? 0 : rating3Count.hashCode());
+		result = prime * result + ((rating4Count == null) ? 0 : rating4Count.hashCode());
+		result = prime * result + ((rating5Count == null) ? 0 : rating5Count.hashCode());
 		return result;
 	}
 
@@ -171,15 +158,15 @@ public class ProductRatingSummary {
 				return false;
 		} else if (!countWant.equals(other.countWant))
 			return false;
+		if (mizeRating == null) {
+			if (other.mizeRating != null)
+				return false;
+		} else if (!mizeRating.equals(other.mizeRating))
+			return false;
 		if (productId == null) {
 			if (other.productId != null)
 				return false;
 		} else if (!productId.equals(other.productId))
-			return false;
-		if (productRating == null) {
-			if (other.productRating != null)
-				return false;
-		} else if (!productRating.equals(other.productRating))
 			return false;
 		if (rating1Count == null) {
 			if (other.rating1Count != null)

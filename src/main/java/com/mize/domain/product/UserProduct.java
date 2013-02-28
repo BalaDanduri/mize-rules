@@ -144,5 +144,18 @@ public class UserProduct extends Entity{
 	public void setCreatedDate(DateTime createdDate) {
 		this.createdDate = createdDate;
 	}
+	
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class)	
+	@JsonIgnore(value=false)
+	public DateTime getUpdatedDate() {
+		return updatedDate;
+	}
 
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	@JsonIgnore(value=false)
+	public void setUpdatedDate(DateTime updatedDate) {
+		this.updatedDate = updatedDate;
+	}
 }

@@ -4,7 +4,7 @@ package com.mize.domain.prod;
 public class ProductDescription extends Entity{
 
 	private static final long serialVersionUID = -632131644234531123L;
-	private Long id;
+	private Long prodId;
 	private String shortDesc;
 	private String longDesc;
 	private String warrantyInfo;
@@ -16,13 +16,21 @@ public class ProductDescription extends Entity{
 	private Long sourceId;
 	private String isDefault;
 	private String type;
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
+	private Long localeId;
 	
+			
+	public Long getLocaleId() {
+		return localeId;
+	}
+	public void setLocaleId(Long localeId) {
+		this.localeId = localeId;
+	}
+	public Long getProdId() {
+		return prodId;
+	}
+	public void setProdId(Long prodId) {
+		this.prodId = prodId;
+	}
 	public String getShortDesc() {
 		return shortDesc;
 	}

@@ -5,13 +5,14 @@ import java.util.List;
 
 import com.mize.domain.auth.User;
 import com.mize.domain.common.Entity;
+import com.mize.domain.product.UserProductFeedback;
 
 public class UserActivity extends Entity{
 
 	private static final long serialVersionUID = -1735215114583875295L;
 	private Activity activity = new Activity();
 	private User user;
-	
+	private List<UserProductFeedback> feedbacks;
 	private List<UserActivityLog> activityLogs;
 	
 	public enum ActivityName{
@@ -146,5 +147,12 @@ public class UserActivity extends Entity{
 	public void setUser(User user) {
 		this.user = user;
 	}
+	public List<UserProductFeedback> getFeedbacks() {
+		return feedbacks;
+	}
+	public void setFeedbacks(List<UserProductFeedback> feedbacks) {
+		this.feedbacks = feedbacks;
+	}
+	
 		
 }

@@ -6,17 +6,24 @@ public class ProductAttribute extends Entity{
 	private static final long serialVersionUID = 6493104044294016583L;
    
     private Long attributeId;
-    private Double displayValue;
-    private Long catId;
+    private String displayValue;
+    private Long categoryId;
     private Double absoluteValue;
     private Long unitId;
-    private String isAbsolute;
-    private String isActive;
+    private Integer isAbsolute;
+    private Integer isActive;
     private Long localeId;
     private Long sourceId;
     private Double value;
     private Long catAttributeId;
+    private Long prodId;
     
+	public Long getProdId() {
+		return prodId;
+	}
+	public void setProdId(Long prodId) {
+		this.prodId = prodId;
+	}
 	public Long getLocaleId() {
 		return localeId;
 	}
@@ -48,17 +55,18 @@ public class ProductAttribute extends Entity{
 	public void setAttributeId(Long attributeId) {
 		this.attributeId = attributeId;
 	}
-	public Double getDisplayValue() {
+		
+	public String getDisplayValue() {
 		return displayValue;
 	}
-	public void setDisplayValue(Double displayValue) {
+	public void setDisplayValue(String displayValue) {
 		this.displayValue = displayValue;
 	}
-	public Long getCatId() {
-		return catId;
+	public Long getCategoryId() {
+		return categoryId;
 	}
-	public void setCatId(Long catId) {
-		this.catId = catId;
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
 	}
 	public Double getAbsoluteValue() {
 		return absoluteValue;
@@ -72,16 +80,17 @@ public class ProductAttribute extends Entity{
 	public void setUnitId(Long unitId) {
 		this.unitId = unitId;
 	}
-	public String getIsAbsolute() {
+	public Integer getIsAbsolute() {
 		return isAbsolute;
 	}
-	public void setIsAbsolute(String isAbsolute) {
+	public void setIsAbsolute(Integer isAbsolute) {
 		this.isAbsolute = isAbsolute;
 	}
-	public String getIsActive() {
+	public Integer getIsActive() {
 		return isActive;
 	}
-	public void setIsActive(String isActive) {
+	public void setIsActive(Integer isActive) {
 		this.isActive = isActive;
-	}		
+	}
+	
 }
