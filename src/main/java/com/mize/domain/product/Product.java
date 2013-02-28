@@ -23,7 +23,7 @@ public class Product  extends Entity{
 	protected Long id;
 	protected String name;
 	protected Brand brand = new Brand();
-	protected Double price;
+	protected Double price = 0.0;
 	protected Set<ProductCategory> category = new HashSet<ProductCategory>();
 	private String shortDescription;
 	protected String upc;
@@ -35,7 +35,6 @@ public class Product  extends Entity{
 	private ProductDetails productDetails;
 	private String model;
 	private String productLink;
-
 	
 	public Product() {
 		// TODO Auto-generated constructor stub

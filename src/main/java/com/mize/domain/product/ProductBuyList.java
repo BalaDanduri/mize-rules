@@ -7,7 +7,7 @@ public class ProductBuyList {
 	
 	private List<ProductBuyItem> productBuyItems = new ArrayList<ProductBuyItem>();
 	
-	public class ProductBuyItem {
+	public static class ProductBuyItem {
 		private String buyLink;
 		private String sourceName;
 		public String getBuyLink() {

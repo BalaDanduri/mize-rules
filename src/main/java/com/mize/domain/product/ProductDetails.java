@@ -32,6 +32,7 @@ public class ProductDetails extends Entity{
 	private String warranty;
 	private List<ProductImage> productImages;
 	private List<ProductImageSet> imageSets;
+	private ProductPrices productPrices;
 
 	public ProductDetails(){
 		productFeatures = new ArrayList<ProductFeature>();
@@ -105,6 +106,14 @@ public class ProductDetails extends Entity{
 
 	public void setAccessories(List<SimilarProducts> accessories) {
 		this.accessories = accessories;
+	}
+
+	public ProductPrices getProductPrices() {
+		return productPrices;
+	}
+
+	public void setProductPrices(ProductPrices productPrices) {
+		this.productPrices = productPrices;
 	}
 	
 }

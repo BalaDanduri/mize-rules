@@ -7,7 +7,7 @@ public class ProductPrices {
 	
 	private List<ProductPrice> productPrices = new ArrayList<ProductPrice>();
 	
-	public class ProductPrice {
+	public static class ProductPrice {
 		private Double price;
 		private String sourceName;
 		public Double getPrice() {
