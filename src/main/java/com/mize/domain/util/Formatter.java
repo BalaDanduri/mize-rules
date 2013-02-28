@@ -3,6 +3,7 @@ package com.mize.domain.util;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -281,5 +282,12 @@ public class Formatter {
 	}
 	public static boolean isTrue(String val){
 		return "True".equalsIgnoreCase(val);
+	}
+	public static Double formattedDouble(Double value){
+		if(value == null){
+			return null;
+		}else{
+			return Double.valueOf(new DecimalFormat("#.##").format(value));
+		}
 	}
 }
