@@ -15,7 +15,7 @@ public class ProductSearchCriteria{
 	private Long userId;
 	private String sourceCategory;
 	private String upc;
-	private Long sourceId;
+	private String sourceId;
 	
 	public ProductSearchCriteria() {
 	}
@@ -133,12 +133,12 @@ public class ProductSearchCriteria{
 	}
 
 
-	public Long getSourceId() {
+	public String getSourceId() {
 		return sourceId;
 	}
 
 
-	public void setSourceId(Long sourceId) {
+	public void setSourceId(String sourceId) {
 		this.sourceId = sourceId;
 	}
 	
