@@ -36,6 +36,16 @@ public class Product  extends Entity{
 	private String model;
 	private String productLink;
 	
+	public enum Source{
+		MIZE(1),AMAZON(2),ETILIZE(3);
+		int value;
+		Source(int val){
+			value = val;
+		}
+		public int getValue(){
+			return value;
+		}
+	}	
 	public Product() {
 		// TODO Auto-generated constructor stub
 		category = new HashSet<ProductCategory>();
