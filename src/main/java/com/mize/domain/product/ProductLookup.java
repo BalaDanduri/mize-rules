@@ -20,11 +20,22 @@ public class ProductLookup {
 	protected String lookupKey;
 	protected List<String> lookupId = new ArrayList<String>();
 	private Long userId;
-
+	private Integer maxLength;
 	
 	public ProductLookup() {
 	}
 	
+	
+	public Integer getMaxLength() {
+		return maxLength;
+	}
+
+
+	public void setMaxLength(Integer maxLength) {
+		this.maxLength = maxLength;
+	}
+
+
 	public String getLookupKey() {
 		return lookupKey;
 	}
