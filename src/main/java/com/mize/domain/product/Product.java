@@ -1,18 +1,19 @@
 package com.mize.domain.product;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.io.IOException;
-import java.util.ArrayList;
 
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.annotate.JsonFilter;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import com.mize.domain.brand.Brand;
 import com.mize.domain.common.Entity;
+import com.mize.domain.util.NumberValueSerializer;
 
 public class Product  extends Entity{
 	
@@ -23,7 +24,8 @@ public class Product  extends Entity{
 	protected Long id;
 	protected String name;
 	protected Brand brand = new Brand();
-	protected Double price = 0.0;
+	@JsonSerialize(using=NumberValueSerializer.class)
+	protected Double price;
 	protected Set<ProductCategory> category = new HashSet<ProductCategory>();
 	private String shortDescription;
 	protected String upc;

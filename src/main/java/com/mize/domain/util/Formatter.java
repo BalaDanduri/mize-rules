@@ -290,4 +290,13 @@ public class Formatter {
 			return Double.valueOf(new DecimalFormat("#.##").format(value));
 		}
 	}
+	@SuppressWarnings("rawtypes")
+	public static int size( Collection list){
+		return (list == null ? 0:list.size());
+	}
+	@SuppressWarnings("rawtypes")
+	public static int size( Map map){
+		return (map == null ? 0:map.size());
+	}
+	
 }

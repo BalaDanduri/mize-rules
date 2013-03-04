@@ -25,6 +25,8 @@ public class ProductCategory {
 	protected Set<ProductCategory> children = new HashSet<ProductCategory>();
 	protected ProdCategorySource sourceCategory  = new ProdCategorySource();
 	protected String department;
+	protected Integer level; 
+	
 	public String getDepartment() {
 		return department;
 	}
@@ -205,6 +207,16 @@ public class ProductCategory {
 
 	public void setSourceCategory(ProdCategorySource sourceCategory) {
 		this.sourceCategory = sourceCategory;
+	}
+
+
+	public Integer getLevel() {
+		return level;
+	}
+
+
+	public void setLevel(Integer level) {
+		this.level = level;
 	}
 
 
