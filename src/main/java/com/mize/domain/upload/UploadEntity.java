@@ -25,7 +25,7 @@ public final class UploadEntity implements Serializable {
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime endTime;
 	private Object entity;
-	private ErrorRecord errorRecord;;
+	private ErrorRecord errorRecord = new ErrorRecord();
 	
 	public enum Status{
 		IN_PROGRESS,COMPLETED;
