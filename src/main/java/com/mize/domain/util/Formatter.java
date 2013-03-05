@@ -258,6 +258,7 @@ public class Formatter {
 				value=value.replaceAll(HTML_COMMENTS_PATTERN, EMPTY);
 				Matcher m = HTML_TAGS_PATTERN.matcher(value);
 				value = m.replaceAll(EMPTY);
+				value = value.replaceAll("  ",EMPTY);
 			}catch(Exception e){
 			}
 		}	

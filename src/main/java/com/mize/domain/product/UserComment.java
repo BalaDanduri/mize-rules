@@ -23,7 +23,7 @@ public class UserComment extends Entity{
 	private String commentType;
 	private User user;
 	private String comments;
-//	private Integer liked;
+	private Integer liked;
 	
 	/*public enum Like{
 		Thumps_Up(1),Thumps_Down(2),Spam(3);
@@ -97,12 +97,12 @@ public class UserComment extends Entity{
 		this.comments = comments;
 	}
 	
-	/*public Integer getLiked() {
+	public Integer getLiked() {
 		return liked;
 	}
 	public void setLiked(Integer liked) {
 		this.liked = liked;
-	}*/
+	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class)

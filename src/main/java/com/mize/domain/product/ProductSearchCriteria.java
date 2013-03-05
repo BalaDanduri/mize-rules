@@ -17,10 +17,19 @@ public class ProductSearchCriteria{
 	private String upc;
 	private String sourceId;
 	private String brand;
+	private Integer maxLength;
+
 	
 	public ProductSearchCriteria() {
 	}
+	
+	public Integer getMaxLength() {
+		return maxLength;
+	}
 
+	public void setMaxLength(Integer maxLength) {
+		this.maxLength = maxLength;
+	}
 
 	public String getCategory() { 
 		return category;

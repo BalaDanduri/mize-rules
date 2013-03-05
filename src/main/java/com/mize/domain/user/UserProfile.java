@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonAutoDetect;
-import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.codehaus.jackson.map.annotate.JsonView;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -16,55 +14,33 @@ import com.mize.domain.common.Entity;
 import com.mize.domain.common.Gender;
 import com.mize.domain.common.PostalAddress;
 import com.mize.domain.product.UserProduct;
-import com.mize.domain.user.UserProfileViews.UserProfilePrivacyView;
 import com.mize.domain.util.JodaDateDeserializer;
 import com.mize.domain.util.JsonDateSerializer;
 
 @JsonAutoDetect
 public class UserProfile extends Entity {
 
-	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
 	private Long userId;
-	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
 	private UserType userType;
-	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
 	private PostalAddress postalAddress;
-	@JsonView(UserProfileViews.UserProfilePrivacyView.class)
 	private String photoLink;
-	@JsonView(UserProfileViews.UserProfilePrivacyView.class)
 	private String profileName;
-	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
 	private String phoneMobile;
-	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
 	private String phoneHome;
-	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
-	private String phoneWork;
-	
+	private String phoneWork;	
 	private String jobTitle;
-	@JsonView(UserProfileViews.UserProfilePrivacyView.class)
 	private List<UserProduct> want;
-	@JsonView(UserProfileViews.UserProfilePrivacyView.class)
 	private List<UserProduct> own;
 	private Long friendUserId;
 	private int friendStatus;
 	private String emailOptOut;
-	
-	
-	// Personal Info
-	@JsonProperty 
-	@JsonView(UserProfileViews.UserProfilePrivacyView.class)
 	private String firstName;
-	@JsonView(UserProfileViews.UserProfilePrivacyView.class)
-	private String lastName;
-	
+	private String lastName;	
 	@DateTimeFormat (pattern="dd-MM-yyyy")
-	@JsonView(UserProfileViews.UserProfilePrivacyView.class)
 	private DateTime birthdate;
-	@JsonView(UserProfileViews.UserProfilePrivacyView.class)
 	private Gender gender;
 	private String cityState;
 	
-	@JsonView(UserProfileViews.UserProfilePrivacyView.class)
 	private List<User> friends = new ArrayList<User>();
 	private UserProfilePrivacy privacy;
 	private int mutualFriendCount;
@@ -78,7 +54,8 @@ public class UserProfile extends Entity {
 		PROFILE_CREATED, PROFILE_UPDATED
 	}
 	public enum Timezone {
-		EST,CST;
+		EST,CST,AST,MST,PST; 
+
 	}
 
 	public UserProfile() {
@@ -109,30 +86,25 @@ public class UserProfile extends Entity {
 		this.lastName = lastName;
 		this.birthdate = birthdate;
 		this.gender = gender;
-	}
-	
-	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
+	}	
 	public Long getUserId() {
 		return userId;
 	}
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
-	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
 	public UserType getUserType() {
 		return userType;
 	}
 	public void setUserType(UserType userType) {
 		this.userType = userType;
 	}
-	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
 	public PostalAddress getPostalAddress() {
 		return postalAddress;
 	}
 	public void setPostalAddress(PostalAddress postalAddress) {
 		this.postalAddress = postalAddress;
 	}
-	@JsonView(UserProfileViews.UserProfilePrivacyView.class)
 	public String getFirstName() {
 		return firstName;
 	}
@@ -140,7 +112,6 @@ public class UserProfile extends Entity {
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-	@JsonView(UserProfileViews.UserProfilePrivacyView.class)
 	public String getLastName() {
 		return lastName;
 	}
@@ -150,7 +121,6 @@ public class UserProfile extends Entity {
 	
 	@DateTimeFormat (pattern="MM-dd-yyyy")
 	@JsonSerialize(using=JsonDateSerializer.class)
-	@JsonView(UserProfileViews.UserProfilePrivacyView.class)
 	public DateTime getBirthdate() {
 		return birthdate;
 	}
@@ -160,7 +130,6 @@ public class UserProfile extends Entity {
 	public void setBirthdate(DateTime birthdate) {
 		this.birthdate = birthdate;
 	}
-	@JsonView(UserProfileViews.UserProfilePrivacyView.class)
 	public Gender getGender() {
 		return gender;
 	}
@@ -168,7 +137,6 @@ public class UserProfile extends Entity {
 		this.gender = gender;
 	}
 	
-	@JsonView(UserProfilePrivacyView.class)
 	public String getPhotoLink() {
 		return photoLink;
 	}
@@ -176,7 +144,6 @@ public class UserProfile extends Entity {
 	public void setPhotoLink(String photoLink) {
 		this.photoLink = photoLink;
 	}
-	@JsonView(UserProfileViews.UserProfilePrivacyView.class)
 	public String getProfileName() {
 		return profileName;
 	}
@@ -184,7 +151,6 @@ public class UserProfile extends Entity {
 	public void setProfileName(String profileName) {
 		this.profileName = profileName;
 	}
-	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
 	public String getPhoneMobile() {
 		return phoneMobile;
 	}
@@ -192,7 +158,6 @@ public class UserProfile extends Entity {
 	public void setPhoneMobile(String phoneMobile) {
 		this.phoneMobile = phoneMobile;
 	}
-	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
 	public String getPhoneHome() {
 		return phoneHome;
 	}
@@ -200,7 +165,6 @@ public class UserProfile extends Entity {
 	public void setPhoneHome(String phoneHome) {
 		this.phoneHome = phoneHome;
 	}
-	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
 	public String getPhoneWork() {
 		return phoneWork;
 	}
@@ -208,7 +172,6 @@ public class UserProfile extends Entity {
 	public void setPhoneWork(String phoneWork) {
 		this.phoneWork = phoneWork;
 	}
-	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
 	public String getJobTitle() {
 		return jobTitle;
 	}
@@ -216,7 +179,6 @@ public class UserProfile extends Entity {
 	public void setJobTitle(String jobTitle) {
 		this.jobTitle = jobTitle;
 	}
-	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
 	public String getEmailOptOut() {
 		return emailOptOut;
 	}
@@ -224,7 +186,6 @@ public class UserProfile extends Entity {
 	public void setEmailOptOut(String emailOptOut) {
 		this.emailOptOut = emailOptOut;
 	}
-	@JsonView(UserProfileViews.UserProfilePrivacyView.class)
 	public List<User> getFriends() {
 		return friends;
 	}
@@ -232,7 +193,6 @@ public class UserProfile extends Entity {
 	public void addFriends(List<User> friends) {
 		this.friends.addAll(friends);
 	}
-	@JsonView(UserProfileViews.UserProfilePrivacyView.class)
 	public List<UserProduct> getWant() {
 		return want;
 	}
@@ -240,7 +200,6 @@ public class UserProfile extends Entity {
 	public void setWant(List<UserProduct> want) {
 		this.want = want;
 	}
-	@JsonView(UserProfileViews.UserProfilePrivacyView.class)
 	public List<UserProduct> getOwn() {
 		return own;
 	}
@@ -248,7 +207,6 @@ public class UserProfile extends Entity {
 	public void setOwn(List<UserProduct> own) {
 		this.own = own;
 	}
-	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
 	public Long getFriendUserId() {
 		return friendUserId;
 	}
@@ -260,7 +218,6 @@ public class UserProfile extends Entity {
 	public void setFriends(List<User> friends) {
 		this.friends = friends;
 	}
-	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
 	public UserProfilePrivacy getPrivacy() {
 		return privacy;
 	}
@@ -268,7 +225,6 @@ public class UserProfile extends Entity {
 	public void setPrivacy(UserProfilePrivacy privacy) {
 		this.privacy = privacy;
 	}
-	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
 	public int getMutualFriendCount() {
 		return mutualFriendCount;
 	}
@@ -277,7 +233,6 @@ public class UserProfile extends Entity {
 		this.mutualFriendCount = mutualFriendCount;
 	}
 	
-	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
 	public int getPageIndex() {
 		return pageIndex;
 	}
@@ -493,16 +448,5 @@ public class UserProfile extends Entity {
 	public String toString() {
 		return "UserProfile [userId=" + userId + ", userType=" + userType + ", postalAddress=" + postalAddress + ", photoLink=" + photoLink + ", profileName=" + profileName + ", phoneMobile=" + phoneMobile + ", phoneHome=" + phoneHome + ", phoneWork=" + phoneWork + ", jobTitle=" + jobTitle + ", want=" + want + ", own=" + own + ", friendUserId=" + friendUserId + ", friendStatus=" + friendStatus + ", emailOptOut=" + emailOptOut + ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", birthdate=" + birthdate + ", gender=" + gender + ", cityState=" + cityState + ", friends=" + friends + ", privacy=" + privacy + ", mutualFriendCount=" + mutualFriendCount + ", pageIndex=" + pageIndex + ", mizeUserCount=" + mizeUserCount + ", wantCount=" + wantCount + ", ownCount=" + ownCount + "]";
-	}
-
-	
-	
-	
-	
-
-	
-	
-	
-	
-	
+	}	
 }
