@@ -16,6 +16,7 @@ public class ProductSearchCriteria{
 	private String sourceCategory;
 	private String upc;
 	private String sourceId;
+	private String brand;
 	
 	public ProductSearchCriteria() {
 	}
@@ -140,6 +141,16 @@ public class ProductSearchCriteria{
 
 	public void setSourceId(String sourceId) {
 		this.sourceId = sourceId;
+	}
+
+
+	public String getBrand() {
+		return brand;
+	}
+
+
+	public void setBrand(String brand) {
+		this.brand = brand;
 	}
 	
 }
