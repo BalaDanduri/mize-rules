@@ -15,6 +15,7 @@ public class UserActivity extends Entity{
 	private List<UserProductFeedback> feedbacks;
 	private List<UserActivityLog> activityLogs;
 	private List<FriendsActivities> friendsActivities;
+	public List<Long> activityIds = new ArrayList<Long>();
 	
 	public enum ActivityName{
 		Send_Friend_Invite(1),Recommend_Product(2),Friend_Invite_Accepted(3),Friend_Request_Pending(4),
@@ -79,6 +80,15 @@ public class UserActivity extends Entity{
 	public void setActivityId(Long activityId) {
 		this.activity.id = activityId;
 	}
+	
+	public List<Long> getActivityIds() {
+		return activity.activityIds;
+	}
+
+	public void setActivityIds(List<Long> activityIds) {
+		this.activity.activityIds = activityIds;
+	}
+	
 	public String getActivityName() {
 		return activity.activityName;
 	}
@@ -159,6 +169,12 @@ public class UserActivity extends Entity{
 	}
 	public void setFriendsActivities(List<FriendsActivities> friendsActivities) {
 		this.friendsActivities = friendsActivities;
+	}
+	public Activity getActivity() {
+		return activity;
+	}
+	public void setActivity(Activity activity) {
+		this.activity = activity;
 	}
 	
 		
