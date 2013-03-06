@@ -34,6 +34,7 @@ public class ProductDetails extends Entity{
 	private List<ProductImageSet> imageSets;
 	private ProductPrices productPrices;
 	private ProductLinks productLinks;
+	private ProductReviews productReviews;
 
 	public ProductDetails(){
 		productFeatures = new ArrayList<ProductFeature>();
@@ -123,6 +124,14 @@ public class ProductDetails extends Entity{
 
 	public void setProductLinks(ProductLinks productLinks) {
 		this.productLinks = productLinks;
+	}
+
+	public ProductReviews getProductReviews() {
+		return productReviews;
+	}
+
+	public void setProductReviews(ProductReviews productReviews) {
+		this.productReviews = productReviews;
 	}
 	
 }

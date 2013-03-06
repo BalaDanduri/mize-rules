@@ -10,6 +10,7 @@ public class ProductLinks {
 	public static class ProductLink {
 		private String produtLink;
 		private String sourceName;
+		protected Long sourceId;
 		public String getProdutLink() {
 			return produtLink;
 		}
@@ -21,7 +22,14 @@ public class ProductLinks {
 		}
 		public void setSourceName(String sourceName) {
 			this.sourceName = sourceName;
-		}		
+		}
+		public Long getSourceId() {
+			return sourceId;
+		}
+		public void setSourceId(Long sourceId) {
+			this.sourceId = sourceId;
+		}	
+		
 	}
 
 	public List<ProductLink> getProductLinks() {
