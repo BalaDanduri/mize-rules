@@ -3,9 +3,12 @@ package com.mize.domain.product;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mize.domain.util.Formatter;
+
 public class ProductLinks {
 	
-	private List<ProductLink> productLinks = new ArrayList<ProductLink>();
+	private List<ProductLink> productLinkList = new ArrayList<ProductLink>();
+	private Integer count ;
 	
 	public static class ProductLink {
 		private String produtLink;
@@ -28,16 +31,23 @@ public class ProductLinks {
 		}
 		public void setSourceId(Long sourceId) {
 			this.sourceId = sourceId;
-		}	
-		
+		}			
 	}
 
-	public List<ProductLink> getProductLinks() {
-		return productLinks;
+	public List<ProductLink> getProductLinkList() {
+		return productLinkList;
 	}
 
-	public void setProductLinks(List<ProductLink> productLinks) {
-		this.productLinks = productLinks;
+	public void setProductLinkList(List<ProductLink> productLinkList) {
+		this.productLinkList = productLinkList;
 	}
-		
+
+	public Integer getCount() {
+		return Formatter.isEmpty(productLinkList) ? null :productLinkList.size() ;
+	}
+
+	public void setCount(Integer count) {
+		this.count = count;
+	}
+
 }

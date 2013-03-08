@@ -5,12 +5,13 @@ import java.util.List;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
+import com.mize.domain.util.Formatter;
 import com.mize.domain.util.NumberValueSerializer;
 
 public class ProductPrices {
 	
-	private List<ProductPrice> productPrices = new ArrayList<ProductPrice>();
-	
+	private List<ProductPrice> productPriceList = new ArrayList<ProductPrice>();
+	private Integer count ;
 	public static class ProductPrice {
 		@JsonSerialize(using=NumberValueSerializer.class)
 		private Double price;
@@ -34,19 +35,22 @@ public class ProductPrices {
 		}
 		public void setSourceId(Long sourceId) {
 			this.sourceId = sourceId;
-		}
-		
+		}		
+	}
+	public List<ProductPrice> getProductPriceList() {
+		return productPriceList;
 	}
 
-	public List<ProductPrice> getProductPrices() {
-		return productPrices;
+	public void setProductPriceList(List<ProductPrice> productPriceList) {
+		this.productPriceList = productPriceList;
 	}
 
-	public void setProductPrices(List<ProductPrice> productPrices) {
-		this.productPrices = productPrices;
+	public Integer getCount() {
+		return Formatter.isEmpty(productPriceList) ? null :productPriceList.size() ;
+	}
+
+	public void setCount(Integer count) {
+		this.count = count;
 	}
 	
-	public void addProductPrice(ProductPrice productPrice) {
-		this.productPrices.add(productPrice);
-	}
 }

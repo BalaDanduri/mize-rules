@@ -3,9 +3,12 @@ package com.mize.domain.product;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mize.domain.util.Formatter;
+
 public class ProductReviews {
 	
-	private List<ProductReview> productReviews = new ArrayList<ProductReview>();
+	private List<ProductReview> productReviewList = new ArrayList<ProductReview>();
+	private Integer count ;
 	
 	public static class ProductReview {
 		private String reviewLink;
@@ -31,12 +34,21 @@ public class ProductReviews {
 			this.reviewLink = reviewLink;
 		}	
 	}
-	public List<ProductReview> getProductReviews() {
-		return productReviews;
+
+	public List<ProductReview> getProductReviewList() {
+		return productReviewList;
 	}
 
-	public void setProductReviews(List<ProductReview> productReviews) {
-		this.productReviews = productReviews;
+	public void setProductReviewList(List<ProductReview> productReviewList) {
+		this.productReviewList = productReviewList;
 	}
-		
+
+	public Integer getCount() {
+		return Formatter.isEmpty(productReviewList) ? null :productReviewList.size() ;
+	}
+
+	public void setCount(Integer count) {
+		this.count = count;
+	}
+			
 }
