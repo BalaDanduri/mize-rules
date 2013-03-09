@@ -98,6 +98,10 @@ public class Formatter {
 		return (str == null || str.trim().length()==0);
 	}
 	
+	public static boolean isNotNull(String str){
+		return (!isNull(str));
+	}
+	
 	public static boolean isYorN(String str){
 		if(str == null || !(YES.equalsIgnoreCase(str.trim()) || NO.equalsIgnoreCase(str.trim()))){
 			return false;
