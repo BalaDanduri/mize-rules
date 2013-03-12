@@ -28,6 +28,7 @@ public class UserActivityLog extends Entity{
 	private String productName;
 	private String imageLink;
 	private Long productId;
+	private Long sourceId;
 	private String sourceProductId;
 	private String action;
 	private String activityViewed;
@@ -35,10 +36,19 @@ public class UserActivityLog extends Entity{
 	private Long parentActivityLogId;	
 	private boolean isReqPending;
 	private UserActivityLog parentActivityLog;
+	
 	public UserActivityLog(){
 		targetUsers = new ArrayList<User>();
 	}
 	
+	public Long getSourceId() {
+		return sourceId;
+	}
+
+	public void setSourceId(Long sourceId) {
+		this.sourceId = sourceId;
+	}
+
 	public boolean isReqPending() {
 		return isReqPending;
 	}
