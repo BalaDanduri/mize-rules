@@ -41,7 +41,7 @@ public class Product  extends Entity{
 	private String productLink;
 	
 	public enum Source{
-		MIZE(1),AMAZON(2),ETILIZE(3);
+		MIZE(1),AMAZON(2),ETILIZE(3),BestBuy(4);
 		int value;
 		Source(int val){
 			value = val;
