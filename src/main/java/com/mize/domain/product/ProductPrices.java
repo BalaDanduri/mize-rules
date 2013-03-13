@@ -5,12 +5,15 @@ import java.util.List;
 
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
+import com.mize.domain.common.Entity;
 import com.mize.domain.util.Formatter;
 import com.mize.domain.util.NumberValueSerializer;
 
-public class ProductPrices {
-	
+public class ProductPrices extends Entity{
+
+	private static final long serialVersionUID = -7613756473871400062L;
 	private List<ProductPrice> productPriceList = new ArrayList<ProductPrice>();
+	@SuppressWarnings("unused")
 	private Integer count ;
 	public static class ProductPrice {
 		@JsonSerialize(using=NumberValueSerializer.class)

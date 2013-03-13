@@ -3,11 +3,14 @@ package com.mize.domain.product;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mize.domain.common.Entity;
 import com.mize.domain.util.Formatter;
 
-public class ProductLinks {
+public class ProductLinks extends Entity{
 	
+	private static final long serialVersionUID = 8848336876918401799L;
 	private List<ProductLink> productLinkList = new ArrayList<ProductLink>();
+	@SuppressWarnings("unused")
 	private Integer count ;
 	
 	public static class ProductLink {
@@ -43,7 +46,7 @@ public class ProductLinks {
 	}
 
 	public Integer getCount() {
-		return Formatter.isEmpty(productLinkList) ? null :productLinkList.size() ;
+		return (count = Formatter.isEmpty(productLinkList) ? null :productLinkList.size());
 	}
 
 	public void setCount(Integer count) {

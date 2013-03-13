@@ -14,9 +14,6 @@ import com.mize.domain.util.NumberValueSerializer;
 
 public class Product  extends Entity{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 5379538452565383073L;
 	protected Long id;
 	protected String name;

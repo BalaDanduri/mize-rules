@@ -1,8 +1,11 @@
 package com.mize.domain.product;
 
+import com.mize.domain.common.Entity;
 
-public class Dimension {
 
+public class Dimension extends Entity{
+	
+	private static final long serialVersionUID = 8691446210400725036L;
 	public enum Name{
 		Height,Length,Weight,Width;		
 	}

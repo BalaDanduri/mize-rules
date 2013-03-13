@@ -3,8 +3,10 @@ package com.mize.domain.product;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ProductSearchCriteria{
+import com.mize.domain.common.Entity;
 
+public class ProductSearchCriteria extends Entity{
+	private static final long serialVersionUID = 155385665556860537L;
 	private String category;
 	private String searchKey;
 	private String browseNode;
@@ -19,10 +21,6 @@ public class ProductSearchCriteria{
 	private String brand;
 	private Integer maxLength;
 
-	
-	public ProductSearchCriteria() {
-	}
-	
 	public Integer getMaxLength() {
 		return maxLength;
 	}

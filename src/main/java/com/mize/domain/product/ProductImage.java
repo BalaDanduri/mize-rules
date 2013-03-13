@@ -3,7 +3,11 @@ package com.mize.domain.product;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ProductImage  {
+import com.mize.domain.common.Entity;
+
+public class ProductImage extends Entity{
+	
+	private static final long serialVersionUID = -6911683738097635650L;
 	private String imageType;
 	private String url;
 	private Map<String,Dimension> dimensions;

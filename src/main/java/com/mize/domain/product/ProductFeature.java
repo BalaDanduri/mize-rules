@@ -1,6 +1,10 @@
 package com.mize.domain.product;
 
-public class ProductFeature{
+import com.mize.domain.common.Entity;
+
+public class ProductFeature extends Entity{
+	
+	private static final long serialVersionUID = -97276364683192909L;
 	private String feature;
 	private String name;
 	private String absoluteValue;
@@ -36,7 +40,5 @@ public class ProductFeature{
 
 	public void setName(String name) {
 		this.name = name;
-	}
-	
-	
+	}	
 }

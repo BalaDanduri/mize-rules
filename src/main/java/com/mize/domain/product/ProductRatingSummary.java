@@ -1,8 +1,10 @@
 package com.mize.domain.product;
 
+import com.mize.domain.common.Entity;
 
-public class ProductRatingSummary {
-	
+
+public class ProductRatingSummary extends Entity{
+	private static final long serialVersionUID = -7710842260731182272L;
 	protected Long productId;
 	protected Double mizeRating;
 	protected Long rating1Count;
@@ -14,14 +16,6 @@ public class ProductRatingSummary {
 	protected Long countWant;
 	protected Long countGift;
 	
-	@Override
-	public String toString() {
-		return "ProductRatingSummary [productId=" + productId + ", mizeRating=" + mizeRating + ", rating1Count="
-				+ rating1Count + ", rating2Count=" + rating2Count + ", rating3Count=" + rating3Count
-				+ ", rating4Count=" + rating4Count + ", rating5Count=" + rating5Count + ", countOwn=" + countOwn
-				+ ", countWant=" + countWant + ", countGift=" + countGift + "]";
-	}
-
 	public Long getProductId() {
 		return productId;
 	}
@@ -115,5 +109,14 @@ public class ProductRatingSummary {
 
 	public void setCountGift(Long countGift) {
 		this.countGift = countGift;
+	}
+	
+
+	@Override
+	public String toString() {
+		return "ProductRatingSummary [productId=" + productId + ", mizeRating=" + mizeRating + ", rating1Count="
+				+ rating1Count + ", rating2Count=" + rating2Count + ", rating3Count=" + rating3Count
+				+ ", rating4Count=" + rating4Count + ", rating5Count=" + rating5Count + ", countOwn=" + countOwn
+				+ ", countWant=" + countWant + ", countGift=" + countGift + "]";
 	}
 }

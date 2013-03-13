@@ -8,10 +8,7 @@ import java.util.Map;
 import com.mize.domain.common.Entity;
 
 public class ProductDetails extends Entity{
-
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = -6338652951554117142L;
 
 	public enum DESC{
