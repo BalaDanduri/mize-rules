@@ -44,6 +44,7 @@ public class ProductDetails extends Entity{
 		imageSets = new ArrayList<ProductImageSet>();
 		accessories = new ArrayList<SimilarProducts>();
 		productPrices = new ProductPrices();
+		productLinks = new ProductLinks();
 	}
 	
 	public String getWarranty() {
