@@ -4,6 +4,7 @@ import com.mize.domain.common.Entity;
 
 public class Source extends Entity{
 
+	private static final long serialVersionUID = 1143535287038637870L;
 	public Integer sourceId;
 	public String sourceName;
 

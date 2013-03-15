@@ -3,7 +3,11 @@ package com.mize.domain.product;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductImageSet{
+import com.mize.domain.common.Entity;
+
+public class ProductImageSet extends Entity{
+	
+	private static final long serialVersionUID = -7839100839627763732L;
 	private String category;
 	private List<ProductImage> productImages;
 	

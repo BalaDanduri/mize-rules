@@ -1,6 +1,9 @@
 package com.mize.domain.product;
 
-public class ProductItem {
+import com.mize.domain.common.Entity;
+
+public class ProductItem extends Entity{
+	private static final long serialVersionUID = -7554073627351568158L;
 	protected String title;
 	protected String description;
 	protected String listingType;

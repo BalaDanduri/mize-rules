@@ -9,11 +9,11 @@ import com.mize.domain.common.Entity;
 
 public class UserWownit extends Entity{
 
+	private static final long serialVersionUID = -5112664139693276593L;
 	private User user;
 	private Map<String, Set<Product>> wownitProducts; 
 	
 	public UserWownit() {
-		// TODO Auto-generated constructor stub
 		wownitProducts = new HashMap<String, Set<Product>>();
 	}
 

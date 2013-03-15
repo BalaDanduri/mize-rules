@@ -1,22 +1,20 @@
 package com.mize.domain.product;
 
 
-import java.io.IOException;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonPropertyOrder;
-import org.codehaus.jackson.map.JsonMappingException;
+
+import com.mize.domain.common.Entity;
 
 
 @JsonPropertyOrder ({"id", "name", "link", "parent"})
 
-public class ProductCategory {
+public class ProductCategory extends Entity{
 
-	
+	private static final long serialVersionUID = -2450196415219764436L;
 	protected Long id;
 	protected String name;
 	protected String photoLink;
@@ -165,15 +163,6 @@ public class ProductCategory {
 	}
 
 
-	public static void main(String args[]) throws JsonGenerationException, JsonMappingException, IOException {
-		
-//		ProductCategory cat1 = new ProductCategory(new Long(1), "Electronics", null, null );
-//		ProductCategory cat2 = new ProductCategory(new Long(2), "Computer", null, cat1 );
-//		ProductCategory cat3 = new ProductCategory(new Long(3), "Laptop", null, cat2 );
-//		
-//		System.out.println(new ObjectMapper().writeValueAsString(cat3));
-		
-	}
 
 
 	@JsonIgnore
@@ -188,7 +177,6 @@ public class ProductCategory {
 
 	public boolean isLeaf() {
 		if ((children == null || children.isEmpty()) ) {
-//		if ((children == null || children.isEmpty()) && (parent!= null)) {
 			return true;
 		} else {
 			return false;
@@ -196,7 +184,6 @@ public class ProductCategory {
 	}
 
 	public void setLeaf(boolean leaf) {
-		// Not needed as it is based on the Children
 	}
 
 
@@ -218,7 +205,5 @@ public class ProductCategory {
 	public void setLevel(Integer level) {
 		this.level = level;
 	}
-
-
 
 }

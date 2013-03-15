@@ -3,8 +3,11 @@ package com.mize.domain.product;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductBuyList {
-	
+import com.mize.domain.common.Entity;
+
+public class ProductBuyList extends Entity{
+
+	private static final long serialVersionUID = -4712168162637629908L;
 	private List<ProductBuyItem> productBuyItems = new ArrayList<ProductBuyItem>();
 	
 	public static class ProductBuyItem {

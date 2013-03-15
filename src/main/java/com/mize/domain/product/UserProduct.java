@@ -13,6 +13,7 @@ import com.mize.domain.util.JsonDateTimeSerializer;
 
 public class UserProduct extends Entity{
 
+	private static final long serialVersionUID = -5270305444916049503L;
 	protected Long id;
 	protected User User = new User();
 	protected Product product;
@@ -25,10 +26,6 @@ public class UserProduct extends Entity{
 		own,want,gift,recycle;
 	}
 	
-	public UserProduct() {
-		// TODO Auto-generated constructor stub
-	}
-
 	public Long getId() {
 		return id;
 	}
@@ -85,44 +82,6 @@ public class UserProduct extends Entity{
 
 	public void setPageIndex(int pageIndex) {
 		this.pageIndex = pageIndex;
-	}
-
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((product == null) ? 0 : product.hashCode());
-		result = prime * result + ((listName == null) ? 0 : listName.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		UserProduct other = (UserProduct) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (product == null) {
-			if (other.product != null)
-				return false;
-		} else if (!product.equals(other.product))
-			return false;
-		if (listName == null) {
-			if (other.listName != null)
-				return false;
-		} else if (!listName.equals(other.listName))
-			return false;		
-		return true;
 	}
 
 	@Override

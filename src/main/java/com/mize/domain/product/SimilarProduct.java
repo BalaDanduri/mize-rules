@@ -1,7 +1,10 @@
 package com.mize.domain.product;
 
-public class SimilarProduct{
+import com.mize.domain.common.Entity;
 
+public class SimilarProduct extends Entity{
+
+	private static final long serialVersionUID = 3696822751611075316L;
 	private String asin;
 	private String title;
 	

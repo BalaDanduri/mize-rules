@@ -13,9 +13,6 @@ import com.mize.domain.util.JsonDateTimeSerializer;
 
 public class UserComment extends Entity{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 5202517627419277416L;
 	private Long commentId;
 	private Long parentCommentId;
@@ -23,28 +20,7 @@ public class UserComment extends Entity{
 	private String commentType;
 	private User user;
 	private String comments;
-	private Integer liked;
-	
-	/*public enum Like{
-		Thumps_Up(1),Thumps_Down(2),Spam(3);
-		private int value;
-		private Like(int val){
-			value = val;
-		}
-		public int getValue(){
-			return value;
-		}
-	}
-	
-	public static Like getLike(int num) {
-		for (Like li : Like.values()) {
-			if (num == li.ordinal() + 1) {
-				return li;
-			}
-		}
-		return null;
-	}*/
-	
+	private Integer liked;	
 	
 	public enum CommentType{
 		prod_feedback,want,own;	

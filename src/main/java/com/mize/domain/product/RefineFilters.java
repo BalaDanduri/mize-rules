@@ -5,15 +5,14 @@ import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonPropertyOrder;
 
+import com.mize.domain.common.Entity;
+
 @JsonPropertyOrder ({"filterTypeName", "filters"})
-public class RefineFilters {
-	
+public class RefineFilters extends Entity{
+
+	private static final long serialVersionUID = 2938728873171419969L;
 	protected String filterTypeName;
 	protected List<RefineFilter> filters = new ArrayList<>();
-	
-	public RefineFilters() {
-		
-	}
 	
 	public String getFilterTypeName() {
 		return filterTypeName;

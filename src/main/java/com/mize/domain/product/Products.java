@@ -3,15 +3,15 @@ package com.mize.domain.product;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Products {
+import com.mize.domain.common.Entity;
 
+public class Products extends Entity{
+
+	private static final long serialVersionUID = 5620440549204450869L;
 	private long searchResults;
 	private List<Product> productList = new ArrayList<Product>();
 	private List<RefineFilters> refineFilters = new ArrayList<RefineFilters>(); 
 	
-	public Products() {
-		
-	}
 	
 	public long getSearchResults() {
 		return searchResults;

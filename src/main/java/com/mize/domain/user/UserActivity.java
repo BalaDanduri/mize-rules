@@ -16,6 +16,7 @@ public class UserActivity extends Entity{
 	private List<UserActivityLog> activityLogs;
 	private List<FriendsActivities> friendsActivities;
 	public List<Long> activityIds = new ArrayList<Long>();
+	private Integer unreadCount;
 	
 	public enum ActivityName{
 		Send_Friend_Invite(1),Recommend_Product(2),Friend_Invite_Accepted(3),Friend_Request_Pending(4),
@@ -176,6 +177,11 @@ public class UserActivity extends Entity{
 	public void setActivity(Activity activity) {
 		this.activity = activity;
 	}
+	public Integer getUnreadCount() {
+		return unreadCount;
+	}
+	public void setUnreadCount(Integer unreadCount) {
+		this.unreadCount = unreadCount;
+	}
 	
-		
 }

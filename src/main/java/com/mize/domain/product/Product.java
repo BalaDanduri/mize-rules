@@ -1,15 +1,10 @@
 package com.mize.domain.product;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import com.mize.domain.brand.Brand;
@@ -19,9 +14,6 @@ import com.mize.domain.util.NumberValueSerializer;
 
 public class Product  extends Entity{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 5379538452565383073L;
 	protected Long id;
 	protected String name;
@@ -51,7 +43,6 @@ public class Product  extends Entity{
 		}
 	}	
 	public Product() {
-		// TODO Auto-generated constructor stub
 		category = new HashSet<ProductCategory>();
 		productSource = new ProductSource();
 		productDetails = new ProductDetails();

@@ -1,12 +1,11 @@
 package com.mize.domain.product;
 
 import com.mize.domain.auth.User;
+import com.mize.domain.common.Entity;
 
-/*
- * This class us used for selling an User product on ebay or other stores.
- */
-public class UserProductItem {
+public class UserProductItem extends Entity{
 
+	private static final long serialVersionUID = 6747681807001480512L;
 	private User user;
 	private ProductItem productItem;
 	protected Product product;

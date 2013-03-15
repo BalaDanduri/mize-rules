@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -28,8 +29,28 @@ public class Formatter {
 	private static final String HTML_COMMENTS_PATTERN = "(?s)<!--.*?-->";
 	public static final String DATE_SEPARATE = "-";
 	public static final String MORE_TEXT = "...";
+	public static final Integer DEFAULT_LOCALE = 1;
+	public static final String AMAZON_PRODUCT_FEATURES = "Amazon_Product_Features";
+	public static final String SPECIFICATION_WIDTH = "Width";
+	public static final String SPECIFICATION_DEPTH = "Depth";
+	public static final String SPECIFICATION_HEIGHT = "Height";
+	public static final String SPECIFICATION_LENGTH = "Length";
+	public static final String SPECIFICATION_WEIGHT = "Weight";
+	public static String UNIT_INCHES = "inches";
+	public static String UNIT_POUNDS = "pounds";
+	
+	public static final List<String> amazonSpecList = new ArrayList<String>();
 	
 	private Formatter(){		
+	}
+	
+	static{
+		amazonSpecList.add(AMAZON_PRODUCT_FEATURES);
+		amazonSpecList.add(SPECIFICATION_WIDTH);
+		amazonSpecList.add(SPECIFICATION_DEPTH);
+		amazonSpecList.add(SPECIFICATION_LENGTH);
+		amazonSpecList.add(SPECIFICATION_WEIGHT);
+		amazonSpecList.add(SPECIFICATION_HEIGHT);
 	}
 	
 	public static int intValue(Integer intVal){
@@ -304,4 +325,5 @@ public class Formatter {
 		return (map == null ? 0:map.size());
 	}
 	
+
 }

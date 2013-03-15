@@ -3,11 +3,14 @@ package com.mize.domain.product;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mize.domain.common.Entity;
 import com.mize.domain.util.Formatter;
 
-public class ProductReviews {
+public class ProductReviews extends Entity{
 	
+	private static final long serialVersionUID = 7538779901437212154L;
 	private List<ProductReview> productReviewList = new ArrayList<ProductReview>();
+	@SuppressWarnings("unused")
 	private Integer count ;
 	
 	public static class ProductReview {
