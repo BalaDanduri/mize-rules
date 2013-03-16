@@ -19,6 +19,8 @@ public class ProductSearchCriteria extends Entity{
 	private String upc;
 	private String sourceId;
 	private String brand;
+	private String lowPrice;
+	private String highPrice;
 	private Integer maxLength;
 
 	public Integer getMaxLength() {
@@ -158,6 +160,22 @@ public class ProductSearchCriteria extends Entity{
 
 	public void setBrand(String brand) {
 		this.brand = brand;
+	}
+
+	public String getLowPrice() {
+		return lowPrice;
+	}
+
+	public void setLowPrice(String lowPrice) {
+		this.lowPrice = lowPrice;
+	}
+
+	public String getHighPrice() {
+		return highPrice;
+	}
+
+	public void setHighPrice(String highPrice) {
+		this.highPrice = highPrice;
 	}
 	
 }
