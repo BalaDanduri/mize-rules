@@ -15,11 +15,11 @@ public class NumberFormatSerializer extends org.codehaus.jackson.map.JsonSeriali
 		if (value > 999) {
 			int first_divi = 1000;
 			int divident = value / first_divi;
-			double reminder = value % first_divi;
+			double remainder = value % first_divi;
 			int lowerLimit = 49;
 			for (int i = 1; i <= 10; i++) {
 				val = divident + "K";
-				if (reminder > lowerLimit && !(reminder > (lowerLimit + i * 100))) {
+				if (remainder > lowerLimit && !(remainder > (lowerLimit + i * 100))) {
 					if (i > 9) {
 						val = ++divident + "K";
 					} else {
