@@ -119,10 +119,11 @@ public class ProductSearchCriteria extends Entity{
 
 	@Override
 	public String toString() {
-		return "ProductSearchCriteria [category=" + category + ", searchKey="
-				+ searchKey + ", browseNode=" + browseNode + ", searchIndex="
-				+ searchIndex + ", pageIndex=" + pageIndex + ", filters="
-				+ filters + ", sortBy=" + sortBy + ", userId=" + userId + "sourceId=" + sourceId +"]";
+		return "ProductSearchCriteria [category=" + category + ", searchKey=" + searchKey + ", browseNode="
+				+ browseNode + ", searchIndex=" + searchIndex + ", pageIndex=" + pageIndex + ", filters=" + filters
+				+ ", sortBy=" + sortBy + ", userId=" + userId + ", sourceCategory=" + sourceCategory + ", upc=" + upc
+				+ ", sourceId=" + sourceId + ", brand=" + brand + ", lowPrice=" + lowPrice + ", highPrice=" + highPrice
+				+ ", maxLength=" + maxLength + "]";
 	}
 
 
