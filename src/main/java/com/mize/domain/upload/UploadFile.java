@@ -11,6 +11,7 @@ public class UploadFile extends Entity{
 	private String generatedFileName;
 	private String s3Bucket;
 	private String folder;
+	private boolean local;
 	
 	public String getFileFormat() {
 		return fileFormat;
@@ -47,6 +48,12 @@ public class UploadFile extends Entity{
 	}
 	public void setFolder(String folder) {
 		this.folder = folder;
+	}
+	public boolean isLocal() {
+		return local;
+	}
+	public void setLocal(boolean local) {
+		this.local = local;
 	}
 	
 	
