@@ -33,8 +33,7 @@ public class UserActivityLog extends Entity{
 	private String action;
 	private String activityViewed;
 	private Integer activityLiked;
-	private Long parentActivityLogId;	
-	private boolean isReqPending;
+	private Long parentActivityLogId;
 	private UserActivityLog parentActivityLog;
 	
 	public UserActivityLog(){
@@ -47,14 +46,6 @@ public class UserActivityLog extends Entity{
 
 	public void setSourceId(Long sourceId) {
 		this.sourceId = sourceId;
-	}
-
-	public boolean isReqPending() {
-		return isReqPending;
-	}
-
-	public void setReqPending(boolean isReqPending) {
-		this.isReqPending = isReqPending;
 	}
 
 	public Long getId() {
