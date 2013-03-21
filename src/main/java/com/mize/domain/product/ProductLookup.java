@@ -24,11 +24,19 @@ public class ProductLookup extends Entity{
 	protected List<String> lookupId = new ArrayList<String>();
 	private Long userId;
 	private Integer maxLength;
+	private Long prodId;
 	
-	public ProductLookup() {
+	
+	public Long getProdId() {
+		return prodId;
 	}
-	
-	
+
+
+	public void setProdId(Long prodId) {
+		this.prodId = prodId;
+	}
+
+
 	public Integer getMaxLength() {
 		return maxLength;
 	}
