@@ -25,6 +25,29 @@ public class ProductLookup extends Entity{
 	private Long userId;
 	private Integer maxLength;
 	private Long prodId;
+	private boolean similarProdsReqd = true;
+	private boolean accessoriesProdsReqd = true;
+	
+	public enum Source{
+		AMAZON(2),ETILIZE(3);	
+		private int value;
+		private Source(int val){
+			value = val;
+		}
+		public int getValue(){
+			return value;
+		}
+	}
+	
+	public static Source getSourceID(int num) {
+		for (Source sid : Source.values()) {
+			if(num==sid.value){
+				return sid;
+			}
+		}
+		return null;
+	}
+	
 	
 	
 	public Long getProdId() {
@@ -88,6 +111,26 @@ public class ProductLookup extends Entity{
 	public String toString() {
 		return "ProductLookup [sourceId=" + sourceId + ", lookupKey="
 				+ lookupKey + ", lookupId=" + lookupId + "]";
+	}
+
+
+	public boolean isSimilarProdsReqd() {
+		return similarProdsReqd;
+	}
+
+
+	public void setSimilarProdsReqd(boolean similarProdsReqd) {
+		this.similarProdsReqd = similarProdsReqd;
+	}
+
+
+	public boolean isAccessoriesProdsReqd() {
+		return accessoriesProdsReqd;
+	}
+
+
+	public void setAccessoriesProdsReqd(boolean accessoriesProdsReqd) {
+		this.accessoriesProdsReqd = accessoriesProdsReqd;
 	}
 
 
