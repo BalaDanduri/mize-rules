@@ -27,6 +27,7 @@ public class ProductLookup extends Entity{
 	private Long prodId;
 	private boolean similarProdsReqd = true;
 	private boolean accessoriesProdsReqd = true;
+	private Integer pageIndex;
 	
 	public enum Source{
 		AMAZON(2),ETILIZE(3);	
@@ -133,5 +134,14 @@ public class ProductLookup extends Entity{
 		this.accessoriesProdsReqd = accessoriesProdsReqd;
 	}
 
+
+
+	public Integer getPageIndex() {
+		return pageIndex;
+	}
+
+	public void setPageIndex(Integer pageIndex) {
+		this.pageIndex = pageIndex;
+	}
 
 }
