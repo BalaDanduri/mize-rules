@@ -10,6 +10,7 @@ public class ProductImage extends Entity{
 	private static final long serialVersionUID = -6911683738097635650L;
 	private String imageType;
 	private String url;
+	private Long prodId;
 	private Map<String,Dimension> dimensions;
 	
 	
@@ -25,6 +26,15 @@ public class ProductImage extends Entity{
 	public ProductImage(){
 		dimensions = new  HashMap<String,Dimension>();	
 	}
+	
+	public Long getProdId() {
+		return prodId;
+	}
+
+	public void setProdId(Long prodId) {
+		this.prodId = prodId;
+	}
+
 	public String getUrl() {
 		return url;
 	}
