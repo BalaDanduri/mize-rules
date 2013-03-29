@@ -2,14 +2,14 @@ package com.mize.domain.socialnetwork;
 
 public class SocialNetworkContactDetail {
 	
-	public static final String STATUS_NOT_IN_MIZE = "1";
-	public static final String STATUS_IN_MIZE = "2";
-	public static final String STATUS_MIZE_FRIEND = "3";
+	public static final int STATUS_NOT_IN_MIZE = 1;
+	public static final int STATUS_IN_MIZE = 2;
+	public static final int STATUS_MIZE_FRIEND = 3;
 	private String providerUserId;
 	private String firstName;
 	private String lastName;
 	private String pictureURL;
-	private String status = STATUS_NOT_IN_MIZE;
+	private int status = STATUS_NOT_IN_MIZE;
 	public String getProviderUserId() {
 		return providerUserId;
 	}
@@ -34,10 +34,10 @@ public class SocialNetworkContactDetail {
 	public void setPictureURL(String pictureURL) {
 		this.pictureURL = pictureURL;
 	}
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 	@Override
