@@ -325,5 +325,17 @@ public class Formatter {
 		return (map == null ? 0:map.size());
 	}
 	
-
+	public static boolean equal(Long var1,Long var2){
+		return (longValue(var1) == longValue(var2));
+	}
+	
+	public static boolean equal(Integer var1,Integer var2){
+		return (intValue(var1) == intValue(var2));
+	}
+	public static boolean equal(String var1,String var2){
+		return (makeNotNullString(var1).equals(makeNotNullString(var2)));
+	}
+	public static boolean equalIgnoreCase(String var1,String var2){
+		return (makeNotNullString(var1).equalsIgnoreCase(makeNotNullString(var2)));
+	}
 }
