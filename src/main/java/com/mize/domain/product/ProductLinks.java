@@ -14,14 +14,15 @@ public class ProductLinks extends Entity{
 	private Integer count ;
 	
 	public static class ProductLink {
-		private String produtLink;
+		private String productLink;
 		private String sourceName;
-		protected Long sourceId;
-		public String getProdutLink() {
-			return produtLink;
+		protected Long sourceId;		
+		
+		public String getProductLink() {
+			return productLink;
 		}
-		public void setProdutLink(String produtLink) {
-			this.produtLink = produtLink;
+		public void setProductLink(String productLink) {
+			this.productLink = productLink;
 		}
 		public String getSourceName() {
 			return sourceName;
