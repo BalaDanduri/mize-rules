@@ -29,9 +29,7 @@ public class ProductDetails extends Entity{
 	private String warranty;
 	private List<ProductImage> productImages;
 	private List<ProductImageSet> imageSets;
-	private ProductPrices productPrices;
-	private ProductLinks productLinks;
-	private ProductReviews productReviews;
+	private List<Retailer> retailersList;
 
 	public ProductDetails(){
 		productFeatures = new ArrayList<ProductFeature>();
@@ -40,9 +38,7 @@ public class ProductDetails extends Entity{
 		productImages = new ArrayList<ProductImage>();
 		imageSets = new ArrayList<ProductImageSet>();
 		accessories = new ArrayList<SimilarProducts>();
-		productPrices = new ProductPrices();
-		productLinks = new ProductLinks();
-		productReviews = new ProductReviews();
+		retailersList = new ArrayList<Retailer>();
 	}
 	
 	public String getWarranty() {
@@ -51,8 +47,15 @@ public class ProductDetails extends Entity{
 
 	public void setWarranty(String warranty) {
 		this.warranty = warranty;
-	}
+	}	
 	
+	public List<Retailer> getRetailersList() {
+		return retailersList;
+	}
+
+	public void setRetailersList(List<Retailer> retailersList) {
+		this.retailersList = retailersList;
+	}
 
 	public List<ProductFeature> getProductFeatures() {
 		return productFeatures;
@@ -108,30 +111,6 @@ public class ProductDetails extends Entity{
 
 	public void setAccessories(List<SimilarProducts> accessories) {
 		this.accessories = accessories;
-	}
-
-	public ProductPrices getProductPrices() {
-		return productPrices;
-	}
-
-	public void setProductPrices(ProductPrices productPrices) {
-		this.productPrices = productPrices;
-	}
-
-	public ProductLinks getProductLinks() {
-		return productLinks;
-	}
-
-	public void setProductLinks(ProductLinks productLinks) {
-		this.productLinks = productLinks;
-	}
-
-	public ProductReviews getProductReviews() {
-		return productReviews;
-	}
-
-	public void setProductReviews(ProductReviews productReviews) {
-		this.productReviews = productReviews;
 	}
 	
 }
