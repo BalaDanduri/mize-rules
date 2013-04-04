@@ -1,7 +1,10 @@
 package com.mize.domain.user;
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
@@ -49,6 +52,8 @@ public class UserProfile extends Entity {
 	private int wantCount;
 	private int ownCount;
 	private String timezone;
+	
+	private Map<String, URL> photoURLMap = new HashMap<String, URL>();
 	
 	public enum UserProfileResult {
 		PROFILE_CREATED, PROFILE_UPDATED
@@ -293,6 +298,15 @@ public class UserProfile extends Entity {
 		this.timezone = timezone;
 	}
 
+	public Map<String, URL> getPhotoURLMap() {
+		return photoURLMap;
+	}
+
+	public void setPhotoURLMap(Map<String, URL> photoURLMap) {
+		this.photoURLMap = photoURLMap;
+	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -316,9 +330,11 @@ public class UserProfile extends Entity {
 		result = prime * result + ((phoneMobile == null) ? 0 : phoneMobile.hashCode());
 		result = prime * result + ((phoneWork == null) ? 0 : phoneWork.hashCode());
 		result = prime * result + ((photoLink == null) ? 0 : photoLink.hashCode());
+		result = prime * result + ((photoURLMap == null) ? 0 : photoURLMap.hashCode());
 		result = prime * result + ((postalAddress == null) ? 0 : postalAddress.hashCode());
 		result = prime * result + ((privacy == null) ? 0 : privacy.hashCode());
 		result = prime * result + ((profileName == null) ? 0 : profileName.hashCode());
+		result = prime * result + ((timezone == null) ? 0 : timezone.hashCode());
 		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		result = prime * result + ((userType == null) ? 0 : userType.hashCode());
 		result = prime * result + ((want == null) ? 0 : want.hashCode());
@@ -412,6 +428,11 @@ public class UserProfile extends Entity {
 				return false;
 		} else if (!photoLink.equals(other.photoLink))
 			return false;
+		if (photoURLMap == null) {
+			if (other.photoURLMap != null)
+				return false;
+		} else if (!photoURLMap.equals(other.photoURLMap))
+			return false;
 		if (postalAddress == null) {
 			if (other.postalAddress != null)
 				return false;
@@ -426,6 +447,11 @@ public class UserProfile extends Entity {
 			if (other.profileName != null)
 				return false;
 		} else if (!profileName.equals(other.profileName))
+			return false;
+		if (timezone == null) {
+			if (other.timezone != null)
+				return false;
+		} else if (!timezone.equals(other.timezone))
 			return false;
 		if (userId == null) {
 			if (other.userId != null)
