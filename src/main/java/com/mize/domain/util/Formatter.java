@@ -325,6 +325,10 @@ public class Formatter {
 		return (map == null ? 0:map.size());
 	}
 	
+	public static boolean equal(Double var1,Double var2){
+		return (doubleValue(var1) == doubleValue(var2));
+	}
+	
 	public static boolean equal(Long var1,Long var2){
 		return (longValue(var1) == longValue(var2));
 	}
@@ -337,5 +341,17 @@ public class Formatter {
 	}
 	public static boolean equalIgnoreCase(String var1,String var2){
 		return (makeNotNullString(var1).equalsIgnoreCase(makeNotNullString(var2)));
+	}
+	public static String concat(Long var1,String var2){
+		return longValue(var1)+makeNotNullString(var2);
+	}
+	public static String concat(Long var1,Long var2){
+		return longValue(var1)+EMPTY+longValue(var2);
+	}
+	public static String concat(Long var1,Long var2,Long var3){
+		return longValue(var1)+EMPTY+longValue(var2)+EMPTY+longValue(var3);
+	}
+	public static String concat(Long var1,Long var2 ,String var3){
+		return longValue(var1)+EMPTY+longValue(var2)+makeNotNullString(var3);
 	}
 }
