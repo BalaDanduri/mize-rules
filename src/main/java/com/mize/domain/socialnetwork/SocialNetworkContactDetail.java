@@ -1,6 +1,6 @@
 package com.mize.domain.socialnetwork;
 
-public class SocialNetworkContactDetail {
+public class SocialNetworkContactDetail implements Comparable<SocialNetworkContactDetail>{
 	
 	public static final int STATUS_NOT_IN_MIZE = 1;
 	public static final int STATUS_IN_MIZE = 2;
@@ -46,5 +46,27 @@ public class SocialNetworkContactDetail {
 				+ ", lastName=" + lastName + ", pictureURL=" + pictureURL + ", status=" + status + "]";
 	}
 
+	public int compareTo(SocialNetworkContactDetail detail) {
+		if (firstName == null ) {
+			firstName = "";
+		}
+		
+		if (detail.getFirstName() == null) {
+			detail.setFirstName("");
+		}
+		
+		if (firstName.equalsIgnoreCase(detail.getFirstName())) {
+			if (lastName == null) {
+				lastName = "";
+			}
+			if (detail.getLastName() == null) {
+				detail.setLastName("");
+			}
+			return lastName.toUpperCase().compareTo(detail.getLastName().toUpperCase());
+
+		} else {
+			return firstName.toUpperCase().compareTo(detail.getFirstName().toUpperCase());
+		}
+	}	
 	
 }
