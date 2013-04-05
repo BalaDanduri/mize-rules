@@ -7,7 +7,7 @@ public class SocialNetworkContact {
 
 	private String providerName;
 	private Long userId;
-	private Long totalNoOfConnections;
+	private Long countOfConnections;
 	private Map<String, SocialNetworkContactDetail> contactDetails;
 	public String getProviderName() {
 		return providerName;
@@ -27,16 +27,16 @@ public class SocialNetworkContact {
 	public void setContactDetails(Map<String, SocialNetworkContactDetail> contactDetails) {
 		this.contactDetails = contactDetails;
 	}
-	public Long getTotalNoOfConnections() {
-		return totalNoOfConnections;
+	public Long getCountOfConnections() {
+		return countOfConnections;
 	}
-	public void setTotalNoOfConnections(Long totalNoOfConnections) {
-		this.totalNoOfConnections = totalNoOfConnections;
+	public void setCountOfConnections(Long countOfConnections) {
+		this.countOfConnections = countOfConnections;
 	}
 	@Override
 	public String toString() {
 		return "SocialNetworkContact [providerName=" + providerName + ", userId=" + userId + ", totalNoOfConnections="
-				+ totalNoOfConnections + ", contactDetails=" + contactDetails + "]";
+				+ countOfConnections + ", contactDetails=" + contactDetails + "]";
 	}
 	
 	
