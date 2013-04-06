@@ -15,6 +15,7 @@ public class ProductImages extends Entity{
 	private Long prodId;
 	private String type;
 	private String status;
+	private String url;
 	
 	public Long getProdId() {
 		return prodId;
@@ -76,6 +77,12 @@ public class ProductImages extends Entity{
 	}
 	public void setLocaleId(Long localeId) {
 		this.localeId = localeId;
+	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
 	}
 		
 }
