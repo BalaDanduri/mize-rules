@@ -8,29 +8,15 @@ public class SocialNetworkContactResponse {
 	private String providerName;
 	private Long userId;
 	private Long countOfConnections;
-	private List<SocialNetworkContactDetail> mizeFriends = new ArrayList<SocialNetworkContactDetail>();
-	private List<SocialNetworkContactDetail> mizeContacts = new ArrayList<SocialNetworkContactDetail>();
-	private List<SocialNetworkContactDetail> nonmizeContacts = new ArrayList<SocialNetworkContactDetail>();
+	private List<SocialNetworkContactDetail> connections = new ArrayList<SocialNetworkContactDetail>();
 	public String getProviderName() {
 		return providerName;
 	}
-	public List<SocialNetworkContactDetail> getMizeFriends() {
-		return mizeFriends;
+	public List<SocialNetworkContactDetail> getConnections() {
+		return connections;
 	}
-	public void setMizeFriends(List<SocialNetworkContactDetail> mizeFriends) {
-		this.mizeFriends = mizeFriends;
-	}
-	public List<SocialNetworkContactDetail> getMizeContacts() {
-		return mizeContacts;
-	}
-	public void setMizeContacts(List<SocialNetworkContactDetail> mizeContacts) {
-		this.mizeContacts = mizeContacts;
-	}
-	public List<SocialNetworkContactDetail> getNonmizeContacts() {
-		return nonmizeContacts;
-	}
-	public void setNonmizeContacts(List<SocialNetworkContactDetail> nonmizeContacts) {
-		this.nonmizeContacts = nonmizeContacts;
+	public void setConnections(List<SocialNetworkContactDetail> connections) {
+		this.connections = connections;
 	}
 	public void setProviderName(String providerName) {
 		this.providerName = providerName;
@@ -50,8 +36,7 @@ public class SocialNetworkContactResponse {
 	@Override
 	public String toString() {
 		return "SocialNetworkContactResponse [providerName=" + providerName + ", userId=" + userId
-				+ ", totalNoOfConnections=" + countOfConnections + ", mizeFriends=" + mizeFriends + ", mizeContacts="
-				+ mizeContacts + ", nonmizeContacts=" + nonmizeContacts + "]";
+				+ ", totalNoOfConnections=" + countOfConnections + ", mizeFriends=" + connections + "]";
 	}
 	
 }
