@@ -354,4 +354,11 @@ public class Formatter {
 	public static String concat(Long var1,Long var2 ,String var3){
 		return longValue(var1)+EMPTY+longValue(var2)+makeNotNullString(var3);
 	}
+	public static int daysDiff(DateTime time1 , DateTime time2){
+		if(time1 != null && time2 != null){
+			return time1.compareTo(time2);
+		}
+		return 0;
+		
+	}
 }
