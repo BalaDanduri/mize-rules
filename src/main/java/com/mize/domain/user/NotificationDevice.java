@@ -19,16 +19,16 @@ public class NotificationDevice extends Entity {
 	List<DeviceUser> deviceUsers = new ArrayList<DeviceUser>();
 	
 	public enum Status{
-		Enabled,Disabled;
+		enabled,disabled;
 	}
 	public enum Alert{
-		Enabled,Disabled;
+		enabled,disabled;
 	}
 	public enum Sound{
-		Enabled,Disabled;
+		enabled,disabled;
 	}
 	public enum Badge{
-		Enabled,Disabled;
+		enabled,disabled;
 	}
 	
 	public Long getId() {
