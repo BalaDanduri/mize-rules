@@ -26,7 +26,7 @@ public class UserProduct extends Entity{
 		own,want,gift;
 	}
 	
-	public Wownit getWownit(String val){
+	public static Wownit getWownit(String val){
 		for(Wownit wownit : Wownit.values()){
 			if(wownit.toString().equals(val)){
 				return wownit;
