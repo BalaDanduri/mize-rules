@@ -6,15 +6,15 @@ import com.mize.domain.common.Entity;
 public class ProductRatingSummary extends Entity{
 	private static final long serialVersionUID = -7710842260731182272L;
 	protected Long productId;
-	protected Double mizeRating;
-	protected Long rating1Count;
-	protected Long rating2Count;
-	protected Long rating3Count;
-	protected Long rating4Count;
-	protected Long rating5Count;
-	protected Long countOwn;
-	protected Long countWant;
-	protected Long countGift;
+	protected Double rating;
+	protected Integer rating1Count;
+	protected Integer rating2Count;
+	protected Integer rating3Count;
+	protected Integer rating4Count;
+	protected Integer rating5Count;
+	protected Integer countOwn;
+	protected Integer countWant;
+	protected Integer countGift;
 	
 	public Long getProductId() {
 		return productId;
@@ -24,99 +24,75 @@ public class ProductRatingSummary extends Entity{
 		this.productId = productId;
 	}
 
-	public Double getMizeRating() {
-		return mizeRating;
+	public Double getRating() {
+		return rating;
 	}
 
-	public void setMizeRating(Double mizeRating) {
-		this.mizeRating = mizeRating;
+	public void setRating(Double rating) {
+		this.rating = rating;
 	}
 
-	public Long getRating1Count() {
-		if (rating1Count == null) {
-			rating1Count = new Long(0);
-		}
+	public Integer getRating1Count() {
 		return rating1Count;
 	}
 
-	public void setRating1Count(Long rating1Count) {
+	public void setRating1Count(Integer rating1Count) {
 		this.rating1Count = rating1Count;
 	}
 
-	public Long getRating2Count() {
-		if (rating2Count == null) {
-			rating2Count = new Long(0);
-		}
+	public Integer getRating2Count() {
 		return rating2Count;
 	}
 
-	public void setRating2Count(Long rating2Count) {
+	public void setRating2Count(Integer rating2Count) {
 		this.rating2Count = rating2Count;
 	}
 
-	public Long getRating3Count() {
-		if (rating3Count == null) {
-			rating3Count = new Long(0);
-		}
+	public Integer getRating3Count() {
 		return rating3Count;
 	}
 
-	public void setRating3Count(Long rating3Count) {
+	public void setRating3Count(Integer rating3Count) {
 		this.rating3Count = rating3Count;
 	}
 
-	public Long getRating4Count() {
-		if (rating4Count == null) {
-			rating4Count = new Long(0);
-		}
+	public Integer getRating4Count() {
 		return rating4Count;
 	}
 
-	public void setRating4Count(Long rating4Count) {
+	public void setRating4Count(Integer rating4Count) {
 		this.rating4Count = rating4Count;
 	}
 
-	public Long getRating5Count() {
-		if (rating5Count == null) {
-			rating5Count = new Long(0);
-		}
+	public Integer getRating5Count() {
 		return rating5Count;
 	}
 
-	public void setRating5Count(Long rating5Count) {
+	public void setRating5Count(Integer rating5Count) {
 		this.rating5Count = rating5Count;
 	}
 
-	public Long getCountOwn() {
+	public Integer getCountOwn() {
 		return countOwn;
 	}
 
-	public void setCountOwn(Long countOwn) {
+	public void setCountOwn(Integer countOwn) {
 		this.countOwn = countOwn;
 	}
 
-	public Long getCountWant() {
+	public Integer getCountWant() {
 		return countWant;
 	}
 
-	public void setCountWant(Long countWant) {
+	public void setCountWant(Integer countWant) {
 		this.countWant = countWant;
 	}
 
-	public Long getCountGift() {
+	public Integer getCountGift() {
 		return countGift;
 	}
 
-	public void setCountGift(Long countGift) {
+	public void setCountGift(Integer countGift) {
 		this.countGift = countGift;
-	}
-	
-
-	@Override
-	public String toString() {
-		return "ProductRatingSummary [productId=" + productId + ", mizeRating=" + mizeRating + ", rating1Count="
-				+ rating1Count + ", rating2Count=" + rating2Count + ", rating3Count=" + rating3Count
-				+ ", rating4Count=" + rating4Count + ", rating5Count=" + rating5Count + ", countOwn=" + countOwn
-				+ ", countWant=" + countWant + ", countGift=" + countGift + "]";
-	}
+	}	
 }

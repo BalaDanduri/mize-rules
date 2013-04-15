@@ -23,7 +23,16 @@ public class UserProduct extends Entity{
 	protected int pageIndex;
 	
 	public enum Wownit{
-		own,want,gift,recycle;
+		own,want,gift;
+	}
+	
+	public Wownit getWownit(String val){
+		for(Wownit wownit : Wownit.values()){
+			if(wownit.toString().equals(val)){
+				return wownit;
+			}			
+		}
+		return null;
 	}
 	
 	public Long getId() {
