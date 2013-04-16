@@ -1,5 +1,9 @@
 package com.mize.domain.product;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.mize.domain.auth.User;
 import com.mize.domain.common.Entity;
 
 
@@ -9,6 +13,7 @@ public class ProductRating extends Entity{
 	private Long userId;
 	private ProductRatingSummary mizeRatings = new ProductRatingSummary();
 	private ProductRatingSummary friendRatings = new ProductRatingSummary();
+	private List<User> friends = new ArrayList<User>();
 	
 	public Long getProductId() {
 		return productId;
@@ -33,6 +38,12 @@ public class ProductRating extends Entity{
 	}
 	public void setUserId(Long userId) {
 		this.userId = userId;
+	}
+	public List<User> getFriends() {
+		return friends;
+	}
+	public void setFriends(List<User> friends) {
+		this.friends = friends;
 	}
 	
 }

@@ -56,6 +56,7 @@ public class UserProfile extends Entity {
 	private boolean isFriend;
 	private int prodFeedbackCount;
 	private long friendsCount;
+	List<String> listNames = new ArrayList<String>();
 	
 	private Map<String, URL> photoURLMap = new HashMap<String, URL>();
 	
@@ -332,6 +333,14 @@ public class UserProfile extends Entity {
 
 	public void setFriendsCount(long friendsCount) {
 		this.friendsCount = friendsCount;
+	}
+
+	public List<String> getListNames() {
+		return listNames;
+	}
+
+	public void setListNames(List<String> listNames) {
+		this.listNames = listNames;
 	}
 	
 }
