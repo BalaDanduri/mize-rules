@@ -33,6 +33,9 @@ public class ProductRatingSummary extends Entity{
 	}
 
 	public Integer getRating1Count() {
+		if(rating1Count == null){
+			rating1Count = Integer.valueOf(0);
+		}
 		return rating1Count;
 	}
 
@@ -41,6 +44,9 @@ public class ProductRatingSummary extends Entity{
 	}
 
 	public Integer getRating2Count() {
+		if(rating2Count == null){
+			rating2Count = Integer.valueOf(0);
+		}
 		return rating2Count;
 	}
 
@@ -49,6 +55,9 @@ public class ProductRatingSummary extends Entity{
 	}
 
 	public Integer getRating3Count() {
+		if(rating3Count == null){
+			rating3Count = Integer.valueOf(0);
+		}
 		return rating3Count;
 	}
 
@@ -57,6 +66,9 @@ public class ProductRatingSummary extends Entity{
 	}
 
 	public Integer getRating4Count() {
+		if(rating4Count == null){
+			rating4Count = Integer.valueOf(0);
+		}
 		return rating4Count;
 	}
 
@@ -65,6 +77,9 @@ public class ProductRatingSummary extends Entity{
 	}
 
 	public Integer getRating5Count() {
+		if(rating5Count == null){
+			rating5Count = Integer.valueOf(0);
+		}
 		return rating5Count;
 	}
 
