@@ -6,6 +6,7 @@ public class SocialNetworkContactDetail implements Comparable<SocialNetworkConta
 	public static final int STATUS_IN_MIZE = 2;
 	public static final int STATUS_MIZE_FRIEND = 3;
 	private String providerUserId;
+	private String userId;
 	private String firstName;
 	private String lastName;
 	private String pictureURL;
@@ -40,10 +41,16 @@ public class SocialNetworkContactDetail implements Comparable<SocialNetworkConta
 	public void setStatus(int status) {
 		this.status = status;
 	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 	@Override
 	public String toString() {
-		return "SocialNetworkContactDetail [providerUserId=" + providerUserId + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", pictureURL=" + pictureURL + ", status=" + status + "]";
+		return "SocialNetworkContactDetail [providerUserId=" + providerUserId + ", userId=" + userId + ", firstName="
+				+ firstName + ", lastName=" + lastName + ", pictureURL=" + pictureURL + ", status=" + status + "]";
 	}
 
 	public int compareTo(SocialNetworkContactDetail detail) {
