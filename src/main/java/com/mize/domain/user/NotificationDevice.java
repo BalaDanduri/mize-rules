@@ -9,7 +9,7 @@ public class NotificationDevice extends Entity {
 	
 	private static final long serialVersionUID = 6457591358862233006L;	
 	private Long id;
-	private String code;
+	private String deviceToken;
 	private String status;
 	private String alert;
 	private String sound;
@@ -21,28 +21,28 @@ public class NotificationDevice extends Entity {
 	public enum Status{
 		enabled,disabled;
 	}
-	public enum Alert{
-		enabled,disabled;
-	}
-	public enum Sound{
-		enabled,disabled;
-	}
-	public enum Badge{
-		enabled,disabled;
+	public static Status getStatus(String s){
+		for(Status status : Status.values()){
+			if(status.toString().equalsIgnoreCase(s)){
+				return status;
+			}
+		}
+		return null;
 	}
 	
+	public String getDeviceToken() {
+		return deviceToken;
+	}
+	public void setDeviceToken(String deviceToken) {
+		this.deviceToken = deviceToken;
+	}
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getCode() {
-		return code;
-	}
-	public void setCode(String code) {
-		this.code = code;
-	}
+	
 	public String getStatus() {
 		return status;
 	}
