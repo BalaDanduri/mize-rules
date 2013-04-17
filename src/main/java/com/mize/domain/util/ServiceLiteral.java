@@ -6,4 +6,5 @@ public interface ServiceLiteral {
 	public String DEVICE_NOT_REGISTERED = "DEVICE_NOT_REGISTERED";
 	public String SUCCESS_MSG = "SUCCESS_MSG";
 	public String FAILURE_MSG = "FAILURE_MSG";
+	public String RESULT = "result";
 }
