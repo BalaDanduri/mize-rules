@@ -358,7 +358,20 @@ public class Formatter {
 		if(time1 != null && time2 != null){
 			return time1.compareTo(time2);
 		}
-		return 0;
-		
+		return 0;		
+	}
+	public static String toString(Integer intVal){
+		if(intVal == null){
+			return EMPTY;
+		}else {
+			return EMPTY+intValue(intVal);
+		}
+	}
+	public static String toString(Long longVal){
+		if(longVal == null){
+			return EMPTY;
+		}else {
+			return EMPTY+longValue(longVal);
+		}
 	}
 }
