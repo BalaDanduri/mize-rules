@@ -31,7 +31,7 @@ public class NotificationDevice extends Entity {
 	}
 	
 	public enum MessageCode{
-		FriendInvite,RecommendProdcut,RecommendProduct,AskQuestion;
+		FriendInvite,RecommendProduct,AskQuestion;
 	}
 	
 	public String getDeviceToken() {
