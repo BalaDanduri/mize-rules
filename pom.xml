@@ -4,34 +4,6 @@
   <artifactId>mize-domain</artifactId>
   <version>1.2</version>
   <packaging>jar</packaging>
-	<profiles>
-	    <profile>
-	      <id>dev</id>
-	      <activation>
-	        <property>
-	          <name>env</name>
-	          <value>dev</value>
-	        </property>
-	      </activation>
-	      <properties>
-	        <version>0.0.1-SNAPSHOT</version>
-	      </properties>
-	    </profile>
-	
-	    <profile>
-	      <id>prod</id>
-	      <activation>
-	        <property>
-	          <name>env</name>
-	          <value>prod</value>
-	        </property>
-	      </activation>
-	      <properties>
-	        <version>1.2</version>
-	      </properties>
-	    </profile>
-	  </profiles>
-  
   <properties>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <project.build.outputEncoding>UTF-8</project.build.outputEncoding>
