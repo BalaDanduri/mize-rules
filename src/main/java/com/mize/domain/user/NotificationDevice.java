@@ -31,9 +31,9 @@ public class NotificationDevice extends Entity {
 	}
 	
 	public enum MessageCode{
-		FriendInvite("You have an Invitation from a Friend. View it Now?   No/Yes"),
-		RequestProductInput("You have received a request to share your product opinion. View it Now?   No/Yes") ,
-		ResponseToProductInputRequest("You have received a response to your request for opinion. View it Now?   No/Yes");
+		FriendInvite("You have an Invitation from a Friend."),
+		RequestProductInput("You have received a request to share your product opinion.") ,
+		ResponseToProductInputRequest("You have received a response to your request for opinion.");
 		String message;
 		MessageCode(String msg){
 			message = msg;
