@@ -8,6 +8,7 @@ import com.mize.domain.common.Entity;
 public class NotificationDevice extends Entity {
 	
 	private static final long serialVersionUID = 6457591358862233006L;	
+	public static final String HOT_SPOT = "{?}";
 	private Long id;
 	private String deviceToken;
 	private String status;
@@ -31,9 +32,9 @@ public class NotificationDevice extends Entity {
 	}
 	
 	public enum MessageCode{
-		FriendInvite("You have an Invitation from a Friend."),
-		RequestProductInput("You have received a request to share your product opinion.") ,
-		ResponseToProductInputRequest("You have received a response to your request for opinion.");
+		FriendInvite("{?} has sent you a Friend Invitation."),
+		RequestProductInput("You have received a request to share your opinion on {?}") ,
+		ResponseToProductInputRequest("You have received a response to your request for opinion on {?}");
 		String message;
 		MessageCode(String msg){
 			message = msg;
