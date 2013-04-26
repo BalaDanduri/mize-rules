@@ -3,8 +3,10 @@ package com.mize.domain.product;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ProductSearchCriteria{
+import com.mize.domain.common.Entity;
 
+public class ProductSearchCriteria extends Entity{
+	private static final long serialVersionUID = 155385665556860537L;
 	private String category;
 	private String searchKey;
 	private String browseNode;
@@ -15,12 +17,21 @@ public class ProductSearchCriteria{
 	private Long userId;
 	private String sourceCategory;
 	private String upc;
-	
-	public ProductSearchCriteria() {
+	private String sourceId;
+	private String brand;
+	private String lowPrice;
+	private String highPrice;
+	private Integer maxLength;
+
+	public Integer getMaxLength() {
+		return maxLength;
 	}
 
+	public void setMaxLength(Integer maxLength) {
+		this.maxLength = maxLength;
+	}
 
-	public String getCategory() {
+	public String getCategory() { 
 		return category;
 	}
 
@@ -108,10 +119,11 @@ public class ProductSearchCriteria{
 
 	@Override
 	public String toString() {
-		return "ProductSearchCriteria [category=" + category + ", searchKey="
-				+ searchKey + ", browseNode=" + browseNode + ", searchIndex="
-				+ searchIndex + ", pageIndex=" + pageIndex + ", filters="
-				+ filters + ", sortBy=" + sortBy + ", userId=" + userId + "]";
+		return "ProductSearchCriteria [category=" + category + ", searchKey=" + searchKey + ", browseNode="
+				+ browseNode + ", searchIndex=" + searchIndex + ", pageIndex=" + pageIndex + ", filters=" + filters
+				+ ", sortBy=" + sortBy + ", userId=" + userId + ", sourceCategory=" + sourceCategory + ", upc=" + upc
+				+ ", sourceId=" + sourceId + ", brand=" + brand + ", lowPrice=" + lowPrice + ", highPrice=" + highPrice
+				+ ", maxLength=" + maxLength + "]";
 	}
 
 
@@ -129,6 +141,42 @@ public class ProductSearchCriteria{
 	}
 	public void setUpc(String upc) {
 		this.upc = upc;
+	}
+
+
+	public String getSourceId() {
+		return sourceId;
+	}
+
+
+	public void setSourceId(String sourceId) {
+		this.sourceId = sourceId;
+	}
+
+
+	public String getBrand() {
+		return brand;
+	}
+
+
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+
+	public String getLowPrice() {
+		return lowPrice;
+	}
+
+	public void setLowPrice(String lowPrice) {
+		this.lowPrice = lowPrice;
+	}
+
+	public String getHighPrice() {
+		return highPrice;
+	}
+
+	public void setHighPrice(String highPrice) {
+		this.highPrice = highPrice;
 	}
 	
 }

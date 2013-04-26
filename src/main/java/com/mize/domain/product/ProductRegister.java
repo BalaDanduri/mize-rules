@@ -91,77 +91,7 @@ public class ProductRegister extends Entity{
 	public void setAdditionalInfo(String additionalInfo) {
 		this.additionalInfo = additionalInfo;
 	}
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((additionalInfo == null) ? 0 : additionalInfo.hashCode());
-		result = prime * result + ((prodRegnId == null) ? 0 : prodRegnId.hashCode());
-		result = prime * result + ((product == null) ? 0 : product.hashCode());
-		result = prime * result + ((purchaseDate == null) ? 0 : purchaseDate.hashCode());
-		result = prime * result + ((purchasePrice == null) ? 0 : purchasePrice.hashCode());
-		result = prime * result + ((purchaseStore == null) ? 0 : purchaseStore.hashCode());
-		result = prime * result + ((serialNumber == null) ? 0 : serialNumber.hashCode());
-		result = prime * result + ((user == null) ? 0 : user.hashCode());
-		result = prime * result + ((warrantyExpiryDate == null) ? 0 : warrantyExpiryDate.hashCode());
-		return result;
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ProductRegister other = (ProductRegister) obj;
-		if (additionalInfo == null) {
-			if (other.additionalInfo != null)
-				return false;
-		} else if (!additionalInfo.equals(other.additionalInfo))
-			return false;
-		if (prodRegnId == null) {
-			if (other.prodRegnId != null)
-				return false;
-		} else if (!prodRegnId.equals(other.prodRegnId))
-			return false;
-		if (product == null) {
-			if (other.product != null)
-				return false;
-		} else if (!product.equals(other.product))
-			return false;
-		if (purchaseDate == null) {
-			if (other.purchaseDate != null)
-				return false;
-		} else if (!purchaseDate.equals(other.purchaseDate))
-			return false;
-		if (purchasePrice == null) {
-			if (other.purchasePrice != null)
-				return false;
-		} else if (!purchasePrice.equals(other.purchasePrice))
-			return false;
-		if (purchaseStore == null) {
-			if (other.purchaseStore != null)
-				return false;
-		} else if (!purchaseStore.equals(other.purchaseStore))
-			return false;
-		if (serialNumber == null) {
-			if (other.serialNumber != null)
-				return false;
-		} else if (!serialNumber.equals(other.serialNumber))
-			return false;
-		if (user == null) {
-			if (other.user != null)
-				return false;
-		} else if (!user.equals(other.user))
-			return false;
-		if (warrantyExpiryDate == null) {
-			if (other.warrantyExpiryDate != null)
-				return false;
-		} else if (!warrantyExpiryDate.equals(other.warrantyExpiryDate))
-			return false;
-		return true;
-	}
+	
 	@Override
 	public String toString() {
 		return "ProductRegister [prodRegnId=" + prodRegnId + ", product=" + product + ", user=" + user

@@ -8,10 +8,7 @@ import java.util.Map;
 import com.mize.domain.common.Entity;
 
 public class ProductDetails extends Entity{
-
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = -6338652951554117142L;
 
 	public enum DESC{
@@ -32,6 +29,7 @@ public class ProductDetails extends Entity{
 	private String warranty;
 	private List<ProductImage> productImages;
 	private List<ProductImageSet> imageSets;
+	private List<Retailer> retailersList;
 
 	public ProductDetails(){
 		productFeatures = new ArrayList<ProductFeature>();
@@ -40,6 +38,7 @@ public class ProductDetails extends Entity{
 		productImages = new ArrayList<ProductImage>();
 		imageSets = new ArrayList<ProductImageSet>();
 		accessories = new ArrayList<SimilarProducts>();
+		retailersList = new ArrayList<Retailer>();
 	}
 	
 	public String getWarranty() {
@@ -48,8 +47,15 @@ public class ProductDetails extends Entity{
 
 	public void setWarranty(String warranty) {
 		this.warranty = warranty;
-	}
+	}	
 	
+	public List<Retailer> getRetailersList() {
+		return retailersList;
+	}
+
+	public void setRetailersList(List<Retailer> retailersList) {
+		this.retailersList = retailersList;
+	}
 
 	public List<ProductFeature> getProductFeatures() {
 		return productFeatures;

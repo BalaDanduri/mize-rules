@@ -3,9 +3,12 @@ package com.mize.domain.product;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mize.domain.common.Entity;
 
-public class ProductLookup {
+
+public class ProductLookup extends Entity{
 		
+	private static final long serialVersionUID = 7754176397823092647L;
 	public static final String SOURCE_MIZE = "1";
 	public static final String SOURCE_AMAZON = "2";
 	public static final String SOURCE_GOOGLE = "3";
@@ -20,11 +23,54 @@ public class ProductLookup {
 	protected String lookupKey;
 	protected List<String> lookupId = new ArrayList<String>();
 	private Long userId;
-
+	private Integer maxLength;
+	private Long prodId;
+	private boolean similarProdsReqd = true;
+	private boolean accessoriesProdsReqd = true;
+	private Integer pageIndex;
 	
-	public ProductLookup() {
+	public enum Source{
+		AMAZON(2),ETILIZE(3);	
+		private int value;
+		private Source(int val){
+			value = val;
+		}
+		public int getValue(){
+			return value;
+		}
 	}
 	
+	public static Source getSourceID(int num) {
+		for (Source sid : Source.values()) {
+			if(num==sid.value){
+				return sid;
+			}
+		}
+		return null;
+	}
+	
+	
+	
+	public Long getProdId() {
+		return prodId;
+	}
+
+
+	public void setProdId(Long prodId) {
+		this.prodId = prodId;
+	}
+
+
+	public Integer getMaxLength() {
+		return maxLength;
+	}
+
+
+	public void setMaxLength(Integer maxLength) {
+		this.maxLength = maxLength;
+	}
+
+
 	public String getLookupKey() {
 		return lookupKey;
 	}
@@ -63,50 +109,39 @@ public class ProductLookup {
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((lookupId == null) ? 0 : lookupId.hashCode());
-		result = prime * result
-				+ ((lookupKey == null) ? 0 : lookupKey.hashCode());
-		result = prime * result
-				+ ((sourceId == null) ? 0 : sourceId.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ProductLookup other = (ProductLookup) obj;
-		if (lookupId == null) {
-			if (other.lookupId != null)
-				return false;
-		} else if (!lookupId.equals(other.lookupId))
-			return false;
-		if (lookupKey == null) {
-			if (other.lookupKey != null)
-				return false;
-		} else if (!lookupKey.equals(other.lookupKey))
-			return false;
-		if (sourceId == null) {
-			if (other.sourceId != null)
-				return false;
-		} else if (!sourceId.equals(other.sourceId))
-			return false;
-		return true;
-	}
-
-	@Override
 	public String toString() {
 		return "ProductLookup [sourceId=" + sourceId + ", lookupKey="
 				+ lookupKey + ", lookupId=" + lookupId + "]";
 	}
 
+
+	public boolean isSimilarProdsReqd() {
+		return similarProdsReqd;
+	}
+
+
+	public void setSimilarProdsReqd(boolean similarProdsReqd) {
+		this.similarProdsReqd = similarProdsReqd;
+	}
+
+
+	public boolean isAccessoriesProdsReqd() {
+		return accessoriesProdsReqd;
+	}
+
+
+	public void setAccessoriesProdsReqd(boolean accessoriesProdsReqd) {
+		this.accessoriesProdsReqd = accessoriesProdsReqd;
+	}
+
+
+
+	public Integer getPageIndex() {
+		return pageIndex;
+	}
+
+	public void setPageIndex(Integer pageIndex) {
+		this.pageIndex = pageIndex;
+	}
 
 }

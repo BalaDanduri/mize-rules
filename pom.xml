@@ -2,9 +2,8 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.mize</groupId>
   <artifactId>mize-domain</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>1.2</version>
   <packaging>jar</packaging>
-
   <properties>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <project.build.outputEncoding>UTF-8</project.build.outputEncoding>
@@ -14,7 +13,7 @@
     <repository>
       <id>nexus</id>
       <name>Nexus Releases</name>
-      <url>http://dev.m-ize.com:8081/nexus/service/local/staging/deploy/maven2</url>
+      <url>http://dev.m-ize.com:8081/nexus/content/repositories/mize-domain</url>
     </repository>
     <snapshotRepository>
       <id>nexus</id>
@@ -39,11 +38,6 @@
     	<artifactId>guava</artifactId>
     	<version>13.0</version>
     </dependency>
-    <dependency>
-		<groupId>org.codehaus.jackson</groupId>
-		<artifactId>jackson-mapper-lgpl</artifactId>
-		<version>1.9.9</version>
-	</dependency>
 	<dependency>
 		<groupId>org.codehaus.jackson</groupId>
 		<artifactId>jackson-mapper-lgpl</artifactId>

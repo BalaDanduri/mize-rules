@@ -4,7 +4,11 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class ProductDefaultOptions {
+import com.mize.domain.common.Entity;
+
+public class ProductDefaultOptions extends Entity{
+	
+	private static final long serialVersionUID = 7827009375375725481L;
 	private Map<String, String> listingTypeMap = new LinkedHashMap<String, String>();
 	private Map<String, String> listingDurationMap = new HashMap<String, String>();
 	private Map<String, String> buyerPaymentMethodMap = new HashMap<String, String>();

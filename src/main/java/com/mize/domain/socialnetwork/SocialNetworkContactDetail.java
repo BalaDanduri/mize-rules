@@ -1,12 +1,16 @@
 package com.mize.domain.socialnetwork;
 
-public class SocialNetworkContactDetail {
+public class SocialNetworkContactDetail implements Comparable<SocialNetworkContactDetail>{
 	
+	public static final int STATUS_NOT_IN_MIZE = 1;
+	public static final int STATUS_IN_MIZE = 2;
+	public static final int STATUS_MIZE_FRIEND = 3;
 	private String providerUserId;
+	private String userId;
 	private String firstName;
 	private String lastName;
 	private String pictureURL;
-	private String status;
+	private int status = STATUS_NOT_IN_MIZE;
 	public String getProviderUserId() {
 		return providerUserId;
 	}
@@ -31,17 +35,45 @@ public class SocialNetworkContactDetail {
 	public void setPictureURL(String pictureURL) {
 		this.pictureURL = pictureURL;
 	}
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 	@Override
 	public String toString() {
-		return "SocialNetworkContactDetail [providerUserId=" + providerUserId + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", pictureURL=" + pictureURL + ", status=" + status + "]";
+		return "SocialNetworkContactDetail [providerUserId=" + providerUserId + ", userId=" + userId + ", firstName="
+				+ firstName + ", lastName=" + lastName + ", pictureURL=" + pictureURL + ", status=" + status + "]";
 	}
 
+	public int compareTo(SocialNetworkContactDetail detail) {
+		if (firstName == null ) {
+			firstName = "";
+		}
+		
+		if (detail.getFirstName() == null) {
+			detail.setFirstName("");
+		}
+		
+		if (firstName.equalsIgnoreCase(detail.getFirstName())) {
+			if (lastName == null) {
+				lastName = "";
+			}
+			if (detail.getLastName() == null) {
+				detail.setLastName("");
+			}
+			return lastName.toUpperCase().compareTo(detail.getLastName().toUpperCase());
+
+		} else {
+			return firstName.toUpperCase().compareTo(detail.getFirstName().toUpperCase());
+		}
+	}	
 	
 }

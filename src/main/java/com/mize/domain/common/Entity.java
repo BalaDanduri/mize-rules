@@ -15,12 +15,12 @@ public class Entity implements Serializable{
 	
 	private static final long serialVersionUID = 6651571123697401305L;
 
-	protected int createdBy;
+	protected Integer createdBy;
 	
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	protected DateTime createdDate;
 	
-	protected int updatedBy;
+	protected Integer updatedBy;
 	
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	protected DateTime updatedDate;
@@ -37,12 +37,12 @@ public class Entity implements Serializable{
 	}
 	
 	@JsonIgnore
-	public int getCreatedBy() {
+	public Integer getCreatedBy() {
 		return createdBy;
 	}
 
 	@JsonIgnore
-	public void setCreatedBy(int createdBy) {
+	public void setCreatedBy(Integer createdBy) {
 		this.createdBy = createdBy;
 	}
 
@@ -61,12 +61,12 @@ public class Entity implements Serializable{
 	}
 
 	@JsonIgnore
-	public int getUpdatedBy() {
+	public Integer getUpdatedBy() {
 		return updatedBy;
 	}
 
 	@JsonIgnore
-	public void setUpdatedBy(int updatedBy) {
+	public void setUpdatedBy(Integer updatedBy) {
 		this.updatedBy = updatedBy;
 	}
 

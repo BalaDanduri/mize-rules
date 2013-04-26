@@ -28,11 +28,24 @@ public class UserActivityLog extends Entity{
 	private String productName;
 	private String imageLink;
 	private Long productId;
+	private Long sourceId;
 	private String sourceProductId;
 	private String action;
+	private String activityViewed;
+	private Integer activityLiked;
+	private Long parentActivityLogId;
+	private UserActivityLog parentActivityLog;
 	
 	public UserActivityLog(){
 		targetUsers = new ArrayList<User>();
+	}
+	
+	public Long getSourceId() {
+		return sourceId;
+	}
+
+	public void setSourceId(Long sourceId) {
+		this.sourceId = sourceId;
 	}
 
 	public Long getId() {
@@ -246,5 +259,39 @@ public class UserActivityLog extends Entity{
 	public void setAction(String action) {
 		this.action = action;
 	}
+
+	public String getActivityViewed() {
+		return activityViewed;
+	}
+
+	public void setActivityViewed(String activityViewed) {
+		this.activityViewed = activityViewed;
+	}
+
+	public Integer getActivityLiked() {
+		return activityLiked;
+	}
+
+	public void setActivityLiked(Integer activityLiked) {
+		this.activityLiked = activityLiked;
+	}
+
+	public Long getParentActivityLogId() {
+		return parentActivityLogId;
+	}
+
+	public void setParentActivityLogId(Long parentActivityLogId) {
+		this.parentActivityLogId = parentActivityLogId;
+	}
+
+	public UserActivityLog getParentActivityLog() {
+		return parentActivityLog;
+	}
+
+	public void setParentActivityLog(UserActivityLog parentActivityLog) {
+		this.parentActivityLog = parentActivityLog;
+	}	
+	
+	
 		
 }

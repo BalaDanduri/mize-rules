@@ -3,6 +3,8 @@ package com.mize.domain.util;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -26,8 +28,29 @@ public class Formatter {
 	private static final Pattern HTML_TAGS_PATTERN = Pattern.compile("<.+?>");
 	private static final String HTML_COMMENTS_PATTERN = "(?s)<!--.*?-->";
 	public static final String DATE_SEPARATE = "-";
+	public static final String MORE_TEXT = "...";
+	public static final Integer DEFAULT_LOCALE = 1;
+	public static final String AMAZON_PRODUCT_FEATURES = "Amazon_Product_Features";
+	public static final String SPECIFICATION_WIDTH = "Width";
+	public static final String SPECIFICATION_DEPTH = "Depth";
+	public static final String SPECIFICATION_HEIGHT = "Height";
+	public static final String SPECIFICATION_LENGTH = "Length";
+	public static final String SPECIFICATION_WEIGHT = "Weight";
+	public static String UNIT_INCHES = "inches";
+	public static String UNIT_POUNDS = "pounds";
+	
+	public static final List<String> amazonSpecList = new ArrayList<String>();
 	
 	private Formatter(){		
+	}
+	
+	static{
+		amazonSpecList.add(AMAZON_PRODUCT_FEATURES);
+		amazonSpecList.add(SPECIFICATION_WIDTH);
+		amazonSpecList.add(SPECIFICATION_DEPTH);
+		amazonSpecList.add(SPECIFICATION_LENGTH);
+		amazonSpecList.add(SPECIFICATION_WEIGHT);
+		amazonSpecList.add(SPECIFICATION_HEIGHT);
 	}
 	
 	public static int intValue(Integer intVal){
@@ -94,6 +117,10 @@ public class Formatter {
 	
 	public static boolean isNull(String str){
 		return (str == null || str.trim().length()==0);
+	}
+	
+	public static boolean isNotNull(String str){
+		return (!isNull(str));
 	}
 	
 	public static boolean isYorN(String str){
@@ -256,6 +283,7 @@ public class Formatter {
 				value=value.replaceAll(HTML_COMMENTS_PATTERN, EMPTY);
 				Matcher m = HTML_TAGS_PATTERN.matcher(value);
 				value = m.replaceAll(EMPTY);
+				value = value.replaceAll("  ",EMPTY);
 			}catch(Exception e){
 			}
 		}	
@@ -280,5 +308,70 @@ public class Formatter {
 	}
 	public static boolean isTrue(String val){
 		return "True".equalsIgnoreCase(val);
+	}
+	public static Double formattedDouble(Double value){
+		if(value == null){
+			return null;
+		}else{
+			return Double.valueOf(new DecimalFormat("#.##").format(value));
+		}
+	}
+	@SuppressWarnings("rawtypes")
+	public static int size( Collection list){
+		return (list == null ? 0:list.size());
+	}
+	@SuppressWarnings("rawtypes")
+	public static int size( Map map){
+		return (map == null ? 0:map.size());
+	}
+	
+	public static boolean equal(Double var1,Double var2){
+		return (doubleValue(var1) == doubleValue(var2));
+	}
+	
+	public static boolean equal(Long var1,Long var2){
+		return (longValue(var1) == longValue(var2));
+	}
+	
+	public static boolean equal(Integer var1,Integer var2){
+		return (intValue(var1) == intValue(var2));
+	}
+	public static boolean equal(String var1,String var2){
+		return (makeNotNullString(var1).equals(makeNotNullString(var2)));
+	}
+	public static boolean equalIgnoreCase(String var1,String var2){
+		return (makeNotNullString(var1).equalsIgnoreCase(makeNotNullString(var2)));
+	}
+	public static String concat(Long var1,String var2){
+		return longValue(var1)+makeNotNullString(var2);
+	}
+	public static String concat(Long var1,Long var2){
+		return longValue(var1)+EMPTY+longValue(var2);
+	}
+	public static String concat(Long var1,Long var2,Long var3){
+		return longValue(var1)+EMPTY+longValue(var2)+EMPTY+longValue(var3);
+	}
+	public static String concat(Long var1,Long var2 ,String var3){
+		return longValue(var1)+EMPTY+longValue(var2)+makeNotNullString(var3);
+	}
+	public static int daysDiff(DateTime time1 , DateTime time2){
+		if(time1 != null && time2 != null){
+			return time1.compareTo(time2);
+		}
+		return 0;		
+	}
+	public static String toString(Integer intVal){
+		if(intVal == null){
+			return EMPTY;
+		}else {
+			return EMPTY+intValue(intVal);
+		}
+	}
+	public static String toString(Long longVal){
+		if(longVal == null){
+			return EMPTY;
+		}else {
+			return EMPTY+longValue(longVal);
+		}
 	}
 }

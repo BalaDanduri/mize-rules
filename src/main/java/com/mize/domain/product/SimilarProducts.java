@@ -2,8 +2,11 @@ package com.mize.domain.product;
 
 import java.util.List;
 
-public class SimilarProducts{
+import com.mize.domain.common.Entity;
 
+public class SimilarProducts extends Entity{
+
+	private static final long serialVersionUID = -1394688774116638338L;
 	private ProductSource productSource;
 	private String name;
 	private Double price;
