@@ -3,11 +3,15 @@ package com.mize.domain.user;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.auth.User;
 import com.mize.domain.common.Entity;
+import com.mize.domain.util.JodaDateTimeDeserializer;
+import com.mize.domain.util.JsonDateTimeSerializer;
 
 public class UserActivityLog extends Entity{
 	
@@ -72,18 +76,32 @@ public class UserActivityLog extends Entity{
 	public void setActivityStatus(String activityStatus) {
 		this.activityStatus = activityStatus;
 	}
+	
+
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
 	public DateTime getFirstActivityTime() {
 		return firstActivityTime;
 	}
+	
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
 	public void setFirstActivityTime(DateTime firstActivityTime) {
 		this.firstActivityTime = firstActivityTime;
 	}
+	
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
 	public DateTime getLastActivityTime() {
 		return lastActivityTime;
 	}
+	
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
 	public void setLastActivityTime(DateTime lastActivityTime) {
 		this.lastActivityTime = lastActivityTime;
 	}
+	
 	public String getActivityComments() {
 		return activityComments;
 	}
