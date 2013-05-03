@@ -39,6 +39,7 @@ public class UserActivityLog extends Entity{
 	
 	public UserActivityLog(){
 		targetUsers = new ArrayList<User>();
+		product = new Product();
 	}
 
 	public Product getProduct() {
