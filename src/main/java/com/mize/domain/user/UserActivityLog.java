@@ -10,6 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.auth.User;
 import com.mize.domain.common.Entity;
+import com.mize.domain.product.Product;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
@@ -29,11 +30,7 @@ public class UserActivityLog extends Entity{
 	private String userGroupName;
 	private String activityName;
 	private Integer mutualFriendsCount;
-	private String productName;
-	private String imageLink;
-	private Long productId;
-	private Long sourceId;
-	private String sourceProductId;
+	private Product product;
 	private String action;
 	private String activityViewed;
 	private Integer activityLiked;
@@ -43,13 +40,13 @@ public class UserActivityLog extends Entity{
 	public UserActivityLog(){
 		targetUsers = new ArrayList<User>();
 	}
-	
-	public Long getSourceId() {
-		return sourceId;
+
+	public Product getProduct() {
+		return product;
 	}
 
-	public void setSourceId(Long sourceId) {
-		this.sourceId = sourceId;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 	public Long getId() {
@@ -126,102 +123,6 @@ public class UserActivityLog extends Entity{
 		this.targetUsers = targetUsers;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((activityAction == null) ? 0 : activityAction.hashCode());
-		result = prime
-				* result
-				+ ((activityComments == null) ? 0 : activityComments.hashCode());
-		result = prime * result
-				+ ((activityKey == null) ? 0 : activityKey.hashCode());
-		result = prime * result
-				+ ((activityStatus == null) ? 0 : activityStatus.hashCode());
-		result = prime
-				* result
-				+ ((firstActivityTime == null) ? 0 : firstActivityTime
-						.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime
-				* result
-				+ ((lastActivityTime == null) ? 0 : lastActivityTime.hashCode());
-		result = prime * result
-				+ ((targetUsers == null) ? 0 : targetUsers.hashCode());
-		result = prime * result
-				+ ((userGroupName == null) ? 0 : userGroupName.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		UserActivityLog other = (UserActivityLog) obj;
-		if (activityAction == null) {
-			if (other.activityAction != null)
-				return false;
-		} else if (!activityAction.equals(other.activityAction))
-			return false;
-		if (activityComments == null) {
-			if (other.activityComments != null)
-				return false;
-		} else if (!activityComments.equals(other.activityComments))
-			return false;
-		if (activityKey == null) {
-			if (other.activityKey != null)
-				return false;
-		} else if (!activityKey.equals(other.activityKey))
-			return false;
-		if (activityStatus == null) {
-			if (other.activityStatus != null)
-				return false;
-		} else if (!activityStatus.equals(other.activityStatus))
-			return false;
-		if (firstActivityTime == null) {
-			if (other.firstActivityTime != null)
-				return false;
-		} else if (!firstActivityTime.equals(other.firstActivityTime))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (lastActivityTime == null) {
-			if (other.lastActivityTime != null)
-				return false;
-		} else if (!lastActivityTime.equals(other.lastActivityTime))
-			return false;
-		if (targetUsers == null) {
-			if (other.targetUsers != null)
-				return false;
-		} else if (!targetUsers.equals(other.targetUsers))
-			return false;
-		if (userGroupName == null) {
-			if (other.userGroupName != null)
-				return false;
-		} else if (!userGroupName.equals(other.userGroupName))
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "UserActivityLog [id=" + id + ", targetUsers=" + targetUsers
-				+ ", activityKey=" + activityKey + ", activityAction="
-				+ activityAction + ", activityStatus=" + activityStatus
-				+ ", activityComments=" + activityComments
-				+ ", firstActivityTime=" + firstActivityTime
-				+ ", lastActivityTime=" + lastActivityTime + ", userGroupName="
-				+ userGroupName + "]";
-	}
-
 	public String getActivityName() {
 		return activityName;
 	}
@@ -236,38 +137,6 @@ public class UserActivityLog extends Entity{
 
 	public void setMutualFriendsCount(Integer mutualFriendsCount) {
 		this.mutualFriendsCount = mutualFriendsCount;
-	}
-
-	public String getProductName() {
-		return productName;
-	}
-
-	public void setProductName(String productName) {
-		this.productName = productName;
-	}
-
-	public String getImageLink() {
-		return imageLink;
-	}
-
-	public void setImageLink(String imageLink) {
-		this.imageLink = imageLink;
-	}
-
-	public Long getProductId() {
-		return productId;
-	}
-
-	public void setProductId(Long productId) {
-		this.productId = productId;
-	}
-
-	public String getSourceProductId() {
-		return sourceProductId;
-	}
-
-	public void setSourceProductId(String sourceProductId) {
-		this.sourceProductId = sourceProductId;
 	}
 
 	public String getAction() {
@@ -309,7 +178,5 @@ public class UserActivityLog extends Entity{
 	public void setParentActivityLog(UserActivityLog parentActivityLog) {
 		this.parentActivityLog = parentActivityLog;
 	}	
-	
-	
 		
 }
