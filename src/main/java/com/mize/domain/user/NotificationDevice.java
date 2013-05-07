@@ -15,13 +15,30 @@ public class NotificationDevice extends Entity {
 	private String alert;
 	private String sound;
 	private String badge;
-	private String OS;
+	private String deviceOS;
 	private Long userId;
 	List<DeviceUser> deviceUsers = new ArrayList<DeviceUser>();
 	
 	public enum Status{
 		enabled,disabled;
 	}
+	
+	public enum DeviceType{
+		IOS("ios"),ANDRIOD("andriod"),BLACKBERRY("blackberry"),WINDOWS("windows");
+		private String type;
+		private DeviceType(String type) {
+			this.type = type;
+		}
+	}
+	public static final DeviceType getDeviceType(String deviceType) {
+		for (DeviceType s : DeviceType.values() ){
+			if (s.type.equalsIgnoreCase(deviceType)){
+				return s;
+			}
+		}
+		return null;
+	}
+	
 	public static Status getStatus(String s){
 		for(Status status : Status.values()){
 			if(status.toString().equalsIgnoreCase(s)){
@@ -88,11 +105,12 @@ public class NotificationDevice extends Entity {
 	public void setDeviceUsers(List<DeviceUser> deviceUsers) {
 		this.deviceUsers = deviceUsers;
 	}
-	public String getOS() {
-		return OS;
+	
+	public String getDeviceOS() {
+		return deviceOS;
 	}
-	public void setOS(String oS) {
-		OS = oS;
+	public void setDeviceOS(String deviceOS) {
+		this.deviceOS = deviceOS;
 	}
 	public Long getUserId() {
 		return userId;
