@@ -1,0 +1,170 @@
+package com.mize.domain.servicelocator;
+
+import com.mize.domain.common.Entity;
+
+public class BusinessEntityAddress  extends Entity {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 625412111910612584L;
+	
+	private long id;
+	private long beId;
+	private String code;
+	private long localeId;
+	private String name;
+	private String address1;
+	private String address2;
+	private String address3;
+	private String zip;
+	private String zipExt;
+	private String city;
+	private String county;
+	private long stateId;
+	private long countryId;
+	private String phone1;
+	private String phone2;
+	private String email;
+	private String fax;
+	private String landMark;
+	private String url;
+	private String toolTipLogo;
+	private String icon;
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	public long getBeId() {
+		return beId;
+	}
+	public void setBeId(long beId) {
+		this.beId = beId;
+	}
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+	public long getLocaleId() {
+		return localeId;
+	}
+	public void setLocaleId(long localeId) {
+		this.localeId = localeId;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getAddress1() {
+		return address1;
+	}
+	public void setAddress1(String address1) {
+		this.address1 = address1;
+	}
+	public String getAddress2() {
+		return address2;
+	}
+	public void setAddress2(String address2) {
+		this.address2 = address2;
+	}
+	public String getAddress3() {
+		return address3;
+	}
+	public void setAddress3(String address3) {
+		this.address3 = address3;
+	}
+	public String getZip() {
+		return zip;
+	}
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
+	public String getZipExt() {
+		return zipExt;
+	}
+	public void setZipExt(String zipExt) {
+		this.zipExt = zipExt;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public String getCounty() {
+		return county;
+	}
+	public void setCounty(String county) {
+		this.county = county;
+	}
+	public long getStateId() {
+		return stateId;
+	}
+	public void setStateId(long stateId) {
+		this.stateId = stateId;
+	}
+	public long getCountryId() {
+		return countryId;
+	}
+	public void setCountryId(long countryId) {
+		this.countryId = countryId;
+	}
+	public String getPhone1() {
+		return phone1;
+	}
+	public void setPhone1(String phone1) {
+		this.phone1 = phone1;
+	}
+	public String getPhone2() {
+		return phone2;
+	}
+	public void setPhone2(String phone2) {
+		this.phone2 = phone2;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getFax() {
+		return fax;
+	}
+	public void setFax(String fax) {
+		this.fax = fax;
+	}
+	public String getLandMark() {
+		return landMark;
+	}
+	public void setLandMark(String landMark) {
+		this.landMark = landMark;
+	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	public String getToolTipLogo() {
+		return toolTipLogo;
+	}
+	public void setToolTipLogo(String toolTipLogo) {
+		this.toolTipLogo = toolTipLogo;
+	}
+	public String getIcon() {
+		return icon;
+	}
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+}
