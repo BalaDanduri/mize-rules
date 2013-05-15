@@ -9,6 +9,8 @@ public class Faq extends Entity{
 	private Long seqNo;
 	private String question;
 	private String answer;
+	private int pageIndex;
+	private Integer count;
 	
 	public String getBrandName() {
 		return brandName;
@@ -40,5 +42,19 @@ public class Faq extends Entity{
 	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
-
+	public int getPageIndex() {
+		return pageIndex;
+	}
+	public void setPageIndex(int pageIndex) {
+		this.pageIndex = pageIndex;
+	}
+	
+	public Integer getCount() {
+		return count;
+	}
+	public void setCount(Integer count) {
+		this.count = count;
+	}
+	
+	
 }
