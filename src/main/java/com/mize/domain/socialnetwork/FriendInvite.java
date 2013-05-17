@@ -12,7 +12,7 @@ public class FriendInvite {
 	private String searchString;
 	private User user;
 	private List<String> inviteUserList = new ArrayList<String>();
-	private List<String> friendInviteUserList = new ArrayList<String>();
+	private List<Long> friendInviteUserList = new ArrayList<Long>();
 	private String subject;
 	private String inviteMessage;
 	private String twitterInviteMessage;
@@ -75,10 +75,10 @@ public class FriendInvite {
 	public void setInviteUserList(List<String> inviteUserList) {
 		this.inviteUserList = inviteUserList;
 	}
-	public List<String> getFriendInviteUserList() {
+	public List<Long> getFriendInviteUserList() {
 		return friendInviteUserList;
 	}
-	public void setFriendInviteUserList(List<String> friendInviteUserList) {
+	public void setFriendInviteUserList(List<Long> friendInviteUserList) {
 		this.friendInviteUserList = friendInviteUserList;
 	}
 
