@@ -2,7 +2,7 @@ package com.mize.domain.servicelocator;
 
 import com.mize.domain.common.Entity;
 
-public class BusinessEntityAddress  extends Entity {
+public class BusinessEntityAddress  extends Entity  implements Comparable<BusinessEntityAddress>{
 
 	/**
 	 * 
@@ -165,6 +165,10 @@ public class BusinessEntityAddress  extends Entity {
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	@Override
+	public int compareTo(BusinessEntityAddress o) {
+		return(int)( this.getId() - o.getId());
 	}
 
 }

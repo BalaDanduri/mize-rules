@@ -1,9 +1,15 @@
 package com.mize.domain.servicelocator;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonProperty;
+
 import com.mize.domain.common.Entity;
 
-public class BusinessEntity  extends Entity{
+public class BusinessEntity  extends Entity {
 	/**
 	 * 
 	 */
@@ -14,6 +20,9 @@ public class BusinessEntity  extends Entity{
 	private String subTypeCode;
 	private String name;
 	private String logo;
+	@JsonProperty
+	private List<BusinessEntityAddress> businessEntityAddressList;
+	
 	public long getId() {
 		return id;
 	}
@@ -49,6 +58,37 @@ public class BusinessEntity  extends Entity{
 	}
 	public void setLogo(String logo) {
 		this.logo = logo;
+	}
+	
+	@JsonIgnore
+	public boolean addAddress(BusinessEntityAddress businessEntityAddress) {
+		if(businessEntityAddressList==null) {
+			businessEntityAddressList = new ArrayList<BusinessEntityAddress>();
+		}
+		if(businessEntityAddressList.contains(businessEntityAddress)) {
+			businessEntityAddressList.set(businessEntityAddressList.lastIndexOf(businessEntityAddress), businessEntityAddress);
+		}
+		businessEntityAddressList.add(businessEntityAddress);
+		return true;
+	}
+	
+	@JsonIgnore
+	public int getAddressCount() {
+		return businessEntityAddressList==null?0:businessEntityAddressList.size();
+	}
+	
+	@JsonIgnore
+	public BusinessEntityAddress getAddressAt(int index) {
+		return (businessEntityAddressList!=null&& businessEntityAddressList.size()<index)? businessEntityAddressList.get(0) : null;
+	}
+	
+	@JsonIgnore
+	public boolean updateAddressAt(int index,BusinessEntityAddress businessEntityAddress) {
+		if(businessEntityAddressList!=null&& businessEntityAddressList.size()<index) {
+			businessEntityAddressList.set(index, businessEntityAddress);
+			return true;
+		}
+		return false;
 	}
 	
 }
