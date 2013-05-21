@@ -65,7 +65,7 @@ public class BusinessEntity  extends Entity {
 		if(businessEntityAddressList==null) {
 			businessEntityAddressList = new ArrayList<BusinessEntityAddress>();
 		}
-		if(businessEntityAddressList.contains(businessEntityAddress)) {
+		if(businessEntityAddressList.contains(businessEntityAddress) && businessEntityAddress.getId()>0 ) {
 			businessEntityAddressList.set(businessEntityAddressList.lastIndexOf(businessEntityAddress), businessEntityAddress);
 		}
 		businessEntityAddressList.add(businessEntityAddress);
