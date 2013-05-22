@@ -79,12 +79,12 @@ public class BusinessEntity  extends Entity {
 	
 	@JsonIgnore
 	public BusinessEntityAddress getAddressAt(int index) {
-		return (businessEntityAddressList!=null&& businessEntityAddressList.size()<index)? businessEntityAddressList.get(0) : null;
+		return (businessEntityAddressList!=null&& businessEntityAddressList.size()>index)? businessEntityAddressList.get(index) : null;
 	}
 	
 	@JsonIgnore
 	public boolean updateAddressAt(int index,BusinessEntityAddress businessEntityAddress) {
-		if(businessEntityAddressList!=null&& businessEntityAddressList.size()<index) {
+		if(businessEntityAddressList!=null&& businessEntityAddressList.size()>index) {
 			businessEntityAddressList.set(index, businessEntityAddress);
 			return true;
 		}
