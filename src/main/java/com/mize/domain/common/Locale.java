@@ -1,4 +1,4 @@
-package com.mize.domain.util;
+package com.mize.domain.common;
 
 import com.mize.domain.common.Entity;
 
