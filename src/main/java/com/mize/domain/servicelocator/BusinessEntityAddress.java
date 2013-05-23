@@ -4,7 +4,10 @@ import java.util.ArrayList;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
+import com.mize.domain.common.Country;
 import com.mize.domain.common.Entity;
+import com.mize.domain.common.State;
+import com.mize.domain.prod.Locale;
 
 public class BusinessEntityAddress  extends Entity  implements Comparable<BusinessEntityAddress>{
 
@@ -16,7 +19,7 @@ public class BusinessEntityAddress  extends Entity  implements Comparable<Busine
 	private long id;
 	private long beId;
 	private String code;
-	private long localeId;
+	private Locale locale;
 	private String name;
 	private String address1;
 	private String address2;
@@ -25,8 +28,8 @@ public class BusinessEntityAddress  extends Entity  implements Comparable<Busine
 	private String zipExt;
 	private String city;
 	private String county;
-	private long stateId;
-	private long countryId;
+	private State state;
+	private Country country;
 	private String phone1;
 	private String phone2;
 	private String email;
@@ -54,11 +57,12 @@ public class BusinessEntityAddress  extends Entity  implements Comparable<Busine
 	public void setCode(String code) {
 		this.code = code;
 	}
-	public long getLocaleId() {
-		return localeId;
+	
+	public Locale getLocale() {
+		return locale;
 	}
-	public void setLocaleId(long localeId) {
-		this.localeId = localeId;
+	public void setLocale(Locale locale) {
+		this.locale = locale;
 	}
 	public String getName() {
 		return name;
@@ -108,17 +112,18 @@ public class BusinessEntityAddress  extends Entity  implements Comparable<Busine
 	public void setCounty(String county) {
 		this.county = county;
 	}
-	public long getStateId() {
-		return stateId;
+	
+	public State getState() {
+		return state;
 	}
-	public void setStateId(long stateId) {
-		this.stateId = stateId;
+	public void setState(State state) {
+		this.state = state;
 	}
-	public long getCountryId() {
-		return countryId;
+	public Country getCountry() {
+		return country;
 	}
-	public void setCountryId(long countryId) {
-		this.countryId = countryId;
+	public void setCountry(Country country) {
+		this.country = country;
 	}
 	public String getPhone1() {
 		return phone1;
