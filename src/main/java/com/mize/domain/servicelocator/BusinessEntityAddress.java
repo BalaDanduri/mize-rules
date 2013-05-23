@@ -6,8 +6,8 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 
 import com.mize.domain.common.Country;
 import com.mize.domain.common.Entity;
+import com.mize.domain.common.Locale;
 import com.mize.domain.common.State;
-import com.mize.domain.util.Locale;
 
 public class BusinessEntityAddress  extends Entity  implements Comparable<BusinessEntityAddress>{
 
