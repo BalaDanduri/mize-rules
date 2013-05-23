@@ -1,6 +1,13 @@
 package com.mize.domain.servicelocator;
 
+import java.util.ArrayList;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
+
+import com.mize.domain.common.Country;
 import com.mize.domain.common.Entity;
+import com.mize.domain.common.State;
+import com.mize.domain.prod.Locale;
 
 public class BusinessEntityAddress  extends Entity  implements Comparable<BusinessEntityAddress>{
 
@@ -12,7 +19,7 @@ public class BusinessEntityAddress  extends Entity  implements Comparable<Busine
 	private long id;
 	private long beId;
 	private String code;
-	private long localeId;
+	private Locale locale;
 	private String name;
 	private String address1;
 	private String address2;
@@ -21,8 +28,8 @@ public class BusinessEntityAddress  extends Entity  implements Comparable<Busine
 	private String zipExt;
 	private String city;
 	private String county;
-	private long stateId;
-	private long countryId;
+	private State state;
+	private Country country;
 	private String phone1;
 	private String phone2;
 	private String email;
@@ -31,6 +38,7 @@ public class BusinessEntityAddress  extends Entity  implements Comparable<Busine
 	private String url;
 	private String toolTipLogo;
 	private String icon;
+	private ArrayList<BusinessEntityGeo> geoLocationList;
 	public long getId() {
 		return id;
 	}
@@ -49,11 +57,12 @@ public class BusinessEntityAddress  extends Entity  implements Comparable<Busine
 	public void setCode(String code) {
 		this.code = code;
 	}
-	public long getLocaleId() {
-		return localeId;
+	
+	public Locale getLocale() {
+		return locale;
 	}
-	public void setLocaleId(long localeId) {
-		this.localeId = localeId;
+	public void setLocale(Locale locale) {
+		this.locale = locale;
 	}
 	public String getName() {
 		return name;
@@ -103,17 +112,18 @@ public class BusinessEntityAddress  extends Entity  implements Comparable<Busine
 	public void setCounty(String county) {
 		this.county = county;
 	}
-	public long getStateId() {
-		return stateId;
+	
+	public State getState() {
+		return state;
 	}
-	public void setStateId(long stateId) {
-		this.stateId = stateId;
+	public void setState(State state) {
+		this.state = state;
 	}
-	public long getCountryId() {
-		return countryId;
+	public Country getCountry() {
+		return country;
 	}
-	public void setCountryId(long countryId) {
-		this.countryId = countryId;
+	public void setCountry(Country country) {
+		this.country = country;
 	}
 	public String getPhone1() {
 		return phone1;
@@ -170,5 +180,32 @@ public class BusinessEntityAddress  extends Entity  implements Comparable<Busine
 	public int compareTo(BusinessEntityAddress o) {
 		return(int)( this.getId() - o.getId());
 	}
-
+	
+	@JsonIgnore
+	public boolean addGeoLocation(BusinessEntityGeo businessEntityGeo) {
+		if(geoLocationList==null) {
+			geoLocationList = new ArrayList<BusinessEntityGeo>();
+		}
+		geoLocationList.add(businessEntityGeo);
+		return true;
+	}
+	
+	@JsonIgnore
+	public int getGeoLocationCount() {
+		return geoLocationList==null?0:geoLocationList.size();
+	}
+	
+	@JsonIgnore
+	public BusinessEntityGeo getAddressAt(int index) {
+		return (geoLocationList!=null&& geoLocationList.size()>index)? geoLocationList.get(index) : null;
+	}
+	
+	@JsonIgnore
+	public boolean updateGeoLocationAt(int index,BusinessEntityGeo businessEntityGeo) {
+		if(geoLocationList!=null&& geoLocationList.size()>index) {
+			geoLocationList.set(index, businessEntityGeo);
+			return true;
+		}
+		return false;
+	}
 }
