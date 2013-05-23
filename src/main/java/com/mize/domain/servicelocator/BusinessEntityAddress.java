@@ -1,5 +1,9 @@
 package com.mize.domain.servicelocator;
 
+import java.util.ArrayList;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import com.mize.domain.common.Entity;
 
 public class BusinessEntityAddress  extends Entity  implements Comparable<BusinessEntityAddress>{
@@ -31,6 +35,7 @@ public class BusinessEntityAddress  extends Entity  implements Comparable<Busine
 	private String url;
 	private String toolTipLogo;
 	private String icon;
+	private ArrayList<BusinessEntityGeo> geoLocationList;
 	public long getId() {
 		return id;
 	}
@@ -170,5 +175,32 @@ public class BusinessEntityAddress  extends Entity  implements Comparable<Busine
 	public int compareTo(BusinessEntityAddress o) {
 		return(int)( this.getId() - o.getId());
 	}
-
+	
+	@JsonIgnore
+	public boolean addGeoLocation(BusinessEntityGeo businessEntityGeo) {
+		if(geoLocationList==null) {
+			geoLocationList = new ArrayList<BusinessEntityGeo>();
+		}
+		geoLocationList.add(businessEntityGeo);
+		return true;
+	}
+	
+	@JsonIgnore
+	public int getGeoLocationCount() {
+		return geoLocationList==null?0:geoLocationList.size();
+	}
+	
+	@JsonIgnore
+	public BusinessEntityGeo getAddressAt(int index) {
+		return (geoLocationList!=null&& geoLocationList.size()>index)? geoLocationList.get(index) : null;
+	}
+	
+	@JsonIgnore
+	public boolean updateGeoLocationAt(int index,BusinessEntityGeo businessEntityGeo) {
+		if(geoLocationList!=null&& geoLocationList.size()>index) {
+			geoLocationList.set(index, businessEntityGeo);
+			return true;
+		}
+		return false;
+	}
 }
