@@ -10,19 +10,19 @@ import org.codehaus.jackson.map.DeserializationContext;
 import org.springframework.stereotype.Component;
 
 @Component
-public class NumberValueDeserializer extends org.codehaus.jackson.map.JsonDeserializer<Number> {	
+public class DecimalValueDeserializer extends org.codehaus.jackson.map.JsonDeserializer<Double> {	
 	@Override
-	public Number deserialize(JsonParser parser, DeserializationContext context)throws IOException, JsonProcessingException {
+	public Double deserialize(JsonParser parser, DeserializationContext context)throws IOException, JsonProcessingException {
 		NumberFormat formatter = NumberFormat.getNumberInstance(Locale.getDefault());
 		formatter.setMaximumFractionDigits(2);
 		formatter.setMinimumFractionDigits(2);
-		Number number = null;
+		Double double1 = null;
 		try {
-			number = formatter.parse(parser.getText());
+			Number number = formatter.parse(parser.getText());
+			number.doubleValue();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return number;
-	}
-	
+		return double1;
+	}	
 }

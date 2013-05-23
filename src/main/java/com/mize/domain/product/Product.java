@@ -11,7 +11,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 import com.mize.domain.brand.Brand;
 import com.mize.domain.common.Entity;
 import com.mize.domain.util.Formatter;
-import com.mize.domain.util.NumberValueDeserializer;
+import com.mize.domain.util.DecimalValueDeserializer;
 import com.mize.domain.util.NumberValueSerializer;
 
 public class Product  extends Entity{
@@ -93,7 +93,7 @@ public class Product  extends Entity{
 		return price;
 	}
 
-	@JsonDeserialize(using=NumberValueDeserializer.class)	
+	@JsonDeserialize(using=DecimalValueDeserializer.class)	
 	public void setPrice(Double price) {
 		this.price = price;
 	}
