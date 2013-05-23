@@ -1,4 +1,4 @@
-package com.mize.domain.prod;
+package com.mize.domain.etilize;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.mize.domain.common.Entity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
@@ -24,8 +25,6 @@ public class Product extends Entity{
 	
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	protected DateTime modifiedDate;
-	
-	private ProductToSource productToSource;
 	private ProductAccessories accessories;
 	private ProductAttribute attribute;
 	private ProductDescription prdDescription;

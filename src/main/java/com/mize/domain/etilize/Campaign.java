@@ -1,6 +1,8 @@
-package com.mize.domain.prod;
+package com.mize.domain.etilize;
 
 import org.joda.time.DateTime;
+
+import com.mize.domain.common.Entity;
 
 public class Campaign extends Entity{
 

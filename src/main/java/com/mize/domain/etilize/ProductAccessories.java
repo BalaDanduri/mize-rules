@@ -1,4 +1,6 @@
-package com.mize.domain.prod;
+package com.mize.domain.etilize;
+
+import com.mize.domain.common.Entity;
 
 
 public class ProductAccessories extends Entity{

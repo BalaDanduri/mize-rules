@@ -1,14 +1,16 @@
-package com.mize.domain.prod;
+package com.mize.domain.util;
 
+import com.mize.domain.common.Entity;
 
 public class Locale extends Entity{
-
-	private static final long serialVersionUID = -1231526446685342722L;
+	
+	private static final long serialVersionUID = -3914800360286751871L;
 	private Long id;
-	private String isActive;
-	private String languageCode;
-	private String countryCode;
-	private String name;
+    private String isActive;
+    private String languageCode;
+    private String countryCode;
+    private String name;
+    
 	public Long getId() {
 		return id;
 	}
@@ -39,5 +41,5 @@ public class Locale extends Entity{
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 }

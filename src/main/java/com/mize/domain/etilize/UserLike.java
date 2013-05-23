@@ -1,4 +1,4 @@
-package com.mize.domain.prod;
+package com.mize.domain.etilize;
 
 import com.mize.domain.auth.User;
 import com.mize.domain.common.Entity;
