@@ -5,11 +5,13 @@ import java.util.List;
 import java.util.Set;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import com.mize.domain.brand.Brand;
 import com.mize.domain.common.Entity;
 import com.mize.domain.util.Formatter;
+import com.mize.domain.util.DecimalValueDeserializer;
 import com.mize.domain.util.NumberValueSerializer;
 
 public class Product  extends Entity{
@@ -18,7 +20,6 @@ public class Product  extends Entity{
 	protected Long id;
 	protected String name;
 	protected Brand brand = new Brand();
-	@JsonSerialize(using=NumberValueSerializer.class)
 	protected Double price;
 	protected Set<ProductCategory> category = new HashSet<ProductCategory>();
 	private String shortDescription;
@@ -87,12 +88,12 @@ public class Product  extends Entity{
 		this.brand = brand;
 	}
 
-
+	@JsonSerialize(using=NumberValueSerializer.class)
 	public Double getPrice() {
 		return price;
 	}
 
-
+	@JsonDeserialize(using=DecimalValueDeserializer.class)	
 	public void setPrice(Double price) {
 		this.price = price;
 	}
