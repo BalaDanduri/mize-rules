@@ -19,7 +19,7 @@ public class DecimalValueDeserializer extends org.codehaus.jackson.map.JsonDeser
 		Double double1 = null;
 		try {
 			Number number = formatter.parse(parser.getText());
-			number.doubleValue();
+			double1 = number.doubleValue();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
