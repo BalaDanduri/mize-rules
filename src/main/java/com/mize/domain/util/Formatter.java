@@ -333,6 +333,10 @@ public class Formatter {
 		return (longValue(var1) == longValue(var2));
 	}
 	
+	public static boolean equal(Long var1,Integer var2){
+		return (longValue(var1) == intValue(var2));
+	}
+	
 	public static boolean equal(Integer var1,Integer var2){
 		return (intValue(var1) == intValue(var2));
 	}
