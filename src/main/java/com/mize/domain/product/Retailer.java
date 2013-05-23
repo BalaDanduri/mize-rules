@@ -1,8 +1,10 @@
 package com.mize.domain.product;
 
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 import com.mize.domain.common.Entity;
+import com.mize.domain.util.DecimalValueDeserializer;
 import com.mize.domain.util.NumberValueSerializer;
 
 public class Retailer extends Entity{
@@ -11,7 +13,6 @@ private static final long serialVersionUID = -7613756473871400062L;
 	
 	private String sourceName;
 	private Long sourceId;
-	@JsonSerialize(using=NumberValueSerializer.class)
 	private Double price;	
 	private String productLink;
 	private String reviewLink;
@@ -27,9 +28,13 @@ private static final long serialVersionUID = -7613756473871400062L;
 	public void setSourceId(Long sourceId) {
 		this.sourceId = sourceId;
 	}
+	
+	@JsonSerialize(using=NumberValueSerializer.class)
 	public Double getPrice() {
 		return price;
 	}
+	
+	@JsonDeserialize(using=DecimalValueDeserializer.class)
 	public void setPrice(Double price) {
 		this.price = price;
 	}
