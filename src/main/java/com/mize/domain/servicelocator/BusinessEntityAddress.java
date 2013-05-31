@@ -1,5 +1,9 @@
 package com.mize.domain.servicelocator;
 
+import java.util.Comparator;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import com.mize.domain.common.Country;
 import com.mize.domain.common.Entity;
 import com.mize.domain.common.Locale;
@@ -182,4 +186,18 @@ public class BusinessEntityAddress  extends Entity  implements Comparable<Busine
 	public void setGeoLocation(BusinessEntityGeo geoLocation) {
 		this.geoLocation = geoLocation;
 	}
+	
+	@JsonIgnore
+	public static Comparator<BusinessEntityAddress> BusinessEntityAddressDurationComparator = new  Comparator<BusinessEntityAddress>() {
+		public int compare(BusinessEntityAddress beAddress1, BusinessEntityAddress beAddress2) {
+		    return BusinessEntityGeo.BusinessEntityGeoDurationComparator.compare(beAddress1.getGeoLocation(),beAddress2.getGeoLocation());
+		}
+	};
+	
+	@JsonIgnore
+	public static Comparator<BusinessEntityAddress> BusinessEntityAddressDistanceComparator = new  Comparator<BusinessEntityAddress>() {
+		public int compare(BusinessEntityAddress beAddress1, BusinessEntityAddress beAddress2) {
+		    return beAddress1.getGeoLocation().compareTo(beAddress2.getGeoLocation());
+		}
+	};
 }
