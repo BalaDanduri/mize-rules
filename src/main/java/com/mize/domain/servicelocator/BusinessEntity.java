@@ -23,6 +23,13 @@ public class BusinessEntity  extends Entity {
 	@JsonProperty
 	private List<BusinessEntityAddress> businessEntityAddressList;
 	
+	public List<BusinessEntityAddress> getBusinessEntityAddressList() {
+		return businessEntityAddressList;
+	}
+	public void setBusinessEntityAddressList(
+			List<BusinessEntityAddress> businessEntityAddressList) {
+		this.businessEntityAddressList = businessEntityAddressList;
+	}
 	public long getId() {
 		return id;
 	}
