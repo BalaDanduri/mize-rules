@@ -8,7 +8,7 @@ public class GetConnectionsRequest {
 	private String provider;
 	private String searchString;
 	private int status;
-	private int index;
+	private int pageIndex;
 	public User getUser() {
 		return user;
 	}
@@ -33,17 +33,17 @@ public class GetConnectionsRequest {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	public int getIndex() {
-		return index;
+	public int getPageIndex() {
+		return pageIndex;
 	}
-	public void setIndex(int index) {
-		this.index = index;
+	public void setPageIndex(int index) {
+		this.pageIndex = index;
 	}
 	
 	@Override
 	public String toString() {
 		return "GetConnectionsRequest [user=" + user + ", provider=" + provider + ", searchString=" + searchString
-				+ ", status=" + status + ", index=" + index + "]";
+				+ ", status=" + status + ", index=" + pageIndex + "]";
 	}
 	
 	
