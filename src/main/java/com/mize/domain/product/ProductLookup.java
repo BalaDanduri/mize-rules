@@ -17,7 +17,7 @@ public class ProductLookup extends Entity{
 	public static final String LOOKUP_UPC = "UPC";
 	public static final String LOOKUP_SKU = "SKU";
 	public static final String LOOKUP_ISBN = "ISBN";
-	public static final String LOOKUP_EAN = "EAN";
+	public static final String LOOKUP_EAN = "EAN"; 
 	
 	protected Long sourceId;
 	protected String lookupKey;
@@ -28,6 +28,7 @@ public class ProductLookup extends Entity{
 	private boolean similarProdsReqd = true;
 	private boolean accessoriesProdsReqd = true;
 	private Integer pageIndex;
+	protected String sourceProductId;
 	
 	public enum Source{
 		AMAZON(2),ETILIZE(3);	
@@ -135,13 +136,21 @@ public class ProductLookup extends Entity{
 	}
 
 
-
 	public Integer getPageIndex() {
 		return pageIndex;
 	}
 
 	public void setPageIndex(Integer pageIndex) {
 		this.pageIndex = pageIndex;
+	}
+
+	public String getSourceProductId() {
+		return sourceProductId;
+	}
+
+
+	public void setSourceProductId(String sourceProductId) {
+		this.sourceProductId = sourceProductId;
 	}
 
 }
