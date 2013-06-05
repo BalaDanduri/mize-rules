@@ -11,7 +11,22 @@ public class Faq extends Entity{
 	private String answer;
 	private int pageIndex;
 	private Integer count;
+	private String videoName;
+	private String videoLink;
+
 	
+	public String getVideoName() {
+		return videoName;
+	}
+	public void setVideoName(String videoName) {
+		this.videoName = videoName;
+	}
+	public String getVideoLink() {
+		return videoLink;
+	}
+	public void setVideoLink(String videoLink) {
+		this.videoLink = videoLink;
+	}
 	public String getBrandName() {
 		return brandName;
 	}
@@ -54,6 +69,12 @@ public class Faq extends Entity{
 	}
 	public void setCount(Integer count) {
 		this.count = count;
+	}
+	@Override
+	public String toString() {
+		return "Faq [brandName=" + brandName + ", productName=" + productName + ", seqNo=" + seqNo + ", question="
+				+ question + ", answer=" + answer + ", pageIndex=" + pageIndex + ", count=" + count + ", videoName="
+				+ videoName + ", videoLink=" + videoLink + "]";
 	}
 	
 	
