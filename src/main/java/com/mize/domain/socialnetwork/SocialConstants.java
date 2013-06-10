@@ -7,6 +7,8 @@ public class SocialConstants {
     public static final String TWIT_AUTH_EXCEPTION = "401:";
     public static final String TWIT_FORBIDDEN = "403:";
     
+    public static final String TWIT_NO_CONNECTIONS="";
+    
     
     public static final String ERROR_INVALID_TOKEN = "ACCESS_TOKEN_INVALID";
     public static final String ERROR_DUPLICATE_MESSAGE = "DUPLICATE_MESSAGE";
