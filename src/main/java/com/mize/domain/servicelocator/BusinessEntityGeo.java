@@ -61,7 +61,8 @@ public class BusinessEntityGeo extends Entity implements Comparable<BusinessEnti
 	public void setDurationText(String durationText) {
 		this.durationText = durationText;
 	}
-	@JsonDeserialize(using=DecimalValueDeserializer.class)	
+	@JsonDeserialize(using=DecimalValueDeserializer.class)
+	@JsonIgnore
 	public Double getDistanceInMiles() {
 		return (this.distance/1000) * 0.621371;
 	}

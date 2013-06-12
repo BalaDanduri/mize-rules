@@ -35,6 +35,17 @@ public class UserProduct extends Entity{
 		return null;
 	}
 	
+	public enum Status{
+		Success("PRD_WOWN_001"),Failure("PRD_WOWN_002"),Already_Tagged("PRD_ALREADY_TAGGED_001");
+		String val;
+		Status(String v){
+			val = v;
+		}
+		public String getValue(){
+			return val;
+		}
+	}
+	
 	public Long getId() {
 		return id;
 	}
