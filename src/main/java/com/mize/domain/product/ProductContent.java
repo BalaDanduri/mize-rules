@@ -13,6 +13,7 @@ public class ProductContent extends Entity{
 	private String description;
 	private String url;
 	private Integer pageIndex;
+	private Integer count;
 	
 	public enum ContentType{
 		faq,video,manuals; 
@@ -78,12 +79,19 @@ public class ProductContent extends Entity{
 		this.pageIndex = pageIndex;
 	}
 
+	public Integer getCount() {
+		return count;
+	}
+
+	public void setCount(Integer count) {
+		this.count = count;
+	}
+
 	@Override
 	public String toString() {
 		return "ProductContent [brandName=" + brandName + ", productName=" + productName + ", contentType=" + contentType + ", seqNo=" + seqNo + ", title="
-				+ title + ", description=" + description + ", url=" + url + ", pageIndex=" + pageIndex + ", createdBy=" + createdBy + ", createdDate="
-				+ createdDate + ", updatedBy=" + updatedBy + ", updatedDate=" + updatedDate + "]";
+				+ title + ", description=" + description + ", url=" + url + ", pageIndex=" + pageIndex + ", count=" + count + ", createdBy=" + createdBy
+				+ ", createdDate=" + createdDate + ", updatedBy=" + updatedBy + ", updatedDate=" + updatedDate + "]";
 	}
-
 	
 }
