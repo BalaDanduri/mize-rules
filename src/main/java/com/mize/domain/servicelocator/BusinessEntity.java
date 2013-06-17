@@ -23,6 +23,10 @@ public class BusinessEntity  extends Entity {
 	@JsonProperty
 	private List<BusinessEntityAddress> businessEntityAddressList;
 	
+	long entityId;
+	String entityName;
+	
+	
 	public List<BusinessEntityAddress> getBusinessEntityAddressList() {
 		return businessEntityAddressList;
 	}
@@ -74,8 +78,9 @@ public class BusinessEntity  extends Entity {
 		}
 		if(businessEntityAddressList.contains(businessEntityAddress) && businessEntityAddress.getId()>0 ) {
 			businessEntityAddressList.set(businessEntityAddressList.lastIndexOf(businessEntityAddress), businessEntityAddress);
+		} else {
+			businessEntityAddressList.add(businessEntityAddress);
 		}
-		businessEntityAddressList.add(businessEntityAddress);
 		return true;
 	}
 	
@@ -97,5 +102,16 @@ public class BusinessEntity  extends Entity {
 		}
 		return false;
 	}
-	
+	public long getEntityId() {
+		return entityId;
+	}
+	public void setEntityId(long entityId) {
+		this.entityId = entityId;
+	}
+	public String getEntityName() {
+		return entityName;
+	}
+	public void setEntityName(String entityName) {
+		this.entityName = entityName;
+	}
 }
