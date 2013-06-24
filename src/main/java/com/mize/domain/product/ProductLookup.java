@@ -29,6 +29,7 @@ public class ProductLookup extends Entity{
 	private boolean accessoriesProdsReqd = true;
 	private Integer pageIndex;
 	protected String sourceProductId;
+	private boolean isValidate;
 	
 	public enum Source{
 		AMAZON(2),ETILIZE(3);	
@@ -152,5 +153,15 @@ public class ProductLookup extends Entity{
 	public void setSourceProductId(String sourceProductId) {
 		this.sourceProductId = sourceProductId;
 	}
+
+	public boolean isValidate() {
+		return isValidate;
+	}
+
+	public void setValidate(boolean isValidate) {
+		this.isValidate = isValidate;
+	}
+	
+	
 
 }
