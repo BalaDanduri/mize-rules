@@ -15,13 +15,14 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.mize.domain.auth.User;
 import com.mize.domain.common.Entity;
 import com.mize.domain.common.Gender;
+import com.mize.domain.common.MizeEntity;
 import com.mize.domain.common.PostalAddress;
 import com.mize.domain.product.UserProduct;
 import com.mize.domain.util.JodaDateDeserializer;
 import com.mize.domain.util.JsonDateSerializer;
 
 @JsonAutoDetect
-public class UserProfile extends Entity {
+public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 
 	private static final long serialVersionUID = 1396029824729565589L;
 	private Long userId;
@@ -46,13 +47,13 @@ public class UserProfile extends Entity {
 	private String cityState;
 	
 	private List<User> friends = new ArrayList<User>();
-	private UserProfilePrivacy privacy;
 	private int mutualFriendCount;
 	private int pageIndex;
 	private int mizeUserCount;
 	private int wantCount;
 	private int ownCount;
 	private String timezone;
+	private UserProfilePrivacy privacy;	
 	private boolean isFriend;
 	private int prodFeedbackCount;
 	private long friendsCount;
@@ -97,6 +98,14 @@ public class UserProfile extends Entity {
 		this.birthdate = birthdate;
 		this.gender = gender;
 	}	
+
+	public Long getId() {
+		return userId;
+	}
+	public void setId(Long userId) {
+		this.userId = userId;
+	}
+
 	public Long getUserId() {
 		return userId;
 	}
@@ -342,5 +351,50 @@ public class UserProfile extends Entity {
 	public void setListNames(List<String> listNames) {
 		this.listNames = listNames;
 	}
+	
+		@Override
+	public String toString() {
+		return "UserProfile [userId=" + userId + ", photoLink=" + photoLink + ", profileName=" + profileName + ", phoneMobile=" +
+				phoneMobile + ", phoneHome=" + phoneHome + ", phoneWork=" + phoneWork + ", jobTitle=" + jobTitle + ", emailOptOut=" + 
+				emailOptOut + ", firstName=" + firstName + ", lastName=" + lastName + ", birthdate=" + birthdate + ", gender=" 
+				+ gender + ", cityState=" + cityState + ", timezone=" + timezone + ", privacy=" + privacy + ", photoURLMap=" + photoURLMap + ", id=" + id
+				+ "]";
+	}
+
+	@Override
+	public int hashCode() {
+		int result = super.hashCode();
+		result = PRIME * result + ((userId == null) ? 0 : userId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UserProfile other = (UserProfile) obj;		
+		if (userId == null) {
+			if (other.userId != null)
+				return false;
+		} else if (!userId.equals(other.userId))
+			return false;
+		return true;
+	}
+	
+	public int compareTo(UserProfile profile) {
+		if ( this == profile ) 
+			return EQUAL;
+		else if (this.id < profile.id) 
+			return BEFORE;
+		else if (profile.id == this.id) 
+			return EQUAL;
+		else if (this.id > profile.id)
+			return AFTER;
+		return EQUAL;		
+	}	
 	
 }

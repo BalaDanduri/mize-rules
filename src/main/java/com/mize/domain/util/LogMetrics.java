@@ -1,10 +1,9 @@
 package com.mize.domain.util;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
-import com.mize.domain.common.Entity;
-
-public class LogMetrics extends Entity{
+public class LogMetrics implements Serializable{
 	private static final long serialVersionUID = -4682972504716094968L;
 	private long startTime;
 	private LogMetrics(){

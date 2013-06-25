@@ -11,12 +11,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class DecimalValueDeserializer extends org.codehaus.jackson.map.JsonDeserializer<Double> {	
-	private static final NumberFormat formatter = NumberFormat.getNumberInstance(Locale.getDefault());
-	static  {	
+	@Override
+	public Double deserialize(JsonParser parser, DeserializationContext context)throws IOException, JsonProcessingException {
+		NumberFormat formatter = NumberFormat.getNumberInstance(Locale.getDefault());
 		formatter.setMaximumFractionDigits(2);
 		formatter.setMinimumFractionDigits(2);
-	}
-	public Double deserialize(JsonParser parser, DeserializationContext context)throws IOException, JsonProcessingException {
 		Double double1 = null;
 		try {
 			Number number = formatter.parse(parser.getText());
