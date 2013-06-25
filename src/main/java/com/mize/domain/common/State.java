@@ -1,37 +1,103 @@
 package com.mize.domain.common;
 
-public class State {
+public class State extends MizeEntity implements Comparable<State>{
 	
-	private int stateId;
-	private String stateName;
-	private String stateCode;
+	private static final long serialVersionUID = -1518811417788517045L;
+	private String name;
+	private String code;
 	
-	public State(){
-		
+
+	@Override
+	public Long getId() {
+		return id;
 	}
-	public State(int stateId, String stateName, String stateCode) {
-		super();
-		this.stateId = stateId;
-		this.stateName = stateName;
-		this.stateCode = stateCode;
+
+	@Override
+	public void setId(Long id) {
+		this.id = id;
+	}	
+
+	@Deprecated
+	public Long getStateId() {
+		return id;
 	}
-	public int getStateId() {
-		return stateId;
+
+	@Deprecated
+	public void setStateId(Long id) {
+		this.id = id;
+	}	
+
+	public String getName() {
+		return name;
 	}
-	public void setStateId(int stateId) {
-		this.stateId = stateId;
+	public void setName(String name) {
+		this.name = name;
 	}
+	
+	@Deprecated
 	public String getStateName() {
-		return stateName;
+		return name;
 	}
-	public void setStateName(String stateName) {
-		this.stateName = stateName;
+	
+	@Deprecated
+	public void setStateName(String name) {
+		this.name = name;
 	}
+
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}	
+	
+	@Deprecated
 	public String getStateCode() {
-		return stateCode;
+		return code;
 	}
-	public void setStateCode(String stareCode) {
-		this.stateCode = stareCode;
+	
+	@Deprecated
+	public void setStateCode(String code) {
+		this.code = code;
+	}
+	@Override
+	public int hashCode() {
+		int result = super.hashCode();
+		result = PRIME * result + ((code == null) ? 0 : code.hashCode());
+		return result;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		State other = (State) obj;
+		if (code == null) {
+			if (other.code != null)
+				return false;
+		} else if (!code.equals(other.code))
+			return false;
+		return true;
+	}
+	@Override
+	public String toString() {
+		return "State [name=" + name + ", code=" + code + ", id=" + id + "]";
+	}
+	
+	public int compareTo(State state) {
+		if ( this == state ) 
+			return EQUAL;
+		else if (this.id < state.id) 
+			return BEFORE;
+		else if (state.id == this.id) 
+			return EQUAL;
+		else if (this.id > state.id)
+			return AFTER;
+		return EQUAL;		
 	}
 	
 }

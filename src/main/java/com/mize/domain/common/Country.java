@@ -1,87 +1,118 @@
 package com.mize.domain.common;
 
-public class Country {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name = "country")
+public class Country extends MizeEntity implements Comparable<Country>{
+
+	private static final long serialVersionUID = 3412102873370612905L;
 	
-	private int countryId;
-	private String countryName;
-	private String countryCode;
+	private String code;
+	private String name;
 	
-	public Country(){
-		
-	}
-	
-	public Country(int countryId, String countryName, String countryCode) {
-		this.countryId = countryId;
-		this.countryName = countryName;
-		this.countryCode = countryCode;
+	@Id
+	@GenericGenerator(name="countryId" , strategy="increment")
+	@GeneratedValue(generator="countryId")
+	@Column(name="country_id",nullable=false)
+	public Long getId() {
+		return id;
 	}
 
-	public int getCountryId() {
-		return countryId;
+	
+	public void setId(Long id) {
+		this.id = id;
 	}
-	public void setCountryId(int countryId) {
-		this.countryId = countryId;
+
+	@Deprecated
+	public Long getCountryId() {
+		return id;
 	}
-	public String getCountryName() {
-		return countryName;
+
+	@Deprecated
+	public void setCountryId(Long id) {
+		this.id = id;
 	}
-	public void setCountryName(String countryName) {
-		this.countryName = countryName;
+	@Column(name="country_code",nullable=false)
+	public String getCode() {
+		return code;
 	}
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	@Deprecated
 	public String getCountryCode() {
-		return countryCode;
+		return code;
 	}
-	public void setCountryCode(String countryCode) {
-		this.countryCode = countryCode;
+	
+	@Deprecated
+	public void setCountryCode(String code) {
+		this.code = code;
+	}
+
+	@Column(name="country_name",nullable=false)
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	@Deprecated
+	public String getCountryName() {
+		return name;
+	}
+	
+	@Deprecated
+	public void setCountryName(String name) {
+		this.name = name;
 	}
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((countryCode == null) ? 0 : countryCode.hashCode());
-		result = prime * result + countryId;
-		result = prime * result
-				+ ((countryName == null) ? 0 : countryName.hashCode());
+		int result = super.hashCode();
+		result = PRIME * result + ((code == null) ? 0 : code.hashCode());
 		return result;
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		Country other = (Country) obj;
-		if (countryCode == null) {
-			if (other.countryCode != null)
+		if (code == null) {
+			if (other.code != null)
 				return false;
-		} else if (!countryCode.equals(other.countryCode))
-			return false;
-		if (countryId != other.countryId)
-			return false;
-		if (countryName == null) {
-			if (other.countryName != null)
-				return false;
-		} else if (!countryName.equals(other.countryName))
+		} else if (!code.equals(other.code))
 			return false;
 		return true;
 	}
-
+	
 	@Override
 	public String toString() {
-		return "Country [countryId=" + countryId + ", countryName="
-				+ countryName + ", countryCode=" + countryCode + "]";
+		return "Country [code=" + code + ", name=" + name + ", id=" + id + "]";
 	}
-
-	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		// TODO Auto-generated method stub
-		return super.clone();
-	}
-
 	
+	public int compareTo(Country country) {
+		if ( this == country ) 
+			return EQUAL;
+		else if (this.id < country.id) 
+			return BEFORE;
+		else if (country.id == this.id) 
+			return EQUAL;
+		else if (this.id > country.id)
+			return AFTER;
+		return EQUAL;		
+	}	
 }

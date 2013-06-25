@@ -1,28 +1,51 @@
 package com.mize.domain.appmessage;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
+import com.mize.domain.common.Locale;
+import com.mize.domain.common.MizeEntity;
 
-public class ApplicationMessage {
-	
-	private long id;
-	private MessageType messageType;
-	private String messageCode;
-	private String messageShortDesc;
-	private String messageLongDesc;
-	private int messageSeverity;
-		
-	public ApplicationMessage() {
+public class ApplicationMessage extends MizeEntity implements Comparable<ApplicationMessage> {
+
+	private static final long serialVersionUID = 6836153638967617947L;
+	private MessageType messageType = new MessageType();
+	private String code;
+	private String shortDesc;
+	private String longDesc;
+	private Integer severity;
+	private Locale locale = new Locale();
+
+	public enum Severity{
+		one(1),two(2),three(3),four(4),five(5);
+		int val;
+		Severity(int v){
+			val = v;
+		}
+		public int getValue(){
+			return val;
+		}
+	}
+	public enum MsgType{
+		Application(1),Error(2);
+		int val;
+		MsgType(int v){
+			val = v;
+		}
+		public int getValue(){
+			return val;
+		}
 	}
 	
-	public ApplicationMessage(long id, MessageType messageType, String messageCode,
-				String messageShortDesc, String messageLongDesc,
-				int messageSeverity) {
+	
+	public ApplicationMessage() {
+	}
+
+	@Override
+	public Long getId() {
+		return id;
+	}
+
+	@Override
+	public void setId(Long id) {
 		this.id = id;
-		this.messageType = messageType;
-		this.messageCode = messageCode;
-		this.messageShortDesc = messageShortDesc;
-		this.messageLongDesc = messageLongDesc;
-		this.messageSeverity = messageSeverity;
 	}
 
 	public MessageType getMessageType() {
@@ -33,95 +56,127 @@ public class ApplicationMessage {
 		this.messageType = messageType;
 	}
 	
+	public Locale getLocale() {
+		return locale;
+	}
+
+	public void setLocale(Locale locale) {
+		this.locale = locale;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getShortDesc() {
+		return shortDesc;
+	}
+
+	public void setShortDesc(String shortDesc) {
+		this.shortDesc = shortDesc;
+	}
+
+	public String getLongDesc() {
+		return longDesc;
+	}
+
+	public void setLongDesc(String longDesc) {
+		this.longDesc = longDesc;
+	}
+
+	public Integer getSeverity() {
+		return severity;
+	}
+
+	public void setSeverity(Integer severity) {
+		this.severity = severity;
+	}
+
+	@Deprecated
 	public String getMessageCode() {
-		return messageCode;
+		return code;
 	}
-	
+
+	@Deprecated
 	public void setMessageCode(String messageCode) {
-		this.messageCode = messageCode;
+		this.code = messageCode;
 	}
 	
+	@Deprecated
 	public String getMessageShortDesc() {
-		return messageShortDesc;
+		return shortDesc;
 	}
 	
+	@Deprecated
 	public void setMessageShortDesc(String messageShortDesc) {
-		this.messageShortDesc = messageShortDesc;
+		this.shortDesc = messageShortDesc;
 	}
 	
+	@Deprecated
 	public String getMessageLongDesc() {
-		return messageLongDesc;
+		return longDesc;
 	}
 	
+	@Deprecated
 	public void setMessageLongDesc(String messageLongDesc) {
-		this.messageLongDesc = messageLongDesc;
+		this.longDesc = messageLongDesc;
 	}
 	
+	@Deprecated
 	public int getMessageSeverity() {
-		return messageSeverity;
+		return severity;
 	}
 	
+	@Deprecated
 	public void setMessageSeverity(int messageSeverity) {
-		this.messageSeverity = messageSeverity;
+		this.severity = messageSeverity;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "ApplicationMessages [messageType=" + messageType
-				+ ", messageCode=" + messageCode + ", messageShortDesc="
-				+ messageShortDesc + ", messageLongDesc=" + messageLongDesc
-				+ ", messageSeverity=" + messageSeverity + "]";
-		}
-	
-		@Override
-		public int hashCode() {
-			final int prime = 31;
-			int result = 1;
-			result = prime * result
-					+ ((messageType == null) ? 0 : messageType.hashCode());
-			result = prime * result
-					+ ((messageCode == null) ? 0 : messageCode.hashCode());
-			result = prime
-					* result
-					+ ((messageShortDesc == null) ? 0 : messageShortDesc.hashCode());
-			result = prime * result
-					+ ((messageLongDesc == null) ? 0 : messageLongDesc.hashCode());
-			result = prime * result
-					+ (messageSeverity);
-			return result;
-		}
-	
-		@Override
-		public boolean equals(Object obj) {
-			if (this == obj)
-				return true;
-			if (obj == null)
-				return false;
-			if (getClass() != obj.getClass())
-				return false;
-			ApplicationMessage other = (ApplicationMessage) obj;
-			if (messageType == null) {
-				if (other.messageType != null)
-					return false;
-			} else if (!messageType.equals(other.messageType))
-				return false;
-			if (messageCode != other.messageCode)
-				return false;
-			if (messageShortDesc != other.messageShortDesc)
-				return false;
-			if (messageLongDesc != other.messageLongDesc)
-				return false;
-			if (messageSeverity != other.messageSeverity)
-				return false;
-			return true;
-		}
-	
-		@JsonIgnore
-		public Long getId() {
-			return id;
-		}
-		@JsonIgnore
-		public void setId(Long id) {
-			this.id = id;
-		}
+		return "ApplicationMessage [messageType=" + messageType + ", code=" + code + ", shortDesc=" + shortDesc +
+				", longDesc=" + longDesc + ", severity=" + severity + ", id=" + id + "]";
 	}
+
+	
+	@Override
+	public int hashCode() {
+		int result = super.hashCode();
+		result = PRIME * result + ((code == null) ? 0 : code.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ApplicationMessage other = (ApplicationMessage) obj;
+		if (code == null) {
+			if (other.code != null)
+				return false;
+		} else if (!code.equals(other.code))
+			return false;
+		return true;
+	}
+
+	public int compareTo(ApplicationMessage o) {
+		if ( this == o ) 
+			return EQUAL;
+		else if (this.id < o.id) 
+			return BEFORE;
+		else if (o.id == this.id) 
+			return EQUAL;
+		else if (this.id > o.id)
+			return AFTER;
+		return EQUAL;
+	}
+
+}

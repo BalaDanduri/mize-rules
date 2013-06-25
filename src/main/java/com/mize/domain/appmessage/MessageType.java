@@ -1,72 +1,94 @@
 package com.mize.domain.appmessage;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
+import com.mize.domain.common.MizeEntity;
 
-public class MessageType {
-	private int messageTypeId;
-	private String messageType;
+
+public class MessageType extends MizeEntity implements Comparable<MessageType>{
+	
+	private static final long serialVersionUID = 1023272589160106886L;
+	
+	private String type;
 
 	public MessageType() {
 
 	}
 
-	public MessageType(int messageTypeId, String messageType) {
-		this.messageTypeId = messageTypeId;
-		this.messageType = messageType;
-	}
-
-	@JsonIgnore
-	public int getMessageTypeId() {
-		return messageTypeId;
-	}
-
-	@JsonIgnore
-	public void setMessageTypeId(int messageTypeId) {
-		this.messageTypeId = messageTypeId;
-	}
-
-	public String getMessageType() {
-		return messageType;
-	}
-
-	public void setMessageType(String messageType) {
-		this.messageType = messageType;
+	@Override
+	public Long getId() {
+		return id;
 	}
 
 	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		return sb.append("messageTypeId = " + messageTypeId + ",")
-				.append("messageType = " + messageType + "} \n").toString();
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	@Deprecated
+	public Long getMessageTypeId() {
+		return id;
+	}
+
+	@Deprecated
+	public void setMessageTypeId(Long messageTypeId) {
+		this.id = messageTypeId;
+	}
+
+	public String getMessageType() {
+		return type;
+	}
+
+	public void setMessageType(String messageType) {
+		this.type = messageType;
+	}
+
+	
+	@Override
+	public int hashCode() {
+		int result = super.hashCode();
+		result = PRIME * result + ((type == null) ? 0 : type.hashCode());
+		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		MessageType other = (MessageType) obj;
-		if (messageTypeId != other.messageTypeId)
-			return false;
-		if (messageType == null) {
-			if (other.messageType != null)
+		if (type == null) {
+			if (other.type != null)
 				return false;
-		} else if (!messageType.equals(other.messageType))
+		} else if (!type.equals(other.type))
 			return false;
 		return true;
 
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + messageTypeId;
-		result = prime * result
-				+ ((messageType == null) ? 0 : messageType.hashCode());
-		return result;
+	public String toString() {
+		return "MessageType [type=" + type + ", id=" + id + "]";
+	}
+
+	public int compareTo(MessageType o) {
+		if ( this == o ) 
+			return EQUAL;
+		else if (this.id < o.id) 
+			return BEFORE;
+		else if (o.id == this.id) 
+			return EQUAL;
+		else if (this.id > o.id)
+			return AFTER;
+		return EQUAL;
 	}
 }
