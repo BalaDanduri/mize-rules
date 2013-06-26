@@ -26,6 +26,22 @@ public class BusinessEntity  extends Entity {
 	long entityId;
 	String entityName;
 	
+	public BusinessEntity() {
+		
+	}
+	
+	public BusinessEntity(long id, String code, String typeCode, String subTypeCode, String name, String logo,
+			List<BusinessEntityAddress> businessEntityAddressList, long entityId, String entityName) {
+		this.id = id;
+		this.code = code;
+		this.typeCode = typeCode;
+		this.subTypeCode = subTypeCode;
+		this.name = name;
+		this.logo = logo;
+		this.businessEntityAddressList = businessEntityAddressList;
+		this.entityId = entityId;
+		this.entityName = entityName;
+	}
 	
 	public List<BusinessEntityAddress> getBusinessEntityAddressList() {
 		return businessEntityAddressList;
@@ -113,5 +129,91 @@ public class BusinessEntity  extends Entity {
 	}
 	public void setEntityName(String entityName) {
 		this.entityName = entityName;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((businessEntityAddressList == null) ? 0 : businessEntityAddressList.hashCode());
+		result = prime * result + ((code == null) ? 0 : code.hashCode());
+		result = prime * result + (int) (entityId ^ (entityId >>> 32));
+		result = prime * result + ((entityName == null) ? 0 : entityName.hashCode());
+		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((logo == null) ? 0 : logo.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((subTypeCode == null) ? 0 : subTypeCode.hashCode());
+		result = prime * result + ((typeCode == null) ? 0 : typeCode.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof BusinessEntity)) {
+			return false;
+		}
+		BusinessEntity other = (BusinessEntity) obj;
+		if (businessEntityAddressList == null) {
+			if (other.businessEntityAddressList != null) {
+				return false;
+			}
+		} else if (!businessEntityAddressList.equals(other.businessEntityAddressList)) {
+			return false;
+		}
+		if (code == null) {
+			if (other.code != null) {
+				return false;
+			}
+		} else if (!code.equals(other.code)) {
+			return false;
+		}
+		if (entityId != other.entityId) {
+			return false;
+		}
+		if (entityName == null) {
+			if (other.entityName != null) {
+				return false;
+			}
+		} else if (!entityName.equals(other.entityName)) {
+			return false;
+		}
+		if (id != other.id) {
+			return false;
+		}
+		if (logo == null) {
+			if (other.logo != null) {
+				return false;
+			}
+		} else if (!logo.equals(other.logo)) {
+			return false;
+		}
+		if (name == null) {
+			if (other.name != null) {
+				return false;
+			}
+		} else if (!name.equals(other.name)) {
+			return false;
+		}
+		if (subTypeCode == null) {
+			if (other.subTypeCode != null) {
+				return false;
+			}
+		} else if (!subTypeCode.equals(other.subTypeCode)) {
+			return false;
+		}
+		if (typeCode == null) {
+			if (other.typeCode != null) {
+				return false;
+			}
+		} else if (!typeCode.equals(other.typeCode)) {
+			return false;
+		}
+		return true;
 	}
 }
