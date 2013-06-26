@@ -1,8 +1,9 @@
 package com.mize.domain.auth;
 
 import com.mize.domain.common.Entity;
+import com.mize.domain.common.MizeEntity;
 
-public class UserPermission extends Entity {
+public class UserPermission extends MizeEntity implements Comparable<UserPermission> {
     private Long id; 
     private String value;
     
@@ -67,5 +68,16 @@ public class UserPermission extends Entity {
 		return true;
 	}
     
+	public int compareTo(UserPermission entity) {
+		if ( this == entity ) 
+			return EQUAL;
+		else if (this.id < entity.id) 
+			return BEFORE;
+		else if (entity.id == this.id) 
+			return EQUAL;
+		else if (this.id > entity.id)
+			return AFTER;
+		return EQUAL;		
+	}
     
 }

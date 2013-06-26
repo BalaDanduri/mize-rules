@@ -1,4 +1,4 @@
-package com.mize.domain.appmessage;
+package com.mize.domain.appmsg;
 
 import com.mize.domain.common.MizeEntity;
 
@@ -10,7 +10,6 @@ public class MessageType extends MizeEntity implements Comparable<MessageType>{
 	private String type;
 
 	public MessageType() {
-
 	}
 
 	@Override
@@ -29,24 +28,6 @@ public class MessageType extends MizeEntity implements Comparable<MessageType>{
 
 	public void setType(String type) {
 		this.type = type;
-	}
-
-	@Deprecated
-	public Long getMessageTypeId() {
-		return id;
-	}
-
-	@Deprecated
-	public void setMessageTypeId(Long messageTypeId) {
-		this.id = messageTypeId;
-	}
-
-	public String getMessageType() {
-		return type;
-	}
-
-	public void setMessageType(String messageType) {
-		this.type = messageType;
 	}
 
 	
@@ -72,7 +53,6 @@ public class MessageType extends MizeEntity implements Comparable<MessageType>{
 		} else if (!type.equals(other.type))
 			return false;
 		return true;
-
 	}
 
 	@Override
@@ -91,4 +71,6 @@ public class MessageType extends MizeEntity implements Comparable<MessageType>{
 			return AFTER;
 		return EQUAL;
 	}
+
+	
 }

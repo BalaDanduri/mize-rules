@@ -1,24 +1,98 @@
 package com.mize.domain.brand;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mize.domain.common.Entity;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-public class Brand extends Entity {
+import org.hibernate.annotations.GenericGenerator;
+
+import com.mize.domain.common.MizeDomainConstant;
+import com.mize.domain.common.MizeEntity;
+
+@Entity
+@Table(name = "brand")
+public class Brand extends MizeEntity implements Comparable<Brand>{
 	
 	private static final long serialVersionUID = -7447355457187568168L;
-	private int brandId;
-	private String brandName;
+	private String name;
 	private String website;
 	private String logoName;
 	private String feedbackEmail ; 
 	private List<BrandSupport> brandSupports = new ArrayList<BrandSupport>();
 	
+	@Id
+	@GenericGenerator(name="brandId" , strategy="increment")
+	@GeneratedValue(generator="brandId")
+	@Column(name = "BRAND_ID", unique = true, nullable = false, length = 10)
+	@Override
+	public Long getId() {
+		return id;
+	}
+
+	@Override
+	public void setId(Long id) {
+		this.id = id;
+	}	
+
+	public Long getBrandId() {
+		return id;
+	}
+
+	public void setBrandId(Long id) {
+		this.id = id;
+	}	
+
 	public Brand() {
 		
 	}
 	
+	public Brand(Long id, String brandName, String website) {
+		this(id, brandName, website, null, null, null);
+	}
+
+	public Brand(Long id, String brandName, String website, String logoName) {
+		this(id, brandName, website, logoName, null, null);
+	}
+
+	public Brand(Long id, String name, String website, String logoName, String feedbackEmail, List<BrandSupport> brandSupports) {
+		this.id = id;
+		this.name = name;
+		this.website = website;
+		this.logoName = logoName;
+		this.feedbackEmail = feedbackEmail;
+		this.brandSupports = brandSupports;
+	}
+	
+	public String getBrandName() {
+		return name;
+	}
+	public void setBrandName(String brandName) {
+		this.name = brandName;
+	}
+	
+	@Column(name = "BRAND_NAME", unique = true, nullable = false, length = 250)
+	public String getName() {
+		return name;
+	}
+	public void setName(String brandName) {
+		this.name = brandName;
+	}
+	@Column(name = "BRAND_LINK",  nullable = true, length = 250)
+	public String getWebsite() {
+		return website;
+	}
+	public void setWebsite(String website) {
+		this.website = website;
+	}
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "brand")
 	public List<BrandSupport> getBrandSupports() {
 		return brandSupports;
 	}
@@ -26,53 +100,28 @@ public class Brand extends Entity {
 	public void setBrandSupports(List<BrandSupport> brandSupports) {
 		this.brandSupports = brandSupports;
 	}
-
-	public Brand(int brandId, String brandName, String website) {
-		this.brandId = brandId;
-		this.brandName = brandName;
-		this.website = website;
+	@Column(name = "BRAND_LOGO",  nullable = true, length = 50)
+	public String getLogoName() {
+		return logoName;
 	}
 
-	public Brand(int brandId, String brandName, String website, String logoName) {
-		this.brandId = brandId;
-		this.brandName = brandName;
-		this.website = website;
+	public void setLogoName(String logoName) {
 		this.logoName = logoName;
 	}
-	
-	public int getBrandId() {
-		return brandId;
-	}
-	public void setBrandId(int brandId) {
-		this.brandId = brandId;
-	}
-	public String getBrandName() {
-		return brandName;
-	}
-	public void setBrandName(String brandName) {
-		this.brandName = brandName;
-	}
-	public String getWebsite() {
-		return website;
-	}
-	public void setWebsite(String website) {
-		this.website = website;
+	@Column(name = "FEEDBACK_EMAIL",  nullable = true, length = 50)
+	public String getFeedbackEmail() {
+		return feedbackEmail;
 	}
 
+	public void setFeedbackEmail(String feedbackEmail) {
+		this.feedbackEmail = feedbackEmail;
+	}
+	
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + brandId;
-		result = prime * result
-				+ ((brandName == null) ? 0 : brandName.hashCode());
-		result = prime * result
-				+ ((brandSupports == null) ? 0 : brandSupports.hashCode());
-		result = prime * result
-				+ ((feedbackEmail == null) ? 0 : feedbackEmail.hashCode());
-		result = prime * result
-				+ ((logoName == null) ? 0 : logoName.hashCode());
-		result = prime * result + ((website == null) ? 0 : website.hashCode());
+		int result = super.hashCode();
+		result = MizeDomainConstant.PRIME * result
+				+ ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
 
@@ -82,67 +131,54 @@ public class Brand extends Entity {
 			return true;
 		if (obj == null)
 			return false;
-		if (getClass() != obj.getClass())
+		if ( !(obj instanceof Brand))
 			return false;
 		Brand other = (Brand) obj;
-		if (brandId != other.brandId)
-			return false;
-		if (brandName == null) {
-			if (other.brandName != null)
+		
+		if (id==null) {
+			if (other.id!= null)
 				return false;
-		} else if (!brandName.equals(other.brandName))
+		} else if (!id.equals(other.id)) 
 			return false;
-		if (brandSupports == null) {
-			if (other.brandSupports != null)
+
+		if (name == null) {
+			if (other.name != null)
 				return false;
-		} else if (!brandSupports.equals(other.brandSupports))
-			return false;
-		if (feedbackEmail == null) {
-			if (other.feedbackEmail != null)
-				return false;
-		} else if (!feedbackEmail.equals(other.feedbackEmail))
-			return false;
-		if (logoName == null) {
-			if (other.logoName != null)
-				return false;
-		} else if (!logoName.equals(other.logoName))
-			return false;
-		if (website == null) {
-			if (other.website != null)
-				return false;
-		} else if (!website.equals(other.website))
+		} else if (!name.equals(other.name))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Brand [brandId=" + brandId + ", brandName=" + brandName
-				+ ", website=" + website + ", logoName=" + logoName
-				+ ", feedbackEmail=" + feedbackEmail + ", brandSupports="
-				+ brandSupports + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Brand [id=");
+		builder.append(id);
+		builder.append(", name=");
+		builder.append(name);
+		builder.append(", website=");
+		builder.append(website);
+		builder.append(", logoName=");
+		builder.append(logoName);
+		builder.append(", feedbackEmail=");
+		builder.append(feedbackEmail);
+		builder.append(", brandSupports=");
+		builder.append(brandSupports);
+		builder.append("]");
+		return builder.toString();
 	}
 
-	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		// TODO Auto-generated method stub
-		return super.clone();
-	}
 	
-
-	public String getLogoName() {
-		return logoName;
-	}
-
-	public void setLogoName(String logoName) {
-		this.logoName = logoName;
-	}
-
-	public String getFeedbackEmail() {
-		return feedbackEmail;
-	}
-
-	public void setFeedbackEmail(String feedbackEmail) {
-		this.feedbackEmail = feedbackEmail;
-	}
+	public int compareTo(Brand thatBrand) {
+		if ( this == thatBrand ) 
+			return MizeDomainConstant.EQUAL;
+		else if (this.id < thatBrand.id) 
+			return MizeDomainConstant.BEFORE;
+		else if (thatBrand.id == this.id) 
+			return MizeDomainConstant.EQUAL;
+		else if (this.id > thatBrand.id)
+			return MizeDomainConstant.AFTER;
+		return MizeDomainConstant.EQUAL;		
+	}	
+	
 }

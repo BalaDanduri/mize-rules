@@ -1,9 +1,9 @@
-package com.mize.domain.appmessage;
+package com.mize.domain.appmsg;
 
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeEntity;
 
-public class ApplicationMessage extends MizeEntity implements Comparable<ApplicationMessage> {
+public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 
 	private static final long serialVersionUID = 6836153638967617947L;
 	private MessageType messageType = new MessageType();
@@ -35,7 +35,7 @@ public class ApplicationMessage extends MizeEntity implements Comparable<Applica
 	}
 	
 	
-	public ApplicationMessage() {
+	public AppMessage() {
 	}
 
 	@Override
@@ -47,14 +47,14 @@ public class ApplicationMessage extends MizeEntity implements Comparable<Applica
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	
 	public MessageType getMessageType() {
 		return messageType;
 	}
-	
+
 	public void setMessageType(MessageType messageType) {
 		this.messageType = messageType;
-	}
+	}	
 	
 	public Locale getLocale() {
 		return locale;
@@ -96,46 +96,7 @@ public class ApplicationMessage extends MizeEntity implements Comparable<Applica
 		this.severity = severity;
 	}
 
-	@Deprecated
-	public String getMessageCode() {
-		return code;
-	}
-
-	@Deprecated
-	public void setMessageCode(String messageCode) {
-		this.code = messageCode;
-	}
 	
-	@Deprecated
-	public String getMessageShortDesc() {
-		return shortDesc;
-	}
-	
-	@Deprecated
-	public void setMessageShortDesc(String messageShortDesc) {
-		this.shortDesc = messageShortDesc;
-	}
-	
-	@Deprecated
-	public String getMessageLongDesc() {
-		return longDesc;
-	}
-	
-	@Deprecated
-	public void setMessageLongDesc(String messageLongDesc) {
-		this.longDesc = messageLongDesc;
-	}
-	
-	@Deprecated
-	public int getMessageSeverity() {
-		return severity;
-	}
-	
-	@Deprecated
-	public void setMessageSeverity(int messageSeverity) {
-		this.severity = messageSeverity;
-	}
-
 	@Override
 	public String toString() {
 		return "ApplicationMessage [messageType=" + messageType + ", code=" + code + ", shortDesc=" + shortDesc +
@@ -158,7 +119,7 @@ public class ApplicationMessage extends MizeEntity implements Comparable<Applica
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ApplicationMessage other = (ApplicationMessage) obj;
+		AppMessage other = (AppMessage) obj;
 		if (code == null) {
 			if (other.code != null)
 				return false;
@@ -167,7 +128,7 @@ public class ApplicationMessage extends MizeEntity implements Comparable<Applica
 		return true;
 	}
 
-	public int compareTo(ApplicationMessage o) {
+	public int compareTo(AppMessage o) {
 		if ( this == o ) 
 			return EQUAL;
 		else if (this.id < o.id) 

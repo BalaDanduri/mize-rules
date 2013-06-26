@@ -10,6 +10,8 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.common.Entity;
+import com.mize.domain.common.MizeEntity;
+import com.mize.domain.user.Group;
 import com.mize.domain.user.UserProfile;
 import com.mize.domain.user.UserProfileViews;
 import com.mize.domain.user.UserProfileViews.PublicView;
@@ -17,7 +19,7 @@ import com.mize.domain.user.UserProfileViews.UserProfilePrivacyView;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
-public class User extends Entity {
+public class User extends MizeEntity implements Comparable<User> {
 	
 	private static final long serialVersionUID = 6457591358862233006L;
 	protected Long id;
@@ -26,10 +28,11 @@ public class User extends Entity {
     protected DateTime lastLogin;
     protected boolean active;
     protected boolean emailValidated;
-    protected List<LinkedAccount> linkedAccounts;
+    protected List<LinkedAccount> linkedAccounts = new ArrayList<LinkedAccount>();
     protected List<UserConnect> userConnects;
     protected UserProfile userProfile;
     protected Long referralId;
+	private List<Group> groups = new ArrayList<Group>();
     
     public enum Case {
 		SIGNUP, LOGIN , LOGOUT
@@ -42,16 +45,10 @@ public class User extends Entity {
     public enum LoginResult {
 		USER_UNVERIFIED, USER_LOGGED_IN, NOT_FOUND, WRONG_PASSWORD,USER_FOUND
 	}
-
-	
-    public User() {
-		super();
-	}
-
-    public User(Long id) {
-		this.id = id;
-	}
-
+    
+    public User(){
+    	userProfile = new UserProfile();
+    }
     
 	public User(Long id, String email, String name, DateTime lastLogin,
 			boolean active, boolean emailValidated,
@@ -208,44 +205,36 @@ public class User extends Entity {
 	public void setReferralId(Long referralId) {
 		this.referralId = referralId;
 	}
+	
+	public List<Group> getGroups() {
+		return groups;
+	}
+
+	public void setGroups(List<Group> groups) {
+		this.groups = groups;
+	}
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", name=" + name + ", lastLogin=" + lastLogin + ", active="
-				+ active + ", emailValidated=" + emailValidated + ", linkedAccounts=" + linkedAccounts
-				+ ", userConnects=" + userConnects + ", userProfile=" + userProfile + ", referralId=" + referralId
-				+ "]";
+		return "User [email=" + email + ", name=" + name + ", lastLogin=" + lastLogin + ", active=" + active + ", emailValidated=" + emailValidated +
+				", linkedAccounts=" + linkedAccounts + ", userProfile=" + userProfile + ", referralId=" + referralId + ", id=" + id + "]";
 	}
+
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (active ? 1231 : 1237);
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + (emailValidated ? 1231 : 1237);
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result
-				+ ((lastLogin == null) ? 0 : lastLogin.hashCode());
-		result = prime * result
-				+ ((linkedAccounts == null) ? 0 : linkedAccounts.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result
-				+ ((userConnects == null) ? 0 : userConnects.hashCode());
-		result = prime * result
-				+ ((userProfile == null) ? 0 : userProfile.hashCode());
+		int result = super.hashCode();
+		result = PRIME * result + ((email == null) ? 0 : email.hashCode());
 		return result;
 	}
-	@Override
+
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		if (active != other.active)
-			return false;
 		if (email == null) {
 			if (other.email != null)
 				return false;
@@ -253,40 +242,20 @@ public class User extends Entity {
 			return false;
 		if (emailValidated != other.emailValidated)
 			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (lastLogin == null) {
-			if (other.lastLogin != null)
-				return false;
-		} else if (!lastLogin.equals(other.lastLogin))
-			return false;
-		if (linkedAccounts == null) {
-			if (other.linkedAccounts != null)
-				return false;
-		} else if (!linkedAccounts.equals(other.linkedAccounts))
-			return false;
-		if (userConnects == null) {
-			if (other.userConnects != null)
-				return false;
-		} else if (!userConnects.equals(other.userConnects)) {
-			return false;
-		} 
-		if (userProfile == null) {
-			if (other.userProfile != null)
-				return false;
-		} else if (!userProfile.equals(other.userProfile))
-		return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
 		return true;
 	}
-
 	
+	public int compareTo(User user) {
+		if ( this == user ) 
+			return EQUAL;
+		else if (this.id < user.id) 
+			return BEFORE;
+		else if (user.id == this.id) 
+			return EQUAL;
+		else if (this.id > user.id)
+			return AFTER;
+		return EQUAL;		
+	}
+
 	
 }

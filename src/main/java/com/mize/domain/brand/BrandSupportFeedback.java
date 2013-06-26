@@ -8,17 +8,19 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.common.Entity;
+import com.mize.domain.common.MizeDomainConstant;
+import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateDeserializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateSerializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
-public class BrandSupportFeedback extends Entity {
+public class BrandSupportFeedback extends MizeEntity implements Comparable<BrandSupportFeedback>{
 
-	private int supportLogId;
-	private int id;
+	private Long supportLogId;
+	private Long id;
 	private Brand brand;
-	private int userId;
+	private Long userId;
 	private String userName;
 	private String supportType;
 	private int rating;
@@ -26,7 +28,7 @@ public class BrandSupportFeedback extends Entity {
 	private boolean resolved;	
 	private DateTime feedbackDate;
 	private String ticketNo;
-	private long brandSupportId;
+	private Long brandSupportId;
 	private List<PostToSocialMedia> socialMediaPosts;
 	private DateTime startDate;
 
@@ -34,7 +36,7 @@ public class BrandSupportFeedback extends Entity {
 		
 	}
 
-	public BrandSupportFeedback(int supportLogId, int id, Brand brand, long brandSupportId, int userId, String userName, String supportType, int rating,
+	public BrandSupportFeedback(long supportLogId, long id, Brand brand, long brandSupportId, long userId, String userName, String supportType, int rating,
 			String feedback, boolean resolved, DateTime feedbackDate, String ticketNo, List<PostToSocialMedia> socialMediaPosts) {
 		this.supportLogId = supportLogId;
 		this.id = id;
@@ -65,19 +67,19 @@ public class BrandSupportFeedback extends Entity {
 	}
 
 
-	public int getSupportLogId() {
+	public Long getSupportLogId() {
 		return supportLogId;
 	}
 
-	public void setSupportLogId(int supportLogId) {
+	public void setSupportLogId(Long supportLogId) {
 		this.supportLogId = supportLogId;
 	}
 
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -89,11 +91,11 @@ public class BrandSupportFeedback extends Entity {
 		this.brand = brand;
 	}
 
-	public int getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 
@@ -189,4 +191,17 @@ public class BrandSupportFeedback extends Entity {
 	public void setBrandSupportId(long brandSupportId) {
 		this.brandSupportId = brandSupportId;
 	}
+	
+	public int compareTo(BrandSupportFeedback entity) {
+		if ( this == entity ) 
+			return MizeDomainConstant.EQUAL;
+		else if (this.id < entity.id) 
+			return MizeDomainConstant.BEFORE;
+		else if (entity.id == this.id) 
+			return MizeDomainConstant.EQUAL;
+		else if (this.id > entity.id)
+			return MizeDomainConstant.AFTER;
+		return MizeDomainConstant.EQUAL;
+	}
+
 }

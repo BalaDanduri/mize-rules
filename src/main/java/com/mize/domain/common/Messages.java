@@ -19,8 +19,13 @@ public class Messages {
 	public boolean addMessage(long id, MessageType messageType, String messageCode,
 			String messageShortDesc, String messageLongDesc,
 			int messageSeverity) {
-	
-			return appMessages.add(new ApplicationMessage(id, messageType, messageCode, messageShortDesc, messageLongDesc, messageSeverity));
+		ApplicationMessage message= new ApplicationMessage();
+		message.setId(new Long(id));
+		message.setMessageType(messageType);
+		message.setCode(messageCode);
+		message.setLongDesc(messageLongDesc);
+		message.setShortDesc(messageShortDesc);
+			return appMessages.add(message);
 	}
 	
 	public Set<ApplicationMessage> getApplicationMessages() {

@@ -1,9 +1,11 @@
 package com.mize.domain.brand;
 
 import com.mize.domain.common.Entity;
+import com.mize.domain.common.MizeDomainConstant;
+import com.mize.domain.common.MizeEntity;
 
-public class FeedbackCategory extends Entity {
-	private int feedbackCategoryId;
+public class FeedbackCategory extends MizeEntity implements Comparable<FeedbackCategory>{
+	private Long id;
 	private String feedbackCategory;
 
 	
@@ -11,16 +13,25 @@ public class FeedbackCategory extends Entity {
 		super();
 	}
 
-	public FeedbackCategory(int feedbackCategoryId, String feedbackCategory) {
-		this.feedbackCategoryId = feedbackCategoryId;
+	public FeedbackCategory(long feedbackCategoryId, String feedbackCategory) {
+		this.id = feedbackCategoryId;
 		this.feedbackCategory = feedbackCategory;
 	}
 
-	public int getFeedbackCategoryId() {
-		return feedbackCategoryId;
+	public Long getId() {
+		return id;
 	}
-	public void setFeedbackCategoryId(int feedbackCategoryId) {
-		this.feedbackCategoryId = feedbackCategoryId;
+	public void setId(Long id) {
+		this.id = id;
+	}
+	@Deprecated
+	public Long getFeedbackCategoryId() {
+		return id;
+	}
+	
+	@Deprecated
+	public void setFeedbackCategoryId(Long feedbackCategoryId) {
+		this.id = feedbackCategoryId;
 	}
 	public String getFeedbackCategory() {
 		return feedbackCategory;
@@ -31,18 +42,17 @@ public class FeedbackCategory extends Entity {
 
 	@Override
 	public String toString() {
-		return "FeedbackCategory [feedbackCategoryId=" + feedbackCategoryId
+		return "FeedbackCategory [feedbackCategoryId=" + id
 				+ ", feedbackCategory=" + feedbackCategory + "]";
 	}
 
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
-		result = prime
-				* result
-				+ ((feedbackCategory == null) ? 0 : feedbackCategory.hashCode());
-		result = prime * result + feedbackCategoryId;
+		int result = super.hashCode();
+		result = prime * result + ((feedbackCategory == null) ? 0 : feedbackCategory.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -50,7 +60,7 @@ public class FeedbackCategory extends Entity {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -60,8 +70,24 @@ public class FeedbackCategory extends Entity {
 				return false;
 		} else if (!feedbackCategory.equals(other.feedbackCategory))
 			return false;
-		if (feedbackCategoryId != other.feedbackCategoryId)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
+
+	public int compareTo(FeedbackCategory entity) {
+		if ( this == entity ) 
+			return MizeDomainConstant.EQUAL;
+		else if (this.id < entity.id) 
+			return MizeDomainConstant.BEFORE;
+		else if (entity.id == this.id) 
+			return MizeDomainConstant.EQUAL;
+		else if (this.id > entity.id)
+			return MizeDomainConstant.AFTER;
+		return MizeDomainConstant.EQUAL;
+	}
+
 }

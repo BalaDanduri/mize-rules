@@ -284,13 +284,6 @@ public class Formatter {
 				Matcher m = HTML_TAGS_PATTERN.matcher(value);
 				value = m.replaceAll(EMPTY);
 				value = value.replaceAll("  ",EMPTY);
-				while(true){
-					if(value.contains("\n\n\n")){
-						value = value.replaceAll("\n\n\n","\n\n");
-					}else{
-						break;
-					}
-				}
 			}catch(Exception e){
 			}
 		}	
