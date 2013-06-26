@@ -9,10 +9,12 @@ import org.codehaus.jackson.map.annotate.JsonView;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.mize.domain.common.Entity;
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.servicelocator.BusinessEntity;
 import com.mize.domain.user.Group;
+import com.mize.domain.user.UserBE;
 import com.mize.domain.user.UserProfile;
+import com.mize.domain.user.UserProfilePrivacy;
 import com.mize.domain.user.UserProfileViews;
 import com.mize.domain.user.UserProfileViews.PublicView;
 import com.mize.domain.user.UserProfileViews.UserProfilePrivacyView;
@@ -32,6 +34,8 @@ public class User extends MizeEntity implements Comparable<User> {
     protected List<UserConnect> userConnects;
     protected UserProfile userProfile;
     protected Long referralId;
+    protected UserBE userBe;
+    protected UserProfilePrivacy privacy;
 	private List<Group> groups = new ArrayList<Group>();
     
     public enum Case {
@@ -206,6 +210,22 @@ public class User extends MizeEntity implements Comparable<User> {
 		this.referralId = referralId;
 	}
 	
+	public UserProfilePrivacy getPrivacy() {
+		return privacy;
+	}
+
+	public void setPrivacy(UserProfilePrivacy privacy) {
+		this.privacy = privacy;
+	}
+
+	public UserBE getUserBe() {
+		return userBe;
+	}
+
+	public void setUserBe(UserBE userBe) {
+		this.userBe = userBe;
+	}
+
 	public List<Group> getGroups() {
 		return groups;
 	}
@@ -216,8 +236,10 @@ public class User extends MizeEntity implements Comparable<User> {
 
 	@Override
 	public String toString() {
-		return "User [email=" + email + ", name=" + name + ", lastLogin=" + lastLogin + ", active=" + active + ", emailValidated=" + emailValidated +
-				", linkedAccounts=" + linkedAccounts + ", userProfile=" + userProfile + ", referralId=" + referralId + ", id=" + id + "]";
+		return "User [id=" + id + ", email=" + email + ", name=" + name + ", lastLogin=" + lastLogin + ", active="
+				+ active + ", emailValidated=" + emailValidated + ", linkedAccounts=" + linkedAccounts
+				+ ", userConnects=" + userConnects + ", userProfile=" + userProfile + ", referralId=" + referralId
+				+ ", userBe=" + userBe + ", privacy=" + privacy + ", groups=" + groups + "]";
 	}
 
 	@Override
