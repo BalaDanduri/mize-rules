@@ -17,7 +17,7 @@ public class PostToSocialMedia extends MizeEntity implements Comparable<PostToSo
 	DateTime postedDate;
 	String postData;
 	String socialMedia;
-	int feedbackId;
+	Long feedbackId;
 	Long id;
 	
 	public PostToSocialMedia() {
@@ -68,11 +68,11 @@ public class PostToSocialMedia extends MizeEntity implements Comparable<PostToSo
 		this.socialMedia = socialMedia;
 	}
 
-	public int getFeedbackId() {
+	public Long getFeedbackId() {
 		return feedbackId;
 	}
 
-	public void setfeedbackId(int feedbackId) {
+	public void setfeedbackId(Long feedbackId) {
 		this.feedbackId = feedbackId;
 	}
 	
