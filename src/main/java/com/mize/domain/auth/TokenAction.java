@@ -8,11 +8,12 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 import com.mize.domain.common.Entity;
+import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 import com.mize.domain.auth.User;
 
-public class TokenAction extends Entity {
+public class TokenAction extends MizeEntity implements Comparable<TokenAction> {
 	
 	public enum TokenType {
 		EV("EV"),
@@ -118,5 +119,16 @@ public class TokenAction extends Entity {
 				+ ", expires=" + expires + "]";
 	}	
 	
-	
+	public int compareTo(TokenAction entity) {
+		if ( this == entity ) 
+			return EQUAL;
+		else if (this.id < entity.id) 
+			return BEFORE;
+		else if (entity.id == this.id) 
+			return EQUAL;
+		else if (this.id > entity.id)
+			return AFTER;
+		return EQUAL;		
+	}
+
 }

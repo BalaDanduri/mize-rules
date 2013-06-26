@@ -1,8 +1,9 @@
 package com.mize.domain.auth;
 
-import com.mize.domain.common.Entity;
+import com.mize.domain.common.MizeEntity;
 
-public class SecurityRole extends Entity {
+public class SecurityRole extends MizeEntity implements Comparable<SecurityRole> {
+	private static final long serialVersionUID = -926097655061859317L;
 	private Long id;
     public String roleName;
     
@@ -63,5 +64,17 @@ public class SecurityRole extends Entity {
 		return true;
 	}
     
+	public int compareTo(SecurityRole entity) {
+		if ( this == entity ) 
+			return EQUAL;
+		else if (this.id < entity.id) 
+			return BEFORE;
+		else if (entity.id == this.id) 
+			return EQUAL;
+		else if (this.id > entity.id)
+			return AFTER;
+		return EQUAL;		
+	}
+
     
 }
