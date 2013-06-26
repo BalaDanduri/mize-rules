@@ -17,49 +17,23 @@ public class State extends MizeEntity implements Comparable<State>{
 		this.id = id;
 	}	
 
-	@Deprecated
-	public Long getStateId() {
-		return id;
-	}
-
-	@Deprecated
-	public void setStateId(Long id) {
-		this.id = id;
-	}	
-
 	public String getName() {
 		return name;
 	}
+	
 	public void setName(String name) {
-		this.name = name;
-	}
-	
-	@Deprecated
-	public String getStateName() {
-		return name;
-	}
-	
-	@Deprecated
-	public void setStateName(String name) {
 		this.name = name;
 	}
 
 	public String getCode() {
 		return code;
 	}
+	
 	public void setCode(String code) {
 		this.code = code;
 	}	
 	
-	@Deprecated
-	public String getStateCode() {
-		return code;
-	}
 	
-	@Deprecated
-	public void setStateCode(String code) {
-		this.code = code;
-	}
 	@Override
 	public int hashCode() {
 		int result = super.hashCode();
