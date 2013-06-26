@@ -20,6 +20,7 @@ public class BrandFeed extends Entity{
 	private DateTime startTime;
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime endTime;
+	private Long userId;
 	
 	public Long getId() {
 		return id;
@@ -69,4 +70,11 @@ public class BrandFeed extends Entity{
 	public void setEndTime(DateTime endTime) {
 		this.endTime = endTime;
 	}
+	public Long getUserId() {
+		return userId;
+	}
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+	
 }
