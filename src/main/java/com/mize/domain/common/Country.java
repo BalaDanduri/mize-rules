@@ -24,36 +24,17 @@ public class Country extends MizeEntity implements Comparable<Country>{
 	public Long getId() {
 		return id;
 	}
-
 	
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-	@Deprecated
-	public Long getCountryId() {
-		return id;
-	}
-
-	@Deprecated
-	public void setCountryId(Long id) {
-		this.id = id;
-	}
+	
 	@Column(name="country_code",nullable=false)
 	public String getCode() {
 		return code;
 	}
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	@Deprecated
-	public String getCountryCode() {
-		return code;
-	}
 	
-	@Deprecated
-	public void setCountryCode(String code) {
+	public void setCode(String code) {
 		this.code = code;
 	}
 
@@ -61,19 +42,11 @@ public class Country extends MizeEntity implements Comparable<Country>{
 	public String getName() {
 		return name;
 	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
 	
-	@Deprecated
-	public String getCountryName() {
-		return name;
-	}
-	
-	@Deprecated
-	public void setCountryName(String name) {
-		this.name = name;
-	}
 
 	@Override
 	public int hashCode() {
