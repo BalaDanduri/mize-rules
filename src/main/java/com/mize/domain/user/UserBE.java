@@ -15,7 +15,16 @@ public class UserBE extends MizeEntity implements Comparable<UserBE>{
 	private Long userId;
 	private Long beId;
 	private String jobRole;
+	private String department;
 	
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+
 	@Override
 	public Long getId() {
 		return userId;
@@ -58,7 +67,8 @@ public class UserBE extends MizeEntity implements Comparable<UserBE>{
 
 	@Override
 	public String toString() {
-		return "UserBE [userId=" + userId + ", beId=" + beId + ", jobRole=" + jobRole + "]";
+		return "UserBE [userId=" + userId + ", beId=" + beId + ", jobRole=" + jobRole + ", department=" + department
+				+ "]";
 	}
 
 	public int compareTo(UserBE be) {
