@@ -14,7 +14,6 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import com.mize.domain.common.MizeDomainConstant;
 import com.mize.domain.common.MizeEntity;
 
 @Entity
@@ -120,8 +119,7 @@ public class Brand extends MizeEntity implements Comparable<Brand>{
 	@Override
 	public int hashCode() {
 		int result = super.hashCode();
-		result = MizeDomainConstant.PRIME * result
-				+ ((name == null) ? 0 : name.hashCode());
+		result = PRIME * result	+ ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
 
@@ -171,14 +169,14 @@ public class Brand extends MizeEntity implements Comparable<Brand>{
 	
 	public int compareTo(Brand thatBrand) {
 		if ( this == thatBrand ) 
-			return MizeDomainConstant.EQUAL;
+			return EQUAL;
 		else if (this.id < thatBrand.id) 
-			return MizeDomainConstant.BEFORE;
+			return BEFORE;
 		else if (thatBrand.id == this.id) 
-			return MizeDomainConstant.EQUAL;
+			return EQUAL;
 		else if (this.id > thatBrand.id)
-			return MizeDomainConstant.AFTER;
-		return MizeDomainConstant.EQUAL;		
+			return AFTER;
+		return EQUAL;		
 	}	
 	
 }

@@ -18,6 +18,7 @@ public abstract class MizeEntity implements Serializable{
 	public static final int BEFORE = -1;
 	public static final int AFTER = 1;
 	public static final int PRIME = 31;	
+	public static final int HASH_CODE_START = 17;
 	@JsonIgnore
 	public static String STATUS = "status";
 	
@@ -91,8 +92,8 @@ public abstract class MizeEntity implements Serializable{
 
 	@Override
 	public int hashCode() {
-		int result = MizeDomainConstant.HASH_CODE_START;
-		result = MizeDomainConstant.PRIME * result + ((id == null) ? 0 : id.hashCode());
+		int result = HASH_CODE_START;
+		result = PRIME * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 

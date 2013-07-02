@@ -1,12 +1,10 @@
 package com.mize.domain.brand;
 
-import com.mize.domain.common.Entity;
-import com.mize.domain.common.MizeDomainConstant;
 import com.mize.domain.common.MizeEntity;
 
 public class UserBrands extends MizeEntity implements Comparable<UserBrands>{
 	
-	private Long id;
+	private static final long serialVersionUID = 3188507890380837744L;
 	private Long userId;
 	private Brand brand;
 	private BrandSupport brandSupport;
@@ -123,14 +121,14 @@ public class UserBrands extends MizeEntity implements Comparable<UserBrands>{
 
 	public int compareTo(UserBrands entity) {
 		if ( this == entity ) 
-			return MizeDomainConstant.EQUAL;
+			return EQUAL;
 		else if (this.id < entity.id) 
-			return MizeDomainConstant.BEFORE;
+			return BEFORE;
 		else if (entity.id == this.id) 
-			return MizeDomainConstant.EQUAL;
+			return EQUAL;
 		else if (this.id > entity.id)
-			return MizeDomainConstant.AFTER;
-		return MizeDomainConstant.EQUAL;
+			return AFTER;
+		return EQUAL;
 	}
 	
 }

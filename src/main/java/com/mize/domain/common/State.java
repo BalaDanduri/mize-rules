@@ -5,7 +5,6 @@ public class State extends MizeEntity implements Comparable<State>{
 	private static final long serialVersionUID = -1518811417788517045L;
 	private String name;
 	private String code;
-	
 
 	@Override
 	public Long getId() {

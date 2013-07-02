@@ -1,10 +1,11 @@
 package com.mize.domain.auth;
 
-import com.mize.domain.common.Entity;
 import com.mize.domain.common.MizeEntity;
 
 public class UserPermission extends MizeEntity implements Comparable<UserPermission> {
-    private Long id; 
+   
+	private static final long serialVersionUID = 377175289703147158L;
+	private Long id; 
     private String value;
     
     public UserPermission() {

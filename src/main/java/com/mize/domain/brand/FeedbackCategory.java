@@ -1,13 +1,11 @@
 package com.mize.domain.brand;
 
-import com.mize.domain.common.Entity;
-import com.mize.domain.common.MizeDomainConstant;
 import com.mize.domain.common.MizeEntity;
 
 public class FeedbackCategory extends MizeEntity implements Comparable<FeedbackCategory>{
-	private Long id;
+	
+	private static final long serialVersionUID = -3371001783622958001L;
 	private String feedbackCategory;
-
 	
 	public FeedbackCategory() {
 		super();
@@ -80,14 +78,14 @@ public class FeedbackCategory extends MizeEntity implements Comparable<FeedbackC
 
 	public int compareTo(FeedbackCategory entity) {
 		if ( this == entity ) 
-			return MizeDomainConstant.EQUAL;
+			return EQUAL;
 		else if (this.id < entity.id) 
-			return MizeDomainConstant.BEFORE;
+			return BEFORE;
 		else if (entity.id == this.id) 
-			return MizeDomainConstant.EQUAL;
+			return EQUAL;
 		else if (this.id > entity.id)
-			return MizeDomainConstant.AFTER;
-		return MizeDomainConstant.EQUAL;
+			return AFTER;
+		return EQUAL;
 	}
 
 }

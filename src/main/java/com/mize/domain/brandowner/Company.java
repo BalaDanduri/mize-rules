@@ -3,12 +3,13 @@ package com.mize.domain.brandowner;
 import com.mize.domain.common.Entity;
 
 public class Company extends Entity {
+	
+	private static final long serialVersionUID = -6376039841637921409L;
 	private int companyId;
 	private String companyName;
 	private String companyType;
 
 	public Company() {
-
 	}
 
 	public Company(int companyId, String companyName, String companyType) {

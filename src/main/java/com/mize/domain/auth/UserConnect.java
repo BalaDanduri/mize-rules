@@ -1,13 +1,11 @@
 package com.mize.domain.auth;
 
-import com.mize.domain.common.Entity;
 import com.mize.domain.common.MizeEntity;
 
 public class UserConnect extends MizeEntity implements Comparable<UserConnect> {
-	/**
-	 * Adding these constants to avoid hardcoding in the code.
-	 */
-    private Long linkedAccountId;
+	
+	private static final long serialVersionUID = 678341089266523579L;
+	private Long linkedAccountId;
     private Long userId;
     public String email;
     public String provider;

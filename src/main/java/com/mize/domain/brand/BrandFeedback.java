@@ -1,11 +1,10 @@
 package com.mize.domain.brand;
 
-import com.mize.domain.common.Entity;
-import com.mize.domain.common.MizeDomainConstant;
 import com.mize.domain.common.MizeEntity;
 
 public class BrandFeedback extends MizeEntity implements Comparable<BrandFeedback>{
 	
+	private static final long serialVersionUID = 1957219755183415343L;
 	private Long id;
 	private Brand brand;
 	private int userId;
@@ -65,14 +64,14 @@ public class BrandFeedback extends MizeEntity implements Comparable<BrandFeedbac
 	
 	public int compareTo(BrandFeedback entity) {
 		if ( this == entity ) 
-			return MizeDomainConstant.EQUAL;
+			return EQUAL;
 		else if (this.id < entity.id) 
-			return MizeDomainConstant.BEFORE;
+			return BEFORE;
 		else if (entity.id == this.id) 
-			return MizeDomainConstant.EQUAL;
+			return EQUAL;
 		else if (this.id > entity.id)
-			return MizeDomainConstant.AFTER;
-		return MizeDomainConstant.EQUAL;		
+			return AFTER;
+		return EQUAL;		
 	}	
 
 

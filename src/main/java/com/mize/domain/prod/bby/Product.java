@@ -1,7 +1,5 @@
 package com.mize.domain.prod.bby;
 
-import java.sql.Date;
-
 import org.joda.time.DateTime;
 
 public class Product {

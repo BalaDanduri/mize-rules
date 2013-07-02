@@ -1,7 +1,5 @@
 package com.mize.domain.common;
 
-
-
 public class Locale extends MizeEntity implements Comparable<Locale>{
 	
 	private static final long serialVersionUID = -3914800360286751871L;

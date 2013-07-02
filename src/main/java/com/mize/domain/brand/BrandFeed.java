@@ -5,14 +5,13 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.mize.domain.common.Entity;
+import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
-public class BrandFeed extends Entity{
+public class BrandFeed extends MizeEntity implements Comparable<BrandFeed>{
 	
 	private static final long serialVersionUID = -8006941720446513027L;
-	private Long id;
 	private Brand brand;
 	private String feedType;
 	private String feedDesc;
@@ -22,9 +21,12 @@ public class BrandFeed extends Entity{
 	private DateTime endTime;
 	private Long userId;
 	
+	@Override
 	public Long getId() {
 		return id;
 	}
+	
+	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -75,6 +77,11 @@ public class BrandFeed extends Entity{
 	}
 	public void setUserId(Long userId) {
 		this.userId = userId;
+	}
+
+	@Override
+	public int compareTo(BrandFeed arg0) {
+		return 0;
 	}
 	
 }

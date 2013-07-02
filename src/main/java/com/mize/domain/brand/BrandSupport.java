@@ -16,7 +16,6 @@ import org.hibernate.annotations.GenericGenerator;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.mize.domain.common.MizeDomainConstant;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
@@ -289,7 +288,7 @@ public class BrandSupport extends MizeEntity implements Comparable<BrandSupport>
 	@Override
 	public int hashCode() {
 		int result = super.hashCode();
-		result = MizeDomainConstant.PRIME * result + ((brandId == null) ? 0 : brandId.hashCode());
+		result = PRIME * result + ((brandId == null) ? 0 : brandId.hashCode());
 		return result;
 	}
 
@@ -315,14 +314,14 @@ public class BrandSupport extends MizeEntity implements Comparable<BrandSupport>
 
 	public int compareTo(BrandSupport that) {
 		if ( this == that ) 
-			return MizeDomainConstant.EQUAL;
+			return EQUAL;
 		else if (this.id < that.id) 
-			return MizeDomainConstant.BEFORE;
+			return BEFORE;
 		else if (that.id == this.id) 
-			return MizeDomainConstant.EQUAL;
+			return EQUAL;
 		else if (this.id > that.id)
-			return MizeDomainConstant.AFTER;
-		return MizeDomainConstant.EQUAL;
+			return AFTER;
+		return EQUAL;
 	}
 
 }

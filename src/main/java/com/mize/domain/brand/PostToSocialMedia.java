@@ -5,21 +5,19 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.mize.domain.common.MizeDomainConstant;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
 public class PostToSocialMedia extends MizeEntity implements Comparable<PostToSocialMedia>{
 	
+	private static final long serialVersionUID = 4674350998777147719L;
 	String postId;
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	DateTime postedDate;
 	String postData;
 	String socialMedia;
 	Long feedbackId;
-	Long id;
-	
 	public PostToSocialMedia() {
 		
 	}
@@ -78,14 +76,14 @@ public class PostToSocialMedia extends MizeEntity implements Comparable<PostToSo
 	
 	public int compareTo(PostToSocialMedia entity) {
 		if ( this == entity ) 
-			return MizeDomainConstant.EQUAL;
+			return EQUAL;
 		else if (this.id < entity.id) 
-			return MizeDomainConstant.BEFORE;
+			return BEFORE;
 		else if (entity.id == this.id) 
-			return MizeDomainConstant.EQUAL;
+			return EQUAL;
 		else if (this.id > entity.id)
-			return MizeDomainConstant.AFTER;
-		return MizeDomainConstant.EQUAL;
+			return AFTER;
+		return EQUAL;
 	}
 
 

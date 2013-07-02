@@ -7,14 +7,15 @@ import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
-import com.mize.domain.common.Entity;
+
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
-import com.mize.domain.auth.User;
 
 public class TokenAction extends MizeEntity implements Comparable<TokenAction> {
 	
+	private static final long serialVersionUID = 7260474936022570280L;
+
 	public enum TokenType {
 		EV("EV"),
 		PR("PR");
@@ -30,7 +31,7 @@ public class TokenAction extends MizeEntity implements Comparable<TokenAction> {
 			}
 			return null;
 		}
-		
+
 		public String toString() {
 			return tokenType;
 		}

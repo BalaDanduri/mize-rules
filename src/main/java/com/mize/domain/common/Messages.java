@@ -8,11 +8,9 @@ import com.mize.domain.appmsg.MessageType;
 
 public class Messages {
 
-
 	private Set<AppMessage> appMessages = new HashSet<AppMessage>();
 	
-	public boolean addMessage(final AppMessage msg) {
-		
+	public boolean addMessage(final AppMessage msg) {		
 		return appMessages.add(msg);
 	}
 	

@@ -4,7 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
-import com.mize.domain.common.MizeDomainConstant;
 import com.mize.domain.common.MizeEntity;
 
 @Entity
@@ -73,14 +72,14 @@ public class UserBE extends MizeEntity implements Comparable<UserBE>{
 
 	public int compareTo(UserBE be) {
 		if ( this.userId == be.userId && this.beId == be.beId ) 
-			return MizeDomainConstant.EQUAL;
+			return EQUAL;
 		else if (this.id < be.id) 
-			return MizeDomainConstant.BEFORE;
+			return BEFORE;
 		else if (be.id == this.id) 
-			return MizeDomainConstant.EQUAL;
+			return EQUAL;
 		else if (this.id > be.id)
-			return MizeDomainConstant.AFTER;
-		return MizeDomainConstant.EQUAL;		
+			return AFTER;
+		return EQUAL;		
 	}	
 	
 }

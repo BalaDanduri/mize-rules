@@ -4,6 +4,8 @@ import com.mize.domain.auth.User;
 import com.mize.domain.user.UserProfile;
 
 public class BrandUser extends User{
+	
+	private static final long serialVersionUID = 371188296131306815L;
 	private UserProfile userProfile;
 	private Company company;
 	private CompanyUrl companyUrl;

@@ -11,6 +11,8 @@ import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
 public class CompanyUser extends Entity {
+	
+	private static final long serialVersionUID = 3037663684148720786L;
 	private User user;
 	private Company company;
 	private boolean isValidated;
@@ -19,7 +21,6 @@ public class CompanyUser extends Entity {
 	private String internalComments;
 
 	public CompanyUser() {
-
 	}
 
 	public CompanyUser(User user, Company company, boolean isValidated,

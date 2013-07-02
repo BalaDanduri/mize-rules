@@ -6,6 +6,7 @@ import com.mize.domain.brand.Brand;
 
 public class UserBrandResp extends Entity {
 
+	private static final long serialVersionUID = 1L;
 	private User user;
 	private Brand brand;
 

@@ -3,6 +3,8 @@ package com.mize.domain.brandowner;
 import com.mize.domain.common.Entity;
 
 public class CompanyUrl extends Entity {
+	
+	private static final long serialVersionUID = 1959113184391069836L;
 	private int companyUrlId;
 	private String accessType;
 	private int countryId;
@@ -11,7 +13,6 @@ public class CompanyUrl extends Entity {
 	private Company company;
 
 	public CompanyUrl() {
-
 	}
 
 	public CompanyUrl(int companyUrlId, String accessType, int countryId,
