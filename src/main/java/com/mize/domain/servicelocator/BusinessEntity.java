@@ -20,6 +20,7 @@ public class BusinessEntity  extends Entity {
 	private String subTypeCode;
 	private String name;
 	private String logo;
+	private int pageIndex;
 	@JsonProperty
 	private List<BusinessEntityAddress> businessEntityAddressList;
 	
@@ -216,4 +217,14 @@ public class BusinessEntity  extends Entity {
 		}
 		return true;
 	}
+
+	public int getPageIndex() {
+		return pageIndex;
+	}
+
+	public void setPageIndex(int pageIndex) {
+		this.pageIndex = pageIndex;
+	}
+	
+	
 }
