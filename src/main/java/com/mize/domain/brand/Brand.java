@@ -22,9 +22,10 @@ public class Brand extends MizeEntity implements Comparable<Brand>{
 	
 	private static final long serialVersionUID = -7447355457187568168L;
 	private String name;
+	private String department;
 	private String website;
 	private String logoName;
-	private String feedbackEmail ; 
+	private String feedbackEmail ; 	
 	private List<BrandSupport> brandSupports = new ArrayList<BrandSupport>();
 	
 	@Id
@@ -84,10 +85,20 @@ public class Brand extends MizeEntity implements Comparable<Brand>{
 	public void setName(String brandName) {
 		this.name = brandName;
 	}
+	
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+
 	@Column(name = "BRAND_LINK",  nullable = true, length = 250)
 	public String getWebsite() {
 		return website;
 	}
+
 	public void setWebsite(String website) {
 		this.website = website;
 	}
@@ -154,6 +165,8 @@ public class Brand extends MizeEntity implements Comparable<Brand>{
 		builder.append(id);
 		builder.append(", name=");
 		builder.append(name);
+		builder.append(", department=");
+		builder.append(department);
 		builder.append(", website=");
 		builder.append(website);
 		builder.append(", logoName=");
