@@ -26,12 +26,12 @@ public abstract class MizeEntity implements Serializable{
 		TRUE,FALSE;
 	}
 		
-	protected Integer createdBy;
+	protected Long createdBy;
 	
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	protected DateTime createdDate;
 	
-	protected Integer updatedBy;
+	protected Long updatedBy;
 	
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	protected DateTime updatedDate;
@@ -43,12 +43,12 @@ public abstract class MizeEntity implements Serializable{
 	public abstract void setId(Long id);
 
 	@JsonIgnore
-	public Integer getCreatedBy() {
+	public Long getCreatedBy() {
 		return createdBy;
 	}
 
 	@JsonIgnore
-	public void setCreatedBy(Integer createdBy) {
+	public void setCreatedBy(Long createdBy) {
 		this.createdBy = createdBy;
 	}
 
@@ -67,12 +67,12 @@ public abstract class MizeEntity implements Serializable{
 	}
 
 	@JsonIgnore
-	public Integer getUpdatedBy() {
+	public Long getUpdatedBy() {
 		return updatedBy;
 	}
 
 	@JsonIgnore
-	public void setUpdatedBy(Integer updatedBy) {
+	public void setUpdatedBy(Long updatedBy) {
 		this.updatedBy = updatedBy;
 	}
 

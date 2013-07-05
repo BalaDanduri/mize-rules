@@ -12,6 +12,17 @@ public class MessageType extends MizeEntity implements Comparable<MessageType>{
 	public MessageType() {
 	}
 
+	public enum Type{
+		Application(1),Error(2),Validation(3);
+		long val;
+		Type(long l){
+			val = l;
+		}
+		public long getValue(){
+			return val;
+		}
+	}
+	
 	@Override
 	public Long getId() {
 		return id;

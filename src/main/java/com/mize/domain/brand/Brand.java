@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -27,6 +28,7 @@ public class Brand extends MizeEntity implements Comparable<Brand>{
 	private String logoName;
 	private String feedbackEmail ; 	
 	private List<BrandSupport> brandSupports = new ArrayList<BrandSupport>();
+	private List<BrandFeed> brandFeeds = new ArrayList<BrandFeed>();
 	
 	@Id
 	@GenericGenerator(name="brandId" , strategy="increment")
@@ -42,6 +44,7 @@ public class Brand extends MizeEntity implements Comparable<Brand>{
 		this.id = id;
 	}	
 
+	@Transient
 	public Long getBrandId() {
 		return id;
 	}
@@ -71,6 +74,7 @@ public class Brand extends MizeEntity implements Comparable<Brand>{
 		this.brandSupports = brandSupports;
 	}
 	
+	@Transient
 	public String getBrandName() {
 		return name;
 	}
@@ -127,6 +131,16 @@ public class Brand extends MizeEntity implements Comparable<Brand>{
 		this.feedbackEmail = feedbackEmail;
 	}
 	
+	
+	@OneToMany(mappedBy = "brand")
+	public List<BrandFeed> getBrandFeeds() {
+		return brandFeeds;
+	}
+
+	public void setBrandFeeds(List<BrandFeed> brandFeeds) {
+		this.brandFeeds = brandFeeds;
+	}
+
 	@Override
 	public int hashCode() {
 		int result = super.hashCode();
@@ -175,6 +189,8 @@ public class Brand extends MizeEntity implements Comparable<Brand>{
 		builder.append(feedbackEmail);
 		builder.append(", brandSupports=");
 		builder.append(brandSupports);
+		builder.append(", brandFeeds=");
+		builder.append(brandFeeds);
 		builder.append("]");
 		return builder.toString();
 	}

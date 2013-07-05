@@ -21,6 +21,8 @@ public class UserProductFeedback  extends Entity{
 	protected User user;
 	protected Product product;
 	protected String reviewedBy;
+	protected int pageIndex;
+	private Integer count;
 
 	public String getReviewedBy() {
 		return reviewedBy;
@@ -117,12 +119,28 @@ public class UserProductFeedback  extends Entity{
 		this.updatedDate = updatedDate;
 	}
 	
+	public int getPageIndex() {
+		return pageIndex;
+	}
+
+
+	public void setPageIndex(int pageIndex) {
+		this.pageIndex = pageIndex;
+	}
+
+	public Integer getCount() {
+		return count;
+	}
+
+	public void setCount(Integer count) {
+		this.count = count;
+	}
+
+
 	@Override
 	public String toString() {
-		return "UserProductFeedback [id=" + id + ", feedbackTitle="
-				+ feedbackTitle + ", review=" + review + ", rating=" + rating
-				+ ", user=" + user + ", product=" + product + ", reviewedBy="
-				+ reviewedBy + "]";
+		return "UserProductFeedback [id=" + id + ", feedbackTitle=" + feedbackTitle + ", review=" + review + ", rating=" + rating + ", user=" + user
+				+ ", product=" + product + ", reviewedBy=" + reviewedBy + ", pageIndex=" + pageIndex + ", count=" + count + "]";
 	}
 
 }

@@ -66,8 +66,8 @@ public class BrandSupport extends MizeEntity implements Comparable<BrandSupport>
 			String site, String chatUrl, String tollFreePhone,
 			String hoursOfOp, String qualifier, String type, Boolean validated,
 			Integer validatedBy, DateTime validatedDate, String twitter,String facebook,
-			String countryCode, int createdBy, DateTime createdDate,
-			int updatedBy, DateTime updatedDate) {
+			String countryCode, Long createdBy, DateTime createdDate,
+			Long updatedBy, DateTime updatedDate) {
 		this.brandId = brandId;
 		this.id = id;
 		this.phone = phone;
