@@ -5,9 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.Range;
 
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.NonEmpty;
@@ -31,11 +34,11 @@ public class UserSignup extends MizeEntity implements Comparable<UserSignup>{
 	private String lastName;
 	
 	@NonEmpty (message="email")
-	@Size(max = 30)
+	@Size(max = 50)
 	private String email;
 	
-	@NonEmpty (message="phone")
-	@Size(max = 30)
+	@NonEmpty (message="phone.notempty")
+	@Range(min=1000000000L, max=9999999999L, message="phone.numeric")
 	private String phone;
 	
 	@NonEmpty (message="website")
