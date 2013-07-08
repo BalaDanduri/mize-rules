@@ -1,5 +1,6 @@
 package com.mize.domain.common.response;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.mize.domain.common.MizeEntity;
@@ -35,7 +36,8 @@ public class MizeResponse {
 	}
 	
 	public MizeResponse() {
-		
+		meta = new ResponseMeta();
+		rels = new ArrayList<ResponseLink>();
 	}
 
 }
