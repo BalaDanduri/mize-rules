@@ -106,7 +106,7 @@ public class BrandFeed extends MizeEntity implements Comparable<BrandFeed>{
 	
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Column(name = "start_time",  nullable = true)
-	@Type(type="com.mize.domain.brand.DateTimeJPA")
+	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@JsonSerialize(using=JsonDateTimeSerializer.class)
 	public DateTime getStartTime() {
 		return startTime;
@@ -120,7 +120,7 @@ public class BrandFeed extends MizeEntity implements Comparable<BrandFeed>{
 	
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Column(name = "end_time",  nullable = true)
-	@Type(type="com.mize.domain.brand.DateTimeJPA")
+	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@JsonSerialize(using=JsonDateTimeSerializer.class)
 	public DateTime getEndTime() {
 		return endTime;
