@@ -183,11 +183,11 @@ public class BrandSupportFeedback extends MizeEntity implements Comparable<Brand
 		return sb.toString();
 	}
 
-	public long getBrandSupportId() {
+	public Long getBrandSupportId() {
 		return brandSupportId;
 	}
 
-	public void setBrandSupportId(long brandSupportId) {
+	public void setBrandSupportId(Long brandSupportId) {
 		this.brandSupportId = brandSupportId;
 	}
 	
