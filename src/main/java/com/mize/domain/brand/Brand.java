@@ -27,6 +27,7 @@ public class Brand extends MizeEntity implements Comparable<Brand>{
 	private String website;
 	private String logoName;
 	private String feedbackEmail ; 	
+	private String registered;
 	private List<BrandSupport> brandSupports = new ArrayList<BrandSupport>();
 	private List<BrandFeed> brandFeeds = new ArrayList<BrandFeed>();
 	
@@ -139,6 +140,15 @@ public class Brand extends MizeEntity implements Comparable<Brand>{
 
 	public void setBrandFeeds(List<BrandFeed> brandFeeds) {
 		this.brandFeeds = brandFeeds;
+	}
+
+	
+	public String getRegistered() {
+		return registered;
+	}
+
+	public void setRegistered(String registered) {
+		this.registered = registered;
 	}
 
 	@Override
