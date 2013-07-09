@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.hibernate.annotations.GenericGenerator;
@@ -33,9 +34,7 @@ public class BrandFeed extends MizeEntity implements Comparable<BrandFeed>{
 	private DateTime startTime;
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime endTime;
-	private Long userId;
-	protected Long createdBy;
-	protected Long updatedBy;
+	private Integer pageIndex;
 	
 	public BrandFeed(){
 		
@@ -133,35 +132,36 @@ public class BrandFeed extends MizeEntity implements Comparable<BrandFeed>{
 		this.endTime = endTime;
 	}
 	
-	@Transient
-	public Long getUserId() {
-		return userId;
-	}
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
-	
 	@Column(name = "created_by",  nullable = true, length = 20)
+	@JsonIgnore(value=false)
 	public Long getCreatedBy() {
-		return userId;
+		return createdBy;
 	}
-
-	public void setCreatedBy(Long userId) {
-		this.userId = userId;
+	@JsonIgnore(value=false)
+	public void setCreatedBy(Long createdBy) {
+		this.createdBy = createdBy;
 	}
 
 	@Column(name = "updated_by",  nullable = true, length = 20)
+	@JsonIgnore(value=false)
 	public Long getUpdatedBy() {
-		return userId;
+		return updatedBy;
 	}
-
-	public void setUpdatedBy(Long userId) {
-		this.userId = userId;
+	@JsonIgnore(value=false)
+	public void setUpdatedBy(Long updatedBy) {
+		this.updatedBy = updatedBy;
 	}
 
 	@Override
 	public int compareTo(BrandFeed arg0) {
 		return 0;
 	}
-	
+
+	public Integer getPageIndex() {
+		return pageIndex;
+	}
+
+	public void setPageIndex(Integer pageIndex) {
+		this.pageIndex = pageIndex;
+	}
 }

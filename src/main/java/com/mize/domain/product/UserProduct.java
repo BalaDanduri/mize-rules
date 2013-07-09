@@ -7,11 +7,11 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.auth.User;
-import com.mize.domain.common.Entity;
+import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
-public class UserProduct extends Entity{
+public class UserProduct extends MizeEntity{
 
 	private static final long serialVersionUID = -5270305444916049503L;
 	protected Long id;
