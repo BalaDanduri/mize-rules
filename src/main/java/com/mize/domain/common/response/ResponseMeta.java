@@ -2,6 +2,8 @@ package com.mize.domain.common.response;
 
 import java.util.List;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 
 public class ResponseMeta {
 	
@@ -11,9 +13,12 @@ public class ResponseMeta {
 	private Long totalRecords;
 	private Integer pageNumber;
 	private Long totalPages;
-	private Long responseTime;
 	private String version;
 	private String request;
+	@JsonIgnore
+	private Long startTime = System.currentTimeMillis();
+	@JsonIgnore
+	private Long endTime;
 
 	public ResponseMeta() {
 		
@@ -27,7 +32,6 @@ public class ResponseMeta {
 		this.totalRecords = totalRecords;
 		this.pageNumber = pageNumber;
 		this.totalPages = totalPages;
-		this.responseTime = responseTime;
 		this.version = version;
 		this.request = request;
 	}
@@ -69,10 +73,13 @@ public class ResponseMeta {
 		this.totalPages = totalPages;
 	}
 	public Long getResponseTime() {
-		return responseTime;
+		if (endTime == null) {
+			return -1L;
+		}
+		return endTime - startTime;
 	}
-	public void setResponseTime(Long responseTime) {
-		this.responseTime = responseTime;
+	public void setEndTime(Long endTime) {
+		this.endTime = endTime;
 	}
 	public String getVersion() {
 		return version;
