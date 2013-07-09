@@ -21,37 +21,37 @@ public class UserSignup extends MizeEntity implements Comparable<UserSignup>{
 
 	private static final long serialVersionUID = 6078249173358032532L;
 	
-	@NonEmpty(message="companyName")
+	@NonEmpty(message="companyName.notnull")
 	@Size(max = 30)
 	private String companyName;
 	
-	@NonEmpty (message="firstName")
+	@NonEmpty (message="firstName.notnull")
 	@Size(max = 30)
 	private String firstName;
 	
-	@NonEmpty (message="lastName")
+	@NonEmpty (message="lastName.notnull")
 	@Size(max = 30)
 	private String lastName;
 	
-	@NonEmpty (message="email")
+	@NonEmpty (message="email.notnull")
 	@Size(max = 50)
 	private String email;
 	
-	@NonEmpty (message="phone.notempty")
+	@NonEmpty (message="phone.notnull")
 	@Range(min=1000000000L, max=9999999999L, message="phone.numeric")
 	private String phone;
 	
-	@NonEmpty (message="website")
+	@NonEmpty (message="website.notnull")
 	@Size(max = 30)
 	private String website;
 	
-	@NonEmpty (message="jobRole")
+	@NonEmpty (message="jobRole.notnull")
 	@Size(max = 30)
 	private String jobRole;
 	
 	private String comment;
 	
-	@NonEmpty (message="status")
+	@NonEmpty (message="status.notnull")
 	private Integer status;
 	
 	private Integer validatedBy;

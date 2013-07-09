@@ -1,17 +1,16 @@
 package com.mize.domain.user;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.GenericGenerator;
 
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.util.NonEmpty;
 
 @Entity
 @Table(name = "role")
@@ -21,17 +20,18 @@ public class Role extends MizeEntity implements Comparable<Role>{
 	private String name;
 	private String description;
 	private String code;
-	private List<Group> groups = new ArrayList<Group>(); 
+	private String active;
+	
 	
 	public Role(){		
 	}
 	
-	public Role(String name, String description, String code, List<Group> groups) {
+	public Role(String name, String description, String code, String active) {
 		super();
 		this.name = name;
 		this.description = description;
 		this.code = code;
-		this.groups = groups;
+		this.active = active;
 	}
 
 	@Id
@@ -49,6 +49,8 @@ public class Role extends MizeEntity implements Comparable<Role>{
 	}
 	
 	@Column(name = "CODE", nullable = true, length = 20)
+	@NonEmpty(message="code.notempty")
+	@Size(max = 30)
 	public String getCode() {
 		return code;
 	}
@@ -58,6 +60,8 @@ public class Role extends MizeEntity implements Comparable<Role>{
 	}
 
 	@Column(name = "ROLE_NAME", nullable = false, length = 100)
+	@NonEmpty(message="roleName.notempty")
+	@Size(max = 100)
 	public String getName() {
 		return name;
 	}
@@ -66,19 +70,22 @@ public class Role extends MizeEntity implements Comparable<Role>{
 	}
 	
 	@Column(name = "DESCRIPTION", nullable = true, length = 200)
+	@NonEmpty(message="description.notempty")
+	@Size(max = 200)
 	public String getDescription() {
 		return description;
 	}
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	@javax.persistence.Transient
-	public List<Group> getGroups() {
-		return groups;
+	
+	@Column(name = "ACTIVE_INDICATOR", nullable = true, length = 1)
+	public String getActive() {
+		return active;
 	}
 
-	public void setGroups(List<Group> groups) {
-		this.groups = groups;
+	public void setActive(String active) {
+		this.active = active;
 	}
 
 	@Override
@@ -112,7 +119,7 @@ public class Role extends MizeEntity implements Comparable<Role>{
 
 	@Override
 	public String toString() {
-		return "Role [id=" + id + ", name=" + name + ", description=" + description + "]";
+		return "Role [id=" + id + ", name=" + name + ", description=" + description + ",active=" + active + "]";
 	}
 	
 	public int compareTo(Role role) {

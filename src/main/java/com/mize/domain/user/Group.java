@@ -9,10 +9,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.GenericGenerator;
 
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.util.NonEmpty;
 
 @Entity
 @Table(name = "groups")
@@ -22,16 +24,18 @@ public class Group extends MizeEntity implements Comparable<Group>{
 	private String name;
 	private String code;
 	private String description;
+	private String active;
 	private List<Role> roles = new ArrayList<Role>();
 	
 	public Group(){		
 	}
 	
-	public Group(String name, String description, String code, List<Role> roles) {
+	public Group(String name, String description, String code, String active, List<Role> roles) {
 		super();
 		this.name = name;
 		this.description = description;
 		this.code = code;
+		this.active = active;
 		this.roles = roles;
 	}
 	
@@ -51,6 +55,8 @@ public class Group extends MizeEntity implements Comparable<Group>{
 	}	
 	
 	@Column(name = "CODE", nullable = true, length = 20)
+	@NonEmpty(message="code.notempty")
+	@Size(max = 30)
 	public String getCode() {
 		return code;
 	}
@@ -60,6 +66,8 @@ public class Group extends MizeEntity implements Comparable<Group>{
 	}
 
 	@Column(name = "DESCRIPTION", nullable = true, length = 200)
+	@NonEmpty(message="description.notempty")
+	@Size(max = 200)
 	public String getDescription() {
 		return description;
 	}
@@ -69,6 +77,8 @@ public class Group extends MizeEntity implements Comparable<Group>{
 	}
 	
 	@Column(name = "GROUP_NAME", nullable = false, length = 100)
+	@NonEmpty(message="groupName.notempty")
+	@Size(max = 100)
 	public String getName() {
 		return name;
 	}
@@ -76,10 +86,21 @@ public class Group extends MizeEntity implements Comparable<Group>{
 		this.name = name;
 	}
 	
+	
 	@javax.persistence.Transient
 	public List<Role> getRoles() {
 		return roles;
 	}
+	
+	@Column(name = "ACTIVE_INDICATOR", nullable = true, length = 1)
+	public String getActive() {
+		return active;
+	}
+
+	public void setActive(String active) {
+		this.active = active;
+	}
+
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
@@ -98,7 +119,7 @@ public class Group extends MizeEntity implements Comparable<Group>{
 	
 	@Override
 	public String toString() {
-		return "Group [name=" + name + ", roles=" + roles + ", id=" + id + "]";
+		return "Group [name=" + name + ", roles=" + roles + ", id=" + id + ", active=" + active + "]";
 	}
 
 	@Override
