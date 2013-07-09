@@ -1,8 +1,8 @@
 package com.mize.domain.product;
 
-import com.mize.domain.common.Entity;
+import com.mize.domain.common.MizeEntity;
 
-public class ProductContent extends Entity{
+public class ProductContent extends MizeEntity{
 	
 	private static final long serialVersionUID = -76159028571766886L;
 	private String brandName;
@@ -92,6 +92,18 @@ public class ProductContent extends Entity{
 		return "ProductContent [brandName=" + brandName + ", productName=" + productName + ", contentType=" + contentType + ", seqNo=" + seqNo + ", title="
 				+ title + ", description=" + description + ", url=" + url + ", pageIndex=" + pageIndex + ", count=" + count + ", createdBy=" + createdBy
 				+ ", createdDate=" + createdDate + ", updatedBy=" + updatedBy + ", updatedDate=" + updatedDate + "]";
+	}
+
+	@Override
+	public Long getId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setId(Long id) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

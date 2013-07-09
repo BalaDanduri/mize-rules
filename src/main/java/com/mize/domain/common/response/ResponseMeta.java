@@ -13,12 +13,11 @@ public class ResponseMeta {
 	private Long totalRecords;
 	private Integer pageNumber;
 	private Long totalPages;
+	private Long responseTime = System.currentTimeMillis();
 	private String version;
 	private String request;
 	@JsonIgnore
 	private Long startTime = System.currentTimeMillis();
-	@JsonIgnore
-	private Long endTime;
 
 	public ResponseMeta() {
 		
@@ -73,13 +72,7 @@ public class ResponseMeta {
 		this.totalPages = totalPages;
 	}
 	public Long getResponseTime() {
-		if (endTime == null) {
-			return -1L;
-		}
-		return endTime - startTime;
-	}
-	public void setEndTime(Long endTime) {
-		this.endTime = endTime;
+		return (System.currentTimeMillis()-responseTime);
 	}
 	public String getVersion() {
 		return version;
