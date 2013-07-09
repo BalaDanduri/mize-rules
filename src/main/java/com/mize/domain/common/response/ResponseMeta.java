@@ -9,6 +9,7 @@ public class ResponseMeta {
 	
 	private String statusCode;
 	private List<String> statusMessage;
+	private List<ResponseStatus> status;
 	private Integer resultSize;
 	private Long totalRecords;
 	private Integer pageNumber;
@@ -34,6 +35,19 @@ public class ResponseMeta {
 		this.totalPages = totalPages;
 		this.version = version;
 		this.request = request;
+	}
+	
+	public ResponseMeta(String statusCode, List<String> statusMessage, Integer resultSize, Long totalRecords,
+			Integer pageNumber, Long totalPages, Long responseTime, String version, String request, List<ResponseStatus> status) {
+		this.statusCode = statusCode;
+		this.statusMessage = statusMessage;
+		this.resultSize = resultSize;
+		this.totalRecords = totalRecords;
+		this.pageNumber = pageNumber;
+		this.totalPages = totalPages;
+		this.version = version;
+		this.request = request;
+		this.status = status;
 	}
 
 	public String getStatusCode() {
@@ -92,5 +106,13 @@ public class ResponseMeta {
 	}
 	public void setRequest(String request) {
 		this.request = request;
+	}
+
+	public List<ResponseStatus> getStatus() {
+		return status;
+	}
+
+	public void setStatus(List<ResponseStatus> status) {
+		this.status = status;
 	}	
 }
