@@ -19,8 +19,8 @@ public class ResponseMeta {
 	@JsonIgnore
 	private final Long startTime = System.currentTimeMillis();
 
-	public static final String STATUS_SUCCESS = "success";
-	public static final String STATUS_FAILURE = "failure";
+	public static final String STATUS_SUCCESS = "SUCCESS";
+	public static final String STATUS_FAILURE = "FAILURE";
 	
 	public ResponseMeta() {
 		
