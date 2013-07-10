@@ -55,7 +55,6 @@ public class Group extends MizeEntity implements Comparable<Group>{
 	}	
 	
 	@Column(name = "CODE", nullable = true, length = 20)
-	@NonEmpty(message="code.notempty")
 	@Size(max = 30)
 	public String getCode() {
 		return code;
