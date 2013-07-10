@@ -1,5 +1,6 @@
 package com.mize.domain.common.response;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
@@ -49,6 +50,9 @@ public class ResponseMeta {
 	}
 
 	public List<ResponseStatus> getErrors() {
+		if (errors == null) {
+			errors = new ArrayList<ResponseStatus>();
+		}
 		return errors;
 	}
 
