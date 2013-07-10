@@ -1,5 +1,8 @@
 package com.mize.domain.product;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -21,7 +24,7 @@ public class UserProduct extends MizeEntity{
 	protected String active;
 	protected UserProductFeedback productFeedback;
 	protected int pageIndex;
-	
+	private List<Long> prodRegnIds = new ArrayList<Long>(); 
 	public enum Wownit{
 		own,want,gift;
 	}
@@ -137,4 +140,15 @@ public class UserProduct extends MizeEntity{
 	public void setUpdatedDate(DateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}
+
+	public List<Long> getProdRegnIds() {
+		return prodRegnIds;
+	}
+
+	public void setProdRegnIds(List<Long> prodRegnIds) {
+		this.prodRegnIds = prodRegnIds;
+	}
+
+	
+	
 }
