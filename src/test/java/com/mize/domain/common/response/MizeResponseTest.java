@@ -23,14 +23,14 @@ public class MizeResponseTest extends MizeDomainTest {
 
 	@Test
 	public void test() {
-		ResponseStatus status = new ResponseStatus("brand_not_found", "The brand you searched is not present in our system");
-		ResponseStatus status1 = new ResponseStatus("product_not_found", "The product you searched is not present in our system");
+		ResponseStatus status = new ResponseStatus("", "brand_not_found", "The brand you searched is not present in our system");
+		ResponseStatus status1 = new ResponseStatus("", "product_not_found", "The product you searched is not present in our system");
 		
 		List<ResponseStatus> statuses = new ArrayList<ResponseStatus>();
 		statuses.add(status);
 		statuses.add(status1);
 		
-		ResponseMeta meta = new ResponseMeta("Brand.Ok", null,10,900L,1,90L,340L,"1.2","GET /brands/", statuses);
+		ResponseMeta meta = new ResponseMeta("SUCCESS", null,10,900L,1,90L,"1.2","GET /brands/");
 		
 		ResponseLink link0 = new ResponseLink("Brand Support", "/brand/support/{items.id}", new String[]{"BrandSupport"});
 		ResponseLink link1 = new ResponseLink("Brand Details", "/brand/details/{items.id}", new String[]{"BrandDetails"});
