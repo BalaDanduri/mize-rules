@@ -2,6 +2,7 @@ package com.mize.domain.common.response;
 
 public class ResponseStatus {
 	
+	String fieldName;
 	String code;
 	String message;
 	
@@ -9,10 +10,19 @@ public class ResponseStatus {
 		
 	}
 	
-	public ResponseStatus(String code, String message) {
+	public ResponseStatus(String fieldName, String code, String message) {
+		this.fieldName = fieldName;
 		this.code = code;
 		this.message = message;
 	}
+	public String getFieldName() {
+		return fieldName;
+	}
+
+	public void setFieldName(String fieldName) {
+		this.fieldName = fieldName;
+	}
+
 	public String getCode() {
 		return code;
 	}
@@ -31,43 +41,44 @@ public class ResponseStatus {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
+		result = prime * result + ((fieldName == null) ? 0 : fieldName.hashCode());
 		result = prime * result + ((message == null) ? 0 : message.hashCode());
 		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
+		if (this == obj)
 			return true;
-		}
-		if (obj == null) {
+		if (obj == null)
 			return false;
-		}
-		if (!(obj instanceof ResponseStatus)) {
+		if (getClass() != obj.getClass())
 			return false;
-		}
 		ResponseStatus other = (ResponseStatus) obj;
 		if (code == null) {
-			if (other.code != null) {
+			if (other.code != null)
 				return false;
-			}
-		} else if (!code.equals(other.code)) {
+		} else if (!code.equals(other.code))
 			return false;
-		}
+		if (fieldName == null) {
+			if (other.fieldName != null)
+				return false;
+		} else if (!fieldName.equals(other.fieldName))
+			return false;
 		if (message == null) {
-			if (other.message != null) {
+			if (other.message != null)
 				return false;
-			}
-		} else if (!message.equals(other.message)) {
+		} else if (!message.equals(other.message))
 			return false;
-		}
 		return true;
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("ResponseStatus [code=");
+		builder.append("ResponseStatus [fieldName=");
+		builder.append(fieldName);
+		builder.append(", code=");
 		builder.append(code);
 		builder.append(", message=");
 		builder.append(message);
