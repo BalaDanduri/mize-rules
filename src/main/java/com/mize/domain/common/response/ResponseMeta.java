@@ -39,9 +39,6 @@ public class ResponseMeta {
 	}
 
 	public String getStatus() {
-		if (status == null || !status.equalsIgnoreCase(STATUS_FAILURE)) {
-			status = STATUS_SUCCESS;
-		}
 		return status;
 	}
 
