@@ -15,7 +15,7 @@ public class ProductRegister extends MizeEntity{
 	private static final long serialVersionUID = -6338652951554117142L;
 	
 	private Product product;
-	private User user = new User();;
+	private User user;
 	private String serialNumber;
 	
 	@DateTimeFormat (pattern="dd-MM-yyyy")
