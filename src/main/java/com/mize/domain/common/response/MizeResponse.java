@@ -6,8 +6,8 @@ import java.util.List;
 import com.mize.domain.common.MizeEntity;
 
 public class MizeResponse {
-	private ResponseMeta meta;
-	private List<ResponseLink>  rels;
+	private ResponseMeta meta = new ResponseMeta();
+	private List<ResponseLink>  rels = new ArrayList<ResponseLink>();
 	private List<? extends MizeEntity> items;
 	
 	public ResponseMeta getMeta() {
@@ -36,8 +36,9 @@ public class MizeResponse {
 	}
 	
 	public MizeResponse() {
-		meta = new ResponseMeta();
-		rels = new ArrayList<ResponseLink>();
 	}
 
+	public MizeResponse(String request) {
+		meta.setRequest(request);
+	}
 }
