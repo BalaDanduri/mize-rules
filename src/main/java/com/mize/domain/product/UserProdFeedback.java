@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.mize.domain.common.Entity;
+import com.mize.domain.common.MizeEntity;
 import com.mize.domain.user.FriendsActivities;
 import com.mize.domain.user.UserFriend;
 
-public class UserProdFeedback extends Entity{
+public class UserProdFeedback extends MizeEntity{
 	
 	private static final long serialVersionUID = -3952329917212635913L;
 	Map<Long, FriendsActivities> commentsMap ;
@@ -16,6 +16,12 @@ public class UserProdFeedback extends Entity{
 	Map<Long, FriendsActivities> userLikedMap ;
 	List<UserProductFeedback>  prodFeedbacks;
 	private List<UserFriend> userFriends;
+	private Integer resultSize;
+	private Long totalRecords;
+	private Integer pageNumber;
+	private Long totalPages;
+	List<FriendsActivities> friendsActivities;
+	
 	
 	public Map<Long, FriendsActivities> getCommentsMap() {
 		return commentsMap;
@@ -65,5 +71,45 @@ public class UserProdFeedback extends Entity{
 			}
 		}
 		return userIds;
+	}
+	public Integer getResultSize() {
+		return resultSize;
+	}
+	public void setResultSize(Integer resultSize) {
+		this.resultSize = resultSize;
+	}
+	public Long getTotalRecords() {
+		return totalRecords;
+	}
+	public void setTotalRecords(Long totalRecords) {
+		this.totalRecords = totalRecords;
+	}
+	public Integer getPageNumber() {
+		return pageNumber;
+	}
+	public void setPageNumber(Integer pageNumber) {
+		this.pageNumber = pageNumber;
+	}
+	public Long getTotalPages() {
+		return totalPages;
+	}
+	public void setTotalPages(Long totalPages) {
+		this.totalPages = totalPages;
+	}
+	public List<FriendsActivities> getFriendsActivities() {
+		return friendsActivities;
+	}
+	public void setFriendsActivities(List<FriendsActivities> friendsActivities) {
+		this.friendsActivities = friendsActivities;
+	}
+	@Override
+	public Long getId() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public void setId(Long id) {
+		// TODO Auto-generated method stub
+		
 	}
 }
