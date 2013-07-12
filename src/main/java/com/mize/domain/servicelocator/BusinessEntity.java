@@ -35,7 +35,7 @@ public class BusinessEntity  extends Entity {
 		COMPANY, DEALER
 	}
 	
-	public BusinessEntity(long id, String code, String typeCode, String subTypeCode, String name, String logo,
+	public BusinessEntity(long id, String code, BusineEntityTypeCoe typeCode, String subTypeCode, String name, String logo,
 			List<BusinessEntityAddress> businessEntityAddressList, long entityId, String entityName) {
 		this.id = id;
 		this.code = code;
@@ -67,10 +67,10 @@ public class BusinessEntity  extends Entity {
 	public void setCode(String code) {
 		this.code = code;
 	}
-	public String getTypeCode() {
+	public BusineEntityTypeCoe getTypeCode() {
 		return typeCode;
 	}
-	public void setTypeCode(String typeCode) {
+	public void setTypeCode(BusineEntityTypeCoe typeCode) {
 		this.typeCode = typeCode;
 	}
 	public String getSubTypeCode() {
