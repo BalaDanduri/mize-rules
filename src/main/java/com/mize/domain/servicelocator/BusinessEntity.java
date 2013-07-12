@@ -16,7 +16,7 @@ public class BusinessEntity  extends Entity {
 	private static final long serialVersionUID = 3712437162456355278L;
 	long id;
 	private String code;
-	private BusineEntityTypeCode typeCode;
+	private TypeCode typeCode;
 	private String subTypeCode;
 	private String name;
 	private String logo;
@@ -31,11 +31,11 @@ public class BusinessEntity  extends Entity {
 		
 	}
 	
-	public enum BusineEntityTypeCode {
+	public enum TypeCode {
 		COMPANY, DEALER
 	}
 	
-	public BusinessEntity(long id, String code, BusineEntityTypeCode typeCode, String subTypeCode, String name, String logo,
+	public BusinessEntity(long id, String code, TypeCode typeCode, String subTypeCode, String name, String logo,
 			List<BusinessEntityAddress> businessEntityAddressList, long entityId, String entityName) {
 		this.id = id;
 		this.code = code;
@@ -67,10 +67,10 @@ public class BusinessEntity  extends Entity {
 	public void setCode(String code) {
 		this.code = code;
 	}
-	public BusineEntityTypeCode getTypeCode() {
+	public TypeCode getTypeCode() {
 		return typeCode;
 	}
-	public void setTypeCode(BusineEntityTypeCode typeCode) {
+	public void setTypeCode(TypeCode typeCode) {
 		this.typeCode = typeCode;
 	}
 	public String getSubTypeCode() {
