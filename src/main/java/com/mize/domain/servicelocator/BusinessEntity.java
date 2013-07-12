@@ -16,7 +16,7 @@ public class BusinessEntity  extends Entity {
 	private static final long serialVersionUID = 3712437162456355278L;
 	long id;
 	private String code;
-	private String typeCode;
+	private BusineEntityTypeCoe typeCode;
 	private String subTypeCode;
 	private String name;
 	private String logo;
@@ -29,6 +29,10 @@ public class BusinessEntity  extends Entity {
 	
 	public BusinessEntity() {
 		
+	}
+	
+	public enum BusineEntityTypeCoe {
+		COMPANY, DEALER
 	}
 	
 	public BusinessEntity(long id, String code, String typeCode, String subTypeCode, String name, String logo,
