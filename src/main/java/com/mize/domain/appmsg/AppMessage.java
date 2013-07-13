@@ -13,7 +13,7 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 	private Integer severity;
 	private Locale locale = new Locale();
 
-	public enum Severity{
+	public enum Severity {
 		one(1),two(2),three(3),four(4),five(5);
 		int val;
 		Severity(int v){
@@ -23,7 +23,7 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 			return val;
 		}
 	}
-	public enum MsgType{
+	public enum MsgType {
 		Application(1),Error(2);
 		int val;
 		MsgType(int v){
