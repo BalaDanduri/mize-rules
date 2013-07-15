@@ -8,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
@@ -30,6 +29,7 @@ public class BrandFeed extends MizeEntity implements Comparable<BrandFeed>{
 	private Brand brand;
 	private String feedType;
 	private String feedDesc;
+	private String feedTitle;
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime startTime;
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
@@ -164,4 +164,14 @@ public class BrandFeed extends MizeEntity implements Comparable<BrandFeed>{
 	public void setPageIndex(Integer pageIndex) {
 		this.pageIndex = pageIndex;
 	}
+
+	@Column(name = "FEED_TITLE",nullable = true, length = 50)
+	public String getFeedTitle() {
+		return feedTitle;
+	}
+
+	public void setFeedTitle(String feedTitle) {
+		this.feedTitle = feedTitle;
+	}
+	
 }
