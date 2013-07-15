@@ -42,7 +42,7 @@ public class UserSignup extends MizeEntity implements Comparable<UserSignup>{
 	private String phone;
 	
 	@NonEmpty (message="website.notnull")
-	@Size(max = 30)
+	@Size(max = 100)
 	private String website;
 	
 	@NonEmpty (message="jobRole.notnull")
