@@ -8,7 +8,7 @@ public class PaginationPage<E> {
         private int pagesAvailable;
         private List<E> pageItems = new ArrayList<E>();
         private long rowsAvailable;
-        private Long pageSize;
+        private Integer pageSize;
 
         public void setPageNumber(int pageNumber) {
             this.pageNumber = pageNumber;
@@ -42,11 +42,11 @@ public class PaginationPage<E> {
 			this.rowsAvailable = rowsAvailable;
 		}
 
-		public Long getPageSize() {
+		public Integer getPageSize() {
 			return pageSize;
 		}
 
-		public void setPageSize(Long pageSize) {
+		public void setPageSize(Integer pageSize) {
 			this.pageSize = pageSize;
 		}
     }
