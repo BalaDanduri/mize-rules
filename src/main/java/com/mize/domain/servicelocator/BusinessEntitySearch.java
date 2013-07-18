@@ -2,12 +2,17 @@ package com.mize.domain.servicelocator;
 
 import java.util.List;
 
-
 public class BusinessEntitySearch {
 	
 	private BusinessEntityAddress entityAddress;
 	private int radius;
-	private List<BusinessEntityAddress> addressList;
+	private List<BusinessEntityAddress> addressList;	
+	private Integer pageIndex;
+	
+	public BusinessEntitySearch() {
+		entityAddress = new BusinessEntityAddress();
+		
+	}
 	
 	public BusinessEntityAddress getEntityAddress() {
 		return entityAddress;
@@ -26,5 +31,12 @@ public class BusinessEntitySearch {
 	}
 	public void setAddressList(List<BusinessEntityAddress> addressList) {
 		this.addressList = addressList;
+	}	
+	public Integer getPageIndex() {
+		return pageIndex;
+	}	
+	public void setPageIndex(Integer pageIndex) {
+		this.pageIndex = pageIndex;
 	}
+	
 }

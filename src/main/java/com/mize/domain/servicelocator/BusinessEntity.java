@@ -7,14 +7,11 @@ import java.util.List;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 
-import com.mize.domain.common.Entity;
+import com.mize.domain.common.MizeEntity;
 
-public class BusinessEntity  extends Entity {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 3712437162456355278L;
-	long id;
+public class BusinessEntity  extends MizeEntity {
+	
+	private static final long serialVersionUID = 3712437162456355278L;	
 	private String code;
 	private TypeCode typeCode;
 	private String subTypeCode;
@@ -55,10 +52,10 @@ public class BusinessEntity  extends Entity {
 			List<BusinessEntityAddress> businessEntityAddressList) {
 		this.businessEntityAddressList = businessEntityAddressList;
 	}
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getCode() {
@@ -229,6 +226,5 @@ public class BusinessEntity  extends Entity {
 	public void setPageIndex(int pageIndex) {
 		this.pageIndex = pageIndex;
 	}
-	
 	
 }
