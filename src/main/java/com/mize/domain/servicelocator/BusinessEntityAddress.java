@@ -5,18 +5,13 @@ import java.util.Comparator;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 import com.mize.domain.common.Country;
-import com.mize.domain.common.Entity;
 import com.mize.domain.common.Locale;
+import com.mize.domain.common.MizeEntity;
 import com.mize.domain.common.State;
 
-public class BusinessEntityAddress  extends Entity  implements Comparable<BusinessEntityAddress>{
+public class BusinessEntityAddress  extends MizeEntity  implements Comparable<BusinessEntityAddress>{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 625412111910612584L;
-	
-	private long id;
+	private static final long serialVersionUID = 625412111910612584L;	
 	private long beId;
 	private String code;
 	private Locale locale;
@@ -39,10 +34,14 @@ public class BusinessEntityAddress  extends Entity  implements Comparable<Busine
 	private String toolTipLogo;
 	private String icon;
 	private BusinessEntityGeo geoLocation;
-	public long getId() {
+	
+	public BusinessEntityAddress() {
+		geoLocation = new BusinessEntityGeo();
+	}
+	public Long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public long getBeId() {
