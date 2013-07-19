@@ -25,6 +25,7 @@ public class ProductRegister extends MizeEntity{
 	@DateTimeFormat (pattern="dd-MM-yyyy")
 	private DateTime warrantyExpiryDate;
 	private String additionalInfo;
+	private String receiptLink;
 	
 	public Product getProduct() {
 		return product;
@@ -85,11 +86,17 @@ public class ProductRegister extends MizeEntity{
 		this.additionalInfo = additionalInfo;
 	}
 	
+	public String getReceiptLink() {
+		return receiptLink;
+	}
+	public void setReceiptLink(String receiptLink) {
+		this.receiptLink = receiptLink;
+	}
 	@Override
 	public String toString() {
 		return "ProductRegister [product=" + product + ", user=" + user + ", serialNumber=" + serialNumber + ", purchaseDate=" + purchaseDate
 				+ ", purchasePrice=" + purchasePrice + ", purchaseStore=" + purchaseStore + ", warrantyExpiryDate=" + warrantyExpiryDate + ", additionalInfo="
-				+ additionalInfo + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", updatedBy=" + updatedBy + ", updatedDate=" + updatedDate
+				+ additionalInfo + ", receiptLink=" + receiptLink + ", createdBy=" + createdBy + ", createdDate=" + createdDate + ", updatedBy=" + updatedBy + ", updatedDate=" + updatedDate
 				+ ", id=" + id + "]";
 	}
 	
