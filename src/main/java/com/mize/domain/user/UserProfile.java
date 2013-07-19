@@ -13,7 +13,6 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.auth.User;
-import com.mize.domain.common.Entity;
 import com.mize.domain.common.Gender;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.common.PostalAddress;

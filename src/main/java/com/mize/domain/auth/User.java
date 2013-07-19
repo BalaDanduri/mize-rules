@@ -196,7 +196,7 @@ public class User extends MizeEntity implements Comparable<User> {
 	public void setUserProfile(UserProfile userProfile) {
 		this.userProfile = userProfile;
 	}
-	@JsonView(UserProfileViews.UserProfilePrivacyView.class)
+	
 	public UserProfile getUserProfile() {
 		return userProfile;
 	}
