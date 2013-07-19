@@ -1,9 +1,16 @@
 package com.mize.domain.user;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.mize.domain.brand.Brand;
 import com.mize.domain.common.MizeEntity;
 
 @Entity
@@ -11,11 +18,26 @@ import com.mize.domain.common.MizeEntity;
 public class UserBE extends MizeEntity implements Comparable<UserBE>{
 	
 	private static final long serialVersionUID = -7447355457187568168L;
+	
 	private Long userId;
 	private Long beId;
 	private String jobRole;
 	private String department;
+	private Set<Brand> brands;
 	
+	public UserBE() {
+		
+	}
+	
+	public UserBE(Long userId, Long beId, String jobRole, String department, Set<Brand> brands) {
+		this.userId = userId;
+		this.beId = beId;
+		this.jobRole = jobRole;
+		this.department = department;
+		this.brands = brands;
+	}
+
+	@Column(name = "department",  nullable = true, length = 100)
 	public String getDepartment() {
 		return department;
 	}
@@ -80,6 +102,16 @@ public class UserBE extends MizeEntity implements Comparable<UserBE>{
 		else if (this.id > be.id)
 			return AFTER;
 		return EQUAL;		
+	}
+
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "users_to_brand" , joinColumns = { @JoinColumn(name="user_id")}, inverseJoinColumns = {@JoinColumn(name="brand_id")} )
+	public Set<Brand> getBrands() {
+		return brands;
+	}
+
+	public void setBrands(Set<Brand> brands) {
+		this.brands = brands;
 	}	
 	
 }
