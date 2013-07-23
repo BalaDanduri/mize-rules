@@ -2,7 +2,7 @@ package com.mize.domain.product;
 
 import com.mize.domain.common.MizeEntity;
 
-public class ProductAttachment extends MizeEntity{
+public class ProductRegnAttachment extends MizeEntity{
 	private static final long serialVersionUID = -6722341511569003526L;	
 	
 	private String name;
@@ -64,7 +64,7 @@ public class ProductAttachment extends MizeEntity{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ProductAttachment other = (ProductAttachment) obj;
+		ProductRegnAttachment other = (ProductRegnAttachment) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

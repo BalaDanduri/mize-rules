@@ -213,7 +213,7 @@ public class ProductRegister extends MizeEntity{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ProductAttachment other = (ProductAttachment) obj;
+		ProductRegnAttachment other = (ProductRegnAttachment) obj;
 		if (id == null) {
 			if (other.getId() != null)
 				return false;
