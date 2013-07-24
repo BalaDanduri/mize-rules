@@ -378,4 +378,24 @@ public class Formatter {
 			return EMPTY+longValue(longVal);
 		}
 	}
+	
+	public static String getTime(DateTime dateTime){
+		String time = EMPTY;
+		if(dateTime != null){			
+			String hours = dateTime.getHourOfDay() < 10 ? "0"+dateTime.getHourOfDay() : ""+dateTime.getHourOfDay() ;
+			String minutes = dateTime.getMinuteOfHour() < 10 ? "0"+dateTime.getMinuteOfHour() : ""+dateTime.getMinuteOfHour() ;
+			String seconds = dateTime.getSecondOfMinute() < 10 ? "0"+dateTime.getSecondOfMinute() : ""+dateTime.getSecondOfMinute() ;		
+			time = hours+":"+minutes+":"+seconds+ (dateTime.getHourOfDay() > 12 ? " PM" : " AM");
+		}
+		return time;
+	}
+	
+	public static String getDisplayDate(DateTime dateTime){
+		String time = EMPTY;
+		if(dateTime != null){	
+			time = getDateTime(dateTime)+(dateTime.getHourOfDay() > 12 ? " PM" : " AM");
+		}
+		return time;
+	}
+	
 }
