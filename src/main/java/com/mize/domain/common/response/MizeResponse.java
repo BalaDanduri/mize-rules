@@ -3,8 +3,11 @@ package com.mize.domain.common.response;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.codehaus.jackson.annotate.JsonPropertyOrder;
+
 import com.mize.domain.common.MizeEntity;
 
+@JsonPropertyOrder({"meta","rel","items"})
 public class MizeResponse {
 	private ResponseMeta meta = new ResponseMeta();
 	private List<ResponseLink>  rels = new ArrayList<ResponseLink>();
