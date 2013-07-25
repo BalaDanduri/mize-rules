@@ -41,6 +41,7 @@ public class ProductRegister extends MizeEntity{
 	private String phoneHome;
 	private String phoneWork;
 	private List<ProductRegnAttachment> attachments ;
+	private String updateProfile;
 	
 	@Override
 	public Long getId() {
@@ -194,6 +195,12 @@ public class ProductRegister extends MizeEntity{
 	public void setAttachments(List<ProductRegnAttachment> attachments) {
 		this.attachments = attachments;
 	}
+	public String getUpdateProfile() {
+		return updateProfile;
+	}
+	public void setUpdateProfile(String updateProfile) {
+		this.updateProfile = updateProfile;
+	}
 	@Override
 	public String toString() {
 		return "ProductRegister [product=" + product + ", user=" + user + ", serialNumber=" + serialNumber
@@ -202,11 +209,12 @@ public class ProductRegister extends MizeEntity{
 				+ ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", address1=" + address1
 				+ ", address2=" + address2 + ", address3=" + address3 + ", city=" + city + ", state=" + state
 				+ ", country=" + country + ", zipCode=" + zipCode + ", phoneMobile=" + phoneMobile + ", phoneHome="
-				+ phoneHome + ", phoneWork=" + phoneWork + ", attachments=" + attachments + "]";
+				+ phoneHome + ", phoneWork=" + phoneWork + ", attachments=" + attachments + ", updateProfile="
+				+ updateProfile + "]";
 	}
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result + ((additionalInfo == null) ? 0 : additionalInfo.hashCode());
 		result = prime * result + ((address1 == null) ? 0 : address1.hashCode());
@@ -227,6 +235,7 @@ public class ProductRegister extends MizeEntity{
 		result = prime * result + ((purchaseStore == null) ? 0 : purchaseStore.hashCode());
 		result = prime * result + ((serialNumber == null) ? 0 : serialNumber.hashCode());
 		result = prime * result + ((state == null) ? 0 : state.hashCode());
+		result = prime * result + ((updateProfile == null) ? 0 : updateProfile.hashCode());
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		result = prime * result + ((warrantyExpiryDate == null) ? 0 : warrantyExpiryDate.hashCode());
 		result = prime * result + ((zipCode == null) ? 0 : zipCode.hashCode());
@@ -336,6 +345,11 @@ public class ProductRegister extends MizeEntity{
 				return false;
 		} else if (!state.equals(other.state))
 			return false;
+		if (updateProfile == null) {
+			if (other.updateProfile != null)
+				return false;
+		} else if (!updateProfile.equals(other.updateProfile))
+			return false;
 		if (user == null) {
 			if (other.user != null)
 				return false;
@@ -353,5 +367,4 @@ public class ProductRegister extends MizeEntity{
 			return false;
 		return true;
 	}
-
 }
