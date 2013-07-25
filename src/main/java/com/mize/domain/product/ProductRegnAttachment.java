@@ -1,12 +1,14 @@
 package com.mize.domain.product;
 
+import java.net.URL;
+
 import com.mize.domain.common.MizeEntity;
 
 public class ProductRegnAttachment extends MizeEntity{
 	private static final long serialVersionUID = -6722341511569003526L;	
 	
 	private String name;
-	private String url;
+	private URL url;
 	private String type;
 	private Long prodRegnId;
 	
@@ -26,10 +28,10 @@ public class ProductRegnAttachment extends MizeEntity{
 		this.id = id;
 	}
 	
-	public String getUrl() {
+	public URL getUrl() {
 		return url;
 	}
-	public void setUrl(String url) {
+	public void setUrl(URL url) {
 		this.url = url;
 	}
 	public String getType() {
