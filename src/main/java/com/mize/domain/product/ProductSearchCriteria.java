@@ -3,9 +3,9 @@ package com.mize.domain.product;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.mize.domain.common.Entity;
+import com.mize.domain.common.MizeEntity;
 
-public class ProductSearchCriteria extends Entity{
+public class ProductSearchCriteria extends MizeEntity implements Comparable<ProductSearchCriteria>{
 	private static final long serialVersionUID = 155385665556860537L;
 	private String category;
 	private String searchKey;
@@ -23,6 +23,16 @@ public class ProductSearchCriteria extends Entity{
 	private String highPrice;
 	private Integer maxLength;
 
+	@Override
+	public Long getId(){
+		return id;
+	}
+	
+	@Override
+	public void setId(Long id){
+		this.id = id;
+	}
+	
 	public Integer getMaxLength() {
 		return maxLength;
 	}
@@ -177,6 +187,11 @@ public class ProductSearchCriteria extends Entity{
 
 	public void setHighPrice(String highPrice) {
 		this.highPrice = highPrice;
+	}
+
+	@Override
+	public int compareTo(ProductSearchCriteria arg0) {
+		return 0;
 	}
 	
 }
