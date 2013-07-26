@@ -22,6 +22,7 @@ public class ProductSearchCriteria extends MizeEntity implements Comparable<Prod
 	private String lowPrice;
 	private String highPrice;
 	private Integer maxLength;
+	private Integer pageSize;
 
 	@Override
 	public Long getId(){
@@ -31,8 +32,16 @@ public class ProductSearchCriteria extends MizeEntity implements Comparable<Prod
 	@Override
 	public void setId(Long id){
 		this.id = id;
-	}
+	}	
 	
+	public Integer getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(Integer pageSize) {
+		this.pageSize = pageSize;
+	}
+
 	public Integer getMaxLength() {
 		return maxLength;
 	}
