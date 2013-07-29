@@ -2,9 +2,9 @@ package com.mize.domain.product;
 
 import java.util.List;
 
-import com.mize.domain.common.Entity;
+import com.mize.domain.common.MizeEntity;
 
-public class SimilarProducts extends Entity{
+public class SimilarProducts extends MizeEntity {
 
 	private static final long serialVersionUID = -1394688774116638338L;
 	private ProductSource productSource;
@@ -53,6 +53,18 @@ public class SimilarProducts extends Entity{
 
 	public void setImages(List<ProductImage> images) {
 		this.images = images;
+	}
+
+
+	@Override
+	public Long getId() {
+		return id;
+	}
+
+
+	@Override
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 

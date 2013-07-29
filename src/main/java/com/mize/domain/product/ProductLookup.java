@@ -3,10 +3,10 @@ package com.mize.domain.product;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mize.domain.common.Entity;
+import com.mize.domain.common.MizeEntity;
 
 
-public class ProductLookup extends Entity{
+public class ProductLookup extends MizeEntity{
 		
 	private static final long serialVersionUID = 7754176397823092647L;
 	public static final String SOURCE_MIZE = "1";
@@ -30,6 +30,9 @@ public class ProductLookup extends Entity{
 	private Integer pageIndex;
 	protected String sourceProductId;
 	private boolean isValidate;
+	private Integer pageSize;
+	
+	
 	
 	public enum Source{
 		AMAZON(2),ETILIZE(3);	
@@ -42,6 +45,14 @@ public class ProductLookup extends Entity{
 		}
 	}
 	
+	public Integer getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(Integer pageSize) {
+		this.pageSize = pageSize;
+	}
+
 	public static Source getSourceID(int num) {
 		for (Source sid : Source.values()) {
 			if(num==sid.value){
@@ -161,7 +172,15 @@ public class ProductLookup extends Entity{
 	public void setValidate(boolean isValidate) {
 		this.isValidate = isValidate;
 	}
-	
-	
+
+	@Override
+	public Long getId() {
+		return id;
+	}
+
+	@Override
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 }
