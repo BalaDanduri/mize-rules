@@ -33,7 +33,11 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 			return val;
 		}
 	}
-	
+	public AppMessage(String code,String shortDesc,String longDesc) {
+		this.code = code;
+		this.shortDesc = shortDesc;
+		this.longDesc = longDesc;
+	}
 	
 	public AppMessage() {
 	}
