@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
@@ -34,6 +35,7 @@ public class BrandFeed extends MizeEntity implements Comparable<BrandFeed>{
 	private DateTime startTime;
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime endTime;
+	@Transient
 	private Integer pageIndex;
 	
 	public BrandFeed(){
@@ -45,22 +47,24 @@ public class BrandFeed extends MizeEntity implements Comparable<BrandFeed>{
 		this.brand = brand;
 	}
 
-	public BrandFeed(Brand brand, String feedType, String feedDesc, DateTime startTime, DateTime endTime) {
+	public BrandFeed(Brand brand, String feedType, String feedDesc, DateTime startTime, DateTime endTime,Integer pageIndex) {
 		super();
 		this.brand = brand;
 		this.feedType = feedType;
 		this.feedDesc = feedDesc;
 		this.startTime = startTime;
 		this.endTime = endTime;
+		this.pageIndex = pageIndex;
 	}
 
-	public BrandFeed(Long id,Brand brand, String feedType, String feedDesc, DateTime startTime, DateTime endTime) {
+	public BrandFeed(Long id,Brand brand, String feedType, String feedDesc, DateTime startTime, DateTime endTime,Integer pageIndex) {
 		this.id = id;
 		this.brand = brand;
 		this.feedType = feedType;
 		this.feedDesc = feedDesc;
 		this.startTime = startTime;
 		this.endTime = endTime;
+		this.pageIndex = pageIndex;
 	}
 
 
@@ -157,6 +161,7 @@ public class BrandFeed extends MizeEntity implements Comparable<BrandFeed>{
 		return 0;
 	}
 
+	@Transient
 	public Integer getPageIndex() {
 		return pageIndex;
 	}

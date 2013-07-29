@@ -1,12 +1,24 @@
 package com.mize.domain.product;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.hibernate.annotations.GenericGenerator;
 
 import com.mize.domain.brand.Brand;
 import com.mize.domain.common.MizeEntity;
@@ -14,10 +26,13 @@ import com.mize.domain.util.DecimalValueDeserializer;
 import com.mize.domain.util.Formatter;
 import com.mize.domain.util.NumberValueSerializer;
 
+@javax.persistence.Entity
+@Table(name = "prod")
 public class Product  extends MizeEntity implements Comparable<Product>{
 	
 	private static final long serialVersionUID = 5379538452565383073L;
 	protected String name;
+	@Transient
 	protected Brand brand = new Brand();
 	protected Double price;
 	protected Set<ProductCategory> category = new HashSet<ProductCategory>();
@@ -31,6 +46,8 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	private ProductDetails productDetails;
 	private String model;
 	private String productLink;
+	private List<ProductRegister> productRegisters = new ArrayList<ProductRegister>();
+	
 	
 	public enum Source{
 		MIZE(1),AMAZON(2),ETILIZE(3),BestBuy(4);
@@ -48,6 +65,8 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 		productDetails = new ProductDetails();
 	}
 
+/*	@OneToOne(fetch= FetchType.EAGER)
+	@JoinColumn(name="")*/
 	public ProductSource getProductSource() {
 		return productSource;
 	}
@@ -57,17 +76,22 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 		this.productSource = productSource;
 	}
 
+	@Id
+	@GenericGenerator(name="prod_id",strategy="increment")
+	@GeneratedValue
+	@Column(name="prod_id",unique=true,nullable=false,length=20)
 	@Override
 	public Long getId() {
 		return id;
 	}
 
-	@Override
+
 	public void setId(Long id) {
 		this.id = id;
 	}
 
 
+	@Column(name="prod_name",nullable=true,length=200)
 	public String getName() {
 		return name;
 	}
@@ -77,7 +101,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 		this.name = name;
 	}
 
-
+	@Transient
 	public Brand getBrand() {
 		return brand;
 	}
@@ -87,6 +111,8 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 		this.brand = brand;
 	}
 
+	
+	@Transient
 	@JsonSerialize(using=NumberValueSerializer.class)
 	public Double getPrice() {
 		return price;
@@ -97,7 +123,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 		this.price = price;
 	}
 
-
+	@Transient
 	public Set<ProductCategory> getCategory() {
 		return category;
 	}
@@ -107,6 +133,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 		this.category = category;
 	}
 
+	@Column(name="upc",nullable=true,length=20)
 	public String getUpc() {
 		return upc;
 	}
@@ -117,6 +144,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	}
 
 
+	@Column(name="qr_code",nullable=true,length=100)
 	public String getQrCode() {
 		return qrCode;
 	}
@@ -127,6 +155,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	}
 
 	
+	@Transient
 	public Double getMizeRating() {
 		return mizeRating;
 	}
@@ -137,6 +166,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	}
 
 
+	@Transient
 	public ProductDetails getProductDetails() {
 		return productDetails;
 	}
@@ -146,7 +176,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 		this.productDetails = productDetails;
 	}
 
-
+	@Column(name="prod_image",nullable=true,length=500)
 	public String getImageLink() {
 		return imageLink;
 	}
@@ -157,6 +187,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	}
 
 
+	@Transient
 	public List<String> getListNames() {
 		return listNames;
 	}
@@ -167,6 +198,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	}
 
 
+	@Transient
 	public String getModel() {
 		return model;
 	}
@@ -176,7 +208,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 		this.model = model;
 	}
 
-
+	@Column(name="prod_desc",nullable=true,length=500)
 	public String getShortDescription() {
 		return shortDescription;
 	}
@@ -187,6 +219,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	}
 
 
+	@Transient
 	public String getProductLink() {
 		return productLink;
 	}
@@ -196,6 +229,18 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 		this.productLink = productLink;
 	}	
 	
+	
+	@OneToMany(fetch = FetchType.EAGER, cascade =CascadeType.ALL)
+	@JoinColumn(name="prod_regn_id") 
+	public List<ProductRegister> getProductRegisters() {
+		return productRegisters;
+	}
+
+	public void setProductRegisters(List<ProductRegister> productRegisters) {
+		this.productRegisters = productRegisters;
+	}
+
+	@Transient
 	@JsonIgnore
 	public boolean isAmazonSource(){
 		boolean flag = false;
@@ -204,6 +249,8 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 		}
 		return flag;
 	}
+	
+	@Transient
 	@JsonIgnore
 	public boolean isMizeSource(){
 		return (!isAmazonSource());
@@ -254,5 +301,6 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 		result = prime * result + ((upc == null) ? 0 : upc.hashCode());
 		return result;
 	}
+	
 
 }

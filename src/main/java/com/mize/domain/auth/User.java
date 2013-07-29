@@ -3,13 +3,26 @@ package com.mize.domain.auth;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonView;
+import org.hibernate.annotations.GenericGenerator;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.product.ProductRegister;
 import com.mize.domain.user.Group;
 import com.mize.domain.user.UserBE;
 import com.mize.domain.user.UserProfile;
@@ -20,6 +33,8 @@ import com.mize.domain.user.UserProfileViews.UserProfilePrivacyView;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
+@Entity
+@Table(name="users")
 public class User extends MizeEntity implements Comparable<User> {
 	
 	private static final long serialVersionUID = 6457591358862233006L;
@@ -29,13 +44,20 @@ public class User extends MizeEntity implements Comparable<User> {
     protected DateTime lastLogin;
     protected boolean active;
     protected boolean emailValidated;
+    @Transient
     protected List<LinkedAccount> linkedAccounts = new ArrayList<LinkedAccount>();
+    @Transient
     protected List<UserConnect> userConnects;
+    @Transient
     protected UserProfile userProfile;
     protected Long referralId;
+    @Transient
     protected UserBE userBe;
+    @Transient
     protected UserProfilePrivacy privacy;
+    @Transient
 	private List<Group> groups = new ArrayList<Group>();
+	private List<ProductRegister> productRegisters = new ArrayList<ProductRegister>();
     
     public enum Case {
 		SIGNUP, LOGIN , LOGOUT
@@ -65,6 +87,12 @@ public class User extends MizeEntity implements Comparable<User> {
 		this.linkedAccounts = linkedAccounts;
 	}
 	
+	
+	@Id
+	@GenericGenerator(name="id",strategy="increment")
+	@GeneratedValue
+	@Column(name="id",unique=true,nullable=false,length=20)
+	@Override
 	@JsonView(PublicView.class)
 	public Long getId() {
 		return id;
@@ -72,6 +100,8 @@ public class User extends MizeEntity implements Comparable<User> {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	@Column(name="email",nullable=true,length=255)
 	@JsonView(UserProfilePrivacyView.class)
 	public String getEmail() {
 		return email;
@@ -79,6 +109,8 @@ public class User extends MizeEntity implements Comparable<User> {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	@Column(name="name",nullable=true,length=255)
 	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
 	public String getName() {
 		return name;
@@ -88,6 +120,7 @@ public class User extends MizeEntity implements Comparable<User> {
 	}
 	
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@Column(name = "last_login",  nullable = false)
 	@JsonSerialize(using=JsonDateTimeSerializer.class)	
 	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
 	public DateTime getLastLogin() {
@@ -99,6 +132,8 @@ public class User extends MizeEntity implements Comparable<User> {
 	public void setLastLogin(DateTime lastLogin) {
 		this.lastLogin = lastLogin;
 	}
+	
+	@Column(name="active",nullable=true)
 	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
 	public boolean isActive() {
 		return active;
@@ -106,6 +141,8 @@ public class User extends MizeEntity implements Comparable<User> {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
+	
+	@Column(name="email_validated", nullable= true)
 	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
 	public boolean isEmailValidated() {
 		return emailValidated;
@@ -113,6 +150,8 @@ public class User extends MizeEntity implements Comparable<User> {
 	public void setEmailValidated(boolean emailValidated) {
 		this.emailValidated = emailValidated;
 	}
+	
+	@Transient
 	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
 	public List<LinkedAccount> getLinkedAccounts() {
 		return linkedAccounts;
@@ -153,6 +192,7 @@ public class User extends MizeEntity implements Comparable<User> {
 		}
 	}
 	
+	@Transient
 	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
 	public List<UserConnect> getUserConnects() {
 		return userConnects;
@@ -197,10 +237,12 @@ public class User extends MizeEntity implements Comparable<User> {
 		this.userProfile = userProfile;
 	}
 	
+	@Transient
 	public UserProfile getUserProfile() {
 		return userProfile;
 	}
 
+	@Column(name="referral_id",nullable=true,length=20)
 	public Long getReferralId() {
 		return referralId;
 	}
@@ -209,6 +251,7 @@ public class User extends MizeEntity implements Comparable<User> {
 		this.referralId = referralId;
 	}
 	
+	@Transient
 	public UserProfilePrivacy getPrivacy() {
 		return privacy;
 	}
@@ -217,6 +260,7 @@ public class User extends MizeEntity implements Comparable<User> {
 		this.privacy = privacy;
 	}
 
+	@Transient
 	public UserBE getUserBe() {
 		return userBe;
 	}
@@ -225,6 +269,7 @@ public class User extends MizeEntity implements Comparable<User> {
 		this.userBe = userBe;
 	}
 
+	@Transient
 	public List<Group> getGroups() {
 		return groups;
 	}
@@ -277,6 +322,16 @@ public class User extends MizeEntity implements Comparable<User> {
 			return AFTER;
 		return EQUAL;		
 	}
+	
+	
+	@OneToMany(fetch = FetchType.EAGER, cascade =CascadeType.ALL)
+	@JoinColumn(name="prod_regn_id") 
+	public List<ProductRegister> getProductRegisters() {
+		return productRegisters;
+	}
 
+	public void setProductRegisters(List<ProductRegister> productRegisters) {
+		this.productRegisters = productRegisters;
+	}
 	
 }

@@ -2,9 +2,24 @@ package com.mize.domain.product;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -13,6 +28,8 @@ import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateDeserializer;
 import com.mize.domain.util.JsonDateSerializer;
 
+@Entity
+@Table(name = "prod_regn")
 public class ProductRegister extends MizeEntity{
 
 	private static final long serialVersionUID = -6338652951554117142L;
@@ -40,8 +57,55 @@ public class ProductRegister extends MizeEntity{
 	private String phoneMobile;
 	private String phoneHome;
 	private String phoneWork;
-	private List<ProductRegnAttachment> attachments ;
+	private List<ProductRegnAttachment> attachments;
+	@Transient
 	private String updateProfile;
+	@Transient
+	private Long stateId;
+	@Transient
+	private Long countryId;
+	
+	
+	
+	public ProductRegister(){
+		
+	}
+	
+	public ProductRegister(Product product, User user, String serialNumber, DateTime purchaseDate,
+			Double purchasePrice, String purchaseStore, DateTime warrantyExpiryDate, String additionalInfo,
+			String firstName, String lastName, String email, String address1, String address2, String address3,
+			String city, String state, String country, String zipCode, String phoneMobile, String phoneHome,
+			String phoneWork, List<ProductRegnAttachment> attachments,String updateProfile) {
+		super();
+		this.product = product;
+		this.user = user;
+		this.serialNumber = serialNumber;
+		this.purchaseDate = purchaseDate;
+		this.purchasePrice = purchasePrice;
+		this.purchaseStore = purchaseStore;
+		this.warrantyExpiryDate = warrantyExpiryDate;
+		this.additionalInfo = additionalInfo;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.address1 = address1;
+		this.address2 = address2;
+		this.address3 = address3;
+		this.city = city;
+		this.state = state;
+		this.country = country;
+		this.zipCode = zipCode;
+		this.phoneMobile = phoneMobile;
+		this.phoneHome = phoneHome;
+		this.phoneWork = phoneWork;
+		this.attachments = attachments;
+		this.updateProfile = updateProfile;
+	}
+	
+	@Id
+	@GenericGenerator(name="id" , strategy="increment")
+	@GeneratedValue(generator="id")
+	@Column(name="prod_regn_id",unique=true,nullable=false,length=20)
 	
 	@Override
 	public Long getId() {
@@ -53,18 +117,25 @@ public class ProductRegister extends MizeEntity{
 		
 	}
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "prod_id", nullable = true)
 	public Product getProduct() {
 		return product;
 	}
 	public void setProduct(Product product) {
 		this.product = product;
 	}
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "user_id", nullable = true)
 	public User getUser() {
 		return user;
 	}
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	@Column(name = "prod_srl_no",  nullable = true, length = 200)
 	public String getSerialNumber() {
 		return serialNumber;
 	}
@@ -73,6 +144,8 @@ public class ProductRegister extends MizeEntity{
 	}
 	
 	@DateTimeFormat (pattern="MM-dd-yyyy")
+	@Column(name = "purchase_date",  nullable = true)
+	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@JsonSerialize(using=JsonDateSerializer.class,include=Inclusion.NON_DEFAULT)
 	public DateTime getPurchaseDate() {
 		return purchaseDate;
@@ -83,19 +156,26 @@ public class ProductRegister extends MizeEntity{
 	public void setPurchaseDate(DateTime purchaseDate) {
 		this.purchaseDate = purchaseDate;
 	}
+	
+	@Column(name = "purchase_price",  nullable = true)
 	public Double getPurchasePrice() {
 		return purchasePrice;
 	}
 	public void setPurchasePrice(Double purchasePrice) {
 		this.purchasePrice = purchasePrice;
 	}
+	
+	@Column(name = "purchase_store",  nullable = true, length = 200)
 	public String getPurchaseStore() {
 		return purchaseStore;
 	}
 	public void setPurchaseStore(String purchaseStore) {
 		this.purchaseStore = purchaseStore;
 	}
+	
 	@DateTimeFormat (pattern="MM-dd-yyyy")
+	@Column(name = "warranty_expiry_date",  nullable = true)
+	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@JsonSerialize(using=JsonDateSerializer.class,include=Inclusion.NON_DEFAULT)
 	public DateTime getWarrantyExpiryDate() {
 		return warrantyExpiryDate;
@@ -105,102 +185,159 @@ public class ProductRegister extends MizeEntity{
 	public void setWarrantyExpiryDate(DateTime warrantyExpiryDate) {
 		this.warrantyExpiryDate = warrantyExpiryDate;
 	}
+	
+	@Column(name = "addl_info",  nullable = true, length = 500)
 	public String getAdditionalInfo() {
 		return additionalInfo;
 	}
 	public void setAdditionalInfo(String additionalInfo) {
 		this.additionalInfo = additionalInfo;
 	}
+	
+	@Column(name = "first_name",  nullable = true, length = 100)
 	public String getFirstName() {
 		return firstName;
 	}
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+	
+	@Column(name = "last_name",  nullable = true, length = 100)
 	public String getLastName() {
 		return lastName;
 	}
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+	
+	@Column(name = "email",  nullable = true, length = 255)
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	@Column(name = "address1",  nullable = true, length = 100)
 	public String getAddress1() {
 		return address1;
 	}
 	public void setAddress1(String address1) {
 		this.address1 = address1;
 	}
+	
+	@Column(name = "address2",  nullable = true, length = 100)
 	public String getAddress2() {
 		return address2;
 	}
 	public void setAddress2(String address2) {
 		this.address2 = address2;
 	}
+	
+	@Column(name = "address3",  nullable = true, length = 100)
 	public String getAddress3() {
 		return address3;
 	}
 	public void setAddress3(String address3) {
 		this.address3 = address3;
 	}
+	
+	@Column(name = "city",  nullable = true, length = 100)
 	public String getCity() {
 		return city;
 	}
 	public void setCity(String city) {
 		this.city = city;
 	}
+	
+	@Column(name = "state_id",  nullable = true, length = 11)
 	public String getState() {
 		return state;
 	}
 	public void setState(String state) {
 		this.state = state;
 	}
+	
+	@Column(name = "postal_code",  nullable = true, length = 11)
 	public String getZipCode() {
 		return zipCode;
 	}
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
+	
+	@Column(name = "country_id",  nullable = true, length = 11)
 	public String getCountry() {
 		return country;
 	}
 	public void setCountry(String country) {
 		this.country = country;
 	}
+	
+	@Column(name = "phone_mobile",  nullable = true, length = 20)
 	public String getPhoneMobile() {
 		return phoneMobile;
 	}
 	public void setPhoneMobile(String phoneMobile) {
 		this.phoneMobile = phoneMobile;
 	}
+	
+	@Column(name = "phone_home",  nullable = true, length = 20)
 	public String getPhoneHome() {
 		return phoneHome;
 	}
 	public void setPhoneHome(String phoneHome) {
 		this.phoneHome = phoneHome;
 	}
+	
+	@Column(name = "phone_work",  nullable = true, length = 20)
 	public String getPhoneWork() {
 		return phoneWork;
 	}
 	public void setPhoneWork(String phoneWork) {
 		this.phoneWork = phoneWork;
 	}
+	
+	
+
+	
+	@OneToMany(fetch = FetchType.LAZY, cascade =CascadeType.ALL)
+	@JoinColumn(name="prod_regn_id") 
 	public List<ProductRegnAttachment> getAttachments() {
 		return attachments;
 	}
 	public void setAttachments(List<ProductRegnAttachment> attachments) {
 		this.attachments = attachments;
 	}
+	
+	@Transient
 	public String getUpdateProfile() {
 		return updateProfile;
 	}
 	public void setUpdateProfile(String updateProfile) {
 		this.updateProfile = updateProfile;
 	}
+	
+	@JsonIgnore
+	@Transient
+	public Long getStateId() {
+		return stateId;
+	}
+
+	public void setStateId(Long stateId) {
+		this.stateId = stateId;
+	}
+
+	@JsonIgnore
+	@Transient
+	public Long getCountryId() {
+		return countryId;
+	}
+
+	public void setCountryId(Long countryId) {
+		this.countryId = countryId;
+	}
+
 	@Override
 	public String toString() {
 		return "ProductRegister [product=" + product + ", user=" + user + ", serialNumber=" + serialNumber

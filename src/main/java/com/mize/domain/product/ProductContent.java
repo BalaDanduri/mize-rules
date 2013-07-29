@@ -1,20 +1,42 @@
 package com.mize.domain.product;
 
+import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import com.mize.domain.common.MizeEntity;
 
+@Entity
+@Table(name = "prod_content")
 public class ProductContent extends MizeEntity{
 	
 	private static final long serialVersionUID = -76159028571766886L;
-	private String brandName;
-	private String productName;
-	private String contentType;
-	private Integer seqNo;
+	
+	@EmbeddedId
+	private ProductContentPK productContentPK;
 	private String title;
 	private String description;
 	private String url;
+	@Transient
 	private Integer pageIndex;
-	private Integer count;
 	
+	public ProductContent(){
+		
+	}	
+	
+	public ProductContent(ProductContentPK productContentPK, String title, String description, String url,
+			Integer pageIndex) {
+		super();
+		this.productContentPK = productContentPK;
+		this.title = title;
+		this.description = description;
+		this.url = url;
+		this.pageIndex = pageIndex;
+	}
+
+
 	public enum ContentType{
 		faq,video,manuals; 
 	}
@@ -28,42 +50,22 @@ public class ProductContent extends MizeEntity{
 		return null;
 	}
 	
-	public String getBrandName() {
-		return brandName;
-	}
-	public void setBrandName(String brandName) {
-		this.brandName = brandName;
-	}
-	public String getProductName() {
-		return productName;
-	}
-	public void setProductName(String productName) {
-		this.productName = productName;
-	}
-	public String getContentType() {
-		return contentType;
-	}
-	public void setContentType(String contentType) {
-		this.contentType = contentType;
-	}
-	public Integer getSeqNo() {
-		return seqNo;
-	}
-	public void setSeqNo(Integer seqNo) {
-		this.seqNo = seqNo;
-	}
+	@Column(name = "title",  nullable = true, length = 250)
 	public String getTitle() {
 		return title;
 	}
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	@Column(name = "description",  nullable = true, length = 1000)
 	public String getDescription() {
 		return description;
 	}
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	@Column(name = "url",  nullable = true, length = 250)
 	public String getUrl() {
 		return url;
 	}
@@ -71,6 +73,7 @@ public class ProductContent extends MizeEntity{
 		this.url = url;
 	}
 	
+	@Transient
 	public Integer getPageIndex() {
 		return pageIndex;
 	}
@@ -78,32 +81,82 @@ public class ProductContent extends MizeEntity{
 	public void setPageIndex(Integer pageIndex) {
 		this.pageIndex = pageIndex;
 	}
-
-	public Integer getCount() {
-		return count;
-	}
-
-	public void setCount(Integer count) {
-		this.count = count;
-	}
-
-	@Override
-	public String toString() {
-		return "ProductContent [brandName=" + brandName + ", productName=" + productName + ", contentType=" + contentType + ", seqNo=" + seqNo + ", title="
-				+ title + ", description=" + description + ", url=" + url + ", pageIndex=" + pageIndex + ", count=" + count + ", createdBy=" + createdBy
-				+ ", createdDate=" + createdDate + ", updatedBy=" + updatedBy + ", updatedDate=" + updatedDate + "]";
-	}
-
+	
+	@Transient
 	@Override
 	public Long getId() {
-		// TODO Auto-generated method stub
-		return null;
+		return id;
 	}
 
 	@Override
 	public void setId(Long id) {
-		// TODO Auto-generated method stub
-		
+		this.id = id;		
 	}
+
+	public ProductContentPK getProductContentPK() {
+		return productContentPK;
+	}
+
+	public void setProductContentPK(ProductContentPK productContentPK) {
+		this.productContentPK = productContentPK;
+	}
+
+
+
+	@Override
+	public int hashCode() {
+		final int prime = PRIME;
+		int result = super.hashCode();
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((pageIndex == null) ? 0 : pageIndex.hashCode());
+		result = prime * result + ((productContentPK == null) ? 0 : productContentPK.hashCode());
+		result = prime * result + ((title == null) ? 0 : title.hashCode());
+		result = prime * result + ((url == null) ? 0 : url.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ProductContent other = (ProductContent) obj;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (pageIndex == null) {
+			if (other.pageIndex != null)
+				return false;
+		} else if (!pageIndex.equals(other.pageIndex))
+			return false;
+		if (productContentPK == null) {
+			if (other.productContentPK != null)
+				return false;
+		} else if (!productContentPK.equals(other.productContentPK))
+			return false;
+		if (title == null) {
+			if (other.title != null)
+				return false;
+		} else if (!title.equals(other.title))
+			return false;
+		if (url == null) {
+			if (other.url != null)
+				return false;
+		} else if (!url.equals(other.url))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "ProductContent [productContentPK=" + productContentPK + ", title=" + title + ", description="
+				+ description + ", url=" + url + ", pageIndex=" + pageIndex + "]";
+	}
+	
 	
 }

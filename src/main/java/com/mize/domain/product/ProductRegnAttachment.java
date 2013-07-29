@@ -1,16 +1,35 @@
 package com.mize.domain.product;
 
 import java.net.URL;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.GenericGenerator;
 
 import com.mize.domain.common.MizeEntity;
 
+@Entity
+@Table(name = "prod_regn_attach")
 public class ProductRegnAttachment extends MizeEntity{
 	private static final long serialVersionUID = -6722341511569003526L;	
 	
 	private String name;
+	@Transient
 	private URL url;
 	private String type;
 	private Long prodRegnId;
+	
+	
+	@ManyToOne(targetEntity = ProductRegister.class,fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@JoinColumn(name = "prod_regn_id", nullable = true)
 	
 	public Long getProdRegnId() {
 		return prodRegnId;
@@ -18,6 +37,11 @@ public class ProductRegnAttachment extends MizeEntity{
 	public void setProdRegnId(Long prodId) {
 		this.prodRegnId = prodId;
 	}
+	
+	@Id
+	@GenericGenerator(name="id" , strategy="increment")
+	@GeneratedValue(generator="id")
+	@Column(name="id",unique=true,nullable=false,length=20)
 	@Override
 	public Long getId() {
 		return id;
@@ -28,18 +52,23 @@ public class ProductRegnAttachment extends MizeEntity{
 		this.id = id;
 	}
 	
+	@Transient
 	public URL getUrl() {
 		return url;
 	}
 	public void setUrl(URL url) {
 		this.url = url;
 	}
+	
+	@Column(name="type",nullable=false,length=50)
 	public String getType() {
 		return type;
 	}
 	public void setType(String type) {
 		this.type = type;
 	}
+	
+	@Column(name="name",nullable=false,length=250)
 	public String getName() {
 		return name;
 	}
@@ -53,7 +82,7 @@ public class ProductRegnAttachment extends MizeEntity{
 	}
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
