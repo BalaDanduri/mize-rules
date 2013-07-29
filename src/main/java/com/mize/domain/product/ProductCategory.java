@@ -7,12 +7,12 @@ import java.util.Set;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonPropertyOrder;
 
-import com.mize.domain.common.Entity;
+import com.mize.domain.common.MizeEntity;
 
 
 @JsonPropertyOrder ({"id", "name", "link", "parent"})
 
-public class ProductCategory extends Entity{
+public class ProductCategory extends MizeEntity{
 
 	private static final long serialVersionUID = -2450196415219764436L;
 	protected Long id;
