@@ -1,9 +1,9 @@
 package com.mize.domain.etilize;
 
-import com.mize.domain.common.Entity;
+import com.mize.domain.common.MizeEntity;
 
 
-public class ProductToSource extends Entity{
+public class ProductToSource extends MizeEntity{
 
 	private static final long serialVersionUID = -17526446685342722L;
 	
@@ -38,6 +38,15 @@ public class ProductToSource extends Entity{
 	}
 	public void setProductSourceId(Long productSourceId) {
 		this.productSourceId = productSourceId;
+	}
+	
+	@Override
+	public Long getId() {
+		return id;
+	}
+	@Override
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 }

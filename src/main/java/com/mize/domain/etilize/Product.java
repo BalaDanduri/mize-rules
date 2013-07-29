@@ -7,14 +7,13 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.mize.domain.common.Entity;
+import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
-public class Product extends Entity{
+public class Product extends MizeEntity{
 
 	private static final long serialVersionUID = 6738887069779058581L;
-	private Long id;	
 	private Long manufacturerId;
 	private Integer isActive;
 	private String mfgPartNo;	
@@ -35,10 +34,12 @@ public class Product extends Entity{
 	private ProductSummaryDesc summaryDesc;
 	private List<SimilarProduct> similarProducts;
 	
-	
+	@Override
 	public Long getId() {
 		return id;
 	}
+	
+	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}

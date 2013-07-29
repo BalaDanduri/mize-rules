@@ -3,6 +3,7 @@ package com.mize.domain.upload;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
@@ -264,6 +265,22 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 				+ ", endTime=" + endTime + ", status=" + status + ", fileName="
 				+ fileName + ", entity=" + entity + ", processLogs="
 				+ processLogs + "]";
+	}
+	
+	
+	@JsonIgnore
+	@SuppressWarnings("rawtypes")
+	public static void addToFailureRecord(UploadEntity uploadEntity ,MizeEntity entity,String entityCode,String field,String msgCode) {		
+		if(uploadEntity != null){
+			ProcessLog processLog = new ProcessLog();			
+			processLog.setEntity(entity);
+			processLog.setEntityId(entity.getId());
+			processLog.setEntityCode(entityCode);
+			processLog.setRecordNumber(((List)uploadEntity.getEntity()).indexOf(entity)+1);
+			ErrorLog errorLog = new ErrorLog(field,msgCode);
+			processLog.getErrorLogs().add(errorLog);
+			uploadEntity.getProcessLogs().add(processLog);
+		}
 	}
 	
 }

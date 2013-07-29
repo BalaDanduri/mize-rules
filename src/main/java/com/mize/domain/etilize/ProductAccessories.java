@@ -1,9 +1,9 @@
 package com.mize.domain.etilize;
 
-import com.mize.domain.common.Entity;
+import com.mize.domain.common.MizeEntity;
 
 
-public class ProductAccessories extends Entity{
+public class ProductAccessories extends MizeEntity{
 
 	private static final long serialVersionUID = -632231234234531123L;
 	private Long prodId;
@@ -12,6 +12,15 @@ public class ProductAccessories extends Entity{
 	private Integer isPreferred;
 	private Integer isOption;
 	private String note;
+	
+	@Override
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 	public Long getProdId() {
 		return prodId;
 	}

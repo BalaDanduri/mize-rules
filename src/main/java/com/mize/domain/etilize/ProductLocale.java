@@ -1,15 +1,16 @@
 package com.mize.domain.etilize;
 
-import com.mize.domain.common.Entity;
+import com.mize.domain.common.MizeEntity;
 
 
-public class ProductLocale extends Entity{
+public class ProductLocale extends MizeEntity{
 
 	private static final long serialVersionUID = 67388870695558581L;
 	private Long prodId;
 	private Long localeId;
 	private Integer isActive;
 	private String status;
+	
 	public Long getProdId() {
 		return prodId;
 	}
@@ -33,6 +34,15 @@ public class ProductLocale extends Entity{
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	
+	@Override
+	public Long getId() {
+		return id;
+	}
+	@Override
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 }
