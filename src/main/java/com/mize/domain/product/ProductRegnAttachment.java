@@ -25,12 +25,22 @@ public class ProductRegnAttachment extends MizeEntity{
 	@Transient
 	private URL url;
 	private String type;
+	
+	@Transient
 	private Long prodRegnId;
 	
+	private ProductRegister productRegister;
 	
 	@ManyToOne(targetEntity = ProductRegister.class,fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	@JoinColumn(name = "prod_regn_id", nullable = true)
+	public ProductRegister getProductRegister() {
+		return productRegister;
+	}
+	public void setProductRegister(ProductRegister productRegister) {
+		this.productRegister = productRegister;
+	}
 	
+	@Transient
 	public Long getProdRegnId() {
 		return prodRegnId;
 	}
