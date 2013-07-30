@@ -25,8 +25,8 @@ public final class UploadSearchResult extends MizeEntity implements Comparable<U
 	private Integer successCount;
 	private Integer failureCount;
 	private String logFileURI;
-	private Long userId;
-	private String uploadedBy;
+	private String uploadedByName;
+	private Long uploadedBy;
 	@Override
 	public Long getId() {
 		return id;
@@ -37,14 +37,6 @@ public final class UploadSearchResult extends MizeEntity implements Comparable<U
 		this.id = id;
 	}
 	
-	public Long getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}
-
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class)
 	public DateTime getStartTime() {
@@ -236,12 +228,20 @@ public final class UploadSearchResult extends MizeEntity implements Comparable<U
 		return true;
 	}
 
-	public String getUploadedBy() {
+	public String getUploadedByName() {
+		return uploadedByName;
+	}
+
+	public void setUploadedByName(String uploadedByName) {
+		this.uploadedByName = uploadedByName;
+	}
+
+	public Long getUploadedBy() {
 		return uploadedBy;
 	}
 
-	public void setUploadedBy(String uploadedBy) {
+	public void setUploadedBy(Long uploadedBy) {
 		this.uploadedBy = uploadedBy;
-	}	
-	
+	}
+
 }
