@@ -1,41 +1,31 @@
 package com.mize.domain.upload;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.mize.domain.auth.User;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
-public final class UploadEntity extends MizeEntity implements Comparable<UploadEntity> {
+public final class UploadSearchResult extends MizeEntity implements Comparable<UploadSearchResult> {
 
-	private static final long serialVersionUID = 8241122531831985362L;
-	private Long parentId;
+	private static final long serialVersionUID = 8241322531831985362L;
+	
 	private String entityType;
 	private String fileType;
-	private Integer recordCount;
-	private Integer successCount;
-	private Integer failureCount;
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime startTime;
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime endTime;
 	private String status;
 	private String fileName;
-	private Object entity;
-	private List<ProcessLog> processLogs = new ArrayList<ProcessLog>();
+	private String uploadBy;
+	private Integer recordCount;
+	private Integer successCount;
+	private Integer failureCount;
 	private String logFileURI;
-	private User user;
-	public enum Status{
-		IN_PROGRESS,COMPLETED;
-	}
 	
 	@Override
 	public Long getId() {
@@ -71,14 +61,6 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 		this.endTime = endTime;
 	}
 	
-	public Long getParentId() {
-		return parentId;
-	}
-
-	public void setParentId(Long parentId) {
-		this.parentId = parentId;
-	}
-
 	public String getEntityType() {
 		return entityType;
 	}
@@ -95,37 +77,13 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 		this.fileType = fileType;
 	}
 
-	public Integer getRecordCount() {
-		return recordCount;
-	}
-
-	public void setRecordCount(Integer recordCount) {
-		this.recordCount = recordCount;
-	}
-
-	public Integer getFailureCount() {
-		return failureCount;
-	}
-
-	public void setFailureCount(Integer failureCount) {
-		this.failureCount = failureCount;
-	}
-
 	public String getStatus() {
 		return status;
 	}
 
 	public void setStatus(String status) {
 		this.status = status;
-	}
-	
-	public Object getEntity() {
-		return entity;
-	}
-
-	public void setEntity(Object entity) {
-		this.entity = entity;
-	}
+	}	
 	
 	public String getFileName() {
 		return fileName;
@@ -135,22 +93,41 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 		this.fileName = fileName;
 	}
 
-	
-	public List<ProcessLog> getProcessLogs() {
-		return processLogs;
+	@Override
+	public int compareTo(UploadSearchResult o) {
+		return 0;
 	}
 
-	public void setProcessLogs(List<ProcessLog> processLogs) {
-		this.processLogs = processLogs;
+	public String getUploadBy() {
+		return uploadBy;
 	}
 
-	
+	public void setUploadBy(String uploadBy) {
+		this.uploadBy = uploadBy;
+	}
+
+	public Integer getRecordCount() {
+		return recordCount;
+	}
+
+	public void setRecordCount(Integer recordCount) {
+		this.recordCount = recordCount;
+	}
+
 	public Integer getSuccessCount() {
 		return successCount;
 	}
 
 	public void setSuccessCount(Integer successCount) {
 		this.successCount = successCount;
+	}
+
+	public Integer getFailureCount() {
+		return failureCount;
+	}
+
+	public void setFailureCount(Integer failureCount) {
+		this.failureCount = failureCount;
 	}
 
 	public String getLogFileURI() {
@@ -162,16 +139,20 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 	}
 
 	@Override
-	public int compareTo(UploadEntity o) {
-		return 0;
-	}	
+	public String toString() {
+		return "UploadSearchResult [entityType=" + entityType + ", fileType="
+				+ fileType + ", startTime=" + startTime + ", endTime="
+				+ endTime + ", status=" + status + ", fileName=" + fileName
+				+ ", uploadBy=" + uploadBy + ", recordCount=" + recordCount
+				+ ", successCount=" + successCount + ", failureCount="
+				+ failureCount + ", logFileURI=" + logFileURI + "]";
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ((endTime == null) ? 0 : endTime.hashCode());
-		result = prime * result + ((entity == null) ? 0 : entity.hashCode());
 		result = prime * result
 				+ ((entityType == null) ? 0 : entityType.hashCode());
 		result = prime * result
@@ -181,9 +162,7 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 		result = prime * result
 				+ ((fileType == null) ? 0 : fileType.hashCode());
 		result = prime * result
-				+ ((parentId == null) ? 0 : parentId.hashCode());
-		result = prime * result
-				+ ((processLogs == null) ? 0 : processLogs.hashCode());
+				+ ((logFileURI == null) ? 0 : logFileURI.hashCode());
 		result = prime * result
 				+ ((recordCount == null) ? 0 : recordCount.hashCode());
 		result = prime * result
@@ -191,6 +170,8 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result
 				+ ((successCount == null) ? 0 : successCount.hashCode());
+		result = prime * result
+				+ ((uploadBy == null) ? 0 : uploadBy.hashCode());
 		return result;
 	}
 
@@ -202,16 +183,11 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		UploadEntity other = (UploadEntity) obj;
+		UploadSearchResult other = (UploadSearchResult) obj;
 		if (endTime == null) {
 			if (other.endTime != null)
 				return false;
 		} else if (!endTime.equals(other.endTime))
-			return false;
-		if (entity == null) {
-			if (other.entity != null)
-				return false;
-		} else if (!entity.equals(other.entity))
 			return false;
 		if (entityType == null) {
 			if (other.entityType != null)
@@ -233,15 +209,10 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 				return false;
 		} else if (!fileType.equals(other.fileType))
 			return false;
-		if (parentId == null) {
-			if (other.parentId != null)
+		if (logFileURI == null) {
+			if (other.logFileURI != null)
 				return false;
-		} else if (!parentId.equals(other.parentId))
-			return false;
-		if (processLogs == null) {
-			if (other.processLogs != null)
-				return false;
-		} else if (!processLogs.equals(other.processLogs))
+		} else if (!logFileURI.equals(other.logFileURI))
 			return false;
 		if (recordCount == null) {
 			if (other.recordCount != null)
@@ -263,42 +234,12 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 				return false;
 		} else if (!successCount.equals(other.successCount))
 			return false;
+		if (uploadBy == null) {
+			if (other.uploadBy != null)
+				return false;
+		} else if (!uploadBy.equals(other.uploadBy))
+			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "UploadEntity [parentId=" + parentId + ", entityType="
-				+ entityType + ", fileType=" + fileType + ", recordCount="
-				+ recordCount + ", successCount=" + successCount
-				+ ", failureCount=" + failureCount + ", startTime=" + startTime
-				+ ", endTime=" + endTime + ", status=" + status + ", fileName="
-				+ fileName + ", entity=" + entity + ", processLogs="
-				+ processLogs + "]";
-	}
-	
-	
-	@JsonIgnore
-	@SuppressWarnings("rawtypes")
-	public static void addToFailureRecord(UploadEntity uploadEntity ,MizeEntity entity,String entityCode,String field,String msgCode) {		
-		if(uploadEntity != null){
-			ProcessLog processLog = new ProcessLog();			
-			processLog.setEntity(entity);
-			processLog.setEntityId(entity.getId());
-			processLog.setEntityCode(entityCode);
-			processLog.setRecordNumber(((List)uploadEntity.getEntity()).indexOf(entity)+1);
-			ErrorLog errorLog = new ErrorLog(field,msgCode);
-			processLog.getErrorLogs().add(errorLog);
-			uploadEntity.getProcessLogs().add(processLog);
-		}
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
+	}	
 	
 }
