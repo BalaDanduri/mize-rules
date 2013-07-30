@@ -23,6 +23,7 @@ public class Formatter {
 	public static final String YES = "Y";
 	public static final String NO = "N";
 	public static final DateTimeFormatter  DATE_FORMAT = DateTimeFormat.forPattern("MM-dd-yyyy HH:mm:ss");
+	public static final DateTimeFormatter  DATE_FORMAT1 = DateTimeFormat.forPattern("MM-dd-yyyy");
 	public static final DateTimeFormatter  DB_DATE_TIME_FORMAT = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
 	public static final String LIKE = "%";
 	private static final Pattern HTML_TAGS_PATTERN = Pattern.compile("<.+?>");
@@ -222,6 +223,17 @@ public class Formatter {
 		if(dateTime!= null){
 			try{
 				time = DateTime.parse(dateTime,DATE_FORMAT);
+			}catch(Exception e){
+			}
+		}		
+		return time;
+	}
+	
+	public static DateTime date(String dateTime){
+		DateTime time = null;
+		if(dateTime!= null){
+			try{
+				time = DateTime.parse(dateTime,DATE_FORMAT1);
 			}catch(Exception e){
 			}
 		}		

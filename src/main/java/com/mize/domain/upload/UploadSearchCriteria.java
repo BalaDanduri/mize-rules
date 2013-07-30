@@ -26,6 +26,7 @@ public final class UploadSearchCriteria extends MizeEntity implements Comparable
 	private String status;
 	private String fileName;
 	private User user;
+	private Integer pageIndex;
 	private List<UploadSearchResult> results = new ArrayList<UploadSearchResult>();
 	
 	@Override
@@ -186,6 +187,14 @@ public final class UploadSearchCriteria extends MizeEntity implements Comparable
 		} else if (!user.equals(other.user))
 			return false;
 		return true;
+	}
+
+	public Integer getPageIndex() {
+		return pageIndex;
+	}
+
+	public void setPageIndex(Integer pageIndex) {
+		this.pageIndex = pageIndex;
 	}
 	
 }

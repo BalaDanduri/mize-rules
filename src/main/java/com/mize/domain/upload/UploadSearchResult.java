@@ -21,12 +21,12 @@ public final class UploadSearchResult extends MizeEntity implements Comparable<U
 	private DateTime endTime;
 	private String status;
 	private String fileName;
-	private String uploadBy;
 	private Integer recordCount;
 	private Integer successCount;
 	private Integer failureCount;
 	private String logFileURI;
-	
+	private String uploadedByName;
+	private Long uploadedBy;
 	@Override
 	public Long getId() {
 		return id;
@@ -36,7 +36,7 @@ public final class UploadSearchResult extends MizeEntity implements Comparable<U
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class)
 	public DateTime getStartTime() {
@@ -98,14 +98,6 @@ public final class UploadSearchResult extends MizeEntity implements Comparable<U
 		return 0;
 	}
 
-	public String getUploadBy() {
-		return uploadBy;
-	}
-
-	public void setUploadBy(String uploadBy) {
-		this.uploadBy = uploadBy;
-	}
-
 	public Integer getRecordCount() {
 		return recordCount;
 	}
@@ -143,7 +135,7 @@ public final class UploadSearchResult extends MizeEntity implements Comparable<U
 		return "UploadSearchResult [entityType=" + entityType + ", fileType="
 				+ fileType + ", startTime=" + startTime + ", endTime="
 				+ endTime + ", status=" + status + ", fileName=" + fileName
-				+ ", uploadBy=" + uploadBy + ", recordCount=" + recordCount
+				+ ", recordCount=" + recordCount
 				+ ", successCount=" + successCount + ", failureCount="
 				+ failureCount + ", logFileURI=" + logFileURI + "]";
 	}
@@ -170,8 +162,7 @@ public final class UploadSearchResult extends MizeEntity implements Comparable<U
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result
 				+ ((successCount == null) ? 0 : successCount.hashCode());
-		result = prime * result
-				+ ((uploadBy == null) ? 0 : uploadBy.hashCode());
+		
 		return result;
 	}
 
@@ -233,13 +224,24 @@ public final class UploadSearchResult extends MizeEntity implements Comparable<U
 			if (other.successCount != null)
 				return false;
 		} else if (!successCount.equals(other.successCount))
-			return false;
-		if (uploadBy == null) {
-			if (other.uploadBy != null)
-				return false;
-		} else if (!uploadBy.equals(other.uploadBy))
-			return false;
+			return false;		
 		return true;
-	}	
-	
+	}
+
+	public String getUploadedByName() {
+		return uploadedByName;
+	}
+
+	public void setUploadedByName(String uploadedByName) {
+		this.uploadedByName = uploadedByName;
+	}
+
+	public Long getUploadedBy() {
+		return uploadedBy;
+	}
+
+	public void setUploadedBy(Long uploadedBy) {
+		this.uploadedBy = uploadedBy;
+	}
+
 }
