@@ -20,8 +20,17 @@ public class ProductContent extends MizeEntity{
 	private String description;
 	private String url;
 	@Transient
-	private Integer pageIndex;
-	
+	private Integer pageIndex;	
+	@Transient
+    private String brandName;
+    @Transient
+    private String productName;
+    @Transient
+    private String contentType;
+    @Transient
+    private Integer seqNo;
+
+
 	public ProductContent(){
 		
 	}	
@@ -101,15 +110,58 @@ public class ProductContent extends MizeEntity{
 		this.productContentPK = productContentPK;
 	}
 
+	public String getBrandName() {
+		return brandName;
+	}
+
+	public void setBrandName(String brandName) {
+		this.brandName = brandName;
+	}
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
+	public String getContentType() {
+		return contentType;
+	}
+
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
+	}
+
+	public Integer getSeqNo() {
+		return seqNo;
+	}
+
+	public void setSeqNo(Integer seqNo) {
+		this.seqNo = seqNo;
+	}
+	
 
 
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((pageIndex == null) ? 0 : pageIndex.hashCode());
-		result = prime * result + ((productContentPK == null) ? 0 : productContentPK.hashCode());
+		result = prime * result
+				+ ((brandName == null) ? 0 : brandName.hashCode());
+		result = prime * result
+				+ ((contentType == null) ? 0 : contentType.hashCode());
+		result = prime * result
+				+ ((description == null) ? 0 : description.hashCode());
+		result = prime * result
+				+ ((pageIndex == null) ? 0 : pageIndex.hashCode());
+		result = prime
+				* result
+				+ ((productContentPK == null) ? 0 : productContentPK.hashCode());
+		result = prime * result
+				+ ((productName == null) ? 0 : productName.hashCode());
+		result = prime * result + ((seqNo == null) ? 0 : seqNo.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		result = prime * result + ((url == null) ? 0 : url.hashCode());
 		return result;
@@ -124,6 +176,16 @@ public class ProductContent extends MizeEntity{
 		if (getClass() != obj.getClass())
 			return false;
 		ProductContent other = (ProductContent) obj;
+		if (brandName == null) {
+			if (other.brandName != null)
+				return false;
+		} else if (!brandName.equals(other.brandName))
+			return false;
+		if (contentType == null) {
+			if (other.contentType != null)
+				return false;
+		} else if (!contentType.equals(other.contentType))
+			return false;
 		if (description == null) {
 			if (other.description != null)
 				return false;
@@ -138,6 +200,16 @@ public class ProductContent extends MizeEntity{
 			if (other.productContentPK != null)
 				return false;
 		} else if (!productContentPK.equals(other.productContentPK))
+			return false;
+		if (productName == null) {
+			if (other.productName != null)
+				return false;
+		} else if (!productName.equals(other.productName))
+			return false;
+		if (seqNo == null) {
+			if (other.seqNo != null)
+				return false;
+		} else if (!seqNo.equals(other.seqNo))
 			return false;
 		if (title == null) {
 			if (other.title != null)
@@ -154,9 +226,11 @@ public class ProductContent extends MizeEntity{
 
 	@Override
 	public String toString() {
-		return "ProductContent [productContentPK=" + productContentPK + ", title=" + title + ", description="
-				+ description + ", url=" + url + ", pageIndex=" + pageIndex + "]";
+		return "ProductContent [productContentPK=" + productContentPK
+				+ ", title=" + title + ", description=" + description
+				+ ", url=" + url + ", pageIndex=" + pageIndex + ", brandName="
+				+ brandName + ", productName=" + productName + ", contentType="
+				+ contentType + ", seqNo=" + seqNo + "]";
 	}
-	
 	
 }
