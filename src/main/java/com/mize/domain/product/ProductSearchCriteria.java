@@ -22,7 +22,7 @@ public class ProductSearchCriteria extends MizeEntity implements Comparable<Prod
 	private String lowPrice;
 	private String highPrice;
 	private Integer maxLength;
-	private Integer pageSize;
+	private String pageSize;
 
 	@Override
 	public Long getId(){
@@ -34,11 +34,11 @@ public class ProductSearchCriteria extends MizeEntity implements Comparable<Prod
 		this.id = id;
 	}	
 	
-	public Integer getPageSize() {
+	public String getPageSize() {
 		return pageSize;
 	}
 
-	public void setPageSize(Integer pageSize) {
+	public void setPageSize(String pageSize) {
 		this.pageSize = pageSize;
 	}
 
@@ -142,7 +142,7 @@ public class ProductSearchCriteria extends MizeEntity implements Comparable<Prod
 				+ browseNode + ", searchIndex=" + searchIndex + ", pageIndex=" + pageIndex + ", filters=" + filters
 				+ ", sortBy=" + sortBy + ", userId=" + userId + ", sourceCategory=" + sourceCategory + ", upc=" + upc
 				+ ", sourceId=" + sourceId + ", brand=" + brand + ", lowPrice=" + lowPrice + ", highPrice=" + highPrice
-				+ ", maxLength=" + maxLength + "]";
+				+ ", maxLength=" + maxLength + ", pageSize=" + pageSize + "]";
 	}
 
 
