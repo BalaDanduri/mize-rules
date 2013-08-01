@@ -8,6 +8,7 @@ public class BusinessEntitySearch {
 	private int radius;
 	private List<BusinessEntityAddress> addressList;	
 	private Integer pageIndex;
+	private String entityType;
 	
 	public BusinessEntitySearch() {
 		entityAddress = new BusinessEntityAddress();
@@ -37,6 +38,14 @@ public class BusinessEntitySearch {
 	}	
 	public void setPageIndex(Integer pageIndex) {
 		this.pageIndex = pageIndex;
+	}
+
+	public String getEntityType() {
+		return entityType;
+	}
+
+	public void setEntityType(String entityType) {
+		this.entityType = entityType;
 	}
 	
 }
