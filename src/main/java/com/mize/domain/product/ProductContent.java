@@ -14,6 +14,16 @@ public class ProductContent extends MizeEntity{
 	
 	private static final long serialVersionUID = -76159028571766886L;
 	
+	private Long brandId;
+	@Transient
+    private String brandName;
+	private Long productId;
+	@Transient
+    private String productName;
+	@Transient
+	private String contentType;
+	@Transient
+	private Integer seqNo;
 	@EmbeddedId
 	private ProductContentPK productContentPK;
 	private String title;
@@ -21,20 +31,33 @@ public class ProductContent extends MizeEntity{
 	private String url;
 	@Transient
 	private Integer pageIndex;	
-	@Transient
-    private String brandName;
-    @Transient
-    private String productName;
-    @Transient
-    private String contentType;
-    @Transient
-    private Integer seqNo;
 
 
 	public ProductContent(){
 		
 	}	
 	
+	
+	
+	public ProductContent(Long brandId, String brandName, Long productId, String productName, String contentType,
+			Integer seqNo, ProductContentPK productContentPK, String title, String description, String url,
+			Integer pageIndex) {
+		super();
+		this.brandId = brandId;
+		this.brandName = brandName;
+		this.productId = productId;
+		this.productName = productName;
+		this.contentType = contentType;
+		this.seqNo = seqNo;
+		this.productContentPK = productContentPK;
+		this.title = title;
+		this.description = description;
+		this.url = url;
+		this.pageIndex = pageIndex;
+	}
+
+
+
 	public ProductContent(ProductContentPK productContentPK, String title, String description, String url,
 			Integer pageIndex) {
 		super();
@@ -142,25 +165,36 @@ public class ProductContent extends MizeEntity{
 		this.seqNo = seqNo;
 	}
 	
+	@Column(name = "brand_id",  nullable = true, length = 20)
+	public Long getBrandId() {
+		return brandId;
+	}
 
+	public void setBrandId(Long brandId) {
+		this.brandId = brandId;
+	}
+
+	@Column(name = "prod_id",  nullable = true, length = 20)
+	public Long getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Long productId) {
+		this.productId = productId;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime * result
-				+ ((brandName == null) ? 0 : brandName.hashCode());
-		result = prime * result
-				+ ((contentType == null) ? 0 : contentType.hashCode());
-		result = prime * result
-				+ ((description == null) ? 0 : description.hashCode());
-		result = prime * result
-				+ ((pageIndex == null) ? 0 : pageIndex.hashCode());
-		result = prime
-				* result
-				+ ((productContentPK == null) ? 0 : productContentPK.hashCode());
-		result = prime * result
-				+ ((productName == null) ? 0 : productName.hashCode());
+		result = prime * result + ((brandId == null) ? 0 : brandId.hashCode());
+		result = prime * result + ((brandName == null) ? 0 : brandName.hashCode());
+		result = prime * result + ((contentType == null) ? 0 : contentType.hashCode());
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((pageIndex == null) ? 0 : pageIndex.hashCode());
+		result = prime * result + ((productContentPK == null) ? 0 : productContentPK.hashCode());
+		result = prime * result + ((productId == null) ? 0 : productId.hashCode());
+		result = prime * result + ((productName == null) ? 0 : productName.hashCode());
 		result = prime * result + ((seqNo == null) ? 0 : seqNo.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		result = prime * result + ((url == null) ? 0 : url.hashCode());
@@ -176,6 +210,11 @@ public class ProductContent extends MizeEntity{
 		if (getClass() != obj.getClass())
 			return false;
 		ProductContent other = (ProductContent) obj;
+		if (brandId == null) {
+			if (other.brandId != null)
+				return false;
+		} else if (!brandId.equals(other.brandId))
+			return false;
 		if (brandName == null) {
 			if (other.brandName != null)
 				return false;
@@ -200,6 +239,11 @@ public class ProductContent extends MizeEntity{
 			if (other.productContentPK != null)
 				return false;
 		} else if (!productContentPK.equals(other.productContentPK))
+			return false;
+		if (productId == null) {
+			if (other.productId != null)
+				return false;
+		} else if (!productId.equals(other.productId))
 			return false;
 		if (productName == null) {
 			if (other.productName != null)
@@ -226,11 +270,10 @@ public class ProductContent extends MizeEntity{
 
 	@Override
 	public String toString() {
-		return "ProductContent [productContentPK=" + productContentPK
-				+ ", title=" + title + ", description=" + description
-				+ ", url=" + url + ", pageIndex=" + pageIndex + ", brandName="
-				+ brandName + ", productName=" + productName + ", contentType="
-				+ contentType + ", seqNo=" + seqNo + "]";
+		return "ProductContent [brandId=" + brandId + ", brandName=" + brandName + ", productId=" + productId
+				+ ", productName=" + productName + ", contentType=" + contentType + ", seqNo=" + seqNo
+				+ ", productContentPK=" + productContentPK + ", title=" + title + ", description=" + description
+				+ ", url=" + url + ", pageIndex=" + pageIndex + "]";
 	}
 	
 }
