@@ -1,87 +1,57 @@
 package com.mize.domain.product;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.Transient;
 
 import com.mize.domain.common.MizeEntity;
 
-@Entity
-@Table(name="engagement_options_link")
-public class EngagementLink extends MizeEntity{
-	private static final long serialVersionUID = 8076842078721402700L;
+@Embeddable
+public class EngagementLinkPK  extends MizeEntity{
+
+	private static final long serialVersionUID = 3572751841558747212L;
 	
-	@Transient
+	@Column(name = "engagement_options_id",  nullable = true, length = 20)
 	private Long engagementOptionsId;
-	@Transient
+	@Column(name = "prod_cat_id",  nullable = true, length = 15)
 	private Integer prodCatId;
-	@Transient
+	@Column(name = "prod_id",  nullable = true, length = 20)
 	private Long productId;
 	
-	@EmbeddedId
-	private EngagementLinkPK engagementLinkPK;
-	
-	public EngagementLink(){
+	public EngagementLinkPK(){
 		
 	}
-
-	public EngagementLink(Long engagementOptionsId, Integer prodCatId, Long productId, EngagementLinkPK engagementLinkPK) {
+	
+	public EngagementLinkPK(Long engagementOptionsId, Integer prodCatId, Long productId) {
 		super();
 		this.engagementOptionsId = engagementOptionsId;
 		this.prodCatId = prodCatId;
 		this.productId = productId;
-		this.engagementLinkPK = engagementLinkPK;
 	}
-
-	@Transient
-	@Override
-	public Long getId() {
-		return id;
-	}
-
-	@Override
-	public void setId(Long id) {
-		this.id = id;
-	}
-
+	
 	public Long getEngagementOptionsId() {
 		return engagementOptionsId;
 	}
-
 	public void setEngagementOptionsId(Long engagementOptionsId) {
 		this.engagementOptionsId = engagementOptionsId;
 	}
-
 	public Integer getProdCatId() {
 		return prodCatId;
 	}
-
 	public void setProdCatId(Integer prodCatId) {
 		this.prodCatId = prodCatId;
 	}
-
 	public Long getProductId() {
 		return productId;
 	}
-
 	public void setProductId(Long productId) {
 		this.productId = productId;
-	}
-
-	public EngagementLinkPK getEngagementLinkPK() {
-		return engagementLinkPK;
-	}
-
-	public void setEngagementLinkPK(EngagementLinkPK engagementLinkPK) {
-		this.engagementLinkPK = engagementLinkPK;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
-		int result = super.hashCode();
-		result = prime * result + ((engagementLinkPK == null) ? 0 : engagementLinkPK.hashCode());
+		int result = 1;
 		result = prime * result + ((engagementOptionsId == null) ? 0 : engagementOptionsId.hashCode());
 		result = prime * result + ((prodCatId == null) ? 0 : prodCatId.hashCode());
 		result = prime * result + ((productId == null) ? 0 : productId.hashCode());
@@ -92,16 +62,11 @@ public class EngagementLink extends MizeEntity{
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!super.equals(obj))
+		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		EngagementLink other = (EngagementLink) obj;
-		if (engagementLinkPK == null) {
-			if (other.engagementLinkPK != null)
-				return false;
-		} else if (!engagementLinkPK.equals(other.engagementLinkPK))
-			return false;
+		EngagementLinkPK other = (EngagementLinkPK) obj;
 		if (engagementOptionsId == null) {
 			if (other.engagementOptionsId != null)
 				return false;
@@ -122,8 +87,19 @@ public class EngagementLink extends MizeEntity{
 
 	@Override
 	public String toString() {
-		return "EngagementLink [engagementOptionsId=" + engagementOptionsId + ", prodCatId=" + prodCatId
-				+ ", productId=" + productId + ", engagementLinkPK=" + engagementLinkPK + "]";
+		return "EngagementLinkPK [engagementOptionsId=" + engagementOptionsId + ", prodCatId=" + prodCatId
+				+ ", productId=" + productId + "]";
 	}
-	
+
+	@Transient
+	@Override
+	public Long getId() {
+		return id;
+	}
+
+	@Override
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 }
