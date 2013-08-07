@@ -4,7 +4,7 @@ import com.mize.domain.common.MizeEntity;
 
 public class MizeValueAdditionCriteria extends MizeEntity implements Comparable<MizeValueAdditionCriteria>{
 	private static final long serialVersionUID = 155385665556860537L;
-	private String productId;
+	private Long productId;
 	private String upc;
 
 	@Override
@@ -18,11 +18,11 @@ public class MizeValueAdditionCriteria extends MizeEntity implements Comparable<
 	}	
 	
 
-	public String getProductId() {
+	public Long getProductId() {
 		return productId;
 	}
 
-	public void setProductId(String productId) {
+	public void setProductId(Long productId) {
 		this.productId = productId;
 	}
 
