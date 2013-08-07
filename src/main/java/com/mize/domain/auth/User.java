@@ -24,6 +24,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.product.ProductRegister;
 import com.mize.domain.user.Group;
+import com.mize.domain.user.UserAddress;
 import com.mize.domain.user.UserBE;
 import com.mize.domain.user.UserProfile;
 import com.mize.domain.user.UserProfilePrivacy;
@@ -58,6 +59,7 @@ public class User extends MizeEntity implements Comparable<User> {
     @Transient
 	private List<Group> groups = new ArrayList<Group>();
 	private List<ProductRegister> productRegisters = new ArrayList<ProductRegister>();
+	private List<UserAddress> userAddress = new ArrayList<UserAddress>();
     
     public enum Case {
 		SIGNUP, LOGIN , LOGOUT
@@ -332,6 +334,15 @@ public class User extends MizeEntity implements Comparable<User> {
 
 	public void setProductRegisters(List<ProductRegister> productRegisters) {
 		this.productRegisters = productRegisters;
+	}
+
+	@Transient
+	public List<UserAddress> getUserAddress() {
+		return userAddress;
+	}
+
+	public void setUserAddress(List<UserAddress> userAddress) {
+		this.userAddress = userAddress;
 	}
 	
 }
