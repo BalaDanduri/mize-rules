@@ -16,6 +16,7 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.product.ProductRepeatShipping;
 
 @Entity
 @Table(name = "brand")
@@ -30,6 +31,8 @@ public class Brand extends MizeEntity implements Comparable<Brand>{
 	private String registered;
 	private List<BrandSupport> brandSupports = new ArrayList<BrandSupport>();
 	private List<BrandFeed> brandFeeds = new ArrayList<BrandFeed>();
+	private List<ProductRepeatShipping> shippings = new ArrayList<ProductRepeatShipping>();
+	
 	
 	@Id
 	@GenericGenerator(name="brandId" , strategy="increment")
@@ -133,7 +136,7 @@ public class Brand extends MizeEntity implements Comparable<Brand>{
 	}
 	
 	
-	@OneToMany(mappedBy = "brand")
+	@OneToMany(mappedBy = "brand",fetch = FetchType.LAZY)
 	public List<BrandFeed> getBrandFeeds() {
 		return brandFeeds;
 	}
@@ -142,7 +145,15 @@ public class Brand extends MizeEntity implements Comparable<Brand>{
 		this.brandFeeds = brandFeeds;
 	}
 
-	
+	@OneToMany(mappedBy = "brand")
+	public List<ProductRepeatShipping> getShippings() {
+		return shippings;
+	}
+
+	public void setShippings(List<ProductRepeatShipping> shippings) {
+		this.shippings = shippings;
+	}
+
 	public String getRegistered() {
 		return registered;
 	}
