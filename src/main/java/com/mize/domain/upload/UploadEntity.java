@@ -283,7 +283,7 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 	public static void addToFailureRecord(UploadEntity uploadEntity ,MizeEntity entity,String entityCode,String field,String msgCode) {		
 		if(uploadEntity != null){
 			ProcessLog processLog = new ProcessLog();			
-			processLog.setEntity(entity);
+			processLog.setInputRecord(entity);
 			processLog.setEntityId(entity.getId());
 			processLog.setEntityCode(entityCode);
 			processLog.setRecordNumber(((List)uploadEntity.getEntity()).indexOf(entity)+1);
