@@ -4,19 +4,34 @@ package com.mize.domain.servicelocator;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.hibernate.annotations.GenericGenerator;
 
 import com.mize.domain.common.MizeEntity;
 
+@Entity
+@Table(name="business_entity")
 public class BusinessEntity  extends MizeEntity {
 	
 	private static final long serialVersionUID = 3712437162456355278L;	
-	private String code;
+	private String code;	
 	private TypeCode typeCode;
 	private String subTypeCode;
 	private String name;
-	private String logo;
+	private String logo;	
 	private int pageIndex;
 	@JsonProperty
 	private List<BusinessEntityAddress> businessEntityAddressList;
@@ -32,7 +47,7 @@ public class BusinessEntity  extends MizeEntity {
 		COMPANY, DEALER
 	}
 	
-	public BusinessEntity(long id, String code, TypeCode typeCode, String subTypeCode, String name, String logo,
+	public BusinessEntity(Long id, String code, TypeCode typeCode, String subTypeCode, String name, String logo,
 			List<BusinessEntityAddress> businessEntityAddressList, long entityId, String entityName) {
 		this.id = id;
 		this.code = code;
@@ -45,6 +60,7 @@ public class BusinessEntity  extends MizeEntity {
 		this.entityName = entityName;
 	}
 	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,orphanRemoval=true,mappedBy="businessEntity")
 	public List<BusinessEntityAddress> getBusinessEntityAddressList() {
 		return businessEntityAddressList;
 	}
@@ -52,6 +68,11 @@ public class BusinessEntity  extends MizeEntity {
 			List<BusinessEntityAddress> businessEntityAddressList) {
 		this.businessEntityAddressList = businessEntityAddressList;
 	}
+	
+	@Id
+	@GenericGenerator(name= "businessEntityId" , strategy="increment")
+	@GeneratedValue(generator="businessEntityId")
+	@Column(name="id", nullable=false,unique=true)
 	public Long getId() {
 		return id;
 	}
@@ -64,24 +85,29 @@ public class BusinessEntity  extends MizeEntity {
 	public void setCode(String code) {
 		this.code = code;
 	}
+	@Column(name="type_code",nullable=true,length=50)
+	@Enumerated(EnumType.STRING)
 	public TypeCode getTypeCode() {
 		return typeCode;
 	}
 	public void setTypeCode(TypeCode typeCode) {
 		this.typeCode = typeCode;
 	}
+	@Column(name="sub_type_code",nullable=true,length=50)
 	public String getSubTypeCode() {
 		return subTypeCode;
 	}
 	public void setSubTypeCode(String subTypeCode) {
 		this.subTypeCode = subTypeCode;
 	}
+	@Column(name="name",nullable=true,length=200)
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
+	@Column(name="logo",nullable=true,length=100)
 	public String getLogo() {
 		return logo;
 	}
@@ -90,6 +116,7 @@ public class BusinessEntity  extends MizeEntity {
 	}
 	
 	@JsonIgnore
+	@Transient
 	public boolean addAddress(BusinessEntityAddress businessEntityAddress) {
 		if(businessEntityAddressList==null) {
 			businessEntityAddressList = new ArrayList<BusinessEntityAddress>();
@@ -103,16 +130,19 @@ public class BusinessEntity  extends MizeEntity {
 	}
 	
 	@JsonIgnore
+	@Transient
 	public int getAddressCount() {
 		return businessEntityAddressList==null?0:businessEntityAddressList.size();
 	}
 	
 	@JsonIgnore
+	@Transient
 	public BusinessEntityAddress getAddressAt(int index) {
 		return (businessEntityAddressList!=null&& businessEntityAddressList.size()>index)? businessEntityAddressList.get(index) : null;
 	}
 	
 	@JsonIgnore
+	@Transient
 	public boolean updateAddressAt(int index,BusinessEntityAddress businessEntityAddress) {
 		if(businessEntityAddressList!=null&& businessEntityAddressList.size()>index) {
 			businessEntityAddressList.set(index, businessEntityAddress);
@@ -120,12 +150,14 @@ public class BusinessEntity  extends MizeEntity {
 		}
 		return false;
 	}
+	@Transient
 	public long getEntityId() {
 		return entityId;
 	}
 	public void setEntityId(long entityId) {
 		this.entityId = entityId;
 	}
+	@Transient
 	public String getEntityName() {
 		return entityName;
 	}
@@ -184,8 +216,12 @@ public class BusinessEntity  extends MizeEntity {
 			}
 		} else if (!entityName.equals(other.entityName)) {
 			return false;
-		}
-		if (id != other.id) {
+		}		
+		if(id == null) {
+			if (other.id != null) {
+				return false;
+			}
+		} else if(id.compareTo(other.id) != 0) {
 			return false;
 		}
 		if (logo == null) {
@@ -218,7 +254,7 @@ public class BusinessEntity  extends MizeEntity {
 		}
 		return true;
 	}
-
+	@Transient
 	public int getPageIndex() {
 		return pageIndex;
 	}
