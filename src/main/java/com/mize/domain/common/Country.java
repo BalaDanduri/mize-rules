@@ -1,10 +1,13 @@
 package com.mize.domain.common;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -16,6 +19,8 @@ public class Country extends MizeEntity implements Comparable<Country>{
 	
 	private String code;
 	private String name;
+	
+	private List<State> states;
 	
 	@Id
 	@GenericGenerator(name="countryId" , strategy="increment")
@@ -87,5 +92,15 @@ public class Country extends MizeEntity implements Comparable<Country>{
 		else if (this.id > country.id)
 			return AFTER;
 		return EQUAL;		
-	}	
+	}
+
+	@Transient
+	public List<State> getStates() {
+		return states;
+	}
+
+	public void setStates(List<State> states) {
+		this.states = states;
+	}		
+	
 }
