@@ -23,7 +23,6 @@ public class ProcessLog extends MizeEntity implements Comparable<ProcessLog> {
 	private Object inputRecord;
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime createdTime;
-	private Object entity;
 	private List<ErrorLog> errorLogs = new ArrayList<ErrorLog>();
 	
 	public enum Status{
@@ -100,14 +99,6 @@ public class ProcessLog extends MizeEntity implements Comparable<ProcessLog> {
 		this.createdTime = createdTime;
 	}
 	
-	public Object getEntity() {
-		return entity;
-	}
-
-	public void setEntity(Object entity) {
-		this.entity = entity;
-	}	
-
 	public List<ErrorLog> getErrorLogs() {
 		return errorLogs;
 	}
