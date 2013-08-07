@@ -1,5 +1,6 @@
 package com.mize.domain.common;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -20,7 +21,7 @@ public class Country extends MizeEntity implements Comparable<Country>{
 	private String code;
 	private String name;
 	
-	private List<State> states;
+	private List<State> states = new ArrayList<State>();
 	
 	@Id
 	@GenericGenerator(name="countryId" , strategy="increment")
