@@ -9,5 +9,6 @@ public abstract class MessageConstants implements Serializable{
 	public static String ENTITY_BRAND_NAME_REQUIRED = "ENTITY_BRAND_NAME_REQUIRED";
 	public static String ADDRESS_REQUIRED = "ADDRESS_REQUIRED";
 	public static String INVALID_ADDRESS = "INVALID_ADDRESS";
+	public static String CREATED_BY_REQUIRED = "CREATED_BY_REQUIRED";
 
 }
