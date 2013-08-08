@@ -20,7 +20,7 @@ public class Country extends MizeEntity implements Comparable<Country>{
 	
 	private String code;
 	private String name;
-	
+	private String code3;
 	private List<State> states = new ArrayList<State>();
 	
 	@Id
@@ -56,8 +56,12 @@ public class Country extends MizeEntity implements Comparable<Country>{
 
 	@Override
 	public int hashCode() {
+		final int prime = PRIME;
 		int result = super.hashCode();
-		result = PRIME * result + ((code == null) ? 0 : code.hashCode());
+		result = prime * result + ((code == null) ? 0 : code.hashCode());
+		result = prime * result + ((code3 == null) ? 0 : code3.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((states == null) ? 0 : states.hashCode());
 		return result;
 	}
 	
@@ -75,12 +79,28 @@ public class Country extends MizeEntity implements Comparable<Country>{
 				return false;
 		} else if (!code.equals(other.code))
 			return false;
+		if (code3 == null) {
+			if (other.code3 != null)
+				return false;
+		} else if (!code3.equals(other.code3))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (states == null) {
+			if (other.states != null)
+				return false;
+		} else if (!states.equals(other.states))
+			return false;
 		return true;
 	}
 	
 	@Override
 	public String toString() {
-		return "Country [code=" + code + ", name=" + name + ", id=" + id + "]";
+		return "Country [code=" + code + ", name=" + name + ", code3=" + code3
+				+ ", states=" + states + "]";
 	}
 	
 	public int compareTo(Country country) {
@@ -102,6 +122,15 @@ public class Country extends MizeEntity implements Comparable<Country>{
 
 	public void setStates(List<State> states) {
 		this.states = states;
+	}
+
+	@Transient
+	public String getCode3() {
+		return code3;
+	}
+
+	public void setCode3(String code3) {
+		this.code3 = code3;
 	}		
 	
 }
