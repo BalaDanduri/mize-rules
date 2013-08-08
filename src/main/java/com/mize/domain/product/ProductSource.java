@@ -8,7 +8,7 @@ public class ProductSource  extends Entity{
 	private static final long serialVersionUID = -4500817575280246709L;
 	public static final String SOURCE_MIZE = "1";
 	public static final String SOURCE_AMAZON = "2";
-	public static final String SOURCE_GOOGLE = "3";
+	public static final String SOURCE_ETILIZE = "3";
 	public static final Long AMAZON_SOURCE_ID = new Long(SOURCE_AMAZON);
 	
 	protected Long productId;
