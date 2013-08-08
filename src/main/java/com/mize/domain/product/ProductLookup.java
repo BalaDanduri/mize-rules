@@ -11,7 +11,7 @@ public class ProductLookup extends MizeEntity{
 	private static final long serialVersionUID = 7754176397823092647L;
 	public static final String SOURCE_MIZE = "1";
 	public static final String SOURCE_AMAZON = "2";
-	public static final String SOURCE_GOOGLE = "3";
+	public static final String SOURCE_ETILIZE = "3";
 	
 	public static final String LOOKUP_ASIN = "ASIN";
 	public static final String LOOKUP_UPC = "UPC";
