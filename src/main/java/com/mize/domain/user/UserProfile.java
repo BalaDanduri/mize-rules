@@ -9,6 +9,7 @@ import java.util.Map;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -57,6 +58,7 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 	private int prodFeedbackCount;
 	private long friendsCount;
 	List<String> listNames = new ArrayList<String>();
+	List<UserAddress> addresses = new ArrayList<UserAddress>();
 	
 	private Map<String, URL> photoURLMap = new HashMap<String, URL>();
 	
@@ -65,7 +67,6 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 	}
 	public enum Timezone {
 		EST,CST,AST,MST,PST; 
-
 	}
 
 	public UserProfile() {
@@ -138,7 +139,7 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 	}
 	
 	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonSerialize(using=JsonDateSerializer.class)
+	@JsonSerialize(using=JsonDateSerializer.class,include=Inclusion.NON_DEFAULT)
 	public DateTime getBirthdate() {
 		return birthdate;
 	}
@@ -394,6 +395,15 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 		else if (this.id > profile.id)
 			return AFTER;
 		return EQUAL;		
-	}	
-	
+	}
+
+	public List<UserAddress> getAddresses() {
+		return addresses;
+	}
+
+	public void setAddresses(List<UserAddress> addresses) {
+		this.addresses = addresses;
+	}
+
+
 }

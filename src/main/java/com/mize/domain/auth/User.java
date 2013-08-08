@@ -195,7 +195,6 @@ public class User extends MizeEntity implements Comparable<User> {
 	}
 	
 	@Transient
-	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
 	public List<UserConnect> getUserConnects() {
 		return userConnects;
 	}
@@ -203,7 +202,7 @@ public class User extends MizeEntity implements Comparable<User> {
 	public void setUserConnects(List<UserConnect> userConnects) {
 		this.userConnects = userConnects;
 	}
-	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
+	
 	public void  setUserConnect(UserConnect UserConnect) {
 		if(userConnects==null) {
 			userConnects = new ArrayList<UserConnect>();

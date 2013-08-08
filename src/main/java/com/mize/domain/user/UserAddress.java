@@ -3,6 +3,7 @@ package com.mize.domain.user;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -22,7 +23,7 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 	private String city;
 	private String state;
 	private String country;
-	private String postalCode;
+	private String zipCode;
 	
 	public UserAddress(){
 	}
@@ -30,7 +31,7 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 
 	public UserAddress(Long id, Long userId, String type, String name,
 			String address1, String address2, String address3, String city,
-			String state, String country, String postalCode) {
+			String state, String country, String zipCode) {
 		super();
 		this.id = id;
 		this.userId = userId;
@@ -42,7 +43,11 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 		this.city = city;
 		this.state = state;
 		this.country = country;
-		this.postalCode = postalCode;
+		this.zipCode = zipCode;
+	}
+	
+	public enum Type{
+		Default,Shipping,Billing;
 	}
 	
 	@Override
@@ -127,14 +132,15 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 		this.country = country;
 	}
 
-	public String getPostalCode() {
-		return postalCode;
-	}
-
-	public void setPostalCode(String postalCode) {
-		this.postalCode = postalCode;
+	public String getZipCode() {
+		return zipCode;
 	}
 	
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
+	}
+
+
 	@JsonIgnore(value=false)
 	public Long getCreatedBy() {
 		return createdBy;
@@ -146,7 +152,7 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	@JsonIgnore(value=false)
 	public DateTime getCreatedDate() {
 		return createdDate;
@@ -170,7 +176,7 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	@JsonIgnore(value=false)
 	public DateTime getUpdatedDate() {
 		return updatedDate;
@@ -198,7 +204,7 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result
-				+ ((postalCode == null) ? 0 : postalCode.hashCode());
+				+ ((zipCode == null) ? 0 : zipCode.hashCode());
 		result = prime * result + ((state == null) ? 0 : state.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
@@ -249,10 +255,10 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (postalCode == null) {
-			if (other.postalCode != null)
+		if (zipCode == null) {
+			if (other.zipCode != null)
 				return false;
-		} else if (!postalCode.equals(other.postalCode))
+		} else if (!zipCode.equals(other.zipCode))
 			return false;
 		if (state == null) {
 			if (other.state != null)
@@ -278,7 +284,7 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 				+ type + ", name=" + name + ", address1=" + address1
 				+ ", address2=" + address2 + ", address3=" + address3
 				+ ", city=" + city + ", state=" + state + ", country="
-				+ country + ", postalCode=" + postalCode + "]";
+				+ country + ", postalCode=" + zipCode + "]";
 	}
 
 	@Override

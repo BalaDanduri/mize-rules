@@ -1,5 +1,15 @@
 package com.mize.domain.common;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name = "state")
 public class State extends MizeEntity implements Comparable<State>{
 	
 	private static final long serialVersionUID = -1518811417788517045L;
@@ -7,6 +17,10 @@ public class State extends MizeEntity implements Comparable<State>{
 	private String code;
 
 	@Override
+	@Id
+	@GenericGenerator(name="stateId" , strategy="increment")
+	@GeneratedValue(generator="stateId")
+	@Column(name="state_id",nullable=false,unique=true)
 	public Long getId() {
 		return id;
 	}
@@ -15,7 +29,8 @@ public class State extends MizeEntity implements Comparable<State>{
 	public void setId(Long id) {
 		this.id = id;
 	}	
-
+	
+	@Column(name="state_name",nullable=false)
 	public String getName() {
 		return name;
 	}
@@ -23,7 +38,8 @@ public class State extends MizeEntity implements Comparable<State>{
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
+	@Column(name="state_code",nullable=false)
 	public String getCode() {
 		return code;
 	}
@@ -32,14 +48,15 @@ public class State extends MizeEntity implements Comparable<State>{
 		this.code = code;
 	}	
 	
-	
 	@Override
 	public int hashCode() {
+		final int prime = PRIME;
 		int result = super.hashCode();
-		result = PRIME * result + ((code == null) ? 0 : code.hashCode());
+		result = prime * result + ((code == null) ? 0 : code.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -54,8 +71,14 @@ public class State extends MizeEntity implements Comparable<State>{
 				return false;
 		} else if (!code.equals(other.code))
 			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
 		return true;
 	}
+
 	@Override
 	public String toString() {
 		return "State [name=" + name + ", code=" + code + ", id=" + id + "]";

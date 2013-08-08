@@ -16,7 +16,7 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.mize.domain.common.MizeEntity;
-import com.mize.domain.product.ProductRepeatShipping;
+import com.mize.domain.product.ProductRepeatOrderShipOptions;
 
 @Entity
 @Table(name = "brand")
@@ -31,7 +31,7 @@ public class Brand extends MizeEntity implements Comparable<Brand>{
 	private String registered;
 	private List<BrandSupport> brandSupports = new ArrayList<BrandSupport>();
 	private List<BrandFeed> brandFeeds = new ArrayList<BrandFeed>();
-	private List<ProductRepeatShipping> shippings = new ArrayList<ProductRepeatShipping>();
+	private List<ProductRepeatOrderShipOptions> shippings = new ArrayList<ProductRepeatOrderShipOptions>();
 	
 	
 	@Id
@@ -146,11 +146,11 @@ public class Brand extends MizeEntity implements Comparable<Brand>{
 	}
 
 	@OneToMany(mappedBy = "brand")
-	public List<ProductRepeatShipping> getShippings() {
+	public List<ProductRepeatOrderShipOptions> getShippings() {
 		return shippings;
 	}
 
-	public void setShippings(List<ProductRepeatShipping> shippings) {
+	public void setShippings(List<ProductRepeatOrderShipOptions> shippings) {
 		this.shippings = shippings;
 	}
 
