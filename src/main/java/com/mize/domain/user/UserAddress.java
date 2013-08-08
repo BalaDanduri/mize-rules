@@ -7,7 +7,9 @@ import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.mize.domain.common.Country;
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.State;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
@@ -21,29 +23,11 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 	private String address2;
 	private String address3;
 	private String city;
-	private String state;
-	private String country;
+	private State state;
+	private Country country;
 	private String zipCode;
 	
 	public UserAddress(){
-	}
-	
-
-	public UserAddress(Long id, Long userId, String type, String name,
-			String address1, String address2, String address3, String city,
-			String state, String country, String zipCode) {
-		super();
-		this.id = id;
-		this.userId = userId;
-		this.type = type;
-		this.name = name;
-		this.address1 = address1;
-		this.address2 = address2;
-		this.address3 = address3;
-		this.city = city;
-		this.state = state;
-		this.country = country;
-		this.zipCode = zipCode;
 	}
 	
 	public enum Type{
@@ -114,22 +98,6 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 
 	public void setCity(String city) {
 		this.city = city;
-	}
-
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}
-
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
 	}
 
 	public String getZipCode() {
@@ -291,4 +259,22 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 	public int compareTo(UserAddress arg0) {
 		return 0;
 	}
+
+	public State getState() {
+		return state;
+	}
+
+	public void setState(State state) {
+		this.state = state;
+	}
+
+	public Country getCountry() {
+		return country;
+	}
+
+	public void setCountry(Country country) {
+		this.country = country;
+	}
+	
+	
 }

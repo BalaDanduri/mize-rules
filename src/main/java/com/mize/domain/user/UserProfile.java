@@ -404,6 +404,5 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 	public void setAddresses(List<UserAddress> addresses) {
 		this.addresses = addresses;
 	}
-
-
+	
 }

@@ -16,6 +16,7 @@ import javax.persistence.Transient;
 
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import org.codehaus.jackson.map.annotate.JsonView;
 import org.hibernate.annotations.GenericGenerator;
 import org.joda.time.DateTime;
@@ -24,7 +25,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.product.ProductRegister;
 import com.mize.domain.user.Group;
-import com.mize.domain.user.UserAddress;
 import com.mize.domain.user.UserBE;
 import com.mize.domain.user.UserProfile;
 import com.mize.domain.user.UserProfilePrivacy;
@@ -59,7 +59,6 @@ public class User extends MizeEntity implements Comparable<User> {
     @Transient
 	private List<Group> groups = new ArrayList<Group>();
 	private List<ProductRegister> productRegisters = new ArrayList<ProductRegister>();
-	private List<UserAddress> userAddress = new ArrayList<UserAddress>();
     
     public enum Case {
 		SIGNUP, LOGIN , LOGOUT
@@ -123,7 +122,7 @@ public class User extends MizeEntity implements Comparable<User> {
 	
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Column(name = "last_login",  nullable = false)
-	@JsonSerialize(using=JsonDateTimeSerializer.class)	
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)	
 	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
 	public DateTime getLastLogin() {
 		return lastLogin;
@@ -333,15 +332,6 @@ public class User extends MizeEntity implements Comparable<User> {
 
 	public void setProductRegisters(List<ProductRegister> productRegisters) {
 		this.productRegisters = productRegisters;
-	}
-
-	@Transient
-	public List<UserAddress> getUserAddress() {
-		return userAddress;
-	}
-
-	public void setUserAddress(List<UserAddress> userAddress) {
-		this.userAddress = userAddress;
 	}
 	
 }
