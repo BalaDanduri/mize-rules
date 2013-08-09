@@ -10,7 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
-
+import javax.validation.constraints.Pattern;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.mize.domain.common.MizeEntity;
@@ -78,6 +78,7 @@ public class Group extends MizeEntity implements Comparable<Group>{
 	@Column(name = "GROUP_NAME", nullable = false, length = 100)
 	@NonEmpty(message="groupName.notempty")
 	@Size(max = 100)
+	@Pattern(regexp = "^[a-zA-Z][a-zA-Z\\s]+$", message="groupName.alpha")
 	public String getName() {
 		return name;
 	}
@@ -149,5 +150,4 @@ public class Group extends MizeEntity implements Comparable<Group>{
 			return false;		
 		return true;
 	}	
-
 }
