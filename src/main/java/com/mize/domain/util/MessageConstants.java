@@ -10,5 +10,6 @@ public abstract class MessageConstants implements Serializable{
 	public static String ADDRESS_REQUIRED = "ADDRESS_REQUIRED";
 	public static String INVALID_ADDRESS = "INVALID_ADDRESS";
 	public static String CREATED_BY_REQUIRED = "CREATED_BY_REQUIRED";
+	public static String INVALID_ENTITY_TYPE_CODE = "VALID_ENTITY_TYPE_CODE_REQUIRED";
 
 }
