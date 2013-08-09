@@ -64,6 +64,8 @@ public class ProductRegister extends MizeEntity{
 	private Long stateId;
 	@Transient
 	private Long countryId;
+	@Transient
+	private Integer pageIndex;
 	
 	
 	
@@ -504,4 +506,15 @@ public class ProductRegister extends MizeEntity{
 			return false;
 		return true;
 	}
+
+	@Transient
+	public Integer getPageIndex() {
+		return pageIndex;
+	}
+
+	public void setPageIndex(Integer pageIndex) {
+		this.pageIndex = pageIndex;
+	}
+	
+	
 }
