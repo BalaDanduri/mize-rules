@@ -6,6 +6,7 @@ import java.util.List;
 import org.joda.time.DateTime;
 
 import com.mize.domain.auth.User;
+import com.mize.domain.brand.Brand;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.user.UserAddress;
 
@@ -13,6 +14,7 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 	
 	private static final long serialVersionUID = 3558480216294413887L;
 	private User user;
+	private Brand brand;
 	private Product product;
 	private ProductRepeatOrderType productRepeatOrderType;
 	private ProductRepeatOrderShipOptions productRepeatOrderShipOptions;
@@ -23,6 +25,7 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 	private String active;
 	private Double Qty;
 	private List<UserAddress> userAddresses = new ArrayList<UserAddress>();
+	private ProductRepeatOrderHistory productRepeatOrderHistory;
 
 	@Override
 	public Long getId() {
@@ -41,6 +44,14 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	public Brand getBrand() {
+		return brand;
+	}
+
+	public void setBrand(Brand brand) {
+		this.brand = brand;
 	}
 
 	public Product getProduct() {
@@ -122,6 +133,14 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 	public void setUserAddresses(List<UserAddress> userAddresses) {
 		this.userAddresses = userAddresses;
 	}
+
+	public ProductRepeatOrderHistory getProductRepeatOrderHistory() {
+		return productRepeatOrderHistory;
+	}
+
+	public void setProductRepeatOrderHistory(ProductRepeatOrderHistory productRepeatOrderHistory) {
+		this.productRepeatOrderHistory = productRepeatOrderHistory;
+	}
 	
 
 	@Override
@@ -130,10 +149,12 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 		int result = super.hashCode();
 		result = prime * result + ((Qty == null) ? 0 : Qty.hashCode());
 		result = prime * result + ((active == null) ? 0 : active.hashCode());
+		result = prime * result + ((brand == null) ? 0 : brand.hashCode());
 		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
 		result = prime * result + ((lastOrderDate == null) ? 0 : lastOrderDate.hashCode());
 		result = prime * result + ((nextOrderDate == null) ? 0 : nextOrderDate.hashCode());
 		result = prime * result + ((product == null) ? 0 : product.hashCode());
+		result = prime * result + ((productRepeatOrderHistory == null) ? 0 : productRepeatOrderHistory.hashCode());
 		result = prime * result
 				+ ((productRepeatOrderShipOptions == null) ? 0 : productRepeatOrderShipOptions.hashCode());
 		result = prime * result + ((productRepeatOrderType == null) ? 0 : productRepeatOrderType.hashCode());
@@ -162,6 +183,11 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 				return false;
 		} else if (!active.equals(other.active))
 			return false;
+		if (brand == null) {
+			if (other.brand != null)
+				return false;
+		} else if (!brand.equals(other.brand))
+			return false;
 		if (endDate == null) {
 			if (other.endDate != null)
 				return false;
@@ -181,6 +207,11 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 			if (other.product != null)
 				return false;
 		} else if (!product.equals(other.product))
+			return false;
+		if (productRepeatOrderHistory == null) {
+			if (other.productRepeatOrderHistory != null)
+				return false;
+		} else if (!productRepeatOrderHistory.equals(other.productRepeatOrderHistory))
 			return false;
 		if (productRepeatOrderShipOptions == null) {
 			if (other.productRepeatOrderShipOptions != null)
@@ -213,16 +244,16 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 
 	@Override
 	public String toString() {
-		return "ProductRepeatOrder [user=" + user + ", product=" + product + ", productRepeatOrderType="
-				+ productRepeatOrderType + ", productRepeatOrderShipOptions=" + productRepeatOrderShipOptions
-				+ ", startDate=" + startDate + ", endDate=" + endDate + ", lastOrderDate=" + lastOrderDate
-				+ ", nextOrderDate=" + nextOrderDate + ", active=" + active + ", Qty=" + Qty + ", userAddresses="
-				+ userAddresses + "]";
+		return "ProductRepeatOrder [user=" + user + ", brand=" + brand + ", product=" + product
+				+ ", productRepeatOrderType=" + productRepeatOrderType + ", productRepeatOrderShipOptions="
+				+ productRepeatOrderShipOptions + ", startDate=" + startDate + ", endDate=" + endDate
+				+ ", lastOrderDate=" + lastOrderDate + ", nextOrderDate=" + nextOrderDate + ", active=" + active
+				+ ", Qty=" + Qty + ", userAddresses=" + userAddresses + ", productRepeatOrderHistory="
+				+ productRepeatOrderHistory + "]";
 	}
 
 	@Override
 	public int compareTo(ProductRepeatOrder arg0) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 }
