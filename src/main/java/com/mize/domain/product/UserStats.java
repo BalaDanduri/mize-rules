@@ -6,11 +6,11 @@ public class UserStats extends MizeEntity implements Comparable<UserStats> {
 	private static final long serialVersionUID = -3151359495279040285L;
 
 	Long userId;
-	Long wantCount;
-	Long ownCount;
-	Long productRegnCount;
-	Long productConsumableCount;
-	Long productSchulerCount;
+	Integer wantCount;
+	Integer ownCount;
+	Integer productRegnCount;
+	Integer productConsumableCount;
+	Integer serviceScheduleCount;
 	
 	@Override
 	public Long getId() {
@@ -30,44 +30,44 @@ public class UserStats extends MizeEntity implements Comparable<UserStats> {
 		this.userId = userId;
 	}
 
-	public Long getWantCount() {
+	public Integer getWantCount() {
 		return wantCount;
 	}
 
-	public void setWantCount(Long wantCount) {
+	public void setWantCount(Integer wantCount) {
 		this.wantCount = wantCount;
 	}
 
-	public Long getOwnCount() {
+	public Integer getOwnCount() {
 		return ownCount;
 	}
 
-	public void setOwnCount(Long ownCount) {
+	public void setOwnCount(Integer ownCount) {
 		this.ownCount = ownCount;
 	}
 
-	public Long getProductRegnCount() {
+	public Integer getProductRegnCount() {
 		return productRegnCount;
 	}
 
-	public void setProductRegnCount(Long productRegnCount) {
+	public void setProductRegnCount(Integer productRegnCount) {
 		this.productRegnCount = productRegnCount;
 	}
 
-	public Long getProductConsumableCount() {
+	public Integer getProductConsumableCount() {
 		return productConsumableCount;
 	}
 
-	public void setProductConsumableCount(Long productConsumableCount) {
+	public void setProductConsumableCount(Integer productConsumableCount) {
 		this.productConsumableCount = productConsumableCount;
 	}
 
-	public Long getProductSchulerCount() {
-		return productSchulerCount;
+	public Integer getServiceScheduleCount() {
+		return serviceScheduleCount;
 	}
 
-	public void setProductSchulerCount(Long productSchulerCount) {
-		this.productSchulerCount = productSchulerCount;
+	public void setServiceScheduleCount(Integer serviceScheduleCount) {
+		this.serviceScheduleCount = serviceScheduleCount;
 	}
 
 	@Override
@@ -80,8 +80,7 @@ public class UserStats extends MizeEntity implements Comparable<UserStats> {
 		return "UserStats [userId=" + userId + ", wantCount=" + wantCount
 				+ ", ownCount=" + ownCount + ", productRegnCount="
 				+ productRegnCount + ", productConsumableCount="
-				+ productConsumableCount + ", productSchulerCount="
-				+ productSchulerCount + "]";
+				+ productConsumableCount + ", serviceScheduleCount="+ serviceScheduleCount+ "]";
 	}
 
 	@Override
@@ -99,7 +98,7 @@ public class UserStats extends MizeEntity implements Comparable<UserStats> {
 				+ ((productRegnCount == null) ? 0 : productRegnCount.hashCode());
 		result = prime
 				* result
-				+ ((productSchulerCount == null) ? 0 : productSchulerCount
+				+ ((serviceScheduleCount == null) ? 0 : serviceScheduleCount
 						.hashCode());
 		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		result = prime * result
@@ -131,10 +130,10 @@ public class UserStats extends MizeEntity implements Comparable<UserStats> {
 				return false;
 		} else if (!productRegnCount.equals(other.productRegnCount))
 			return false;
-		if (productSchulerCount == null) {
-			if (other.productSchulerCount != null)
+		if (serviceScheduleCount == null) {
+			if (other.serviceScheduleCount != null)
 				return false;
-		} else if (!productSchulerCount.equals(other.productSchulerCount))
+		} else if (!serviceScheduleCount.equals(other.serviceScheduleCount))
 			return false;
 		if (userId == null) {
 			if (other.userId != null)
