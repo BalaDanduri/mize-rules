@@ -9,7 +9,7 @@ public class ProductRepeatOrderHistory extends MizeEntity implements Comparable<
 	private static final long serialVersionUID = -3861494853684026293L;
 	private ProductRepeatOrder productRepeatOrder;
 	private DateTime orderDate;
-	private Long orderSnapshot;
+	private ProductRepeatOrder orderSnapshot;
 	private DateTime createdDate;
 	
 	public ProductRepeatOrder getProductRepeatOrder() {
@@ -28,11 +28,11 @@ public class ProductRepeatOrderHistory extends MizeEntity implements Comparable<
 		this.orderDate = orderDate;
 	}
 
-	public Long getOrderSnapshot() {
+	public ProductRepeatOrder getOrderSnapshot() {
 		return orderSnapshot;
 	}
 
-	public void setOrderSnapshot(Long orderSnapshot) {
+	public void setOrderSnapshot(ProductRepeatOrder orderSnapshot) {
 		this.orderSnapshot = orderSnapshot;
 	}
 
@@ -106,7 +106,6 @@ public class ProductRepeatOrderHistory extends MizeEntity implements Comparable<
 
 	@Override
 	public int compareTo(ProductRepeatOrderHistory o) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
