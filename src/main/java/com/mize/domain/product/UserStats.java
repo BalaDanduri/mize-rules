@@ -12,6 +12,10 @@ public class UserStats extends MizeEntity implements Comparable<UserStats> {
 	Integer productConsumableCount;
 	Integer serviceScheduleCount;
 	
+	public enum Stats{
+		want,own,product_regn,product_consumable,service_schedule;
+	}
+	
 	@Override
 	public Long getId() {
 		return id;
