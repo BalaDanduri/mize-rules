@@ -18,6 +18,7 @@ import javax.persistence.Transient;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.mize.domain.brand.Brand;
@@ -47,7 +48,9 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	private String model;
 	private String productLink;
 	private List<ProductRegister> productRegisters = new ArrayList<ProductRegister>();
-	
+	private String hasProdContent;
+	private String isCounsumable;
+	private String isAccessory;
 	
 	public enum Source{
 		MIZE(1),AMAZON(2),ETILIZE(3),BestBuy(4);
@@ -65,8 +68,6 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 		productDetails = new ProductDetails();
 	}
 
-/*	@OneToOne(fetch= FetchType.EAGER)
-	@JoinColumn(name="")*/
 	public ProductSource getProductSource() {
 		return productSource;
 	}
@@ -113,7 +114,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 
 	
 	@Transient
-	@JsonSerialize(using=NumberValueSerializer.class)
+	@JsonSerialize(using=NumberValueSerializer.class,include = Inclusion.NON_DEFAULT)
 	public Double getPrice() {
 		return price;
 	}
@@ -301,6 +302,42 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 		result = prime * result + ((upc == null) ? 0 : upc.hashCode());
 		return result;
 	}
+
+	@Transient
+	public String getHasProdContent() {
+		return hasProdContent;
+	}
+
+	public void setHasProdContent(String hasProdContent) {
+		this.hasProdContent = hasProdContent;
+	}
+
+	@Transient
+	public String getIsCounsumable() {
+		return isCounsumable;
+	}
+
+	public void setIsCounsumable(String isCounsumable) {
+		this.isCounsumable = isCounsumable;
+	}
+
+	@Transient
+	public String getIsAccessory() {
+		return isAccessory;
+	}
+
+	public void setIsAccessory(String isAccessory) {
+		this.isAccessory = isAccessory;
+	}
 	
+	@JsonIgnore
+	@Transient
+	public static Long getValidSourceId(Long sourceId){
+		if(Formatter.longValue(sourceId) == Source.AMAZON.getValue()){
+			return Long.valueOf(Source.AMAZON.getValue());
+		}else{
+			return Long.valueOf(Source.ETILIZE.getValue());
+		}
+	}
 
 }
