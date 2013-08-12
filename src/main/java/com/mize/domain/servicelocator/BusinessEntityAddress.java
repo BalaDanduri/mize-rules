@@ -48,6 +48,7 @@ public class BusinessEntityAddress  extends MizeEntity  implements Comparable<Bu
 	private String icon;
 	private BusinessEntityGeo geoLocation;
 	private BusinessEntity businessEntity;
+	private String hoursOfOperation;
 	
 	
 	
@@ -453,8 +454,21 @@ public class BusinessEntityAddress  extends MizeEntity  implements Comparable<Bu
 				return false;
 		} else if (!zipExt.equals(other.zipExt))
 			return false;
+		if(hoursOfOperation == null) {
+			if (other.hoursOfOperation != null)
+				return false;
+		} else if(!hoursOfOperation.equals(other.hoursOfOperation))
+			return false;
 		return true;
-	}	
+	}
+	@Column(name="hours_of_op",length=250,nullable=true)
+	public String getHoursOfOperation() {
+		return hoursOfOperation;
+	}
+	
+	public void setHoursOfOperation(String hoursOfOperation) {
+		this.hoursOfOperation = hoursOfOperation;
+	}
 	
 	
 }

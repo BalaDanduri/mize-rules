@@ -24,7 +24,7 @@ import com.mize.domain.common.MizeEntity;
 
 @Entity
 @Table(name="business_entity")
-public class BusinessEntity  extends MizeEntity {
+public class BusinessEntity  extends MizeEntity implements Comparable<BusinessEntity>{
 	
 	private static final long serialVersionUID = 3712437162456355278L;	
 	private String code;	
@@ -44,7 +44,7 @@ public class BusinessEntity  extends MizeEntity {
 	}
 	
 	public enum TypeCode {
-		COMPANY, DEALER
+		company, dealer, store
 	}
 	
 	public BusinessEntity(Long id, String code, TypeCode typeCode, String subTypeCode, String name, String logo,
@@ -261,6 +261,22 @@ public class BusinessEntity  extends MizeEntity {
 
 	public void setPageIndex(int pageIndex) {
 		this.pageIndex = pageIndex;
+	}
+	
+	@JsonIgnore
+	@Transient
+	public static TypeCode getEntityTypeCode(String typeCode){
+		for (TypeCode entityTypeCode : TypeCode.values()) {
+			if( entityTypeCode.toString().equals(typeCode) ){
+				return entityTypeCode;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public int compareTo(BusinessEntity o) {
+		return 0;
 	}
 	
 }
