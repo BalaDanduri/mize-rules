@@ -2,6 +2,8 @@ package com.mize.domain.product;
 
 import java.util.List;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import com.mize.domain.common.MizeEntity;
 
 public class SimilarProducts extends MizeEntity {
@@ -11,6 +13,8 @@ public class SimilarProducts extends MizeEntity {
 	private String name;
 	private Double price;
 	private List<ProductImage> images;
+	@JsonIgnore
+	private String isConsumable;
 	
 	public SimilarProducts(){
 		
@@ -66,6 +70,15 @@ public class SimilarProducts extends MizeEntity {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
+	@JsonIgnore
+	public String getIsConsumable() {
+		return isConsumable;
+	}
+
+	@JsonIgnore
+	public void setIsConsumable(String isConsumable) {
+		this.isConsumable = isConsumable;
+	}	
 
 }
