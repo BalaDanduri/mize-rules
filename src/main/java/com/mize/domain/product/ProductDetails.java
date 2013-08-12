@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.mize.domain.common.Entity;
+import com.mize.domain.common.MizeEntity;
 
-public class ProductDetails extends Entity{
+public class ProductDetails extends MizeEntity implements Comparable<ProductDetails>{
 	
 	private static final long serialVersionUID = -6338652951554117142L;
 
@@ -24,6 +24,7 @@ public class ProductDetails extends Entity{
 	private List<ProductFeature> productFeatures;
 	private List<SimilarProducts> similarProducts;
 	private List<SimilarProducts> accessories;
+	private List<SimilarProducts> consumbles;
 	private Map<String,Dimension> dimensions;	
 	private String detailsDescription;
 	private String warranty;
@@ -39,6 +40,7 @@ public class ProductDetails extends Entity{
 		imageSets = new ArrayList<ProductImageSet>();
 		accessories = new ArrayList<SimilarProducts>();
 		retailersList = new ArrayList<Retailer>();
+		consumbles = new ArrayList<SimilarProducts>();
 	}
 	
 	public String getWarranty() {
@@ -115,7 +117,7 @@ public class ProductDetails extends Entity{
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = PRIME;
 		int result = 1;
 		result = prime * result + ((accessories == null) ? 0 : accessories.hashCode());
 		result = prime * result + ((detailsDescription == null) ? 0 : detailsDescription.hashCode());
@@ -185,7 +187,28 @@ public class ProductDetails extends Entity{
 			return false;
 		return true;
 	}
-	
-	
+
+	@Override
+	public int compareTo(ProductDetails o) {
+		return 0;
+	}
+
+	@Override
+	public Long getId() {
+		return id;
+	}
+
+	@Override
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public List<SimilarProducts> getConsumbles() {
+		return consumbles;
+	}
+
+	public void setConsumbles(List<SimilarProducts> consumbles) {
+		this.consumbles = consumbles;
+	}
 	
 }
