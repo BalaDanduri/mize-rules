@@ -24,7 +24,7 @@ public class ProductDetails extends MizeEntity implements Comparable<ProductDeta
 	private List<ProductFeature> productFeatures;
 	private List<SimilarProducts> similarProducts;
 	private List<SimilarProducts> accessories;
-	private List<SimilarProducts> consumbles;
+	private List<SimilarProducts> consumables;
 	private Map<String,Dimension> dimensions;	
 	private String detailsDescription;
 	private String warranty;
@@ -40,7 +40,7 @@ public class ProductDetails extends MizeEntity implements Comparable<ProductDeta
 		imageSets = new ArrayList<ProductImageSet>();
 		accessories = new ArrayList<SimilarProducts>();
 		retailersList = new ArrayList<Retailer>();
-		consumbles = new ArrayList<SimilarProducts>();
+		consumables = new ArrayList<SimilarProducts>();
 	}
 	
 	public String getWarranty() {
@@ -203,12 +203,12 @@ public class ProductDetails extends MizeEntity implements Comparable<ProductDeta
 		this.id = id;
 	}
 
-	public List<SimilarProducts> getConsumbles() {
-		return consumbles;
+	public List<SimilarProducts> getConsumables() {
+		return consumables;
 	}
 
-	public void setConsumbles(List<SimilarProducts> consumbles) {
-		this.consumbles = consumbles;
+	public void setConsumables(List<SimilarProducts> consumables) {
+		this.consumables = consumables;
 	}
-	
+
 }

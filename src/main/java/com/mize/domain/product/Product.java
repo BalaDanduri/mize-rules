@@ -49,7 +49,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	private String productLink;
 	private List<ProductRegister> productRegisters = new ArrayList<ProductRegister>();
 	private String hasProdContent;
-	private String isCounsumable;
+	private String isConsumable;
 	private String isAccessory;
 	
 	public enum Source{
@@ -313,12 +313,12 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	}
 
 	@Transient
-	public String getIsCounsumable() {
-		return isCounsumable;
+	public String getIsConsumable() {
+		return isConsumable;
 	}
 
-	public void setIsCounsumable(String isCounsumable) {
-		this.isCounsumable = isCounsumable;
+	public void setIsConsumable(String isConsumable) {
+		this.isConsumable = isConsumable;
 	}
 
 	@Transient
