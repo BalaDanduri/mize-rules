@@ -277,28 +277,15 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime * result + ((brand == null) ? 0 : brand.hashCode());
-		result = prime * result
-				+ ((category == null) ? 0 : category.hashCode());
-		result = prime * result
-				+ ((imageLink == null) ? 0 : imageLink.hashCode());
-		result = prime * result
-				+ ((listNames == null) ? 0 : listNames.hashCode());
-		result = prime * result
-				+ ((mizeRating == null) ? 0 : mizeRating.hashCode());
+		result = prime * result + ((hasProdContent == null) ? 0 : hasProdContent.hashCode());
+		result = prime * result	+ ((imageLink == null) ? 0 : imageLink.hashCode());
+		result = prime * result + ((isAccessory == null) ? 0 : isAccessory.hashCode());
+		result = prime * result + ((isConsumable == null) ? 0 : isConsumable.hashCode());
+		result = prime * result + ((mizeRating == null) ? 0 : mizeRating.hashCode());
 		result = prime * result + ((model == null) ? 0 : model.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((price == null) ? 0 : price.hashCode());
-		result = prime * result
-				+ ((productDetails == null) ? 0 : productDetails.hashCode());
-		result = prime * result
-				+ ((productLink == null) ? 0 : productLink.hashCode());
-		result = prime * result
-				+ ((productSource == null) ? 0 : productSource.hashCode());
-		result = prime * result + ((qrCode == null) ? 0 : qrCode.hashCode());
-		result = prime
-				* result
-				+ ((shortDescription == null) ? 0 : shortDescription.hashCode());
+		result = prime * result	+ ((shortDescription == null) ? 0 : shortDescription.hashCode());
 		result = prime * result + ((upc == null) ? 0 : upc.hashCode());
 		return result;
 	}
@@ -338,6 +325,83 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 		}else{
 			return Long.valueOf(Source.ETILIZE.getValue());
 		}
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Product other = (Product) obj;		
+		if (hasProdContent == null) {
+			if (other.hasProdContent != null)
+				return false;
+		} else if (!hasProdContent.equals(other.hasProdContent))
+			return false;
+		if (imageLink == null) {
+			if (other.imageLink != null)
+				return false;
+		} else if (!imageLink.equals(other.imageLink))
+			return false;
+		if (isAccessory == null) {
+			if (other.isAccessory != null)
+				return false;
+		} else if (!isAccessory.equals(other.isAccessory))
+			return false;
+		if (isConsumable == null) {
+			if (other.isConsumable != null)
+				return false;
+		} else if (!isConsumable.equals(other.isConsumable))
+			return false;
+		if (listNames == null) {
+			if (other.listNames != null)
+				return false;
+		} else if (!listNames.equals(other.listNames))
+			return false;
+		if (mizeRating == null) {
+			if (other.mizeRating != null)
+				return false;
+		} else if (!mizeRating.equals(other.mizeRating))
+			return false;
+		if (model == null) {
+			if (other.model != null)
+				return false;
+		} else if (!model.equals(other.model))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (price == null) {
+			if (other.price != null)
+				return false;
+		} else if (!price.equals(other.price))
+			return false;		
+		if (productLink == null) {
+			if (other.productLink != null)
+				return false;
+		} else if (!productLink.equals(other.productLink))
+			return false;	
+		if (qrCode == null) {
+			if (other.qrCode != null)
+				return false;
+		} else if (!qrCode.equals(other.qrCode))
+			return false;
+		if (shortDescription == null) {
+			if (other.shortDescription != null)
+				return false;
+		} else if (!shortDescription.equals(other.shortDescription))
+			return false;
+		if (upc == null) {
+			if (other.upc != null)
+				return false;
+		} else if (!upc.equals(other.upc))
+			return false;
+		return true;
 	}
 
 }
