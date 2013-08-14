@@ -3,12 +3,19 @@ package com.mize.domain.product;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Transient;
+
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.auth.User;
 import com.mize.domain.brand.Brand;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.user.UserAddress;
+import com.mize.domain.util.JodaDateTimeDeserializer;
+import com.mize.domain.util.JsonDateTimeSerializer;
 
 public class ProductRepeatOrder extends MizeEntity implements Comparable<ProductRepeatOrder>{
 	
@@ -18,14 +25,20 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 	private Product product;
 	private ProductRepeatOrderType productRepeatOrderType;
 	private ProductRepeatOrderShipOptions productRepeatOrderShipOptions;
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime startDate;
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime endDate;
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime lastOrderDate;
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime nextOrderDate;
 	private String active;
-	private Double Qty;
+	private Double quantity;
 	private List<UserAddress> userAddresses = new ArrayList<UserAddress>();
 	private ProductRepeatOrderHistory productRepeatOrderHistory;
+	@Transient
+	private Integer pageIndex;
 
 	@Override
 	public Long getId() {
@@ -78,34 +91,50 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 		this.productRepeatOrderShipOptions = productRepeatOrderShipOptions;
 	}
 
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
 	public DateTime getStartDate() {
 		return startDate;
 	}
 
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
 	public void setStartDate(DateTime startDate) {
 		this.startDate = startDate;
 	}
 
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
 	public DateTime getEndDate() {
 		return endDate;
 	}
 
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
 	public void setEndDate(DateTime endDate) {
 		this.endDate = endDate;
 	}
 
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
 	public DateTime getLastOrderDate() {
 		return lastOrderDate;
 	}
 
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
 	public void setLastOrderDate(DateTime lastOrderDate) {
 		this.lastOrderDate = lastOrderDate;
 	}
 
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
 	public DateTime getNextOrderDate() {
 		return nextOrderDate;
 	}
 
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
 	public void setNextOrderDate(DateTime nextOrderDate) {
 		this.nextOrderDate = nextOrderDate;
 	}
@@ -118,12 +147,12 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 		this.active = active;
 	}
 
-	public Double getQty() {
-		return Qty;
+	public Double getQuantity() {
+		return quantity;
 	}
 
-	public void setQty(Double qty) {
-		Qty = qty;
+	public void setQuantity(Double quantity) {
+		this.quantity = quantity;
 	}
 
 	public List<UserAddress> getUserAddresses() {
@@ -142,12 +171,19 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 		this.productRepeatOrderHistory = productRepeatOrderHistory;
 	}
 	
+	@Transient
+	public Integer getPageIndex() {
+		return pageIndex;
+	}
+
+	public void setPageIndex(Integer pageIndex) {
+		this.pageIndex = pageIndex;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime * result + ((Qty == null) ? 0 : Qty.hashCode());
 		result = prime * result + ((active == null) ? 0 : active.hashCode());
 		result = prime * result + ((brand == null) ? 0 : brand.hashCode());
 		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
@@ -158,6 +194,7 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 		result = prime * result
 				+ ((productRepeatOrderShipOptions == null) ? 0 : productRepeatOrderShipOptions.hashCode());
 		result = prime * result + ((productRepeatOrderType == null) ? 0 : productRepeatOrderType.hashCode());
+		result = prime * result + ((quantity == null) ? 0 : quantity.hashCode());
 		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		result = prime * result + ((userAddresses == null) ? 0 : userAddresses.hashCode());
@@ -173,11 +210,6 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 		if (getClass() != obj.getClass())
 			return false;
 		ProductRepeatOrder other = (ProductRepeatOrder) obj;
-		if (Qty == null) {
-			if (other.Qty != null)
-				return false;
-		} else if (!Qty.equals(other.Qty))
-			return false;
 		if (active == null) {
 			if (other.active != null)
 				return false;
@@ -223,6 +255,11 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 				return false;
 		} else if (!productRepeatOrderType.equals(other.productRepeatOrderType))
 			return false;
+		if (quantity == null) {
+			if (other.quantity != null)
+				return false;
+		} else if (!quantity.equals(other.quantity))
+			return false;
 		if (startDate == null) {
 			if (other.startDate != null)
 				return false;
@@ -240,15 +277,15 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 			return false;
 		return true;
 	}
-	
 
+	
 	@Override
 	public String toString() {
 		return "ProductRepeatOrder [user=" + user + ", brand=" + brand + ", product=" + product
 				+ ", productRepeatOrderType=" + productRepeatOrderType + ", productRepeatOrderShipOptions="
 				+ productRepeatOrderShipOptions + ", startDate=" + startDate + ", endDate=" + endDate
 				+ ", lastOrderDate=" + lastOrderDate + ", nextOrderDate=" + nextOrderDate + ", active=" + active
-				+ ", Qty=" + Qty + ", userAddresses=" + userAddresses + ", productRepeatOrderHistory="
+				+ ", quantity=" + quantity + ", userAddresses=" + userAddresses + ", productRepeatOrderHistory="
 				+ productRepeatOrderHistory + "]";
 	}
 
