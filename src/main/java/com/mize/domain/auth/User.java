@@ -39,8 +39,7 @@ import com.mize.domain.util.JsonDateTimeSerializer;
 public class User extends MizeEntity implements Comparable<User> {
 	
 	private static final long serialVersionUID = 6457591358862233006L;
-	protected Long id;
-    protected String email;
+	protected String email;
     protected String name;
     protected DateTime lastLogin;
     protected boolean active;
@@ -98,6 +97,7 @@ public class User extends MizeEntity implements Comparable<User> {
 	public Long getId() {
 		return id;
 	}
+	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -301,6 +301,11 @@ public class User extends MizeEntity implements Comparable<User> {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
 		if (email == null) {
 			if (other.email != null)
 				return false;
