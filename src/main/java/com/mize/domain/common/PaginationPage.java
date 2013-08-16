@@ -10,7 +10,21 @@ public class PaginationPage<E> {
         private List<E> pageItems = new ArrayList<E>();
         private long rowsAvailable;
         private Integer pageSize;
-
+        
+        public PaginationPage() {
+        	
+        }
+        
+        public PaginationPage(int pageNumber, int pagesAvailable,
+    			List<E> pageItems, long rowsAvailable, Integer pageSize) {
+    		super();
+    		this.pageNumber = pageNumber;
+    		this.pagesAvailable = pagesAvailable;
+    		this.pageItems = pageItems;
+    		this.rowsAvailable = rowsAvailable;
+    		this.pageSize = pageSize;
+    	}
+        
         public void setPageNumber(int pageNumber) {
             this.pageNumber = pageNumber;
         }

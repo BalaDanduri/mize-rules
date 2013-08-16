@@ -20,11 +20,15 @@ import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import org.hibernate.annotations.GenericGenerator;
+import org.joda.time.DateTime;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.brand.Brand;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.DecimalValueDeserializer;
 import com.mize.domain.util.Formatter;
+import com.mize.domain.util.JodaDateDeserializer;
+import com.mize.domain.util.JsonDateSerializer;
 import com.mize.domain.util.NumberValueSerializer;
 
 @javax.persistence.Entity
@@ -51,6 +55,21 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	private String hasProdContent;
 	private String isConsumable;
 	private String isAccessory;
+	
+	@DateTimeFormat(pattern="MM-dd-yyyy")
+	private DateTime releaseDate;
+
+	@DateTimeFormat(pattern="MM-dd-yyyy")
+	@JsonSerialize(using=JsonDateSerializer.class,include=Inclusion.NON_DEFAULT)
+	public DateTime getReleaseDate() {
+		return releaseDate;
+	}
+	
+	@DateTimeFormat(pattern="MM-dd-yyyy")
+	@JsonDeserialize(using=JodaDateDeserializer.class)
+	public void setReleaseDate(DateTime releaseDate) {
+		this.releaseDate = releaseDate;
+	}
 	
 	public enum Source{
 		MIZE(1),AMAZON(2),ETILIZE(3),BestBuy(4);
