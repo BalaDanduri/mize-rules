@@ -64,9 +64,7 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 	
 	public ServiceSchedule() {
 		user = new User();
-		brand = new Brand();
-		state = new State();
-		country = new Country();
+		brand = new Brand();		
 	}	
 
 	public ServiceSchedule(User user, Brand brand, String serviceFormat,
