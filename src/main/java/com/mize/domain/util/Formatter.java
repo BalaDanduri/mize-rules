@@ -415,8 +415,18 @@ public class Formatter {
 		return pageSize;
 	}
 	
+	public static int calculatePageSize(Integer pagesize) {
+		int pageSize = Formatter.intValue(pagesize) == 0 ? 10: Formatter.intValue(pagesize);
+		return pageSize;
+	}
+	
 	public static int calculatePageNumber(String pageIndex) {
 		int pageNumber = Formatter.intValue(pageIndex) == 0 ?  1 : Formatter.intValue(pageIndex)  ;
+		return pageNumber;
+	}
+	
+	public static int calculatePageNumber(Integer pageIndex) {
+		int pageNumber = Formatter.intValue(pageIndex) == 0 ?  1 : Formatter.intValue(pageIndex);
 		return pageNumber;
 	}
 	
@@ -427,6 +437,5 @@ public class Formatter {
 		}
 	   return avialablePage;
 	}
-
 	
 }
