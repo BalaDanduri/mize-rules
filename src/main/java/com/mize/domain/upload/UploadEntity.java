@@ -37,6 +37,20 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 		IN_PROGRESS,COMPLETED;
 	}
 	
+	public enum EntityType{
+		BrandService("Brand Service"),BrandSupprtService("Brand Supprt"),ProductService("Product"),ProductDesriptionService("Product Desription"),
+		ProductKeywordsService("Product Keywords"),ProductLocaleService("Product Locale"),ProductAccessoriesService("Product Accessories"),
+		ProductSearchAttributeService("Product Search Attribute"),ProductUpsellService("Product Upsell"),ProductSkuService("Product Sku"),
+		ProductImagesService("Product Images"),ProductAttributeService("Product Attribute"),ServiceLocatorService("Service Locator");
+		String name;
+		EntityType(String name){
+			this.name = name;
+		}
+		public String getName(){
+			return name;
+		}
+	}
+	
 	@Override
 	public Long getId() {
 		return id;
@@ -299,6 +313,16 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	@JsonIgnore
+	public static String getEntityName(String entityCode){
+		try{
+			EntityType entityType = EntityType.valueOf(entityCode);
+			return entityType.getName();
+		}catch(Exception e){			
+		}		
+		return entityCode;
 	}
 	
 }

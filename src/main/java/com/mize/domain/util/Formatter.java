@@ -39,6 +39,8 @@ public class Formatter {
 	public static final String SPECIFICATION_WEIGHT = "Weight";
 	public static String UNIT_INCHES = "inches";
 	public static String UNIT_POUNDS = "pounds";
+	public static String NEW_LINE = "\n";
+	public static String BR_LINE = "<br>";
 	
 	public static final List<String> amazonSpecList = new ArrayList<String>();
 	
@@ -436,6 +438,23 @@ public class Formatter {
 			 avialablePage++;
 		}
 	   return avialablePage;
-	}
+	}	
 	
+	public static String getNewLineString(String input1,Object input2){
+		StringBuilder builder = new StringBuilder();
+		builder.append(makeNotNullString(input1)+": ");
+		if(input2 != null){
+			if(input2 instanceof String){
+				builder.append(makeNotNullString((String)input2));
+			}
+			if(input2 instanceof Long){
+				builder.append(longValue((Long)input2));
+			}
+			if(input2 instanceof Integer){
+				builder.append(intValue((Integer)input2));
+			}
+		}
+		builder.append(NEW_LINE);
+		return builder.toString();
+	}	
 }

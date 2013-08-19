@@ -14,10 +14,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.apache.commons.lang.WordUtils;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
-import org.codehaus.jackson.map.annotate.JsonView;
 import org.hibernate.annotations.GenericGenerator;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -28,9 +29,7 @@ import com.mize.domain.user.Group;
 import com.mize.domain.user.UserBE;
 import com.mize.domain.user.UserProfile;
 import com.mize.domain.user.UserProfilePrivacy;
-import com.mize.domain.user.UserProfileViews;
-import com.mize.domain.user.UserProfileViews.PublicView;
-import com.mize.domain.user.UserProfileViews.UserProfilePrivacyView;
+import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
@@ -93,7 +92,6 @@ public class User extends MizeEntity implements Comparable<User> {
 	@GeneratedValue
 	@Column(name="id",unique=true,nullable=false,length=20)
 	@Override
-	@JsonView(PublicView.class)
 	public Long getId() {
 		return id;
 	}
@@ -103,7 +101,6 @@ public class User extends MizeEntity implements Comparable<User> {
 	}
 	
 	@Column(name="email",nullable=true,length=255)
-	@JsonView(UserProfilePrivacyView.class)
 	public String getEmail() {
 		return email;
 	}
@@ -112,7 +109,6 @@ public class User extends MizeEntity implements Comparable<User> {
 	}
 	
 	@Column(name="name",nullable=true,length=255)
-	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
 	public String getName() {
 		return name;
 	}
@@ -122,8 +118,7 @@ public class User extends MizeEntity implements Comparable<User> {
 	
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Column(name = "last_login",  nullable = false)
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)	
-	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	public DateTime getLastLogin() {
 		return lastLogin;
 	}
@@ -135,7 +130,6 @@ public class User extends MizeEntity implements Comparable<User> {
 	}
 	
 	@Column(name="active",nullable=true)
-	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
 	public boolean isActive() {
 		return active;
 	}
@@ -144,7 +138,6 @@ public class User extends MizeEntity implements Comparable<User> {
 	}
 	
 	@Column(name="email_validated", nullable= true)
-	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
 	public boolean isEmailValidated() {
 		return emailValidated;
 	}
@@ -153,7 +146,6 @@ public class User extends MizeEntity implements Comparable<User> {
 	}
 	
 	@Transient
-	@JsonView(UserProfileViews.UserProfilePrivacyHideView.class)
 	public List<LinkedAccount> getLinkedAccounts() {
 		return linkedAccounts;
 	}
@@ -339,4 +331,14 @@ public class User extends MizeEntity implements Comparable<User> {
 		this.productRegisters = productRegisters;
 	}
 	
+	@JsonIgnore
+	@Transient
+	public String getUserName(){
+		String name = Formatter.EMPTY;
+		if(getUserProfile() != null){
+			name = WordUtils.capitalize(Formatter.makeNotNullString(getUserProfile().getFirstName()))+" "+WordUtils.capitalize(Formatter.makeNotNullString(getUserProfile().getLastName()));
+			name = Formatter.makeNotNullString(name);
+		}
+		return name;
+	}
 }
