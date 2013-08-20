@@ -38,7 +38,7 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 	}
 	
 	public enum EntityType{
-		BrandService("Brand Service"),BrandSupprtService("Brand Supprt"),ProductService("Product"),ProductDesriptionService("Product Desription"),
+		BrandService("Brand"),BrandSupprtService("Brand Supprt"),ProductService("Product"),ProductDesriptionService("Product Desription"),
 		ProductKeywordsService("Product Keywords"),ProductLocaleService("Product Locale"),ProductAccessoriesService("Product Accessories"),
 		ProductSearchAttributeService("Product Search Attribute"),ProductUpsellService("Product Upsell"),ProductSkuService("Product Sku"),
 		ProductImagesService("Product Images"),ProductAttributeService("Product Attribute"),ServiceLocatorService("Service Locator");
@@ -294,13 +294,14 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 	
 	@JsonIgnore
 	@SuppressWarnings("rawtypes")
-	public static void addToFailureRecord(UploadEntity uploadEntity ,MizeEntity entity,String entityCode,String field,String msgCode) {		
+	public static void addToFailureRecord(UploadEntity uploadEntity ,int recordNumber,String entityCode,String field,String msgCode) {		
 		if(uploadEntity != null){
+			MizeEntity entity = (MizeEntity)((List)uploadEntity.getEntity()).get(recordNumber-1);
 			ProcessLog processLog = new ProcessLog();			
 			processLog.setInputRecord(entity);
 			processLog.setEntityId(entity.getId());
 			processLog.setEntityCode(entityCode);
-			processLog.setRecordNumber(((List)uploadEntity.getEntity()).indexOf(entity)+1);
+			processLog.setRecordNumber(recordNumber);
 			ErrorLog errorLog = new ErrorLog(field,msgCode);
 			processLog.getErrorLogs().add(errorLog);
 			uploadEntity.getProcessLogs().add(processLog);
