@@ -4,11 +4,13 @@ package com.mize.domain.brand;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -16,6 +18,7 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.product.ProductRegister;
 import com.mize.domain.product.ProductRepeatOrderShipOptions;
 
 @Entity
@@ -32,6 +35,7 @@ public class Brand extends MizeEntity implements Comparable<Brand>{
 	private List<BrandSupport> brandSupports = new ArrayList<BrandSupport>();
 	private List<BrandFeed> brandFeeds = new ArrayList<BrandFeed>();
 	private List<ProductRepeatOrderShipOptions> shippings = new ArrayList<ProductRepeatOrderShipOptions>();
+	private List<ProductRegister> productRegisters = new ArrayList<ProductRegister>();
 	
 	
 	@Id
@@ -160,6 +164,16 @@ public class Brand extends MizeEntity implements Comparable<Brand>{
 
 	public void setRegistered(String registered) {
 		this.registered = registered;
+	}
+	
+	@OneToMany(fetch = FetchType.LAZY, cascade =CascadeType.ALL)
+	@JoinColumn(name="prod_regn_id") 
+	public List<ProductRegister> getProductRegisters() {
+		return productRegisters;
+	}
+
+	public void setProductRegisters(List<ProductRegister> productRegisters) {
+		this.productRegisters = productRegisters;
 	}
 
 	@Override

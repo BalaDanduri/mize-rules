@@ -24,6 +24,7 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.auth.User;
+import com.mize.domain.brand.Brand;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateDeserializer;
 import com.mize.domain.util.JsonDateSerializer;
@@ -33,7 +34,7 @@ import com.mize.domain.util.JsonDateSerializer;
 public class ProductRegister extends MizeEntity{
 
 	private static final long serialVersionUID = -6338652951554117142L;
-	
+	private Brand brand;
 	private Product product;
 	private User user;
 	private String serialNumber;
@@ -66,6 +67,8 @@ public class ProductRegister extends MizeEntity{
 	private Long countryId;
 	@Transient
 	private Integer pageIndex;
+	private String regnName;
+	
 	
 	
 	
@@ -73,12 +76,13 @@ public class ProductRegister extends MizeEntity{
 		
 	}
 	
-	public ProductRegister(Product product, User user, String serialNumber, DateTime purchaseDate,
+	public ProductRegister(Brand brand,Product product, User user, String serialNumber, DateTime purchaseDate,
 			Double purchasePrice, String purchaseStore, DateTime warrantyExpiryDate, String additionalInfo,
 			String firstName, String lastName, String email, String address1, String address2, String address3,
 			String city, String state, String country, String zipCode, String phoneMobile, String phoneHome,
 			String phoneWork, List<ProductRegnAttachment> attachments,String updateProfile) {
 		super();
+		this.brand = brand;
 		this.product = product;
 		this.user = user;
 		this.serialNumber = serialNumber;
@@ -119,6 +123,16 @@ public class ProductRegister extends MizeEntity{
 		
 	}
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "brand_id", nullable = true)
+	public Brand getBrand() {
+		return brand;
+	}
+
+	public void setBrand(Brand brand) {
+		this.brand = brand;
+	}
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "prod_id", nullable = true)
 	public Product getProduct() {
@@ -342,14 +356,15 @@ public class ProductRegister extends MizeEntity{
 
 	@Override
 	public String toString() {
-		return "ProductRegister [product=" + product + ", user=" + user + ", serialNumber=" + serialNumber
-				+ ", purchaseDate=" + purchaseDate + ", purchasePrice=" + purchasePrice + ", purchaseStore="
-				+ purchaseStore + ", warrantyExpiryDate=" + warrantyExpiryDate + ", additionalInfo=" + additionalInfo
-				+ ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", address1=" + address1
-				+ ", address2=" + address2 + ", address3=" + address3 + ", city=" + city + ", state=" + state
-				+ ", country=" + country + ", zipCode=" + zipCode + ", phoneMobile=" + phoneMobile + ", phoneHome="
-				+ phoneHome + ", phoneWork=" + phoneWork + ", attachments=" + attachments + ", updateProfile="
-				+ updateProfile + "]";
+		return "ProductRegister [brand=" + brand + ", product=" + product + ", user=" + user + ", serialNumber="
+				+ serialNumber + ", purchaseDate=" + purchaseDate + ", purchasePrice=" + purchasePrice
+				+ ", purchaseStore=" + purchaseStore + ", warrantyExpiryDate=" + warrantyExpiryDate
+				+ ", additionalInfo=" + additionalInfo + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", email=" + email + ", address1=" + address1 + ", address2=" + address2 + ", address3=" + address3
+				+ ", city=" + city + ", state=" + state + ", country=" + country + ", zipCode=" + zipCode
+				+ ", phoneMobile=" + phoneMobile + ", phoneHome=" + phoneHome + ", phoneWork=" + phoneWork
+				+ ", attachments=" + attachments + ", updateProfile=" + updateProfile + ", stateId=" + stateId
+				+ ", countryId=" + countryId + ", pageIndex=" + pageIndex + ", regnName=" + regnName + "]";
 	}
 	@Override
 	public int hashCode() {
@@ -360,11 +375,14 @@ public class ProductRegister extends MizeEntity{
 		result = prime * result + ((address2 == null) ? 0 : address2.hashCode());
 		result = prime * result + ((address3 == null) ? 0 : address3.hashCode());
 		result = prime * result + ((attachments == null) ? 0 : attachments.hashCode());
+		result = prime * result + ((brand == null) ? 0 : brand.hashCode());
 		result = prime * result + ((city == null) ? 0 : city.hashCode());
 		result = prime * result + ((country == null) ? 0 : country.hashCode());
+		result = prime * result + ((countryId == null) ? 0 : countryId.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result + ((pageIndex == null) ? 0 : pageIndex.hashCode());
 		result = prime * result + ((phoneHome == null) ? 0 : phoneHome.hashCode());
 		result = prime * result + ((phoneMobile == null) ? 0 : phoneMobile.hashCode());
 		result = prime * result + ((phoneWork == null) ? 0 : phoneWork.hashCode());
@@ -372,8 +390,10 @@ public class ProductRegister extends MizeEntity{
 		result = prime * result + ((purchaseDate == null) ? 0 : purchaseDate.hashCode());
 		result = prime * result + ((purchasePrice == null) ? 0 : purchasePrice.hashCode());
 		result = prime * result + ((purchaseStore == null) ? 0 : purchaseStore.hashCode());
+		result = prime * result + ((regnName == null) ? 0 : regnName.hashCode());
 		result = prime * result + ((serialNumber == null) ? 0 : serialNumber.hashCode());
 		result = prime * result + ((state == null) ? 0 : state.hashCode());
+		result = prime * result + ((stateId == null) ? 0 : stateId.hashCode());
 		result = prime * result + ((updateProfile == null) ? 0 : updateProfile.hashCode());
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		result = prime * result + ((warrantyExpiryDate == null) ? 0 : warrantyExpiryDate.hashCode());
@@ -414,6 +434,11 @@ public class ProductRegister extends MizeEntity{
 				return false;
 		} else if (!attachments.equals(other.attachments))
 			return false;
+		if (brand == null) {
+			if (other.brand != null)
+				return false;
+		} else if (!brand.equals(other.brand))
+			return false;
 		if (city == null) {
 			if (other.city != null)
 				return false;
@@ -423,6 +448,11 @@ public class ProductRegister extends MizeEntity{
 			if (other.country != null)
 				return false;
 		} else if (!country.equals(other.country))
+			return false;
+		if (countryId == null) {
+			if (other.countryId != null)
+				return false;
+		} else if (!countryId.equals(other.countryId))
 			return false;
 		if (email == null) {
 			if (other.email != null)
@@ -438,6 +468,11 @@ public class ProductRegister extends MizeEntity{
 			if (other.lastName != null)
 				return false;
 		} else if (!lastName.equals(other.lastName))
+			return false;
+		if (pageIndex == null) {
+			if (other.pageIndex != null)
+				return false;
+		} else if (!pageIndex.equals(other.pageIndex))
 			return false;
 		if (phoneHome == null) {
 			if (other.phoneHome != null)
@@ -474,6 +509,11 @@ public class ProductRegister extends MizeEntity{
 				return false;
 		} else if (!purchaseStore.equals(other.purchaseStore))
 			return false;
+		if (regnName == null) {
+			if (other.regnName != null)
+				return false;
+		} else if (!regnName.equals(other.regnName))
+			return false;
 		if (serialNumber == null) {
 			if (other.serialNumber != null)
 				return false;
@@ -483,6 +523,11 @@ public class ProductRegister extends MizeEntity{
 			if (other.state != null)
 				return false;
 		} else if (!state.equals(other.state))
+			return false;
+		if (stateId == null) {
+			if (other.stateId != null)
+				return false;
+		} else if (!stateId.equals(other.stateId))
 			return false;
 		if (updateProfile == null) {
 			if (other.updateProfile != null)
@@ -515,6 +560,12 @@ public class ProductRegister extends MizeEntity{
 	public void setPageIndex(Integer pageIndex) {
 		this.pageIndex = pageIndex;
 	}
-	
-	
+	@Column(name = "regn_name",  nullable = true, length = 50)
+	public String getRegnName() {
+		return regnName;
+	}
+
+	public void setRegnName(String regnName) {
+		this.regnName = regnName;
+	}
 }
