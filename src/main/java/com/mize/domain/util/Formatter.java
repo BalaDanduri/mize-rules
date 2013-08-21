@@ -457,4 +457,11 @@ public class Formatter {
 		builder.append(NEW_LINE);
 		return builder.toString();
 	}	
+	
+	public static int compareDates(DateTime startTime,DateTime endTime){
+		if(startTime != null && endTime != null){
+			return startTime.compareTo(endTime);
+		}
+		return 0;
+	}
 }
