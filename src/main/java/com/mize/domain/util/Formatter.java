@@ -464,4 +464,8 @@ public class Formatter {
 		}
 		return 0;
 	}
+	public static void main(String[] args) {
+		int i = compareDates(DateTime.now(), DateTime.now());
+		System.out.println(i);
+	}
 }
