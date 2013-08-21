@@ -27,7 +27,9 @@ import com.mize.domain.auth.User;
 import com.mize.domain.brand.Brand;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateDeserializer;
+import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateSerializer;
+import com.mize.domain.util.JsonDateTimeSerializer;
 
 @Entity
 @Table(name = "prod_regn")
@@ -68,6 +70,16 @@ public class ProductRegister extends MizeEntity{
 	@Transient
 	private Integer pageIndex;
 	private String regnName;
+	
+	
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	private DateTime createdFromDate;
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	private DateTime createdToDate;
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	private DateTime updatedFromDate;
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	private DateTime updatedToDate;
 	
 	
 	
@@ -568,4 +580,53 @@ public class ProductRegister extends MizeEntity{
 	public void setRegnName(String regnName) {
 		this.regnName = regnName;
 	}
+
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	public DateTime getCreatedFromDate() {
+		return createdFromDate;
+	}
+
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
+	public void setCreatedFromDate(DateTime createdFromDate) {
+		this.createdFromDate = createdFromDate;
+	}
+
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	public DateTime getCreatedToDate() {
+		return createdToDate;
+	}
+
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
+	public void setCreatedToDate(DateTime createdToDate) {
+		this.createdToDate = createdToDate;
+	}
+
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	public DateTime getUpdatedFromDate() {
+		return updatedFromDate;
+	}
+
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
+	public void setUpdatedFromDate(DateTime updatedFromDate) {
+		this.updatedFromDate = updatedFromDate;
+	}
+
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	public DateTime getUpdatedToDate() {
+		return updatedToDate;
+	}
+
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
+	public void setUpdatedToDate(DateTime updatedToDate) {
+		this.updatedToDate = updatedToDate;
+	}
+	
 }
