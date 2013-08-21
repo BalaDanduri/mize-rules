@@ -55,6 +55,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	private String hasProdContent;
 	private String isConsumable;
 	private String isAccessory;
+	private String mpn;
 	
 	@DateTimeFormat(pattern="MM-dd-yyyy")
 	private DateTime releaseDate;
@@ -270,6 +271,14 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 		return flag;
 	}
 	
+	public String getMpn() {
+		return mpn;
+	}
+
+	public void setMpn(String mpn) {
+		this.mpn = mpn;
+	}
+
 	@Transient
 	@JsonIgnore
 	public boolean isMizeSource(){
@@ -283,13 +292,13 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 
 	@Override
 	public String toString() {
-		return "Product [name=" + name + ", brand=" + brand + ", price="
-				+ price + ", category=" + category + ", shortDescription="
-				+ shortDescription + ", upc=" + upc + ", qrCode=" + qrCode
-				+ ", productSource=" + productSource + ", mizeRating="
-				+ mizeRating + ", imageLink=" + imageLink + ", listNames="
-				+ listNames + ", productDetails=" + productDetails + ", model="
-				+ model + ", productLink=" + productLink + "]";
+		return "Product [name=" + name + ", brand=" + brand + ", price=" + price + ", category=" + category
+				+ ", shortDescription=" + shortDescription + ", upc=" + upc + ", qrCode=" + qrCode + ", productSource="
+				+ productSource + ", mizeRating=" + mizeRating + ", imageLink=" + imageLink + ", listNames="
+				+ listNames + ", productDetails=" + productDetails + ", model=" + model + ", productLink="
+				+ productLink + ", productRegisters=" + productRegisters + ", hasProdContent=" + hasProdContent
+				+ ", isConsumable=" + isConsumable + ", isAccessory=" + isAccessory + ", mpn=" + mpn + ", releaseDate="
+				+ releaseDate + "]";
 	}
 
 	@Override
