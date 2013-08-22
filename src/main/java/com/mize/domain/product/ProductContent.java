@@ -31,6 +31,33 @@ public class ProductContent extends MizeEntity{
 	private String url;
 	@Transient
 	private Integer pageIndex;	
+	
+	private String upc;
+	private String mpn;
+
+
+	public String getUpc() {
+		return upc;
+	}
+
+
+
+	public void setUpc(String upc) {
+		this.upc = upc;
+	}
+
+
+
+	public String getMpn() {
+		return mpn;
+	}
+
+
+
+	public void setMpn(String mpn) {
+		this.mpn = mpn;
+	}
+
 
 
 	public ProductContent(){
@@ -56,6 +83,24 @@ public class ProductContent extends MizeEntity{
 		this.pageIndex = pageIndex;
 	}
 
+	public ProductContent(Long brandId, String brandName, Long productId, String productName, String contentType,
+			Integer seqNo, ProductContentPK productContentPK, String title, String description, String url,
+			Integer pageIndex, String upc, String mpn) {
+		super();
+		this.brandId = brandId;
+		this.brandName = brandName;
+		this.productId = productId;
+		this.productName = productName;
+		this.contentType = contentType;
+		this.seqNo = seqNo;
+		this.productContentPK = productContentPK;
+		this.title = title;
+		this.description = description;
+		this.url = url;
+		this.pageIndex = pageIndex;
+		this.upc = upc;
+		this.mpn = mpn;
+	}
 
 
 	public ProductContent(ProductContentPK productContentPK, String title, String description, String url,
@@ -273,7 +318,7 @@ public class ProductContent extends MizeEntity{
 		return "ProductContent [brandId=" + brandId + ", brandName=" + brandName + ", productId=" + productId
 				+ ", productName=" + productName + ", contentType=" + contentType + ", seqNo=" + seqNo
 				+ ", productContentPK=" + productContentPK + ", title=" + title + ", description=" + description
-				+ ", url=" + url + ", pageIndex=" + pageIndex + "]";
+				+ ", url=" + url + ", pageIndex=" + pageIndex + ", upc=" + upc + ", mpn=" + mpn + "]";
 	}
 	
 }
