@@ -2,12 +2,14 @@ package com.mize.domain.common;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PaginationPage<E> {
+import org.codehaus.jackson.annotate.JsonIgnore;
+
+public class PaginationPage<T> {
 
 		public static final Integer DEFAULT_PAGE_SIZE = 10;
         private int pageNumber;
         private int pagesAvailable;
-        private List<E> pageItems = new ArrayList<E>();
+        private List<T> pageItems = new ArrayList<T>();
         private long rowsAvailable;
         private Integer pageSize;
         
@@ -16,7 +18,7 @@ public class PaginationPage<E> {
         }
         
         public PaginationPage(int pageNumber, int pagesAvailable,
-    			List<E> pageItems, long rowsAvailable, Integer pageSize) {
+    			List<T> pageItems, long rowsAvailable, Integer pageSize) {
     		super();
     		this.pageNumber = pageNumber;
     		this.pagesAvailable = pagesAvailable;
@@ -33,7 +35,7 @@ public class PaginationPage<E> {
             this.pagesAvailable = pagesAvailable;
         }
 
-        public void setPageItems(List<E> pageItems) {
+        public void setPageItems(List<T> pageItems) {
             this.pageItems = pageItems;
         }
 
@@ -45,7 +47,7 @@ public class PaginationPage<E> {
             return pagesAvailable;
         }
 
-        public List<E> getPageItems() {
+        public List<T> getPageItems() {
             return pageItems;
         }
 
@@ -66,5 +68,18 @@ public class PaginationPage<E> {
 
 		public void setPageSize(Integer pageSize) {
 			this.pageSize = pageSize;
+		}
+		
+		@JsonIgnore
+		public T getPage(){
+			if(pageItems != null && pageItems.size() > 0){
+				return pageItems.get(0);
+			}
+			return null;
+		}
+		
+		@JsonIgnore
+		public void setPage(T page){
+			pageItems.add(page);
 		}
     }
