@@ -45,7 +45,8 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 		BrandService("Brand"),BrandSupprtService("Brand Supprt"),ProductService("Product"),ProductDesriptionService("Product Desription"),
 		ProductKeywordsService("Product Keywords"),ProductLocaleService("Product Locale"),ProductAccessoriesService("Product Accessories"),
 		ProductSearchAttributeService("Product Search Attribute"),ProductUpsellService("Product Upsell"),ProductSkuService("Product Sku"),
-		ProductImagesService("Product Images"),ProductAttributeService("Product Attribute"),ServiceLocatorService("Service Locator");
+		ProductImagesService("Product Images"),ProductAttributeService("Product Attribute"),ServiceLocatorService("Service Locator"),
+		ProductSimilarService("Similar Product");
 		String name;
 		EntityType(String name){
 			this.name = name;
