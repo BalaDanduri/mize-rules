@@ -20,6 +20,7 @@ import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -118,6 +119,7 @@ public class User extends MizeEntity implements Comparable<User> {
 	
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Column(name = "last_login",  nullable = false)
+	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	public DateTime getLastLogin() {
 		return lastLogin;

@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import com.mize.domain.common.MizeEntity;
 
 @Entity
@@ -227,6 +229,27 @@ public class ProductContent extends MizeEntity{
 	public void setProductId(Long productId) {
 		this.productId = productId;
 	}
+	
+	@Column(name = "created_by",  nullable = true, length = 20)
+	@JsonIgnore(value=false)
+	public Long getCreatedBy() {
+		return createdBy;
+	}
+	@JsonIgnore(value=false)
+	public void setCreatedBy(Long createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	@Column(name = "updated_by",  nullable = true, length = 20)
+	@JsonIgnore(value=false)
+	public Long getUpdatedBy() {
+		return updatedBy;
+	}
+	@JsonIgnore(value=false)
+	public void setUpdatedBy(Long updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+	
 
 	@Override
 	public int hashCode() {
