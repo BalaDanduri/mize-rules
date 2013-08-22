@@ -1,7 +1,9 @@
 package com.mize.domain.upload;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
@@ -33,6 +35,8 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 	private List<ProcessLog> processLogs = new ArrayList<ProcessLog>();
 	private String logFileURI;
 	private User user;
+	@JsonIgnore
+	private Map<Integer,ProcessLog> logMap = new  HashMap<Integer,ProcessLog>();
 	public enum Status{
 		IN_PROGRESS,COMPLETED;
 	}
@@ -41,7 +45,8 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 		BrandService("Brand"),BrandSupprtService("Brand Supprt"),ProductService("Product"),ProductDesriptionService("Product Desription"),
 		ProductKeywordsService("Product Keywords"),ProductLocaleService("Product Locale"),ProductAccessoriesService("Product Accessories"),
 		ProductSearchAttributeService("Product Search Attribute"),ProductUpsellService("Product Upsell"),ProductSkuService("Product Sku"),
-		ProductImagesService("Product Images"),ProductAttributeService("Product Attribute"),ServiceLocatorService("Service Locator");
+		ProductImagesService("Product Images"),ProductAttributeService("Product Attribute"),ServiceLocatorService("Service Locator"),
+		ProductSimilarService("Similar Product");
 		String name;
 		EntityType(String name){
 			this.name = name;
@@ -294,18 +299,20 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 	
 	@JsonIgnore
 	@SuppressWarnings("rawtypes")
-	public static void addToFailureRecord(UploadEntity uploadEntity ,int recordNumber,String entityCode,String field,String msgCode) {		
-		if(uploadEntity != null){
+	public void addToFailureRecord(UploadEntity uploadEntity ,int recordNumber,String entityCode,String field,String msgCode) {
+		ProcessLog processLog = logMap.get(recordNumber);
+		if(processLog == null){
+			processLog = new ProcessLog();
 			MizeEntity entity = (MizeEntity)((List)uploadEntity.getEntity()).get(recordNumber-1);
-			ProcessLog processLog = new ProcessLog();			
 			processLog.setInputRecord(entity);
 			processLog.setEntityId(entity.getId());
 			processLog.setEntityCode(entityCode);
 			processLog.setRecordNumber(recordNumber);
-			ErrorLog errorLog = new ErrorLog(field,msgCode);
-			processLog.getErrorLogs().add(errorLog);
+			logMap.put(recordNumber, processLog);
 			uploadEntity.getProcessLogs().add(processLog);
-		}
+		}			
+		ErrorLog errorLog = new ErrorLog(field,msgCode);
+		processLog.getErrorLogs().add(errorLog);		
 	}
 
 	public User getUser() {
