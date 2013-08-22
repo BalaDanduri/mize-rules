@@ -18,7 +18,7 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-public class Formatter {
+public final class Formatter {
 	public static final String EMPTY = "";
 	public static final String YES = "Y";
 	public static final String NO = "N";
