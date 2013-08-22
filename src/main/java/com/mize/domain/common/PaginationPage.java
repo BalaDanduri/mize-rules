@@ -4,7 +4,7 @@ import java.util.List;
 
 public class PaginationPage<E> {
 
-		private final Integer DEFAULT_PAGE_SIZE = 10;
+		public static final Integer DEFAULT_PAGE_SIZE = 10;
         private int pageNumber;
         private int pagesAvailable;
         private List<E> pageItems = new ArrayList<E>();
