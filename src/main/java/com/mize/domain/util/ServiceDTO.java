@@ -1,5 +1,6 @@
 package com.mize.domain.util;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -72,5 +73,40 @@ public final class ServiceDTO<T> implements ServiceLiteral{
 			return true;
 		}
 		return  false;
+	}
+	
+	@JsonIgnore
+	public boolean addErrorMessage(String msgCode,String msgValue){
+		MizeError error = new MizeError(msgCode, msgValue);
+		if(errors == null){
+			errors = new ArrayList<MizeError>();
+		}
+		errors.add(error);
+		return  true;
+	}
+	
+	@JsonIgnore
+	public List<String> getErrorKeys(){
+		List<String> keys = new ArrayList<String>();
+		if(errors != null){
+			for(MizeError error : errors){
+				keys.add(error.getCode());
+			}
+		}
+		return keys;
+	}
+	
+	@JsonIgnore
+	public List<String> getValidationMessageKeys(){
+		List<String> keys = new ArrayList<String>();
+		if(validationMessages != null){
+			keys.addAll(validationMessages.keySet());
+		}
+		return keys;
+	}
+	
+	@JsonIgnore
+	public boolean isValid(){
+		return !(hasErrors() || hasValidations());
 	}
 }

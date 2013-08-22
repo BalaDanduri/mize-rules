@@ -20,6 +20,8 @@ public abstract class MessageConstants implements Serializable{
 	public static String UPSELL_PRODUCT_ID_NOT_FOUND = "UPSELL_PRODUCT_ID_NOT_FOUND";
 	public static String ATTRIBUTE_ID_NOT_FOUND = "ATTRIBUTE_ID_NOT_FOUND";
 	public static String CATEGORY_ID_NOT_FOUND = "CATEGORY_ID_NOT_FOUND";
+	public static String NO_RESULTS_FOUND = "NO_RESULTS_FOUND";
+	public static String GEN_TEC_MSG = "GEN_TEC_MSG";
 	public static String EXCEPTION = "EXCEPTION";
 
 }
