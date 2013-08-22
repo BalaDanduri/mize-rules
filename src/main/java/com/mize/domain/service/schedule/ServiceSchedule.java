@@ -6,15 +6,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -108,8 +109,9 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 		this.confirmationNumber = confirmationNumber;
 	}
 	
-	@ManyToOne(targetEntity=User.class)
-	@PrimaryKeyJoinColumn(name="user_id")
+	@ManyToOne(targetEntity=User.class)	
+	@Fetch(FetchMode.SELECT)	
+	@JoinColumn(name="user_id",updatable=true,nullable=true)
 	public User getUser() {
 		return user;
 	}
@@ -119,7 +121,8 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 	}
 	
 	@ManyToOne(targetEntity=Brand.class)
-	@PrimaryKeyJoinColumn(name="brand_id")
+	@Fetch(FetchMode.SELECT)
+	@JoinColumn(name="brand_id",updatable=true,nullable=true)
 	public Brand getBrand() {
 		return brand;
 	}
@@ -193,6 +196,7 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 
 	@Column(name="scheduled_date",nullable=true)
 	@DateTimeFormat(pattern="MM-dd-yyyy")
+	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@JsonSerialize(using = JsonDateSerializer.class,include=Inclusion.NON_NULL)
 	public DateTime getScheduledDate() {
 		return scheduledDate;
@@ -258,7 +262,7 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 		this.city = city;
 	}
 	
-	@OneToOne(targetEntity=State.class)
+	@ManyToOne(targetEntity=State.class)
 	@JoinColumn(name="state_id",nullable=true)
 	public State getState() {
 		return state;
@@ -268,7 +272,7 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 		this.state = state;
 	}
 	
-	@OneToOne(targetEntity=Country.class)
+	@ManyToOne(targetEntity=Country.class)
 	@JoinColumn(name="country_id",nullable=true)
 	public Country getCountry() {
 		return country;
