@@ -80,6 +80,16 @@ public final class Formatter {
 		return value;
 	}
 	
+	public static double doubleValue(String dValue){
+		double value = 0.0;
+		if(dValue != null){
+			try{
+				value = Double.valueOf(dValue);
+			}catch(Exception e){}
+		}		
+		return value;
+	}
+	
 	public static double doubleValue(BigDecimal decimal){
 		double value = 0.0;
 		if(decimal != null){
@@ -463,9 +473,5 @@ public final class Formatter {
 			return startTime.compareTo(endTime);
 		}
 		return 0;
-	}
-	public static void main(String[] args) {
-		int i = compareDates(DateTime.now(), DateTime.now());
-		System.out.println(i);
 	}
 }
