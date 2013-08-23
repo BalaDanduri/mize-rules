@@ -2,6 +2,7 @@ package com.mize.domain.service.schedule;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -24,6 +25,7 @@ import com.mize.domain.brand.Brand;
 import com.mize.domain.common.Country;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.common.State;
+import com.mize.domain.user.UserAddress;
 import com.mize.domain.util.JodaDateDeserializer;
 import com.mize.domain.util.JsonDateSerializer;
 
@@ -61,14 +63,16 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 	private String scheduledStatus;
 	private String serviceOrderNumber;
 	private String confirmationNumber;
+	private UserAddress address;
 	private Integer pageIndex;
 	
 	public ServiceSchedule() {
 		user = new User();
-		brand = new Brand();		
+		brand = new Brand();
+		address = new UserAddress();
 	}	
 
-	public ServiceSchedule(User user, Brand brand, String serviceFormat,
+	public ServiceSchedule(User user, UserAddress address, Brand brand, String serviceFormat,
 			Long beId, String serviceType, String problem,
 			Long productCategoryId, Long productSubCategoryId,
 			String requestorName, DateTime scheduledDate, String startTime,
@@ -80,6 +84,7 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 			String confirmationNumber) {
 		super();
 		this.user = user;
+		this.address = address;
 		this.brand = brand;
 		this.serviceFormat = serviceFormat;
 		this.beId = beId;
@@ -109,9 +114,8 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 		this.confirmationNumber = confirmationNumber;
 	}
 	
-	@ManyToOne(targetEntity=User.class)	
-	@Fetch(FetchMode.SELECT)	
-	@JoinColumn(name="user_id",updatable=true,nullable=true)
+	@ManyToOne(targetEntity=User.class,fetch=FetchType.EAGER)		
+	@JoinColumn(name="user_id",nullable=true)
 	public User getUser() {
 		return user;
 	}
@@ -122,7 +126,7 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 	
 	@ManyToOne(targetEntity=Brand.class)
 	@Fetch(FetchMode.SELECT)
-	@JoinColumn(name="brand_id",updatable=true,nullable=true)
+	@JoinColumn(name="brand_id",nullable=true)
 	public Brand getBrand() {
 		return brand;
 	}
@@ -262,8 +266,7 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 		this.city = city;
 	}
 	
-	@ManyToOne(targetEntity=State.class)
-	@JoinColumn(name="state_id",nullable=true)
+	@Transient
 	public State getState() {
 		return state;
 	}
@@ -272,8 +275,7 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 		this.state = state;
 	}
 	
-	@ManyToOne(targetEntity=Country.class)
-	@JoinColumn(name="country_id",nullable=true)
+	@Transient
 	public Country getCountry() {
 		return country;
 	}
@@ -282,7 +284,7 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 		this.country = country;
 	}
 
-	@Column(name="email",length=50,nullable=true)
+	@Column(name="email",length=255,nullable=true)
 	public String getEmail() {
 		return email;
 	}
@@ -384,6 +386,21 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 	@Override
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	@ManyToOne(targetEntity=UserAddress.class)	
+	@JoinColumn(name="user_address_id",nullable=true,updatable=false)
+	public UserAddress getAddress() {
+		return address;
+	}
+
+	public void setAddress(UserAddress address) {
+		try {
+			this.address = address;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	@Override
@@ -606,6 +623,11 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 			if (other.zipCode != null)
 				return false;
 		} else if (!zipCode.equals(other.zipCode))
+			return false;
+		if(address == null) {
+			if(other.address != null) 
+				return false;			
+		} else if(!address.equals(other.address)) 
 			return false;
 		return true;
 	}

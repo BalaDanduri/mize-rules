@@ -1,18 +1,31 @@
 package com.mize.domain.user;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.hibernate.annotations.GenericGenerator;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.mize.domain.auth.User;
 import com.mize.domain.common.Country;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.common.State;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
+@Entity
+@Table(name="user_address")
 public class UserAddress extends MizeEntity implements Comparable<UserAddress> {	
 	private static final long serialVersionUID = -7919863139299243311L;
 	
@@ -26,6 +39,7 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 	private State state;
 	private Country country;
 	private String zipCode;
+	private User user;
 	
 	public UserAddress(){
 	}
@@ -35,6 +49,10 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 	}
 	
 	@Override
+	@Id
+	@GenericGenerator(name="userAddressId",strategy="increment")
+	@GeneratedValue(generator="userAddressId")
+	@Column(name="id",nullable=false,unique=true)
 	public Long getId() {
 		return id;
 	}
@@ -43,7 +61,9 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	
+	
+	@Transient
 	public Long getUserId() {
 		return userId;
 	}
@@ -51,7 +71,8 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
-
+	
+	@Column(name="address_type",length=20,nullable=true)
 	public String getType() {
 		return type;
 	}
@@ -59,7 +80,8 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 	public void setType(String type) {
 		this.type = type;
 	}
-
+	
+	@Column(name="address_name",length=50,nullable=true)
 	public String getName() {
 		return name;
 	}
@@ -67,7 +89,8 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
+	@Column(name="address1",length=100,nullable=true)
 	public String getAddress1() {
 		return address1;
 	}
@@ -75,7 +98,8 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 	public void setAddress1(String address1) {
 		this.address1 = address1;
 	}
-
+	
+	@Column(name="address2",length=100,nullable=true)
 	public String getAddress2() {
 		return address2;
 	}
@@ -83,7 +107,8 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 	public void setAddress2(String address2) {
 		this.address2 = address2;
 	}
-
+	
+	@Column(name="address3",length=100,nullable=true)
 	public String getAddress3() {
 		return address3;
 	}
@@ -91,7 +116,8 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 	public void setAddress3(String address3) {
 		this.address3 = address3;
 	}
-
+	
+	@Column(name="city",length=100,nullable=true)
 	public String getCity() {
 		return city;
 	}
@@ -99,7 +125,8 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 	public void setCity(String city) {
 		this.city = city;
 	}
-
+	
+	@Column(name="postal_code",length=11,nullable=true)
 	public String getZipCode() {
 		return zipCode;
 	}
@@ -110,6 +137,7 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 
 
 	@JsonIgnore(value=false)
+	@Transient
 	public Long getCreatedBy() {
 		return createdBy;
 	}
@@ -122,6 +150,7 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	@JsonIgnore(value=false)
+	@Transient
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
@@ -134,6 +163,7 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 	}
 
 	@JsonIgnore(value=false)
+	@Transient
 	public Long getUpdatedBy() {
 		return updatedBy;
 	}
@@ -146,6 +176,7 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	@JsonIgnore(value=false)
+	@Transient
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
@@ -259,7 +290,9 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 	public int compareTo(UserAddress arg0) {
 		return 0;
 	}
-
+	
+	@ManyToOne(targetEntity=State.class)
+	@JoinColumn(name="state_id",nullable=true)
 	public State getState() {
 		return state;
 	}
@@ -267,7 +300,9 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 	public void setState(State state) {
 		this.state = state;
 	}
-
+	
+	@ManyToOne(targetEntity=Country.class)
+	@JoinColumn(name="country_id",nullable=true)
 	public Country getCountry() {
 		return country;
 	}
@@ -275,6 +310,18 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 	public void setCountry(Country country) {
 		this.country = country;
 	}
+
+	@ManyToOne
+	@JoinColumn(name="user_id")
+	@JsonIgnore
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
 	
 	
 }

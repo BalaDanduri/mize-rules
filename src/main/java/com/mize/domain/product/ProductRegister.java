@@ -583,6 +583,7 @@ public class ProductRegister extends MizeEntity{
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@Transient
 	public DateTime getCreatedFromDate() {
 		return createdFromDate;
 	}
@@ -595,6 +596,7 @@ public class ProductRegister extends MizeEntity{
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@Transient
 	public DateTime getCreatedToDate() {
 		return createdToDate;
 	}
@@ -607,6 +609,7 @@ public class ProductRegister extends MizeEntity{
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@Transient
 	public DateTime getUpdatedFromDate() {
 		return updatedFromDate;
 	}
@@ -619,6 +622,7 @@ public class ProductRegister extends MizeEntity{
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@Transient
 	public DateTime getUpdatedToDate() {
 		return updatedToDate;
 	}
