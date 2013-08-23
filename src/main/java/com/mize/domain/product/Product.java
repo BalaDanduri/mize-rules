@@ -73,7 +73,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	}
 	
 	public enum Source{
-		MIZE(1),AMAZON(2),ETILIZE(3),BestBuy(4);
+		MIZE(1),AMAZON(2),ETILIZE(3),BestBuy(4),Sears(5);
 		int value;
 		Source(int val){
 			value = val;
