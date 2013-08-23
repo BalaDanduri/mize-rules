@@ -1,27 +1,22 @@
 package com.mize.domain.product;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Transient;
 
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.mize.domain.auth.User;
-import com.mize.domain.brand.Brand;
 import com.mize.domain.common.MizeEntity;
-import com.mize.domain.user.UserAddress;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
 public class ProductRepeatOrder extends MizeEntity implements Comparable<ProductRepeatOrder>{
 	
 	private static final long serialVersionUID = 3558480216294413887L;
-	private User user;
-	private Brand brand;
+	private Long userId;
+	private Long brandId;
 	private Product product;
 	private ProductRepeatOrderType productRepeatOrderType;
 	private ProductRepeatOrderShipOptions productRepeatOrderShipOptions;
@@ -35,10 +30,23 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 	private DateTime nextOrderDate;
 	private String active;
 	private Double quantity;
-	private List<UserAddress> userAddresses = new ArrayList<UserAddress>();
+	private Double unitAmount;
+	private Double shipAmount;
+	private Double totalAmount;
+	private Double discountAmount;
+	private Double taxAmount;
+	private Double totalOrderAmount;
+	private String confirmationNumber;
+	private String email;
+	private String phoneMobile;
+	private String phoneHome;
+	private String phoneWork;	
 	private ProductRepeatOrderHistory productRepeatOrderHistory;
+	private ProductRepeatOrderAddress productRepeatOrderAddress ;
 	@Transient
 	private Integer pageIndex;
+
+	
 
 	@Override
 	public Long getId() {
@@ -48,23 +56,6 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 	@Override
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-	
-	public Brand getBrand() {
-		return brand;
-	}
-
-	public void setBrand(Brand brand) {
-		this.brand = brand;
 	}
 
 	public Product getProduct() {
@@ -92,7 +83,7 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	public DateTime getStartDate() {
 		return startDate;
 	}
@@ -104,7 +95,7 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	public DateTime getEndDate() {
 		return endDate;
 	}
@@ -116,7 +107,7 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	public DateTime getLastOrderDate() {
 		return lastOrderDate;
 	}
@@ -128,7 +119,7 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	public DateTime getNextOrderDate() {
 		return nextOrderDate;
 	}
@@ -155,14 +146,6 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 		this.quantity = quantity;
 	}
 
-	public List<UserAddress> getUserAddresses() {
-		return userAddresses;
-	}
-
-	public void setUserAddresses(List<UserAddress> userAddresses) {
-		this.userAddresses = userAddresses;
-	}
-
 	public ProductRepeatOrderHistory getProductRepeatOrderHistory() {
 		return productRepeatOrderHistory;
 	}
@@ -180,24 +163,148 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 		this.pageIndex = pageIndex;
 	}
 
+	public Double getUnitAmount() {
+		return unitAmount;
+	}
+
+	public void setUnitAmount(Double unitAmount) {
+		this.unitAmount = unitAmount;
+	}
+
+	public Double getShipAmount() {
+		return shipAmount;
+	}
+
+	public void setShipAmount(Double shipAmount) {
+		this.shipAmount = shipAmount;
+	}
+
+	public Double getTotalAmount() {
+		return totalAmount;
+	}
+
+	public void setTotalAmount(Double totalAmount) {
+		this.totalAmount = totalAmount;
+	}
+
+	public Double getDiscountAmount() {
+		return discountAmount;
+	}
+
+	public void setDiscountAmount(Double discountAmount) {
+		this.discountAmount = discountAmount;
+	}
+
+	public Double getTaxAmount() {
+		return taxAmount;
+	}
+
+	public void setTaxAmount(Double taxAmount) {
+		this.taxAmount = taxAmount;
+	}
+
+	public Double getTotalOrderAmount() {
+		return totalOrderAmount;
+	}
+
+	public void setTotalOrderAmount(Double totalOrderAmount) {
+		this.totalOrderAmount = totalOrderAmount;
+	}
+
+	public String getConfirmationNumber() {
+		return confirmationNumber;
+	}
+
+	public void setConfirmationNumber(String confirmationNumber) {
+		this.confirmationNumber = confirmationNumber;
+	}
+
+	public ProductRepeatOrderAddress getProductRepeatOrderAddress() {
+		return productRepeatOrderAddress;
+	}
+
+	public void setProductRepeatOrderAddress(ProductRepeatOrderAddress productRepeatOrderAddress) {
+		this.productRepeatOrderAddress = productRepeatOrderAddress;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhoneMobile() {
+		return phoneMobile;
+	}
+
+	public void setPhoneMobile(String phoneMobile) {
+		this.phoneMobile = phoneMobile;
+	}
+
+	public String getPhoneHome() {
+		return phoneHome;
+	}
+
+	public void setPhoneHome(String phoneHome) {
+		this.phoneHome = phoneHome;
+	}
+
+	public String getPhoneWork() {
+		return phoneWork;
+	}
+
+	public void setPhoneWork(String phoneWork) {
+		this.phoneWork = phoneWork;
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+	public Long getBrandId() {
+		return brandId;
+	}
+
+	public void setBrandId(Long brandId) {
+		this.brandId = brandId;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result + ((active == null) ? 0 : active.hashCode());
-		result = prime * result + ((brand == null) ? 0 : brand.hashCode());
+		result = prime * result + ((brandId == null) ? 0 : brandId.hashCode());
+		result = prime * result + ((confirmationNumber == null) ? 0 : confirmationNumber.hashCode());
+		result = prime * result + ((discountAmount == null) ? 0 : discountAmount.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
 		result = prime * result + ((lastOrderDate == null) ? 0 : lastOrderDate.hashCode());
 		result = prime * result + ((nextOrderDate == null) ? 0 : nextOrderDate.hashCode());
+		result = prime * result + ((pageIndex == null) ? 0 : pageIndex.hashCode());
+		result = prime * result + ((phoneHome == null) ? 0 : phoneHome.hashCode());
+		result = prime * result + ((phoneMobile == null) ? 0 : phoneMobile.hashCode());
+		result = prime * result + ((phoneWork == null) ? 0 : phoneWork.hashCode());
 		result = prime * result + ((product == null) ? 0 : product.hashCode());
+		result = prime * result + ((productRepeatOrderAddress == null) ? 0 : productRepeatOrderAddress.hashCode());
 		result = prime * result + ((productRepeatOrderHistory == null) ? 0 : productRepeatOrderHistory.hashCode());
 		result = prime * result
 				+ ((productRepeatOrderShipOptions == null) ? 0 : productRepeatOrderShipOptions.hashCode());
 		result = prime * result + ((productRepeatOrderType == null) ? 0 : productRepeatOrderType.hashCode());
 		result = prime * result + ((quantity == null) ? 0 : quantity.hashCode());
+		result = prime * result + ((shipAmount == null) ? 0 : shipAmount.hashCode());
 		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
-		result = prime * result + ((user == null) ? 0 : user.hashCode());
-		result = prime * result + ((userAddresses == null) ? 0 : userAddresses.hashCode());
+		result = prime * result + ((taxAmount == null) ? 0 : taxAmount.hashCode());
+		result = prime * result + ((totalAmount == null) ? 0 : totalAmount.hashCode());
+		result = prime * result + ((totalOrderAmount == null) ? 0 : totalOrderAmount.hashCode());
+		result = prime * result + ((unitAmount == null) ? 0 : unitAmount.hashCode());
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
 	}
 
@@ -215,10 +322,25 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 				return false;
 		} else if (!active.equals(other.active))
 			return false;
-		if (brand == null) {
-			if (other.brand != null)
+		if (brandId == null) {
+			if (other.brandId != null)
 				return false;
-		} else if (!brand.equals(other.brand))
+		} else if (!brandId.equals(other.brandId))
+			return false;
+		if (confirmationNumber == null) {
+			if (other.confirmationNumber != null)
+				return false;
+		} else if (!confirmationNumber.equals(other.confirmationNumber))
+			return false;
+		if (discountAmount == null) {
+			if (other.discountAmount != null)
+				return false;
+		} else if (!discountAmount.equals(other.discountAmount))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
 			return false;
 		if (endDate == null) {
 			if (other.endDate != null)
@@ -235,10 +357,35 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 				return false;
 		} else if (!nextOrderDate.equals(other.nextOrderDate))
 			return false;
+		if (pageIndex == null) {
+			if (other.pageIndex != null)
+				return false;
+		} else if (!pageIndex.equals(other.pageIndex))
+			return false;
+		if (phoneHome == null) {
+			if (other.phoneHome != null)
+				return false;
+		} else if (!phoneHome.equals(other.phoneHome))
+			return false;
+		if (phoneMobile == null) {
+			if (other.phoneMobile != null)
+				return false;
+		} else if (!phoneMobile.equals(other.phoneMobile))
+			return false;
+		if (phoneWork == null) {
+			if (other.phoneWork != null)
+				return false;
+		} else if (!phoneWork.equals(other.phoneWork))
+			return false;
 		if (product == null) {
 			if (other.product != null)
 				return false;
 		} else if (!product.equals(other.product))
+			return false;
+		if (productRepeatOrderAddress == null) {
+			if (other.productRepeatOrderAddress != null)
+				return false;
+		} else if (!productRepeatOrderAddress.equals(other.productRepeatOrderAddress))
 			return false;
 		if (productRepeatOrderHistory == null) {
 			if (other.productRepeatOrderHistory != null)
@@ -260,20 +407,40 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 				return false;
 		} else if (!quantity.equals(other.quantity))
 			return false;
+		if (shipAmount == null) {
+			if (other.shipAmount != null)
+				return false;
+		} else if (!shipAmount.equals(other.shipAmount))
+			return false;
 		if (startDate == null) {
 			if (other.startDate != null)
 				return false;
 		} else if (!startDate.equals(other.startDate))
 			return false;
-		if (user == null) {
-			if (other.user != null)
+		if (taxAmount == null) {
+			if (other.taxAmount != null)
 				return false;
-		} else if (!user.equals(other.user))
+		} else if (!taxAmount.equals(other.taxAmount))
 			return false;
-		if (userAddresses == null) {
-			if (other.userAddresses != null)
+		if (totalAmount == null) {
+			if (other.totalAmount != null)
 				return false;
-		} else if (!userAddresses.equals(other.userAddresses))
+		} else if (!totalAmount.equals(other.totalAmount))
+			return false;
+		if (totalOrderAmount == null) {
+			if (other.totalOrderAmount != null)
+				return false;
+		} else if (!totalOrderAmount.equals(other.totalOrderAmount))
+			return false;
+		if (unitAmount == null) {
+			if (other.unitAmount != null)
+				return false;
+		} else if (!unitAmount.equals(other.unitAmount))
+			return false;
+		if (userId == null) {
+			if (other.userId != null)
+				return false;
+		} else if (!userId.equals(other.userId))
 			return false;
 		return true;
 	}
@@ -281,12 +448,16 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 	
 	@Override
 	public String toString() {
-		return "ProductRepeatOrder [user=" + user + ", brand=" + brand + ", product=" + product
+		return "ProductRepeatOrder [userId=" + userId + ", brandId=" + brandId + ", product=" + product
 				+ ", productRepeatOrderType=" + productRepeatOrderType + ", productRepeatOrderShipOptions="
 				+ productRepeatOrderShipOptions + ", startDate=" + startDate + ", endDate=" + endDate
 				+ ", lastOrderDate=" + lastOrderDate + ", nextOrderDate=" + nextOrderDate + ", active=" + active
-				+ ", quantity=" + quantity + ", userAddresses=" + userAddresses + ", productRepeatOrderHistory="
-				+ productRepeatOrderHistory + "]";
+				+ ", quantity=" + quantity + ", unitAmount=" + unitAmount + ", shipAmount=" + shipAmount
+				+ ", totalAmount=" + totalAmount + ", discountAmount=" + discountAmount + ", taxAmount=" + taxAmount
+				+ ", totalOrderAmount=" + totalOrderAmount + ", confirmationNumber=" + confirmationNumber + ", email="
+				+ email + ", phoneMobile=" + phoneMobile + ", phoneHome=" + phoneHome + ", phoneWork=" + phoneWork
+				+ ", productRepeatOrderHistory=" + productRepeatOrderHistory + ", productRepeatOrderAddress="
+				+ productRepeatOrderAddress + ", pageIndex=" + pageIndex + "]";
 	}
 
 	@Override
