@@ -241,6 +241,21 @@ public final class Formatter {
 		return time;
 	}
 	
+	public static DateTime dateTime(String dateTime, String format){
+		DateTime time = null;
+		if(dateTime!= null && format != null){
+			try{
+				DateTimeFormatter  FORMAT = DateTimeFormat.forPattern(format);
+				if (dateTime.length() > format.length()) {
+					dateTime = dateTime.substring(0, format.length());
+				}
+				time = DateTime.parse(dateTime,FORMAT);
+			}catch(Exception e){
+			}
+		}		
+		return time;
+	}
+
 	public static DateTime date(String dateTime){
 		DateTime time = null;
 		if(dateTime!= null){
