@@ -18,6 +18,8 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import com.mize.domain.common.PaginationPage;
+
 public final class Formatter {
 	public static final String EMPTY = "";
 	public static final String YES = "Y";
@@ -488,5 +490,46 @@ public final class Formatter {
 			return startTime.compareTo(endTime);
 		}
 		return 0;
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public static void populatePagination(PaginationPage page, int pageNo){
+		if(pageNo <= 0){
+			pageNo = 1;
+		}
+		int pageSize = PaginationPage.DEFAULT_PAGE_SIZE;
+		int pageCount = page.getPageItems().size() / pageSize;
+		if (page.getPageItems().size() > pageSize * pageCount) {
+			pageCount++;
+		}
+		int startIndex = (pageNo-1) *pageSize;
+		int endIndex = (pageNo) *pageSize;
+		if(endIndex > page.getPageItems().size()){
+			endIndex = page.getPageItems().size();
+		}
+		List subpages = new ArrayList();
+		try{
+			subpages = page.getPageItems().subList(startIndex, endIndex);
+		}catch(Exception e){			
+		}
+		page.setPageNumber(pageNo);
+		page.setPagesAvailable(pageCount);
+		page.setRowsAvailable(page.getPageItems().size());
+		page.setPageItems(subpages);
+	}
+	
+	@SuppressWarnings({ "rawtypes"})
+	public static void populatePagination(PaginationPage page, int pageNo,int totalPages){
+		int pageSize = PaginationPage.DEFAULT_PAGE_SIZE;
+		if(pageNo <= 0){
+			pageNo = 1;
+		}
+		int pageCount = page.getPageItems().size() / pageSize;
+		if (page.getPageItems().size() > pageSize * pageCount) {
+			pageCount++;
+		}		
+		page.setPageNumber(pageNo);
+		page.setPagesAvailable(pageCount);
+		page.setRowsAvailable(totalPages);
 	}
 }
