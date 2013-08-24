@@ -54,6 +54,8 @@ public class BusinessEntityAddress  extends MizeEntity  implements Comparable<Bu
 	
 	public BusinessEntityAddress() {
 		geoLocation = new BusinessEntityGeo();
+		state = new State();
+		country = new Country();
 	}
 	
 	

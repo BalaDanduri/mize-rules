@@ -23,5 +23,8 @@ public abstract class MessageConstants implements Serializable{
 	public static String NO_RESULTS_FOUND = "NO_RESULTS_FOUND";
 	public static String GEN_TEC_MSG = "GEN_TEC_MSG";
 	public static String EXCEPTION = "EXCEPTION";
+	public static String INVALID_STATE_CODE = "INVALID_STATE_CODE";
+	public static String INVALID_COUNTRY_CODE = "INVALID_COUNTRY_CODE";
+	public static String INVALID_LOCALE_CODE = "INVALID_LOCALE_CODE";
 
 }
