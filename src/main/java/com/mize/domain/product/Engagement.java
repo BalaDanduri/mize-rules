@@ -33,6 +33,8 @@ import com.mize.domain.util.JsonDateTimeSerializer;
 public class Engagement extends MizeEntity {
 	
 	private static final long serialVersionUID = 6140543699715462721L;
+	@Transient
+	private String storeNumber;
 	private String type;
 	private String code;
 	private Brand brand;
@@ -98,7 +100,7 @@ public class Engagement extends MizeEntity {
 	public Long getId() {
 		return id;
 	}
-
+	
 	@Override
 	public void setId(Long id) {
 		this.id = id;
@@ -107,6 +109,16 @@ public class Engagement extends MizeEntity {
 	@Column(name = "type",nullable = true, length = 50)
 	public String getType() {
 		return type;
+	}
+
+	@Transient
+	public String getStoreNumber() {
+		return storeNumber;
+	}
+
+	@Transient
+	public void setStoreNumber(String storeNumber) {
+		this.storeNumber = storeNumber;
 	}
 
 	public void setType(String type) {
