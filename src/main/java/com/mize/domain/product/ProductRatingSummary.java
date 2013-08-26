@@ -1,8 +1,15 @@
 package com.mize.domain.product;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import com.mize.domain.common.MizeEntity;
 
-
+@Entity
+@Table(name="prod_ratings_summary")
 public class ProductRatingSummary extends MizeEntity implements Comparable<ProductRatingSummary> {
 	private static final long serialVersionUID = -7710842260731182272L;
 	protected Long productId;
@@ -16,6 +23,28 @@ public class ProductRatingSummary extends MizeEntity implements Comparable<Produ
 	protected Integer countWant;
 	protected Integer countGift;
 	
+	public ProductRatingSummary() {
+	}
+	
+	public ProductRatingSummary(Long productId, Double rating,
+			Integer rating1Count, Integer rating2Count, Integer rating3Count,
+			Integer rating4Count, Integer rating5Count, Integer countOwn,
+			Integer countWant, Integer countGift) {
+		super();
+		this.productId = productId;
+		this.rating = rating;
+		this.rating1Count = rating1Count;
+		this.rating2Count = rating2Count;
+		this.rating3Count = rating3Count;
+		this.rating4Count = rating4Count;
+		this.rating5Count = rating5Count;
+		this.countOwn = countOwn;
+		this.countWant = countWant;
+		this.countGift = countGift;
+	}
+	
+	@Id	
+	@Column(name="prod_id", nullable=false,unique=true, length = 20)
 	public Long getProductId() {
 		return productId;
 	}
@@ -24,6 +53,7 @@ public class ProductRatingSummary extends MizeEntity implements Comparable<Produ
 		this.productId = productId;
 	}
 
+	@Column(name="prod_rating", nullable=false,unique=true)
 	public Double getRating() {
 		return rating;
 	}
@@ -32,6 +62,7 @@ public class ProductRatingSummary extends MizeEntity implements Comparable<Produ
 		this.rating = rating;
 	}
 
+	@Column(name="cnt_rating1", nullable=false, unique=true, length = 11)
 	public Integer getRating1Count() {
 		if(rating1Count == null){
 			rating1Count = Integer.valueOf(0);
@@ -42,7 +73,8 @@ public class ProductRatingSummary extends MizeEntity implements Comparable<Produ
 	public void setRating1Count(Integer rating1Count) {
 		this.rating1Count = rating1Count;
 	}
-
+	
+	@Column(name="cnt_rating2", nullable=false, unique=true, length = 11)
 	public Integer getRating2Count() {
 		if(rating2Count == null){
 			rating2Count = Integer.valueOf(0);
@@ -54,6 +86,7 @@ public class ProductRatingSummary extends MizeEntity implements Comparable<Produ
 		this.rating2Count = rating2Count;
 	}
 
+	@Column(name="cnt_rating3", nullable=false, unique=true, length = 11)
 	public Integer getRating3Count() {
 		if(rating3Count == null){
 			rating3Count = Integer.valueOf(0);
@@ -65,6 +98,7 @@ public class ProductRatingSummary extends MizeEntity implements Comparable<Produ
 		this.rating3Count = rating3Count;
 	}
 
+	@Column(name="cnt_rating4", nullable=false, unique=true, length = 11)
 	public Integer getRating4Count() {
 		if(rating4Count == null){
 			rating4Count = Integer.valueOf(0);
@@ -76,6 +110,7 @@ public class ProductRatingSummary extends MizeEntity implements Comparable<Produ
 		this.rating4Count = rating4Count;
 	}
 
+	@Column(name="cnt_rating5", nullable=false, unique=true, length = 11)
 	public Integer getRating5Count() {
 		if(rating5Count == null){
 			rating5Count = Integer.valueOf(0);
@@ -87,6 +122,7 @@ public class ProductRatingSummary extends MizeEntity implements Comparable<Produ
 		this.rating5Count = rating5Count;
 	}
 
+	@Column(name="cnt_own", nullable=false, unique=true, length = 11)
 	public Integer getCountOwn() {
 		return countOwn;
 	}
@@ -95,6 +131,7 @@ public class ProductRatingSummary extends MizeEntity implements Comparable<Produ
 		this.countOwn = countOwn;
 	}
 
+	@Column(name="cnt_want", nullable=false, unique=true, length = 11)
 	public Integer getCountWant() {
 		return countWant;
 	}
@@ -103,6 +140,7 @@ public class ProductRatingSummary extends MizeEntity implements Comparable<Produ
 		this.countWant = countWant;
 	}
 
+	@Column(name="cnt_gift", nullable=false, length = 11)
 	public Integer getCountGift() {
 		return countGift;
 	}
@@ -112,6 +150,7 @@ public class ProductRatingSummary extends MizeEntity implements Comparable<Produ
 	}
 
 	@Override
+	@Transient
 	public Long getId() {
 		return id;
 	}
@@ -125,6 +164,7 @@ public class ProductRatingSummary extends MizeEntity implements Comparable<Produ
 	public int compareTo(ProductRatingSummary arg0) {
 		return 0;
 	}
+		
 
 	@Override
 	public int hashCode() {
