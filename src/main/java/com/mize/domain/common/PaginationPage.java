@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
+import com.mize.domain.util.Formatter;
+
 public class PaginationPage<T> implements Serializable {
 
 	private static final long serialVersionUID = -3877742914755125667L;
@@ -83,5 +85,13 @@ public class PaginationPage<T> implements Serializable {
 	@JsonIgnore
 	public void setPage(T page) {
 		pageItems.add(page);
+	}	
+	@JsonIgnore
+	public static int getDefaultPageSize(Integer pageSize){
+		if(Formatter.intValue(pageSize) > 0){
+			return pageSize;
+		}else{
+			return DEFAULT_PAGE_SIZE;
+		}
 	}
 }
