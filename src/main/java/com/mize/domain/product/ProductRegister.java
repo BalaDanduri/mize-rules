@@ -26,6 +26,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.mize.domain.auth.User;
 import com.mize.domain.brand.Brand;
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.user.UserAddress;
 import com.mize.domain.util.JodaDateDeserializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateSerializer;
@@ -62,8 +63,6 @@ public class ProductRegister extends MizeEntity{
 	private String phoneWork;
 	private List<ProductRegnAttachment> attachments;
 	@Transient
-	private String updateProfile;
-	@Transient
 	private Long stateId;
 	@Transient
 	private Long countryId;
@@ -81,6 +80,9 @@ public class ProductRegister extends MizeEntity{
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime updatedToDate;
 	
+	private Long addressId;
+	private UserAddress address;
+	
 	
 	
 	
@@ -92,7 +94,7 @@ public class ProductRegister extends MizeEntity{
 			Double purchasePrice, String purchaseStore, DateTime warrantyExpiryDate, String additionalInfo,
 			String firstName, String lastName, String email, String address1, String address2, String address3,
 			String city, String state, String country, String zipCode, String phoneMobile, String phoneHome,
-			String phoneWork, List<ProductRegnAttachment> attachments,String updateProfile) {
+			String phoneWork, List<ProductRegnAttachment> attachments) {
 		super();
 		this.brand = brand;
 		this.product = product;
@@ -117,8 +119,9 @@ public class ProductRegister extends MizeEntity{
 		this.phoneHome = phoneHome;
 		this.phoneWork = phoneWork;
 		this.attachments = attachments;
-		this.updateProfile = updateProfile;
 	}
+
+	
 	
 	@Id
 	@GenericGenerator(name="id" , strategy="increment")
@@ -338,14 +341,6 @@ public class ProductRegister extends MizeEntity{
 		this.attachments = attachments;
 	}
 	
-	@Transient
-	public String getUpdateProfile() {
-		return updateProfile;
-	}
-	public void setUpdateProfile(String updateProfile) {
-		this.updateProfile = updateProfile;
-	}
-	
 	@JsonIgnore
 	@Transient
 	public Long getStateId() {
@@ -375,22 +370,28 @@ public class ProductRegister extends MizeEntity{
 				+ ", email=" + email + ", address1=" + address1 + ", address2=" + address2 + ", address3=" + address3
 				+ ", city=" + city + ", state=" + state + ", country=" + country + ", zipCode=" + zipCode
 				+ ", phoneMobile=" + phoneMobile + ", phoneHome=" + phoneHome + ", phoneWork=" + phoneWork
-				+ ", attachments=" + attachments + ", updateProfile=" + updateProfile + ", stateId=" + stateId
-				+ ", countryId=" + countryId + ", pageIndex=" + pageIndex + ", regnName=" + regnName + "]";
+				+ ", attachments=" + attachments + ", stateId=" + stateId + ", countryId=" + countryId + ", pageIndex="
+				+ pageIndex + ", regnName=" + regnName + ", createdFromDate=" + createdFromDate + ", createdToDate="
+				+ createdToDate + ", updatedFromDate=" + updatedFromDate + ", updatedToDate=" + updatedToDate
+				+ ", addressId=" + addressId + ", address=" + address + "]";
 	}
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result + ((additionalInfo == null) ? 0 : additionalInfo.hashCode());
+		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result + ((address1 == null) ? 0 : address1.hashCode());
 		result = prime * result + ((address2 == null) ? 0 : address2.hashCode());
 		result = prime * result + ((address3 == null) ? 0 : address3.hashCode());
+		result = prime * result + ((addressId == null) ? 0 : addressId.hashCode());
 		result = prime * result + ((attachments == null) ? 0 : attachments.hashCode());
 		result = prime * result + ((brand == null) ? 0 : brand.hashCode());
 		result = prime * result + ((city == null) ? 0 : city.hashCode());
 		result = prime * result + ((country == null) ? 0 : country.hashCode());
 		result = prime * result + ((countryId == null) ? 0 : countryId.hashCode());
+		result = prime * result + ((createdFromDate == null) ? 0 : createdFromDate.hashCode());
+		result = prime * result + ((createdToDate == null) ? 0 : createdToDate.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
@@ -406,7 +407,8 @@ public class ProductRegister extends MizeEntity{
 		result = prime * result + ((serialNumber == null) ? 0 : serialNumber.hashCode());
 		result = prime * result + ((state == null) ? 0 : state.hashCode());
 		result = prime * result + ((stateId == null) ? 0 : stateId.hashCode());
-		result = prime * result + ((updateProfile == null) ? 0 : updateProfile.hashCode());
+		result = prime * result + ((updatedFromDate == null) ? 0 : updatedFromDate.hashCode());
+		result = prime * result + ((updatedToDate == null) ? 0 : updatedToDate.hashCode());
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		result = prime * result + ((warrantyExpiryDate == null) ? 0 : warrantyExpiryDate.hashCode());
 		result = prime * result + ((zipCode == null) ? 0 : zipCode.hashCode());
@@ -426,6 +428,11 @@ public class ProductRegister extends MizeEntity{
 				return false;
 		} else if (!additionalInfo.equals(other.additionalInfo))
 			return false;
+		if (address == null) {
+			if (other.address != null)
+				return false;
+		} else if (!address.equals(other.address))
+			return false;
 		if (address1 == null) {
 			if (other.address1 != null)
 				return false;
@@ -440,6 +447,11 @@ public class ProductRegister extends MizeEntity{
 			if (other.address3 != null)
 				return false;
 		} else if (!address3.equals(other.address3))
+			return false;
+		if (addressId == null) {
+			if (other.addressId != null)
+				return false;
+		} else if (!addressId.equals(other.addressId))
 			return false;
 		if (attachments == null) {
 			if (other.attachments != null)
@@ -465,6 +477,16 @@ public class ProductRegister extends MizeEntity{
 			if (other.countryId != null)
 				return false;
 		} else if (!countryId.equals(other.countryId))
+			return false;
+		if (createdFromDate == null) {
+			if (other.createdFromDate != null)
+				return false;
+		} else if (!createdFromDate.equals(other.createdFromDate))
+			return false;
+		if (createdToDate == null) {
+			if (other.createdToDate != null)
+				return false;
+		} else if (!createdToDate.equals(other.createdToDate))
 			return false;
 		if (email == null) {
 			if (other.email != null)
@@ -541,10 +563,15 @@ public class ProductRegister extends MizeEntity{
 				return false;
 		} else if (!stateId.equals(other.stateId))
 			return false;
-		if (updateProfile == null) {
-			if (other.updateProfile != null)
+		if (updatedFromDate == null) {
+			if (other.updatedFromDate != null)
 				return false;
-		} else if (!updateProfile.equals(other.updateProfile))
+		} else if (!updatedFromDate.equals(other.updatedFromDate))
+			return false;
+		if (updatedToDate == null) {
+			if (other.updatedToDate != null)
+				return false;
+		} else if (!updatedToDate.equals(other.updatedToDate))
 			return false;
 		if (user == null) {
 			if (other.user != null)
@@ -582,7 +609,7 @@ public class ProductRegister extends MizeEntity{
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	@Transient
 	public DateTime getCreatedFromDate() {
 		return createdFromDate;
@@ -595,7 +622,7 @@ public class ProductRegister extends MizeEntity{
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	@Transient
 	public DateTime getCreatedToDate() {
 		return createdToDate;
@@ -608,7 +635,7 @@ public class ProductRegister extends MizeEntity{
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	@Transient
 	public DateTime getUpdatedFromDate() {
 		return updatedFromDate;
@@ -621,7 +648,7 @@ public class ProductRegister extends MizeEntity{
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	@Transient
 	public DateTime getUpdatedToDate() {
 		return updatedToDate;
@@ -632,5 +659,23 @@ public class ProductRegister extends MizeEntity{
 	public void setUpdatedToDate(DateTime updatedToDate) {
 		this.updatedToDate = updatedToDate;
 	}
+
+	public Long getAddressId() {
+		return addressId;
+	}
+
+	public void setAddressId(Long addressId) {
+		this.addressId = addressId;
+	}
+
+	public UserAddress getAddress() {
+		return address;
+	}
+
+	public void setAddress(UserAddress address) {
+		this.address = address;
+	}
+	
+	
 	
 }
