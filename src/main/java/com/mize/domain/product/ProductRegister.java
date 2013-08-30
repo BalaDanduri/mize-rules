@@ -28,9 +28,7 @@ import com.mize.domain.brand.Brand;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.user.UserAddress;
 import com.mize.domain.util.JodaDateDeserializer;
-import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateSerializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
 
 @Entity
 @Table(name = "prod_regn")
@@ -71,14 +69,14 @@ public class ProductRegister extends MizeEntity{
 	private String regnName;
 	
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private DateTime createdFromDate;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private DateTime createdToDate;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private DateTime updatedFromDate;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private DateTime updatedToDate;
+	@DateTimeFormat (pattern="MM-dd-yyyy")
+	private DateTime createdDateFrom;
+	@DateTimeFormat (pattern="MM-dd-yyyy")
+	private DateTime createdDateTo;
+	@DateTimeFormat (pattern="MM-dd-yyyy")
+	private DateTime updatedDateFrom;
+	@DateTimeFormat (pattern="MM-dd-yyyy")
+	private DateTime updatedDateTo;
 	
 	private Long addressId;
 	private UserAddress address;
@@ -371,13 +369,13 @@ public class ProductRegister extends MizeEntity{
 				+ ", city=" + city + ", state=" + state + ", country=" + country + ", zipCode=" + zipCode
 				+ ", phoneMobile=" + phoneMobile + ", phoneHome=" + phoneHome + ", phoneWork=" + phoneWork
 				+ ", attachments=" + attachments + ", stateId=" + stateId + ", countryId=" + countryId + ", pageIndex="
-				+ pageIndex + ", regnName=" + regnName + ", createdFromDate=" + createdFromDate + ", createdToDate="
-				+ createdToDate + ", updatedFromDate=" + updatedFromDate + ", updatedToDate=" + updatedToDate
+				+ pageIndex + ", regnName=" + regnName + ", createdDateFrom=" + createdDateFrom + ", createdDateTo="
+				+ createdDateTo + ", updatedDateFrom=" + updatedDateFrom + ", updatedDateTo=" + updatedDateTo
 				+ ", addressId=" + addressId + ", address=" + address + "]";
 	}
 	@Override
 	public int hashCode() {
-		final int prime = PRIME;
+		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ((additionalInfo == null) ? 0 : additionalInfo.hashCode());
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
@@ -390,8 +388,8 @@ public class ProductRegister extends MizeEntity{
 		result = prime * result + ((city == null) ? 0 : city.hashCode());
 		result = prime * result + ((country == null) ? 0 : country.hashCode());
 		result = prime * result + ((countryId == null) ? 0 : countryId.hashCode());
-		result = prime * result + ((createdFromDate == null) ? 0 : createdFromDate.hashCode());
-		result = prime * result + ((createdToDate == null) ? 0 : createdToDate.hashCode());
+		result = prime * result + ((createdDateFrom == null) ? 0 : createdDateFrom.hashCode());
+		result = prime * result + ((createdDateTo == null) ? 0 : createdDateTo.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
@@ -407,8 +405,8 @@ public class ProductRegister extends MizeEntity{
 		result = prime * result + ((serialNumber == null) ? 0 : serialNumber.hashCode());
 		result = prime * result + ((state == null) ? 0 : state.hashCode());
 		result = prime * result + ((stateId == null) ? 0 : stateId.hashCode());
-		result = prime * result + ((updatedFromDate == null) ? 0 : updatedFromDate.hashCode());
-		result = prime * result + ((updatedToDate == null) ? 0 : updatedToDate.hashCode());
+		result = prime * result + ((updatedDateFrom == null) ? 0 : updatedDateFrom.hashCode());
+		result = prime * result + ((updatedDateTo == null) ? 0 : updatedDateTo.hashCode());
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		result = prime * result + ((warrantyExpiryDate == null) ? 0 : warrantyExpiryDate.hashCode());
 		result = prime * result + ((zipCode == null) ? 0 : zipCode.hashCode());
@@ -478,15 +476,15 @@ public class ProductRegister extends MizeEntity{
 				return false;
 		} else if (!countryId.equals(other.countryId))
 			return false;
-		if (createdFromDate == null) {
-			if (other.createdFromDate != null)
+		if (createdDateFrom == null) {
+			if (other.createdDateFrom != null)
 				return false;
-		} else if (!createdFromDate.equals(other.createdFromDate))
+		} else if (!createdDateFrom.equals(other.createdDateFrom))
 			return false;
-		if (createdToDate == null) {
-			if (other.createdToDate != null)
+		if (createdDateTo == null) {
+			if (other.createdDateTo != null)
 				return false;
-		} else if (!createdToDate.equals(other.createdToDate))
+		} else if (!createdDateTo.equals(other.createdDateTo))
 			return false;
 		if (email == null) {
 			if (other.email != null)
@@ -563,15 +561,15 @@ public class ProductRegister extends MizeEntity{
 				return false;
 		} else if (!stateId.equals(other.stateId))
 			return false;
-		if (updatedFromDate == null) {
-			if (other.updatedFromDate != null)
+		if (updatedDateFrom == null) {
+			if (other.updatedDateFrom != null)
 				return false;
-		} else if (!updatedFromDate.equals(other.updatedFromDate))
+		} else if (!updatedDateFrom.equals(other.updatedDateFrom))
 			return false;
-		if (updatedToDate == null) {
-			if (other.updatedToDate != null)
+		if (updatedDateTo == null) {
+			if (other.updatedDateTo != null)
 				return false;
-		} else if (!updatedToDate.equals(other.updatedToDate))
+		} else if (!updatedDateTo.equals(other.updatedDateTo))
 			return false;
 		if (user == null) {
 			if (other.user != null)
@@ -607,57 +605,53 @@ public class ProductRegister extends MizeEntity{
 	public void setRegnName(String regnName) {
 		this.regnName = regnName;
 	}
-
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
-	@Transient
-	public DateTime getCreatedFromDate() {
-		return createdFromDate;
+	
+	@DateTimeFormat (pattern="MM-dd-yyyy")
+	@JsonSerialize(using=JsonDateSerializer.class,include=Inclusion.NON_DEFAULT)
+	public DateTime getCreatedDateFrom() {
+		return createdDateFrom;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
-	public void setCreatedFromDate(DateTime createdFromDate) {
-		this.createdFromDate = createdFromDate;
+	@DateTimeFormat (pattern="MM-dd-yyyy")
+	@JsonDeserialize(using=JodaDateDeserializer.class)
+	public void setCreatedDateFrom(DateTime createdDateFrom) {
+		this.createdDateFrom = createdDateFrom;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
-	@Transient
-	public DateTime getCreatedToDate() {
-		return createdToDate;
+	@DateTimeFormat (pattern="MM-dd-yyyy")
+	@JsonSerialize(using=JsonDateSerializer.class,include=Inclusion.NON_DEFAULT)
+	public DateTime getCreatedDateTo() {
+		return createdDateTo;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
-	public void setCreatedToDate(DateTime createdToDate) {
-		this.createdToDate = createdToDate;
+	@DateTimeFormat (pattern="MM-dd-yyyy")
+	@JsonDeserialize(using=JodaDateDeserializer.class)
+	public void setCreatedDateTo(DateTime createdDateTo) {
+		this.createdDateTo = createdDateTo;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
-	@Transient
-	public DateTime getUpdatedFromDate() {
-		return updatedFromDate;
+	@DateTimeFormat (pattern="MM-dd-yyyy")
+	@JsonSerialize(using=JsonDateSerializer.class,include=Inclusion.NON_DEFAULT)
+	public DateTime getUpdatedDateFrom() {
+		return updatedDateFrom;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
-	public void setUpdatedFromDate(DateTime updatedFromDate) {
-		this.updatedFromDate = updatedFromDate;
+	@DateTimeFormat (pattern="MM-dd-yyyy")
+	@JsonDeserialize(using=JodaDateDeserializer.class)
+	public void setUpdatedDateFrom(DateTime updatedDateFrom) {
+		this.updatedDateFrom = updatedDateFrom;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
-	@Transient
-	public DateTime getUpdatedToDate() {
-		return updatedToDate;
+	@DateTimeFormat (pattern="MM-dd-yyyy")
+	@JsonSerialize(using=JsonDateSerializer.class,include=Inclusion.NON_DEFAULT)
+	public DateTime getUpdatedDateTo() {
+		return updatedDateTo;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
-	public void setUpdatedToDate(DateTime updatedToDate) {
-		this.updatedToDate = updatedToDate;
+	@DateTimeFormat (pattern="MM-dd-yyyy")
+	@JsonDeserialize(using=JodaDateDeserializer.class)
+	public void setUpdatedDateTo(DateTime updatedDateTo) {
+		this.updatedDateTo = updatedDateTo;
 	}
 
 	public Long getAddressId() {
