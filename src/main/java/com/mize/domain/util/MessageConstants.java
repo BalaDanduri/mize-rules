@@ -42,5 +42,7 @@ public abstract class MessageConstants implements Serializable{
 	public static final String BRAND_ID_REQUIRED = "BRAND_ID_REQUIRED";
 	public static final String INVALID_SCHEDULED_DATE = "INVALID_SCHEDULED_DATE";
 	public static final String INVALID_SERVICE_FORMAT = "INVALID_SERVICE_FORMAT";
+	public static final String PRODUCT_ID_REQUIRED = "PRODUCT_ID_REQUIRED";
+	public static final String PRODUCT_ID_OR_BRAND_ID_REQUIRED = "PRODUCT_ID_OR_BRAND_ID_REQUIRED";
 	
 }
