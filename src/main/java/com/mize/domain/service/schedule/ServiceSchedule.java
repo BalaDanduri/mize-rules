@@ -64,7 +64,8 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 	private String serviceOrderNumber;
 	private String confirmationNumber;
 	private UserAddress address;
-	private Integer pageIndex;
+	private Long addressId;
+	
 	
 	public ServiceSchedule() {
 		user = new User();
@@ -629,16 +630,23 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 				return false;			
 		} else if(!address.equals(other.address)) 
 			return false;
+		if(addressId == null) {
+			if(other.addressId != null)
+				return false;
+		} else if(!addressId.equals(other.addressId))
+			return false;
 		return true;
 	}
 	
 	@Transient
-	public Integer getPageIndex() {
-		return pageIndex;
+	public Long getAddressId() {
+		return addressId;
 	}
 
-	public void setPageIndex(Integer pageIndex) {
-		this.pageIndex = pageIndex;
+	public void setAddressId(Long addressId) {
+		this.addressId = addressId;
 	}
+	
+	
 	
 }

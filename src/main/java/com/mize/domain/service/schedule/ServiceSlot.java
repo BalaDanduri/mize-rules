@@ -1,7 +1,5 @@
 package com.mize.domain.service.schedule;
 
-import java.util.List;
-
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
@@ -17,8 +15,11 @@ public class ServiceSlot  extends MizeEntity implements Comparable<ServiceSlot>{
 
 	@DateTimeFormat (pattern="dd-MM-yyyy")
 	private DateTime date;
-
-	List<TimeSlot> timeSlots;
+	
+	private String startTime;
+	
+	private String endTime;
+	
 	@JsonSerialize(using=JsonDateSerializer.class)
 	public DateTime getDate() {
 		return date;
@@ -27,19 +28,7 @@ public class ServiceSlot  extends MizeEntity implements Comparable<ServiceSlot>{
 	public void setDate(DateTime date) {
 		this.date = date;
 	}
-	
-	
-	public List<TimeSlot> getTimeSlots() {
-		return timeSlots;
-	}
-	public void setTimeSlots(List<TimeSlot> timeSlots) {
-		this.timeSlots = timeSlots;
-	}
-	
-	@Override
-	public String toString() {
-		return "ServiceSlot [date=" + date + ", timeSlots= "+ timeSlots + "]";
-	}
+		
 	@Override
 	public Long getId() {
 		return id;
@@ -52,17 +41,33 @@ public class ServiceSlot  extends MizeEntity implements Comparable<ServiceSlot>{
 	public int compareTo(ServiceSlot arg0) {
 		return 0;
 	}
-	
+	public String getStartTime() {
+		return startTime;
+	}
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+	public String getEndTime() {
+		return endTime;
+	}
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+	@Override
+	public String toString() {
+		return "ServiceSlot [date=" + date + ", startTime=" + startTime
+				+ ", endTime=" + endTime + "]";
+	}
 	@Override
 	public int hashCode() {
-		final int prime = PRIME;
+		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
+		result = prime * result + ((endTime == null) ? 0 : endTime.hashCode());
 		result = prime * result
-				+ ((timeSlots == null) ? 0 : timeSlots.hashCode());
+				+ ((startTime == null) ? 0 : startTime.hashCode());
 		return result;
 	}
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -77,13 +82,17 @@ public class ServiceSlot  extends MizeEntity implements Comparable<ServiceSlot>{
 				return false;
 		} else if (!date.equals(other.date))
 			return false;
-		if (timeSlots == null) {
-			if (other.timeSlots != null)
+		if (endTime == null) {
+			if (other.endTime != null)
 				return false;
-		} else if (!timeSlots.equals(other.timeSlots))
+		} else if (!endTime.equals(other.endTime))
+			return false;
+		if (startTime == null) {
+			if (other.startTime != null)
+				return false;
+		} else if (!startTime.equals(other.startTime))
 			return false;
 		return true;
 	}
-	
 	
 }

@@ -28,5 +28,21 @@ public abstract class MessageConstants implements Serializable{
 	public static final String INVALID_LOCALE_CODE = "INVALID_LOCALE_CODE";
 	public static final String MIZE_PRODUCT_NOT_FOUND = "MIZE_PRODUCT_NOT_FOUND";
 	public static final String EBAY_ERROR = "EBAY_ERROR";
-
+	public static final String ROLE_ID_DOESNOT_EXISTS = "ROLE_ID_DOESNOT_EXISTS";
+	public static final String GROUP_ID_DOES_NOT_EXISTS = "GROUP_ID_DOES_NOT_EXISTS";
+	public static final String USER_ID_DOES_NOT_EXISTS = "USER_ID_DOES_NOT_EXISTS";
+	public static final String GROUP_NAME_ALREADY_EXISTS = "GROUP_NAME_ALREADY_EXISTS";
+	public static final String COMPANY_ID_DOES_NOT_EXISTS = "COMPANY_ID_DOES_NOT_EXISTS";
+	public static final String COMPANY_NAME_DOES_NOT_EXISTS = "COMPANY_NAME_DOES_NOT_EXISTS";
+	public static final String BRAND_ID_DOES_NOT_EXISTS = "BRAND_ID_DOES_NOT_EXISTS";
+	public static final String USER_AND_BRAND_DOES_NOT_EXIXTS = "USER_AND_BRAND_DOES_NOT_EXIXTS";
+	public static final String INVALID_SCHEDULE_ID = "INVALID_SCHEDULE_ID";
+	public static final String INVALID_BRAND_ID = "INVALID_BRAND_ID";
+	public static final String INVALID_ADDRESS_ID = "INVALID_ADDRESS_ID";
+	public static final String BRAND_ID_REQUIRED = "BRAND_ID_REQUIRED";
+	public static final String INVALID_SCHEDULED_DATE = "INVALID_SCHEDULED_DATE";
+	public static final String INVALID_SERVICE_FORMAT = "INVALID_SERVICE_FORMAT";
+	public static final String PRODUCT_ID_REQUIRED = "PRODUCT_ID_REQUIRED";
+	public static final String PRODUCT_ID_OR_BRAND_ID_REQUIRED = "PRODUCT_ID_OR_BRAND_ID_REQUIRED";
+	
 }

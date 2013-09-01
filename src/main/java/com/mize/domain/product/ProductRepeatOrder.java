@@ -9,7 +9,9 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.util.JodaDateDeserializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
+import com.mize.domain.util.JsonDateSerializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
 public class ProductRepeatOrder extends MizeEntity implements Comparable<ProductRepeatOrder>{
@@ -45,6 +47,11 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 	private ProductRepeatOrderAddress productRepeatOrderAddress ;
 	@Transient
 	private Integer pageIndex;
+	private String cardType;
+	private String cardNumber;
+	@DateTimeFormat (pattern="dd-MM-yyyy")
+	private DateTime cardExpiryDate;
+	private String cardSecurityCode;
 
 	
 
@@ -274,6 +281,42 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 	public void setBrandId(Long brandId) {
 		this.brandId = brandId;
 	}
+	
+	public String getCardType() {
+		return cardType;
+	}
+
+	public void setCardType(String cardType) {
+		this.cardType = cardType;
+	}
+
+	public String getCardNumber() {
+		return cardNumber;
+	}
+
+	public void setCardNumber(String cardNumber) {
+		this.cardNumber = cardNumber;
+	}
+
+	@DateTimeFormat (pattern="MM-dd-yyyy")
+	@JsonSerialize(using=JsonDateSerializer.class,include=Inclusion.NON_DEFAULT)
+	public DateTime getCardExpiryDate() {
+		return cardExpiryDate;
+	}
+
+	@DateTimeFormat (pattern="MM-dd-yyyy")
+	@JsonDeserialize(using=JodaDateDeserializer.class)
+	public void setCardExpiryDate(DateTime cardExpiryDate) {
+		this.cardExpiryDate = cardExpiryDate;
+	}
+
+	public String getCardSecurityCode() {
+		return cardSecurityCode;
+	}
+
+	public void setCardSecurityCode(String cardSecurityCode) {
+		this.cardSecurityCode = cardSecurityCode;
+	}
 
 	@Override
 	public int hashCode() {
@@ -281,6 +324,10 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 		int result = super.hashCode();
 		result = prime * result + ((active == null) ? 0 : active.hashCode());
 		result = prime * result + ((brandId == null) ? 0 : brandId.hashCode());
+		result = prime * result + ((cardExpiryDate == null) ? 0 : cardExpiryDate.hashCode());
+		result = prime * result + ((cardNumber == null) ? 0 : cardNumber.hashCode());
+		result = prime * result + ((cardSecurityCode == null) ? 0 : cardSecurityCode.hashCode());
+		result = prime * result + ((cardType == null) ? 0 : cardType.hashCode());
 		result = prime * result + ((confirmationNumber == null) ? 0 : confirmationNumber.hashCode());
 		result = prime * result + ((discountAmount == null) ? 0 : discountAmount.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
@@ -326,6 +373,26 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 			if (other.brandId != null)
 				return false;
 		} else if (!brandId.equals(other.brandId))
+			return false;
+		if (cardExpiryDate == null) {
+			if (other.cardExpiryDate != null)
+				return false;
+		} else if (!cardExpiryDate.equals(other.cardExpiryDate))
+			return false;
+		if (cardNumber == null) {
+			if (other.cardNumber != null)
+				return false;
+		} else if (!cardNumber.equals(other.cardNumber))
+			return false;
+		if (cardSecurityCode == null) {
+			if (other.cardSecurityCode != null)
+				return false;
+		} else if (!cardSecurityCode.equals(other.cardSecurityCode))
+			return false;
+		if (cardType == null) {
+			if (other.cardType != null)
+				return false;
+		} else if (!cardType.equals(other.cardType))
 			return false;
 		if (confirmationNumber == null) {
 			if (other.confirmationNumber != null)
@@ -457,7 +524,8 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 				+ ", totalOrderAmount=" + totalOrderAmount + ", confirmationNumber=" + confirmationNumber + ", email="
 				+ email + ", phoneMobile=" + phoneMobile + ", phoneHome=" + phoneHome + ", phoneWork=" + phoneWork
 				+ ", productRepeatOrderHistory=" + productRepeatOrderHistory + ", productRepeatOrderAddress="
-				+ productRepeatOrderAddress + ", pageIndex=" + pageIndex + "]";
+				+ productRepeatOrderAddress + ", pageIndex=" + pageIndex + ", cardType=" + cardType + ", cardNumber="
+				+ cardNumber + ", cardExpiryDate=" + cardExpiryDate + ", cardSecurityCode=" + cardSecurityCode + "]";
 	}
 
 	@Override

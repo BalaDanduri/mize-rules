@@ -76,6 +76,11 @@ public final class ServiceDTO<T> implements ServiceLiteral{
 	}
 	
 	@JsonIgnore
+	public boolean addValidationMessage(String msgCode){
+		return addValidationMessage(msgCode,msgCode);
+	}
+	
+	@JsonIgnore
 	public boolean addErrorMessage(String msgCode,String msgValue){
 		MizeError error = new MizeError(msgCode, msgValue);
 		if(errors == null){
@@ -83,6 +88,11 @@ public final class ServiceDTO<T> implements ServiceLiteral{
 		}
 		errors.add(error);
 		return  true;
+	}
+	
+	@JsonIgnore
+	public boolean addErrorMessage(String msgCode){
+		return addErrorMessage(msgCode,msgCode);
 	}
 	
 	@JsonIgnore

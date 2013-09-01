@@ -171,6 +171,11 @@ public final class Formatter {
 		return (dateTime == null ? null : dateTime.toString(DB_DATE_TIME_FORMAT));
 	}
 	
+	public static String getDBEndDateTime(DateTime dateTime){
+		dateTime = dateTime.withTime(23, 59, 59, 999);
+		return (dateTime == null ? null : dateTime.toString(DB_DATE_TIME_FORMAT));
+	}
+	
 	public static String getDateTime(DateTime dateTime){
 		return (dateTime == null ? null : dateTime.toString(DATE_FORMAT));
 	}
