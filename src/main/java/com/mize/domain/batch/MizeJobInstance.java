@@ -5,17 +5,21 @@ import java.util.Date;
 import com.mize.domain.common.MizeEntity;
 
 public class MizeJobInstance extends MizeEntity{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1638699269504919603L;
 	private Long id;
 	private Long jobId;
-	private String jobCode;
+	private String instanceCode;
 	private String instanceName;
 	private Date lastRun;
 	private Date nextRun;
 	public String getJobName() {
-		return jobCode;
+		return instanceCode;
 	}
 	public void setJobName(String jobCode) {
-		this.jobCode = jobCode;
+		this.instanceCode = jobCode;
 	}
 	public Long getJobId() {
 		return jobId;
@@ -47,9 +51,15 @@ public class MizeJobInstance extends MizeEntity{
 	public void setNextRun(Date nextRun) {
 		this.nextRun = nextRun;
 	}
+	public String getInstanceCode() {
+		return instanceCode;
+	}
+	public void setInstanceCode(String instanceCode) {
+		this.instanceCode = instanceCode;
+	}
 	@Override
 	public String toString() {
-		return "JobInstance [id=" + id + ", jobId=" + jobId + ", jobCode=" + jobCode + ", instanceName="
+		return "MizeJobInstance [id=" + id + ", jobId=" + jobId + ", instanceCode=" + instanceCode + ", instanceName="
 				+ instanceName + ", lastRun=" + lastRun + ", nextRun=" + nextRun + "]";
 	}
 	

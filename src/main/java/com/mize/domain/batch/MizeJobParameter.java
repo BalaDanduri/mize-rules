@@ -2,14 +2,26 @@ package com.mize.domain.batch;
 
 import com.mize.domain.common.MizeEntity;
 
-public class MizeJobParameters extends MizeEntity{
+public class MizeJobParameter extends MizeEntity{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 976447039451815450L;
 	private Long jobId;
 	private Long jobInstanceId;
 	private String parmName;
 	private String parmType;
 	private String parmValue;
 
+	@Override
+	public Long getId() {
+		return id;
+	}
 	
+	@Override
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public Long getJobId() {
 		return jobId;
 	}
@@ -44,19 +56,8 @@ public class MizeJobParameters extends MizeEntity{
 	
 	@Override
 	public String toString() {
-		return "MizeJobParameters [jobId=" + jobId + ", jobInstanceId=" + jobInstanceId + ", parmName=" + parmName
-				+ ", parmType=" + parmType + ", parmValue=" + parmValue + "]";
+		return "MizeJobParameter [jobId=" + jobId + ", jobInstanceId=" + jobInstanceId + ", parmName=" + parmName
+				+ ", parmType=" + parmType + ", parmValue=" + parmValue + ", id=" + id + "]";
 	}
-	@Override
-	public Long getId() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	@Override
-	public void setId(Long id) {
-		// TODO Auto-generated method stub
-		
-	}
-
 
 }
