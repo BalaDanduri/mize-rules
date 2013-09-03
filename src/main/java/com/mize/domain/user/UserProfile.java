@@ -363,8 +363,44 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 
 	@Override
 	public int hashCode() {
+		final int prime = 31;
 		int result = super.hashCode();
-		result = PRIME * result + ((userId == null) ? 0 : userId.hashCode());
+		result = prime * result
+				+ ((birthdate == null) ? 0 : birthdate.hashCode());
+		result = prime * result
+				+ ((cityState == null) ? 0 : cityState.hashCode());
+		result = prime * result
+				+ ((emailOptOut == null) ? 0 : emailOptOut.hashCode());
+		result = prime * result
+				+ ((firstName == null) ? 0 : firstName.hashCode());
+		result = prime * result + friendStatus;
+		result = prime * result
+				+ ((friendUserId == null) ? 0 : friendUserId.hashCode());
+		result = prime * result + (int) (friendsCount ^ (friendsCount >>> 32));
+		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
+		result = prime * result + (isFriend ? 1231 : 1237);
+		result = prime * result
+				+ ((jobTitle == null) ? 0 : jobTitle.hashCode());
+		result = prime * result
+				+ ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result
+				+ ((listNames == null) ? 0 : listNames.hashCode());
+		result = prime * result
+				+ ((phoneHome == null) ? 0 : phoneHome.hashCode());
+		result = prime * result
+				+ ((phoneMobile == null) ? 0 : phoneMobile.hashCode());
+		result = prime * result
+				+ ((phoneWork == null) ? 0 : phoneWork.hashCode());
+		result = prime * result
+				+ ((photoLink == null) ? 0 : photoLink.hashCode());
+		result = prime * result
+				+ ((profileName == null) ? 0 : profileName.hashCode());
+		result = prime * result
+				+ ((timezone == null) ? 0 : timezone.hashCode());
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+		result = prime * result
+				+ ((userType == null) ? 0 : userType.hashCode());
+		result = prime * result + wantCount;
 		return result;
 	}
 
@@ -376,7 +412,85 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		UserProfile other = (UserProfile) obj;		
+		UserProfile other = (UserProfile) obj;
+		if (birthdate == null) {
+			if (other.birthdate != null)
+				return false;
+		} else if (!birthdate.equals(other.birthdate))
+			return false;
+		if (cityState == null) {
+			if (other.cityState != null)
+				return false;
+		} else if (!cityState.equals(other.cityState))
+			return false;
+		if (emailOptOut == null) {
+			if (other.emailOptOut != null)
+				return false;
+		} else if (!emailOptOut.equals(other.emailOptOut))
+			return false;
+		if (firstName == null) {
+			if (other.firstName != null)
+				return false;
+		} else if (!firstName.equals(other.firstName))
+			return false;
+		if (friendStatus != other.friendStatus)
+			return false;
+		if (friendUserId == null) {
+			if (other.friendUserId != null)
+				return false;
+		} else if (!friendUserId.equals(other.friendUserId))
+			return false;
+		if (friendsCount != other.friendsCount)
+			return false;
+		if (gender != other.gender)
+			return false;
+		if (isFriend != other.isFriend)
+			return false;
+		if (jobTitle == null) {
+			if (other.jobTitle != null)
+				return false;
+		} else if (!jobTitle.equals(other.jobTitle))
+			return false;
+		if (lastName == null) {
+			if (other.lastName != null)
+				return false;
+		} else if (!lastName.equals(other.lastName))
+			return false;
+		if (listNames == null) {
+			if (other.listNames != null)
+				return false;
+		} else if (!listNames.equals(other.listNames))
+			return false;
+		if (phoneHome == null) {
+			if (other.phoneHome != null)
+				return false;
+		} else if (!phoneHome.equals(other.phoneHome))
+			return false;
+		if (phoneMobile == null) {
+			if (other.phoneMobile != null)
+				return false;
+		} else if (!phoneMobile.equals(other.phoneMobile))
+			return false;
+		if (phoneWork == null) {
+			if (other.phoneWork != null)
+				return false;
+		} else if (!phoneWork.equals(other.phoneWork))
+			return false;
+		if (photoLink == null) {
+			if (other.photoLink != null)
+				return false;
+		} else if (!photoLink.equals(other.photoLink))
+			return false;
+		if (profileName == null) {
+			if (other.profileName != null)
+				return false;
+		} else if (!profileName.equals(other.profileName))
+			return false;
+		if (timezone == null) {
+			if (other.timezone != null)
+				return false;
+		} else if (!timezone.equals(other.timezone))
+			return false;
 		if (userId == null) {
 			if (other.userId != null)
 				return false;
