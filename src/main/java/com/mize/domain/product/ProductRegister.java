@@ -69,63 +69,31 @@ public class ProductRegister extends MizeEntity{
 	private String regnName;
 	
 	
+	@Transient
 	@DateTimeFormat (pattern="MM-dd-yyyy")
 	private DateTime createdDateFrom;
+	@Transient
 	@DateTimeFormat (pattern="MM-dd-yyyy")
 	private DateTime createdDateTo;
+	@Transient
 	@DateTimeFormat (pattern="MM-dd-yyyy")
 	private DateTime updatedDateFrom;
+	@Transient
 	@DateTimeFormat (pattern="MM-dd-yyyy")
 	private DateTime updatedDateTo;
 	
 	private Long addressId;
+	@Transient
 	private UserAddress address;
-	
-	
-	
 	
 	public ProductRegister(){
 		
 	}
 	
-	public ProductRegister(Brand brand,Product product, User user, String serialNumber, DateTime purchaseDate,
-			Double purchasePrice, String purchaseStore, DateTime warrantyExpiryDate, String additionalInfo,
-			String firstName, String lastName, String email, String address1, String address2, String address3,
-			String city, String state, String country, String zipCode, String phoneMobile, String phoneHome,
-			String phoneWork, List<ProductRegnAttachment> attachments) {
-		super();
-		this.brand = brand;
-		this.product = product;
-		this.user = user;
-		this.serialNumber = serialNumber;
-		this.purchaseDate = purchaseDate;
-		this.purchasePrice = purchasePrice;
-		this.purchaseStore = purchaseStore;
-		this.warrantyExpiryDate = warrantyExpiryDate;
-		this.additionalInfo = additionalInfo;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.address1 = address1;
-		this.address2 = address2;
-		this.address3 = address3;
-		this.city = city;
-		this.state = state;
-		this.country = country;
-		this.zipCode = zipCode;
-		this.phoneMobile = phoneMobile;
-		this.phoneHome = phoneHome;
-		this.phoneWork = phoneWork;
-		this.attachments = attachments;
-	}
-
-	
-	
 	@Id
 	@GenericGenerator(name="id" , strategy="increment")
 	@GeneratedValue(generator="id")
 	@Column(name="prod_regn_id",unique=true,nullable=false,length=20)
-	
 	@Override
 	public Long getId() {
 		return id;
@@ -327,9 +295,6 @@ public class ProductRegister extends MizeEntity{
 		this.phoneWork = phoneWork;
 	}
 	
-	
-
-	
 	@OneToMany(fetch = FetchType.LAZY, cascade =CascadeType.ALL)
 	@JoinColumn(name="prod_regn_id") 
 	public List<ProductRegnAttachment> getAttachments() {
@@ -375,7 +340,7 @@ public class ProductRegister extends MizeEntity{
 	}
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result + ((additionalInfo == null) ? 0 : additionalInfo.hashCode());
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
@@ -606,6 +571,7 @@ public class ProductRegister extends MizeEntity{
 		this.regnName = regnName;
 	}
 	
+	@Transient
 	@DateTimeFormat (pattern="MM-dd-yyyy")
 	@JsonSerialize(using=JsonDateSerializer.class,include=Inclusion.NON_DEFAULT)
 	public DateTime getCreatedDateFrom() {
@@ -618,6 +584,7 @@ public class ProductRegister extends MizeEntity{
 		this.createdDateFrom = createdDateFrom;
 	}
 
+	@Transient
 	@DateTimeFormat (pattern="MM-dd-yyyy")
 	@JsonSerialize(using=JsonDateSerializer.class,include=Inclusion.NON_DEFAULT)
 	public DateTime getCreatedDateTo() {
@@ -630,6 +597,7 @@ public class ProductRegister extends MizeEntity{
 		this.createdDateTo = createdDateTo;
 	}
 
+	@Transient
 	@DateTimeFormat (pattern="MM-dd-yyyy")
 	@JsonSerialize(using=JsonDateSerializer.class,include=Inclusion.NON_DEFAULT)
 	public DateTime getUpdatedDateFrom() {
@@ -642,6 +610,7 @@ public class ProductRegister extends MizeEntity{
 		this.updatedDateFrom = updatedDateFrom;
 	}
 
+	@Transient
 	@DateTimeFormat (pattern="MM-dd-yyyy")
 	@JsonSerialize(using=JsonDateSerializer.class,include=Inclusion.NON_DEFAULT)
 	public DateTime getUpdatedDateTo() {
@@ -654,6 +623,7 @@ public class ProductRegister extends MizeEntity{
 		this.updatedDateTo = updatedDateTo;
 	}
 
+	@Column(name = "user_address_id",  nullable = true, length = 20)
 	public Long getAddressId() {
 		return addressId;
 	}
@@ -662,6 +632,7 @@ public class ProductRegister extends MizeEntity{
 		this.addressId = addressId;
 	}
 
+	@Transient
 	public UserAddress getAddress() {
 		return address;
 	}
@@ -669,7 +640,4 @@ public class ProductRegister extends MizeEntity{
 	public void setAddress(UserAddress address) {
 		this.address = address;
 	}
-	
-	
-	
 }

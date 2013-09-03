@@ -1,12 +1,14 @@
 package com.mize.domain.product;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.hibernate.annotations.GenericGenerator;
 
 import com.mize.domain.common.MizeEntity;
 
@@ -22,34 +24,29 @@ public class ProductContent extends MizeEntity{
 	private Long productId;
 	@Transient
     private String productName;
-	@Transient
 	private String contentType;
-	@Transient
 	private Integer seqNo;
-	@EmbeddedId
-	private ProductContentPK productContentPK;
 	private String title;
 	private String description;
 	private String url;
 	@Transient
 	private Integer pageIndex;	
-	
+	@Transient
 	private String upc;
+	@Transient
 	private String mpn;
 
 
+	@Transient
 	public String getUpc() {
 		return upc;
 	}
-
-
 
 	public void setUpc(String upc) {
 		this.upc = upc;
 	}
 
-
-
+	@Transient
 	public String getMpn() {
 		return mpn;
 	}
@@ -60,61 +57,9 @@ public class ProductContent extends MizeEntity{
 		this.mpn = mpn;
 	}
 
-
-
 	public ProductContent(){
 		
 	}	
-	
-	
-	
-	public ProductContent(Long brandId, String brandName, Long productId, String productName, String contentType,
-			Integer seqNo, ProductContentPK productContentPK, String title, String description, String url,
-			Integer pageIndex) {
-		super();
-		this.brandId = brandId;
-		this.brandName = brandName;
-		this.productId = productId;
-		this.productName = productName;
-		this.contentType = contentType;
-		this.seqNo = seqNo;
-		this.productContentPK = productContentPK;
-		this.title = title;
-		this.description = description;
-		this.url = url;
-		this.pageIndex = pageIndex;
-	}
-
-	public ProductContent(Long brandId, String brandName, Long productId, String productName, String contentType,
-			Integer seqNo, ProductContentPK productContentPK, String title, String description, String url,
-			Integer pageIndex, String upc, String mpn) {
-		super();
-		this.brandId = brandId;
-		this.brandName = brandName;
-		this.productId = productId;
-		this.productName = productName;
-		this.contentType = contentType;
-		this.seqNo = seqNo;
-		this.productContentPK = productContentPK;
-		this.title = title;
-		this.description = description;
-		this.url = url;
-		this.pageIndex = pageIndex;
-		this.upc = upc;
-		this.mpn = mpn;
-	}
-
-
-	public ProductContent(ProductContentPK productContentPK, String title, String description, String url,
-			Integer pageIndex) {
-		super();
-		this.productContentPK = productContentPK;
-		this.title = title;
-		this.description = description;
-		this.url = url;
-		this.pageIndex = pageIndex;
-	}
-
 
 	public enum ContentType{
 		faq,video,manuals; 
@@ -161,7 +106,10 @@ public class ProductContent extends MizeEntity{
 		this.pageIndex = pageIndex;
 	}
 	
-	@Transient
+	@Id
+	@GenericGenerator(name="id" , strategy="increment")
+	@GeneratedValue(generator="id")
+	@Column(name="id",unique=true,nullable=false,length=11)
 	@Override
 	public Long getId() {
 		return id;
@@ -172,14 +120,7 @@ public class ProductContent extends MizeEntity{
 		this.id = id;		
 	}
 
-	public ProductContentPK getProductContentPK() {
-		return productContentPK;
-	}
-
-	public void setProductContentPK(ProductContentPK productContentPK) {
-		this.productContentPK = productContentPK;
-	}
-
+	@Transient
 	public String getBrandName() {
 		return brandName;
 	}
@@ -188,6 +129,7 @@ public class ProductContent extends MizeEntity{
 		this.brandName = brandName;
 	}
 
+	@Transient
 	public String getProductName() {
 		return productName;
 	}
@@ -196,6 +138,7 @@ public class ProductContent extends MizeEntity{
 		this.productName = productName;
 	}
 
+	@Column(name = "content_type",nullable = true, length = 50)
 	public String getContentType() {
 		return contentType;
 	}
@@ -204,6 +147,7 @@ public class ProductContent extends MizeEntity{
 		this.contentType = contentType;
 	}
 
+	@Column(name = "seq_no",nullable = true, length = 11)
 	public Integer getSeqNo() {
 		return seqNo;
 	}
@@ -259,12 +203,13 @@ public class ProductContent extends MizeEntity{
 		result = prime * result + ((brandName == null) ? 0 : brandName.hashCode());
 		result = prime * result + ((contentType == null) ? 0 : contentType.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((mpn == null) ? 0 : mpn.hashCode());
 		result = prime * result + ((pageIndex == null) ? 0 : pageIndex.hashCode());
-		result = prime * result + ((productContentPK == null) ? 0 : productContentPK.hashCode());
 		result = prime * result + ((productId == null) ? 0 : productId.hashCode());
 		result = prime * result + ((productName == null) ? 0 : productName.hashCode());
 		result = prime * result + ((seqNo == null) ? 0 : seqNo.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
+		result = prime * result + ((upc == null) ? 0 : upc.hashCode());
 		result = prime * result + ((url == null) ? 0 : url.hashCode());
 		return result;
 	}
@@ -298,15 +243,15 @@ public class ProductContent extends MizeEntity{
 				return false;
 		} else if (!description.equals(other.description))
 			return false;
+		if (mpn == null) {
+			if (other.mpn != null)
+				return false;
+		} else if (!mpn.equals(other.mpn))
+			return false;
 		if (pageIndex == null) {
 			if (other.pageIndex != null)
 				return false;
 		} else if (!pageIndex.equals(other.pageIndex))
-			return false;
-		if (productContentPK == null) {
-			if (other.productContentPK != null)
-				return false;
-		} else if (!productContentPK.equals(other.productContentPK))
 			return false;
 		if (productId == null) {
 			if (other.productId != null)
@@ -328,6 +273,11 @@ public class ProductContent extends MizeEntity{
 				return false;
 		} else if (!title.equals(other.title))
 			return false;
+		if (upc == null) {
+			if (other.upc != null)
+				return false;
+		} else if (!upc.equals(other.upc))
+			return false;
 		if (url == null) {
 			if (other.url != null)
 				return false;
@@ -339,9 +289,9 @@ public class ProductContent extends MizeEntity{
 	@Override
 	public String toString() {
 		return "ProductContent [brandId=" + brandId + ", brandName=" + brandName + ", productId=" + productId
-				+ ", productName=" + productName + ", contentType=" + contentType + ", seqNo=" + seqNo
-				+ ", productContentPK=" + productContentPK + ", title=" + title + ", description=" + description
-				+ ", url=" + url + ", pageIndex=" + pageIndex + ", upc=" + upc + ", mpn=" + mpn + "]";
+				+ ", productName=" + productName + ", contentType=" + contentType + ", seqNo=" + seqNo + ", title="
+				+ title + ", description=" + description + ", url=" + url + ", pageIndex=" + pageIndex + ", upc=" + upc
+				+ ", mpn=" + mpn + "]";
 	}
 	
 }
