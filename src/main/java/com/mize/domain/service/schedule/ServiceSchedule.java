@@ -42,8 +42,7 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 	private String serviceType;
 	private String problem;
 	Long productCategoryId;
-	private Long productSubCategoryId;
-	private String requestorName;	
+	private Long productSubCategoryId;		
 	private DateTime scheduledDate;
 	private String startTime;
 	private String endTime;
@@ -65,6 +64,8 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 	private String confirmationNumber;
 	private UserAddress address;
 	private Long addressId;
+	private String firstName;
+	private String lastName;
 	
 	
 	public ServiceSchedule() {
@@ -73,19 +74,21 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 		address = new UserAddress();
 	}	
 
-	public ServiceSchedule(User user, UserAddress address, Brand brand, String serviceFormat,
+	
+	
+	public ServiceSchedule(User user, Brand brand, String serviceFormat,
 			Long beId, String serviceType, String problem,
 			Long productCategoryId, Long productSubCategoryId,
-			String requestorName, DateTime scheduledDate, String startTime,
-			String endTime, String address1, String address2, String address3,
-			String city, State state, Country country, String email,
-			String zipCode, String mobilePhone, String homePhone,
-			String workPhone, String additionalInfo, String warrantyStatus,
+			DateTime scheduledDate, String startTime, String endTime,
+			String address1, String address2, String address3, String city,
+			State state, Country country, String email, String zipCode,
+			String mobilePhone, String homePhone, String workPhone,
+			String additionalInfo, String warrantyStatus,
 			String scheduledStatus, String serviceOrderNumber,
-			String confirmationNumber) {
+			String confirmationNumber, UserAddress address, Long addressId,
+			String firstName, String lastName) {
 		super();
 		this.user = user;
-		this.address = address;
 		this.brand = brand;
 		this.serviceFormat = serviceFormat;
 		this.beId = beId;
@@ -93,7 +96,6 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 		this.problem = problem;
 		this.productCategoryId = productCategoryId;
 		this.productSubCategoryId = productSubCategoryId;
-		this.requestorName = requestorName;
 		this.scheduledDate = scheduledDate;
 		this.startTime = startTime;
 		this.endTime = endTime;
@@ -113,8 +115,14 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 		this.scheduledStatus = scheduledStatus;
 		this.serviceOrderNumber = serviceOrderNumber;
 		this.confirmationNumber = confirmationNumber;
+		this.address = address;
+		this.addressId = addressId;
+		this.firstName = firstName;
+		this.lastName = lastName;
 	}
-	
+
+
+
 	@ManyToOne(targetEntity=User.class,fetch=FetchType.EAGER)		
 	@JoinColumn(name="user_id",nullable=true)
 	public User getUser() {
@@ -190,13 +198,22 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 		this.productSubCategoryId = productSubCategoryId;
 	}
 
-	@Column(name="requestor_name",length=100,nullable=true)
-	public String getRequestorName() {
-		return requestorName;
+	@Column(name="first_name",nullable=true,length=100)
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setRequestorName(String requestorName) {
-		this.requestorName = requestorName;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	
+	@Column(name="last_name",nullable=true,length=100)
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	@Column(name="scheduled_date",nullable=true)
@@ -446,7 +463,9 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 				+ ((productSubCategoryId == null) ? 0 : productSubCategoryId
 						.hashCode());
 		result = prime * result
-				+ ((requestorName == null) ? 0 : requestorName.hashCode());
+				+ ((firstName == null) ? 0 : firstName.hashCode());
+		result = prime * result
+				+ ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result
 				+ ((scheduledDate == null) ? 0 : scheduledDate.hashCode());
 		result = prime * result
@@ -565,10 +584,15 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 				return false;
 		} else if (!productSubCategoryId.equals(other.productSubCategoryId))
 			return false;
-		if (requestorName == null) {
-			if (other.requestorName != null)
+		if (firstName == null) {
+			if (other.firstName != null)
 				return false;
-		} else if (!requestorName.equals(other.requestorName))
+		} else if (!firstName.equals(other.firstName))
+			return false;
+		if (lastName == null) {
+			if (other.lastName != null)
+				return false;
+		} else if (!lastName.equals(other.lastName))
 			return false;
 		if (scheduledDate == null) {
 			if (other.scheduledDate != null)

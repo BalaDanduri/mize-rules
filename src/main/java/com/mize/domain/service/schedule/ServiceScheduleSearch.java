@@ -31,7 +31,8 @@ public class ServiceScheduleSearch {
 	String endTime;
 	Double latitude;
 	Double longitude;
-	String requestorName;
+	String firstName;
+	String lastName;
 	String serviceOrderNumber;
 	String confirmationNumber;
 	
@@ -211,12 +212,20 @@ public class ServiceScheduleSearch {
 		this.longitude = longitude;
 	}
 
-	public String getRequestorName() {
-		return requestorName;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setRequestorName(String requestorName) {
-		this.requestorName = requestorName;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public String getServiceOrderNumber() {
