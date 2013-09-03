@@ -1,26 +1,50 @@
 package com.mize.domain.product;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.hibernate.annotations.GenericGenerator;
+
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.user.UserAddress;
 
+@Entity
+@Table(name = "prod_repeat_order_address")
 public class ProductRepeatOrderAddress extends MizeEntity implements Comparable<ProductRepeatOrderAddress>{
 	
 	private static final long serialVersionUID = 5924025513879604072L;
-//	private ProductRepeatOrder productRepeatOrder;
+	
+	private ProductRepeatOrder repeatOrder;
+	@Transient
 	private Long productRepeatOrderId;
 	private Long billingAddressId;
+	@Transient
 	private UserAddress billingAddress;
 	private Long shippingAddressId;
+	@Transient
 	private UserAddress shippingAddress;
-
-	/*public ProductRepeatOrder getProductRepeatOrder() {
-		return productRepeatOrder;
+	
+	@JsonIgnore
+	@OneToOne(optional=false,fetch=FetchType.EAGER)
+    @JoinColumn(name="prod_repeat_order_id")
+	public ProductRepeatOrder getRepeatOrder() {
+		return repeatOrder;
 	}
 
-	public void setProductRepeatOrder(ProductRepeatOrder productRepeatOrder) {
-		this.productRepeatOrder = productRepeatOrder;
-	}*/
+	public void setRepeatOrder(ProductRepeatOrder repeatOrder) {
+		this.repeatOrder = repeatOrder;
+	}
 	
+	
+	@Transient
 	public Long getProductRepeatOrderId() {
 		return productRepeatOrderId;
 	}
@@ -29,7 +53,7 @@ public class ProductRepeatOrderAddress extends MizeEntity implements Comparable<
 		this.productRepeatOrderId = productRepeatOrderId;
 	}
 	
-
+	@Transient
 	public UserAddress getBillingAddress() {
 		return billingAddress;
 	}
@@ -38,6 +62,7 @@ public class ProductRepeatOrderAddress extends MizeEntity implements Comparable<
 		this.billingAddress = billingAddress;
 	}
 
+	@Transient
 	public UserAddress getShippingAddress() {
 		return shippingAddress;
 	}
@@ -46,6 +71,7 @@ public class ProductRepeatOrderAddress extends MizeEntity implements Comparable<
 		this.shippingAddress = shippingAddress;
 	}
 	
+	@Column(name = "billing_address_id",  nullable = true,length=20)
 	public Long getBillingAddressId() {
 		return billingAddressId;
 	}
@@ -54,6 +80,7 @@ public class ProductRepeatOrderAddress extends MizeEntity implements Comparable<
 		this.billingAddressId = billingAddressId;
 	}
 
+	@Column(name = "shipping_address_id",  nullable = true,length=20)
 	public Long getShippingAddressId() {
 		return shippingAddressId;
 	}
@@ -69,6 +96,7 @@ public class ProductRepeatOrderAddress extends MizeEntity implements Comparable<
 		result = prime * result + ((billingAddress == null) ? 0 : billingAddress.hashCode());
 		result = prime * result + ((billingAddressId == null) ? 0 : billingAddressId.hashCode());
 		result = prime * result + ((productRepeatOrderId == null) ? 0 : productRepeatOrderId.hashCode());
+		result = prime * result + ((repeatOrder == null) ? 0 : repeatOrder.hashCode());
 		result = prime * result + ((shippingAddress == null) ? 0 : shippingAddress.hashCode());
 		result = prime * result + ((shippingAddressId == null) ? 0 : shippingAddressId.hashCode());
 		return result;
@@ -98,6 +126,11 @@ public class ProductRepeatOrderAddress extends MizeEntity implements Comparable<
 				return false;
 		} else if (!productRepeatOrderId.equals(other.productRepeatOrderId))
 			return false;
+		if (repeatOrder == null) {
+			if (other.repeatOrder != null)
+				return false;
+		} else if (!repeatOrder.equals(other.repeatOrder))
+			return false;
 		if (shippingAddress == null) {
 			if (other.shippingAddress != null)
 				return false;
@@ -113,9 +146,10 @@ public class ProductRepeatOrderAddress extends MizeEntity implements Comparable<
 
 	@Override
 	public String toString() {
-		return "ProductRepeatOrderAddress [productRepeatOrderId=" + productRepeatOrderId + ", billingAddressId="
-				+ billingAddressId + ", billingAddress=" + billingAddress + ", shippingAddressId=" + shippingAddressId
-				+ ", shippingAddress=" + shippingAddress + "]";
+		return "ProductRepeatOrderAddress [repeatOrder=" + repeatOrder + ", productRepeatOrderId="
+				+ productRepeatOrderId + ", billingAddressId=" + billingAddressId + ", billingAddress="
+				+ billingAddress + ", shippingAddressId=" + shippingAddressId + ", shippingAddress=" + shippingAddress
+				+ "]";
 	}
 
 	@Override
@@ -123,6 +157,10 @@ public class ProductRepeatOrderAddress extends MizeEntity implements Comparable<
 		return 0;
 	}
 
+	@Id
+	@GenericGenerator(name="id" , strategy="increment")
+	@GeneratedValue(generator="id")
+	@Column(name="id",unique=true,nullable=false,length=20)
 	@Override
 	public Long getId() {
 		return id;

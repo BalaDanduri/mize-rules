@@ -1,10 +1,26 @@
 package com.mize.domain.product;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.apache.commons.lang.RandomStringUtils;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -14,6 +30,8 @@ import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateSerializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
+@Entity
+@Table(name = "prod_repeat_order")
 public class ProductRepeatOrder extends MizeEntity implements Comparable<ProductRepeatOrder>{
 	
 	private static final long serialVersionUID = 3558480216294413887L;
@@ -44,6 +62,7 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 	private String phoneHome;
 	private String phoneWork;	
 	private ProductRepeatOrderHistory productRepeatOrderHistory;
+	@Transient
 	private ProductRepeatOrderAddress productRepeatOrderAddress ;
 	@Transient
 	private Integer pageIndex;
@@ -52,9 +71,13 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 	@DateTimeFormat (pattern="dd-MM-yyyy")
 	private DateTime cardExpiryDate;
 	private String cardSecurityCode;
-
 	
+	private List<ProductRepeatOrderHistory> orderHistories;	
 
+	@Id
+	@GenericGenerator(name="id" , strategy="increment")
+	@GeneratedValue(generator="id")
+	@Column(name="id",unique=true,nullable=false,length=20)
 	@Override
 	public Long getId() {
 		return id;
@@ -65,6 +88,8 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 		this.id = id;
 	}
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "prod_id", nullable = true)
 	public Product getProduct() {
 		return product;
 	}
@@ -72,7 +97,9 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 	public void setProduct(Product product) {
 		this.product = product;
 	}
-
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "prod_repeat_type_id", nullable = true)
 	public ProductRepeatOrderType getProductRepeatOrderType() {
 		return productRepeatOrderType;
 	}
@@ -81,6 +108,8 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 		this.productRepeatOrderType = productRepeatOrderType;
 	}
 
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "prod_repeat_ship_options_id", nullable = true)
 	public ProductRepeatOrderShipOptions getProductRepeatOrderShipOptions() {
 		return productRepeatOrderShipOptions;
 	}
@@ -88,8 +117,10 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 	public void setProductRepeatOrderShipOptions(ProductRepeatOrderShipOptions productRepeatOrderShipOptions) {
 		this.productRepeatOrderShipOptions = productRepeatOrderShipOptions;
 	}
-
+	
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@Column(name = "start_date",  nullable = true)
+	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	public DateTime getStartDate() {
 		return startDate;
@@ -100,8 +131,10 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 	public void setStartDate(DateTime startDate) {
 		this.startDate = startDate;
 	}
-
+	
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@Column(name = "end_date",  nullable = true)
+	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	public DateTime getEndDate() {
 		return endDate;
@@ -113,7 +146,10 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 		this.endDate = endDate;
 	}
 
+	
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@Column(name = "last_order_date",  nullable = true)
+	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	public DateTime getLastOrderDate() {
 		return lastOrderDate;
@@ -126,10 +162,13 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@Column(name = "next_order_date",  nullable = true)
+	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	public DateTime getNextOrderDate() {
 		return nextOrderDate;
 	}
+	
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
@@ -137,6 +176,7 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 		this.nextOrderDate = nextOrderDate;
 	}
 
+	@Column(name = "active",  nullable = true)
 	public String getActive() {
 		return active;
 	}
@@ -145,6 +185,7 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 		this.active = active;
 	}
 
+	@Column(name = "qty",  nullable = true)
 	public Double getQuantity() {
 		return quantity;
 	}
@@ -153,6 +194,7 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 		this.quantity = quantity;
 	}
 
+	@Transient
 	public ProductRepeatOrderHistory getProductRepeatOrderHistory() {
 		return productRepeatOrderHistory;
 	}
@@ -170,6 +212,7 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 		this.pageIndex = pageIndex;
 	}
 
+	@Column(name = "unit_amt",  nullable = true)
 	public Double getUnitAmount() {
 		return unitAmount;
 	}
@@ -178,6 +221,7 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 		this.unitAmount = unitAmount;
 	}
 
+	@Column(name = "ship_amt",  nullable = true)
 	public Double getShipAmount() {
 		return shipAmount;
 	}
@@ -186,6 +230,7 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 		this.shipAmount = shipAmount;
 	}
 
+	@Column(name = "total_amt",  nullable = true)
 	public Double getTotalAmount() {
 		return totalAmount;
 	}
@@ -194,6 +239,7 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 		this.totalAmount = totalAmount;
 	}
 
+	@Column(name = "discount_amt",  nullable = true)
 	public Double getDiscountAmount() {
 		return discountAmount;
 	}
@@ -202,6 +248,7 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 		this.discountAmount = discountAmount;
 	}
 
+	@Column(name = "tax_amt",  nullable = true)
 	public Double getTaxAmount() {
 		return taxAmount;
 	}
@@ -210,6 +257,7 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 		this.taxAmount = taxAmount;
 	}
 
+	@Column(name = "total_order_amt",  nullable = true)
 	public Double getTotalOrderAmount() {
 		return totalOrderAmount;
 	}
@@ -218,7 +266,11 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 		this.totalOrderAmount = totalOrderAmount;
 	}
 
+	@Column(name = "confirmation_number",  nullable = true,length=50)
 	public String getConfirmationNumber() {
+		if(confirmationNumber == null){
+			return RandomStringUtils.randomNumeric(10);
+		}
 		return confirmationNumber;
 	}
 
@@ -226,14 +278,16 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 		this.confirmationNumber = confirmationNumber;
 	}
 
+	@Transient
 	public ProductRepeatOrderAddress getProductRepeatOrderAddress() {
 		return productRepeatOrderAddress;
 	}
-
+	
 	public void setProductRepeatOrderAddress(ProductRepeatOrderAddress productRepeatOrderAddress) {
 		this.productRepeatOrderAddress = productRepeatOrderAddress;
 	}
 
+	@Column(name = "email",  nullable = true,length=50)
 	public String getEmail() {
 		return email;
 	}
@@ -242,6 +296,7 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 		this.email = email;
 	}
 
+	@Column(name = "phone_mobile",  nullable = true,length=50)
 	public String getPhoneMobile() {
 		return phoneMobile;
 	}
@@ -250,6 +305,7 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 		this.phoneMobile = phoneMobile;
 	}
 
+	@Column(name = "phone_home",  nullable = true,length=50)
 	public String getPhoneHome() {
 		return phoneHome;
 	}
@@ -258,6 +314,7 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 		this.phoneHome = phoneHome;
 	}
 
+	@Column(name = "phone_work",  nullable = true,length=50)
 	public String getPhoneWork() {
 		return phoneWork;
 	}
@@ -266,6 +323,7 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 		this.phoneWork = phoneWork;
 	}
 
+	@Column(name = "user_id",  nullable = true, length = 20)
 	public Long getUserId() {
 		return userId;
 	}
@@ -274,6 +332,7 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 		this.userId = userId;
 	}
 
+	@Column(name = "brand_id",  nullable = true, length = 20)
 	public Long getBrandId() {
 		return brandId;
 	}
@@ -281,7 +340,7 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 	public void setBrandId(Long brandId) {
 		this.brandId = brandId;
 	}
-	
+	@Transient
 	public String getCardType() {
 		return cardType;
 	}
@@ -289,7 +348,7 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 	public void setCardType(String cardType) {
 		this.cardType = cardType;
 	}
-
+	@Transient
 	public String getCardNumber() {
 		return cardNumber;
 	}
@@ -298,6 +357,7 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 		this.cardNumber = cardNumber;
 	}
 
+	@Transient
 	@DateTimeFormat (pattern="MM-dd-yyyy")
 	@JsonSerialize(using=JsonDateSerializer.class,include=Inclusion.NON_DEFAULT)
 	public DateTime getCardExpiryDate() {
@@ -310,12 +370,24 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 		this.cardExpiryDate = cardExpiryDate;
 	}
 
+	@Transient
 	public String getCardSecurityCode() {
 		return cardSecurityCode;
 	}
 
 	public void setCardSecurityCode(String cardSecurityCode) {
 		this.cardSecurityCode = cardSecurityCode;
+	}
+	
+	
+	@JsonIgnore
+	@OneToMany(targetEntity=ProductRepeatOrderHistory.class,mappedBy="productRepeatOrder",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	public List<ProductRepeatOrderHistory> getOrderHistories() {
+		return orderHistories;
+	}
+
+	public void setOrderHistories(List<ProductRepeatOrderHistory> orderHistories) {
+		this.orderHistories = orderHistories;
 	}
 
 	@Override
