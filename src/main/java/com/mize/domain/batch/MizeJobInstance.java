@@ -15,6 +15,13 @@ public class MizeJobInstance extends MizeEntity{
 	private String instanceName;
 	private Date lastRun;
 	private Date nextRun;
+	private String jobStatus;
+	public String getJobStatus() {
+		return jobStatus;
+	}
+	public void setJobStatus(String jobStatus) {
+		this.jobStatus = jobStatus;
+	}
 	public Long getId() {
 		return id;
 	}
@@ -55,7 +62,8 @@ public class MizeJobInstance extends MizeEntity{
 	public String toString() {
 		return "MizeJobInstance [id=" + id + ", job=" + job + ", instanceCode="
 				+ instanceCode + ", instanceName=" + instanceName
-				+ ", lastRun=" + lastRun + ", nextRun=" + nextRun + "]";
+				+ ", lastRun=" + lastRun + ", nextRun=" + nextRun
+				+ ", jobStatus=" + jobStatus + "]";
 	}
 	@Override
 	public int hashCode() {
