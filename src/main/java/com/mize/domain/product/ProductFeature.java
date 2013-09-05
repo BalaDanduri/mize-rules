@@ -23,6 +23,12 @@ public class ProductFeature extends Entity{
 		this.name = name;
 	}
 
+	public ProductFeature(String feature, String name, String absoluteValue) {
+		this.feature = feature;
+		this.name = name;
+		this.absoluteValue = absoluteValue;
+	}
+
 	public String getFeature() {
 		return feature;
 	}
