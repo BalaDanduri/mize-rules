@@ -13,13 +13,13 @@ public class RefineFilter implements Comparable<RefineFilter>{
 	private BigInteger filterItemCount;
 	private List<Parameter> params = new ArrayList<Parameter>();
 	
-	public RefineFilter() {
-		
+	public RefineFilter() {		
 	}
 	
 	public static class Parameter {
 		protected String name;
 		protected String value;
+		protected Boolean leaf = null;
 		public String getName() {
 			return name;
 		}
@@ -34,9 +34,14 @@ public class RefineFilter implements Comparable<RefineFilter>{
 		}
 		@Override
 		public String toString() {
-			return "Parameter [name=" + name + ", value=" + value + "]";
+			return "Parameter [name=" + name + ", value=" + value + ", leaf=" + leaf + "]";
 		}
-		
+		public Boolean isLeaf() {
+			return leaf;
+		}
+		public void setLeaf(Boolean leaf) {
+			this.leaf = leaf;
+		}
 	}
 
 	public String getFilterName() {
