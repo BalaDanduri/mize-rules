@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import com.mize.domain.common.MizeEntity;
 
 public class ProductDetails extends MizeEntity implements Comparable<ProductDetails>{
@@ -50,6 +52,16 @@ public class ProductDetails extends MizeEntity implements Comparable<ProductDeta
 	public void setWarranty(String warranty) {
 		this.warranty = warranty;
 	}	
+	
+	@JsonIgnore
+	public void addRetailer(Retailer retailer){
+		if(retailer != null){
+			if(retailersList == null){
+				retailersList = new ArrayList<Retailer>();	
+			}
+			retailersList.add(retailer);
+		}
+	}
 	
 	public List<Retailer> getRetailersList() {
 		return retailersList;
