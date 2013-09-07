@@ -6,12 +6,15 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import com.mize.domain.common.MizeEntity;
 
 @Entity
 @Table(name="prod_ratings_summary")
 public class ProductRatingSummary extends MizeEntity implements Comparable<ProductRatingSummary> {
 	private static final long serialVersionUID = -7710842260731182272L;
+	public static final Integer DEFAULT_VIEW_COUNT = 1;
 	protected Long productId;
 	protected Double rating;
 	protected Integer rating1Count;
@@ -22,6 +25,8 @@ public class ProductRatingSummary extends MizeEntity implements Comparable<Produ
 	protected Integer countOwn;
 	protected Integer countWant;
 	protected Integer countGift;
+	@JsonIgnore
+	protected Integer countView;
 	
 	public ProductRatingSummary() {
 	}
@@ -262,6 +267,15 @@ public class ProductRatingSummary extends MizeEntity implements Comparable<Produ
 				+ ", rating4Count=" + rating4Count + ", rating5Count="
 				+ rating5Count + ", countOwn=" + countOwn + ", countWant="
 				+ countWant + ", countGift=" + countGift + "]";
-	}	
-	
+	}
+
+	@JsonIgnore
+	public Integer getCountView() {
+		return countView;
+	}
+
+	@JsonIgnore
+	public void setCountView(Integer countView) {
+		this.countView = countView;
+	}
 }

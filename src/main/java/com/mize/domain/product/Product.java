@@ -56,6 +56,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	private String isConsumable;
 	private String isAccessory;
 	private String mpn;
+	private Long userId;
 	
 	@DateTimeFormat(pattern="MM-dd-yyyy")
 	private DateTime releaseDate;
@@ -430,6 +431,14 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 		} else if (!upc.equals(other.upc))
 			return false;
 		return true;
+	}
+
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
 }
