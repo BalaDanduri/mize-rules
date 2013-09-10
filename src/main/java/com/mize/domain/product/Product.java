@@ -57,6 +57,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	private String isAccessory;
 	private String mpn;
 	private Long userId;
+	private Integer prodScore;
 	
 	@DateTimeFormat(pattern="MM-dd-yyyy")
 	private DateTime releaseDate;
@@ -441,4 +442,12 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 		this.userId = userId;
 	}
 
+	public Integer getProdScore() {
+		return prodScore;
+	}
+
+	public void setProdScore(Integer prodScore) {
+		this.prodScore = prodScore;
+	}
+	
 }

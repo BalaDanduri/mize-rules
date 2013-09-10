@@ -14,7 +14,6 @@ public class DateTimeJPA implements UserType{
 
 	@Override
 	public Object assemble(Serializable arg0, Object arg1) throws HibernateException {
-		// TODO Auto-generated method stub
 		return arg0;
 	}
 
@@ -54,13 +53,11 @@ public class DateTimeJPA implements UserType{
 
 	@Override
 	public void nullSafeSet(PreparedStatement arg0, Object arg1, int arg2) throws HibernateException, SQLException {
-		System.out.println(arg0);
 		arg0.setString(arg2,Formatter.getDBDateTime((DateTime)arg1));
 	}
 
 	@Override
 	public Object replace(Object arg0, Object arg1, Object arg2) throws HibernateException {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
