@@ -14,7 +14,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.apache.commons.lang.RandomStringUtils;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -25,9 +24,7 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.common.MizeEntity;
-import com.mize.domain.util.JodaDateDeserializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateSerializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
 @Entity
@@ -66,10 +63,8 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 	private ProductRepeatOrderAddress productRepeatOrderAddress ;
 	private String cardType;
 	private String cardNumber;
-	@DateTimeFormat (pattern="dd-MM-yyyy")
-	private DateTime cardExpiryDate;
+	private String cardExpiryDate;
 	private String cardSecurityCode;
-	
 	private List<ProductRepeatOrderHistory> orderHistories;	
 
 	@Id
@@ -257,9 +252,6 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 
 	@Column(name = "confirmation_number",  nullable = true,length=50)
 	public String getConfirmationNumber() {
-		if(confirmationNumber == null){
-			return RandomStringUtils.randomNumeric(10);
-		}
 		return confirmationNumber;
 	}
 
@@ -345,17 +337,13 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 	public void setCardNumber(String cardNumber) {
 		this.cardNumber = cardNumber;
 	}
-
+	
 	@Transient
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonSerialize(using=JsonDateSerializer.class,include=Inclusion.NON_DEFAULT)
-	public DateTime getCardExpiryDate() {
+	public String getCardExpiryDate() {
 		return cardExpiryDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateDeserializer.class)
-	public void setCardExpiryDate(DateTime cardExpiryDate) {
+	public void setCardExpiryDate(String cardExpiryDate) {
 		this.cardExpiryDate = cardExpiryDate;
 	}
 
