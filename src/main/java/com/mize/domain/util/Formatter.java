@@ -58,7 +58,7 @@ public final class Formatter {
 		amazonSpecList.add(SPECIFICATION_HEIGHT);
 		SPL_CHAR_MAP.put(153,"&trade;");
 		SPL_CHAR_MAP.put(169,"&copy;");
-		SPL_CHAR_MAP.put(174,"&amp;reg;");
+		SPL_CHAR_MAP.put(174,"&reg;");
 		SPL_CHAR_MAP.put(8482,"&trade;");
 		
 		
