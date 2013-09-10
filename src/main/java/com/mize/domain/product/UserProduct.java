@@ -18,7 +18,7 @@ public class UserProduct extends MizeEntity{
 
 	private static final long serialVersionUID = -5270305444916049503L;
 	protected Long id;
-	protected User User = new User();
+	protected User user = new User();
 	protected Product product;
 	protected String listName;
 	protected String active;
@@ -58,11 +58,11 @@ public class UserProduct extends MizeEntity{
 	}
 	
 	public User getUser() {
-		return User;
+		return user;
 	}
 
 	public void setUser(User user) {
-		User = user;
+		this.user = user;
 	}
 
 	public Product getProduct() {
