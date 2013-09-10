@@ -7,11 +7,11 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.auth.User;
-import com.mize.domain.common.Entity;
+import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
-public class UserProductFeedback  extends Entity{
+public class UserProductFeedback  extends MizeEntity implements Comparable<UserProdFeedback>{
 	
 	private static final long serialVersionUID = 1784400215647825886L;
 	protected Long id;
@@ -22,7 +22,6 @@ public class UserProductFeedback  extends Entity{
 	protected Product product;
 	protected String reviewedBy;
 	protected int pageIndex;
-//	private Integer count;
 
 	public String getReviewedBy() {
 		return reviewedBy;
@@ -33,11 +32,12 @@ public class UserProductFeedback  extends Entity{
 		this.reviewedBy = reviewedBy;
 	}
 
+	@Override
 	public Long getId() {
 		return id;
 	}
 
-
+	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -135,4 +135,9 @@ public class UserProductFeedback  extends Entity{
 				+ ", product=" + product + ", reviewedBy=" + reviewedBy + ", pageIndex=" + pageIndex + "]";
 	}
 
+	@Override
+	public int compareTo(UserProdFeedback o) {
+		return 0;
+	}
+	
 }
