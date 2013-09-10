@@ -64,8 +64,6 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 	private ProductRepeatOrderHistory productRepeatOrderHistory;
 	@Transient
 	private ProductRepeatOrderAddress productRepeatOrderAddress ;
-	@Transient
-	private Integer pageIndex;
 	private String cardType;
 	private String cardNumber;
 	@DateTimeFormat (pattern="dd-MM-yyyy")
@@ -203,15 +201,6 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 		this.productRepeatOrderHistory = productRepeatOrderHistory;
 	}
 	
-	@Transient
-	public Integer getPageIndex() {
-		return pageIndex;
-	}
-
-	public void setPageIndex(Integer pageIndex) {
-		this.pageIndex = pageIndex;
-	}
-
 	@Column(name = "unit_amt",  nullable = true)
 	public Double getUnitAmount() {
 		return unitAmount;
@@ -406,7 +395,7 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
 		result = prime * result + ((lastOrderDate == null) ? 0 : lastOrderDate.hashCode());
 		result = prime * result + ((nextOrderDate == null) ? 0 : nextOrderDate.hashCode());
-		result = prime * result + ((pageIndex == null) ? 0 : pageIndex.hashCode());
+		result = prime * result + ((orderHistories == null) ? 0 : orderHistories.hashCode());
 		result = prime * result + ((phoneHome == null) ? 0 : phoneHome.hashCode());
 		result = prime * result + ((phoneMobile == null) ? 0 : phoneMobile.hashCode());
 		result = prime * result + ((phoneWork == null) ? 0 : phoneWork.hashCode());
@@ -496,10 +485,10 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 				return false;
 		} else if (!nextOrderDate.equals(other.nextOrderDate))
 			return false;
-		if (pageIndex == null) {
-			if (other.pageIndex != null)
+		if (orderHistories == null) {
+			if (other.orderHistories != null)
 				return false;
-		} else if (!pageIndex.equals(other.pageIndex))
+		} else if (!orderHistories.equals(other.orderHistories))
 			return false;
 		if (phoneHome == null) {
 			if (other.phoneHome != null)
@@ -596,8 +585,9 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 				+ ", totalOrderAmount=" + totalOrderAmount + ", confirmationNumber=" + confirmationNumber + ", email="
 				+ email + ", phoneMobile=" + phoneMobile + ", phoneHome=" + phoneHome + ", phoneWork=" + phoneWork
 				+ ", productRepeatOrderHistory=" + productRepeatOrderHistory + ", productRepeatOrderAddress="
-				+ productRepeatOrderAddress + ", pageIndex=" + pageIndex + ", cardType=" + cardType + ", cardNumber="
-				+ cardNumber + ", cardExpiryDate=" + cardExpiryDate + ", cardSecurityCode=" + cardSecurityCode + "]";
+				+ productRepeatOrderAddress + ", cardType=" + cardType + ", cardNumber=" + cardNumber
+				+ ", cardExpiryDate=" + cardExpiryDate + ", cardSecurityCode=" + cardSecurityCode + ", orderHistories="
+				+ orderHistories + "]";
 	}
 
 	@Override

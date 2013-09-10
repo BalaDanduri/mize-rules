@@ -64,8 +64,6 @@ public class ProductRegister extends MizeEntity{
 	private Long stateId;
 	@Transient
 	private Long countryId;
-	@Transient
-	private Integer pageIndex;
 	private String regnName;
 	
 	
@@ -333,10 +331,10 @@ public class ProductRegister extends MizeEntity{
 				+ ", email=" + email + ", address1=" + address1 + ", address2=" + address2 + ", address3=" + address3
 				+ ", city=" + city + ", state=" + state + ", country=" + country + ", zipCode=" + zipCode
 				+ ", phoneMobile=" + phoneMobile + ", phoneHome=" + phoneHome + ", phoneWork=" + phoneWork
-				+ ", attachments=" + attachments + ", stateId=" + stateId + ", countryId=" + countryId + ", pageIndex="
-				+ pageIndex + ", regnName=" + regnName + ", createdDateFrom=" + createdDateFrom + ", createdDateTo="
-				+ createdDateTo + ", updatedDateFrom=" + updatedDateFrom + ", updatedDateTo=" + updatedDateTo
-				+ ", addressId=" + addressId + ", address=" + address + "]";
+				+ ", attachments=" + attachments + ", stateId=" + stateId + ", countryId=" + countryId + ", regnName="
+				+ regnName + ", createdDateFrom=" + createdDateFrom + ", createdDateTo=" + createdDateTo
+				+ ", updatedDateFrom=" + updatedDateFrom + ", updatedDateTo=" + updatedDateTo + ", addressId="
+				+ addressId + ", address=" + address + "]";
 	}
 	@Override
 	public int hashCode() {
@@ -358,7 +356,6 @@ public class ProductRegister extends MizeEntity{
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result + ((pageIndex == null) ? 0 : pageIndex.hashCode());
 		result = prime * result + ((phoneHome == null) ? 0 : phoneHome.hashCode());
 		result = prime * result + ((phoneMobile == null) ? 0 : phoneMobile.hashCode());
 		result = prime * result + ((phoneWork == null) ? 0 : phoneWork.hashCode());
@@ -466,11 +463,6 @@ public class ProductRegister extends MizeEntity{
 				return false;
 		} else if (!lastName.equals(other.lastName))
 			return false;
-		if (pageIndex == null) {
-			if (other.pageIndex != null)
-				return false;
-		} else if (!pageIndex.equals(other.pageIndex))
-			return false;
 		if (phoneHome == null) {
 			if (other.phoneHome != null)
 				return false;
@@ -554,14 +546,7 @@ public class ProductRegister extends MizeEntity{
 		return true;
 	}
 
-	@Transient
-	public Integer getPageIndex() {
-		return pageIndex;
-	}
-
-	public void setPageIndex(Integer pageIndex) {
-		this.pageIndex = pageIndex;
-	}
+	
 	@Column(name = "regn_name",  nullable = true, length = 50)
 	public String getRegnName() {
 		return regnName;
