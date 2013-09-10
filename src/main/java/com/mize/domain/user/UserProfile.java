@@ -59,7 +59,7 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 	private long friendsCount;
 	List<String> listNames = new ArrayList<String>();
 	List<UserAddress> addresses = new ArrayList<UserAddress>();
-	
+	private String promptForAppRating;
 	private Map<String, URL> photoURLMap = new HashMap<String, URL>();
 	
 	public enum UserProfileResult {
@@ -517,6 +517,14 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 
 	public void setAddresses(List<UserAddress> addresses) {
 		this.addresses = addresses;
+	}
+
+	public String getPromptForAppRating() {
+		return promptForAppRating;
+	}
+
+	public void setPromptForAppRating(String promptForAppRating) {
+		this.promptForAppRating = promptForAppRating;
 	}
 	
 }
