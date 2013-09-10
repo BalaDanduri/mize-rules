@@ -43,7 +43,7 @@ public final class Formatter {
 	public static String UNIT_POUNDS = "pounds";
 	public static String NEW_LINE = "\n";
 	public static String BR_LINE = "<br>";
-	
+	public static final Map<Integer, String> SPL_CHAR_MAP = new HashMap<Integer,String>();
 	public static final List<String> amazonSpecList = new ArrayList<String>();
 	
 	private Formatter(){		
@@ -56,6 +56,12 @@ public final class Formatter {
 		amazonSpecList.add(SPECIFICATION_LENGTH);
 		amazonSpecList.add(SPECIFICATION_WEIGHT);
 		amazonSpecList.add(SPECIFICATION_HEIGHT);
+		SPL_CHAR_MAP.put(153,"&trade;");
+		SPL_CHAR_MAP.put(169,"&copy;");
+		SPL_CHAR_MAP.put(174,"&amp;reg;");
+		SPL_CHAR_MAP.put(8482,"&trade;");
+		
+		
 	}
 	
 	public static int intValue(Integer intVal){
@@ -536,5 +542,24 @@ public final class Formatter {
 		page.setPageNumber(pageNo);
 		page.setPagesAvailable(pageCount);
 		page.setRowsAvailable(totalPages);
+	}
+	
+	public static String replaceSplCharForHtml(String str) {
+		StringBuilder filtered = new StringBuilder(str.length());
+		for (int i = 0; i < str.length(); i++) {
+			char current = str.charAt(i);	        
+			if (current >= 0x20 && current <= 0x7e) {
+				filtered.append(current);
+			}else{
+				int ik = (int)current;
+				String splChar = null;
+				if ((splChar = SPL_CHAR_MAP.get(ik)) != null){
+					filtered.append(splChar);
+				}else{
+					filtered.append(current);
+				}
+			}
+		}
+		return filtered.toString();
 	}
 }
