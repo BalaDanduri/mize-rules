@@ -18,6 +18,7 @@ import javax.persistence.Transient;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
@@ -256,7 +257,7 @@ public class Engagement extends MizeEntity {
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Column(name = "start_date",  nullable = true)
 	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	public DateTime getStartDate() {
 		return startDate;
 	}
@@ -270,7 +271,7 @@ public class Engagement extends MizeEntity {
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Column(name = "end_date",  nullable = true)
 	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	public DateTime getEndDate() {
 		return endDate;
 	}

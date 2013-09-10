@@ -13,6 +13,7 @@ import javax.persistence.Transient;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
@@ -110,7 +111,7 @@ public class BrandFeed extends MizeEntity implements Comparable<BrandFeed>{
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Column(name = "start_time",  nullable = true)
 	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	public DateTime getStartTime() {
 		return startTime;
 	}
@@ -124,7 +125,7 @@ public class BrandFeed extends MizeEntity implements Comparable<BrandFeed>{
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Column(name = "end_time",  nullable = true)
 	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	public DateTime getEndTime() {
 		return endTime;
 	}
