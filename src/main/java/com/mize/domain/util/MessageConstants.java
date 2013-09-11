@@ -46,4 +46,5 @@ public abstract class MessageConstants implements Serializable{
 	public static final String PRODUCT_ID_OR_BRAND_ID_REQUIRED = "PRODUCT_ID_OR_BRAND_ID_REQUIRED";
 	public static final String JDBC_UPDATE_ZERO_RECORDS = "ZERO_RECORDS_UPDATE";
 	public static final String DAO_ERROR = "DAO_ERROR";
+	public static final String INVALID_COUNTRY_OR_STATE = "INVALID_COUNTRY_OR_STATE";
 }
