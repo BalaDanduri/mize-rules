@@ -48,4 +48,5 @@ public abstract class MessageConstants implements Serializable{
 	public static final String DAO_ERROR = "DAO_ERROR";
 	public static final String INVALID_COUNTRY_OR_STATE = "INVALID_COUNTRY_OR_STATE";
 	public static final String INVALID_ENROLLMENT_TOKEN = "INVALID_ENROLLMENT_TOKEN";
+	public static final String ALREADY_ENROLLED = "ALREADY_ENROLLED";
 }
