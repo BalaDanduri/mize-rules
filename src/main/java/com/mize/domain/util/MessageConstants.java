@@ -21,7 +21,7 @@ public abstract class MessageConstants implements Serializable{
 	public static final String ATTRIBUTE_ID_NOT_FOUND = "ATTRIBUTE_ID_NOT_FOUND";
 	public static final String CATEGORY_ID_NOT_FOUND = "CATEGORY_ID_NOT_FOUND";
 	public static final String NO_RESULTS_FOUND = "NO_RESULTS_FOUND";
-	public static final String GEN_TEC_EXCEPTION = "GEN_TEC_001";
+	public static final String GEN_TECH_EXCEPTION = "GEN_TEC_001";
 	public static final String EXCEPTION = "EXCEPTION";
 	public static final String INVALID_STATE_CODE = "INVALID_STATE_CODE";
 	public static final String INVALID_COUNTRY_CODE = "INVALID_COUNTRY_CODE";
@@ -49,4 +49,5 @@ public abstract class MessageConstants implements Serializable{
 	public static final String INVALID_COUNTRY_OR_STATE = "INVALID_COUNTRY_OR_STATE";
 	public static final String INVALID_ENROLLMENT_TOKEN = "INVALID_ENROLLMENT_TOKEN";
 	public static final String ALREADY_ENROLLED = "ALREADY_ENROLLED";
+	public static final String ENROLLMENT_EMAIL_NOT_VALIDATED = "ENROLLMENT_EMAIL_NOT_VALIDATED";
 }

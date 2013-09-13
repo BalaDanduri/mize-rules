@@ -18,6 +18,9 @@ public class SweepsTakeEnrollment extends MizeEntity implements Comparable<Sweep
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime enrollmentDate;	
 	private String emailValidated;
+	private SweepsTake sweepsTake;
+	private Integer invitationCount;
+	private String isEnrolled;
 
 	@Override
 	public Long getId() {
@@ -79,6 +82,30 @@ public class SweepsTakeEnrollment extends MizeEntity implements Comparable<Sweep
 	@Override
 	public int compareTo(SweepsTakeEnrollment o) {
 		return 0;
+	}
+
+	public SweepsTake getSweepsTake() {
+		return sweepsTake;
+	}
+
+	public void setSweepsTake(SweepsTake sweepsTake) {
+		this.sweepsTake = sweepsTake;
+	}
+
+	public Integer getInvitationCount() {
+		return invitationCount;
+	}
+
+	public void setInvitationCount(Integer invitationCount) {
+		this.invitationCount = invitationCount;
+	}
+
+	public String getIsEnrolled() {
+		return isEnrolled;
+	}
+
+	public void setIsEnrolled(String isEnrolled) {
+		this.isEnrolled = isEnrolled;
 	}
 
 	@Override

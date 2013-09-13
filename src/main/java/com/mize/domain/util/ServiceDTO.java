@@ -119,4 +119,14 @@ public final class ServiceDTO<T> implements ServiceLiteral{
 	public boolean isValid(){
 		return !(hasErrors() || hasValidations());
 	}
+	
+	@JsonIgnore
+	public boolean hasValidationKey(String key){
+		return getValidationMessageKeys().contains(key);
+	}
+	
+	@JsonIgnore
+	public boolean hasErrorKey(String key){
+		return getErrorKeys().contains(key);
+	}
 }
