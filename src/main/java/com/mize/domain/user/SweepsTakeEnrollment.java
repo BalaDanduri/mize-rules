@@ -5,6 +5,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
@@ -29,6 +30,9 @@ public class SweepsTakeEnrollment extends MizeEntity implements Comparable<Sweep
 	}
 	
 	public Long getSweepsTakeId() {
+		if(Formatter.longValue(sweepsTakeId) == 0){
+			sweepsTakeId = Long.valueOf(1);
+		}
 		return sweepsTakeId;
 	}
 
