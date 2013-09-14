@@ -15,8 +15,7 @@ public class SmooksEnumDecoder implements DataDecoder{
 		if(data != null){
 			try{
 				typeCode = BusinessEntity.TypeCode.valueOf(data);
-			}catch(Exception e){
-				e.printStackTrace();
+			}catch(Exception e){				
 			}
 		}		
 		return typeCode;

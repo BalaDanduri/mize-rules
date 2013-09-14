@@ -413,12 +413,7 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 	}
 
 	public void setAddress(UserAddress address) {
-		try {
-			this.address = address;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
+		this.address = address;
 	}
 
 	@Override
