@@ -2,8 +2,10 @@ package com.mize.domain.user;
 
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
+
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JodaDateTimeDeserializer;
@@ -20,7 +22,6 @@ public class SweepsTakeEnrollment extends MizeEntity implements Comparable<Sweep
 	private String emailValidated;
 	private SweepsTake sweepsTake;
 	private Integer invitationCount;
-	private String isEnrolled;
 
 	@Override
 	public Long getId() {
@@ -60,7 +61,7 @@ public class SweepsTakeEnrollment extends MizeEntity implements Comparable<Sweep
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	public DateTime getEnrollmentDate() {
 		return enrollmentDate;
 	}
@@ -98,14 +99,6 @@ public class SweepsTakeEnrollment extends MizeEntity implements Comparable<Sweep
 
 	public void setInvitationCount(Integer invitationCount) {
 		this.invitationCount = invitationCount;
-	}
-
-	public String getIsEnrolled() {
-		return isEnrolled;
-	}
-
-	public void setIsEnrolled(String isEnrolled) {
-		this.isEnrolled = isEnrolled;
 	}
 
 	@Override

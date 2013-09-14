@@ -2,6 +2,7 @@ package com.mize.domain.user;
 
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -12,8 +13,8 @@ import com.mize.domain.util.JsonDateTimeSerializer;
 public class SweepsTakeInvite extends MizeEntity implements Comparable<SweepsTakeInvite>{
 
 	private static final long serialVersionUID = 3657381192795060009L;
-	private String from ;
-	private String to;
+	private Long sentFrom ;
+	private String sentTo;
 	private String channel;
 	private String successfulConversion;
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
@@ -29,23 +30,7 @@ public class SweepsTakeInvite extends MizeEntity implements Comparable<SweepsTak
 	@Override
 	public void setId(Long id) {
 		this.id = id;
-	}
-	
-	public String getFrom() {
-		return from;
-	}
-
-	public void setFrom(String from) {
-		this.from = from;
-	}
-
-	public String getTo() {
-		return to;
-	}
-
-	public void setTo(String to) {
-		this.to = to;
-	}
+	}	
 
 	public String getChannel() {
 		return channel;
@@ -64,7 +49,7 @@ public class SweepsTakeInvite extends MizeEntity implements Comparable<SweepsTak
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	public DateTime getSendDate() {
 		return sendDate;
 	}
@@ -76,7 +61,7 @@ public class SweepsTakeInvite extends MizeEntity implements Comparable<SweepsTak
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	public DateTime getSuccessfulConversionDate() {
 		return successfulConversionDate;
 	}
@@ -92,14 +77,32 @@ public class SweepsTakeInvite extends MizeEntity implements Comparable<SweepsTak
 		return 0;
 	}
 
+	public Long getSentFrom() {
+		return sentFrom;
+	}
+
+	public void setSentFrom(Long sentFrom) {
+		this.sentFrom = sentFrom;
+	}
+
+	public String getSentTo() {
+		return sentTo;
+	}
+
+	public void setSentTo(String sentTo) {
+		this.sentTo = sentTo;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result + ((channel == null) ? 0 : channel.hashCode());
-		result = prime * result + ((from == null) ? 0 : from.hashCode());
 		result = prime * result
 				+ ((sendDate == null) ? 0 : sendDate.hashCode());
+		result = prime * result
+				+ ((sentFrom == null) ? 0 : sentFrom.hashCode());
+		result = prime * result + ((sentTo == null) ? 0 : sentTo.hashCode());
 		result = prime
 				* result
 				+ ((successfulConversion == null) ? 0 : successfulConversion
@@ -108,7 +111,6 @@ public class SweepsTakeInvite extends MizeEntity implements Comparable<SweepsTak
 				* result
 				+ ((successfulConversionDate == null) ? 0
 						: successfulConversionDate.hashCode());
-		result = prime * result + ((to == null) ? 0 : to.hashCode());
 		return result;
 	}
 
@@ -126,15 +128,20 @@ public class SweepsTakeInvite extends MizeEntity implements Comparable<SweepsTak
 				return false;
 		} else if (!channel.equals(other.channel))
 			return false;
-		if (from == null) {
-			if (other.from != null)
-				return false;
-		} else if (!from.equals(other.from))
-			return false;
 		if (sendDate == null) {
 			if (other.sendDate != null)
 				return false;
 		} else if (!sendDate.equals(other.sendDate))
+			return false;
+		if (sentFrom == null) {
+			if (other.sentFrom != null)
+				return false;
+		} else if (!sentFrom.equals(other.sentFrom))
+			return false;
+		if (sentTo == null) {
+			if (other.sentTo != null)
+				return false;
+		} else if (!sentTo.equals(other.sentTo))
 			return false;
 		if (successfulConversion == null) {
 			if (other.successfulConversion != null)
@@ -147,20 +154,16 @@ public class SweepsTakeInvite extends MizeEntity implements Comparable<SweepsTak
 		} else if (!successfulConversionDate
 				.equals(other.successfulConversionDate))
 			return false;
-		if (to == null) {
-			if (other.to != null)
-				return false;
-		} else if (!to.equals(other.to))
-			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "SweepsTakeInvite [from=" + from + ", to=" + to + ", channel="
-				+ channel + ", successfulConversion=" + successfulConversion
-				+ ", sendDate=" + sendDate + ", successfulConversionDate="
-				+ successfulConversionDate + "]";
+		return "SweepsTakeInvite [sentFrom=" + sentFrom + ", sentTo=" + sentTo
+				+ ", channel=" + channel + ", successfulConversion="
+				+ successfulConversion + ", sendDate=" + sendDate
+				+ ", successfulConversionDate=" + successfulConversionDate
+				+ "]";
 	}
 
 }
