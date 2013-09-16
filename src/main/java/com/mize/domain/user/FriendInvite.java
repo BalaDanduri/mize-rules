@@ -10,7 +10,7 @@ import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
-public class SweepsTakeInvite extends MizeEntity implements Comparable<SweepsTakeInvite>{
+public class FriendInvite extends MizeEntity implements Comparable<FriendInvite>{
 
 	private static final long serialVersionUID = 3657381192795060009L;
 	private Long sentFrom ;
@@ -73,7 +73,7 @@ public class SweepsTakeInvite extends MizeEntity implements Comparable<SweepsTak
 	}
 
 	@Override
-	public int compareTo(SweepsTakeInvite o) {
+	public int compareTo(FriendInvite o) {
 		return 0;
 	}
 
@@ -122,7 +122,7 @@ public class SweepsTakeInvite extends MizeEntity implements Comparable<SweepsTak
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SweepsTakeInvite other = (SweepsTakeInvite) obj;
+		FriendInvite other = (FriendInvite) obj;
 		if (channel == null) {
 			if (other.channel != null)
 				return false;
