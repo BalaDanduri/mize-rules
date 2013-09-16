@@ -36,6 +36,20 @@ public class Brand extends MizeEntity implements Comparable<Brand>{
 	private List<BrandFeed> brandFeeds = new ArrayList<BrandFeed>();
 	private List<ProductRepeatOrderShipOptions> shippings = new ArrayList<ProductRepeatOrderShipOptions>();
 	private List<ProductRegister> productRegisters = new ArrayList<ProductRegister>();
+	private String searchType;
+	
+	public enum SearchType{
+		equals,like;	
+	}
+	
+	public static SearchType getSearchType(String num){
+		for (SearchType sType : SearchType.values()) {
+			if( sType.toString().equals(num) ){
+				return sType;
+			}
+		}
+		return null;
+	}
 	
 	
 	@Id
@@ -174,6 +188,15 @@ public class Brand extends MizeEntity implements Comparable<Brand>{
 
 	public void setProductRegisters(List<ProductRegister> productRegisters) {
 		this.productRegisters = productRegisters;
+	}
+
+	@Transient
+	public String getSearchType() {
+		return searchType;
+	}
+
+	public void setSearchType(String searchType) {
+		this.searchType = searchType;
 	}
 
 	@Override

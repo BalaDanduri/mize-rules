@@ -62,7 +62,7 @@ public class ProductContent extends MizeEntity{
 	}	
 
 	public enum ContentType{
-		faq,video,manuals; 
+		faq,video,manuals,brochure; 
 	}
 	
 	public static ContentType getContentType(String num){
