@@ -60,6 +60,7 @@ public class Engagement extends MizeEntity {
 	@Transient
 	private Integer pageIndex;
 	private String status;
+	private String level;
 	
 	public Engagement(){
 		
@@ -342,6 +343,15 @@ public class Engagement extends MizeEntity {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
+	}
+
 
 	@Override
 	public int hashCode() {
@@ -349,26 +359,44 @@ public class Engagement extends MizeEntity {
 		int result = super.hashCode();
 		result = prime * result + ((brand == null) ? 0 : brand.hashCode());
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((discountType == null) ? 0 : discountType.hashCode());
-		result = prime * result + ((discountValue == null) ? 0 : discountValue.hashCode());
+		result = prime * result
+				+ ((description == null) ? 0 : description.hashCode());
+		result = prime * result
+				+ ((discountType == null) ? 0 : discountType.hashCode());
+		result = prime * result
+				+ ((discountValue == null) ? 0 : discountValue.hashCode());
 		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
-		result = prime * result + ((engagementLinks == null) ? 0 : engagementLinks.hashCode());
-		result = prime * result + ((imagePath == null) ? 0 : imagePath.hashCode());
-		result = prime * result + ((imageTitle == null) ? 0 : imageTitle.hashCode());
-		result = prime * result + ((maxRedemptions == null) ? 0 : maxRedemptions.hashCode());
-		result = prime * result + ((pageIndex == null) ? 0 : pageIndex.hashCode());
-		result = prime * result + ((redeemInstructions == null) ? 0 : redeemInstructions.hashCode());
-		result = prime * result + ((redemptions == null) ? 0 : redemptions.hashCode());
-		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
+		result = prime * result
+				+ ((engagementLinks == null) ? 0 : engagementLinks.hashCode());
+		result = prime * result
+				+ ((imagePath == null) ? 0 : imagePath.hashCode());
+		result = prime * result
+				+ ((imageTitle == null) ? 0 : imageTitle.hashCode());
+		result = prime * result + ((level == null) ? 0 : level.hashCode());
+		result = prime * result
+				+ ((maxRedemptions == null) ? 0 : maxRedemptions.hashCode());
+		result = prime * result
+				+ ((pageIndex == null) ? 0 : pageIndex.hashCode());
+		result = prime
+				* result
+				+ ((redeemInstructions == null) ? 0 : redeemInstructions
+						.hashCode());
+		result = prime * result
+				+ ((redemptions == null) ? 0 : redemptions.hashCode());
+		result = prime * result
+				+ ((startDate == null) ? 0 : startDate.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
-		result = prime * result + ((storeNumber == null) ? 0 : storeNumber.hashCode());
-		result = prime * result + ((termsConditions == null) ? 0 : termsConditions.hashCode());
+		result = prime * result
+				+ ((storeNumber == null) ? 0 : storeNumber.hashCode());
+		result = prime * result
+				+ ((termsConditions == null) ? 0 : termsConditions.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		result = prime * result + ((url == null) ? 0 : url.hashCode());
-		result = prime * result + ((urlTitle == null) ? 0 : urlTitle.hashCode());
-		result = prime * result + ((useLimit == null) ? 0 : useLimit.hashCode());
+		result = prime * result
+				+ ((urlTitle == null) ? 0 : urlTitle.hashCode());
+		result = prime * result
+				+ ((useLimit == null) ? 0 : useLimit.hashCode());
 		return result;
 	}
 
@@ -426,6 +454,11 @@ public class Engagement extends MizeEntity {
 			if (other.imageTitle != null)
 				return false;
 		} else if (!imageTitle.equals(other.imageTitle))
+			return false;
+		if (level == null) {
+			if (other.level != null)
+				return false;
+		} else if (!level.equals(other.level))
 			return false;
 		if (maxRedemptions == null) {
 			if (other.maxRedemptions != null)
@@ -498,16 +531,18 @@ public class Engagement extends MizeEntity {
 
 	@Override
 	public String toString() {
-		return "Engagement [storeNumber=" + storeNumber + ", type=" + type + ", code=" + code + ", brand=" + brand
-				+ ", title=" + title + ", description=" + description + ", imagePath=" + imagePath + ", imageTitle="
-				+ imageTitle + ", url=" + url + ", urlTitle=" + urlTitle + ", redeemInstructions=" + redeemInstructions
-				+ ", termsConditions=" + termsConditions + ", discountType=" + discountType + ", discountValue="
-				+ discountValue + ", maxRedemptions=" + maxRedemptions + ", redemptions=" + redemptions + ", useLimit="
-				+ useLimit + ", startDate=" + startDate + ", endDate=" + endDate + ", engagementLinks="
-				+ engagementLinks + ", pageIndex=" + pageIndex + ", status=" + status + "]";
+		return "Engagement [storeNumber=" + storeNumber + ", type=" + type
+				+ ", code=" + code + ", brand=" + brand + ", title=" + title
+				+ ", description=" + description + ", imagePath=" + imagePath
+				+ ", imageTitle=" + imageTitle + ", url=" + url + ", urlTitle="
+				+ urlTitle + ", redeemInstructions=" + redeemInstructions
+				+ ", termsConditions=" + termsConditions + ", discountType="
+				+ discountType + ", discountValue=" + discountValue
+				+ ", maxRedemptions=" + maxRedemptions + ", redemptions="
+				+ redemptions + ", useLimit=" + useLimit + ", startDate="
+				+ startDate + ", endDate=" + endDate + ", engagementLinks="
+				+ engagementLinks + ", pageIndex=" + pageIndex + ", status="
+				+ status + ", level=" + level + "]";
 	}
-
-
-	
 		
 }
