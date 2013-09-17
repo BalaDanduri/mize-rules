@@ -4,6 +4,10 @@ import com.mize.domain.common.MizeEntity;
 
 public class MizeJobSchedule extends MizeEntity{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1040968045922261957L;
 	private Long id;
 	private Long instanceId;
 	private String expr;
