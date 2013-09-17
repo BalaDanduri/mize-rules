@@ -12,6 +12,7 @@ public class MizeJob extends MizeEntity{
 	private static final long serialVersionUID = 9090898975271779926L;
 	private Long id;
 	private String jobCode;
+	private String jobName;
 	private String jobDescription;
 	private List<MizeJobInstance> jobInstances;
 	private Boolean active;
@@ -26,6 +27,12 @@ public class MizeJob extends MizeEntity{
 	}
 	public void setJobCode(String jobCode) {
 		this.jobCode = jobCode;
+	}
+	public String getJobName() {
+		return jobName;
+	}
+	public void setJobName(String jobName) {
+		this.jobName = jobName;
 	}
 	public String getJobDescription() {
 		return jobDescription;
@@ -72,9 +79,9 @@ public class MizeJob extends MizeEntity{
 	}
 	@Override
 	public String toString() {
-		return "MizeJob [id=" + id + ", jobCode=" + jobCode
-				+ ", jobDescription=" + jobDescription + ", jobInstances="
-				+ jobInstances + ", active=" + active + "]";
+		return "MizeJob [id=" + id + ", jobCode=" + jobCode + ", jobName="
+				+ jobName + ", jobDescription=" + jobDescription
+				+ ", jobInstances=" + jobInstances + ", active=" + active + "]";
 	}
 
 	
