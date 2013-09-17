@@ -1,9 +1,17 @@
 package com.mize.domain.product;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -11,12 +19,15 @@ import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
+@Entity
+@Table(name = "system_options")
 public class SystemOptions extends MizeEntity implements Comparable<SystemOptions>{
 
 	private static final long serialVersionUID = -8578576996983187261L;
 	private String forceLogin;
 	private String displayProdContent;
 	
+	@Column(name = "force_login",  nullable = true)
 	public String getForceLogin() {
 		return forceLogin;
 	}
@@ -25,6 +36,7 @@ public class SystemOptions extends MizeEntity implements Comparable<SystemOption
 		this.forceLogin = forceLogin;
 	}
 
+	@Column(name = "display_prod_content",  nullable = true)
 	public String getDisplayProdContent() {
 		return displayProdContent;
 	}
@@ -33,6 +45,7 @@ public class SystemOptions extends MizeEntity implements Comparable<SystemOption
 		this.displayProdContent = displayProdContent;
 	}
 	
+	@Column(name = "created_by",  nullable = true, length = 20)
 	@JsonIgnore(value=false)
 	public Long getCreatedBy() {
 		return createdBy;
@@ -44,6 +57,8 @@ public class SystemOptions extends MizeEntity implements Comparable<SystemOption
 	}
 	
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@Column(name = "created_date",  nullable = true)
+	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)	
 	@JsonIgnore(value=false)
 	public DateTime getCreatedDate() {
@@ -57,6 +72,7 @@ public class SystemOptions extends MizeEntity implements Comparable<SystemOption
 		this.createdDate = createdDate;
 	}
 	
+	@Column(name = "updated_by",  nullable = true, length = 20)
 	@JsonIgnore(value=false)
 	public Long getUpdatedBy() {
 		return updatedBy;
@@ -68,6 +84,8 @@ public class SystemOptions extends MizeEntity implements Comparable<SystemOption
 	}
 	
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@Column(name = "updated_date",  nullable = true)
+	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	@JsonIgnore(value=false)
 	public DateTime getUpdatedDate() {
@@ -81,6 +99,10 @@ public class SystemOptions extends MizeEntity implements Comparable<SystemOption
 		this.updatedDate = updatedDate;
 	}
 
+	@Id
+	@GenericGenerator(name="id" , strategy="increment")
+	@GeneratedValue(generator="id")
+	@Column(name="id",unique=true,nullable=false,length=20)
 	@Override
 	public Long getId() {
 		return id;
