@@ -1,5 +1,6 @@
 package com.mize.domain.user;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
@@ -77,6 +78,24 @@ public class SweepsTake extends MizeEntity implements Comparable<SweepsTake>{
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	public void setEndDate(DateTime endDate) {
 		this.endDate = endDate;
+	}
+	
+	@JsonIgnore(value=false)
+	public Long getCreatedBy() {
+		return createdBy;
+	}
+	@JsonIgnore(value=false)
+	public void setCreatedBy(Long createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	@JsonIgnore(value=false)
+	public Long getUpdatedBy() {
+		return updatedBy;
+	}
+	@JsonIgnore(value=false)
+	public void setUpdatedBy(Long updatedBy) {
+		this.updatedBy = updatedBy;
 	}
 	
 	@Override

@@ -111,7 +111,7 @@ public class Brand extends MizeEntity implements Comparable<Brand>{
 	public void setName(String brandName) {
 		this.name = brandName;
 	}
-	
+	@Column(name = "department",  nullable = true, length = 50)
 	public String getDepartment() {
 		return department;
 	}
@@ -172,6 +172,7 @@ public class Brand extends MizeEntity implements Comparable<Brand>{
 		this.shippings = shippings;
 	}
 
+	@Column(name = "registered",  nullable = true)
 	public String getRegistered() {
 		return registered;
 	}
