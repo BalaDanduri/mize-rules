@@ -1,6 +1,7 @@
 package com.mize.domain.batch;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.mize.domain.common.MizeEntity;
@@ -16,9 +17,12 @@ public class MizeJobSearchCriteria extends MizeEntity{
 	private String jobName;
 	private Long instanceId;
 	private String instanceCode;
-	private String fromDate;
-	private String toDate;
-	private Boolean active;
+	private Date jobFromDate;
+	private Date jobToDate;
+	private Date instanceFromDate;
+	private Date instanceToDate;
+	private Boolean jobActive;
+	private Boolean instanceActive;
 	private List<String> roles = new ArrayList<String>();
 	public Long getId() {
 		return id;
@@ -50,23 +54,41 @@ public class MizeJobSearchCriteria extends MizeEntity{
 	public void setInstanceCode(String instanceCode) {
 		this.instanceCode = instanceCode;
 	}
-	public String getFromDate() {
-		return fromDate;
+	public Date getJobFromDate() {
+		return jobFromDate;
 	}
-	public void setFromDate(String fromDate) {
-		this.fromDate = fromDate;
+	public void setJobFromDate(Date jobFromDate) {
+		this.jobFromDate = jobFromDate;
 	}
-	public String getToDate() {
-		return toDate;
+	public Date getJobToDate() {
+		return jobToDate;
 	}
-	public void setToDate(String toDate) {
-		this.toDate = toDate;
+	public void setJobToDate(Date jobToDate) {
+		this.jobToDate = jobToDate;
 	}
-	public Boolean getActive() {
-		return active;
+	public Date getInstanceFromDate() {
+		return instanceFromDate;
 	}
-	public void setActive(Boolean active) {
-		this.active = active;
+	public void setInstanceFromDate(Date instanceFromDate) {
+		this.instanceFromDate = instanceFromDate;
+	}
+	public Date getInstanceToDate() {
+		return instanceToDate;
+	}
+	public void setInstanceToDate(Date instanceToDate) {
+		this.instanceToDate = instanceToDate;
+	}
+	public Boolean getJobActive() {
+		return jobActive;
+	}
+	public void setJobActive(Boolean jobActive) {
+		this.jobActive = jobActive;
+	}
+	public Boolean getInstanceActive() {
+		return instanceActive;
+	}
+	public void setInstanceActive(Boolean instanceActive) {
+		this.instanceActive = instanceActive;
 	}
 	public List<String> getRoles() {
 		return roles;
@@ -78,8 +100,12 @@ public class MizeJobSearchCriteria extends MizeEntity{
 	public String toString() {
 		return "MizeJobSearchCriteria [id=" + id + ", jobCode=" + jobCode
 				+ ", jobName=" + jobName + ", instanceId=" + instanceId
-				+ ", instanceCode=" + instanceCode + ", fromDate=" + fromDate
-				+ ", toDate=" + toDate + ", active=" + active + ", roles="
+				+ ", instanceCode=" + instanceCode + ", jobFromDate="
+				+ jobFromDate + ", jobToDate=" + jobToDate
+				+ ", instanceFromDate=" + instanceFromDate
+				+ ", instanceToDate=" + instanceToDate + ", jobActive="
+				+ jobActive + ", instanceActive=" + instanceActive + ", roles="
 				+ roles + "]";
 	}
+	
 }
