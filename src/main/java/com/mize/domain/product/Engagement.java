@@ -59,6 +59,7 @@ public class Engagement extends MizeEntity {
 	private List<EngagementLink> engagementLinks = new ArrayList<EngagementLink>();
 	@Transient
 	private Integer pageIndex;
+	private String status;
 	
 	public Engagement(){
 		
@@ -68,7 +69,7 @@ public class Engagement extends MizeEntity {
 	public Engagement(String type, String code, Brand brand, String title, String description, String imagePath,
 			String imageTitle, String url, String urlTitle, String redeemInstructions, String termsConditions,
 			String discountType, Double discountValue, Integer maxRedemptions, Integer redemptions, Integer useLimit,
-			DateTime startDate, DateTime endDate, List<EngagementLink> engagementLinks, Integer pageIndex) {
+			DateTime startDate, DateTime endDate, List<EngagementLink> engagementLinks, Integer pageIndex, String status) {
 		super();
 		this.type = type;
 		this.code = code;
@@ -90,6 +91,7 @@ public class Engagement extends MizeEntity {
 		this.endDate = endDate;
 		this.engagementLinks = engagementLinks;
 		this.pageIndex = pageIndex;
+		this.status = status;
 	}
 
 	
@@ -330,7 +332,16 @@ public class Engagement extends MizeEntity {
 	public void setUpdatedBy(Long updatedBy) {
 		this.updatedBy = updatedBy;
 	}
+	
+	@Column(name = "eo_status",nullable = true)
+	public String getStatus() {
+		return status;
+	}
 
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	@Override
 	public int hashCode() {
@@ -350,6 +361,8 @@ public class Engagement extends MizeEntity {
 		result = prime * result + ((redeemInstructions == null) ? 0 : redeemInstructions.hashCode());
 		result = prime * result + ((redemptions == null) ? 0 : redemptions.hashCode());
 		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		result = prime * result + ((storeNumber == null) ? 0 : storeNumber.hashCode());
 		result = prime * result + ((termsConditions == null) ? 0 : termsConditions.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
@@ -439,6 +452,16 @@ public class Engagement extends MizeEntity {
 				return false;
 		} else if (!startDate.equals(other.startDate))
 			return false;
+		if (status == null) {
+			if (other.status != null)
+				return false;
+		} else if (!status.equals(other.status))
+			return false;
+		if (storeNumber == null) {
+			if (other.storeNumber != null)
+				return false;
+		} else if (!storeNumber.equals(other.storeNumber))
+			return false;
 		if (termsConditions == null) {
 			if (other.termsConditions != null)
 				return false;
@@ -475,13 +498,16 @@ public class Engagement extends MizeEntity {
 
 	@Override
 	public String toString() {
-		return "Engagement [type=" + type + ", code=" + code + ", brand=" + brand + ", title=" + title
-				+ ", description=" + description + ", imagePath=" + imagePath + ", imageTitle=" + imageTitle + ", url="
-				+ url + ", urlTitle=" + urlTitle + ", redeemInstructions=" + redeemInstructions + ", termsConditions="
-				+ termsConditions + ", discountType=" + discountType + ", discountValue=" + discountValue
-				+ ", maxRedemptions=" + maxRedemptions + ", redemptions=" + redemptions + ", useLimit=" + useLimit
-				+ ", startDate=" + startDate + ", endDate=" + endDate + ", engagementLinks=" + engagementLinks
-				+ ", pageIndex=" + pageIndex + "]";
+		return "Engagement [storeNumber=" + storeNumber + ", type=" + type + ", code=" + code + ", brand=" + brand
+				+ ", title=" + title + ", description=" + description + ", imagePath=" + imagePath + ", imageTitle="
+				+ imageTitle + ", url=" + url + ", urlTitle=" + urlTitle + ", redeemInstructions=" + redeemInstructions
+				+ ", termsConditions=" + termsConditions + ", discountType=" + discountType + ", discountValue="
+				+ discountValue + ", maxRedemptions=" + maxRedemptions + ", redemptions=" + redemptions + ", useLimit="
+				+ useLimit + ", startDate=" + startDate + ", endDate=" + endDate + ", engagementLinks="
+				+ engagementLinks + ", pageIndex=" + pageIndex + ", status=" + status + "]";
 	}
+
+
+	
 		
 }
