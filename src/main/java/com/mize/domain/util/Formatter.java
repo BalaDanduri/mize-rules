@@ -508,6 +508,9 @@ public final class Formatter {
 		if(pageNo <= 0){
 			pageNo = 1;
 		}
+		if(page.getPageItems() == null){
+			page.setPageItems(new ArrayList());
+		}
 		int pageSize = PaginationPage.DEFAULT_PAGE_SIZE;
 		int pageCount = page.getPageItems().size() / pageSize;
 		if (page.getPageItems().size() > pageSize * pageCount) {
@@ -529,11 +532,14 @@ public final class Formatter {
 		page.setPageItems(subpages);
 	}
 	
-	@SuppressWarnings({ "rawtypes"})
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void populatePagination(PaginationPage page, int pageNo,int totalPages){
 		int pageSize = PaginationPage.DEFAULT_PAGE_SIZE;
 		if(pageNo <= 0){
 			pageNo = 1;
+		}
+		if(page.getPageItems() == null){
+			page.setPageItems(new ArrayList());
 		}
 		int pageCount = page.getPageItems().size() / pageSize;
 		if (page.getPageItems().size() > pageSize * pageCount) {
