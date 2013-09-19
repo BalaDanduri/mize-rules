@@ -21,7 +21,7 @@ import com.mize.domain.util.JsonDateTimeSerializer;
 
 @Entity
 @Table(name = "sweepstake")
-public class SweepsTake extends MizeEntity implements Comparable<SweepsTake>{
+public class Sweepstake extends MizeEntity implements Comparable<Sweepstake>{
 
 	private static final long serialVersionUID = 3657381192795060009L;
 	private String code;
@@ -122,7 +122,7 @@ public class SweepsTake extends MizeEntity implements Comparable<SweepsTake>{
 	}
 	
 	@Override
-	public int compareTo(SweepsTake o) {
+	public int compareTo(Sweepstake o) {
 		return 0;
 	}
 
@@ -148,7 +148,7 @@ public class SweepsTake extends MizeEntity implements Comparable<SweepsTake>{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SweepsTake other = (SweepsTake) obj;
+		Sweepstake other = (Sweepstake) obj;
 		if (code == null) {
 			if (other.code != null)
 				return false;
