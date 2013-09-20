@@ -131,12 +131,10 @@ public class Sweepstake extends MizeEntity implements Comparable<Sweepstake>{
 		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
-		result = prime * result
-				+ ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result
-				+ ((startDate == null) ? 0 : startDate.hashCode());
+		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
 		return result;
 	}
 
@@ -179,9 +177,8 @@ public class Sweepstake extends MizeEntity implements Comparable<Sweepstake>{
 
 	@Override
 	public String toString() {
-		return "SweepsTake [code=" + code + ", name=" + name + ", description="
-				+ description + ", startDate=" + startDate + ", endDate="
-				+ endDate + "]";
+		return "Sweepstake [code=" + code + ", name=" + name + ", description=" + description + ", startDate="
+				+ startDate + ", endDate=" + endDate + "]";
 	}
 
 }

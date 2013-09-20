@@ -159,11 +159,9 @@ public class FriendInvitation extends MizeEntity implements Comparable<FriendInv
 
 	@Override
 	public String toString() {
-		return "SweepsTakeInvite [sentFrom=" + sentFrom + ", sentTo=" + sentTo
-				+ ", channel=" + channel + ", successfulConversion="
-				+ successfulConversion + ", sendDate=" + sendDate
-				+ ", successfulConversionDate=" + successfulConversionDate
-				+ "]";
+		return "FriendInvitation [sentFrom=" + sentFrom + ", sentTo=" + sentTo + ", channel=" + channel
+				+ ", successfulConversion=" + successfulConversion + ", sendDate=" + sendDate
+				+ ", successfulConversionDate=" + successfulConversionDate + "]";
 	}
 
 }
