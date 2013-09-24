@@ -329,6 +329,12 @@ public final class Formatter {
 	public static String likeString(String value){		
 		return LIKE+toUpperCase(value)+LIKE;
 	}
+	
+	public static String likeStringStartsWith(String value){		
+		return toUpperCase(value)+LIKE;
+	}
+	
+	
 	public static String removeHtml(String value){
 		if(getLength(value) >0){
 			try{
