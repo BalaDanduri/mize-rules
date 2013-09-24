@@ -8,11 +8,11 @@ public class ProductFeature extends MizeEntity implements Comparable<ProductFeat
 	
 	private static final long serialVersionUID = -97276364683192909L;
 	public static final String FEATURES ="features";
-	public static final String GENERAL_INFO ="generalInformation";
+	public static final String SPECIFICATIONS ="specifications";
 	private String feature;
 	private String name;
 	private String absoluteValue;
-	private String groupName;
+	private String group;
 	private List<ProductFeature> attributes;
 
 	public ProductFeature(String feature) {
@@ -59,12 +59,12 @@ public class ProductFeature extends MizeEntity implements Comparable<ProductFeat
 		this.name = name;
 	}
 
-	public String getGroupName() {
-		return groupName;
+	public String getGroup() {
+		return group;
 	}
 
-	public void setGroupName(String groupName) {
-		this.groupName = groupName;
+	public void setGroup(String group) {
+		this.group = group;
 	}
 
 	public List<ProductFeature> getAttributes() {
