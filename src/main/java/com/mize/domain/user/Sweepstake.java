@@ -1,9 +1,17 @@
 package com.mize.domain.user;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -11,7 +19,9 @@ import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
-public class SweepsTake extends MizeEntity implements Comparable<SweepsTake>{
+@Entity
+@Table(name = "sweepstake")
+public class Sweepstake extends MizeEntity implements Comparable<Sweepstake>{
 
 	private static final long serialVersionUID = 3657381192795060009L;
 	private String code;
@@ -22,6 +32,10 @@ public class SweepsTake extends MizeEntity implements Comparable<SweepsTake>{
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime endDate;	
 
+	@Id
+	@GenericGenerator(name="id" , strategy="increment")
+	@GeneratedValue(generator="id")
+	@Column(name="id",unique=true,nullable=false,length=11)
 	@Override
 	public Long getId() {
 		return id;
@@ -32,6 +46,7 @@ public class SweepsTake extends MizeEntity implements Comparable<SweepsTake>{
 		this.id = id;
 	}
 	
+	@Column(name = "code",nullable = true, length = 50)
 	public String getCode() {
 		return code;
 	}
@@ -40,6 +55,7 @@ public class SweepsTake extends MizeEntity implements Comparable<SweepsTake>{
 		this.code = code;
 	}
 
+	@Column(name = "name",nullable = true, length = 100)
 	public String getName() {
 		return name;
 	}
@@ -48,6 +64,7 @@ public class SweepsTake extends MizeEntity implements Comparable<SweepsTake>{
 		this.name = name;
 	}
 
+	@Column(name = "description",nullable = true, length = 500)
 	public String getDescription() {
 		return description;
 	}
@@ -57,6 +74,8 @@ public class SweepsTake extends MizeEntity implements Comparable<SweepsTake>{
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@Column(name = "start_date",  nullable = true)
+	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	public DateTime getStartDate() {
 		return startDate;
@@ -69,6 +88,8 @@ public class SweepsTake extends MizeEntity implements Comparable<SweepsTake>{
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@Column(name = "end_date",  nullable = true)
+	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	public DateTime getEndDate() {
 		return endDate;
@@ -80,6 +101,7 @@ public class SweepsTake extends MizeEntity implements Comparable<SweepsTake>{
 		this.endDate = endDate;
 	}
 	
+	@Column(name = "created_by",  nullable = true, length = 20)
 	@JsonIgnore(value=false)
 	public Long getCreatedBy() {
 		return createdBy;
@@ -89,6 +111,7 @@ public class SweepsTake extends MizeEntity implements Comparable<SweepsTake>{
 		this.createdBy = createdBy;
 	}
 
+	@Column(name = "updated_by",  nullable = true, length = 20)
 	@JsonIgnore(value=false)
 	public Long getUpdatedBy() {
 		return updatedBy;
@@ -99,7 +122,7 @@ public class SweepsTake extends MizeEntity implements Comparable<SweepsTake>{
 	}
 	
 	@Override
-	public int compareTo(SweepsTake o) {
+	public int compareTo(Sweepstake o) {
 		return 0;
 	}
 
@@ -108,12 +131,10 @@ public class SweepsTake extends MizeEntity implements Comparable<SweepsTake>{
 		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
-		result = prime * result
-				+ ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result
-				+ ((startDate == null) ? 0 : startDate.hashCode());
+		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
 		return result;
 	}
 
@@ -125,7 +146,7 @@ public class SweepsTake extends MizeEntity implements Comparable<SweepsTake>{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SweepsTake other = (SweepsTake) obj;
+		Sweepstake other = (Sweepstake) obj;
 		if (code == null) {
 			if (other.code != null)
 				return false;
@@ -156,9 +177,8 @@ public class SweepsTake extends MizeEntity implements Comparable<SweepsTake>{
 
 	@Override
 	public String toString() {
-		return "SweepsTake [code=" + code + ", name=" + name + ", description="
-				+ description + ", startDate=" + startDate + ", endDate="
-				+ endDate + "]";
+		return "Sweepstake [code=" + code + ", name=" + name + ", description=" + description + ", startDate="
+				+ startDate + ", endDate=" + endDate + "]";
 	}
 
 }

@@ -17,6 +17,8 @@ public class EngagementLinkPK  extends MizeEntity{
 	private Integer prodCatId;
 	@Column(name = "prod_id",  nullable = true, length = 20)
 	private Long productId;
+	@Column(name = "brand_id",  nullable = true, length = 20)
+	private Long brandId;
 	
 	public EngagementLinkPK(){
 		
@@ -47,11 +49,20 @@ public class EngagementLinkPK  extends MizeEntity{
 	public void setProductId(Long productId) {
 		this.productId = productId;
 	}
+	
+	public Long getBrandId() {
+		return brandId;
+	}
+
+	public void setBrandId(Long brandId) {
+		this.brandId = brandId;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
-		int result = 1;
+		int result = super.hashCode();
+		result = prime * result + ((brandId == null) ? 0 : brandId.hashCode());
 		result = prime * result + ((engagementOptionsId == null) ? 0 : engagementOptionsId.hashCode());
 		result = prime * result + ((prodCatId == null) ? 0 : prodCatId.hashCode());
 		result = prime * result + ((productId == null) ? 0 : productId.hashCode());
@@ -62,11 +73,16 @@ public class EngagementLinkPK  extends MizeEntity{
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		EngagementLinkPK other = (EngagementLinkPK) obj;
+		if (brandId == null) {
+			if (other.brandId != null)
+				return false;
+		} else if (!brandId.equals(other.brandId))
+			return false;
 		if (engagementOptionsId == null) {
 			if (other.engagementOptionsId != null)
 				return false;
@@ -88,7 +104,7 @@ public class EngagementLinkPK  extends MizeEntity{
 	@Override
 	public String toString() {
 		return "EngagementLinkPK [engagementOptionsId=" + engagementOptionsId + ", prodCatId=" + prodCatId
-				+ ", productId=" + productId + "]";
+				+ ", productId=" + productId + ", brandId=" + brandId + "]";
 	}
 
 	@Transient

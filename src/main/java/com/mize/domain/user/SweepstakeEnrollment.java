@@ -11,16 +11,16 @@ import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
-public class SweepsTakeEnrollment extends MizeEntity implements Comparable<SweepsTakeEnrollment>{
+public class SweepstakeEnrollment extends MizeEntity implements Comparable<SweepstakeEnrollment>{
 
 	private static final long serialVersionUID = 3657381192795060009L;
-	private Long sweepsTakeId;
+	private Long sweepstakeId;
 	private Long userId;
 	private String email;
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime enrollmentDate;	
 	private String emailValidated;
-	private SweepsTake sweepsTake;
+	private Sweepstake sweepstake;
 	private Integer invitationCount;
 
 	@Override
@@ -33,15 +33,14 @@ public class SweepsTakeEnrollment extends MizeEntity implements Comparable<Sweep
 		this.id = id;
 	}
 	
-	public Long getSweepsTakeId() {
-		if(Formatter.longValue(sweepsTakeId) == 0){
-			sweepsTakeId = Long.valueOf(1);
+	public Long getSweepstakeId() {
+		if (Formatter.longValue(sweepstakeId) == 0) {
+			sweepstakeId = Long.valueOf(1);
 		}
-		return sweepsTakeId;
-	}
+		return sweepstakeId;}
 
-	public void setSweepsTakeId(Long sweepsTakeId) {
-		this.sweepsTakeId = sweepsTakeId;
+	public void setSweepstakeId(Long sweepstakeId) {
+		this.sweepstakeId = sweepstakeId;
 	}
 
 	public Long getUserId() {
@@ -81,16 +80,16 @@ public class SweepsTakeEnrollment extends MizeEntity implements Comparable<Sweep
 	}
 
 	@Override
-	public int compareTo(SweepsTakeEnrollment o) {
+	public int compareTo(SweepstakeEnrollment o) {
 		return 0;
 	}
 
-	public SweepsTake getSweepsTake() {
-		return sweepsTake;
+	public Sweepstake getSweepstake() {
+		return sweepstake;
 	}
 
-	public void setSweepsTake(SweepsTake sweepsTake) {
-		this.sweepsTake = sweepsTake;
+	public void setSweepstake(Sweepstake sweepstake) {
+		this.sweepstake = sweepstake;
 	}
 
 	public Integer getInvitationCount() {
@@ -106,22 +105,20 @@ public class SweepsTakeEnrollment extends MizeEntity implements Comparable<Sweep
 		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result
-				+ ((emailValidated == null) ? 0 : emailValidated.hashCode());
-		result = prime * result
-				+ ((enrollmentDate == null) ? 0 : enrollmentDate.hashCode());
-		result = prime * result
-				+ ((sweepsTakeId == null) ? 0 : sweepsTakeId.hashCode());
+		result = prime * result + ((emailValidated == null) ? 0 : emailValidated.hashCode());
+		result = prime * result + ((enrollmentDate == null) ? 0 : enrollmentDate.hashCode());
+		result = prime * result + ((invitationCount == null) ? 0 : invitationCount.hashCode());
+		result = prime * result + ((sweepstake == null) ? 0 : sweepstake.hashCode());
+		result = prime * result + ((sweepstakeId == null) ? 0 : sweepstakeId.hashCode());
 		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
 	}
 
 	@Override
 	public String toString() {
-		return "SweepsTakeEnrollment [sweepsTakeId=" + sweepsTakeId
-				+ ", userId=" + userId + ", email=" + email
-				+ ", enrollmentDate=" + enrollmentDate + ", emailValidated="
-				+ emailValidated + "]";
+		return "SweepstakeEnrollment [sweepstakeId=" + sweepstakeId + ", userId=" + userId + ", email=" + email
+				+ ", enrollmentDate=" + enrollmentDate + ", emailValidated=" + emailValidated + ", sweepstake="
+				+ sweepstake + ", invitationCount=" + invitationCount + "]";
 	}
 
 	@Override
@@ -132,7 +129,7 @@ public class SweepsTakeEnrollment extends MizeEntity implements Comparable<Sweep
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SweepsTakeEnrollment other = (SweepsTakeEnrollment) obj;
+		SweepstakeEnrollment other = (SweepstakeEnrollment) obj;
 		if (email == null) {
 			if (other.email != null)
 				return false;
@@ -148,10 +145,20 @@ public class SweepsTakeEnrollment extends MizeEntity implements Comparable<Sweep
 				return false;
 		} else if (!enrollmentDate.equals(other.enrollmentDate))
 			return false;
-		if (sweepsTakeId == null) {
-			if (other.sweepsTakeId != null)
+		if (invitationCount == null) {
+			if (other.invitationCount != null)
 				return false;
-		} else if (!sweepsTakeId.equals(other.sweepsTakeId))
+		} else if (!invitationCount.equals(other.invitationCount))
+			return false;
+		if (sweepstake == null) {
+			if (other.sweepstake != null)
+				return false;
+		} else if (!sweepstake.equals(other.sweepstake))
+			return false;
+		if (sweepstakeId == null) {
+			if (other.sweepstakeId != null)
+				return false;
+		} else if (!sweepstakeId.equals(other.sweepstakeId))
 			return false;
 		if (userId == null) {
 			if (other.userId != null)
