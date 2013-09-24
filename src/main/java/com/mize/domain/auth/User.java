@@ -343,4 +343,15 @@ public class User extends MizeEntity implements Comparable<User> {
 		}
 		return name;
 	}
+	
+	@JsonIgnore
+	@Transient
+	public String getFirstName(){
+		String name = Formatter.EMPTY;
+		if(getUserProfile() != null){
+			name = WordUtils.capitalize(Formatter.makeNotNullString(getUserProfile().getFirstName()));
+			name = Formatter.makeNotNullString(name);
+		}
+		return name;
+	}
 }
