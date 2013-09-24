@@ -1,8 +1,22 @@
 package com.mize.domain.product;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
 import com.mize.domain.brand.Brand;
 import com.mize.domain.common.MizeEntity;
 
+
+@Entity
+@Table(name = "device_list")
 public class DeviceList extends MizeEntity implements Comparable<DeviceList>{
 
 	private static final long serialVersionUID = -3440812506217447673L;
@@ -18,6 +32,8 @@ public class DeviceList extends MizeEntity implements Comparable<DeviceList>{
 	private Long prodId;
 	private String prodImage;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "brand_id", nullable = true)
 	public Brand getBrand() {
 		return brand;
 	}
@@ -26,6 +42,7 @@ public class DeviceList extends MizeEntity implements Comparable<DeviceList>{
 		this.brand = brand;
 	}
 
+	@Column(name = "device",  nullable = true, length = 100)
 	public String getDevice() {
 		return device;
 	}
@@ -34,6 +51,7 @@ public class DeviceList extends MizeEntity implements Comparable<DeviceList>{
 		this.device = device;
 	}
 
+	@Column(name = "name",  nullable = true, length = 200)
 	public String getName() {
 		return name;
 	}
@@ -42,6 +60,7 @@ public class DeviceList extends MizeEntity implements Comparable<DeviceList>{
 		this.name = name;
 	}
 
+	@Column(name = "model",  nullable = true, length = 50)
 	public String getModel() {
 		return model;
 	}
@@ -49,7 +68,7 @@ public class DeviceList extends MizeEntity implements Comparable<DeviceList>{
 	public void setModel(String model) {
 		this.model = model;
 	}
-
+	@Column(name = "memory",  nullable = true, length = 11)
 	public Integer getMemory() {
 		return memory;
 	}
@@ -58,6 +77,7 @@ public class DeviceList extends MizeEntity implements Comparable<DeviceList>{
 		this.memory = memory;
 	}
 
+	@Column(name = "color",  nullable = true, length = 20)
 	public String getColor() {
 		return color;
 	}
@@ -66,6 +86,7 @@ public class DeviceList extends MizeEntity implements Comparable<DeviceList>{
 		this.color = color;
 	}
 
+	@Column(name = "carrier",  nullable = true, length = 50)
 	public String getCarrier() {
 		return carrier;
 	}
@@ -74,6 +95,7 @@ public class DeviceList extends MizeEntity implements Comparable<DeviceList>{
 		this.carrier = carrier;
 	}
 
+	@Column(name = "prod_source_id",  nullable = true, length = 11)
 	public Long getProdSourceId() {
 		return prodSourceId;
 	}
@@ -82,6 +104,7 @@ public class DeviceList extends MizeEntity implements Comparable<DeviceList>{
 		this.prodSourceId = prodSourceId;
 	}
 
+	@Column(name = "prod_to_source_id",  nullable = true, length = 50)
 	public String getProdToSourceId() {
 		return prodToSourceId;
 	}
@@ -90,6 +113,7 @@ public class DeviceList extends MizeEntity implements Comparable<DeviceList>{
 		this.prodToSourceId = prodToSourceId;
 	}
 
+	@Column(name = "prod_id",  nullable = true, length = 20)
 	public Long getProdId() {
 		return prodId;
 	}
@@ -98,6 +122,7 @@ public class DeviceList extends MizeEntity implements Comparable<DeviceList>{
 		this.prodId = prodId;
 	}
 
+	@Column(name = "prod_image",  nullable = true, length = 500)
 	public String getProdImage() {
 		return prodImage;
 	}
@@ -106,6 +131,10 @@ public class DeviceList extends MizeEntity implements Comparable<DeviceList>{
 		this.prodImage = prodImage;
 	}
 
+	@Id
+	@GenericGenerator(name="id" , strategy="increment")
+	@GeneratedValue(generator="id")
+	@Column(name="id",unique=true,nullable=false,length=20)
 	@Override
 	public Long getId() {
 		return id;
