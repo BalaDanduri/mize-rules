@@ -32,7 +32,7 @@ import com.mize.domain.util.JsonDateSerializer;
 
 @Entity
 @Table(name = "prod_regn")
-public class ProductRegister extends MizeEntity{
+public class ProductRegister extends MizeEntity implements Comparable<ProductRegister>{
 
 	private static final long serialVersionUID = -6338652951554117142L;
 	private Brand brand;
@@ -65,7 +65,7 @@ public class ProductRegister extends MizeEntity{
 	@Transient
 	private Long countryId;
 	private String regnName;
-	
+	private String template = "json";
 	
 	@Transient
 	@DateTimeFormat (pattern="MM-dd-yyyy")
@@ -624,5 +624,18 @@ public class ProductRegister extends MizeEntity{
 
 	public void setAddress(UserAddress address) {
 		this.address = address;
+	}
+
+	public String getTemplate() {
+		return template;
+	}
+
+	public void setTemplate(String template) {
+		this.template = template;
+	}
+
+	@Override
+	public int compareTo(ProductRegister arg0) {
+		return 0;
 	}
 }
