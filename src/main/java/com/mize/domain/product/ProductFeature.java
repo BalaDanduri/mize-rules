@@ -7,8 +7,8 @@ import com.mize.domain.common.MizeEntity;
 public class ProductFeature extends MizeEntity implements Comparable<ProductFeature>{
 	
 	private static final long serialVersionUID = -97276364683192909L;
-	public static final String FEATURES ="features";
-	public static final String SPECIFICATIONS ="specifications";
+	public static final String FEATURES ="Features";
+	public static final String SPECIFICATIONS ="Specifications";
 	private String feature;
 	private String name;
 	private String absoluteValue;
