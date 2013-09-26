@@ -37,6 +37,9 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 	private User user;
 	@JsonIgnore
 	private Map<Integer,ProcessLog> logMap = new  HashMap<Integer,ProcessLog>();
+	@JsonIgnore
+	private boolean isSolrUpdateReq = true;
+	private List<Long> prodIds = new ArrayList<Long>();
 	public enum Status{
 		IN_PROGRESS,COMPLETED;
 	}
@@ -186,102 +189,12 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 	}	
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((endTime == null) ? 0 : endTime.hashCode());
-		result = prime * result + ((entity == null) ? 0 : entity.hashCode());
-		result = prime * result
-				+ ((entityType == null) ? 0 : entityType.hashCode());
-		result = prime * result
-				+ ((failureCount == null) ? 0 : failureCount.hashCode());
-		result = prime * result
-				+ ((fileName == null) ? 0 : fileName.hashCode());
-		result = prime * result
-				+ ((fileType == null) ? 0 : fileType.hashCode());
-		result = prime * result
-				+ ((parentId == null) ? 0 : parentId.hashCode());
-		result = prime * result
-				+ ((processLogs == null) ? 0 : processLogs.hashCode());
-		result = prime * result
-				+ ((recordCount == null) ? 0 : recordCount.hashCode());
-		result = prime * result
-				+ ((startTime == null) ? 0 : startTime.hashCode());
-		result = prime * result + ((status == null) ? 0 : status.hashCode());
-		result = prime * result
-				+ ((successCount == null) ? 0 : successCount.hashCode());
-		return result;
+	public int hashCode() {		
+		return PRIME;
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		UploadEntity other = (UploadEntity) obj;
-		if (endTime == null) {
-			if (other.endTime != null)
-				return false;
-		} else if (!endTime.equals(other.endTime))
-			return false;
-		if (entity == null) {
-			if (other.entity != null)
-				return false;
-		} else if (!entity.equals(other.entity))
-			return false;
-		if (entityType == null) {
-			if (other.entityType != null)
-				return false;
-		} else if (!entityType.equals(other.entityType))
-			return false;
-		if (failureCount == null) {
-			if (other.failureCount != null)
-				return false;
-		} else if (!failureCount.equals(other.failureCount))
-			return false;
-		if (fileName == null) {
-			if (other.fileName != null)
-				return false;
-		} else if (!fileName.equals(other.fileName))
-			return false;
-		if (fileType == null) {
-			if (other.fileType != null)
-				return false;
-		} else if (!fileType.equals(other.fileType))
-			return false;
-		if (parentId == null) {
-			if (other.parentId != null)
-				return false;
-		} else if (!parentId.equals(other.parentId))
-			return false;
-		if (processLogs == null) {
-			if (other.processLogs != null)
-				return false;
-		} else if (!processLogs.equals(other.processLogs))
-			return false;
-		if (recordCount == null) {
-			if (other.recordCount != null)
-				return false;
-		} else if (!recordCount.equals(other.recordCount))
-			return false;
-		if (startTime == null) {
-			if (other.startTime != null)
-				return false;
-		} else if (!startTime.equals(other.startTime))
-			return false;
-		if (status == null) {
-			if (other.status != null)
-				return false;
-		} else if (!status.equals(other.status))
-			return false;
-		if (successCount == null) {
-			if (other.successCount != null)
-				return false;
-		} else if (!successCount.equals(other.successCount))
-			return false;
+	public boolean equals(Object obj) {		
 		return true;
 	}
 
@@ -332,5 +245,23 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 		}		
 		return entityCode;
 	}
+
+	@JsonIgnore
+	public boolean isSolrUpdateReq() {
+		return isSolrUpdateReq;
+	}
+
+	@JsonIgnore
+	public void setSolrUpdateReq(boolean isSolrUpdateReq) {
+		this.isSolrUpdateReq = isSolrUpdateReq;
+	}
+
+	public List<Long> getProdIds() {
+		return prodIds;
+	}
+
+	public void setProdIds(List<Long> prodIds) {
+		this.prodIds = prodIds;
+	}	
 	
 }
