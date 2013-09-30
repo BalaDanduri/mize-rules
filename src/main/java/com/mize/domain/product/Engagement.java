@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
@@ -28,10 +30,11 @@ import com.mize.domain.brand.Brand;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.util.NonEmpty;
 
 @Entity
 @Table(name="engagement_options")
-public class Engagement extends MizeEntity {
+public class Engagement extends MizeEntity  {
 	
 	private static final long serialVersionUID = 6140543699715462721L;
 	@Transient
@@ -111,6 +114,9 @@ public class Engagement extends MizeEntity {
 	}
 
 	@Column(name = "type",nullable = true, length = 50)
+	@NonEmpty(message="type.notempty")
+	@Size(max = 50)
+	@Pattern(regexp = "/^[a-zA-Z]+$/", message="type.alphabets")
 	public String getType() {
 		return type;
 	}
@@ -130,6 +136,8 @@ public class Engagement extends MizeEntity {
 	}
 
 	@Column(name = "code",nullable = true, length = 100)
+	@NonEmpty(message="code.notempty")
+	@Size(max = 100)
 	public String getCode() {
 		return code;
 	}
@@ -149,6 +157,9 @@ public class Engagement extends MizeEntity {
 	}
 
 	@Column(name = "title",nullable = true, length = 100)
+	@NonEmpty(message="title.notempty")
+	@Size(max = 100)
+	@Pattern(regexp = "/^[0-9a-zA-Z-:.,_ ]+$/", message="title.alphanumeric")
 	public String getTitle() {
 		return title;
 	}
@@ -158,6 +169,8 @@ public class Engagement extends MizeEntity {
 	}
 
 	@Column(name = "description",nullable = true, length = 500)
+	@NonEmpty(message="description.notempty")
+	@Size(max = 500)
 	public String getDescription() {
 		return description;
 	}
@@ -167,6 +180,9 @@ public class Engagement extends MizeEntity {
 	}
 
 	@Column(name = "image_title",nullable = true, length = 100)
+	@NonEmpty(message="image_title.notempty")
+	@Size(max = 100)
+	@Pattern(regexp = "/^[a-zA-Z]+$/", message="image_title.alphabets")
 	public String getImageTitle() {
 		return imageTitle;
 	}
@@ -194,6 +210,8 @@ public class Engagement extends MizeEntity {
 	}
 
 	@Column(name = "redeem_instructions",nullable = true, length = 500)
+	@Size(max = 100)
+	@Pattern(regexp = "/^[0-9a-zA-Z-:.,_ ]+$/", message="redeem_instructions.alphanumeric")
 	public String getRedeemInstructions() {
 		return redeemInstructions;
 	}
@@ -213,6 +231,8 @@ public class Engagement extends MizeEntity {
 	}
 
 	@Column(name = "discount_type",nullable = true, length = 100)
+	@NonEmpty(message="discount_type.notempty")
+	@Size(max = 100)
 	public String getDiscountType() {
 		return discountType;
 	}
@@ -222,6 +242,7 @@ public class Engagement extends MizeEntity {
 	}
 
 	@Column(name = "discount_value",nullable = true)
+	@NonEmpty(message="discount_value.notempty")
 	public Double getDiscountValue() {
 		return discountValue;
 	}
@@ -231,6 +252,8 @@ public class Engagement extends MizeEntity {
 	}
 
 	@Column(name = "max_redemptions",nullable = true, length = 11)
+	@NonEmpty(message="max_redemptions.notempty")
+	//@Pattern(regexp = "[0-9]", message="max_redemptions.numeric")
 	public Integer getMaxRedemptions() {
 		return maxRedemptions;
 	}
@@ -240,6 +263,8 @@ public class Engagement extends MizeEntity {
 	}
 
 	@Column(name = "redemptions",nullable = true, length = 11)
+	@NonEmpty(message="redemptions.notempty")
+	//@Pattern(regexp = ".*[^0-9].*", message="redemptions.numeric")
 	public Integer getRedemptions() {
 		return redemptions;
 	}
@@ -261,6 +286,7 @@ public class Engagement extends MizeEntity {
 	@Column(name = "start_date",  nullable = true)
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	@NonEmpty(message="start_date.notempty")
 	public DateTime getStartDate() {
 		return startDate;
 	}
@@ -275,6 +301,7 @@ public class Engagement extends MizeEntity {
 	@Column(name = "end_date",  nullable = true)
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	@NonEmpty(message="end_date.notempty")
 	public DateTime getEndDate() {
 		return endDate;
 	}
@@ -285,7 +312,9 @@ public class Engagement extends MizeEntity {
 		this.endDate = endDate;
 	}
 
-	@Column(name = "image",nullable = true)
+	@Column(name = "image",nullable = true, length = 100)
+	@NonEmpty(message="image.notempty")
+	@Size(max = 50)
 	public String getImagePath() { 
 		return imagePath;
 	}
@@ -335,11 +364,13 @@ public class Engagement extends MizeEntity {
 	}
 	
 	@Column(name = "eo_status",nullable = true)
+	@NonEmpty(message="eo_status.notempty")
+	@Size(max = 30)
 	public String getStatus() {
 		return status;
 	}
 
-
+	
 	public void setStatus(String status) {
 		this.status = status;
 	}
@@ -544,5 +575,4 @@ public class Engagement extends MizeEntity {
 				+ engagementLinks + ", pageIndex=" + pageIndex + ", status="
 				+ status + ", level=" + level + "]";
 	}
-		
 }
