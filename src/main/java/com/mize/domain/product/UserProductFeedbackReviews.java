@@ -15,6 +15,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.mize.domain.auth.User;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
@@ -29,6 +30,7 @@ public class UserProductFeedbackReviews extends MizeEntity implements Comparable
     private String additionalInfo;
     private boolean isActive;
  
+    private User user;
    
 	public enum ReviewStatus{
     	NEW,OPEN,CLOSED,REVIEWED
@@ -166,11 +168,19 @@ public class UserProductFeedbackReviews extends MizeEntity implements Comparable
 		return true;
 	}
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	@Override
 	public String toString() {
 		return "UserProductFeedbackReviews [status=" + status
 				+ ", additionalInfo=" + additionalInfo + ", isActive="
-				+ isActive + "]";
+				+ isActive + ", user=" + user + ", id=" + id + "]";
 	}   
     
 }
