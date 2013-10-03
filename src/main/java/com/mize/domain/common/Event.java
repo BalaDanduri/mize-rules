@@ -2,13 +2,13 @@ package com.mize.domain.common;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
@@ -17,7 +17,6 @@ import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.mize.domain.brand.Brand;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
@@ -36,7 +35,16 @@ public class Event extends MizeEntity implements Comparable<Event>{
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime endDate;
 	private String active;
-	private Brand brand;
+	private Integer frequencyValue;
+	private Unit frequencyUnit;
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	private DateTime lastEventDate;
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	private DateTime nextEventDate;
+	
+	public enum Unit{
+		DAYS,WEEKS,MONTHS,YEARS
+	}
 	
 	@Column(name = "code",  nullable = true, length = 20)
 	public String getCode() {
@@ -120,15 +128,69 @@ public class Event extends MizeEntity implements Comparable<Event>{
 		this.active = active;
 	}
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "brand_id", nullable = true)
-	public Brand getBrand() {
-		return brand;
+	public Integer getFrequencyValue() {
+		return frequencyValue;
 	}
 
-	public void setBrand(Brand brand) {
-		this.brand = brand;
+	public void setFrequencyValue(Integer frequencyValue) {
+		this.frequencyValue = frequencyValue;
 	}
+
+	@Enumerated(EnumType.ORDINAL) 
+	public Unit getFrequencyUnit() {
+		return frequencyUnit;
+	}
+
+	public void setFrequencyUnit(Unit frequencyUnit) {
+		this.frequencyUnit = frequencyUnit;
+	}
+
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@Column(name = "last_event_date",  nullable = true)
+	@Type(type="com.mize.domain.util.DateTimeJPA")
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	public DateTime getLastEventDate() {
+		return lastEventDate;
+	}
+
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
+	public void setLastEventDate(DateTime lastEventDate) {
+		this.lastEventDate = lastEventDate;
+	}
+
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@Column(name = "next_event_date",  nullable = true)
+	@Type(type="com.mize.domain.util.DateTimeJPA")
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	public DateTime getNextEventDate() {
+		return nextEventDate;
+	}
+
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
+	public void setNextEventDate(DateTime nextEventDate) {
+		this.nextEventDate = nextEventDate;
+	}
+	
+	@JsonIgnore(value=false)
+	public Long getCreatedBy() {
+		return createdBy;
+	}
+	@JsonIgnore(value=false)
+	public void setCreatedBy(Long createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	@JsonIgnore(value=false)
+	public Long getUpdatedBy() {
+		return updatedBy;
+	}
+	@JsonIgnore(value=false)
+	public void setUpdatedBy(Long updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+	
 
 	@Id
 	@GenericGenerator(name="id" , strategy="increment")
@@ -144,19 +206,21 @@ public class Event extends MizeEntity implements Comparable<Event>{
 		this.id = id;
 	}
 	
-
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result + ((active == null) ? 0 : active.hashCode());
-		result = prime * result + ((brand == null) ? 0 : brand.hashCode());
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
 		result = prime * result + ((eventName == null) ? 0 : eventName.hashCode());
 		result = prime * result + ((eventStatus == null) ? 0 : eventStatus.hashCode());
 		result = prime * result + ((eventType == null) ? 0 : eventType.hashCode());
+		result = prime * result + ((frequencyUnit == null) ? 0 : frequencyUnit.hashCode());
+		result = prime * result + ((frequencyValue == null) ? 0 : frequencyValue.hashCode());
+		result = prime * result + ((lastEventDate == null) ? 0 : lastEventDate.hashCode());
+		result = prime * result + ((nextEventDate == null) ? 0 : nextEventDate.hashCode());
 		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
 		return result;
 	}
@@ -174,11 +238,6 @@ public class Event extends MizeEntity implements Comparable<Event>{
 			if (other.active != null)
 				return false;
 		} else if (!active.equals(other.active))
-			return false;
-		if (brand == null) {
-			if (other.brand != null)
-				return false;
-		} else if (!brand.equals(other.brand))
 			return false;
 		if (code == null) {
 			if (other.code != null)
@@ -210,6 +269,23 @@ public class Event extends MizeEntity implements Comparable<Event>{
 				return false;
 		} else if (!eventType.equals(other.eventType))
 			return false;
+		if (frequencyUnit != other.frequencyUnit)
+			return false;
+		if (frequencyValue == null) {
+			if (other.frequencyValue != null)
+				return false;
+		} else if (!frequencyValue.equals(other.frequencyValue))
+			return false;
+		if (lastEventDate == null) {
+			if (other.lastEventDate != null)
+				return false;
+		} else if (!lastEventDate.equals(other.lastEventDate))
+			return false;
+		if (nextEventDate == null) {
+			if (other.nextEventDate != null)
+				return false;
+		} else if (!nextEventDate.equals(other.nextEventDate))
+			return false;
 		if (startDate == null) {
 			if (other.startDate != null)
 				return false;
@@ -217,13 +293,13 @@ public class Event extends MizeEntity implements Comparable<Event>{
 			return false;
 		return true;
 	}
-
 	
 	@Override
 	public String toString() {
 		return "Event [code=" + code + ", eventName=" + eventName + ", eventType=" + eventType + ", description="
 				+ description + ", eventStatus=" + eventStatus + ", startDate=" + startDate + ", endDate=" + endDate
-				+ ", active=" + active + ", brand=" + brand + "]";
+				+ ", active=" + active + ", frequencyValue=" + frequencyValue + ", frequencyUnit=" + frequencyUnit
+				+ ", lastEventDate=" + lastEventDate + ", nextEventDate=" + nextEventDate + "]";
 	}
 
 	@Override
