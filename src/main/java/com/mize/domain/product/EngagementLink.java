@@ -5,12 +5,14 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.mize.domain.brand.Brand;
 import com.mize.domain.common.MizeEntity;
 
 @Entity
 @Table(name="engagement_options_link")
 public class EngagementLink extends MizeEntity{
 	private static final long serialVersionUID = 8076842078721402700L;
+	
 	
 	@Transient
 	private Long engagementOptionsId;
@@ -22,6 +24,12 @@ public class EngagementLink extends MizeEntity{
 	private Long brandId;
 	@EmbeddedId
 	private EngagementLinkPK engagementLinkPK;
+	
+	private Product product;
+	private Brand brand;
+	private ProductCategory productCategory;
+	
+	
 	
 	public EngagementLink(){
 		
@@ -135,10 +143,38 @@ public class EngagementLink extends MizeEntity{
 		return true;
 	}
 
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+	public Brand getBrand() {
+		return brand;
+	}
+
+	public void setBrand(Brand brand) {
+		this.brand = brand;
+	}
+
+	public ProductCategory getProductCategory() {
+		return productCategory;
+	}
+
+	public void setProductCategory(ProductCategory productCategory) {
+		this.productCategory = productCategory;
+	}
+
 	@Override
 	public String toString() {
-		return "EngagementLink [engagementOptionsId=" + engagementOptionsId + ", prodCatId=" + prodCatId
-				+ ", productId=" + productId + ", brandId=" + brandId + ", engagementLinkPK=" + engagementLinkPK + "]";
+		return "EngagementLink [engagementOptionsId=" + engagementOptionsId
+				+ ", prodCatId=" + prodCatId + ", productId=" + productId
+				+ ", brandId=" + brandId + ", engagementLinkPK="
+				+ engagementLinkPK + ", product=" + product + ", brand="
+				+ brand + ", productCategory=" + productCategory + ", id=" + id
+				+ "]";
 	}
 	
 }
