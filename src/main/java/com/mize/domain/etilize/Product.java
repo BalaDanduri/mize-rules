@@ -1,5 +1,6 @@
 package com.mize.domain.etilize;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
@@ -27,7 +28,7 @@ public class Product extends MizeEntity{
 	private ProductAccessories accessories;
 	private ProductAttribute attribute;
 	private ProductDescription prdDescription;
-	private List<ProductImages>  images;
+	private List<ProductImages>  images = new ArrayList<ProductImages>();
 	private ProductMarket market;
 	private ProductMultimedia multimedia;
 	private ProductSku sku;
