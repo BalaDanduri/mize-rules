@@ -86,5 +86,14 @@ public class ProductImages extends MizeEntity{
 	public void setUrl(String url) {
 		this.url = url;
 	}
+	
+	@Override
+	public String toString() {
+		return "ProductImages [isActive=" + isActive + ", isOption=" + isOption
+				+ ", isPreferred=" + isPreferred + ", note=" + note
+				+ ", sourceId=" + sourceId + ", localeId=" + localeId
+				+ ", prodId=" + prodId + ", type=" + type + ", status="
+				+ status + ", url=" + url + "]";
+	}
 		
 }

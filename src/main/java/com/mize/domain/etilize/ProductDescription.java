@@ -107,4 +107,15 @@ public class ProductDescription extends MizeEntity{
 		this.type = type;
 	}
 	
+	@Override
+	public String toString() {
+		return "ProductDescription [prodId=" + prodId + ", shortDesc="
+				+ shortDesc + ", longDesc=" + longDesc + ", warrantyInfo="
+				+ warrantyInfo + ", officialUrl=" + officialUrl + ", pdfUrl="
+				+ pdfUrl + ", pdfSize=" + pdfSize + ", manualPdfUrl="
+				+ manualPdfUrl + ", manualPdfSize=" + manualPdfSize
+				+ ", sourceId=" + sourceId + ", isDefault=" + isDefault
+				+ ", type=" + type + ", localeId=" + localeId + "]";
+	}
+	
 }

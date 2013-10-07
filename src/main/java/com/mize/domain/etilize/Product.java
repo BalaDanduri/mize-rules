@@ -19,13 +19,13 @@ public class Product extends MizeEntity{
 	private Integer isActive;
 	private String mfgPartNo;	
 	private Double equivalency;
-		
+	private String brandName;
 	private Long categoryId;
 	private Integer isAccesory;
-	
+	private Long brandId;
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	protected DateTime modifiedDate;
-	private ProductAccessories accessories;
+	private List<ProductAccessories> accessories = new ArrayList<ProductAccessories>();
 	private ProductAttribute attribute;
 	private ProductDescription prdDescription;
 	private List<ProductImages>  images = new ArrayList<ProductImages>();
@@ -33,8 +33,38 @@ public class Product extends MizeEntity{
 	private ProductMultimedia multimedia;
 	private ProductSku sku;
 	private ProductSummaryDesc summaryDesc;
-	private List<SimilarProduct> similarProducts;
+	private List<SimilarProduct> similarProducts = new ArrayList<SimilarProduct>();
+	private String name;
+	private String description;
+	private String upc;
+	private String model;
+	private Integer isConsumable;
+	private ProductPrice productPrice;
 	
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	public Long getBrandId() {
+		return brandId;
+	}
+
+	public void setBrandId(Long brandId) {
+		this.brandId = brandId;
+	}
+
+	public String getBrandName() {
+		return brandName;
+	}
+
+	public void setBrandName(String brandName) {
+		this.brandName = brandName;
+	}
+
 	@Override
 	public Long getId() {
 		return id;
@@ -85,10 +115,10 @@ public class Product extends MizeEntity{
 	public void setEquivalency(Double equivalency) {
 		this.equivalency = equivalency;
 	}
-	public ProductAccessories getAccessories() {
+	public List<ProductAccessories> getAccessories() {
 		return accessories;
 	}
-	public void setAccessories(ProductAccessories accessories) {
+	public void setAccessories(List<ProductAccessories> accessories) {
 		this.accessories = accessories;
 	}
 	public ProductAttribute getAttribute() {
@@ -150,6 +180,46 @@ public class Product extends MizeEntity{
 		this.modifiedDate = modifiedDate;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getUpc() {
+		return upc;
+	}
+
+	public void setUpc(String upc) {
+		this.upc = upc;
+	}
+
+	public Integer getIsConsumable() {
+		return isConsumable;
+	}
+
+	public void setIsConsumable(Integer isConsumable) {
+		this.isConsumable = isConsumable;
+	}
+
+	public ProductPrice getProductPrice() {
+		return productPrice;
+	}
+
+	public void setProductPrice(ProductPrice productPrice) {
+		this.productPrice = productPrice;
+	}	
+	
 	@Override
 	public String toString() {
 		return "Product [manufacturerId=" + manufacturerId + ", isActive="
@@ -165,6 +235,7 @@ public class Product extends MizeEntity{
 				+ updatedBy + ", updatedDate=" + updatedDate + ", id=" + id
 				+ "]";
 	}
+
 	
 	
 }
