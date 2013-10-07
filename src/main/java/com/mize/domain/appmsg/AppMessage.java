@@ -11,6 +11,7 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 	private String shortDesc;
 	private String longDesc;
 	private Integer severity;
+	private String field;
 	private Locale locale = new Locale();
 
 	public enum Severity {
@@ -99,8 +100,15 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 	public void setSeverity(Integer severity) {
 		this.severity = severity;
 	}
-
 	
+	public String getField() {
+		return field;
+	}
+
+	public void setField(String field) {
+		this.field = field;
+	}
+
 	@Override
 	public String toString() {
 		return "ApplicationMessage [messageType=" + messageType + ", code=" + code + ", shortDesc=" + shortDesc +

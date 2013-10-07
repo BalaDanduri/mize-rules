@@ -149,6 +149,22 @@ public class Product extends MizeEntity{
 	public void setModifiedDate(DateTime modifiedDate) {
 		this.modifiedDate = modifiedDate;
 	}
+
+	@Override
+	public String toString() {
+		return "Product [manufacturerId=" + manufacturerId + ", isActive="
+				+ isActive + ", mfgPartNo=" + mfgPartNo + ", equivalency="
+				+ equivalency + ", categoryId=" + categoryId + ", isAccesory="
+				+ isAccesory + ", modifiedDate=" + modifiedDate
+				+ ", accessories=" + accessories + ", attribute=" + attribute
+				+ ", prdDescription=" + prdDescription + ", images=" + images
+				+ ", market=" + market + ", multimedia=" + multimedia
+				+ ", sku=" + sku + ", summaryDesc=" + summaryDesc
+				+ ", similarProducts=" + similarProducts + ", createdBy="
+				+ createdBy + ", createdDate=" + createdDate + ", updatedBy="
+				+ updatedBy + ", updatedDate=" + updatedDate + ", id=" + id
+				+ "]";
+	}
 	
 	
 }
