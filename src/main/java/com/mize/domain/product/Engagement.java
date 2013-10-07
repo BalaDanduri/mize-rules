@@ -116,7 +116,7 @@ public class Engagement extends MizeEntity  {
 	@Column(name = "type",nullable = true, length = 50)
 	@NonEmpty(message="type.notempty")
 	@Size(max = 50)
-	@Pattern(regexp = "/^[a-zA-Z]+$/", message="type.alphabets")
+	@Pattern(regexp = "^[a-zA-Z]+$", message="type.alphabets")
 	public String getType() {
 		return type;
 	}
@@ -159,7 +159,7 @@ public class Engagement extends MizeEntity  {
 	@Column(name = "title",nullable = true, length = 100)
 	@NonEmpty(message="title.notempty")
 	@Size(max = 100)
-	@Pattern(regexp = "/^[0-9a-zA-Z-:.,_ ]+$/", message="title.alphanumeric")
+	@Pattern(regexp = "^[a-zA-Z0-9_]*$", message="title.alphanumeric")
 	public String getTitle() {
 		return title;
 	}
@@ -182,7 +182,7 @@ public class Engagement extends MizeEntity  {
 	@Column(name = "image_title",nullable = true, length = 100)
 	@NonEmpty(message="image_title.notempty")
 	@Size(max = 100)
-	@Pattern(regexp = "/^[a-zA-Z]+$/", message="image_title.alphabets")
+	@Pattern(regexp = "^[a-zA-Z]+$", message="image_title.alphabets")
 	public String getImageTitle() {
 		return imageTitle;
 	}
@@ -192,6 +192,7 @@ public class Engagement extends MizeEntity  {
 	}
 
 	@Column(name = "url",nullable = true, length = 100)
+	@Size(max = 100)
 	public String getUrl() {
 		return url;
 	}
@@ -201,6 +202,7 @@ public class Engagement extends MizeEntity  {
 	}
 
 	@Column(name = "url_title",nullable = true, length = 100)
+	@Size(max = 100)
 	public String getUrlTitle() {
 		return urlTitle;
 	}
@@ -210,8 +212,8 @@ public class Engagement extends MizeEntity  {
 	}
 
 	@Column(name = "redeem_instructions",nullable = true, length = 500)
-	@Size(max = 100)
-	@Pattern(regexp = "/^[0-9a-zA-Z-:.,_ ]+$/", message="redeem_instructions.alphanumeric")
+	@Size(max = 500)
+	@Pattern(regexp = "^[a-zA-Z0-9_]*$", message="redeem_instructions.alphanumeric")
 	public String getRedeemInstructions() {
 		return redeemInstructions;
 	}
@@ -222,6 +224,7 @@ public class Engagement extends MizeEntity  {
 	
 	
 	@Column(name = "terms_conditions",nullable = true, length = 1000)
+	@Size(max = 1000)
 	public String getTermsConditions() {
 		return termsConditions;
 	}
@@ -253,6 +256,7 @@ public class Engagement extends MizeEntity  {
 
 	@Column(name = "max_redemptions",nullable = true, length = 11)
 	@NonEmpty(message="max_redemptions.notempty")
+	@Size(max = 11)
 	//@Pattern(regexp = "[0-9]", message="max_redemptions.numeric")
 	public Integer getMaxRedemptions() {
 		return maxRedemptions;
@@ -264,6 +268,7 @@ public class Engagement extends MizeEntity  {
 
 	@Column(name = "redemptions",nullable = true, length = 11)
 	@NonEmpty(message="redemptions.notempty")
+	@Size(max = 11)
 	//@Pattern(regexp = ".*[^0-9].*", message="redemptions.numeric")
 	public Integer getRedemptions() {
 		return redemptions;
@@ -274,6 +279,7 @@ public class Engagement extends MizeEntity  {
 	}
 
 	@Column(name = "use_limit",nullable = true, length = 11)
+	@Size(max = 11)
 	public Integer getUseLimit() {
 		return useLimit;
 	}
