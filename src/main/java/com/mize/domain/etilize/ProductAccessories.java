@@ -12,6 +12,7 @@ public class ProductAccessories extends MizeEntity{
 	private Integer isPreferred;
 	private Integer isOption;
 	private String note;
+	private Integer isConsumable;
 	
 	@Override
 	public Long getId() {
@@ -58,4 +59,11 @@ public class ProductAccessories extends MizeEntity{
 	public void setNote(String note) {
 		this.note = note;
 	}
+	public Integer getIsConsumable() {
+		return isConsumable;
+	}
+	public void setIsConsumable(Integer isConsumable) {
+		this.isConsumable = isConsumable;
+	}
+	
 }

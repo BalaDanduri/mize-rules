@@ -40,6 +40,8 @@ public class Product extends MizeEntity{
 	private String model;
 	private Integer isConsumable;
 	private ProductPrice productPrice;
+	private Long prodId;
+	private List<ProductKeywords> keywords = new ArrayList<ProductKeywords>();
 	
 	public String getModel() {
 		return model;
@@ -234,6 +236,22 @@ public class Product extends MizeEntity{
 				+ createdBy + ", createdDate=" + createdDate + ", updatedBy="
 				+ updatedBy + ", updatedDate=" + updatedDate + ", id=" + id
 				+ "]";
+	}
+
+	public Long getProdId() {
+		return prodId;
+	}
+
+	public void setProdId(Long prodId) {
+		this.prodId = prodId;
+	}
+
+	public List<ProductKeywords> getKeywords() {
+		return keywords;
+	}
+
+	public void setKeywords(List<ProductKeywords> keywords) {
+		this.keywords = keywords;
 	}
 
 	
