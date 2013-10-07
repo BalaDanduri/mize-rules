@@ -256,7 +256,6 @@ public class Engagement extends MizeEntity  {
 
 	@Column(name = "max_redemptions",nullable = true, length = 11)
 	@NonEmpty(message="max_redemptions.notempty")
-	@Size(max = 11)
 	//@Pattern(regexp = "[0-9]", message="max_redemptions.numeric")
 	public Integer getMaxRedemptions() {
 		return maxRedemptions;
@@ -268,7 +267,6 @@ public class Engagement extends MizeEntity  {
 
 	@Column(name = "redemptions",nullable = true, length = 11)
 	@NonEmpty(message="redemptions.notempty")
-	@Size(max = 11)
 	//@Pattern(regexp = ".*[^0-9].*", message="redemptions.numeric")
 	public Integer getRedemptions() {
 		return redemptions;
@@ -279,7 +277,6 @@ public class Engagement extends MizeEntity  {
 	}
 
 	@Column(name = "use_limit",nullable = true, length = 11)
-	@Size(max = 11)
 	public Integer getUseLimit() {
 		return useLimit;
 	}
