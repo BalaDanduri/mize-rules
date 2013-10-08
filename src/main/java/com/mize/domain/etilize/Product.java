@@ -9,6 +9,8 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.product.ProductCategory;
+import com.mize.domain.product.ProductContent;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
@@ -26,12 +28,8 @@ public class Product extends MizeEntity{
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	protected DateTime modifiedDate;
 	private List<ProductAccessories> accessories = new ArrayList<ProductAccessories>();
-	private ProductAttribute attribute;
 	private ProductDescription prdDescription;
 	private List<ProductImages>  images = new ArrayList<ProductImages>();
-	private ProductMarket market;
-	private ProductMultimedia multimedia;
-	private ProductSku sku;
 	private ProductSummaryDesc summaryDesc;
 	private List<SimilarProduct> similarProducts = new ArrayList<SimilarProduct>();
 	private String name;
@@ -41,7 +39,10 @@ public class Product extends MizeEntity{
 	private Integer isConsumable;
 	private ProductPrice productPrice;
 	private Long prodId;
+	private List<ProductCategory> categories = new ArrayList<ProductCategory>();
 	private List<ProductKeywords> keywords = new ArrayList<ProductKeywords>();
+	private List<ProductAttribute> attributes = new ArrayList<ProductAttribute>();
+	private List<ProductContent> contents = new ArrayList<ProductContent>();
 	
 	public String getModel() {
 		return model;
@@ -123,12 +124,7 @@ public class Product extends MizeEntity{
 	public void setAccessories(List<ProductAccessories> accessories) {
 		this.accessories = accessories;
 	}
-	public ProductAttribute getAttribute() {
-		return attribute;
-	}
-	public void setAttribute(ProductAttribute attribute) {
-		this.attribute = attribute;
-	}
+	
 	public ProductDescription getPrdDescription() {
 		return prdDescription;
 	}
@@ -141,24 +137,7 @@ public class Product extends MizeEntity{
 	public void setImages(List<ProductImages> images) {
 		this.images = images;
 	}
-	public ProductMarket getMarket() {
-		return market;
-	}
-	public void setMarket(ProductMarket market) {
-		this.market = market;
-	}
-	public ProductMultimedia getMultimedia() {
-		return multimedia;
-	}
-	public void setMultimedia(ProductMultimedia multimedia) {
-		this.multimedia = multimedia;
-	}
-	public ProductSku getSku() {
-		return sku;
-	}
-	public void setSku(ProductSku sku) {
-		this.sku = sku;
-	}
+	
 	public ProductSummaryDesc getSummaryDesc() {
 		return summaryDesc;
 	}
@@ -222,22 +201,6 @@ public class Product extends MizeEntity{
 		this.productPrice = productPrice;
 	}	
 	
-	@Override
-	public String toString() {
-		return "Product [manufacturerId=" + manufacturerId + ", isActive="
-				+ isActive + ", mfgPartNo=" + mfgPartNo + ", equivalency="
-				+ equivalency + ", categoryId=" + categoryId + ", isAccesory="
-				+ isAccesory + ", modifiedDate=" + modifiedDate
-				+ ", accessories=" + accessories + ", attribute=" + attribute
-				+ ", prdDescription=" + prdDescription + ", images=" + images
-				+ ", market=" + market + ", multimedia=" + multimedia
-				+ ", sku=" + sku + ", summaryDesc=" + summaryDesc
-				+ ", similarProducts=" + similarProducts + ", createdBy="
-				+ createdBy + ", createdDate=" + createdDate + ", updatedBy="
-				+ updatedBy + ", updatedDate=" + updatedDate + ", id=" + id
-				+ "]";
-	}
-
 	public Long getProdId() {
 		return prodId;
 	}
@@ -254,6 +217,28 @@ public class Product extends MizeEntity{
 		this.keywords = keywords;
 	}
 
-	
+	public List<ProductCategory> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<ProductCategory> categories) {
+		this.categories = categories;
+	}
+
+	public List<ProductAttribute> getAttributes() {
+		return attributes;
+	}
+
+	public void setAttributes(List<ProductAttribute> attributes) {
+		this.attributes = attributes;
+	}
+
+	public List<ProductContent> getContents() {
+		return contents;
+	}
+
+	public void setContents(List<ProductContent> contents) {
+		this.contents = contents;
+	}
 	
 }

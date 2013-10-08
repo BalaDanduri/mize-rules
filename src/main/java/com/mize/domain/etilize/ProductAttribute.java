@@ -19,6 +19,7 @@ public class ProductAttribute extends MizeEntity{
     private Double value;
     private Long catAttributeId;
     private Long prodId;
+    private String name;
     
     @Override
 	public Long getId() {
@@ -100,6 +101,12 @@ public class ProductAttribute extends MizeEntity{
 	}
 	public void setIsActive(Integer isActive) {
 		this.isActive = isActive;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 }
