@@ -58,6 +58,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	private String mpn;
 	private Long userId;
 	private Integer prodScore;
+	private String active;
 	
 	@DateTimeFormat(pattern="MM-dd-yyyy")
 	private DateTime releaseDate;
@@ -261,6 +262,14 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 
 	public void setProductRegisters(List<ProductRegister> productRegisters) {
 		this.productRegisters = productRegisters;
+	}
+	
+	public String getActive() {
+		return active;
+	}
+
+	public void setActive(String active) {
+		this.active = active;
 	}
 
 	@Transient
