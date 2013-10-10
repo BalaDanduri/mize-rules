@@ -27,6 +27,14 @@ public class CatalogIntl extends MizeEntity {
 	public CatalogIntl() {
 	}
 
+	public CatalogIntl(Catalog catalog, Locale locale, String catalogName,
+			String catalogDescription) {
+		this.catalog = catalog;
+		this.locale = locale;
+		this.catalogName = catalogName;
+		this.catalogDescription = catalogDescription;
+	}
+
 	@Id
 	@GenericGenerator(name="catalogIntlId" , strategy="increment")
 	@GeneratedValue(generator="catalogIntlId")
@@ -52,7 +60,7 @@ public class CatalogIntl extends MizeEntity {
 	}
 
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="local_id")
+	@JoinColumn(name="locale_id")
 	public Locale getLocale() {
 		return locale;
 	}
@@ -77,6 +85,79 @@ public class CatalogIntl extends MizeEntity {
 
 	public void setCatalogDescription(String catalogDescription) {
 		this.catalogDescription = catalogDescription;
+	}
+
+	@Override
+	public int hashCode() {
+
+		int result = super.hashCode();
+		result = PRIME * result + ((catalog == null) ? 0 : catalog.hashCode());
+		result = PRIME
+				* result
+				+ ((catalogDescription == null) ? 0 : catalogDescription
+						.hashCode());
+		result = PRIME * result
+				+ ((catalogName == null) ? 0 : catalogName.hashCode());
+		result = PRIME * result + ((locale == null) ? 0 : locale.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!super.equals(obj)) {
+			return false;
+		}
+		if (!(obj instanceof CatalogIntl)) {
+			return false;
+		}
+		CatalogIntl other = (CatalogIntl) obj;
+		if (catalog == null) {
+			if (other.catalog != null) {
+				return false;
+			}
+		} else if (!catalog.equals(other.catalog)) {
+			return false;
+		}
+		if (catalogDescription == null) {
+			if (other.catalogDescription != null) {
+				return false;
+			}
+		} else if (!catalogDescription.equals(other.catalogDescription)) {
+			return false;
+		}
+		if (catalogName == null) {
+			if (other.catalogName != null) {
+				return false;
+			}
+		} else if (!catalogName.equals(other.catalogName)) {
+			return false;
+		}
+		if (locale == null) {
+			if (other.locale != null) {
+				return false;
+			}
+		} else if (!locale.equals(other.locale)) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("CatalogIntl [catalog=");
+		builder.append(catalog);
+		builder.append(", locale=");
+		builder.append(locale);
+		builder.append(", catalogName=");
+		builder.append(catalogName);
+		builder.append(", catalogDescription=");
+		builder.append(catalogDescription);
+		builder.append("]");
+		return builder.toString();
 	}
 
 }
