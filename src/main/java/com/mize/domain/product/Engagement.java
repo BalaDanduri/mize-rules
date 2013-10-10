@@ -159,7 +159,7 @@ public class Engagement extends MizeEntity  {
 	@Column(name = "title",nullable = true, length = 100)
 	@NonEmpty(message="title.notempty")
 	@Size(max = 100)
-	@Pattern(regexp = "^[a-zA-Z0-9_]*$", message="title.alphanumeric")
+	@Pattern(regexp = "^[0-9a-zA-Z-:.,_ ]+$", message="title.alphanumeric")
 	public String getTitle() {
 		return title;
 	}
@@ -213,7 +213,7 @@ public class Engagement extends MizeEntity  {
 
 	@Column(name = "redeem_instructions",nullable = true, length = 500)
 	@Size(max = 500)
-	@Pattern(regexp = "^[a-zA-Z0-9_]*$", message="redeem_instructions.alphanumeric")
+	@Pattern(regexp = "^[0-9a-zA-Z-:.,_ ]+$", message="redeem_instructions.alphanumeric")
 	public String getRedeemInstructions() {
 		return redeemInstructions;
 	}
