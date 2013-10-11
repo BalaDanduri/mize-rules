@@ -51,4 +51,7 @@ public abstract class MessageConstants implements Serializable{
 	public static final String ALREADY_ENROLLED = "ALREADY_ENROLLED";
 	public static final String ENROLLMENT_EMAIL_NOT_VALIDATED = "ENROLLMENT_EMAIL_NOT_VALIDATED";
 	public static final String INVALID_SEARCH_TYPE ="INVALID_SEARCH_TYPE";
+	public static final String UNIT_ID_NOT_FOUND ="UNIT_ID_NOT_FOUND";
+	public static final String BASE_UNIT_ID_NOT_FOUND ="BASE_UNIT_ID_NOT_FOUND";
+	
 }
