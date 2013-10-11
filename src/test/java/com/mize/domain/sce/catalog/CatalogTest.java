@@ -50,7 +50,6 @@ public class CatalogTest {
 	public void test()  {
 		
 		Catalog catalog = new Catalog(null,"123","ABC","Y",null);
-		catalog.setId(1L);
 		EntityManager mf = myEmf.getNativeEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = mf.getTransaction();
 		tx.begin();

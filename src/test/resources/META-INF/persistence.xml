@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	version="2.0">
 
-  <persistence-unit name="myUnit" transaction-type="RESOURCE_LOCAL">
-	  <class>com.mize.domain.sce.catalog.Catalog</class>
-	  <class>com.mize.domain.sce.catalog.CatalogIntl</class>
-	  <class>com.mize.domain.common.Locale</class>
-  
-  </persistence-unit>
+	<persistence-unit name="myUnit" transaction-type="RESOURCE_LOCAL">
+		<class>com.mize.domain.sce.catalog.Catalog</class>
+		<class>com.mize.domain.sce.catalog.CatalogIntl</class>
+		<class>com.mize.domain.common.Locale</class>
+		<class>com.mize.domain.servicelocator.BusinessEntity</class>
+		<class>com.mize.domain.servicelocator.BusinessEntityAddress</class>
+		<class>com.mize.domain.common.State</class>
+		<class>com.mize.domain.common.Country</class>
+		<class>com.mize.domain.servicelocator.BusinessEntityGeo</class>
+	</persistence-unit>
 
 </persistence>

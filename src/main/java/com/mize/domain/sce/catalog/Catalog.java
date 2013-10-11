@@ -24,7 +24,7 @@ import com.mize.domain.servicelocator.BusinessEntity;
 public class Catalog extends MizeEntity {
 	
 	private static final long serialVersionUID = -8488237770262609141L;	
-	//private BusinessEntity tenant;
+	private BusinessEntity tenant;
 	private String catalogCode;
 	private String catalogType;
 	private String isActive;
@@ -44,7 +44,7 @@ public class Catalog extends MizeEntity {
 	public Catalog(BusinessEntity tenant, String catalogCode,
 			String catalogType, String isActive, List<CatalogIntl> catalogIntl) {
 		super();
-		//this.tenant = tenant;
+		this.tenant = tenant;
 		this.catalogCode = catalogCode;
 		this.catalogType = catalogType;
 		this.isActive = isActive;
@@ -66,7 +66,7 @@ public class Catalog extends MizeEntity {
 		super.id=id;
 	}
 
-/*	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="tenant_id")
 	public BusinessEntity getTenant() {
 		return tenant;
@@ -75,7 +75,6 @@ public class Catalog extends MizeEntity {
 	public void setTenant(BusinessEntity tenant) {
 		this.tenant = tenant;
 	}
-*/
 
 	@Column(name = "catalog_code",  nullable = true, length = 30)
 	public String getCatalogCode() {
@@ -125,7 +124,7 @@ public class Catalog extends MizeEntity {
 				+ ((catalogType == null) ? 0 : catalogType.hashCode());
 		result = PRIME * result
 				+ ((isActive == null) ? 0 : isActive.hashCode());
-		//result = PRIME * result + ((tenant == null) ? 0 : tenant.hashCode());
+		result = PRIME * result + ((tenant == null) ? 0 : tenant.hashCode());
 		return result;
 	}
 
@@ -169,13 +168,13 @@ public class Catalog extends MizeEntity {
 		} else if (!isActive.equals(other.isActive)) {
 			return false;
 		}
-		/*if (tenant == null) {
+		if (tenant == null) {
 			if (other.tenant != null) {
 				return false;
 			}
 		} else if (!tenant.equals(other.tenant)) {
 			return false;
-		}*/
+		}
 		return true;
 	}
 
@@ -183,7 +182,7 @@ public class Catalog extends MizeEntity {
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Catalog [tenant=");
-	//	builder.append(tenant);
+		builder.append(tenant);
 		builder.append(", catalogCode=");
 		builder.append(catalogCode);
 		builder.append(", catalogType=");
