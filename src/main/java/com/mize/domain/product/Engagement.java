@@ -28,6 +28,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.brand.Brand;
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.util.EmptyOrAlpha;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 import com.mize.domain.util.NonEmpty;
@@ -136,7 +137,6 @@ public class Engagement extends MizeEntity  {
 	}
 
 	@Column(name = "code",nullable = true, length = 100)
-	@NonEmpty(message="code.notempty")
 	@Size(max = 100)
 	public String getCode() {
 		return code;
@@ -211,9 +211,9 @@ public class Engagement extends MizeEntity  {
 		this.urlTitle = urlTitle;
 	}
 
-	@Column(name = "redeem_instructions",nullable = true, length = 500)
+	@Column(name = "redeem_instructions",nullable = false, length = 500)
 	@Size(max = 500)
-	@Pattern(regexp = "^[0-9a-zA-Z-:.,_ ]+$", message="redeem_instructions.alphanumeric")
+	@EmptyOrAlpha(message="redeem_instructions.alphanumeric")
 	public String getRedeemInstructions() {
 		return redeemInstructions;
 	}
