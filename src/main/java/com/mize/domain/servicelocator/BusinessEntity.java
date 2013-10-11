@@ -60,7 +60,7 @@ public class BusinessEntity  extends MizeEntity implements Comparable<BusinessEn
 		this.entityName = entityName;
 	}
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,orphanRemoval=true,mappedBy="businessEntity")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,orphanRemoval=true,mappedBy="businessEntity")
 	public List<BusinessEntityAddress> getBusinessEntityAddressList() {
 		return businessEntityAddressList;
 	}
