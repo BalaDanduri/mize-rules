@@ -2,10 +2,12 @@ package com.mize.domain.sce.catalog;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -13,14 +15,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.servicelocator.BusinessEntity;
 
 @Entity
-@Table(name = "catalog", 
-	uniqueConstraints = {@UniqueConstraint (columnNames={"catalog_code"})})
+@Table(name = "catalog", uniqueConstraints = {@UniqueConstraint (columnNames={"tenant_id", "catalog_code"})})
 public class Catalog extends MizeEntity {
 	
 	private static final long serialVersionUID = -8488237770262609141L;	
@@ -34,13 +33,6 @@ public class Catalog extends MizeEntity {
 		super();
 	}
 
-	/**
-	 * @param tenant
-	 * @param catalogCode
-	 * @param catalogType
-	 * @param isActive
-	 * @param catalogIntl
-	 */
 	public Catalog(BusinessEntity tenant, String catalogCode,
 			String catalogType, String isActive, List<CatalogIntl> catalogIntl) {
 		super();
@@ -53,8 +45,7 @@ public class Catalog extends MizeEntity {
 
 
 	@Id
-	@GenericGenerator(name="catalogId" , strategy="increment")
-	@GeneratedValue(generator="catalogId")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "id", unique = true, nullable = false, length = 10)
 	@Override
 	public Long getId() {
@@ -66,7 +57,7 @@ public class Catalog extends MizeEntity {
 		super.id=id;
 	}
 
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="tenant_id")
 	public BusinessEntity getTenant() {
 		return tenant;
@@ -103,7 +94,7 @@ public class Catalog extends MizeEntity {
 		this.isActive = isActive;
 	}
 
-	@OneToMany(fetch=FetchType.EAGER, mappedBy="catalog")
+	@OneToMany(fetch=FetchType.LAZY, cascade={CascadeType.ALL}, mappedBy="catalog")
 	public List<CatalogIntl> getCatalogIntl() {
 		return catalogIntl;
 	}
@@ -147,11 +138,11 @@ public class Catalog extends MizeEntity {
 		} else if (!catalogCode.equals(other.catalogCode)) {
 			return false;
 		}
-		if (catalogIntl == null) {
-			if (other.catalogIntl != null) {
+		if (this.getCatalogIntl() == null) {
+			if (other.getCatalogIntl() != null) {
 				return false;
 			}
-		} else if (!catalogIntl.equals(other.catalogIntl)) {
+		} else if (!this.getCatalogIntl().equals(other.getCatalogIntl())) {
 			return false;
 		}
 		if (catalogType == null) {
@@ -194,5 +185,4 @@ public class Catalog extends MizeEntity {
 		builder.append("]");
 		return builder.toString();
 	}
-
 }
