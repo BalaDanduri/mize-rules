@@ -2,83 +2,82 @@ package com.mize.domain.product;
 
 import com.mize.domain.common.MizeEntity;
 
-public class Units extends MizeEntity implements Comparable<Units>{
+public class Unit extends MizeEntity implements Comparable<Unit> {
 
 	private static final long serialVersionUID = 936976445854937548L;
-	private String unitsName;
-	private Long  baseUnitId;
+	private Long unitId;
+	private String unitName;
+	private Long baseUnitId;
 	private Integer multiple;
-	private String unitsSign;
+	private String unitSign;
 	private String pattern;
 	private Integer tid;
 	private Long prodSourceId;
 	
-	public String getUnitsName() {
-		return unitsName;
+	
+	public Long getUnitId() {
+		return unitId;
 	}
-
-	public void setUnitsName(String unitsName) {
-		this.unitsName = unitsName;
+	public void setUnitId(Long unitId) {
+		this.unitId = unitId;
 	}
-
+	public String getUnitName() {
+		return unitName;
+	}
+	public void setUnitName(String unitName) {
+		this.unitName = unitName;
+	}
 	public Long getBaseUnitId() {
 		return baseUnitId;
 	}
-
 	public void setBaseUnitId(Long baseUnitId) {
 		this.baseUnitId = baseUnitId;
 	}
-
 	public Integer getMultiple() {
 		return multiple;
 	}
-
 	public void setMultiple(Integer multiple) {
 		this.multiple = multiple;
 	}
-
-	public String getUnitsSign() {
-		return unitsSign;
+	public String getUnitSign() {
+		return unitSign;
 	}
-
-	public void setUnitsSign(String unitsSign) {
-		this.unitsSign = unitsSign;
+	public void setUnitSign(String unitSign) {
+		this.unitSign = unitSign;
 	}
-
 	public String getPattern() {
 		return pattern;
 	}
-
 	public void setPattern(String pattern) {
 		this.pattern = pattern;
 	}
-
 	public Integer getTid() {
 		return tid;
 	}
-
 	public void setTid(Integer tid) {
 		this.tid = tid;
 	}
-
 	public Long getProdSourceId() {
 		return prodSourceId;
 	}
-
 	public void setProdSourceId(Long prodSourceId) {
 		this.prodSourceId = prodSourceId;
 	}
-
+	@Override
+	public int compareTo(Unit arg0) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	@Override
 	public Long getId() {
-		return id;
+		// TODO Auto-generated method stub
+		return null;
 	}
-
 	@Override
 	public void setId(Long id) {
-		this.id = id;
+		// TODO Auto-generated method stub
+		
 	}
-	
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
@@ -88,11 +87,11 @@ public class Units extends MizeEntity implements Comparable<Units>{
 		result = prime * result + ((pattern == null) ? 0 : pattern.hashCode());
 		result = prime * result + ((prodSourceId == null) ? 0 : prodSourceId.hashCode());
 		result = prime * result + ((tid == null) ? 0 : tid.hashCode());
-		result = prime * result + ((unitsName == null) ? 0 : unitsName.hashCode());
-		result = prime * result + ((unitsSign == null) ? 0 : unitsSign.hashCode());
+		result = prime * result + ((unitId == null) ? 0 : unitId.hashCode());
+		result = prime * result + ((unitName == null) ? 0 : unitName.hashCode());
+		result = prime * result + ((unitSign == null) ? 0 : unitSign.hashCode());
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -101,7 +100,7 @@ public class Units extends MizeEntity implements Comparable<Units>{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Units other = (Units) obj;
+		Unit other = (Unit) obj;
 		if (baseUnitId == null) {
 			if (other.baseUnitId != null)
 				return false;
@@ -127,30 +126,23 @@ public class Units extends MizeEntity implements Comparable<Units>{
 				return false;
 		} else if (!tid.equals(other.tid))
 			return false;
-		if (unitsName == null) {
-			if (other.unitsName != null)
+		if (unitId == null) {
+			if (other.unitId != null)
 				return false;
-		} else if (!unitsName.equals(other.unitsName))
+		} else if (!unitId.equals(other.unitId))
 			return false;
-		if (unitsSign == null) {
-			if (other.unitsSign != null)
+		if (unitName == null) {
+			if (other.unitName != null)
 				return false;
-		} else if (!unitsSign.equals(other.unitsSign))
+		} else if (!unitName.equals(other.unitName))
+			return false;
+		if (unitSign == null) {
+			if (other.unitSign != null)
+				return false;
+		} else if (!unitSign.equals(other.unitSign))
 			return false;
 		return true;
 	}
+
 	
-
-	@Override
-	public String toString() {
-		return "Units [unitsName=" + unitsName + ", baseUnitId=" + baseUnitId + ", multiple=" + multiple
-				+ ", unitsSign=" + unitsSign + ", pattern=" + pattern + ", tid=" + tid + ", prodSourceId="
-				+ prodSourceId + "]";
-	}
-
-	@Override
-	public int compareTo(Units o) {
-		return 0;
-	}
-
 }
