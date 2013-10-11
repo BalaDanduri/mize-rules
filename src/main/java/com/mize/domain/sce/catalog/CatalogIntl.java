@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -36,8 +37,7 @@ public class CatalogIntl extends MizeEntity {
 	}
 
 	@Id
-	@GenericGenerator(name="catalogIntlId" , strategy="increment")
-	@GeneratedValue(generator="catalogIntlId")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "id", unique = true, nullable = false, length = 10)
 	@Override
 	public Long getId() {
