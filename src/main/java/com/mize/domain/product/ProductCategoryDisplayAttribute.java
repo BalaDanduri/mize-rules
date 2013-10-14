@@ -3,16 +3,27 @@ package com.mize.domain.product;
 
 import com.mize.domain.common.MizeEntity;
 
-public class ProductCategoryHeader extends MizeEntity implements Comparable<ProductCategoryHeader>{
+public class ProductCategoryDisplayAttribute extends MizeEntity implements Comparable<ProductCategoryDisplayAttribute>{
 
 	private static final long serialVersionUID = -2450196415219764436L;
 	private Long srcCategoryId;
+	private Long srcAttributeId;
+	private Long attributeId;
 	private Long srcHeaderId;
 	private Long headerId;
 	private Integer isactive;
 	private Integer templateType;
 	private Integer defaultDisplayOrder;
 	private Integer displayOrder;
+	
+	@Override
+	public Long getId() {
+		return id;
+	}
+	@Override
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public Long getSrcCategoryId() {
 		return srcCategoryId;
 	}
@@ -54,21 +65,27 @@ public class ProductCategoryHeader extends MizeEntity implements Comparable<Prod
 	}
 	public void setDisplayOrder(Integer displayOrder) {
 		this.displayOrder = displayOrder;
-	}
+	}	
 	
-	@Override
-	public String toString() {
-		return "ProductCategoryHeader [srcCategoryId=" + srcCategoryId
-				+ ", srcHeaderId=" + srcHeaderId + ", headerId=" + headerId
-				+ ", isactive=" + isactive + ", templateType=" + templateType
-				+ ", defaultDisplayOrder=" + defaultDisplayOrder
-				+ ", displayOrder=" + displayOrder + "]";
+	public Long getSrcAttributeId() {
+		return srcAttributeId;
+	}
+	public void setSrcAttributeId(Long srcAttributeId) {
+		this.srcAttributeId = srcAttributeId;
+	}
+	public Long getAttributeId() {
+		return attributeId;
+	}
+	public void setAttributeId(Long attributeId) {
+		this.attributeId = attributeId;
 	}
 	
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
+		result = prime * result
+				+ ((attributeId == null) ? 0 : attributeId.hashCode());
 		result = prime
 				* result
 				+ ((defaultDisplayOrder == null) ? 0 : defaultDisplayOrder
@@ -80,6 +97,8 @@ public class ProductCategoryHeader extends MizeEntity implements Comparable<Prod
 		result = prime * result
 				+ ((isactive == null) ? 0 : isactive.hashCode());
 		result = prime * result
+				+ ((srcAttributeId == null) ? 0 : srcAttributeId.hashCode());
+		result = prime * result
 				+ ((srcCategoryId == null) ? 0 : srcCategoryId.hashCode());
 		result = prime * result
 				+ ((srcHeaderId == null) ? 0 : srcHeaderId.hashCode());
@@ -87,6 +106,7 @@ public class ProductCategoryHeader extends MizeEntity implements Comparable<Prod
 				+ ((templateType == null) ? 0 : templateType.hashCode());
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -95,7 +115,12 @@ public class ProductCategoryHeader extends MizeEntity implements Comparable<Prod
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ProductCategoryHeader other = (ProductCategoryHeader) obj;
+		ProductCategoryDisplayAttribute other = (ProductCategoryDisplayAttribute) obj;
+		if (attributeId == null) {
+			if (other.attributeId != null)
+				return false;
+		} else if (!attributeId.equals(other.attributeId))
+			return false;
 		if (defaultDisplayOrder == null) {
 			if (other.defaultDisplayOrder != null)
 				return false;
@@ -116,6 +141,11 @@ public class ProductCategoryHeader extends MizeEntity implements Comparable<Prod
 				return false;
 		} else if (!isactive.equals(other.isactive))
 			return false;
+		if (srcAttributeId == null) {
+			if (other.srcAttributeId != null)
+				return false;
+		} else if (!srcAttributeId.equals(other.srcAttributeId))
+			return false;
 		if (srcCategoryId == null) {
 			if (other.srcCategoryId != null)
 				return false;
@@ -135,17 +165,8 @@ public class ProductCategoryHeader extends MizeEntity implements Comparable<Prod
 	}
 	
 	@Override
-	public Long getId() {
-		return id;
-	}
-	@Override
-	public void setId(Long id) {
-		this.id = id;
-	}
-	@Override
-	public int compareTo(ProductCategoryHeader o) {
+	public int compareTo(ProductCategoryDisplayAttribute arg0) {
 		return 0;
 	}	
-	
 	
 }

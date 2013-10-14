@@ -5,7 +5,7 @@ import com.mize.domain.common.MizeEntity;
 
 
 
-public class ProductCategoryName extends MizeEntity{
+public class ProductCategoryName extends MizeEntity implements Comparable<ProductCategoryName>{
 
 	private static final long serialVersionUID = -2450196415219764436L;
 	private Long srcCategoryId;
@@ -82,6 +82,10 @@ public class ProductCategoryName extends MizeEntity{
 		} else if (!srcCategoryId.equals(other.srcCategoryId))
 			return false;
 		return true;
+	}
+	@Override
+	public int compareTo(ProductCategoryName o) {
+		return 0;
 	}
 	
 }
