@@ -58,7 +58,7 @@ public class CatalogTest extends JPATest {
 	public void test() {
 		try {
 		// test that catalog is created in db and is equal to same
-			List<Catalog>  catalogs = jdbcTemplate.query("Select catalog_code from catalog where id="+1, new RowMapper<Catalog> (){
+			List<Catalog>  catalogs = jdbcTemplate.query("Select catalog_code from catalog where id="+catalog.getId(), new RowMapper<Catalog> (){
 
 				@Override
 				public Catalog mapRow(ResultSet resultSet, int arg1)

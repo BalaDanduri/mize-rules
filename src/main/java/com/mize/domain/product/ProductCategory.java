@@ -15,32 +15,35 @@ import com.mize.domain.common.MizeEntity;
 public class ProductCategory extends MizeEntity{
 
 	private static final long serialVersionUID = -2450196415219764436L;
-	protected Long id;
-	protected String name;
-	protected String photoLink;
-	protected ProductCategory parent = null;
 	@JsonIgnore
-	protected Set<ProductCategory> children = new HashSet<ProductCategory>();
-	protected ProdCategorySource sourceCategory  = new ProdCategorySource();
-	protected String department;
-	protected Integer level; 
+	private Long srcCategoryId;
+	private String name;
+	private String photoLink;
+	private ProductCategory parent = null;
+	@JsonIgnore
+	private Set<ProductCategory> children = new HashSet<ProductCategory>();
+	private ProdCategorySource sourceCategory  = new ProdCategorySource();
+	private String department;
+	private Integer level;
+	@JsonIgnore
+	private Integer displayOrder;
+	@JsonIgnore
+	private Integer orderNumber; 
+	private boolean isActive;
+	@JsonIgnore
+	private Integer active;
 	
 	public String getDepartment() {
 		return department;
 	}
 
-
 	public void setDepartment(String department) {
 		this.department = department;
-	}
-
-
-	protected boolean isActive;
+	}	
 	
 	public ProductCategory() {
 		
 	}
-
 	
 	public Long getId() {
 		return id;
@@ -78,11 +81,80 @@ public class ProductCategory extends MizeEntity{
 	public boolean isActive() {
 		return isActive;
 	}
+	
+	@JsonIgnore
+	public Set<ProductCategory> getChildren() {
+		return children;
+	}
+
+	@JsonIgnore
+	public void setChildren(Set<ProductCategory> children) {
+		this.children = children;
+	}
+
+	public boolean isLeaf() {
+		if ((children == null || children.isEmpty()) ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public void setLeaf(boolean leaf) {
+	}
+
+
+	public ProdCategorySource getSourceCategory() {
+		return sourceCategory;
+	}
+
+	public void setSourceCategory(ProdCategorySource sourceCategory) {
+		this.sourceCategory = sourceCategory;
+	}
+
+	public Integer getLevel() {
+		return level;
+	}
+
+	public void setLevel(Integer level) {
+		this.level = level;
+	}
+
+	public Long getSrcCategoryId() {
+		return srcCategoryId;
+	}
+
+	public void setSrcCategoryId(Long srcCategoryId) {
+		this.srcCategoryId = srcCategoryId;
+	}
+
+	public Integer getDisplayOrder() {
+		return displayOrder;
+	}
+
+	public void setDisplayOrder(Integer displayOrder) {
+		this.displayOrder = displayOrder;
+	}
+
+	public Integer getOrderNumber() {
+		return orderNumber;
+	}
+
+	public void setOrderNumber(Integer orderNumber) {
+		this.orderNumber = orderNumber;
+	}
 
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}
 
+	public Integer getActive() {
+		return active;
+	}
+
+	public void setActive(Integer active) {
+		this.active = active;
+	}
 
 	@Override
 	public String toString() {
@@ -92,18 +164,13 @@ public class ProductCategory extends MizeEntity{
 				+ department + ", isActive=" + isActive + "]";
 	}
 
-	
-
-
-
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = PRIME;
 		int result = 1;
 		result = prime * result
 				+ ((department == null) ? 0 : department.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + (isActive ? 1231 : 1237);
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result
 				+ ((photoLink == null) ? 0 : photoLink.hashCode());
@@ -111,7 +178,6 @@ public class ProductCategory extends MizeEntity{
 				+ ((sourceCategory == null) ? 0 : sourceCategory.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -161,49 +227,4 @@ public class ProductCategory extends MizeEntity{
 			return false;
 		return true;
 	}
-
-
-
-
-	@JsonIgnore
-	public Set<ProductCategory> getChildren() {
-		return children;
-	}
-
-	@JsonIgnore
-	public void setChildren(Set<ProductCategory> children) {
-		this.children = children;
-	}
-
-	public boolean isLeaf() {
-		if ((children == null || children.isEmpty()) ) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	public void setLeaf(boolean leaf) {
-	}
-
-
-	public ProdCategorySource getSourceCategory() {
-		return sourceCategory;
-	}
-
-
-	public void setSourceCategory(ProdCategorySource sourceCategory) {
-		this.sourceCategory = sourceCategory;
-	}
-
-
-	public Integer getLevel() {
-		return level;
-	}
-
-
-	public void setLevel(Integer level) {
-		this.level = level;
-	}
-
 }

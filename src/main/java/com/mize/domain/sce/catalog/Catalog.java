@@ -15,8 +15,15 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.servicelocator.BusinessEntity;
+import com.mize.domain.util.JodaDateTimeDeserializer;
 
 @Entity
 @Table(name = "catalog", uniqueConstraints = {@UniqueConstraint (columnNames={"tenant_id", "catalog_code"})})
@@ -28,6 +35,7 @@ public class Catalog extends MizeEntity {
 	private String catalogType;
 	private String isActive;
 	private List<CatalogIntl> catalogIntl;
+	private List<CatalogEntry> catalogEntry;
 	
 	public Catalog() {
 		super();
@@ -45,7 +53,7 @@ public class Catalog extends MizeEntity {
 
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", unique = true, nullable = false, length = 10)
 	@Override
 	public Long getId() {
@@ -102,6 +110,73 @@ public class Catalog extends MizeEntity {
 
 	public void setCatalogIntl(List<CatalogIntl> catalogIntl) {
 		this.catalogIntl = catalogIntl;
+	}
+	
+	@OneToMany(fetch=FetchType.LAZY, cascade={CascadeType.ALL}, mappedBy="catalog")
+	public List<CatalogEntry> getCatalogEntry() {
+		return catalogEntry;
+	}
+	
+	public void setCatalogEntry(List<CatalogEntry> catalogEntry) {
+		this.catalogEntry = catalogEntry;
+	}
+	
+	@Override	
+	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
+	@Type(type="com.mize.domain.util.DateTimeJPA")
+	@Column(name = "created_date")
+	public DateTime getCreatedDate() {
+		return createdDate;
+	}
+	
+	@Override
+	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	@JsonIgnore
+	public void setCreatedDate(DateTime createdDate) {
+		super.createdDate = createdDate;
+	}
+	
+	@Override	
+	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
+	@Type(type="com.mize.domain.util.DateTimeJPA")
+	@Column(name = "updated_date")
+	public DateTime getUpdatedDate() {
+		return updatedDate;
+	}
+	
+	@Override
+	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	@JsonIgnore
+	public void setUpdatedDate(DateTime updatedDate) {
+		super.updatedDate = updatedDate;
+	}
+	
+	@Override
+	@JsonIgnore
+	@Column(name = "created_by")
+	public Long getCreatedBy() {		
+		return super.getCreatedBy();
+	}
+	
+	@Override
+	@JsonIgnore
+	public void setCreatedBy(Long createdBy) {		
+		super.setCreatedBy(createdBy);
+	}
+	
+	@Override
+	@JsonIgnore
+	@Column(name = "updated_by")
+	public Long getUpdatedBy() {		
+		return super.getUpdatedBy();
+	}
+	
+	@Override
+	@JsonIgnore
+	public void setUpdatedBy(Long updatedBy) {		
+		super.setUpdatedBy(updatedBy);
 	}
 
 	@Override
@@ -182,6 +257,8 @@ public class Catalog extends MizeEntity {
 		builder.append(isActive);
 		builder.append(", catalogIntl=");
 		builder.append(catalogIntl);
+		builder.append(", catalogEntry=");
+		builder.append(catalogEntry);
 		builder.append("]");
 		return builder.toString();
 	}

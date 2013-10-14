@@ -37,7 +37,7 @@ public class JPATest {
 	@BeforeClass
 	public static void launchH2Console() throws Exception {
 		// uncomment it if want to see H2console
-		//Console.main(new String[]{});
+		Console.main(new String[]{});
 	}
 	
 	public <T> Object find(Class<T> name, Object pkey) {
@@ -73,5 +73,15 @@ public class JPATest {
 
 	public EntityManager getEntityManager() {
 		return myEmf.getNativeEntityManagerFactory().createEntityManager();
+	}
+	
+	public Catalog findExistingCatalog(EntityManager entityManager) {
+		Catalog catalog = (Catalog) entityManager.find(Catalog.class, new Long(100));
+		return catalog;
+	}
+	
+	public CatalogEntry findExistingCatalogEntry(EntityManager entityManager) {
+		CatalogEntry catalogEntry = (CatalogEntry) entityManager.find(CatalogEntry.class, new Long(101));
+		return catalogEntry;
 	}
 }
