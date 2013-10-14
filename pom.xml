@@ -3,10 +3,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.mize</groupId>
 	<artifactId>mize-domain</artifactId>
-	<version>1.4-SNAPSHOT</version>
+	<version>1.5.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<properties>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<project.reporting.outputEncoding>UF-8</project.reporting.outputEncoding>
 		<project.build.outputEncoding>UTF-8</project.build.outputEncoding>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>

@@ -118,7 +118,7 @@ public class CatalogIntl extends MizeEntity {
 			if (other.catalog != null) {
 				return false;
 			}
-		} else if (!catalog.equals(other.catalog)) {
+		} else if (!catalog.getId().equals(other.catalog.getId())) {
 			return false;
 		}
 		if (catalogDescription == null) {
