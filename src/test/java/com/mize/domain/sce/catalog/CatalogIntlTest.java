@@ -59,16 +59,13 @@ public class CatalogIntlTest extends JPATest {
 	public void basicCatalogAndCatalogIntlRelationshipTest() {
 		try {
 			Catalog catalogFromDB = entityManager.find(Catalog.class, new Long(1));
-			CatalogIntl catalogIntlfromDB = (CatalogIntl) entityManager.find(CatalogIntl.class, new Long(1));
-			
-			// catalog after find shoud be equals to previous one
+			CatalogIntl catalogIntlfromDB = (CatalogIntl) entityManager.find(CatalogIntl.class, new Long(1));		
+			// catalog after find should be equals to previous one
 			assertTrue(catalog.equals(catalogFromDB));
 			assertTrue(catalogIntlfromDB.equals(catalogIntl));
 			List<CatalogIntl> catalognames =  catalogFromDB.getCatalogIntl();
 			assertNotNull(catalognames);
 			assertTrue(catalognames.get(0).equals(catalogIntlfromDB));
-			
-
 		} catch (Throwable th) {
 			th.printStackTrace();
 			fail();
