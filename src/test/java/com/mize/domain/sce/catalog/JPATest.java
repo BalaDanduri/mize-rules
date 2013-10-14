@@ -7,6 +7,7 @@ import org.h2.tools.Console;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -20,6 +21,13 @@ public class JPATest {
 
 	@Autowired
 	protected LocalContainerEntityManagerFactoryBean myEmf;
+	
+	@Autowired
+	protected JdbcTemplate jdbcTemplate;
+
+	public JdbcTemplate getJdbcTemplate() {
+		return jdbcTemplate;
+	}
 
 	public JPATest() {
 		super();
