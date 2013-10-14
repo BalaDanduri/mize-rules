@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.mize.domain.sce.catalog;
 
 import static org.junit.Assert.assertTrue;
@@ -9,18 +6,14 @@ import static org.junit.Assert.fail;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
+import org.joda.time.DateTime;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.mize.domain.servicelocator.BusinessEntity;
-
-public class CatalogTest extends JPATest {
+public class CatalogEntryTest extends JPATest {
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -31,16 +24,16 @@ public class CatalogTest extends JPATest {
 	}
 
 	EntityManager entityManager = null;
-	Catalog catalog = null;
+	CatalogEntry catalogEntry = null;
 
 	@Before
 	public void setUp() throws Exception {
 		entityManager = getEntityManager();
-		BusinessEntity be = findExistingBEtoBeusedwiththecatalogastenantid(entityManager);
-		catalog = createCatalogObjectToBeSavedInDB(be);
+		Catalog catalog = findExistingCatalog(entityManager);
+		catalogEntry = createCatalogEntryObjectToBeSavedInDB(catalog);
 		EntityTransaction tx = entityManager.getTransaction();
 		tx.begin();
-		entityManager.persist(catalog);
+		entityManager.persist(catalogEntry);
 		tx.commit();
 	}
 
@@ -51,11 +44,9 @@ public class CatalogTest extends JPATest {
 
 	@Test
 	public void test() {
-		try {
-		// test that it is created in db and same
-			Catalog catalogFromDB = (Catalog) entityManager.find(Catalog.class,
-					catalog.getId());
-			assertTrue(catalog.equals(catalogFromDB));
+		try {		
+			CatalogEntry catalogEntryFromDB = (CatalogEntry) entityManager.find(CatalogEntry.class,	catalogEntry.getId());
+			assertTrue(catalogEntry.equals(catalogEntryFromDB));
 		} catch (Throwable th) {
 			th.printStackTrace();
 			fail();
@@ -63,8 +54,16 @@ public class CatalogTest extends JPATest {
 		}
 	}
 
-	private Catalog createCatalogObjectToBeSavedInDB(BusinessEntity be) {
-		Catalog catalog = new Catalog(be, "ABC", "Test", "Y", null);
-		return catalog;
+	private CatalogEntry createCatalogEntryObjectToBeSavedInDB(Catalog catalog) {
+		CatalogEntry catalogEntry = new CatalogEntry(catalog, "ABC", "Y", null);		
+		
+		catalogEntry.setCreatedDate(DateTime.now());
+		catalogEntry.setUpdatedDate(DateTime.now());
+		catalogEntry.setCreatedBy(1L);
+		catalogEntry.setUpdatedBy(1L);
+		return catalogEntry;
 	}
+	
+	
+
 }

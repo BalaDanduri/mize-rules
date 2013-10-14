@@ -11,6 +11,8 @@
 		<class>com.mize.domain.common.State</class>
 		<class>com.mize.domain.common.Country</class>
 		<class>com.mize.domain.servicelocator.BusinessEntityGeo</class>
+		<class>com.mize.domain.sce.catalog.CatalogEntry</class>
+		<class>com.mize.domain.sce.catalog.CatalogEntryIntl</class>
 	</persistence-unit>
 
 </persistence>

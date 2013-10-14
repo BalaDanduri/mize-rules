@@ -27,6 +27,33 @@ create table catalog_intl
   	updated_by integer
 );
 
+drop table if exists catalog_entry;
+create table catalog_entry
+(
+	id integer primary key auto_increment  not null,
+	catalog_id integer,
+ 	item_code varchar(30), 	
+ 	is_active char(1) default 'Y',
+  	created_date timestamp,
+  	updated_date timestamp, 
+  	created_by integer,
+  	updated_by integer
+);
+
+drop table if exists catalog_entry_intl;
+create table catalog_entry_intl
+(
+	id integer primary key auto_increment  not null,
+	catalog_entry_id integer,
+	locale_id integer,
+ 	item_name varchar(100),
+ 	item_desc varchar(500),
+  	created_date timestamp,
+  	updated_date timestamp, 
+  	created_by integer,
+  	updated_by integer
+);
+
 create table locale 
 (
 	locale_id integer primary key auto_increment not null,
@@ -223,3 +250,9 @@ INSERT INTO state(state_id, state_code, state_name, created_by, created_date, up
 
 INSERT INTO  business_entity_address (id, be_id, code, locale_id, name, address_1, address_2, address_3, zip, zip_ext, city, county, state_id, country_id, phone_1, phone_2, email, fax, land_mark, url, tool_tip_logo, icon, hours_of_op)
   VALUES(10799, 961, NULL, 1, NULL, '12529 PARKLAWN DR.', NULL, NULL, '20852', NULL, 'ROCKVILLE', NULL, 20, 1, '3012305800', NULL, NULL, '3012305830', NULL, NULL, NULL, NULL, NULL);
+  
+INSERT INTO  catalog (id, tenant_id, catalog_code, catalog_type, is_active, created_date, updated_date, created_by, updated_by)
+  VALUES(100, 961, 'TestCatalog', 'TestCatalogType', 'Y', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL);
+  
+INSERT INTO  catalog_entry (id, catalog_id, item_code, is_active, created_date, updated_date, created_by, updated_by)
+  VALUES(101, 100, 'ItemCode', 'Y', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL);
