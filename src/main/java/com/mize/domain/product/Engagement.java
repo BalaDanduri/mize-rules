@@ -32,9 +32,18 @@ import com.mize.domain.util.EmptyOrAlpha;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 import com.mize.domain.util.NonEmpty;
+import com.mize.domain.util.ValidateOnDependentFeild;
 
 @Entity
 @Table(name="engagement_options")
+@ValidateOnDependentFeild.List({
+	@ValidateOnDependentFeild(
+        fieldName = "code",
+        dependFieldName = "type",
+        dependedFieldValue ="coupon",
+        regex = true,
+        regexValue ="^[0-9a-zA-Z-:.,_ ]+$",
+        message ="code.notempty")})
 public class Engagement extends MizeEntity  {
 	
 	private static final long serialVersionUID = 6140543699715462721L;
