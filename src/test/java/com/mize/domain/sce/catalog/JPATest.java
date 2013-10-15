@@ -20,7 +20,7 @@ import com.mize.domain.servicelocator.BusinessEntity;
 public class JPATest {
 
 	@Autowired
-	protected LocalContainerEntityManagerFactoryBean myEmf;
+	protected LocalContainerEntityManagerFactoryBean entityManagerFactory;
 	
 	@Autowired
 	protected JdbcTemplate jdbcTemplate;
@@ -41,7 +41,7 @@ public class JPATest {
 	}
 	
 	public <T> Object find(Class<T> name, Object pkey) {
-		EntityManager mf = myEmf.getNativeEntityManagerFactory().createEntityManager();
+		EntityManager mf = entityManagerFactory.getNativeEntityManagerFactory().createEntityManager();
 		Object object = mf.find(name, pkey);
 		mf.close();
 		return object;
@@ -63,7 +63,7 @@ public class JPATest {
 	}
 	
 	public void persist(Object obj) {
-		EntityManager mf = myEmf.getNativeEntityManagerFactory().createEntityManager();
+		EntityManager mf = entityManagerFactory.getNativeEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = mf.getTransaction();
 		tx.begin();
 		mf.persist(obj);
@@ -72,7 +72,7 @@ public class JPATest {
 	}
 
 	public EntityManager getEntityManager() {
-		return myEmf.getNativeEntityManagerFactory().createEntityManager();
+		return entityManagerFactory.getNativeEntityManagerFactory().createEntityManager();
 	}
 	
 	public Catalog findExistingCatalog(EntityManager entityManager) {
