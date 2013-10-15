@@ -16,9 +16,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.test.context.ContextConfiguration;
 
 import com.mize.domain.common.Locale;
 
+@ContextConfiguration(locations={"/test-context.xml"})
 public class CatalogIntlTest extends JPATest {
 	
 	private static String CATALOG_INTL_QUERY = "select * from catalog_intl where id = ?";
@@ -38,12 +40,9 @@ public class CatalogIntlTest extends JPATest {
 	@Before
 	public void setUp() throws Exception {
 		entityManager = getEntityManager();
-		//BusinessEntity be = findExistingBEtoBeusedwiththecatalogastenantid(entityManager);
-		//catalog = createCatalogObjectToBeSavedInDB(be);	
 		catalog = findExistingCatalog(entityManager);
 		Locale locale = findLocaleObjectFromDBToBeUsedForCatalogIntl();			
 		catalogIntl = createCatalogIntlObjectToBeSavedinDB(catalog, locale);
-		//setCatalogIntlIntoCatalog(catalog, catalogIntl);
 		
 		//save catalog
 		EntityTransaction tx = entityManager.getTransaction();
@@ -81,39 +80,26 @@ public class CatalogIntlTest extends JPATest {
 				
 			});
 			// catalog after find should be equals to previous one
-			/*assertTrue(catalog.equals(catalogFromDB));
-			assertTrue(catalogIntlfromDB.equals(catalogIntl));
-			List<CatalogIntl> catalognames =  catalogFromDB.getCatalogIntl();
-			assertNotNull(catalognames);
-			assertTrue(catalognames.get(0).equals(catalogIntlfromDB));*/
+			if (intlList == null || intlList.size() == 0) {
+				fail("Found Nothing");
+			}
 			CatalogIntl catalogIntlfromDB = intlList.get(0);
 			assertTrue(catalogIntl.getId().equals(catalogIntlfromDB.getId()));
 			assertTrue(catalogIntl.getCatalogName().equals(catalogIntlfromDB.getCatalogName()));
+			assertTrue(catalogIntl.getCatalogDescription().equals(catalogIntlfromDB.getCatalogDescription()));
 			assertTrue(catalogIntl.getLocale().getId().equals(catalogIntlfromDB.getLocale().getId()));
 		} catch (Throwable th) {
 			th.printStackTrace();
-			fail();
+			fail("Got Exception");
 			throw th;
 		}
 	}
-
-	/*private void setCatalogIntlIntoCatalog(Catalog catalog,
-			CatalogIntl catalogIntl) {
-		List<CatalogIntl> list = new ArrayList<CatalogIntl>();
-		list.add(catalogIntl);
-		catalog.setCatalogIntl(list);
-	}*/
 
 	private CatalogIntl createCatalogIntlObjectToBeSavedinDB(Catalog catalog,
 			Locale locale) {
 		CatalogIntl catalogIntl = new CatalogIntl(catalog, locale,"Test", "Test description");
 		return catalogIntl;
 	}
-
-	/*private Catalog createCatalogObjectToBeSavedInDB(BusinessEntity be) {
-		Catalog catalog = new Catalog(be, "ABC", "Test", "Y", null);
-		return catalog;
-	}*/
 
 }
 

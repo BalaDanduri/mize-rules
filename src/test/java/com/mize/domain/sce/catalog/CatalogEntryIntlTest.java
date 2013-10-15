@@ -17,9 +17,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.test.context.ContextConfiguration;
 
 import com.mize.domain.common.Locale;
 
+@ContextConfiguration(locations={"/test-context.xml"})
 public class CatalogEntryIntlTest extends JPATest {
 	
 	private static String CATALOG_ENTRY_INTL_QUERY = "select * from catalog_entry_intl where id = ?";
@@ -73,6 +75,9 @@ public class CatalogEntryIntlTest extends JPATest {
 				}
 				
 			});
+			if (entryIntlList == null || entryIntlList.size() == 0) {
+				fail("Found Nothing");
+			}
 			CatalogEntryIntl catalogEntryIntlFromDB = entryIntlList.get(0);
 			assertTrue(catalogEntryIntl.getId().equals(catalogEntryIntlFromDB.getId()));
 			assertTrue(catalogEntryIntl.getItemName().equals(catalogEntryIntlFromDB.getItemName()));
@@ -81,7 +86,7 @@ public class CatalogEntryIntlTest extends JPATest {
 			assertTrue(catalogEntryIntl.getLocale().getId().equals(catalogEntryIntlFromDB.getLocale().getId()));
 		} catch (Throwable th) {
 			th.printStackTrace();
-			fail();
+			fail("Got Exception");
 			throw th;
 		}
 	}

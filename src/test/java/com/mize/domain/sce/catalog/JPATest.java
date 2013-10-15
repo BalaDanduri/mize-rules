@@ -1,22 +1,22 @@
 package com.mize.domain.sce.catalog;
 
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import org.h2.tools.Console;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.mize.domain.common.Locale;
 import com.mize.domain.servicelocator.BusinessEntity;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={"/test-context.xml"})
+@Ignore
 public class JPATest {
 
 	@Autowired
@@ -31,9 +31,8 @@ public class JPATest {
 
 	public JPATest() {
 		super();
-	}
-	
-	
+	}	
+		
 	@BeforeClass
 	public static void launchH2Console() throws Exception {
 		// uncomment it if want to see H2console
