@@ -19,6 +19,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.ContextConfiguration;
 
 import com.mize.domain.servicelocator.BusinessEntity;
+import com.mize.domain.util.JPATest;
 
 @ContextConfiguration(locations={"/test-context.xml"})
 public class CatalogTest extends JPATest {

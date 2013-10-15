@@ -19,6 +19,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.ContextConfiguration;
 
 import com.mize.domain.common.Locale;
+import com.mize.domain.util.JPATest;
 
 @ContextConfiguration(locations={"/test-context.xml"})
 public class CatalogIntlTest extends JPATest {

@@ -1,7 +1,6 @@
 package com.mize.domain.sce.catalog;
 
 import static org.junit.Assert.assertTrue;
-
 import static org.junit.Assert.fail;
 
 import java.sql.ResultSet;
@@ -19,6 +18,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.ContextConfiguration;
+
+import com.mize.domain.util.JPATest;
 
 @ContextConfiguration(locations={"/test-context.xml"})
 public class CatalogEntryTest extends JPATest {
