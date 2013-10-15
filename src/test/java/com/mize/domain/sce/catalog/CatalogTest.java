@@ -18,14 +18,13 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.mize.domain.servicelocator.BusinessEntity;
 
 public class CatalogTest extends JPATest {
+	
+	private static String CATALOG_QUERY = "select * from catalog where id = ?";
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -58,18 +57,26 @@ public class CatalogTest extends JPATest {
 	public void test() {
 		try {
 		// test that catalog is created in db and is equal to same
-			List<Catalog>  catalogs = jdbcTemplate.query("Select catalog_code from catalog where id="+catalog.getId(), new RowMapper<Catalog> (){
+			List<Catalog>  catalogs = jdbcTemplate.query(CATALOG_QUERY, new Object[]{catalog.getId()}, new RowMapper<Catalog> (){
 
 				@Override
 				public Catalog mapRow(ResultSet resultSet, int arg1)
 						throws SQLException {
 					Catalog catalog = new Catalog();
+					catalog.setId(resultSet.getLong("id"));
 					catalog.setCatalogCode(resultSet.getString("catalog_code"));
+					catalog.setCatalogType(resultSet.getString("catalog_type"));
+					catalog.setIsActive(resultSet.getString("is_active"));
+					BusinessEntity be = new BusinessEntity();
+					be.setId(resultSet.getLong("tenant_id"));					
+					catalog.setTenant(be);
 					return catalog;
 				}
 			});		
-			Catalog catalogFromDB = catalogs.get(0);
-			assertTrue(catalog.equals(catalogFromDB));
+			Catalog catalogFromDB = catalogs.get(0);			
+			assertTrue(catalog.getId().equals(catalogFromDB.getId()));
+			assertTrue(catalog.getCatalogCode().equals(catalogFromDB.getCatalogCode()));
+			assertTrue(catalog.getCatalogType().equals(catalogFromDB.getCatalogType()));
 		} catch (Throwable th) {
 			th.printStackTrace();
 			fail();
@@ -82,3 +89,4 @@ public class CatalogTest extends JPATest {
 		return catalog;
 	}
 }
+
