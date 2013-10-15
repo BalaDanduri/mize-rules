@@ -10,16 +10,19 @@
            http://www.springframework.org/schema/batch 
            http://www.springframework.org/schema/batch/spring-batch-2.2.xsd">        
 	
-	<bean id="myEmf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-	 	<property name="dataSource" ref="dataSource"></property>
-	 	<property name="persistenceProviderClass" value="org.hibernate.ejb.HibernatePersistence"/>
-	 	<property name="jpaVendorAdapter">
-      		<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
-   		</property>
-	 </bean>
-	   
-	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="dataSource" />
+		<property name="persistenceProviderClass" value="org.hibernate.ejb.HibernatePersistence"/>
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="database" value="H2" />
+				<property name="generateDdl" value="false" />
+			</bean>
+		</property>
+	</bean>
+	
+	<bean class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
 	
  	<jdbc:embedded-database id="dataSource" type="H2">
