@@ -1,8 +1,10 @@
 package com.mize.domain.sce.catalog;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
-import java.util.ArrayList;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -13,14 +15,13 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.jdbc.core.RowMapper;
 
 import com.mize.domain.common.Locale;
-import com.mize.domain.servicelocator.BusinessEntity;
 
 public class CatalogIntlTest extends JPATest {
+	
+	private static String CATALOG_INTL_QUERY = "select * from catalog_intl where id = ?";
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -37,16 +38,17 @@ public class CatalogIntlTest extends JPATest {
 	@Before
 	public void setUp() throws Exception {
 		entityManager = getEntityManager();
-		BusinessEntity be = findExistingBEtoBeusedwiththecatalogastenantid();
-		catalog = createCatalogObjectToBeSavedInDB(be);		
+		//BusinessEntity be = findExistingBEtoBeusedwiththecatalogastenantid(entityManager);
+		//catalog = createCatalogObjectToBeSavedInDB(be);	
+		catalog = findExistingCatalog(entityManager);
 		Locale locale = findLocaleObjectFromDBToBeUsedForCatalogIntl();			
 		catalogIntl = createCatalogIntlObjectToBeSavedinDB(catalog, locale);
-		setCatalogIntlIntoCatalog(catalog, catalogIntl);
+		//setCatalogIntlIntoCatalog(catalog, catalogIntl);
 		
 		//save catalog
 		EntityTransaction tx = entityManager.getTransaction();
 		tx.begin();
-		entityManager.persist(catalog);
+		entityManager.persist(catalogIntl);
 		tx.commit();
 	}
 
@@ -58,14 +60,36 @@ public class CatalogIntlTest extends JPATest {
 	@Test
 	public void basicCatalogAndCatalogIntlRelationshipTest() {
 		try {
-			Catalog catalogFromDB = entityManager.find(Catalog.class, new Long(1));
-			CatalogIntl catalogIntlfromDB = (CatalogIntl) entityManager.find(CatalogIntl.class, new Long(1));		
+			/*Catalog catalogFromDB = entityManager.find(Catalog.class, catalog.getId());
+			CatalogIntl catalogIntlfromDB = (CatalogIntl) entityManager.find(CatalogIntl.class, new Long(1));*/
+			List<CatalogIntl> intlList = jdbcTemplate.query(CATALOG_INTL_QUERY, new Object[]{catalogIntl.getId()}, new RowMapper<CatalogIntl>() {
+				@Override
+				public CatalogIntl mapRow(ResultSet resultSet, int arg1)
+						throws SQLException {
+					CatalogIntl intl = new CatalogIntl();
+					intl.setId(resultSet.getLong("id"));
+					intl.setCatalogName(resultSet.getString("catalog_name"));
+					intl.setCatalogDescription(resultSet.getString("catalog_desc"));
+					Catalog catalog = new Catalog();
+					catalog.setId(resultSet.getLong("catalog_id"));
+					intl.setCatalog(catalog);
+					Locale locale = new Locale();
+					locale.setId(resultSet.getLong("locale_id"));
+					intl.setLocale(locale);
+					return intl;
+				}
+				
+			});
 			// catalog after find should be equals to previous one
-			assertTrue(catalog.equals(catalogFromDB));
+			/*assertTrue(catalog.equals(catalogFromDB));
 			assertTrue(catalogIntlfromDB.equals(catalogIntl));
 			List<CatalogIntl> catalognames =  catalogFromDB.getCatalogIntl();
 			assertNotNull(catalognames);
-			assertTrue(catalognames.get(0).equals(catalogIntlfromDB));
+			assertTrue(catalognames.get(0).equals(catalogIntlfromDB));*/
+			CatalogIntl catalogIntlfromDB = intlList.get(0);
+			assertTrue(catalogIntl.getId().equals(catalogIntlfromDB.getId()));
+			assertTrue(catalogIntl.getCatalogName().equals(catalogIntlfromDB.getCatalogName()));
+			assertTrue(catalogIntl.getLocale().getId().equals(catalogIntlfromDB.getLocale().getId()));
 		} catch (Throwable th) {
 			th.printStackTrace();
 			fail();
@@ -73,12 +97,12 @@ public class CatalogIntlTest extends JPATest {
 		}
 	}
 
-	private void setCatalogIntlIntoCatalog(Catalog catalog,
+	/*private void setCatalogIntlIntoCatalog(Catalog catalog,
 			CatalogIntl catalogIntl) {
 		List<CatalogIntl> list = new ArrayList<CatalogIntl>();
 		list.add(catalogIntl);
 		catalog.setCatalogIntl(list);
-	}
+	}*/
 
 	private CatalogIntl createCatalogIntlObjectToBeSavedinDB(Catalog catalog,
 			Locale locale) {
@@ -86,9 +110,10 @@ public class CatalogIntlTest extends JPATest {
 		return catalogIntl;
 	}
 
-	private Catalog createCatalogObjectToBeSavedInDB(BusinessEntity be) {
+	/*private Catalog createCatalogObjectToBeSavedInDB(BusinessEntity be) {
 		Catalog catalog = new Catalog(be, "ABC", "Test", "Y", null);
 		return catalog;
-	}
+	}*/
 
 }
+

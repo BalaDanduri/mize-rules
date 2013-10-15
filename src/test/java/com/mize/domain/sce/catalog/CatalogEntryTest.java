@@ -3,6 +3,10 @@ package com.mize.domain.sce.catalog;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
@@ -12,8 +16,11 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.springframework.jdbc.core.RowMapper;
 
 public class CatalogEntryTest extends JPATest {
+	
+	private static String CATALOG_ENTRY_QUERY = "select * from catalog_entry where id = ?";
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -44,8 +51,26 @@ public class CatalogEntryTest extends JPATest {
 
 	@Test
 	public void test() {
-		try {		
-			CatalogEntry catalogEntryFromDB = (CatalogEntry) entityManager.find(CatalogEntry.class,	catalogEntry.getId());
+		try {
+			
+			List<CatalogEntry>  catalogEntries = jdbcTemplate.query(CATALOG_ENTRY_QUERY, new Object[]{catalogEntry.getId()}, new RowMapper<CatalogEntry> (){
+
+				@Override
+				public CatalogEntry mapRow(ResultSet resultSet, int arg1)
+						throws SQLException {
+					CatalogEntry catalogEntry = new CatalogEntry();
+					catalogEntry.setId(resultSet.getLong("id"));
+					catalogEntry.setItemCode(resultSet.getString("item_code"));					
+					catalogEntry.setIsActive(resultSet.getString("is_active"));						
+					
+					Catalog catalog = new Catalog();
+					catalog.setId(resultSet.getLong("catalog_id"));		
+					catalogEntry.setCatalog(catalog);
+					return catalogEntry;
+				}
+			});
+			
+			CatalogEntry catalogEntryFromDB = catalogEntries.get(0);
 			assertTrue(catalogEntry.equals(catalogEntryFromDB));
 		} catch (Throwable th) {
 			th.printStackTrace();
@@ -55,8 +80,7 @@ public class CatalogEntryTest extends JPATest {
 	}
 
 	private CatalogEntry createCatalogEntryObjectToBeSavedInDB(Catalog catalog) {
-		CatalogEntry catalogEntry = new CatalogEntry(catalog, "ABC", "Y", null);		
-		
+		CatalogEntry catalogEntry = new CatalogEntry(catalog, "ABC", "Y", null);
 		catalogEntry.setCreatedDate(DateTime.now());
 		catalogEntry.setUpdatedDate(DateTime.now());
 		catalogEntry.setCreatedBy(1L);

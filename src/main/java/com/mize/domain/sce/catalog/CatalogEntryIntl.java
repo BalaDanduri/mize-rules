@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -11,7 +12,6 @@ import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -45,8 +45,7 @@ public class CatalogEntryIntl extends MizeEntity {
 
 
 	@Id
-	@GenericGenerator(name = "catalogEntryIntlId", strategy = "increment")
-	@GeneratedValue(generator = "catalogEntryIntlId")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false, unique = true)
 	@Override
 	public Long getId() {
@@ -180,7 +179,7 @@ public class CatalogEntryIntl extends MizeEntity {
 		if (catalogEntry == null) {
 			if (other.catalogEntry != null)
 				return false;
-		} else if (!catalogEntry.equals(other.catalogEntry))
+		} else if (!catalogEntry.getId().equals(other.catalogEntry.getId()))
 			return false;
 		if (itemDescription == null) {
 			if (other.itemDescription != null)

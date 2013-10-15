@@ -11,8 +11,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeEntity;
 
@@ -118,7 +116,7 @@ public class CatalogIntl extends MizeEntity {
 			if (other.catalog != null) {
 				return false;
 			}
-		} else if (!catalog.equals(other.catalog)) {
+		} else if (!catalog.getId().equals(other.catalog.getId())) {
 			return false;
 		}
 		if (catalogDescription == null) {
