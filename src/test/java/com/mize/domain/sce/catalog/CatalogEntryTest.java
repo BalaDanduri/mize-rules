@@ -19,7 +19,7 @@ import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.ContextConfiguration;
 
-import com.mize.domain.util.JPATest;
+import com.mize.domain.test.util.JPATest;
 
 @ContextConfiguration(locations={"/test-context.xml"})
 public class CatalogEntryTest extends JPATest {

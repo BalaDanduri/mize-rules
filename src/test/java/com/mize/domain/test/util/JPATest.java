@@ -1,4 +1,4 @@
-package com.mize.domain.util;
+package com.mize.domain.test.util;
 
 
 import javax.persistence.EntityManager;
