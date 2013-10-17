@@ -25,7 +25,6 @@ public class ProdList extends MizeEntity implements Comparable<ProdList>{
 	private User user; 
 	private String active;
 	private Integer privacyLevel;
-//	private List<ProdListItems> prodListItems;
 	
 	@Column(name = "list_name",  nullable = true, length = 100)
 	public String getListName() {
@@ -73,14 +72,6 @@ public class ProdList extends MizeEntity implements Comparable<ProdList>{
 		this.privacyLevel = privacyLevel;
 	}
 	
-	/*public List<ProdListItems> getProdListItems() {
-		return prodListItems;
-	}
-
-	public void setProdListItems(List<ProdListItems> prodListItems) {
-		this.prodListItems = prodListItems;
-	}*/
-
 	@Id
 	@GenericGenerator(name="id" , strategy="increment")
 	@GeneratedValue(generator="id")
