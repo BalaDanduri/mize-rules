@@ -359,11 +359,12 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	@JsonIgnore
 	@Transient
 	public static Long getValidSourceId(Long sourceId){
-		if(Formatter.longValue(sourceId) == Source.AMAZON.getValue()){
-			return Long.valueOf(Source.AMAZON.getValue());
-		}else{
-			return Long.valueOf(Source.ETILIZE.getValue());
+		for(Source source : Source.values()){
+			if(Formatter.longValue(sourceId) == source.getValue()){
+				return sourceId;
+			}
 		}
+		return Long.valueOf(Source.ETILIZE.getValue());
 	}
 
 	@Override
