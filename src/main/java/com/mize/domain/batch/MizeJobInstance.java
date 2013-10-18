@@ -18,6 +18,11 @@ public class MizeJobInstance extends MizeEntity{
 	private Date nextRun;
 	private String jobStatus;
 	private List<MizeJobParameter> jobParameters;
+	public static final String STATUS_NOT_PLANNED = "NOT_PLANNED";
+	public static final String STATUS_WAITING = "WAITING";
+	public static final String STATUS_RUNNING = "RUNNING";
+	public static final String STATUS_DELETED = "DELETED";
+	
 	public List<MizeJobParameter> getJobParameters() {
 		return jobParameters;
 	}
