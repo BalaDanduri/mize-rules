@@ -47,8 +47,8 @@ public class CatalogIntl extends MizeEntity {
 		super.id = id;
 	}
 
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="catalog_id")
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
+	@JoinColumn(name = "catalog_id", nullable = false)
 	public Catalog getCatalog() {
 		return catalog;
 	}
@@ -57,7 +57,7 @@ public class CatalogIntl extends MizeEntity {
 		this.catalog = catalog;
 	}
 
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="locale_id")
 	public Locale getLocale() {
 		return locale;

@@ -85,7 +85,7 @@ public class CatalogEntryIntl extends MizeEntity {
 		this.itemDescription = itemDescription;
 	}
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "locale_id")
 	public Locale getLocale() {
 		return locale;
