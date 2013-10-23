@@ -53,5 +53,7 @@ public abstract class MessageConstants implements Serializable{
 	public static final String INVALID_SEARCH_TYPE ="INVALID_SEARCH_TYPE";
 	public static final String UNIT_ID_NOT_FOUND ="UNIT_ID_NOT_FOUND";
 	public static final String BASE_UNIT_ID_NOT_FOUND ="BASE_UNIT_ID_NOT_FOUND";
+	public static final String CONFIRMATION_NUMBER_REQUIRED ="CONFIRMATION_NUMBER_REQUIRED";
+	public static final String INVAID_CONFIRMATION_NUMBER ="INVAID_CONFIRMATION_NUMBER";
 	
 }
