@@ -35,6 +35,13 @@ public class ProductFeature extends MizeEntity implements Comparable<ProductFeat
 		this.absoluteValue = absoluteValue;
 	}
 
+	public ProductFeature(String feature, String name, String absoluteValue, String group) {
+		this.feature = feature;
+		this.name = name;
+		this.absoluteValue = absoluteValue;
+		this.group = group;
+	}
+
 	public String getFeature() {
 		return feature;
 	}
