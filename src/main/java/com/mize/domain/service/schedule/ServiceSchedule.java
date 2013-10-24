@@ -69,6 +69,7 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 	private String firstName;
 	private String lastName;
 	private String caseNumber;	
+	private String serialNumber;
 	
 	public ServiceSchedule() {
 		user = new User();
@@ -683,6 +684,14 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 	
 	public void setCaseNumber(String caseNumber) {
 		this.caseNumber = caseNumber;
+	}
+	
+	public String getSerialNumber() {
+		return serialNumber;
+	}
+
+	public void setSerialNumber(String serialNumber) {
+		this.serialNumber = serialNumber;
 	}
 	
 }
