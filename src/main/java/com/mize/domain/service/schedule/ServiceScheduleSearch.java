@@ -36,7 +36,7 @@ public class ServiceScheduleSearch {
 	String serviceOrderNumber;
 	String confirmationNumber;
 	String caseNumber;
-	String prodId;
+	Long prodId;
 	
 	public ServiceScheduleSearch() {
 		
@@ -254,11 +254,11 @@ public class ServiceScheduleSearch {
 		this.caseNumber = caseNumber;
 	}
 
-	public String getProdId() {
+	public Long getProdId() {
 		return prodId;
 	}
 
-	public void setProdId(String prodId) {
+	public void setProdId(Long prodId) {
 		this.prodId = prodId;
 	}
 	
