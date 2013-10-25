@@ -245,6 +245,22 @@ public class ServiceScheduleSearch {
 	public void setConfirmationNumber(String confirmationNumber) {
 		this.confirmationNumber = confirmationNumber;
 	}
+
+	public String getCaseNumber() {
+		return caseNumber;
+	}
+
+	public void setCaseNumber(String caseNumber) {
+		this.caseNumber = caseNumber;
+	}
+
+	public String getProdId() {
+		return prodId;
+	}
+
+	public void setProdId(String prodId) {
+		this.prodId = prodId;
+	}
 	
 	
 
