@@ -197,6 +197,7 @@ create table part_kit
 (
 	id integer primary key auto_increment  not null,
     part_id integer ,
+    tenant_id integer ,
     price_method  varchar(30) ,
  	kit_type varchar(30),
  	is_active char(1) default 'Y',
@@ -391,11 +392,11 @@ INSERT INTO  part_attribute (id, part_id, attribute_code,attribute_value,attribu
 INSERT INTO  part_attribute (id, part_id, attribute_code,attribute_value,attribute_uom)
   VALUES(402, 102,'attributecode1','attributevalue','other');
 
-INSERT INTO  part_kit (id, part_id, price_method, kit_type, is_active, start_date, end_date, created_date, updated_date, created_by, updated_by)
-  VALUES(501, 101, 'Kit Level','Standard', 'Y', null,null,CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL);
+INSERT INTO  part_kit (id, part_id, tenant_id,price_method, kit_type, is_active, start_date, end_date, created_date, updated_date, created_by, updated_by)
+  VALUES(501, 101,961, 'Kit Level','Standard', 'Y', null,null,CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL);
   
-INSERT INTO  part_kit (id, part_id, price_method, kit_type, is_active, start_date, end_date, created_date, updated_date, created_by, updated_by)
-  VALUES(502, 102, 'Kit Level','Standard', 'Y', null,null,CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL);
+INSERT INTO  part_kit (id, part_id, tenant_id,price_method, kit_type, is_active, start_date, end_date, created_date, updated_date, created_by, updated_by)
+  VALUES(502, 102, 961, 'Kit Level','Standard', 'Y', null,null,CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL);
   
 INSERT INTO  part_kit_item (id, part_id, part_kit_id,part_qty)
   VALUES(601, 101,501,3);
@@ -404,10 +405,10 @@ INSERT INTO  part_kit_item (id, part_id, part_kit_id,part_qty)
   VALUES(602, 102,501,3);
     
 INSERT INTO  picklist (id, picklist_code, picklist_type, is_active,be_id,tenant_id,picklist_comments,created_date, updated_date, created_by, updated_by)
-  VALUES(701, 'pickListcode', 'Standard', 'Y', 10799,null,'picklistcomments',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL);
+  VALUES(701, 'pickListcode', 'Standard', 'Y', 961,null,'picklistcomments',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL);
   
 INSERT INTO  picklist (id, picklist_code, picklist_type, is_active,be_id,tenant_id,picklist_comments,created_date, updated_date, created_by, updated_by)
-  VALUES(702, 'pickListcode', 'Standard', 'Y', 10799,null,'picklistcomments',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL);
+  VALUES(702, 'pickListcode', 'Standard', 'Y', 961,null,'picklistcomments',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL);
   
 INSERT INTO  picklist_item (id,part_id, picklist_id,part_qty)
   VALUES(801,101, 701,3);
