@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -130,7 +131,15 @@ public class PartKit extends MizeEntity{
 		return super.getUpdatedBy();
 	}
 	
-	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "partKit")
+	public List<PartKitItem> getPartKitItems() {
+		return partKitItems;
+	}
+
+	public void setPartKitItems(List<PartKitItem> partKitItems) {
+		this.partKitItems = partKitItems;
+	}
+
 	@Override
 	public void setId(Long id) {
 		this.id = id;
