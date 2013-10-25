@@ -9,11 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeEntity;
-import com.mize.domain.sce.catalog.CatalogEntry;
 
 @Entity
 @Table(name="business_entity_intl")

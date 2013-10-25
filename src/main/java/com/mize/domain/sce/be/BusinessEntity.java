@@ -14,7 +14,6 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import com.mize.domain.common.MizeEntity;
-import com.mize.domain.sce.catalog.CatalogIntl;
 
 @Entity
 @Table(name = "business_entity", uniqueConstraints = {@UniqueConstraint (columnNames={"tenant_id", "code"})})
