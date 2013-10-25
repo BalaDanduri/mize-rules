@@ -35,6 +35,8 @@ public class ServiceScheduleSearch {
 	String lastName;
 	String serviceOrderNumber;
 	String confirmationNumber;
+	String caseNumber;
+	String prodId;
 	
 	public ServiceScheduleSearch() {
 		

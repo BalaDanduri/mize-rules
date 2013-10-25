@@ -71,6 +71,18 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 	private String caseNumber;	
 	private String serialNumber;
 	
+	public enum Formatt{
+		in_home,carry_in,support_request
+	}
+	
+	public static Formatt getFormatt(String formatt){
+		for(Formatt f : Formatt.values()){
+			if(f.toString().equalsIgnoreCase(formatt)){
+				return f;
+			}
+		}
+		return null;
+	}
 	public ServiceSchedule() {
 		user = new User();
 		brand = new Brand();
