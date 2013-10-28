@@ -26,6 +26,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.mize.domain.auth.User;
 import com.mize.domain.brand.Brand;
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.servicelocator.BusinessEntity;
 import com.mize.domain.user.UserAddress;
 import com.mize.domain.util.JodaDateDeserializer;
 import com.mize.domain.util.JsonDateSerializer;
@@ -36,6 +37,7 @@ public class ProductRegister extends MizeEntity implements Comparable<ProductReg
 
 	private static final long serialVersionUID = -6338652951554117142L;
 	private Brand brand;
+	private BusinessEntity businessEntity;
 	private Product product;
 	private User user;
 	private String serialNumber;
@@ -110,6 +112,16 @@ public class ProductRegister extends MizeEntity implements Comparable<ProductReg
 
 	public void setBrand(Brand brand) {
 		this.brand = brand;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "be_id", nullable = true)
+	public BusinessEntity getBusinessEntity() {
+		return businessEntity;
+	}
+
+	public void setBusinessEntity(BusinessEntity businessEntity) {
+		this.businessEntity = businessEntity;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -324,17 +336,24 @@ public class ProductRegister extends MizeEntity implements Comparable<ProductReg
 
 	@Override
 	public String toString() {
-		return "ProductRegister [brand=" + brand + ", product=" + product + ", user=" + user + ", serialNumber="
-				+ serialNumber + ", purchaseDate=" + purchaseDate + ", purchasePrice=" + purchasePrice
-				+ ", purchaseStore=" + purchaseStore + ", warrantyExpiryDate=" + warrantyExpiryDate
-				+ ", additionalInfo=" + additionalInfo + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", email=" + email + ", address1=" + address1 + ", address2=" + address2 + ", address3=" + address3
-				+ ", city=" + city + ", state=" + state + ", country=" + country + ", zipCode=" + zipCode
-				+ ", phoneMobile=" + phoneMobile + ", phoneHome=" + phoneHome + ", phoneWork=" + phoneWork
-				+ ", attachments=" + attachments + ", stateId=" + stateId + ", countryId=" + countryId + ", regnName="
-				+ regnName + ", createdDateFrom=" + createdDateFrom + ", createdDateTo=" + createdDateTo
-				+ ", updatedDateFrom=" + updatedDateFrom + ", updatedDateTo=" + updatedDateTo + ", addressId="
-				+ addressId + ", address=" + address + "]";
+		return "ProductRegister [brand=" + brand + ", businessEntity="
+				+ businessEntity + ", product=" + product + ", user=" + user
+				+ ", serialNumber=" + serialNumber + ", purchaseDate="
+				+ purchaseDate + ", purchasePrice=" + purchasePrice
+				+ ", purchaseStore=" + purchaseStore + ", warrantyExpiryDate="
+				+ warrantyExpiryDate + ", additionalInfo=" + additionalInfo
+				+ ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", email=" + email + ", address1=" + address1 + ", address2="
+				+ address2 + ", address3=" + address3 + ", city=" + city
+				+ ", state=" + state + ", country=" + country + ", zipCode="
+				+ zipCode + ", phoneMobile=" + phoneMobile + ", phoneHome="
+				+ phoneHome + ", phoneWork=" + phoneWork + ", attachments="
+				+ attachments + ", stateId=" + stateId + ", countryId="
+				+ countryId + ", regnName=" + regnName + ", template="
+				+ template + ", createdDateFrom=" + createdDateFrom
+				+ ", createdDateTo=" + createdDateTo + ", updatedDateFrom="
+				+ updatedDateFrom + ", updatedDateTo=" + updatedDateTo
+				+ ", addressId=" + addressId + ", address=" + address + "]";
 	}
 	@Override
 	public int hashCode() {
