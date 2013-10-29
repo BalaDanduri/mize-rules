@@ -70,6 +70,7 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 	private String lastName;
 	private String caseNumber;	
 	private String serialNumber;
+	private String processId;
 	
 	public enum Formatt{
 		in_home,carry_in,support_request
@@ -704,6 +705,13 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 
 	public void setSerialNumber(String serialNumber) {
 		this.serialNumber = serialNumber;
+	}
+	
+	public String getProcessId() {
+		return processId;
+	}
+	public void setProcessId(String processId) {
+		this.processId = processId;
 	}
 	
 }
