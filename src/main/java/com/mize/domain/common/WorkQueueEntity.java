@@ -16,7 +16,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.util.JodaDateTimeDeserializer;
 
-public class WorkQueueItem extends MizeEntity {
+public class WorkQueueEntity extends MizeEntity {
 
 	private static final long serialVersionUID = -3725309680746498668L;
 
@@ -26,11 +26,11 @@ public class WorkQueueItem extends MizeEntity {
 	private MizeEntity serviceEntity;
 	private String status;
 	
-	public WorkQueueItem(){
+	public WorkQueueEntity(){
 		super();
 	}
 	
-	public WorkQueueItem(WorkQueue workQueue, String entityType,
+	public WorkQueueEntity(WorkQueue workQueue, String entityType,
 			String entityCode, MizeEntity serviceEntity, String status) {
 		super();
 		this.workQueue = workQueue;
@@ -186,7 +186,7 @@ public class WorkQueueItem extends MizeEntity {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		WorkQueueItem other = (WorkQueueItem) obj;
+		WorkQueueEntity other = (WorkQueueEntity) obj;
 		if (entityCode == null) {
 			if (other.entityCode != null)
 				return false;
