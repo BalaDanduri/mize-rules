@@ -14,6 +14,7 @@ import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.mize.domain.service.schedule.ServiceSchedule;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 
 public class WorkQueueEntity extends MizeEntity {
@@ -23,7 +24,7 @@ public class WorkQueueEntity extends MizeEntity {
 	private WorkQueue workQueue;
 	private String entityType;
 	private String entityCode;
-	private MizeEntity serviceEntity;
+	private ServiceSchedule serviceEntity;
 	private String status;
 	
 	public WorkQueueEntity(){
@@ -31,7 +32,7 @@ public class WorkQueueEntity extends MizeEntity {
 	}
 	
 	public WorkQueueEntity(WorkQueue workQueue, String entityType,
-			String entityCode, MizeEntity serviceEntity, String status) {
+			String entityCode, ServiceSchedule serviceEntity, String status) {
 		super();
 		this.workQueue = workQueue;
 		this.entityType = entityType;
@@ -108,7 +109,7 @@ public class WorkQueueEntity extends MizeEntity {
 		return serviceEntity;
 	}
 
-	public void setServiceEntity(MizeEntity serviceEntity) {
+	public void setServiceEntity(ServiceSchedule serviceEntity) {
 		this.serviceEntity = serviceEntity;
 	}
 
