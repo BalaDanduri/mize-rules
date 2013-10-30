@@ -9,7 +9,17 @@ public class ActivitiModel  extends MizeEntity  implements Comparable<ActivitiMo
 	private String name;
 	private String deploymentId;
 	private String processUrl;
+	private String modelEditUrl;
+	private String modelName;
 	
+	public String getModelName() {
+		return modelName;
+	}
+
+	public void setModelName(String modelName) {
+		this.modelName = modelName;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -32,6 +42,14 @@ public class ActivitiModel  extends MizeEntity  implements Comparable<ActivitiMo
 
 	public void setProcessUrl(String processUrl) {
 		this.processUrl = processUrl;
+	}
+	
+	public String getModelEditUrl() {
+		return modelEditUrl;
+	}
+
+	public void setModelEditUrl(String modelEditUrl) {
+		this.modelEditUrl = modelEditUrl;
 	}
 
 	@Override
