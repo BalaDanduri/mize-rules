@@ -79,7 +79,7 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 	}
 	
 	public enum Status{
-		complete
+		Completed
 	}
 	
 	public static Formatt getFormatt(String formatt){
