@@ -2,6 +2,7 @@ package com.mize.domain.sce.part;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -38,17 +39,21 @@ public class Part extends MizeEntity {
 	private String isReturnable;
 	private String uom;
 	private List<PartIntl> partIntl;
-	private List<PartPrice> partPrice;
+	private List<PartPrice> partPrices;
 	private List<PartAttribute> partAttributes;
+	private List<PartKit> partKits;
 
 	public Part() {
 		super();
 	}
 
+	
+
 	public Part(BusinessEntity tenant, String partCode, String partType,
 			String isActive, String isKit, String isSerialized,
 			String isReturnable, String uom, List<PartIntl> partIntl,
-			List<PartPrice> partPrice, List<PartAttribute> partAttributes) {
+			List<PartPrice> partPrices, List<PartAttribute> partAttributes,
+			List<PartKit> partKits) {
 		super();
 		this.tenant = tenant;
 		this.partCode = partCode;
@@ -59,9 +64,12 @@ public class Part extends MizeEntity {
 		this.isReturnable = isReturnable;
 		this.uom = uom;
 		this.partIntl = partIntl;
-		this.partPrice = partPrice;
+		this.partPrices = partPrices;
 		this.partAttributes = partAttributes;
+		this.partKits = partKits;
 	}
+
+
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -122,9 +130,9 @@ public class Part extends MizeEntity {
 		return partIntl;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "part")
-	public List<PartPrice> getPartPrice() {
-		return partPrice;
+	@OneToMany(fetch = FetchType.LAZY, cascade={CascadeType.ALL}, mappedBy = "part")
+	public List<PartPrice> getPartPrices() {
+		return partPrices;
 	}
 
 	@Override	
@@ -156,6 +164,18 @@ public class Part extends MizeEntity {
 	public Long getUpdatedBy() {		
 		return super.getUpdatedBy();
 	}
+
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "part")
+	public List<PartKit> getPartKits() {
+		return partKits;
+	}
+
+	public void setPartKits(List<PartKit> partKits) {
+		this.partKits = partKits;
+	}
+
+
 
 	@Override
 	public void setId(Long id) {
@@ -202,8 +222,8 @@ public class Part extends MizeEntity {
 		this.partIntl = partIntl;
 	}
 
-	public void setPartPrice(List<PartPrice> partPrice) {
-		this.partPrice = partPrice;
+	public void setPartPrices(List<PartPrice> partPrices) {
+		this.partPrices = partPrices;
 	}
 
 	@Override
@@ -252,7 +272,7 @@ public class Part extends MizeEntity {
 		result = prime * result
 				+ ((partIntl == null) ? 0 : partIntl.hashCode());
 		result = prime * result
-				+ ((partPrice == null) ? 0 : partPrice.hashCode());
+				+ ((partPrices == null) ? 0 : partPrices.hashCode());
 		result = prime * result
 				+ ((partType == null) ? 0 : partType.hashCode());
 		result = prime * result + ((tenant == null) ? 0 : tenant.hashCode());
@@ -304,10 +324,10 @@ public class Part extends MizeEntity {
 				return false;
 		} else if (!partIntl.equals(other.partIntl))
 			return false;
-		if (partPrice == null) {
-			if (other.partPrice != null)
+		if (partPrices == null) {
+			if (other.partPrices != null)
 				return false;
-		} else if (!partPrice.equals(other.partPrice))
+		} else if (!partPrices.equals(other.partPrices))
 			return false;
 		if (partType == null) {
 			if (other.partType != null)
@@ -349,7 +369,7 @@ public class Part extends MizeEntity {
 		builder.append(", partIntl=");
 		builder.append(partIntl);
 		builder.append(", partPrice=");
-		builder.append(partPrice);
+		builder.append(partPrices);
 		builder.append(", partAttributes=");
 		builder.append(partAttributes);
 		builder.append(", id=");

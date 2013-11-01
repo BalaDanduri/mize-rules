@@ -89,6 +89,7 @@ public class PartKit extends MizeEntity{
 
 	@Column(name = "start_date", nullable = false)
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@JsonSerialize(using=JsonDateTimeSerializer.class)
 	public DateTime getStartDate() {
 		return startDate;
@@ -96,6 +97,7 @@ public class PartKit extends MizeEntity{
 
 	@Column(name = "end_date", nullable = false)
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@JsonSerialize(using=JsonDateTimeSerializer.class)
 	public DateTime getEndDate() {
 		return endDate;
