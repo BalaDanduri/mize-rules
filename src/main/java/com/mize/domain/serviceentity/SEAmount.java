@@ -24,6 +24,11 @@ public class SEAmount extends MizeEntity implements Comparable<SEAmount> {
 	public SEAmount() {
 		super();
 	}
+	
+	public SEAmount(Long id) {
+		super();
+		this.id = id;		
+	}
 
 	@Override
 	public Long getId() {

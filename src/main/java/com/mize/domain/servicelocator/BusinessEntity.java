@@ -43,6 +43,11 @@ public class BusinessEntity  extends MizeEntity implements Comparable<BusinessEn
 		
 	}
 	
+	public BusinessEntity(Long id) {
+		super();
+		this.id = id;
+	}
+	
 	public enum TypeCode {
 		company, dealer, store
 	}

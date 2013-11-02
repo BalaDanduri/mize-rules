@@ -34,6 +34,9 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 	private List<SEAttachment> attachments = new ArrayList<SEAttachment>();
 	private User user;
 	private SEAudit audit;
+	private SERelation relation;
+	private SERequester requester;
+	private SEProvider provider;
 	
 	public ServiceEntity() {
 		super();
@@ -228,6 +231,30 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 
 	public void setAudit(SEAudit audit) {
 		this.audit = audit;
+	}
+
+	public SERelation getRelation() {
+		return relation;
+	}
+
+	public void setRelation(SERelation relation) {
+		this.relation = relation;
+	}
+
+	public SERequester getRequester() {
+		return requester;
+	}
+
+	public void setRequester(SERequester requester) {
+		this.requester = requester;
+	}
+
+	public SEProvider getProvider() {
+		return provider;
+	}
+
+	public void setProvider(SEProvider provider) {
+		this.provider = provider;
 	}
 
 	@Override
