@@ -1,5 +1,8 @@
 package com.mize.domain.serviceentity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -40,6 +43,9 @@ public class SERequest extends MizeEntity implements Comparable<SERequest> {
 	private SEAmount laborAmount;
 	private SEAmount otherAmount;
 	private SEAmount totalAmount;
+	private List<SEPart> parts = new ArrayList<SEPart>();
+	private List<SELabor> labors = new ArrayList<SELabor>();
+	private List<SEOtherCharges> othersCharges = new ArrayList<SEOtherCharges>();
 	
 	public SERequest() {
 		super();
@@ -289,6 +295,30 @@ public class SERequest extends MizeEntity implements Comparable<SERequest> {
 
 	public void setTotalAmount(SEAmount totalAmount) {
 		this.totalAmount = totalAmount;
+	}
+
+	public List<SEPart> getParts() {
+		return parts;
+	}
+
+	public void setParts(List<SEPart> parts) {
+		this.parts = parts;
+	}
+
+	public List<SELabor> getLabors() {
+		return labors;
+	}
+
+	public void setLabors(List<SELabor> labors) {
+		this.labors = labors;
+	}
+
+	public List<SEOtherCharges> getOthersCharges() {
+		return othersCharges;
+	}
+
+	public void setOthersCharges(List<SEOtherCharges> othersCharges) {
+		this.othersCharges = othersCharges;
 	}
 
 	@Override

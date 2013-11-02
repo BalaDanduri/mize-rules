@@ -1,5 +1,8 @@
 package com.mize.domain.serviceentity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -7,6 +10,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.mize.domain.auth.User;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.servicelocator.BusinessEntity;
@@ -19,13 +23,17 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 	private String code;
 	private String status;
 	private Locale locale;
-	private String countryCode;
-	private String reference;
+	private String currencyCode;
+	private String entityReference;
 	private SEAmount partAmount;
 	private SEAmount laborAmount;
 	private SEAmount otherAmount;
 	private SEAmount totalAmount;
 	private BusinessEntity businessEntity;
+	private List<SERequest> requests = new ArrayList<SERequest>();
+	private List<SEAttachment> attachments = new ArrayList<SEAttachment>();
+	private User user;
+	private SEAudit audit;
 	
 	public ServiceEntity() {
 		super();
@@ -78,20 +86,20 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 		this.locale = locale;
 	}
 
-	public String getCountryCode() {
-		return countryCode;
+	public String getCurrencyCode() {
+		return currencyCode;
 	}
 
-	public void setCountryCode(String countryCode) {
-		this.countryCode = countryCode;
+	public void setCurrencyCode(String currencyCode) {
+		this.currencyCode = currencyCode;
 	}
 
-	public String getReference() {
-		return reference;
+	public String getEntityReference() {
+		return entityReference;
 	}
 
-	public void setReference(String reference) {
-		this.reference = reference;
+	public void setEntityReference(String entityReference) {
+		this.entityReference = entityReference;
 	}
 
 	public SEAmount getPartAmount() {
@@ -174,6 +182,54 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 		this.updatedBy = updatedBy;
 	}
 
+	public List<SERequest> getRequests() {
+		return requests;
+	}
+
+	public void setRequests(List<SERequest> requests) {
+		this.requests = requests;
+	}
+
+	@JsonIgnore
+	public SERequest getRequest() {
+		if(requests != null && requests.size() > 0){
+			return requests.get(0);
+		}
+		return null;
+	}
+
+	@JsonIgnore
+	public void setRequest(SERequest request) {
+		if(requests == null){
+			requests = new ArrayList<SERequest>();
+		}
+		requests.add(request);
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public List<SEAttachment> getAttachments() {
+		return attachments;
+	}
+
+	public void setAttachments(List<SEAttachment> attachments) {
+		this.attachments = attachments;
+	}
+
+	public SEAudit getAudit() {
+		return audit;
+	}
+
+	public void setAudit(SEAudit audit) {
+		this.audit = audit;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
@@ -182,7 +238,7 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 				+ ((businessEntity == null) ? 0 : businessEntity.hashCode());
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result
-				+ ((countryCode == null) ? 0 : countryCode.hashCode());
+				+ ((currencyCode == null) ? 0 : currencyCode.hashCode());
 		result = prime * result
 				+ ((laborAmount == null) ? 0 : laborAmount.hashCode());
 		result = prime * result + ((locale == null) ? 0 : locale.hashCode());
@@ -191,7 +247,7 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 		result = prime * result
 				+ ((partAmount == null) ? 0 : partAmount.hashCode());
 		result = prime * result
-				+ ((reference == null) ? 0 : reference.hashCode());
+				+ ((entityReference == null) ? 0 : entityReference.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result
 				+ ((totalAmount == null) ? 0 : totalAmount.hashCode());
@@ -217,10 +273,10 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 				return false;
 		} else if (!code.equals(other.code))
 			return false;
-		if (countryCode == null) {
-			if (other.countryCode != null)
+		if (currencyCode == null) {
+			if (other.currencyCode != null)
 				return false;
-		} else if (!countryCode.equals(other.countryCode))
+		} else if (!currencyCode.equals(other.currencyCode))
 			return false;
 		if (laborAmount == null) {
 			if (other.laborAmount != null)
@@ -242,10 +298,10 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 				return false;
 		} else if (!partAmount.equals(other.partAmount))
 			return false;
-		if (reference == null) {
-			if (other.reference != null)
+		if (entityReference == null) {
+			if (other.entityReference != null)
 				return false;
-		} else if (!reference.equals(other.reference))
+		} else if (!entityReference.equals(other.entityReference))
 			return false;
 		if (status == null) {
 			if (other.status != null)
@@ -263,8 +319,8 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 	@Override
 	public String toString() {
 		return "ServiceEntity [code=" + code + ", status=" + status
-				+ ", locale=" + locale + ", countryCode=" + countryCode
-				+ ", reference=" + reference + ", partAmount=" + partAmount
+				+ ", locale=" + locale + ", currencyCode=" + currencyCode
+				+ ", entityReference=" + entityReference + ", partAmount=" + partAmount
 				+ ", laborAmount=" + laborAmount + ", otherAmount="
 				+ otherAmount + ", totalAmount=" + totalAmount
 				+ ", businessEntity=" + businessEntity + "]";
