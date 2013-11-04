@@ -25,10 +25,10 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 	private Locale locale;
 	private String currencyCode;
 	private String entityReference;
-	private SEAmount partAmount;
-	private SEAmount laborAmount;
-	private SEAmount otherAmount;
-	private SEAmount totalAmount;
+	private SEAmount partAmount = new SEAmount();
+	private SEAmount laborAmount = new SEAmount();
+	private SEAmount otherAmount = new SEAmount();
+	private SEAmount totalAmount = new SEAmount();
 	private BusinessEntity businessEntity;
 	private List<SERequest> requests = new ArrayList<SERequest>();
 	private List<SEAttachment> attachments = new ArrayList<SEAttachment>();
@@ -37,6 +37,7 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 	private SERelation relation;
 	private SERequester requester;
 	private SEProvider provider;
+	private List<SENote> notes = new ArrayList<SENote>();
 	
 	public ServiceEntity() {
 		super();
@@ -255,6 +256,14 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 
 	public void setProvider(SEProvider provider) {
 		this.provider = provider;
+	}
+
+	public List<SENote> getNotes() {
+		return notes;
+	}
+
+	public void setNotes(List<SENote> notes) {
+		this.notes = notes;
 	}
 
 	@Override
