@@ -18,7 +18,15 @@ public class Locale extends MizeEntity implements Comparable<Locale>{
     private String countryCode;
     private String name;
    
-
+    public Locale(){
+    	super();
+    }
+    
+    public Locale(Long id){
+    	super();
+    	this.id = id;
+    }
+    
 	@Override
 	@Id
 	@GenericGenerator(name="localeId" , strategy="increment")

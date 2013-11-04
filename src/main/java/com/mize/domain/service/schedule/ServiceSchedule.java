@@ -25,6 +25,7 @@ import com.mize.domain.brand.Brand;
 import com.mize.domain.common.Country;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.common.State;
+import com.mize.domain.product.Product;
 import com.mize.domain.user.UserAddress;
 import com.mize.domain.util.JodaDateDeserializer;
 import com.mize.domain.util.JsonDateSerializer;
@@ -35,7 +36,10 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 	
 	private static final long serialVersionUID = -5351211947355990640L;	
 	
+	private Product product;
 	private User user;
+	private User userBE;
+	private User source;
 	private Brand brand;
 	private String serviceFormat;
 	private Long beId;
@@ -66,12 +70,31 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 	private Long addressId;
 	private String firstName;
 	private String lastName;
+	private String caseNumber;	
+	private String serialNumber;
+	private String processId;
 	
+	public enum Formatt{
+		in_home,carry_in,support_request
+	}
 	
+	public enum Status{
+		Completed
+	}
+	
+	public static Formatt getFormatt(String formatt){
+		for(Formatt f : Formatt.values()){
+			if(f.toString().equalsIgnoreCase(formatt)){
+				return f;
+			}
+		}
+		return null;
+	}
 	public ServiceSchedule() {
 		user = new User();
 		brand = new Brand();
 		address = new UserAddress();
+		
 	}	
 
 	
@@ -665,7 +688,48 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 	public void setAddressId(Long addressId) {
 		this.addressId = addressId;
 	}
+
+	public Product getProduct() {
+		return product;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+	public String getCaseNumber() {
+		return caseNumber;
+	}
 	
+	public void setCaseNumber(String caseNumber) {
+		this.caseNumber = caseNumber;
+	}
 	
+	public String getSerialNumber() {
+		return serialNumber;
+	}
+
+	public void setSerialNumber(String serialNumber) {
+		this.serialNumber = serialNumber;
+	}
+	
+	public String getProcessId() {
+		return processId;
+	}
+	public void setProcessId(String processId) {
+		this.processId = processId;
+	}
+	public User getUserBE() {
+		return userBE;
+	}
+	public void setUserBE(User userBE) {
+		this.userBE = userBE;
+	}
+	public User getSource() {
+		return source;
+	}
+	public void setSource(User source) {
+		this.source = source;
+	}
 	
 }

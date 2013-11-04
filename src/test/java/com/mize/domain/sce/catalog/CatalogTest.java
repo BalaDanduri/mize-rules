@@ -17,7 +17,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.ContextConfiguration;
-
 import com.mize.domain.servicelocator.BusinessEntity;
 import com.mize.domain.test.util.JPATest;
 
@@ -74,14 +73,18 @@ public class CatalogTest extends JPATest {
 					return catalog;
 				}
 			});		
+
 			if (catalogs == null || catalogs.size() == 0) {
 				fail("Found Nothing");
 			}
+
 			Catalog catalogFromDB = catalogs.get(0);			
 			assertTrue(catalog.getId().equals(catalogFromDB.getId()));
 			assertTrue(catalog.getCatalogCode().equals(catalogFromDB.getCatalogCode()));
 			assertTrue(catalog.getCatalogType().equals(catalogFromDB.getCatalogType()));
+
 			assertTrue(catalog.getTenant().getId().equals(catalogFromDB.getTenant().getId()));
+
 		} catch (Throwable th) {
 			th.printStackTrace();
 			fail("Got Exception");

@@ -21,6 +21,7 @@ import org.springframework.test.context.ContextConfiguration;
 import com.mize.domain.common.Locale;
 import com.mize.domain.test.util.JPATest;
 
+
 @ContextConfiguration(locations={"/test-context.xml"})
 public class CatalogIntlTest extends JPATest {
 	
@@ -41,10 +42,10 @@ public class CatalogIntlTest extends JPATest {
 	@Before
 	public void setUp() throws Exception {
 		entityManager = getEntityManager();
+
 		catalog = findExistingCatalog(entityManager);
 		Locale locale = findLocaleObjectFromDBToBeUsedForCatalogIntl();			
 		catalogIntl = createCatalogIntlObjectToBeSavedinDB(catalog, locale);
-		
 		//save catalog
 		EntityTransaction tx = entityManager.getTransaction();
 		tx.begin();
@@ -81,6 +82,7 @@ public class CatalogIntlTest extends JPATest {
 				
 			});
 			// catalog after find should be equals to previous one
+
 			if (intlList == null || intlList.size() == 0) {
 				fail("Found Nothing");
 			}
@@ -96,11 +98,27 @@ public class CatalogIntlTest extends JPATest {
 		}
 	}
 
+
+
+	/*private void setCatalogIntlIntoCatalog(Catalog catalog,
+			CatalogIntl catalogIntl) {
+		List<CatalogIntl> list = new ArrayList<CatalogIntl>();
+		list.add(catalogIntl);
+		catalog.setCatalogIntl(list);
+	}*/
+
+
 	private CatalogIntl createCatalogIntlObjectToBeSavedinDB(Catalog catalog,
 			Locale locale) {
 		CatalogIntl catalogIntl = new CatalogIntl(catalog, locale,"Test", "Test description");
 		return catalogIntl;
 	}
+
+
+	/*private Catalog createCatalogObjectToBeSavedInDB(BusinessEntity be) {
+		Catalog catalog = new Catalog(be, "ABC", "Test", "Y", null);
+		return catalog;
+	}*/
 
 }
 

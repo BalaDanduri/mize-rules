@@ -1,4 +1,3 @@
-
 drop table if exists catalog;
 create table catalog
 (

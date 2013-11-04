@@ -10,6 +10,8 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import com.mize.domain.exception.MizeError;
 
 public final class ServiceDTO<T> implements ServiceLiteral{
+
+	private static final long serialVersionUID = 3924014526748017303L;
 	private T dataObject;
 	private List<MizeError> errors;
 	private Map<String,Object> messages = new HashMap<String, Object>();
