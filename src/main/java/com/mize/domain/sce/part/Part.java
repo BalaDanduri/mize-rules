@@ -79,7 +79,7 @@ public class Part extends MizeEntity {
 		return id;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(cascade={CascadeType.ALL},fetch = FetchType.EAGER)
 	@JoinColumn(name="tenant_id")
 	public BusinessEntity getTenant() {
 		return tenant;
@@ -115,7 +115,7 @@ public class Part extends MizeEntity {
 		return isReturnable;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "part")
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "part")
 	public List<PartAttribute> getPartAttributes() {
 		return partAttributes;
 	}
@@ -125,7 +125,7 @@ public class Part extends MizeEntity {
 		return uom;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "part")
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "part")
 	public List<PartIntl> getPartIntl() {
 		return partIntl;
 	}
@@ -166,7 +166,7 @@ public class Part extends MizeEntity {
 	}
 
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "part")
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "part")
 	public List<PartKit> getPartKits() {
 		return partKits;
 	}
