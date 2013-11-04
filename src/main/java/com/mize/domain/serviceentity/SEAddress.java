@@ -29,6 +29,7 @@ public class SEAddress extends MizeEntity implements Comparable<SEAddress> {
 	private String phone2;
 	private String email;
 	private String fax;
+	private String county;
 	
 	public SEAddress() {
 		super();
@@ -196,6 +197,14 @@ public class SEAddress extends MizeEntity implements Comparable<SEAddress> {
 		this.updatedBy = updatedBy;
 	}
 	
+	public String getCounty() {
+		return county;
+	}
+
+	public void setCounty(String county) {
+		this.county = county;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;

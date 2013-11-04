@@ -39,10 +39,10 @@ public class SERequest extends MizeEntity implements Comparable<SERequest> {
 	private String causeDesc;
 	private String correctiveActionCode;
 	private String correctiveActionDesc;
-	private SEAmount partAmount;
-	private SEAmount laborAmount;
-	private SEAmount otherAmount;
-	private SEAmount totalAmount;
+	private SEAmount partAmount = new SEAmount();
+	private SEAmount laborAmount = new SEAmount();
+	private SEAmount otherAmount = new SEAmount();
+	private SEAmount totalAmount = new SEAmount();
 	private List<SEPart> parts = new ArrayList<SEPart>();
 	private List<SELabor> labors = new ArrayList<SELabor>();
 	private List<SEOtherCharges> othersCharges = new ArrayList<SEOtherCharges>();
