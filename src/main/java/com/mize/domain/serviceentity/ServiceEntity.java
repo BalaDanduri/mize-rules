@@ -13,7 +13,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.mize.domain.auth.User;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeEntity;
-import com.mize.domain.servicelocator.BusinessEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
@@ -29,7 +28,6 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 	private SEAmount laborAmount = new SEAmount();
 	private SEAmount otherAmount = new SEAmount();
 	private SEAmount totalAmount = new SEAmount();
-	private BusinessEntity businessEntity;
 	private List<SERequest> requests = new ArrayList<SERequest>();
 	private List<SEAttachment> attachments = new ArrayList<SEAttachment>();
 	private User user;
@@ -43,6 +41,14 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 		super();
 	}
 	
+	public enum Staus{
+		Draft,Pending,Corrections_Needed,Approved,Deleted,Rejected
+	}
+	
+	public enum Type{
+		Warranty,Campaign,Extended_Warranty,PDI,Parts_Warranty,Support_Request,Service_Order;
+	}
+	
 	@Override
 	public Long getId() {
 		return id;
@@ -53,14 +59,6 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 		this.id = id;
 	}	
 	
-	public BusinessEntity getBusinessEntity() {
-		return businessEntity;
-	}
-
-	public void setBusinessEntity(BusinessEntity businessEntity) {
-		this.businessEntity = businessEntity;
-	}
-
 	@Override
 	public int compareTo(ServiceEntity arg0) {
 		return 0;
@@ -270,8 +268,6 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime * result
-				+ ((businessEntity == null) ? 0 : businessEntity.hashCode());
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result
 				+ ((currencyCode == null) ? 0 : currencyCode.hashCode());
@@ -299,11 +295,6 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 		if (getClass() != obj.getClass())
 			return false;
 		ServiceEntity other = (ServiceEntity) obj;		
-		if (businessEntity == null) {
-			if (other.businessEntity != null)
-				return false;
-		} else if (!businessEntity.equals(other.businessEntity))
-			return false;
 		if (code == null) {
 			if (other.code != null)
 				return false;
@@ -358,8 +349,7 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 				+ ", locale=" + locale + ", currencyCode=" + currencyCode
 				+ ", entityReference=" + entityReference + ", partAmount=" + partAmount
 				+ ", laborAmount=" + laborAmount + ", otherAmount="
-				+ otherAmount + ", totalAmount=" + totalAmount
-				+ ", businessEntity=" + businessEntity + "]";
+				+ otherAmount + ", totalAmount=" + totalAmount + "]";
 	}
 
 }
