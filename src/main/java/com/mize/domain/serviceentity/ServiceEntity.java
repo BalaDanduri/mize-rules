@@ -13,7 +13,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.mize.domain.auth.User;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeEntity;
-import com.mize.domain.servicelocator.BusinessEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
@@ -29,7 +28,6 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 	private SEAmount laborAmount = new SEAmount();
 	private SEAmount otherAmount = new SEAmount();
 	private SEAmount totalAmount = new SEAmount();
-	private BusinessEntity businessEntity;
 	private List<SERequest> requests = new ArrayList<SERequest>();
 	private List<SEAttachment> attachments = new ArrayList<SEAttachment>();
 	private User user;
@@ -38,9 +36,21 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 	private SERequester requester;
 	private SEProvider provider;
 	private List<SENote> notes = new ArrayList<SENote>();
+	private String serviceType;
+	private String salesPerson;
+	private String shipComplete;
+	
 	
 	public ServiceEntity() {
 		super();
+	}
+	
+	public enum Staus{
+		Draft,Pending,Corrections_Needed,Approved,Deleted,Rejected
+	}
+	
+	public enum Type{
+		Warranty,Campaign,Extended_Warranty,PDI,Parts_Warranty,Support_Request,Service_Order;
 	}
 	
 	@Override
@@ -53,14 +63,6 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 		this.id = id;
 	}	
 	
-	public BusinessEntity getBusinessEntity() {
-		return businessEntity;
-	}
-
-	public void setBusinessEntity(BusinessEntity businessEntity) {
-		this.businessEntity = businessEntity;
-	}
-
 	@Override
 	public int compareTo(ServiceEntity arg0) {
 		return 0;
@@ -266,27 +268,69 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 		this.notes = notes;
 	}
 
+	public String getServiceType() {
+		return serviceType;
+	}
+
+	public void setServiceType(String serviceType) {
+		this.serviceType = serviceType;
+	}
+
+	public String getSalesPerson() {
+		return salesPerson;
+	}
+
+	public void setSalesPerson(String salesPerson) {
+		this.salesPerson = salesPerson;
+	}
+
+	public String getShipComplete() {
+		return shipComplete;
+	}
+
+	public void setShipComplete(String shipComplete) {
+		this.shipComplete = shipComplete;
+	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result
-				+ ((businessEntity == null) ? 0 : businessEntity.hashCode());
+				+ ((attachments == null) ? 0 : attachments.hashCode());
+		result = prime * result + ((audit == null) ? 0 : audit.hashCode());
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result
 				+ ((currencyCode == null) ? 0 : currencyCode.hashCode());
 		result = prime * result
+				+ ((entityReference == null) ? 0 : entityReference.hashCode());
+		result = prime * result
 				+ ((laborAmount == null) ? 0 : laborAmount.hashCode());
 		result = prime * result + ((locale == null) ? 0 : locale.hashCode());
+		result = prime * result + ((notes == null) ? 0 : notes.hashCode());
 		result = prime * result
 				+ ((otherAmount == null) ? 0 : otherAmount.hashCode());
 		result = prime * result
 				+ ((partAmount == null) ? 0 : partAmount.hashCode());
 		result = prime * result
-				+ ((entityReference == null) ? 0 : entityReference.hashCode());
+				+ ((provider == null) ? 0 : provider.hashCode());
+		result = prime * result
+				+ ((relation == null) ? 0 : relation.hashCode());
+		result = prime * result
+				+ ((requester == null) ? 0 : requester.hashCode());
+		result = prime * result
+				+ ((requests == null) ? 0 : requests.hashCode());
+		result = prime * result
+				+ ((salesPerson == null) ? 0 : salesPerson.hashCode());
+		result = prime * result
+				+ ((serviceType == null) ? 0 : serviceType.hashCode());
+		result = prime * result
+				+ ((shipComplete == null) ? 0 : shipComplete.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result
 				+ ((totalAmount == null) ? 0 : totalAmount.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
 
@@ -298,11 +342,16 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ServiceEntity other = (ServiceEntity) obj;		
-		if (businessEntity == null) {
-			if (other.businessEntity != null)
+		ServiceEntity other = (ServiceEntity) obj;
+		if (attachments == null) {
+			if (other.attachments != null)
 				return false;
-		} else if (!businessEntity.equals(other.businessEntity))
+		} else if (!attachments.equals(other.attachments))
+			return false;
+		if (audit == null) {
+			if (other.audit != null)
+				return false;
+		} else if (!audit.equals(other.audit))
 			return false;
 		if (code == null) {
 			if (other.code != null)
@@ -314,6 +363,11 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 				return false;
 		} else if (!currencyCode.equals(other.currencyCode))
 			return false;
+		if (entityReference == null) {
+			if (other.entityReference != null)
+				return false;
+		} else if (!entityReference.equals(other.entityReference))
+			return false;
 		if (laborAmount == null) {
 			if (other.laborAmount != null)
 				return false;
@@ -323,6 +377,11 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 			if (other.locale != null)
 				return false;
 		} else if (!locale.equals(other.locale))
+			return false;
+		if (notes == null) {
+			if (other.notes != null)
+				return false;
+		} else if (!notes.equals(other.notes))
 			return false;
 		if (otherAmount == null) {
 			if (other.otherAmount != null)
@@ -334,10 +393,40 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 				return false;
 		} else if (!partAmount.equals(other.partAmount))
 			return false;
-		if (entityReference == null) {
-			if (other.entityReference != null)
+		if (provider == null) {
+			if (other.provider != null)
 				return false;
-		} else if (!entityReference.equals(other.entityReference))
+		} else if (!provider.equals(other.provider))
+			return false;
+		if (relation == null) {
+			if (other.relation != null)
+				return false;
+		} else if (!relation.equals(other.relation))
+			return false;
+		if (requester == null) {
+			if (other.requester != null)
+				return false;
+		} else if (!requester.equals(other.requester))
+			return false;
+		if (requests == null) {
+			if (other.requests != null)
+				return false;
+		} else if (!requests.equals(other.requests))
+			return false;
+		if (salesPerson == null) {
+			if (other.salesPerson != null)
+				return false;
+		} else if (!salesPerson.equals(other.salesPerson))
+			return false;
+		if (serviceType == null) {
+			if (other.serviceType != null)
+				return false;
+		} else if (!serviceType.equals(other.serviceType))
+			return false;
+		if (shipComplete == null) {
+			if (other.shipComplete != null)
+				return false;
+		} else if (!shipComplete.equals(other.shipComplete))
 			return false;
 		if (status == null) {
 			if (other.status != null)
@@ -349,6 +438,11 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 				return false;
 		} else if (!totalAmount.equals(other.totalAmount))
 			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
 		return true;
 	}
 
@@ -356,10 +450,15 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 	public String toString() {
 		return "ServiceEntity [code=" + code + ", status=" + status
 				+ ", locale=" + locale + ", currencyCode=" + currencyCode
-				+ ", entityReference=" + entityReference + ", partAmount=" + partAmount
-				+ ", laborAmount=" + laborAmount + ", otherAmount="
-				+ otherAmount + ", totalAmount=" + totalAmount
-				+ ", businessEntity=" + businessEntity + "]";
+				+ ", entityReference=" + entityReference + ", partAmount="
+				+ partAmount + ", laborAmount=" + laborAmount
+				+ ", otherAmount=" + otherAmount + ", totalAmount="
+				+ totalAmount + ", requests=" + requests + ", attachments="
+				+ attachments + ", user=" + user + ", audit=" + audit
+				+ ", relation=" + relation + ", requester=" + requester
+				+ ", provider=" + provider + ", notes=" + notes
+				+ ", serviceType=" + serviceType + ", salesPerson="
+				+ salesPerson + ", shipComplete=" + shipComplete + "]";
 	}
 
 }

@@ -17,7 +17,7 @@ public class SEOtherCharges extends MizeEntity implements Comparable<SEOtherChar
 	private String code;
 	private String description;
 	private Long requestId;
-	private SEAmount amount;
+	private SEAmount amount = new SEAmount();
 	
 	public SEOtherCharges() {
 		super();

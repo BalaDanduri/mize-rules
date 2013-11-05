@@ -20,6 +20,11 @@ public class SEAmount extends MizeEntity implements Comparable<SEAmount> {
 	private BigDecimal adjustedAmount;
 	private BigDecimal requestedAmount;
 	private BigDecimal totalAmount;
+	private BigDecimal discountAmount;
+	private BigDecimal handlingAmount;
+	private BigDecimal freightAmount;
+	private BigDecimal taxAmount;
+	private BigDecimal miscellaneousAmount;
 	
 	public SEAmount() {
 		super();
@@ -133,12 +138,44 @@ public class SEAmount extends MizeEntity implements Comparable<SEAmount> {
 		return 0;
 	}
 
-	@Override
-	public String toString() {
-		return "SEAmount [requestedQuantity=" + requestedQuantity
-				+ ", adjustedQuantity=" + adjustedQuantity
-				+ ", adjustedAmount=" + adjustedAmount + ", requestedAmount="
-				+ requestedAmount + ", totalAmount=" + totalAmount + "]";
+	public BigDecimal getDiscountAmount() {
+		return discountAmount;
+	}
+
+	public void setDiscountAmount(BigDecimal discountAmount) {
+		this.discountAmount = discountAmount;
+	}
+
+	public BigDecimal getHandlingAmount() {
+		return handlingAmount;
+	}
+
+	public void setHandlingAmount(BigDecimal handlingAmount) {
+		this.handlingAmount = handlingAmount;
+	}
+
+	public BigDecimal getFreightAmount() {
+		return freightAmount;
+	}
+
+	public void setFreightAmount(BigDecimal freightAmount) {
+		this.freightAmount = freightAmount;
+	}
+
+	public BigDecimal getTaxAmount() {
+		return taxAmount;
+	}
+
+	public void setTaxAmount(BigDecimal taxAmount) {
+		this.taxAmount = taxAmount;
+	}
+
+	public BigDecimal getMiscellaneousAmount() {
+		return miscellaneousAmount;
+	}
+
+	public void setMiscellaneousAmount(BigDecimal miscellaneousAmount) {
+		this.miscellaneousAmount = miscellaneousAmount;
 	}
 
 	@Override
@@ -151,11 +188,23 @@ public class SEAmount extends MizeEntity implements Comparable<SEAmount> {
 				* result
 				+ ((adjustedQuantity == null) ? 0 : adjustedQuantity.hashCode());
 		result = prime * result
+				+ ((discountAmount == null) ? 0 : discountAmount.hashCode());
+		result = prime * result
+				+ ((freightAmount == null) ? 0 : freightAmount.hashCode());
+		result = prime * result
+				+ ((handlingAmount == null) ? 0 : handlingAmount.hashCode());
+		result = prime
+				* result
+				+ ((miscellaneousAmount == null) ? 0 : miscellaneousAmount
+						.hashCode());
+		result = prime * result
 				+ ((requestedAmount == null) ? 0 : requestedAmount.hashCode());
 		result = prime
 				* result
 				+ ((requestedQuantity == null) ? 0 : requestedQuantity
 						.hashCode());
+		result = prime * result
+				+ ((taxAmount == null) ? 0 : taxAmount.hashCode());
 		result = prime * result
 				+ ((totalAmount == null) ? 0 : totalAmount.hashCode());
 		return result;
@@ -180,6 +229,26 @@ public class SEAmount extends MizeEntity implements Comparable<SEAmount> {
 				return false;
 		} else if (!adjustedQuantity.equals(other.adjustedQuantity))
 			return false;
+		if (discountAmount == null) {
+			if (other.discountAmount != null)
+				return false;
+		} else if (!discountAmount.equals(other.discountAmount))
+			return false;
+		if (freightAmount == null) {
+			if (other.freightAmount != null)
+				return false;
+		} else if (!freightAmount.equals(other.freightAmount))
+			return false;
+		if (handlingAmount == null) {
+			if (other.handlingAmount != null)
+				return false;
+		} else if (!handlingAmount.equals(other.handlingAmount))
+			return false;
+		if (miscellaneousAmount == null) {
+			if (other.miscellaneousAmount != null)
+				return false;
+		} else if (!miscellaneousAmount.equals(other.miscellaneousAmount))
+			return false;
 		if (requestedAmount == null) {
 			if (other.requestedAmount != null)
 				return false;
@@ -190,12 +259,29 @@ public class SEAmount extends MizeEntity implements Comparable<SEAmount> {
 				return false;
 		} else if (!requestedQuantity.equals(other.requestedQuantity))
 			return false;
+		if (taxAmount == null) {
+			if (other.taxAmount != null)
+				return false;
+		} else if (!taxAmount.equals(other.taxAmount))
+			return false;
 		if (totalAmount == null) {
 			if (other.totalAmount != null)
 				return false;
 		} else if (!totalAmount.equals(other.totalAmount))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "SEAmount [requestedQuantity=" + requestedQuantity
+				+ ", adjustedQuantity=" + adjustedQuantity
+				+ ", adjustedAmount=" + adjustedAmount + ", requestedAmount="
+				+ requestedAmount + ", totalAmount=" + totalAmount
+				+ ", discountAmount=" + discountAmount + ", handlingAmount="
+				+ handlingAmount + ", freightAmount=" + freightAmount
+				+ ", taxAmount=" + taxAmount + ", miscellaneousAmount="
+				+ miscellaneousAmount + "]";
 	}	
 
 }

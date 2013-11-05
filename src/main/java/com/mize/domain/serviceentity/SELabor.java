@@ -17,7 +17,7 @@ public class SELabor extends MizeEntity implements Comparable<SELabor> {
 	private String code;
 	private String description;
 	private Long requestId;
-	private SEAmount amount;
+	private SEAmount amount = new SEAmount();
 	
 	public SELabor() {
 		super();

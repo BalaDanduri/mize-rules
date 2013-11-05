@@ -17,7 +17,7 @@ public class SERequester extends MizeEntity implements Comparable<SERequester> {
 	private static final long serialVersionUID = 6821133638967617947L;
 	private Long entityId;
 	private BusinessEntity businessEntity;
-	private SEAddress address;
+	private SEAddress address = new SEAddress();
 	
 	public SERequester() {
 		super();
