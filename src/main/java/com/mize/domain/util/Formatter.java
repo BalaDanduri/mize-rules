@@ -610,5 +610,12 @@ public final class Formatter {
 		return val1.add(val2).add(val3);		
 	}
 	
+
+	public static BigDecimal formattBigDecimal(BigDecimal value){
+		if(value == null){
+			return null;
+		}
+		return BigDecimal.valueOf(value.doubleValue());
+	}
 	
 }
