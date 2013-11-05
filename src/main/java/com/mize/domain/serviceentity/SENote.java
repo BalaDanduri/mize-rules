@@ -16,6 +16,7 @@ public class SENote extends MizeEntity implements Comparable<SENote> {
 	private static final long serialVersionUID = 6821133638967617947L;
 	private Long entityId;
 	private String notes;
+	private String type;
 	
 	public SENote() {
 		super();
@@ -101,6 +102,25 @@ public class SENote extends MizeEntity implements Comparable<SENote> {
 		this.updatedBy = updatedBy;
 	}
 	
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	@Override
+	public int compareTo(SENote arg0) {
+		return 0;
+	}
+
+	@Override
+	public String toString() {
+		return "SENote [entityId=" + entityId + ", notes=" + notes + ", type="
+				+ type + "]";
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
@@ -108,6 +128,7 @@ public class SENote extends MizeEntity implements Comparable<SENote> {
 		result = prime * result
 				+ ((entityId == null) ? 0 : entityId.hashCode());
 		result = prime * result + ((notes == null) ? 0 : notes.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
 
@@ -130,12 +151,12 @@ public class SENote extends MizeEntity implements Comparable<SENote> {
 				return false;
 		} else if (!notes.equals(other.notes))
 			return false;
+		if (type == null) {
+			if (other.type != null)
+				return false;
+		} else if (!type.equals(other.type))
+			return false;
 		return true;
-	}
-
-	@Override
-	public int compareTo(SENote arg0) {
-		return 0;
 	}	
 
 }
