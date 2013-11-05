@@ -21,7 +21,7 @@ public class SEPart extends MizeEntity implements Comparable<SEPart> {
 	private String serialNumber;
 	private String description;
 	private Long requestId;
-	private SEAmount amount;
+	private SEAmount amount = new SEAmount();
 	private String uom;
 	private BigDecimal weight;
 	private String model;
