@@ -7,7 +7,6 @@ import java.sql.Timestamp;
 import java.sql.Types;
 
 import org.hibernate.HibernateException;
-import org.hibernate.engine.spi.SessionImplementor;
 import org.hibernate.usertype.UserType;
 import org.joda.time.DateTime;
 
@@ -42,7 +41,8 @@ public class DateTimeJPA implements UserType{
 	public boolean isMutable() {
 		return false;
 	}
-
+	
+	@Override
 	public Object nullSafeGet(ResultSet arg0, String[] arg1, Object arg2) throws HibernateException, SQLException {
 		Timestamp timestamp = arg0.getTimestamp(arg1[0]);
         if (arg0.wasNull()) {
@@ -50,7 +50,8 @@ public class DateTimeJPA implements UserType{
         }
         return new DateTime(timestamp);
 	}
-
+	
+	@Override
 	public void nullSafeSet(PreparedStatement arg0, Object arg1, int arg2) throws HibernateException, SQLException {
 		arg0.setString(arg2,Formatter.getDBDateTime((DateTime)arg1));
 	}
@@ -71,7 +72,7 @@ public class DateTimeJPA implements UserType{
 		 return new int[] {Types.TIMESTAMP};
 	}
 
-	@Override
+	/*@Override
 	public Object nullSafeGet(ResultSet arg0, String[] arg1,SessionImplementor arg2, Object arg3) throws HibernateException, SQLException {
 		Timestamp timestamp = arg0.getTimestamp(arg1[0]);
         if (arg0.wasNull()) {
@@ -84,6 +85,6 @@ public class DateTimeJPA implements UserType{
 	public void nullSafeSet(PreparedStatement arg0, Object arg1, int arg2,SessionImplementor arg3) throws HibernateException, SQLException {
 		arg0.setString(arg2,Formatter.getDBDateTime((DateTime)arg1));
 		
-	}
+	}*/
 
 }

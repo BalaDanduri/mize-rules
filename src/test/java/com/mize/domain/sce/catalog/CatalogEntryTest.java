@@ -17,6 +17,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
+
 import org.springframework.test.context.ContextConfiguration;
 
 import com.mize.domain.test.util.JPATest;
@@ -72,9 +73,11 @@ public class CatalogEntryTest extends JPATest {
 					return catalogEntry;
 				}
 			});
+
 			if (catalogEntries == null || catalogEntries.size() == 0) {
 				fail("Found Nothing");
 			}
+
 			CatalogEntry catalogEntryFromDB = catalogEntries.get(0);
 			assertTrue(catalogEntry.equals(catalogEntryFromDB));
 		} catch (Throwable th) {

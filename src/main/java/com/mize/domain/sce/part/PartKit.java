@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -21,6 +22,7 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.servicelocator.BusinessEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
@@ -31,6 +33,7 @@ public class PartKit extends MizeEntity{
 	private static final long serialVersionUID = 4502594935806813253L;
 	
 	private Part part;
+	private BusinessEntity tenant;
 	private String priceMethod;
 	private String kitType;
 	private String isActive;
@@ -86,6 +89,7 @@ public class PartKit extends MizeEntity{
 
 	@Column(name = "start_date", nullable = false)
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@JsonSerialize(using=JsonDateTimeSerializer.class)
 	public DateTime getStartDate() {
 		return startDate;
@@ -93,6 +97,7 @@ public class PartKit extends MizeEntity{
 
 	@Column(name = "end_date", nullable = false)
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@JsonSerialize(using=JsonDateTimeSerializer.class)
 	public DateTime getEndDate() {
 		return endDate;
@@ -130,7 +135,25 @@ public class PartKit extends MizeEntity{
 		return super.getUpdatedBy();
 	}
 	
-	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "partKit")
+	public List<PartKitItem> getPartKitItems() {
+		return partKitItems;
+	}
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "tenant_id")
+	public BusinessEntity getTenant() {
+		return tenant;
+	}
+
+	public void setTenant(BusinessEntity tenant) {
+		this.tenant = tenant;
+	}
+
+	public void setPartKitItems(List<PartKitItem> partKitItems) {
+		this.partKitItems = partKitItems;
+	}
+
 	@Override
 	public void setId(Long id) {
 		this.id = id;

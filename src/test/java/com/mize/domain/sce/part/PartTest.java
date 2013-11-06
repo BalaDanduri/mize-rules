@@ -82,8 +82,8 @@ public class PartTest extends JPATest  {
 							assertNotNull(pa);
 						}
 					}
-					if(p.getPartPrice()!=null){
-						for(PartPrice pp: p.getPartPrice()){
+					if(p.getPartPrices()!=null){
+						for(PartPrice pp: p.getPartPrices()){
 							assertNotNull(pp);
 						}
 					}
@@ -105,7 +105,7 @@ public class PartTest extends JPATest  {
 	}
 
 	private Part getPartObjectToSave(BusinessEntity be) {
-		Part part = new Part(be,"partcode3","partType","Y","N","N",null,null,null,null,null);
+		Part part = new Part(be,"partcode3","partType","Y","N","N",null,null,null,null,null,null);
 		return part ;
 	}
 

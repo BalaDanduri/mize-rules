@@ -1,3 +1,4 @@
+
 package com.mize.domain.test.util;
 
 
@@ -93,4 +94,6 @@ public class JPATest {
 		BusinessEntity be = (BusinessEntity) entityManager.find(BusinessEntity.class, new Long(961));
 		return be;
 	}
+
+
 }

@@ -27,6 +27,7 @@ public final class Formatter {
 	public static final DateTimeFormatter  DATE_FORMAT = DateTimeFormat.forPattern("MM-dd-yyyy HH:mm:ss");
 	public static final DateTimeFormatter  DATE_FORMAT1 = DateTimeFormat.forPattern("MM-dd-yyyy");
 	public static final DateTimeFormatter  DB_DATE_TIME_FORMAT = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+	public static final DateTimeFormatter  DATE_FORMAT2 = DateTimeFormat.forPattern("yyyy-MM-dd");
 	public static final String LIKE = "%";
 	private static final Pattern HTML_TAGS_PATTERN = Pattern.compile("<.+?>");
 	private static final String HTML_COMMENTS_PATTERN = "(?s)<!--.*?-->";
@@ -174,6 +175,10 @@ public final class Formatter {
 	}
 	
 	public static String getDBDateTime(DateTime dateTime){
+		return (dateTime == null ? null : dateTime.toString(DB_DATE_TIME_FORMAT));
+	}
+	
+	public static String dbDateTime(DateTime dateTime){
 		return (dateTime == null ? null : dateTime.toString(DB_DATE_TIME_FORMAT));
 	}
 	
@@ -574,4 +579,43 @@ public final class Formatter {
 		}
 		return filtered.toString();
 	}
+	
+	public static double bigDecimalValue(BigDecimal value){
+		if(value == null){
+			return Double.valueOf(0);
+		}
+		return value.doubleValue();
+	}
+	
+	public static BigDecimal addBigDecimals(BigDecimal val1,BigDecimal val2){
+		if(val1 == null){
+			val1 = BigDecimal.ZERO;
+		}
+		if(val2 == null){
+			val2 = BigDecimal.ZERO;
+		}
+		return val1.add(val2);		
+	}
+	
+	public static BigDecimal addBigDecimals(BigDecimal val1,BigDecimal val2,BigDecimal val3){
+		if(val1 == null){
+			val1 = BigDecimal.ZERO;
+		}
+		if(val2 == null){
+			val2 = BigDecimal.ZERO;
+		}
+		if(val3 == null){
+			val3 = BigDecimal.ZERO;
+		}
+		return val1.add(val2).add(val3);		
+	}
+	
+
+	public static BigDecimal formattBigDecimal(BigDecimal value){
+		if(value == null){
+			return null;
+		}
+		return BigDecimal.valueOf(value.doubleValue());
+	}
+	
 }
