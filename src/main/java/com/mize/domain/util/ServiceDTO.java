@@ -16,7 +16,7 @@ public final class ServiceDTO<T> implements ServiceLiteral{
 	private List<MizeError> errors;
 	private Map<String,Object> messages = new HashMap<String, Object>();
 	private Map<String,String> validationMessages = new HashMap<String, String>();
-
+	private boolean isValid;
 	public T getDataObject() {
 		return dataObject;
 	}
@@ -120,6 +120,11 @@ public final class ServiceDTO<T> implements ServiceLiteral{
 	@JsonIgnore
 	public boolean isValid(){
 		return !(hasErrors() || hasValidations());
+	}
+	
+	@JsonIgnore
+	public boolean getIsValid(){
+		return isValid = !(hasErrors() || hasValidations());
 	}
 	
 	@JsonIgnore

@@ -5,6 +5,9 @@ import java.util.Date;
 import com.mize.domain.common.MizeEntity;
 
 public class MizeJobExecution extends MizeEntity{
+
+	private static final long serialVersionUID = 2316762090397722064L;
+	
 	private Long id;
 	private Long batchExecutionid;
 	private Long jobInstanceId;

@@ -24,6 +24,7 @@ public class WorkQueueEntity extends MizeEntity {
 	private WorkQueue workQueue;
 	private String entityType;
 	private String entityCode;
+	private Long entityId;
 	private ServiceSchedule serviceEntity;
 	private String status;
 	
@@ -70,10 +71,6 @@ public class WorkQueueEntity extends MizeEntity {
 	public String getStatus() {
 		return status;
 	}
-
-	
-
-	
 
 	@Override	
 	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
@@ -163,6 +160,14 @@ public class WorkQueueEntity extends MizeEntity {
 		super.setUpdatedBy(updatedBy);
 	}
 
+	public Long getEntityId() {
+		return entityId;
+	}
+
+	public void setEntityId(Long entityId) {
+		this.entityId = entityId;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
@@ -235,7 +240,5 @@ public class WorkQueueEntity extends MizeEntity {
 		return builder.toString();
 	}
 
-	
-	
 	
 }
