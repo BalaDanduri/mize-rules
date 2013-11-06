@@ -55,5 +55,9 @@ public abstract class MessageConstants implements Serializable{
 	public static final String BASE_UNIT_ID_NOT_FOUND ="BASE_UNIT_ID_NOT_FOUND";
 	public static final String CASE_NUMBER_REQUIRED ="CASE_NUMBER_REQUIRED";
 	public static final String INVAID_CASE_NUMBER ="INVAID_CASE_NUMBER";
+	public static final String PROVIDER_CODE_REQUIRED ="PROVIDER_CODE_REQUIRED";
+	public static final String INVALID_PROVIDER_CODE ="INVALID_PROVIDER_CODE";
+	public static final String REQUESTER_CODE_REQUIRED ="REQUESTER_CODE_REQUIRED";
+	public static final String INVALID_REQUESTER_CODE ="INVALID_REQUESTER_CODE";
 	
 }

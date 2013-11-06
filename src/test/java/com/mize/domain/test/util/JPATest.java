@@ -1,9 +1,6 @@
 
 package com.mize.domain.test.util;
 
-
-
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
@@ -94,6 +91,5 @@ public class JPATest {
 		BusinessEntity be = (BusinessEntity) entityManager.find(BusinessEntity.class, new Long(961));
 		return be;
 	}
-
 
 }
