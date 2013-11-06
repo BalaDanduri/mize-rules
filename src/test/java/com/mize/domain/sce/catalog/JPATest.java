@@ -5,6 +5,7 @@ import javax.persistence.EntityTransaction;
 
 import org.h2.tools.Console;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -17,10 +18,11 @@ import com.mize.domain.servicelocator.BusinessEntity;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"/test-context.xml"})
+@Ignore
 public class JPATest {
 
 	@Autowired
-	protected LocalContainerEntityManagerFactoryBean myEmf;
+	protected LocalContainerEntityManagerFactoryBean entityManagerFactory;
 	
 	@Autowired
 	protected JdbcTemplate jdbcTemplate;
@@ -37,11 +39,11 @@ public class JPATest {
 	@BeforeClass
 	public static void launchH2Console() throws Exception {
 		// uncomment it if want to see H2console
-		Console.main(new String[]{});
+		//Console.main(new String[]{});
 	}
 	
 	public <T> Object find(Class<T> name, Object pkey) {
-		EntityManager mf = myEmf.getNativeEntityManagerFactory().createEntityManager();
+		EntityManager mf = entityManagerFactory.getNativeEntityManagerFactory().createEntityManager();
 		Object object = mf.find(name, pkey);
 		mf.close();
 		return object;
@@ -63,7 +65,7 @@ public class JPATest {
 	}
 	
 	public void persist(Object obj) {
-		EntityManager mf = myEmf.getNativeEntityManagerFactory().createEntityManager();
+		EntityManager mf = entityManagerFactory.getNativeEntityManagerFactory().createEntityManager();
 		EntityTransaction tx = mf.getTransaction();
 		tx.begin();
 		mf.persist(obj);
@@ -72,7 +74,7 @@ public class JPATest {
 	}
 
 	public EntityManager getEntityManager() {
-		return myEmf.getNativeEntityManagerFactory().createEntityManager();
+		return entityManagerFactory.getNativeEntityManagerFactory().createEntityManager();
 	}
 	
 	public Catalog findExistingCatalog(EntityManager entityManager) {
