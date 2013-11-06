@@ -22,6 +22,7 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 	private String code;
 	private String status;
 	private Locale locale;
+	private String type;
 	private String currencyCode;
 	private String entityReference;
 	private SEAmount partAmount = new SEAmount();
@@ -40,7 +41,6 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 	private String salesPerson;
 	private String shipComplete;
 	
-	
 	public ServiceEntity() {
 		super();
 	}
@@ -50,7 +50,7 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 	}
 	
 	public enum Type{
-		Warranty,Campaign,Extended_Warranty,PDI,Parts_Warranty,Support_Request,Service_Order;
+		Claim,Warranty,Campaign,Extended_Warranty,PDI,Parts_Warranty,Support_Request,Service_Order,Parts_Order;
 	}
 	
 	@Override
@@ -292,6 +292,13 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 		this.shipComplete = shipComplete;
 	}
 
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 
 	@Override
 	public int hashCode() {
