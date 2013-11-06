@@ -45,8 +45,8 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 		super();
 	}
 	
-	public enum Staus{
-		Draft,Pending,Corrections_Needed,Approved,Deleted,Rejected,Closed,Open;
+	public enum Status{
+		Draft,Pending,Corrections_Needed,Approved,Deleted,Rejected,Closed,Open,Completed;
 	}
 	
 	public enum Type{
