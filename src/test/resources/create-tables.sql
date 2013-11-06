@@ -255,4 +255,4 @@ INSERT INTO  catalog (id, tenant_id, catalog_code, catalog_type, is_active, crea
   VALUES(100, 961, 'TestCatalog', 'TestCatalogType', 'Y', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL);
   
 INSERT INTO  catalog_entry (id, catalog_id, item_code, is_active, created_date, updated_date, created_by, updated_by)
-  VALUES(101, 100, 'ItemCode', 'Y', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL);
+  VALUES(102, 100, 'ItemCode', 'Y', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL);

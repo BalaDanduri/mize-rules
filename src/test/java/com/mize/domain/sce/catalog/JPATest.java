@@ -81,7 +81,7 @@ public class JPATest {
 	}
 	
 	public CatalogEntry findExistingCatalogEntry(EntityManager entityManager) {
-		CatalogEntry catalogEntry = (CatalogEntry) entityManager.find(CatalogEntry.class, new Long(101));
+		CatalogEntry catalogEntry = (CatalogEntry) entityManager.find(CatalogEntry.class, new Long(102));
 		return catalogEntry;
 	}
 }
