@@ -18,7 +18,8 @@ public class SEAudit extends MizeEntity implements Comparable<SEAudit> {
 	private String statusCode;
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime statusDate;
-	private Long statusBy;	
+	private Long statusBy;
+	private String userName;
 	
 	@Override
 	public Long getId() {
@@ -114,6 +115,14 @@ public class SEAudit extends MizeEntity implements Comparable<SEAudit> {
 		this.updatedBy = updatedBy;
 	}
 	
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
