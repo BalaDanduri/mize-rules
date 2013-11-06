@@ -1,4 +1,3 @@
-
 drop table if exists catalog;
 create table catalog
 (
@@ -132,6 +131,118 @@ CREATE TABLE business_entity_geo (
 	latitude     	VARCHAR(16777215) NULL,
 	longitude    	VARCHAR(16777215) NULL 
 	);
+	
+drop table if exists part;
+create table part
+(
+	id integer primary key auto_increment  not null,
+    tenant_id integer ,
+ 	part_code varchar(30),
+ 	part_type varchar(30),
+ 	is_active char(1) default 'Y',
+ 	is_kit char(1),
+ 	is_serialized char(1),
+ 	is_returnable char(1),
+ 	uom varchar(30),
+  	created_date timestamp,
+  	updated_date timestamp, 
+  	created_by integer,
+  	updated_by integer
+);
+
+drop table if exists part_intl;
+create table part_intl
+(
+	id integer primary key auto_increment  not null,
+    locale_id integer ,
+    part_id integer ,
+ 	part_name varchar(250),
+ 	part_desc varchar(500),
+  
+);
+
+drop table if exists part_price;
+create table part_price
+(
+	id integer primary key auto_increment  not null,
+    country_id integer ,
+    part_id integer ,
+ 	unit_price DECIMAL(20,6),
+ 	list_price DECIMAL(20,6),
+ 	net_price DECIMAL(20,6),
+ 	start_date timestamp,
+  	end_date timestamp,
+  	currency_code varchar(30),
+  	tax_id  integer,
+  	created_date timestamp,
+  	updated_date timestamp, 
+  	created_by integer,
+  	updated_by integer
+);
+
+drop table if exists part_attribute;
+create table part_attribute
+(
+	id integer primary key auto_increment  not null,
+    part_id integer ,
+    attribute_code varchar(30),
+ 	attribute_value varchar(100),
+    attribute_uom varchar(30)
+);
+
+
+drop table if exists part_kit;
+create table part_kit
+(
+	id integer primary key auto_increment  not null,
+    part_id integer ,
+    tenant_id integer ,
+    price_method  varchar(30) ,
+ 	kit_type varchar(30),
+ 	is_active char(1) default 'Y',
+ 	start_date timestamp,
+ 	end_date timestamp,
+    created_date timestamp,
+  	updated_date timestamp, 
+  	created_by integer,
+  	updated_by integer
+    
+);
+
+drop table if exists part_kit_item;
+create table part_kit_item
+(
+	id integer primary key auto_increment  not null,
+    part_id integer ,
+    part_kit_id integer ,
+ 	part_qty DECIMAL(20,6),
+);
+
+drop table if exists picklist;
+create table picklist
+(
+	id integer primary key auto_increment  not null,
+    picklist_code  varchar(30) ,
+ 	picklist_type varchar(30),
+ 	is_active char(1) default 'Y',
+ 	be_id integer,
+ 	tenant_id integer,
+ 	picklist_comments varchar(500),
+    created_date timestamp,
+  	updated_date timestamp, 
+  	created_by integer,
+  	updated_by integer
+    
+);
+
+drop table if exists picklist_item;
+create table picklist_item
+(
+	id integer primary key auto_increment  not null,
+	part_id integer ,
+    picklist_id integer ,
+ 	part_qty DECIMAL(20,6),
+);
 
 
 insert into locale values(1,'Y','EN','USA','EN_USA');
@@ -256,3 +367,50 @@ INSERT INTO  catalog (id, tenant_id, catalog_code, catalog_type, is_active, crea
   
 INSERT INTO  catalog_entry (id, catalog_id, item_code, is_active, created_date, updated_date, created_by, updated_by)
   VALUES(102, 100, 'ItemCode', 'Y', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL);
+  
+  
+INSERT INTO  part (id, tenant_id, part_code, part_type, is_active,is_kit,is_serialized,is_returnable,uom, created_date, updated_date, created_by, updated_by)
+  VALUES(101, 961, 'partCode','standard', 'Y', 'N','N','N',null,CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL);
+INSERT INTO  part (id, tenant_id, part_code, part_type, is_active,is_kit,is_serialized,is_returnable,uom, created_date, updated_date, created_by, updated_by)
+  VALUES(102, 961, 'partCode1','standard', 'Y', 'N','N','N',null,CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL);
+  
+INSERT INTO  part_intl (id, locale_id, part_id, part_name, part_desc)
+  VALUES(201, 1, 101,'partname', 'partdescription');
+INSERT INTO  part_intl (id, locale_id, part_id, part_name, part_desc)
+  VALUES(202, 1, 102,'partname', 'partdescription');
+  
+INSERT INTO  part_price (id, country_id, part_id, unit_price, list_price, net_price, start_date, end_date, currency_code, tax_id, created_date, updated_date, created_by, updated_by)
+  VALUES(301, 1, 101,200.00, null, 200.00,CURRENT_TIMESTAMP,null,'USD',null,CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL);
+
+INSERT INTO  part_price (id, country_id, part_id, unit_price, list_price, net_price, start_date, end_date, currency_code, tax_id, created_date, updated_date, created_by, updated_by)
+  VALUES(302, 1, 102,200.00, null, 200.00,CURRENT_TIMESTAMP,null,'USD',null,CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL);
+
+INSERT INTO  part_attribute (id, part_id, attribute_code,attribute_value,attribute_uom)
+  VALUES(401, 101,'attributecode','attributevalue','standard');
+  
+INSERT INTO  part_attribute (id, part_id, attribute_code,attribute_value,attribute_uom)
+  VALUES(402, 102,'attributecode1','attributevalue','other');
+
+INSERT INTO  part_kit (id, part_id, tenant_id,price_method, kit_type, is_active, start_date, end_date, created_date, updated_date, created_by, updated_by)
+  VALUES(501, 101,961, 'Kit Level','Standard', 'Y', null,null,CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL);
+  
+INSERT INTO  part_kit (id, part_id, tenant_id,price_method, kit_type, is_active, start_date, end_date, created_date, updated_date, created_by, updated_by)
+  VALUES(502, 102, 961, 'Kit Level','Standard', 'Y', null,null,CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL);
+  
+INSERT INTO  part_kit_item (id, part_id, part_kit_id,part_qty)
+  VALUES(601, 101,501,3);
+
+INSERT INTO  part_kit_item (id, part_id, part_kit_id,part_qty)
+  VALUES(602, 102,501,3);
+    
+INSERT INTO  picklist (id, picklist_code, picklist_type, is_active,be_id,tenant_id,picklist_comments,created_date, updated_date, created_by, updated_by)
+  VALUES(701, 'pickListcode', 'Standard', 'Y', 961,null,'picklistcomments',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL);
+  
+INSERT INTO  picklist (id, picklist_code, picklist_type, is_active,be_id,tenant_id,picklist_comments,created_date, updated_date, created_by, updated_by)
+  VALUES(702, 'pickListcode', 'Standard', 'Y', 961,null,'picklistcomments',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL);
+  
+INSERT INTO  picklist_item (id,part_id, picklist_id,part_qty)
+  VALUES(801,101, 701,3);
+ 
+INSERT INTO  picklist_item (id, part_id,picklist_id,part_qty)
+  VALUES(802,101, 702,3);

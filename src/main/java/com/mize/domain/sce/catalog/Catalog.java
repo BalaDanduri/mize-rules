@@ -10,8 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -33,7 +33,7 @@ public class Catalog extends MizeEntity {
 	private BusinessEntity tenant;
 	private String catalogCode;
 	private String catalogType;
-	private String isActive;
+	private String isActive;	
 	private List<CatalogIntl> catalogIntl;
 	private List<CatalogEntry> catalogEntry;
 	
@@ -65,7 +65,7 @@ public class Catalog extends MizeEntity {
 		super.id=id;
 	}
 
-	@OneToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="tenant_id")
 	public BusinessEntity getTenant() {
 		return tenant;
@@ -102,7 +102,7 @@ public class Catalog extends MizeEntity {
 		this.isActive = isActive;
 	}
 
-	@OneToMany(fetch=FetchType.LAZY, cascade={CascadeType.ALL}, mappedBy="catalog")
+	@OneToMany(cascade={CascadeType.ALL}, fetch= FetchType.EAGER, mappedBy = "catalog")			
 	public List<CatalogIntl> getCatalogIntl() {
 		return catalogIntl;
 	}
@@ -112,7 +112,7 @@ public class Catalog extends MizeEntity {
 		this.catalogIntl = catalogIntl;
 	}
 	
-	@OneToMany(fetch=FetchType.LAZY, cascade={CascadeType.ALL}, mappedBy="catalog")
+	@OneToMany(cascade={CascadeType.ALL}, fetch= FetchType.LAZY, mappedBy = "catalog")		
 	public List<CatalogEntry> getCatalogEntry() {
 		return catalogEntry;
 	}

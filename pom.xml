@@ -6,7 +6,7 @@
 	<version>1.4-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<properties>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<project.reporting.outputEncoding>UF-8</project.reporting.outputEncoding>
 		<project.build.outputEncoding>UTF-8</project.build.outputEncoding>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -151,7 +151,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>4.3.0.Final</version>
+			<version>4.3.1.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
