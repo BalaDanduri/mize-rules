@@ -5,6 +5,7 @@ import javax.persistence.EntityTransaction;
 
 import org.h2.tools.Console;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -17,6 +18,7 @@ import com.mize.domain.servicelocator.BusinessEntity;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"/test-context.xml"})
+@Ignore
 public class JPATest {
 
 	@Autowired
