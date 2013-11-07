@@ -61,5 +61,9 @@ public abstract class MessageConstants implements Serializable{
 	public static final String INVALID_REQUESTER_CODE ="INVALID_REQUESTER_CODE";
 	public static final String TEMPLATE_CODE_REQUIRED = "TEMPLATE_CODE_REQUIRED";
 	public static final String DUPLICATE_TEMPLATE_CODE = "DUPLICATE_TEMPLATE_CODE";
+	public static final String TEMPLATE_ALREADY_EXISTS = "TEMPLATE_ALREADY_EXISTS";
+	public static final String INVALID_MODEL = "INVALID_MODEL";
+	public static final String INVALID_MODEL_SERIAL_COMBINATION = "INVALID_MODEL_AND_SERIAL_COMBINATION";
+	public static final String FORM_ALREADY_EXISTS = "FORM_ALREADY_EXISTS";
 	
 }
