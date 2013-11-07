@@ -15,8 +15,10 @@ public class WorkQueueResult extends MizeEntity {
 	private String requester;
 	private String provider;
 	private String status;
+	private String entityType;
 	private String serviceType;
 	private String serviceCode;
+	private String ref;
 	private String serviceProductName;
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime serviceDate;
@@ -53,6 +55,23 @@ public class WorkQueueResult extends MizeEntity {
 	@JsonSerialize(using=JsonDateTimeSerializer.class)
 	public DateTime getServiceDate() {
 		return serviceDate;
+	}
+	
+	public String getEntityType() {
+		return entityType;
+	}
+
+	
+	public String getRef() {
+		return ref;
+	}
+
+	public void setRef(String ref) {
+		this.ref = ref;
+	}
+
+	public void setEntityType(String entityType) {
+		this.entityType = entityType;
 	}
 
 	public void setRequester(String requester) {
@@ -94,15 +113,16 @@ public class WorkQueueResult extends MizeEntity {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result
+				+ ((entityType == null) ? 0 : entityType.hashCode());
+		result = prime * result
 				+ ((provider == null) ? 0 : provider.hashCode());
+		result = prime * result + ((ref == null) ? 0 : ref.hashCode());
 		result = prime * result
 				+ ((requester == null) ? 0 : requester.hashCode());
 		result = prime * result
@@ -128,10 +148,20 @@ public class WorkQueueResult extends MizeEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		WorkQueueResult other = (WorkQueueResult) obj;
+		if (entityType == null) {
+			if (other.entityType != null)
+				return false;
+		} else if (!entityType.equals(other.entityType))
+			return false;
 		if (provider == null) {
 			if (other.provider != null)
 				return false;
 		} else if (!provider.equals(other.provider))
+			return false;
+		if (ref == null) {
+			if (other.ref != null)
+				return false;
+		} else if (!ref.equals(other.ref))
 			return false;
 		if (requester == null) {
 			if (other.requester != null)
@@ -171,8 +201,12 @@ public class WorkQueueResult extends MizeEntity {
 		StringBuilder builder = new StringBuilder();
 		builder.append("WorkQueueResult [id=");
 		builder.append(id);
+		builder.append(", entityType=");
+		builder.append(entityType);
 		builder.append(", provider=");
 		builder.append(provider);
+		builder.append(", ref=");
+		builder.append(ref);
 		builder.append(", requester=");
 		builder.append(requester);
 		builder.append(", serviceCode=");
@@ -188,7 +222,6 @@ public class WorkQueueResult extends MizeEntity {
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
+
 
 }
