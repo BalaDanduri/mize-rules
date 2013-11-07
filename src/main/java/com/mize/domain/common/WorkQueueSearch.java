@@ -10,7 +10,7 @@ public class WorkQueueSearch extends MizeEntity {
 	private String type;
 	
 	public enum EntityType{
-		Claim,Service_Order,Support_Request,Parts_Order,Service_Entity
+		Claim,Service_Order,Support_Request,Parts_Order,Service_Entity,Inspection
 	}
 	
 	public WorkQueueSearch(){
