@@ -40,13 +40,16 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 	private String serviceType;
 	private String salesPerson;
 	private String shipComplete;
+	private String processId;
+	private String dDStatus;
 	
 	public ServiceEntity() {
 		super();
 	}
 	
 	public enum Status{
-		Draft,Pending,Corrections_Needed,Approved,Deleted,Rejected,Closed,Open,Completed;
+		Draft,Pending,Corrections_Needed,Approved,Deleted,Rejected,Closed,Open,Completed,Shipped,
+		In_Progress;
 	}
 	
 	public enum Type{
@@ -298,6 +301,22 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getProcessId() {
+		return processId;
+	}
+
+	public void setProcessId(String processId) {
+		this.processId = processId;
+	}
+
+	public String getDBStatus() {
+		return dDStatus;
+	}
+
+	public void setDBStatus(String dDStatus) {
+		this.dDStatus = dDStatus;
 	}
 
 	@Override
