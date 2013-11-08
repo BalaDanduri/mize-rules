@@ -4,13 +4,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
-
-import org.hibernate.annotations.GenericGenerator;
 
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeEntity;
@@ -36,30 +35,19 @@ public class PartIntl extends MizeEntity {
 		this.partName = partName;
 		this.partDescription = partDescription;
 	}
-
 	
 	@Id
-	@GenericGenerator(name = "partIntlId", strategy = "increment")
-	@GeneratedValue(generator = "partIntlId")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false, unique = true)
 	@Override
 	public Long getId() {		
 		return id;
 	}
 
-	@Override
-	public void setId(Long id) {
-		super.id = id;
-	}
-	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "part_id")
 	public Part getPart() {
 		return part;
-	}
-
-	public void setPart(Part part) {
-		this.part = part;
 	}
 	
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -68,27 +56,38 @@ public class PartIntl extends MizeEntity {
 		return locale;
 	}
 
-	public void setLocale(Locale locale) {
-		this.locale = locale;
-	}
-	
 	@Column(name = "part_name", length = 100, nullable = true)
 	public String getPartName() {
 		return partName;
-	}
-
-	public void setPartName(String partName) {
-		this.partName = partName;
 	}
 	
 	@Column(name = "part_desc", length = 500, nullable = true)
 	public String getPartDescription() {
 		return partDescription;
 	}
+	
+	
+	@Override
+	public void setId(Long id) {
+		super.id = id;
+	}
+
+	public void setPart(Part part) {
+		this.part = part;
+	}
+
+	public void setLocale(Locale locale) {
+		this.locale = locale;
+	}
+
+	public void setPartName(String partName) {
+		this.partName = partName;
+	}
 
 	public void setPartDescription(String partDescription) {
 		this.partDescription = partDescription;
 	}
+	
 
 	@Override
 	public int hashCode() {

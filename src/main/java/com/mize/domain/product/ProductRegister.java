@@ -90,6 +90,11 @@ public class ProductRegister extends MizeEntity implements Comparable<ProductReg
 		
 	}
 	
+	public ProductRegister(Long id){
+		super();
+		this.id = id;
+	}
+	
 	@Id
 	@GenericGenerator(name="id" , strategy="increment")
 	@GeneratedValue(generator="id")

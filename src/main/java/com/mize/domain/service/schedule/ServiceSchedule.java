@@ -38,6 +38,8 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 	
 	private Product product;
 	private User user;
+	private User userBE;
+	private User source;
 	private Brand brand;
 	private String serviceFormat;
 	private Long beId;
@@ -70,9 +72,14 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 	private String lastName;
 	private String caseNumber;	
 	private String serialNumber;
+	private String processId;
 	
 	public enum Formatt{
 		in_home,carry_in,support_request
+	}
+	
+	public enum Status{
+		Completed
 	}
 	
 	public static Formatt getFormatt(String formatt){
@@ -704,6 +711,25 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 
 	public void setSerialNumber(String serialNumber) {
 		this.serialNumber = serialNumber;
+	}
+	
+	public String getProcessId() {
+		return processId;
+	}
+	public void setProcessId(String processId) {
+		this.processId = processId;
+	}
+	public User getUserBE() {
+		return userBE;
+	}
+	public void setUserBE(User userBE) {
+		this.userBE = userBE;
+	}
+	public User getSource() {
+		return source;
+	}
+	public void setSource(User source) {
+		this.source = source;
 	}
 	
 }

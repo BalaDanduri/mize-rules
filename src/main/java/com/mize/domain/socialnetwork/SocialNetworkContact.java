@@ -1,6 +1,5 @@
 package com.mize.domain.socialnetwork;
 
-import java.util.List;
 import java.util.Map;
 
 public class SocialNetworkContact {

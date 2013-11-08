@@ -18,6 +18,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
 
+import org.springframework.test.context.ContextConfiguration;
+
+import com.mize.domain.test.util.JPATest;
+
+@ContextConfiguration(locations={"/test-context.xml"})
 public class CatalogEntryTest extends JPATest {
 	
 	private static String CATALOG_ENTRY_QUERY = "select * from catalog_entry where id = ?";
@@ -62,19 +67,22 @@ public class CatalogEntryTest extends JPATest {
 					catalogEntry.setId(resultSet.getLong("id"));
 					catalogEntry.setItemCode(resultSet.getString("item_code"));					
 					catalogEntry.setIsActive(resultSet.getString("is_active"));						
-					
 					Catalog catalog = new Catalog();
 					catalog.setId(resultSet.getLong("catalog_id"));		
 					catalogEntry.setCatalog(catalog);
 					return catalogEntry;
 				}
 			});
-			
+
+			if (catalogEntries == null || catalogEntries.size() == 0) {
+				fail("Found Nothing");
+			}
+
 			CatalogEntry catalogEntryFromDB = catalogEntries.get(0);
 			assertTrue(catalogEntry.equals(catalogEntryFromDB));
 		} catch (Throwable th) {
 			th.printStackTrace();
-			fail();
+			fail("Got Exception");
 			throw th;
 		}
 	}

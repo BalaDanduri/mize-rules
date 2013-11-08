@@ -10,11 +10,13 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import com.mize.domain.exception.MizeError;
 
 public final class ServiceDTO<T> implements ServiceLiteral{
+
+	private static final long serialVersionUID = 3924014526748017303L;
 	private T dataObject;
 	private List<MizeError> errors;
 	private Map<String,Object> messages = new HashMap<String, Object>();
 	private Map<String,String> validationMessages = new HashMap<String, String>();
-
+	private boolean isValid;
 	public T getDataObject() {
 		return dataObject;
 	}
@@ -118,6 +120,11 @@ public final class ServiceDTO<T> implements ServiceLiteral{
 	@JsonIgnore
 	public boolean isValid(){
 		return !(hasErrors() || hasValidations());
+	}
+	
+	@JsonIgnore
+	public boolean getIsValid(){
+		return isValid = !(hasErrors() || hasValidations());
 	}
 	
 	@JsonIgnore

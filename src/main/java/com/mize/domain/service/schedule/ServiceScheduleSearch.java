@@ -37,6 +37,7 @@ public class ServiceScheduleSearch {
 	String confirmationNumber;
 	String caseNumber;
 	Long prodId;
+	private String serviceFormat;
 	
 	public ServiceScheduleSearch() {
 		
@@ -260,6 +261,34 @@ public class ServiceScheduleSearch {
 
 	public void setProdId(Long prodId) {
 		this.prodId = prodId;
+	}
+
+	public String getServiceFormat() {
+		return serviceFormat;
+	}
+
+	public void setServiceFormat(String serviceFormat) {
+		this.serviceFormat = serviceFormat;
+	}
+
+	@Override
+	public String toString() {
+		return "ServiceScheduleSearch [id=" + id + ", brandId=" + brandId
+				+ ", serviceType=" + serviceType + ", category=" + category
+				+ ", subCategory=" + subCategory + ", zipCode=" + zipCode
+				+ ", problem=" + problem + ", address=" + address + ", city="
+				+ city + ", state=" + state + ", phone=" + phone + ", email="
+				+ email + ", specialInstructions=" + specialInstructions
+				+ ", productId=" + productId + ", productName=" + productName
+				+ ", productSerialNumber=" + productSerialNumber
+				+ ", scheduleDate=" + scheduleDate + ", startTime=" + startTime
+				+ ", endTime=" + endTime + ", latitude=" + latitude
+				+ ", longitude=" + longitude + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", serviceOrderNumber="
+				+ serviceOrderNumber + ", confirmationNumber="
+				+ confirmationNumber + ", caseNumber=" + caseNumber
+				+ ", prodId=" + prodId + ", serviceFormat=" + serviceFormat
+				+ "]";
 	}
 	
 	

@@ -178,6 +178,10 @@ public final class Formatter {
 		return (dateTime == null ? null : dateTime.toString(DB_DATE_TIME_FORMAT));
 	}
 	
+	public static String dbDateTime(DateTime dateTime){
+		return (dateTime == null ? null : dateTime.toString(DB_DATE_TIME_FORMAT));
+	}
+	
 	public static String getDBEndDateTime(DateTime dateTime){
 		dateTime = dateTime.withTime(23, 59, 59, 999);
 		return (dateTime == null ? null : dateTime.toString(DB_DATE_TIME_FORMAT));
@@ -575,4 +579,43 @@ public final class Formatter {
 		}
 		return filtered.toString();
 	}
+	
+	public static double bigDecimalValue(BigDecimal value){
+		if(value == null){
+			return Double.valueOf(0);
+		}
+		return value.doubleValue();
+	}
+	
+	public static BigDecimal addBigDecimals(BigDecimal val1,BigDecimal val2){
+		if(val1 == null){
+			val1 = BigDecimal.ZERO;
+		}
+		if(val2 == null){
+			val2 = BigDecimal.ZERO;
+		}
+		return val1.add(val2);		
+	}
+	
+	public static BigDecimal addBigDecimals(BigDecimal val1,BigDecimal val2,BigDecimal val3){
+		if(val1 == null){
+			val1 = BigDecimal.ZERO;
+		}
+		if(val2 == null){
+			val2 = BigDecimal.ZERO;
+		}
+		if(val3 == null){
+			val3 = BigDecimal.ZERO;
+		}
+		return val1.add(val2).add(val3);		
+	}
+	
+
+	public static BigDecimal formattBigDecimal(BigDecimal value){
+		if(value == null){
+			return null;
+		}
+		return BigDecimal.valueOf(value.doubleValue());
+	}
+	
 }
