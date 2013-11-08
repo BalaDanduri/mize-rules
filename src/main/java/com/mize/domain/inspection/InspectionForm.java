@@ -48,6 +48,7 @@ public class InspectionForm extends MizeEntity {
 	private ProductRegister productRegistration;
 	private List<InspectionFormAudit> formAudits;
 	private List<InspectionFormAttachment> formAttachments;
+	private String processId;
 	
 
 	public InspectionForm() {
@@ -79,6 +80,10 @@ public class InspectionForm extends MizeEntity {
 		this.formAttachments = formAttachments;
 	}
 
+	public enum Status{
+		Draft,Pending,Approved;
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="id",unique=true,nullable=false,length=20)
@@ -223,6 +228,14 @@ public class InspectionForm extends MizeEntity {
 
 	public void setFormAttachments(List<InspectionFormAttachment> formAttachments) {
 		this.formAttachments = formAttachments;
+	}
+
+	public String getProcessId() {
+		return processId;
+	}
+
+	public void setProcessId(String processId) {
+		this.processId = processId;
 	}
 
 	@Override
