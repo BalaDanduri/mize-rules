@@ -15,6 +15,7 @@ public class WorkQueueResult extends MizeEntity {
 	private String requester;
 	private String provider;
 	private String status;
+	private Long   entityId;
 	private String entityType;
 	private String serviceType;
 	private String serviceCode;
@@ -64,6 +65,14 @@ public class WorkQueueResult extends MizeEntity {
 	
 	public String getRef() {
 		return ref;
+	}
+	
+	public Long getEntityId() {
+		return entityId;
+	}
+
+	public void setEntityId(Long entityId) {
+		this.entityId = entityId;
 	}
 
 	public void setRef(String ref) {
@@ -119,6 +128,8 @@ public class WorkQueueResult extends MizeEntity {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result
+				+ ((entityId == null) ? 0 : entityId.hashCode());
+		result = prime * result
 				+ ((entityType == null) ? 0 : entityType.hashCode());
 		result = prime * result
 				+ ((provider == null) ? 0 : provider.hashCode());
@@ -148,6 +159,11 @@ public class WorkQueueResult extends MizeEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		WorkQueueResult other = (WorkQueueResult) obj;
+		if (entityId == null) {
+			if (other.entityId != null)
+				return false;
+		} else if (!entityId.equals(other.entityId))
+			return false;
 		if (entityType == null) {
 			if (other.entityType != null)
 				return false;
@@ -201,6 +217,8 @@ public class WorkQueueResult extends MizeEntity {
 		StringBuilder builder = new StringBuilder();
 		builder.append("WorkQueueResult [id=");
 		builder.append(id);
+		builder.append(", entityId=");
+		builder.append(entityId);
 		builder.append(", entityType=");
 		builder.append(entityType);
 		builder.append(", provider=");
@@ -222,6 +240,5 @@ public class WorkQueueResult extends MizeEntity {
 		builder.append("]");
 		return builder.toString();
 	}
-
 
 }
