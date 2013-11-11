@@ -32,7 +32,7 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 	private List<SERequest> requests = new ArrayList<SERequest>();
 	private List<SEAttachment> attachments = new ArrayList<SEAttachment>();
 	private User user;
-	private SEAudit audit;
+	private List<SEAudit> audits = new ArrayList<SEAudit>();
 	private SERelation relation;
 	private SERequester requester;
 	private SEProvider provider;
@@ -40,13 +40,16 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 	private String serviceType;
 	private String salesPerson;
 	private String shipComplete;
+	private String processId;
+	private String dDStatus;
 	
 	public ServiceEntity() {
 		super();
 	}
 	
 	public enum Status{
-		Draft,Pending,Corrections_Needed,Approved,Deleted,Rejected,Closed,Open,Completed;
+		Draft,Pending,Corrections_Needed,Approved,Deleted,Rejected,Closed,Open,Completed,Shipped,
+		In_Progress;
 	}
 	
 	public enum Type{
@@ -228,12 +231,12 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 		this.attachments = attachments;
 	}
 
-	public SEAudit getAudit() {
-		return audit;
+	public List<SEAudit> getAudits() {
+		return audits;
 	}
 
-	public void setAudit(SEAudit audit) {
-		this.audit = audit;
+	public void setAudits(List<SEAudit> audit) {
+		this.audits = audit;
 	}
 
 	public SERelation getRelation() {
@@ -300,13 +303,26 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 		this.type = type;
 	}
 
+	public String getProcessId() {
+		return processId;
+	}
+
+	public void setProcessId(String processId) {
+		this.processId = processId;
+	}
+
+	public String getDBStatus() {
+		return dDStatus;
+	}
+
+	public void setDBStatus(String dDStatus) {
+		this.dDStatus = dDStatus;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
-		int result = super.hashCode();
-		result = prime * result
-				+ ((attachments == null) ? 0 : attachments.hashCode());
-		result = prime * result + ((audit == null) ? 0 : audit.hashCode());
+		int result = super.hashCode();		
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result
 				+ ((currencyCode == null) ? 0 : currencyCode.hashCode());
@@ -354,12 +370,7 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 			if (other.attachments != null)
 				return false;
 		} else if (!attachments.equals(other.attachments))
-			return false;
-		if (audit == null) {
-			if (other.audit != null)
-				return false;
-		} else if (!audit.equals(other.audit))
-			return false;
+			return false;	
 		if (code == null) {
 			if (other.code != null)
 				return false;
@@ -461,8 +472,7 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 				+ partAmount + ", laborAmount=" + laborAmount
 				+ ", otherAmount=" + otherAmount + ", totalAmount="
 				+ totalAmount + ", requests=" + requests + ", attachments="
-				+ attachments + ", user=" + user + ", audit=" + audit
-				+ ", relation=" + relation + ", requester=" + requester
+				+ attachments + ", user=" + user + ", relation=" + relation + ", requester=" + requester
 				+ ", provider=" + provider + ", notes=" + notes
 				+ ", serviceType=" + serviceType + ", salesPerson="
 				+ salesPerson + ", shipComplete=" + shipComplete + "]";

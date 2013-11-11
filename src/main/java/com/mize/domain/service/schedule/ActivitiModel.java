@@ -11,6 +11,7 @@ public class ActivitiModel  extends MizeEntity  implements Comparable<ActivitiMo
 	private String processUrl;
 	private String modelEditUrl;
 	private String modelName;
+	private String description;
 	
 	public String getModelName() {
 		return modelName;
@@ -104,6 +105,14 @@ public class ActivitiModel  extends MizeEntity  implements Comparable<ActivitiMo
 		} else if (!processUrl.equals(other.processUrl))
 			return false;
 		return true;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 	

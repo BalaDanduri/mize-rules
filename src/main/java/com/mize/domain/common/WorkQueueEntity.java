@@ -163,17 +163,19 @@ public class WorkQueueEntity extends MizeEntity {
 	public Long getEntityId() {
 		return entityId;
 	}
-
+	
 	public void setEntityId(Long entityId) {
 		this.entityId = entityId;
-	}
-
+	}	
+	
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result
 				+ ((entityCode == null) ? 0 : entityCode.hashCode());
+		result = prime * result
+				+ ((entityId == null) ? 0 : entityId.hashCode());
 		result = prime * result
 				+ ((entityType == null) ? 0 : entityType.hashCode());
 		result = prime * result
@@ -198,6 +200,11 @@ public class WorkQueueEntity extends MizeEntity {
 				return false;
 		} else if (!entityCode.equals(other.entityCode))
 			return false;
+		if (entityId == null) {
+			if (other.entityId != null)
+				return false;
+		} else if (!entityId.equals(other.entityId))
+			return false;
 		if (entityType == null) {
 			if (other.entityType != null)
 				return false;
@@ -220,25 +227,5 @@ public class WorkQueueEntity extends MizeEntity {
 			return false;
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("WorkQueueItem [id=");
-		builder.append(id);
-		builder.append(", entityCode=");
-		builder.append(entityCode);
-		builder.append(", entityType=");
-		builder.append(entityType);
-		builder.append(", serviceEntity=");
-		builder.append(serviceEntity);
-		builder.append(", status=");
-		builder.append(status);
-		builder.append(", workQueue=");
-		builder.append(workQueue);
-		builder.append("]");
-		return builder.toString();
-	}
-
 	
 }

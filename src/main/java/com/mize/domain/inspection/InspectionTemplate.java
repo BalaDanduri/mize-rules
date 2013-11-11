@@ -31,7 +31,7 @@ import com.mize.domain.util.JsonDateSerializer;
 
 @Entity
 @Table(name = "inspection_template")
-public class InspectionTemplate extends MizeEntity {
+public class InspectionTemplate extends MizeEntity implements Comparable<InspectionTemplate>{
 	
 	private static final long serialVersionUID = 2970815534756018496L;
 	
@@ -233,121 +233,8 @@ public class InspectionTemplate extends MizeEntity {
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
-		result = prime * result
-				+ ((isActive == null) ? 0 : isActive.hashCode());
-		result = prime * result + ((model == null) ? 0 : model.hashCode());
-		result = prime * result
-				+ ((startDate == null) ? 0 : startDate.hashCode());
-		result = prime * result
-				+ ((statusCode == null) ? 0 : statusCode.hashCode());
-		result = prime
-				* result
-				+ ((templateAttachments == null) ? 0 : templateAttachments
-						.hashCode());
-		result = prime * result
-				+ ((templateAudits == null) ? 0 : templateAudits.hashCode());
-		result = prime * result
-				+ ((templateCode == null) ? 0 : templateCode.hashCode());
-		result = prime
-				* result
-				+ ((templateDefinition == null) ? 0 : templateDefinition
-						.hashCode());
-		result = prime * result
-				+ ((templateIntls == null) ? 0 : templateIntls.hashCode());
-		result = prime * result + ((tenant == null) ? 0 : tenant.hashCode());
-		result = prime * result
-				+ ((typeCode == null) ? 0 : typeCode.hashCode());
-		result = prime * result + ((user == null) ? 0 : user.hashCode());
-		result = prime * result
-				+ ((versionNumber == null) ? 0 : versionNumber.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		InspectionTemplate other = (InspectionTemplate) obj;
-		if (endDate == null) {
-			if (other.endDate != null)
-				return false;
-		} else if (!endDate.equals(other.endDate))
-			return false;
-		if (isActive == null) {
-			if (other.isActive != null)
-				return false;
-		} else if (!isActive.equals(other.isActive))
-			return false;
-		if (model == null) {
-			if (other.model != null)
-				return false;
-		} else if (!model.equals(other.model))
-			return false;
-		if (startDate == null) {
-			if (other.startDate != null)
-				return false;
-		} else if (!startDate.equals(other.startDate))
-			return false;
-		if (statusCode == null) {
-			if (other.statusCode != null)
-				return false;
-		} else if (!statusCode.equals(other.statusCode))
-			return false;
-		if (templateAttachments == null) {
-			if (other.templateAttachments != null)
-				return false;
-		} else if (!templateAttachments.equals(other.templateAttachments))
-			return false;
-		if (templateAudits == null) {
-			if (other.templateAudits != null)
-				return false;
-		} else if (!templateAudits.equals(other.templateAudits))
-			return false;
-		if (templateCode == null) {
-			if (other.templateCode != null)
-				return false;
-		} else if (!templateCode.equals(other.templateCode))
-			return false;
-		if (templateDefinition == null) {
-			if (other.templateDefinition != null)
-				return false;
-		} else if (!templateDefinition.equals(other.templateDefinition))
-			return false;
-		if (templateIntls == null) {
-			if (other.templateIntls != null)
-				return false;
-		} else if (!templateIntls.equals(other.templateIntls))
-			return false;
-		if (tenant == null) {
-			if (other.tenant != null)
-				return false;
-		} else if (!tenant.getId().equals(other.tenant.getId()))
-			return false;
-		if (typeCode == null) {
-			if (other.typeCode != null)
-				return false;
-		} else if (!typeCode.equals(other.typeCode))
-			return false;
-		if (user == null) {
-			if (other.user != null)
-				return false;
-		} else if (!user.equals(other.user))
-			return false;
-		if (versionNumber == null) {
-			if (other.versionNumber != null)
-				return false;
-		} else if (!versionNumber.equals(other.versionNumber))
-			return false;
-		return true;
+	public int compareTo(InspectionTemplate o) {
+		return 0;
 	}
 	
-
 }
