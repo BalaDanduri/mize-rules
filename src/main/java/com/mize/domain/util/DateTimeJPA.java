@@ -58,7 +58,7 @@ public class DateTimeJPA implements UserType{
 
 	@Override
 	public Object replace(Object arg0, Object arg1, Object arg2) throws HibernateException {
-		return null;
+		return arg0;
 	}
 
 	@SuppressWarnings("rawtypes")
