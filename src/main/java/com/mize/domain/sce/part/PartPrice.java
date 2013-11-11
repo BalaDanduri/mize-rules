@@ -22,6 +22,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.mize.domain.common.Country;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateDeserializer;
+import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateSerializer;
 
 @Entity
@@ -33,7 +34,9 @@ public class PartPrice extends MizeEntity {
 	private BigDecimal unitPrice;
 	private BigDecimal listPrice;
 	private BigDecimal netPrice;
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime startDate;
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime endDate;
 	private String currencyCode;
 	private Country country;
@@ -89,7 +92,7 @@ public class PartPrice extends MizeEntity {
 	}
 	
 	@Column(name = "start_date", nullable = true)
-	@DateTimeFormat(pattern = "MM-dd-yyyy")
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Type(type = "com.mize.domain.util.DateTimeJPA")
 	@JsonSerialize(using = JsonDateSerializer.class, include = Inclusion.NON_NULL)
 	public DateTime getStartDate() {
@@ -97,7 +100,7 @@ public class PartPrice extends MizeEntity {
 	}
 
 	@Column(name = "end_date", nullable = true)
-	@DateTimeFormat(pattern = "MM-dd-yyyy")
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@JsonSerialize(using = JsonDateSerializer.class,include=Inclusion.NON_NULL)
 	public DateTime getEndDate() {
@@ -142,12 +145,14 @@ public class PartPrice extends MizeEntity {
 		this.netPrice = netPrice;
 	}
 
-	@DateTimeFormat(pattern = "MM-dd-yyyy")
-	@JsonDeserialize(using = JodaDateDeserializer.class)
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	public void setStartDate(DateTime startDate) {
 		this.startDate = startDate;
 	}
 
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	public void setEndDate(DateTime endDate) {
 		this.endDate = endDate;
 	}
