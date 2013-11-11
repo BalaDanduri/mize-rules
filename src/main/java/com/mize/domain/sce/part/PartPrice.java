@@ -24,7 +24,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.mize.domain.common.Country;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateSerializer;
+import com.mize.domain.util.JsonDateTimeSerializer;
 
 @Entity
 @Table(name = "part_price")
@@ -95,7 +95,7 @@ public class PartPrice extends MizeEntity {
 	@Column(name = "start_date", nullable = true)
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateSerializer.class, include = Inclusion.NON_NULL)
+	@JsonSerialize(using = JsonDateTimeSerializer.class, include = Inclusion.NON_NULL)
 	public DateTime getStartDate() {
 		return startDate;
 	}
@@ -103,7 +103,7 @@ public class PartPrice extends MizeEntity {
 	@Column(name = "end_date", nullable = true)
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateSerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using = JsonDateTimeSerializer.class, include = Inclusion.NON_NULL)
 	public DateTime getEndDate() {
 		return endDate;
 	}
