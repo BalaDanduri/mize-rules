@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -22,7 +24,6 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.common.MizeEntity;
-import com.mize.domain.servicelocator.BusinessEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
@@ -33,7 +34,6 @@ public class PartKit extends MizeEntity{
 	private static final long serialVersionUID = 4502594935806813253L;
 	
 	private Part part;
-	private BusinessEntity tenant;
 	private String priceMethod;
 	private String kitType;
 	private String isActive;
@@ -140,16 +140,7 @@ public class PartKit extends MizeEntity{
 		return partKitItems;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "tenant_id")
-	public BusinessEntity getTenant() {
-		return tenant;
-	}
-
-	public void setTenant(BusinessEntity tenant) {
-		this.tenant = tenant;
-	}
-
+	
 	public void setPartKitItems(List<PartKitItem> partKitItems) {
 		this.partKitItems = partKitItems;
 	}
@@ -304,4 +295,13 @@ public class PartKit extends MizeEntity{
 		return builder.toString();
 	}
 	
+	@PrePersist
+	@PreUpdate
+	public void auditFields(){
+		if(createdDate==null && id==null){
+			setCreatedDate(DateTime.now());
+		}
+		setUpdatedDate(DateTime.now());
+		
+	}
 }

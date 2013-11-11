@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -379,6 +381,15 @@ public class Part extends MizeEntity {
 	}
 
 
+	@PrePersist
+	@PreUpdate
+	public void auditFields(){
+		if(createdDate==null && id==null){
+			setCreatedDate(DateTime.now());
+		}
+		setUpdatedDate(DateTime.now());
+		
+	}
 
 
 
