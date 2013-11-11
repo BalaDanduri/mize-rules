@@ -21,7 +21,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.common.Country;
 import com.mize.domain.common.MizeEntity;
-import com.mize.domain.util.JodaDateDeserializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateSerializer;
 
