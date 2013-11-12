@@ -123,7 +123,7 @@ public class PartTest extends JPATest  {
 			Part part = new Part();
 			part.setId(resultSet.getLong("id"));
 			part.setIsActive(resultSet.getString("is_active"));
-			part.setPartType(resultSet.getString("part_type"));
+			part.setType(resultSet.getString("part_type"));
             part.setIsSerialized(resultSet.getString("is_serialized"));
             part.setIsReturnable(resultSet.getString("is_returnable"));
             part.setUom(resultSet.getString("uom"));

@@ -25,8 +25,8 @@ public class PartIntl extends MizeEntity {
 	private static final long serialVersionUID = -1164448119809296797L;
 	private Part part;
 	private Locale locale;
-	private String partName;
-	private String partDescription;
+	private String name;
+	private String description;
 	
 	public PartIntl() {
 		super();
@@ -36,8 +36,8 @@ public class PartIntl extends MizeEntity {
 			String partDescription) {
 		this.part = part;
 		this.locale = locale;
-		this.partName = partName;
-		this.partDescription = partDescription;
+		this.name = partName;
+		this.description = partDescription;
 	}
 	
 	@Id
@@ -61,13 +61,13 @@ public class PartIntl extends MizeEntity {
 	}
 
 	@Column(name = "part_name", length = 100, nullable = true)
-	public String getPartName() {
-		return partName;
+	public String getName() {
+		return name;
 	}
 	
 	@Column(name = "part_desc", length = 500, nullable = true)
-	public String getPartDescription() {
-		return partDescription;
+	public String getDescription() {
+		return description;
 	}
 	
 	
@@ -84,25 +84,40 @@ public class PartIntl extends MizeEntity {
 		this.locale = locale;
 	}
 
-	public void setPartName(String partName) {
-		this.partName = partName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public void setPartDescription(String partDescription) {
-		this.partDescription = partDescription;
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+
+	@PrePersist
+	@PreUpdate
+	public void auditFields(){
+		if(createdDate==null && id==null){
+			setCreatedDate(DateTime.now());
+		}
+		setUpdatedDate(DateTime.now());		
 	}
 	
 
 	@Override
+	public String toString() {
+		return "PartIntl [part=" + part + ", locale=" + locale + ", name="
+				+ name + ", description=" + description + "]";
+	}
+
+	@Override
 	public int hashCode() {
-		final int prime = PRIME;
+		final int prime = 31;
 		int result = super.hashCode();
+		result = prime * result
+				+ ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((locale == null) ? 0 : locale.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((part == null) ? 0 : part.hashCode());
-		result = prime * result
-				+ ((partDescription == null) ? 0 : partDescription.hashCode());
-		result = prime * result
-				+ ((partName == null) ? 0 : partName.hashCode());
 		return result;
 	}
 
@@ -115,52 +130,29 @@ public class PartIntl extends MizeEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		PartIntl other = (PartIntl) obj;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
 		if (locale == null) {
 			if (other.locale != null)
 				return false;
 		} else if (!locale.equals(other.locale))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
 			return false;
 		if (part == null) {
 			if (other.part != null)
 				return false;
 		} else if (!part.equals(other.part))
 			return false;
-		if (partDescription == null) {
-			if (other.partDescription != null)
-				return false;
-		} else if (!partDescription.equals(other.partDescription))
-			return false;
-		if (partName == null) {
-			if (other.partName != null)
-				return false;
-		} else if (!partName.equals(other.partName))
-			return false;
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		StringBuffer builder = new StringBuffer();
-		builder.append("PartIntl [part=");
-		builder.append(part);
-		builder.append(", locale=");
-		builder.append(locale);
-		builder.append(", partName=");
-		builder.append(partName);
-		builder.append(", partDescription=");
-		builder.append(partDescription);		
-		builder.append("]");		
-		return builder.toString();
-	}	
 	
-	@PrePersist
-	@PreUpdate
-	public void auditFields(){
-		if(createdDate==null && id==null){
-			setCreatedDate(DateTime.now());
-		}
-		setUpdatedDate(DateTime.now());
-		
-	}
+	
 
 }

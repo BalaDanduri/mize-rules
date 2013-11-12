@@ -33,8 +33,8 @@ public class Part extends MizeEntity {
 
 	private static final long serialVersionUID = 2686388059625468728L;
 	private BusinessEntity tenant;
-	private String partCode;
-	private String partType;
+	private String code;
+	private String type;
 	private String isActive;
 	private String isKit;
 	private String isSerialized;
@@ -58,8 +58,8 @@ public class Part extends MizeEntity {
 			List<PartKit> partKits) {
 		super();
 		this.tenant = tenant;
-		this.partCode = partCode;
-		this.partType = partType;
+		this.code = partCode;
+		this.type = partType;
 		this.isActive = isActive;
 		this.isKit = isKit;
 		this.isSerialized = isSerialized;
@@ -88,13 +88,13 @@ public class Part extends MizeEntity {
 	}
 
 	@Column(name = "part_code", length = 30, nullable = false)
-	public String getPartCode() {
-		return partCode;
+	public String getCode() {
+		return code;
 	}
 
 	@Column(name = "part_type", length = 30, nullable = true)
-	public String getPartType() {
-		return partType;
+	public String getType() {
+		return type;
 	}
 
 	@Column(name = "is_active", length = 1, nullable = true)
@@ -188,12 +188,12 @@ public class Part extends MizeEntity {
 		this.tenant = tenant;
 	}
 
-	public void setPartCode(String partCode) {
-		this.partCode = partCode;
+	public void setCode(String code) {
+		this.code = code;
 	}
 
-	public void setPartType(String partType) {
-		this.partType = partType;
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public void setIsActive(String isActive) {
@@ -256,10 +256,35 @@ public class Part extends MizeEntity {
 		super.setUpdatedBy(updatedBy);
 	}
 
+
+	@PrePersist
+	@PreUpdate
+	public void auditFields(){
+		if(createdDate==null && id==null){
+			setCreatedDate(DateTime.now());
+		}
+		setUpdatedDate(DateTime.now());		
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Part [tenant=" + tenant + ", code=" + code + ", type=" + type
+				+ ", isActive=" + isActive + ", isKit=" + isKit
+				+ ", isSerialized=" + isSerialized + ", isReturnable="
+				+ isReturnable + ", uom=" + uom + ", partIntl=" + partIntl
+				+ ", partPrices=" + partPrices + ", partAttributes="
+				+ partAttributes + ", partKits=" + partKits + "]";
+	}
+
+
+
 	@Override
 	public int hashCode() {
-		final int prime = PRIME;
+		final int prime = 31;
 		int result = super.hashCode();
+		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result
 				+ ((isActive == null) ? 0 : isActive.hashCode());
 		result = prime * result + ((isKit == null) ? 0 : isKit.hashCode());
@@ -270,17 +295,18 @@ public class Part extends MizeEntity {
 		result = prime * result
 				+ ((partAttributes == null) ? 0 : partAttributes.hashCode());
 		result = prime * result
-				+ ((partCode == null) ? 0 : partCode.hashCode());
-		result = prime * result
 				+ ((partIntl == null) ? 0 : partIntl.hashCode());
 		result = prime * result
-				+ ((partPrices == null) ? 0 : partPrices.hashCode());
+				+ ((partKits == null) ? 0 : partKits.hashCode());
 		result = prime * result
-				+ ((partType == null) ? 0 : partType.hashCode());
+				+ ((partPrices == null) ? 0 : partPrices.hashCode());
 		result = prime * result + ((tenant == null) ? 0 : tenant.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		result = prime * result + ((uom == null) ? 0 : uom.hashCode());
 		return result;
 	}
+
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -291,6 +317,11 @@ public class Part extends MizeEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		Part other = (Part) obj;
+		if (code == null) {
+			if (other.code != null)
+				return false;
+		} else if (!code.equals(other.code))
+			return false;
 		if (isActive == null) {
 			if (other.isActive != null)
 				return false;
@@ -316,30 +347,30 @@ public class Part extends MizeEntity {
 				return false;
 		} else if (!partAttributes.equals(other.partAttributes))
 			return false;
-		if (partCode == null) {
-			if (other.partCode != null)
-				return false;
-		} else if (!partCode.equals(other.partCode))
-			return false;
 		if (partIntl == null) {
 			if (other.partIntl != null)
 				return false;
 		} else if (!partIntl.equals(other.partIntl))
+			return false;
+		if (partKits == null) {
+			if (other.partKits != null)
+				return false;
+		} else if (!partKits.equals(other.partKits))
 			return false;
 		if (partPrices == null) {
 			if (other.partPrices != null)
 				return false;
 		} else if (!partPrices.equals(other.partPrices))
 			return false;
-		if (partType == null) {
-			if (other.partType != null)
-				return false;
-		} else if (!partType.equals(other.partType))
-			return false;
 		if (tenant == null) {
 			if (other.tenant != null)
 				return false;
 		} else if (!tenant.equals(other.tenant))
+			return false;
+		if (type == null) {
+			if (other.type != null)
+				return false;
+		} else if (!type.equals(other.type))
 			return false;
 		if (uom == null) {
 			if (other.uom != null)
@@ -348,49 +379,7 @@ public class Part extends MizeEntity {
 			return false;
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Part [tenant=");
-		builder.append(tenant);
-		builder.append(", partCode=");
-		builder.append(partCode);
-		builder.append(", partType=");
-		builder.append(partType);
-		builder.append(", isActive=");
-		builder.append(isActive);
-		builder.append(", isKit=");
-		builder.append(isKit);
-		builder.append(", isSerialized=");
-		builder.append(isSerialized);
-		builder.append(", isReturnable=");
-		builder.append(isReturnable);
-		builder.append(", uom=");
-		builder.append(uom);
-		builder.append(", partIntl=");
-		builder.append(partIntl);
-		builder.append(", partPrice=");
-		builder.append(partPrices);
-		builder.append(", partAttributes=");
-		builder.append(partAttributes);
-		builder.append(", id=");
-		builder.append(id);
-		builder.append("]");
-		return builder.toString();
-	}
-
-
-	@PrePersist
-	@PreUpdate
-	public void auditFields(){
-		if(createdDate==null && id==null){
-			setCreatedDate(DateTime.now());
-		}
-		setUpdatedDate(DateTime.now());
-		
-	}
-
-
+	
+	
 
 }

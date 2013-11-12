@@ -35,7 +35,7 @@ public class PartKit extends MizeEntity{
 	
 	private Part part;
 	private String priceMethod;
-	private String kitType;
+	private String type;
 	private String isActive;
 	private DateTime startDate;
 	private DateTime endDate;
@@ -45,13 +45,13 @@ public class PartKit extends MizeEntity{
 		super();
 	}
 	
-	public PartKit(Part part, String priceMethod, String kitType,
+	public PartKit(Part part, String priceMethod, String type,
 			String isActive, DateTime startDate, DateTime endDate,
 			List<PartKitItem> partKitItems) {
 		super();
 		this.part = part;
 		this.priceMethod = priceMethod;
-		this.kitType = kitType;
+		this.type = type;
 		this.isActive = isActive;
 		this.startDate = startDate;
 		this.endDate = endDate;
@@ -78,8 +78,8 @@ public class PartKit extends MizeEntity{
 	}
 
 	@Column(name = "kit_type", length = 30, nullable = false)
-	public String getKitType() {
-		return kitType;
+	public String getType() {
+		return type;
 	}
 
 	@Column(name = "is_active", length = 1, nullable = false)
@@ -158,8 +158,8 @@ public class PartKit extends MizeEntity{
 		this.priceMethod = priceMethod;
 	}
 
-	public void setKitType(String kitType) {
-		this.kitType = kitType;
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public void setIsActive(String isActive) {
@@ -205,15 +205,24 @@ public class PartKit extends MizeEntity{
 	public void setUpdatedBy(Long updatedBy) {		
 		super.setUpdatedBy(updatedBy);
 	}
+	
+	@PrePersist
+	@PreUpdate
+	public void auditFields(){
+		if(createdDate==null && id==null){
+			setCreatedDate(DateTime.now());
+		}
+		setUpdatedDate(DateTime.now());
+		
+	}
 
 	@Override
 	public int hashCode() {
-		final int prime = PRIME;
+		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
 		result = prime * result
 				+ ((isActive == null) ? 0 : isActive.hashCode());
-		result = prime * result + ((kitType == null) ? 0 : kitType.hashCode());
 		result = prime * result + ((part == null) ? 0 : part.hashCode());
 		result = prime * result
 				+ ((partKitItems == null) ? 0 : partKitItems.hashCode());
@@ -221,9 +230,9 @@ public class PartKit extends MizeEntity{
 				+ ((priceMethod == null) ? 0 : priceMethod.hashCode());
 		result = prime * result
 				+ ((startDate == null) ? 0 : startDate.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -243,11 +252,6 @@ public class PartKit extends MizeEntity{
 			if (other.isActive != null)
 				return false;
 		} else if (!isActive.equals(other.isActive))
-			return false;
-		if (kitType == null) {
-			if (other.kitType != null)
-				return false;
-		} else if (!kitType.equals(other.kitType))
 			return false;
 		if (part == null) {
 			if (other.part != null)
@@ -269,39 +273,21 @@ public class PartKit extends MizeEntity{
 				return false;
 		} else if (!startDate.equals(other.startDate))
 			return false;
+		if (type == null) {
+			if (other.type != null)
+				return false;
+		} else if (!type.equals(other.type))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("PartKit [part=");
-		builder.append(part);
-		builder.append(", priceMethod=");
-		builder.append(priceMethod);
-		builder.append(", kitType=");
-		builder.append(kitType);
-		builder.append(", isActive=");
-		builder.append(isActive);
-		builder.append(", startDate=");
-		builder.append(startDate);
-		builder.append(", endDate=");
-		builder.append(endDate);
-		builder.append(", partKitItems=");
-		builder.append(partKitItems);
-		builder.append(", id=");
-		builder.append(id);
-		builder.append("]");
-		return builder.toString();
+		return "PartKit [part=" + part + ", priceMethod=" + priceMethod
+				+ ", type=" + type + ", isActive=" + isActive + ", startDate="
+				+ startDate + ", endDate=" + endDate + ", partKitItems="
+				+ partKitItems + "]";
 	}
 	
-	@PrePersist
-	@PreUpdate
-	public void auditFields(){
-		if(createdDate==null && id==null){
-			setCreatedDate(DateTime.now());
-		}
-		setUpdatedDate(DateTime.now());
-		
-	}
+	
 }
