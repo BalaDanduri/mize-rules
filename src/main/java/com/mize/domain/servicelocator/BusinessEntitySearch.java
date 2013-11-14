@@ -10,6 +10,7 @@ public class BusinessEntitySearch {
 	private Integer pageIndex;
 	private String entityType;
 	private String sourceProductId;
+	private String searchType;
 	
 	public BusinessEntitySearch() {
 		entityAddress = new BusinessEntityAddress();
@@ -55,6 +56,14 @@ public class BusinessEntitySearch {
 
 	public void setSourceProductId(String sourceProductId) {
 		this.sourceProductId = sourceProductId;
+	}
+	
+	public String getSearchType() {
+		return searchType;
+	}
+	
+	public void setSearchType(String searchType) {
+		this.searchType = searchType;
 	}
 	
 }
