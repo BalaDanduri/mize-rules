@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
+import com.mize.domain.appmsg.AppMessage;
 import com.mize.domain.exception.MizeError;
 
 public final class ServiceDTO<T> implements ServiceLiteral{
@@ -16,7 +17,10 @@ public final class ServiceDTO<T> implements ServiceLiteral{
 	private List<MizeError> errors;
 	private Map<String,Object> messages = new HashMap<String, Object>();
 	private Map<String,String> validationMessages = new HashMap<String, String>();
+	private List<AppMessage> appMessages = new ArrayList<AppMessage>();
+	private Integer severity;
 	private boolean isValid;
+
 	public T getDataObject() {
 		return dataObject;
 	}
@@ -46,8 +50,14 @@ public final class ServiceDTO<T> implements ServiceLiteral{
 	public Map<String, Object> getMessages() {
 		return messages;
 	}
+	
 	public void setMessages(Map<String, Object> messages) {
 		this.messages = messages;
+	}
+	
+	@JsonIgnore
+	public boolean setMessage(String msgCode,Object msgValue){
+		return addMessage(msgCode,msgValue);
 	}
 	
 	@JsonIgnore
@@ -58,14 +68,22 @@ public final class ServiceDTO<T> implements ServiceLiteral{
 		}
 		return  false;
 	}
+	
 	public boolean hasMessages(){
 		return (messages != null && messages.size() > 0);
 	}
+	
 	public Map<String, String> getValidationMessages() {
 		return validationMessages;
 	}
+	
 	public void setValidationMessages(Map<String, String> validationMessages) {
 		this.validationMessages = validationMessages;
+	}
+	
+	@JsonIgnore
+	public boolean setValidationMessage(String msgCode,String msgValue){
+		return addValidationMessage(msgCode,msgValue);
 	}
 	
 	@JsonIgnore
@@ -80,6 +98,11 @@ public final class ServiceDTO<T> implements ServiceLiteral{
 	@JsonIgnore
 	public boolean addValidationMessage(String msgCode){
 		return addValidationMessage(msgCode,msgCode);
+	}
+	
+	@JsonIgnore
+	public boolean setErrorMessage(String msgCode,String msgValue){
+		return addErrorMessage(msgCode,msgValue);
 	}
 	
 	@JsonIgnore
@@ -123,8 +146,13 @@ public final class ServiceDTO<T> implements ServiceLiteral{
 	}
 	
 	@JsonIgnore
+	public void setValid(boolean isValid) {
+		this.isValid = isValid;
+	}
+
+	@JsonIgnore
 	public boolean getIsValid(){
-		return isValid = !(hasErrors() || hasValidations());
+		return !(hasErrors() || hasValidations());
 	}
 	
 	@JsonIgnore
@@ -136,4 +164,42 @@ public final class ServiceDTO<T> implements ServiceLiteral{
 	public boolean hasErrorKey(String key){
 		return getErrorKeys().contains(key);
 	}
+	
+	public List<AppMessage> getAppMessages() {
+		return appMessages;
+	}
+
+	public void setAppMessages(List<AppMessage> appMessages) {
+		this.appMessages = appMessages;
+	}
+
+	@JsonIgnore
+	public void addAppMessage(Integer severity, String code){
+		addAppMessage(severity,code,null);
+	}
+	
+	@JsonIgnore
+	public void addAppMessage(Integer severity, String code,String shortDesc){
+		if(appMessages == null){
+			appMessages = new ArrayList<AppMessage>();
+		}
+		if(Formatter.intValue(this.severity) > Formatter.intValue(severity)){
+			this.severity = severity;
+		}
+		appMessages.add(new AppMessage(severity, code,shortDesc));
+	}
+	
+	public Integer getSeverity() {
+		return Formatter.intValue(severity);
+	}
+
+
+	@Override
+	public String toString() {
+		return "ServiceDTO [errors=" + errors
+				+ ", messages=" + messages + ", validationMessages="
+				+ validationMessages + ", isValid=" + isValid + "]";
+	}
+	
+	
 }

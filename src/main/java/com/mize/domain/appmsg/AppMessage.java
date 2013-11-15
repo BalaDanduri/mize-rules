@@ -40,6 +40,17 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 		this.longDesc = longDesc;
 	}
 	
+	public AppMessage(Integer severity, String code) {
+		this.severity = severity;
+		this.code = code;		
+	}
+	
+	public AppMessage(Integer severity, String code,String shortDesc) {
+		this.severity = severity;
+		this.code = code;		
+		this.shortDesc = shortDesc;
+	}
+	
 	public AppMessage() {
 	}
 
