@@ -20,6 +20,8 @@ import org.springframework.jdbc.core.RowMapper;
 
 import org.springframework.test.context.ContextConfiguration;
 
+import com.mize.domain.catalog.Catalog;
+import com.mize.domain.catalog.CatalogEntry;
 import com.mize.domain.test.util.JPATest;
 
 @ContextConfiguration(locations={"/test-context.xml"})

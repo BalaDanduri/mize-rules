@@ -21,6 +21,10 @@ import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.ContextConfiguration;
 
+import com.mize.domain.part.Part;
+import com.mize.domain.part.PartAttribute;
+import com.mize.domain.part.PartIntl;
+import com.mize.domain.part.PartPrice;
 import com.mize.domain.servicelocator.BusinessEntity;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;

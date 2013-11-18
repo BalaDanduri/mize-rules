@@ -1,4 +1,4 @@
-package com.mize.domain.sce.part;
+package com.mize.domain.part;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

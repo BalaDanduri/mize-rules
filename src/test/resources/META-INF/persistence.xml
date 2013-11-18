@@ -3,24 +3,24 @@
 	version="2.0">
 
 	<persistence-unit name="myUnit" transaction-type="RESOURCE_LOCAL">
-		<class>com.mize.domain.sce.catalog.Catalog</class>
-		<class>com.mize.domain.sce.catalog.CatalogIntl</class>
+		<class>com.mize.domain.catalog.Catalog</class>
+		<class>com.mize.domain.catalog.CatalogIntl</class>
 		<class>com.mize.domain.common.Locale</class>
 		<class>com.mize.domain.servicelocator.BusinessEntity</class>
 		<class>com.mize.domain.servicelocator.BusinessEntityAddress</class>
 		<class>com.mize.domain.common.State</class>
 		<class>com.mize.domain.common.Country</class>
 		<class>com.mize.domain.servicelocator.BusinessEntityGeo</class>
-		<class>com.mize.domain.sce.catalog.CatalogEntry</class>
-		<class>com.mize.domain.sce.catalog.CatalogEntryIntl</class>
-		<class>com.mize.domain.sce.part.Part</class>
-		<class>com.mize.domain.sce.part.PartIntl</class>
-		<class>com.mize.domain.sce.part.PartPrice</class>
-		<class>com.mize.domain.sce.part.PartAttribute</class>
-		<class>com.mize.domain.sce.part.PartKit</class>
-		<class>com.mize.domain.sce.part.PartKitItem</class>
-		<class>com.mize.domain.sce.part.PickList</class>
-		<class>com.mize.domain.sce.part.PickListItem</class>
+		<class>com.mize.domain.catalog.CatalogEntry</class>
+		<class>com.mize.domain.catalog.CatalogEntryIntl</class>
+		<class>com.mize.domain.part.Part</class>
+		<class>com.mize.domain.part.PartIntl</class>
+		<class>com.mize.domain.part.PartPrice</class>
+		<class>com.mize.domain.part.PartAttribute</class>
+		<class>com.mize.domain.part.PartKit</class>
+		<class>com.mize.domain.part.PartKitItem</class>
+		<class>com.mize.domain.part.PickList</class>
+		<class>com.mize.domain.part.PickListItem</class>
 	</persistence-unit>
 
 </persistence>

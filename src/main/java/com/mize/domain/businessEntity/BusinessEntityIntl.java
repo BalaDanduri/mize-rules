@@ -1,4 +1,4 @@
-package com.mize.domain.sce.be;
+package com.mize.domain.businessEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,8 +19,8 @@ public class BusinessEntityIntl extends MizeEntity {
 
 	private static final long serialVersionUID = -1362236702129137109L;
 	private BusinessEntity businessEntity;
-	private String beName;
-	private String beDescription;
+	private String name;
+	private String description;
 	private Locale locale;	
 	
 	public BusinessEntityIntl() {
@@ -47,13 +47,13 @@ public class BusinessEntityIntl extends MizeEntity {
 	}
 	
 	@Column(name = "be_name", nullable = true, length = 250)
-	public String getBeName() {
-		return beName;
+	public String getName() {
+		return name;
 	}
 
 	@Column(name = "be_description", nullable = true, length = 500)
-	public String getBeDescription() {
-		return beDescription;
+	public String getDescription() {
+		return description;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -66,12 +66,12 @@ public class BusinessEntityIntl extends MizeEntity {
 		this.businessEntity = businessEntity;
 	}
 
-	public void setBeName(String beName) {
-		this.beName = beName;
+	public void setName(String beName) {
+		this.name = beName;
 	}
 
-	public void setBeDescription(String beDescription) {
-		this.beDescription = beDescription;
+	public void setDescription(String beDescription) {
+		this.description = beDescription;
 	}
 
 	public void setLocale(Locale locale) {

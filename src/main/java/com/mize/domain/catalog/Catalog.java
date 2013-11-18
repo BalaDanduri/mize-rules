@@ -1,4 +1,4 @@
-package com.mize.domain.sce.catalog;
+package com.mize.domain.catalog;
 
 import java.util.List;
 

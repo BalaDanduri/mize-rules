@@ -1,4 +1,4 @@
-package com.mize.domain.sce.be;
+package com.mize.domain.businessEntity;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class BusinessEntity extends MizeEntity {
 	private String subTypeCode;
 	private String logo;
 	private BusinessEntity tenant;
-	private BusinessEntity parentBe;
+	private BusinessEntity parentBE;
 	private String isActive;
 	private String currencyCode;
 	private List<BusinessEntityIntl> businessEntityIntl;
@@ -44,7 +44,7 @@ public class BusinessEntity extends MizeEntity {
 		this.subTypeCode = subTypeCode;
 		this.logo = logo;
 		this.tenant = tenantId;
-		this.parentBe = parentBeId;
+		this.parentBE = parentBeId;
 		this.isActive = isActive;
 		this.currencyCode = currencyCode;
 	}
@@ -91,8 +91,8 @@ public class BusinessEntity extends MizeEntity {
 
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="parent_be_id")
-	public BusinessEntity getParentBe() {
-		return parentBe;
+	public BusinessEntity getParentBE() {
+		return parentBE;
 	}
 
 	@Column(name = "is_active",  nullable = true, length = 1)
@@ -125,8 +125,8 @@ public class BusinessEntity extends MizeEntity {
 		this.tenant = tenant;
 	}
 
-	public void setParentBe(BusinessEntity parentBe) {
-		this.parentBe = parentBe;
+	public void setParentBE(BusinessEntity parentBe) {
+		this.parentBE = parentBe;
 	}
 
 	public void setIsActive(String isActive) {
@@ -157,7 +157,7 @@ public class BusinessEntity extends MizeEntity {
 				+ ((isActive == null) ? 0 : isActive.hashCode());
 		result = prime * result + ((logo == null) ? 0 : logo.hashCode());
 		result = prime * result
-				+ ((parentBe == null) ? 0 : parentBe.hashCode());
+				+ ((parentBE == null) ? 0 : parentBE.hashCode());
 		result = prime * result
 				+ ((subTypeCode == null) ? 0 : subTypeCode.hashCode());
 		result = prime * result
@@ -214,11 +214,11 @@ public class BusinessEntity extends MizeEntity {
 		} else if (!logo.equals(other.logo)) {
 			return false;
 		}
-		if (parentBe == null) {
-			if (other.parentBe != null) {
+		if (parentBE == null) {
+			if (other.parentBE != null) {
 				return false;
 			}
-		} else if (!parentBe.equals(other.parentBe)) {
+		} else if (!parentBE.equals(other.parentBE)) {
 			return false;
 		}
 		if (subTypeCode == null) {
@@ -261,7 +261,7 @@ public class BusinessEntity extends MizeEntity {
 		builder.append(", tenantId=");
 		builder.append(tenant);
 		builder.append(", parentBeId=");
-		builder.append(parentBe);
+		builder.append(parentBE);
 		builder.append(", isActive=");
 		builder.append(isActive);
 		builder.append(", currencyCode=");

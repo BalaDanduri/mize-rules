@@ -13,9 +13,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.mize.domain.catalog.Catalog;
+import com.mize.domain.catalog.CatalogEntry;
 import com.mize.domain.common.Locale;
-import com.mize.domain.sce.catalog.Catalog;
-import com.mize.domain.sce.catalog.CatalogEntry;
 import com.mize.domain.servicelocator.BusinessEntity;
 
 @RunWith(SpringJUnit4ClassRunner.class)
