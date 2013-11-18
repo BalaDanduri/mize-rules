@@ -66,17 +66,16 @@ public class BusinessEntityIntl extends MizeEntity {
 		this.businessEntity = businessEntity;
 	}
 
-	public void setName(String beName) {
-		this.name = beName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public void setDescription(String beDescription) {
-		this.description = beDescription;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public void setLocale(Locale locale) {
 		this.locale = locale;
 	}
-
 	
 }

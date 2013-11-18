@@ -4,7 +4,6 @@ package com.mize.domain.test.util;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import org.h2.tools.Console;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.runner.RunWith;
