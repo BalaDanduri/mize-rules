@@ -2,6 +2,7 @@ package com.mize.domain.sce.part;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -135,7 +136,7 @@ public class PartKit extends MizeEntity{
 		return super.getUpdatedBy();
 	}
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "partKit")
+	@OneToMany(cascade={CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = "partKit")
 	public List<PartKitItem> getPartKitItems() {
 		return partKitItems;
 	}
