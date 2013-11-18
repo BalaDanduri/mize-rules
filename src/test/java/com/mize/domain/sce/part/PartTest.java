@@ -151,7 +151,7 @@ public class PartTest extends JPATest  {
 		if(!Formatter.isEmpty(partAttributes)){
 			PartAttribute partAttribute1 = partAttributes.get(0);
 			assertTrue(partAttribute1.getId().equals(partAttribute.getId()));
-			assertTrue(partAttribute1.getAttributeCode().equals(partAttribute.getAttributeCode()));
+			assertTrue(partAttribute1.getCode().equals(partAttribute.getCode()));
 		}
 	}
 	
@@ -168,7 +168,7 @@ public class PartTest extends JPATest  {
 		if(!Formatter.isEmpty(partAttributes)){
 			PartAttribute partAttribute1 = partAttributes.get(0);
 			assertTrue(partAttribute1.getId().equals(partAttribute.getId()));
-			assertTrue(partAttribute1.getAttributeCode().equals(partAttribute.getAttributeCode()));
+			assertTrue(partAttribute1.getCode().equals(partAttribute.getCode()));
 		}
 	}
 
@@ -183,9 +183,9 @@ public class PartTest extends JPATest  {
 		public PartAttribute mapRow(ResultSet rs, int rowNum)throws SQLException {
 			 PartAttribute partAttribute = new PartAttribute();
 			 partAttribute.setId(rs.getLong("id"));
-			 partAttribute.setAttributeCode(rs.getString("attribute_code"));
-			 partAttribute.setAttributeUOM(rs.getString("attribute_uom"));
-			 partAttribute.setAttributeValue(rs.getString("attribute_value"));
+			 partAttribute.setCode(rs.getString("attribute_code"));
+			 partAttribute.setUom(rs.getString("attribute_uom"));
+			 partAttribute.setValue(rs.getString("attribute_value"));
 			 Part part = new Part();
 			 part.setId(rs.getLong("part_id"));
 			 partAttribute.setPart(part);

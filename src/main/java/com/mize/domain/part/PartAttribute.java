@@ -23,20 +23,20 @@ public class PartAttribute extends MizeEntity{
 
 	private static final long serialVersionUID = 5827509183800749241L;
 	private Part part;
-	private String attributeCode;
-	private String attributeValue;
-	private String attributeUOM;
+	private String code;
+	private String value;
+	private String uom;
 
 
 	public PartAttribute(){
 	}
 
-	public PartAttribute(Part part,String attributeCode, String attributeValue, String attributeUOM) {
+	public PartAttribute(Part part,String code, String value, String uom) {
 		super();
 		this.part = part;
-		this.attributeCode = attributeCode;
-		this.attributeValue = attributeValue;
-		this.attributeUOM = attributeUOM;
+		this.code = code;
+		this.value = value;
+		this.uom = uom;
 	}
 
 	@Id
@@ -54,22 +54,22 @@ public class PartAttribute extends MizeEntity{
 	}
 
 	@Column(name = "attribute_value", length = 100, nullable = true)
-	public String getAttributeValue() {
-		return attributeValue;
+	public String getValue() {
+		return value;
 	}
 
 	@Column(name = "attribute_uom", length = 30, nullable = true)
-	public String getAttributeUOM() {
-		return attributeUOM;
+	public String getUom() {
+		return uom;
 	}
 	
 	@Column(name = "attribute_code", length = 30, nullable = true)
-	public String getAttributeCode() {
-		return attributeCode;
+	public String getCode() {
+		return code;
 	}
 
-	public void setAttributeCode(String attributeCode) {
-		this.attributeCode = attributeCode;
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	@Override
@@ -81,25 +81,32 @@ public class PartAttribute extends MizeEntity{
 		this.part = part;
 	}
 
-	public void setAttributeValue(String attributeValue) {
-		this.attributeValue = attributeValue;
+	public void setValue(String value) {
+		this.value = value;
 	}
 
-	public void setAttributeUOM(String attribute_uom) {
-		this.attributeUOM = attribute_uom;
+	public void setUom(String uom) {
+		this.uom = uom;
+	}
+
+
+	@PrePersist
+	@PreUpdate
+	public void auditFields(){
+		if(createdDate==null && id==null){
+			setCreatedDate(DateTime.now());
+		}
+		setUpdatedDate(DateTime.now());		
 	}
 
 	@Override
 	public int hashCode() {
-		final int prime = PRIME;
+		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result
-				+ ((attributeCode == null) ? 0 : attributeCode.hashCode());
-		result = prime * result
-				+ ((attributeValue == null) ? 0 : attributeValue.hashCode());
-		result = prime * result
-				+ ((attributeUOM == null) ? 0 : attributeUOM.hashCode());
+		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result + ((part == null) ? 0 : part.hashCode());
+		result = prime * result + ((uom == null) ? 0 : uom.hashCode());
+		result = prime * result + ((value == null) ? 0 : value.hashCode());
 		return result;
 	}
 
@@ -112,55 +119,33 @@ public class PartAttribute extends MizeEntity{
 		if (getClass() != obj.getClass())
 			return false;
 		PartAttribute other = (PartAttribute) obj;
-		if (attributeCode == null) {
-			if (other.attributeCode != null)
+		if (code == null) {
+			if (other.code != null)
 				return false;
-		} else if (!attributeCode.equals(other.attributeCode))
-			return false;
-		if (attributeValue == null) {
-			if (other.attributeValue != null)
-				return false;
-		} else if (!attributeValue.equals(other.attributeValue))
-			return false;
-		if (attributeUOM == null) {
-			if (other.attributeUOM != null)
-				return false;
-		} else if (!attributeUOM.equals(other.attributeUOM))
+		} else if (!code.equals(other.code))
 			return false;
 		if (part == null) {
 			if (other.part != null)
 				return false;
 		} else if (!part.equals(other.part))
 			return false;
+		if (uom == null) {
+			if (other.uom != null)
+				return false;
+		} else if (!uom.equals(other.uom))
+			return false;
+		if (value == null) {
+			if (other.value != null)
+				return false;
+		} else if (!value.equals(other.value))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("PartAttribute [part=");
-		builder.append(part);
-		builder.append(", attributeCode=");
-		builder.append(attributeCode);
-		builder.append(", attributeValue=");
-		builder.append(attributeValue);
-		builder.append(", attribute_uom=");
-		builder.append(attributeUOM);
-		builder.append(", id=");
-		builder.append(id);
-		builder.append("]");
-		return builder.toString();
-	}
-
-
-	@PrePersist
-	@PreUpdate
-	public void auditFields(){
-		if(createdDate==null && id==null){
-			setCreatedDate(DateTime.now());
-		}
-		setUpdatedDate(DateTime.now());
-		
+		return "PartAttribute [part=" + part + ", code=" + code + ", value="
+				+ value + ", uom=" + uom + "]";
 	}
 
 
