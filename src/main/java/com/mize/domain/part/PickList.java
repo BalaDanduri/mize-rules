@@ -30,29 +30,33 @@ public class PickList extends MizeEntity {
 
 	private static final long serialVersionUID = 7197887648853141829L;
 	private BusinessEntity businessEntity;
-	private String pickListCode;
-	private String pickListType;
+	private String code;
+	private String type;
 	private String isActive;
-	private String pickListComments;
+	private String comments;
 	private BusinessEntity tenant;
-	private List<PickListItem> pickListItems;
+	private List<PickListItem> items;
 
 	public PickList(){
 		super();
 	}
 
-	public PickList(BusinessEntity businessEntity, String pickListCode,
-			String pickListType, String isActive, String pickListComments,
-			BusinessEntity tenant, List<PickListItem> pickListItems) {
+	
+
+	public PickList(BusinessEntity businessEntity, String code, String type,
+			String isActive, String comments, BusinessEntity tenant,
+			List<PickListItem> items) {
 		super();
 		this.businessEntity = businessEntity;
-		this.pickListCode = pickListCode;
-		this.pickListType = pickListType;
+		this.code = code;
+		this.type = type;
 		this.isActive = isActive;
-		this.pickListComments = pickListComments;
+		this.comments = comments;
 		this.tenant = tenant;
-		this.pickListItems = pickListItems;
+		this.items = items;
 	}
+
+
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -63,13 +67,13 @@ public class PickList extends MizeEntity {
 	}
 
 	@Column(name = "picklist_code", length = 30, nullable = false)
-	public String getPickListCode() {
-		return pickListCode;
+	public String getCode() {
+		return code;
 	}
 
 	@Column(name = "picklist_type", length = 30, nullable = true)
-	public String getPickListType() {
-		return pickListType;
+	public String getType() {
+		return type;
 	}
 
 	@Column(name = "is_active", length = 1, nullable = true)
@@ -78,8 +82,8 @@ public class PickList extends MizeEntity {
 	}
 
 	@Column(name = "picklist_comments", length = 500, nullable = false)
-	public String getPickListComments() {
-		return pickListComments;
+	public String getComments() {
+		return comments;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -89,8 +93,8 @@ public class PickList extends MizeEntity {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pickList")
-	public List<PickListItem> getPickListItems() {
-		return pickListItems;
+	public List<PickListItem> getItems() {
+		return items;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -134,28 +138,28 @@ public class PickList extends MizeEntity {
 		this.id = id;
 	}
 
-	public void setPickListCode(String pickListCode) {
-		this.pickListCode = pickListCode;
+	public void setCode(String code) {
+		this.code = code;
 	}
 
-	public void setPickListType(String pickListType) {
-		this.pickListType = pickListType;
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public void setIsActive(String isActive) {
 		this.isActive = isActive;
 	}
 
-	public void setPickListComments(String pickListComments) {
-		this.pickListComments = pickListComments;
+	public void setComments(String comments) {
+		this.comments = comments;
 	}
 
 	public void setTenant(BusinessEntity tenant) {
 		this.tenant = tenant;
 	}
 
-	public void setPickListItems(List<PickListItem> pickListItems) {
-		this.pickListItems = pickListItems;
+	public void setItems(List<PickListItem> items) {
+		this.items = items;
 	}
 
 	public void setBusinessEntity(BusinessEntity businessEntity) {
@@ -190,25 +194,20 @@ public class PickList extends MizeEntity {
 		super.setUpdatedBy(updatedBy);
 	}
 
-
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result
 				+ ((businessEntity == null) ? 0 : businessEntity.hashCode());
+		result = prime * result + ((code == null) ? 0 : code.hashCode());
+		result = prime * result
+				+ ((comments == null) ? 0 : comments.hashCode());
 		result = prime * result
 				+ ((isActive == null) ? 0 : isActive.hashCode());
-		result = prime * result
-				+ ((pickListCode == null) ? 0 : pickListCode.hashCode());
-		result = prime
-				* result
-				+ ((pickListComments == null) ? 0 : pickListComments.hashCode());
-		result = prime * result
-				+ ((pickListItems == null) ? 0 : pickListItems.hashCode());
-		result = prime * result
-				+ ((pickListType == null) ? 0 : pickListType.hashCode());
+		result = prime * result + ((items == null) ? 0 : items.hashCode());
 		result = prime * result + ((tenant == null) ? 0 : tenant.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
 
@@ -226,35 +225,35 @@ public class PickList extends MizeEntity {
 				return false;
 		} else if (!businessEntity.equals(other.businessEntity))
 			return false;
+		if (code == null) {
+			if (other.code != null)
+				return false;
+		} else if (!code.equals(other.code))
+			return false;
+		if (comments == null) {
+			if (other.comments != null)
+				return false;
+		} else if (!comments.equals(other.comments))
+			return false;
 		if (isActive == null) {
 			if (other.isActive != null)
 				return false;
 		} else if (!isActive.equals(other.isActive))
 			return false;
-		if (pickListCode == null) {
-			if (other.pickListCode != null)
+		if (items == null) {
+			if (other.items != null)
 				return false;
-		} else if (!pickListCode.equals(other.pickListCode))
-			return false;
-		if (pickListComments == null) {
-			if (other.pickListComments != null)
-				return false;
-		} else if (!pickListComments.equals(other.pickListComments))
-			return false;
-		if (pickListItems == null) {
-			if (other.pickListItems != null)
-				return false;
-		} else if (!pickListItems.equals(other.pickListItems))
-			return false;
-		if (pickListType == null) {
-			if (other.pickListType != null)
-				return false;
-		} else if (!pickListType.equals(other.pickListType))
+		} else if (!items.equals(other.items))
 			return false;
 		if (tenant == null) {
 			if (other.tenant != null)
 				return false;
 		} else if (!tenant.equals(other.tenant))
+			return false;
+		if (type == null) {
+			if (other.type != null)
+				return false;
+		} else if (!type.equals(other.type))
 			return false;
 		return true;
 	}
@@ -264,18 +263,18 @@ public class PickList extends MizeEntity {
 		StringBuilder builder = new StringBuilder();
 		builder.append("PickList [businessEntity=");
 		builder.append(businessEntity);
-		builder.append(", pickListCode=");
-		builder.append(pickListCode);
-		builder.append(", pickListType=");
-		builder.append(pickListType);
+		builder.append(", code=");
+		builder.append(code);
+		builder.append(", type=");
+		builder.append(type);
 		builder.append(", isActive=");
 		builder.append(isActive);
-		builder.append(", pickListComments=");
-		builder.append(pickListComments);
+		builder.append(", comments=");
+		builder.append(comments);
 		builder.append(", tenant=");
 		builder.append(tenant);
-		builder.append(", pickListItems=");
-		builder.append(pickListItems);
+		builder.append(", items=");
+		builder.append(items);
 		builder.append(", id=");
 		builder.append(id);
 		builder.append("]");

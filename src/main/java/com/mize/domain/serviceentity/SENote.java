@@ -18,6 +18,10 @@ public class SENote extends MizeEntity implements Comparable<SENote> {
 	private String notes;
 	private String type;
 	
+	public enum Type{
+		Internal,External;
+	}
+	
 	public SENote() {
 		super();
 	}
