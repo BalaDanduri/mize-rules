@@ -21,6 +21,10 @@
 		<class>com.mize.domain.part.PartKitItem</class>
 		<class>com.mize.domain.part.PickList</class>
 		<class>com.mize.domain.part.PickListItem</class>
+		<class>com.mize.domain.form.FormTemplateDefinition</class>
+		<class>com.mize.domain.form.FormDefinition</class>
+		<class>com.mize.domain.form.FormDefinitionAudit</class>
+		<class>com.mize.domain.form.FormInstance</class>
 	</persistence-unit>
 
 </persistence>
