@@ -92,9 +92,9 @@ public class PickListTest extends JPATest {
 			pickList.setBusinessEntity(be);
 			pickList.setId(rs.getLong("id"));
 			pickList.setIsActive(rs.getString("is_active"));
-			pickList.setPickListCode(rs.getString("picklist_code"));
-			pickList.setPickListType(rs.getString("picklist_type"));
-			pickList.setPickListComments(rs.getString("picklist_comments"));
+			pickList.setCode(rs.getString("picklist_code"));
+			pickList.setType(rs.getString("picklist_type"));
+			pickList.setComments(rs.getString("picklist_comments"));
 			pickList.setCreatedBy(rs.getLong("created_by"));
 			pickList.setUpdatedBy(rs.getLong("updated_by"));
 			pickList.setCreatedDate(Formatter.dateTime(rs.getTimestamp("created_date")));
