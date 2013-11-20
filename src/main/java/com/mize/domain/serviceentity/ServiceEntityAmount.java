@@ -8,8 +8,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.joda.time.DateTime;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.util.JodaDateTimeDeserializer;
+import com.mize.domain.util.JsonDateTimeSerializer;
 
 @Entity
 @Table(name = "service_entity_amount")
@@ -112,9 +122,10 @@ public class ServiceEntityAmount extends MizeEntity implements Comparable<Servic
 		this.totalAmount = totalAmount;
 	}
 	
-	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	@JsonIgnore(value=false)
+	@Transient
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
@@ -129,6 +140,7 @@ public class ServiceEntityAmount extends MizeEntity implements Comparable<Servic
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	@JsonIgnore(value=false)
+	@Transient
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
@@ -146,11 +158,13 @@ public class ServiceEntityAmount extends MizeEntity implements Comparable<Servic
 	}
 
 	@JsonIgnore(value=false)
+	@Transient
 	public Long getCreatedBy() {
 		return createdBy;
 	}
 	
 	@JsonIgnore(value=false)
+	@Transient
 	public Long getUpdatedBy() {
 		return updatedBy;
 	}
@@ -158,7 +172,7 @@ public class ServiceEntityAmount extends MizeEntity implements Comparable<Servic
 	@JsonIgnore(value=false)
 	public void setUpdatedBy(Long updatedBy) {
 		this.updatedBy = updatedBy;
-	}*/
+	}
 	
 	@Override
 	public int compareTo(ServiceEntityAmount arg0) {

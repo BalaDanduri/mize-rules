@@ -26,14 +26,14 @@
 		<class>com.mize.domain.serviceentity.ServiceEntityAttachment</class>
 		<class>com.mize.domain.serviceentity.ServiceEntityAudit</class>
 		<class>com.mize.domain.serviceentity.ServiceEntityLabor</class>
-		<class>com.mize.domain.serviceentity.ServiceEntityNote</class>
-		<class>com.mize.domain.serviceentity.ServiceEntityOtherCharges</class>
+		<class>com.mize.domain.serviceentity.ServiceEntityNotes</class>
+		<class>com.mize.domain.serviceentity.ServiceEntityOtherCharge</class>
 		<class>com.mize.domain.serviceentity.ServiceEntityPart</class>
 		<class>com.mize.domain.serviceentity.ServiceEntityProvider</class>
 		<class>com.mize.domain.serviceentity.ServiceEntityRelation</class>
 		<class>com.mize.domain.serviceentity.ServiceEntityRequest</class>
 		<class>com.mize.domain.serviceentity.ServiceEntityRequester</class>
-		<class>com.mize.domain.serviceentity.ServiceEntityrviceEntity</class>
+		<class>com.mize.domain.serviceentity.ServiceEntity</class>
 		<class>com.mize.domain.product.Product</class>
 		<class>com.mize.domain.product.ProductRegister</class>
 		<class>com.mize.domain.product.ProductRegnAttachment</class>
