@@ -13,7 +13,7 @@ import com.mize.domain.common.MizeEntity;
 
 @Entity
 @Table(name = "service_entity_amount")
-public class SEAmount extends MizeEntity implements Comparable<SEAmount> {
+public class ServiceEntityAmount extends MizeEntity implements Comparable<ServiceEntityAmount> {
 	private static final long serialVersionUID = 6821336389676111L;
 	private BigDecimal requestedQuantity;
 	private BigDecimal adjustedQuantity;
@@ -26,17 +26,17 @@ public class SEAmount extends MizeEntity implements Comparable<SEAmount> {
 	private BigDecimal taxAmount;
 	private BigDecimal miscellaneousAmount;
 	
-	public SEAmount() {
+	public ServiceEntityAmount() {
 		super();
 	}
 	
-	public SEAmount(Long id) {
+	public ServiceEntityAmount(Long id) {
 		super();
 		this.id = id;
 		
 	}
 	
-	public SEAmount(BigDecimal requestedQuantity, BigDecimal adjustedQuantity,
+	public ServiceEntityAmount(BigDecimal requestedQuantity, BigDecimal adjustedQuantity,
 			BigDecimal adjustedAmount, BigDecimal requestedAmount,
 			BigDecimal totalAmount, BigDecimal discountAmount,
 			BigDecimal handlingAmount, BigDecimal freightAmount,
@@ -161,7 +161,7 @@ public class SEAmount extends MizeEntity implements Comparable<SEAmount> {
 	}*/
 	
 	@Override
-	public int compareTo(SEAmount arg0) {
+	public int compareTo(ServiceEntityAmount arg0) {
 		return 0;
 	}
 
@@ -250,7 +250,7 @@ public class SEAmount extends MizeEntity implements Comparable<SEAmount> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SEAmount other = (SEAmount) obj;
+		ServiceEntityAmount other = (ServiceEntityAmount) obj;
 		if (adjustedAmount == null) {
 			if (other.adjustedAmount != null)
 				return false;

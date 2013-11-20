@@ -24,22 +24,22 @@ import com.mize.domain.servicelocator.BusinessEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
-
 @Entity
-@Table(name = "service_entity_requester")
-public class SERequester extends MizeEntity implements Comparable<SERequester> {
+@Table(name = "service_entity_provider")
+public class ServiceEntityProvider extends MizeEntity implements Comparable<ServiceEntityProvider> {
 
 	private static final long serialVersionUID = 6821133638967617947L;
 	
+	@Transient
 	private Long entityId;
 	private ServiceEntity serviceEntity;
 	private BusinessEntity businessEntity;
-	private SEAddress address = new SEAddress();
+	private ServiceEntityAddress address = new ServiceEntityAddress();
 	
-	public SERequester() {
+	public ServiceEntityProvider() {
 		super();
 	}
-	
+
 	@Transient
 	public Long getEntityId() {
 		return entityId;
@@ -56,43 +56,44 @@ public class SERequester extends MizeEntity implements Comparable<SERequester> {
 		return id;
 	}
 	
-	@Override
-	public void setId(Long id) {
-		this.id = id;
-	}	
-	
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER,cascade =CascadeType.ALL)
 	@JoinColumn(name="entity_id")
 	public ServiceEntity getServiceEntity() {
 		return serviceEntity;
 	}
 
 
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="requester_id")
+	@ManyToOne(fetch=FetchType.EAGER ,cascade =CascadeType.ALL)
+	@JoinColumn(name="provider_id")
 	public BusinessEntity getBusinessEntity() {
 		return businessEntity;
 	}
 	
-	@ManyToOne(fetch=FetchType.EAGER ,cascade=CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER ,cascade =CascadeType.ALL)
 	@JoinColumn(name="address_id")
-	public SEAddress getAddress() {
+	public ServiceEntityAddress getAddress() {
 		return address;
+	}
+
+	@Override
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	public void setServiceEntity(ServiceEntity serviceEntity) {
+		this.serviceEntity = serviceEntity;
 	}
 	
 	public void setBusinessEntity(BusinessEntity businessEntity) {
 		this.businessEntity = businessEntity;
 	}
-    
-	public void setServiceEntity(ServiceEntity serviceEntity) {
-		this.serviceEntity = serviceEntity;
-	}
 
-	public void setAddress(SEAddress address) {
+	public void setAddress(ServiceEntityAddress address) {
 		this.address = address;
 	}
 
 	
+
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	@JsonIgnore(value=false)
@@ -151,8 +152,9 @@ public class SERequester extends MizeEntity implements Comparable<SERequester> {
 	}
 	
 	
+	
 	@Override
-	public int compareTo(SERequester arg0) {
+	public int compareTo(ServiceEntityProvider arg0) {
 		return 0;
 	}
 
@@ -182,7 +184,7 @@ public class SERequester extends MizeEntity implements Comparable<SERequester> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SERequester other = (SERequester) obj;
+		ServiceEntityProvider other = (ServiceEntityProvider) obj;
 		if (address == null) {
 			if (other.address != null)
 				return false;

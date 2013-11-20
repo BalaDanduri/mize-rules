@@ -13,7 +13,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.ContextConfiguration;
 import com.mize.domain.common.Country;
 import com.mize.domain.common.State;
-import com.mize.domain.serviceentity.SEAddress;
+import com.mize.domain.serviceentity.ServiceEntityAddress;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;
 
@@ -21,7 +21,7 @@ import com.mize.domain.util.Formatter;
 public class SEAddressTest extends JPATest {
 	private static final String SE_ADDRESS_QUERY = "select * from service_entity_address where id = ?";
 	EntityManager entityManager = null;
-	SEAddress sEAddress = null;
+	ServiceEntityAddress sEAddress = null;
 	
 	@Before
 	public void setUp(){
@@ -37,9 +37,9 @@ public class SEAddressTest extends JPATest {
 	@Test
 	public void test() {
 		try {
-			List<SEAddress>  addresses = jdbcTemplate.query(SE_ADDRESS_QUERY, new Object[]{sEAddress.getId()}, new SEAddressRowMapper());
+			List<ServiceEntityAddress>  addresses = jdbcTemplate.query(SE_ADDRESS_QUERY, new Object[]{sEAddress.getId()}, new SEAddressRowMapper());
 			if(!Formatter.isEmpty(addresses)){
-				SEAddress seaddress = addresses.get(0);
+				ServiceEntityAddress seaddress = addresses.get(0);
 				assertTrue(sEAddress.getId().equals(seaddress.getId()));
 			}
 		}catch(Throwable th) {
@@ -49,10 +49,10 @@ public class SEAddressTest extends JPATest {
 		}
 	}
 	
-	private class SEAddressRowMapper implements RowMapper<SEAddress> {
+	private class SEAddressRowMapper implements RowMapper<ServiceEntityAddress> {
 		@Override
-		public SEAddress mapRow(ResultSet rs, int rowNum) throws SQLException {
-			SEAddress address = new SEAddress();
+		public ServiceEntityAddress mapRow(ResultSet rs, int rowNum) throws SQLException {
+			ServiceEntityAddress address = new ServiceEntityAddress();
 			address.setId(rs.getLong("id"));
 			address.setType(rs.getString("address_type"));
 			address.setAddress1(rs.getString("address_1"));
@@ -76,8 +76,8 @@ public class SEAddressTest extends JPATest {
 		}
 	}
 	
-	private SEAddress getSEAddressObjectToSave(SEAddress sEAddress) {
-		SEAddress address = new SEAddress("address_type","address1","address2","address3","50000","50000","alabama",null,null,"7878787878","8989898989","raghu@gmail.com","9898989898","US");
+	private ServiceEntityAddress getSEAddressObjectToSave(ServiceEntityAddress sEAddress) {
+		ServiceEntityAddress address = new ServiceEntityAddress("address_type","address1","address2","address3","50000","50000","alabama",null,null,"7878787878","8989898989","raghu@gmail.com","9898989898","US");
 		return address;
 	}
 }

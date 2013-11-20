@@ -50,35 +50,35 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 	private String DBStatus;
 	
 	private Locale locale;
-	private SEAmount partAmount = new SEAmount();
-	private SEAmount laborAmount = new SEAmount();
-	private SEAmount otherAmount = new SEAmount();
-	private SEAmount totalAmount = new SEAmount();
+	private ServiceEntityAmount partAmount = new ServiceEntityAmount();
+	private ServiceEntityAmount laborAmount = new ServiceEntityAmount();
+	private ServiceEntityAmount otherAmount = new ServiceEntityAmount();
+	private ServiceEntityAmount totalAmount = new ServiceEntityAmount();
 	
 	@Transient
-	private SERelation relation;
+	private ServiceEntityRelation relation;
 	
-	private SERequester requester;
-	private SEProvider provider;
+	private ServiceEntityRequester requester;
+	private ServiceEntityProvider provider;
 	
 	@Transient
 	private User user;
 	
-	private List<SEAudit> audits = new ArrayList<SEAudit>();
-	private List<SENote> notes = new ArrayList<SENote>();
-	private List<SERequest> requests = new ArrayList<SERequest>();
-	private List<SEAttachment> attachments = new ArrayList<SEAttachment>();
+	private List<ServiceEntityAudit> audits = new ArrayList<ServiceEntityAudit>();
+	private List<ServiceEntityNotes> notes = new ArrayList<ServiceEntityNotes>();
+	private List<ServiceEntityRequest> requests = new ArrayList<ServiceEntityRequest>();
+	private List<ServiceEntityAttachment> attachments = new ArrayList<ServiceEntityAttachment>();
 	
 	
 
 	public ServiceEntity(String code, String status, String currencyCode,
 			String entityReference, String serviceType, String salesPerson,
 			String shipComplete, String processId, String type,
-			String DBStatus, Locale locale, SEAmount partAmount,
-			SEAmount laborAmount, SEAmount otherAmount, SEAmount totalAmount,
-			SERelation relation, SERequester requester, SEProvider provider,
-			User user, List<SEAudit> audits, List<SENote> notes,
-			List<SERequest> requests, List<SEAttachment> attachments) {
+			String DBStatus, Locale locale, ServiceEntityAmount partAmount,
+			ServiceEntityAmount laborAmount, ServiceEntityAmount otherAmount, ServiceEntityAmount totalAmount,
+			ServiceEntityRelation relation, ServiceEntityRequester requester, ServiceEntityProvider provider,
+			User user, List<ServiceEntityAudit> audits, List<ServiceEntityNotes> notes,
+			List<ServiceEntityRequest> requests, List<ServiceEntityAttachment> attachments) {
 		super();
 		this.code = code;
 		this.status = status;
@@ -185,42 +185,42 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 
 	@OneToOne(fetch=FetchType.LAZY ,cascade= CascadeType.ALL)
 	@JoinColumn(name="part_amount_id")
-	public SEAmount getPartAmount() {
+	public ServiceEntityAmount getPartAmount() {
 		return partAmount;
 	}
 	
 	@OneToOne(fetch=FetchType.LAZY ,cascade=CascadeType.ALL)
 	@JoinColumn(name="labor_amount_id")
-	public SEAmount getLaborAmount() {
+	public ServiceEntityAmount getLaborAmount() {
 		return laborAmount;
 	}
 
 	@OneToOne(fetch=FetchType.LAZY ,cascade=CascadeType.ALL)
 	@JoinColumn(name="other_amount_id")
-	public SEAmount getOtherAmount() {
+	public ServiceEntityAmount getOtherAmount() {
 		return otherAmount;
 	}
 
 	@OneToOne(fetch=FetchType.LAZY ,cascade=CascadeType.ALL)
 	@JoinColumn(name="total_amount_id")
-	public SEAmount getTotalAmount() {
+	public ServiceEntityAmount getTotalAmount() {
 		return totalAmount;
 	}
 	
 	@Transient
-	public SERelation getRelation() {
+	public ServiceEntityRelation getRelation() {
 		return relation;
 	}
 	
 	@OneToOne(cascade=CascadeType.ALL,fetch = FetchType.EAGER)
 	@JoinColumn(name="id")
-	public SEProvider getProvider() {
+	public ServiceEntityProvider getProvider() {
 		return provider;
 	}
 	
 	@OneToOne(cascade=CascadeType.ALL,fetch = FetchType.EAGER)
 	@JoinColumn(name="id")
-	public SERequester getRequester() {
+	public ServiceEntityRequester getRequester() {
 		return requester;
 	}
 	
@@ -230,22 +230,22 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 	}
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "serviceEntity")
-	public List<SERequest> getRequests() {
+	public List<ServiceEntityRequest> getRequests() {
 		return requests;
 	}
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "serviceEntity")
-	public List<SEAttachment> getAttachments() {
+	public List<ServiceEntityAttachment> getAttachments() {
 		return attachments;
 	}
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "serviceEntity")
-	public List<SEAudit> getAudits() {
+	public List<ServiceEntityAudit> getAudits() {
 		return audits;
 	}
 	
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "serviceEntity")
-	public List<SENote> getNotes() {
+	public List<ServiceEntityNotes> getNotes() {
 		return notes;
 	}
 	
@@ -304,7 +304,7 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 	
 	@JsonIgnore
 	@Transient
-	public SERequest getRequest() {
+	public ServiceEntityRequest getRequest() {
 		if(requests != null && requests.size() > 0){
 			return requests.get(0);
 		}
@@ -313,14 +313,14 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 
 	@JsonIgnore
 	@Transient
-	public void setRequest(SERequest request) {
+	public void setRequest(ServiceEntityRequest request) {
 		if(requests == null){
-			requests = new ArrayList<SERequest>();
+			requests = new ArrayList<ServiceEntityRequest>();
 		}
 		requests.add(request);
 	}
 
-	public void setPartAmount(SEAmount partAmount) {
+	public void setPartAmount(ServiceEntityAmount partAmount) {
 		this.partAmount = partAmount;
 	}
 
@@ -328,31 +328,31 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 		this.user = user;
 	}
 	
-	public void setAttachments(List<SEAttachment> attachments) {
+	public void setAttachments(List<ServiceEntityAttachment> attachments) {
 		this.attachments = attachments;
 	}
 
-	public void setAudits(List<SEAudit> audit) {
+	public void setAudits(List<ServiceEntityAudit> audit) {
 		this.audits = audit;
 	}
 
-	public void setTotalAmount(SEAmount totalAmount) {
+	public void setTotalAmount(ServiceEntityAmount totalAmount) {
 		this.totalAmount = totalAmount;
 	}
 
-	public void setRequester(SERequester requester) {
+	public void setRequester(ServiceEntityRequester requester) {
 		this.requester = requester;
 	}
 
-	public void setRelation(SERelation relation) {
+	public void setRelation(ServiceEntityRelation relation) {
 		this.relation = relation;
 	}
 	
-	public void setProvider(SEProvider provider) {
+	public void setProvider(ServiceEntityProvider provider) {
 		this.provider = provider;
 	}
 
-	public void setNotes(List<SENote> notes) {
+	public void setNotes(List<ServiceEntityNotes> notes) {
 		this.notes = notes;
 	}
 
@@ -406,15 +406,15 @@ public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntit
 		this.salesPerson = salesPerson;
 	}
 	
-	public void setOtherAmount(SEAmount otherAmount) {
+	public void setOtherAmount(ServiceEntityAmount otherAmount) {
 		this.otherAmount = otherAmount;
 	}
 
-	public void setRequests(List<SERequest> requests) {
+	public void setRequests(List<ServiceEntityRequest> requests) {
 		this.requests = requests;
 	}
 
-	public void setLaborAmount(SEAmount laborAmount) {
+	public void setLaborAmount(ServiceEntityAmount laborAmount) {
 		this.laborAmount = laborAmount;
 	}
 	

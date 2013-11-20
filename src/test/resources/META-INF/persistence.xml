@@ -21,19 +21,19 @@
 		<class>com.mize.domain.part.PartKitItem</class>
 		<class>com.mize.domain.part.PickList</class>
 		<class>com.mize.domain.part.PickListItem</class>
-		<class>com.mize.domain.serviceentity.SEAddress</class>
-		<class>com.mize.domain.serviceentity.SEAmount</class>
-		<class>com.mize.domain.serviceentity.SEAttachment</class>
-		<class>com.mize.domain.serviceentity.SEAudit</class>
-		<class>com.mize.domain.serviceentity.SELabor</class>
-		<class>com.mize.domain.serviceentity.SENote</class>
-		<class>com.mize.domain.serviceentity.SEOtherCharges</class>
-		<class>com.mize.domain.serviceentity.SEPart</class>
-		<class>com.mize.domain.serviceentity.SEProvider</class>
-		<class>com.mize.domain.serviceentity.SERelation</class>
-		<class>com.mize.domain.serviceentity.SERequest</class>
-		<class>com.mize.domain.serviceentity.SERequester</class>
-		<class>com.mize.domain.serviceentity.ServiceEntity</class>
+		<class>com.mize.domain.serviceentity.ServiceEntityAddress</class>
+		<class>com.mize.domain.serviceentity.ServiceEntityAmount</class>
+		<class>com.mize.domain.serviceentity.ServiceEntityAttachment</class>
+		<class>com.mize.domain.serviceentity.ServiceEntityAudit</class>
+		<class>com.mize.domain.serviceentity.ServiceEntityLabor</class>
+		<class>com.mize.domain.serviceentity.ServiceEntityNote</class>
+		<class>com.mize.domain.serviceentity.ServiceEntityOtherCharges</class>
+		<class>com.mize.domain.serviceentity.ServiceEntityPart</class>
+		<class>com.mize.domain.serviceentity.ServiceEntityProvider</class>
+		<class>com.mize.domain.serviceentity.ServiceEntityRelation</class>
+		<class>com.mize.domain.serviceentity.ServiceEntityRequest</class>
+		<class>com.mize.domain.serviceentity.ServiceEntityRequester</class>
+		<class>com.mize.domain.serviceentity.ServiceEntityrviceEntity</class>
 		<class>com.mize.domain.product.Product</class>
 		<class>com.mize.domain.product.ProductRegister</class>
 		<class>com.mize.domain.product.ProductRegnAttachment</class>

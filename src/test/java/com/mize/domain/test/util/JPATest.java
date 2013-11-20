@@ -16,8 +16,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.mize.domain.catalog.Catalog;
 import com.mize.domain.catalog.CatalogEntry;
 import com.mize.domain.common.Locale;
-import com.mize.domain.serviceentity.SEAddress;
-import com.mize.domain.serviceentity.SEAudit;
+import com.mize.domain.serviceentity.ServiceEntityAddress;
+import com.mize.domain.serviceentity.ServiceEntityAudit;
 import com.mize.domain.serviceentity.ServiceEntity;
 import com.mize.domain.servicelocator.BusinessEntity;
 
@@ -100,13 +100,13 @@ public class JPATest {
 		return serviceEntity;
 	}
 	
-	public SEAddress findExistingSEAddress(EntityManager entityManager) {
-		SEAddress address = (SEAddress) entityManager.find(SEAddress.class, new Long(101));
+	public ServiceEntityAddress findExistingSEAddress(EntityManager entityManager) {
+		ServiceEntityAddress address = (ServiceEntityAddress) entityManager.find(ServiceEntityAddress.class, new Long(101));
 		return address;
 	}
 	
-	public SEAudit findExistingSEAudit(EntityManager entityManager) {
-		SEAudit seAudit = (SEAudit) entityManager.find(SEAudit.class, new Long(801));
+	public ServiceEntityAudit findExistingSEAudit(EntityManager entityManager) {
+		ServiceEntityAudit seAudit = (ServiceEntityAudit) entityManager.find(ServiceEntityAudit.class, new Long(801));
 		return seAudit;
 	}
 

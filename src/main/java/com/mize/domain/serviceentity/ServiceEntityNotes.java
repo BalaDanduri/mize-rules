@@ -1,6 +1,5 @@
 package com.mize.domain.serviceentity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -20,34 +19,35 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.common.MizeEntity;
-import com.mize.domain.servicelocator.BusinessEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
+
 @Entity
-@Table(name = "service_entity_provider")
-public class SEProvider extends MizeEntity implements Comparable<SEProvider> {
+@Table(name = "service_entity_notes")
+public class ServiceEntityNotes extends MizeEntity implements Comparable<ServiceEntityNotes> {
 
 	private static final long serialVersionUID = 6821133638967617947L;
 	
 	@Transient
 	private Long entityId;
-	private ServiceEntity serviceEntity;
-	private BusinessEntity businessEntity;
-	private SEAddress address = new SEAddress();
 	
-	public SEProvider() {
+	private ServiceEntity serviceEntity;
+	private String notes;
+	private String type;
+	
+	public ServiceEntityNotes() {
 		super();
 	}
-
-	@Transient
-	public Long getEntityId() {
-		return entityId;
-	}
-	public void setEntityId(Long entityId) {
-		this.entityId = entityId;
-	}
 	
+	public ServiceEntityNotes(Long id,Long entityId, String notes) {
+		super();
+		this.id = id;
+		this.entityId = entityId;
+		this.notes = notes;
+	}
+
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false, unique = true)
@@ -56,52 +56,25 @@ public class SEProvider extends MizeEntity implements Comparable<SEProvider> {
 		return id;
 	}
 	
-	@ManyToOne(fetch=FetchType.EAGER,cascade =CascadeType.ALL)
+	@Transient
+	public Long getEntityId() {
+		return entityId;
+	}
+	
+	@Column(name = "notes")
+	public String getNotes() {
+		return notes;
+	}
+	
+	@Column(name = "note_type")
+	public String getType() {
+		return type;
+	}
+
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="entity_id")
 	public ServiceEntity getServiceEntity() {
 		return serviceEntity;
-	}
-
-
-	@ManyToOne(fetch=FetchType.EAGER ,cascade =CascadeType.ALL)
-	@JoinColumn(name="provider_id")
-	public BusinessEntity getBusinessEntity() {
-		return businessEntity;
-	}
-	
-	@ManyToOne(fetch=FetchType.EAGER ,cascade =CascadeType.ALL)
-	@JoinColumn(name="address_id")
-	public SEAddress getAddress() {
-		return address;
-	}
-
-	@Override
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
-	public void setServiceEntity(ServiceEntity serviceEntity) {
-		this.serviceEntity = serviceEntity;
-	}
-	
-	public void setBusinessEntity(BusinessEntity businessEntity) {
-		this.businessEntity = businessEntity;
-	}
-
-	public void setAddress(SEAddress address) {
-		this.address = address;
-	}
-
-	
-
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
-	@JsonIgnore(value=false)
-	@Column(name = "created_date",updatable = false)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
-	@Transient
-	public DateTime getCreatedDate() {
-		return createdDate;
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
@@ -113,18 +86,45 @@ public class SEProvider extends MizeEntity implements Comparable<SEProvider> {
 		return updatedDate;
 	}
 	
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	@Column(name = "created_date")
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
+	@Transient
+	public DateTime getCreatedDate() {
+		return createdDate;
+	}
+	
 	@JsonIgnore(value=false)
-	@Column(name = "created_by",updatable=false)
 	@Transient
 	public Long getCreatedBy() {
 		return createdBy;
 	}
 	
 	@JsonIgnore(value=false)
-	@Column(name = "updated_by")
 	@Transient
 	public Long getUpdatedBy() {
 		return updatedBy;
+	}
+	
+	public void setEntityId(Long entityId) {
+		this.entityId = entityId;
+	}
+
+	public void setNotes(String notes) {
+		this.notes = notes;
+	}
+	
+	@Override
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	@JsonIgnore(value=false)
+	public void setUpdatedDate(DateTime updatedDate) {
+		this.updatedDate = updatedDate;
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
@@ -135,44 +135,42 @@ public class SEProvider extends MizeEntity implements Comparable<SEProvider> {
 	}
 	
 	@JsonIgnore(value=false)
-	public void setUpdatedBy(Long updatedBy) {
-		this.updatedBy = updatedBy;
-	}
- 
-	@JsonIgnore(value=false)
 	public void setCreatedBy(Long createdBy) {
 		this.createdBy = createdBy;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(value=false)
-	public void setUpdatedDate(DateTime updatedDate) {
-		this.updatedDate = updatedDate;
+	public void setUpdatedBy(Long updatedBy) {
+		this.updatedBy = updatedBy;
 	}
 	
+	public void setServiceEntity(ServiceEntity serviceEntity) {
+		this.serviceEntity = serviceEntity;
+	}
 	
-	
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	@Override
-	public int compareTo(SEProvider arg0) {
+	public int compareTo(ServiceEntityNotes arg0) {
 		return 0;
 	}
 
 	@Override
 	public String toString() {
-		return "SERequester [entityId=" + entityId + ", businessEntity="
-				+ businessEntity + ", address=" + address + "]";
+		return "SENote [entityId=" + entityId + ", notes=" + notes + ", type="
+				+ type + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime * result + ((address == null) ? 0 : address.hashCode());
-		result = prime * result
-				+ ((businessEntity == null) ? 0 : businessEntity.hashCode());
 		result = prime * result
 				+ ((entityId == null) ? 0 : entityId.hashCode());
+		result = prime * result + ((notes == null) ? 0 : notes.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
 
@@ -184,21 +182,21 @@ public class SEProvider extends MizeEntity implements Comparable<SEProvider> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SEProvider other = (SEProvider) obj;
-		if (address == null) {
-			if (other.address != null)
-				return false;
-		} else if (!address.equals(other.address))
-			return false;
-		if (businessEntity == null) {
-			if (other.businessEntity != null)
-				return false;
-		} else if (!businessEntity.equals(other.businessEntity))
-			return false;
+		ServiceEntityNotes other = (ServiceEntityNotes) obj;
 		if (entityId == null) {
 			if (other.entityId != null)
 				return false;
 		} else if (!entityId.equals(other.entityId))
+			return false;
+		if (notes == null) {
+			if (other.notes != null)
+				return false;
+		} else if (!notes.equals(other.notes))
+			return false;
+		if (type == null) {
+			if (other.type != null)
+				return false;
+		} else if (!type.equals(other.type))
 			return false;
 		return true;
 	}	

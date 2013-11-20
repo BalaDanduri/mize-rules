@@ -18,16 +18,16 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.ContextConfiguration;
 import com.mize.domain.auth.User;
 import com.mize.domain.common.Locale;
-import com.mize.domain.serviceentity.SEAddress;
-import com.mize.domain.serviceentity.SEAmount;
-import com.mize.domain.serviceentity.SEAttachment;
-import com.mize.domain.serviceentity.SELabor;
-import com.mize.domain.serviceentity.SENote;
-import com.mize.domain.serviceentity.SEOtherCharges;
-import com.mize.domain.serviceentity.SEPart;
-import com.mize.domain.serviceentity.SEProvider;
-import com.mize.domain.serviceentity.SERequest;
-import com.mize.domain.serviceentity.SERequester;
+import com.mize.domain.serviceentity.ServiceEntityAddress;
+import com.mize.domain.serviceentity.ServiceEntityAmount;
+import com.mize.domain.serviceentity.ServiceEntityAttachment;
+import com.mize.domain.serviceentity.ServiceEntityLabor;
+import com.mize.domain.serviceentity.ServiceEntityNotes;
+import com.mize.domain.serviceentity.ServiceEntitytherCharge;
+import com.mize.domain.serviceentity.ServiceEntityPart;
+import com.mize.domain.serviceentity.ServiceEntityProvider;
+import com.mize.domain.serviceentity.ServiceEntityRequest;
+import com.mize.domain.serviceentity.ServiceEntityRequester;
 import com.mize.domain.serviceentity.ServiceEntity;
 import com.mize.domain.servicelocator.BusinessEntity;
 import com.mize.domain.test.util.JPATest;
@@ -74,7 +74,7 @@ public class ServiceEntityTest extends JPATest {
 			serviceEntity.setId(rs.getLong("id"));
 			BusinessEntity be = new BusinessEntity();
 			be.setId(rs.getLong("tenant_id"));
-			SERequester requester = new SERequester();
+			ServiceEntityRequester requester = new ServiceEntityRequester();
 			requester.setBusinessEntity(be);
 			serviceEntity.setRequester(requester);
 			serviceEntity.setCode(rs.getString("entity_code"));
@@ -84,16 +84,16 @@ public class ServiceEntityTest extends JPATest {
 			serviceEntity.setLocale(locale);
 			serviceEntity.setCurrencyCode(rs.getString("currency_code"));
 			serviceEntity.setEntityReference(rs.getString("entity_reference"));
-			SEAmount partAmount = new SEAmount();
+			ServiceEntityAmount partAmount = new ServiceEntityAmount();
 			partAmount.setId(rs.getLong("part_amount_id"));
 			serviceEntity.setPartAmount(partAmount);
-			SEAmount laborAmount = new SEAmount();
+			ServiceEntityAmount laborAmount = new ServiceEntityAmount();
 			laborAmount.setId(rs.getLong("labor_amount_id"));
 			serviceEntity.setLaborAmount(laborAmount);
-			SEAmount otherAmount = new SEAmount();
+			ServiceEntityAmount otherAmount = new ServiceEntityAmount();
 			otherAmount.setId(rs.getLong("other_amount_id"));
 			serviceEntity.setOtherAmount(otherAmount);
-			SEAmount totalAmount = new SEAmount();
+			ServiceEntityAmount totalAmount = new ServiceEntityAmount();
 			totalAmount.setId(rs.getLong("total_amount_id"));
 			serviceEntity.setTotalAmount(totalAmount);
 			serviceEntity.setCreatedDate(Formatter.dateTime(rs.getTimestamp("created_date")));
@@ -115,24 +115,24 @@ public class ServiceEntityTest extends JPATest {
 		serviceEntity.setLocale(new Locale(1l));
 		serviceEntity.setCurrencyCode("Dollar");
 		serviceEntity.setServiceType("BackFilling");
-		SEProvider provider = new SEProvider();
+		ServiceEntityProvider provider = new ServiceEntityProvider();
 		BusinessEntity businessEntity = new BusinessEntity();
 		businessEntity.setId(961L);
 		businessEntity = entityManager.find(BusinessEntity.class, businessEntity.getId());
 		provider.setBusinessEntity(businessEntity);
-		SEAddress address = new SEAddress();
+		ServiceEntityAddress address = new ServiceEntityAddress();
 		address.setAddress1("test1");
 		address.setAddress2("test2");
 		provider.setServiceEntity(serviceEntity);
 		provider.setAddress(address);
 		serviceEntity.setProvider(provider);
 		
-		SERequester requester = new SERequester();
+		ServiceEntityRequester requester = new ServiceEntityRequester();
 		BusinessEntity businessEntity1 = new BusinessEntity();
 		businessEntity1.setId(961l);
 		businessEntity1 = entityManager.find(BusinessEntity.class, businessEntity1.getId());
 		requester.setBusinessEntity(businessEntity1);
-		SEAddress address1 = new SEAddress();
+		ServiceEntityAddress address1 = new ServiceEntityAddress();
 		address1.setAddress1("test1");
 		address1.setAddress2("test2");
 		requester.setAddress(address1);
@@ -144,25 +144,25 @@ public class ServiceEntityTest extends JPATest {
 		be.setBeId(961l);
 		user.setUserBe(be);
 		serviceEntity.setUser(user);
-		SERequest request = new SERequest();
+		ServiceEntityRequest request = new ServiceEntityRequest();
 		request.setType(ServiceEntity.Type.Warranty.toString());
 		request.setFailureDate(DateTime.now());
 		request.setRepairDate(DateTime.now().plusDays(1));
 		request.setProdId(100l);
 		request.setServiceEntity(serviceEntity);
-		SEPart part = new SEPart();
+		ServiceEntityPart part = new ServiceEntityPart();
 		part.setRequest(request);
 		part.setCode("9152413200");
 		part.setType("starndar");
 		part.setSerialNumber("1111");
-		SEAmount seAmount = new SEAmount();
+		ServiceEntityAmount seAmount = new ServiceEntityAmount();
 		seAmount.setRequestedAmount(BigDecimal.valueOf(300));
 		seAmount.setAdjustedAmount(BigDecimal.valueOf(301));
 		seAmount.setRequestedQuantity(BigDecimal.valueOf(20));
 		seAmount.setAdjustedQuantity(BigDecimal.valueOf(20));
 		part.setAmount(seAmount);
 		
-		SEPart part1 = new SEPart();
+		ServiceEntityPart part1 = new ServiceEntityPart();
 		part1.setRequest(request);
 		part1.setCode("9152413200");
 		part1.setType("starndar");
@@ -175,8 +175,8 @@ public class ServiceEntityTest extends JPATest {
 		request.getParts().add(part);
 		request.getParts().add(part1);
 		
-		SELabor labor = new SELabor();
-		SEAmount seLaborAmount = new SEAmount();
+		ServiceEntityLabor labor = new ServiceEntityLabor();
+		ServiceEntityAmount seLaborAmount = new ServiceEntityAmount();
 		labor.setRequest(request);
 		labor.setCode("L001");
 		labor.setType("hour1");
@@ -186,8 +186,8 @@ public class ServiceEntityTest extends JPATest {
 		seLaborAmount.setAdjustedQuantity(BigDecimal.valueOf(21));
 		labor.setAmount(seLaborAmount);
 		
-		SELabor labor1 = new SELabor();
-		SEAmount seLaborAmount2 = new SEAmount();
+		ServiceEntityLabor labor1 = new ServiceEntityLabor();
+		ServiceEntityAmount seLaborAmount2 = new ServiceEntityAmount();
 		labor1.setRequest(request);
 		labor1.setCode("L0011");
 		labor1.setType("hour");
@@ -199,8 +199,8 @@ public class ServiceEntityTest extends JPATest {
 		request.getLabors().add(labor);
 		request.getLabors().add(labor1);
 		
-		SEOtherCharges other = new SEOtherCharges();
-		SEAmount seOtherAmount = new SEAmount();
+		ServiceEntitytherCharge other = new ServiceEntitytherCharge();
+		ServiceEntityAmount seOtherAmount = new ServiceEntityAmount();
 		other.setRequest(request);
 		other.setCode("O001");
 		other.setType("misc");
@@ -210,8 +210,8 @@ public class ServiceEntityTest extends JPATest {
 		seOtherAmount.setAdjustedQuantity(BigDecimal.valueOf(21));
 		other.setAmount(seOtherAmount);
 		
-		SEOtherCharges other1 = new SEOtherCharges();
-		SEAmount seOtherAmount1 = new SEAmount();
+		ServiceEntitytherCharge other1 = new ServiceEntitytherCharge();
+		ServiceEntityAmount seOtherAmount1 = new ServiceEntityAmount();
 		other1.setRequest(request);
 		other1.setCode("O0011");
 		other1.setType("misc");
@@ -223,13 +223,13 @@ public class ServiceEntityTest extends JPATest {
 		request.getOthersCharges().add(other);
 		request.getOthersCharges().add(other1);
 		
-		SEAttachment attachment = new SEAttachment();
+		ServiceEntityAttachment attachment = new ServiceEntityAttachment();
 		attachment.setName("upload");
 		attachment.setServiceEntity(serviceEntity);
 		serviceEntity.getAttachments().add(attachment);		
 		serviceEntity.getRequests().add(request);
 		
-		SENote note = new SENote();
+		ServiceEntityNotes note = new ServiceEntityNotes();
 		note.setNotes("test notes");
 		note.setServiceEntity(serviceEntity);
 		serviceEntity.getNotes().add(note);

@@ -1,5 +1,6 @@
 package com.mize.domain.serviceentity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,31 +20,27 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.servicelocator.BusinessEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
+
 @Entity
-@Table(name = "service_entity_rltn")
-public class SERelation extends MizeEntity implements Comparable<SERelation> {
+@Table(name = "service_entity_requester")
+public class ServiceEntityRequester extends MizeEntity implements Comparable<ServiceEntityRequester> {
 
 	private static final long serialVersionUID = 6821133638967617947L;
-	@Transient
+	
 	private Long entityId;
-	
 	private ServiceEntity serviceEntity;
-	private Long entityRelationId;
+	private BusinessEntity businessEntity;
+	private ServiceEntityAddress address = new ServiceEntityAddress();
 	
-	public SERelation() {
+	public ServiceEntityRequester() {
 		super();
 	}
 	
-	public SERelation(Long id,Long entityId, Long entityRelationId) {
-		super();
-		this.id = id;
-		this.entityId = entityId;
-		this.entityRelationId = entityRelationId;
-	}
-
+	@Transient
 	public Long getEntityId() {
 		return entityId;
 	}
@@ -59,31 +56,49 @@ public class SERelation extends MizeEntity implements Comparable<SERelation> {
 		return id;
 	}
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@Override
+	public void setId(Long id) {
+		this.id = id;
+	}	
+	
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="entity_id")
 	public ServiceEntity getServiceEntity() {
 		return serviceEntity;
 	}
-	
-	@Column(name="entity_rltn_id")
-	public Long getEntityRelationId() {
-		return entityRelationId;
+
+
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="requester_id")
+	public BusinessEntity getBusinessEntity() {
+		return businessEntity;
 	}
 	
+	@ManyToOne(fetch=FetchType.EAGER ,cascade=CascadeType.ALL)
+	@JoinColumn(name="address_id")
+	public ServiceEntityAddress getAddress() {
+		return address;
+	}
 	
-	public void setEntityRelationId(Long entityRelationId) {
-		this.entityRelationId = entityRelationId;
+	public void setBusinessEntity(BusinessEntity businessEntity) {
+		this.businessEntity = businessEntity;
 	}
-	@Override
-	public void setId(Long id) {
-		this.id = id;
+    
+	public void setServiceEntity(ServiceEntity serviceEntity) {
+		this.serviceEntity = serviceEntity;
 	}
+
+	public void setAddress(ServiceEntityAddress address) {
+		this.address = address;
+	}
+
 	
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	@JsonIgnore(value=false)
 	@Column(name = "created_date",updatable = false)
 	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
+	@Transient
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
@@ -92,18 +107,21 @@ public class SERelation extends MizeEntity implements Comparable<SERelation> {
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	@Column(name = "updated_date")
 	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
+	@Transient
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
 	
 	@JsonIgnore(value=false)
 	@Column(name = "created_by",updatable=false)
+	@Transient
 	public Long getCreatedBy() {
 		return createdBy;
 	}
 	
 	@JsonIgnore(value=false)
 	@Column(name = "updated_by")
+	@Transient
 	public Long getUpdatedBy() {
 		return updatedBy;
 	}
@@ -132,22 +150,30 @@ public class SERelation extends MizeEntity implements Comparable<SERelation> {
 		this.updatedDate = updatedDate;
 	}
 	
-	public void setServiceEntity(ServiceEntity serviceEntity) {
-		this.serviceEntity = serviceEntity;
-	}	
 	
+	@Override
+	public int compareTo(ServiceEntityRequester arg0) {
+		return 0;
+	}
+
+	@Override
+	public String toString() {
+		return "SERequester [entityId=" + entityId + ", businessEntity="
+				+ businessEntity + ", address=" + address + "]";
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
+		result = prime * result + ((address == null) ? 0 : address.hashCode());
+		result = prime * result
+				+ ((businessEntity == null) ? 0 : businessEntity.hashCode());
 		result = prime * result
 				+ ((entityId == null) ? 0 : entityId.hashCode());
-		result = prime
-				* result
-				+ ((entityRelationId == null) ? 0 : entityRelationId.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -156,25 +182,23 @@ public class SERelation extends MizeEntity implements Comparable<SERelation> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SERelation other = (SERelation) obj;
+		ServiceEntityRequester other = (ServiceEntityRequester) obj;
+		if (address == null) {
+			if (other.address != null)
+				return false;
+		} else if (!address.equals(other.address))
+			return false;
+		if (businessEntity == null) {
+			if (other.businessEntity != null)
+				return false;
+		} else if (!businessEntity.equals(other.businessEntity))
+			return false;
 		if (entityId == null) {
 			if (other.entityId != null)
 				return false;
 		} else if (!entityId.equals(other.entityId))
 			return false;
-		if (entityRelationId == null) {
-			if (other.entityRelationId != null)
-				return false;
-		} else if (!entityRelationId.equals(other.entityRelationId))
-			return false;
 		return true;
-	}
-	
-	@Override
-	public int compareTo(SERelation arg0) {
-		return 0;
-	}
-
-	
+	}	
 
 }

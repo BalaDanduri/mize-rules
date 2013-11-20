@@ -22,7 +22,7 @@ import com.mize.domain.util.JsonDateTimeSerializer;
 
 @Entity
 @Table(name = "service_entity_audit")
-public class SEAudit extends MizeEntity implements Comparable<SEAudit> {
+public class ServiceEntityAudit extends MizeEntity implements Comparable<ServiceEntityAudit> {
 
 	private static final long serialVersionUID = 6821133638967617947L;
 	@Transient
@@ -35,11 +35,11 @@ public class SEAudit extends MizeEntity implements Comparable<SEAudit> {
 	@Transient
 	private String userName;
 	
-	public SEAudit(){
+	public ServiceEntityAudit(){
 		super();
 	}
 	
-	public SEAudit(Long entityId, ServiceEntity serviceEntity,
+	public ServiceEntityAudit(Long entityId, ServiceEntity serviceEntity,
 			String statusCode, DateTime statusDate, Long statusBy,
 			String userName) {
 		super();
@@ -198,7 +198,7 @@ public class SEAudit extends MizeEntity implements Comparable<SEAudit> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SEAudit other = (SEAudit) obj;
+		ServiceEntityAudit other = (ServiceEntityAudit) obj;
 		if (entityId == null) {
 			if (other.entityId != null)
 				return false;
@@ -252,7 +252,7 @@ public class SEAudit extends MizeEntity implements Comparable<SEAudit> {
 	}
 
 	@Override
-	public int compareTo(SEAudit arg0) {
+	public int compareTo(ServiceEntityAudit arg0) {
 		return 0;
 	}
 

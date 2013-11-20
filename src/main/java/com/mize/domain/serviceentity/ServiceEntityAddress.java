@@ -9,21 +9,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
+
 import com.mize.domain.common.Country;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.common.State;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
 
 @Entity
 @Table(name = "service_entity_address")
-public class SEAddress extends MizeEntity implements Comparable<SEAddress> {
+public class ServiceEntityAddress extends MizeEntity implements Comparable<ServiceEntityAddress> {
 	private static final long serialVersionUID = 6821133638967617947L;
 	private String type;
 	private String address1;
@@ -40,11 +33,11 @@ public class SEAddress extends MizeEntity implements Comparable<SEAddress> {
 	private String fax;
 	private String county;
 	
-	public SEAddress() {
+	public ServiceEntityAddress() {
 		super();
 	}
 	
-	public SEAddress(String type, String address1, String address2,
+	public ServiceEntityAddress(String type, String address1, String address2,
 			String address3, String zip, String zipExt, String city,
 			State state, Country country, String phone1, String phone2,
 			String email, String fax, String county) {
@@ -283,7 +276,7 @@ public class SEAddress extends MizeEntity implements Comparable<SEAddress> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SEAddress other = (SEAddress) obj;
+		ServiceEntityAddress other = (ServiceEntityAddress) obj;
 		if (address1 == null) {
 			if (other.address1 != null)
 				return false;
@@ -385,7 +378,7 @@ public class SEAddress extends MizeEntity implements Comparable<SEAddress> {
 	}	
 
 	@Override
-	public int compareTo(SEAddress arg0) {
+	public int compareTo(ServiceEntityAddress arg0) {
 		return 0;
 	}
 

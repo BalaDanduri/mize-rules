@@ -24,7 +24,7 @@ import com.mize.domain.util.JsonDateTimeSerializer;
 
 @Entity
 @Table(name = "service_entity_attach")
-public class SEAttachment extends MizeEntity implements Comparable<SEAttachment> {
+public class ServiceEntityAttachment extends MizeEntity implements Comparable<ServiceEntityAttachment> {
 
 	private static final long serialVersionUID = 6821133638967617947L;
 	private Long entityId;
@@ -33,11 +33,11 @@ public class SEAttachment extends MizeEntity implements Comparable<SEAttachment>
 	private String name;
 	private String url;
 	
-	public SEAttachment() {
+	public ServiceEntityAttachment() {
 		super();
 	}
 	
-	public SEAttachment(Long entityId, ServiceEntity serviceEntity,
+	public ServiceEntityAttachment(Long entityId, ServiceEntity serviceEntity,
 			String typeCode, String name, String url) {
 		super();
 		this.entityId = entityId;
@@ -185,7 +185,7 @@ public class SEAttachment extends MizeEntity implements Comparable<SEAttachment>
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SEAttachment other = (SEAttachment) obj;
+		ServiceEntityAttachment other = (ServiceEntityAttachment) obj;
 		if (entityId == null) {
 			if (other.entityId != null)
 				return false;
@@ -234,7 +234,7 @@ public class SEAttachment extends MizeEntity implements Comparable<SEAttachment>
 	}
 
 	@Override
-	public int compareTo(SEAttachment arg0) {
+	public int compareTo(ServiceEntityAttachment arg0) {
 		return 0;
 	}
 

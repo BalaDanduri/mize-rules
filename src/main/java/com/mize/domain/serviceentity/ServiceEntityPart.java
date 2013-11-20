@@ -1,5 +1,7 @@
 package com.mize.domain.serviceentity;
 
+import java.math.BigDecimal;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,22 +23,34 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.product.Product;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
 @Entity
-@Table(name = "service_entity_request_labor")
-public class SELabor extends MizeEntity implements Comparable<SELabor> {
-	private static final long serialVersionUID = 28211336389676111L;
+@Table(name = "service_entity_request_part")
+public class ServiceEntityPart extends MizeEntity implements Comparable<ServiceEntityPart> {
+
+	private static final long serialVersionUID = 68211336389676111L;
+	
 	private String type;
 	private String code;
+	private String serialNumber;
 	private String description;
 	@Transient
 	private Long requestId;
-	private SERequest request;
-	private SEAmount amount = new SEAmount();
+	private ServiceEntityRequest request;
+	private ServiceEntityAmount amount = new ServiceEntityAmount();
+	private String uom;
+	private BigDecimal weight;
+	private String model;
+	@Transient
+	private Long prodId;
+	private Product product;
+	private String prodSerialNumber;
+	private String warehouseCode;
 	
-	public SELabor() {
+	public ServiceEntityPart() {
 		super();
 	}
 
@@ -47,18 +61,22 @@ public class SELabor extends MizeEntity implements Comparable<SELabor> {
 	public Long getId() {
 		return id;
 	}
-
-	@Column(name="labor_type")
+	@Column(name="part_type")
 	public String getType() {
 		return type;
 	}
-	
-	@Column(name="labor_code")
+
+	@Column(name="part_code")
 	public String getCode() {
 		return code;
 	}
 
-	@Column(name="labor_description")
+	@Column(name="part_serial")
+	public String getSerialNumber() {
+		return serialNumber;
+	}
+
+	@Column(name="part_description")
 	public String getDescription() {
 		return description;
 	}
@@ -68,21 +86,108 @@ public class SELabor extends MizeEntity implements Comparable<SELabor> {
 		return requestId;
 	}
 
-	@OneToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
-	@JoinColumn(name="amount_id")
-	public SEAmount getAmount() {
-		return amount;
-	}
-
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.LAZY,cascade =CascadeType.ALL)
 	@JoinColumn(name="request_id")
-	public SERequest getRequest() {
+	public ServiceEntityRequest getRequest() {
 		return request;
 	}
 
+	@OneToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
+	@JoinColumn(name="amount_id")
+	public ServiceEntityAmount getAmount() {
+		return amount;
+	}
 
-	public void setRequest(SERequest request) {
+	@Column(name="part_uom")
+	public String getUom() {
+		return uom;
+	}
+	
+	@Column(name="part_weight")
+	public BigDecimal getWeight() {
+		return weight;
+	}
+
+	@Column(name="model")
+	public String getModel() {
+		return model;
+	}
+
+	@Transient
+	public Long getProdId() {
+		return prodId;
+	}
+
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="prod_id")
+	public Product getProduct() {
+		return product;
+	}
+	
+	@Column(name="prod_srl_no")
+	public String getProdSerialNumber() {
+		return prodSerialNumber;
+	}
+
+	@Column(name="warehouse_code")
+	public String getWarehouseCode() {
+		return warehouseCode;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public void setSerialNumber(String serialNumber) {
+		this.serialNumber = serialNumber;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setRequestId(Long requestId) {
+		this.requestId = requestId;
+	}
+
+	public void setRequest(ServiceEntityRequest request) {
 		this.request = request;
+	}
+
+	public void setAmount(ServiceEntityAmount amount) {
+		this.amount = amount;
+	}
+
+	public void setUom(String uom) {
+		this.uom = uom;
+	}
+
+	public void setWeight(BigDecimal weight) {
+		this.weight = weight;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	public void setProdId(Long prodId) {
+		this.prodId = prodId;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+	public void setProdSerialNumber(String prodSerialNumber) {
+		this.prodSerialNumber = prodSerialNumber;
+	}
+
+	public void setWarehouseCode(String warehouseCode) {
+		this.warehouseCode = warehouseCode;
 	}
 
 	@Override
@@ -90,26 +195,6 @@ public class SELabor extends MizeEntity implements Comparable<SELabor> {
 		this.id = id;
 	}	
 
-	public void setType(String type) {
-		this.type = type;
-	}
-	
-	public void setCode(String code) {
-		this.code = code;
-	}
-	
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	
-	public void setRequestId(Long requestId) {
-		this.requestId = requestId;
-	}
-	
-	public void setAmount(SEAmount amount) {
-		this.amount = amount;
-	}
-	
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
@@ -164,6 +249,11 @@ public class SELabor extends MizeEntity implements Comparable<SELabor> {
 		this.updatedDate = updatedDate;
 	}
 	
+	
+	@Override
+	public int compareTo(ServiceEntityPart arg0) {
+		return 0;
+	}
 
 	@Override
 	public int hashCode() {
@@ -173,9 +263,20 @@ public class SELabor extends MizeEntity implements Comparable<SELabor> {
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result
 				+ ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((model == null) ? 0 : model.hashCode());
+		result = prime * result + ((prodId == null) ? 0 : prodId.hashCode());
+		result = prime
+				* result
+				+ ((prodSerialNumber == null) ? 0 : prodSerialNumber.hashCode());
 		result = prime * result
 				+ ((requestId == null) ? 0 : requestId.hashCode());
+		result = prime * result
+				+ ((serialNumber == null) ? 0 : serialNumber.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		result = prime * result + ((uom == null) ? 0 : uom.hashCode());
+		result = prime * result
+				+ ((warehouseCode == null) ? 0 : warehouseCode.hashCode());
+		result = prime * result + ((weight == null) ? 0 : weight.hashCode());
 		return result;
 	}
 
@@ -187,7 +288,7 @@ public class SELabor extends MizeEntity implements Comparable<SELabor> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SELabor other = (SELabor) obj;
+		ServiceEntityPart other = (ServiceEntityPart) obj;
 		if (amount == null) {
 			if (other.amount != null)
 				return false;
@@ -203,29 +304,62 @@ public class SELabor extends MizeEntity implements Comparable<SELabor> {
 				return false;
 		} else if (!description.equals(other.description))
 			return false;
+		if (model == null) {
+			if (other.model != null)
+				return false;
+		} else if (!model.equals(other.model))
+			return false;
+		if (prodId == null) {
+			if (other.prodId != null)
+				return false;
+		} else if (!prodId.equals(other.prodId))
+			return false;
+		if (prodSerialNumber == null) {
+			if (other.prodSerialNumber != null)
+				return false;
+		} else if (!prodSerialNumber.equals(other.prodSerialNumber))
+			return false;
 		if (requestId == null) {
 			if (other.requestId != null)
 				return false;
 		} else if (!requestId.equals(other.requestId))
+			return false;
+		if (serialNumber == null) {
+			if (other.serialNumber != null)
+				return false;
+		} else if (!serialNumber.equals(other.serialNumber))
 			return false;
 		if (type == null) {
 			if (other.type != null)
 				return false;
 		} else if (!type.equals(other.type))
 			return false;
+		if (uom == null) {
+			if (other.uom != null)
+				return false;
+		} else if (!uom.equals(other.uom))
+			return false;
+		if (warehouseCode == null) {
+			if (other.warehouseCode != null)
+				return false;
+		} else if (!warehouseCode.equals(other.warehouseCode))
+			return false;
+		if (weight == null) {
+			if (other.weight != null)
+				return false;
+		} else if (!weight.equals(other.weight))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "SEOtherCharges [type=" + type + ", code=" + code
-				+ ", description=" + description + ", requestId=" + requestId
-				+ ", amount=" + amount + "]";
-	}
-
-	@Override
-	public int compareTo(SELabor arg0) {
-		return 0;
+		return "SEPart [type=" + type + ", code=" + code + ", serialNumber="
+				+ serialNumber + ", description=" + description
+				+ ", requestId=" + requestId + ", amount=" + amount + ", uom="
+				+ uom + ", weight=" + weight + ", model=" + model + ", prodId="
+				+ prodId + ", prodSerialNumber=" + prodSerialNumber
+				+ ", warehouseCode=" + warehouseCode + "]";
 	}	
 
 }

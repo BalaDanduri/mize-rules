@@ -22,32 +22,35 @@ import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
-
 @Entity
-@Table(name = "service_entity_notes")
-public class SENote extends MizeEntity implements Comparable<SENote> {
+@Table(name = "service_entity_rltn")
+public class ServiceEntityRelation extends MizeEntity implements Comparable<ServiceEntityRelation> {
 
 	private static final long serialVersionUID = 6821133638967617947L;
-	
 	@Transient
 	private Long entityId;
 	
 	private ServiceEntity serviceEntity;
-	private String notes;
-	private String type;
+	private Long entityRelationId;
 	
-	public SENote() {
+	public ServiceEntityRelation() {
 		super();
 	}
 	
-	public SENote(Long id,Long entityId, String notes) {
+	public ServiceEntityRelation(Long id,Long entityId, Long entityRelationId) {
 		super();
 		this.id = id;
 		this.entityId = entityId;
-		this.notes = notes;
+		this.entityRelationId = entityRelationId;
 	}
 
-
+	public Long getEntityId() {
+		return entityId;
+	}
+	public void setEntityId(Long entityId) {
+		this.entityId = entityId;
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false, unique = true)
@@ -56,75 +59,53 @@ public class SENote extends MizeEntity implements Comparable<SENote> {
 		return id;
 	}
 	
-	@Transient
-	public Long getEntityId() {
-		return entityId;
-	}
-	
-	@Column(name = "notes")
-	public String getNotes() {
-		return notes;
-	}
-	
-	@Column(name = "note_type")
-	public String getType() {
-		return type;
-	}
-
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="entity_id")
 	public ServiceEntity getServiceEntity() {
 		return serviceEntity;
+	}
+	
+	@Column(name="entity_rltn_id")
+	public Long getEntityRelationId() {
+		return entityRelationId;
+	}
+	
+	
+	public void setEntityRelationId(Long entityRelationId) {
+		this.entityRelationId = entityRelationId;
+	}
+	@Override
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	@JsonIgnore(value=false)
+	@Column(name = "created_date",updatable = false)
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
+	public DateTime getCreatedDate() {
+		return createdDate;
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	@Column(name = "updated_date")
 	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
-	@Transient
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
-	@Column(name = "created_date")
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
-	@Transient
-	public DateTime getCreatedDate() {
-		return createdDate;
-	}
-	
 	@JsonIgnore(value=false)
-	@Transient
+	@Column(name = "created_by",updatable=false)
 	public Long getCreatedBy() {
 		return createdBy;
 	}
 	
 	@JsonIgnore(value=false)
-	@Transient
+	@Column(name = "updated_by")
 	public Long getUpdatedBy() {
 		return updatedBy;
-	}
-	
-	public void setEntityId(Long entityId) {
-		this.entityId = entityId;
-	}
-
-	public void setNotes(String notes) {
-		this.notes = notes;
-	}
-	
-	@Override
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore(value=false)
-	public void setUpdatedDate(DateTime updatedDate) {
-		this.updatedDate = updatedDate;
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
@@ -135,45 +116,38 @@ public class SENote extends MizeEntity implements Comparable<SENote> {
 	}
 	
 	@JsonIgnore(value=false)
+	public void setUpdatedBy(Long updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+ 
+	@JsonIgnore(value=false)
 	public void setCreatedBy(Long createdBy) {
 		this.createdBy = createdBy;
 	}
 
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(value=false)
-	public void setUpdatedBy(Long updatedBy) {
-		this.updatedBy = updatedBy;
+	public void setUpdatedDate(DateTime updatedDate) {
+		this.updatedDate = updatedDate;
 	}
 	
 	public void setServiceEntity(ServiceEntity serviceEntity) {
 		this.serviceEntity = serviceEntity;
-	}
+	}	
 	
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	@Override
-	public int compareTo(SENote arg0) {
-		return 0;
-	}
-
-	@Override
-	public String toString() {
-		return "SENote [entityId=" + entityId + ", notes=" + notes + ", type="
-				+ type + "]";
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result
 				+ ((entityId == null) ? 0 : entityId.hashCode());
-		result = prime * result + ((notes == null) ? 0 : notes.hashCode());
-		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		result = prime
+				* result
+				+ ((entityRelationId == null) ? 0 : entityRelationId.hashCode());
 		return result;
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -182,23 +156,25 @@ public class SENote extends MizeEntity implements Comparable<SENote> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SENote other = (SENote) obj;
+		ServiceEntityRelation other = (ServiceEntityRelation) obj;
 		if (entityId == null) {
 			if (other.entityId != null)
 				return false;
 		} else if (!entityId.equals(other.entityId))
 			return false;
-		if (notes == null) {
-			if (other.notes != null)
+		if (entityRelationId == null) {
+			if (other.entityRelationId != null)
 				return false;
-		} else if (!notes.equals(other.notes))
-			return false;
-		if (type == null) {
-			if (other.type != null)
-				return false;
-		} else if (!type.equals(other.type))
+		} else if (!entityRelationId.equals(other.entityRelationId))
 			return false;
 		return true;
-	}	
+	}
+	
+	@Override
+	public int compareTo(ServiceEntityRelation arg0) {
+		return 0;
+	}
+
+	
 
 }

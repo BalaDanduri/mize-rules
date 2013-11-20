@@ -32,7 +32,7 @@ import com.mize.domain.util.JsonDateTimeSerializer;
 
 @Entity
 @Table(name = "service_entity_request")
-public class SERequest extends MizeEntity implements Comparable<SERequest> {
+public class ServiceEntityRequest extends MizeEntity implements Comparable<ServiceEntityRequest> {
 
 	private static final long serialVersionUID = 6821133638967617947L;
 	@Transient
@@ -60,15 +60,15 @@ public class SERequest extends MizeEntity implements Comparable<SERequest> {
 	private String causeDesc;
 	private String correctiveActionCode;
 	private String correctiveActionDesc;
-	private SEAmount partAmount = new SEAmount();
-	private SEAmount laborAmount = new SEAmount();
-	private SEAmount otherAmount = new SEAmount();
-	private SEAmount totalAmount = new SEAmount();
-	private List<SEPart> parts = new ArrayList<SEPart>();
-	private List<SELabor> labors = new ArrayList<SELabor>();
-	private List<SEOtherCharges> othersCharges = new ArrayList<SEOtherCharges>();
+	private ServiceEntityAmount partAmount = new ServiceEntityAmount();
+	private ServiceEntityAmount laborAmount = new ServiceEntityAmount();
+	private ServiceEntityAmount otherAmount = new ServiceEntityAmount();
+	private ServiceEntityAmount totalAmount = new ServiceEntityAmount();
+	private List<ServiceEntityPart> parts = new ArrayList<ServiceEntityPart>();
+	private List<ServiceEntityLabor> labors = new ArrayList<ServiceEntityLabor>();
+	private List<ServiceEntitytherCharge> othersCharges = new ArrayList<ServiceEntitytherCharge>();
 	
-	public SERequest() {
+	public ServiceEntityRequest() {
 		super();
 	}
 	
@@ -193,40 +193,40 @@ public class SERequest extends MizeEntity implements Comparable<SERequest> {
 	
 	@OneToOne(fetch=FetchType.LAZY ,cascade=CascadeType.ALL)
 	@JoinColumn(name="part_amount_id")
-	public SEAmount getPartAmount() {
+	public ServiceEntityAmount getPartAmount() {
 		return partAmount;
 	}
 	
 	@OneToOne(fetch=FetchType.LAZY ,cascade=CascadeType.ALL)
 	@JoinColumn(name="labor_amount_id")
-	public SEAmount getLaborAmount() {
+	public ServiceEntityAmount getLaborAmount() {
 		return laborAmount;
 	}
 
 	@OneToOne(fetch=FetchType.LAZY ,cascade=CascadeType.ALL)
 	@JoinColumn(name="other_amount_id")
-	public SEAmount getOtherAmount() {
+	public ServiceEntityAmount getOtherAmount() {
 		return otherAmount;
 	}
 
 	@OneToOne(fetch=FetchType.LAZY ,cascade=CascadeType.ALL)
 	@JoinColumn(name="total_amount_id")
-	public SEAmount getTotalAmount() {
+	public ServiceEntityAmount getTotalAmount() {
 		return totalAmount;
 	}
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "request")
-	public List<SEPart> getParts() {
+	public List<ServiceEntityPart> getParts() {
 		return parts;
 	}
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "request")
-	public List<SELabor> getLabors() {
+	public List<ServiceEntityLabor> getLabors() {
 		return labors;
 	}
 	
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "request")
-	public List<SEOtherCharges> getOthersCharges() {
+	public List<ServiceEntitytherCharge> getOthersCharges() {
 		return othersCharges;
 	}
 
@@ -323,31 +323,31 @@ public class SERequest extends MizeEntity implements Comparable<SERequest> {
 		this.correctiveActionDesc = correctiveActionDesc;
 	}
 
-	public void setPartAmount(SEAmount partAmount) {
+	public void setPartAmount(ServiceEntityAmount partAmount) {
 		this.partAmount = partAmount;
 	}
 
-	public void setLaborAmount(SEAmount laborAmount) {
+	public void setLaborAmount(ServiceEntityAmount laborAmount) {
 		this.laborAmount = laborAmount;
 	}
 
-	public void setOtherAmount(SEAmount otherAmount) {
+	public void setOtherAmount(ServiceEntityAmount otherAmount) {
 		this.otherAmount = otherAmount;
 	}
 
-	public void setTotalAmount(SEAmount totalAmount) {
+	public void setTotalAmount(ServiceEntityAmount totalAmount) {
 		this.totalAmount = totalAmount;
 	}
 
-	public void setParts(List<SEPart> parts) {
+	public void setParts(List<ServiceEntityPart> parts) {
 		this.parts = parts;
 	}
 
-	public void setLabors(List<SELabor> labors) {
+	public void setLabors(List<ServiceEntityLabor> labors) {
 		this.labors = labors;
 	}
 
-	public void setOthersCharges(List<SEOtherCharges> othersCharges) {
+	public void setOthersCharges(List<ServiceEntitytherCharge> othersCharges) {
 		this.othersCharges = othersCharges;
 	}
 
@@ -485,7 +485,7 @@ public class SERequest extends MizeEntity implements Comparable<SERequest> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SERequest other = (SERequest) obj;
+		ServiceEntityRequest other = (ServiceEntityRequest) obj;
 		if (causeCode == null) {
 			if (other.causeCode != null)
 				return false;
@@ -595,7 +595,7 @@ public class SERequest extends MizeEntity implements Comparable<SERequest> {
 	}
 
 	@Override
-	public int compareTo(SERequest arg0) {
+	public int compareTo(ServiceEntityRequest arg0) {
 		return 0;
 	}
 

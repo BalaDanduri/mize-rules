@@ -13,7 +13,7 @@ import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.ContextConfiguration;
 
-import com.mize.domain.serviceentity.SEAudit;
+import com.mize.domain.serviceentity.ServiceEntityAudit;
 import com.mize.domain.serviceentity.ServiceEntity;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;
@@ -22,7 +22,7 @@ import com.mize.domain.util.Formatter;
 public class SEAuditTest extends JPATest{
 	private static final String SE_AUDIT_QUERY = "select * from service_entity_audit where id = ?";
 	EntityManager entityManager = null;
-	SEAudit sEAudit = null;
+	ServiceEntityAudit sEAudit = null;
 	ServiceEntity serviceEntity = null;
 	
 	@Before
@@ -39,9 +39,9 @@ public class SEAuditTest extends JPATest{
 	@Test
 	public void test() {
 		try {
-			List<SEAudit> audits = jdbcTemplate.query(SE_AUDIT_QUERY, new Object[]{sEAudit.getId()}, new SEAuditRowMapper());
+			List<ServiceEntityAudit> audits = jdbcTemplate.query(SE_AUDIT_QUERY, new Object[]{sEAudit.getId()}, new SEAuditRowMapper());
 			if(!Formatter.isEmpty(audits)){
-				SEAudit sEAudits = audits.get(0);
+				ServiceEntityAudit sEAudits = audits.get(0);
 				assertTrue(sEAudit.getId().equals(sEAudits.getId()));
 			}
 		}catch(Throwable th) {
@@ -51,10 +51,10 @@ public class SEAuditTest extends JPATest{
 		}
 	}
 	
-	private class SEAuditRowMapper implements RowMapper<SEAudit> {
+	private class SEAuditRowMapper implements RowMapper<ServiceEntityAudit> {
 		@Override
-		public SEAudit mapRow(ResultSet rs, int rowNum) throws SQLException {
-			SEAudit sEAudit = new SEAudit();
+		public ServiceEntityAudit mapRow(ResultSet rs, int rowNum) throws SQLException {
+			ServiceEntityAudit sEAudit = new ServiceEntityAudit();
 			sEAudit.setId(rs.getLong("id"));
 			sEAudit.setEntityId(rs.getLong("entity_id"));
 			sEAudit.setStatusBy(rs.getLong("status_by"));
@@ -64,8 +64,8 @@ public class SEAuditTest extends JPATest{
 		}
 	}
 	
-	private SEAudit getSEAuditObjectToSave(SEAudit sEAudit) {
-		SEAudit audit = new SEAudit(Long.valueOf(12),serviceEntity,"statusCode",null,Long.valueOf(801),"raghu");
+	private ServiceEntityAudit getSEAuditObjectToSave(ServiceEntityAudit sEAudit) {
+		ServiceEntityAudit audit = new ServiceEntityAudit(Long.valueOf(12),serviceEntity,"statusCode",null,Long.valueOf(801),"raghu");
 		return audit;
 	}
 }

@@ -12,19 +12,19 @@ import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
-public class SESearch extends MizeEntity implements Comparable<SESearch> {
+public class ServiceEntitySearch extends MizeEntity implements Comparable<ServiceEntitySearch> {
 
 	private static final long serialVersionUID = 6821133638967617947L;
 	private String code;
 	private String status;
-	private SEAddress address;
+	private ServiceEntityAddress address;
 	private String type;
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime createdDate;
 	private Long createdBy;
 	private Long submittedBy;
 	
-	List<SESearch> results = new ArrayList<SESearch>(); 
+	List<ServiceEntitySearch> results = new ArrayList<ServiceEntitySearch>(); 
 	
 	public String getCode() {
 		return code;
@@ -42,11 +42,11 @@ public class SESearch extends MizeEntity implements Comparable<SESearch> {
 		this.status = status;
 	}
 
-	public SEAddress getAddress() {
+	public ServiceEntityAddress getAddress() {
 		return address;
 	}
 
-	public void setAddress(SEAddress address) {
+	public void setAddress(ServiceEntityAddress address) {
 		this.address = address;
 	}
 
@@ -86,7 +86,7 @@ public class SESearch extends MizeEntity implements Comparable<SESearch> {
 		this.submittedBy = submittedBy;
 	}
 
-	public SESearch() {
+	public ServiceEntitySearch() {
 		super();
 	}
 	
@@ -102,7 +102,7 @@ public class SESearch extends MizeEntity implements Comparable<SESearch> {
 
 	
 	@Override
-	public int compareTo(SESearch arg0) {
+	public int compareTo(ServiceEntitySearch arg0) {
 		return 0;
 	}	
 

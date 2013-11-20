@@ -25,20 +25,18 @@ import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
 @Entity
-@Table(name = "service_entity_request_other")
-public class SEOtherCharges extends MizeEntity implements Comparable<SEOtherCharges> {
-	private static final long serialVersionUID = 68211336389676111L;
-	
+@Table(name = "service_entity_request_labor")
+public class ServiceEntityLabor extends MizeEntity implements Comparable<ServiceEntityLabor> {
+	private static final long serialVersionUID = 28211336389676111L;
 	private String type;
 	private String code;
 	private String description;
 	@Transient
 	private Long requestId;
-	private SERequest request;
+	private ServiceEntityRequest request;
+	private ServiceEntityAmount amount = new ServiceEntityAmount();
 	
-	private SEAmount amount = new SEAmount();
-	
-	public SEOtherCharges() {
+	public ServiceEntityLabor() {
 		super();
 	}
 
@@ -49,19 +47,18 @@ public class SEOtherCharges extends MizeEntity implements Comparable<SEOtherChar
 	public Long getId() {
 		return id;
 	}
-	
 
-	@Column(name="other_charge_type")
+	@Column(name="labor_type")
 	public String getType() {
 		return type;
 	}
-
-	@Column(name="other_charge_code")
+	
+	@Column(name="labor_code")
 	public String getCode() {
 		return code;
 	}
 
-	@Column(name="other_charge_description")
+	@Column(name="labor_description")
 	public String getDescription() {
 		return description;
 	}
@@ -70,27 +67,29 @@ public class SEOtherCharges extends MizeEntity implements Comparable<SEOtherChar
 	public Long getRequestId() {
 		return requestId;
 	}
-	
+
 	@OneToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name="amount_id")
-	public SEAmount getAmount() {
+	public ServiceEntityAmount getAmount() {
 		return amount;
 	}
-	
-	
+
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="request_id")
-	public SERequest getRequest() {
+	public ServiceEntityRequest getRequest() {
 		return request;
 	}
 
-	
+
+	public void setRequest(ServiceEntityRequest request) {
+		this.request = request;
+	}
+
 	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}	
 
-	
 	public void setType(String type) {
 		this.type = type;
 	}
@@ -102,18 +101,15 @@ public class SEOtherCharges extends MizeEntity implements Comparable<SEOtherChar
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
+	
 	public void setRequestId(Long requestId) {
 		this.requestId = requestId;
 	}
-
-	public void setAmount(SEAmount amount) {
+	
+	public void setAmount(ServiceEntityAmount amount) {
 		this.amount = amount;
 	}
-
-	public void setRequest(SERequest request) {
-		this.request = request;
-	}
+	
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
@@ -168,7 +164,7 @@ public class SEOtherCharges extends MizeEntity implements Comparable<SEOtherChar
 		this.updatedDate = updatedDate;
 	}
 	
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
@@ -191,7 +187,7 @@ public class SEOtherCharges extends MizeEntity implements Comparable<SEOtherChar
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SEOtherCharges other = (SEOtherCharges) obj;
+		ServiceEntityLabor other = (ServiceEntityLabor) obj;
 		if (amount == null) {
 			if (other.amount != null)
 				return false;
@@ -228,7 +224,7 @@ public class SEOtherCharges extends MizeEntity implements Comparable<SEOtherChar
 	}
 
 	@Override
-	public int compareTo(SEOtherCharges arg0) {
+	public int compareTo(ServiceEntityLabor arg0) {
 		return 0;
 	}	
 
