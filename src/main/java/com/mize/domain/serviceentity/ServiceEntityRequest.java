@@ -66,7 +66,7 @@ public class ServiceEntityRequest extends MizeEntity implements Comparable<Servi
 	private ServiceEntityAmount totalAmount = new ServiceEntityAmount();
 	private List<ServiceEntityPart> parts = new ArrayList<ServiceEntityPart>();
 	private List<ServiceEntityLabor> labors = new ArrayList<ServiceEntityLabor>();
-	private List<ServiceEntitytherCharge> othersCharges = new ArrayList<ServiceEntitytherCharge>();
+	private List<ServiceEntityOtherCharge> othersCharges = new ArrayList<ServiceEntityOtherCharge>();
 	
 	public ServiceEntityRequest() {
 		super();
@@ -226,7 +226,7 @@ public class ServiceEntityRequest extends MizeEntity implements Comparable<Servi
 	}
 	
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "request")
-	public List<ServiceEntitytherCharge> getOthersCharges() {
+	public List<ServiceEntityOtherCharge> getOthersCharges() {
 		return othersCharges;
 	}
 
@@ -347,7 +347,7 @@ public class ServiceEntityRequest extends MizeEntity implements Comparable<Servi
 		this.labors = labors;
 	}
 
-	public void setOthersCharges(List<ServiceEntitytherCharge> othersCharges) {
+	public void setOthersCharges(List<ServiceEntityOtherCharge> othersCharges) {
 		this.othersCharges = othersCharges;
 	}
 

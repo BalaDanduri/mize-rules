@@ -23,7 +23,7 @@ import com.mize.domain.serviceentity.ServiceEntityAmount;
 import com.mize.domain.serviceentity.ServiceEntityAttachment;
 import com.mize.domain.serviceentity.ServiceEntityLabor;
 import com.mize.domain.serviceentity.ServiceEntityNotes;
-import com.mize.domain.serviceentity.ServiceEntitytherCharge;
+import com.mize.domain.serviceentity.ServiceEntityOtherCharge;
 import com.mize.domain.serviceentity.ServiceEntityPart;
 import com.mize.domain.serviceentity.ServiceEntityProvider;
 import com.mize.domain.serviceentity.ServiceEntityRequest;
@@ -199,7 +199,7 @@ public class ServiceEntityTest extends JPATest {
 		request.getLabors().add(labor);
 		request.getLabors().add(labor1);
 		
-		ServiceEntitytherCharge other = new ServiceEntitytherCharge();
+		ServiceEntityOtherCharge other = new ServiceEntityOtherCharge();
 		ServiceEntityAmount seOtherAmount = new ServiceEntityAmount();
 		other.setRequest(request);
 		other.setCode("O001");
@@ -210,7 +210,7 @@ public class ServiceEntityTest extends JPATest {
 		seOtherAmount.setAdjustedQuantity(BigDecimal.valueOf(21));
 		other.setAmount(seOtherAmount);
 		
-		ServiceEntitytherCharge other1 = new ServiceEntitytherCharge();
+		ServiceEntityOtherCharge other1 = new ServiceEntityOtherCharge();
 		ServiceEntityAmount seOtherAmount1 = new ServiceEntityAmount();
 		other1.setRequest(request);
 		other1.setCode("O0011");

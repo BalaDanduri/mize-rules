@@ -26,7 +26,7 @@ import com.mize.domain.util.JsonDateTimeSerializer;
 
 @Entity
 @Table(name = "service_entity_request_other")
-public class ServiceEntitytherCharge extends MizeEntity implements Comparable<ServiceEntitytherCharge> {
+public class ServiceEntityOtherCharge extends MizeEntity implements Comparable<ServiceEntityOtherCharge> {
 	private static final long serialVersionUID = 68211336389676111L;
 	
 	private String type;
@@ -38,7 +38,7 @@ public class ServiceEntitytherCharge extends MizeEntity implements Comparable<Se
 	
 	private ServiceEntityAmount amount = new ServiceEntityAmount();
 	
-	public ServiceEntitytherCharge() {
+	public ServiceEntityOtherCharge() {
 		super();
 	}
 
@@ -191,7 +191,7 @@ public class ServiceEntitytherCharge extends MizeEntity implements Comparable<Se
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		ServiceEntitytherCharge other = (ServiceEntitytherCharge) obj;
+		ServiceEntityOtherCharge other = (ServiceEntityOtherCharge) obj;
 		if (amount == null) {
 			if (other.amount != null)
 				return false;
@@ -228,7 +228,7 @@ public class ServiceEntitytherCharge extends MizeEntity implements Comparable<Se
 	}
 
 	@Override
-	public int compareTo(ServiceEntitytherCharge arg0) {
+	public int compareTo(ServiceEntityOtherCharge arg0) {
 		return 0;
 	}	
 
