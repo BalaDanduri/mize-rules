@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -28,8 +29,7 @@ import com.mize.domain.util.JsonDateTimeSerializer;
 @Table(name = "service_entity_provider")
 public class ServiceEntityProvider extends MizeEntity implements Comparable<ServiceEntityProvider> {
 
-	private static final long serialVersionUID = 6821133638967617947L;
-	
+	private static final long serialVersionUID = 6821133638967617947L;	
 	@Transient
 	private Long entityId;
 	private ServiceEntity serviceEntity;
@@ -63,8 +63,8 @@ public class ServiceEntityProvider extends MizeEntity implements Comparable<Serv
 	}
 
 
-	@ManyToOne(fetch=FetchType.EAGER ,cascade =CascadeType.ALL)
-	@JoinColumn(name="provider_id")
+	@OneToOne(fetch=FetchType.EAGER ,cascade =CascadeType.ALL)
+	@JoinColumn(name="requester_be_id")
 	public BusinessEntity getBusinessEntity() {
 		return businessEntity;
 	}

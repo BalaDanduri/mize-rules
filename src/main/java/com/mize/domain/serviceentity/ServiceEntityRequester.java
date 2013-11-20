@@ -8,7 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -61,20 +61,20 @@ public class ServiceEntityRequester extends MizeEntity implements Comparable<Ser
 		this.id = id;
 	}	
 	
-	@ManyToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="entity_id")
 	public ServiceEntity getServiceEntity() {
 		return serviceEntity;
 	}
 
 
-	@ManyToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="requester_id")
 	public BusinessEntity getBusinessEntity() {
 		return businessEntity;
 	}
 	
-	@ManyToOne(fetch=FetchType.EAGER ,cascade=CascadeType.ALL)
+	@OneToOne(fetch=FetchType.LAZY ,cascade=CascadeType.ALL)
 	@JoinColumn(name="address_id")
 	public ServiceEntityAddress getAddress() {
 		return address;
