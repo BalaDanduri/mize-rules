@@ -1,5 +1,16 @@
 package com.mize.domain.serviceentity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -11,16 +22,19 @@ import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
+
+@Entity
+@Table(name = "service_entity_notes")
 public class SENote extends MizeEntity implements Comparable<SENote> {
 
 	private static final long serialVersionUID = 6821133638967617947L;
+	
+	@Transient
 	private Long entityId;
+	
+	private ServiceEntity serviceEntity;
 	private String notes;
 	private String type;
-	
-	public enum Type{
-		Internal,External;
-	}
 	
 	public SENote() {
 		super();
@@ -33,50 +47,84 @@ public class SENote extends MizeEntity implements Comparable<SENote> {
 		this.notes = notes;
 	}
 
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id", nullable = false, unique = true)
+	@Override
+	public Long getId() {
+		return id;
+	}
+	
+	@Transient
 	public Long getEntityId() {
 		return entityId;
 	}
-	public void setEntityId(Long entityId) {
-		this.entityId = entityId;
-	}
 	
+	@Column(name = "notes")
 	public String getNotes() {
 		return notes;
+	}
+	
+	@Column(name = "note_type")
+	public String getType() {
+		return type;
+	}
+
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="entity_id")
+	public ServiceEntity getServiceEntity() {
+		return serviceEntity;
+	}
+
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	@Column(name = "updated_date")
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
+	@Transient
+	public DateTime getUpdatedDate() {
+		return updatedDate;
+	}
+	
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	@Column(name = "created_date")
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
+	@Transient
+	public DateTime getCreatedDate() {
+		return createdDate;
+	}
+	
+	@JsonIgnore(value=false)
+	@Transient
+	public Long getCreatedBy() {
+		return createdBy;
+	}
+	
+	@JsonIgnore(value=false)
+	@Transient
+	public Long getUpdatedBy() {
+		return updatedBy;
+	}
+	
+	public void setEntityId(Long entityId) {
+		this.entityId = entityId;
 	}
 
 	public void setNotes(String notes) {
 		this.notes = notes;
-	}
-
-	@Override
-	public Long getId() {
-		return id;
 	}
 	
 	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
-	@JsonIgnore(value=false)
-	public DateTime getUpdatedDate() {
-		return updatedDate;
-	}
-	
+
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(value=false)
 	public void setUpdatedDate(DateTime updatedDate) {
 		this.updatedDate = updatedDate;
-	}
-	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
-	@JsonIgnore(value=false)
-	public DateTime getCreatedDate() {
-		return createdDate;
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
@@ -92,24 +140,14 @@ public class SENote extends MizeEntity implements Comparable<SENote> {
 	}
 
 	@JsonIgnore(value=false)
-	public Long getCreatedBy() {
-		return createdBy;
-	}
-	
-	@JsonIgnore(value=false)
-	public Long getUpdatedBy() {
-		return updatedBy;
-	}
-
-	@JsonIgnore(value=false)
 	public void setUpdatedBy(Long updatedBy) {
 		this.updatedBy = updatedBy;
 	}
 	
-	public String getType() {
-		return type;
+	public void setServiceEntity(ServiceEntity serviceEntity) {
+		this.serviceEntity = serviceEntity;
 	}
-
+	
 	public void setType(String type) {
 		this.type = type;
 	}

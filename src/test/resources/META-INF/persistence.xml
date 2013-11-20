@@ -2,7 +2,7 @@
 <persistence xmlns="http://java.sun.com/xml/ns/persistence"
 	version="2.0">
 
-	<persistence-unit name="myUnit" transaction-type="RESOURCE_LOCAL">
+	<persistence-unit name="myUnit1" transaction-type="RESOURCE_LOCAL">
 		<class>com.mize.domain.catalog.Catalog</class>
 		<class>com.mize.domain.catalog.CatalogIntl</class>
 		<class>com.mize.domain.common.Locale</class>
@@ -21,6 +21,27 @@
 		<class>com.mize.domain.part.PartKitItem</class>
 		<class>com.mize.domain.part.PickList</class>
 		<class>com.mize.domain.part.PickListItem</class>
+		<class>com.mize.domain.serviceentity.SEAddress</class>
+		<class>com.mize.domain.serviceentity.SEAmount</class>
+		<class>com.mize.domain.serviceentity.SEAttachment</class>
+		<class>com.mize.domain.serviceentity.SEAudit</class>
+		<class>com.mize.domain.serviceentity.SELabor</class>
+		<class>com.mize.domain.serviceentity.SENote</class>
+		<class>com.mize.domain.serviceentity.SEOtherCharges</class>
+		<class>com.mize.domain.serviceentity.SEPart</class>
+		<class>com.mize.domain.serviceentity.SEProvider</class>
+		<class>com.mize.domain.serviceentity.SERelation</class>
+		<class>com.mize.domain.serviceentity.SERequest</class>
+		<class>com.mize.domain.serviceentity.SERequester</class>
+		<class>com.mize.domain.serviceentity.ServiceEntity</class>
+		<class>com.mize.domain.product.Product</class>
+		<class>com.mize.domain.product.ProductRegister</class>
+		<class>com.mize.domain.product.ProductRegnAttachment</class>
+		<class>com.mize.domain.brand.Brand</class>
+		<class>com.mize.domain.brand.BrandFeed</class>
+		<class>com.mize.domain.brand.BrandSupport</class>
+		<class>com.mize.domain.product.ProductRepeatOrderShipOptions</class>
+		<class>com.mize.domain.auth.User</class>
 	</persistence-unit>
 
 </persistence>

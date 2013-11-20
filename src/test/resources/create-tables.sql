@@ -85,20 +85,30 @@ CREATE TABLE state (
 	country_id  	INTEGER(11) NULL 
 	);
 
-CREATE TABLE  business_entity ( 
-	id              	BIGINT(20) NOT NULL,
-	code            	VARCHAR(50) NULL,
-	type_code       	VARCHAR(50) NULL,
-	sub_type_code   	VARCHAR(50) NULL,
-	name            	VARCHAR(200) NULL,
-	logo            	VARCHAR(100) NULL,
-	created_date    	DATETIME NULL,
-	updated_date    	DATETIME NULL,
-	created_by      	BIGINT(20) NULL,
-	updated_by      	BIGINT(20) NULL,
-	active_indicator	CHAR(1) NULL 
-	);
+	CREATE TABLE business_entity ( 
+    id       bigint(20) 	AUTO_INCREMENT NOT NULL,
+    tenant_id     bigint(20) 		NULL,
+    code           varchar(50) 	NULL,
+    type_code      varchar(50) 	NULL,
+    sub_type_code  varchar(50) 	NULL,
+    name		   varchar(50) 	NULL,
+   	logo           varchar(100) NULL,
+    active_indicator char(1) 	NULL,
+    currency_code  varchar(50) 	NULL,
+    parent_be_id	bigint(20) 	NULL,
+    created_date    datetime 	NULL,
+    updated_date    datetime 	NULL,
+    created_by      bigint(20) 	NULL,
+    updated_by      bigint(20) 	NULL,    
+);
 
+CREATE TABLE business_entity_intl ( 
+    id         bigint(20) 	AUTO_INCREMENT NOT NULL,
+    be_id      bigint(20) 	NOT NULL,   
+    locale_id  bigint(20) 	NULL,
+    be_name    varchar(250) NULL,
+    be_description  varchar(500) NULL,
+);
 
 CREATE TABLE  business_entity_address  ( 
 	id           	BIGINT(20) NOT NULL,
@@ -124,7 +134,27 @@ CREATE TABLE  business_entity_address  (
 	tool_tip_logo	VARCHAR(100) NULL,
 	icon         	VARCHAR(100) NULL,
 	hours_of_op  	VARCHAR(250) NULL 
-	);
+);
+
+CREATE TABLE entity_address (
+	id					bigint(20) 	AUTO_INCREMENT NOT NULL,
+	address_type    	varchar(100) 		NULL,
+	address_1    		varchar(100) 		NULL,
+	address_2    		varchar(100) 		NULL,
+	address_3    		varchar(100) 		NULL,
+	zip          		varchar(10) 		NULL,
+	zip_ext      		varchar(10) 		NULL,
+	city         		varchar(50)			NULL,
+	county       		varchar(50) 		NULL,
+	state_id     		bigint(20) 			NULL,
+	country_id   		bigint(20) 			NULL,	
+	email        		varchar(50) 		NULL,
+	created_date    	datetime 			NULL,
+	updated_date    	datetime 			NULL,
+	created_by      	bigint(20) 			NULL,
+    updated_by      	bigint(20) 			NULL,  
+	
+);
 
 CREATE TABLE business_entity_geo ( 
 	be_address_id	BIGINT(20) NULL,
@@ -242,6 +272,209 @@ create table picklist_item
     picklist_id integer ,
  	part_qty DECIMAL(20,6),
 );
+
+
+drop table if exists service_entity;
+create table service_entity
+(
+	id integer primary key auto_increment not null,
+  	tenant_id integer,
+  	entity_code varchar(50),
+  	entity_status varchar(50),
+  	locale_id integer,
+  	currency_code varchar(50),
+  	entity_reference varchar(50),
+  	part_amount_id integer,
+  	labor_amount_id integer,
+  	other_amount_id integer,
+  	total_amount_id integer,
+  	created_date timestamp,
+  	updated_date timestamp,
+  	created_by integer,
+  	updated_by integer,
+  	service_type varchar(50),
+  	sales_person varchar(50),
+  	ship_complete char(1),
+  	process_id varchar(50),
+ );
+ 
+ drop table if exists service_entity_address;
+create table service_entity_address
+(
+	id integer primary key auto_increment not null,
+  	address_type varchar(100),
+ 	address_1 varchar(100),
+ 	address_2 varchar(100),
+  	address_3 varchar(100),
+ 	city varchar(50),
+  	zip varchar(10),
+  	zip_ext varchar(10),
+  	county varchar(100),
+  	state_id integer,
+  	country_id integer,
+  	phone_1 varchar(50),
+  	phone_2 varchar(50),
+  	email varchar(50),
+  	fax varchar(50),
+  	
+);
+
+drop table if exists service_entity_amount;
+CREATE TABLE service_entity_amount (
+        id integer primary key auto_increment not null,
+        requested_quantity   DECIMAL(20,6)         null,
+        adjusted_quantity    DECIMAL(20,6)      null,
+        requested_amount     DECIMAL(20,6)      null,
+        adjusted_amount      DECIMAL(20,6)      null,
+        total_amount         DECIMAL(20,6)      null,
+        discount_amount      DECIMAL(20,6)      null,
+        handling_amount      DECIMAL(20,6)      null,
+        freight_amount       DECIMAL(20,6)      null,
+        tax_amount         	 DECIMAL(20,6)      null,
+        miscellaneous_amount DECIMAL(20,6)      null,
+ );
+ 
+ 
+ drop table if exists service_entity_attach;
+ CREATE TABLE service_entity_attach (
+        id integer primary key auto_increment not null,
+        entity_id  integer not null,
+        type_code  varchar(30) null,
+        attach_name varchar(30) null,
+        attach_url varchar(256) null,
+ );
+
+drop table if exists service_entity_audit;
+create table service_entity_audit
+(
+	id integer primary key auto_increment not null,
+	entity_id integer,
+  	status_code varchar2(30),
+  	status_date timestamp,
+  	status_by integer,
+);
+
+drop table if exists service_entity_notes;
+CREATE TABLE service_entity_notes (
+        id integer primary key auto_increment not null,
+        entity_id  integer not null,
+        notes  varchar(5000) null,
+        note_type varchar(50) null,
+);
+
+drop table if exists service_entity_payment;
+CREATE TABLE service_entity_payment (
+     id integer primary key auto_increment not null,
+     entity_id  integer  not null,
+     payer_id   integer  not null,
+     address_id integer  not null,
+               
+ );
+
+
+drop table if exists service_entity_provider;
+create table service_entity_provider
+(
+	id integer primary key auto_increment not null,
+	entity_id integer,
+  	provider_id integer,
+  	address_id integer,
+);
+
+drop table if exists service_entity_request;
+CREATE TABLE service_entity_request (
+        id integer primary key auto_increment not null,
+        entity_id integer,
+        request_type varchar(50) null,
+        failure_date   timestamp  null,
+        repair_date   timestamp  null,
+        prod_id   integer    null,
+        prod_regn_id  integer    null,
+        contract_id   integer    null,
+        repair_site_code  varchar(100)  null,
+        coverage_id   integer    null,
+        coverage_code varchar(100)  null,
+        coverage_descr  varchar(1000) null,
+        coverage_end_date  timestamp  null,
+        complaint_code   varchar(100)  null,
+        complaint_description  varchar(1000) null,
+        cause_code   varchar(100)  null,
+        cause_description  varchar(1000) null,
+        corrective_action_code  varchar(100)  null,
+        corrective_action_descr  varchar(1000)  null,
+        part_amount_id   integer  null,
+        labor_amount_id  integer  null,
+        other_amount_id  integer  null,
+        total_amount_id  integer  null,
+        created_date  timestamp  null,
+        updated_date  timestamp  null,
+        created_by  integer  null,
+        updated_by  integer  null,
+ );
+ 
+ drop table if exists service_entity_request_labor;
+ CREATE TABLE service_entity_request_labor (
+        id  integer primary key auto_increment not null,
+        request_id integer  not null,
+        labor_type  varchar(50) null,
+        labor_code  varchar(100) null,
+        labor_description  varchar(500) null,
+        amount_id  integer null,
+        created_date timestamp null,
+        updated_date timestamp null,
+        created_by integer null,
+        updated_by integer null,
+ );
+ 
+ drop table if exists service_entity_request_other;
+ CREATE TABLE service_entity_request_other (
+        id  integer primary key auto_increment not null,
+        request_id integer  not null,
+        other_charge_type  varchar(50) null,
+        other_charge_code  varchar(100) null,
+        other_charge_description  varchar(500) null,
+        amount_id  integer null,
+        created_date timestamp  null,
+        updated_date timestamp  null,
+        created_by integer null,
+        updated_by integer null,
+ );
+ 
+ drop table if exists service_entity_request_part;
+ CREATE TABLE service_entity_request_part (
+        id  integer primary key auto_increment not null,
+        request_id  bigint(20)  NOT NULL,
+        part_type   varchar(50) NULL,
+        part_code   varchar(100)  NULL,
+        part_serial varchar(100)  NULL,
+        part_description  varchar(500)  NULL,
+        amount_id  bigint(20) NULL,
+        created_date  datetime NULL,
+        updated_date  datetime NULL,
+        created_by    bigint(20) NULL,
+        updated_by    bigint(20) NULL,
+        part_uom   varchar(50)  NULL,
+        part_weight DECIMAL(20,6) null,
+        prod_id bigint(20) NULL,
+        model varchar(50) null,
+        prod_srl_no varchar(200) null,
+        warehouse_code varchar(100) null,
+ );
+  
+  drop table if exists service_entity_requester;
+  CREATE TABLE service_entity_requester (
+        id  integer primary key auto_increment not null,
+        entity_id   bigint(20)  NOT NULL,
+        requester_id bigint(20) NULL,
+        address_id   bigint(20) NULL,
+  );
+
+  drop table if exists service_entity_rltn;
+  CREATE TABLE service_entity_rltn (
+        id  bigint(20) AUTO_INCREMENT NOT NULL,
+        entity_id  bigint(20) NOT NULL,
+        entity_rltn_id bigint(20) NOT NULL,
+  );
 
 
 insert into locale values(1,'Y','EN','USA','EN_USA');
@@ -413,3 +646,48 @@ INSERT INTO  picklist_item (id,part_id, picklist_id,part_qty)
  
 INSERT INTO  picklist_item (id, part_id,picklist_id,part_qty)
   VALUES(802,101, 702,3);
+  
+INSERT INTO service_entity (id, tenant_id, entity_code, entity_status, locale_id, currency_code, entity_reference, part_amount_id, labor_amount_id, other_amount_id, total_amount_id, created_date, updated_date, created_by, updated_by, service_type, sales_person, ship_complete, process_id) 
+  VALUES (201, 961, 'entityCode', 'Draft', 1, 'USA', 'entity_reference' , 203, 204, 205, 206, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, null, null, 'serviceType', 'Sales', 'Y', 1);
+  
+INSERT INTO service_entity_address (id, address_type, address_1, address_2, address_3, zip, zip_ext, city,county, state_id, country_id, phone_1, phone_2, email, fax)
+  VALUES(101 ,'address_type' ,'address_1' ,'address_2' ,'address_3' ,'50000' ,'500000' ,'albama' ,'US' ,1 ,1 ,'456543456' ,'456543456' ,'raghu@gmail.com' ,'45454545');
+
+ INSERT INTO service_entity_amount (id, requested_quantity, adjusted_quantity, requested_amount, adjusted_amount, total_amount, discount_amount, handling_amount, freight_amount, tax_amount, miscellaneous_amount)
+  VALUES(2086, 20, 20, 300, 301 ,301, 303, 304, 305, 306, 307);  
+  
+ INSERT INTO service_entity_attach(id, entity_id, type_code, attach_name, attach_url)
+ 	VALUES(35, 201, null, 'upload', 'bose.jpg');
+
+ INSERT INTO service_entity_audit (id, entity_id, status_code, status_date, status_by)
+  VALUES(801, 201, 'status_code', CURRENT_TIMESTAMP, 801);
+  
+ INSERT INTO service_entity_notes(id, entity_id, notes, note_type)
+   VALUES(301, 201, 'Notes1','noteType');
+   
+ INSERT INTO service_entity_payment(id, entity_id, payer_id, address_id)
+   VALUES(401, 201, 2, 101);
+   
+ INSERT INTO service_entity_provider(id, entity_id, provider_id, address_id)
+  VALUES(401, 201, 2, 101);
+  
+INSERT INTO service_entity_request(id, entity_id, request_type, failure_date, repair_date,prod_id,prod_regn_id, contract_id, repair_site_code, coverage_id, coverage_code, coverage_descr, coverage_end_date, complaint_code, complaint_description, cause_code, cause_description, corrective_action_code, corrective_action_descr, part_amount_id, labor_amount_id, other_amount_id, total_amount_id, created_date, updated_date, created_by, updated_by)
+   VALUES(101, 201,'Warranty',CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,100,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,null,203,204,205,206,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,NULL,NULL);
+   
+INSERT INTO service_entity_request_labor(id,request_id, labor_type, labor_code, labor_description, amount_id, created_date, updated_date, created_by, updated_by)
+  VALUES(201,201,'hour1','L001',null,120,current_timestamp,current_timestamp,null,null);
+  
+INSERT INTO service_entity_request_other(id,request_id, other_charge_type, other_charge_code, other_charge_description, amount_id, created_date, updated_date, created_by, updated_by)
+  VALUES(201,201,'other1123','L001',null,120,current_timestamp,current_timestamp,null,null);
+  
+ INSERT INTO service_entity_request_part(id, request_id, part_type, part_code, part_serial, part_description,amount_id, created_date, updated_date, created_by, updated_by, part_uom,part_weight,prod_id,model,prod_srl_no,warehouse_code)
+   VALUES(1001,201,'part1123','L001',111,null,115,current_timestamp,current_timestamp,null,null,null,null,null,null,null,null);
+   
+ INSERT INTO service_entity_requester(id, entity_id, requester_id, address_id)
+   VALUES(1001,201,101,22);
+   
+ INSERT INTO service_entity_rltn(id, entity_id, entity_rltn_id)
+ VALUES(1001,201,33);
+
+  
+ 

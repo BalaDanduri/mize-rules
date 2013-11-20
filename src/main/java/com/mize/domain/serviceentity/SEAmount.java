@@ -2,17 +2,17 @@ package com.mize.domain.serviceentity;
 
 import java.math.BigDecimal;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 import com.mize.domain.common.MizeEntity;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
 
+@Entity
+@Table(name = "service_entity_amount")
 public class SEAmount extends MizeEntity implements Comparable<SEAmount> {
 	private static final long serialVersionUID = 6821336389676111L;
 	private BigDecimal requestedQuantity;
@@ -32,9 +32,31 @@ public class SEAmount extends MizeEntity implements Comparable<SEAmount> {
 	
 	public SEAmount(Long id) {
 		super();
-		this.id = id;		
+		this.id = id;
+		
+	}
+	
+	public SEAmount(BigDecimal requestedQuantity, BigDecimal adjustedQuantity,
+			BigDecimal adjustedAmount, BigDecimal requestedAmount,
+			BigDecimal totalAmount, BigDecimal discountAmount,
+			BigDecimal handlingAmount, BigDecimal freightAmount,
+			BigDecimal taxAmount, BigDecimal miscellaneousAmount) {
+		super();
+		this.requestedQuantity = requestedQuantity;
+		this.adjustedQuantity = adjustedQuantity;
+		this.adjustedAmount = adjustedAmount;
+		this.requestedAmount = requestedAmount;
+		this.totalAmount = totalAmount;
+		this.discountAmount = discountAmount;
+		this.handlingAmount = handlingAmount;
+		this.freightAmount = freightAmount;
+		this.taxAmount = taxAmount;
+		this.miscellaneousAmount = miscellaneousAmount;
 	}
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name = "id", nullable = false, unique = true)
 	@Override
 	public Long getId() {
 		return id;
@@ -45,6 +67,7 @@ public class SEAmount extends MizeEntity implements Comparable<SEAmount> {
 		this.id = id;
 	}	
 
+	@Column(name = "requested_quantity", nullable = true)
 	public BigDecimal getRequestedQuantity() {
 		return requestedQuantity;
 	}
@@ -53,6 +76,7 @@ public class SEAmount extends MizeEntity implements Comparable<SEAmount> {
 		this.requestedQuantity = requestedQuantity;
 	}
 
+	@Column(name = "adjusted_quantity", nullable = true)
 	public BigDecimal getAdjustedQuantity() {
 		return adjustedQuantity;
 	}
@@ -61,6 +85,7 @@ public class SEAmount extends MizeEntity implements Comparable<SEAmount> {
 		this.adjustedQuantity = adjustedQuantity;
 	}
 
+	@Column(name = "adjusted_amount", nullable = true)
 	public BigDecimal getAdjustedAmount() {
 		return adjustedAmount;
 	}
@@ -69,6 +94,7 @@ public class SEAmount extends MizeEntity implements Comparable<SEAmount> {
 		this.adjustedAmount = adjustedAmount;
 	}
 
+	@Column(name = "requested_amount", nullable = true)
 	public BigDecimal getRequestedAmount() {
 		return requestedAmount;
 	}
@@ -77,6 +103,7 @@ public class SEAmount extends MizeEntity implements Comparable<SEAmount> {
 		this.requestedAmount = requestedAmount;
 	}
 
+	@Column(name = "total_amount", nullable = true)
 	public BigDecimal getTotalAmount() {
 		return totalAmount;
 	}
@@ -85,7 +112,7 @@ public class SEAmount extends MizeEntity implements Comparable<SEAmount> {
 		this.totalAmount = totalAmount;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	@JsonIgnore(value=false)
 	public DateTime getUpdatedDate() {
@@ -131,13 +158,14 @@ public class SEAmount extends MizeEntity implements Comparable<SEAmount> {
 	@JsonIgnore(value=false)
 	public void setUpdatedBy(Long updatedBy) {
 		this.updatedBy = updatedBy;
-	}
+	}*/
 	
 	@Override
 	public int compareTo(SEAmount arg0) {
 		return 0;
 	}
 
+	@Column(name = "discount_amount", nullable = true)
 	public BigDecimal getDiscountAmount() {
 		return discountAmount;
 	}
@@ -146,6 +174,7 @@ public class SEAmount extends MizeEntity implements Comparable<SEAmount> {
 		this.discountAmount = discountAmount;
 	}
 
+	@Column(name = "handling_amount", nullable = true)
 	public BigDecimal getHandlingAmount() {
 		return handlingAmount;
 	}
@@ -154,6 +183,7 @@ public class SEAmount extends MizeEntity implements Comparable<SEAmount> {
 		this.handlingAmount = handlingAmount;
 	}
 
+	@Column(name = "freight_amount", nullable = true)
 	public BigDecimal getFreightAmount() {
 		return freightAmount;
 	}
@@ -162,6 +192,7 @@ public class SEAmount extends MizeEntity implements Comparable<SEAmount> {
 		this.freightAmount = freightAmount;
 	}
 
+	@Column(name = "tax_amount", nullable = true)
 	public BigDecimal getTaxAmount() {
 		return taxAmount;
 	}
@@ -170,6 +201,7 @@ public class SEAmount extends MizeEntity implements Comparable<SEAmount> {
 		this.taxAmount = taxAmount;
 	}
 
+	@Column(name = "miscellaneous_amount", nullable = true)
 	public BigDecimal getMiscellaneousAmount() {
 		return miscellaneousAmount;
 	}
@@ -271,17 +303,34 @@ public class SEAmount extends MizeEntity implements Comparable<SEAmount> {
 			return false;
 		return true;
 	}
-
+	
 	@Override
 	public String toString() {
-		return "SEAmount [requestedQuantity=" + requestedQuantity
-				+ ", adjustedQuantity=" + adjustedQuantity
-				+ ", adjustedAmount=" + adjustedAmount + ", requestedAmount="
-				+ requestedAmount + ", totalAmount=" + totalAmount
-				+ ", discountAmount=" + discountAmount + ", handlingAmount="
-				+ handlingAmount + ", freightAmount=" + freightAmount
-				+ ", taxAmount=" + taxAmount + ", miscellaneousAmount="
-				+ miscellaneousAmount + "]";
-	}	
-
+		StringBuilder builder = new StringBuilder();
+		builder.append("SEAmount [requestedQuantity=");
+		builder.append(requestedQuantity);
+		builder.append(", adjustedQuantity=");
+		builder.append(adjustedQuantity);
+		builder.append(", adjustedAmount=");
+		builder.append(adjustedAmount);
+		builder.append(", requestedAmount=");
+		builder.append(requestedAmount);
+		builder.append(", totalAmount=");
+		builder.append(totalAmount);
+		builder.append(", discountAmount=");
+		builder.append(discountAmount);
+		builder.append(", handlingAmount=");
+		builder.append(handlingAmount);
+		builder.append(", freightAmount=");
+		builder.append(freightAmount);
+		builder.append(", taxAmount=");
+		builder.append(taxAmount);
+		builder.append(", miscellaneousAmount=");
+		builder.append(miscellaneousAmount);
+		builder.append(", id=");
+		builder.append(id);
+		builder.append("]");
+		return builder.toString();
+	}
+	
 }

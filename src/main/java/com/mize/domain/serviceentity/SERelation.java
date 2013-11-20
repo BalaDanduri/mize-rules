@@ -1,5 +1,16 @@
 package com.mize.domain.serviceentity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -11,10 +22,15 @@ import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
+@Entity
+@Table(name = "service_entity_rltn")
 public class SERelation extends MizeEntity implements Comparable<SERelation> {
 
 	private static final long serialVersionUID = 6821133638967617947L;
+	@Transient
 	private Long entityId;
+	
+	private ServiceEntity serviceEntity;
 	private Long entityRelationId;
 	
 	public SERelation() {
@@ -34,18 +50,30 @@ public class SERelation extends MizeEntity implements Comparable<SERelation> {
 	public void setEntityId(Long entityId) {
 		this.entityId = entityId;
 	}
-	public Long getEntityRelationId() {
-		return entityRelationId;
-	}
-	public void setEntityRelationId(Long entityRelationId) {
-		this.entityRelationId = entityRelationId;
-	}
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id", nullable = false, unique = true)
 	@Override
 	public Long getId() {
 		return id;
 	}
 	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="entity_id")
+	public ServiceEntity getServiceEntity() {
+		return serviceEntity;
+	}
+	
+	@Column(name="entity_rltn_id")
+	public Long getEntityRelationId() {
+		return entityRelationId;
+	}
+	
+	
+	public void setEntityRelationId(Long entityRelationId) {
+		this.entityRelationId = entityRelationId;
+	}
 	@Override
 	public void setId(Long id) {
 		this.id = id;
@@ -54,22 +82,30 @@ public class SERelation extends MizeEntity implements Comparable<SERelation> {
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	@JsonIgnore(value=false)
+	@Column(name = "created_date",updatable = false)
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
+	public DateTime getCreatedDate() {
+		return createdDate;
+	}
+
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	@Column(name = "updated_date")
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(value=false)
-	public void setUpdatedDate(DateTime updatedDate) {
-		this.updatedDate = updatedDate;
+	@Column(name = "created_by",updatable=false)
+	public Long getCreatedBy() {
+		return createdBy;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	@JsonIgnore(value=false)
-	public DateTime getCreatedDate() {
-		return createdDate;
+	@Column(name = "updated_by")
+	public Long getUpdatedBy() {
+		return updatedBy;
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
@@ -80,24 +116,25 @@ public class SERelation extends MizeEntity implements Comparable<SERelation> {
 	}
 	
 	@JsonIgnore(value=false)
+	public void setUpdatedBy(Long updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+ 
+	@JsonIgnore(value=false)
 	public void setCreatedBy(Long createdBy) {
 		this.createdBy = createdBy;
 	}
 
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(value=false)
-	public Long getCreatedBy() {
-		return createdBy;
+	public void setUpdatedDate(DateTime updatedDate) {
+		this.updatedDate = updatedDate;
 	}
 	
-	@JsonIgnore(value=false)
-	public Long getUpdatedBy() {
-		return updatedBy;
-	}
-
-	@JsonIgnore(value=false)
-	public void setUpdatedBy(Long updatedBy) {
-		this.updatedBy = updatedBy;
-	}
+	public void setServiceEntity(ServiceEntity serviceEntity) {
+		this.serviceEntity = serviceEntity;
+	}	
 	
 	@Override
 	public int hashCode() {
@@ -136,6 +173,8 @@ public class SERelation extends MizeEntity implements Comparable<SERelation> {
 	@Override
 	public int compareTo(SERelation arg0) {
 		return 0;
-	}	
+	}
+
+	
 
 }
