@@ -46,7 +46,7 @@ public class CatalogIntlTest extends JPATest {
 		entityManager = getEntityManager();
 
 		catalog = findExistingCatalog(entityManager);
-		Locale locale = findLocaleObjectFromDBToBeUsedForCatalogIntl();			
+		Locale locale = findLocaleObjectFromDB();			
 		catalogIntl = createCatalogIntlObjectToBeSavedinDB(catalog, locale);
 		//save catalog
 		EntityTransaction tx = entityManager.getTransaction();

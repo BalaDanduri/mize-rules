@@ -1,59 +1,29 @@
 package com.mize.domain.partsOrder;
 
-import javax.persistence.Entity;
+import java.beans.Transient;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 import com.mize.domain.common.MizeEntity;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
 
 @Entity
+@Table(name = "parts_order_attach")
 public class PartsOrderAttachment extends MizeEntity implements Comparable<PartsOrderAttachment>{	
 
 	private static final long serialVersionUID = 261638805962518728L;	
 	private Long orderId;
 	private String type;
-	private String code;
+	private String name;
 	private String url;
 
-	public Long getOrderId() {
-		return orderId;
-	}
-
-	public void setOrderId(Long orderId) {
-		this.orderId = orderId;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id", nullable = false, unique = true)
 	@Override
 	public Long getId() {
 		return id;
@@ -62,62 +32,49 @@ public class PartsOrderAttachment extends MizeEntity implements Comparable<Parts
 	@Override
 	public void setId(Long id) {
 		this.id = id;		
-	}
+	}	
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
-	@JsonIgnore(value=false)
-	public DateTime getUpdatedDate() {
-		return updatedDate;
-	}
-	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore(value=false)
-	public void setUpdatedDate(DateTime updatedDate) {
-		this.updatedDate = updatedDate;
-	}
-	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
-	@JsonIgnore(value=false)
-	public DateTime getCreatedDate() {
-		return createdDate;
+	@Transient
+	public Long getOrderId() {
+		return orderId;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore(value=false)
-	public void setCreatedDate(DateTime createdDate) {
-		this.createdDate = createdDate;
-	}
-	
-	@JsonIgnore(value=false)
-	public void setCreatedBy(Long createdBy) {
-		this.createdBy = createdBy;
+	public void setOrderId(Long orderId) {
+		this.orderId = orderId;
 	}
 
-	@JsonIgnore(value=false)
-	public Long getCreatedBy() {
-		return createdBy;
-	}
-	
-	@JsonIgnore(value=false)
-	public Long getUpdatedBy() {
-		return updatedBy;
+	@Column(name = "type_code")
+	public String getType() {
+		return type;
 	}
 
-	@JsonIgnore(value=false)
-	public void setUpdatedBy(Long updatedBy) {
-		this.updatedBy = updatedBy;
+	public void setType(String type) {
+		this.type = type;
 	}
-	
+
+	@Column(name = "attach_name")
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Column(name = "attach_url")
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}	
 
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime * result + ((code == null) ? 0 : code.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((orderId == null) ? 0 : orderId.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		result = prime * result + ((url == null) ? 0 : url.hashCode());
@@ -133,10 +90,10 @@ public class PartsOrderAttachment extends MizeEntity implements Comparable<Parts
 		if (getClass() != obj.getClass())
 			return false;
 		PartsOrderAttachment other = (PartsOrderAttachment) obj;
-		if (code == null) {
-			if (other.code != null)
+		if (name == null) {
+			if (other.name != null)
 				return false;
-		} else if (!code.equals(other.code))
+		} else if (!name.equals(other.name))
 			return false;
 		if (orderId == null) {
 			if (other.orderId != null)
@@ -159,7 +116,7 @@ public class PartsOrderAttachment extends MizeEntity implements Comparable<Parts
 	@Override
 	public String toString() {
 		return "PartsOrderAttachment [orderId=" + orderId + ", type=" + type
-				+ ", code=" + code + ", url=" + url + "]";
+				+ ", name=" + name + ", url=" + url + "]";
 	}
 
 	@Override

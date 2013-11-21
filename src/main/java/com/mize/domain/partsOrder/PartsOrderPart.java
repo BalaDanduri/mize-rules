@@ -1,6 +1,6 @@
 package com.mize.domain.partsOrder;
 
-import java.beans.Transient;
+
 import java.math.BigDecimal;
 
 import javax.persistence.CascadeType;
@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
@@ -23,7 +24,6 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.common.MizeEntity;
-import com.mize.domain.part.Part;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
@@ -33,7 +33,10 @@ public class PartsOrderPart extends MizeEntity implements Comparable<PartsOrderP
 
 	private static final long serialVersionUID = 26163880591518728L;
 	private Long orderId;
-	private Part part;
+	private Long partId;
+	private String type;
+	private String code;
+	private String uom;
 	private String serialNumber;
 	private String name;
 	private String description;
@@ -65,16 +68,6 @@ public class PartsOrderPart extends MizeEntity implements Comparable<PartsOrderP
 
 	public void setOrderId(Long orderId) {
 		this.orderId = orderId;
-	}
-
-	@OneToOne(fetch=FetchType.LAZY ,cascade =CascadeType.ALL)
-	@JoinColumn(name="part_id")
-	public Part getPart() {
-		return part;
-	}
-
-	public void setPart(Part part) {
-		this.part = part;
 	}
 
 	@Column(name="part_serial")
@@ -220,8 +213,43 @@ public class PartsOrderPart extends MizeEntity implements Comparable<PartsOrderP
 	public void setPartsOrder(PartsOrder partsOrder) {
 		this.partsOrder = partsOrder;
 	}
-
 	
+	@Column(name="part_id")
+	public Long getPartId() {
+		return partId;
+	}
+
+	public void setPartId(Long partId) {
+		this.partId = partId;
+	}
+
+	@Column(name="part_type")
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	@Column(name="part_code")
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	@Column(name="part_uom")
+	public String getUom() {
+		return uom;
+	}
+
+	public void setUom(String uom) {
+		this.uom = uom;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;

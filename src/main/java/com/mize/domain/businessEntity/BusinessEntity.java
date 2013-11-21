@@ -1,7 +1,9 @@
 package com.mize.domain.businessEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -29,30 +32,21 @@ public class BusinessEntity extends MizeEntity {
 	private BusinessEntity parentBE;
 	private String isActive;
 	private String currencyCode;
-	private List<BusinessEntityIntl> businessEntityIntl;
+	private String name;
+	private List<BusinessEntityAddress> addresses = new ArrayList<BusinessEntityAddress>();
 	
 	
 	public BusinessEntity() {
 	}
-
-	public BusinessEntity(String code, String typeCode, String subTypeCode,
-			String logo, BusinessEntity tenantId, BusinessEntity parentBeId, String isActive,
-			String currencyCode) {
-		super();
-		this.code = code;
-		this.typeCode = typeCode;
-		this.subTypeCode = subTypeCode;
-		this.logo = logo;
-		this.tenant = tenantId;
-		this.parentBE = parentBeId;
-		this.isActive = isActive;
-		this.currencyCode = currencyCode;
+	
+	public BusinessEntity(Long id) {
+		this.id = id;
 	}
 
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", unique = true, nullable = false, length = 10)
+	@Column(name = "id")
 	public Long getId() {
 		return id;
 	}
@@ -60,25 +54,24 @@ public class BusinessEntity extends MizeEntity {
 	@Override
 	public void setId(Long id) {
 		this.id= id;
-
 	}
 
-	@Column(name = "code",  nullable = true, length = 50)
+	@Column(name = "code",length = 50)
 	public String getCode() {
 		return code;
 	}
 
-	@Column(name = "type_code",  nullable = true, length = 50)
+	@Column(name = "type_code",length = 50)
 	public String getTypeCode() {
 		return typeCode;
 	}
 
-	@Column(name = "sub_type_code",  nullable = true, length = 50)
+	@Column(name = "sub_type_code",length = 50)
 	public String getSubTypeCode() {
 		return subTypeCode;
 	}
 
-	@Column(name = "logo",  nullable = true, length = 100)
+	@Column(name = "logo", length = 100)
 	public String getLogo() {
 		return logo;
 	}
@@ -95,12 +88,12 @@ public class BusinessEntity extends MizeEntity {
 		return parentBE;
 	}
 
-	@Column(name = "is_active",  nullable = true, length = 1)
+	@Column(name = "active_indicator",length = 1)
 	public String getIsActive() {
 		return isActive;
 	}
 
-	@Column(name = "currency_code",  nullable = true, length = 30)
+	@Column(name = "currency_code",length = 30)
 	public String getCurrencyCode() {
 		return currencyCode;
 	}
@@ -136,18 +129,28 @@ public class BusinessEntity extends MizeEntity {
 	public void setCurrencyCode(String currencyCode) {
 		this.currencyCode = currencyCode;
 	}
-
-	public List<BusinessEntityIntl> getBusinessEntityIntl() {
-		return businessEntityIntl;
+	
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "businessEntity")
+	public List<BusinessEntityAddress> getAddresses() {
+		return addresses;
 	}
 
-	public void setBusinessEntityIntl(List<BusinessEntityIntl> businessEntityIntl) {
-		this.businessEntityIntl = businessEntityIntl;
+	public void setAddresses(List<BusinessEntityAddress> addresses) {
+		this.addresses = addresses;
+	}
+
+	@Column(name = "name")
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result

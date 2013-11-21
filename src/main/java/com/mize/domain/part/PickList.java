@@ -20,8 +20,8 @@ import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.mize.domain.businessEntity.BusinessEntity;
 import com.mize.domain.common.MizeEntity;
-import com.mize.domain.servicelocator.BusinessEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 
 @Entity

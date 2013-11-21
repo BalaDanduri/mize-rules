@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -21,6 +22,7 @@ import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
 @Entity
+@Table(name = "parts_order_audit")
 public class PartsOrderAudit extends MizeEntity implements Comparable<PartsOrderAudit>{	
 
 	private static final long serialVersionUID = 268638805962518728L;
@@ -46,10 +48,11 @@ public class PartsOrderAudit extends MizeEntity implements Comparable<PartsOrder
 		this.id = id;
 	}
 	
+	@Column(name="status_code")
 	public String getStatusCode() {
 		return statusCode;
 	}
-
+	
 	public void setStatusCode(String statusCode) {
 		this.statusCode = statusCode;
 	}

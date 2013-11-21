@@ -44,7 +44,7 @@ public class CatalogEntryIntlTest extends JPATest {
 	public void setUp() throws Exception {
 		entityManager = getEntityManager();
 		CatalogEntry ce = findExistingCatalogEntry(entityManager);
-		Locale locale = findLocaleObjectFromDBToBeUsedForCatalogIntl();
+		Locale locale = findLocaleObjectFromDB();
 		catalogEntryIntl = createCatalogEntryIntlObjectToBeSavedInDB(ce,locale);		
 		EntityTransaction tx = entityManager.getTransaction();
 		tx.begin();

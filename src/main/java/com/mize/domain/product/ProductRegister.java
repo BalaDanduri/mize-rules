@@ -119,6 +119,7 @@ public class ProductRegister extends MizeEntity implements Comparable<ProductReg
 		this.brand = brand;
 	}
 
+	@Transient
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "be_id", nullable = true)
 	public BusinessEntity getBusinessEntity() {

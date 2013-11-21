@@ -1,6 +1,5 @@
 package com.mize.domain.partsOrder;
 
-import java.beans.Transient;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,10 +10,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.mize.domain.common.MizeEntity;
 
 @Entity
+@Table(name = "parts_order_comment")
 public class PartsOrderComment extends MizeEntity implements Comparable<PartsOrderComment>{	
 
 	private static final long serialVersionUID = 268638805962518728L;
@@ -38,6 +40,10 @@ public class PartsOrderComment extends MizeEntity implements Comparable<PartsOrd
 		this.id = id;
 		this.type = type;
 		this.comments = comments;
+	}
+	
+	public enum Type{
+		Internal,External;
 	}
 	
 	@Id

@@ -1,3 +1,199 @@
+CREATE TABLE entity_address_phone (
+      id				bigint(20) 		AUTO_INCREMENT NOT NULL,
+	 address_type    	varchar(100) 		NULL,
+	address_1    		varchar(100) 		NULL,
+	address_2    		varchar(100) 		NULL,
+	address_3    		varchar(100) 		NULL,
+	zip          		varchar(10) 		NULL,
+	zip_ext      		varchar(10) 		NULL,
+	city         		varchar(50)		NULL,
+	county       		varchar(50) 		NULL,
+	state_id     		bigint(20) 		NULL,
+	country_id   		bigint(20) 		NULL,	
+	email        		varchar(50) 		NULL,
+	created_date    	datetime 		NULL,
+	updated_date    	datetime 		NULL,
+	created_by      	bigint(20) 		NULL,
+    updated_by      	bigint(20) 		NULL,  
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE entity_address_geo ( 
+    id               bigint(20)           AUTO_INCREMENT NOT NULL,
+    entity_address_id      bigint(20)           NULL,
+    latitude               mediumtext           NULL,
+    longitude              mediumtext           NULL,
+);
+
+
+CREATE TABLE parts_order_amount (
+	id integer primary key auto_increment  not null,
+	requested_quantity	 	 DECIMAL(20,6),
+	requested_amount		 DECIMAL(20,6),
+	discount_amount		 	 DECIMAL(20,6),
+	handling_amount		 	 DECIMAL(20,6),
+	shipping_amount			 DECIMAL(20,6),
+	tax_amount		 		 DECIMAL(20,6),
+	miscellaneous_amount	 DECIMAL(20,6),
+	adjusted_amount			 DECIMAL(20,6),
+	total_amount		 	 DECIMAL(20,6),
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE parts_order (
+	id integer primary key auto_increment  not null,
+	tenant_id			integer	NULL,
+	order_code			varchar(50) 	NULL,	
+	order_type			varchar(50) 	NULL,
+	request_type		varchar(50) 	NULL,
+	order_status		varchar(50) 	NULL,
+	locale_id			integer	NULL,
+	currency_code		varchar(50) 	NULL,
+	order_reference		varchar(100) 	NULL,	
+	sales_person		varchar(100) 	NULL,
+	ship_complete   	char(1)         NULL,
+	amount_id			integer	NULL,
+	created_date 		datetime 	NULL,
+	updated_date 		datetime 	NULL,
+	created_by 			integer	NULL,
+	updated_by 			integer	NULL,
+	PRIMARY KEY (id)
+);
+	
+ALTER TABLE parts_order
+	ADD CONSTRAINT po_amountid_fk
+	FOREIGN KEY(amount_id)
+	REFERENCES parts_order_amount(id);
+
+
+CREATE TABLE parts_order_requester (
+	id 						integer primary key auto_increment  not null,
+	order_id				integer NULL,
+	requester_be_id			integer	NULL,
+	requester_address_id	integer	NULL,
+	PRIMARY KEY (id)
+);
+			
+ALTER TABLE parts_order_requester
+	ADD CONSTRAINT por_orderid_fk
+	FOREIGN KEY(order_id)
+	REFERENCES parts_order(id);
+		
+	
+	
+CREATE TABLE parts_order_part (
+	id 						integer primary key auto_increment  not null,
+	order_id				integer NULL,
+	part_id					integer NULL,
+	part_type				varchar(50) 		NULL,	
+	part_code				varchar(100) 		NULL,   
+	part_serial				varchar(100) 		NULL,
+	part_name				varchar(250) 		NULL,
+	part_description		varchar(500) 		NULL,
+	part_uom				varchar(50) 		NULL,   
+	part_status				varchar(50) 		NULL,
+	part_weight				DECIMAL(20,6),
+	prod_id					integer NULL,
+	model           		varchar(50) 		NULL,
+    prod_srl_no         	varchar(200) 		NULL,
+	amount_id				integer NULL,
+	created_date 			datetime 		NULL,
+	updated_date 			datetime 		NULL,
+	created_by 				integer NULL,
+	updated_by 				integer NULL,
+	PRIMARY KEY (id)
+);
+
+ALTER TABLE parts_order_part
+	ADD CONSTRAINT pop_orderid_fk
+	FOREIGN KEY(order_id)
+	REFERENCES parts_order(id);
+	
+ALTER TABLE parts_order_part
+	ADD CONSTRAINT pop_amountid_fk
+	FOREIGN KEY(amount_id)
+	REFERENCES parts_order_amount(id);
+	
+
+CREATE TABLE parts_order_audit ( 
+	id 						integer primary key auto_increment  not null,
+	order_id       			integer NULL,
+	status_code     		varchar(30) 	NULL,
+	status_date				datetime 	NULL,
+	status_by				integer	NULL,
+    PRIMARY KEY (id)
+);
+
+ALTER TABLE parts_order_audit
+	ADD CONSTRAINT poa_orderid_fk
+	FOREIGN KEY(order_id)
+	REFERENCES parts_order(id);
+	
+	
+CREATE TABLE parts_order_attach ( 
+	id 					integer primary key auto_increment  not null,
+	order_id       		integer NULL,
+	type_code     		varchar(30) 	NULL,
+	attach_name			varchar(250) 	NULL,
+	attach_url			varchar(256) 	NULL,
+    PRIMARY KEY (id)
+);
+
+ALTER TABLE parts_order_attach
+	ADD CONSTRAINT poattach_orderid_fk
+	FOREIGN KEY(order_id)
+	REFERENCES parts_order(id);
+	
+
+CREATE TABLE parts_order_comment ( 
+	id 					integer primary key auto_increment  not null,
+	order_id       		integer NULL,
+	comment_type     	varchar(50) 	NULL,
+	comments     		varchar(5000) 	NULL,
+    PRIMARY KEY (id)
+);
+
+ALTER TABLE parts_order_comment
+	ADD CONSTRAINT poc_orderid_fk
+	FOREIGN KEY(order_id)
+	REFERENCES parts_order(id);
+	
+
+	
+CREATE TABLE parts_order_shipment (
+	id 						integer primary key auto_increment  not null,
+	order_id				integer NULL,
+	shipment_be_id 			integer	NULL,
+	shipment_address_id		integer	NULL,
+	shipment_method			varchar(50) 	NULL,
+	shipment_priority		varchar(50) 	NULL,
+	shipment_carrier		varchar(50) 	NULL,	
+	estimated_ship_date		datetime 	NULL,
+	drop_ship				char(1)		NULL,
+	PRIMARY KEY (id)
+);
+			
+ALTER TABLE parts_order_shipment
+	ADD CONSTRAINT pos_orderid_fk
+	FOREIGN KEY(order_id)
+	REFERENCES parts_order(id);
+	
+
+CREATE TABLE parts_order_payment (
+	id 						integer primary key auto_increment  not null,
+	order_id				integer NULL,
+	payee_be_id 			integer	NULL,
+	payee_address_id		integer	NULL,
+	payment_method     		varchar(50) NULL,
+	PRIMARY KEY (id)
+);
+		
+ALTER TABLE parts_order_payment
+	ADD CONSTRAINT popayee_orderid_fk
+	FOREIGN KEY(order_id)
+	REFERENCES parts_order(id);
+	
+
 drop table if exists catalog;
 create table catalog
 (
@@ -111,7 +307,7 @@ CREATE TABLE business_entity_intl (
 );
 
 CREATE TABLE  business_entity_address  ( 
-	id           	BIGINT(20) NOT NULL,
+	id           	BIGINT(20) AUTO_INCREMENT NOT NULL,
 	be_id        	BIGINT(20) NOT NULL,
 	code         	VARCHAR(50) NULL,
 	locale_id    	INTEGER(11) NULL,
@@ -133,7 +329,8 @@ CREATE TABLE  business_entity_address  (
 	url          	VARCHAR(256) NULL,
 	tool_tip_logo	VARCHAR(100) NULL,
 	icon         	VARCHAR(100) NULL,
-	hours_of_op  	VARCHAR(250) NULL 
+	hours_of_op  	VARCHAR(250) NULL,
+	be_address_id   BIGINT(20)   NULL,
 );
 
 CREATE TABLE entity_address (
@@ -688,6 +885,9 @@ INSERT INTO service_entity_request_other(id,request_id, other_charge_type, other
    
  INSERT INTO service_entity_rltn(id, entity_id, entity_rltn_id)
  VALUES(1001,201,33);
+ 
+  INSERT INTO entity_address(id)
+ VALUES(1);
 
   
  

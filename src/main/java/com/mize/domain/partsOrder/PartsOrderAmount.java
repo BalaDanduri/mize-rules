@@ -3,6 +3,7 @@ package com.mize.domain.partsOrder;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -10,6 +11,7 @@ import javax.persistence.Table;
 
 import com.mize.domain.common.MizeEntity;
 
+@Entity
 @Table(name = "parts_order_amount")
 public class PartsOrderAmount extends MizeEntity implements Comparable<PartsOrderAmount>{	
 

@@ -13,13 +13,15 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.mize.domain.businessEntity.BusinessEntity;
 import com.mize.domain.catalog.Catalog;
 import com.mize.domain.catalog.CatalogEntry;
+import com.mize.domain.common.Country;
 import com.mize.domain.common.Locale;
+import com.mize.domain.common.State;
+import com.mize.domain.serviceentity.ServiceEntity;
 import com.mize.domain.serviceentity.ServiceEntityAddress;
 import com.mize.domain.serviceentity.ServiceEntityAudit;
-import com.mize.domain.serviceentity.ServiceEntity;
-import com.mize.domain.servicelocator.BusinessEntity;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @Ignore
@@ -52,9 +54,24 @@ public class JPATest {
 		return object;
 	}
 	
-	public Locale findLocaleObjectFromDBToBeUsedForCatalogIntl() {
+	public Locale findLocaleObjectFromDB() {
 		Locale locale = (Locale) find(Locale.class, new Long(1));
 		return locale;
+	}
+	
+	public State findStateObjectFromDB() {
+		State state = (State) find(State.class, new Long(1));
+		return state;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public <T> T findObjectFromDB(Class<?> cls,Long id) {
+		return (T)find(cls, id);
+	}
+	
+	public Country findCountryObjectFromDB() {
+		Country country = (Country) find(Country.class, new Long(1));
+		return country;
 	}
 	
 	public BusinessEntity findExistingBEtoBeusedwiththecatalogastenantid() {
@@ -108,6 +125,10 @@ public class JPATest {
 	public ServiceEntityAudit findExistingSEAudit(EntityManager entityManager) {
 		ServiceEntityAudit seAudit = (ServiceEntityAudit) entityManager.find(ServiceEntityAudit.class, new Long(801));
 		return seAudit;
+	}
+	
+	public <T> T findById(Long id,Class<T> cls,EntityManager entityManager) {
+		return entityManager.find(cls,id);
 	}
 
 }

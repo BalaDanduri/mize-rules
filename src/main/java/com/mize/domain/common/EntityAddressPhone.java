@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name = "entity_address_phone")
+@Table(name = "entity_address_phone" )
 public class EntityAddressPhone extends MizeEntity implements Comparable<EntityAddressPhone> {
 
 	private static final long serialVersionUID = 1L;

@@ -27,11 +27,9 @@ import com.mize.domain.util.JsonDateTimeSerializer;
 @Table(name = "service_entity_notes")
 public class ServiceEntityNotes extends MizeEntity implements Comparable<ServiceEntityNotes> {
 
-	private static final long serialVersionUID = 6821133638967617947L;
-	
+	private static final long serialVersionUID = 6821133638967617947L;	
 	@Transient
-	private Long entityId;
-	
+	private Long entityId;	
 	private ServiceEntity serviceEntity;
 	private String notes;
 	private String type;

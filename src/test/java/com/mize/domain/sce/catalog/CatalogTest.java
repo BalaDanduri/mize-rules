@@ -18,8 +18,8 @@ import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.ContextConfiguration;
 
+import com.mize.domain.businessEntity.BusinessEntity;
 import com.mize.domain.catalog.Catalog;
-import com.mize.domain.servicelocator.BusinessEntity;
 import com.mize.domain.test.util.JPATest;
 
 @ContextConfiguration(locations={"/test-context.xml"})
@@ -62,8 +62,7 @@ public class CatalogTest extends JPATest {
 			List<Catalog>  catalogs = jdbcTemplate.query(CATALOG_QUERY, new Object[]{catalog.getId()}, new RowMapper<Catalog> (){
 
 				@Override
-				public Catalog mapRow(ResultSet resultSet, int arg1)
-						throws SQLException {
+				public Catalog mapRow(ResultSet resultSet, int arg1) throws SQLException {
 					Catalog catalog = new Catalog();
 					catalog.setId(resultSet.getLong("id"));
 					catalog.setCatalogCode(resultSet.getString("catalog_code"));

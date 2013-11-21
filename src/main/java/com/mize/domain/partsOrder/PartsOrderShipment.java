@@ -1,9 +1,14 @@
 package com.mize.domain.partsOrder;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -18,6 +23,7 @@ import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
 @Entity
+@Table(name = "parts_order_shipment")
 public class PartsOrderShipment extends MizeEntity implements Comparable<PartsOrderShipment>{	
 
 	private static final long serialVersionUID = 261638805962518728L;	
@@ -32,6 +38,9 @@ public class PartsOrderShipment extends MizeEntity implements Comparable<PartsOr
 	private DateTime estimatedShipDate;
 	private PartsOrder partsOrder;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id", nullable = false, unique = true)
 	@Override
 	public Long getId() {
 		return id;
@@ -50,6 +59,8 @@ public class PartsOrderShipment extends MizeEntity implements Comparable<PartsOr
 		this.orderId = orderId;
 	}
 
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="shipment_be_id")
 	public BusinessEntity getBusinessEntity() {
 		return businessEntity;
 	}
@@ -58,6 +69,8 @@ public class PartsOrderShipment extends MizeEntity implements Comparable<PartsOr
 		this.businessEntity = businessEntity;
 	}
 
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="shipment_address_id")
 	public EntityAddress getAddress() {
 		return address;
 	}

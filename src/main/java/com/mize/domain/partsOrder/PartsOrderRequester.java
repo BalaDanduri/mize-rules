@@ -1,7 +1,5 @@
 package com.mize.domain.partsOrder;
 
-import java.beans.Transient;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
@@ -34,21 +33,20 @@ public class PartsOrderRequester extends MizeEntity implements Comparable<PartsO
 	private Long orderId;
 	private PartsOrder partsOrder;
 	private BusinessEntity businessEntity;
-	private String name;	
 	private EntityAddress address = new EntityAddress();
 
 	public PartsOrderRequester(){
 		super();
 	}
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id", nullable = false, unique = true)
 	@Override
 	public Long getId() {
 		return id;
 	}
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	
 	@Override
 	public void setId(Long id) {
 		this.id = id;
@@ -73,6 +71,7 @@ public class PartsOrderRequester extends MizeEntity implements Comparable<PartsO
 		this.businessEntity = businessEntity;
 	}
 
+	@Transient
 	@OneToOne(fetch=FetchType.LAZY ,cascade =CascadeType.ALL)
 	@JoinColumn(name="requester_address_id")
 	public EntityAddress getAddress() {
@@ -124,15 +123,6 @@ public class PartsOrderRequester extends MizeEntity implements Comparable<PartsO
 	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
 	public DateTime getUpdatedDate() {
 		return updatedDate;
-	}
-	
-	@Column(name = "requester_be_name")
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 	
 	@OneToOne(fetch=FetchType.LAZY)

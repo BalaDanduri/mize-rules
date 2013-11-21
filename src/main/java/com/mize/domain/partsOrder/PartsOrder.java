@@ -1,6 +1,5 @@
 package com.mize.domain.partsOrder;
 
-import java.beans.Transient;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
@@ -29,7 +29,6 @@ import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
-
 @Entity
 @Table(name = "parts_order", uniqueConstraints = {@UniqueConstraint (columnNames = {"order_code"})})
 public class PartsOrder extends MizeEntity implements Comparable<PartsOrder>{	
@@ -37,6 +36,7 @@ public class PartsOrder extends MizeEntity implements Comparable<PartsOrder>{
 	private static final long serialVersionUID = 261638805962518728L;
 	private String type;
 	private String code;
+	@Transient
 	private User user;
 	private String requestType;
 	private String status;
@@ -47,7 +47,7 @@ public class PartsOrder extends MizeEntity implements Comparable<PartsOrder>{
 	private String shipComplete;
 	private PartsOrderAmount amount = new PartsOrderAmount();
 	private PartsOrderRequester requester;
-	private List<PartsOrderPart> parts; 
+	private List<PartsOrderPart> parts = new ArrayList<PartsOrderPart>(); 
 	private List<PartsOrderComment> comments = new ArrayList<PartsOrderComment>();
 	private List<PartsOrderAudit> audits = new ArrayList<PartsOrderAudit>();
 	private PartsOrderPayment payment;
@@ -55,6 +55,15 @@ public class PartsOrder extends MizeEntity implements Comparable<PartsOrder>{
 
 	public PartsOrder(){
 		super();
+	}
+	
+	public enum Status{
+		Draft,Pending,Approved,Deleted,Rejected,Closed,Open,Completed,Shipped,
+		In_Progress;
+	}
+	
+	public enum Type{
+		Claim,Warranty,Campaign,Extended_Warranty,PDI,Parts_Warranty,Support_Request,Service_Order,Parts_Order;
 	}
 	
 	@Id

@@ -1,17 +1,22 @@
 package com.mize.domain.partsOrder;
 
-import java.beans.Transient;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.servicelocator.BusinessEntity;
 
 @Entity
+@Table(name = "parts_order_payment")
 public class PartsOrderPayment extends MizeEntity implements Comparable<PartsOrderPayment>{	
 
 	private static final long serialVersionUID = 261638805962518728L;	
@@ -21,6 +26,9 @@ public class PartsOrderPayment extends MizeEntity implements Comparable<PartsOrd
 	private String method;
 	private PartsOrder partsOrder;
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id", nullable = false, unique = true)
 	@Override
 	public Long getId() {
 		return id;
@@ -40,6 +48,8 @@ public class PartsOrderPayment extends MizeEntity implements Comparable<PartsOrd
 		this.orderId = orderId;
 	}
 
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="payee_be_id")
 	public BusinessEntity getBusinessEntity() {
 		return businessEntity;
 	}
@@ -48,6 +58,8 @@ public class PartsOrderPayment extends MizeEntity implements Comparable<PartsOrd
 		this.businessEntity = businessEntity;
 	}
 
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="payee_address_id")
 	public EntityAddress getAddress() {
 		return address;
 	}
