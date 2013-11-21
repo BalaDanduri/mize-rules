@@ -19,25 +19,22 @@ public abstract class MizeEntity implements Serializable{
 	public static final int AFTER = 1;
 	public static final int PRIME = 31;	
 	public static final int HASH_CODE_START = 17;
+			
+	protected Long createdBy;	
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	protected DateTime createdDate;	
+	protected Long updatedBy;	
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	protected DateTime updatedDate;	
+	protected Long id;
+
 	@JsonIgnore
 	public static String STATUS = "status";
 	
 	public enum Result{
 		TRUE,FALSE;
 	}
-		
-	protected Long createdBy;
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	protected DateTime createdDate;
-	
-	protected Long updatedBy;
-	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	protected DateTime updatedDate;
-	
-	protected Long id;
-
 	public abstract Long getId();
 
 	public abstract void setId(Long id);

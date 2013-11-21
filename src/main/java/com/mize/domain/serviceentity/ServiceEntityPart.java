@@ -2,6 +2,19 @@ package com.mize.domain.serviceentity;
 
 import java.math.BigDecimal;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -10,99 +23,206 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.product.Product;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
-public class SEPart extends MizeEntity implements Comparable<SEPart> {
+@Entity
+@Table(name = "service_entity_request_part")
+public class ServiceEntityPart extends MizeEntity implements Comparable<ServiceEntityPart> {
 
 	private static final long serialVersionUID = 68211336389676111L;
+	
 	private String type;
 	private String code;
 	private String serialNumber;
 	private String description;
+	@Transient
 	private Long requestId;
-	private SEAmount amount = new SEAmount();
+	private ServiceEntityRequest request;
+	private ServiceEntityAmount amount = new ServiceEntityAmount();
 	private String uom;
 	private BigDecimal weight;
 	private String model;
+	@Transient
 	private Long prodId;
+	private Product product;
 	private String prodSerialNumber;
 	private String warehouseCode;
 	
-	public SEPart() {
+	public ServiceEntityPart() {
 		super();
 	}
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id", nullable = false, unique = true)
 	@Override
 	public Long getId() {
 		return id;
 	}
-	
-	@Override
-	public void setId(Long id) {
-		this.id = id;
-	}	
-
-
+	@Column(name="part_type")
 	public String getType() {
 		return type;
+	}
+
+	@Column(name="part_code")
+	public String getCode() {
+		return code;
+	}
+
+	@Column(name="part_serial")
+	public String getSerialNumber() {
+		return serialNumber;
+	}
+
+	@Column(name="part_description")
+	public String getDescription() {
+		return description;
+	}
+
+	@Transient
+	public Long getRequestId() {
+		return requestId;
+	}
+
+	@ManyToOne(fetch=FetchType.LAZY,cascade =CascadeType.ALL)
+	@JoinColumn(name="request_id")
+	public ServiceEntityRequest getRequest() {
+		return request;
+	}
+
+	@OneToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
+	@JoinColumn(name="amount_id")
+	public ServiceEntityAmount getAmount() {
+		return amount;
+	}
+
+	@Column(name="part_uom")
+	public String getUom() {
+		return uom;
+	}
+	
+	@Column(name="part_weight")
+	public BigDecimal getWeight() {
+		return weight;
+	}
+
+	@Column(name="model")
+	public String getModel() {
+		return model;
+	}
+
+	@Transient
+	public Long getProdId() {
+		return prodId;
+	}
+
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="prod_id")
+	public Product getProduct() {
+		return product;
+	}
+	
+	@Column(name="prod_srl_no")
+	public String getProdSerialNumber() {
+		return prodSerialNumber;
+	}
+
+	@Column(name="warehouse_code")
+	public String getWarehouseCode() {
+		return warehouseCode;
 	}
 
 	public void setType(String type) {
 		this.type = type;
 	}
 
-	public String getCode() {
-		return code;
-	}
-
 	public void setCode(String code) {
 		this.code = code;
 	}
 
-	public String getDescription() {
-		return description;
+	public void setSerialNumber(String serialNumber) {
+		this.serialNumber = serialNumber;
 	}
 
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-	public Long getRequestId() {
-		return requestId;
-	}
-
 	public void setRequestId(Long requestId) {
 		this.requestId = requestId;
 	}
 
-	public SEAmount getAmount() {
-		return amount;
+	public void setRequest(ServiceEntityRequest request) {
+		this.request = request;
 	}
 
-	public void setAmount(SEAmount amount) {
+	public void setAmount(ServiceEntityAmount amount) {
 		this.amount = amount;
 	}
+
+	public void setUom(String uom) {
+		this.uom = uom;
+	}
+
+	public void setWeight(BigDecimal weight) {
+		this.weight = weight;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	public void setProdId(Long prodId) {
+		this.prodId = prodId;
+	}
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+	public void setProdSerialNumber(String prodSerialNumber) {
+		this.prodSerialNumber = prodSerialNumber;
+	}
+
+	public void setWarehouseCode(String warehouseCode) {
+		this.warehouseCode = warehouseCode;
+	}
+
+	@Override
+	public void setId(Long id) {
+		this.id = id;
+	}	
+
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	@JsonIgnore(value=false)
+	@Column(name = "created_date",updatable = false)
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
+	public DateTime getCreatedDate() {
+		return createdDate;
+	}
+
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	@Column(name = "updated_date")
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(value=false)
-	public void setUpdatedDate(DateTime updatedDate) {
-		this.updatedDate = updatedDate;
+	@Column(name = "created_by",updatable=false)
+	public Long getCreatedBy() {
+		return createdBy;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	@JsonIgnore(value=false)
-	public DateTime getCreatedDate() {
-		return createdDate;
+	@Column(name = "updated_by")
+	public Long getUpdatedBy() {
+		return updatedBy;
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
@@ -113,83 +233,25 @@ public class SEPart extends MizeEntity implements Comparable<SEPart> {
 	}
 	
 	@JsonIgnore(value=false)
+	public void setUpdatedBy(Long updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+ 
+	@JsonIgnore(value=false)
 	public void setCreatedBy(Long createdBy) {
 		this.createdBy = createdBy;
 	}
 
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(value=false)
-	public Long getCreatedBy() {
-		return createdBy;
+	public void setUpdatedDate(DateTime updatedDate) {
+		this.updatedDate = updatedDate;
 	}
 	
-	@JsonIgnore(value=false)
-	public Long getUpdatedBy() {
-		return updatedBy;
-	}
-
-	@JsonIgnore(value=false)
-	public void setUpdatedBy(Long updatedBy) {
-		this.updatedBy = updatedBy;
-	}
 	
-	public String getSerialNumber() {
-		return serialNumber;
-	}
-
-	public void setSerialNumber(String serialNumber) {
-		this.serialNumber = serialNumber;
-	}	
-
-	public String getUom() {
-		return uom;
-	}
-
-	public void setUom(String uom) {
-		this.uom = uom;
-	}
-
-	public BigDecimal getWeight() {
-		return weight;
-	}
-
-	public void setWeight(BigDecimal weight) {
-		this.weight = weight;
-	}
-
-	public String getModel() {
-		return model;
-	}
-
-	public void setModel(String model) {
-		this.model = model;
-	}
-
-	public Long getProdId() {
-		return prodId;
-	}
-
-	public void setProdId(Long prodId) {
-		this.prodId = prodId;
-	}
-
-	public String getProdSerialNumber() {
-		return prodSerialNumber;
-	}
-
-	public void setProdSerialNumber(String prodSerialNumber) {
-		this.prodSerialNumber = prodSerialNumber;
-	}
-
-	public String getWarehouseCode() {
-		return warehouseCode;
-	}
-
-	public void setWarehouseCode(String warehouseCode) {
-		this.warehouseCode = warehouseCode;
-	}
-
 	@Override
-	public int compareTo(SEPart arg0) {
+	public int compareTo(ServiceEntityPart arg0) {
 		return 0;
 	}
 
@@ -226,7 +288,7 @@ public class SEPart extends MizeEntity implements Comparable<SEPart> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SEPart other = (SEPart) obj;
+		ServiceEntityPart other = (ServiceEntityPart) obj;
 		if (amount == null) {
 			if (other.amount != null)
 				return false;

@@ -18,6 +18,9 @@ import com.mize.domain.catalog.CatalogEntry;
 import com.mize.domain.common.Locale;
 import com.mize.domain.form.FormDefinition;
 import com.mize.domain.form.FormTemplateDefinition;
+import com.mize.domain.serviceentity.ServiceEntity;
+import com.mize.domain.serviceentity.ServiceEntityAddress;
+import com.mize.domain.serviceentity.ServiceEntityAudit;
 import com.mize.domain.servicelocator.BusinessEntity;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -92,6 +95,21 @@ public class JPATest {
 	public BusinessEntity findExistingBE(EntityManager entityManager) {
 		BusinessEntity be = (BusinessEntity) entityManager.find(BusinessEntity.class, new Long(961));
 		return be;
+	}
+	
+	public ServiceEntity findExistingServiceEntityObject(EntityManager entityManager) {
+		ServiceEntity serviceEntity = (ServiceEntity) entityManager.find(ServiceEntity.class, new Long(201));
+		return serviceEntity;
+	}
+	
+	public ServiceEntityAddress findExistingSEAddress(EntityManager entityManager) {
+		ServiceEntityAddress address = (ServiceEntityAddress) entityManager.find(ServiceEntityAddress.class, new Long(101));
+		return address;
+	}
+	
+	public ServiceEntityAudit findExistingSEAudit(EntityManager entityManager) {
+		ServiceEntityAudit seAudit = (ServiceEntityAudit) entityManager.find(ServiceEntityAudit.class, new Long(801));
+		return seAudit;
 	}
 	
 	public FormTemplateDefinition findExistingFormTemplateDef(EntityManager entityManager) {

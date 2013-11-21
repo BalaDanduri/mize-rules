@@ -1,4 +1,6 @@
-package com.mize.domain.serviceentity;
+package com.mize.domain.partsOrder;
+
+import javax.persistence.Entity;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
@@ -11,44 +13,55 @@ import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
-public class SERelation extends MizeEntity implements Comparable<SERelation> {
+@Entity
+public class PartsOrderAttachment extends MizeEntity implements Comparable<PartsOrderAttachment>{	
 
-	private static final long serialVersionUID = 6821133638967617947L;
-	private Long entityId;
-	private Long entityRelationId;
-	
-	public SERelation() {
-		super();
-	}
-	
-	public SERelation(Long id,Long entityId, Long entityRelationId) {
-		super();
-		this.id = id;
-		this.entityId = entityId;
-		this.entityRelationId = entityRelationId;
+	private static final long serialVersionUID = 261638805962518728L;	
+	private Long orderId;
+	private String type;
+	private String code;
+	private String url;
+
+	public Long getOrderId() {
+		return orderId;
 	}
 
-	public Long getEntityId() {
-		return entityId;
+	public void setOrderId(Long orderId) {
+		this.orderId = orderId;
 	}
-	public void setEntityId(Long entityId) {
-		this.entityId = entityId;
+
+	public String getType() {
+		return type;
 	}
-	public Long getEntityRelationId() {
-		return entityRelationId;
+
+	public void setType(String type) {
+		this.type = type;
 	}
-	public void setEntityRelationId(Long entityRelationId) {
-		this.entityRelationId = entityRelationId;
+
+	public String getCode() {
+		return code;
 	}
-	
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
 	@Override
 	public Long getId() {
 		return id;
 	}
-	
+
 	@Override
 	public void setId(Long id) {
-		this.id = id;
+		this.id = id;		
 	}
 	
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
@@ -99,18 +112,18 @@ public class SERelation extends MizeEntity implements Comparable<SERelation> {
 		this.updatedBy = updatedBy;
 	}
 	
+
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime * result
-				+ ((entityId == null) ? 0 : entityId.hashCode());
-		result = prime
-				* result
-				+ ((entityRelationId == null) ? 0 : entityRelationId.hashCode());
+		result = prime * result + ((code == null) ? 0 : code.hashCode());
+		result = prime * result + ((orderId == null) ? 0 : orderId.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		result = prime * result + ((url == null) ? 0 : url.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -119,23 +132,39 @@ public class SERelation extends MizeEntity implements Comparable<SERelation> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SERelation other = (SERelation) obj;
-		if (entityId == null) {
-			if (other.entityId != null)
+		PartsOrderAttachment other = (PartsOrderAttachment) obj;
+		if (code == null) {
+			if (other.code != null)
 				return false;
-		} else if (!entityId.equals(other.entityId))
+		} else if (!code.equals(other.code))
 			return false;
-		if (entityRelationId == null) {
-			if (other.entityRelationId != null)
+		if (orderId == null) {
+			if (other.orderId != null)
 				return false;
-		} else if (!entityRelationId.equals(other.entityRelationId))
+		} else if (!orderId.equals(other.orderId))
+			return false;
+		if (type == null) {
+			if (other.type != null)
+				return false;
+		} else if (!type.equals(other.type))
+			return false;
+		if (url == null) {
+			if (other.url != null)
+				return false;
+		} else if (!url.equals(other.url))
 			return false;
 		return true;
 	}
-	
+
 	@Override
-	public int compareTo(SERelation arg0) {
+	public String toString() {
+		return "PartsOrderAttachment [orderId=" + orderId + ", type=" + type
+				+ ", code=" + code + ", url=" + url + "]";
+	}
+
+	@Override
+	public int compareTo(PartsOrderAttachment o) {
 		return 0;
-	}	
+	}
 
 }

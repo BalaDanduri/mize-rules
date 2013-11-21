@@ -1,5 +1,18 @@
 package com.mize.domain.serviceentity;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -11,88 +24,120 @@ import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
-public class SEOtherCharges extends MizeEntity implements Comparable<SEOtherCharges> {
-	private static final long serialVersionUID = 68211336389676111L;
+@Entity
+@Table(name = "service_entity_request_labor")
+public class ServiceEntityLabor extends MizeEntity implements Comparable<ServiceEntityLabor> {
+	private static final long serialVersionUID = 28211336389676111L;
 	private String type;
 	private String code;
 	private String description;
+	@Transient
 	private Long requestId;
-	private SEAmount amount = new SEAmount();
+	private ServiceEntityRequest request;
+	private ServiceEntityAmount amount = new ServiceEntityAmount();
 	
-	public SEOtherCharges() {
+	public ServiceEntityLabor() {
 		super();
 	}
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id", nullable = false, unique = true)
 	@Override
 	public Long getId() {
 		return id;
 	}
+
+	@Column(name="labor_type")
+	public String getType() {
+		return type;
+	}
 	
+	@Column(name="labor_code")
+	public String getCode() {
+		return code;
+	}
+
+	@Column(name="labor_description")
+	public String getDescription() {
+		return description;
+	}
+
+	@Transient
+	public Long getRequestId() {
+		return requestId;
+	}
+
+	@OneToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
+	@JoinColumn(name="amount_id")
+	public ServiceEntityAmount getAmount() {
+		return amount;
+	}
+
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="request_id")
+	public ServiceEntityRequest getRequest() {
+		return request;
+	}
+
+
+	public void setRequest(ServiceEntityRequest request) {
+		this.request = request;
+	}
+
 	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}	
 
-
-	public String getType() {
-		return type;
-	}
-
 	public void setType(String type) {
 		this.type = type;
 	}
-
-	public String getCode() {
-		return code;
-	}
-
+	
 	public void setCode(String code) {
 		this.code = code;
 	}
-
-	public String getDescription() {
-		return description;
-	}
-
+	
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
-	public Long getRequestId() {
-		return requestId;
-	}
-
+	
 	public void setRequestId(Long requestId) {
 		this.requestId = requestId;
 	}
-
-	public SEAmount getAmount() {
-		return amount;
-	}
-
-	public void setAmount(SEAmount amount) {
+	
+	public void setAmount(ServiceEntityAmount amount) {
 		this.amount = amount;
 	}
+	
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	@JsonIgnore(value=false)
+	@Column(name = "created_date",updatable = false)
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
+	public DateTime getCreatedDate() {
+		return createdDate;
+	}
+
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	@Column(name = "updated_date")
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(value=false)
-	public void setUpdatedDate(DateTime updatedDate) {
-		this.updatedDate = updatedDate;
+	@Column(name = "created_by",updatable=false)
+	public Long getCreatedBy() {
+		return createdBy;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	@JsonIgnore(value=false)
-	public DateTime getCreatedDate() {
-		return createdDate;
+	@Column(name = "updated_by")
+	public Long getUpdatedBy() {
+		return updatedBy;
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
@@ -103,25 +148,23 @@ public class SEOtherCharges extends MizeEntity implements Comparable<SEOtherChar
 	}
 	
 	@JsonIgnore(value=false)
+	public void setUpdatedBy(Long updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+ 
+	@JsonIgnore(value=false)
 	public void setCreatedBy(Long createdBy) {
 		this.createdBy = createdBy;
 	}
 
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(value=false)
-	public Long getCreatedBy() {
-		return createdBy;
+	public void setUpdatedDate(DateTime updatedDate) {
+		this.updatedDate = updatedDate;
 	}
 	
-	@JsonIgnore(value=false)
-	public Long getUpdatedBy() {
-		return updatedBy;
-	}
 
-	@JsonIgnore(value=false)
-	public void setUpdatedBy(Long updatedBy) {
-		this.updatedBy = updatedBy;
-	}
-	
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
@@ -144,7 +187,7 @@ public class SEOtherCharges extends MizeEntity implements Comparable<SEOtherChar
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SEOtherCharges other = (SEOtherCharges) obj;
+		ServiceEntityLabor other = (ServiceEntityLabor) obj;
 		if (amount == null) {
 			if (other.amount != null)
 				return false;
@@ -181,7 +224,7 @@ public class SEOtherCharges extends MizeEntity implements Comparable<SEOtherChar
 	}
 
 	@Override
-	public int compareTo(SEOtherCharges arg0) {
+	public int compareTo(ServiceEntityLabor arg0) {
 		return 0;
 	}	
 

@@ -1,5 +1,16 @@
 package com.mize.domain.serviceentity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -13,8 +24,9 @@ import com.mize.domain.common.State;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
-public class SEAddress extends MizeEntity implements Comparable<SEAddress> {
-
+@Entity
+@Table(name = "service_entity_address")
+public class ServiceEntityAddress extends MizeEntity implements Comparable<ServiceEntityAddress> {
 	private static final long serialVersionUID = 6821133638967617947L;
 	private String type;
 	private String address1;
@@ -31,10 +43,34 @@ public class SEAddress extends MizeEntity implements Comparable<SEAddress> {
 	private String fax;
 	private String county;
 	
-	public SEAddress() {
+	public ServiceEntityAddress() {
 		super();
 	}
 	
+	public ServiceEntityAddress(String type, String address1, String address2,
+			String address3, String zip, String zipExt, String city,
+			State state, Country country, String phone1, String phone2,
+			String email, String fax, String county) {
+		super();
+		this.type = type;
+		this.address1 = address1;
+		this.address2 = address2;
+		this.address3 = address3;
+		this.zip = zip;
+		this.zipExt = zipExt;
+		this.city = city;
+		this.state = state;
+		this.country = country;
+		this.phone1 = phone1;
+		this.phone2 = phone2;
+		this.email = email;
+		this.fax = fax;
+		this.county = county;
+	}
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name = "id", nullable = false, unique = true)
 	@Override
 	public Long getId() {
 		return id;
@@ -45,6 +81,7 @@ public class SEAddress extends MizeEntity implements Comparable<SEAddress> {
 		this.id = id;
 	}	
 
+	@Column(name = "address_type", length = 100, nullable = true)
 	public String getType() {
 		return type;
 	}
@@ -53,6 +90,7 @@ public class SEAddress extends MizeEntity implements Comparable<SEAddress> {
 		this.type = type;
 	}
 
+	@Column(name = "address_1", length = 100, nullable = true)
 	public String getAddress1() {
 		return address1;
 	}
@@ -61,6 +99,7 @@ public class SEAddress extends MizeEntity implements Comparable<SEAddress> {
 		this.address1 = address1;
 	}
 
+	@Column(name = "address_2", length = 100, nullable = true)
 	public String getAddress2() {
 		return address2;
 	}
@@ -69,6 +108,7 @@ public class SEAddress extends MizeEntity implements Comparable<SEAddress> {
 		this.address2 = address2;
 	}
 
+	@Column(name = "address_3", length = 100, nullable = true)
 	public String getAddress3() {
 		return address3;
 	}
@@ -77,6 +117,7 @@ public class SEAddress extends MizeEntity implements Comparable<SEAddress> {
 		this.address3 = address3;
 	}
 
+	@Column(name = "zip", length = 10, nullable = true)
 	public String getZip() {
 		return zip;
 	}
@@ -85,6 +126,7 @@ public class SEAddress extends MizeEntity implements Comparable<SEAddress> {
 		this.zip = zip;
 	}
 
+	@Column(name = "zip_ext", length = 10, nullable = true)
 	public String getZipExt() {
 		return zipExt;
 	}
@@ -93,6 +135,8 @@ public class SEAddress extends MizeEntity implements Comparable<SEAddress> {
 		this.zipExt = zipExt;
 	}
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "state_id")
 	public State getState() {
 		return state;
 	}
@@ -101,6 +145,8 @@ public class SEAddress extends MizeEntity implements Comparable<SEAddress> {
 		this.state = state;
 	}
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "country_id")
 	public Country getCountry() {
 		return country;
 	}
@@ -109,6 +155,7 @@ public class SEAddress extends MizeEntity implements Comparable<SEAddress> {
 		this.country = country;
 	}
 
+	@Column(name = "phone_1", length = 50, nullable = true)
 	public String getPhone1() {
 		return phone1;
 	}
@@ -117,6 +164,7 @@ public class SEAddress extends MizeEntity implements Comparable<SEAddress> {
 		this.phone1 = phone1;
 	}
 
+	@Column(name = "phone_2", length = 50, nullable = true)
 	public String getPhone2() {
 		return phone2;
 	}
@@ -125,6 +173,7 @@ public class SEAddress extends MizeEntity implements Comparable<SEAddress> {
 		this.phone2 = phone2;
 	}
 
+	@Column(name = "email", length = 50, nullable = true)
 	public String getEmail() {
 		return email;
 	}
@@ -133,6 +182,7 @@ public class SEAddress extends MizeEntity implements Comparable<SEAddress> {
 		this.email = email;
 	}
 
+	@Column(name = "fax", length = 50, nullable = true)
 	public String getFax() {
 		return fax;
 	}
@@ -141,6 +191,7 @@ public class SEAddress extends MizeEntity implements Comparable<SEAddress> {
 		this.fax = fax;
 	}
 
+	@Column(name = "city", length = 50, nullable = true)
 	public String getCity() {
 		return city;
 	}
@@ -152,6 +203,7 @@ public class SEAddress extends MizeEntity implements Comparable<SEAddress> {
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	@JsonIgnore(value=false)
+	@Transient
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
@@ -166,6 +218,7 @@ public class SEAddress extends MizeEntity implements Comparable<SEAddress> {
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	@JsonIgnore(value=false)
+	@Transient
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
@@ -183,11 +236,13 @@ public class SEAddress extends MizeEntity implements Comparable<SEAddress> {
 	}
 
 	@JsonIgnore(value=false)
+	@Transient
 	public Long getCreatedBy() {
 		return createdBy;
 	}
 	
 	@JsonIgnore(value=false)
+	@Transient
 	public Long getUpdatedBy() {
 		return updatedBy;
 	}
@@ -235,7 +290,7 @@ public class SEAddress extends MizeEntity implements Comparable<SEAddress> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SEAddress other = (SEAddress) obj;
+		ServiceEntityAddress other = (ServiceEntityAddress) obj;
 		if (address1 == null) {
 			if (other.address1 != null)
 				return false;
@@ -298,10 +353,48 @@ public class SEAddress extends MizeEntity implements Comparable<SEAddress> {
 			return false;
 		return true;
 	}
-
+	
 	@Override
-	public int compareTo(SEAddress arg0) {
-		return 0;
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("SEAddress [type=");
+		builder.append(type);
+		builder.append(", address1=");
+		builder.append(address1);
+		builder.append(", address2=");
+		builder.append(address2);
+		builder.append(", address3=");
+		builder.append(address3);
+		builder.append(", zip=");
+		builder.append(zip);
+		builder.append(", zipExt=");
+		builder.append(zipExt);
+		builder.append(", city=");
+		builder.append(city);
+		builder.append(", state=");
+		builder.append(state);
+		builder.append(", country=");
+		builder.append(country);
+		builder.append(", phone1=");
+		builder.append(phone1);
+		builder.append(", phone2=");
+		builder.append(phone2);
+		builder.append(", email=");
+		builder.append(email);
+		builder.append(", fax=");
+		builder.append(fax);
+		builder.append(", county=");
+		builder.append(county);
+		builder.append(", id=");
+		builder.append(id);
+		builder.append("]");
+		return builder.toString();
 	}	
 
+	@Override
+	public int compareTo(ServiceEntityAddress arg0) {
+		return 0;
+	}
+
+	
 }

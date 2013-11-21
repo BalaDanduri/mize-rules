@@ -1,30 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence xmlns="http://java.sun.com/xml/ns/persistence"
-	version="2.0">
+        version="2.0">
 
-	<persistence-unit name="myUnit" transaction-type="RESOURCE_LOCAL">
-		<class>com.mize.domain.catalog.Catalog</class>
-		<class>com.mize.domain.catalog.CatalogIntl</class>
-		<class>com.mize.domain.common.Locale</class>
-		<class>com.mize.domain.servicelocator.BusinessEntity</class>
-		<class>com.mize.domain.servicelocator.BusinessEntityAddress</class>
-		<class>com.mize.domain.common.State</class>
-		<class>com.mize.domain.common.Country</class>
-		<class>com.mize.domain.servicelocator.BusinessEntityGeo</class>
-		<class>com.mize.domain.catalog.CatalogEntry</class>
-		<class>com.mize.domain.catalog.CatalogEntryIntl</class>
-		<class>com.mize.domain.part.Part</class>
-		<class>com.mize.domain.part.PartIntl</class>
-		<class>com.mize.domain.part.PartPrice</class>
-		<class>com.mize.domain.part.PartAttribute</class>
-		<class>com.mize.domain.part.PartKit</class>
-		<class>com.mize.domain.part.PartKitItem</class>
-		<class>com.mize.domain.part.PickList</class>
-		<class>com.mize.domain.part.PickListItem</class>
-		<class>com.mize.domain.form.FormTemplateDefinition</class>
-		<class>com.mize.domain.form.FormDefinition</class>
-		<class>com.mize.domain.form.FormDefinitionAudit</class>
-		<class>com.mize.domain.form.FormInstance</class>
-	</persistence-unit>
+        <persistence-unit name="myUnit1" transaction-type="RESOURCE_LOCAL">
+                <class>com.mize.domain.catalog.Catalog</class>
+                <class>com.mize.domain.catalog.CatalogIntl</class>
+                <class>com.mize.domain.common.Locale</class>
+                <class>com.mize.domain.servicelocator.BusinessEntity</class>
+                <class>com.mize.domain.servicelocator.BusinessEntityAddress</class>
+                <class>com.mize.domain.common.State</class>
+                <class>com.mize.domain.common.Country</class>
+                <class>com.mize.domain.servicelocator.BusinessEntityGeo</class>
+                <class>com.mize.domain.catalog.CatalogEntry</class>
+                <class>com.mize.domain.catalog.CatalogEntryIntl</class>
+                <class>com.mize.domain.part.Part</class>
+                <class>com.mize.domain.part.PartIntl</class>
+                <class>com.mize.domain.part.PartPrice</class>
+                <class>com.mize.domain.part.PartAttribute</class>
+                <class>com.mize.domain.part.PartKit</class>
+                <class>com.mize.domain.part.PartKitItem</class>
+                <class>com.mize.domain.part.PickList</class>
+                <class>com.mize.domain.part.PickListItem</class>
+                <class>com.mize.domain.serviceentity.ServiceEntityAddress</class>
+                <class>com.mize.domain.serviceentity.ServiceEntityAmount</class>
+                <class>com.mize.domain.serviceentity.ServiceEntityAttachment</class>
+                <class>com.mize.domain.serviceentity.ServiceEntityAudit</class>
+                <class>com.mize.domain.serviceentity.ServiceEntityLabor</class>
+                <class>com.mize.domain.serviceentity.ServiceEntityNotes</class>
+                <class>com.mize.domain.serviceentity.ServiceEntityOtherCharge</class>
+                <class>com.mize.domain.serviceentity.ServiceEntityPart</class>
+                <class>com.mize.domain.serviceentity.ServiceEntityProvider</class>
+                <class>com.mize.domain.serviceentity.ServiceEntityRelation</class>
+                <class>com.mize.domain.serviceentity.ServiceEntityRequest</class>
+                <class>com.mize.domain.serviceentity.ServiceEntityRequester</class>
+                <class>com.mize.domain.serviceentity.ServiceEntity</class>
+                <class>com.mize.domain.product.Product</class>
+                <class>com.mize.domain.product.ProductRegister</class>
+                <class>com.mize.domain.product.ProductRegnAttachment</class>
+                <class>com.mize.domain.brand.Brand</class>
+                <class>com.mize.domain.brand.BrandFeed</class>
+                <class>com.mize.domain.brand.BrandSupport</class>
+                <class>com.mize.domain.product.ProductRepeatOrderShipOptions</class>
+                <class>com.mize.domain.auth.User</class>
+                <class>com.mize.domain.form.FormTemplateDefinition</class>
+				<class>com.mize.domain.form.FormDefinition</class>
+				<class>com.mize.domain.form.FormDefinitionAudit</class>
+				<class>com.mize.domain.form.FormInstance</class>
+        </persistence-unit>
 
 </persistence>

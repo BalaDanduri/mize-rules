@@ -3,6 +3,20 @@ package com.mize.domain.serviceentity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -11,20 +25,27 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.product.Product;
 import com.mize.domain.product.ProductRegister;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
-public class SERequest extends MizeEntity implements Comparable<SERequest> {
+@Entity
+@Table(name = "service_entity_request")
+public class ServiceEntityRequest extends MizeEntity implements Comparable<ServiceEntityRequest> {
 
 	private static final long serialVersionUID = 6821133638967617947L;
+	@Transient
 	private String entityId;
+	private ServiceEntity serviceEntity;
 	private String type;
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime failureDate;
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime repairDate;
+	@Transient
 	private Long prodId;
+	private Product product;
 	private Long contractId;
 	private ProductRegister productRegister;
 	private String repairSiteCode;
@@ -39,48 +60,197 @@ public class SERequest extends MizeEntity implements Comparable<SERequest> {
 	private String causeDesc;
 	private String correctiveActionCode;
 	private String correctiveActionDesc;
-	private SEAmount partAmount = new SEAmount();
-	private SEAmount laborAmount = new SEAmount();
-	private SEAmount otherAmount = new SEAmount();
-	private SEAmount totalAmount = new SEAmount();
-	private List<SEPart> parts = new ArrayList<SEPart>();
-	private List<SELabor> labors = new ArrayList<SELabor>();
-	private List<SEOtherCharges> othersCharges = new ArrayList<SEOtherCharges>();
+	private ServiceEntityAmount partAmount = new ServiceEntityAmount();
+	private ServiceEntityAmount laborAmount = new ServiceEntityAmount();
+	private ServiceEntityAmount otherAmount = new ServiceEntityAmount();
+	private ServiceEntityAmount totalAmount = new ServiceEntityAmount();
+	private List<ServiceEntityPart> parts = new ArrayList<ServiceEntityPart>();
+	private List<ServiceEntityLabor> labors = new ArrayList<ServiceEntityLabor>();
+	private List<ServiceEntityOtherCharge> othersCharges = new ArrayList<ServiceEntityOtherCharge>();
 	
-	public SERequest() {
+	public ServiceEntityRequest() {
 		super();
 	}
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id", nullable = false, unique = true)
 	@Override
 	public Long getId() {
 		return id;
 	}
 	
-	@Override
-	public void setId(Long id) {
-		this.id = id;
-	}	
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
+	@Transient
 	public String getEntityId() {
 		return entityId;
 	}
 
-	public void setEntityId(String entityId) {
-		this.entityId = entityId;
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="entity_id")
+	public ServiceEntity getServiceEntity() {
+		return serviceEntity;
+	}
+
+	@Column(name="request_type")
+	public String getType() {
+		return type;
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	@Column(name = "failure_date")
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
 	public DateTime getFailureDate() {
 		return failureDate;
+	}
+
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	@Column(name = "repair_date")
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
+	public DateTime getRepairDate() {
+		return repairDate;
+	}
+
+	@Transient
+	public Long getProdId() {
+		return prodId;
+	}
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="prod_id")
+	public Product getProduct() {
+		return product;
+	}
+
+	@Column(name="contract_id")
+	public Long getContractId() {
+		return contractId;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "prod_regn_id")
+	public ProductRegister getProductRegister() {
+		return productRegister;
+	}
+
+	@Column(name="repair_site_code")
+	public String getRepairSiteCode() {
+		return repairSiteCode;
+	}
+
+	@Column(name="coverage_code")
+	public String getCoverageCode() {
+		return coverageCode;
+	}
+
+	@Column(name="coverage_descr")
+	public String getCoverageDesc() {
+		return coverageDesc;
+	}
+	
+	@Column(name="coverage_id")
+	public Long getCoverageId() {
+		return coverageId;
+	}
+	
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	@Column(name = "coverage_end_date")
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
+	public DateTime getCoverageEndDate() {
+		return coverageEndDate;
+	}
+
+	@Column(name="complaint_code")
+	public String getComplaintCode() {
+		return complaintCode;
+	}
+
+	@Column(name="complaint_description")
+	public String getComplaintDesc() {
+		return complaintDesc;
+	}
+
+	@Column(name="cause_code")
+	public String getCauseCode() {
+		return causeCode;
+	}
+
+	@Column(name="cause_description")
+	public String getCauseDesc() {
+		return causeDesc;
+	}
+
+	@Column(name="corrective_action_code")
+	public String getCorrectiveActionCode() {
+		return correctiveActionCode;
+	}
+
+	@Column(name="corrective_action_descr")
+	public String getCorrectiveActionDesc() {
+		return correctiveActionDesc;
+	}
+	
+	@OneToOne(fetch=FetchType.LAZY ,cascade=CascadeType.ALL)
+	@JoinColumn(name="part_amount_id")
+	public ServiceEntityAmount getPartAmount() {
+		return partAmount;
+	}
+	
+	@OneToOne(fetch=FetchType.LAZY ,cascade=CascadeType.ALL)
+	@JoinColumn(name="labor_amount_id")
+	public ServiceEntityAmount getLaborAmount() {
+		return laborAmount;
+	}
+
+	@OneToOne(fetch=FetchType.LAZY ,cascade=CascadeType.ALL)
+	@JoinColumn(name="other_amount_id")
+	public ServiceEntityAmount getOtherAmount() {
+		return otherAmount;
+	}
+
+	@OneToOne(fetch=FetchType.LAZY ,cascade=CascadeType.ALL)
+	@JoinColumn(name="total_amount_id")
+	public ServiceEntityAmount getTotalAmount() {
+		return totalAmount;
+	}
+
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "request")
+	public List<ServiceEntityPart> getParts() {
+		return parts;
+	}
+
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "request")
+	public List<ServiceEntityLabor> getLabors() {
+		return labors;
+	}
+	
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "request")
+	public List<ServiceEntityOtherCharge> getOthersCharges() {
+		return othersCharges;
+	}
+
+
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+	@Override
+	public void setId(Long id) {
+		this.id =id;
+	}	
+	
+	
+	public void setEntityId(String entityId) {
+		this.entityId = entityId;
+	}
+
+	public void setServiceEntity(ServiceEntity serviceEntity) {
+		this.serviceEntity = serviceEntity;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
@@ -90,77 +260,37 @@ public class SERequest extends MizeEntity implements Comparable<SERequest> {
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
-	public DateTime getRepairDate() {
-		return repairDate;
-	}
-
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	public void setRepairDate(DateTime repairDate) {
 		this.repairDate = repairDate;
-	}
-
-	public Long getProdId() {
-		return prodId;
 	}
 
 	public void setProdId(Long prodId) {
 		this.prodId = prodId;
 	}
 
-	public Long getContractId() {
-		return contractId;
-	}
-
 	public void setContractId(Long contractId) {
 		this.contractId = contractId;
-	}
-
-	public ProductRegister getProductRegister() {
-		return productRegister;
 	}
 
 	public void setProductRegister(ProductRegister productRegister) {
 		this.productRegister = productRegister;
 	}
 
-	public String getRepairSiteCode() {
-		return repairSiteCode;
-	}
-
 	public void setRepairSiteCode(String repairSiteCode) {
 		this.repairSiteCode = repairSiteCode;
-	}
-
-	public String getCoverageCode() {
-		return coverageCode;
 	}
 
 	public void setCoverageCode(String coverageCode) {
 		this.coverageCode = coverageCode;
 	}
 
-	public String getCoverageDesc() {
-		return coverageDesc;
-	}
-
 	public void setCoverageDesc(String coverageDesc) {
 		this.coverageDesc = coverageDesc;
 	}
 
-	public Long getCoverageId() {
-		return coverageId;
-	}
-
 	public void setCoverageId(Long coverageId) {
 		this.coverageId = coverageId;
-	}
-
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
-	public DateTime getCoverageEndDate() {
-		return coverageEndDate;
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
@@ -169,97 +299,89 @@ public class SERequest extends MizeEntity implements Comparable<SERequest> {
 		this.coverageEndDate = coverageEndDate;
 	}
 
-	public String getComplaintCode() {
-		return complaintCode;
-	}
-
 	public void setComplaintCode(String complaintCode) {
 		this.complaintCode = complaintCode;
-	}
-
-	public String getComplaintDesc() {
-		return complaintDesc;
 	}
 
 	public void setComplaintDesc(String complaintDesc) {
 		this.complaintDesc = complaintDesc;
 	}
 
-	public String getCauseCode() {
-		return causeCode;
-	}
-
 	public void setCauseCode(String causeCode) {
 		this.causeCode = causeCode;
-	}
-
-	public String getCauseDesc() {
-		return causeDesc;
 	}
 
 	public void setCauseDesc(String causeDesc) {
 		this.causeDesc = causeDesc;
 	}
 
-	public String getCorrectiveActionCode() {
-		return correctiveActionCode;
-	}
-
 	public void setCorrectiveActionCode(String correctiveActionCode) {
 		this.correctiveActionCode = correctiveActionCode;
-	}
-
-	public String getCorrectiveActionDesc() {
-		return correctiveActionDesc;
 	}
 
 	public void setCorrectiveActionDesc(String correctiveActionDesc) {
 		this.correctiveActionDesc = correctiveActionDesc;
 	}
 
-	public SEAmount getPartAmount() {
-		return partAmount;
-	}
-
-	public void setPartAmount(SEAmount partAmount) {
+	public void setPartAmount(ServiceEntityAmount partAmount) {
 		this.partAmount = partAmount;
 	}
 
-	public SEAmount getLaborAmount() {
-		return laborAmount;
-	}
-
-	public void setLaborAmount(SEAmount laborAmount) {
+	public void setLaborAmount(ServiceEntityAmount laborAmount) {
 		this.laborAmount = laborAmount;
 	}
 
-	public SEAmount getOtherAmount() {
-		return otherAmount;
+	public void setOtherAmount(ServiceEntityAmount otherAmount) {
+		this.otherAmount = otherAmount;
 	}
 
-	public void setOtherAmount(SEAmount otherAmount) {
-		this.otherAmount = otherAmount;
+	public void setTotalAmount(ServiceEntityAmount totalAmount) {
+		this.totalAmount = totalAmount;
+	}
+
+	public void setParts(List<ServiceEntityPart> parts) {
+		this.parts = parts;
+	}
+
+	public void setLabors(List<ServiceEntityLabor> labors) {
+		this.labors = labors;
+	}
+
+	public void setOthersCharges(List<ServiceEntityOtherCharge> othersCharges) {
+		this.othersCharges = othersCharges;
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	@JsonIgnore(value=false)
+	@Column(name = "created_date",updatable = false)
+	@Transient
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
+	public DateTime getCreatedDate() {
+		return createdDate;
+	}
+
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	@Column(name = "updated_date")
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
+	@Transient
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(value=false)
-	public void setUpdatedDate(DateTime updatedDate) {
-		this.updatedDate = updatedDate;
+	@Column(name = "created_by",updatable=false)
+	@Transient
+	public Long getCreatedBy() {
+		return createdBy;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	@JsonIgnore(value=false)
-	public DateTime getCreatedDate() {
-		return createdDate;
+	@Column(name = "updated_by")
+	@Transient
+	public Long getUpdatedBy() {
+		return updatedBy;
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
@@ -270,56 +392,22 @@ public class SERequest extends MizeEntity implements Comparable<SERequest> {
 	}
 	
 	@JsonIgnore(value=false)
+	public void setUpdatedBy(Long updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+ 
+	@JsonIgnore(value=false)
 	public void setCreatedBy(Long createdBy) {
 		this.createdBy = createdBy;
 	}
 
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(value=false)
-	public Long getCreatedBy() {
-		return createdBy;
+	public void setUpdatedDate(DateTime updatedDate) {
+		this.updatedDate = updatedDate;
 	}
 	
-	@JsonIgnore(value=false)
-	public Long getUpdatedBy() {
-		return updatedBy;
-	}
-
-	@JsonIgnore(value=false)
-	public void setUpdatedBy(Long updatedBy) {
-		this.updatedBy = updatedBy;
-	}
-	
-	public SEAmount getTotalAmount() {
-		return totalAmount;
-	}
-
-	public void setTotalAmount(SEAmount totalAmount) {
-		this.totalAmount = totalAmount;
-	}
-
-	public List<SEPart> getParts() {
-		return parts;
-	}
-
-	public void setParts(List<SEPart> parts) {
-		this.parts = parts;
-	}
-
-	public List<SELabor> getLabors() {
-		return labors;
-	}
-
-	public void setLabors(List<SELabor> labors) {
-		this.labors = labors;
-	}
-
-	public List<SEOtherCharges> getOthersCharges() {
-		return othersCharges;
-	}
-
-	public void setOthersCharges(List<SEOtherCharges> othersCharges) {
-		this.othersCharges = othersCharges;
-	}
 
 	@Override
 	public String toString() {
@@ -397,7 +485,7 @@ public class SERequest extends MizeEntity implements Comparable<SERequest> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SERequest other = (SERequest) obj;
+		ServiceEntityRequest other = (ServiceEntityRequest) obj;
 		if (causeCode == null) {
 			if (other.causeCode != null)
 				return false;
@@ -507,8 +595,10 @@ public class SERequest extends MizeEntity implements Comparable<SERequest> {
 	}
 
 	@Override
-	public int compareTo(SERequest arg0) {
+	public int compareTo(ServiceEntityRequest arg0) {
 		return 0;
-	}	
+	}
+
+	
 
 }

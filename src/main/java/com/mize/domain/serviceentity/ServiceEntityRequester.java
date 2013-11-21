@@ -1,5 +1,17 @@
 package com.mize.domain.serviceentity;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -12,17 +24,23 @@ import com.mize.domain.servicelocator.BusinessEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
-public class SERequester extends MizeEntity implements Comparable<SERequester> {
+
+@Entity
+@Table(name = "service_entity_requester")
+public class ServiceEntityRequester extends MizeEntity implements Comparable<ServiceEntityRequester> {
 
 	private static final long serialVersionUID = 6821133638967617947L;
-	private Long entityId;
-	private BusinessEntity businessEntity;
-	private SEAddress address = new SEAddress();
 	
-	public SERequester() {
+	private Long entityId;
+	private ServiceEntity serviceEntity;
+	private BusinessEntity businessEntity;
+	private ServiceEntityAddress address = new ServiceEntityAddress();
+	
+	public ServiceEntityRequester() {
 		super();
 	}
-
+	
+	@Transient
 	public Long getEntityId() {
 		return entityId;
 	}
@@ -30,6 +48,9 @@ public class SERequester extends MizeEntity implements Comparable<SERequester> {
 		this.entityId = entityId;
 	}
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id", nullable = false, unique = true)
 	@Override
 	public Long getId() {
 		return id;
@@ -40,41 +61,69 @@ public class SERequester extends MizeEntity implements Comparable<SERequester> {
 		this.id = id;
 	}	
 	
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="entity_id")
+	public ServiceEntity getServiceEntity() {
+		return serviceEntity;
+	}
+
+
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="requester_id")
 	public BusinessEntity getBusinessEntity() {
 		return businessEntity;
 	}
-
+	
+	@OneToOne(fetch=FetchType.LAZY ,cascade=CascadeType.ALL)
+	@JoinColumn(name="address_id")
+	public ServiceEntityAddress getAddress() {
+		return address;
+	}
+	
 	public void setBusinessEntity(BusinessEntity businessEntity) {
 		this.businessEntity = businessEntity;
 	}
-
-	public SEAddress getAddress() {
-		return address;
+    
+	public void setServiceEntity(ServiceEntity serviceEntity) {
+		this.serviceEntity = serviceEntity;
 	}
 
-	public void setAddress(SEAddress address) {
+	public void setAddress(ServiceEntityAddress address) {
 		this.address = address;
+	}
+
+	
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	@JsonIgnore(value=false)
+	@Column(name = "created_date",updatable = false)
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
+	@Transient
+	public DateTime getCreatedDate() {
+		return createdDate;
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
-	@JsonIgnore(value=false)
+	@Column(name = "updated_date")
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
+	@Transient
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(value=false)
-	public void setUpdatedDate(DateTime updatedDate) {
-		this.updatedDate = updatedDate;
+	@Column(name = "created_by",updatable=false)
+	@Transient
+	public Long getCreatedBy() {
+		return createdBy;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	@JsonIgnore(value=false)
-	public DateTime getCreatedDate() {
-		return createdDate;
+	@Column(name = "updated_by")
+	@Transient
+	public Long getUpdatedBy() {
+		return updatedBy;
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
@@ -85,27 +134,25 @@ public class SERequester extends MizeEntity implements Comparable<SERequester> {
 	}
 	
 	@JsonIgnore(value=false)
+	public void setUpdatedBy(Long updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+ 
+	@JsonIgnore(value=false)
 	public void setCreatedBy(Long createdBy) {
 		this.createdBy = createdBy;
 	}
 
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(value=false)
-	public Long getCreatedBy() {
-		return createdBy;
+	public void setUpdatedDate(DateTime updatedDate) {
+		this.updatedDate = updatedDate;
 	}
 	
-	@JsonIgnore(value=false)
-	public Long getUpdatedBy() {
-		return updatedBy;
-	}
-
-	@JsonIgnore(value=false)
-	public void setUpdatedBy(Long updatedBy) {
-		this.updatedBy = updatedBy;
-	}
 	
 	@Override
-	public int compareTo(SERequester arg0) {
+	public int compareTo(ServiceEntityRequester arg0) {
 		return 0;
 	}
 
@@ -135,7 +182,7 @@ public class SERequester extends MizeEntity implements Comparable<SERequester> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SERequester other = (SERequester) obj;
+		ServiceEntityRequester other = (ServiceEntityRequester) obj;
 		if (address == null) {
 			if (other.address != null)
 				return false;
