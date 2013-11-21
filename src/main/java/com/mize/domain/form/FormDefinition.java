@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
@@ -23,6 +24,7 @@ import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.mize.domain.auth.User;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.servicelocator.BusinessEntity;
@@ -48,6 +50,7 @@ public class FormDefinition extends MizeEntity {
 	private DateTime startDate;
 	private DateTime endDate;
 	private List<FormDefinitionAudit> audits;
+	private User user;
 	
 	public FormDefinition() {
 		tenant = new BusinessEntity();
@@ -205,6 +208,15 @@ public class FormDefinition extends MizeEntity {
 	
 	public void setAudits(List<FormDefinitionAudit> audits) {
 		this.audits = audits;
+	}
+	
+	@Transient
+	public User getUser() {
+		return user;
+	}
+	
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 	@Override	

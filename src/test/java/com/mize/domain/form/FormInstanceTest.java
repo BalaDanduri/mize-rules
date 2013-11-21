@@ -68,7 +68,7 @@ public class FormInstanceTest extends JPATest {
 		public FormInstance mapRow(ResultSet rs, int arg1) throws SQLException {
 			FormInstance formInstance = new FormInstance();
 			formInstance.setId(rs.getLong("id"));
-			formInstance.setFormData(rs.getString("form_data"));
+			formInstance.setFormInstanceData(rs.getString("form_instance_data"));
 			FormDefinition formDef= new FormDefinition();
 			formDef.setId(rs.getLong("form_defn_id"));
 			formInstance.setFormDefinition(formDef);
