@@ -19,9 +19,9 @@ import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.mize.domain.businessEntity.BusinessEntity;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.MizeEntity;
-import com.mize.domain.servicelocator.BusinessEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
@@ -62,7 +62,7 @@ public class PartsOrderRequester extends MizeEntity implements Comparable<PartsO
 	}
 
 	@OneToOne(fetch=FetchType.LAZY ,cascade =CascadeType.ALL)
-	@JoinColumn(name="provider_id")
+	@JoinColumn(name="requester_be_id")
 	public BusinessEntity getBusinessEntity() {
 		return businessEntity;
 	}

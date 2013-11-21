@@ -17,10 +17,9 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.ContextConfiguration;
 
 import com.mize.domain.auth.User;
+import com.mize.domain.businessEntity.BusinessEntity;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.Locale;
-import com.mize.domain.serviceentity.ServiceEntity;
-import com.mize.domain.servicelocator.BusinessEntity;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.user.UserBE;
 import com.mize.domain.util.Formatter;
@@ -39,7 +38,11 @@ public class PartsOrderTest extends JPATest {
 		this.partsOrder = getPartsOrderOjectToSave(partsOrder);
 		EntityTransaction tx = entityManager.getTransaction();
 		tx.begin();
-		entityManager.persist(partsOrder);
+		if(partsOrder.getId() == null){
+			entityManager.persist(partsOrder);	
+		}else{
+			partsOrder = entityManager.merge(partsOrder);
+		}		
 		tx.commit();
 	}
 
@@ -77,7 +80,10 @@ public class PartsOrderTest extends JPATest {
 	
 	
 	private PartsOrder getPartsOrderOjectToSave(PartsOrder order) {
-		order.setStatus(ServiceEntity.Status.Draft.toString());
+		if(order == null){
+			order = new PartsOrder();
+		}
+		order.setStatus(PartsOrder.Status.Draft.toString());
 		order.setLocale(new Locale(1l));
 		order.setCurrencyCode("Dollar");
 		order.setRequestType("Back_Order");

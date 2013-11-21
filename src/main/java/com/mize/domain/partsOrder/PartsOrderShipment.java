@@ -9,16 +9,18 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.mize.domain.businessEntity.BusinessEntity;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.MizeEntity;
-import com.mize.domain.servicelocator.BusinessEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
@@ -51,6 +53,7 @@ public class PartsOrderShipment extends MizeEntity implements Comparable<PartsOr
 		this.id = id;		
 	}
 	
+	@Transient
 	public Long getOrderId() {
 		return orderId;
 	}
@@ -78,7 +81,8 @@ public class PartsOrderShipment extends MizeEntity implements Comparable<PartsOr
 	public void setAddress(EntityAddress address) {
 		this.address = address;
 	}
-
+	
+	@Column(name="shipment_method")
 	public String getMethod() {
 		return method;
 	}
@@ -87,6 +91,7 @@ public class PartsOrderShipment extends MizeEntity implements Comparable<PartsOr
 		this.method = method;
 	}
 
+	@Column(name="shipment_priority")
 	public String getPriority() {
 		return priority;
 	}
@@ -95,6 +100,7 @@ public class PartsOrderShipment extends MizeEntity implements Comparable<PartsOr
 		this.priority = priority;
 	}
 
+	@Column(name="shipment_carrier")
 	public String getCarrier() {
 		return carrier;
 	}
@@ -103,6 +109,7 @@ public class PartsOrderShipment extends MizeEntity implements Comparable<PartsOr
 		this.carrier = carrier;
 	}
 
+	@Column(name="drop_ship")
 	public String getDropShip() {
 		return dropShip;
 	}
@@ -113,6 +120,9 @@ public class PartsOrderShipment extends MizeEntity implements Comparable<PartsOr
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	@JsonIgnore(value=false)
+	@Column(name = "estimated_ship_date")
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
 	public DateTime getEstimatedShipDate() {
 		return estimatedShipDate;
 	}

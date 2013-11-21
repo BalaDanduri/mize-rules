@@ -11,9 +11,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.mize.domain.businessEntity.BusinessEntity;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.MizeEntity;
-import com.mize.domain.servicelocator.BusinessEntity;
 
 @Entity
 @Table(name = "parts_order_payment")
@@ -68,6 +68,7 @@ public class PartsOrderPayment extends MizeEntity implements Comparable<PartsOrd
 		this.address = address;
 	}
 
+	@Column(name="payment_method")
 	public String getMethod() {
 		return method;
 	}
