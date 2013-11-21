@@ -19,6 +19,8 @@ import com.mize.domain.catalog.CatalogEntry;
 import com.mize.domain.common.Country;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.State;
+import com.mize.domain.form.FormDefinition;
+import com.mize.domain.form.FormTemplateDefinition;
 import com.mize.domain.serviceentity.ServiceEntity;
 import com.mize.domain.serviceentity.ServiceEntityAddress;
 import com.mize.domain.serviceentity.ServiceEntityAudit;
@@ -127,8 +129,19 @@ public class JPATest {
 		return seAudit;
 	}
 	
+
 	public <T> T findById(Long id,Class<T> cls,EntityManager entityManager) {
 		return entityManager.find(cls,id);
+	}
+	
+	public FormTemplateDefinition findExistingFormTemplateDef(EntityManager entityManager) {
+		FormTemplateDefinition layoutdef = (FormTemplateDefinition) entityManager.find(FormTemplateDefinition.class, new Long(1));
+		return layoutdef;
+	}
+	
+	public FormDefinition findExistingFormDefinition(EntityManager entityManager) {
+		FormDefinition formDef = (FormDefinition) entityManager.find(FormDefinition.class, new Long(1));
+		return formDef;
 	}
 
 }
