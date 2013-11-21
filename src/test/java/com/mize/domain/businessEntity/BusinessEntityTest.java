@@ -22,9 +22,6 @@ import com.mize.domain.common.State;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;
 
-
-
-
 @ContextConfiguration(locations={"/test-context.xml"})
 public class BusinessEntityTest extends JPATest {
 	private static final String BUSINESS_ENTITY_QUERY = "select * from business_entity where id = ?";
@@ -38,7 +35,6 @@ public class BusinessEntityTest extends JPATest {
 		this.businessEntity = businessEntityObjectTobeSaved(businessEntity);
 		EntityTransaction tx = entityManager.getTransaction();
 		tx.begin();
-		
 		if(businessEntity.getId() != null){
 			businessEntity = entityManager.merge(businessEntity);
 		}else{
@@ -122,6 +118,7 @@ public class BusinessEntityTest extends JPATest {
 		country.setCode("US");
 		address.setCountry(country);
 		BusinessEntityAddress address2 = new BusinessEntityAddress();
+		address2.setBusinessEntity(be);
 		address2.setEntityAddress(address);
 		address2.setBusinessEntity(be);
 		addressList.add(address2);
@@ -129,6 +126,21 @@ public class BusinessEntityTest extends JPATest {
 		address2.setState(findStateObjectFromDB());
 		address2.setCountry(findCountryObjectFromDB());
 		be.setAddresses(addressList);
+		
+		List<BusinessEntityIntl> intlList = new ArrayList<BusinessEntityIntl>();
+		BusinessEntityIntl intl = findExistingBusinessEntityIntl(entityManager);
+		intl.setBusinessEntity(be);
+		intl.setLocale(findLocaleObjectFromDB());
+		intl.setName("TestIntl");
+		intl.setDescription("IntlDescription");
+		intlList.add(intl);
+		be.setIntl(intlList);
+		
+		BusinessEntityGeo entityGeo = new BusinessEntityGeo();
+		entityGeo.setBusinessEntityAddress(address2);
+		entityGeo.setLatitude(345.0);
+		entityGeo.setLongitude(634.0);
+		address2.setEntityGeo(entityGeo);
 		return be;
 	}
 	

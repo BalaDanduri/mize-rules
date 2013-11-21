@@ -1,5 +1,6 @@
 package com.mize.domain.businessEntity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,9 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-
 import org.codehaus.jackson.annotate.JsonIgnore;
-
 import com.mize.domain.common.Country;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.Locale;
@@ -49,13 +48,13 @@ public class BusinessEntityAddress  extends MizeEntity  implements Comparable<Bu
 	private BusinessEntity businessEntity;
 	private EntityAddress entityAddress;
 	private String hoursOfOperation;
-	
+	private BusinessEntityGeo entityGeo = new BusinessEntityGeo();
 	
 	public BusinessEntityAddress() {
 		state = new State();
 		country = new Country();
 	}
-
+	
 	@Id
 	@Column(name="id",nullable=false,unique=true)
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -76,8 +75,8 @@ public class BusinessEntityAddress  extends MizeEntity  implements Comparable<Bu
 		this.beId = beId;
 	}
 	
-	@OneToOne
-	@JoinColumn(name = "be_address_id")
+	@OneToOne(fetch=FetchType.LAZY ,cascade= CascadeType.ALL)
+	@JoinColumn(name="be_address_id")
 	public EntityAddress getEntityAddress() {
 		return entityAddress;
 	}
@@ -289,9 +288,19 @@ public class BusinessEntityAddress  extends MizeEntity  implements Comparable<Bu
 		this.hoursOfOperation = hoursOfOperation;
 	}
 	
+	@OneToOne(fetch=FetchType.LAZY ,cascade= CascadeType.ALL, mappedBy ="businessEntityAddress")
+	public BusinessEntityGeo getEntityGeo() {
+		return entityGeo;
+	}
+
+	public void setEntityGeo(BusinessEntityGeo entityGeo) {
+		this.entityGeo = entityGeo;
+	}
+
+
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result
 				+ ((address1 == null) ? 0 : address1.hashCode());
@@ -299,13 +308,22 @@ public class BusinessEntityAddress  extends MizeEntity  implements Comparable<Bu
 				+ ((address2 == null) ? 0 : address2.hashCode());
 		result = prime * result
 				+ ((address3 == null) ? 0 : address3.hashCode());
-		result = prime * result + (int) (beId ^ (beId >>> 32));
+		result = prime * result + ((beId == null) ? 0 : beId.hashCode());
+		result = prime * result
+				+ ((businessEntity == null) ? 0 : businessEntity.hashCode());
 		result = prime * result + ((city == null) ? 0 : city.hashCode());
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result + ((country == null) ? 0 : country.hashCode());
 		result = prime * result + ((county == null) ? 0 : county.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result
+				+ ((entityAddress == null) ? 0 : entityAddress.hashCode());
+		result = prime * result
+				+ ((entityGeo == null) ? 0 : entityGeo.hashCode());
 		result = prime * result + ((fax == null) ? 0 : fax.hashCode());
+		result = prime
+				* result
+				+ ((hoursOfOperation == null) ? 0 : hoursOfOperation.hashCode());
 		result = prime * result + ((icon == null) ? 0 : icon.hashCode());
 		result = prime * result
 				+ ((landMark == null) ? 0 : landMark.hashCode());
@@ -321,6 +339,7 @@ public class BusinessEntityAddress  extends MizeEntity  implements Comparable<Bu
 		result = prime * result + ((zipExt == null) ? 0 : zipExt.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -346,7 +365,15 @@ public class BusinessEntityAddress  extends MizeEntity  implements Comparable<Bu
 				return false;
 		} else if (!address3.equals(other.address3))
 			return false;
-		if (beId != other.beId)
+		if (beId == null) {
+			if (other.beId != null)
+				return false;
+		} else if (!beId.equals(other.beId))
+			return false;
+		if (businessEntity == null) {
+			if (other.businessEntity != null)
+				return false;
+		} else if (!businessEntity.equals(other.businessEntity))
 			return false;
 		if (city == null) {
 			if (other.city != null)
@@ -373,10 +400,25 @@ public class BusinessEntityAddress  extends MizeEntity  implements Comparable<Bu
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
+		if (entityAddress == null) {
+			if (other.entityAddress != null)
+				return false;
+		} else if (!entityAddress.equals(other.entityAddress))
+			return false;
+		if (entityGeo == null) {
+			if (other.entityGeo != null)
+				return false;
+		} else if (!entityGeo.equals(other.entityGeo))
+			return false;
 		if (fax == null) {
 			if (other.fax != null)
 				return false;
 		} else if (!fax.equals(other.fax))
+			return false;
+		if (hoursOfOperation == null) {
+			if (other.hoursOfOperation != null)
+				return false;
+		} else if (!hoursOfOperation.equals(other.hoursOfOperation))
 			return false;
 		if (icon == null) {
 			if (other.icon != null)
@@ -434,6 +476,64 @@ public class BusinessEntityAddress  extends MizeEntity  implements Comparable<Bu
 		} else if (!zipExt.equals(other.zipExt))
 			return false;
 		return true;
+	}
+
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("BusinessEntityAddress [beId=");
+		builder.append(beId);
+		builder.append(", code=");
+		builder.append(code);
+		builder.append(", locale=");
+		builder.append(locale);
+		builder.append(", name=");
+		builder.append(name);
+		builder.append(", address1=");
+		builder.append(address1);
+		builder.append(", address2=");
+		builder.append(address2);
+		builder.append(", address3=");
+		builder.append(address3);
+		builder.append(", zip=");
+		builder.append(zip);
+		builder.append(", zipExt=");
+		builder.append(zipExt);
+		builder.append(", city=");
+		builder.append(city);
+		builder.append(", county=");
+		builder.append(county);
+		builder.append(", state=");
+		builder.append(state);
+		builder.append(", country=");
+		builder.append(country);
+		builder.append(", phone1=");
+		builder.append(phone1);
+		builder.append(", phone2=");
+		builder.append(phone2);
+		builder.append(", email=");
+		builder.append(email);
+		builder.append(", fax=");
+		builder.append(fax);
+		builder.append(", landMark=");
+		builder.append(landMark);
+		builder.append(", url=");
+		builder.append(url);
+		builder.append(", toolTipLogo=");
+		builder.append(toolTipLogo);
+		builder.append(", icon=");
+		builder.append(icon);
+		builder.append(", businessEntity=");
+		builder.append(businessEntity);
+		builder.append(", entityAddress=");
+		builder.append(entityAddress);
+		builder.append(", hoursOfOperation=");
+		builder.append(hoursOfOperation);
+		builder.append(", entityGeo=");
+		builder.append(entityGeo);
+		builder.append("]");
+		return builder.toString();
 	}
 
 }

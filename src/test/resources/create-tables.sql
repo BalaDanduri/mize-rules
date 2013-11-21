@@ -281,7 +281,7 @@ CREATE TABLE business_entity_intl (
 );
 
 CREATE TABLE  business_entity_address  ( 
-	id           	BIGINT(20) NOT NULL,
+	id         bigint(20) 	AUTO_INCREMENT NOT NULL,
 	be_id        	BIGINT(20) NOT NULL,
 	code         	VARCHAR(50) NULL,
 	locale_id    	INTEGER(11) NULL,
@@ -303,7 +303,8 @@ CREATE TABLE  business_entity_address  (
 	url          	VARCHAR(256) NULL,
 	tool_tip_logo	VARCHAR(100) NULL,
 	icon         	VARCHAR(100) NULL,
-	hours_of_op  	VARCHAR(250) NULL 
+	hours_of_op  	VARCHAR(250) NULL, 
+	be_address_id	BIGINT(20)  NULL,   
 );
 
 CREATE TABLE entity_address (
@@ -327,9 +328,10 @@ CREATE TABLE entity_address (
 );
 
 CREATE TABLE business_entity_geo ( 
+	id					bigint(20) 	AUTO_INCREMENT NOT NULL,
 	be_address_id	BIGINT(20) NULL,
-	latitude     	VARCHAR(16777215) NULL,
-	longitude    	VARCHAR(16777215) NULL 
+	latitude     	bigint(2000) NULL,
+	longitude    	bigint(2000) NULL,
 	);
 	
 drop table if exists part;
@@ -652,8 +654,8 @@ insert into locale values(1,'Y','EN','USA','EN_USA');
 INSERT INTO  business_entity(id, code, type_code, sub_type_code, name, logo, created_date, updated_date, created_by, updated_by, active_indicator)
   VALUES(961, '10C00100P', 'dealer', NULL, 'WASHINGTON AIR COMP. RENTAL', NULL, '2013-06-19 14:39:31.0', '2013-07-26 14:17:19.0', NULL, NULL, NULL);
 
-INSERT INTO business_entity_geo(be_address_id, latitude, longitude)
-  VALUES(10799, '39.061799', '-77.11795099999999');  
+INSERT INTO business_entity_geo(id, be_address_id, latitude, longitude)
+  VALUES(101,10799, 39.0, 345.0);  
 
 INSERT INTO country(country_id, country_name, country_code, country_code_3, created_by, created_date, updated_by, updated_date)
   VALUES(1, 'United States', 'US', 'USA', NULL, NULL, NULL, NULL);
@@ -761,8 +763,8 @@ INSERT INTO state(state_id, state_code, state_name, created_by, created_date, up
 INSERT INTO state(state_id, state_code, state_name, created_by, created_date, updated_by, updated_date, country_id)
   VALUES(50, 'WY', 'Wyoming', NULL, NULL, NULL, NULL, 1);
 
-INSERT INTO  business_entity_address (id, be_id, code, locale_id, name, address_1, address_2, address_3, zip, zip_ext, city, county, state_id, country_id, phone_1, phone_2, email, fax, land_mark, url, tool_tip_logo, icon, hours_of_op)
-  VALUES(10799, 961, NULL, 1, NULL, '12529 PARKLAWN DR.', NULL, NULL, '20852', NULL, 'ROCKVILLE', NULL, 20, 1, '3012305800', NULL, NULL, '3012305830', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO  business_entity_address (id, be_id, code, locale_id, name, address_1, address_2, address_3, zip, zip_ext, city, county, state_id, country_id, phone_1, phone_2, email, fax, land_mark, url, tool_tip_logo, icon, hours_of_op, be_address_id)
+  VALUES(10799, 961, NULL, 1, NULL, '12529 PARKLAWN DR.', NULL, NULL, '20852', NULL, 'ROCKVILLE', NULL, 20, 1, '3012305800', NULL, NULL, '3012305830', NULL, NULL, NULL, NULL, NULL,10799);
   
 INSERT INTO  catalog (id, tenant_id, catalog_code, catalog_type, is_active, created_date, updated_date, created_by, updated_by)
   VALUES(100, 961, 'TestCatalog', 'TestCatalogType', 'Y', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL);
@@ -859,3 +861,5 @@ INSERT INTO service_entity_request_other(id,request_id, other_charge_type, other
  INSERT INTO service_entity_rltn(id, entity_id, entity_rltn_id)
  VALUES(1001,201,33);
   INSERT INTO entity_address(id) VALUES(1);
+  
+  INSERT INTO business_entity_intl(id, be_id) VALUES(101, 961);

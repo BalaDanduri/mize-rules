@@ -7,6 +7,8 @@
                 <class>com.mize.domain.common.Locale</class>
              	<class>com.mize.domain.businessEntity.BusinessEntity</class>
 				<class>com.mize.domain.businessEntity.BusinessEntityAddress</class>
+				<class>com.mize.domain.businessEntity.BusinessEntityGeo</class>
+				<class>com.mize.domain.businessEntity.BusinessEntityIntl</class>
                 <class>com.mize.domain.common.State</class>
                 <class>com.mize.domain.common.Country</class>
                 <class>com.mize.domain.catalog.CatalogEntry</class>
@@ -45,15 +47,6 @@
 				<class>com.mize.domain.form.FormDefinitionAudit</class>
 				<class>com.mize.domain.form.FormInstance</class>
 				<class>com.mize.domain.common.EntityAddress</class>
-				<class>com.mize.domain.partsOrder.PartsOrder</class>
-				<class>com.mize.domain.partsOrder.PartsOrderAmount</class>
-				<class>com.mize.domain.partsOrder.PartsOrderAttachment</class>
-				<class>com.mize.domain.partsOrder.PartsOrderAudit</class>
-				<class>com.mize.domain.partsOrder.PartsOrderComment</class>
-				<class>com.mize.domain.partsOrder.PartsOrderPayment</class>
-				<class>com.mize.domain.partsOrder.PartsOrderRequester</class>
-				<class>com.mize.domain.partsOrder.PartsOrderShipment</class>
-				<class>com.mize.domain.partsOrder.PartsOrderPart</class>
         </persistence-unit>
 
 </persistence>

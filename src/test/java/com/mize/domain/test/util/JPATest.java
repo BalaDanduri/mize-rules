@@ -14,6 +14,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.mize.domain.businessEntity.BusinessEntity;
+import com.mize.domain.businessEntity.BusinessEntityIntl;
 import com.mize.domain.catalog.Catalog;
 import com.mize.domain.catalog.CatalogEntry;
 import com.mize.domain.common.Country;
@@ -64,6 +65,11 @@ public class JPATest {
 	public State findStateObjectFromDB() {
 		State state = (State) find(State.class, new Long(1));
 		return state;
+	}
+	
+	public BusinessEntityIntl findExistingBusinessEntityIntl(EntityManager entityManager) {
+		BusinessEntityIntl intl =  (BusinessEntityIntl) find(BusinessEntityIntl.class, new Long(101));
+		return intl;
 	}
 	
 	@SuppressWarnings("unchecked")

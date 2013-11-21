@@ -24,12 +24,11 @@ public class BusinessEntityIntl extends MizeEntity {
 	private Locale locale;	
 	
 	public BusinessEntityIntl() {
-		
 	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return id;
@@ -46,12 +45,12 @@ public class BusinessEntityIntl extends MizeEntity {
 		return businessEntity;
 	}
 	
-	@Column(name = "be_name", nullable = true, length = 250)
+	@Column(name = "be_name")
 	public String getName() {
 		return name;
 	}
 
-	@Column(name = "be_description", nullable = true, length = 500)
+	@Column(name = "be_description")
 	public String getDescription() {
 		return description;
 	}
