@@ -1,4 +1,4 @@
-package com.mize.domain.businessEntity;
+package com.mize.domain.businessentity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +16,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.mize.domain.businessentity.BusinessEntityIntl;
 import com.mize.domain.common.MizeEntity;
 
 @Entity

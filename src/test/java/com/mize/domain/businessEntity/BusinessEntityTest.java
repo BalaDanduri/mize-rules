@@ -1,8 +1,9 @@
-package com.mize.domain.businessEntity;
+package com.mize.domain.businessentity;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -11,13 +12,19 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.ContextConfiguration;
 
+import com.mize.domain.businessentity.BusinessEntity;
+import com.mize.domain.businessentity.BusinessEntityAddress;
+import com.mize.domain.businessentity.BusinessEntityIntl;
 import com.mize.domain.common.Country;
 import com.mize.domain.common.EntityAddress;
+import com.mize.domain.common.EntityAddressGeo;
+import com.mize.domain.common.EntityAddressPhone;
 import com.mize.domain.common.State;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;
@@ -28,11 +35,12 @@ public class BusinessEntityTest extends JPATest {
 	EntityManager entityManager;
 	BusinessEntity businessEntity = null;
 	
+	
+	
 	@Before
 	public void setUp(){
 		entityManager = getEntityManager();
-		businessEntity = findExistingBusinessEntity(entityManager);
-		this.businessEntity = businessEntityObjectTobeSaved(businessEntity);
+		businessEntity = businessEntityObjectTobeSaved(businessEntity);
 		EntityTransaction tx = entityManager.getTransaction();
 		tx.begin();
 		if(businessEntity.getId() != null){
@@ -85,7 +93,7 @@ public class BusinessEntityTest extends JPATest {
 	
 	private BusinessEntity businessEntityObjectTobeSaved(BusinessEntity businessEntity) {
 		BusinessEntity be = new BusinessEntity();
-		be.setId(961l);
+		//be.setId(961l);
 		be.setTypeCode("dealer");
 		be.setCode("10C00101P");
 		be.setIsActive("Y");
@@ -100,7 +108,7 @@ public class BusinessEntityTest extends JPATest {
 		be.setParentBE(parentBe);
 		
 		List<BusinessEntityAddress> addressList = new ArrayList<BusinessEntityAddress>();
-		EntityAddress address = findObjectFromDB(EntityAddress.class , 1l);
+		EntityAddress address = new EntityAddress();
 		address.setType("Office");
 		address.setAddress1("address1");
 		address.setAddress2("address2");
@@ -120,29 +128,40 @@ public class BusinessEntityTest extends JPATest {
 		BusinessEntityAddress address2 = new BusinessEntityAddress();
 		address2.setBusinessEntity(be);
 		address2.setEntityAddress(address);
-		address2.setBusinessEntity(be);
+		EntityAddressGeo addressGeo = new EntityAddressGeo();
+		addressGeo.setAddress(address);
+		address.setAddressGeo(addressGeo);
 		addressList.add(address2);
-		address2.setLocale(findLocaleObjectFromDB());
-		address2.setState(findStateObjectFromDB());
-		address2.setCountry(findCountryObjectFromDB());
+		
 		be.setAddresses(addressList);
 		
+		
+		List<EntityAddressPhone> addressPhoneList = new ArrayList<EntityAddressPhone>();
+		EntityAddressPhone addressPhone = new EntityAddressPhone();
+		addressPhone.setPhoneType("Office");
+		addressPhone.setPhoneExt("2222");
+		addressPhone.setPhoneValue("5656565");
+		addressPhoneList.add(addressPhone);
+		addressPhone.setAddress(address);
+		address.setAddressPhones(addressPhoneList);
+		
 		List<BusinessEntityIntl> intlList = new ArrayList<BusinessEntityIntl>();
+		
 		BusinessEntityIntl intl = findExistingBusinessEntityIntl(entityManager);
+		intl = entityManager.merge(intl);
 		intl.setBusinessEntity(be);
 		intl.setLocale(findLocaleObjectFromDB());
 		intl.setName("TestIntl");
 		intl.setDescription("IntlDescription");
 		intlList.add(intl);
 		be.setIntl(intlList);
-		
-		BusinessEntityGeo entityGeo = new BusinessEntityGeo();
-		entityGeo.setBusinessEntityAddress(address2);
-		entityGeo.setLatitude(345.0);
-		entityGeo.setLongitude(634.0);
-		address2.setEntityGeo(entityGeo);
+		be.setAddresses(addressList);
 		return be;
 	}
 	
-	
+	/*@After
+	public void tearDown(){
+		entityManager.flush();
+		entityManager.close();
+	}*/
 }

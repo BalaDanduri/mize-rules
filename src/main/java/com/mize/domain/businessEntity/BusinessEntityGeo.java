@@ -1,4 +1,4 @@
-package com.mize.domain.businessEntity;
+package com.mize.domain.businessentity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;

@@ -5,10 +5,10 @@
                 <class>com.mize.domain.catalog.Catalog</class>
                 <class>com.mize.domain.catalog.CatalogIntl</class>
                 <class>com.mize.domain.common.Locale</class>
-             	<class>com.mize.domain.businessEntity.BusinessEntity</class>
-				<class>com.mize.domain.businessEntity.BusinessEntityAddress</class>
-				<class>com.mize.domain.businessEntity.BusinessEntityGeo</class>
-				<class>com.mize.domain.businessEntity.BusinessEntityIntl</class>
+             	<class>com.mize.domain.businessentity.BusinessEntity</class>
+				<class>com.mize.domain.businessentity.BusinessEntityAddress</class>
+				<class>com.mize.domain.businessentity.BusinessEntityGeo</class>
+				<class>com.mize.domain.businessentity.BusinessEntityIntl</class>
                 <class>com.mize.domain.common.State</class>
                 <class>com.mize.domain.common.Country</class>
                 <class>com.mize.domain.catalog.CatalogEntry</class>
@@ -57,6 +57,9 @@
 				<class>com.mize.domain.partsorder.PartsOrderRequester</class>
 				<class>com.mize.domain.partsorder.PartsOrderShipment</class>
 				<class>com.mize.domain.partsorder.PartsOrderPart</class>
+				<class>com.mize.domain.common.EntityAddress</class>
+				<class>com.mize.domain.common.EntityAddressPhone</class>
+				<class>com.mize.domain.common.EntityAddressGeo</class>
         </persistence-unit>
 
 </persistence>

@@ -320,6 +320,7 @@ CREATE TABLE entity_address (
 	state_id     		bigint(20) 			NULL,
 	country_id   		bigint(20) 			NULL,	
 	email        		varchar(50) 		NULL,
+	land_mark    		varchar(500) 		NULL,
 	created_date    	datetime 			NULL,
 	updated_date    	datetime 			NULL,
 	created_by      	bigint(20) 			NULL,
@@ -327,12 +328,31 @@ CREATE TABLE entity_address (
 	
 );
 
+drop table if exists entity_address_phone;
+CREATE TABLE entity_address_phone (
+	id			bigint(20) 		AUTO_INCREMENT NOT NULL,
+	entity_address_id    	bigint(20) 		NULL,
+	phone_type      	varchar(50) 		NULL,
+	phone_value      	varchar(50) 		NULL,
+	phone_ext      		varchar(10) 		NULL,
+	PRIMARY KEY (id)
+);
+
+drop table if exists business_entity_geo;
 CREATE TABLE business_entity_geo ( 
 	id					bigint(20) 	AUTO_INCREMENT NOT NULL,
 	be_address_id	BIGINT(20) NULL,
 	latitude     	bigint(2000) NULL,
 	longitude    	bigint(2000) NULL,
 	);
+
+drop table if exists entity_address_geo;
+CREATE TABLE entity_address_geo ( 
+    id				bigint(20) 		AUTO_INCREMENT NOT NULL,
+    entity_address_id		bigint(20) 		NULL,
+    latitude     		mediumtext 		NULL,
+    longitude    		mediumtext 		NULL,
+  );
 	
 drop table if exists part;
 create table part
