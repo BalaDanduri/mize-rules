@@ -648,6 +648,22 @@ CREATE TABLE service_entity_request (
         entity_rltn_id bigint(20) NOT NULL,
   );
 
+  drop table if exists part_substitute;
+  CREATE TABLE part_substitute (
+	id 			bigint(20) 	AUTO_INCREMENT NOT NULL,
+	old_part_id		bigint(20)	NOT NULL,
+	new_part_id		bigint(20)	NOT NULL,
+	family_code		varchar(50) 	NULL,
+	substitute_date		datetime 	NULL,
+	substitute_code		varchar(50) 	NULL,
+	substitute_comments	varchar(1000) 	NULL,	
+	created_date 		datetime 	NULL,
+	updated_date 		datetime 	NULL,
+	created_by 		bigint(20)	NULL,
+	updated_by 		bigint(20)	NULL,	
+	PRIMARY KEY (id)
+);
+
 
 insert into locale values(1,'Y','EN','USA','EN_USA');
 
