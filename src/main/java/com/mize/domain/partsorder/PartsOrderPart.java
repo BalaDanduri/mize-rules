@@ -1,4 +1,4 @@
-package com.mize.domain.partsOrder;
+package com.mize.domain.partsorder;
 
 
 import java.math.BigDecimal;

@@ -1,4 +1,4 @@
-package com.mize.domain.partsOrder;
+package com.mize.domain.partsorder;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;

@@ -1,4 +1,4 @@
-package com.mize.domain.partsOrder;
+package com.mize.domain.partsorder;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -20,6 +20,13 @@ import com.mize.domain.auth.User;
 import com.mize.domain.businessEntity.BusinessEntity;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.Locale;
+import com.mize.domain.partsorder.PartsOrder;
+import com.mize.domain.partsorder.PartsOrderAmount;
+import com.mize.domain.partsorder.PartsOrderComment;
+import com.mize.domain.partsorder.PartsOrderPart;
+import com.mize.domain.partsorder.PartsOrderPayment;
+import com.mize.domain.partsorder.PartsOrderRequester;
+import com.mize.domain.partsorder.PartsOrderShipment;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.user.UserBE;
 import com.mize.domain.util.Formatter;
