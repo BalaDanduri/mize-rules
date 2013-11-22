@@ -1,5 +1,9 @@
 package com.mize.domain.common;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -35,7 +40,11 @@ public class EntityAddress extends MizeEntity implements Comparable<EntityAddres
 	private State state;
 	private Country country;
 	private String email;
-
+	private String landmark;
+	List<EntityAddressPhone> addressPhones = new ArrayList<EntityAddressPhone>();
+	EntityAddressGeo addressGeo = new EntityAddressGeo();
+	
+	
 	public EntityAddress(){
 		super();
 	}
@@ -198,7 +207,34 @@ public class EntityAddress extends MizeEntity implements Comparable<EntityAddres
 	public void setUpdatedBy(Long updatedBy) {
 		this.updatedBy = updatedBy;
 	} 
+	
+	@Column(name = "land_mark", nullable = true)
+	public String getLandmark() {
+		return landmark;
+	}
 
+	public void setLandmark(String landmark) {
+		this.landmark = landmark;
+	}
+	
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "address")
+	public List<EntityAddressPhone> getAddressPhones() {
+		return addressPhones;
+	}
+
+	public void setAddressPhones(List<EntityAddressPhone> addressPhones) {
+		this.addressPhones = addressPhones;
+	}
+
+	@OneToOne(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "address")
+	@JoinColumn(name="entity_address_id")
+	public EntityAddressGeo getAddressGeo() {
+		return addressGeo;
+	}
+
+	public void setAddressGeo(EntityAddressGeo addressGeo) {
+		this.addressGeo = addressGeo;
+	}
 
 	@Override
 	public int hashCode() {
@@ -213,6 +249,8 @@ public class EntityAddress extends MizeEntity implements Comparable<EntityAddres
 		result = prime * result + ((city == null) ? 0 : city.hashCode());
 		result = prime * result + ((country == null) ? 0 : country.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result
+				+ ((landmark == null) ? 0 : landmark.hashCode());
 		result = prime * result + ((state == null) ? 0 : state.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		result = prime * result + ((zip == null) ? 0 : zip.hashCode());
@@ -259,6 +297,11 @@ public class EntityAddress extends MizeEntity implements Comparable<EntityAddres
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
+		if (landmark == null) {
+			if (other.landmark != null)
+				return false;
+		} else if (!landmark.equals(other.landmark))
+			return false;
 		if (state == null) {
 			if (other.state != null)
 				return false;
@@ -284,11 +327,33 @@ public class EntityAddress extends MizeEntity implements Comparable<EntityAddres
 
 	@Override
 	public String toString() {
-		return "EntityAddress [type=" + type + ", address1=" + address1
-				+ ", address2=" + address2 + ", address3=" + address3
-				+ ", zip=" + zip + ", zipExt=" + zipExt + ", city=" + city
-				+ ", state=" + state + ", country=" + country + ", email="
-				+ email + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("EntityAddress [type=");
+		builder.append(type);
+		builder.append(", address1=");
+		builder.append(address1);
+		builder.append(", address2=");
+		builder.append(address2);
+		builder.append(", address3=");
+		builder.append(address3);
+		builder.append(", zip=");
+		builder.append(zip);
+		builder.append(", zipExt=");
+		builder.append(zipExt);
+		builder.append(", city=");
+		builder.append(city);
+		builder.append(", state=");
+		builder.append(state);
+		builder.append(", country=");
+		builder.append(country);
+		builder.append(", email=");
+		builder.append(email);
+		builder.append(", landmark=");
+		builder.append(landmark);
+		builder.append(", id=");
+		builder.append(id);
+		builder.append("]");
+		return builder.toString();
 	}
 
 	@Override
@@ -296,4 +361,5 @@ public class EntityAddress extends MizeEntity implements Comparable<EntityAddres
 		return 0;
 	}
 
+	
 }

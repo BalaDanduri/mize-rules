@@ -12,7 +12,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
 
-import com.mize.domain.businessEntity.BusinessEntity;
+
+import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.part.Part;
 import com.mize.domain.part.PartSubstitute;
 import com.mize.domain.test.util.JPATest;

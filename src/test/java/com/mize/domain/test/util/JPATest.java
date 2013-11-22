@@ -13,8 +13,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.mize.domain.businessEntity.BusinessEntity;
-import com.mize.domain.businessEntity.BusinessEntityIntl;
+import com.mize.domain.businessentity.BusinessEntity;
+import com.mize.domain.businessentity.BusinessEntityIntl;
 import com.mize.domain.catalog.Catalog;
 import com.mize.domain.catalog.CatalogEntry;
 import com.mize.domain.common.Country;

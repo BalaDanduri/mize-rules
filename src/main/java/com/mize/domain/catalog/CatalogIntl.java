@@ -76,7 +76,7 @@ public class CatalogIntl extends MizeEntity {
 		this.catalogName = catalogName;
 	}
 
-	@Column(name="catalog_description", nullable=true, length=500)
+	@Column(name="catalog_desc", nullable=true, length=500)
 	public String getCatalogDescription() {
 		return catalogDescription;
 	}

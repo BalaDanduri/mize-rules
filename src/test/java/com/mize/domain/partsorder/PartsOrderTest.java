@@ -17,7 +17,8 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.ContextConfiguration;
 
 import com.mize.domain.auth.User;
-import com.mize.domain.businessEntity.BusinessEntity;
+
+import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.Locale;
 import com.mize.domain.partsorder.PartsOrder;
