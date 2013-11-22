@@ -125,6 +125,7 @@ public class PartsOrderRequester extends MizeEntity implements Comparable<PartsO
 		return updatedDate;
 	}
 	
+	@JsonIgnore
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="order_id")
 	public PartsOrder getPartsOrder() {
