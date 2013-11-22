@@ -48,6 +48,7 @@
 				<class>com.mize.domain.form.FormDefinitionAudit</class>
 				<class>com.mize.domain.form.FormInstance</class>
 				<class>com.mize.domain.common.EntityAddress</class>
+				<class>com.mize.domain.partsorder.PartsOrder</class>
 				<class>com.mize.domain.partsorder.PartsOrderAmount</class>
 				<class>com.mize.domain.partsorder.PartsOrderAttachment</class>
 				<class>com.mize.domain.partsorder.PartsOrderAudit</class>
