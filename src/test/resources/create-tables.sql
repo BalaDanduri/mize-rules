@@ -344,7 +344,44 @@ CREATE TABLE business_entity_geo (
 	be_address_id	BIGINT(20) NULL,
 	latitude     	bigint(2000) NULL,
 	longitude    	bigint(2000) NULL,
-	);
+);
+
+drop table if exists business_entity_brand;
+CREATE TABLE business_entity_brand (
+    id				bigint(20) 	AUTO_INCREMENT NOT NULL,
+    be_id   		bigint(20) 			NULL,
+    brand_id		bigint(20) 			NULL,
+    is_active		char(1) 			NULL,
+);
+
+drop table if exists business_entity_attribute;
+CREATE TABLE business_entity_attribute (
+    id				bigint(20) 		AUTO_INCREMENT NOT NULL,
+    be_id   			bigint(20) 		NULL,
+    brand_id			bigint(20) 		NULL,
+    url          		varchar(256) 		NULL,
+    tool_tip_logo		varchar(100) 		NULL,
+    icon         		varchar(100) 		NULL,
+    hours_of_op  		varchar(250) 		NULL,
+    is_credit_onhold		char(1) 		NULL,
+);	
+
+drop table if exists business_entity_contact;
+CREATE TABLE business_entity_contact (
+    id				bigint(20) 		AUTO_INCREMENT NOT NULL,
+    be_id   			bigint(20) 		NULL,
+    brand_id			bigint(20) 		NULL,
+    is_primary			char(1) 		NULL,
+    first_name			varchar(100) 		NULL,
+    last_name			varchar(100) 		NULL,
+    middle_initial		varchar(50) 		NULL,
+    phone         		varchar(50) 		NULL,
+    phone_ext         		varchar(10) 		NULL,
+    fax         		varchar(50) 		NULL,
+    fax_ext         		varchar(10) 		NULL,
+    email  			varchar(100) 		NULL,
+    department			varchar(50) 		NULL,
+);
 
 drop table if exists entity_address_geo;
 CREATE TABLE entity_address_geo ( 

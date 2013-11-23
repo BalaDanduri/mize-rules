@@ -1,5 +1,7 @@
 package com.mize.domain.common;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 @Entity
 @Table(name = "entity_address_geo")
 public class EntityAddressGeo extends MizeEntity implements Comparable<EntityAddressGeo>{
@@ -19,15 +23,15 @@ public class EntityAddressGeo extends MizeEntity implements Comparable<EntityAdd
 	@Transient
 	private Long entityAddressId;
 	private EntityAddress address;
-	private String latitude;
-	private String longitude;
+	private BigDecimal latitude;
+	private BigDecimal longitude;
 
 	public EntityAddressGeo(){
 		super();
 	}
 
-	public EntityAddressGeo(Long entityAddressId, String latitude,
-			String longitude) {
+	public EntityAddressGeo(Long entityAddressId, BigDecimal latitude,
+			BigDecimal longitude) {
 		super();
 		this.entityAddressId = entityAddressId;
 		this.latitude = latitude;
@@ -48,6 +52,8 @@ public class EntityAddressGeo extends MizeEntity implements Comparable<EntityAdd
 	}
 
 	@Transient
+	@Column(name="be_address_id",insertable=false,updatable=false)
+	@JsonIgnore
 	public Long getEntityAddressId() {
 		return entityAddressId;
 	}
@@ -67,20 +73,20 @@ public class EntityAddressGeo extends MizeEntity implements Comparable<EntityAdd
 	}
 
 	@Column(name = "latitude", nullable = true)
-	public String getLatitude() {
+	public BigDecimal getLatitude() {
 		return latitude;
 	}
 
-	public void setLatitude(String latitude) {
+	public void setLatitude(BigDecimal latitude) {
 		this.latitude = latitude;
 	}
 
 	@Column(name = "longitude", nullable = true)
-	public String getLongitude() {
+	public BigDecimal getLongitude() {
 		return longitude;
 	}
 
-	public void setLongitude(String longitude) {
+	public void setLongitude(BigDecimal longitude) {
 		this.longitude = longitude;
 	}
 
@@ -88,6 +94,7 @@ public class EntityAddressGeo extends MizeEntity implements Comparable<EntityAdd
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
+		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result
 				+ ((entityAddressId == null) ? 0 : entityAddressId.hashCode());
 		result = prime * result
@@ -106,6 +113,11 @@ public class EntityAddressGeo extends MizeEntity implements Comparable<EntityAdd
 		if (getClass() != obj.getClass())
 			return false;
 		EntityAddressGeo other = (EntityAddressGeo) obj;
+		if (address == null) {
+			if (other.address != null)
+				return false;
+		} else if (!address.equals(other.address))
+			return false;
 		if (entityAddressId == null) {
 			if (other.entityAddressId != null)
 				return false;
@@ -129,6 +141,8 @@ public class EntityAddressGeo extends MizeEntity implements Comparable<EntityAdd
 		StringBuilder builder = new StringBuilder();
 		builder.append("EntityAddressGeo [entityAddressId=");
 		builder.append(entityAddressId);
+		builder.append(", address=");
+		builder.append(address);
 		builder.append(", latitude=");
 		builder.append(latitude);
 		builder.append(", longitude=");
@@ -138,12 +152,11 @@ public class EntityAddressGeo extends MizeEntity implements Comparable<EntityAdd
 		builder.append("]");
 		return builder.toString();
 	}
-
+	
 	@Override
 	public int compareTo(EntityAddressGeo o) {
 		return 0;
 	}
 
-
-
+	
 }

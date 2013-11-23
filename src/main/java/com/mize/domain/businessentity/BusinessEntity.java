@@ -36,6 +36,9 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	private String name;
 	private List<BusinessEntityAddress> addresses = new ArrayList<BusinessEntityAddress>();
 	private List<BusinessEntityIntl> intl = new ArrayList<BusinessEntityIntl>();
+	private List<BusinessEntityBrand> beBrand = new ArrayList<BusinessEntityBrand>();
+	private List<BusinessEntityContact> beContact = new ArrayList<BusinessEntityContact>();
+	private BusinessEntityAttribute beAttribute = new BusinessEntityAttribute();
 	
 	public BusinessEntity() {
 	}
@@ -157,6 +160,35 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "businessEntity")
+	public List<BusinessEntityBrand> getBeBrand() {
+		return beBrand;
+	}
+
+	public void setBeBrand(List<BusinessEntityBrand> beBrand) {
+		this.beBrand = beBrand;
+	}
+
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "businessEntity")
+	public List<BusinessEntityContact> getBeContact() {
+		return beContact;
+	}
+
+	public void setBeContact(List<BusinessEntityContact> beContact) {
+		this.beContact = beContact;
+	}
+
+	@OneToOne(fetch=FetchType.LAZY ,cascade= CascadeType.ALL)
+	@JoinColumn(name="id")
+	public BusinessEntityAttribute getBeAttribute() {
+		return beAttribute;
+	}
+
+	public void setBeAttribute(BusinessEntityAttribute beAttribute) {
+		this.beAttribute = beAttribute;
+	}
+	
 
 	@Override
 	public int hashCode() {
@@ -279,7 +311,7 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 		builder.append("]");
 		return builder.toString();
 	}
-
+	
 	@Override
 	public int compareTo(BusinessEntity o) {
 		return 0;

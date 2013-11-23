@@ -1,5 +1,4 @@
 package com.mize.domain.businessentity;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,7 +9,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import com.mize.domain.brand.Brand;
 import com.mize.domain.common.MizeEntity;
@@ -19,7 +17,6 @@ import com.mize.domain.common.MizeEntity;
 @Table(name="business_entity_brand")
 public class BusinessEntityBrand extends MizeEntity implements Comparable<BusinessEntityBrand>{
 	private static final long serialVersionUID = -269538922800687629L;
-	private Long be_id;
 	private String isActive;
 	private BusinessEntity businessEntity;
 	private Brand brand;
@@ -37,17 +34,6 @@ public class BusinessEntityBrand extends MizeEntity implements Comparable<Busine
 		this.id = id;
 	}
 	
-	@Transient
-	@Column(name="be_id",insertable=false,updatable=false)
-	@JsonIgnore
-	public Long getBe_id() {
-		return be_id;
-	}
-
-	public void setBe_id(Long be_id) {
-		this.be_id = be_id;
-	}
-
 	@Column(name="is_active",nullable=true)
 	public String getIsActive() {
 		return isActive;
@@ -82,7 +68,6 @@ public class BusinessEntityBrand extends MizeEntity implements Comparable<Busine
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime * result + ((be_id == null) ? 0 : be_id.hashCode());
 		result = prime * result + ((brand == null) ? 0 : brand.hashCode());
 		result = prime * result
 				+ ((businessEntity == null) ? 0 : businessEntity.hashCode());
@@ -100,11 +85,6 @@ public class BusinessEntityBrand extends MizeEntity implements Comparable<Busine
 		if (getClass() != obj.getClass())
 			return false;
 		BusinessEntityBrand other = (BusinessEntityBrand) obj;
-		if (be_id == null) {
-			if (other.be_id != null)
-				return false;
-		} else if (!be_id.equals(other.be_id))
-			return false;
 		if (brand == null) {
 			if (other.brand != null)
 				return false;
@@ -122,13 +102,11 @@ public class BusinessEntityBrand extends MizeEntity implements Comparable<Busine
 			return false;
 		return true;
 	}
-
+	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("BusinessEntityBrand [be_id=");
-		builder.append(be_id);
-		builder.append(", isActive=");
+		builder.append("BusinessEntityBrand [isActive=");
 		builder.append(isActive);
 		builder.append(", businessEntity=");
 		builder.append(businessEntity);
@@ -144,5 +122,4 @@ public class BusinessEntityBrand extends MizeEntity implements Comparable<Busine
 	public int compareTo(BusinessEntityBrand arg0) {
 		return 0;
 	}
-
 }

@@ -2,20 +2,19 @@ package com.mize.domain.businessentity;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.ContextConfiguration;
-
+import com.mize.domain.businessentity.BusinessEntity;
+import com.mize.domain.businessentity.BusinessEntityAddress;
+import com.mize.domain.businessentity.BusinessEntityIntl;
 import com.mize.domain.common.Country;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityAddressGeo;
@@ -29,8 +28,6 @@ public class BusinessEntityTest extends JPATest {
 	private static final String BUSINESS_ENTITY_QUERY = "select * from business_entity where id = ?";
 	EntityManager entityManager;
 	BusinessEntity businessEntity = null;
-	
-	
 	
 	@Before
 	public void setUp(){
@@ -102,6 +99,37 @@ public class BusinessEntityTest extends JPATest {
 		parentBe.setId(963l);
 		be.setParentBE(parentBe);
 		
+		List<BusinessEntityBrand> beBrandList = new ArrayList<BusinessEntityBrand>();
+		BusinessEntityBrand beBrand = new BusinessEntityBrand();
+		beBrand.setBusinessEntity(be);
+		beBrand.setIsActive("Y");
+		beBrandList.add(beBrand);
+		be.setBeBrand(beBrandList);
+		
+		List<BusinessEntityContact> beContactList = new ArrayList<BusinessEntityContact>();
+		BusinessEntityContact beContact = new BusinessEntityContact();
+		beContact.setBusinessEntity(be);
+		beContact.setDepartment("department");
+		beContact.setEmail("email");
+		beContact.setFax("fax");
+		beContact.setFaxExt("faxExt");
+		beContact.setIsPrimary("Y");
+		beContact.setFirstName("firstName");
+		beContact.setLastName("lastName");
+		beContact.setMiddleName("MiddleName");
+		beContact.setPhone("phone");
+		beContact.setPhoneExt("phoneExt");
+		beContactList.add(beContact);
+		be.setBeContact(beContactList);
+		
+		BusinessEntityAttribute beAttribute = new BusinessEntityAttribute();
+		beAttribute.setBusinessEntity(be);
+		beAttribute.setCreditOnHold("Y");
+		beAttribute.setHoursOfOp("344");
+		beAttribute.setIcon("icon");
+		be.setBeAttribute(beAttribute);
+		
+		
 		List<BusinessEntityAddress> addressList = new ArrayList<BusinessEntityAddress>();
 		EntityAddress address = new EntityAddress();
 		address.setType("Office");
@@ -127,7 +155,6 @@ public class BusinessEntityTest extends JPATest {
 		addressGeo.setAddress(address);
 		address.setAddressGeo(addressGeo);
 		addressList.add(address2);
-		
 		be.setAddresses(addressList);
 		
 		
@@ -141,7 +168,6 @@ public class BusinessEntityTest extends JPATest {
 		address.setAddressPhones(addressPhoneList);
 		
 		List<BusinessEntityIntl> intlList = new ArrayList<BusinessEntityIntl>();
-		
 		BusinessEntityIntl intl = findExistingBusinessEntityIntl(entityManager);
 		intl = entityManager.merge(intl);
 		intl.setBusinessEntity(be);
@@ -154,9 +180,4 @@ public class BusinessEntityTest extends JPATest {
 		return be;
 	}
 	
-	/*@After
-	public void tearDown(){
-		entityManager.flush();
-		entityManager.close();
-	}*/
 }

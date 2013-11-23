@@ -9,6 +9,9 @@
 				<class>com.mize.domain.businessentity.BusinessEntityAddress</class>
 				<class>com.mize.domain.businessentity.BusinessEntityGeo</class>
 				<class>com.mize.domain.businessentity.BusinessEntityIntl</class>
+				<class>com.mize.domain.businessentity.BusinessEntityAttribute</class>
+				<class>com.mize.domain.businessentity.BusinessEntityContact</class>
+				<class>com.mize.domain.businessentity.BusinessEntityBrand</class>
                 <class>com.mize.domain.common.State</class>
                 <class>com.mize.domain.common.Country</class>
                 <class>com.mize.domain.catalog.CatalogEntry</class>
