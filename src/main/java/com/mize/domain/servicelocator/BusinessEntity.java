@@ -22,7 +22,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import com.mize.domain.common.MizeEntity;
 
-@Entity
+@Entity(name="com.mize.domain.servicelocator.BusinessEntity")
 @Table(name="business_entity")
 public class BusinessEntity  extends MizeEntity implements Comparable<BusinessEntity>{
 	

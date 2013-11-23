@@ -13,8 +13,7 @@ import javax.persistence.Table;
 import com.mize.domain.brand.Brand;
 import com.mize.domain.common.MizeEntity;
 
-@Entity
-@Table(name = "user_to_be")
+
 public class UserBE extends MizeEntity implements Comparable<UserBE>{
 	
 	private static final long serialVersionUID = -7447355457187568168L;

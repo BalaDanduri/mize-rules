@@ -20,7 +20,7 @@ import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.common.State;
 
-@Entity
+@Entity(name="com.mize.domain.servicelocator.BusinessEntityAddress")
 @Table(name="business_entity_address")
 public class BusinessEntityAddress  extends MizeEntity  implements Comparable<BusinessEntityAddress>{
 

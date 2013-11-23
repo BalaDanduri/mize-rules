@@ -16,10 +16,15 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.codehaus.jackson.annotate.JsonManagedReference;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+
 import com.mize.domain.businessentity.BusinessEntityIntl;
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.util.JPASerializer;
 
-@Entity
+@Entity(name="BusinessEntity")
 @Table(name = "business_entity", uniqueConstraints = {@UniqueConstraint (columnNames={"tenant_id", "code"})})
 public class BusinessEntity extends MizeEntity implements Comparable<BusinessEntity>{
 
@@ -82,12 +87,14 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="tenant_id")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public BusinessEntity getTenant() {
 		return tenant;
 	}
 
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="parent_be_id")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public BusinessEntity getParentBE() {
 		return parentBE;
 	}
@@ -135,6 +142,8 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	}
 	
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "businessEntity")
+	@JsonManagedReference
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public List<BusinessEntityAddress> getAddresses() {
 		return addresses;
 	}
@@ -144,6 +153,7 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	}
 	
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "businessEntity")
+	@JsonManagedReference
 	public List<BusinessEntityIntl> getIntl() {
 		return intl;
 	}
@@ -162,6 +172,8 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	}
 	
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "businessEntity")
+	@JsonManagedReference
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public List<BusinessEntityBrand> getBeBrand() {
 		return beBrand;
 	}
@@ -171,6 +183,8 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	}
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "businessEntity")
+	@JsonManagedReference
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public List<BusinessEntityContact> getBeContact() {
 		return beContact;
 	}
@@ -181,6 +195,7 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 
 	@OneToOne(fetch=FetchType.LAZY ,cascade= CascadeType.ALL)
 	@JoinColumn(name="id")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public BusinessEntityAttribute getBeAttribute() {
 		return beAttribute;
 	}

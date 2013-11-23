@@ -76,7 +76,7 @@ public class CatalogEntryIntl extends MizeEntity {
 		this.itemName = itemName;
 	}
 	
-	@Column(name = "item_desc", nullable = true, length = 500)
+	@Column(name = "item_description", nullable = true, length = 500)
 	public String getItemDescription() {
 		return itemDescription;
 	}

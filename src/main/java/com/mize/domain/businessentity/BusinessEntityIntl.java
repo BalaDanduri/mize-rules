@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
+
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeEntity;
 
@@ -41,6 +43,7 @@ public class BusinessEntityIntl extends MizeEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "be_id")
+	@JsonBackReference
 	public BusinessEntity getBusinessEntity() {
 		return businessEntity;
 	}

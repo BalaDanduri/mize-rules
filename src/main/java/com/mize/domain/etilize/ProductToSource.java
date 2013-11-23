@@ -11,8 +11,6 @@ import com.mize.domain.common.MizeEntity;
 
 
 
-@javax.persistence.Entity
-@Table(name="prod_to_source")
 public class ProductToSource extends MizeEntity{
 
 	private static final long serialVersionUID = -17526446685342722L;

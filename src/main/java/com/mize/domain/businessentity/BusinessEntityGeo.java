@@ -14,7 +14,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 
 import com.mize.domain.common.MizeEntity;
 
-@Entity
+@Entity(name="com.mize.domain.businessentity.BusinessEntityGeo")
 @Table(name="business_entity_geo")
 public class BusinessEntityGeo extends MizeEntity implements Comparable<BusinessEntityGeo> {
 	private static final long serialVersionUID = -2024187778230039496L;

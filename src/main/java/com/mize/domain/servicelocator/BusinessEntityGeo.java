@@ -19,7 +19,7 @@ import org.hibernate.annotations.Parameter;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.DecimalValueDeserializer;
 
-@Entity
+@Entity(name="com.mize.domain.servicelocator.BusinessEntityGeo")
 @Table(name="business_entity_geo")
 public class BusinessEntityGeo extends MizeEntity implements Comparable<BusinessEntityGeo> {
 

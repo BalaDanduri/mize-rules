@@ -13,13 +13,13 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
-import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.MizeEntity;
 
-@Entity
+@Entity(name="com.mize.domain.businessentity.BusinessEntityAddress")
 @Table(name="business_entity_address")
 public class BusinessEntityAddress  extends MizeEntity  implements Comparable<BusinessEntityAddress>{
 
@@ -45,6 +45,7 @@ public class BusinessEntityAddress  extends MizeEntity  implements Comparable<Bu
 	
 	@Transient
 	@Column(name="be_id",insertable=false,updatable=false)
+	@JsonIgnore
 	public long getBeId() {
 		return beId;
 	}
@@ -69,7 +70,7 @@ public class BusinessEntityAddress  extends MizeEntity  implements Comparable<Bu
 
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="be_id")
-	@JsonIgnore
+	@JsonBackReference
 	public BusinessEntity getBusinessEntity() {
 		return businessEntity;
 	}
