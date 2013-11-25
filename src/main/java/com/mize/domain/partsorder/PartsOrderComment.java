@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 import com.mize.domain.common.MizeEntity;
 
 @Entity
@@ -79,6 +81,7 @@ public class PartsOrderComment extends MizeEntity implements Comparable<PartsOrd
 	
 	@ManyToOne(fetch=FetchType.LAZY,cascade =CascadeType.ALL)
 	@JoinColumn(name="order_id")
+	@JsonIgnore
 	public PartsOrder getPartsOrder() {
 		return partsOrder;
 	}

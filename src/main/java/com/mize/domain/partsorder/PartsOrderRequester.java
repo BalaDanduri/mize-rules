@@ -33,7 +33,7 @@ public class PartsOrderRequester extends MizeEntity implements Comparable<PartsO
 	private Long orderId;
 	private PartsOrder partsOrder;
 	private BusinessEntity businessEntity;
-	private EntityAddress address = new EntityAddress();
+	private EntityAddress address = null;
 
 	public PartsOrderRequester(){
 		super();
@@ -61,7 +61,7 @@ public class PartsOrderRequester extends MizeEntity implements Comparable<PartsO
 		this.orderId = orderId;
 	}
 
-	@OneToOne(fetch=FetchType.LAZY ,cascade =CascadeType.ALL)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="requester_be_id")
 	public BusinessEntity getBusinessEntity() {
 		return businessEntity;
@@ -71,7 +71,6 @@ public class PartsOrderRequester extends MizeEntity implements Comparable<PartsO
 		this.businessEntity = businessEntity;
 	}
 
-	@Transient
 	@OneToOne(fetch=FetchType.LAZY ,cascade =CascadeType.ALL)
 	@JoinColumn(name="requester_address_id")
 	public EntityAddress getAddress() {
@@ -127,6 +126,7 @@ public class PartsOrderRequester extends MizeEntity implements Comparable<PartsO
 	
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="order_id")
+	@JsonIgnore
 	public PartsOrder getPartsOrder() {
 		return partsOrder;
 	}

@@ -206,6 +206,7 @@ public class PartsOrderPart extends MizeEntity implements Comparable<PartsOrderP
 
 	@ManyToOne(fetch=FetchType.LAZY,cascade =CascadeType.ALL)
 	@JoinColumn(name="order_id")
+	@JsonIgnore
 	public PartsOrder getPartsOrder() {
 		return partsOrder;
 	}

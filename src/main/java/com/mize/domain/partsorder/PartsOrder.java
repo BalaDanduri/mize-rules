@@ -240,7 +240,7 @@ public class PartsOrder extends MizeEntity implements Comparable<PartsOrder>{
 		this.parts = parts;
 	}
 
-	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "partsOrder")
+	@OneToMany(cascade=CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "partsOrder")
 	public List<PartsOrderComment> getComments() {
 		return comments;
 	}
@@ -249,7 +249,7 @@ public class PartsOrder extends MizeEntity implements Comparable<PartsOrder>{
 		this.comments = comments;
 	}
 
-	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "partsOrder")
+	@OneToMany(cascade=CascadeType.ALL,fetch = FetchType.LAZY, mappedBy = "partsOrder")
 	public List<PartsOrderAudit> getAudits() {
 		return audits;
 	}

@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
@@ -79,8 +80,9 @@ public class PartsOrderAudit extends MizeEntity implements Comparable<PartsOrder
 		this.statusBy = statusBy;
 	}
 
-	@ManyToOne(fetch=FetchType.LAZY,cascade =CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
 	@JoinColumn(name="order_id")
+	@JsonIgnore
 	public PartsOrder getPartsOrder() {
 		return partsOrder;
 	}

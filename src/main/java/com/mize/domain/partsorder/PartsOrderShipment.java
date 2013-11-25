@@ -1,5 +1,6 @@
 package com.mize.domain.partsorder;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -31,7 +32,7 @@ public class PartsOrderShipment extends MizeEntity implements Comparable<PartsOr
 	private static final long serialVersionUID = 261638805962518728L;	
 	private Long orderId;
 	private BusinessEntity businessEntity;
-	private EntityAddress address;
+	private EntityAddress address = null;
 	private String method;
 	private String priority;
 	private String carrier;
@@ -72,7 +73,7 @@ public class PartsOrderShipment extends MizeEntity implements Comparable<PartsOr
 		this.businessEntity = businessEntity;
 	}
 
-	@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name="shipment_address_id")
 	public EntityAddress getAddress() {
 		return address;
@@ -135,6 +136,7 @@ public class PartsOrderShipment extends MizeEntity implements Comparable<PartsOr
 	
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="order_id")
+	@JsonIgnore
 	public PartsOrder getPartsOrder() {
 		return partsOrder;
 	}

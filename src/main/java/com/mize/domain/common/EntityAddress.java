@@ -42,7 +42,7 @@ public class EntityAddress extends MizeEntity implements Comparable<EntityAddres
 	private String email;
 	private String landmark;
 	List<EntityAddressPhone> addressPhones = new ArrayList<EntityAddressPhone>();
-	EntityAddressGeo addressGeo = new EntityAddressGeo();
+	EntityAddressGeo addressGeo = null;
 	
 	
 	public EntityAddress(){
