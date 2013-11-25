@@ -52,7 +52,7 @@ public class State extends MizeEntity implements Comparable<State>{
 		this.code = code;
 	}	
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "country_id")
 	public Country getCountry() {
 		return country;

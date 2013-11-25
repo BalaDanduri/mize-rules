@@ -11,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -118,7 +117,7 @@ public class Country extends MizeEntity implements Comparable<Country>{
 		return EQUAL;		
 	}
 
-	@OneToMany(cascade={CascadeType.ALL}, fetch= FetchType.LAZY ,mappedBy ="country")
+	@OneToMany(cascade={CascadeType.ALL}, fetch= FetchType.LAZY , mappedBy ="country")
 	public List<State> getStates() {
 		return states;
 	}
@@ -127,7 +126,7 @@ public class Country extends MizeEntity implements Comparable<Country>{
 		this.states = states;
 	}
 
-	@Transient
+	@Column(name="country_code_3")
 	public String getCode3() {
 		return code3;
 	}

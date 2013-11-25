@@ -22,7 +22,7 @@ import com.mize.domain.util.Formatter;
 @ContextConfiguration(locations={"/test-context.xml"})
 public class CountryTest extends JPATest {
 
-	private static String Country_QUERY = "select * from country where id = ?";
+	private static String Country_QUERY = "select * from country where country_id = ?";
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		
@@ -43,7 +43,7 @@ public class CountryTest extends JPATest {
 	
 	@Test
 	public void test(){
-		List<Country> countries = jdbcTemplate.query(Country_QUERY, new Object[]{ new Long(1) }, new CountryRowMapper() );
+		List<Country> countries = jdbcTemplate.query(Country_QUERY, new Object[]{ new Long(1) }, new CountryRowMapper());
 		if(!Formatter.isEmpty(countries)){
 			Country country1  = countries.get(0);
 			assertEquals(country.getCode(),country1.getCode());
@@ -56,9 +56,10 @@ public class CountryTest extends JPATest {
 		@Override
 		public Country mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Country country = new Country();
-			country.setId(rs.getLong("id"));
-			country.setCode(rs.getString("code"));
-			country.setCode3(rs.getString("code3"));
+			country.setId(rs.getLong("country_id"));
+			country.setCode(rs.getString("country_code"));
+			country.setCode3(rs.getString("country_code_3"));
+			country.setName(rs.getString("country_name"));
 			return country;
 		}
 	}
