@@ -8,7 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import com.mize.domain.brand.Brand;
@@ -50,7 +49,7 @@ public class BusinessEntityAttribute extends MizeEntity implements Comparable<Bu
 		this.businessEntity = businessEntity;
 	}
 
-	@OneToOne(targetEntity=Brand.class)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="brand_id")
 	public Brand getBrand() {
 		return brand;

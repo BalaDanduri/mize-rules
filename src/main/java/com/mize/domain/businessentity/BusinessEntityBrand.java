@@ -7,11 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import org.codehaus.jackson.annotate.JsonBackReference;
-
+import org.codehaus.jackson.annotate.JsonIgnore;
 import com.mize.domain.brand.Brand;
 import com.mize.domain.common.MizeEntity;
 
@@ -47,7 +44,7 @@ public class BusinessEntityBrand extends MizeEntity implements Comparable<Busine
 
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="be_id")
-	@JsonBackReference
+	@JsonIgnore
 	public BusinessEntity getBusinessEntity() {
 		return businessEntity;
 	}
@@ -56,7 +53,7 @@ public class BusinessEntityBrand extends MizeEntity implements Comparable<Busine
 		this.businessEntity = businessEntity;
 	}
 
-	@OneToOne(targetEntity=Brand.class)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="brand_id")
 	public Brand getBrand() {
 		return brand;

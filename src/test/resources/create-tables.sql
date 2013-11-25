@@ -254,6 +254,52 @@ CREATE TABLE state (
 	updated_date	DATETIME NULL,
 	country_id  	INTEGER(11) NULL 
 	);
+	
+drop table if exists brand;
+CREATE TABLE brand (
+        brand_id         bigint(20) NOT NULL,
+        brand_name         varchar(250) NOT NULL,
+        brand_type         bigint(11) NULL,
+        brand_link         varchar(250) NULL,
+        created_by         bigint(20) NULL,
+        created_date         datetime NULL,
+        updated_by         bigint(20) NULL,
+        updated_date         datetime NULL,
+        brand_logo         varchar(50) NULL,
+        feedback_email         varchar(100) NULL,
+        department         varchar(50) NULL,
+        registered         char(1) NULL DEFAULT 'N',
+        is_active         char(1) NULL,
+);
+
+INSERT INTO brand(brand_id,brand_name,brand_type,brand_link,created_by,created_date,updated_by,updated_date,feedback_email,department,registered,is_active)
+ 	VALUES(1,'Bose',1,'bose.com',null,null,null,null,'feedback_email','Electronics','Y','Y');
+
+drop table if exists brand_support;
+CREATE TABLE brand_support (
+        brand_id         bigint(20) NOT NULL,
+        brand_support_id         bigint(20) NOT NULL,
+        support_phone         varchar(20) NULL,
+        support_email         varchar(100) NULL,
+        support_site         varchar(250) NULL,
+        support_chat         varchar(500) NULL,
+        support_phone_tf         varchar(20) NULL,
+        support_qualifier         varchar(250) NULL,
+        validated_by         varchar(100) NULL,
+        validated_on         datetime NULL,
+        prodcat_id         int(11) NULL,
+        support_facebook         varchar(250) NULL,
+        support_twitter         varchar(250) NULL,
+        country_id         int(11) NOT NULL,
+        support_type         int(11) NULL,
+        data_source_type         int(11) NULL,
+        validated         tinyint(1) NULL,
+        hours_of_op         varchar(250) NULL,
+        created_by         bigint(20) NULL,
+        created_date         datetime NULL,
+        updated_by         bigint(20) NULL,
+        updated_date         datetime NULL,
+);
 
 	CREATE TABLE business_entity ( 
     id       bigint(20) 	AUTO_INCREMENT NOT NULL,
@@ -354,6 +400,8 @@ CREATE TABLE business_entity_brand (
     is_active		char(1) 			NULL,
 );
 
+
+
 drop table if exists business_entity_attribute;
 CREATE TABLE business_entity_attribute (
     id				bigint(20) 		AUTO_INCREMENT NOT NULL,
@@ -365,6 +413,8 @@ CREATE TABLE business_entity_attribute (
     hours_of_op  		varchar(250) 		NULL,
     is_credit_onhold		char(1) 		NULL,
 );	
+
+
 
 drop table if exists business_entity_contact;
 CREATE TABLE business_entity_contact (
@@ -382,6 +432,10 @@ CREATE TABLE business_entity_contact (
     email  			varchar(100) 		NULL,
     department			varchar(50) 		NULL,
 );
+
+INSERT INTO business_entity_contact (be_id, brand_id, is_primary, first_name, last_name, middle_initial, phone, phone_ext, fax, fax_ext, email, department)
+ 	VALUES(961,1,'Y','firstName','lastName','middleIntial','90909090','90909090','909090','90909','test@test.com','departmant');
+
 
 drop table if exists entity_address_geo;
 CREATE TABLE entity_address_geo ( 
@@ -838,6 +892,12 @@ INSERT INTO state(state_id, state_code, state_name, created_by, created_date, up
 
 INSERT INTO  business_entity_address (id, be_id, code, locale_id, name, address_1, address_2, address_3, zip, zip_ext, city, county, state_id, country_id, phone_1, phone_2, email, fax, land_mark, url, tool_tip_logo, icon, hours_of_op, be_address_id)
   VALUES(10799, 961, NULL, 1, NULL, '12529 PARKLAWN DR.', NULL, NULL, '20852', NULL, 'ROCKVILLE', NULL, 20, 1, '3012305800', NULL, NULL, '3012305830', NULL, NULL, NULL, NULL, NULL,10799);
+  
+INSERT INTO business_entity_brand(be_id, brand_id, is_active) VALUES (961, 1, 'Y');
+
+INSERT INTO business_entity_attribute(be_id, brand_id, url, tool_tip_logo, icon, hours_of_op, is_credit_onhold) VALUES (961,1,'url','tooltiplogo','icon','24*7','Y');
+
+
   
 INSERT INTO  catalog (id, tenant_id, catalog_code, catalog_type, is_active, created_date, updated_date, created_by, updated_by)
   VALUES(100, 961, 'TestCatalog', 'TestCatalogType', 'Y', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL);

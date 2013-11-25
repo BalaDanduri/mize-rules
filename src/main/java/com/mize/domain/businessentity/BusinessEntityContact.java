@@ -7,11 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import org.codehaus.jackson.annotate.JsonBackReference;
-
+import org.codehaus.jackson.annotate.JsonIgnore;
 import com.mize.domain.brand.Brand;
 import com.mize.domain.common.MizeEntity;
 
@@ -47,7 +44,7 @@ public class BusinessEntityContact extends MizeEntity implements Comparable<Busi
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="be_id")
-	@JsonBackReference
+	@JsonIgnore
 	public BusinessEntity getBusinessEntity() {
 		return businessEntity;
 	}
@@ -56,7 +53,7 @@ public class BusinessEntityContact extends MizeEntity implements Comparable<Busi
 		this.businessEntity = businessEntity;
 	}
 
-	@OneToOne(targetEntity=Brand.class)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="brand_id")
 	public Brand getBrand() {
 		return brand;
@@ -161,5 +158,105 @@ public class BusinessEntityContact extends MizeEntity implements Comparable<Busi
 	public int compareTo(BusinessEntityContact o) {
 		return 0;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = PRIME;
+		int result = super.hashCode();
+		result = prime * result + ((brand == null) ? 0 : brand.hashCode());
+		result = prime * result
+				+ ((businessEntity == null) ? 0 : businessEntity.hashCode());
+		result = prime * result
+				+ ((department == null) ? 0 : department.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((fax == null) ? 0 : fax.hashCode());
+		result = prime * result + ((faxExt == null) ? 0 : faxExt.hashCode());
+		result = prime * result
+				+ ((firstName == null) ? 0 : firstName.hashCode());
+		result = prime * result
+				+ ((isPrimary == null) ? 0 : isPrimary.hashCode());
+		result = prime * result
+				+ ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result
+				+ ((middleName == null) ? 0 : middleName.hashCode());
+		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
+		result = prime * result
+				+ ((phoneExt == null) ? 0 : phoneExt.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		BusinessEntityContact other = (BusinessEntityContact) obj;
+		if (brand == null) {
+			if (other.brand != null)
+				return false;
+		} else if (!brand.equals(other.brand))
+			return false;
+		if (businessEntity == null) {
+			if (other.businessEntity != null)
+				return false;
+		} else if (!businessEntity.equals(other.businessEntity))
+			return false;
+		if (department == null) {
+			if (other.department != null)
+				return false;
+		} else if (!department.equals(other.department))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (fax == null) {
+			if (other.fax != null)
+				return false;
+		} else if (!fax.equals(other.fax))
+			return false;
+		if (faxExt == null) {
+			if (other.faxExt != null)
+				return false;
+		} else if (!faxExt.equals(other.faxExt))
+			return false;
+		if (firstName == null) {
+			if (other.firstName != null)
+				return false;
+		} else if (!firstName.equals(other.firstName))
+			return false;
+		if (isPrimary == null) {
+			if (other.isPrimary != null)
+				return false;
+		} else if (!isPrimary.equals(other.isPrimary))
+			return false;
+		if (lastName == null) {
+			if (other.lastName != null)
+				return false;
+		} else if (!lastName.equals(other.lastName))
+			return false;
+		if (middleName == null) {
+			if (other.middleName != null)
+				return false;
+		} else if (!middleName.equals(other.middleName))
+			return false;
+		if (phone == null) {
+			if (other.phone != null)
+				return false;
+		} else if (!phone.equals(other.phone))
+			return false;
+		if (phoneExt == null) {
+			if (other.phoneExt != null)
+				return false;
+		} else if (!phoneExt.equals(other.phoneExt))
+			return false;
+		return true;
+	}
+	
+	
 
 }
