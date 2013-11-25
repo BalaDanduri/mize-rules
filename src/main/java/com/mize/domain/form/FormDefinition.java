@@ -100,7 +100,7 @@ public class FormDefinition extends MizeEntity {
 		this.formTemplateDefinition = formTemplateDefinition;
 	}
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne()
 	@JoinColumn(name = "tenant_id", nullable = true)
 	public BusinessEntity getTenant() {
 		return tenant;
@@ -202,7 +202,7 @@ public class FormDefinition extends MizeEntity {
 		this.endDate = endDate;
 	}
 	
-	@OneToMany(cascade={CascadeType.ALL}, fetch= FetchType.EAGER, mappedBy = "formDefinition")
+	@OneToMany(cascade={CascadeType.ALL}, fetch= FetchType.LAZY, mappedBy = "formDefinition")
 	@JsonManagedReference
 	public List<FormDefinitionAudit> getAudits() {
 		return audits;

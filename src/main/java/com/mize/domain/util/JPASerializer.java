@@ -1,9 +1,6 @@
 package com.mize.domain.util;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 
 import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.JsonProcessingException;
@@ -19,31 +16,32 @@ public class JPASerializer extends JsonSerializer<Object> {
 
 	@SuppressWarnings("rawtypes")
 	@Override
-	public void serialize(Object value, JsonGenerator jgen, SerializerProvider provider)
+	public void serialize(Object entity, JsonGenerator jgen, SerializerProvider provider)
 			throws IOException, JsonProcessingException {
 		
-		if(HibernateProxy.class.isAssignableFrom(value.getClass())) {
-			 if (((HibernateProxy) value).getHibernateLazyInitializer().isUninitialized()) {
-	             jgen.writeNull();
-	             return;
-	         }
-		} else if(PersistentCollection.class.isAssignableFrom(value.getClass())) {
-			if (!((PersistentCollection) value).wasInitialized()) {				
-                if(PersistentMap.class.isAssignableFrom(value.getClass()))  {
-                	jgen.writeObject(new HashMap());
+		if(PersistentCollection.class.isAssignableFrom(entity.getClass())) {
+			if (!((PersistentCollection) entity).wasInitialized()) {				
+                if(PersistentMap.class.isAssignableFrom(entity.getClass()))  {
+                	jgen.writeStartObject();
+        			jgen.writeEndObject();
                 	return;
                 }
-                if(PersistentBag.class.isAssignableFrom(value.getClass()))  {
-                	jgen.writeObject(new ArrayList());
+                if(PersistentBag.class.isAssignableFrom(entity.getClass()) || PersistentSet.class.isAssignableFrom(entity.getClass()))  {
+                	jgen.writeStartArray();
+        			jgen.writeEndArray();
                 	return;
                 }
-                if(PersistentSet.class.isAssignableFrom(value.getClass()))  {
-                	jgen.writeObject(new HashSet());
-                	return;
-                }
-                
-            }
-		}		
+              
+            }else {
+    			jgen.writeObject(entity);
+    		}
+		} else if(entity instanceof HibernateProxy && HibernateProxy.class.isAssignableFrom(entity.getClass())) {
+			jgen.writeStartObject();
+			jgen.writeEndObject();
+            return;
+		} else {
+			jgen.writeObject(entity);
+		}
 				
 	}
 
