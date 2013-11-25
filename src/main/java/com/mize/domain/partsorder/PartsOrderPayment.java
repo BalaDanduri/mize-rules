@@ -97,7 +97,7 @@ public class PartsOrderPayment extends MizeEntity implements Comparable<PartsOrd
 		int result = super.hashCode();
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result + ((method == null) ? 0 : method.hashCode());
-		result = prime * result + ((orderId == null) ? 0 : orderId.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -120,17 +120,17 @@ public class PartsOrderPayment extends MizeEntity implements Comparable<PartsOrd
 				return false;
 		} else if (!method.equals(other.method))
 			return false;
-		if (orderId == null) {
-			if (other.orderId != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!orderId.equals(other.orderId))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "PartsOrderPayment [orderId=" + orderId + ", address=" + address
+		return "PartsOrderPayment [id=" + id + ", address=" + address
 				+ ", method=" + method + "]";
 	}
 

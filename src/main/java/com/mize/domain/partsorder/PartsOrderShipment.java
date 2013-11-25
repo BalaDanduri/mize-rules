@@ -191,9 +191,9 @@ public class PartsOrderShipment extends MizeEntity implements Comparable<PartsOr
 		} else if (!method.equals(other.method))
 			return false;
 		if (orderId == null) {
-			if (other.orderId != null)
+			if (other.id != null)
 				return false;
-		} else if (!orderId.equals(other.orderId))
+		} else if (!id.equals(other.id))
 			return false;
 		if (priority == null) {
 			if (other.priority != null)

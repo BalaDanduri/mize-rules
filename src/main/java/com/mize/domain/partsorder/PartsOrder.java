@@ -315,7 +315,7 @@ public class PartsOrder extends MizeEntity implements Comparable<PartsOrder>{
 	@Override
 	public String toString() {
 		return "PartsOrder [type=" + type + ", code=" + code + ", requestType="
-				+ requestType + ", status=" + status + "]";
+				+ requestType + ", status=" + status +",id = "+id+ "]";
 	}
 
 	@Override

@@ -135,7 +135,7 @@ public class PartsOrderAudit extends MizeEntity implements Comparable<PartsOrder
 	@Override
 	public String toString() {
 		return "PartsOrderAudit [statusCode=" + statusCode + ", statusDate="
-				+ statusDate + ", statusBy=" + statusBy + "]";
+				+ statusDate + ", statusBy=" + statusBy +",id ="+id+ "]";
 	}
 
 	@Override
