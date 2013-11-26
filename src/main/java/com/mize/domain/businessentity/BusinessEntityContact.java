@@ -9,7 +9,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.codehaus.jackson.annotate.JsonIgnore;
-import com.mize.domain.brand.Brand;
 import com.mize.domain.common.MizeEntity;
 
 @Entity
@@ -17,8 +16,7 @@ import com.mize.domain.common.MizeEntity;
 public class BusinessEntityContact extends MizeEntity implements Comparable<BusinessEntityContact> {
 	private static final long serialVersionUID = -1908157637318196738L;
 	 	private BusinessEntity businessEntity;
-	 	private Brand brand;
-		private String isPrimary;
+	 	private String isPrimary;
 		private String firstName;
 		private String lastName;
 		private String middleName;
@@ -51,16 +49,6 @@ public class BusinessEntityContact extends MizeEntity implements Comparable<Busi
 
 	public void setBusinessEntity(BusinessEntity businessEntity) {
 		this.businessEntity = businessEntity;
-	}
-
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="brand_id")
-	public Brand getBrand() {
-		return brand;
-	}
-
-	public void setBrand(Brand brand) {
-		this.brand = brand;
 	}
 
 	@Column(name="is_primary",nullable=true)
@@ -163,7 +151,6 @@ public class BusinessEntityContact extends MizeEntity implements Comparable<Busi
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime * result + ((brand == null) ? 0 : brand.hashCode());
 		result = prime * result
 				+ ((businessEntity == null) ? 0 : businessEntity.hashCode());
 		result = prime * result
@@ -194,11 +181,6 @@ public class BusinessEntityContact extends MizeEntity implements Comparable<Busi
 		if (getClass() != obj.getClass())
 			return false;
 		BusinessEntityContact other = (BusinessEntityContact) obj;
-		if (brand == null) {
-			if (other.brand != null)
-				return false;
-		} else if (!brand.equals(other.brand))
-			return false;
 		if (businessEntity == null) {
 			if (other.businessEntity != null)
 				return false;
@@ -256,6 +238,8 @@ public class BusinessEntityContact extends MizeEntity implements Comparable<Busi
 			return false;
 		return true;
 	}
+
+	
 	
 	
 

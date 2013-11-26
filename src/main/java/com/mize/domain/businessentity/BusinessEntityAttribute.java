@@ -10,7 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.codehaus.jackson.annotate.JsonIgnore;
-import com.mize.domain.brand.Brand;
 import com.mize.domain.common.MizeEntity;
 
 @Entity
@@ -18,7 +17,6 @@ import com.mize.domain.common.MizeEntity;
 public class BusinessEntityAttribute extends MizeEntity implements Comparable<BusinessEntityAttribute>{
 	private static final long serialVersionUID = 7270726663818044384L;
 	 private BusinessEntity businessEntity;
-	 private Brand brand;
 	 private String url;
 	 private String toolTipLogo;
 	 private String icon;
@@ -47,16 +45,6 @@ public class BusinessEntityAttribute extends MizeEntity implements Comparable<Bu
 
 	public void setBusinessEntity(BusinessEntity businessEntity) {
 		this.businessEntity = businessEntity;
-	}
-
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="brand_id")
-	public Brand getBrand() {
-		return brand;
-	}
-
-	public void setBrand(Brand brand) {
-		this.brand = brand;
 	}
 
 	@Column(name="url",nullable=true)
@@ -108,7 +96,6 @@ public class BusinessEntityAttribute extends MizeEntity implements Comparable<Bu
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime * result + ((brand == null) ? 0 : brand.hashCode());
 		result = prime * result
 				+ ((businessEntity == null) ? 0 : businessEntity.hashCode());
 		result = prime * result
@@ -131,11 +118,6 @@ public class BusinessEntityAttribute extends MizeEntity implements Comparable<Bu
 		if (getClass() != obj.getClass())
 			return false;
 		BusinessEntityAttribute other = (BusinessEntityAttribute) obj;
-		if (brand == null) {
-			if (other.brand != null)
-				return false;
-		} else if (!brand.equals(other.brand))
-			return false;
 		if (businessEntity == null) {
 			if (other.businessEntity != null)
 				return false;
@@ -169,33 +151,9 @@ public class BusinessEntityAttribute extends MizeEntity implements Comparable<Bu
 		return true;
 	}
 	
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("BusinessEntityAttribute [businessEntity=");
-		builder.append(businessEntity);
-		builder.append(", brand=");
-		builder.append(brand);
-		builder.append(", url=");
-		builder.append(url);
-		builder.append(", toolTipLogo=");
-		builder.append(toolTipLogo);
-		builder.append(", icon=");
-		builder.append(icon);
-		builder.append(", hoursOfOp=");
-		builder.append(hoursOfOp);
-		builder.append(", creditOnHold=");
-		builder.append(creditOnHold);
-		builder.append(", id=");
-		builder.append(id);
-		builder.append("]");
-		return builder.toString();
-	}
 	
 	@Override
 	public int compareTo(BusinessEntityAttribute o) {
 		return 0;
 	}
-
-	
 }

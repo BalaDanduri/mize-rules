@@ -405,8 +405,7 @@ CREATE TABLE business_entity_brand (
 drop table if exists business_entity_attribute;
 CREATE TABLE business_entity_attribute (
     id				bigint(20) 		AUTO_INCREMENT NOT NULL,
-    be_id   			bigint(20) 		NULL,
-    brand_id			bigint(20) 		NULL,
+    be_id   			bigint(20) 		NULL,    
     url          		varchar(256) 		NULL,
     tool_tip_logo		varchar(100) 		NULL,
     icon         		varchar(100) 		NULL,
@@ -419,8 +418,7 @@ CREATE TABLE business_entity_attribute (
 drop table if exists business_entity_contact;
 CREATE TABLE business_entity_contact (
     id				bigint(20) 		AUTO_INCREMENT NOT NULL,
-    be_id   			bigint(20) 		NULL,
-    brand_id			bigint(20) 		NULL,
+    be_id   			bigint(20) 		NULL,    
     is_primary			char(1) 		NULL,
     first_name			varchar(100) 		NULL,
     last_name			varchar(100) 		NULL,
@@ -433,8 +431,8 @@ CREATE TABLE business_entity_contact (
     department			varchar(50) 		NULL,
 );
 
-INSERT INTO business_entity_contact (be_id, brand_id, is_primary, first_name, last_name, middle_initial, phone, phone_ext, fax, fax_ext, email, department)
- 	VALUES(961,1,'Y','firstName','lastName','middleIntial','90909090','90909090','909090','90909','test@test.com','departmant');
+INSERT INTO business_entity_contact (be_id, is_primary, first_name, last_name, middle_initial, phone, phone_ext, fax, fax_ext, email, department)
+ 	VALUES(961,'Y','firstName','lastName','middleIntial','90909090','90909090','909090','90909','test@test.com','departmant');
 
 
 drop table if exists entity_address_geo;
@@ -895,7 +893,7 @@ INSERT INTO  business_entity_address (id, be_id, code, locale_id, name, address_
   
 INSERT INTO business_entity_brand(be_id, brand_id, is_active) VALUES (961, 1, 'Y');
 
-INSERT INTO business_entity_attribute(be_id, brand_id, url, tool_tip_logo, icon, hours_of_op, is_credit_onhold) VALUES (961,1,'url','tooltiplogo','icon','24*7','Y');
+INSERT INTO business_entity_attribute(be_id, url, tool_tip_logo, icon, hours_of_op, is_credit_onhold) VALUES (961,'url','tooltiplogo','icon','24*7','Y');
 
 
   
