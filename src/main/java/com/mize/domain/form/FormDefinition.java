@@ -21,6 +21,8 @@ import org.codehaus.jackson.annotate.JsonManagedReference;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -202,8 +204,9 @@ public class FormDefinition extends MizeEntity {
 		this.endDate = endDate;
 	}
 	
-	@OneToMany(cascade={CascadeType.ALL}, fetch= FetchType.LAZY, mappedBy = "formDefinition")
+	@OneToMany(cascade={CascadeType.ALL}, fetch= FetchType.EAGER, mappedBy = "formDefinition")
 	@JsonManagedReference
+	@Fetch(FetchMode.SUBSELECT)
 	public List<FormDefinitionAudit> getAudits() {
 		return audits;
 	}
