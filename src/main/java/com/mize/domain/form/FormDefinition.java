@@ -228,7 +228,7 @@ public class FormDefinition extends MizeEntity {
 	@Override	
 	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
 	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	@Column(name = "created_date", updatable = false)
 	public DateTime getCreatedDate() {
 		return createdDate;
@@ -244,7 +244,7 @@ public class FormDefinition extends MizeEntity {
 	
 	@Override	
 	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@Column(name = "updated_date")
 	public DateTime getUpdatedDate() {
