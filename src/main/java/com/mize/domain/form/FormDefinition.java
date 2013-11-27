@@ -227,34 +227,34 @@ public class FormDefinition extends MizeEntity {
 	
 	@Override	
 	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
-	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	@Column(name = "created_date", updatable = false)
+	@Type(type="com.mize.domain.util.DateTimeJPA")
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)	
+	@JsonIgnore(value=false)
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
 	
 	@Override
 	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)		
 	public void setCreatedDate(DateTime createdDate) {
 		super.createdDate = createdDate;
 	}
 	
-	@Override	
+	
 	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	@Column(name = "updated_date", nullable = true)
 	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@Column(name = "updated_date")
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	@JsonIgnore(value=false)
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
 	
-	@Override
+	
 	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)		
 	public void setUpdatedDate(DateTime updatedDate) {
 		super.updatedDate = updatedDate;
 	}
