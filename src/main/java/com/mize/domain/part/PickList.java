@@ -35,7 +35,7 @@ public class PickList extends MizeEntity {
 	private String isActive;
 	private String comments;
 	private BusinessEntity tenant;
-	private List<PickListItem> items;
+	private List<PickListItem> listItems;
 
 	public PickList(){
 		super();
@@ -45,7 +45,7 @@ public class PickList extends MizeEntity {
 
 	public PickList(BusinessEntity businessEntity, String code, String type,
 			String isActive, String comments, BusinessEntity tenant,
-			List<PickListItem> items) {
+			List<PickListItem> listItems) {
 		super();
 		this.businessEntity = businessEntity;
 		this.code = code;
@@ -53,7 +53,7 @@ public class PickList extends MizeEntity {
 		this.isActive = isActive;
 		this.comments = comments;
 		this.tenant = tenant;
-		this.items = items;
+		this.listItems = listItems;
 	}
 
 
@@ -93,8 +93,8 @@ public class PickList extends MizeEntity {
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pickList")
-	public List<PickListItem> getItems() {
-		return items;
+	public List<PickListItem> getListItems() {
+		return listItems;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -158,8 +158,8 @@ public class PickList extends MizeEntity {
 		this.tenant = tenant;
 	}
 
-	public void setItems(List<PickListItem> items) {
-		this.items = items;
+	public void setListItems(List<PickListItem> listItems) {
+		this.listItems = listItems;
 	}
 
 	public void setBusinessEntity(BusinessEntity businessEntity) {
@@ -205,7 +205,7 @@ public class PickList extends MizeEntity {
 				+ ((comments == null) ? 0 : comments.hashCode());
 		result = prime * result
 				+ ((isActive == null) ? 0 : isActive.hashCode());
-		result = prime * result + ((items == null) ? 0 : items.hashCode());
+		result = prime * result + ((listItems == null) ? 0 : listItems.hashCode());
 		result = prime * result + ((tenant == null) ? 0 : tenant.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
@@ -240,10 +240,10 @@ public class PickList extends MizeEntity {
 				return false;
 		} else if (!isActive.equals(other.isActive))
 			return false;
-		if (items == null) {
-			if (other.items != null)
+		if (listItems == null) {
+			if (other.listItems != null)
 				return false;
-		} else if (!items.equals(other.items))
+		} else if (!listItems.equals(other.listItems))
 			return false;
 		if (tenant == null) {
 			if (other.tenant != null)
@@ -274,7 +274,7 @@ public class PickList extends MizeEntity {
 		builder.append(", tenant=");
 		builder.append(tenant);
 		builder.append(", items=");
-		builder.append(items);
+		builder.append(listItems);
 		builder.append(", id=");
 		builder.append(id);
 		builder.append("]");
