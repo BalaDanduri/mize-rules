@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -117,7 +119,8 @@ public class Country extends MizeEntity implements Comparable<Country>{
 		return EQUAL;		
 	}
 
-	@OneToMany(cascade={CascadeType.ALL}, fetch= FetchType.LAZY , mappedBy ="country")
+	@OneToMany(cascade={CascadeType.ALL}, fetch= FetchType.EAGER , mappedBy ="country")
+	@Fetch(value = FetchMode.SELECT)
 	public List<State> getStates() {
 		return states;
 	}
