@@ -73,5 +73,12 @@ public abstract class MessageConstants implements Serializable{
 	public static final String PART_CODE_DOES_NOT_EXIST = "PART_CODE_DOES_NOT_EXIST";
 	public static final String OLD_PART_CODE_DOES_NOT_EXIST = "OLD_PART_CODE_DOES_NOT_EXIST";
 	public static final String NEW_PART_CODE_DOES_NOT_EXIST = "NEW_PART_CODE_DOES_NOT_EXIST";
+	public static final String INVALID_PICK_LIST_CODE = "INVALID_PICK_LIST_CODE";
+	public static final String INVALID_PICK_LIST_ID = "INVALID_PICK_LIST_ID";
+	public static final String INVALID_PICK_LIST = "INVALID_PICK_LIST_ID_OR_CODE";
+	public static final String INVALID_BUSINESS_ENTITY = "INVALID_BUSINESS_ENTITY";
+	public static final String INVALID_TENANT = "INVALID_TENANT";
+	public static final String DUPLICATE_PICK_LIST_CODE = "DUPLICATE_PICK_LIST_CODE";
+	
 	
 }
