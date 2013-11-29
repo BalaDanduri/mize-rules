@@ -468,7 +468,7 @@ create table part_intl
     locale_id integer ,
     part_id integer ,
  	part_name varchar(250),
- 	part_desc varchar(500),
+ 	part_description varchar(500),
   
 );
 
@@ -909,9 +909,9 @@ INSERT INTO  part (id, tenant_id, part_code, part_type, is_active,is_kit,is_seri
 INSERT INTO  part (id, tenant_id, part_code, part_type, is_active,is_kit,is_serialized,is_returnable,uom, created_date, updated_date, created_by, updated_by)
   VALUES(102, 961, 'partCode1','standard', 'Y', 'N','N','N',null,CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL);
   
-INSERT INTO  part_intl (id, locale_id, part_id, part_name, part_desc)
+INSERT INTO  part_intl (id, locale_id, part_id, part_name, part_description)
   VALUES(201, 1, 101,'partname', 'partdescription');
-INSERT INTO  part_intl (id, locale_id, part_id, part_name, part_desc)
+INSERT INTO  part_intl (id, locale_id, part_id, part_name, part_description)
   VALUES(202, 1, 102,'partname', 'partdescription');
   
 INSERT INTO  part_price (id, country_id, part_id, unit_price, list_price, net_price, start_date, end_date, currency_code, tax_id, created_date, updated_date, created_by, updated_by)

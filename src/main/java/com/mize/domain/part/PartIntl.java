@@ -65,7 +65,7 @@ public class PartIntl extends MizeEntity {
 		return name;
 	}
 	
-	@Column(name = "part_desc", length = 500, nullable = true)
+	@Column(name = "part_description", length = 500, nullable = true)
 	public String getDescription() {
 		return description;
 	}
