@@ -20,6 +20,8 @@ import javax.persistence.UniqueConstraint;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -136,7 +138,8 @@ public class PartKit extends MizeEntity{
 		return super.getUpdatedBy();
 	}
 	
-	@OneToMany(cascade={CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = "partKit")
+	@OneToMany(cascade={CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = "partKit", orphanRemoval = true)
+	@Fetch(FetchMode.SUBSELECT)
 	public List<PartKitItem> getPartKitItems() {
 		return partKitItems;
 	}

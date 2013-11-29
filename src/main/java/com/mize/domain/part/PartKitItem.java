@@ -2,6 +2,7 @@ package com.mize.domain.part;
 
 import java.math.BigDecimal;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -43,13 +44,13 @@ public class PartKitItem extends MizeEntity{
 		return id;
 	}
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "part_id")
 	public Part getPart() {
 		return part;
 	}
     
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	@JoinColumn(name = "part_kit_id")
 	public PartKit getPartKit() {
 		return partKit;
@@ -102,19 +103,11 @@ public class PartKitItem extends MizeEntity{
 		if (part == null) {
 			if (other.part != null)
 				return false;
-		} else if (!part.equals(other.part))
-			return false;
-		if (partKit == null) {
-			if (other.partKit != null)
+		}if (part.getCode() == null ||other.part.getCode() == null) {
 				return false;
-		} else if (!partKit.equals(other.partKit))
-			return false;
-		if (partQty == null) {
-			if (other.partQty != null)
-				return false;
-		} else if (!partQty.equals(other.partQty))
-			return false;
-		return true;
+		} else if (part.getCode() != null && other.part.getCode() != null && !part.getCode().equals(other.part.getCode()))
+			return true; 
+		return false;
 	}
 
 	@Override
