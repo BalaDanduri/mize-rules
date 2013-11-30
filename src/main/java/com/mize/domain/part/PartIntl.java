@@ -13,6 +13,7 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
 import org.joda.time.DateTime;
 
 import com.mize.domain.common.Locale;
@@ -50,11 +51,13 @@ public class PartIntl extends MizeEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "part_id")
+	@JsonBackReference
 	public Part getPart() {
 		return part;
 	}
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+
+	@ManyToOne(fetch = FetchType.EAGER ,optional = true)
 	@JoinColumn(name = "locale_id")
 	public Locale getLocale() {
 		return locale;

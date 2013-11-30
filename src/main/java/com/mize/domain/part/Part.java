@@ -19,6 +19,8 @@ import javax.persistence.UniqueConstraint;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -128,6 +130,7 @@ public class Part extends MizeEntity {
 	}
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "part")
+	@Fetch(FetchMode.SELECT)
 	public List<PartIntl> getPartIntl() {
 		return partIntl;
 	}
