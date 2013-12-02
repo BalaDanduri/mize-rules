@@ -49,7 +49,6 @@ public class User extends MizeEntity implements Comparable<User> {
     protected List<LinkedAccount> linkedAccounts = new ArrayList<LinkedAccount>();
     @Transient
     protected List<UserConnect> userConnects;
-    @Transient
     protected UserProfile userProfile;
     protected Long referralId;
     @Transient
