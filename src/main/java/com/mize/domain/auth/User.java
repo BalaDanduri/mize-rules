@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -231,7 +232,8 @@ public class User extends MizeEntity implements Comparable<User> {
 		this.userProfile = userProfile;
 	}
 	
-	@Transient
+	@OneToOne(fetch=FetchType.EAGER ,cascade= CascadeType.ALL )
+	@JoinColumn(name="id")
 	public UserProfile getUserProfile() {
 		return userProfile;
 	}

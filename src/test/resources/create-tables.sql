@@ -1,3 +1,53 @@
+CREATE TABLE users ( 
+	id integer primary key auto_increment  not null,
+		email          	varchar(255) NULL,
+		name           	varchar(255) NULL,
+		last_login     	timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+		active         	tinyint(1) NULL,
+		email_validated tinyint(1) NULL,
+		referral_id    	bigint(20) NULL,
+        PRIMARY KEY (id) 
+	);
+
+
+CREATE TABLE user_profile (
+	id integer primary key auto_increment  not null,
+	first_name			varchar(50) 	NULL,
+	middle_name			varchar(50) 	NULL,
+	last_name			varchar(50) 	NULL,
+	profile_name 		varchar(100) 	NULL,
+	gender       		varchar(1) 		NULL DEFAULT 'M',
+	phone_mobile 		varchar(20) 	NULL,
+	phone_home   		varchar(20) 	NULL,
+	phone_work   		varchar(20) 	NULL,
+	email_opt_out 		varchar(1) NOT 	NULL DEFAULT 'Y',
+	birth_day    		timestamp 		NULL,
+	photo_link   		varchar(250) 	NULL,
+	timezone     		varchar(10) 	NULL,
+	prompt_app_rating   varchar(1) 		NULL,
+	user_id     		integer 		NULL,
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE user_address ( 
+	id          	integer AUTO_INCREMENT NOT NULL,
+	user_id     	integer NULL,
+	address_type 	varchar(20) NULL,
+	address_name 	varchar(50) NULL,
+	address1    	varchar(100) NULL,
+	address2    	varchar(100) NULL,
+	address3    	varchar(100) NULL,
+	city        	varchar(100) NULL,
+	state_id    	int(11) NULL,
+	country_id  	int(11) NULL,
+	postal_code 	varchar(11) NULL,
+	created_by  	integer NULL,
+	created_date	timestamp NULL,
+	updated_by  	integer NULL,
+	updated_date	timestamp NULL, 
+	PRIMARY KEY (id)
+);
+
 CREATE TABLE parts_order_amount (
 	id integer primary key auto_increment  not null,
 	requested_quantity	 	 DECIMAL(20,6),

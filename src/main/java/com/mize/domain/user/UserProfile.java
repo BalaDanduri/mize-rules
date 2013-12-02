@@ -6,6 +6,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -19,8 +32,10 @@ import com.mize.domain.common.MizeEntity;
 import com.mize.domain.common.PostalAddress;
 import com.mize.domain.product.UserProduct;
 import com.mize.domain.util.JodaDateDeserializer;
-import com.mize.domain.util.JsonDateSerializer;
+import com.mize.domain.util.JsonDateTimeSerializer;
 
+@Entity
+@Table(name = "user_profile")
 @JsonAutoDetect
 public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 
@@ -40,6 +55,7 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 	private int friendStatus;
 	private String emailOptOut;
 	private String firstName;
+	private String middleName;
 	private String lastName;	
 	@DateTimeFormat (pattern="dd-MM-yyyy")
 	private DateTime birthdate;
@@ -61,6 +77,7 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 	List<UserAddress> addresses = new ArrayList<UserAddress>();
 	private String promptForAppRating;
 	private Map<String, URL> photoURLMap = new HashMap<String, URL>();
+	private User user;
 	
 	public enum UserProfileResult {
 		PROFILE_CREATED, PROFILE_UPDATED
@@ -99,38 +116,66 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 		this.gender = gender;
 	}	
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="id",unique=true,nullable=false,length=10)
 	public Long getId() {
 		return userId;
 	}
 	public void setId(Long userId) {
 		this.userId = userId;
 	}
+	
+	@OneToOne(fetch=FetchType.EAGER,targetEntity=User.class)
+	@JoinColumn(name="user_id")
+	public User getUser() {
+		return user;
+	}
 
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	@Transient
 	public Long getUserId() {
 		return userId;
 	}
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
+	@Transient
 	public UserType getUserType() {
 		return userType;
 	}
 	public void setUserType(UserType userType) {
 		this.userType = userType;
 	}
+	
+	@Transient
 	public PostalAddress getPostalAddress() {
 		return postalAddress;
 	}
 	public void setPostalAddress(PostalAddress postalAddress) {
 		this.postalAddress = postalAddress;
 	}
+	
+	@Column(name = "first_name", length = 30, nullable = false)
 	public String getFirstName() {
 		return firstName;
 	}
-	
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+	
+	@Column(name = "middle_name", length = 30, nullable = false)
+	public String getMiddleName() {
+		return middleName;
+	}
+	public void setMiddleName(String middleName) {
+		this.middleName = middleName;
+	}
+	
+	@Column(name = "last_name", length = 30, nullable = false)
 	public String getLastName() {
 		return lastName;
 	}
@@ -138,8 +183,10 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 		this.lastName = lastName;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonSerialize(using=JsonDateSerializer.class,include=Inclusion.NON_DEFAULT)
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	@Column(name = "birth_day",updatable = false)
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
 	public DateTime getBirthdate() {
 		return birthdate;
 	}
@@ -149,6 +196,9 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 	public void setBirthdate(DateTime birthdate) {
 		this.birthdate = birthdate;
 	}
+	
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.GenderJPA")	
+	@Column(name = "gender")
 	public Gender getGender() {
 		return gender;
 	}
@@ -156,6 +206,7 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 		this.gender = gender;
 	}
 	
+	@Column(name = "photo_link", nullable = false)
 	public String getPhotoLink() {
 		return photoLink;
 	}
@@ -163,6 +214,8 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 	public void setPhotoLink(String photoLink) {
 		this.photoLink = photoLink;
 	}
+	
+	@Column(name = "profile_name", length = 30, nullable = false)
 	public String getProfileName() {
 		return profileName;
 	}
@@ -170,6 +223,8 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 	public void setProfileName(String profileName) {
 		this.profileName = profileName;
 	}
+	
+	@Column(name = "phone_mobile", length = 10, nullable = false)
 	public String getPhoneMobile() {
 		return phoneMobile;
 	}
@@ -177,20 +232,24 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 	public void setPhoneMobile(String phoneMobile) {
 		this.phoneMobile = phoneMobile;
 	}
+	
+	@Column(name = "phone_home", length = 10, nullable = false)
 	public String getPhoneHome() {
 		return phoneHome;
 	}
-
 	public void setPhoneHome(String phoneHome) {
 		this.phoneHome = phoneHome;
 	}
+	
+	@Column(name = "phone_work", length = 10, nullable = false)
 	public String getPhoneWork() {
 		return phoneWork;
 	}
-
 	public void setPhoneWork(String phoneWork) {
 		this.phoneWork = phoneWork;
 	}
+	
+	@Transient
 	public String getJobTitle() {
 		return jobTitle;
 	}
@@ -198,6 +257,8 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 	public void setJobTitle(String jobTitle) {
 		this.jobTitle = jobTitle;
 	}
+	
+	@Column(name = "email_opt_out", nullable = false)
 	public String getEmailOptOut() {
 		return emailOptOut;
 	}
@@ -205,6 +266,8 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 	public void setEmailOptOut(String emailOptOut) {
 		this.emailOptOut = emailOptOut;
 	}
+	
+	@Transient
 	public List<User> getFriends() {
 		return friends;
 	}
@@ -212,6 +275,8 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 	public void addFriends(List<User> friends) {
 		this.friends.addAll(friends);
 	}
+	
+	@Transient
 	public List<UserProduct> getWant() {
 		return want;
 	}
@@ -219,6 +284,8 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 	public void setWant(List<UserProduct> want) {
 		this.want = want;
 	}
+	
+	@Transient
 	public List<UserProduct> getOwn() {
 		return own;
 	}
@@ -226,6 +293,8 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 	public void setOwn(List<UserProduct> own) {
 		this.own = own;
 	}
+	
+	@Transient
 	public Long getFriendUserId() {
 		return friendUserId;
 	}
@@ -237,6 +306,8 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 	public void setFriends(List<User> friends) {
 		this.friends = friends;
 	}
+	
+	@Transient
 	public UserProfilePrivacy getPrivacy() {
 		return privacy;
 	}
@@ -244,6 +315,8 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 	public void setPrivacy(UserProfilePrivacy privacy) {
 		this.privacy = privacy;
 	}
+	
+	@Transient
 	public int getMutualFriendCount() {
 		return mutualFriendCount;
 	}
@@ -252,6 +325,7 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 		this.mutualFriendCount = mutualFriendCount;
 	}
 	
+	@Transient
 	public int getPageIndex() {
 		return pageIndex;
 	}
@@ -260,6 +334,7 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 		this.pageIndex = pageIndex;
 	}
 
+	@Transient
 	public int getFriendStatus() {
 		return friendStatus;
 	}
@@ -268,8 +343,7 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 		this.friendStatus = friendStatus;
 	}
 	
-	
-
+	@Transient
 	public String getCityState() {
 		return cityState;
 	}
@@ -278,7 +352,7 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 		this.cityState = cityState;
 	}
 	
-
+	@Transient
 	public int getMizeUserCount() {
 		return mizeUserCount;
 	}
@@ -287,6 +361,7 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 		this.mizeUserCount = mizeUserCount;
 	}
 
+	@Transient
 	public int getWantCount() {
 		return wantCount;
 	}
@@ -295,6 +370,7 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 		this.wantCount = wantCount;
 	}
 
+	@Transient
 	public int getOwnCount() {
 		return ownCount;
 	}
@@ -303,7 +379,7 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 		this.ownCount = ownCount;
 	}
 
-	
+	@Column(name = "timezone", length = 10, nullable = false)
 	public String getTimezone() {
 		return timezone;
 	}
@@ -312,6 +388,7 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 		this.timezone = timezone;
 	}
 
+	@Transient
 	public Map<String, URL> getPhotoURLMap() {
 		return photoURLMap;
 	}
@@ -320,6 +397,7 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 		this.photoURLMap = photoURLMap;
 	}
 
+	@Transient
 	public boolean isFriend() {
 		return isFriend;
 	}
@@ -328,6 +406,7 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 		this.isFriend = isFriend;
 	}
 
+	@Transient
 	public int getProdFeedbackCount() {
 		return prodFeedbackCount;
 	}
@@ -336,6 +415,7 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 		this.prodFeedbackCount = prodFeedbackCount;
 	}
 
+	@Transient
 	public long getFriendsCount() {
 		return friendsCount;
 	}
@@ -344,6 +424,7 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 		this.friendsCount = friendsCount;
 	}
 
+	@Transient
 	public List<String> getListNames() {
 		return listNames;
 	}
@@ -511,6 +592,7 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 		return EQUAL;		
 	}
 
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "user")
 	public List<UserAddress> getAddresses() {
 		return addresses;
 	}
@@ -519,6 +601,7 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 		this.addresses = addresses;
 	}
 
+	@Column(name = "prompt_app_rating",nullable = false)
 	public String getPromptForAppRating() {
 		return promptForAppRating;
 	}
