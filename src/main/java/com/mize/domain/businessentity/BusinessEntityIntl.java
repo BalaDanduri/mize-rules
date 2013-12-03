@@ -43,7 +43,7 @@ public class BusinessEntityIntl extends MizeEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "be_id")
-	@JsonBackReference
+	@JsonBackReference(value="intl")
 	public BusinessEntity getBusinessEntity() {
 		return businessEntity;
 	}
