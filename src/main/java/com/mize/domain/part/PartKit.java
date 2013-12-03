@@ -72,7 +72,7 @@ public class PartKit extends MizeEntity{
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "part_id")
-	@JsonBackReference(value ="partKit")
+	@JsonBackReference(value ="partKits")
 	public Part getPart() {
 		return part;
 	}
