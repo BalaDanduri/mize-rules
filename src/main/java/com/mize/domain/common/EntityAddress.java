@@ -16,8 +16,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.codehaus.jackson.annotate.JsonBackReference;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonManagedReference;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
@@ -220,7 +220,7 @@ public class EntityAddress extends MizeEntity implements Comparable<EntityAddres
 	}
 	
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "address")
-	@JsonBackReference
+	@JsonManagedReference
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public List<EntityAddressPhone> getAddressPhones() {
 		return addressPhones;
@@ -232,7 +232,7 @@ public class EntityAddress extends MizeEntity implements Comparable<EntityAddres
 
 	@OneToOne(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "address")
 	@JoinColumn(name="entity_address_id")
-	@JsonBackReference
+	@JsonManagedReference
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public EntityAddressGeo getAddressGeo() {
 		return addressGeo;

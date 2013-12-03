@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 @Entity
@@ -64,6 +65,7 @@ public class EntityAddressGeo extends MizeEntity implements Comparable<EntityAdd
 
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="entity_address_id")
+	@JsonBackReference
 	public EntityAddress getAddress() {
 		return address;
 	}

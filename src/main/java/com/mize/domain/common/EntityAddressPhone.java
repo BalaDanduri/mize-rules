@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
+
 @Entity
 @Table(name = "entity_address_phone" )
 public class EntityAddressPhone extends MizeEntity implements Comparable<EntityAddressPhone> {
@@ -60,6 +62,7 @@ public class EntityAddressPhone extends MizeEntity implements Comparable<EntityA
 
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="entity_address_id")
+	@JsonBackReference
 	public EntityAddress getAddress() {
 		return address;
 	}

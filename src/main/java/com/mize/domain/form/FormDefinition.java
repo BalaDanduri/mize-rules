@@ -206,7 +206,7 @@ public class FormDefinition extends MizeEntity {
 	}
 	
 	@OneToMany(cascade={CascadeType.ALL}, fetch= FetchType.EAGER, mappedBy = "formDefinition")
-	@JsonManagedReference
+	@JsonManagedReference(value="form_def")
 	@Fetch(FetchMode.SUBSELECT)
 	public List<FormDefinitionAudit> getAudits() {
 		return audits;
