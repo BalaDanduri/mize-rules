@@ -65,7 +65,7 @@ public class EntityAddressGeo extends MizeEntity implements Comparable<EntityAdd
 
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="entity_address_id")
-	@JsonBackReference
+	@JsonBackReference(value="geoAddress")
 	public EntityAddress getAddress() {
 		return address;
 	}

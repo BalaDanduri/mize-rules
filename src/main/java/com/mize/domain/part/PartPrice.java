@@ -14,6 +14,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
@@ -72,6 +73,7 @@ public class PartPrice extends MizeEntity {
  
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "part_id")
+	@JsonBackReference(value ="partPrice")
 	public Part getPart() {
 		return part;
 	}

@@ -18,7 +18,10 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonManagedReference;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
@@ -27,6 +30,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 
 @Entity
@@ -120,6 +124,8 @@ public class Part extends MizeEntity {
 	}
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "part")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonManagedReference(value="partAttribute")
 	public List<PartAttribute> getPartAttributes() {
 		return partAttributes;
 	}
@@ -131,11 +137,14 @@ public class Part extends MizeEntity {
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "part")
 	@Fetch(FetchMode.SELECT)
+	@JsonManagedReference(value="partIntl")
 	public List<PartIntl> getPartIntl() {
 		return partIntl;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, cascade={CascadeType.ALL}, mappedBy = "part")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonManagedReference(value="partPrice")
 	public List<PartPrice> getPartPrices() {
 		return partPrices;
 	}
@@ -143,7 +152,7 @@ public class Part extends MizeEntity {
 	@Override	
 	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
 	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@Column(name = "created_date")
+	@Column(name = "created_date",updatable=false)
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
@@ -158,7 +167,7 @@ public class Part extends MizeEntity {
 
 	@Override
 	@JsonIgnore
-	@Column(name = "created_by")
+	@Column(name = "created_by",updatable=false)
 	public Long getCreatedBy() {		
 		return super.getCreatedBy();
 	}
@@ -172,6 +181,8 @@ public class Part extends MizeEntity {
 
 	
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "part")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonManagedReference(value="partKits")
 	public List<PartKit> getPartKits() {
 		return partKits;
 	}

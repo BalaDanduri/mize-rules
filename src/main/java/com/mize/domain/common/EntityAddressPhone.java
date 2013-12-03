@@ -62,7 +62,7 @@ public class EntityAddressPhone extends MizeEntity implements Comparable<EntityA
 
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="entity_address_id")
-	@JsonBackReference
+	@JsonBackReference(value="addressPhone")
 	public EntityAddress getAddress() {
 		return address;
 	}

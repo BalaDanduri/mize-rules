@@ -220,7 +220,7 @@ public class EntityAddress extends MizeEntity implements Comparable<EntityAddres
 	}
 	
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "address")
-	@JsonManagedReference
+	@JsonManagedReference(value="addressPhone")
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public List<EntityAddressPhone> getAddressPhones() {
 		return addressPhones;
@@ -232,7 +232,7 @@ public class EntityAddress extends MizeEntity implements Comparable<EntityAddres
 
 	@OneToOne(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "address")
 	@JoinColumn(name="entity_address_id")
-	@JsonManagedReference
+	@JsonManagedReference(value="geoAddress")
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public EntityAddressGeo getAddressGeo() {
 		return addressGeo;

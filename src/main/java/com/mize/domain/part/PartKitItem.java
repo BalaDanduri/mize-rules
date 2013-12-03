@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
+
 import com.mize.domain.common.MizeEntity;
 
 @Entity
@@ -46,12 +48,14 @@ public class PartKitItem extends MizeEntity{
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "part_id")
+	@JsonBackReference(value="partkitPart")
 	public Part getPart() {
 		return part;
 	}
     
 	@ManyToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
 	@JoinColumn(name = "part_kit_id")
+	@JsonBackReference(value="partKits")
 	public PartKit getPartKit() {
 		return partKit;
 	}

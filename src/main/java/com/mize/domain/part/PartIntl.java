@@ -51,7 +51,7 @@ public class PartIntl extends MizeEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "part_id")
-	@JsonBackReference
+	@JsonBackReference(value ="partIntl")
 	public Part getPart() {
 		return part;
 	}
