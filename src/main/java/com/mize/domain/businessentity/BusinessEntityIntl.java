@@ -11,9 +11,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonBackReference;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.util.JPASerializer;
 
 @Entity
 @Table(name="business_entity_intl")
@@ -43,7 +46,7 @@ public class BusinessEntityIntl extends MizeEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "be_id")
-	@JsonBackReference
+	@JsonBackReference(value="intl")
 	public BusinessEntity getBusinessEntity() {
 		return businessEntity;
 	}
@@ -60,6 +63,7 @@ public class BusinessEntityIntl extends MizeEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "locale_id")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public Locale getLocale() {
 		return locale;
 	}

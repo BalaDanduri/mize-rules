@@ -206,7 +206,7 @@ public class FormDefinition extends MizeEntity {
 	}
 	
 	@OneToMany(cascade={CascadeType.ALL}, fetch= FetchType.EAGER, mappedBy = "formDefinition")
-	@JsonManagedReference
+	@JsonManagedReference(value="form_def")
 	@Fetch(FetchMode.SUBSELECT)
 	public List<FormDefinitionAudit> getAudits() {
 		return audits;
@@ -237,7 +237,8 @@ public class FormDefinition extends MizeEntity {
 	
 	@Override
 	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)		
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	@JsonIgnore(value=false)
 	public void setCreatedDate(DateTime createdDate) {
 		super.createdDate = createdDate;
 	}
@@ -254,7 +255,8 @@ public class FormDefinition extends MizeEntity {
 	
 	
 	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)		
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	@JsonIgnore(value=false)
 	public void setUpdatedDate(DateTime updatedDate) {
 		super.updatedDate = updatedDate;
 	}

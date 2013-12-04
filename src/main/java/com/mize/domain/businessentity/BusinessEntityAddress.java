@@ -15,9 +15,12 @@ import javax.persistence.Transient;
 
 import org.codehaus.jackson.annotate.JsonBackReference;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.util.JPASerializer;
 
 @Entity(name="com.mize.domain.businessentity.BusinessEntityAddress")
 @Table(name="business_entity_address")
@@ -55,6 +58,7 @@ public class BusinessEntityAddress  extends MizeEntity  implements Comparable<Bu
 	
 	@OneToOne(fetch=FetchType.LAZY ,cascade= CascadeType.ALL)
 	@JoinColumn(name="be_address_id")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public EntityAddress getEntityAddress() {
 		return entityAddress;
 	}
@@ -70,7 +74,7 @@ public class BusinessEntityAddress  extends MizeEntity  implements Comparable<Bu
 
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="be_id")
-	@JsonBackReference
+	@JsonBackReference(value="address")
 	public BusinessEntity getBusinessEntity() {
 		return businessEntity;
 	}

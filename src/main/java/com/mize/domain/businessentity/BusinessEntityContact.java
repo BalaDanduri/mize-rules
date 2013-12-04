@@ -8,7 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import org.codehaus.jackson.annotate.JsonIgnore;
+
+import org.codehaus.jackson.annotate.JsonBackReference;
+
 import com.mize.domain.common.MizeEntity;
 
 @Entity
@@ -42,7 +44,7 @@ public class BusinessEntityContact extends MizeEntity implements Comparable<Busi
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="be_id")
-	@JsonIgnore
+	@JsonBackReference(value="be_contact")
 	public BusinessEntity getBusinessEntity() {
 		return businessEntity;
 	}

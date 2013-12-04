@@ -13,6 +13,7 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
 import org.joda.time.DateTime;
 
 import com.mize.domain.common.MizeEntity;
@@ -49,6 +50,7 @@ public class PartAttribute extends MizeEntity{
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "part_id")
+	@JsonBackReference(value="partAttribute")
 	public Part getPart() {
 		return part;
 	}

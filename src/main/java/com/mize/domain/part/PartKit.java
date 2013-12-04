@@ -17,6 +17,7 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -71,6 +72,7 @@ public class PartKit extends MizeEntity{
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "part_id")
+	@JsonBackReference(value ="partKits")
 	public Part getPart() {
 		return part;
 	}
@@ -109,7 +111,7 @@ public class PartKit extends MizeEntity{
 	@Override	
 	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
 	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@Column(name = "created_date")
+	@Column(name = "created_date",updatable=false)
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
@@ -125,7 +127,7 @@ public class PartKit extends MizeEntity{
 	
 	@Override
 	@JsonIgnore
-	@Column(name = "created_by")
+	@Column(name = "created_by",updatable=false)
 	public Long getCreatedBy() {		
 		return super.getCreatedBy();
 	}
@@ -138,7 +140,7 @@ public class PartKit extends MizeEntity{
 		return super.getUpdatedBy();
 	}
 	
-	@OneToMany(cascade={CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = "partKit", orphanRemoval = true)
+	@OneToMany(cascade={CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = "partKit")
 	@Fetch(FetchMode.SUBSELECT)
 	public List<PartKitItem> getPartKitItems() {
 		return partKitItems;
@@ -227,7 +229,7 @@ public class PartKit extends MizeEntity{
 		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
 		result = prime * result
 				+ ((isActive == null) ? 0 : isActive.hashCode());
-		result = prime * result + ((part == null) ? 0 : part.hashCode());
+		result = prime * result + ((part == null && part.getId() == null) ? 0 : part.getId().hashCode());
 		result = prime * result
 				+ ((partKitItems == null) ? 0 : partKitItems.hashCode());
 		result = prime * result
@@ -260,7 +262,7 @@ public class PartKit extends MizeEntity{
 		if (part == null) {
 			if (other.part != null)
 				return false;
-		} else if (!part.equals(other.part))
+		} else if (!part.getId().equals(other.part.getId()))
 			return false;
 		if (partKitItems == null) {
 			if (other.partKitItems != null)

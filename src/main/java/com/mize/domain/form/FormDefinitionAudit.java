@@ -61,7 +61,7 @@ public class FormDefinitionAudit extends MizeEntity {
 	
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "form_defn_id", nullable = false)
-	@JsonBackReference
+	@JsonBackReference(value="form_def")
 	public FormDefinition getFormDefinition() {
 		return formDefinition;
 	}

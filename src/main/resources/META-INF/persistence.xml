@@ -46,6 +46,8 @@
                 <class>com.mize.domain.brand.BrandSupport</class>
                 <class>com.mize.domain.product.ProductRepeatOrderShipOptions</class>
                 <class>com.mize.domain.auth.User</class>
+                <class>com.mize.domain.user.UserProfile</class>
+                <class>com.mize.domain.user.UserAddress</class>
                 <class>com.mize.domain.form.FormTemplateDefinition</class>
 				<class>com.mize.domain.form.FormDefinition</class>
 				<class>com.mize.domain.form.FormDefinitionAudit</class>

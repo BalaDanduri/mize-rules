@@ -1,3 +1,54 @@
+
+CREATE TABLE users ( 
+	id integer primary key auto_increment  not null,
+		email          	varchar(255) NULL,
+		name           	varchar(255) NULL,
+		last_login     	timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+		active         	tinyint(1) NULL,
+		email_validated tinyint(1) NULL,
+		referral_id    	bigint(20) NULL,
+        PRIMARY KEY (id) 
+	);
+
+
+CREATE TABLE user_profile (
+	id integer primary key auto_increment  not null,
+	first_name			varchar(50) 	NULL,
+	middle_name			varchar(50) 	NULL,
+	last_name			varchar(50) 	NULL,
+	profile_name 		varchar(100) 	NULL,
+	gender       		varchar(1) 		NULL DEFAULT 'M',
+	phone_mobile 		varchar(20) 	NULL,
+	phone_home   		varchar(20) 	NULL,
+	phone_work   		varchar(20) 	NULL,
+	email_opt_out 		varchar(1) NOT 	NULL DEFAULT 'Y',
+	birth_day    		timestamp 		NULL,
+	photo_link   		varchar(250) 	NULL,
+	timezone     		varchar(10) 	NULL,
+	prompt_app_rating   varchar(1) 		NULL,
+	user_id     		integer 		NULL,
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE user_address ( 
+	id          	integer AUTO_INCREMENT NOT NULL,
+	user_id     	integer NULL,
+	address_type 	varchar(20) NULL,
+	address_name 	varchar(50) NULL,
+	address1    	varchar(100) NULL,
+	address2    	varchar(100) NULL,
+	address3    	varchar(100) NULL,
+	city        	varchar(100) NULL,
+	state_id    	int(11) NULL,
+	country_id  	int(11) NULL,
+	postal_code 	varchar(11) NULL,
+	created_by  	integer NULL,
+	created_date	timestamp NULL,
+	updated_by  	integer NULL,
+	updated_date	timestamp NULL, 
+	PRIMARY KEY (id)
+);
+
 CREATE TABLE parts_order_amount (
 	id integer primary key auto_increment  not null,
 	requested_quantity	 	 DECIMAL(20,6),
@@ -857,6 +908,7 @@ drop table if exists prod_serial;
 	PRIMARY KEY (id)
 );
 
+
 insert into locale values(1,'Y','EN','USA','EN_USA');
 
 INSERT INTO  business_entity(id, code, type_code, sub_type_code, name, logo, created_date, updated_date, created_by, updated_by, active_indicator)
@@ -1077,8 +1129,7 @@ INSERT INTO service_entity_request_other(id,request_id, other_charge_type, other
   INSERT INTO entity_address(id) VALUES(1);
   
   INSERT INTO business_entity_intl(id, be_id) VALUES(101, 961);
-  
-  INSERT INTO prod (prod_id, prod_name, prod_desc) values (101000, 'test prod1', 'testing the product1');
+INSERT INTO prod (prod_id, prod_name, prod_desc) values (101000, 'test prod1', 'testing the product1');
   INSERT INTO prod (prod_id, prod_name, prod_desc) values (102000, 'test prod2', 'testing the product2');
   INSERT INTO prod_to_source (id, prod_to_source_id, prod_source_id, prod_id) values (1, 'TEST_SOURCE_ID', 2, 101000);
   
@@ -1093,6 +1144,4 @@ INSERT INTO service_entity_request_other(id,request_id, other_charge_type, other
 
   INSERT INTO  prod_serial_comment(id, prod_srl_id, comment_id)
   VALUES(101000, 101000, 101000);
-  
-
   
