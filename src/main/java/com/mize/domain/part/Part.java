@@ -89,6 +89,7 @@ public class Part extends MizeEntity {
 
 	@ManyToOne(cascade={CascadeType.ALL},fetch = FetchType.EAGER)
 	@JoinColumn(name="tenant_id")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public BusinessEntity getTenant() {
 		return tenant;
 	}
