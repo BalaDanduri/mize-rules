@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
+
 import com.mize.domain.common.MizeEntity;
 
 @Entity
@@ -50,6 +52,7 @@ public class PickListItem extends MizeEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "picklist_id")
+	@JsonBackReference(value="pickListItem")
 	public PickList getPickList() {
 		return pickList;
 	}
