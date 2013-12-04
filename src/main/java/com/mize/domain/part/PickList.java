@@ -2,6 +2,7 @@ package com.mize.domain.part;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -97,8 +98,7 @@ public class PickList extends MizeEntity {
 		return tenant;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pickList")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "pickList")
 	@JsonManagedReference(value="pickListItem")
 	public List<PickListItem> getListItems() {
 		return listItems;
@@ -114,7 +114,7 @@ public class PickList extends MizeEntity {
 	@Override	
 	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
 	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@Column(name = "created_date")
+	@Column(name = "created_date",updatable = false)
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
@@ -129,7 +129,7 @@ public class PickList extends MizeEntity {
 
 	@Override
 	@JsonIgnore
-	@Column(name = "created_by")
+	@Column(name = "created_by",updatable=false)
 	public Long getCreatedBy() {		
 		return super.getCreatedBy();
 	}
