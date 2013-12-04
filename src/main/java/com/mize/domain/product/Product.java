@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -65,6 +66,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 
 	@DateTimeFormat(pattern="MM-dd-yyyy")
 	@JsonSerialize(using=JsonDateSerializer.class,include=Inclusion.NON_DEFAULT)
+	@Column(name="release_date",nullable=true)
 	public DateTime getReleaseDate() {
 		return releaseDate;
 	}
@@ -91,6 +93,8 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 		productDetails = new ProductDetails();
 	}
 
+	@OneToOne(fetch = FetchType.EAGER, cascade =CascadeType.ALL)
+	@JoinColumn(name="prod_id") 
 	public ProductSource getProductSource() {
 		return productSource;
 	}
@@ -254,8 +258,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	}	
 	
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade =CascadeType.ALL)
-	@JoinColumn(name="prod_regn_id") 
+	@Transient
 	public List<ProductRegister> getProductRegisters() {
 		return productRegisters;
 	}
@@ -264,6 +267,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 		this.productRegisters = productRegisters;
 	}
 	
+	@Column(name="is_active",nullable=true,length=1)
 	public String getActive() {
 		return active;
 	}
@@ -282,6 +286,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 		return flag;
 	}
 	
+	@Column(name="mfg_part_no",nullable=true,length=70)
 	public String getMpn() {
 		return mpn;
 	}
@@ -444,6 +449,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 		return true;
 	}
 
+	@Column(name="user_id",nullable=true,length=20)
 	public Long getUserId() {
 		return userId;
 	}
@@ -452,6 +458,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 		this.userId = userId;
 	}
 
+	@Transient
 	public Integer getProdScore() {
 		return prodScore;
 	}

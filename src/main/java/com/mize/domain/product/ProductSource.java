@@ -1,8 +1,17 @@
 package com.mize.domain.product;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
 import com.mize.domain.common.MizeEntity;
 
 
+@javax.persistence.Entity
+@Table(name = "prod_to_source")
 public class ProductSource  extends MizeEntity implements Comparable<ProductSource>{
 	
 	private static final long serialVersionUID = -4500817575280246709L;
@@ -15,10 +24,10 @@ public class ProductSource  extends MizeEntity implements Comparable<ProductSour
 	protected Long sourceId;
 	protected String sourceProductId;
 
-	
 	public ProductSource() {
 	}
 	
+	@Column(name="prod_id",nullable=false,length=20)
 	public Long getProductId() {
 		return productId;
 	}
@@ -27,6 +36,7 @@ public class ProductSource  extends MizeEntity implements Comparable<ProductSour
 		this.productId = productId;
 	}
 
+	@Column(name="prod_source_id",nullable=false,length=11)
 	public Long getSourceId() {
 		return sourceId;
 	}
@@ -35,6 +45,7 @@ public class ProductSource  extends MizeEntity implements Comparable<ProductSour
 		this.sourceId = sourceId;
 	}
 
+	@Column(name="prod_to_source_id",nullable=false,length=11)
 	public String getSourceProductId() {
 		return sourceProductId;
 	}
@@ -92,6 +103,10 @@ public class ProductSource  extends MizeEntity implements Comparable<ProductSour
 		return 0;
 	}
 
+	@Id
+	@GenericGenerator(name="id",strategy="increment")
+	@GeneratedValue
+	@Column(name="id",unique=true,nullable=false,length=20)
 	@Override
 	public Long getId() {
 		return id;
