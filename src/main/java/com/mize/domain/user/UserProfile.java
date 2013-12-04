@@ -183,7 +183,7 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 		this.lastName = lastName;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@DateTimeFormat (pattern="MM-dd-yyyy")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	@Column(name = "birth_day",updatable = false)
 	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
