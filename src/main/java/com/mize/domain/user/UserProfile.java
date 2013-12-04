@@ -32,7 +32,7 @@ import com.mize.domain.common.MizeEntity;
 import com.mize.domain.common.PostalAddress;
 import com.mize.domain.product.UserProduct;
 import com.mize.domain.util.JodaDateDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.util.JsonDateSerializer;
 
 @Entity
 @Table(name = "user_profile")
@@ -184,7 +184,7 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 	}
 	
 	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	@JsonSerialize(using=JsonDateSerializer.class,include=Inclusion.NON_DEFAULT)
 	@Column(name = "birth_day",updatable = false)
 	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
 	public DateTime getBirthdate() {
