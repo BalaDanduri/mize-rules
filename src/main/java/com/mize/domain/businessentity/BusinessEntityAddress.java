@@ -75,6 +75,7 @@ public class BusinessEntityAddress  extends MizeEntity  implements Comparable<Bu
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="be_id")
 	@JsonBackReference(value="address")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public BusinessEntity getBusinessEntity() {
 		return businessEntity;
 	}
