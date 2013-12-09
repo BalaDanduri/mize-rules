@@ -59,7 +59,7 @@ public class Group extends MizeEntity implements Comparable<Group> {
 	}
 
 
-	@OneToMany(fetch = FetchType.LAZY,cascade=CascadeType.ALL , mappedBy ="groups")
+	@OneToMany(fetch = FetchType.LAZY,cascade=CascadeType.ALL , mappedBy ="group")
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	@JsonManagedReference(value="groupMapping")
 	public List<GroupsToRole> getGroupsToRole() {
