@@ -11,17 +11,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import org.codehaus.jackson.annotate.JsonManagedReference;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.util.JPASerializer;
 
 @Entity
 @Table(name = "groups", uniqueConstraints = { @UniqueConstraint(columnNames = {"tenant_id", "CODE" }) })
@@ -34,12 +35,19 @@ public class Group extends MizeEntity implements Comparable<Group> {
 	private String active;
 	private List<Role> roles = new ArrayList<Role>();
 	private BusinessEntity owner;
+	
+	private List<GroupsToRole> groupsToRole = new ArrayList<GroupsToRole>();
 
 	public Group() {
 	}
+	
+	
+
+	
 
 	public Group(String name, String code, String description, String active,
-			List<Role> roles, BusinessEntity owner) {
+			List<Role> roles, BusinessEntity owner,
+			List<GroupsToRole> groupsToRole) {
 		super();
 		this.name = name;
 		this.code = code;
@@ -47,7 +55,24 @@ public class Group extends MizeEntity implements Comparable<Group> {
 		this.active = active;
 		this.roles = roles;
 		this.owner = owner;
+		this.groupsToRole = groupsToRole;
 	}
+
+
+	@OneToMany(fetch = FetchType.LAZY,cascade=CascadeType.ALL , mappedBy ="groups")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonManagedReference(value="groupMapping")
+	public List<GroupsToRole> getGroupsToRole() {
+		return groupsToRole;
+	}
+
+
+
+	public void setGroupsToRole(List<GroupsToRole> groupsToRole) {
+		this.groupsToRole = groupsToRole;
+	}
+
+
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -83,9 +108,7 @@ public class Group extends MizeEntity implements Comparable<Group> {
 		return name;
 	}
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@Fetch(FetchMode.SUBSELECT)
-	@JoinTable(name = "groups_to_role", joinColumns = { @JoinColumn(name = "group_id", referencedColumnName = "id") }, inverseJoinColumns = { @JoinColumn(name = "role_id", referencedColumnName = "id") })
+	
 	/*@JsonManagedReference(value="group_roles")*/
 	public List<Role> getRoles() {
 		return roles;
