@@ -9,6 +9,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -17,14 +18,19 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonManagedReference;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.brand.Brand;
+import com.mize.domain.businessentity.BusinessEntity;
+import com.mize.domain.businessentity.BusinessEntityIntl;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.DecimalValueDeserializer;
 import com.mize.domain.util.Formatter;
@@ -60,6 +66,10 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	private Long userId;
 	private Integer prodScore;
 	private String active;
+	private BusinessEntity tenant;
+	private BusinessEntity manufacturerBE;
+	
+	private List<ProductIntl> intl = new ArrayList<ProductIntl>();
 	
 	@DateTimeFormat(pattern="MM-dd-yyyy")
 	private DateTime releaseDate;
@@ -93,8 +103,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 		productDetails = new ProductDetails();
 	}
 
-	@OneToOne(fetch = FetchType.EAGER, cascade =CascadeType.ALL)
-	@JoinColumn(name="prod_id") 
+	@Transient
 	public ProductSource getProductSource() {
 		return productSource;
 	}
@@ -106,18 +115,29 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 
 	@Id
 	@GenericGenerator(name="prod_id",strategy="increment")
-	@GeneratedValue
-	@Column(name="prod_id",unique=true,nullable=false,length=20)
-	@Override
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "prod_id", nullable = false, unique = true)
+	@Override	
 	public Long getId() {
 		return id;
 	}
 
-
+	@Column(name = "prod_id")
 	public void setId(Long id) {
 		this.id = id;
 	}
 
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "product")
+	@Fetch(FetchMode.SUBSELECT)
+	@JsonManagedReference(value="intl")
+	public List<ProductIntl> getIntl() {
+		return intl;
+	}
+
+	public void setIntl(List<ProductIntl> intl) {
+		this.intl = intl;
+	}
+	
 
 	@Column(name="prod_name",nullable=true,length=200)
 	public String getName() {
@@ -129,7 +149,8 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 		this.name = name;
 	}
 
-	@Transient
+	@OneToOne(fetch = FetchType.EAGER, cascade =CascadeType.ALL)
+	@JoinColumn(name="brand_id") 
 	public Brand getBrand() {
 		return brand;
 	}
@@ -226,7 +247,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	}
 
 
-	@Transient
+	@Column(name="model",nullable=true,length=50)
 	public String getModel() {
 		return model;
 	}
@@ -263,6 +284,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 		return productRegisters;
 	}
 
+	@Transient
 	public void setProductRegisters(List<ProductRegister> productRegisters) {
 		this.productRegisters = productRegisters;
 	}
@@ -465,6 +487,26 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 
 	public void setProdScore(Integer prodScore) {
 		this.prodScore = prodScore;
+	}
+
+	@OneToOne(fetch = FetchType.EAGER, cascade =CascadeType.ALL)
+	@JoinColumn(name="tenant_id") 
+	public BusinessEntity getTenant() {
+		return tenant;
+	}
+
+	public void setTenant(BusinessEntity tenant) {
+		this.tenant = tenant;
+	}
+
+	@OneToOne(fetch = FetchType.EAGER, cascade =CascadeType.ALL)
+	@JoinColumn(name="manufacturer_be_id") 
+	public BusinessEntity getManufacturerBE() {
+		return manufacturerBE;
+	}
+
+	public void setManufacturerBE(BusinessEntity manufacturerBE) {
+		this.manufacturerBE = manufacturerBE;
 	}
 	
 }

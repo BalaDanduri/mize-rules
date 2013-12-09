@@ -4,13 +4,28 @@ package com.mize.domain.product;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonPropertyOrder;
+import org.hibernate.annotations.GenericGenerator;
 
+import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeEntity;
 
 
 @JsonPropertyOrder ({"id", "name", "link", "parent"})
+@Entity
+@Table(name = "prod_cat")
 
 public class ProductCategory extends MizeEntity{
 
@@ -32,6 +47,8 @@ public class ProductCategory extends MizeEntity{
 	private boolean isActive;
 	@JsonIgnore
 	private Integer active;
+	private BusinessEntity tenant;
+	
 	
 	public String getDepartment() {
 		return department;
@@ -45,6 +62,11 @@ public class ProductCategory extends MizeEntity{
 		
 	}
 	
+	@Id
+	@GenericGenerator(name="prod_cat_id",strategy="increment")
+	@GeneratedValue
+	@Column(name="prod_cat_id",unique=true,nullable=false,length=20)
+	@Override
 	public Long getId() {
 		return id;
 	}
@@ -53,6 +75,7 @@ public class ProductCategory extends MizeEntity{
 		this.id = id;
 	}
 
+	@Column(name="prod_cat_name",nullable=true,length=100)
 	public String getName() {
 		return name;
 	}
@@ -61,6 +84,8 @@ public class ProductCategory extends MizeEntity{
 		this.name = name;
 	}
 
+	@OneToOne(cascade={CascadeType.ALL},fetch = FetchType.EAGER)
+	@JoinColumn(name="prod_cat_id")
 	public ProductCategory getParent() {
 		return parent;
 	}
@@ -69,6 +94,7 @@ public class ProductCategory extends MizeEntity{
 		this.parent = parent;
 	}
 
+	@Column(name="prod_cat_link",nullable=true,length=250)
 	public String getPhotoLink() {
 		return photoLink;
 	}
@@ -77,12 +103,13 @@ public class ProductCategory extends MizeEntity{
 		this.photoLink = link;
 	}
 
-
+	@Column(name="is_active",nullable=true,length=1)
 	public boolean isActive() {
 		return isActive;
 	}
 	
 	@JsonIgnore
+	@Transient
 	public Set<ProductCategory> getChildren() {
 		return children;
 	}
@@ -92,6 +119,7 @@ public class ProductCategory extends MizeEntity{
 		this.children = children;
 	}
 
+	@Transient
 	public boolean isLeaf() {
 		if ((children == null || children.isEmpty()) ) {
 			return true;
@@ -103,7 +131,7 @@ public class ProductCategory extends MizeEntity{
 	public void setLeaf(boolean leaf) {
 	}
 
-
+	@Transient
 	public ProdCategorySource getSourceCategory() {
 		return sourceCategory;
 	}
@@ -112,6 +140,7 @@ public class ProductCategory extends MizeEntity{
 		this.sourceCategory = sourceCategory;
 	}
 
+	@Column(name="cat_level",nullable=true,length=11)
 	public Integer getLevel() {
 		return level;
 	}
@@ -120,6 +149,7 @@ public class ProductCategory extends MizeEntity{
 		this.level = level;
 	}
 
+	@Transient
 	public Long getSrcCategoryId() {
 		return srcCategoryId;
 	}
@@ -128,6 +158,7 @@ public class ProductCategory extends MizeEntity{
 		this.srcCategoryId = srcCategoryId;
 	}
 
+	@Column(name="display_order",nullable=true,length=11)
 	public Integer getDisplayOrder() {
 		return displayOrder;
 	}
@@ -136,6 +167,7 @@ public class ProductCategory extends MizeEntity{
 		this.displayOrder = displayOrder;
 	}
 
+	@Column(name="order_number",nullable=true,length=11)
 	public Integer getOrderNumber() {
 		return orderNumber;
 	}
@@ -148,12 +180,23 @@ public class ProductCategory extends MizeEntity{
 		this.isActive = isActive;
 	}
 
+	@Transient
 	public Integer getActive() {
 		return active;
 	}
 
 	public void setActive(Integer active) {
 		this.active = active;
+	}
+
+	@OneToOne(fetch = FetchType.EAGER, cascade =CascadeType.ALL)
+	@JoinColumn(name="tenant_id") 
+	public BusinessEntity getTenant() {
+		return tenant;
+	}
+
+	public void setTenant(BusinessEntity tenant) {
+		this.tenant = tenant;
 	}
 
 	@Override

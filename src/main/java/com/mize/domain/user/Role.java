@@ -3,14 +3,12 @@ package com.mize.domain.user;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import com.mize.domain.common.MizeEntity;
-import com.mize.domain.util.NonEmpty;
 
 @Entity
 @Table(name = "role")
@@ -20,7 +18,11 @@ public class Role extends MizeEntity implements Comparable<Role>{
 	private String name;
 	private String description;
 	private String code;
-	private String active;
+	private String active;	
+   /* private List<Group> groups;*/
+	
+	
+	
 	
 	
 	public Role(){		
@@ -35,9 +37,8 @@ public class Role extends MizeEntity implements Comparable<Role>{
 	}
 
 	@Id
-	@GenericGenerator(name="Id" , strategy="increment")
-	@GeneratedValue(generator="Id")
-	@Column(name = "ID", unique = false, nullable = false, length = 11)
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name = "id", unique = false, nullable = false, length = 11)
 	@Override
 	public Long getId() {
 		return id;
@@ -49,7 +50,7 @@ public class Role extends MizeEntity implements Comparable<Role>{
 	}
 	
 	@Column(name = "CODE", nullable = true, length = 20)
-	@NonEmpty(message="code.notempty")
+	/*@NonEmpty(message="code.notempty")*/
 	@Size(max = 30)
 	public String getCode() {
 		return code;
@@ -60,7 +61,7 @@ public class Role extends MizeEntity implements Comparable<Role>{
 	}
 
 	@Column(name = "ROLE_NAME", nullable = false, length = 100)
-	@NonEmpty(message="roleName.notempty")
+	/*@NonEmpty(message="roleName.notempty")*/
 	@Size(max = 100)
 	public String getName() {
 		return name;
@@ -70,7 +71,7 @@ public class Role extends MizeEntity implements Comparable<Role>{
 	}
 	
 	@Column(name = "DESCRIPTION", nullable = true, length = 200)
-	@NonEmpty(message="description.notempty")
+	/*@NonEmpty(message="description.notempty")*/
 	@Size(max = 200)
 	public String getDescription() {
 		return description;
@@ -87,6 +88,17 @@ public class Role extends MizeEntity implements Comparable<Role>{
 	public void setActive(String active) {
 		this.active = active;
 	}
+/*
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles")
+	@JsonManagedReference(value="role_groups")
+	public List<Group> getGroups() {
+		return groups;
+	}
+	
+	@JsonManagedReference(value="role_groups")
+	public void setGroups(List<Group> groups) {
+		this.groups = groups;
+	}*/
 
 	@Override
 	public int hashCode() {
