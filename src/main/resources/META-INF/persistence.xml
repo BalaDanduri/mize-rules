@@ -65,6 +65,8 @@
 				<class>com.mize.domain.common.EntityAddress</class>
 				<class>com.mize.domain.common.EntityAddressPhone</class>
 				<class>com.mize.domain.common.EntityAddressGeo</class>
+				<class>com.mize.domain.user.Group</class>
+				<class>com.mize.domain.user.Role</class>
         </persistence-unit>
 
 </persistence>
