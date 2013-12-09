@@ -67,7 +67,7 @@
 				<class>com.mize.domain.common.EntityAddressGeo</class>
 				<class>com.mize.domain.user.Group</class>
 				<class>com.mize.domain.user.Role</class>
-				<class>com.mize.domain.user.GroupToRole</class>
+				<class>com.mize.domain.user.GroupsToRole</class>
 				
         </persistence-unit>
 
