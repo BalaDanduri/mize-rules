@@ -1,5 +1,6 @@
 package com.mize.domain.user;
 
+import java.beans.Transient;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +34,6 @@ public class Group extends MizeEntity implements Comparable<Group> {
 	private String code;
 	private String description;
 	private String active;
-	private List<Role> roles = new ArrayList<Role>();
 	private BusinessEntity owner;
 	
 	private List<GroupsToRole> groupsToRole = new ArrayList<GroupsToRole>();
@@ -46,14 +46,13 @@ public class Group extends MizeEntity implements Comparable<Group> {
 	
 
 	public Group(String name, String code, String description, String active,
-			List<Role> roles, BusinessEntity owner,
+			 BusinessEntity owner,
 			List<GroupsToRole> groupsToRole) {
 		super();
 		this.name = name;
 		this.code = code;
 		this.description = description;
 		this.active = active;
-		this.roles = roles;
 		this.owner = owner;
 		this.groupsToRole = groupsToRole;
 	}
@@ -109,11 +108,7 @@ public class Group extends MizeEntity implements Comparable<Group> {
 	}
 
 	
-	/*@JsonManagedReference(value="group_roles")*/
-	public List<Role> getRoles() {
-		return roles;
-	}
-
+	
 	@Column(name = "ACTIVE_INDICATOR", nullable = true, length = 1)
 	public String getActive() {
 		return active;
@@ -129,11 +124,6 @@ public class Group extends MizeEntity implements Comparable<Group> {
 		this.active = active;
 	}
 	
-	/*@JsonManagedReference(value="group_roles")*/
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
-	}
-
 	public void setOwner(BusinessEntity tenant) {
 		this.owner = tenant;
 	}
@@ -165,7 +155,7 @@ public class Group extends MizeEntity implements Comparable<Group> {
 	@Override
 	public String toString() {
 		return "Group [name=" + name + ", code=" + code + ", description="
-				+ description + ", active=" + active + ", roles=" + roles
+				+ description + ", active=" + active 
 				+ ", owner=" + owner + "]";
 	}
 
