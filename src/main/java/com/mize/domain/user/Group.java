@@ -1,6 +1,5 @@
 package com.mize.domain.user;
 
-import java.beans.Transient;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import org.codehaus.jackson.annotate.JsonManagedReference;
@@ -42,10 +42,6 @@ public class Group extends MizeEntity implements Comparable<Group> {
 	public Group() {
 	}
 	
-	
-
-	
-
 	public Group(String name, String code, String description, String active,
 			List<Role> roles, BusinessEntity owner,
 			List<GroupsToRole> groupsToRole) {
@@ -59,7 +55,6 @@ public class Group extends MizeEntity implements Comparable<Group> {
 		this.groupsToRole = groupsToRole;
 	}
 
-
 	@OneToMany(fetch = FetchType.LAZY,cascade=CascadeType.ALL , mappedBy ="group")
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	@JsonManagedReference(value="groupMapping")
@@ -67,12 +62,9 @@ public class Group extends MizeEntity implements Comparable<Group> {
 		return groupsToRole;
 	}
 
-
-
 	public void setGroupsToRole(List<GroupsToRole> groupsToRole) {
 		this.groupsToRole = groupsToRole;
 	}
-
 
 
 	@Id
