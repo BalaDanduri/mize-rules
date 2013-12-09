@@ -181,8 +181,7 @@ public class Brand extends MizeEntity implements Comparable<Brand>{
 		this.registered = registered;
 	}
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade =CascadeType.ALL)
-	@JoinColumn(name="prod_regn_id") 
+	@Transient
 	public List<ProductRegister> getProductRegisters() {
 		return productRegisters;
 	}

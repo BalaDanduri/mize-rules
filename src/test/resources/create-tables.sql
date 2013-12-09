@@ -824,10 +824,48 @@ CREATE TABLE service_entity_request (
 	PRIMARY KEY (id)
 );
 
+drop table if exists prod_cat;
+create table prod_cat
+(
+	prod_cat_id			bigint(20)	auto_increment NOT NULL,	
+	prod_cat_name		varchar(100)	NULL,			
+	parent_prod_cat_id	int(15)			NULL,			
+	prod_cat_link		varchar(250)	NULL,			
+	prod_count			int(11)			NULL,			
+	is_active			tinyint(1)		NULL,			
+	created_date		datetime		NULL,			
+	created_by			bigint(20)		NULL,			
+	updated_date		datetime		NULL,			
+	updated_by			bigint(20)		NULL,			
+	department			varchar(25)		NULL,			
+	cat_level			int(11)			NULL,			
+	display_order		int(11)			NULL,			
+	order_number		int(11)			NULL,			
+	searchable			tinyint(4)		NULL,			
+	small_pic			varchar(50)		NULL,			
+	thumb_pic			varchar(50)		NULL,			
+	watched_top_10		int(11)			NULL,			
+	un_cat_id			bigint(20)		NULL,			
+	family_id			int(11)			NULL,			
+	series_id			int(11)			NULL,			
+	unit_id				bigint(20)		NULL,			
+	t_id				int(11)			NULL,			
+	prod_source_id		int(11)			NULL,			
+	tenant_id			bigint(20)		NULL	
+);
+
+drop table if exists prod_to_cat;
+create table prod_to_cat
+(
+	id			bigint(20)	auto_increment	NOT NULL,
+	prod_id		bigint(20)	NULL,
+	prod_cat_id	bigint(20)  NULL
+);
+
 drop table if exists prod;
 create table prod
 (
-	prod_id		bigint(20)     NOT NULL,              
+	prod_id		bigint(20)    auto_increment NOT NULL,              
 	prod_name       varchar(200)   NULL,      
 	prod_desc       varchar(500)   NULL,      
 	upc        	varchar(20)    NULL,             
@@ -856,7 +894,18 @@ create table prod
 	prod_updated_date datetime     NULL,  
 	is_consumable   char(1)        NULL,       
 	model        	varchar(50)    NULL,
-	active			varchar(1)	   NULL
+	active			varchar(1)	   NULL,
+	manufacturer_be_id bigint(20)  NULL,
+	tenant_id		bigint(20)	   NULL 
+);
+
+drop table if exists prod_intl;
+CREATE TABLE prod_intl ( 
+    id         bigint(20) 	AUTO_INCREMENT NOT NULL,
+    prod_id      bigint(20) 	NOT NULL,   
+    locale_id  bigint(20) 	NULL,
+    name    varchar(250) NULL,
+    description  varchar(500) NULL
 );
 
 drop table if exists prod_to_source;
@@ -1129,7 +1178,10 @@ INSERT INTO service_entity_request_other(id,request_id, other_charge_type, other
   INSERT INTO entity_address(id) VALUES(1);
   
   INSERT INTO business_entity_intl(id, be_id) VALUES(101, 961);
-INSERT INTO prod (prod_id, prod_name, prod_desc) values (101000, 'test prod1', 'testing the product1');
+  INSERT INTO prod_cat (prod_cat_id, prod_cat_name, parent_prod_cat_id, prod_cat_link, is_active, department) values (1, 'Parent', null, 'ParentLink', '1', 'Testing Department');
+  INSERT INTO prod_cat (prod_cat_id, prod_cat_name, parent_prod_cat_id, prod_cat_link, is_active, department) values (2, 'Child', 1, 'ChildLink', '1', 'Testing Department');
+  INSERT INTO prod_to_cat (id, prod_id, prod_cat_id) values (1, 1, 1);
+  INSERT INTO prod (prod_id, prod_name, prod_desc) values (101000, 'test prod1', 'testing the product1');
   INSERT INTO prod (prod_id, prod_name, prod_desc) values (102000, 'test prod2', 'testing the product2');
   INSERT INTO prod_to_source (id, prod_to_source_id, prod_source_id, prod_id) values (1, 'TEST_SOURCE_ID', 2, 101000);
   
