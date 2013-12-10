@@ -48,7 +48,6 @@ public class PartKitItem extends MizeEntity{
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "part_id")
-	@JsonBackReference(value="partkitPart")
 	public Part getPart() {
 		return part;
 	}

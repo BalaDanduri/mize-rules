@@ -49,7 +49,7 @@ public class PartSubsituteTest extends JPATest {
 	}
 	
 	private Part getPartObjectToSave(BusinessEntity be, String partCode) {
-		Part part = new Part(be,partCode,"partType","Y","N","N",null,null,null,null,null,null);
+		Part part = new Part(be,partCode,"partType","Y","N","N",null,null,null,null,null);
 		return part ;
 	}
 	

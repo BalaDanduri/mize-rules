@@ -24,6 +24,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.common.Country;
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
@@ -112,6 +113,7 @@ public class PartPrice extends MizeEntity {
     
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "country_id")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public Country getCountry() {
 		return country;
 	}

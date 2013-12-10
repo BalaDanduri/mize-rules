@@ -49,7 +49,7 @@ public class Part extends MizeEntity {
 	private List<PartIntl> partIntl;
 	private List<PartPrice> partPrices;
 	private List<PartAttribute> partAttributes;
-	private List<PartKit> partKits;
+	//private List<PartKit> partKits;
 
 	public Part() {
 		super();
@@ -60,8 +60,7 @@ public class Part extends MizeEntity {
 	public Part(BusinessEntity tenant, String partCode, String partType,
 			String isActive, String isKit, String isSerialized,
 			String isReturnable, String uom, List<PartIntl> partIntl,
-			List<PartPrice> partPrices, List<PartAttribute> partAttributes,
-			List<PartKit> partKits) {
+			List<PartPrice> partPrices, List<PartAttribute> partAttributes) {
 		super();
 		this.tenant = tenant;
 		this.code = partCode;
@@ -74,7 +73,7 @@ public class Part extends MizeEntity {
 		this.partIntl = partIntl;
 		this.partPrices = partPrices;
 		this.partAttributes = partAttributes;
-		this.partKits = partKits;
+		//this.partKits = partKits;
 	}
 
 
@@ -89,6 +88,7 @@ public class Part extends MizeEntity {
 
 	@ManyToOne(cascade={CascadeType.ALL},fetch = FetchType.EAGER)
 	@JoinColumn(name="tenant_id")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public BusinessEntity getTenant() {
 		return tenant;
 	}
@@ -180,7 +180,7 @@ public class Part extends MizeEntity {
 	}
 
 	
-	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "part")
+/*	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "part")
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	@JsonManagedReference(value="partKits")
 	public List<PartKit> getPartKits() {
@@ -189,7 +189,7 @@ public class Part extends MizeEntity {
 
 	public void setPartKits(List<PartKit> partKits) {
 		this.partKits = partKits;
-	}
+	}*/
 
 
 
@@ -289,7 +289,7 @@ public class Part extends MizeEntity {
 				+ ", isSerialized=" + isSerialized + ", isReturnable="
 				+ isReturnable + ", uom=" + uom + ", partIntl=" + partIntl
 				+ ", partPrices=" + partPrices + ", partAttributes="
-				+ partAttributes + ", partKits=" + partKits + "]";
+				+ partAttributes  + "]";
 	}
 
 
@@ -310,8 +310,6 @@ public class Part extends MizeEntity {
 				+ ((partAttributes == null) ? 0 : partAttributes.hashCode());
 		result = prime * result
 				+ ((partIntl == null) ? 0 : partIntl.hashCode());
-		result = prime * result
-				+ ((partKits == null) ? 0 : partKits.hashCode());
 		result = prime * result
 				+ ((partPrices == null) ? 0 : partPrices.hashCode());
 		result = prime * result + ((tenant == null) ? 0 : tenant.hashCode());
@@ -365,11 +363,6 @@ public class Part extends MizeEntity {
 			if (other.partIntl != null)
 				return false;
 		} else if (!partIntl.equals(other.partIntl))
-			return false;
-		if (partKits == null) {
-			if (other.partKits != null)
-				return false;
-		} else if (!partKits.equals(other.partKits))
 			return false;
 		if (partPrices == null) {
 			if (other.partPrices != null)

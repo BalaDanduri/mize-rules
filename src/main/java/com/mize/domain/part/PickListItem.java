@@ -44,7 +44,7 @@ public class PickListItem extends MizeEntity {
 		return id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "part_id")
 	public Part getPart() {
 		return part;
