@@ -375,6 +375,9 @@ CREATE TABLE business_entity_intl (
     locale_id  bigint(20) 	NULL,
     be_name    varchar(250) NULL,
     be_description  varchar(500) NULL,
+    be_first_name varchar(100) NULL,
+    be_last_name varchar(100) NULL,
+    be_middle_initial varchar(50) NULL
 );
 
 CREATE TABLE  business_entity_address  ( 
