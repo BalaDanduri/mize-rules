@@ -957,6 +957,70 @@ drop table if exists prod_serial;
 	PRIMARY KEY (id)
 );
 
+drop table if exists form_template_defn;
+CREATE TABLE form_template_defn ( 
+	id integer primary key auto_increment  not null,
+	template_defn_data    	longtext 	NULL,
+	version_number		decimal(20,6)	NULL,
+	start_date  datetime 	NULL,
+	end_date	datetime 	NULL	
+);
+
+drop table if exists form_defn;
+CREATE TABLE form_defn ( 
+	id integer primary key auto_increment  not null,
+	tenant_id       	bigint(20) 	NULL,
+	template_defn_id    	bigint(20) 	NULL,	
+	form_code   		varchar(30) 	NULL,
+	form_name   		varchar(500) 	NULL,
+	locale_id   		bigint(20) 	NULL,
+	version_number		decimal(20,6)	NULL,	
+	status_code     	varchar(30) 	NULL,
+	form_defn_data    	longtext 	NULL,
+	is_active 		char(1) 	NULL,
+	start_date		datetime 	NULL,
+	end_date		datetime 	NULL,
+	created_date    	datetime 	NULL,
+	updated_date    	datetime 	NULL,
+	created_by      	bigint(20) 	NULL,
+	updated_by      	bigint(20) 	NULL
+);
+
+ALTER TABLE form_defn
+	ADD CONSTRAINT fk_templateid_defn
+	FOREIGN KEY(template_defn_id)
+	REFERENCES form_template_defn(id);
+ 
+drop table if exists form_defn_audit;
+CREATE TABLE form_defn_audit ( 
+	id integer primary key auto_increment  not null,
+	form_defn_id       	bigint(20) 	NOT NULL,
+	status_code     	varchar(30) 	NULL,
+	status_date		datetime 	NULL,
+	status_by		bigint(20)	NULL
+);
+
+ALTER TABLE form_defn_audit
+	ADD CONSTRAINT fk_formdefnid_defn
+	FOREIGN KEY(form_defn_id)
+	REFERENCES form_defn(id);
+	
+drop table if exists form_instance;
+CREATE TABLE form_instance ( 
+	id integer primary key auto_increment  not null,
+	form_defn_id       	bigint(20) 	NOT NULL,
+	form_instance_data    		longtext 	NULL,	
+	created_date    	datetime 	NULL,
+	updated_date    	datetime 	NULL,
+	created_by      	bigint(20) 	NULL,
+	updated_by      	bigint(20) 	NULL
+);
+
+ALTER TABLE form_instance
+	ADD CONSTRAINT fk_formid_instance
+	FOREIGN KEY(form_defn_id)
+	REFERENCES form_defn(id);
+
 
 insert into locale values(1,'Y','EN','USA','EN_USA');
 
@@ -1196,4 +1260,10 @@ INSERT INTO service_entity_request_other(id,request_id, other_charge_type, other
 
   INSERT INTO  prod_serial_comment(id, prod_srl_id, comment_id)
   VALUES(101000, 101000, 101000);
+  
+  INSERT INTO form_template_defn (id, template_defn_data, version_number, start_date, end_date)
+	VALUES (1,'{{#each searchFileds}} <input type="text" /> {{/each}}', 1.0, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+	
+	INSERT INTO form_defn (id, tenant_id, template_defn_id, form_code, form_name, locale_id, version_number, status_code, form_defn_data, is_active, start_date, end_date, created_date, updated_date, created_by, updated_by)
+	VALUES (1,961, 1, 'Form Code', 'Form Name', 1, 1.0, 'DRAFT', 'Form Def data', 'Y', '2014-11-19 00:00:00', '2014-11-18 00:00:00', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 779, 779);
   
