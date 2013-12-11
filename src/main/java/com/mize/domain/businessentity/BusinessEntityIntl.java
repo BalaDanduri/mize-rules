@@ -26,7 +26,10 @@ public class BusinessEntityIntl extends MizeEntity {
 	private BusinessEntity businessEntity;
 	private String name;
 	private String description;
-	private Locale locale;	
+	private Locale locale;
+	private String firstName;
+	private String lastName;
+	private String middleInitial;
 	
 	public BusinessEntityIntl() {
 	}
@@ -82,6 +85,33 @@ public class BusinessEntityIntl extends MizeEntity {
 
 	public void setLocale(Locale locale) {
 		this.locale = locale;
+	}
+	
+	@Column(name = "be_first_name", length = 100, nullable = true)
+	public String getFirstName() {
+		return firstName;
+	}
+	
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	
+	@Column(name = "be_last_name", length = 100, nullable = true)
+	public String getLastName() {
+		return lastName;
+	}
+	
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	
+	@Column(name = "be_middle_initial", length = 50, nullable = true)
+	public String getMiddleInitial() {
+		return middleInitial;
+	}
+	
+	public void setMiddleInitial(String middleInitial) {
+		this.middleInitial = middleInitial;
 	}
 	
 }
