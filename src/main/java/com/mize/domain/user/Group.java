@@ -20,6 +20,8 @@ import javax.persistence.UniqueConstraint;
 import org.codehaus.jackson.annotate.JsonManagedReference;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeEntity;
@@ -37,14 +39,14 @@ public class Group extends MizeEntity implements Comparable<Group> {
 	private List<Role> roles = new ArrayList<Role>();
 	private BusinessEntity owner;
 	
-	private List<GroupsToRole> groupsToRole = new ArrayList<GroupsToRole>();
+	private List<GroupRoleMapping> groupsToRole = new ArrayList<GroupRoleMapping>();
 
 	public Group() {
 	}
 	
 	public Group(String name, String code, String description, String active,
 			List<Role> roles, BusinessEntity owner,
-			List<GroupsToRole> groupsToRole) {
+			List<GroupRoleMapping> groupsToRole) {
 		super();
 		this.name = name;
 		this.code = code;
@@ -55,16 +57,6 @@ public class Group extends MizeEntity implements Comparable<Group> {
 		this.groupsToRole = groupsToRole;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY,cascade=CascadeType.ALL , mappedBy ="group")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
-	@JsonManagedReference(value="groupMapping")
-	public List<GroupsToRole> getGroupsToRole() {
-		return groupsToRole;
-	}
-
-	public void setGroupsToRole(List<GroupsToRole> groupsToRole) {
-		this.groupsToRole = groupsToRole;
-	}
 
 
 	@Id
@@ -141,6 +133,19 @@ public class Group extends MizeEntity implements Comparable<Group> {
 		this.description = description;
 	}
 
+	@OneToMany(fetch = FetchType.LAZY,cascade=CascadeType.ALL , mappedBy ="group")
+	@Fetch(value=FetchMode.SUBSELECT)
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonManagedReference(value="groupMapping")
+	public List<GroupRoleMapping> getGroupsToRole() {
+		return groupsToRole;
+	}
+
+	public void setGroupsToRole(List<GroupRoleMapping> groupsToRole) {
+		this.groupsToRole = groupsToRole;
+	}
+
+	
 	public int compareTo(Group group) {
 		if (this == group)
 			return EQUAL;
@@ -153,11 +158,13 @@ public class Group extends MizeEntity implements Comparable<Group> {
 		return EQUAL;
 	}
 
+
+
 	@Override
 	public String toString() {
 		return "Group [name=" + name + ", code=" + code + ", description="
 				+ description + ", active=" + active + ", roles=" + roles
-				+ ", owner=" + owner + "]";
+				+ ", owner=" + owner + ", groupsToRole=" + groupsToRole + "]";
 	}
 
 	@Override

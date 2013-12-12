@@ -1,5 +1,7 @@
 package com.mize.domain.user;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,20 +23,26 @@ public class Role extends MizeEntity implements Comparable<Role>{
 	private String active;	
    /* private List<Group> groups;*/
 	
-	
+//	private List<GroupRoleMapping> groupsToRole = new ArrayList<GroupRoleMapping>();
 	
 	
 	
 	public Role(){		
 	}
 	
-	public Role(String name, String description, String code, String active) {
+	
+
+	public Role(String name, String description, String code, String active,
+			List<GroupRoleMapping> groupsToRole) {
 		super();
 		this.name = name;
 		this.description = description;
 		this.code = code;
 		this.active = active;
+	//	this.groupsToRole = groupsToRole;
 	}
+
+
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -88,6 +96,17 @@ public class Role extends MizeEntity implements Comparable<Role>{
 	public void setActive(String active) {
 		this.active = active;
 	}
+	
+	/*@OneToMany(fetch = FetchType.LAZY,cascade=CascadeType.ALL , mappedBy ="role")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonManagedReference(value="roleMapping")
+	public List<GroupRoleMapping> getGroupsToRole() {
+		return groupsToRole;
+	}
+
+	public void setGroupsToRole(List<GroupRoleMapping> groupsToRole) {
+		this.groupsToRole = groupsToRole;
+	}*/
 /*
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles")
 	@JsonManagedReference(value="role_groups")
@@ -129,11 +148,16 @@ public class Role extends MizeEntity implements Comparable<Role>{
 		return true;
 	}
 
+	
+	
 	@Override
 	public String toString() {
-		return "Role [id=" + id + ", name=" + name + ", description=" + description + ",active=" + active + "]";
+		return "Role [name=" + name + ", description=" + description
+				+ ", code=" + code + ", active=" + active + "]";
 	}
-	
+
+
+
 	public int compareTo(Role role) {
 		if ( this == role ) 
 			return EQUAL;
