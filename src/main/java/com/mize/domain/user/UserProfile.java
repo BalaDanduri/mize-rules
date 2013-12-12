@@ -23,6 +23,7 @@ import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.hibernate.annotations.GenericGenerator;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -117,13 +118,17 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 	}	
 
 	@Id
+	@GenericGenerator(name="id",strategy="increment")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="id",unique=true,nullable=false,length=10)
+	@Override
 	public Long getId() {
-		return userId;
+		return id;
 	}
-	public void setId(Long userId) {
-		this.userId = userId;
+	
+	@Override
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 	@OneToOne(fetch=FetchType.EAGER,targetEntity=User.class)

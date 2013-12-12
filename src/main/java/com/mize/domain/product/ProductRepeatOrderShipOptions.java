@@ -10,11 +10,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.mize.domain.brand.Brand;
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.util.JPASerializer;
 @Entity
 @Table(name = "prod_repeat_ship_options")
 public class ProductRepeatOrderShipOptions extends MizeEntity implements Comparable<ProductRepeatOrderShipOptions>{
@@ -71,6 +75,7 @@ public class ProductRepeatOrderShipOptions extends MizeEntity implements Compara
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "brand_id", nullable = true)
+	@JsonBackReference(value="brand_shippings")
 	public Brand getBrand() {
 		return brand;
 	}
@@ -81,6 +86,7 @@ public class ProductRepeatOrderShipOptions extends MizeEntity implements Compara
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "prod_id", nullable = true)
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public Product getProduct() {
 		return product;
 	}

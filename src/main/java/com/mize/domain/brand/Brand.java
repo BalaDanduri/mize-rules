@@ -10,16 +10,21 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.codehaus.jackson.annotate.JsonManagedReference;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.product.ProductRegister;
 import com.mize.domain.product.ProductRepeatOrderShipOptions;
+import com.mize.domain.util.JPASerializer;
 
 @Entity
 @Table(name = "brand")
@@ -128,7 +133,11 @@ public class Brand extends MizeEntity implements Comparable<Brand>{
 	public void setWebsite(String website) {
 		this.website = website;
 	}
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "brand")
+	
+	@OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL,mappedBy = "brand")
+	@Fetch(value=FetchMode.SUBSELECT)
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonManagedReference(value="brand_support")
 	public List<BrandSupport> getBrandSupports() {
 		return brandSupports;
 	}
@@ -154,7 +163,10 @@ public class Brand extends MizeEntity implements Comparable<Brand>{
 	}
 	
 	
-	@OneToMany(mappedBy = "brand",fetch = FetchType.LAZY)
+	@OneToMany(fetch = FetchType.LAZY,cascade=CascadeType.ALL,mappedBy = "brand")
+	@Fetch(value=FetchMode.SUBSELECT)
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonManagedReference(value="brand_feed")
 	public List<BrandFeed> getBrandFeeds() {
 		return brandFeeds;
 	}
@@ -162,8 +174,10 @@ public class Brand extends MizeEntity implements Comparable<Brand>{
 	public void setBrandFeeds(List<BrandFeed> brandFeeds) {
 		this.brandFeeds = brandFeeds;
 	}
-
-	@OneToMany(mappedBy = "brand")
+	@OneToMany(fetch = FetchType.LAZY,cascade=CascadeType.ALL,mappedBy = "brand")
+	@Fetch(value=FetchMode.SUBSELECT)
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonManagedReference(value="brand_shippings")
 	public List<ProductRepeatOrderShipOptions> getShippings() {
 		return shippings;
 	}

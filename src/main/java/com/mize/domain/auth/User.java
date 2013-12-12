@@ -17,9 +17,12 @@ import javax.persistence.Transient;
 
 import org.apache.commons.lang.WordUtils;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonManagedReference;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
@@ -29,9 +32,11 @@ import com.mize.domain.common.MizeEntity;
 import com.mize.domain.product.ProductRegister;
 import com.mize.domain.user.Group;
 import com.mize.domain.user.UserBE;
+import com.mize.domain.user.UserBrandMapping;
 import com.mize.domain.user.UserProfile;
 import com.mize.domain.user.UserProfilePrivacy;
 import com.mize.domain.util.Formatter;
+import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
@@ -58,6 +63,7 @@ public class User extends MizeEntity implements Comparable<User> {
     @Transient
 	private List<Group> groups = new ArrayList<Group>();
 	private List<ProductRegister> productRegisters = new ArrayList<ProductRegister>();
+	private List<UserBrandMapping> userBrandMapping = new ArrayList<UserBrandMapping>();
     
     public enum Case {
 		SIGNUP, LOGIN , LOGOUT
@@ -271,6 +277,18 @@ public class User extends MizeEntity implements Comparable<User> {
 
 	public void setGroups(List<Group> groups) {
 		this.groups = groups;
+	}
+	
+	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL,mappedBy="user")
+	@Fetch(value=FetchMode.SUBSELECT)
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonManagedReference(value="userMapping")
+    public List<UserBrandMapping> getUserBrandMapping() {
+		return userBrandMapping;
+	}
+
+	public void setUserBrandMapping(List<UserBrandMapping> userBrandMapping) {
+		this.userBrandMapping = userBrandMapping;
 	}
 
 	@Override

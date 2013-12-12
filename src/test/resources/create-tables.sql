@@ -49,6 +49,53 @@ CREATE TABLE user_address (
 	PRIMARY KEY (id)
 );
 
+CREATE TABLE prod_regn ( 
+	prod_regn_id        	bigint(20) primary key auto_increment NOT NULL,
+	user_id             	bigint(20) NULL,
+	prod_id             	bigint(20) NULL,
+	purchase_price      	double NULL,
+	purchase_store      	varchar(200) NULL,
+	prod_srl_no         	varchar(200) NULL,
+	purchase_date       	date NULL,
+	warranty_expiry_date 	date NULL,
+	addl_info           	varchar(500) NULL,
+	created_by          	bigint(20) NULL,
+	updated_by          	bigint(20) NULL,
+	created_date        	datetime NULL,
+	updated_date        	datetime NULL,
+	first_name          	varchar(100) NULL,
+	last_name           	varchar(100) NULL,
+	email               	varchar(255) NULL,
+	address1            	varchar(100) NULL,
+	address2            	varchar(100) NULL,
+	address3            	varchar(100) NULL,
+	city                	varchar(100) NULL,
+	postal_code         	varchar(11) NULL,
+	phone_mobile        	varchar(20) NULL,
+	phone_home          	varchar(20) NULL,
+	phone_work          	varchar(20) NULL,
+	state_id            	int(11) NULL,
+	country_id          	int(11) NULL,
+	brand_id            	bigint(20) NULL,
+	user_address_id     	bigint(20) NULL,
+	regn_name           	varchar(50) NULL, 
+	PRIMARY KEY (prod_regn_id)
+);
+
+
+CREATE TABLE users_to_brand (
+id integer primary key auto_increment  not null,
+	user_id         	integer NOT NULL,
+	brand_id        	integer NOT NULL,
+	created_date    	datetime NULL,
+	updated_date    	datetime NULL,
+	created_by      	bigint(20) NULL,
+	updated_by      	bigint(20) NULL,
+	active_indicator 	char(1)  NULL,
+	PRIMARY KEY (id)
+);
+
+
 CREATE TABLE parts_order_amount (
 	id integer primary key auto_increment  not null,
 	requested_quantity	 	 DECIMAL(20,6),
@@ -1270,3 +1317,26 @@ INSERT INTO service_entity_request_other(id,request_id, other_charge_type, other
 	INSERT INTO form_defn (id, tenant_id, template_defn_id, form_code, form_name, locale_id, version_number, status_code, form_defn_data, is_active, start_date, end_date, created_date, updated_date, created_by, updated_by)
 	VALUES (1,961, 1, 'Form Code', 'Form Name', 1, 1.0, 'DRAFT', 'Form Def data', 'Y', '2014-11-19 00:00:00', '2014-11-18 00:00:00', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 779, 779);
   
+	INSERT INTO users (id,email,name,last_login ,active,email_validated,referral_id)
+  VALUES (1,'suryamanem@m-ize.com','surya prakash','2013-11-19 00:00:00',1,1,null);	
+
+  INSERT INTO users (id,email,name,last_login ,active,email_validated,referral_id)
+  VALUES (2,'shiva@m-ize.com','Shiva Kumar','2013-10-19 00:00:00',1,1,null);	
+
+  INSERT INTO user_profile(profile_name,first_name,last_name,birth_day,gender,photo_link,user_id,phone_mobile,phone_home,phone_work,email_opt_out,timezone,prompt_app_rating)
+  VALUES ('surya prakash','surya','prakash',null,0,null,1,9492418417,null,null,'Y','GMT+0','Y'); 
+  
+  INSERT INTO brand VALUES (1,'m-ize',NULL,'http://www.m-ize.com/',NULL,NULL,NULL,NULL,'m-ize.png','support@m-ize.com',NULL,NULL,NULL);
+  INSERT INTO brand VALUES (2,'Bose',NULL,'http://www.bose.com',NULL,NULL,NULL,NULL,'bose.png','',NULL,NULL,NULL);
+  INSERT INTO brand VALUES (3,'Samsung',NULL,'http://www.samsung.com',NULL,NULL,NULL,NULL,'samsung.png','',NULL,NULL,NULL);
+  
+  INSERT INTO users_to_brand(id,user_id,brand_id,created_date,updated_date,created_by,updated_by,active_indicator) VALUES(1,1,1,NULL,NULL,NULL,NULL,'Y'); 
+  INSERT INTO users_to_brand(id,user_id,brand_id,created_date,updated_date,created_by,updated_by,active_indicator) VALUES(2,1,2,NULL,NULL,NULL,NULL,'Y'); 
+  INSERT INTO users_to_brand(id,user_id,brand_id,created_date,updated_date,created_by,updated_by,active_indicator) VALUES(3,1,3,NULL,NULL,NULL,NULL,'Y'); 
+  INSERT INTO users_to_brand(id,user_id,brand_id,created_date,updated_date,created_by,updated_by,active_indicator) VALUES(4,2,3,NULL,NULL,NULL,NULL,'Y'); 
+  
+ 
+  INSERT INTO business_entity_brand(id,be_id,brand_id,is_active) VALUES(1,961,1,'Y');
+  INSERT INTO business_entity_brand(id,be_id,brand_id,is_active) VALUES(2,961,2,'Y');
+  INSERT INTO business_entity_brand(id,be_id,brand_id,is_active) VALUES(3,962,3,'Y');
+ 

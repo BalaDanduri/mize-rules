@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -83,8 +84,9 @@ public class BrandFeed extends MizeEntity implements Comparable<BrandFeed>{
 		this.id = id;
 	}
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "BRAND_ID", nullable = true)
+	@JsonBackReference(value="brand_feed")
 	public Brand getBrand() {
 		return brand;
 	}

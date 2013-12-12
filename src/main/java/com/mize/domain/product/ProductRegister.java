@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
@@ -28,6 +29,7 @@ import com.mize.domain.brand.Brand;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.servicelocator.BusinessEntity;
 import com.mize.domain.user.UserAddress;
+import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateDeserializer;
 import com.mize.domain.util.JsonDateSerializer;
 
@@ -111,6 +113,8 @@ public class ProductRegister extends MizeEntity implements Comparable<ProductReg
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "brand_id", nullable = true)
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonBackReference(value="productRegisters")
 	public Brand getBrand() {
 		return brand;
 	}
@@ -231,6 +235,7 @@ public class ProductRegister extends MizeEntity implements Comparable<ProductReg
 		this.email = email;
 	}
 	
+	@Transient
 	@Column(name = "address1",  nullable = true, length = 100)
 	public String getAddress1() {
 		return address1;
@@ -239,6 +244,7 @@ public class ProductRegister extends MizeEntity implements Comparable<ProductReg
 		this.address1 = address1;
 	}
 	
+	@Transient
 	@Column(name = "address2",  nullable = true, length = 100)
 	public String getAddress2() {
 		return address2;
@@ -247,6 +253,7 @@ public class ProductRegister extends MizeEntity implements Comparable<ProductReg
 		this.address2 = address2;
 	}
 	
+	@Transient
 	@Column(name = "address3",  nullable = true, length = 100)
 	public String getAddress3() {
 		return address3;
@@ -255,6 +262,7 @@ public class ProductRegister extends MizeEntity implements Comparable<ProductReg
 		this.address3 = address3;
 	}
 	
+	@Transient
 	@Column(name = "city",  nullable = true, length = 100)
 	public String getCity() {
 		return city;
@@ -263,6 +271,7 @@ public class ProductRegister extends MizeEntity implements Comparable<ProductReg
 		this.city = city;
 	}
 	
+	@Transient
 	@Column(name = "state_id",  nullable = true, length = 11)
 	public String getState() {
 		return state;
@@ -271,6 +280,7 @@ public class ProductRegister extends MizeEntity implements Comparable<ProductReg
 		this.state = state;
 	}
 	
+	@Transient
 	@Column(name = "postal_code",  nullable = true, length = 11)
 	public String getZipCode() {
 		return zipCode;
@@ -279,6 +289,7 @@ public class ProductRegister extends MizeEntity implements Comparable<ProductReg
 		this.zipCode = zipCode;
 	}
 	
+	@Transient
 	@Column(name = "country_id",  nullable = true, length = 11)
 	public String getCountry() {
 		return country;
@@ -651,6 +662,7 @@ public class ProductRegister extends MizeEntity implements Comparable<ProductReg
 		this.address = address;
 	}
 
+	@Transient
 	public String getTemplate() {
 		return template;
 	}
