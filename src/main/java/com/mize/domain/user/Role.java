@@ -1,7 +1,5 @@
 package com.mize.domain.user;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -32,8 +30,7 @@ public class Role extends MizeEntity implements Comparable<Role>{
 	
 	
 
-	public Role(String name, String description, String code, String active,
-			List<GroupRoleMapping> groupsToRole) {
+	public Role(String name, String description, String code, String active) {
 		super();
 		this.name = name;
 		this.description = description;
