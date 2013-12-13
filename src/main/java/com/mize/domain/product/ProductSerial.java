@@ -19,6 +19,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -30,8 +31,10 @@ import com.mize.domain.util.JsonDateTimeSerializer;
 @Entity
 @Table(name = "prod_serial", uniqueConstraints = {@UniqueConstraint (columnNames = {"id"})})
 public class ProductSerial extends MizeEntity{
-
-	private static final long serialVersionUID = 5827509183800749241L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1396934864607540803L;
 	private BusinessEntity tenant;
 	private Product product;
 	private String prodSerialNumber;
@@ -40,8 +43,9 @@ public class ProductSerial extends MizeEntity{
 	protected DateTime deliveryDate;	
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime buildDate;
-	
+	//private String comments;
 	public ProductSerial(){
+		super();
 	}
 
 	public ProductSerial(BusinessEntity tenantId, Product product, String prodSerialNumber,
@@ -106,11 +110,10 @@ public class ProductSerial extends MizeEntity{
 		this.deliveryBE = deliveryBE;
 	}
 
+	@Column(name = "delivery_date", nullable = true)
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
-	@JsonIgnore(value=false)
-	@Column(name = "delivery_date")
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
+	@Type(type = "com.mize.domain.util.DateTimeJPA")
+	@JsonSerialize(using = JsonDateTimeSerializer.class, include = Inclusion.NON_NULL)	
 	public DateTime getDeliveryDate() {
 		return deliveryDate;
 	}
@@ -121,11 +124,10 @@ public class ProductSerial extends MizeEntity{
 		this.deliveryDate = deliveryDate;
 	}
 
+	@Column(name = "build_date", nullable = true)
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
-	@JsonIgnore(value=false)
-	@Column(name = "build_date")
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
+	@Type(type = "com.mize.domain.util.DateTimeJPA")
+	@JsonSerialize(using = JsonDateTimeSerializer.class, include = Inclusion.NON_NULL)
 	public DateTime getBuildDate() {
 		return buildDate;
 	}

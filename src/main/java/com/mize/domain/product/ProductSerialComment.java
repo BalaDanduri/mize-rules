@@ -18,7 +18,10 @@ import com.mize.domain.common.MizeEntity;
 @Table(name = "prod_serial_comment", uniqueConstraints = {@UniqueConstraint (columnNames = {"id"})})
 public class ProductSerialComment extends MizeEntity{
 
-	private static final long serialVersionUID = 5827509183800749241L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4772128184803476915L;
 	private ProductSerial prodSerial;
 	private EntityComment comment;
 

@@ -26,8 +26,8 @@ import com.mize.domain.util.JsonDateTimeSerializer;
 @Table(name = "part_substitute")
 public class PartSubstitute extends MizeEntity {
 
-	private static final long serialVersionUID = 7541499457840335691L;
-	
+	private static final long serialVersionUID = -8910398875058216907L;
+
 	private Part originalPart;
 	private Part substitutedPart;
 	private String code;

@@ -20,7 +20,10 @@ import com.mize.domain.common.MizeEntity;
 @Table(name = "prod_to_cat", uniqueConstraints = {@UniqueConstraint (columnNames = {"id"})})
 public class ProductToCategory extends MizeEntity{
 
-	private static final long serialVersionUID = 5827509183800749241L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 222090270074133209L;
 	private Product product;
 	private ProductCategory productCategory;
 
