@@ -139,7 +139,7 @@ public class PartKit extends MizeEntity{
 		return super.getUpdatedBy();
 	}
 	
-	@OneToMany(cascade={CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = "partKit")
+	@OneToMany(cascade={CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = "partKit" , orphanRemoval= true)
 	@Fetch(FetchMode.SUBSELECT)
 	public List<PartKitItem> getPartKitItems() {
 		return partKitItems;

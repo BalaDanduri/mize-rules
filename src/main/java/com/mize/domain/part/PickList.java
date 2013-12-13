@@ -98,7 +98,7 @@ public class PickList extends MizeEntity {
 		return tenant;
 	}
 
-	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "pickList")
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "pickList", orphanRemoval= true)
 	@JsonManagedReference(value="pickListItem")
 	public List<PickListItem> getListItems() {
 		return listItems;

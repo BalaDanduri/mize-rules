@@ -135,14 +135,14 @@ public class Part extends MizeEntity {
 		return uom;
 	}
 
-	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "part")
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "part" ,orphanRemoval= true)
 	@Fetch(FetchMode.SELECT)
 	@JsonManagedReference(value="partIntl")
 	public List<PartIntl> getPartIntl() {
 		return partIntl;
 	}
 
-	@OneToMany(fetch = FetchType.LAZY, cascade={CascadeType.ALL}, mappedBy = "part")
+	@OneToMany(fetch = FetchType.LAZY, cascade={CascadeType.ALL}, mappedBy = "part", orphanRemoval= true )
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	@JsonManagedReference(value="partPrice")
 	public List<PartPrice> getPartPrices() {
