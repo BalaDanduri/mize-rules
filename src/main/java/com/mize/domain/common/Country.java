@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonManagedReference;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
@@ -121,6 +122,7 @@ public class Country extends MizeEntity implements Comparable<Country>{
 
 	@OneToMany(cascade={CascadeType.ALL}, fetch= FetchType.EAGER , mappedBy ="country")
 	@Fetch(value = FetchMode.SELECT)
+	@JsonManagedReference(value="country")
 	public List<State> getStates() {
 		return states;
 	}
