@@ -25,6 +25,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -35,7 +36,9 @@ import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.DecimalValueDeserializer;
 import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JodaDateDeserializer;
+import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateSerializer;
+import com.mize.domain.util.JsonDateTimeSerializer;
 import com.mize.domain.util.NumberValueSerializer;
 
 @javax.persistence.Entity
@@ -74,15 +77,16 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	@DateTimeFormat(pattern="MM-dd-yyyy")
 	private DateTime releaseDate;
 
-	@DateTimeFormat(pattern="MM-dd-yyyy")
-	@JsonSerialize(using=JsonDateSerializer.class,include=Inclusion.NON_DEFAULT)
-	@Column(name="release_date",nullable=true)
+	@Column(name = "release_date", nullable = true)
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@Type(type = "com.mize.domain.util.DateTimeJPA")
+	@JsonSerialize(using = JsonDateTimeSerializer.class, include = Inclusion.NON_NULL)	
 	public DateTime getReleaseDate() {
 		return releaseDate;
 	}
 	
-	@DateTimeFormat(pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateDeserializer.class)
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	public void setReleaseDate(DateTime releaseDate) {
 		this.releaseDate = releaseDate;
 	}
@@ -129,7 +133,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "product")
 	@Fetch(FetchMode.SUBSELECT)
-	@JsonManagedReference(value="intl")
+	@JsonManagedReference(value="productIntl")
 	public List<ProductIntl> getIntl() {
 		return intl;
 	}

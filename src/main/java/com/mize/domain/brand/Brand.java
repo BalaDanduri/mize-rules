@@ -30,7 +30,10 @@ import com.mize.domain.util.JPASerializer;
 @Table(name = "brand")
 public class Brand extends MizeEntity implements Comparable<Brand>{
 	
-	private static final long serialVersionUID = -7447355457187568168L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5317108190942485164L;
 	private String name;
 	private String department;
 	private String website;
@@ -134,10 +137,11 @@ public class Brand extends MizeEntity implements Comparable<Brand>{
 		this.website = website;
 	}
 	
-	@OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL,mappedBy = "brand")
-	@Fetch(value=FetchMode.SUBSELECT)
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
-	@JsonManagedReference(value="brand_support")
+//	@OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL,mappedBy = "brand")
+//	@Fetch(value=FetchMode.SUBSELECT)
+//	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+//	@JsonManagedReference(value="brand_support")
+	@Transient
 	public List<BrandSupport> getBrandSupports() {
 		return brandSupports;
 	}
@@ -163,10 +167,11 @@ public class Brand extends MizeEntity implements Comparable<Brand>{
 	}
 	
 	
-	@OneToMany(fetch = FetchType.LAZY,cascade=CascadeType.ALL,mappedBy = "brand")
-	@Fetch(value=FetchMode.SUBSELECT)
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
-	@JsonManagedReference(value="brand_feed")
+//	@OneToMany(fetch = FetchType.LAZY,cascade=CascadeType.ALL,mappedBy = "brand")
+//	@Fetch(value=FetchMode.SUBSELECT)
+//	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+//	@JsonManagedReference(value="brand_feed")
+	@Transient
 	public List<BrandFeed> getBrandFeeds() {
 		return brandFeeds;
 	}
@@ -174,10 +179,12 @@ public class Brand extends MizeEntity implements Comparable<Brand>{
 	public void setBrandFeeds(List<BrandFeed> brandFeeds) {
 		this.brandFeeds = brandFeeds;
 	}
-	@OneToMany(fetch = FetchType.LAZY,cascade=CascadeType.ALL,mappedBy = "brand")
-	@Fetch(value=FetchMode.SUBSELECT)
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
-	@JsonManagedReference(value="brand_shippings")
+
+//	@OneToMany(fetch = FetchType.LAZY,cascade=CascadeType.ALL,mappedBy = "brand")
+//	@Fetch(value=FetchMode.SUBSELECT)
+//	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+//	@JsonManagedReference(value="brand_shippings")
+	@Transient
 	public List<ProductRepeatOrderShipOptions> getShippings() {
 		return shippings;
 	}

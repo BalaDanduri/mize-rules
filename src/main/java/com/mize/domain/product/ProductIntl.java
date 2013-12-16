@@ -19,10 +19,13 @@ import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JPASerializer;
 
 @Entity
-@Table(name="prod_intl")
+@Table(name="prod_name_intl")
 public class ProductIntl extends MizeEntity {
 
-	private static final long serialVersionUID = -1362236702129137109L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6977239159157170676L;
 	private Product Product;
 	private String name;
 	private String description;
@@ -46,17 +49,17 @@ public class ProductIntl extends MizeEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "prod_id")
-	@JsonBackReference(value="intl")
+	@JsonBackReference(value="productIntl")
 	public Product getProduct() {
 		return Product;
 	}
 	
-	@Column(name = "name")
+	@Column(name = "prod_name")
 	public String getName() {
 		return name;
 	}
 
-	@Column(name = "description")
+	@Column(name = "prod_desc")
 	public String getDescription() {
 		return description;
 	}

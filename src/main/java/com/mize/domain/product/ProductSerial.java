@@ -101,7 +101,7 @@ public class ProductSerial extends MizeEntity{
 	}
 
 	@ManyToOne(cascade={CascadeType.ALL},fetch = FetchType.LAZY)
-	@JoinColumn(name="delivery_be_id")
+	@JoinColumn(name="delivery_be_id", nullable = true)
 	public BusinessEntity getDeliveryBE() {
 		return deliveryBE;
 	}

@@ -26,7 +26,10 @@ import com.mize.domain.util.JPASerializer;
 @Table(name="business_entity_address")
 public class BusinessEntityAddress  extends MizeEntity  implements Comparable<BusinessEntityAddress>{
 
-	private static final long serialVersionUID = 625412111910612584L;	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8062274530036956916L;
 	private Long beId;
 	private BusinessEntity businessEntity;
 	private EntityAddress entityAddress;
