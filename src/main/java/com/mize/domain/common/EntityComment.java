@@ -1,4 +1,4 @@
-package com.mize.domain.product;
+package com.mize.domain.common;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

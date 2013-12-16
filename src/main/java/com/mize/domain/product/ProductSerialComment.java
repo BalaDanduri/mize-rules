@@ -12,6 +12,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.MizeEntity;
 
 @Entity
