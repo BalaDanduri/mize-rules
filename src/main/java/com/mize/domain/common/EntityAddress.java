@@ -127,7 +127,7 @@ public class EntityAddress extends MizeEntity implements Comparable<EntityAddres
 		this.city = city;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "state_id")
 	public State getState() {
 		return state;
@@ -137,7 +137,7 @@ public class EntityAddress extends MizeEntity implements Comparable<EntityAddres
 		this.state = state;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "country_id")
 	public Country getCountry() {
 		return country;
@@ -219,7 +219,7 @@ public class EntityAddress extends MizeEntity implements Comparable<EntityAddres
 		this.landmark = landmark;
 	}
 	
-	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "address")
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "address", orphanRemoval = true)
 	@JsonManagedReference(value="addressPhone")
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public List<EntityAddressPhone> getAddressPhones() {

@@ -34,7 +34,7 @@ public class ServiceEntityRequester extends MizeEntity implements Comparable<Ser
 	private Long entityId;
 	private ServiceEntity serviceEntity;
 	private BusinessEntity businessEntity;
-	private ServiceEntityAddress address = new ServiceEntityAddress();
+	private ServiceEntityAddress address = new ServiceEntityAddress();	
 	
 	public ServiceEntityRequester() {
 		super();
@@ -148,9 +148,8 @@ public class ServiceEntityRequester extends MizeEntity implements Comparable<Ser
 	@JsonIgnore(value=false)
 	public void setUpdatedDate(DateTime updatedDate) {
 		this.updatedDate = updatedDate;
-	}
-	
-	
+	}	
+
 	@Override
 	public int compareTo(ServiceEntityRequester arg0) {
 		return 0;

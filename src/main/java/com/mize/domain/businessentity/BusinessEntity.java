@@ -14,8 +14,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonManagedReference;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
@@ -30,7 +32,6 @@ import com.mize.domain.util.JPASerializer;
 public class BusinessEntity extends MizeEntity implements Comparable<BusinessEntity>{
 
 	private static final long serialVersionUID = 5842902035928465555L;
-	
 	private String code;
 	private String typeCode;
 	private String subTypeCode;
@@ -142,7 +143,7 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 		this.currencyCode = currencyCode;
 	}
 	
-	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "businessEntity")
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "businessEntity" , orphanRemoval = true)
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	@JsonManagedReference(value="address")
 	public List<BusinessEntityAddress> getAddresses() {
@@ -153,7 +154,7 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 		this.addresses = addresses;
 	}
 	
-	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "businessEntity")
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "businessEntity" ,orphanRemoval = true)
 	@Fetch(FetchMode.SUBSELECT)
 	@JsonManagedReference(value="intl")
 	public List<BusinessEntityIntl> getIntl() {
@@ -173,9 +174,11 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 		this.name = name;
 	}
 	
-	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "businessEntity")
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "businessEntity" , orphanRemoval = true)
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	@JsonManagedReference(value="be_brand")
+	@JsonIgnore
+	@Transient
 	public List<BusinessEntityBrand> getBeBrand() {
 		return beBrand;
 	}
@@ -184,7 +187,7 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 		this.beBrand = beBrand;
 	}
 
-	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "businessEntity")
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "businessEntity" , orphanRemoval = true)
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	@JsonManagedReference(value="be_contact")
 	public List<BusinessEntityContact> getBeContact() {
@@ -195,7 +198,7 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 		this.beContact = beContact;
 	}
 
-	@OneToOne(fetch=FetchType.LAZY ,cascade= CascadeType.ALL ,mappedBy ="businessEntity")
+	@OneToOne(fetch=FetchType.LAZY ,cascade= CascadeType.ALL ,mappedBy ="businessEntity", orphanRemoval = true)
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	@JsonManagedReference(value="be_attribute")
 	public BusinessEntityAttribute getBeAttribute() {

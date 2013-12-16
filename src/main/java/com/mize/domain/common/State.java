@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
@@ -52,8 +53,9 @@ public class State extends MizeEntity implements Comparable<State>{
 		this.code = code;
 	}	
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "country_id")
+	@JsonBackReference(value="country")
 	public Country getCountry() {
 		return country;
 	}

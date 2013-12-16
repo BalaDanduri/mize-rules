@@ -59,9 +59,9 @@ public class BusinessEntityAddress  extends MizeEntity  implements Comparable<Bu
 		this.beId = beId;
 	}
 	
-	@OneToOne(fetch=FetchType.LAZY ,cascade= CascadeType.ALL)
+	@OneToOne(fetch=FetchType.EAGER ,cascade= CascadeType.ALL)
 	@JoinColumn(name="be_address_id")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	/*@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)*/
 	public EntityAddress getEntityAddress() {
 		return entityAddress;
 	}
