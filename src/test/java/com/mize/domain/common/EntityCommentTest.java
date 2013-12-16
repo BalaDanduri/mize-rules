@@ -1,4 +1,4 @@
-package com.mize.domain.product;
+package com.mize.domain.common;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.ContextConfiguration;
 
+import com.mize.domain.product.ProductSerial;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;
 
