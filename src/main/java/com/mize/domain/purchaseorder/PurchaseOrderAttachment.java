@@ -48,9 +48,8 @@ public class PurchaseOrderAttachment extends MizeEntity implements Comparable<Pu
 		this.purchaseOrder = purchaseOrder;
 	}
 
-	@ManyToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER,cascade = CascadeType.ALL)
 	@JoinColumn(name="attach_id")
-	@JsonBackReference(value="attachment_entityattachment")
 	public EntityAttachment getAttachment() {
 		return attachment;
 	}

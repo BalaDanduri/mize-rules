@@ -48,9 +48,8 @@ public class PurchaseOrderMessage extends MizeEntity implements Comparable<Purch
 		this.purchaseOrder = purchaseOrder;
 	}
 
-	@ManyToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER,cascade = CascadeType.ALL)
 	@JoinColumn(name="error_message_id")
-	@JsonBackReference(value="message_entityErrorMessage")
 	public EntityErrorMessage getErrorMessage() {
 		return errorMessage;
 	}

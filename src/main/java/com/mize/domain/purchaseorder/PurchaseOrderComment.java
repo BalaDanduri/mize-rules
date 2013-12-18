@@ -59,9 +59,8 @@ public class PurchaseOrderComment extends MizeEntity implements Comparable<Purch
 		this.purchaseOrder = purchaseOrder;
 	}
 	
-	@ManyToOne(fetch=FetchType.LAZY,cascade =CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER,cascade =CascadeType.ALL)
 	@JoinColumn(name="comment_id")
-	@JsonBackReference(value="comment_entitycomment")
 	public EntityComment getComment() {
 		return comment;
 	}
