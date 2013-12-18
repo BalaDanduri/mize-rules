@@ -246,7 +246,7 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 		this.purchaseOrder = purchaseOrder;
 	}
 
-	@OneToOne(fetch=FetchType.LAZY ,cascade= CascadeType.ALL)
+	@OneToOne(fetch=FetchType.EAGER ,cascade= CascadeType.ALL)
 	@JoinColumn(name="amount_id")
 	public PurchaseOrderAmount getAmount() {
 		return amount;

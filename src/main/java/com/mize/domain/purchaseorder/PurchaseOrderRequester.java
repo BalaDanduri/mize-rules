@@ -59,7 +59,7 @@ public class PurchaseOrderRequester extends MizeEntity implements Comparable<Pur
 		this.businessEntity = businessEntity;
 	}
 
-	@OneToOne(fetch=FetchType.LAZY ,cascade =CascadeType.ALL)
+	@OneToOne(fetch=FetchType.EAGER ,cascade =CascadeType.ALL)
 	@JoinColumn(name="requester_address_id")
 	public EntityAddress getAddress() {
 		return address;

@@ -129,7 +129,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 		this.status = status;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "locale_id")
 	public Locale getLocale() {
 		return locale;
@@ -166,7 +166,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 		this.salesPerson = salesPerson;
 	}
 
-	@OneToOne(fetch=FetchType.LAZY ,cascade= CascadeType.ALL)
+	@OneToOne(fetch=FetchType.EAGER ,cascade= CascadeType.ALL)
 	@JoinColumn(name="amount_id")
 	public PurchaseOrderAmount getAmount() {
 		return amount;
