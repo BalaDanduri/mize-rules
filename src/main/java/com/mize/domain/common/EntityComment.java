@@ -12,18 +12,26 @@ import com.mize.domain.common.MizeEntity;
 
 @Entity
 @Table(name = "entity_comment", uniqueConstraints = {@UniqueConstraint (columnNames = {"id"})})
-public class EntityComment extends MizeEntity{
+public class EntityComment extends MizeEntity implements Comparable<EntityComment>{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -6912661566113329768L;
 	private String commentType;
 	private String comments;
 
 	public EntityComment(){
+		super();
 	}
-
+	
+	public EntityComment(String commentType,String comments){
+		super();
+		this.commentType = commentType;
+		this.comments = comments;
+	}
+	
+	public enum Type{
+		Internal,External;
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false, unique = true)
@@ -91,6 +99,11 @@ public class EntityComment extends MizeEntity{
 	public String toString() {
 		return "EntityComment [id=" + id + ", commentType=" + commentType + ", comments="
 				+ comments + "]";
+	}
+
+	@Override
+	public int compareTo(EntityComment o) {
+		return 0;
 	}
 	
 }

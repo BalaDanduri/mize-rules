@@ -1072,6 +1072,285 @@ ALTER TABLE form_instance
 	REFERENCES form_defn(id);
 
 
+
+CREATE TABLE purchase_order_amount (
+	id integer primary key auto_increment  not null,
+	requested_amount		 DECIMAL(20,6),
+	discount_amount		 	 DECIMAL(20,6),
+	handling_amount		 	 DECIMAL(20,6),
+	shipping_amount			 DECIMAL(20,6),
+	freight_amount			 DECIMAL(20,6),
+	tax_amount		 		 DECIMAL(20,6),
+	miscellaneous_amount	 DECIMAL(20,6),
+	adjusted_amount			 DECIMAL(20,6),
+	total_amount		 	 DECIMAL(20,6),
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE purchase_order (
+	id integer primary key auto_increment  not null,
+	tenant_id			integer	NULL,
+	order_number		varchar(50) 	NULL,	
+	order_type			varchar(50) 	NULL,
+	request_type		varchar(50) 	NULL,
+	order_status		varchar(50) 	NULL,
+	locale_id			integer	NULL,
+	currency_code		varchar(50) 	NULL,
+	order_reference		varchar(100) 	NULL,	
+	sales_person		varchar(100) 	NULL,
+	discount_id			integer	NULL,
+	amount_id			integer	NULL,
+	created_date 		datetime 	NULL,
+	updated_date 		datetime 	NULL,
+	created_by 			integer	NULL,
+	updated_by 			integer	NULL,
+	PRIMARY KEY (id)
+);
+	
+ALTER TABLE purchase_order
+	ADD CONSTRAINT pc_amountid_fk
+	FOREIGN KEY(amount_id)
+	REFERENCES purchase_order_amount(id);
+
+
+CREATE TABLE purchase_order_requester (
+	id 						integer primary key auto_increment  not null,
+	order_id				integer NULL,
+	requester_be_id			integer	NULL,
+	requester_address_id	integer	NULL,
+	PRIMARY KEY (id)
+);
+			
+ALTER TABLE purchase_order_requester
+	ADD CONSTRAINT pcr_orderid_fk
+	FOREIGN KEY(order_id)
+	REFERENCES purchase_order(id);
+		
+
+CREATE TABLE purchase_order_payment (
+	id 						integer primary key auto_increment  not null,
+	order_id				integer NULL,
+	payee_be_id 			integer	NULL,
+	payee_address_id		integer	NULL,          
+	payment_method     		varchar(50) NULL,
+	PRIMARY KEY (id)
+);
+		
+ALTER TABLE purchase_order_payment
+	ADD CONSTRAINT pcp_orderid_fk
+	FOREIGN KEY(order_id)
+	REFERENCES purchase_order(id);
+
+	
+CREATE TABLE purchase_order_shipment (
+	id 						integer primary key auto_increment  not null,
+	order_id				integer NULL,
+	shipment_be_id 			integer	NULL,
+	shipment_address_id		integer	NULL,     			
+	shipment_method			varchar(50) 	NULL,
+	shipment_priority		varchar(50) 	NULL,
+	shipment_carrier		varchar(50) 	NULL,	
+	estimated_ship_days		varchar(50) 	NULL,
+	estimated_ship_date		datetime 	NULL,
+	estimated_ship_cost		DECIMAL(20,6),
+	drop_ship				char(1)		NULL,
+	ship_complete			char(1)		NULL,
+	PRIMARY KEY (id)
+);
+			
+ALTER TABLE purchase_order_shipment
+	ADD CONSTRAINT pcs_orderid_fk
+	FOREIGN KEY(order_id)
+	REFERENCES purchase_order(id);
+	
+	
+CREATE TABLE purchase_order_item (
+	id 						integer primary key auto_increment  not null,
+	order_id				integer NULL,
+	item_id					integer NULL,                       
+	item_type				varchar(50) 		NULL,	
+	item_number				varchar(100) 		NULL,   
+	item_serial				varchar(100) 		NULL,
+	item_name				varchar(250) 		NULL,
+	item_description		varchar(500) 		NULL,
+	item_uom				varchar(50) 		NULL,   
+	item_status				varchar(50) 		NULL,
+	item_price_code			varchar(50) 		NULL,
+	item_weight				DECIMAL(20,6),	
+	item_prod_model         varchar(50) 		NULL,
+    item_prod_srl_no        varchar(200) 		NULL,
+	requested_quantity		DECIMAL(20,6),
+	backorder_quantity		DECIMAL(20,6),
+    amount_id				integer NULL,
+	created_date 			datetime 		NULL,
+	updated_date 			datetime 		NULL,
+	created_by 				integer NULL,
+	updated_by 				integer NULL,
+	PRIMARY KEY (id)
+);
+
+ALTER TABLE purchase_order_item
+	ADD CONSTRAINT poi_orderid_fk
+	FOREIGN KEY(order_id)
+	REFERENCES purchase_order(id);
+	
+ALTER TABLE purchase_order_item
+	ADD CONSTRAINT poi_amountid_fk
+	FOREIGN KEY(amount_id)
+	REFERENCES purchase_order_amount(id);
+	
+
+CREATE TABLE purchase_order_audit ( 
+	id 						integer primary key auto_increment  not null,
+	order_id       			integer NULL,
+	status_code     		varchar(30) 	NULL,
+	status_date				datetime 	NULL,
+	status_by				integer	NULL,
+    PRIMARY KEY (id)
+);
+
+ALTER TABLE purchase_order_audit
+	ADD CONSTRAINT pca_orderid_fk
+	FOREIGN KEY(order_id)
+	REFERENCES purchase_order(id);
+	
+	
+CREATE TABLE purchase_order_attach (
+	id 					integer primary key auto_increment  not null,
+	order_id       		integer NULL,
+	attach_id			integer NULL,
+    PRIMARY KEY (id)
+);
+
+ALTER TABLE purchase_order_attach
+	ADD CONSTRAINT pcattach_orderid_fk
+	FOREIGN KEY(order_id)
+	REFERENCES purchase_order(id);
+	
+
+CREATE TABLE purchase_order_comment ( 
+	id 					integer primary key auto_increment  not null,
+	order_id       		integer NULL,
+	comment_id     		integer NULL,	
+    PRIMARY KEY (id)
+);
+
+ALTER TABLE purchase_order_comment
+	ADD CONSTRAINT pcc_orderid_fk
+	FOREIGN KEY(order_id)
+	REFERENCES purchase_order(id);
+	
+CREATE TABLE purchase_order_message ( 
+	id 					integer primary key auto_increment  not null,
+	order_id       		integer NULL,
+	error_message_id    integer NULL,	
+    PRIMARY KEY (id)
+);
+
+ALTER TABLE purchase_order_message
+	ADD CONSTRAINT pcm_orderid_fk
+	FOREIGN KEY(order_id)
+	REFERENCES purchase_order(id);
+
+	
+CREATE TABLE purchase_order_item_warehouse (
+	id 						integer primary key auto_increment  not null,
+	order_item_id			integer NULL,	
+	warehouse_code			varchar(100) 	NULL,
+	warehouse_name			varchar(500) 	NULL,
+	warehouse_address_id	integer NULL,	          
+	warehouse_item_status	varchar(100) 	NULL,	
+	available_quantity		DECIMAL(20,6),
+	backorder_quantity		DECIMAL(20,6),
+	estimated_ship_date		datetime 	NULL,
+	estimated_ship_cost		DECIMAL(20,6),	
+	PRIMARY KEY (id)
+);
+	
+ALTER TABLE purchase_order_item_warehouse
+	ADD CONSTRAINT pciw_itemid_fk
+	FOREIGN KEY(order_item_id)
+	REFERENCES purchase_order_item(id);
+
+	
+CREATE TABLE purchase_order_ship_package (
+	id 						integer primary key auto_increment  not null,
+	order_shipment_id			integer NULL,	
+	package_number			varchar(50) 	NULL,
+	package_weight			DECIMAL(20,6),
+	shipment_method			varchar(50) 	NULL,
+	shipment_priority		varchar(50) 	NULL,
+	shipment_carrier		varchar(50) 	NULL,	
+	shipment_date			datetime 	NULL,
+	tracking_number			varchar(50) 	NULL,
+	shipment_status			varchar(50) 	NULL,
+	shipment_label			varchar(200) 	NULL,
+	shipment_link_info		varchar(200) 	NULL,
+	warehouse_code			varchar(100) 	NULL,
+	warehouse_name			varchar(500) 	NULL,
+	warehouse_item_status	varchar(100) 	NULL,	
+	handling_amount			DECIMAL(20,6),	
+	freight_amount			DECIMAL(20,6),
+	total_amount			DECIMAL(20,6),
+	created_date 			datetime 	NULL,
+	updated_date 			datetime 	NULL,
+	created_by 				integer	NULL,
+	updated_by 				integer	NULL,
+	PRIMARY KEY (id)
+);
+	
+ALTER TABLE purchase_order_ship_package
+	ADD CONSTRAINT pcsp_shipid_fk
+	FOREIGN KEY(order_shipment_id)
+	REFERENCES purchase_order_shipment(id);
+	
+CREATE TABLE purchase_order_item_status (
+	id 						integer primary key auto_increment  not null,
+	ship_package_id			integer NULL,	
+	order_item_id			integer NULL,	
+	item_quantity			DECIMAL(20,6),	
+	item_status				varchar(50) 	NULL,
+	PRIMARY KEY (id)
+);
+	
+ALTER TABLE purchase_order_item_status
+	ADD CONSTRAINT pcsi_packageid_fk
+	FOREIGN KEY(ship_package_id)
+	REFERENCES purchase_order_ship_package(id);	
+	
+ALTER TABLE purchase_order_item_status
+	ADD CONSTRAINT pcsi_itemid_fk
+	FOREIGN KEY(order_item_id)
+	REFERENCES purchase_order_item(id);
+	
+	
+CREATE TABLE entity_attachment ( 
+	id           		bigint(20) 		AUTO_INCREMENT NOT NULL,	
+	attachment_type 	varchar(50) 		NULL,
+	attachment_name     varchar(200) 		NULL,
+    attachment_url		varchar(256) 		NULL,
+    created_date    	datetime 		NULL,
+	updated_date    	datetime 		NULL,
+	created_by      	bigint(20) 		NULL,
+    updated_by      	bigint(20) 		NULL,          
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE entity_error_message ( 
+	id           			bigint(20) 		AUTO_INCREMENT NOT NULL,	
+	message_severity     	bigint(20) 		NULL,
+	message_field			varchar(250) 		NULL,
+	message_code			varchar(100) 		NULL,
+	message_type			varchar(100) 		NULL,
+	short_description		varchar(250) 		NULL,
+	long_description		varchar(500) 		NULL,
+    created_date    		datetime 		NULL,
+	updated_date    		datetime 		NULL,
+	created_by      		bigint(20) 		NULL,
+    updated_by      		bigint(20) 		NULL,          
+    PRIMARY KEY (id)
+);
+	
 insert into locale values(1,'Y','EN','USA','EN_USA');
 
 INSERT INTO  business_entity(id, code, type_code, sub_type_code, name, logo, created_date, updated_date, created_by, updated_by, active_indicator)
