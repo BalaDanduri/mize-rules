@@ -177,8 +177,6 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "businessEntity" , orphanRemoval = true)
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	@JsonManagedReference(value="be_brand")
-	@JsonIgnore
-	@Transient
 	public List<BusinessEntityBrand> getBeBrand() {
 		return beBrand;
 	}
