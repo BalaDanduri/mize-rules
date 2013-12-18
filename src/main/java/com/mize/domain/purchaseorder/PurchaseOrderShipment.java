@@ -162,4 +162,94 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 		return 0;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = PRIME;
+		int result = super.hashCode();
+		result = prime * result + ((address == null) ? 0 : address.hashCode());
+		result = prime * result + ((carrier == null) ? 0 : carrier.hashCode());
+		result = prime * result
+				+ ((dropShip == null) ? 0 : dropShip.hashCode());
+		result = prime
+				* result
+				+ ((estimatedShipmentCost == null) ? 0 : estimatedShipmentCost
+						.hashCode());
+		result = prime
+				* result
+				+ ((estimatedShipmentDate == null) ? 0 : estimatedShipmentDate
+						.hashCode());
+		result = prime
+				* result
+				+ ((estimatedShipmentDays == null) ? 0 : estimatedShipmentDays
+						.hashCode());
+		result = prime * result + ((method == null) ? 0 : method.hashCode());
+		result = prime * result
+				+ ((priority == null) ? 0 : priority.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PurchaseOrderShipment other = (PurchaseOrderShipment) obj;
+		if (address == null) {
+			if (other.address != null)
+				return false;
+		} else if (!address.equals(other.address))
+			return false;
+		if (carrier == null) {
+			if (other.carrier != null)
+				return false;
+		} else if (!carrier.equals(other.carrier))
+			return false;
+		if (dropShip == null) {
+			if (other.dropShip != null)
+				return false;
+		} else if (!dropShip.equals(other.dropShip))
+			return false;
+		if (estimatedShipmentCost == null) {
+			if (other.estimatedShipmentCost != null)
+				return false;
+		} else if (!estimatedShipmentCost.equals(other.estimatedShipmentCost))
+			return false;
+		if (estimatedShipmentDate == null) {
+			if (other.estimatedShipmentDate != null)
+				return false;
+		} else if (!estimatedShipmentDate.equals(other.estimatedShipmentDate))
+			return false;
+		if (estimatedShipmentDays == null) {
+			if (other.estimatedShipmentDays != null)
+				return false;
+		} else if (!estimatedShipmentDays.equals(other.estimatedShipmentDays))
+			return false;
+		if (method == null) {
+			if (other.method != null)
+				return false;
+		} else if (!method.equals(other.method))
+			return false;
+		if (priority == null) {
+			if (other.priority != null)
+				return false;
+		} else if (!priority.equals(other.priority))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "PurchaseOrderShipment [address=" + address + ", method="
+				+ method + ", priority=" + priority + ", carrier=" + carrier
+				+ ", estimatedShipmentDays=" + estimatedShipmentDays
+				+ ", dropShip=" + dropShip + ", estimatedShipmentDate="
+				+ estimatedShipmentDate + ", estimatedShipmentCost="
+				+ estimatedShipmentCost + "]";
+	}
+	
+	
+
 }
