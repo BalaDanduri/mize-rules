@@ -28,6 +28,7 @@ public class BusinessEntityContact extends MizeEntity implements Comparable<Busi
 		private String faxExt;
 		private String email;
 		private String department;
+		private String contactType;
 
 	@Id
 	@Column(name="id",nullable=false,unique=true)
@@ -144,6 +145,15 @@ public class BusinessEntityContact extends MizeEntity implements Comparable<Busi
 		this.department = department;
 	}
 	
+	@Column(name = "contact_type", length = 50, nullable = true)
+	public String getContactType() {
+		return contactType;
+	}
+	
+	public void setContactType(String contactType) {
+		this.contactType = contactType;
+	}
+	
 	@Override
 	public int compareTo(BusinessEntityContact o) {
 		return 0;
@@ -171,6 +181,8 @@ public class BusinessEntityContact extends MizeEntity implements Comparable<Busi
 		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
 		result = prime * result
 				+ ((phoneExt == null) ? 0 : phoneExt.hashCode());
+		result = prime * result
+				+ ((contactType == null) ? 0 : contactType.hashCode());
 		return result;
 	}
 
@@ -237,6 +249,11 @@ public class BusinessEntityContact extends MizeEntity implements Comparable<Busi
 			if (other.phoneExt != null)
 				return false;
 		} else if (!phoneExt.equals(other.phoneExt))
+			return false;
+		if (contactType == null) {
+			if (other.contactType != null)
+				return false;
+		} else if (!contactType.equals(other.contactType))
 			return false;
 		return true;
 	}

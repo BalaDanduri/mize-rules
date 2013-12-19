@@ -69,6 +69,22 @@
 				<class>com.mize.domain.user.Group</class>
 				<class>com.mize.domain.user.GroupRoleMapping</class>
 				<class>com.mize.domain.user.Role</class>
+				<!-- purchase order -->
+				<class>com.mize.domain.purchaseorder.PurchaseOrder</class>
+				<class>com.mize.domain.purchaseorder.PurchaseOrderAmount</class>
+				<class>com.mize.domain.purchaseorder.PurchaseOrderAttachment</class>
+				<class>com.mize.domain.purchaseorder.PurchaseOrderAudit</class>
+				<class>com.mize.domain.purchaseorder.PurchaseOrderComment</class>
+				<class>com.mize.domain.purchaseorder.PurchaseOrderItem</class>
+				<class>com.mize.domain.purchaseorder.PurchaseOrderItemStatus</class>
+				<class>com.mize.domain.purchaseorder.PurchaseOrderItemWarehourse</class>
+				<class>com.mize.domain.purchaseorder.PurchaseOrderMessage</class>
+				<class>com.mize.domain.purchaseorder.PurchaseOrderPayment</class>
+				<class>com.mize.domain.purchaseorder.PurchaseOrderRequester</class>
+				<class>com.mize.domain.purchaseorder.PurchaseOrderShipment</class>
+				<class>com.mize.domain.purchaseorder.PurchaseOrderShipPackage</class>
+				<class>com.mize.domain.common.EntityAttachment</class>
+				<class>com.mize.domain.common.EntityErrorMessage</class>					
 
         </persistence-unit>
 
