@@ -40,7 +40,7 @@ public class PurchaseOrderPayment extends MizeEntity implements Comparable<Purch
 		this.id = id;		
 	}
 	
-	@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="payee_be_id")
 	public BusinessEntity getBusinessEntity() {
 		return businessEntity;

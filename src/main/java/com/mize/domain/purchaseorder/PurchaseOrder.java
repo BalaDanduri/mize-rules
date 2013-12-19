@@ -223,7 +223,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 		return createdBy;
 	}
 	
-	@OneToOne(fetch=FetchType.LAZY ,cascade= CascadeType.ALL)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="tenant_id")
 	public BusinessEntity getTenant() {
 		return tenant;
@@ -272,7 +272,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 		this.shipment = shipment;
 	}
 
-	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "purchaseOrder")
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "purchaseOrder",orphanRemoval= true)
 	public List<PurchaseOrderItem> getOrderItems() {
 		return orderItems;
 	}
@@ -281,7 +281,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 		this.orderItems = orderItems;
 	}
 
-	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "purchaseOrder")
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "purchaseOrder",orphanRemoval= true)
 	public List<PurchaseOrderAudit> getAudits() {
 		return audits;
 	}
@@ -290,7 +290,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 		this.audits = audits;
 	}
 
-	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "purchaseOrder")
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "purchaseOrder",orphanRemoval= true)
 	public List<PurchaseOrderAttachment> getAttachments() {
 		return attachments;
 	}
@@ -299,7 +299,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 		this.attachments = attachments;
 	}
 
-	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "purchaseOrder")
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "purchaseOrder",orphanRemoval= true)
 	public List<PurchaseOrderComment> getComments() {
 		return comments;
 	}
@@ -308,7 +308,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 		this.comments = comments;
 	}
 
-	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "purchaseOrder")
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "purchaseOrder",orphanRemoval= true)
 	public List<PurchaseOrderMessage> getMessages() {
 		return messages;
 	}
@@ -324,7 +324,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result + ((amount == null) ? 0 : amount.hashCode());
 		result = prime * result + ((number == null) ? 0 : number.hashCode());
