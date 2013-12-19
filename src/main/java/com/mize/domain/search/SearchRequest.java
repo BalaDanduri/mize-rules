@@ -11,8 +11,11 @@ import com.mize.domain.util.Formatter;
 public class SearchRequest {
 	private String entityName;
 	private String version;
+	private Long pageIndex;
+	private Long pageSize;
 	private List<SearchRequestAttribute> attributes;
 
+	private SearchMeta resultMeta;
 	public String getEntityName() {
 		return entityName;
 	}
@@ -37,10 +40,37 @@ public class SearchRequest {
 		this.attributes = attributes;
 	}
 
+	public Long getPageIndex() {
+		return pageIndex;
+	}
+
+	public void setPageIndex(Long pageIndex) {
+		this.pageIndex = pageIndex;
+	}
+
+	public Long getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(Long pageSize) {
+		this.pageSize = pageSize;
+	}
+
+	public SearchMeta getResultMeta() {
+		return resultMeta;
+	}
+
+	public void setResultMeta(SearchMeta resultMeta) {
+		this.resultMeta = resultMeta;
+	}
+
+	
 	@Override
 	public String toString() {
-		return "SearchMeta [entityName=" + getEntityName() + ", version="
-				+ getVersion() + ", attributes=" + getAttributes() + "]";
+		return "SearchRequest [entityName=" + entityName + ", version="
+				+ version + ", pageIndex=" + pageIndex + ", pageSize="
+				+ pageSize + ", attributes=" + attributes + ", resultMeta="
+				+ resultMeta + "]";
 	}
 
 	public Map<String, List<MizeError>> validate() {
