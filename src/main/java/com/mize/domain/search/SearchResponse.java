@@ -5,7 +5,9 @@ import java.util.List;
 public class SearchResponse {
 	private String entityName;
 	private String version;
-	private List<SearchResponseAttribute> attributes;
+	private Long numberOfRecords;
+	private Long pageIndex;
+	private List<SearchResponseRecord> records;
 
 	public String getEntityName() {
 		return entityName;
@@ -23,18 +25,35 @@ public class SearchResponse {
 		this.version = version;
 	}
 
-	public List<SearchResponseAttribute> getAttributes() {
-		return attributes;
+	public List<SearchResponseRecord> getRecords() {
+		return records;
 	}
 
-	public void setAttributes(List<SearchResponseAttribute> attributes) {
-		this.attributes = attributes;
+	public void setRecords(List<SearchResponseRecord> records) {
+		this.records = records;
+	}
+
+	public Long getNumberOfRecords() {
+		return numberOfRecords;
+	}
+
+	public void setNumberOfRecords(Long numberOfRecords) {
+		this.numberOfRecords = numberOfRecords;
+	}
+
+	public Long getPageIndex() {
+		return pageIndex;
+	}
+
+	public void setPageIndex(Long pageIndex) {
+		this.pageIndex = pageIndex;
 	}
 
 	@Override
 	public String toString() {
-		return "SearchRequest [entityName=" + entityName + ", version="
-				+ version + ", attributes=" + attributes + "]";
+		return "SearchResponse [entityName=" + entityName + ", version="
+				+ version + ", numberOfRecords=" + numberOfRecords
+				+ ", pageIndex=" + pageIndex + ", records=" + records + "]";
 	}
 
 }
