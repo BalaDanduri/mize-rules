@@ -57,7 +57,7 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 		this.id = id;		
 	}
 	
-	@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="shipment_be_id")
 	public BusinessEntity getBusinessEntity() {
 		return businessEntity;
