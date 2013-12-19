@@ -48,6 +48,7 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 	private BigDecimal requestedQuantity;
 	private BigDecimal backorderQuantity;
 	private PurchaseOrderAmount amount = new PurchaseOrderAmount();
+	private PurchaseOrderItemWarehourse warehourse;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -263,6 +264,15 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 
 	public void setItemId(Long itemId) {
 		this.itemId = itemId;
+	}
+	@OneToOne(cascade=CascadeType.ALL,fetch = FetchType.LAZY)
+	@JoinColumn(name="id")
+	public PurchaseOrderItemWarehourse getWarehourse() {
+		return warehourse;
+	}
+
+	public void setWarehourse(PurchaseOrderItemWarehourse warehourse) {
+		this.warehourse = warehourse;
 	}
 
 	@Override
