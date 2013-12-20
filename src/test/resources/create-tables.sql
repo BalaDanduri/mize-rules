@@ -371,7 +371,7 @@ CREATE TABLE brand (
 );
 
 INSERT INTO brand(brand_id,brand_name,brand_type,brand_link,created_by,created_date,updated_by,updated_date,feedback_email,department,registered,is_active)
- 	VALUES(1,'Bose',1,'bose.com',null,null,null,null,'feedback_email','Electronics','Y','Y');
+ 	VALUES(4,'Bose',1,'bose.com',null,null,null,null,'feedback_email','Electronics','Y','Y');
 
 drop table if exists brand_support;
 CREATE TABLE brand_support (
@@ -1350,7 +1350,18 @@ CREATE TABLE entity_error_message (
     updated_by      		bigint(20) 		NULL,          
     PRIMARY KEY (id)
 );
-	
+
+drop table if exists prod_name_intl;
+create table prod_name_intl
+(
+	id integer primary key auto_increment  not null,
+    locale_id integer ,
+    prod_id integer ,
+ 	prod_name varchar(250),
+ 	prod_desc varchar(500),
+  
+);
+
 insert into locale values(1,'Y','EN','USA','EN_USA');
 
 INSERT INTO  business_entity(id, code, type_code, sub_type_code, name, logo, created_date, updated_date, created_by, updated_by, active_indicator)

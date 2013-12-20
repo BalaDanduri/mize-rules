@@ -2,6 +2,8 @@ package com.mize.domain.purchaseorder;
 
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -48,7 +51,7 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 	private BigDecimal requestedQuantity;
 	private BigDecimal backorderQuantity;
 	private PurchaseOrderAmount amount = new PurchaseOrderAmount();
-	private PurchaseOrderItemWarehourse warehourse;
+	private List<PurchaseOrderItemWarehourse> warehourses = new ArrayList<PurchaseOrderItemWarehourse>() ;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -265,14 +268,13 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 	public void setItemId(Long itemId) {
 		this.itemId = itemId;
 	}
-	@OneToOne(cascade=CascadeType.ALL,fetch = FetchType.LAZY)
-	@JoinColumn(name="id")
-	public PurchaseOrderItemWarehourse getWarehourse() {
-		return warehourse;
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "orderItem",orphanRemoval= true)
+	public List<PurchaseOrderItemWarehourse> getWarehourses() {
+		return warehourses;
 	}
 
-	public void setWarehourse(PurchaseOrderItemWarehourse warehourse) {
-		this.warehourse = warehourse;
+	public void setWarehourses(List<PurchaseOrderItemWarehourse> warehourses) {
+		this.warehourses = warehourses;
 	}
 
 	@Override

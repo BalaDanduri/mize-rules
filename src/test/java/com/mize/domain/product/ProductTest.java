@@ -26,7 +26,7 @@ public class ProductTest extends JPATest {
 	@Before
 	public void setUp(){
 		entityManager = getEntityManager();
-		product = ProductToBeSaved();
+		product = getProductToBeSaved();
 		EntityTransaction tx = entityManager.getTransaction();
 		tx.begin();
 		if(product.getId() != null){
@@ -42,7 +42,7 @@ public class ProductTest extends JPATest {
 	}
 	
 	@Test
-	public void test() {
+	public void testSaveProduct() {
 		try {
 			List<Product>  be = jdbcTemplate.query(PRODUCT_QUERY, new Object[]{product.getId()}, new ProductRowMapper());
 			if(!Formatter.isEmpty(be)){
@@ -76,16 +76,19 @@ public class ProductTest extends JPATest {
 		}
 	}
 	
-	private Product ProductToBeSaved() {
-		Product product = new Product();
-		product.setId(1L);
-		product.setTenant(new BusinessEntity());
-		product.getTenant().setId(1L);
+	private Product getProductToBeSaved() {
+		Product product = new Product();		
+		Brand brand = findById(1l, Brand.class, entityManager);
+		BusinessEntity businessEntity = findById(1l, BusinessEntity.class, entityManager);
+		product.setTenant(businessEntity);
+		product.setManufacturerBE((businessEntity));
 		product.setName("Testp");
-		Brand brand = new Brand();
-		brand.setId(1L);
-		brand.setName("Test Brand");
 		product.setBrand(brand);
+		ProductIntl intl = new ProductIntl();
+		intl.getLocale().setId(1l);
+		intl.setName("product name");
+		intl.setDescription("product desc");
+		product.getProductIntl().add(intl);
 		return product;
 	}
 		

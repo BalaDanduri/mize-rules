@@ -18,7 +18,6 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonManagedReference;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
@@ -31,13 +30,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.brand.Brand;
 import com.mize.domain.businessentity.BusinessEntity;
-import com.mize.domain.businessentity.BusinessEntityIntl;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.DecimalValueDeserializer;
 import com.mize.domain.util.Formatter;
-import com.mize.domain.util.JodaDateDeserializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateSerializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 import com.mize.domain.util.NumberValueSerializer;
 
@@ -70,27 +66,11 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	private Integer prodScore;
 	private String active;
 	private BusinessEntity tenant;
-	private BusinessEntity manufacturerBE;
-	
-	private List<ProductIntl> intl = new ArrayList<ProductIntl>();
-	
+	private BusinessEntity manufacturerBE;	
+	private List<ProductIntl> productIntl = new ArrayList<ProductIntl>();	
 	@DateTimeFormat(pattern="MM-dd-yyyy")
 	private DateTime releaseDate;
 
-	@Column(name = "release_date", nullable = true)
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateTimeSerializer.class, include = Inclusion.NON_NULL)	
-	public DateTime getReleaseDate() {
-		return releaseDate;
-	}
-	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	public void setReleaseDate(DateTime releaseDate) {
-		this.releaseDate = releaseDate;
-	}
-	
 	public enum Source{
 		MIZE(1),AMAZON(2),ETILIZE(3),BestBuy(4),Sears(5),Ebay(6);
 		int value;
@@ -101,22 +81,13 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 			return value;
 		}
 	}	
+	
 	public Product() {
 		category = new HashSet<ProductCategory>();
 		productSource = new ProductSource();
 		productDetails = new ProductDetails();
 	}
-
-	@Transient
-	public ProductSource getProductSource() {
-		return productSource;
-	}
-
-
-	public void setProductSource(ProductSource productSource) {
-		this.productSource = productSource;
-	}
-
+	
 	@Id
 	@GenericGenerator(name="prod_id",strategy="increment")
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -130,16 +101,40 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	
+	@Column(name = "release_date")
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@Type(type = "com.mize.domain.util.DateTimeJPA")
+	@JsonSerialize(using = JsonDateTimeSerializer.class, include = Inclusion.NON_NULL)	
+	public DateTime getReleaseDate() {
+		return releaseDate;
+	}
+	
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	public void setReleaseDate(DateTime releaseDate) {
+		this.releaseDate = releaseDate;
+	}	
+
+	@Transient
+	public ProductSource getProductSource() {
+		return productSource;
+	}
+
+
+	public void setProductSource(ProductSource productSource) {
+		this.productSource = productSource;
+	}	
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "product")
 	@Fetch(FetchMode.SUBSELECT)
-	@JsonManagedReference(value="productIntl")
-	public List<ProductIntl> getIntl() {
-		return intl;
+	public List<ProductIntl> getProductIntl() {
+		return productIntl;
 	}
 
-	public void setIntl(List<ProductIntl> intl) {
-		this.intl = intl;
+	public void setProductIntl(List<ProductIntl> productIntl) {
+		this.productIntl = productIntl;
 	}
 	
 
@@ -327,39 +322,6 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 		return (!isAmazonSource());
 	}
 
-	@Override
-	public int compareTo(Product o) {	
-		return 0;
-	}
-
-	@Override
-	public String toString() {
-		return "Product [id" + id + ", name=" + name + ", brand=" + brand + ", price=" + price + ", category=" + category
-				+ ", shortDescription=" + shortDescription + ", upc=" + upc + ", qrCode=" + qrCode + ", productSource="
-				+ productSource + ", mizeRating=" + mizeRating + ", imageLink=" + imageLink + ", listNames="
-				+ listNames + ", productDetails=" + productDetails + ", model=" + model + ", productLink="
-				+ productLink + ", productRegisters=" + productRegisters + ", hasProdContent=" + hasProdContent
-				+ ", isConsumable=" + isConsumable + ", isAccessory=" + isAccessory + ", mpn=" + mpn + ", releaseDate="
-				+ releaseDate + "]";
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = PRIME;
-		int result = super.hashCode();
-		result = prime * result + ((hasProdContent == null) ? 0 : hasProdContent.hashCode());
-		result = prime * result	+ ((imageLink == null) ? 0 : imageLink.hashCode());
-		result = prime * result + ((isAccessory == null) ? 0 : isAccessory.hashCode());
-		result = prime * result + ((isConsumable == null) ? 0 : isConsumable.hashCode());
-		result = prime * result + ((mizeRating == null) ? 0 : mizeRating.hashCode());
-		result = prime * result + ((model == null) ? 0 : model.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((price == null) ? 0 : price.hashCode());
-		result = prime * result	+ ((shortDescription == null) ? 0 : shortDescription.hashCode());
-		result = prime * result + ((upc == null) ? 0 : upc.hashCode());
-		return result;
-	}
-
 	@Transient
 	public String getHasProdContent() {
 		return hasProdContent;
@@ -406,7 +368,12 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Product other = (Product) obj;		
+		Product other = (Product) obj;
+		if (active == null) {
+			if (other.active != null)
+				return false;
+		} else if (!active.equals(other.active))
+			return false;
 		if (hasProdContent == null) {
 			if (other.hasProdContent != null)
 				return false;
@@ -427,11 +394,6 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 				return false;
 		} else if (!isConsumable.equals(other.isConsumable))
 			return false;
-		if (listNames == null) {
-			if (other.listNames != null)
-				return false;
-		} else if (!listNames.equals(other.listNames))
-			return false;
 		if (mizeRating == null) {
 			if (other.mizeRating != null)
 				return false;
@@ -442,6 +404,11 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 				return false;
 		} else if (!model.equals(other.model))
 			return false;
+		if (mpn == null) {
+			if (other.mpn != null)
+				return false;
+		} else if (!mpn.equals(other.mpn))
+			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
@@ -451,16 +418,26 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 			if (other.price != null)
 				return false;
 		} else if (!price.equals(other.price))
-			return false;		
+			return false;
+		if (prodScore == null) {
+			if (other.prodScore != null)
+				return false;
+		} else if (!prodScore.equals(other.prodScore))
+			return false;
 		if (productLink == null) {
 			if (other.productLink != null)
 				return false;
 		} else if (!productLink.equals(other.productLink))
-			return false;	
+			return false;
 		if (qrCode == null) {
 			if (other.qrCode != null)
 				return false;
 		} else if (!qrCode.equals(other.qrCode))
+			return false;
+		if (releaseDate == null) {
+			if (other.releaseDate != null)
+				return false;
+		} else if (!releaseDate.equals(other.releaseDate))
 			return false;
 		if (shortDescription == null) {
 			if (other.shortDescription != null)
@@ -471,6 +448,11 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 			if (other.upc != null)
 				return false;
 		} else if (!upc.equals(other.upc))
+			return false;
+		if (userId == null) {
+			if (other.userId != null)
+				return false;
+		} else if (!userId.equals(other.userId))
 			return false;
 		return true;
 	}
@@ -493,7 +475,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 		this.prodScore = prodScore;
 	}
 
-	@OneToOne(fetch = FetchType.EAGER, cascade =CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="tenant_id") 
 	public BusinessEntity getTenant() {
 		return tenant;
@@ -503,7 +485,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 		this.tenant = tenant;
 	}
 
-	@OneToOne(fetch = FetchType.EAGER, cascade =CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="manufacturer_be_id") 
 	public BusinessEntity getManufacturerBE() {
 		return manufacturerBE;
@@ -511,6 +493,56 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 
 	public void setManufacturerBE(BusinessEntity manufacturerBE) {
 		this.manufacturerBE = manufacturerBE;
+	}
+	
+	@Override
+	public int compareTo(Product o) {	
+		return 0;
+	}
+
+	@Override
+	public String toString() {
+		return "Product [id" + id + ", name=" + name + ", brand=" + brand + ", price=" + price + ", category=" + category
+				+ ", shortDescription=" + shortDescription + ", upc=" + upc + ", qrCode=" + qrCode + ", productSource="
+				+ productSource + ", mizeRating=" + mizeRating + ", imageLink=" + imageLink + ", listNames="
+				+ listNames + ", productDetails=" + productDetails + ", model=" + model + ", productLink="
+				+ productLink + ", productRegisters=" + productRegisters + ", hasProdContent=" + hasProdContent
+				+ ", isConsumable=" + isConsumable + ", isAccessory=" + isAccessory + ", mpn=" + mpn + ", releaseDate="
+				+ releaseDate + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = PRIME;
+		int result = super.hashCode();
+		result = prime * result + ((active == null) ? 0 : active.hashCode());
+		result = prime * result
+				+ ((hasProdContent == null) ? 0 : hasProdContent.hashCode());
+		result = prime * result
+				+ ((imageLink == null) ? 0 : imageLink.hashCode());
+		result = prime * result
+				+ ((isAccessory == null) ? 0 : isAccessory.hashCode());
+		result = prime * result
+				+ ((isConsumable == null) ? 0 : isConsumable.hashCode());
+		result = prime * result
+				+ ((mizeRating == null) ? 0 : mizeRating.hashCode());
+		result = prime * result + ((model == null) ? 0 : model.hashCode());
+		result = prime * result + ((mpn == null) ? 0 : mpn.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((price == null) ? 0 : price.hashCode());
+		result = prime * result
+				+ ((prodScore == null) ? 0 : prodScore.hashCode());
+		result = prime * result
+				+ ((productLink == null) ? 0 : productLink.hashCode());
+		result = prime * result + ((qrCode == null) ? 0 : qrCode.hashCode());
+		result = prime * result
+				+ ((releaseDate == null) ? 0 : releaseDate.hashCode());
+		result = prime
+				* result
+				+ ((shortDescription == null) ? 0 : shortDescription.hashCode());
+		result = prime * result + ((upc == null) ? 0 : upc.hashCode());
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+		return result;
 	}
 	
 }
