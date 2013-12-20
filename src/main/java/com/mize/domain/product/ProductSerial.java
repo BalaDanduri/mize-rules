@@ -66,7 +66,7 @@ public class ProductSerial extends MizeEntity{
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false, unique = true)
 	@Override
 	public Long getId() {
@@ -106,7 +106,7 @@ public class ProductSerial extends MizeEntity{
 		this.serialNumber = serialNumber;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="delivery_be_id", nullable = true)
 	public BusinessEntity getDeliveryBE() {
 		return deliveryBE;

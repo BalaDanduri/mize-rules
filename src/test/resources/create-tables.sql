@@ -1359,7 +1359,7 @@ create table prod_name_intl
     locale_id integer ,
     prod_id integer ,
  	prod_name varchar(250),
- 	prod_desc varchar(500),
+ 	prod_description varchar(500),
   
 );
 
