@@ -2,12 +2,14 @@ package com.mize.domain.product;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
@@ -63,7 +65,7 @@ public class ProductSerialTest extends JPATest {
 			ps.setId(rs.getLong("id"));
 			ps.setProduct(new Product());
 			ps.getProduct().setId(rs.getLong("prod_id"));
-			ps.setProdSerialNumber(rs.getString("prod_srl_no"));
+			ps.setProductSerialNumber(rs.getString("prod_srl_no"));
 			BusinessEntity tenant = new BusinessEntity();
 			tenant.setId(rs.getLong("tenant_id"));
 			ps.setTenant(tenant);

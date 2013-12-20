@@ -15,7 +15,6 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
@@ -31,29 +30,27 @@ import com.mize.domain.util.JsonDateTimeSerializer;
 @Entity
 @Table(name = "prod_serial", uniqueConstraints = {@UniqueConstraint (columnNames = {"id"})})
 public class ProductSerial extends MizeEntity{
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1396934864607540803L;
 	private BusinessEntity tenant;
 	private Product product;
-	private String prodSerialNumber;
+	private String productSerialNumber;
 	private BusinessEntity deliveryBE;
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	protected DateTime deliveryDate;	
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime buildDate;
-	//private String comments;
+	
 	public ProductSerial(){
 		super();
 	}
 
-	public ProductSerial(BusinessEntity tenantId, Product product, String prodSerialNumber,
+	public ProductSerial(BusinessEntity tenantId, Product product, String productSerialNumber,
 			BusinessEntity deliveryBE, DateTime deliveryDate, DateTime buildDate) {
 		super();
 		this.tenant = tenantId;
 		this.product = product;
-		this.prodSerialNumber = prodSerialNumber;
+		this.productSerialNumber = productSerialNumber;
 		this.deliveryBE = deliveryBE;
 		this.deliveryDate = deliveryDate;
 		this.buildDate = buildDate;
@@ -92,12 +89,12 @@ public class ProductSerial extends MizeEntity{
 	}
 
 	@Column(name = "prod_srl_no", nullable = true)
-	public String getProdSerialNumber() {
-		return prodSerialNumber;
+	public String getProductSerialNumber() {
+		return productSerialNumber;
 	}
 
-	public void setProdSerialNumber(String prodSerialNumber) {
-		this.prodSerialNumber = prodSerialNumber;
+	public void setProductSerialNumber(String productSerialNumber) {
+		this.productSerialNumber = productSerialNumber;
 	}
 
 	@ManyToOne(cascade={CascadeType.ALL},fetch = FetchType.LAZY)
@@ -159,7 +156,7 @@ public class ProductSerial extends MizeEntity{
 				+ ((deliveryDate == null) ? 0 : deliveryDate.hashCode());
 		result = prime
 				* result
-				+ ((prodSerialNumber == null) ? 0 : prodSerialNumber.hashCode());
+				+ ((productSerialNumber == null) ? 0 : productSerialNumber.hashCode());
 		result = prime * result + ((product == null) ? 0 : product.hashCode());
 		result = prime * result + ((tenant == null) ? 0 : tenant.hashCode());
 		return result;
@@ -189,10 +186,10 @@ public class ProductSerial extends MizeEntity{
 				return false;
 		} else if (!deliveryDate.equals(other.deliveryDate))
 			return false;
-		if (prodSerialNumber == null) {
-			if (other.prodSerialNumber != null)
+		if (productSerialNumber == null) {
+			if (other.productSerialNumber != null)
 				return false;
-		} else if (!prodSerialNumber.equals(other.prodSerialNumber))
+		} else if (!productSerialNumber.equals(other.productSerialNumber))
 			return false;
 		if (product == null) {
 			if (other.product != null)
@@ -210,7 +207,7 @@ public class ProductSerial extends MizeEntity{
 	@Override
 	public String toString() {
 		return "ProductSerial [tenant=" + tenant + ", product=" + product
-				+ ", prodSerialNumber=" + prodSerialNumber + ", deliveryBE="
+				+ ", productSerialNumber=" + productSerialNumber + ", deliveryBE="
 				+ deliveryBE + ", deliveryDate=" + deliveryDate
 				+ ", buildDate=" + buildDate + "]";
 	}
