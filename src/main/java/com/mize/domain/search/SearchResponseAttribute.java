@@ -7,6 +7,23 @@ import com.mize.domain.exception.MizeError;
 import com.mize.domain.util.Formatter;
 
 public class SearchResponseAttribute extends BaseSearchAttribute {
+	public Object value;
+	
+	public Object getValue() {
+		return value;
+	}
+
+	public void setValue(Object value) {
+		this.value = value;
+	}
+
+	@Override
+	public String toString() {
+		return "SearchResponseAttribute [value=" + value + ", getName()="
+				+ getName() + ", getType()=" + getType() + ", getClass()="
+				+ getClass() + "]";
+	}
+
 	public List<MizeError> validate() {
 		List<MizeError> errors = new ArrayList<MizeError>();
 		if (Formatter.isNull(getName())) {
