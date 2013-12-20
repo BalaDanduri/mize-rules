@@ -18,7 +18,6 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonManagedReference;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
@@ -130,7 +129,6 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "product")
 	@Fetch(FetchMode.SUBSELECT)
-	@JsonManagedReference(value="productIntl")
 	public List<ProductIntl> getProductIntl() {
 		return productIntl;
 	}
