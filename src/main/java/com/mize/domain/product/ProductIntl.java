@@ -20,7 +20,7 @@ import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JPASerializer;
 
 @Entity
-@Table(name="prod_name_intl")
+@Table(name="prod_intl")
 public class ProductIntl extends MizeEntity implements Comparable<ProductIntl>{
 	
 	private static final long serialVersionUID = -6977239159157170676L;
