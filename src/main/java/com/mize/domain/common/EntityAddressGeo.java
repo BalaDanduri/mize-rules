@@ -1,6 +1,7 @@
 package com.mize.domain.common;
 
 import java.math.BigDecimal;
+import java.util.Comparator;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,6 +27,7 @@ public class EntityAddressGeo extends MizeEntity implements Comparable<EntityAdd
 	private EntityAddress address;
 	private BigDecimal latitude;
 	private BigDecimal longitude;
+	private EntityAddressGeoData addressGeoData;
 
 	public EntityAddressGeo(){
 		super();
@@ -90,6 +92,15 @@ public class EntityAddressGeo extends MizeEntity implements Comparable<EntityAdd
 
 	public void setLongitude(BigDecimal longitude) {
 		this.longitude = longitude;
+	}
+	
+	@Transient
+	public EntityAddressGeoData getAddressGeoData() {
+		return addressGeoData;
+	}
+	
+	public void setAddressGeoData(EntityAddressGeoData addressGeoData) {
+		this.addressGeoData = addressGeoData;
 	}
 
 	@Override
@@ -159,6 +170,13 @@ public class EntityAddressGeo extends MizeEntity implements Comparable<EntityAdd
 	public int compareTo(EntityAddressGeo o) {
 		return 0;
 	}
+	
+	@JsonIgnore
+	public static Comparator<EntityAddressGeo> EntityGeoDistanceComparator = new  Comparator<EntityAddressGeo>() {
+		public int compare(EntityAddressGeo geo1, EntityAddressGeo geo2) {
+		      return Double.compare( geo1.getAddressGeoData().getDistance() , geo2.getAddressGeoData().getDistance());
+		    }
+	};
 
 	
 }

@@ -1,6 +1,7 @@
 package com.mize.domain.common;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -366,6 +367,13 @@ public class EntityAddress extends MizeEntity implements Comparable<EntityAddres
 	public int compareTo(EntityAddress o) {
 		return 0;
 	}
+	
+	@JsonIgnore
+	public static Comparator<EntityAddress> EntityAddressGeoDistanceComparator = new  Comparator<EntityAddress>() {
+		public int compare(EntityAddress addr1, EntityAddress addr2) {
+		      return  EntityAddressGeo.EntityGeoDistanceComparator.compare( addr1.getAddressGeo() , addr2.getAddressGeo());
+		    }
+	};
 
 	
 }

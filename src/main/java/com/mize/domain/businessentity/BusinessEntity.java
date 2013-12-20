@@ -1,6 +1,7 @@
 package com.mize.domain.businessentity;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,7 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
@@ -155,7 +155,7 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	}
 	
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "businessEntity" ,orphanRemoval = true)
-	@Fetch(FetchMode.SUBSELECT)
+	@Fetch(FetchMode.SELECT)
 	@JsonManagedReference(value="intl")
 	public List<BusinessEntityIntl> getIntl() {
 		return intl;
@@ -206,6 +206,13 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	public void setBeAttribute(BusinessEntityAttribute beAttribute) {
 		this.beAttribute = beAttribute;
 	}
+	
+	@JsonIgnore
+	public static Comparator<BusinessEntity> BusinessEntityAddressDistanceComparator = new  Comparator<BusinessEntity>() {
+		public int compare(BusinessEntity be1, BusinessEntity be2) {
+		    return BusinessEntityAddress.EntityAddressGeoDistanceComparator.compare(be1.addresses.get(0), be2.addresses.get(0));
+		}
+	};
 	
 
 	@Override

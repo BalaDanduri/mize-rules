@@ -1,5 +1,7 @@
 package com.mize.domain.businessentity;
 
+import java.util.Comparator;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -140,6 +142,13 @@ public class BusinessEntityAddress  extends MizeEntity  implements Comparable<Bu
 		builder.append("]");
 		return builder.toString();
 	}
+	
+	@JsonIgnore
+	public static Comparator<BusinessEntityAddress> EntityAddressGeoDistanceComparator = new  Comparator<BusinessEntityAddress>() {
+		public int compare(BusinessEntityAddress addr1, BusinessEntityAddress addr2) {
+		      return  EntityAddress.EntityAddressGeoDistanceComparator.compare( addr1.getEntityAddress() , addr2.getEntityAddress());
+		    }
+	};
 	
 	
 	
