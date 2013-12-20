@@ -58,7 +58,7 @@ public class ProductIntl extends MizeEntity implements Comparable<ProductIntl>{
 		return name;
 	}
 
-	@Column(name = "prod_desc")
+	@Column(name = "prod_description")
 	public String getDescription() {
 		return description;
 	}

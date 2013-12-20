@@ -12,23 +12,29 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
+
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.MizeEntity;
 
 @Entity
 @Table(name = "prod_serial_comment", uniqueConstraints = {@UniqueConstraint (columnNames = {"id"})})
-public class ProductSerialComment extends MizeEntity{
-
-	/**
-	 * 
-	 */
+public class ProductSerialComment extends MizeEntity implements Comparable<ProductSerialComment>{
+	
 	private static final long serialVersionUID = -4772128184803476915L;
-	private ProductSerial prodSerial;
-	private EntityComment comment;
+	private ProductSerial productSerial;
+	private EntityComment comment = new EntityComment();
 
 
 	public ProductSerialComment(){
+		super();
 	}
+	
+	public ProductSerialComment(EntityComment comment){
+		super();
+		this.comment = comment;
+	}
+
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -42,14 +48,15 @@ public class ProductSerialComment extends MizeEntity{
 		this.id = id;
 	}
 
-	@OneToOne(cascade={CascadeType.ALL},fetch = FetchType.EAGER)
+	@OneToOne(cascade={CascadeType.ALL},fetch = FetchType.LAZY)
 	@JoinColumn(name="prod_srl_id")
+	@JsonBackReference(value="comments_productSerial")
 	public ProductSerial getProductSerial() {
-		return prodSerial;
+		return productSerial;
 	}
 
-	public void setProductSerial(ProductSerial prodSerial) {
-		this.prodSerial = prodSerial;
+	public void setProductSerial(ProductSerial productSerial) {
+		this.productSerial = productSerial;
 	}
 
 	@OneToOne(cascade={CascadeType.ALL},fetch = FetchType.EAGER)
@@ -64,11 +71,9 @@ public class ProductSerialComment extends MizeEntity{
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
-		result = prime * result
-				+ ((prodSerial == null) ? 0 : prodSerial.hashCode());
 		return result;
 	}
 
@@ -86,18 +91,18 @@ public class ProductSerialComment extends MizeEntity{
 				return false;
 		} else if (!comment.equals(other.comment))
 			return false;
-		if (prodSerial == null) {
-			if (other.prodSerial != null)
-				return false;
-		} else if (!prodSerial.equals(other.prodSerial))
-			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "ProductSerialComment [id=" +id + ", prodSerial=" + prodSerial + ", comment="
-				+ comment + "]";
+		return "ProductSerialComment [comment=" + comment + "]";
 	}
+
+	@Override
+	public int compareTo(ProductSerialComment arg0) {
+		return 0;
+	}
+
 
 }

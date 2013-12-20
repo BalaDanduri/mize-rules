@@ -1,5 +1,8 @@
 package com.mize.domain.product;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,10 +12,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
@@ -23,6 +28,7 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.businessentity.BusinessEntity;
+import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
@@ -34,30 +40,33 @@ public class ProductSerial extends MizeEntity{
 	private static final long serialVersionUID = 1396934864607540803L;
 	private BusinessEntity tenant;
 	private Product product;
-	private String productSerialNumber;
+	private String serialNumber;
 	private BusinessEntity deliveryBE;
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	protected DateTime deliveryDate;	
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime buildDate;
+	@Transient
+	private EntityComment entityComment;
+	private List<ProductSerialComment> comments = new ArrayList<ProductSerialComment>();
 	
 	public ProductSerial(){
 		super();
 	}
 
-	public ProductSerial(BusinessEntity tenantId, Product product, String productSerialNumber,
+	public ProductSerial(BusinessEntity tenantId, Product product, String serialNumber,
 			BusinessEntity deliveryBE, DateTime deliveryDate, DateTime buildDate) {
 		super();
 		this.tenant = tenantId;
 		this.product = product;
-		this.productSerialNumber = productSerialNumber;
+		this.serialNumber = serialNumber;
 		this.deliveryBE = deliveryBE;
 		this.deliveryDate = deliveryDate;
 		this.buildDate = buildDate;
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "id", nullable = false, unique = true)
 	@Override
 	public Long getId() {
@@ -68,7 +77,7 @@ public class ProductSerial extends MizeEntity{
 		this.id = id;
 	}
 
-	@OneToOne(cascade={CascadeType.ALL},fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="tenant_id")
 	public BusinessEntity getTenant() {
 		return tenant;
@@ -78,7 +87,7 @@ public class ProductSerial extends MizeEntity{
 		this.tenant = tenant;
 	}
 
-	@OneToOne(cascade={CascadeType.ALL},fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="prod_id")
 	public Product getProduct() {
 		return product;
@@ -89,15 +98,15 @@ public class ProductSerial extends MizeEntity{
 	}
 
 	@Column(name = "prod_srl_no", nullable = true)
-	public String getProductSerialNumber() {
-		return productSerialNumber;
+	public String getSerialNumber() {
+		return serialNumber;
 	}
 
-	public void setProductSerialNumber(String productSerialNumber) {
-		this.productSerialNumber = productSerialNumber;
+	public void setSerialNumber(String serialNumber) {
+		this.serialNumber = serialNumber;
 	}
 
-	@ManyToOne(cascade={CascadeType.ALL},fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="delivery_be_id", nullable = true)
 	public BusinessEntity getDeliveryBE() {
 		return deliveryBE;
@@ -143,10 +152,28 @@ public class ProductSerial extends MizeEntity{
 		}
 		setUpdatedDate(DateTime.now());		
 	}
+	
+	@Transient
+	public EntityComment getEntityComment() {
+		return entityComment;
+	}
+
+	public void setEntityComment(EntityComment entityComment) {
+		this.entityComment = entityComment;
+	}
+
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "productSerial",orphanRemoval= true)
+	public List<ProductSerialComment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<ProductSerialComment> comments) {
+		this.comments = comments;
+	}
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result
 				+ ((buildDate == null) ? 0 : buildDate.hashCode());
@@ -156,7 +183,7 @@ public class ProductSerial extends MizeEntity{
 				+ ((deliveryDate == null) ? 0 : deliveryDate.hashCode());
 		result = prime
 				* result
-				+ ((productSerialNumber == null) ? 0 : productSerialNumber.hashCode());
+				+ ((serialNumber == null) ? 0 : serialNumber.hashCode());
 		result = prime * result + ((product == null) ? 0 : product.hashCode());
 		result = prime * result + ((tenant == null) ? 0 : tenant.hashCode());
 		return result;
@@ -186,10 +213,10 @@ public class ProductSerial extends MizeEntity{
 				return false;
 		} else if (!deliveryDate.equals(other.deliveryDate))
 			return false;
-		if (productSerialNumber == null) {
-			if (other.productSerialNumber != null)
+		if (serialNumber == null) {
+			if (other.serialNumber != null)
 				return false;
-		} else if (!productSerialNumber.equals(other.productSerialNumber))
+		} else if (!serialNumber.equals(other.serialNumber))
 			return false;
 		if (product == null) {
 			if (other.product != null)
@@ -207,7 +234,7 @@ public class ProductSerial extends MizeEntity{
 	@Override
 	public String toString() {
 		return "ProductSerial [tenant=" + tenant + ", product=" + product
-				+ ", productSerialNumber=" + productSerialNumber + ", deliveryBE="
+				+ ", serialNumber=" + serialNumber + ", deliveryBE="
 				+ deliveryBE + ", deliveryDate=" + deliveryDate
 				+ ", buildDate=" + buildDate + "]";
 	}

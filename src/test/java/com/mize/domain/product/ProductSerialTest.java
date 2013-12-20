@@ -16,6 +16,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.ContextConfiguration;
 
 import com.mize.domain.businessentity.BusinessEntity;
+import com.mize.domain.common.EntityComment;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;
 
@@ -44,7 +45,7 @@ public class ProductSerialTest extends JPATest {
 	}
 	
 	@Test
-	public void test() {
+	public void testSaveProductSerial() {
 		try {
 			List<ProductSerial>  be = jdbcTemplate.query(PRODUCT_SERIAL_QUERY, new Object[]{prodSerial.getId()}, new ProductSerialRowMapper());
 			if(!Formatter.isEmpty(be)){
@@ -65,7 +66,7 @@ public class ProductSerialTest extends JPATest {
 			ps.setId(rs.getLong("id"));
 			ps.setProduct(new Product());
 			ps.getProduct().setId(rs.getLong("prod_id"));
-			ps.setProductSerialNumber(rs.getString("prod_srl_no"));
+			ps.setSerialNumber(rs.getString("prod_srl_no"));
 			BusinessEntity tenant = new BusinessEntity();
 			tenant.setId(rs.getLong("tenant_id"));
 			ps.setTenant(tenant);
@@ -91,6 +92,11 @@ public class ProductSerialTest extends JPATest {
 		prodSerial.getProduct().setProductSource(prodSource);
 		prodSerial.setDeliveryBE(new BusinessEntity());
 		prodSerial.getDeliveryBE().setId(101000L);
+		ProductSerialComment comment = new ProductSerialComment();
+		EntityComment ec = new EntityComment(EntityComment.Type.Internal.toString(),"test comments");
+		comment.setComment(ec);
+		comment.setProductSerial(prodSerial);
+		prodSerial.getComments().add(comment);
 		return prodSerial;
 	}
 		

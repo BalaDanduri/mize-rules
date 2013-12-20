@@ -521,6 +521,7 @@ CREATE TABLE business_entity_contact (
     id				bigint(20) 		AUTO_INCREMENT NOT NULL,
     be_id   			bigint(20) 		NULL,    
     is_primary			char(1) 		NULL,
+    contact_type			varchar(100) 		NULL,
     first_name			varchar(100) 		NULL,
     last_name			varchar(100) 		NULL,
     middle_initial		varchar(50) 		NULL,
@@ -954,8 +955,8 @@ CREATE TABLE prod_intl (
     id         bigint(20) 	AUTO_INCREMENT NOT NULL,
     prod_id      bigint(20) 	NOT NULL,   
     locale_id  bigint(20) 	NULL,
-    name    varchar(250) NULL,
-    description  varchar(500) NULL
+    prod_name    varchar(250) NULL,
+    prod_description  varchar(500) NULL
 );
 
 drop table if exists prod_to_source;
