@@ -94,4 +94,12 @@ public class PaginationPage<T> implements Serializable {
 			return DEFAULT_PAGE_SIZE;
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "PaginationPage [pageNumber=" + pageNumber + ", pagesAvailable="
+				+ pagesAvailable + ", rowsAvailable=" + rowsAvailable
+				+ ", pageSize=" + pageSize + "]";
+	}	
+	
 }
