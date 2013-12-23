@@ -43,7 +43,8 @@ public class ProductCategory extends MizeEntity{
 	@JsonIgnore
 	private Integer displayOrder;
 	@JsonIgnore
-	private Integer orderNumber; 
+	private Integer orderNumber;
+	@Transient
 	private boolean isActive;
 	@JsonIgnore
 	private Integer active;
@@ -84,7 +85,7 @@ public class ProductCategory extends MizeEntity{
 		this.name = name;
 	}
 
-	@OneToOne(cascade={CascadeType.ALL},fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="prod_cat_id")
 	public ProductCategory getParent() {
 		return parent;
@@ -104,6 +105,7 @@ public class ProductCategory extends MizeEntity{
 	}
 
 	@Column(name="is_active",nullable=true,length=1)
+	@Transient
 	public boolean isActive() {
 		return isActive;
 	}
