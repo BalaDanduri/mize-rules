@@ -72,7 +72,7 @@ public class CatalogIntlTest extends JPATest {
 					CatalogIntl intl = new CatalogIntl();
 					intl.setId(resultSet.getLong("id"));
 					intl.setCatalogName(resultSet.getString("catalog_name"));
-					intl.setCatalogDescription(resultSet.getString("catalog_desc"));
+					intl.setCatalogDescription(resultSet.getString("catalog_description"));
 					Catalog catalog = new Catalog();
 					catalog.setId(resultSet.getLong("catalog_id"));
 					intl.setCatalog(catalog);
