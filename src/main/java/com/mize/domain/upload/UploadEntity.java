@@ -9,7 +9,9 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.jdbc.BadSqlGrammarException;
 
 import com.mize.domain.auth.User;
 import com.mize.domain.common.MizeEntity;
@@ -43,6 +45,12 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 	public enum Status{
 		IN_PROGRESS,COMPLETED;
 	}
+	
+	public static String DATA_INTEGRITY_EXCEPTION = "DATA_INTEGRITY_EXCEPTION";
+	public static String DULPLICATE_RECORD_EXCEPTION = "DULPLICATE_RECORD_EXCEPTION";
+	public static String SQL_EXCEPTION = "SQL_EXCEPTION";
+	public static String NULL_POINTER_EXCEPTION = "NULL_POINTER_EXCEPTION";
+	public static String BAD_SQL_GRAMMER_EXCEPTION = "BAD_SQL_GRAMMER_EXCEPTION";
 	
 	public enum EntityType{
 		BrandService("Brand"),BrandSupprtService("Brand Supprt"),ProductService("Product"),ProductDesriptionService("Product Desription"),
@@ -216,7 +224,7 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 		ProcessLog processLog = logMap.get(recordNumber);
 		if(processLog == null){
 			processLog = new ProcessLog();
-			MizeEntity entity = (MizeEntity)((List)uploadEntity.getEntity()).get(recordNumber-1);
+			MizeEntity entity = (MizeEntity)((List)uploadEntity.getEntity()).get(recordNumber);
 			processLog.setInputRecord(entity);
 			processLog.setEntityId(entity.getId());
 			processLog.setEntityCode(entityCode);
@@ -228,6 +236,39 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 		processLog.getErrorLogs().add(errorLog);		
 	}
 
+	public void addToFailureRecord(UploadEntity uploadEntity ,int recordNumber,String entityCode,String field,Exception exp){
+		String messageCode = SQL_EXCEPTION;
+		if(exp instanceof NullPointerException){
+			messageCode = NULL_POINTER_EXCEPTION;
+		}
+		if(exp instanceof DataIntegrityViolationException){
+			messageCode = DATA_INTEGRITY_EXCEPTION;
+		}
+		if(exp instanceof DataIntegrityViolationException){
+			messageCode = DATA_INTEGRITY_EXCEPTION;
+		}
+		if(exp instanceof BadSqlGrammarException){
+			messageCode = BAD_SQL_GRAMMER_EXCEPTION;
+		}		
+		uploadEntity.addToFailureRecord(uploadEntity, recordNumber, entityCode, field, messageCode);
+	}
+	
+	public void addToFailureRecord(UploadEntity uploadEntity ,int recordNumber,String entityCode,Exception exp){
+		addToFailureRecord(uploadEntity ,recordNumber,entityCode,null,exp);
+	}
+	
+	public void addToFailureRecord(UploadEntity uploadEntity ,int recordNumber,String entityCode,String messageCode){
+		uploadEntity.addToFailureRecord(uploadEntity, recordNumber, entityCode, null, messageCode);
+	}
+	
+	public void addToFailureRecord(UploadEntity uploadEntity ,int recordNumber,Long entityCode,String messageCode){
+		uploadEntity.addToFailureRecord(uploadEntity, recordNumber, String.valueOf(entityCode), null, messageCode);
+	}
+	
+	public void addToFailureRecord(UploadEntity uploadEntity ,int recordNumber,Long entityCode,String field,String messageCode){
+		uploadEntity.addToFailureRecord(uploadEntity, recordNumber, String.valueOf(entityCode), field, messageCode);
+	}
+	
 	public User getUser() {
 		return user;
 	}
