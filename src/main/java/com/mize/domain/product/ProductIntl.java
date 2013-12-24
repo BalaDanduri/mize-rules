@@ -24,7 +24,7 @@ import com.mize.domain.util.JPASerializer;
 public class ProductIntl extends MizeEntity implements Comparable<ProductIntl>{
 	
 	private static final long serialVersionUID = -6977239159157170676L;
-	private Product Product;
+	private Product product;
 	private String name;
 	private String description;
 	private Locale locale = new Locale();	
@@ -50,7 +50,7 @@ public class ProductIntl extends MizeEntity implements Comparable<ProductIntl>{
 	@JoinColumn(name = "prod_id")
 	@JsonBackReference(value="productIntl_product")
 	public Product getProduct() {
-		return Product;
+		return product;
 	}
 	
 	@Column(name = "prod_name")
@@ -70,8 +70,8 @@ public class ProductIntl extends MizeEntity implements Comparable<ProductIntl>{
 		return locale;
 	}
 
-	public void setProduct(Product Product) {
-		this.Product = Product;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
 
 	public void setName(String name) {

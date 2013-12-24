@@ -100,7 +100,6 @@ public class PartTest extends JPATest  {
 			}
 			Part partFromDB = parts.get(0);			
 			assertTrue(part.getId().equals(partFromDB.getId()));
-			assertTrue(part.getTenant().getId().equals(partFromDB.getTenant().getId()));
 		} catch (Throwable th) {
 			th.printStackTrace();
 			fail("Got Exception");

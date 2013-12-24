@@ -3,7 +3,7 @@
         version="2.0">	
         <persistence-unit name="default" transaction-type="RESOURCE_LOCAL">
                 <class>com.mize.domain.catalog.Catalog</class>
-<!--                 <class>com.mize.domain.catalog.CatalogIntl</class> -->
+                <class>com.mize.domain.catalog.CatalogIntl</class>
                 <class>com.mize.domain.common.Locale</class>
              	<class>com.mize.domain.businessentity.BusinessEntity</class>
 				<class>com.mize.domain.businessentity.BusinessEntityAddress</class>
@@ -84,7 +84,9 @@
 				<class>com.mize.domain.purchaseorder.PurchaseOrderShipment</class>
 				<class>com.mize.domain.purchaseorder.PurchaseOrderShipPackage</class>
 				<class>com.mize.domain.common.EntityAttachment</class>
-				<class>com.mize.domain.common.EntityErrorMessage</class>					
+				<class>com.mize.domain.common.EntityErrorMessage</class>
+				<class>com.mize.domain.product.ProductSerial</class>					
+				<class>com.mize.domain.common.EntityComment</class>
 
         </persistence-unit>
 

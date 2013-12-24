@@ -67,7 +67,7 @@ public class CatalogEntryIntlTest extends JPATest {
 					CatalogEntryIntl catalogEntryIntl = new CatalogEntryIntl();
 					catalogEntryIntl.setId(resultSet.getLong("id"));
 					catalogEntryIntl.setItemName(resultSet.getString("item_name"));
-					catalogEntryIntl.setItemDescription(resultSet.getString("item_desc"));
+					catalogEntryIntl.setItemDescription(resultSet.getString("item_description"));
 					CatalogEntry catalogEntry = new CatalogEntry();
 					catalogEntry.setId(resultSet.getLong("catalog_entry_id"));
 					catalogEntryIntl.setCatalogEntry(catalogEntry);
