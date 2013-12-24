@@ -274,20 +274,7 @@ create table catalog
  	catalog_code varchar(30),
  	catalog_type varchar(100),
  	is_active char(1) default 'Y',
-  	created_date timestamp,
-  	updated_date timestamp, 
-  	created_by integer,
-  	updated_by integer
-);
-
-drop table if exists catalog_intl;
-create table catalog_intl
-(
-	id integer primary key auto_increment  not null,
-	catalog_id integer,
-	locale_id integer,
- 	catalog_name varchar(100),
- 	catalog_desc varchar(1000),
+ 	catalog_name varchar(250),
   	created_date timestamp,
   	updated_date timestamp, 
   	created_by integer,
@@ -301,6 +288,8 @@ create table catalog_entry
 	catalog_id integer,
  	item_code varchar(30), 	
  	is_active char(1) default 'Y',
+ 	is_default char(1) default 'N',
+ 	order_sequence bigint(20),
   	created_date timestamp,
   	updated_date timestamp, 
   	created_by integer,
@@ -314,7 +303,7 @@ create table catalog_entry_intl
 	catalog_entry_id integer,
 	locale_id integer,
  	item_name varchar(100),
- 	item_desc varchar(500),
+ 	item_description varchar(500),
   	created_date timestamp,
   	updated_date timestamp, 
   	created_by integer,
@@ -1478,7 +1467,7 @@ INSERT INTO state(state_id, state_code, state_name, created_by, created_date, up
   VALUES(50, 'WY', 'Wyoming', NULL, NULL, NULL, NULL, 1);
 
 INSERT INTO  business_entity_address (id, be_id, code, locale_id, name, address_1, address_2, address_3, zip, zip_ext, city, county, state_id, country_id, phone_1, phone_2, email, fax, land_mark, url, tool_tip_logo, icon, hours_of_op, be_address_id)
-  VALUES(10799, 961, NULL, 1, NULL, '12529 PARKLAWN DR.', NULL, NULL, '20852', NULL, 'ROCKVILLE', NULL, 20, 1, '3012305800', NULL, NULL, '3012305830', NULL, NULL, NULL, NULL, NULL,10799);
+  VALUES(10799, 961, NULL, 1, NULL, '12529 PARKLAWN DR.', NULL, NULL, '20852', NULL, 'ROCKVILLE', NULL, 20, 1, '3012305800', NULL, NULL, '3012305830', NULL, NULL, NULL, NULL, NULL,1);
   
 INSERT INTO business_entity_brand(be_id, brand_id, is_active) VALUES (961, 1, 'Y');
 
@@ -1486,11 +1475,11 @@ INSERT INTO business_entity_attribute(be_id, url, tool_tip_logo, icon, hours_of_
 
 
   
-INSERT INTO  catalog (id, tenant_id, catalog_code, catalog_type, is_active, created_date, updated_date, created_by, updated_by)
-  VALUES(100, 961, 'TestCatalog', 'TestCatalogType', 'Y', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL);
+INSERT INTO  catalog (id, tenant_id, catalog_code, catalog_type, is_active, catalog_name, created_date, updated_date, created_by, updated_by)
+  VALUES(100, 961, 'TestCatalog', 'TestCatalogType', 'Y', 'TestCatalogName', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL);
   
-INSERT INTO  catalog_entry (id, catalog_id, item_code, is_active, created_date, updated_date, created_by, updated_by)
-  VALUES(102, 100, 'ItemCode', 'Y', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL);
+INSERT INTO  catalog_entry (id, catalog_id, item_code, is_active, is_default, order_sequence, created_date, updated_date, created_by, updated_by)
+  VALUES(102, 100, 'ItemCode', 'Y', 'N', 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL);
   
   
 INSERT INTO  part (id, tenant_id, part_code, part_type, is_active,is_kit,is_serialized,is_returnable,uom, created_date, updated_date, created_by, updated_by)

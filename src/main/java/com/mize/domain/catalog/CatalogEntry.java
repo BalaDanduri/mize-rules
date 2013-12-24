@@ -17,6 +17,8 @@ import javax.persistence.UniqueConstraint;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -32,17 +34,21 @@ public class CatalogEntry extends MizeEntity {
 	private Catalog catalog;
 	private String itemCode;
 	private String isActive;
+	private String isDefault;
+	private Long orderSequence;
 	private List<CatalogEntryIntl> catalogEntryIntl;
 	
 	public CatalogEntry() {
 		super();
 	}	
 
-	public CatalogEntry(Catalog catalog, String itemCode, String isActive,
+	public CatalogEntry(Catalog catalog, String itemCode, String isActive, String isDefault, Long orderSequence,
 			List<CatalogEntryIntl> catalogEntryIntl) {
 		this.catalog = catalog;
 		this.itemCode = itemCode;
 		this.isActive = isActive;
+		this.isDefault = isDefault;
+		this.orderSequence = orderSequence;
 		this.catalogEntryIntl = catalogEntryIntl;
 	}
 
@@ -88,6 +94,24 @@ public class CatalogEntry extends MizeEntity {
 		this.isActive = isActive;
 	}		
 	
+	@Column(name = "is_default", length = 1)
+	public String getIsDefault() {
+		return isDefault;
+	}
+
+	public void setIsDefault(String isDefault) {
+		this.isDefault = isDefault;
+	}
+
+	@Column(name = "order_sequence", length = 20)
+	public Long getOrderSequence() {
+		return orderSequence;
+	}
+
+	public void setOrderSequence(Long orderSequence) {
+		this.orderSequence = orderSequence;
+	}
+
 	@OneToMany(fetch = FetchType.EAGER, cascade={CascadeType.ALL}, mappedBy = "catalogEntry")
 	public List<CatalogEntryIntl> getCatalogEntryIntl() {
 		return catalogEntryIntl;
@@ -166,6 +190,10 @@ public class CatalogEntry extends MizeEntity {
 		result = prime * result
 				+ ((isActive == null) ? 0 : isActive.hashCode());
 		result = prime * result
+				+ ((isDefault == null) ? 0 : isDefault.hashCode());
+		result = prime * result
+				+ ((orderSequence == null) ? 0 : orderSequence.hashCode());
+		result = prime * result
 				+ ((itemCode == null) ? 0 : itemCode.hashCode());
 		return result;
 	}
@@ -194,6 +222,16 @@ public class CatalogEntry extends MizeEntity {
 				return false;
 		} else if (!isActive.equals(other.isActive))
 			return false;
+		if (isDefault == null) {
+			if (other.isDefault != null)
+				return false;
+		} else if (!isDefault.equals(other.isDefault))
+			return false;
+		if (orderSequence == null) {
+			if (other.orderSequence != null)
+				return false;
+		} else if (!orderSequence.equals(other.orderSequence))
+			return false;
 		if (itemCode == null) {
 			if (other.itemCode != null)
 				return false;
@@ -211,6 +249,10 @@ public class CatalogEntry extends MizeEntity {
 		builder.append(itemCode);
 		builder.append(", isActive=");
 		builder.append(isActive);
+		builder.append(", isDefault=");
+		builder.append(isDefault);
+		builder.append(", orderSequence=");
+		builder.append(orderSequence);
 		builder.append(", catalogEntryIntl=");
 		builder.append(catalogEntryIntl);		
 		return builder.toString();		

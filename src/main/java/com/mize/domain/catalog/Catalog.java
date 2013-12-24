@@ -17,6 +17,8 @@ import javax.persistence.UniqueConstraint;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -33,8 +35,8 @@ public class Catalog extends MizeEntity {
 	private BusinessEntity tenant;
 	private String catalogCode;
 	private String catalogType;
-	private String isActive;	
-	private List<CatalogIntl> catalogIntl;
+	private String isActive;
+	private String catalogName;
 	private List<CatalogEntry> catalogEntry;
 	
 	public Catalog() {
@@ -42,13 +44,13 @@ public class Catalog extends MizeEntity {
 	}
 
 	public Catalog(BusinessEntity tenant, String catalogCode,
-			String catalogType, String isActive, List<CatalogIntl> catalogIntl) {
+			String catalogType, String isActive, String catalogName) {
 		super();
 		this.tenant = tenant;
 		this.catalogCode = catalogCode;
 		this.catalogType = catalogType;
 		this.isActive = isActive;
-		this.catalogIntl = catalogIntl;
+		this.catalogName = catalogName;
 	}
 
 
@@ -102,21 +104,22 @@ public class Catalog extends MizeEntity {
 		this.isActive = isActive;
 	}
 
-	@OneToMany(cascade={CascadeType.ALL}, fetch= FetchType.EAGER, mappedBy = "catalog")			
-	public List<CatalogIntl> getCatalogIntl() {
-		return catalogIntl;
+	@Column(name = "catalog_name",  nullable = true, length = 250)
+	public String getCatalogName() {
+		return catalogName;
 	}
 
-
-	public void setCatalogIntl(List<CatalogIntl> catalogIntl) {
-		this.catalogIntl = catalogIntl;
+	public void setCatalogName(String catalogName) {
+		this.catalogName = catalogName;
 	}
 	
-	@OneToMany(cascade={CascadeType.ALL}, fetch= FetchType.LAZY, mappedBy = "catalog")		
+	@OneToMany(cascade={CascadeType.ALL}, fetch= FetchType.EAGER, mappedBy = "catalog")
+	@Fetch(FetchMode.SUBSELECT)
 	public List<CatalogEntry> getCatalogEntry() {
 		return catalogEntry;
 	}
 	
+
 	public void setCatalogEntry(List<CatalogEntry> catalogEntry) {
 		this.catalogEntry = catalogEntry;
 	}
@@ -185,11 +188,11 @@ public class Catalog extends MizeEntity {
 		result = PRIME * result
 				+ ((catalogCode == null) ? 0 : catalogCode.hashCode());
 		result = PRIME * result
-				+ ((catalogIntl == null) ? 0 : catalogIntl.hashCode());
-		result = PRIME * result
 				+ ((catalogType == null) ? 0 : catalogType.hashCode());
 		result = PRIME * result
 				+ ((isActive == null) ? 0 : isActive.hashCode());
+		result = PRIME * result
+				+ ((catalogName == null) ? 0 : catalogName.hashCode());
 		result = PRIME * result + ((tenant == null) ? 0 : tenant.hashCode());
 		return result;
 	}
@@ -213,13 +216,7 @@ public class Catalog extends MizeEntity {
 		} else if (!catalogCode.equals(other.catalogCode)) {
 			return false;
 		}
-		if (this.getCatalogIntl() == null) {
-			if (other.getCatalogIntl() != null) {
-				return false;
-			}
-		} else if (!this.getCatalogIntl().equals(other.getCatalogIntl())) {
-			return false;
-		}
+		
 		if (catalogType == null) {
 			if (other.catalogType != null) {
 				return false;
@@ -227,6 +224,15 @@ public class Catalog extends MizeEntity {
 		} else if (!catalogType.equals(other.catalogType)) {
 			return false;
 		}
+		
+		if (catalogName == null) {
+			if (other.catalogName != null) {
+				return false;
+			}
+		} else if (!catalogName.equals(other.catalogName)) {
+			return false;
+		}
+		
 		if (isActive == null) {
 			if (other.isActive != null) {
 				return false;
@@ -255,8 +261,8 @@ public class Catalog extends MizeEntity {
 		builder.append(catalogType);
 		builder.append(", isActive=");
 		builder.append(isActive);
-		builder.append(", catalogIntl=");
-		builder.append(catalogIntl);
+		builder.append(", catalogName=");
+		builder.append(catalogName);
 		builder.append(", catalogEntry=");
 		builder.append(catalogEntry);
 		builder.append("]");

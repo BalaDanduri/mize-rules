@@ -90,7 +90,7 @@ public class CatalogEntryTest extends JPATest {
 	}
 
 	private CatalogEntry createCatalogEntryObjectToBeSavedInDB(Catalog catalog) {
-		CatalogEntry catalogEntry = new CatalogEntry(catalog, "ABC", "Y", null);
+		CatalogEntry catalogEntry = new CatalogEntry(catalog, "ABC", "Y", "N", 0L, null);
 		catalogEntry.setCreatedDate(DateTime.now());
 		catalogEntry.setUpdatedDate(DateTime.now());
 		catalogEntry.setCreatedBy(1L);

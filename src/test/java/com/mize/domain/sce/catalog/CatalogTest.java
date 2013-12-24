@@ -69,6 +69,7 @@ public class CatalogTest extends JPATest {
 					catalog.setCatalogCode(resultSet.getString("catalog_code"));
 					catalog.setCatalogType(resultSet.getString("catalog_type"));
 					catalog.setIsActive(resultSet.getString("is_active"));
+					catalog.setCatalogName(resultSet.getString("catalog_name"));
 					BusinessEntity be = new BusinessEntity();
 					be.setId(resultSet.getLong("tenant_id"));					
 					catalog.setTenant(be);
@@ -84,7 +85,7 @@ public class CatalogTest extends JPATest {
 			assertTrue(catalog.getId().equals(catalogFromDB.getId()));
 			assertTrue(catalog.getCatalogCode().equals(catalogFromDB.getCatalogCode()));
 			assertTrue(catalog.getCatalogType().equals(catalogFromDB.getCatalogType()));
-
+			assertTrue(catalog.getCatalogName().equals(catalogFromDB.getCatalogName()));
 			assertTrue(catalog.getTenant().getId().equals(catalogFromDB.getTenant().getId()));
 
 		} catch (Throwable th) {
@@ -95,7 +96,7 @@ public class CatalogTest extends JPATest {
 	}
 
 	private Catalog createCatalogObjectToBeSavedInDB(BusinessEntity be) {
-		Catalog catalog = new Catalog(be, "ABC", "Test", "Y", null);
+		Catalog catalog = new Catalog(be, "ABC", "Test", "Y", "Name");
 		return catalog;
 	}
 }
