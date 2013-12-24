@@ -38,6 +38,7 @@ public class Catalog extends MizeEntity {
 	private String isActive;
 	private String catalogName;
 	private List<CatalogEntry> catalogEntry;
+	private List<CatalogIntl> catalogIntl;
 	
 	public Catalog() {
 		super();
@@ -180,6 +181,14 @@ public class Catalog extends MizeEntity {
 	@JsonIgnore
 	public void setUpdatedBy(Long updatedBy) {		
 		super.setUpdatedBy(updatedBy);
+	}
+
+	public List<CatalogIntl> getCatalogIntl() {
+		return catalogIntl;
+	}
+
+	public void setCatalogIntl(List<CatalogIntl> catalogIntl) {
+		this.catalogIntl = catalogIntl;
 	}
 
 	@Override
