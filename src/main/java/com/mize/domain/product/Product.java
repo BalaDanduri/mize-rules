@@ -21,8 +21,6 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
@@ -127,8 +125,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 		this.productSource = productSource;
 	}	
 
-	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "product")
-	@Fetch(FetchMode.SUBSELECT)
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "product",orphanRemoval= true)
 	public List<ProductIntl> getProductIntl() {
 		return productIntl;
 	}
