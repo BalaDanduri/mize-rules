@@ -84,9 +84,7 @@
 				<class>com.mize.domain.purchaseorder.PurchaseOrderShipment</class>
 				<class>com.mize.domain.purchaseorder.PurchaseOrderShipPackage</class>
 				<class>com.mize.domain.common.EntityAttachment</class>
-				<class>com.mize.domain.common.EntityErrorMessage</class>
-				<class>com.mize.domain.product.ProductSerial</class>					
-				<class>com.mize.domain.common.EntityComment</class>
+				<class>com.mize.domain.common.EntityErrorMessage</class>					
 
         </persistence-unit>
 
