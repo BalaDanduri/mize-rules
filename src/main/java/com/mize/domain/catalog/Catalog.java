@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
@@ -183,6 +184,7 @@ public class Catalog extends MizeEntity {
 		super.setUpdatedBy(updatedBy);
 	}
 
+	@Transient
 	public List<CatalogIntl> getCatalogIntl() {
 		return catalogIntl;
 	}
