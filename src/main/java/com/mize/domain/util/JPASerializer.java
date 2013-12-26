@@ -14,7 +14,6 @@ import org.hibernate.proxy.HibernateProxy;
 
 public class JPASerializer extends JsonSerializer<Object> {
 
-	@SuppressWarnings("rawtypes")
 	@Override
 	public void serialize(Object entity, JsonGenerator jgen, SerializerProvider provider)
 			throws IOException, JsonProcessingException {

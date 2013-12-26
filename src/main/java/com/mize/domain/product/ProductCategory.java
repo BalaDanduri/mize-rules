@@ -85,8 +85,10 @@ public class ProductCategory extends MizeEntity{
 		this.name = name;
 	}
 
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="prod_cat_id")
+	//@OneToOne(fetch = FetchType.EAGER)
+	//@JoinColumn(name="prod_cat_id")
+	//@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@Transient
 	public ProductCategory getParent() {
 		return parent;
 	}

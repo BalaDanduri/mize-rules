@@ -12,9 +12,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.util.JPASerializer;
 
 @Entity
 @Table(name = "prod_to_cat", uniqueConstraints = {@UniqueConstraint (columnNames = {"id"})})
@@ -46,6 +49,7 @@ public class ProductToCategory extends MizeEntity{
 
 	@OneToOne(cascade={CascadeType.ALL},fetch = FetchType.LAZY)
 	@JoinColumn(name="prod_id")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public Product getProduct() {
 		return product;
 	}
