@@ -12,12 +12,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonBackReference;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeEntity;
-import com.mize.domain.util.JPASerializer;
 
 @Entity
 @Table(name="prod_intl")
@@ -63,9 +60,8 @@ public class ProductIntl extends MizeEntity implements Comparable<ProductIntl>{
 		return description;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "locale_id")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public Locale getLocale() {
 		return locale;
 	}
