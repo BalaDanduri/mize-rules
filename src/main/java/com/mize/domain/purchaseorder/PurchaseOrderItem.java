@@ -163,7 +163,7 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 		this.updatedBy = updatedBy;
 	}	
 
-	@ManyToOne(fetch=FetchType.LAZY,cascade =CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="order_id")
 	@JsonBackReference(value="item_purchaseOrder")
 	public PurchaseOrder getPurchaseOrder() {
@@ -268,7 +268,7 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 	public void setItemId(Long itemId) {
 		this.itemId = itemId;
 	}
-	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "orderItem",orphanRemoval= true)
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "orderItem",orphanRemoval= true)
 	public List<PurchaseOrderItemWarehourse> getWarehourses() {
 		return warehourses;
 	}

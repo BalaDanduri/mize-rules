@@ -82,7 +82,7 @@ public class PurchaseOrderAudit extends MizeEntity implements Comparable<Purchas
 		this.statusBy = statusBy;
 	}
 
-	@ManyToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="order_id")
 	@JsonBackReference(value="audit_purchaseOrder")
 	public PurchaseOrder getPurchaseOrder() {

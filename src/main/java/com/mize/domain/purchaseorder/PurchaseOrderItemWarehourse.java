@@ -2,7 +2,6 @@ package com.mize.domain.purchaseorder;
 
 import java.math.BigDecimal;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -51,7 +50,7 @@ public class PurchaseOrderItemWarehourse extends MizeEntity implements Comparabl
 		this.id = id;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "order_item_id")
 	@JsonBackReference(value = "warehouse_itemOrder")
 	public PurchaseOrderItem getOrderItem() {
@@ -80,7 +79,7 @@ public class PurchaseOrderItemWarehourse extends MizeEntity implements Comparabl
 		this.name = name;
 	}
 
-	@Column(name = "warehouse_status")
+	@Column(name = "warehouse_item_status")
 	public String getStatus() {
 		return status;
 	}
@@ -201,8 +200,7 @@ public class PurchaseOrderItemWarehourse extends MizeEntity implements Comparabl
 
 	@Override
 	public String toString() {
-		return "PurchaseOrderItemWarehourse [orderItem=" + orderItem
-				+ ", code=" + code + ", name=" + name + ", status=" + status
+		return "PurchaseOrderItemWarehourse [code=" + code + ", name=" + name + ", status=" + status
 				+ ", availableQuantity=" + availableQuantity
 				+ ", backorderQuantity=" + backorderQuantity + ", estimatedShipmentCost="
 				+ estimatedShipmentCost + ", estimatedShipmentDate=" + estimatedShipmentDate + "]";

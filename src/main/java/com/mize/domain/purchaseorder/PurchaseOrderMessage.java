@@ -37,7 +37,7 @@ public class PurchaseOrderMessage extends MizeEntity implements Comparable<Purch
 		this.id = id;		
 	}	
 	
-	@ManyToOne(fetch=FetchType.LAZY,cascade = CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="order_id")
 	@JsonBackReference(value="message_purchaseOrder")
 	public PurchaseOrder getPurchaseOrder() {
