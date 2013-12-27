@@ -27,7 +27,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.mize.domain.auth.User;
 import com.mize.domain.brand.Brand;
 import com.mize.domain.common.MizeEntity;
-import com.mize.domain.servicelocator.BusinessEntity;
+import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.user.UserAddress;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateDeserializer;
@@ -145,6 +145,7 @@ public class ProductRegister extends MizeEntity implements Comparable<ProductReg
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id", nullable = true)
+	@JsonBackReference(value="user_productRegisters")
 	public User getUser() {
 		return user;
 	}

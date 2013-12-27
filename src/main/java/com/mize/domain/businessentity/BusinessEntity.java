@@ -47,6 +47,11 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	private List<BusinessEntityContact> beContact = new ArrayList<BusinessEntityContact>();
 	private BusinessEntityAttribute beAttribute = new BusinessEntityAttribute();
 	
+	public static String COMPANY 	= "company";
+	public static String DEALER 	= "dealer";
+	public static String STORE 		= "store";
+
+	
 	public BusinessEntity() {
 	}
 	

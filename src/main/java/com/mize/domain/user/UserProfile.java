@@ -1,5 +1,6 @@
 package com.mize.domain.user;
 
+import java.io.Serializable;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,6 +21,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.codehaus.jackson.annotate.JsonAutoDetect;
+import org.codehaus.jackson.annotate.JsonBackReference;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
@@ -38,7 +40,7 @@ import com.mize.domain.util.JsonDateSerializer;
 @Entity
 @Table(name = "user_profile")
 @JsonAutoDetect
-public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
+public class UserProfile extends MizeEntity implements Serializable, Comparable<UserProfile> {
 
 	private static final long serialVersionUID = 1396029824729565589L;
 	private Long userId;
@@ -62,6 +64,11 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 	private DateTime birthdate;
 	private Gender gender;
 	private String cityState;
+	
+	public static final int EQUAL = 0;
+	public static final int BEFORE = -1;
+	public static final int AFTER = 1;
+	public static final int PRIME = 31;	
 	
 	private List<User> friends = new ArrayList<User>();
 	private int mutualFriendCount;
@@ -131,8 +138,9 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 		this.id = id;
 	}
 	
-	@OneToOne(fetch=FetchType.EAGER,targetEntity=User.class)
+	@OneToOne(fetch=FetchType.LAZY,targetEntity=User.class)
 	@JoinColumn(name="user_id")
+	@JsonBackReference(value="userprofile_user")
 	public User getUser() {
 		return user;
 	}
@@ -172,7 +180,7 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 		this.firstName = firstName;
 	}
 	
-	@Column(name = "middle_name", length = 30, nullable = false)
+	@Column(name = "middle_name", length = 30, nullable = true)
 	public String getMiddleName() {
 		return middleName;
 	}
@@ -190,7 +198,7 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 	
 	@DateTimeFormat (pattern="MM-dd-yyyy")
 	@JsonSerialize(using=JsonDateSerializer.class,include=Inclusion.NON_DEFAULT)
-	@Column(name = "birth_day",updatable = false)
+	@Column(name = "birth_day",updatable = false, nullable = true)
 	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
 	public DateTime getBirthdate() {
 		return birthdate;
@@ -203,7 +211,7 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 	}
 	
 	@org.hibernate.annotations.Type(type="com.mize.domain.util.GenderJPA")	
-	@Column(name = "gender")
+	@Column(name = "gender", nullable = true)
 	public Gender getGender() {
 		return gender;
 	}
@@ -211,7 +219,7 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 		this.gender = gender;
 	}
 	
-	@Column(name = "photo_link", nullable = false)
+	@Column(name = "photo_link", nullable = true)
 	public String getPhotoLink() {
 		return photoLink;
 	}
@@ -229,7 +237,7 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 		this.profileName = profileName;
 	}
 	
-	@Column(name = "phone_mobile", length = 10, nullable = false)
+	@Column(name = "phone_mobile", length = 10, nullable = true)
 	public String getPhoneMobile() {
 		return phoneMobile;
 	}
@@ -238,7 +246,7 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 		this.phoneMobile = phoneMobile;
 	}
 	
-	@Column(name = "phone_home", length = 10, nullable = false)
+	@Column(name = "phone_home", length = 10, nullable = true)
 	public String getPhoneHome() {
 		return phoneHome;
 	}
@@ -246,7 +254,7 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 		this.phoneHome = phoneHome;
 	}
 	
-	@Column(name = "phone_work", length = 10, nullable = false)
+	@Column(name = "phone_work", length = 10, nullable = true)
 	public String getPhoneWork() {
 		return phoneWork;
 	}
@@ -384,7 +392,7 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 		this.ownCount = ownCount;
 	}
 
-	@Column(name = "timezone", length = 10, nullable = false)
+	@Column(name = "timezone", length = 10, nullable=true)
 	public String getTimezone() {
 		return timezone;
 	}
@@ -606,7 +614,7 @@ public class UserProfile extends MizeEntity implements Comparable<UserProfile> {
 		this.addresses = addresses;
 	}
 
-	@Column(name = "prompt_app_rating",nullable = false)
+	@Column(name = "prompt_app_rating", nullable=true)
 	public String getPromptForAppRating() {
 		return promptForAppRating;
 	}

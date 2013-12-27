@@ -1,7 +1,22 @@
 package com.mize.domain.auth;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.codehaus.jackson.annotate.JsonBackReference;
+
 import com.mize.domain.common.MizeEntity;
 
+@Entity
+@Table(name="linked_account")
 public class LinkedAccount extends MizeEntity implements Comparable<LinkedAccount> {
 	
 	private static final long serialVersionUID = 1947755331862630858L;
@@ -37,42 +52,62 @@ public class LinkedAccount extends MizeEntity implements Comparable<LinkedAccoun
     	}
     }	
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name = "id", nullable = false, unique = true)
+	@Override
 	public Long getId() {
 		return id;
 	}
+
+	@Override
 	public void setId(Long id) {
 		this.id = id;
-	}
+	}	
+	
+	@ManyToOne(cascade={CascadeType.ALL},fetch = FetchType.LAZY)
+    @JoinColumn(name ="user_id")
+	@JsonBackReference(value="user_linkedAccount")
 	public User getUser() {
 		return user;
 	}
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	@Column(name="provider_user_id")
 	public String getProviderUserId() {
 		return providerUserId;
 	}
 	public void setProviderUserId(String providerUserId) {
 		this.providerUserId = providerUserId;
 	}
+	
+	@Column(name="provider_key",nullable=true,length=255)
 	public String getProviderKey() {
 		return providerKey;
 	}
 	public void setProviderKey(String providerKey) {
 		this.providerKey = providerKey;
 	}
+	
+	@Column(name="access_token",nullable=true,length=255)
 	public String getAccessToken() {
 		return accessToken;
 	}
 	public void setAccessToken(String accessToken) {
 		this.accessToken = accessToken;
 	}
+	
+	@Column(name="access_token_secret",nullable=true,length=255)
 	public String getAccessTokenSecret() {
 		return accessTokenSecret;
 	}
 	public void setAccessTokenSecret(String accessTokenSecret) {
 		this.accessTokenSecret = accessTokenSecret;
 	}
+	
+	@Column(name="user_name",nullable=true,length=100)
 	public String getUserName() {
 		return userName;
 	}
@@ -80,7 +115,8 @@ public class LinkedAccount extends MizeEntity implements Comparable<LinkedAccoun
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-
+	
+	@Column(name="first_login",nullable=true,length=1)
 	public String getFirstTime() {
 		return firstTime;
 	}
@@ -91,7 +127,8 @@ public class LinkedAccount extends MizeEntity implements Comparable<LinkedAccoun
 
 	@Override
 	public String toString() {
-		return "LinkedAccount [providerUserId=" + providerUserId + ", providerKey=" + providerKey + ", accessToken=" + accessToken + ", accessTokenSecret=" + accessTokenSecret + ", userName=" + userName + ", firstTime=" + firstTime + ", user=" + user + ", id=" + id + "]";
+		return "LinkedAccount [providerUserId=" + providerUserId + ", providerKey=" + providerKey + ", accessToken=" + accessToken + 
+					", accessTokenSecret=" + accessTokenSecret + ", userName=" + userName + ", firstTime=" + firstTime + ", id=" + id + "]";
 	}
 	
 	@Override

@@ -142,7 +142,8 @@ public class ServiceEntityTest extends JPATest {
 		User user = new User();
 		user.setId(785l);
 		UserBE be = new UserBE();
-		be.setBeId(961l);
+		//be.setBeId(961l);
+		be.setBe(businessEntity1);
 		user.setUserBe(be);
 		serviceEntity.setUser(user);
 		ServiceEntityRequest request = new ServiceEntityRequest();

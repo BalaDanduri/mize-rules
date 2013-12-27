@@ -29,7 +29,7 @@ import com.mize.domain.util.JsonDateTimeSerializer;
 public class UserAddress extends MizeEntity implements Comparable<UserAddress> {	
 	private static final long serialVersionUID = -7919863139299243311L;
 	
-	private Long userId;
+	/*private Long userId;*/
 	private String type;
 	private String name;
 	private String address1;
@@ -63,14 +63,14 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 	}
 	
 	
-	@Transient
+	/*@Transient
 	public Long getUserId() {
 		return userId;
 	}
 
 	public void setUserId(Long userId) {
 		this.userId = userId;
-	}
+	}*/
 	
 	@Column(name="address_type",length=20,nullable=true)
 	public String getType() {
@@ -206,7 +206,7 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 				+ ((zipCode == null) ? 0 : zipCode.hashCode());
 		result = prime * result + ((state == null) ? 0 : state.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
-		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+		/*result = prime * result + ((userId == null) ? 0 : userId.hashCode());*/
 		return result;
 	}
 
@@ -269,17 +269,17 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 				return false;
 		} else if (!type.equals(other.type))
 			return false;
-		if (userId == null) {
+		/*if (userId == null) {
 			if (other.userId != null)
 				return false;
 		} else if (!userId.equals(other.userId))
-			return false;
+			return false;*/
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "UserAddress [id=" + id + ", userId=" + userId + ", type="
+		return "UserAddress [id=" + id + ", type="
 				+ type + ", name=" + name + ", address1=" + address1
 				+ ", address2=" + address2 + ", address3=" + address3
 				+ ", city=" + city + ", state=" + state + ", country="

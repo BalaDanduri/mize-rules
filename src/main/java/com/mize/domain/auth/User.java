@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -23,7 +24,6 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -50,15 +50,13 @@ public class User extends MizeEntity implements Comparable<User> {
     protected DateTime lastLogin;
     protected boolean active;
     protected boolean emailValidated;
-    @Transient
+    
     protected List<LinkedAccount> linkedAccounts = new ArrayList<LinkedAccount>();
     @Transient
     protected List<UserConnect> userConnects;
     protected UserProfile userProfile;
     protected Long referralId;
-    @Transient
     protected UserBE userBe;
-    @Transient
     protected UserProfilePrivacy privacy;
     @Transient
 	private List<Group> groups = new ArrayList<Group>();
@@ -94,11 +92,10 @@ public class User extends MizeEntity implements Comparable<User> {
 	}
 	
 	
-	@Id
-	@GenericGenerator(name="id",strategy="increment")
-	@GeneratedValue
-	@Column(name="id",unique=true,nullable=false,length=20)
 	@Override
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
 	public Long getId() {
 		return id;
 	}
@@ -153,7 +150,9 @@ public class User extends MizeEntity implements Comparable<User> {
 		this.emailValidated = emailValidated;
 	}
 	
-	@Transient
+	@OneToMany(cascade={CascadeType.ALL}, mappedBy="user")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonManagedReference(value="user_linkedAccount")
 	public List<LinkedAccount> getLinkedAccounts() {
 		return linkedAccounts;
 	}
@@ -237,7 +236,7 @@ public class User extends MizeEntity implements Comparable<User> {
 		this.userProfile = userProfile;
 	}
 	
-	@OneToOne(fetch=FetchType.EAGER ,cascade= CascadeType.ALL )
+	@OneToOne(fetch=FetchType.EAGER ,cascade= {CascadeType.ALL} )
 	@JoinColumn(name="id")
 	public UserProfile getUserProfile() {
 		return userProfile;
@@ -252,7 +251,9 @@ public class User extends MizeEntity implements Comparable<User> {
 		this.referralId = referralId;
 	}
 	
-	@Transient
+	@OneToOne(mappedBy="user", cascade={CascadeType.ALL})
+	@JoinColumn(name="user_id")
+	
 	public UserProfilePrivacy getPrivacy() {
 		return privacy;
 	}
@@ -261,7 +262,8 @@ public class User extends MizeEntity implements Comparable<User> {
 		this.privacy = privacy;
 	}
 
-	@Transient
+	@OneToOne(mappedBy = "user",cascade={CascadeType.ALL})
+	@JoinColumn(name="user_id")
 	public UserBE getUserBe() {
 		return userBe;
 	}
@@ -282,7 +284,7 @@ public class User extends MizeEntity implements Comparable<User> {
 	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL,mappedBy="user")
 	@Fetch(value=FetchMode.SUBSELECT)
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
-	@JsonManagedReference(value="userMapping")
+	@JsonManagedReference(value="user_brandMapping")
     public List<UserBrandMapping> getUserBrandMapping() {
 		return userBrandMapping;
 	}
@@ -344,6 +346,7 @@ public class User extends MizeEntity implements Comparable<User> {
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade =CascadeType.ALL)
 	@JoinColumn(name="prod_regn_id") 
+	@JsonManagedReference(value="user_productRegisters")
 	public List<ProductRegister> getProductRegisters() {
 		return productRegisters;
 	}

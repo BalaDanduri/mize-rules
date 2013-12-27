@@ -51,7 +51,7 @@ public class GenderJPA implements UserType{
 	
 	@Override
 	public void nullSafeSet(PreparedStatement arg0, Object arg1, int arg2) throws HibernateException, SQLException {
-		arg0.setString(arg2,arg1.toString());
+		arg0.setString(arg2,( (arg1!=null) ? arg1.toString() : null));
 	}
 
 	@Override

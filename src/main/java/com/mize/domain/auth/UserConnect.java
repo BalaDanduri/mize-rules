@@ -65,4 +65,10 @@ public class UserConnect extends MizeEntity implements Comparable<UserConnect> {
 			return AFTER;
 		return EQUAL;		
 	}
+	
+	@Override
+	public String toString() {
+		return "UserConnect [linkedAccountId=" + linkedAccountId + ", email=" + email + ", userId="+userId +", provider=" + provider +"]";
+	}
+
 }

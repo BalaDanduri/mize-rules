@@ -101,7 +101,8 @@ public class PartsOrderTest extends JPATest {
 		User user = new User();
 		user.setId(785l);
 		UserBE be = new UserBE();
-		be.setBeId(961l);
+		//be.setBeId(961l);
+		be.setBe(businessEntity);
 		user.setUserBe(be);
 		businessEntity = entityManager.find(BusinessEntity.class, businessEntity.getId());
 		requester.setBusinessEntity(businessEntity);
