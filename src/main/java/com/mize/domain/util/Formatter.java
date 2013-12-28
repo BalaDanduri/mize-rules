@@ -597,6 +597,29 @@ public final class Formatter {
 		return val1.add(val2);		
 	}
 	
+	public static BigDecimal multiplyBigDecimals(BigDecimal val1,BigDecimal val2){
+		if(val1 == null){
+			val1 = BigDecimal.ZERO;
+		}
+		if(val2 == null){
+			val2 = BigDecimal.ZERO;
+		}
+		return val1.multiply(val2);		
+	}
+	
+	public static BigDecimal multiplyBigDecimals(BigDecimal val1,BigDecimal val2,BigDecimal val3){
+		if(val1 == null){
+			val1 = BigDecimal.ZERO;
+		}
+		if(val2 == null){
+			val2 = BigDecimal.ZERO;
+		}
+		if(val3 == null){
+			val3 = BigDecimal.ZERO;
+		}
+		return val1.multiply(val2).multiply(val3);		
+	}
+	
 	public static BigDecimal addBigDecimals(BigDecimal val1,BigDecimal val2,BigDecimal val3){
 		if(val1 == null){
 			val1 = BigDecimal.ZERO;
