@@ -27,6 +27,7 @@ import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.MizeEntity;
@@ -49,6 +50,8 @@ public class ProductSerial extends MizeEntity{
 	@Transient
 	private EntityComment entityComment;
 	private List<ProductSerialComment> comments = new ArrayList<ProductSerialComment>();
+	@Transient
+	private User user;
 	
 	public ProductSerial(){
 		super();
@@ -169,6 +172,15 @@ public class ProductSerial extends MizeEntity{
 
 	public void setComments(List<ProductSerialComment> comments) {
 		this.comments = comments;
+	}
+
+	@Transient
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override

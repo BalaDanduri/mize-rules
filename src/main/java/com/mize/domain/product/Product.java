@@ -26,6 +26,7 @@ import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.mize.domain.auth.User;
 import com.mize.domain.brand.Brand;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeEntity;
@@ -68,6 +69,8 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	private List<ProductIntl> productIntl = new ArrayList<ProductIntl>();	
 	@DateTimeFormat(pattern="MM-dd-yyyy")
 	private DateTime releaseDate;
+	@Transient
+	private User user;
 
 	public enum Source{
 		MIZE(1),AMAZON(2),ETILIZE(3),BestBuy(4),Sears(5),Ebay(6);
@@ -492,6 +495,15 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 		this.manufacturerBE = manufacturerBE;
 	}
 	
+	@Transient
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	@Override
 	public int compareTo(Product o) {	
 		return 0;
