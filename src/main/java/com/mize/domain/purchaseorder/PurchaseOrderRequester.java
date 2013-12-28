@@ -24,7 +24,7 @@ public class PurchaseOrderRequester extends MizeEntity implements Comparable<Pur
 	private static final long serialVersionUID = 444432988617420731L;
 	private PurchaseOrder purchaseOrder;
 	private BusinessEntity businessEntity;
-	private EntityAddress address;
+	private EntityAddress address = new EntityAddress();
 
 	public PurchaseOrderRequester(){
 		super();

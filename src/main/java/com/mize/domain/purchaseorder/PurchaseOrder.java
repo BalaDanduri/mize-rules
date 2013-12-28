@@ -242,8 +242,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 		this.discountId = discountId;
 	}	
 
-	@OneToOne(cascade=CascadeType.ALL,fetch = FetchType.LAZY)
-	@JoinColumn(name="id")
+	@OneToOne(cascade=CascadeType.ALL,fetch = FetchType.LAZY,mappedBy="purchaseOrder")
 	public PurchaseOrderRequester getRequester() {
 		return requester;
 	}
@@ -252,7 +251,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 		this.requester = requester;
 	}
 	
-	@OneToOne(cascade=CascadeType.ALL,fetch = FetchType.LAZY)
+	@OneToOne(cascade=CascadeType.ALL,fetch = FetchType.LAZY,mappedBy="purchaseOrder")
 	@JoinColumn(name="id")
 	public PurchaseOrderPayment getPayment() {
 		return payment;
@@ -262,7 +261,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 		this.payment = payment;
 	}
 
-	@OneToOne(cascade=CascadeType.ALL,fetch = FetchType.LAZY)
+	@OneToOne(cascade=CascadeType.ALL,fetch = FetchType.LAZY,mappedBy="purchaseOrder")
 	@JoinColumn(name="id")
 	public PurchaseOrderShipment getShipment() {
 		return shipment;
