@@ -251,4 +251,108 @@ public class PurchaseOrderShipPackage extends MizeEntity implements Comparable<P
 		return 0;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = PRIME;
+		int result = super.hashCode();
+		result = prime * result + ((carrier == null) ? 0 : carrier.hashCode());
+		result = prime * result
+				+ ((freightAmount == null) ? 0 : freightAmount.hashCode());
+		result = prime * result + ((label == null) ? 0 : label.hashCode());
+		result = prime * result
+				+ ((linkInfo == null) ? 0 : linkInfo.hashCode());
+		result = prime * result + ((method == null) ? 0 : method.hashCode());
+		result = prime * result + ((number == null) ? 0 : number.hashCode());
+		result = prime * result
+				+ ((priority == null) ? 0 : priority.hashCode());
+		result = prime * result
+				+ ((shipmentDate == null) ? 0 : shipmentDate.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		result = prime * result
+				+ ((totalAmount == null) ? 0 : totalAmount.hashCode());
+		result = prime * result
+				+ ((trackingNumber == null) ? 0 : trackingNumber.hashCode());
+		result = prime * result
+				+ ((warehouseName == null) ? 0 : warehouseName.hashCode());
+		result = prime * result + ((weight == null) ? 0 : weight.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PurchaseOrderShipPackage other = (PurchaseOrderShipPackage) obj;
+		if (carrier == null) {
+			if (other.carrier != null)
+				return false;
+		} else if (!carrier.equals(other.carrier))
+			return false;
+		if (freightAmount == null) {
+			if (other.freightAmount != null)
+				return false;
+		} else if (!freightAmount.equals(other.freightAmount))
+			return false;
+		if (label == null) {
+			if (other.label != null)
+				return false;
+		} else if (!label.equals(other.label))
+			return false;
+		if (linkInfo == null) {
+			if (other.linkInfo != null)
+				return false;
+		} else if (!linkInfo.equals(other.linkInfo))
+			return false;
+		if (method == null) {
+			if (other.method != null)
+				return false;
+		} else if (!method.equals(other.method))
+			return false;
+		if (number == null) {
+			if (other.number != null)
+				return false;
+		} else if (!number.equals(other.number))
+			return false;
+		if (priority == null) {
+			if (other.priority != null)
+				return false;
+		} else if (!priority.equals(other.priority))
+			return false;
+		if (shipmentDate == null) {
+			if (other.shipmentDate != null)
+				return false;
+		} else if (!shipmentDate.equals(other.shipmentDate))
+			return false;
+		if (status == null) {
+			if (other.status != null)
+				return false;
+		} else if (!status.equals(other.status))
+			return false;
+		if (totalAmount == null) {
+			if (other.totalAmount != null)
+				return false;
+		} else if (!totalAmount.equals(other.totalAmount))
+			return false;
+		if (trackingNumber == null) {
+			if (other.trackingNumber != null)
+				return false;
+		} else if (!trackingNumber.equals(other.trackingNumber))
+			return false;
+		if (warehouseName == null) {
+			if (other.warehouseName != null)
+				return false;
+		} else if (!warehouseName.equals(other.warehouseName))
+			return false;
+		if (weight == null) {
+			if (other.weight != null)
+				return false;
+		} else if (!weight.equals(other.weight))
+			return false;
+		return true;
+	}
+
 }

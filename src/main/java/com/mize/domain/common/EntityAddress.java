@@ -175,7 +175,7 @@ public class EntityAddress extends MizeEntity implements Comparable<EntityAddres
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
-	@Column(name = "created_date")
+	@Column(name = "created_date",updatable = false)
 	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
 	@Transient
 	public DateTime getCreatedDate() {

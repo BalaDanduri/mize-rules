@@ -115,6 +115,7 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	@JsonIgnore(value=false)
 	@Column(name="updated_date")
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
@@ -122,6 +123,7 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(value=false)	
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
 	public void setUpdatedDate(DateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}
@@ -130,6 +132,7 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	@JsonIgnore(value=false)
 	@Column(name="created_date",updatable = false)
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
@@ -137,6 +140,7 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(value=false)
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
 	public void setCreatedDate(DateTime createdDate) {
 		this.createdDate = createdDate;
 	}
