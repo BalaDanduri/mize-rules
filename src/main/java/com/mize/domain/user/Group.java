@@ -38,6 +38,7 @@ public class Group extends MizeEntity implements Comparable<Group> {
 	private String active;
 	private List<Role> roles = new ArrayList<Role>();
 	private BusinessEntity owner;
+	private List<UserGroup> userGroups = new ArrayList<UserGroup>();
 	
 	private List<GroupRoleMapping> groupsToRole = new ArrayList<GroupRoleMapping>();
 
@@ -132,6 +133,17 @@ public class Group extends MizeEntity implements Comparable<Group> {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	@OneToMany(mappedBy="group", cascade={CascadeType.ALL}, fetch=FetchType.LAZY)
+	@JsonManagedReference(value="group_userGroups")
+	public List<UserGroup> getUserGroups() {
+		return userGroups;
+	}
+	
+	public void setUserGroups(List<UserGroup> userGroups) {
+		this.userGroups = userGroups;
+	}
+	
 
 	@OneToMany(fetch = FetchType.LAZY,cascade=CascadeType.ALL , mappedBy ="group")
 	@Fetch(value=FetchMode.SUBSELECT)

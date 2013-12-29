@@ -33,6 +33,7 @@ import com.mize.domain.product.ProductRegister;
 import com.mize.domain.user.Group;
 import com.mize.domain.user.UserBE;
 import com.mize.domain.user.UserBrandMapping;
+import com.mize.domain.user.UserGroup;
 import com.mize.domain.user.UserProfile;
 import com.mize.domain.user.UserProfilePrivacy;
 import com.mize.domain.util.Formatter;
@@ -50,8 +51,9 @@ public class User extends MizeEntity implements Comparable<User> {
     protected DateTime lastLogin;
     protected boolean active;
     protected boolean emailValidated;
+    protected Long tenantId;
     
-    protected List<LinkedAccount> linkedAccounts = new ArrayList<LinkedAccount>();
+	protected List<LinkedAccount> linkedAccounts = new ArrayList<LinkedAccount>();
     @Transient
     protected List<UserConnect> userConnects;
     protected UserProfile userProfile;
@@ -60,6 +62,7 @@ public class User extends MizeEntity implements Comparable<User> {
     protected UserProfilePrivacy privacy;
     @Transient
 	private List<Group> groups = new ArrayList<Group>();
+    private List<UserGroup> userGroups = new ArrayList<UserGroup>();
 	private List<ProductRegister> productRegisters = new ArrayList<ProductRegister>();
 	private List<UserBrandMapping> userBrandMapping = new ArrayList<UserBrandMapping>();
     
@@ -102,6 +105,15 @@ public class User extends MizeEntity implements Comparable<User> {
 	@Override
 	public void setId(Long id) {
 		this.id = id;
+	}
+    
+	@Column(name="tenant_id", nullable=false)
+	public Long getTenantId() {
+		return tenantId;
+	}
+
+	public void setTenantId(Long tenantId) {
+		this.tenantId = tenantId;
 	}
 	
 	@Column(name="email",nullable=true,length=255)
@@ -281,6 +293,16 @@ public class User extends MizeEntity implements Comparable<User> {
 		this.groups = groups;
 	}
 	
+	@OneToMany(mappedBy="user", fetch=FetchType.LAZY, cascade={CascadeType.ALL})
+	@JsonManagedReference(value="user_userGroups")
+	public List<UserGroup> getUserGroups() {
+		return userGroups;
+	}
+	
+	public void setUserGroups(List<UserGroup> userGroups) {
+		this.userGroups = userGroups;
+	}
+	
 	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL,mappedBy="user")
 	@Fetch(value=FetchMode.SUBSELECT)
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
@@ -292,7 +314,60 @@ public class User extends MizeEntity implements Comparable<User> {
 	public void setUserBrandMapping(List<UserBrandMapping> userBrandMapping) {
 		this.userBrandMapping = userBrandMapping;
 	}
+	
+	@JsonIgnore(false)
+	@Column(name = "updated_by")
+	public Long getUpdatedBy() {
+		return this.updatedBy;
+	}
+	
+	@JsonIgnore(false)
+	public void setUpdatedBy(Long updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+	
+	@JsonIgnore(false)
+	@Column(name = "created_by", updatable = false)
+	public Long getCreatedBy() {
+		return this.createdBy;
+	}
+	
+	@JsonIgnore(false)
+	public void setCreatedBy(Long createdBy) {
+		this.createdBy = createdBy;
+	}
+	
+	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using = JsonDateTimeSerializer.class, include = JsonSerialize.Inclusion.NON_DEFAULT)
+	@JsonIgnore(false)
+	@Column(name = "created_date", updatable = false)
+	@Type(type = "com.mize.domain.util.DateTimeJPA")
+	public DateTime getCreatedDate() {
+		return this.createdDate;
+	}
 
+	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using = JodaDateTimeDeserializer.class)
+	@JsonIgnore(false)
+	public void setCreatedDate(DateTime createdDate) {
+		this.createdDate = createdDate;
+	}
+	
+	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using = JsonDateTimeSerializer.class, include = JsonSerialize.Inclusion.NON_DEFAULT)
+	@Column(name = "updated_date")
+	@Type(type = "com.mize.domain.util.DateTimeJPA")
+	public DateTime getUpdatedDate() {
+		return this.updatedDate;
+	}
+	
+	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using = JodaDateTimeDeserializer.class)
+	@JsonIgnore(false)
+	public void setUpdatedDate(DateTime updatedDate) {
+		this.updatedDate = updatedDate;
+	}
+	
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", email=" + email + ", name=" + name + ", lastLogin=" + lastLogin + ", active="

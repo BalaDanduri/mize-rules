@@ -21,8 +21,10 @@ import com.mize.domain.auth.LinkedAccount;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.test.util.JPATest;
+import com.mize.domain.user.Group;
 import com.mize.domain.user.UserAddress;
 import com.mize.domain.user.UserBE;
+import com.mize.domain.user.UserGroup;
 import com.mize.domain.user.UserProfile;
 import com.mize.domain.user.UserProfilePrivacy;
 
@@ -51,7 +53,7 @@ public class UserTest extends JPATest {
 	public void test(){
 		EntityTransaction tx = entityManager.getTransaction();
 		tx.begin();
-		 entityManager.persist(user);
+		entityManager.persist(user);
 		tx.commit();
 		assertNotNull(user.getId());
 	}
@@ -91,6 +93,9 @@ public class UserTest extends JPATest {
 	}
 	
 	public User prepareUser(){
+		Long userId = 1L;
+		userId = 961L;
+		
 		user = new User();
 		user.setName("Surya");
 		user.setEmail("surya@m-ize.com");
@@ -98,7 +103,11 @@ public class UserTest extends JPATest {
 		user.setActive(true);
 		user.setEmailValidated(true);
 		user.setReferralId(1L);
-		
+		user.setTenantId(12L);
+		user.setCreatedBy(userId);
+		user.setCreatedDate(DateTime.now());
+		user.setUpdatedBy(userId);
+		user.setUpdatedDate(DateTime.now());
 		
 	 	UserProfile userProfile=new UserProfile();
 		userProfile.setFirstName("Surya");
@@ -141,18 +150,31 @@ public class UserTest extends JPATest {
 		
 		user.setUserProfile(userProfile);
 		
-		/*UserBE userBe = new UserBE();  
+		UserBE userBe = new UserBE();  
         userBe.setUser(user);
         
-        BusinessEntity be = new BusinessEntity();
-        be.setTypeCode("dealer");
+        BusinessEntity be = (BusinessEntity)find(BusinessEntity.class, userId);
+        //be.setTypeCode("dealer");
         userBe.setBe(be);
-        user.setUserBe(userBe);*/
+        user.setUserBe(userBe);
         
         LinkedAccount linkedAccount = new LinkedAccount();
+        linkedAccount.setProviderUserId("providerUserId");
         linkedAccount.setUser(user);
         List<LinkedAccount> linkedAccounts = new ArrayList<LinkedAccount>();
         user.setLinkedAccounts(linkedAccounts);
+        
+        
+        UserGroup userGroup = new UserGroup();
+        Group group = new Group();
+        group.setName("Group1");
+        userGroup.setGroup(group);
+        userGroup.setUser(user);
+        
+        List<UserGroup> userGroups = new ArrayList<UserGroup>();
+        userGroups.add(userGroup);
+        user.setUserGroups(userGroups);
+        group.setUserGroups(userGroups);
         
         return user;
 		
