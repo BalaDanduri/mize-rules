@@ -61,7 +61,7 @@ import com.mize.domain.common.MizeEntity;
    
    @ManyToOne(fetch=FetchType.EAGER,optional= false)
    @JoinColumn(name="role_id")
-  // @JsonBackReference(value="roleMapping")
+   @JsonBackReference(value="roleMapping")
    public Role getRole() {
      return role;
    }
@@ -84,8 +84,7 @@ import com.mize.domain.common.MizeEntity;
    
    @Override
 public String toString() {
-	return "GroupRoleMapping [group=" + group + ", role=" + role + ", active="
-			+ active + "]";
+	return "GroupRoleMapping [active="+ active + "]";
 }
 @Override
    public int compareTo(GroupRoleMapping groupsToRole) {

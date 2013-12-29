@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -28,6 +29,7 @@ import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.product.ProductRegister;
 import com.mize.domain.user.Group;
@@ -51,7 +53,7 @@ public class User extends MizeEntity implements Comparable<User> {
     protected DateTime lastLogin;
     protected boolean active;
     protected boolean emailValidated;
-    protected Long tenantId;
+    protected BusinessEntity be;
     
 	protected List<LinkedAccount> linkedAccounts = new ArrayList<LinkedAccount>();
     @Transient
@@ -107,13 +109,15 @@ public class User extends MizeEntity implements Comparable<User> {
 		this.id = id;
 	}
     
-	@Column(name="tenant_id", nullable=false)
-	public Long getTenantId() {
-		return tenantId;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "tenant_id")
+	//@JsonManagedReference(value="user_be")
+	public BusinessEntity getBe() {
+		return be;
 	}
 
-	public void setTenantId(Long tenantId) {
-		this.tenantId = tenantId;
+	public void setBe(BusinessEntity be) {
+		this.be = be;
 	}
 	
 	@Column(name="email",nullable=true,length=255)

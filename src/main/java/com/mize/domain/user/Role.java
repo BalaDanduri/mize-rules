@@ -1,14 +1,24 @@
 package com.mize.domain.user;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import org.codehaus.jackson.annotate.JsonManagedReference;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.util.JPASerializer;
 
 @Entity
 @Table(name = "role")
@@ -21,7 +31,7 @@ public class Role extends MizeEntity implements Comparable<Role>{
 	private String active;	
    /* private List<Group> groups;*/
 	
-//	private List<GroupRoleMapping> groupsToRole = new ArrayList<GroupRoleMapping>();
+	private List<GroupRoleMapping> groupsToRole;
 	
 	
 	
@@ -36,7 +46,7 @@ public class Role extends MizeEntity implements Comparable<Role>{
 		this.description = description;
 		this.code = code;
 		this.active = active;
-	//	this.groupsToRole = groupsToRole;
+		this.groupsToRole = groupsToRole;
 	}
 
 
@@ -94,7 +104,7 @@ public class Role extends MizeEntity implements Comparable<Role>{
 		this.active = active;
 	}
 	
-	/*@OneToMany(fetch = FetchType.LAZY,cascade=CascadeType.ALL , mappedBy ="role")
+	@OneToMany(fetch = FetchType.LAZY,cascade={CascadeType.ALL}, mappedBy ="role")
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	@JsonManagedReference(value="roleMapping")
 	public List<GroupRoleMapping> getGroupsToRole() {
@@ -103,7 +113,7 @@ public class Role extends MizeEntity implements Comparable<Role>{
 
 	public void setGroupsToRole(List<GroupRoleMapping> groupsToRole) {
 		this.groupsToRole = groupsToRole;
-	}*/
+	}
 /*
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles")
 	@JsonManagedReference(value="role_groups")

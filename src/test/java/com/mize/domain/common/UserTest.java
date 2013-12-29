@@ -22,6 +22,8 @@ import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.user.Group;
+import com.mize.domain.user.GroupRoleMapping;
+import com.mize.domain.user.Role;
 import com.mize.domain.user.UserAddress;
 import com.mize.domain.user.UserBE;
 import com.mize.domain.user.UserGroup;
@@ -97,13 +99,21 @@ public class UserTest extends JPATest {
 		userId = 961L;
 		
 		user = new User();
+		
+        BusinessEntity be = (BusinessEntity)find(BusinessEntity.class, userId);
+        //be.setTypeCode("dealer");
+		UserBE userBe = new UserBE();  
+        userBe.setUser(user);
+        userBe.setBe(be);
+        user.setUserBe(userBe);
+        
 		user.setName("Surya");
 		user.setEmail("surya@m-ize.com");
 		user.setLastLogin(DateTime.now());
 		user.setActive(true);
 		user.setEmailValidated(true);
 		user.setReferralId(1L);
-		user.setTenantId(12L);
+		user.setBe(be);
 		user.setCreatedBy(userId);
 		user.setCreatedDate(DateTime.now());
 		user.setUpdatedBy(userId);
@@ -150,14 +160,6 @@ public class UserTest extends JPATest {
 		
 		user.setUserProfile(userProfile);
 		
-		UserBE userBe = new UserBE();  
-        userBe.setUser(user);
-        
-        BusinessEntity be = (BusinessEntity)find(BusinessEntity.class, userId);
-        //be.setTypeCode("dealer");
-        userBe.setBe(be);
-        user.setUserBe(userBe);
-        
         LinkedAccount linkedAccount = new LinkedAccount();
         linkedAccount.setProviderUserId("providerUserId");
         linkedAccount.setUser(user);
@@ -168,8 +170,28 @@ public class UserTest extends JPATest {
         UserGroup userGroup = new UserGroup();
         Group group = new Group();
         group.setName("Group1");
+        group.setOwner(be);
+        
+        Role role = new Role();
+        role.setName("Role1");
+        role.setCode("RoleCode1");
+        role.setActive("Y");
+        
+        GroupRoleMapping groupRoleMapping = new GroupRoleMapping();
+        groupRoleMapping.setRole(role);
+        groupRoleMapping.setGroup(group);
+        List<GroupRoleMapping> groupsToRole = new ArrayList<GroupRoleMapping>();
+        groupsToRole.add(groupRoleMapping);
+        role.setGroupsToRole(groupsToRole);
+        
+        List<Role> roles = new ArrayList<Role>();
+        roles.add(role);
+        
+        group.setRoles(roles);
+        
         userGroup.setGroup(group);
         userGroup.setUser(user);
+        
         
         List<UserGroup> userGroups = new ArrayList<UserGroup>();
         userGroups.add(userGroup);

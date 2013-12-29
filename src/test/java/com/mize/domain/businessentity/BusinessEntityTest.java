@@ -68,7 +68,7 @@ public class BusinessEntityTest extends JPATest {
 			BusinessEntity be = new BusinessEntity();
 			be.setId(rs.getLong("id"));
 			be.setCode(rs.getString("code"));
-			be.setTypeCode(rs.getString("type_code"));
+			be.setTypeCode(BusinessEntity.TypeCode.valueOf(rs.getString("type_code")));
 			be.setSubTypeCode(rs.getString("sub_type_code"));
 			be.setIsActive(rs.getString("active_indicator"));
 			be.setCurrencyCode(rs.getString("currency_code"));
@@ -86,7 +86,7 @@ public class BusinessEntityTest extends JPATest {
 	private BusinessEntity businessEntityObjectTobeSaved(BusinessEntity businessEntity) {
 		BusinessEntity be = new BusinessEntity();
 		//be.setId(961l);
-		be.setTypeCode("dealer");
+		be.setTypeCode(BusinessEntity.TypeCode.dealer);
 		be.setCode("10C00101P");
 		be.setIsActive("Y");
 		be.setLogo("be.jpg");

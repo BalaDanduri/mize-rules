@@ -7,6 +7,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,7 +35,7 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 
 	private static final long serialVersionUID = 5842902035928465555L;
 	private String code;
-	private String typeCode;
+	private TypeCode typeCode;
 	private String subTypeCode;
 	private String logo;
 	private BusinessEntity tenant;
@@ -47,10 +49,9 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	private List<BusinessEntityContact> beContact = new ArrayList<BusinessEntityContact>();
 	private BusinessEntityAttribute beAttribute = new BusinessEntityAttribute();
 	
-	public static String COMPANY 	= "company";
-	public static String DEALER 	= "dealer";
-	public static String STORE 		= "store";
-
+	public enum TypeCode {
+		company, dealer, store
+	}
 	
 	public BusinessEntity() {
 	}
@@ -75,11 +76,6 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	@Column(name = "code",length = 50)
 	public String getCode() {
 		return code;
-	}
-
-	@Column(name = "type_code",length = 50)
-	public String getTypeCode() {
-		return typeCode;
 	}
 
 	@Column(name = "sub_type_code",length = 50)
@@ -118,10 +114,6 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 
 	public void setCode(String code) {
 		this.code = code;
-	}
-
-	public void setTypeCode(String typeCode) {
-		this.typeCode = typeCode;
 	}
 
 	public void setSubTypeCode(String subTypeCode) {
@@ -219,7 +211,16 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 		}
 	};
 	
-
+	@Column(name="type_code",nullable=true,length=50)
+	@Enumerated(EnumType.STRING)
+	public TypeCode getTypeCode() {
+		return typeCode;
+	}
+	
+	public void setTypeCode(TypeCode typeCode) {
+		this.typeCode = typeCode;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;

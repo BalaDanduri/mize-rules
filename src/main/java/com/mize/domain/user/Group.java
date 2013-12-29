@@ -175,8 +175,7 @@ public class Group extends MizeEntity implements Comparable<Group> {
 	@Override
 	public String toString() {
 		return "Group [name=" + name + ", code=" + code + ", description="
-				+ description + ", active=" + active + ", roles=" + roles
-				+ ", owner=" + owner + ", groupsToRole=" + groupsToRole + "]";
+				+ description + ", active=" + active + "]";
 	}
 
 	@Override
