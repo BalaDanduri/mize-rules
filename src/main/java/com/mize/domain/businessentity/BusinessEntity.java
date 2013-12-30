@@ -211,6 +211,7 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 		}
 	};
 	
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.GenderJPA")
 	@Column(name="type_code",nullable=true,length=50)
 	@Enumerated(EnumType.STRING)
 	public TypeCode getTypeCode() {
