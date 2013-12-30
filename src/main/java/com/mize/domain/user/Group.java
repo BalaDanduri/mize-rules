@@ -135,6 +135,7 @@ public class Group extends MizeEntity implements Comparable<Group> {
 	}
 	
 	@OneToMany(mappedBy="group", cascade={CascadeType.ALL}, fetch=FetchType.LAZY)
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	@JsonManagedReference(value="group_userGroups")
 	public List<UserGroup> getUserGroups() {
 		return userGroups;

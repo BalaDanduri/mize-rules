@@ -7,8 +7,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,7 +33,7 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 
 	private static final long serialVersionUID = 5842902035928465555L;
 	private String code;
-	private TypeCode typeCode;
+	private String typeCode;
 	private String subTypeCode;
 	private String logo;
 	private BusinessEntity tenant;
@@ -48,10 +46,6 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	private List<BusinessEntityBrand> beBrand = new ArrayList<BusinessEntityBrand>();
 	private List<BusinessEntityContact> beContact = new ArrayList<BusinessEntityContact>();
 	private BusinessEntityAttribute beAttribute = new BusinessEntityAttribute();
-	
-	public enum TypeCode {
-		company, dealer, store
-	}
 	
 	public BusinessEntity() {
 	}
@@ -211,14 +205,12 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 		}
 	};
 	
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.GenderJPA")
 	@Column(name="type_code",nullable=true,length=50)
-	@Enumerated(EnumType.STRING)
-	public TypeCode getTypeCode() {
+	public String getTypeCode() {
 		return typeCode;
 	}
 	
-	public void setTypeCode(TypeCode typeCode) {
+	public void setTypeCode(String typeCode) {
 		this.typeCode = typeCode;
 	}
 	
