@@ -24,6 +24,8 @@ import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import com.mize.domain.common.EntityAddress;
+import com.mize.domain.common.EntityAddressPhone;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JPASerializer;
 
@@ -52,6 +54,22 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	
 	public BusinessEntity(Long id) {
 		this.id = id;
+	}
+	
+	public BusinessEntity(Long id, String code, String name, String typeCode, BusinessEntityIntl intl, 
+			BusinessEntityAddress address,String url,String hoursOfOp) {
+		super();
+		this.id = id;
+		this.code = code;
+		this.name = name;
+		this.typeCode = typeCode;		
+		this.addresses = new ArrayList<BusinessEntityAddress>();
+		this.addresses.add(address);
+		List<EntityAddressPhone> phones = new ArrayList<EntityAddressPhone>();		
+		this.intl = new ArrayList<BusinessEntityIntl>();
+		this.intl.add(intl);
+		this.beAttribute.setUrl(url);
+		this.beAttribute.setHoursOfOp(hoursOfOp);
 	}
 
 	@Override
