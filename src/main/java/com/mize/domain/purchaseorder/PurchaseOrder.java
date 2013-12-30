@@ -28,6 +28,7 @@ import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 @Entity
@@ -272,6 +273,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	}
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "purchaseOrder",orphanRemoval= true)
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public List<PurchaseOrderItem> getOrderItems() {
 		return orderItems;
 	}
@@ -281,6 +283,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	}
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "purchaseOrder",orphanRemoval= true)
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public List<PurchaseOrderAudit> getAudits() {
 		return audits;
 	}
@@ -290,6 +293,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	}
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "purchaseOrder",orphanRemoval= true)
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public List<PurchaseOrderAttachment> getAttachments() {
 		return attachments;
 	}
@@ -299,6 +303,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	}
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "purchaseOrder",orphanRemoval= true)
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public List<PurchaseOrderComment> getComments() {
 		return comments;
 	}
@@ -308,6 +313,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	}
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "purchaseOrder",orphanRemoval= true)
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public List<PurchaseOrderMessage> getMessages() {
 		return messages;
 	}
