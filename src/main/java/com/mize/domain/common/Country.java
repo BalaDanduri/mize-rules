@@ -13,9 +13,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonManagedReference;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
+
+import com.mize.domain.util.JPASerializer;
 
 @Entity
 @Table(name = "country")
@@ -120,9 +124,10 @@ public class Country extends MizeEntity implements Comparable<Country>{
 		return EQUAL;		
 	}
 
-	@OneToMany(cascade={CascadeType.ALL}, fetch= FetchType.EAGER , mappedBy ="country")
+	@OneToMany(cascade={CascadeType.ALL}, fetch= FetchType.LAZY , mappedBy ="country")
 	@Fetch(value = FetchMode.SELECT)
-	@JsonManagedReference(value="country")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonManagedReference(value="country_states")
 	public List<State> getStates() {
 		return states;
 	}
