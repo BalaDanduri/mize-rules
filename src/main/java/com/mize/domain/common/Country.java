@@ -12,7 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.codehaus.jackson.annotate.JsonManagedReference;
+import org.codehaus.jackson.annotate.JsonBackReference;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import org.hibernate.annotations.Fetch;
@@ -70,7 +70,6 @@ public class Country extends MizeEntity implements Comparable<Country>{
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result + ((code3 == null) ? 0 : code3.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((states == null) ? 0 : states.hashCode());
 		return result;
 	}
 	
@@ -98,18 +97,12 @@ public class Country extends MizeEntity implements Comparable<Country>{
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (states == null) {
-			if (other.states != null)
-				return false;
-		} else if (!states.equals(other.states))
-			return false;
 		return true;
 	}
 	
 	@Override
 	public String toString() {
-		return "Country [code=" + code + ", name=" + name + ", code3=" + code3
-				+ ", states=" + states + "]";
+		return "Country [code=" + code + ", name=" + name + ", code3=" + code3+ "]";
 	}
 	
 	public int compareTo(Country country) {
@@ -127,7 +120,7 @@ public class Country extends MizeEntity implements Comparable<Country>{
 	@OneToMany(cascade={CascadeType.ALL}, fetch= FetchType.LAZY , mappedBy ="country")
 	@Fetch(value = FetchMode.SELECT)
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
-	@JsonManagedReference(value="country_states")
+	@JsonBackReference(value="country_states")
 	public List<State> getStates() {
 		return states;
 	}
