@@ -87,7 +87,10 @@
 				<class>com.mize.domain.purchaseorder.PurchaseOrderShipPackage</class>
 				<class>com.mize.domain.common.EntityAttachment</class>
 				<class>com.mize.domain.common.EntityErrorMessage</class>					
-
+				<!-- entity parameter -->
+				<class>com.mize.domain.entityparameter.EntityParameter</class>
+				<class>com.mize.domain.entityparameter.EntityParameterAttribute</class>
+				<class>com.mize.domain.entityparameter.EntityParameterComment</class>
         </persistence-unit>
 
 </persistence>
