@@ -35,6 +35,7 @@ public class BusinessEntityAddress  extends MizeEntity  implements Comparable<Bu
 	private Long beId;
 	private BusinessEntity businessEntity;
 	private EntityAddress entityAddress;
+	private String isPreferred;
 	
 	public BusinessEntityAddress() {
 		super();
@@ -87,6 +88,15 @@ public class BusinessEntityAddress  extends MizeEntity  implements Comparable<Bu
 
 	public void setBusinessEntity(BusinessEntity businessEntity) {
 		this.businessEntity = businessEntity;
+	}
+	
+	@Column(name = "is_preferred", length = 1)
+	public String getIsPreferred() {
+		return isPreferred;
+	}
+	
+	public void setIsPreferred(String isPreferred) {
+		this.isPreferred = isPreferred;
 	}
 
 	@Override
