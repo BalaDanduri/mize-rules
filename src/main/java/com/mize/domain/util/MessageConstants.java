@@ -91,6 +91,9 @@ public abstract class MessageConstants implements Serializable{
 	public static final String INVALID_PROD_NAME = "INVALID_PROD_NAME";
 	public static final String INVALID_ITEM_NUMBER = "INVALID_ITEM_NUMBER";
 	public static final String INVALID_CATEGORY_NAME = "INVALID_CATEGORY_NAME";
-	public static final String NAME_REQUIRED = "NAME_REQUIRED";
+	public static final String NAME_REQUIRED = "NAME_REQUIRED";	
+	public static final String DUPLICATE_TYPE_AND_CODE = "DUPLICATE_TYPE_AND_CODE";	
+	public static final String INVALID_LINK_TYPE = "INVALID_LINK_TYPE";
 	public static final String INVALID_PARENT_BUSINESS_ENTITY_CODE = "INVALID_PARENT_BUSINESS_ENTITY_CODE";
+
 }
