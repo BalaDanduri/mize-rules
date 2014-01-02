@@ -94,4 +94,6 @@ public abstract class MessageConstants implements Serializable{
 	public static final String NAME_REQUIRED = "NAME_REQUIRED";
 	
 	public static final String DUPLICATE_TYPE_AND_CODE = "DUPLICATE_TYPE_AND_CODE";
+	
+	public static final String INVALID_LINK_TYPE = "INVALID_LINK_TYPE";
 }

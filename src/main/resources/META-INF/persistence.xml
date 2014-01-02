@@ -55,6 +55,10 @@
 				<class>com.mize.domain.form.FormDefinition</class>
 				<class>com.mize.domain.form.FormDefinitionAudit</class>
 				<class>com.mize.domain.form.FormInstance</class>
+				<class>com.mize.domain.form.link.FormDefinitionLink</class>
+				<class>com.mize.domain.form.link.FormDefinitionLinkData</class>
+				<class>com.mize.domain.form.link.FormInstanceLink</class>
+				<class>com.mize.domain.form.link.FormInstanceLinkAudit</class>
 				<class>com.mize.domain.common.EntityAddress</class>
 				<class>com.mize.domain.partsorder.PartsOrder</class>
 				<class>com.mize.domain.partsorder.PartsOrderAmount</class>
