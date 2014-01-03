@@ -15,7 +15,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonManagedReference;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -73,6 +75,7 @@ public class CatalogEntry extends MizeEntity {
 	
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name = "catalog_id", nullable = false)    
+	@JsonBackReference(value="catlog")
 	public Catalog getCatalog() {
 		return catalog;
 	}
@@ -113,6 +116,7 @@ public class CatalogEntry extends MizeEntity {
 	}
 
 	@OneToMany(fetch = FetchType.EAGER, cascade={CascadeType.ALL}, mappedBy = "catalogEntry")
+	@JsonManagedReference(value="catlog_entry")
 	public List<CatalogEntryIntl> getCatalogEntryIntl() {
 		return catalogEntryIntl;
 	}

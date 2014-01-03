@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonManagedReference;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -115,6 +116,7 @@ public class Catalog extends MizeEntity {
 	
 	@OneToMany(cascade={CascadeType.ALL}, fetch= FetchType.EAGER, mappedBy = "catalog")
 	@Fetch(FetchMode.SUBSELECT)
+	@JsonManagedReference(value="catlog")
 	public List<CatalogEntry> getCatalogEntry() {
 		return catalogEntry;
 	}
@@ -268,4 +270,6 @@ public class Catalog extends MizeEntity {
 		builder.append("]");
 		return builder.toString();
 	}
+	
+	
 }
