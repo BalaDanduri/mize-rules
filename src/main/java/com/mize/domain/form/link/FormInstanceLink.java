@@ -10,8 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
@@ -57,6 +57,7 @@ public class FormInstanceLink extends MizeEntity {
 	
 	public FormInstanceLink() {
 		super();
+		formInstance = new FormInstance();
 	}
 	
 	public FormInstanceLink(FormInstance formInstance, ProductSerial productSerial, 
@@ -86,7 +87,7 @@ public class FormInstanceLink extends MizeEntity {
 		super.id=id;
 	}
 	
-	@ManyToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="form_instance_id", nullable = true)
 	public FormInstance getFormInstance() {
 		return formInstance;
@@ -96,7 +97,7 @@ public class FormInstanceLink extends MizeEntity {
 		this.formInstance = formInstance;
 	}
 	
-	@ManyToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="prod_serial_id", nullable = true)
 	public ProductSerial getProductSerial() {
 		return productSerial;
@@ -106,7 +107,7 @@ public class FormInstanceLink extends MizeEntity {
 		this.productSerial = productSerial;
 	}	
 	
-	@ManyToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="link_be_id", nullable = true)
 	public BusinessEntity getLinkBusinessEntity() {
 		return linkBusinessEntity;

@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -54,7 +54,7 @@ public class FormInstance extends MizeEntity {
 		super.id=id;
 	}
 	
-	@ManyToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="form_defn_id", nullable = false)
 	public FormDefinition getFormDefinition() {
 		return formDefinition;
@@ -160,11 +160,6 @@ public class FormInstance extends MizeEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		FormInstance other = (FormInstance) obj;
-		if(id == null) {
-			if(other.id != null)
-				return false;
-		} else if(!id.equals(other.id))
-			return false;
 		if (formInstanceData == null) {
 			if (other.formInstanceData != null)
 				return false;
