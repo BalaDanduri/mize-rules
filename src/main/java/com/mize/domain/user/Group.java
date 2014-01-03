@@ -17,15 +17,21 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonManagedReference;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.joda.time.DateTime;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JPASerializer;
+import com.mize.domain.util.JodaDateTimeDeserializer;
+import com.mize.domain.util.JsonDateTimeSerializer;
 
 @Entity
 @Table(name = "groups", uniqueConstraints = { @UniqueConstraint(columnNames = {"tenant_id", "CODE" }) })
@@ -44,7 +50,7 @@ public class Group extends MizeEntity implements Comparable<Group> {
 
 	public Group() {
 	}
-	
+	 
 	public Group(String name, String code, String description, String active,
 			List<Role> roles, BusinessEntity owner,
 			List<GroupRoleMapping> groupsToRole) {
@@ -106,6 +112,7 @@ public class Group extends MizeEntity implements Comparable<Group> {
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "tenant_id")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public BusinessEntity getOwner() {
 		return owner;
 	}
@@ -156,6 +163,53 @@ public class Group extends MizeEntity implements Comparable<Group> {
 
 	public void setGroupsToRole(List<GroupRoleMapping> groupsToRole) {
 		this.groupsToRole = groupsToRole;
+	}
+	
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	@JsonIgnore(value=false)
+	public void setCreatedDate(DateTime createdDate) {
+		this.createdDate = createdDate;
+	}
+	
+	@JsonIgnore(value=false)
+	public void setUpdatedBy(Long updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+ 
+	@JsonIgnore(value=false)
+	public void setCreatedBy(Long createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	@JsonIgnore(value=false)
+	public void setUpdatedDate(DateTime updatedDate) {
+		this.updatedDate = updatedDate;
+	}
+	
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	@JsonIgnore(value=false)
+	@Column(name = "created_date",updatable = false)
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
+	public DateTime getCreatedDate() {
+		return createdDate;
+	}
+
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	@Column(name = "updated_date")
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
+	public DateTime getUpdatedDate() {
+		return updatedDate;
+	}
+	
+	@JsonIgnore(value=false)
+	@Column(name = "created_by" , updatable=false)
+	public Long getCreatedBy() {
+		return createdBy;
 	}
 
 	
