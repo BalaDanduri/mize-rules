@@ -38,6 +38,7 @@
                 <class>com.mize.domain.serviceentity.ServiceEntityRequester</class>
                 <class>com.mize.domain.serviceentity.ServiceEntity</class>
                 <class>com.mize.domain.product.Product</class>
+                <class>com.mize.domain.product.ProductSerial</class>
                 <class>com.mize.domain.product.ProductRegister</class>
                 <class>com.mize.domain.product.ProductRegnAttachment</class>
                 <class>com.mize.domain.brand.Brand</class>
