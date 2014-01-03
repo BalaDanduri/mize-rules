@@ -20,6 +20,7 @@
 				<property name="showSql" value="true" />
 			</bean>
 		</property>
+		<property name="packagesToScan" value="com.mize.domain" />
 	</bean>
 	
 	<bean class="org.springframework.orm.jpa.JpaTransactionManager">
