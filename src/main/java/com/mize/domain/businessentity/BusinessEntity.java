@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -31,7 +33,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
 
 @Entity
 @Table(name = "business_entity", uniqueConstraints = {@UniqueConstraint (columnNames={"tenant_id", "code"})})
@@ -235,59 +236,79 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 		this.typeCode = typeCode;
 	}
 	
-	@JsonIgnore(false)
-	@Column(name = "updated_by")
-	public Long getUpdatedBy() {
-		return this.updatedBy;
-	}
 	
-	@JsonIgnore(false)
-	public void setUpdatedBy(Long updatedBy) {
-		this.updatedBy = updatedBy;
-	}
-	
-	@JsonIgnore(false)
-	@Column(name = "created_by", updatable = false)
-	public Long getCreatedBy() {
-		return this.createdBy;
-	}
-	
-	@JsonIgnore(false)
-	public void setCreatedBy(Long createdBy) {
-		this.createdBy = createdBy;
-	}
-	
-	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using = JsonDateTimeSerializer.class, include = JsonSerialize.Inclusion.NON_DEFAULT)
-	@JsonIgnore(false)
-	@Column(name = "created_date", updatable = false)
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
+	@Override	
+	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
+	@Type(type="com.mize.domain.util.DateTimeJPA")
+	@Column(name = "created_date",updatable=false)
+	@JsonIgnore(value = false)
 	public DateTime getCreatedDate() {
-		return this.createdDate;
+		return createdDate;
 	}
 
-	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using = JodaDateTimeDeserializer.class)
-	@JsonIgnore(false)
-	public void setCreatedDate(DateTime createdDate) {
-		this.createdDate = createdDate;
-	}
-	
-	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using = JsonDateTimeSerializer.class, include = JsonSerialize.Inclusion.NON_DEFAULT)
+	@Override	
+	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
+	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@Column(name = "updated_date")
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonIgnore(false)
+	@JsonIgnore(value = false)
 	public DateTime getUpdatedDate() {
-		return this.updatedDate;
+		return updatedDate;
+	}
+
+	@Override
+	@JsonIgnore
+	@Column(name = "created_by",updatable=false)
+	public Long getCreatedBy() {		
+		return super.getCreatedBy();
+	}
+
+	@Override
+	@JsonIgnore
+	@Column(name = "updated_by")
+	public Long getUpdatedBy() {		
+		return super.getUpdatedBy();
+	}
+
+	
+	@Override
+	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	@JsonIgnore
+	public void setCreatedDate(DateTime createdDate) {
+		super.createdDate = createdDate;
+	}
+
+	@Override
+	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	@JsonIgnore
+	public void setUpdatedDate(DateTime updatedDate) {
+		super.updatedDate = updatedDate;
+	}
+
+	@Override
+	@JsonIgnore
+	public void setCreatedBy(Long createdBy) {		
+		super.setCreatedBy(createdBy);
+	}
+
+	@Override
+	@JsonIgnore
+	public void setUpdatedBy(Long updatedBy) {		
+		super.setUpdatedBy(updatedBy);
+	}
+
+	@PrePersist
+	@PreUpdate
+	public void auditFields(){
+		if(createdDate==null && id==null){
+			setCreatedDate(DateTime.now());
+		}
+		setUpdatedDate(DateTime.now());		
 	}
 	
-	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using = JodaDateTimeDeserializer.class)
-	@JsonIgnore(false)
-	public void setUpdatedDate(DateTime updatedDate) {
-		this.updatedDate = updatedDate;
-	}
+	
+	
 	
 	@Override
 	public int hashCode() {
