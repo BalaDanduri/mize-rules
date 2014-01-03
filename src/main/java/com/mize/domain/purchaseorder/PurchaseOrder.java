@@ -213,6 +213,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	@Column(name = "updated_date")
+	@JsonIgnore(value=false)
 	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
 	public DateTime getUpdatedDate() {
 		return updatedDate;
