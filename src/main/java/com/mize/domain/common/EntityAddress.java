@@ -51,6 +51,10 @@ public class EntityAddress extends MizeEntity implements Comparable<EntityAddres
 	public EntityAddress(){
 		super();
 	}
+	
+	public enum Type{
+		Shipping,Billing,Payment;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

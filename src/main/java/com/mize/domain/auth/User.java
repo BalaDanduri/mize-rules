@@ -361,6 +361,7 @@ public class User extends MizeEntity implements Comparable<User> {
 	@JsonSerialize(using = JsonDateTimeSerializer.class, include = JsonSerialize.Inclusion.NON_DEFAULT)
 	@Column(name = "updated_date")
 	@Type(type = "com.mize.domain.util.DateTimeJPA")
+	@JsonIgnore(false)
 	public DateTime getUpdatedDate() {
 		return this.updatedDate;
 	}
