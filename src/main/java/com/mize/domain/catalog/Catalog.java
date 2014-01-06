@@ -114,7 +114,7 @@ public class Catalog extends MizeEntity {
 		this.catalogName = catalogName;
 	}
 	
-	@OneToMany(cascade={CascadeType.ALL}, fetch= FetchType.EAGER, mappedBy = "catalog")
+	@OneToMany(cascade={CascadeType.ALL}, fetch= FetchType.EAGER, mappedBy = "catalog", orphanRemoval = true)
 	@Fetch(FetchMode.SUBSELECT)
 	@JsonManagedReference(value="catlog")
 	public List<CatalogEntry> getCatalogEntry() {

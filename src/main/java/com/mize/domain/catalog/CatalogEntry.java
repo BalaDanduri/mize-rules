@@ -115,7 +115,7 @@ public class CatalogEntry extends MizeEntity {
 		this.orderSequence = orderSequence;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, cascade={CascadeType.ALL}, mappedBy = "catalogEntry")
+	@OneToMany(fetch = FetchType.EAGER, cascade={CascadeType.ALL}, mappedBy = "catalogEntry" ,orphanRemoval= true)
 	@JsonManagedReference(value="catlog_entry")
 	public List<CatalogEntryIntl> getCatalogEntryIntl() {
 		return catalogEntryIntl;
