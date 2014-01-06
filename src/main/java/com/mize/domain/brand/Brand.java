@@ -4,18 +4,26 @@ package com.mize.domain.brand;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.codehaus.jackson.annotate.JsonManagedReference;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.product.ProductRegister;
 import com.mize.domain.product.ProductRepeatOrderShipOptions;
+import com.mize.domain.user.UserBrandMapping;
+import com.mize.domain.util.JPASerializer;
 
 @Entity
 @Table(name = "brand")
@@ -36,7 +44,8 @@ public class Brand extends MizeEntity implements Comparable<Brand>{
 	private List<ProductRepeatOrderShipOptions> shippings = new ArrayList<ProductRepeatOrderShipOptions>();
 	private List<ProductRegister> productRegisters = new ArrayList<ProductRegister>();
 	private String searchType;
-	
+	private List<UserBrandMapping> userBrands = new ArrayList<UserBrandMapping>();
+
 	public enum SearchType{
 		equals,like;	
 	}
@@ -217,7 +226,19 @@ public class Brand extends MizeEntity implements Comparable<Brand>{
 		result = PRIME * result	+ ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
-
+	
+	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL,mappedBy="user")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonManagedReference(value="brand_userbrandMapping")
+	public List<UserBrandMapping> getUserBrands() {
+		return userBrands;
+	}
+	
+	public void setUserBrands(List<UserBrandMapping> userBrands) {
+		this.userBrands = userBrands;
+	}
+	
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

@@ -4,7 +4,9 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -19,6 +21,7 @@ import org.springframework.test.context.ContextConfiguration;
 
 import com.mize.domain.auth.LinkedAccount;
 import com.mize.domain.auth.User;
+import com.mize.domain.brand.Brand;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.user.Group;
@@ -26,6 +29,7 @@ import com.mize.domain.user.GroupRoleMapping;
 import com.mize.domain.user.Role;
 import com.mize.domain.user.UserAddress;
 import com.mize.domain.user.UserBE;
+import com.mize.domain.user.UserBrandMapping;
 import com.mize.domain.user.UserGroup;
 import com.mize.domain.user.UserProfile;
 import com.mize.domain.user.UserProfilePrivacy;
@@ -197,6 +201,24 @@ public class UserTest extends JPATest {
         userGroups.add(userGroup);
         user.setUserGroups(userGroups);
         group.setUserGroups(userGroups);
+        
+        
+        
+        Brand brand = new Brand();
+        brand.setId(1L);
+        //Brand brand = (Brand)find(Brand.class, 4L);
+        brand.setName("brand1");
+        UserBrandMapping ubMapping = new UserBrandMapping();
+        ubMapping.setBrand(brand);
+        ubMapping.setUser(user);
+        List<UserBrandMapping> ubMappings = new ArrayList<UserBrandMapping>();
+        ubMappings.add(ubMapping);
+        brand.setUserBrands(ubMappings);
+        Set<Brand> brands = new HashSet<Brand>();
+        brands.add(brand);
+        userBe.setBrands(brands);
+        user.setUserBrandMapping(ubMappings);
+        
         
         return user;
 		

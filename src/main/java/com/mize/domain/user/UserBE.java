@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -13,8 +14,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.codehaus.jackson.annotate.JsonBackReference;
+import org.codehaus.jackson.annotate.JsonManagedReference;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import org.hibernate.annotations.GenericGenerator;
@@ -144,9 +147,10 @@ public class UserBE extends MizeEntity implements Comparable<UserBE>{
 		return EQUAL;		
 	}
 
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = {CascadeType.ALL}, fetch=FetchType.EAGER)
 	@JoinTable(name = "users_to_brand" , joinColumns = { @JoinColumn(name="user_id")}, inverseJoinColumns = {@JoinColumn(name="brand_id")} )
-	//@JsonManagedReference(value="user_brandMapping")
+	//@JsonManagedReference(value="userbe_brandMapping")
+	@Transient
 	public Set<Brand> getBrands() {
 		return brands;
 	}
