@@ -109,7 +109,7 @@ public class WorkQueue extends MizeEntity {
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	@JsonIgnore(value=false)
 	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
-	@Column(name = "created_date")
+	@Column(name = "created_date",updatable=false)
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
