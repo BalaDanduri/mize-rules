@@ -97,7 +97,7 @@ public abstract class MessageConstants implements Serializable{
 	public static final String INVALID_PARENT_BUSINESS_ENTITY_CODE = "INVALID_PARENT_BUSINESS_ENTITY_CODE";
 	public static final String USER_CODE_REQUIRED = "USER_CODE_REQUIRED";
 	public static final String GROUP_CODE_REQUIRED = "GROUP_CODE_REQUIRED";
-	public static final String DUPLICATE_WORK_QUEUE_CODE = "DUPLICATE_WORK_QUEUE_CODE";
+	public static final String DUPLICATE_WORK_QUEUE_CODE = "DUPLICATE_WORK_QUEUE_NAME";
 	public static final String DUPLICATE_WORK_QUEUE_AUTH_CODE = "DUPLICATE_WORK_QUEUE_AUTH_CODE";
 	public static final String DUPLICATE_ROLE_NAME= "DUPLICATE_ROLE_NAME";
 
