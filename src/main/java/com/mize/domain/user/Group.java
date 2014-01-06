@@ -200,6 +200,7 @@ public class Group extends MizeEntity implements Comparable<Group> {
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	@JsonIgnore(value=false)
 	@Column(name = "updated_date")
 	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
 	public DateTime getUpdatedDate() {
