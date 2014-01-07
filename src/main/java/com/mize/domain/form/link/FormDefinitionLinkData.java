@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -63,7 +64,7 @@ public class FormDefinitionLinkData extends MizeEntity {
 		this.formDefinitionLink = formDefinitionLink;
 	}
 	
-	@ManyToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="prod_id", nullable = true)
 	public Product getProduct() {
 		return product;

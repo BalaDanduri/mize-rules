@@ -10,8 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
@@ -45,10 +45,12 @@ public class FormDefinitionLink extends MizeEntity {
 	
 	public FormDefinitionLink() {
 		super();
+		formDefinition = new FormDefinition();
 	}
 	
-	public FormDefinitionLink(List<FormDefinitionLinkData> formDefnLinkData) {
+	public FormDefinitionLink(FormDefinition formDefinition, List<FormDefinitionLinkData> formDefnLinkData) {
 		super();
+		this.formDefinition = formDefinition;
 		this.formDefnLinkData = formDefnLinkData;
 	}
 
@@ -65,7 +67,7 @@ public class FormDefinitionLink extends MizeEntity {
 		super.id=id;
 	}
 	
-	@ManyToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="form_defn_id", nullable = true)
 	public FormDefinition getFormDefinition() {
 		return formDefinition;

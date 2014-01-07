@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonBackReference;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.hibernate.annotations.Type;
@@ -59,6 +60,7 @@ public class CatalogEntryIntl extends MizeEntity {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "catalog_entry_id")
+	@JsonBackReference(value="catlog_entry")
 	public CatalogEntry getCatalogEntry() {
 		return catalogEntry;
 	}
@@ -95,7 +97,7 @@ public class CatalogEntryIntl extends MizeEntity {
 		this.locale = locale;
 	}
 	
-	@Override	
+/*	@Override	
 	@DateTimeFormat(pattern = "MM-dd-yyyy HH:mm:ss")
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@Column(name = "created_date")
@@ -152,7 +154,7 @@ public class CatalogEntryIntl extends MizeEntity {
 	public void setUpdatedBy(Long updatedBy) {		
 		super.setUpdatedBy(updatedBy);
 	}
-
+*/
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;

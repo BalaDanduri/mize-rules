@@ -74,6 +74,7 @@ public class UserBrandMapping extends MizeEntity implements Comparable<UserBrand
 	
 	@ManyToOne(fetch=FetchType.EAGER,optional= false)
 	@JoinColumn(name="brand_id")
+	@JsonBackReference(value="brand_userbrandMapping")
 	public Brand getBrand() {
 		return brand;
 	}

@@ -107,8 +107,6 @@ public class FormDefinitionAudit extends MizeEntity {
 		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result
-				+ ((formDefinition == null) ? 0 : formDefinition.hashCode());
-		result = prime * result
 				+ ((statusBy == null) ? 0 : statusBy.hashCode());
 		result = prime * result
 				+ ((statusCode == null) ? 0 : statusCode.hashCode());
@@ -126,16 +124,6 @@ public class FormDefinitionAudit extends MizeEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		FormDefinitionAudit other = (FormDefinitionAudit) obj;
-		if(id == null) {
-			if(other.id != null)
-				return false;
-		} else if(!id.equals(other.id))
-			return false;
-		if (formDefinition == null) {
-			if (other.formDefinition != null)
-				return false;
-		} else if (!formDefinition.getId().equals(other.formDefinition.getId()))
-			return false;
 		if (statusBy == null) {
 			if (other.statusBy != null)
 				return false;

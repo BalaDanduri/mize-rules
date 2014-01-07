@@ -64,7 +64,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	
 	public enum Status{
 		Draft,Pending,Approved,Deleted,Rejected,Closed,Open,Completed,
-		Shipped,In_Progress;
+		Shipped,In_Progress,Submitted;
 	}
 	
 	public enum Type{
@@ -213,6 +213,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	@Column(name = "updated_date")
+	@JsonIgnore(value=false)
 	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
 	public DateTime getUpdatedDate() {
 		return updatedDate;

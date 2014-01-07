@@ -11,8 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -93,7 +93,7 @@ public class FormDefinition extends MizeEntity {
 		super.id=id;
 	}
 	
-	@ManyToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="template_defn_id", nullable = true)
 	public FormTemplateDefinition getFormTemplateDefinition() {
 		return formTemplateDefinition;
@@ -103,7 +103,7 @@ public class FormDefinition extends MizeEntity {
 		this.formTemplateDefinition = formTemplateDefinition;
 	}
 	
-	@ManyToOne()
+	@OneToOne()
 	@JoinColumn(name = "tenant_id", nullable = true)
 	public BusinessEntity getTenant() {
 		return tenant;
@@ -131,7 +131,7 @@ public class FormDefinition extends MizeEntity {
 		this.formName = formName;
 	}
 	
-	@ManyToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="locale_id")
 	public Locale getLocale() {
 		return locale;
@@ -290,7 +290,6 @@ public class FormDefinition extends MizeEntity {
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime * result + ((audits == null) ? 0 : audits.hashCode());
 		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
 		result = prime * result
 				+ ((formCode == null) ? 0 : formCode.hashCode());
@@ -323,16 +322,6 @@ public class FormDefinition extends MizeEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		FormDefinition other = (FormDefinition) obj;
-		if(id == null) {
-			if(other.id != null)
-				return false;
-		} else if(!id.equals(other.id))
-			return false;
-		if (audits == null) {
-			if (other.audits != null)
-				return false;
-		} else if (!audits.equals(other.audits))
-			return false;
 		if (endDate == null) {
 			if (other.endDate != null)
 				return false;
@@ -361,7 +350,7 @@ public class FormDefinition extends MizeEntity {
 		if (formTemplateDefinition == null) {
 			if (other.formTemplateDefinition != null)
 				return false;
-		} else if (!formTemplateDefinition.getId().equals(other.formTemplateDefinition.getId()))
+		} else if (!formTemplateDefinition.equals(other.formTemplateDefinition))
 			return false;
 		if (locale == null) {
 			if (other.locale != null)

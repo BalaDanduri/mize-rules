@@ -3,22 +3,35 @@ package com.mize.domain.common;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.annotate.JsonManagedReference;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.hibernate.annotations.Type;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.GenericGenerator;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.mize.domain.businessentity.BusinessEntity;
+import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
+import com.mize.domain.util.JsonDateTimeSerializer;
 
-
+@Entity
+@Table(name="work_queue")
 public class WorkQueue extends MizeEntity {
 
 
@@ -26,9 +39,10 @@ public class WorkQueue extends MizeEntity {
 	private String name;
 	private String desc;
 	private String code;
+	private String isActive;
 	
 	private List<WorkQueueAuth> workQueueAuths  =new ArrayList<WorkQueueAuth>();
-	
+	private BusinessEntity tenant;
 
 	public WorkQueue(){
 		super();
@@ -46,7 +60,8 @@ public class WorkQueue extends MizeEntity {
 
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GenericGenerator(name="id",strategy="increment")
+	@GeneratedValue
 	@Column(name = "id", nullable = false, unique = true)
 	@Override
 	public Long getId() {
@@ -64,28 +79,46 @@ public class WorkQueue extends MizeEntity {
 		return desc;
 	}
 
+	@Column(name = "code", length = 30, nullable = false)
 	public String getCode() {
 		return code;
 	}
 	
+	@Column(name = "is_active",  nullable = true, length = 1)
+	public String getIsActive() {
+		return isActive;
+	}
+	
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "workQueue")
+	@OneToMany(fetch = FetchType.LAZY,cascade=CascadeType.ALL, mappedBy = "workQueue",orphanRemoval= true)
+	@Fetch(value=FetchMode.SUBSELECT)
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonManagedReference(value="workQueue_workQueueAuth")
 	public List<WorkQueueAuth> getWorkQueueAuths() {
 		return workQueueAuths;
 	}
 
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "tenant_id")
+	public BusinessEntity getTenant() {
+		return tenant;
+	}
 	
 	@Override	
-	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
-	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@Column(name = "created_date")
+	@DateTimeFormat(pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	@JsonIgnore(value=false)
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
+	@Column(name = "created_date",updatable=false)
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
 
 	@Override	
-	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
-	@Type(type="com.mize.domain.util.DateTimeJPA")
+	@DateTimeFormat(pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	@JsonIgnore(value=false)
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
 	@Column(name = "updated_date")
 	public DateTime getUpdatedDate() {
 		return updatedDate;
@@ -127,10 +160,16 @@ public class WorkQueue extends MizeEntity {
 		this.workQueueAuths = workQueueAuths;
 	}
 	
-
+	public void setIsActive(String isActive) {
+		this.isActive = isActive;
+	}
+	
+	public void setTenant(BusinessEntity tenant) {
+		this.tenant = tenant;
+	}
      
 	@Override
-	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore
 	public void setCreatedDate(DateTime createdDate) {
@@ -138,7 +177,7 @@ public class WorkQueue extends MizeEntity {
 	}
 
 	@Override
-	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore
 	public void setUpdatedDate(DateTime updatedDate) {
@@ -208,7 +247,7 @@ public class WorkQueue extends MizeEntity {
 		builder.append(id);
 		builder.append(", code=");
 		builder.append(code);
-		builder.append(", desc=");
+		builder.append(", description=");
 		builder.append(desc);
 		builder.append(", name=");
 		builder.append(name);
