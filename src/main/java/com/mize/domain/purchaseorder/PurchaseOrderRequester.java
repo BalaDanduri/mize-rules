@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.codehaus.jackson.annotate.JsonBackReference;
 
@@ -24,7 +25,8 @@ public class PurchaseOrderRequester extends MizeEntity implements Comparable<Pur
 	private static final long serialVersionUID = 444432988617420731L;
 	private PurchaseOrder purchaseOrder;
 	private BusinessEntity businessEntity;
-	private EntityAddress address = null;
+	private EntityAddress address;
+	private String updateAddress;
 
 	public PurchaseOrderRequester(){
 		super();
@@ -78,6 +80,15 @@ public class PurchaseOrderRequester extends MizeEntity implements Comparable<Pur
 
 	public void setPurchaseOrder(PurchaseOrder purchaseOrder) {
 		this.purchaseOrder = purchaseOrder;
+	}
+
+	@Transient
+	public String getUpdateAddress() {
+		return updateAddress;
+	}
+
+	public void setUpdateAddress(String updateAddress) {
+		this.updateAddress = updateAddress;
 	}
 
 	@Override

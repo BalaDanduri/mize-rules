@@ -105,8 +105,6 @@ public class EntityAddressPhone extends MizeEntity implements Comparable<EntityA
 		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result
-				+ ((entityAddressId == null) ? 0 : entityAddressId.hashCode());
-		result = prime * result
 				+ ((phoneExt == null) ? 0 : phoneExt.hashCode());
 		result = prime * result
 				+ ((phoneType == null) ? 0 : phoneType.hashCode());
@@ -124,11 +122,6 @@ public class EntityAddressPhone extends MizeEntity implements Comparable<EntityA
 		if (getClass() != obj.getClass())
 			return false;
 		EntityAddressPhone other = (EntityAddressPhone) obj;
-		if (entityAddressId == null) {
-			if (other.entityAddressId != null)
-				return false;
-		} else if (!entityAddressId.equals(other.entityAddressId))
-			return false;
 		if (phoneExt == null) {
 			if (other.phoneExt != null)
 				return false;
@@ -147,21 +140,12 @@ public class EntityAddressPhone extends MizeEntity implements Comparable<EntityA
 		return true;
 	}
 
+
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("EntityAddressPhone [entityAddressId=");
-		builder.append(entityAddressId);
-		builder.append(", phoneType=");
-		builder.append(phoneType);
-		builder.append(", phoneValue=");
-		builder.append(phoneValue);
-		builder.append(", phoneExt=");
-		builder.append(phoneExt);
-		builder.append(", id=");
-		builder.append(id);
-		builder.append("]");
-		return builder.toString();
+		return "EntityAddressPhone [entityAddressId=" + entityAddressId
+				+ ", phoneType=" + phoneType + ", phoneValue=" + phoneValue
+				+ ", phoneExt=" + phoneExt + "]";
 	}
 
 	@Override

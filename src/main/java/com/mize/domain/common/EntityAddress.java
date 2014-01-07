@@ -245,6 +245,8 @@ public class EntityAddress extends MizeEntity implements Comparable<EntityAddres
 	public void setAddressGeo(EntityAddressGeo addressGeo) {
 		this.addressGeo = addressGeo;
 	}
+	
+	
 
 	@Override
 	public int hashCode() {
@@ -256,6 +258,8 @@ public class EntityAddress extends MizeEntity implements Comparable<EntityAddres
 				+ ((address2 == null) ? 0 : address2.hashCode());
 		result = prime * result
 				+ ((address3 == null) ? 0 : address3.hashCode());
+		result = prime * result
+				+ ((addressPhones == null) ? 0 : addressPhones.hashCode());
 		result = prime * result + ((city == null) ? 0 : city.hashCode());
 		result = prime * result + ((country == null) ? 0 : country.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
@@ -291,6 +295,11 @@ public class EntityAddress extends MizeEntity implements Comparable<EntityAddres
 			if (other.address3 != null)
 				return false;
 		} else if (!address3.equals(other.address3))
+			return false;
+		if (addressPhones == null) {
+			if (other.addressPhones != null)
+				return false;
+		} else if (!addressPhones.equals(other.addressPhones))
 			return false;
 		if (city == null) {
 			if (other.city != null)
@@ -335,35 +344,16 @@ public class EntityAddress extends MizeEntity implements Comparable<EntityAddres
 		return true;
 	}
 
+	
+	
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("EntityAddress [type=");
-		builder.append(type);
-		builder.append(", address1=");
-		builder.append(address1);
-		builder.append(", address2=");
-		builder.append(address2);
-		builder.append(", address3=");
-		builder.append(address3);
-		builder.append(", zip=");
-		builder.append(zip);
-		builder.append(", zipExt=");
-		builder.append(zipExt);
-		builder.append(", city=");
-		builder.append(city);
-		builder.append(", state=");
-		builder.append(state);
-		builder.append(", country=");
-		builder.append(country);
-		builder.append(", email=");
-		builder.append(email);
-		builder.append(", landmark=");
-		builder.append(landmark);
-		builder.append(", id=");
-		builder.append(id);
-		builder.append("]");
-		return builder.toString();
+		return "EntityAddress [type=" + type + ", address1=" + address1
+				+ ", address2=" + address2 + ", address3=" + address3
+				+ ", zip=" + zip + ", zipExt=" + zipExt + ", city=" + city
+				+ ", state=" + state + ", country=" + country + ", email="
+				+ email + ", landmark=" + landmark + ", addressPhones="
+				+ addressPhones + "]";
 	}
 
 	@Override

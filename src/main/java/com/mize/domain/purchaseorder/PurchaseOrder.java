@@ -57,6 +57,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	private List<PurchaseOrderItem> orderItems = new ArrayList<PurchaseOrderItem>();  
 	@Transient
 	private User user;
+	private String processId;
 	
 	public PurchaseOrder(){
 		super();
@@ -326,6 +327,16 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	@Override
 	public int compareTo(PurchaseOrder o) {
 		return 0;
+	}
+
+	@Column(name = "process_id")
+	@Transient
+	public String getProcessId() {
+		return processId;
+	}
+
+	public void setProcessId(String processId) {
+		this.processId = processId;
 	}
 
 	@Override

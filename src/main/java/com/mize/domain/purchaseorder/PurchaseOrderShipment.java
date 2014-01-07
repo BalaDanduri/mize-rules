@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.codehaus.jackson.annotate.JsonBackReference;
 import org.codehaus.jackson.annotate.JsonIgnore;
@@ -43,6 +44,7 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 	private DateTime estimatedShipmentDate;
 	private BigDecimal estimatedShipmentCost;
 	private PurchaseOrder purchaseOrder;
+	private String updateAddress;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -155,6 +157,15 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 
 	public void setEstimatedShipmentCost(BigDecimal estimatedShipmentCost) {
 		this.estimatedShipmentCost = estimatedShipmentCost;
+	}
+	
+	@Transient
+	public String getUpdateAddress() {
+		return updateAddress;
+	}
+
+	public void setUpdateAddress(String updateAddress) {
+		this.updateAddress = updateAddress;
 	}
 	
 	@Override

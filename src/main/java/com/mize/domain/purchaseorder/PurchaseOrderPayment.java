@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.codehaus.jackson.annotate.JsonBackReference;
 
@@ -26,6 +27,7 @@ public class PurchaseOrderPayment extends MizeEntity implements Comparable<Purch
 	private EntityAddress address;
 	private String method;
 	private PurchaseOrder purchaseOrder;
+	private String updateAddress;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -80,6 +82,14 @@ public class PurchaseOrderPayment extends MizeEntity implements Comparable<Purch
 		this.purchaseOrder = purchaseOrder;
 	}	
 	
+	@Transient
+	public String getUpdateAddress() {
+		return updateAddress;
+	}
+
+	public void setUpdateAddress(String updateAddress) {
+		this.updateAddress = updateAddress;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
