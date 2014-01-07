@@ -32,6 +32,7 @@ import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.DecimalValueDeserializer;
 import com.mize.domain.util.Formatter;
+import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 import com.mize.domain.util.NumberValueSerializer;
@@ -477,6 +478,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="tenant_id") 
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public BusinessEntity getTenant() {
 		return tenant;
 	}

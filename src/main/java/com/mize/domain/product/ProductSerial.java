@@ -83,6 +83,7 @@ public class ProductSerial extends MizeEntity{
 
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="tenant_id")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public BusinessEntity getTenant() {
 		return tenant;
 	}
@@ -112,6 +113,7 @@ public class ProductSerial extends MizeEntity{
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="delivery_be_id", nullable = true)
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public BusinessEntity getDeliveryBE() {
 		return deliveryBE;
 	}
