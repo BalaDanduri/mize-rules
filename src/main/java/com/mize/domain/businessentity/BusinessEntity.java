@@ -52,7 +52,7 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	private List<BusinessEntityIntl> intl = new ArrayList<BusinessEntityIntl>();
 	private List<BusinessEntityBrand> beBrand = new ArrayList<BusinessEntityBrand>();
 	private List<BusinessEntityContact> beContact = new ArrayList<BusinessEntityContact>();
-	private BusinessEntityAttribute beAttribute = new BusinessEntityAttribute();
+	private BusinessEntityAttribute beAttribute;
 	
 	public BusinessEntity() {
 	}
@@ -72,6 +72,7 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 		this.addresses.add(address);				
 		this.intl = new ArrayList<BusinessEntityIntl>();
 		this.intl.add(intl);
+		this.beAttribute = new BusinessEntityAttribute();
 		this.beAttribute.setUrl(url);
 		this.beAttribute.setHoursOfOp(hoursOfOp);
 	}

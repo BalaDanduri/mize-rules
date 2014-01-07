@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 import org.codehaus.jackson.annotate.JsonBackReference;
 
@@ -15,7 +16,7 @@ import com.mize.domain.brand.Brand;
 import com.mize.domain.common.MizeEntity;
 
 @Entity
-@Table(name="business_entity_brand")
+@Table(name="business_entity_brand",uniqueConstraints = { @UniqueConstraint(columnNames = {"be_id","brand_id"} )} )
 public class BusinessEntityBrand extends MizeEntity implements Comparable<BusinessEntityBrand>{
 	private static final long serialVersionUID = -269538922800687629L;
 	private String isActive;
