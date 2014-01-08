@@ -36,7 +36,7 @@ import com.mize.domain.util.JodaDateTimeDeserializer;
 
 @Entity
 @Table(name = "business_entity", uniqueConstraints = {@UniqueConstraint (columnNames={"tenant_id", "code"})})
-public class BusinessEntity extends MizeEntity implements Comparable<BusinessEntity>{
+public class BusinessEntity extends MizeEntity implements Comparable<BusinessEntity>, Cloneable{
 
 	private static final long serialVersionUID = 5842902035928465555L;
 	private String code;
@@ -52,7 +52,7 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	private List<BusinessEntityIntl> intl = new ArrayList<BusinessEntityIntl>();
 	private List<BusinessEntityBrand> beBrand = new ArrayList<BusinessEntityBrand>();
 	private List<BusinessEntityContact> beContact = new ArrayList<BusinessEntityContact>();
-	private BusinessEntityAttribute beAttribute;
+	private BusinessEntityAttribute beAttribute = new BusinessEntityAttribute();
 	
 	public BusinessEntity() {
 	}
@@ -72,7 +72,6 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 		this.addresses.add(address);				
 		this.intl = new ArrayList<BusinessEntityIntl>();
 		this.intl.add(intl);
-		this.beAttribute = new BusinessEntityAttribute();
 		this.beAttribute.setUrl(url);
 		this.beAttribute.setHoursOfOp(hoursOfOp);
 	}
@@ -436,6 +435,12 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	@Override
 	public int compareTo(BusinessEntity o) {
 		return 0;
+	}
+	
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		// TODO Auto-generated method stub
+		return super.clone();
 	}
 
 }
