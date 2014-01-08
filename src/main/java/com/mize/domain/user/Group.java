@@ -165,6 +165,7 @@ public class Group extends MizeEntity implements Comparable<Group> {
 		this.groupsToRole = groupsToRole;
 	}
 	
+	@Override
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(value=false)
@@ -172,16 +173,19 @@ public class Group extends MizeEntity implements Comparable<Group> {
 		this.createdDate = createdDate;
 	}
 	
+	@Override
 	@JsonIgnore(value=false)
 	public void setUpdatedBy(Long updatedBy) {
 		this.updatedBy = updatedBy;
 	}
  
+	@Override
 	@JsonIgnore(value=false)
 	public void setCreatedBy(Long createdBy) {
 		this.createdBy = createdBy;
 	}
 
+	@Override
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(value=false)
@@ -189,6 +193,7 @@ public class Group extends MizeEntity implements Comparable<Group> {
 		this.updatedDate = updatedDate;
 	}
 	
+	@Override
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	@JsonIgnore(value=false)
@@ -198,6 +203,7 @@ public class Group extends MizeEntity implements Comparable<Group> {
 		return createdDate;
 	}
 
+	@Override
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	@JsonIgnore(value=false)
@@ -207,10 +213,18 @@ public class Group extends MizeEntity implements Comparable<Group> {
 		return updatedDate;
 	}
 	
+	@Override
 	@JsonIgnore(value=false)
 	@Column(name = "created_by" , updatable=false)
 	public Long getCreatedBy() {
 		return createdBy;
+	}
+	
+	@Override
+	@JsonIgnore
+	@Column(name = "updated_by")
+	public Long getUpdatedBy() {		
+		return super.getUpdatedBy();
 	}
 
 	

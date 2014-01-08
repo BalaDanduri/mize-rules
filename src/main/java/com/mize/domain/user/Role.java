@@ -46,7 +46,7 @@ public class Role extends MizeEntity implements Comparable<Role>{
 	
 	
 
-	public Role(String name, String description, String code, String active) {
+	public Role(String name, String description, String code, String active,List<GroupRoleMapping> groupsToRole) {
 		super();
 		this.name = name;
 		this.description = description;
@@ -173,6 +173,21 @@ public class Role extends MizeEntity implements Comparable<Role>{
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
+	
+	@Override
+	@JsonIgnore
+	@Column(name = "created_by")
+	public Long getCreatedBy() {		
+		return super.getCreatedBy();
+	}
+
+	@Override
+	@JsonIgnore
+	@Column(name = "updated_by")
+	public Long getUpdatedBy() {		
+		return super.getUpdatedBy();
+	}
+
 
 	@Override
 	public int hashCode() {
