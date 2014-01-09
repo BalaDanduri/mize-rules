@@ -13,18 +13,19 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonManagedReference;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
@@ -32,7 +33,7 @@ import com.mize.domain.util.JsonDateTimeSerializer;
 
 @Entity
 @Table(name="work_queue")
-public class WorkQueue extends MizeEntity {
+public class WorkQueue extends MizeEntity implements Comparable<WorkQueue>{
 
 
 	private static final long serialVersionUID = -488011181561672299L;
@@ -40,6 +41,8 @@ public class WorkQueue extends MizeEntity {
 	private String desc;
 	private String code;
 	private String isActive;
+	@Transient
+	private User user;
 	
 	private List<WorkQueueAuth> workQueueAuths  =new ArrayList<WorkQueueAuth>();
 	private BusinessEntity tenant;
@@ -91,7 +94,6 @@ public class WorkQueue extends MizeEntity {
 	
 
 	@OneToMany(fetch = FetchType.LAZY,cascade=CascadeType.ALL, mappedBy = "workQueue",orphanRemoval= true)
-	@Fetch(value=FetchMode.SUBSELECT)
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	@JsonManagedReference(value="workQueue_workQueueAuth")
 	public List<WorkQueueAuth> getWorkQueueAuths() {
@@ -126,14 +128,14 @@ public class WorkQueue extends MizeEntity {
 	}
 
 	@Override
-	@JsonIgnore
+	@JsonIgnore(value=false)
 	@Column(name = "created_by")
 	public Long getCreatedBy() {		
 		return super.getCreatedBy();
 	}
 
 	@Override
-	@JsonIgnore
+	@JsonIgnore(value=false)
 	@Column(name = "updated_by")
 	public Long getUpdatedBy() {		
 		return super.getUpdatedBy();
@@ -172,7 +174,9 @@ public class WorkQueue extends MizeEntity {
 	@Override
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore
+	@JsonIgnore(value=false)
+	@Column(name="created_date")
+	@Type(type="com.mize.domain.util.DateTimeJPA")
 	public void setCreatedDate(DateTime createdDate) {
 		super.createdDate = createdDate;
 	}
@@ -180,21 +184,32 @@ public class WorkQueue extends MizeEntity {
 	@Override
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore
+	@JsonIgnore(value=false)
+	@Type(type="com.mize.domain.util.DateTimeJPA")
 	public void setUpdatedDate(DateTime updatedDate) {
 		super.updatedDate = updatedDate;
 	}
 
 	@Override
-	@JsonIgnore
+	@JsonIgnore(value=false)
 	public void setCreatedBy(Long createdBy) {		
 		super.setCreatedBy(createdBy);
 	}
 
 	@Override
-	@JsonIgnore
+	@JsonIgnore(value=false)
 	public void setUpdatedBy(Long updatedBy) {		
 		super.setUpdatedBy(updatedBy);
+	}
+
+	@Transient
+	@JsonIgnore
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override
@@ -204,8 +219,6 @@ public class WorkQueue extends MizeEntity {
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result + ((desc == null) ? 0 : desc.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result
-				+ ((workQueueAuths == null) ? 0 : workQueueAuths.hashCode());
 		return result;
 	}
 
@@ -233,11 +246,6 @@ public class WorkQueue extends MizeEntity {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (workQueueAuths == null) {
-			if (other.workQueueAuths != null)
-				return false;
-		} else if (!workQueueAuths.equals(other.workQueueAuths))
-			return false;
 		return true;
 	}
 
@@ -252,15 +260,12 @@ public class WorkQueue extends MizeEntity {
 		builder.append(desc);
 		builder.append(", name=");
 		builder.append(name);
-		builder.append(", workQueueAuths=");
-		builder.append(workQueueAuths);
 		builder.append("]");
 		return builder.toString();
 	}
 
-
-	
-
-	
-	
+	@Override
+	public int compareTo(WorkQueue arg0) {
+		return 0;
+	}	
 }

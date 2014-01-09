@@ -24,14 +24,14 @@ import com.mize.domain.util.JsonDateTimeSerializer;
 
 @Entity
 @Table(name="work_queue_auth")
-public class WorkQueueAuth extends MizeEntity {
+public class WorkQueueAuth extends MizeEntity implements Comparable<WorkQueueAuth>{
 
 	
 	private static final long serialVersionUID = -1821933287120972826L;
  
 	private WorkQueue workQueue;
 	private String authType;
-	private long authId;
+	private Long authId;
 	private Authorization authorization;
 	
 	public WorkQueueAuth(){
@@ -57,7 +57,7 @@ public class WorkQueueAuth extends MizeEntity {
 	
 
 	@Column(name = "auth_id")
-	public long getAuthId() {
+	public Long getAuthId() {
 		return authId;
 	}
 
@@ -84,7 +84,7 @@ public class WorkQueueAuth extends MizeEntity {
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	@JsonIgnore(value=false)
 	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
-	@Column(name = "created_date")
+	@Column(name = "created_date",updatable = false)
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
@@ -121,7 +121,7 @@ public class WorkQueueAuth extends MizeEntity {
 		this.authType = authType;
 	}
 	
-	public void setAuthId(long authId) {
+	public void setAuthId(Long authId) {
 		this.authId = authId;
 	}
 	
@@ -138,7 +138,8 @@ public class WorkQueueAuth extends MizeEntity {
 	@Override
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore
+	@JsonIgnore(value = false)
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
 	public void setCreatedDate(DateTime createdDate) {
 		super.createdDate = createdDate;
 	}
@@ -146,34 +147,33 @@ public class WorkQueueAuth extends MizeEntity {
 	@Override
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore
+	@JsonIgnore(value = false)
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
 	public void setUpdatedDate(DateTime updatedDate) {
 		super.updatedDate = updatedDate;
 	}
 
 	@Override
-	@JsonIgnore
+	@JsonIgnore(value = false)
 	public void setCreatedBy(Long createdBy) {		
 		super.setCreatedBy(createdBy);
 	}
 
 	@Override
-	@JsonIgnore
+	@JsonIgnore(value = false)
 	public void setUpdatedBy(Long updatedBy) {		
 		super.setUpdatedBy(updatedBy);
 	}
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result + (int) (authId ^ (authId >>> 32));
 		result = prime * result
 				+ ((authType == null) ? 0 : authType.hashCode());
 		result = prime * result
 				+ ((authorization == null) ? 0 : authorization.hashCode());
-		result = prime * result
-				+ ((workQueue == null) ? 0 : workQueue.hashCode());
 		return result;
 	}
 
@@ -198,11 +198,6 @@ public class WorkQueueAuth extends MizeEntity {
 				return false;
 		} else if (!authorization.equals(other.authorization))
 			return false;
-		if (workQueue == null) {
-			if (other.workQueue != null)
-				return false;
-		} else if (!workQueue.equals(other.workQueue))
-			return false;
 		return true;
 	}
 
@@ -215,12 +210,15 @@ public class WorkQueueAuth extends MizeEntity {
 		builder.append(authId);
 		builder.append(", authType=");
 		builder.append(authType);
-		builder.append(", workQueue=");
-		builder.append(workQueue);
 		builder.append(", authorization=");
 		builder.append(authorization);
 		builder.append("]");
 		return builder.toString();
+	}
+
+	@Override
+	public int compareTo(WorkQueueAuth o) {
+		return 0;
 	}
 
 }

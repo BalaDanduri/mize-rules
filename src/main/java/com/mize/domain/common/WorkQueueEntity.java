@@ -1,23 +1,32 @@
 package com.mize.domain.common;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.mize.domain.auth.User;
 import com.mize.domain.service.schedule.ServiceSchedule;
 import com.mize.domain.util.JodaDateTimeDeserializer;
+import com.mize.domain.util.JsonDateTimeSerializer;
 
-public class WorkQueueEntity extends MizeEntity {
+@Entity
+@Table(name="work_queue_entity")
+public class WorkQueueEntity extends MizeEntity implements Comparable<WorkQueueEntity>{
 
 	private static final long serialVersionUID = -3725309680746498668L;
 
@@ -25,8 +34,10 @@ public class WorkQueueEntity extends MizeEntity {
 	private String entityType;
 	private String entityCode;
 	private Long entityId;
+	@Transient
 	private ServiceSchedule serviceEntity;
 	private String status;
+	private User user;
 	
 	public WorkQueueEntity(){
 		super();
@@ -56,18 +67,18 @@ public class WorkQueueEntity extends MizeEntity {
 		return workQueue;
 	}
 
-	@Column(name = "entity_type", length = 30, nullable = false)
+	@Column(name = "entity_type", length = 30)
 	public String getEntityType() {
 		return entityType;
 	}
 
-	@Column(name = "entity_code", length = 30, nullable = false)
+	@Column(name = "entity_code", length = 30)
 	public String getEntityCode() {
 		return entityCode;
 	}
 
 
-	@Column(name = "entity_status", length = 30, nullable = false)
+	@Column(name = "entity_status", length = 30)
 	public String getStatus() {
 		return status;
 	}
@@ -75,7 +86,9 @@ public class WorkQueueEntity extends MizeEntity {
 	@Override	
 	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
 	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@Column(name = "created_date")
+	@Column(name = "created_date",updatable = false)
+	@JsonIgnore(value = false)
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
@@ -84,24 +97,27 @@ public class WorkQueueEntity extends MizeEntity {
 	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@Column(name = "updated_date")
+	@JsonIgnore(value = false)
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
 
 	@Override
-	@JsonIgnore
 	@Column(name = "created_by")
+	@JsonIgnore(value = false)
 	public Long getCreatedBy() {		
 		return super.getCreatedBy();
 	}
 
 	@Override
-	@JsonIgnore
 	@Column(name = "updated_by")
+	@JsonIgnore(value = false)
 	public Long getUpdatedBy() {		
 		return super.getUpdatedBy();
 	}
 	
+	@Transient
 	public MizeEntity getServiceEntity() {
 		return serviceEntity;
 	}
@@ -135,31 +151,34 @@ public class WorkQueueEntity extends MizeEntity {
 	@Override
 	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore
+	@Type(type="com.mize.domain.util.DateTimeJPA")
+	@JsonIgnore(value = false)
 	public void setCreatedDate(DateTime createdDate) {
 		super.createdDate = createdDate;
 	}
 
 	@Override
 	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
+	@Type(type="com.mize.domain.util.DateTimeJPA")
+	@JsonIgnore(value = false)
 	public void setUpdatedDate(DateTime updatedDate) {
 		super.updatedDate = updatedDate;
 	}
 
 	@Override
-	@JsonIgnore
+	@JsonIgnore(value = false)
 	public void setCreatedBy(Long createdBy) {		
 		super.setCreatedBy(createdBy);
 	}
 
 	@Override
-	@JsonIgnore
+	@JsonIgnore(value = false)
 	public void setUpdatedBy(Long updatedBy) {		
 		super.setUpdatedBy(updatedBy);
 	}
 
+	@Column(name="entity_id")
 	public Long getEntityId() {
 		return entityId;
 	}
@@ -168,6 +187,21 @@ public class WorkQueueEntity extends MizeEntity {
 		this.entityId = entityId;
 	}	
 	
+	@Override
+	public int compareTo(WorkQueueEntity arg0) {
+		return 0;
+	}
+
+	@Transient
+	@JsonIgnore
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
@@ -178,11 +212,7 @@ public class WorkQueueEntity extends MizeEntity {
 				+ ((entityId == null) ? 0 : entityId.hashCode());
 		result = prime * result
 				+ ((entityType == null) ? 0 : entityType.hashCode());
-		result = prime * result
-				+ ((serviceEntity == null) ? 0 : serviceEntity.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
-		result = prime * result
-				+ ((workQueue == null) ? 0 : workQueue.hashCode());
 		return result;
 	}
 
@@ -210,22 +240,19 @@ public class WorkQueueEntity extends MizeEntity {
 				return false;
 		} else if (!entityType.equals(other.entityType))
 			return false;
-		if (serviceEntity == null) {
-			if (other.serviceEntity != null)
-				return false;
-		} else if (!serviceEntity.equals(other.serviceEntity))
-			return false;
 		if (status == null) {
 			if (other.status != null)
 				return false;
 		} else if (!status.equals(other.status))
 			return false;
-		if (workQueue == null) {
-			if (other.workQueue != null)
-				return false;
-		} else if (!workQueue.equals(other.workQueue))
-			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "WorkQueueEntity [entityType=" + entityType + ", entityCode="
+				+ entityCode + ", entityId=" + entityId + ", status=" + status
+				+ "]";
 	}
 	
 }
