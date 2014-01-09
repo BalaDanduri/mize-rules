@@ -146,8 +146,6 @@ public class FormInstance extends MizeEntity {
 		int result = super.hashCode();
 		result = prime * result
 				+ ((formInstanceData == null) ? 0 : formInstanceData.hashCode());
-		result = prime * result
-				+ ((formDefinition == null) ? 0 : formDefinition.hashCode());
 		return result;
 	}
 
@@ -165,14 +163,7 @@ public class FormInstance extends MizeEntity {
 				return false;
 		} else if (!formInstanceData.equals(other.formInstanceData))
 			return false;
-		if (formDefinition == null) {
-			if (other.formDefinition != null)
-				return false;
-		} else if (!formDefinition.getId().equals(other.formDefinition.getId()))
-			return false;
 		return true;
 	}
 	
-	
-
 }

@@ -60,6 +60,10 @@ public class FormInstanceLink extends MizeEntity {
 		formInstance = new FormInstance();
 	}
 	
+	public enum Status{
+		OPEN,COMPLETED,DELETED;
+	}
+	
 	public FormInstanceLink(FormInstance formInstance, ProductSerial productSerial, 
 			BusinessEntity linkBusinessEntity, String linkType, String linkDuration,
 			String statusCode, DateTime reviewedDate, String reviewedBy) {
@@ -262,15 +266,6 @@ public class FormInstanceLink extends MizeEntity {
 				+ ((reviewedDate == null) ? 0 : reviewedDate.hashCode());
 		result = prime * result
 				+ ((reviewedBy == null) ? 0 : reviewedBy.hashCode());
-		result = prime
-				* result
-				+ ((formInstance == null) ? 0 : formInstance.hashCode());
-		result = prime
-				* result
-				+ ((productSerial == null) ? 0 : productSerial.hashCode());
-		result = prime
-				* result
-				+ ((linkBusinessEntity == null) ? 0 : linkBusinessEntity.hashCode());
 		return result;
 	}
 
@@ -308,34 +303,7 @@ public class FormInstanceLink extends MizeEntity {
 				return false;
 		} else if (!reviewedBy.equals(other.reviewedBy))
 			return false;
-		if (formInstance == null) {
-			if (other.formInstance != null)
-				return false;
-		} else if (!formInstance.equals(other.formInstance))
-			return false;
-		if (productSerial == null) {
-			if (other.productSerial != null)
-				return false;
-		} else if (!productSerial.equals(other.productSerial))
-			return false;
-		if (linkBusinessEntity == null) {
-			if (other.linkBusinessEntity != null)
-				return false;
-		} else if (!linkBusinessEntity.equals(other.linkBusinessEntity))
-			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "FormInstanceLink [formInstance=" + formInstance
-				+ ", productSerial=" + productSerial + ", linkBusinessEntity="
-				+ linkBusinessEntity + ", linkType=" + linkType
-				+ ", linkDuration=" + linkDuration + ", statusCode="
-				+ statusCode + ", reviewedDate=" + reviewedDate
-				+ ", reviewedBy=" + reviewedBy + "]";
-	}
-	
-	
+	}	
 
 }
