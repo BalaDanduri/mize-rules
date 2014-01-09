@@ -101,6 +101,7 @@ public abstract class MessageConstants implements Serializable{
 	public static final String DUPLICATE_WORK_QUEUE_CODE = "DUPLICATE_WORK_QUEUE_NAME";
 	public static final String DUPLICATE_WORK_QUEUE_AUTH_CODE = "DUPLICATE_WORK_QUEUE_AUTH_CODE";
 	public static final String DUPLICATE_ROLE_NAME= "DUPLICATE_ROLE_NAME";
+	public static final String INVALID_WQ_AUTHORIZATION= "INVALID_WQ_AUTHORIZATION";
 
 	public static final String INVALID_CUSTOMER = "INVALID_CUSTOMER";
 	public static final String INVALID_INVOICE_BUSINESS_ENTITY = "INVALID_INVOICE_BUSINESS_ENTITY";
