@@ -952,6 +952,9 @@ INSERT INTO  picklist_item (id, part_id,picklist_id,part_qty)
   
   INSERT INTO users_to_be (user_id, be_id, job_role) VALUES (2, 962, 'CEO2');	
 
+--  INSERT INTO brand VALUES (1,'m-ize',NULL,'http://www.m-ize.com/',NULL,NULL,NULL,NULL,'m-ize.png','support@m-ize.com',NULL,NULL,NULL);
+--  INSERT INTO brand VALUES (2,'Bose',NULL,'http://www.bose.com',NULL,NULL,NULL,NULL,'bose.png','',NULL,NULL,NULL);
+--  INSERT INTO brand VALUES (3,'Samsung',NULL,'http://www.samsung.com',NULL,NULL,NULL,NULL,'samsung.png','',NULL,NULL,NULL);
   
   INSERT INTO user_profile(profile_name,first_name,last_name,birth_day,gender,photo_link,user_id,phone_mobile,phone_home,phone_work,email_opt_out,timezone,prompt_app_rating)
   VALUES ('surya prakash','surya','prakash',null,0,null,1,9492418417,null,null,'Y','GMT+0','Y'); 
