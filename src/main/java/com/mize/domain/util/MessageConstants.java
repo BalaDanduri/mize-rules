@@ -106,4 +106,7 @@ public abstract class MessageConstants implements Serializable{
 	public static final String INVALID_CUSTOMER = "INVALID_CUSTOMER";
 	public static final String INVALID_INVOICE_BUSINESS_ENTITY = "INVALID_INVOICE_BUSINESS_ENTITY";
 	public static final String INVALID_PRODUCT_REGISTRATION = "INVALID_PRODUCT_REGISTRATION";
+	
+	public static final String INVALID_CATALOG_NAME = "INVALID_CATALOG_NAME";
+	public static final String CATALOG_NAME_DOES_NOT_EXIST = "CATALOG_NAME_DOES_NOT_EXIST";
 }
