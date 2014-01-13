@@ -13,7 +13,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
@@ -24,6 +27,7 @@ import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JPASerializer;
@@ -40,6 +44,8 @@ public class EntityParameter extends MizeEntity implements Comparable<EntityPara
 	private String code;
 	private DateTime startDate;
 	private DateTime endDate;
+	@Transient
+	private User user;
 	
 	private List<EntityParameterAttribute> attributes = new ArrayList<EntityParameterAttribute>();
 	private List<EntityParameterComment> comments = new ArrayList<EntityParameterComment>();
@@ -51,7 +57,7 @@ public class EntityParameter extends MizeEntity implements Comparable<EntityPara
 
 	public EntityParameter(BusinessEntity owner, String type, String code,
 			DateTime startDate, DateTime endDate,
-			List<EntityParameterAttribute> attributes,
+			List<EntityParameterAttribute> attributes,User user,
 			List<EntityParameterComment> comments) {
 		super();
 		this.owner = owner;
@@ -60,6 +66,7 @@ public class EntityParameter extends MizeEntity implements Comparable<EntityPara
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.attributes = attributes;
+		this.user = user;
 		this.comments = comments;
 	}
 
@@ -113,6 +120,7 @@ public class EntityParameter extends MizeEntity implements Comparable<EntityPara
 	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@Column(name = "created_date",updatable=false)
+	@JsonIgnore(false)
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
@@ -121,19 +129,20 @@ public class EntityParameter extends MizeEntity implements Comparable<EntityPara
 	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@Column(name = "updated_date")
+	@JsonIgnore(false)
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
 	
 	@Override
-	@JsonIgnore
+	@JsonIgnore(false)
 	@Column(name = "created_by",updatable=false)
 	public Long getCreatedBy() {		
 		return super.getCreatedBy();
 	}
 
 	@Override
-	@JsonIgnore
+	@JsonIgnore(false)
 	@Column(name = "updated_by")
 	public Long getUpdatedBy() {		
 		return super.getUpdatedBy();
@@ -154,7 +163,7 @@ public class EntityParameter extends MizeEntity implements Comparable<EntityPara
 	@Override
 	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore
+	@JsonIgnore(false)
 	public void setCreatedDate(DateTime createdDate) {
 		super.createdDate = createdDate;
 	}
@@ -162,19 +171,19 @@ public class EntityParameter extends MizeEntity implements Comparable<EntityPara
 	@Override
 	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore
+	@JsonIgnore(false)
 	public void setUpdatedDate(DateTime updatedDate) {
 		super.updatedDate = updatedDate;
 	}
 	
 	@Override
-	@JsonIgnore
+	@JsonIgnore(false)
 	public void setCreatedBy(Long createdBy) {		
 		super.setCreatedBy(createdBy);
 	}
 	
 	@Override
-	@JsonIgnore
+	@JsonIgnore(false)
 	public void setUpdatedBy(Long updatedBy) {		
 		super.setUpdatedBy(updatedBy);
 	}
@@ -209,6 +218,24 @@ public class EntityParameter extends MizeEntity implements Comparable<EntityPara
 
 	public void setComments(List<EntityParameterComment> comments) {
 		this.comments = comments;
+	}
+	
+	@PrePersist
+	@PreUpdate
+	public void auditFields(){
+		if(createdDate==null && id==null){
+			setCreatedDate(DateTime.now());
+		}
+		setUpdatedDate(DateTime.now());		
+	}
+	
+	@Transient
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public int compareTo(EntityParameter entityParameter) {

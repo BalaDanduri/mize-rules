@@ -732,6 +732,37 @@ ALTER TABLE work_queue_auth
                 ADD CONSTRAINT fk_wqid_wqa
                 FOREIGN KEY(work_queue_id)
                 REFERENCES work_queue (id);
+                
+drop table if exists discount;	
+CREATE TABLE discount (
+	id 			bigint(20) 		AUTO_INCREMENT NOT NULL,
+	tenant_id		bigint(20)		NULL,
+	discount_number		varchar(250) 		NOT NULL,	
+	discount_amount		DECIMAL(20,6) 		NULL,		
+	discount_percent  decimal(20,6) 	NULL,
+	minimum_amount    decimal(20,6) 	NULL,
+	maximum_amount    decimal(20,6)		NULL,
+	discount_level    varchar(50)		NULL,
+	minimum_quantity  decimal(20,6)		NULL,
+	maximum_quantity  decimal(20,6)		NULL,
+	order_type        varchar(50) 		NULL,
+	start_date		datetime 		NULL,
+	end_date		datetime 		NULL,
+	created_date 		datetime 		NULL,
+	updated_date 		datetime 		NULL,
+	created_by 		bigint(20)		NULL,
+	updated_by 		bigint(20)		NULL,	
+	order_be_id		bigint(20)		NULL,
+	PRIMARY KEY (id)
+);
+
+drop table if exists discount_comment;
+CREATE TABLE discount_comment (
+	id 			bigint(20) 		AUTO_INCREMENT NOT NULL,
+	discount_id		bigint(20)		NOT NULL,
+	comment_id		bigint(20)		NOT NULL,	
+	PRIMARY KEY (id)
+);
 
 INSERT INTO entity_parameter(id, tenant_id, entity_type, entity_code, start_date, end_date, created_date, updated_date, created_by, updated_by)
 VALUES(2,961,'testParamType1','testParamCode1',CURRENT_TIMESTAMP, CURRENT_TIMESTAMP,CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL);
