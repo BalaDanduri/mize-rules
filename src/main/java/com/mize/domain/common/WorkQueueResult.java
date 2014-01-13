@@ -1,10 +1,14 @@
 package com.mize.domain.common;
 
+import javax.persistence.Transient;
+
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.mize.domain.businessentity.BusinessEntity;
+import com.mize.domain.product.ProductSerial;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
@@ -23,10 +27,26 @@ public class WorkQueueResult extends MizeEntity {
 	private String serviceProductName;
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime serviceDate;
+	public BusinessEntity businessEntity;
+	public ProductSerial productSerial;
 	
     public WorkQueueResult(){
     	super();
     }
+
+	public WorkQueueResult(Long id,Long entityId, String entityType,String status,String serviceType,String serviceCode,
+			DateTime serviceDate,BusinessEntity businessEntity,ProductSerial productSerial) {
+		super();
+		this.id = id;
+		this.entityId = entityId;
+		this.entityType = entityType;
+		this.status = status;
+		this.serviceDate = serviceDate;
+		this.serviceType = serviceType;
+		this.serviceCode = serviceCode;
+		this.businessEntity = businessEntity;
+		this.productSerial = productSerial;
+	}
 
 	public String getRequester() {
 		return requester;
@@ -121,6 +141,24 @@ public class WorkQueueResult extends MizeEntity {
 	@Override
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	@Transient
+	public BusinessEntity getBusinessEntity() {
+		return businessEntity;
+	}
+
+	public void setBusinessEntity(BusinessEntity businessEntity) {
+		this.businessEntity = businessEntity;
+	}
+
+	@Transient
+	public ProductSerial getProductSerial() {
+		return productSerial;
+	}
+
+	public void setProductSerial(ProductSerial productSerial) {
+		this.productSerial = productSerial;
 	}
 
 	@Override

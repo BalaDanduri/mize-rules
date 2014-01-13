@@ -20,6 +20,8 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.auth.User;
+import com.mize.domain.businessentity.BusinessEntity;
+import com.mize.domain.product.ProductSerial;
 import com.mize.domain.service.schedule.ServiceSchedule;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
@@ -38,9 +40,14 @@ public class WorkQueueEntity extends MizeEntity implements Comparable<WorkQueueE
 	private ServiceSchedule serviceEntity;
 	private String status;
 	private User user;
-	
+	@Transient
+	private WorkQueueResult result;
 	public WorkQueueEntity(){
 		super();
+	}
+	
+	public WorkQueueEntity(Long id,Long entityId, String entityType,String status,String serviceType,String serviceCode,DateTime serviceDate,BusinessEntity businessEntity,ProductSerial productSerial) {
+		result = new WorkQueueResult(id,entityId, entityType,status,serviceType,serviceCode,serviceDate,businessEntity,productSerial);
 	}
 	
 	public WorkQueueEntity(WorkQueue workQueue, String entityType,
@@ -200,6 +207,15 @@ public class WorkQueueEntity extends MizeEntity implements Comparable<WorkQueueE
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	@Transient
+	public WorkQueueResult getResult() {
+		return result;
+	}
+
+	public void setResult(WorkQueueResult result) {
+		this.result = result;
 	}
 
 	@Override
