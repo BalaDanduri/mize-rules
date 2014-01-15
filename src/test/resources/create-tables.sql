@@ -12,6 +12,7 @@ CREATE TABLE users (
 		updated_by     	bigint(20) NULL,
 		updated_date   	timestamp NULL,
 		referral_id    	bigint(20) NULL,
+		login_id    	varchar(50) NULL,
         PRIMARY KEY (id) 
 	);
 	
