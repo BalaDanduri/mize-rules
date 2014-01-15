@@ -117,7 +117,7 @@ public class UserTest extends JPATest {
 		user.setActive(true);
 		user.setEmailValidated(true);
 		user.setReferralId(1L);
-		user.setBe(be);
+		user.setTenant(be);
 		user.setCreatedBy(userId);
 		user.setCreatedDate(DateTime.now());
 		user.setUpdatedBy(userId);

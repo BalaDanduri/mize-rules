@@ -33,6 +33,7 @@ import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.product.ProductRegister;
 import com.mize.domain.user.Group;
+import com.mize.domain.user.UserAddress;
 import com.mize.domain.user.UserBE;
 import com.mize.domain.user.UserBrandMapping;
 import com.mize.domain.user.UserGroup;
@@ -48,25 +49,27 @@ import com.mize.domain.util.JsonDateTimeSerializer;
 public class User extends MizeEntity implements Comparable<User> {
 	
 	private static final long serialVersionUID = 6457591358862233006L;
-	protected String email;
-    protected String name;
-    protected DateTime lastLogin;
-    protected boolean active;
-    protected boolean emailValidated;
-    protected BusinessEntity be;
+	private String email;
+	private String name;
+	private DateTime lastLogin;
+	private boolean active;
+	private boolean emailValidated;
+	private BusinessEntity tenant;
+    private String loginId;
     
-	protected List<LinkedAccount> linkedAccounts = new ArrayList<LinkedAccount>();
+    private List<LinkedAccount> linkedAccounts = new ArrayList<LinkedAccount>();
     @Transient
-    protected List<UserConnect> userConnects;
-    protected UserProfile userProfile;
-    protected Long referralId;
-    protected UserBE userBe;
-    protected UserProfilePrivacy privacy;
+    private List<UserConnect> userConnects;
+    private UserProfile userProfile;
+    private Long referralId;
+    private UserBE userBe;
+    private UserProfilePrivacy privacy;
     @Transient
 	private List<Group> groups = new ArrayList<Group>();
     private List<UserGroup> userGroups = new ArrayList<UserGroup>();
 	private List<ProductRegister> productRegisters = new ArrayList<ProductRegister>();
 	private List<UserBrandMapping> userBrandMapping = new ArrayList<UserBrandMapping>();
+	private List<UserAddress> addresses = new ArrayList<UserAddress>();
     
     public enum Case {
 		SIGNUP, LOGIN , LOGOUT
@@ -111,13 +114,12 @@ public class User extends MizeEntity implements Comparable<User> {
     
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "tenant_id")
-	//@JsonManagedReference(value="user_be")
-	public BusinessEntity getBe() {
-		return be;
+	public BusinessEntity getTenant() {
+		return tenant;
 	}
 
-	public void setBe(BusinessEntity be) {
-		this.be = be;
+	public void setTenant(BusinessEntity tenant) {
+		this.tenant = tenant;
 	}
 	
 	@Column(name="email",nullable=true,length=255)
@@ -208,6 +210,16 @@ public class User extends MizeEntity implements Comparable<User> {
 		}
 	}
 	
+	@OneToMany(fetch = FetchType.LAZY,cascade={CascadeType.ALL}, mappedBy="user")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	public List<UserAddress> getAddresses() {
+		return addresses;
+	}
+
+	public void setAddresses(List<UserAddress> addresses) {
+		this.addresses = addresses;
+	}
+
 	@Transient
 	public List<UserConnect> getUserConnects() {
 		return userConnects;
@@ -252,7 +264,7 @@ public class User extends MizeEntity implements Comparable<User> {
 		this.userProfile = userProfile;
 	}
 	
-	@OneToOne(fetch=FetchType.EAGER ,cascade= {CascadeType.ALL} )
+	@OneToOne(fetch=FetchType.EAGER ,cascade= {CascadeType.ALL},mappedBy="user" )
 	@JoinColumn(name="id")
 	public UserProfile getUserProfile() {
 		return userProfile;
@@ -298,6 +310,7 @@ public class User extends MizeEntity implements Comparable<User> {
 	}
 	
 	@OneToMany(mappedBy="user", fetch=FetchType.LAZY, cascade={CascadeType.ALL})
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	@JsonManagedReference(value="user_userGroups")
 	public List<UserGroup> getUserGroups() {
 		return userGroups;
@@ -373,60 +386,10 @@ public class User extends MizeEntity implements Comparable<User> {
 		this.updatedDate = updatedDate;
 	}
 	
-	@Override
-	public String toString() {
-		return "User [id=" + id + ", email=" + email + ", name=" + name + ", lastLogin=" + lastLogin + ", active="
-				+ active + ", emailValidated=" + emailValidated + ", linkedAccounts=" + linkedAccounts
-				+ ", userConnects=" + userConnects + ", userProfile=" + userProfile + ", referralId=" + referralId
-				+ ", userBe=" + userBe + ", privacy=" + privacy + ", groups=" + groups + "]";
-	}
-
-	@Override
-	public int hashCode() {
-		int result = super.hashCode();
-		result = PRIME * result + ((email == null) ? 0 : email.hashCode());
-		return result;
-	}
-
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		User other = (User) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (emailValidated != other.emailValidated)
-			return false;
-		return true;
-	}
-	
-	public int compareTo(User user) {
-		if ( this == user ) 
-			return EQUAL;
-		else if (this.id < user.id) 
-			return BEFORE;
-		else if (user.id == this.id) 
-			return EQUAL;
-		else if (this.id > user.id)
-			return AFTER;
-		return EQUAL;		
-	}
-	
-	
-	@OneToMany(fetch = FetchType.EAGER, cascade =CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, cascade =CascadeType.ALL)
 	@JoinColumn(name="prod_regn_id") 
 	@JsonManagedReference(value="user_productRegisters")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public List<ProductRegister> getProductRegisters() {
 		return productRegisters;
 	}
@@ -456,4 +419,86 @@ public class User extends MizeEntity implements Comparable<User> {
 		}
 		return name;
 	}
+
+	@Column(name = "login_id")
+	public String getLoginId() {
+		return loginId;
+	}
+
+	public void setLoginId(String loginId) {
+		this.loginId = loginId;
+	}
+
+	@Override
+	public int compareTo(User arg0) {
+		return 0;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = PRIME;
+		int result = super.hashCode();
+		result = prime * result + (active ? 1231 : 1237);
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + (emailValidated ? 1231 : 1237);
+		result = prime * result
+				+ ((lastLogin == null) ? 0 : lastLogin.hashCode());
+		result = prime * result + ((loginId == null) ? 0 : loginId.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result
+				+ ((referralId == null) ? 0 : referralId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		User other = (User) obj;
+		if (active != other.active)
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (emailValidated != other.emailValidated)
+			return false;
+		if (lastLogin == null) {
+			if (other.lastLogin != null)
+				return false;
+		} else if (!lastLogin.equals(other.lastLogin))
+			return false;
+		if (loginId == null) {
+			if (other.loginId != null)
+				return false;
+		} else if (!loginId.equals(other.loginId))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (referralId == null) {
+			if (other.referralId != null)
+				return false;
+		} else if (!referralId.equals(other.referralId))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "User [id ="+id+", email=" + email + ", name=" + name + ", lastLogin="
+				+ lastLogin + ", active=" + active + ", emailValidated="
+				+ emailValidated + ", loginId=" + loginId + ", referralId="
+				+ referralId + "]";
+	}
+	
+	
+	
 }

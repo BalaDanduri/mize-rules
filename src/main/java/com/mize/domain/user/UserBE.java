@@ -17,16 +17,21 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.codehaus.jackson.annotate.JsonBackReference;
-import org.codehaus.jackson.annotate.JsonManagedReference;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import org.hibernate.annotations.GenericGenerator;
+import org.joda.time.DateTime;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.auth.User;
 import com.mize.domain.brand.Brand;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JPASerializer;
+import com.mize.domain.util.JodaDateTimeDeserializer;
+import com.mize.domain.util.JsonDateTimeSerializer;
 
 
 @Entity
@@ -35,8 +40,6 @@ public class UserBE extends MizeEntity implements Comparable<UserBE>{
 	
 	private static final long serialVersionUID = -7447355457187568168L;
 	
-	/*private Long userId;*/
-	/*private Long beId;*/
 	private String jobRole;
 	private String department;
 	private Set<Brand> brands;
@@ -53,8 +56,9 @@ public class UserBE extends MizeEntity implements Comparable<UserBE>{
 		this.be = be;
 	}
 
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne
 	@JoinColumn(name="user_id")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	@JsonBackReference(value="userBE_user")
 	public User getUser() {
 		return user;
@@ -68,9 +72,7 @@ public class UserBE extends MizeEntity implements Comparable<UserBE>{
 		
 	}
 	
-	public UserBE(/*Long userId, */Long beId, String jobRole, String department, Set<Brand> brands) {
-		/*this.userId = userId;*/
-		/*this.beId = beId;*/
+	public UserBE(Long beId, String jobRole, String department, Set<Brand> brands) {
 		this.jobRole = jobRole;
 		this.department = department;
 		this.brands = brands;
@@ -99,26 +101,6 @@ public class UserBE extends MizeEntity implements Comparable<UserBE>{
 		this.id = id;
 	}	
 	
-	/*@Column(name = "USER_ID",  nullable = true, length = 20)
-	public Long getUserId() {
-		return userId;
-	}
-
-	@Column(name = "USER_ID",  nullable = true, length = 20)
-	public void setUserId(Long userId) {
-		this.userId = userId;
-	}*/
-
-	/*@Transient
-	public Long getBeId() {
-		return beId;
-	}
-
-	
-	public void setBeId(Long beId) {
-		this.beId = beId;
-	}*/
-	
 	@Column(name = "JOB_ROLE",  nullable = true, length = 200)
 	public String getJobRole() {
 		return jobRole;
@@ -129,6 +111,54 @@ public class UserBE extends MizeEntity implements Comparable<UserBE>{
 		this.jobRole = jobRole;
 	}
 
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	@JsonIgnore(value=false)
+	public void setCreatedDate(DateTime createdDate) {
+		this.createdDate = createdDate;
+	}
+	
+	@JsonIgnore(value=false)
+	public void setUpdatedBy(Long updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+ 
+	@JsonIgnore(value=false)
+	public void setCreatedBy(Long createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	@JsonIgnore(value=false)
+	public void setUpdatedDate(DateTime updatedDate) {
+		this.updatedDate = updatedDate;
+	}
+	
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	@JsonIgnore(value=false)
+	@Column(name = "created_date",updatable = false)
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
+	public DateTime getCreatedDate() {
+		return createdDate;
+	}
+
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	@Column(name = "updated_date")
+	@JsonIgnore(value=false)
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
+	public DateTime getUpdatedDate() {
+		return updatedDate;
+	}
+	
+	@JsonIgnore(value=false)
+	@Column(name = "created_by" , updatable=false)
+	public Long getCreatedBy() {
+		return createdBy;
+	}
+	
 	@Override
 	public String toString() {
 		return "UserBE [ jobRole=" + jobRole + ", department=" + department
@@ -136,9 +166,7 @@ public class UserBE extends MizeEntity implements Comparable<UserBE>{
 	}
 
 	public int compareTo(UserBE be) {
-		/*if ( this.userId == be.userId && this.beId == be.beId ) 
-			return EQUAL;
-		else*/ if (this.id < be.id) 
+		if (this.id < be.id) 
 			return BEFORE;
 		else if (be.id == this.id) 
 			return EQUAL;
@@ -149,7 +177,6 @@ public class UserBE extends MizeEntity implements Comparable<UserBE>{
 
 	@ManyToMany(cascade = {CascadeType.ALL}, fetch=FetchType.EAGER)
 	@JoinTable(name = "users_to_brand" , joinColumns = { @JoinColumn(name="user_id")}, inverseJoinColumns = {@JoinColumn(name="brand_id")} )
-	//@JsonManagedReference(value="userbe_brandMapping")
 	@Transient
 	public Set<Brand> getBrands() {
 		return brands;

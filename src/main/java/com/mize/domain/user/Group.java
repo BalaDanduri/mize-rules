@@ -66,6 +66,12 @@ public class Group extends MizeEntity implements Comparable<Group> {
 
 
 
+	public Group(String name, String code) {
+		super();
+		this.name = name;
+		this.code = code;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false, unique = true)

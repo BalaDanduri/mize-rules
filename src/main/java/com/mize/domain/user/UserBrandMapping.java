@@ -22,6 +22,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.mize.domain.auth.User;
 import com.mize.domain.brand.Brand;
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
@@ -64,6 +65,7 @@ public class UserBrandMapping extends MizeEntity implements Comparable<UserBrand
 	@ManyToOne(fetch=FetchType.LAZY,optional= false)
 	@JoinColumn(name="user_id")
 	@JsonBackReference(value="user_brandMapping")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public User getUser() {
 		return user;
 	}
@@ -72,9 +74,10 @@ public class UserBrandMapping extends MizeEntity implements Comparable<UserBrand
 		this.user = user;
 	}
 	
-	@ManyToOne(fetch=FetchType.EAGER,optional= false)
+	@ManyToOne(fetch=FetchType.LAZY,optional= false)
 	@JoinColumn(name="brand_id")
-	@JsonBackReference(value="brand_userbrandMapping")
+	@JsonBackReference(value="brand_userBrandMapping")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public Brand getBrand() {
 		return brand;
 	}

@@ -12,9 +12,12 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.codehaus.jackson.annotate.JsonBackReference;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 
 import com.mize.domain.auth.User;
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.util.JPASerializer;
 
 @Entity
 @Table(name="user_to_groups")
@@ -45,6 +48,7 @@ public class UserGroup extends MizeEntity implements Comparable<UserGroup> {
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="user_id")
 	@JsonBackReference(value="user_userGroups")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public User getUser() {
 		return user;
 	}
@@ -64,7 +68,6 @@ public class UserGroup extends MizeEntity implements Comparable<UserGroup> {
 		this.group = group;
 	}
 	
-	//@Column(name="group_id", nullable=false)
 	@Transient
 	public Long getGroupId() {
 		return groupId;
@@ -74,7 +77,6 @@ public class UserGroup extends MizeEntity implements Comparable<UserGroup> {
 		this.groupId = groupId;
 	}
 	
-	//@Column(name="group_name", nullable=false)
 	@Transient
 	public String getGroupName() {
 		return groupName;
@@ -92,12 +94,11 @@ public class UserGroup extends MizeEntity implements Comparable<UserGroup> {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = PRIME;
 		int result = 1;
 		result = prime * result + ((groupId == null) ? 0 : groupId.hashCode());
 		result = prime * result
 				+ ((groupName == null) ? 0 : groupName.hashCode());
-		//result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
 
@@ -120,11 +121,6 @@ public class UserGroup extends MizeEntity implements Comparable<UserGroup> {
 				return false;
 		} else if (!groupName.equals(other.groupName))
 			return false;
-		/*if (user == null) {
-			if (other.user != null)
-				return false;
-		} else if (!user.equals(other.user))
-			return false;*/
 		return true;
 	}
 	

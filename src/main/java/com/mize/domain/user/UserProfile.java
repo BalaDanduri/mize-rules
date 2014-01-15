@@ -34,6 +34,7 @@ import com.mize.domain.common.Gender;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.common.PostalAddress;
 import com.mize.domain.product.UserProduct;
+import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateDeserializer;
 import com.mize.domain.util.JsonDateSerializer;
 
@@ -606,6 +607,7 @@ public class UserProfile extends MizeEntity implements Serializable, Comparable<
 	}
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "user")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public List<UserAddress> getAddresses() {
 		return addresses;
 	}
