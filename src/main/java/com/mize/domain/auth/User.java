@@ -23,8 +23,6 @@ import org.codehaus.jackson.annotate.JsonManagedReference;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -87,9 +85,7 @@ public class User extends MizeEntity implements Comparable<User> {
     	userProfile = new UserProfile();
     }
     
-	public User(Long id, String email, String name, DateTime lastLogin,
-			boolean active, boolean emailValidated,
-			List<LinkedAccount> linkedAccounts) {
+	public User(Long id, String email, String name, DateTime lastLogin,boolean active, boolean emailValidated,List<LinkedAccount> linkedAccounts) {
 		this.id = id;
 		this.email = email;
 		this.name = name;
@@ -107,6 +103,7 @@ public class User extends MizeEntity implements Comparable<User> {
 	public Long getId() {
 		return id;
 	}
+	
 	@Override
 	public void setId(Long id) {
 		this.id = id;
@@ -168,7 +165,7 @@ public class User extends MizeEntity implements Comparable<User> {
 		this.emailValidated = emailValidated;
 	}
 	
-	@OneToMany(cascade={CascadeType.ALL}, mappedBy="user")
+	@OneToMany(cascade={CascadeType.ALL}, mappedBy="user",orphanRemoval = true)
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	@JsonManagedReference(value="user_linkedAccount")
 	public List<LinkedAccount> getLinkedAccounts() {
@@ -210,7 +207,7 @@ public class User extends MizeEntity implements Comparable<User> {
 		}
 	}
 	
-	@OneToMany(fetch = FetchType.LAZY,cascade={CascadeType.ALL}, mappedBy="user")
+	@OneToMany(fetch = FetchType.LAZY,cascade={CascadeType.ALL}, mappedBy="user",orphanRemoval = true)
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public List<UserAddress> getAddresses() {
 		return addresses;
@@ -264,7 +261,7 @@ public class User extends MizeEntity implements Comparable<User> {
 		this.userProfile = userProfile;
 	}
 	
-	@OneToOne(fetch=FetchType.EAGER ,cascade= {CascadeType.ALL},mappedBy="user" )
+	@OneToOne(fetch=FetchType.LAZY ,cascade= {CascadeType.ALL},mappedBy="user" ,orphanRemoval = true)
 	@JoinColumn(name="id")
 	public UserProfile getUserProfile() {
 		return userProfile;
@@ -290,8 +287,7 @@ public class User extends MizeEntity implements Comparable<User> {
 		this.privacy = privacy;
 	}
 
-	@OneToOne(mappedBy = "user",cascade={CascadeType.ALL})
-	@JoinColumn(name="user_id")
+	@OneToOne(mappedBy = "user",cascade={CascadeType.ALL},orphanRemoval = true)
 	public UserBE getUserBe() {
 		return userBe;
 	}
@@ -309,7 +305,7 @@ public class User extends MizeEntity implements Comparable<User> {
 		this.groups = groups;
 	}
 	
-	@OneToMany(mappedBy="user", fetch=FetchType.LAZY, cascade={CascadeType.ALL})
+	@OneToMany(mappedBy="user", fetch=FetchType.LAZY, cascade={CascadeType.ALL},orphanRemoval = true)
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	@JsonManagedReference(value="user_userGroups")
 	public List<UserGroup> getUserGroups() {
@@ -320,8 +316,7 @@ public class User extends MizeEntity implements Comparable<User> {
 		this.userGroups = userGroups;
 	}
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL,mappedBy="user")
-	@Fetch(value=FetchMode.SUBSELECT)
+	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL,mappedBy="user",orphanRemoval = true)
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	@JsonManagedReference(value="user_brandMapping")
     public List<UserBrandMapping> getUserBrandMapping() {

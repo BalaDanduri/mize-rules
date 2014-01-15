@@ -62,7 +62,7 @@ public class UserBrandMapping extends MizeEntity implements Comparable<UserBrand
 		this.id = id;
 	}
 	
-	@ManyToOne(fetch=FetchType.LAZY,optional= false)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="user_id")
 	@JsonBackReference(value="user_brandMapping")
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
@@ -74,10 +74,9 @@ public class UserBrandMapping extends MizeEntity implements Comparable<UserBrand
 		this.user = user;
 	}
 	
-	@ManyToOne(fetch=FetchType.LAZY,optional= false)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="brand_id")
-	@JsonBackReference(value="userBrandMapping_brand")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)	
 	public Brand getBrand() {
 		return brand;
 	}

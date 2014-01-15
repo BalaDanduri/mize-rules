@@ -26,6 +26,7 @@ import com.mize.domain.common.Country;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.common.State;
+import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
@@ -288,8 +289,9 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 		return 0;
 	}
 	
-	@ManyToOne(targetEntity=State.class)
-	@JoinColumn(name="state_id",nullable=true)
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "state_id")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public State getState() {
 		return state;
 	}
@@ -298,8 +300,9 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 		this.state = state;
 	}
 	
-	@ManyToOne(targetEntity=Country.class)
-	@JoinColumn(name="country_id",nullable=true)
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "country_id")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public Country getCountry() {
 		return country;
 	}
@@ -308,7 +311,7 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 		this.country = country;
 	}
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="user_id")
 	@JsonIgnore
 	@JsonBackReference(value="userAddress_user")

@@ -1,6 +1,5 @@
 package com.mize.domain.auth;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,8 +11,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.codehaus.jackson.annotate.JsonBackReference;
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.codehaus.jackson.map.annotate.JsonDeserialize;
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.util.JodaDateTimeDeserializer;
+import com.mize.domain.util.JsonDateTimeSerializer;
 
 @Entity
 @Table(name="linked_account")
@@ -65,7 +72,7 @@ public class LinkedAccount extends MizeEntity implements Comparable<LinkedAccoun
 		this.id = id;
 	}	
 	
-	@ManyToOne(cascade={CascadeType.ALL},fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="user_id")
 	@JsonBackReference(value="user_linkedAccount")
 	public User getUser() {
@@ -125,6 +132,60 @@ public class LinkedAccount extends MizeEntity implements Comparable<LinkedAccoun
 		this.firstTime = firstTime;
 	}
 
+	@JsonIgnore(false)
+	@Column(name = "updated_by")
+	public Long getUpdatedBy() {
+		return this.updatedBy;
+	}
+	
+	@JsonIgnore(false)
+	public void setUpdatedBy(Long updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+	
+	@JsonIgnore(false)
+	@Column(name = "created_by", updatable = false)
+	public Long getCreatedBy() {
+		return this.createdBy;
+	}
+	
+	@JsonIgnore(false)
+	public void setCreatedBy(Long createdBy) {
+		this.createdBy = createdBy;
+	}
+	
+	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using = JsonDateTimeSerializer.class, include = JsonSerialize.Inclusion.NON_DEFAULT)
+	@JsonIgnore(false)
+	@Column(name = "created_date", updatable = false)
+	@Type(type = "com.mize.domain.util.DateTimeJPA")
+	public DateTime getCreatedDate() {
+		return this.createdDate;
+	}
+
+	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using = JodaDateTimeDeserializer.class)
+	@JsonIgnore(false)
+	public void setCreatedDate(DateTime createdDate) {
+		this.createdDate = createdDate;
+	}
+	
+	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using = JsonDateTimeSerializer.class, include = JsonSerialize.Inclusion.NON_DEFAULT)
+	@Column(name = "updated_date")
+	@Type(type = "com.mize.domain.util.DateTimeJPA")
+	@JsonIgnore(false)
+	public DateTime getUpdatedDate() {
+		return this.updatedDate;
+	}
+	
+	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using = JodaDateTimeDeserializer.class)
+	@JsonIgnore(false)
+	public void setUpdatedDate(DateTime updatedDate) {
+		this.updatedDate = updatedDate;
+	}
+	
 	@Override
 	public String toString() {
 		return "LinkedAccount [providerUserId=" + providerUserId + ", providerKey=" + providerKey + ", accessToken=" + accessToken + 

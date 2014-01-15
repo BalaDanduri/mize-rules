@@ -1,8 +1,8 @@
 package com.mize.domain.user;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -45,7 +45,7 @@ public class UserGroup extends MizeEntity implements Comparable<UserGroup> {
 		this.id = id;
 	}
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="user_id")
 	@JsonBackReference(value="user_userGroups")
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
@@ -57,9 +57,8 @@ public class UserGroup extends MizeEntity implements Comparable<UserGroup> {
 		this.user = user;
 	}
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="group_id")
-	@JsonBackReference(value="group_userGroups")
 	public Group getGroup() {
 		return group;
 	}

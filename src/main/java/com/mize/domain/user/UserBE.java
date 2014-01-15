@@ -7,11 +7,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -21,7 +21,6 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
-import org.hibernate.annotations.GenericGenerator;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -46,7 +45,8 @@ public class UserBE extends MizeEntity implements Comparable<UserBE>{
 	private User user;
 	private BusinessEntity be;
 	
-	@ManyToOne
+	@OneToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name="be_id")
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public BusinessEntity getBe() {
 		return be;
@@ -56,7 +56,7 @@ public class UserBE extends MizeEntity implements Comparable<UserBE>{
 		this.be = be;
 	}
 
-	@OneToOne
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="user_id")
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	@JsonBackReference(value="userBE_user")
@@ -87,19 +87,18 @@ public class UserBE extends MizeEntity implements Comparable<UserBE>{
 		this.department = department;
 	}
 	
-	@Id
-	@GenericGenerator(name="id",strategy="increment")
-	@GeneratedValue
-	@Column(name="id",nullable=false, length=20)
 	@Override
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
 	public Long getId() {
 		return id;
 	}
-
+	
 	@Override
 	public void setId(Long id) {
 		this.id = id;
-	}	
+	}
 	
 	@Column(name = "JOB_ROLE",  nullable = true, length = 200)
 	public String getJobRole() {
