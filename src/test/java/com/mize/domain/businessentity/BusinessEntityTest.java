@@ -87,8 +87,7 @@ public class BusinessEntityTest extends JPATest {
 	
 	private BusinessEntity businessEntityObjectTobeSaved(BusinessEntity businessEntity) {
 		BusinessEntity be = new BusinessEntity();
-		//be.setId(961l);
-		be.setTypeCode(MizeDomainBrandConstants.DEALER);
+		be.setTypeCode("dealer");
 		be.setCode("10C00101P");
 		be.setIsActive("Y");
 		be.setLogo("be.jpg");
