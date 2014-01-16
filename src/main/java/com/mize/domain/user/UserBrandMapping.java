@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.codehaus.jackson.annotate.JsonBackReference;
 import org.codehaus.jackson.annotate.JsonIgnore;
@@ -35,7 +36,7 @@ public class UserBrandMapping extends MizeEntity implements Comparable<UserBrand
 	private User user;
 	private Brand brand;
 	private String isActive;
-	
+	private Brand userBrand;
 	
 	public UserBrandMapping(User user,Brand brand,String isActive) {
 			super();
@@ -154,6 +155,15 @@ public class UserBrandMapping extends MizeEntity implements Comparable<UserBrand
 		super.setUpdatedBy(updatedBy);
 	}
 	
+	@Transient
+	public Brand getUserBrand() {
+		return userBrand;
+	}
+
+	public void setUserBrand(Brand userBrand) {
+		this.userBrand = userBrand;
+	}
+
 	@Override
 	public int compareTo(UserBrandMapping userBrand) {
 		if ( this == userBrand ) 

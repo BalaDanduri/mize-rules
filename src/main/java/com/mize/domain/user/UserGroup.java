@@ -28,6 +28,7 @@ public class UserGroup extends MizeEntity implements Comparable<UserGroup> {
 	private Group group;
 	private Long groupId;
 	private String groupName;
+	private Group userGroup;
 	
 	public UserGroup(){
 		user = new User();
@@ -84,6 +85,15 @@ public class UserGroup extends MizeEntity implements Comparable<UserGroup> {
 
 	public void setGroupName(String groupName) {
 		this.groupName = groupName;
+	}
+	
+	@Transient
+	public Group getUserGroup() {
+		return userGroup;
+	}
+
+	public void setUserGroup(Group userGroup) {
+		this.userGroup = userGroup;
 	}
 
 	@Override
