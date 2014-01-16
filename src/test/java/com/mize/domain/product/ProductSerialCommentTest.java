@@ -84,8 +84,8 @@ public class ProductSerialCommentTest extends JPATest {
 		prodSource.setSourceId(2L);
 		prodSource.setSourceProductId("TEST_SOURCE_ID");
 		prodSerial.getProduct().setProductSource(prodSource);
-		prodSerial.setDeliveryBE(new BusinessEntity());
-		prodSerial.getDeliveryBE().setId(101000L);
+		prodSerial.setShippedBusinessEntity(new BusinessEntity());
+		prodSerial.getShippedBusinessEntity().setId(101000L);
 		prodSerialComment.setProductSerial(prodSerial);
 		prodSerialComment.setComment(new EntityComment());
 		prodSerialComment.getComment().setId(101000L);
