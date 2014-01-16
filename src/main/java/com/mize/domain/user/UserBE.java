@@ -45,7 +45,7 @@ public class UserBE extends MizeEntity implements Comparable<UserBE>{
 	private User user;
 	private BusinessEntity be;
 	
-	@OneToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="be_id")
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public BusinessEntity getBe() {

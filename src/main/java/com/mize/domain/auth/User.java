@@ -62,7 +62,6 @@ public class User extends MizeEntity implements Comparable<User> {
     private Long referralId;
     private UserBE userBe;
     private UserProfilePrivacy privacy;
-    @Transient
 	private List<Group> groups = new ArrayList<Group>();
     private List<UserGroup> userGroups = new ArrayList<UserGroup>();
 	private List<ProductRegister> productRegisters = new ArrayList<ProductRegister>();
@@ -261,8 +260,7 @@ public class User extends MizeEntity implements Comparable<User> {
 		this.userProfile = userProfile;
 	}
 	
-	@OneToOne(fetch=FetchType.LAZY ,cascade= {CascadeType.ALL},mappedBy="user" ,orphanRemoval = true)
-	@JoinColumn(name="id")
+	@OneToOne(fetch=FetchType.EAGER ,cascade= {CascadeType.ALL},mappedBy="user" ,orphanRemoval = true)
 	public UserProfile getUserProfile() {
 		return userProfile;
 	}
@@ -276,9 +274,7 @@ public class User extends MizeEntity implements Comparable<User> {
 		this.referralId = referralId;
 	}
 	
-	@OneToOne(mappedBy="user", cascade={CascadeType.ALL})
-	@JoinColumn(name="user_id")
-	
+	@OneToOne(fetch=FetchType.EAGER ,cascade= {CascadeType.ALL},mappedBy="user" ,orphanRemoval = true)
 	public UserProfilePrivacy getPrivacy() {
 		return privacy;
 	}
@@ -287,7 +283,8 @@ public class User extends MizeEntity implements Comparable<User> {
 		this.privacy = privacy;
 	}
 
-	@OneToOne(mappedBy = "user",cascade={CascadeType.ALL},orphanRemoval = true)
+	@OneToOne(fetch=FetchType.EAGER,mappedBy = "user",cascade={CascadeType.ALL},orphanRemoval = true)
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public UserBE getUserBe() {
 		return userBe;
 	}

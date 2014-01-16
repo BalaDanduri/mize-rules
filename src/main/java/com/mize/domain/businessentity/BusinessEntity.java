@@ -104,14 +104,14 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 		return logo;
 	}
 
-	@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="tenant_id")
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public BusinessEntity getTenant() {
 		return tenant;
 	}
 
-	@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="parent_be_id")
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public BusinessEntity getParentBE() {
