@@ -9,6 +9,7 @@ public class BusinessEntitySearch {
 	private Integer radius;	
 	private String entityType;
 	private String brand;
+	private Long   brandId;	
 	
 	public BusinessEntitySearch() {
 		
@@ -60,6 +61,14 @@ public class BusinessEntitySearch {
 
 	public void setBrand(String brand) {
 		this.brand = brand;
+	}
+	
+	public Long getBrandId() {
+		return brandId;
+	}
+	
+	public void setBrandId(Long brandId) {
+		this.brandId = brandId;
 	}
 	
 
