@@ -50,6 +50,11 @@ public class ProductRegistration extends MizeEntity {
 	private DateTime purchaseDate;
 	private DateTime warrantyExpiryDate;
 	private BigDecimal purchasePrice;
+	private DateTime registrationDate;
+	private String registrationRef;
+	private String registrationSource;
+	private String registrationApplication;
+	private String registrationIndustry;
 	
 	@Transient
 	private EntityComment entityComment;
@@ -187,6 +192,36 @@ public class ProductRegistration extends MizeEntity {
 	}
 	
 	
+	
+	@Column(name = "regn_date ", nullable = true)
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@Type(type = "com.mize.domain.util.DateTimeJPA")
+	@JsonSerialize(using = JsonDateTimeSerializer.class, include = Inclusion.NON_NULL)
+	public DateTime getRegistrationDate() {
+		return registrationDate;
+	}
+
+	@Column(name = "regn_reference")
+	public String getRegistrationRef() {
+		return registrationRef;
+	}
+
+	@Column(name = "regn_source")
+	public String getRegistrationSource() {
+		return registrationSource;
+	}
+
+	@Column(name = "regn_application")
+	public String getRegistrationApplication() {
+		return registrationApplication;
+	}
+
+	@Column(name = "regn_industry")
+	public String getRegistrationIndustry() {
+		return registrationIndustry;
+	}
+
+
 	@Override
 	public void setId(Long id) {
 		this.id =id;
@@ -280,11 +315,41 @@ public class ProductRegistration extends MizeEntity {
 	public void setUpdatedBy(Long updatedBy) {		
 		super.setUpdatedBy(updatedBy);
 	}
+	
+	
+
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
+	public void setRegistrationDate(DateTime registrationDate) {
+		this.registrationDate = registrationDate;
+	}
+
+
+	public void setRegistrationRef(String registrationRef) {
+		this.registrationRef = registrationRef;
+	}
+
+
+	public void setRegistrationSource(String registrationSource) {
+		this.registrationSource = registrationSource;
+	}
+
+
+	public void setRegistrationApplication(String registrationApplication) {
+		this.registrationApplication = registrationApplication;
+	}
+
+
+	public void setRegistrationIndustry(String registrationIndustry) {
+		this.registrationIndustry = registrationIndustry;
+	}
+
+
 
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result
 				+ ((purchaseDate == null) ? 0 : purchaseDate.hashCode());
@@ -370,10 +435,18 @@ public class ProductRegistration extends MizeEntity {
 				+ ", invoiceBusinessEntity=" + invoiceBusinessEntity
 				+ ", productSerial=" + productSerial + ", purchaseDate="
 				+ purchaseDate + ", purchasePrice=" + purchasePrice
+				+ ", registrationApplication=" + registrationApplication
+				+ ", registrationDate=" + registrationDate
+				+ ", registrationIndustry=" + registrationIndustry
+				+ ", registrationRef=" + registrationRef
+				+ ", registrationSource=" + registrationSource
 				+ ", registrationType=" + registrationType + ", statusCode="
-				+ statusCode + ", tenant=" + tenant + ", warrantyExpireDate="
+				+ statusCode + ", tenant=" + tenant + ", warrantyExpiryDate="
 				+ warrantyExpiryDate + "]";
 	}
+
+
+
 
 	
 

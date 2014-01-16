@@ -72,8 +72,8 @@ public class ProductRegistrationTest  extends JPATest {
 		prodSource.setSourceId(2L);
 		prodSource.setSourceProductId("TEST_SOURCE_ID");
 		prodSerial.getProduct().setProductSource(prodSource);
-		prodSerial.setDeliveryBE(new BusinessEntity());
-		prodSerial.getDeliveryBE().setId(101000L);
+		prodSerial.setShippedBusinessEntity(new BusinessEntity());
+		prodSerial.getShippedBusinessEntity().setId(101000L);
 		ProductSerialComment comment = new ProductSerialComment();
 		EntityComment ec = new EntityComment(EntityComment.Type.Internal.toString(),"test comments");
 		comment.setComment(ec);

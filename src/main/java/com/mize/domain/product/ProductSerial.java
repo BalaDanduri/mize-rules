@@ -43,7 +43,7 @@ public class ProductSerial extends MizeEntity{
 	private BusinessEntity tenant;
 	private Product product;
 	private String serialNumber;
-	private BusinessEntity deliveryBE;
+	private BusinessEntity shippedBusinessEntity;
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	protected DateTime deliveryDate;	
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
@@ -59,12 +59,12 @@ public class ProductSerial extends MizeEntity{
 	}
 
 	public ProductSerial(BusinessEntity tenantId, Product product, String serialNumber,
-			BusinessEntity deliveryBE, DateTime deliveryDate, DateTime buildDate) {
+			BusinessEntity shippedBusinessEntity, DateTime deliveryDate, DateTime buildDate) {
 		super();
 		this.tenant = tenantId;
 		this.product = product;
 		this.serialNumber = serialNumber;
-		this.deliveryBE = deliveryBE;
+		this.shippedBusinessEntity = shippedBusinessEntity;
 		this.deliveryDate = deliveryDate;
 		this.buildDate = buildDate;
 	}
@@ -112,14 +112,14 @@ public class ProductSerial extends MizeEntity{
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="delivery_be_id", nullable = true)
+	@JoinColumn(name="ship_be_id", nullable = true)
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
-	public BusinessEntity getDeliveryBE() {
-		return deliveryBE;
+	public BusinessEntity getShippedBusinessEntity() {
+		return shippedBusinessEntity;
 	}
 
-	public void setDeliveryBE(BusinessEntity deliveryBE) {
-		this.deliveryBE = deliveryBE;
+	public void setShippedBusinessEntity(BusinessEntity shippedBE) {
+		this.shippedBusinessEntity = shippedBE;
 	}
 
 	@Column(name = "delivery_date", nullable = true)
@@ -194,7 +194,7 @@ public class ProductSerial extends MizeEntity{
 		result = prime * result
 				+ ((buildDate == null) ? 0 : buildDate.hashCode());
 		result = prime * result
-				+ ((deliveryBE == null) ? 0 : deliveryBE.hashCode());
+				+ ((shippedBusinessEntity == null) ? 0 : shippedBusinessEntity.hashCode());
 		result = prime * result
 				+ ((deliveryDate == null) ? 0 : deliveryDate.hashCode());
 		result = prime
@@ -219,10 +219,10 @@ public class ProductSerial extends MizeEntity{
 				return false;
 		} else if (!buildDate.equals(other.buildDate))
 			return false;
-		if (deliveryBE == null) {
-			if (other.deliveryBE != null)
+		if (shippedBusinessEntity == null) {
+			if (other.shippedBusinessEntity != null)
 				return false;
-		} else if (!deliveryBE.equals(other.deliveryBE))
+		} else if (!shippedBusinessEntity.equals(other.shippedBusinessEntity))
 			return false;
 		if (deliveryDate == null) {
 			if (other.deliveryDate != null)
@@ -251,7 +251,7 @@ public class ProductSerial extends MizeEntity{
 	public String toString() {
 		return "ProductSerial [tenant=" + tenant + ", product=" + product
 				+ ", serialNumber=" + serialNumber + ", deliveryBE="
-				+ deliveryBE + ", deliveryDate=" + deliveryDate
+				+ shippedBusinessEntity + ", deliveryDate=" + deliveryDate
 				+ ", buildDate=" + buildDate + "]";
 	}
 

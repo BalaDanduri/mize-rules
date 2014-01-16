@@ -43,7 +43,6 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	
 	private static final long serialVersionUID = 5379538452565383073L;
 	protected String name;
-	@Transient
 	protected Brand brand = new Brand();
 	protected Double price;
 	protected Set<ProductCategory> category = new HashSet<ProductCategory>();
