@@ -14,7 +14,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.codehaus.jackson.annotate.JsonManagedReference;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import org.hibernate.annotations.GenericGenerator;
@@ -228,8 +227,7 @@ public class Brand extends MizeEntity implements Comparable<Brand>{
 	}
 	
 	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL,mappedBy="user")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
-	@JsonManagedReference(value="brand_userbrandMapping")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)	
 	public List<UserBrandMapping> getUserBrands() {
 		return userBrands;
 	}

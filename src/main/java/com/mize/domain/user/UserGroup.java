@@ -59,6 +59,7 @@ public class UserGroup extends MizeEntity implements Comparable<UserGroup> {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="group_id")
+	@JsonBackReference(value="group_userGroups")
 	public Group getGroup() {
 		return group;
 	}

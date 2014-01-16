@@ -17,7 +17,6 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
-import org.codehaus.jackson.annotate.JsonBackReference;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonManagedReference;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
@@ -149,8 +148,7 @@ public class Group extends MizeEntity implements Comparable<Group> {
 	}
 	
 	@OneToMany(mappedBy="group", cascade={CascadeType.ALL}, fetch=FetchType.LAZY)
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
-	@JsonBackReference(value="group_userGroups")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)	
 	public List<UserGroup> getUserGroups() {
 		return userGroups;
 	}
