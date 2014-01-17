@@ -53,6 +53,7 @@ public class ProductSerial extends MizeEntity{
 	private List<ProductSerialComment> comments = new ArrayList<ProductSerialComment>();
 	@Transient
 	private User user;
+	private DateTime shipDate;
 	
 	public ProductSerial(){
 		super();
@@ -185,6 +186,20 @@ public class ProductSerial extends MizeEntity{
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	@Column(name = "ship_date", nullable = true)
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@Type(type = "com.mize.domain.util.DateTimeJPA")
+	@JsonSerialize(using = JsonDateTimeSerializer.class, include = Inclusion.NON_NULL)
+	public DateTime getShipDate() {
+		return shipDate;
+	}
+	
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
+	public void setShipDate(DateTime shipDate) {
+		this.shipDate = shipDate;
 	}
 
 	@Override
