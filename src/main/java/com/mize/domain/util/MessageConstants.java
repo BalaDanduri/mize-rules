@@ -118,4 +118,5 @@ public abstract class MessageConstants implements Serializable{
 	public static final String MIN_QTY_LESS_THAN_MAX_QTY= "MIN_QTY_LESS_THAN_MAX_QTY";
 	public static final String EITHER_AMOUNT_OR_PERCENT_ISREQUIRED= "EITHER_AMOUNT_OR_PERCENT_ISREQUIRED";
 	public static final String ACTIVITI_NOT_FOUND = "ACTIVITI_NOT_FOUND";
+	public static final String INVALID_SHIP_BE_ID ="INVALID_SHIP_BE_ID";
 }
