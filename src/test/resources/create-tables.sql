@@ -105,6 +105,128 @@ CREATE TABLE user_address (
 	PRIMARY KEY (id)
 );
 
+drop table if exists prod_cat;
+create table prod_cat
+(
+	prod_cat_id			bigint(20)	auto_increment NOT NULL,	
+	prod_cat_name		varchar(100)	NULL,			
+	parent_prod_cat_id	int(15)			NULL,			
+	prod_cat_link		varchar(250)	NULL,			
+	prod_count			int(11)			NULL,			
+	is_active			tinyint(1)		NULL,			
+	created_date		datetime		NULL,			
+	created_by			bigint(20)		NULL,			
+	updated_date		datetime		NULL,			
+	updated_by			bigint(20)		NULL,			
+	department			varchar(25)		NULL,			
+	cat_level			int(11)			NULL,			
+	display_order		int(11)			NULL,			
+	order_number		int(11)			NULL,			
+	searchable			tinyint(4)		NULL,			
+	small_pic			varchar(50)		NULL,			
+	thumb_pic			varchar(50)		NULL,			
+	watched_top_10		int(11)			NULL,			
+	un_cat_id			bigint(20)		NULL,			
+	family_id			int(11)			NULL,			
+	series_id			int(11)			NULL,			
+	unit_id				bigint(20)		NULL,			
+	t_id				int(11)			NULL,			
+	prod_source_id		int(11)			NULL,			
+	tenant_id			bigint(20)		NULL	
+);
+
+drop table if exists prod_to_cat;
+create table prod_to_cat
+(
+	id			bigint(20)	auto_increment	NOT NULL,
+	prod_id		bigint(20)	NULL,
+	prod_cat_id	bigint(20)  NULL
+);
+
+drop table if exists prod;
+create table prod
+(
+	prod_id		bigint(20)    auto_increment NOT NULL,              
+	prod_name       varchar(200)   NULL,      
+	prod_desc       varchar(500)   NULL,      
+	upc        	varchar(20)    NULL,             
+	qr_code        	varchar(100)   NULL,        
+	brand_id        bigint(20)     NULL,         
+	brand_name      varchar(250)   NULL,     
+	prod_image      varchar(500)   NULL,     
+	created_date    datetime       NULL,       
+	created_by      bigint(20)     NULL,       
+	updated_date    datetime       NULL,       
+	updated_by      bigint(20)     NULL,       
+	mfg_part_no     varchar(70)    NULL,     
+	manufacturer_id bigint(20)     NULL,  
+	is_active       tinyint(4)     NULL,        
+	is_accessory    char(1)        NULL,        
+	equivalency     varchar(30)    NULL,     
+	family_id       bigint(20)     NULL,        
+	user_id        	bigint(20)     NULL,          
+	low_pic        	varchar(50)    NULL,         
+	high_pic        varchar(50)    NULL,        
+	thumb_pic       varchar(50)    NULL,       
+	low_pic_size    int(11)        NULL,        
+	high_pic_size   int(11)        NULL,       
+	thumb_pic_size  int(11)        NULL,      
+	release_date    datetime       NULL,       
+	prod_updated_date datetime     NULL,  
+	is_consumable   char(1)        NULL,       
+	model        	varchar(50)    NULL,
+	active			varchar(1)	   NULL,
+	manufacturer_be_id bigint(20)  NULL,
+	tenant_id		bigint(20)	   NULL 
+);
+
+drop table if exists prod_intl;
+CREATE TABLE prod_intl ( 
+    id         bigint(20) 	AUTO_INCREMENT NOT NULL,
+    prod_id      bigint(20) 	NOT NULL,   
+    locale_id  bigint(20) 	NULL,
+    prod_name    varchar(250) NULL,
+    prod_description  varchar(500) NULL
+);
+
+drop table if exists prod_to_source;
+create table prod_to_source
+(
+	id				   	bigint(20) auto_increment    	NOT NULL,              
+	prod_to_source_id  	varchar(50)    	NOT NULL,      
+	prod_source_id     	int(11)   		NOT NULL,      
+	prod_id        		bigint(20)  	NOT NULL
+);
+
+drop table if exists prod_serial;
+  CREATE TABLE prod_serial (
+	id 			bigint(20) 	auto_increment NOT NULL,
+	tenant_id		bigint(20)	NULL,
+	prod_id			bigint(20)	NOT NULL,
+	prod_srl_no     varchar(200) 	NULL,
+	ship_be_id  bigint(20) 	NULL,
+	delivery_date   datetime 	NULL,
+	build_date		datetime 	NULL,	
+	created_date 		datetime 	NULL,
+	updated_date 		datetime 	NULL,
+	created_by 		bigint(20)	NULL,
+	updated_by 		bigint(20)	NULL,
+	ship_date 		datetime 	NULL,
+	primary key (id)
+);
+
+  drop table if exists prod_serial_comment;
+  CREATE TABLE prod_serial_comment (
+	id 				bigint(20) 	auto_increment NOT NULL,
+	prod_srl_id 	bigint(20)	NOT NULL,
+	comment_id		bigint(20)	NOT NULL,
+	created_date 	datetime 	NULL,
+	updated_date 	datetime 	NULL,
+	created_by 		bigint(20)	NULL,
+	updated_by 		bigint(20)	NULL,	
+	PRIMARY KEY (id)
+);
+
 
 drop table if exists prod_regn;
 CREATE TABLE prod_regn ( 
@@ -928,6 +1050,9 @@ INSERT INTO  catalog (id, tenant_id, catalog_code, catalog_type, is_active, cata
 INSERT INTO  catalog_entry (id, catalog_id, item_code, is_active, is_default, order_sequence, created_date, updated_date, created_by, updated_by)
   VALUES(102, 100, 'ItemCode', 'Y', 'N', 2, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL);
   
+INSERT INTO  business_entity(id, code, type_code, sub_type_code, name, logo, created_date, updated_date, created_by, updated_by, active_indicator)
+  VALUES(101000, '1C10100P', 'dealer', NULL, 'PROD SERIAL TEST', NULL, '2013-06-19 14:39:31.0', '2013-07-26 14:17:19.0', NULL, NULL, NULL);
+  
  
 INSERT INTO  part (id, tenant_id, part_code, part_type, is_active,is_kit,is_serialized,is_returnable,uom, created_date, updated_date, created_by, updated_by)
   VALUES(101, 961, 'partCode','standard', 'Y', 'N','N','N',null,CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL);
@@ -1025,3 +1150,22 @@ INSERT INTO  picklist_item (id, part_id,picklist_id,part_qty)
     values (2,1,961,'BUSINESS_ENTITY',1,1,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
   INSERT INTO work_queue_auth (Id,work_queue_id,auth_id,auth_type,created_by,updated_by,created_date,updated_date) 
     values (3,1,1,'GROUP',1,1,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);
+    
+  INSERT INTO prod_cat (prod_cat_id, prod_cat_name, parent_prod_cat_id, prod_cat_link, is_active, department) values (1, 'Parent', null, 'ParentLink', '1', 'Testing Department');
+  INSERT INTO prod_cat (prod_cat_id, prod_cat_name, parent_prod_cat_id, prod_cat_link, is_active, department) values (2, 'Child', 1, 'ChildLink', '1', 'Testing Department');
+  INSERT INTO prod_to_cat (id, prod_id, prod_cat_id) values (1, 1, 1);
+  INSERT INTO prod (prod_id, prod_name, prod_desc, model, tenant_id) values (101000, 'test prod1', 'testing the product1','MODEL01', 961);
+  INSERT INTO prod (prod_id, prod_name, prod_desc, model, tenant_id) values (102000, 'test prod2', 'testing the product2','MODEL02', 961);
+  INSERT INTO prod_to_source (id, prod_to_source_id, prod_source_id, prod_id) values (1, 'TEST_SOURCE_ID', 2, 101000);
+    
+  INSERT INTO  prod_serial(id, tenant_id, prod_id, prod_srl_no, ship_be_id, delivery_date, build_date, ship_date,created_date, updated_date, created_by, updated_by)
+  VALUES(101000, 101000, 101000, '101-TEST-SERIAL', null, '2013-12-01 14:39:31.0', '2012-12-01 14:39:31.0','2012-12-01 14:39:31.0', '2013-06-19 14:39:31.0', '2013-07-26 14:17:19.0', NULL, NULL);
+
+  INSERT INTO  prod_serial(id, tenant_id, prod_id, prod_srl_no, ship_be_id, delivery_date, build_date, ship_date,created_date, updated_date, created_by, updated_by)
+  VALUES(101001, 961, 101000, '1001-TEST-SERIAL', 961, '2013-12-01 14:39:31.0', '2012-12-01 14:39:31.0', '2012-12-01 14:39:31.0','2013-06-19 14:39:31.0', '2013-07-26 14:17:19.0', NULL, NULL);
+  
+  INSERT INTO  entity_comment(id, comment_type, comments, created_date, updated_date, created_by, updated_by)
+  VALUES(101000, 'serial', 'Testing the comments for prod serial', '2013-06-19 14:39:31.0', '2013-07-26 14:17:19.0', NULL, NULL);
+
+  INSERT INTO  prod_serial_comment(id, prod_srl_id, comment_id)
+  VALUES(101000, 101000, 101000);
