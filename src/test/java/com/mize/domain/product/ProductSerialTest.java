@@ -71,7 +71,7 @@ public class ProductSerialTest extends JPATest {
 			tenant.setId(rs.getLong("tenant_id"));
 			ps.setTenant(tenant);
 			BusinessEntity deliveryBE = new BusinessEntity();
-			deliveryBE.setId(rs.getLong("delivery_be_id"));
+			deliveryBE.setId(rs.getLong("ship_be_id"));
 			ps.setShippedBusinessEntity(deliveryBE);
 			return ps;
 		}
