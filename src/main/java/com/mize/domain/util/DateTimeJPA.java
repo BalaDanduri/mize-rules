@@ -29,6 +29,11 @@ public class DateTimeJPA implements UserType{
 
 	@Override
 	public boolean equals(Object arg0, Object arg1) throws HibernateException {
+		if(arg0 == null && arg1 == null){
+			return true;
+		}else if(arg0 != null && arg1 != null){
+			return arg0.equals(arg1);
+		}
 		return false;
 	}
 
