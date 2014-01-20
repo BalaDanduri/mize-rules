@@ -109,7 +109,7 @@ public class User extends MizeEntity implements Comparable<User> {
 	}
     
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "tenant_id")
+	@JoinColumn(name = "tenant_id" , insertable=false, updatable=false)
 	public BusinessEntity getTenant() {
 		return tenant;
 	}
