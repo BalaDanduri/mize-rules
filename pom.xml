@@ -124,6 +124,12 @@
 			<groupId>org.milyn</groupId>
 			<artifactId>milyn-smooks-all</artifactId>
 			<version>1.5.1</version>
+			<exclusions>
+                <exclusion>
+                    <groupId>org.mvel</groupId>
+                    <artifactId>mvel2</artifactId>
+                </exclusion>
+            </exclusions>			
 		</dependency>
 		<!-- MySQL database driver -->
 		<dependency>
