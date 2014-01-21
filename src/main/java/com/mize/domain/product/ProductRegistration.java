@@ -162,16 +162,16 @@ public class ProductRegistration extends MizeEntity {
 
 
 	@Override	
-	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
-	@Type(type="com.mize.domain.util.DateTimeJPA")
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@Type(type = "com.mize.domain.util.DateTimeJPA")
 	@Column(name = "created_date",updatable=false)
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
 
 	@Override	
-	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
-	@Type(type="com.mize.domain.util.DateTimeJPA")
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@Type(type = "com.mize.domain.util.DateTimeJPA")
 	@Column(name = "updated_date")
 	public DateTime getUpdatedDate() {
 		return updatedDate;
@@ -289,7 +289,7 @@ public class ProductRegistration extends MizeEntity {
 	
 
 	@Override
-	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore
 	public void setCreatedDate(DateTime createdDate) {
@@ -297,8 +297,8 @@ public class ProductRegistration extends MizeEntity {
 	}
 
 	@Override
-	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
 	@JsonIgnore
 	public void setUpdatedDate(DateTime updatedDate) {
 		super.updatedDate = updatedDate;
