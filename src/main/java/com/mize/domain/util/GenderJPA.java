@@ -7,7 +7,6 @@ import java.sql.Types;
 
 import org.hibernate.HibernateException;
 import org.hibernate.usertype.UserType;
-import org.joda.time.DateTime;
 
 import com.mize.domain.common.Gender;
 
@@ -67,12 +66,12 @@ public class GenderJPA implements UserType{
 	@SuppressWarnings("rawtypes")
 	@Override
 	public Class returnedClass() {		
-		return DateTime.class;
+		return Gender.class;
 	}
 
 	@Override
 	public int[] sqlTypes() {
-		 return new int[] {Types.TIMESTAMP};
-	}
-
+		 return new int[] {Types.VARCHAR};
+	}	
+	
 }
