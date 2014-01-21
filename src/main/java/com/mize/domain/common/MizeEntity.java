@@ -8,6 +8,7 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.mize.domain.exception.UploadError;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
@@ -19,6 +20,8 @@ public abstract class MizeEntity implements Serializable{
 	public static final int AFTER = 1;
 	public static final int PRIME = 31;	
 	public static final int HASH_CODE_START = 17;
+	protected UploadError uploadError;
+	protected Boolean isValid = Boolean.TRUE;
 			
 	protected Long createdBy;	
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
@@ -85,6 +88,17 @@ public abstract class MizeEntity implements Serializable{
 	@JsonIgnore
 	public void setUpdatedDate(DateTime updatedDate) {
 		this.updatedDate = updatedDate;
+	}
+
+	@JsonIgnore
+	public UploadError getUploadError() {
+		return uploadError;
+	}
+	
+	@JsonIgnore
+	public void setUploadError(UploadError uploadError) {
+		this.isValid = Boolean.FALSE;
+		this.uploadError = uploadError;
 	}
 
 	@Override
