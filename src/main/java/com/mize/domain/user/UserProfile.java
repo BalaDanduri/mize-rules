@@ -31,6 +31,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.mize.domain.auth.User;
 import com.mize.domain.common.Gender;
+import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.common.PostalAddress;
 import com.mize.domain.product.UserProduct;
@@ -65,12 +66,6 @@ public class UserProfile extends MizeEntity implements Serializable, Comparable<
 	private DateTime birthdate;
 	private Gender gender;
 	private String cityState;
-	
-	public static final int EQUAL = 0;
-	public static final int BEFORE = -1;
-	public static final int AFTER = 1;
-	public static final int PRIME = 31;	
-	
 	private List<User> friends = new ArrayList<User>();
 	private int mutualFriendCount;
 	private int pageIndex;
@@ -87,6 +82,7 @@ public class UserProfile extends MizeEntity implements Serializable, Comparable<
 	private String promptForAppRating;
 	private Map<String, URL> photoURLMap = new HashMap<String, URL>();
 	private User user;
+	private Locale locale;
 	
 	public enum UserProfileResult {
 		PROFILE_CREATED, PROFILE_UPDATED
@@ -623,6 +619,16 @@ public class UserProfile extends MizeEntity implements Serializable, Comparable<
 
 	public void setPromptForAppRating(String promptForAppRating) {
 		this.promptForAppRating = promptForAppRating;
+	}
+
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "locale_id")
+	public Locale getLocale() {
+		return locale;
+	}
+
+	public void setLocale(Locale locale) {
+		this.locale = locale;
 	}
 	
 }
