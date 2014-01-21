@@ -4,13 +4,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.codehaus.jackson.annotate.JsonBackReference;
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "state")
@@ -20,12 +21,23 @@ public class State extends MizeEntity implements Comparable<State>{
 	private String name;
 	private String code;
 	private Country country;
+	private Country stateCountry;
+	
+	public State() {
+		super();		
+	}
+	
+	public State(Long id,String code, String name) {
+		super();
+		this.id = id;
+		this.code = code;
+		this.name = name;		
+	}
 
-	@Override
 	@Id
-	@GenericGenerator(name="stateId" , strategy="increment")
-	@GeneratedValue(generator="stateId")
-	@Column(name="state_id",nullable=false,unique=true)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "state_id", nullable = false, unique = true)
+	@Override
 	public Long getId() {
 		return id;
 	}
@@ -62,6 +74,15 @@ public class State extends MizeEntity implements Comparable<State>{
 
 	public void setCountry(Country country) {
 		this.country = country;
+	}
+
+	@Transient
+	public Country getStateCountry() {
+		return stateCountry;
+	}
+
+	public void setStateCountry(Country stateCountry) {
+		this.stateCountry = stateCountry;
 	}
 
 	@Override
