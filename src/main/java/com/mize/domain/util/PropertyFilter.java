@@ -1,6 +1,8 @@
 package com.mize.domain.util;
 
-import org.codehaus.jackson.map.annotate.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonFilter;
+
+
 
 @JsonFilter("PropertyFilter") 
 public class PropertyFilter {

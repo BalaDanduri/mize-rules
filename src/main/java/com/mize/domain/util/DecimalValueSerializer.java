@@ -2,17 +2,20 @@ package com.mize.domain.util;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
-import org.codehaus.jackson.JsonGenerator;
-import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.map.SerializerProvider;
+
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
 
 /**
  * @author Rama Battu
  *
  */
 @Component
-public class DecimalValueSerializer extends org.codehaus.jackson.map.JsonSerializer<Double> {    
+public class DecimalValueSerializer extends JsonSerializer<Double> {    
 	private static final DecimalFormat formatter = new DecimalFormat("#.##");
 	
 	public void serialize(Double value, JsonGenerator gen,

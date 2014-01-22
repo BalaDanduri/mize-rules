@@ -3,7 +3,7 @@ package com.mize.domain.common;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class ShortUrl extends MizeEntity implements Comparable<ShortUrl>{
 

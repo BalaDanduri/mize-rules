@@ -4,13 +4,15 @@ import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-import org.codehaus.jackson.JsonParser;
-import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.map.DeserializationContext;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+
 @Component
-public class DecimalValueDeserializer extends org.codehaus.jackson.map.JsonDeserializer<Double> {	
+public class DecimalValueDeserializer extends JsonDeserializer<Double> {	
 	@Override
 	public Double deserialize(JsonParser parser, DeserializationContext context)throws IOException, JsonProcessingException {
 		NumberFormat formatter = NumberFormat.getNumberInstance(Locale.getDefault());

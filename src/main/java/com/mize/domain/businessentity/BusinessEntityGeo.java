@@ -10,8 +10,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mize.domain.common.MizeEntity;
 
 @Entity(name="com.mize.domain.businessentity.BusinessEntityGeo")

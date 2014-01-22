@@ -6,11 +6,16 @@ import java.util.Locale;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
+
 @Component
-public class NumberValueSerializer extends org.codehaus.jackson.map.JsonSerializer<Number> {
+public class NumberValueSerializer extends JsonSerializer<Number> {
 	@Override
-	public void serialize(Number value, org.codehaus.jackson.JsonGenerator gen, org.codehaus.jackson.map.SerializerProvider provider)
-			throws IOException, org.codehaus.jackson.JsonProcessingException {
+	public void serialize(Number value, JsonGenerator gen, SerializerProvider provider)
+			throws IOException, JsonProcessingException {
 		NumberFormat formatter = NumberFormat.getNumberInstance(Locale.getDefault());
 		formatter.setMaximumFractionDigits(2);
 		formatter.setMinimumFractionDigits(2);

@@ -3,8 +3,7 @@ package com.mize.domain.common.response;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonPropertyOrder;
-
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.mize.domain.common.MizeEntity;
 
 @JsonPropertyOrder({"meta","rel","items"})

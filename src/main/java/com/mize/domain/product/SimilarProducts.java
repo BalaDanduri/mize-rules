@@ -2,8 +2,7 @@ package com.mize.domain.product;
 
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mize.domain.common.MizeEntity;
 
 public class SimilarProducts extends MizeEntity {

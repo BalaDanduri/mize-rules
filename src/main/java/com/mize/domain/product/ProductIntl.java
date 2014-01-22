@@ -11,8 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.codehaus.jackson.annotate.JsonBackReference;
-
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeEntity;
 

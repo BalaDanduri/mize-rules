@@ -3,8 +3,7 @@ package com.mize.domain.product;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonPropertyOrder;
-
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.mize.domain.common.Entity;
 
 @JsonPropertyOrder ({"filterTypeName", "filters"})

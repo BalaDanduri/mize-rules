@@ -4,12 +4,17 @@ import java.io.IOException;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.SerializerProvider;
+
 @Component
-public class NumberFormatSerializer extends org.codehaus.jackson.map.JsonSerializer<Number> {
+public class NumberFormatSerializer extends JsonSerializer<Number> {
 	private static final String EMPTY = "";
 
 	@Override
-	public void serialize(Number number, org.codehaus.jackson.JsonGenerator gen,org.codehaus.jackson.map.SerializerProvider provider) throws IOException,org.codehaus.jackson.JsonProcessingException {
+	public void serialize(Number number, JsonGenerator gen,SerializerProvider provider) throws IOException,JsonProcessingException {
 		String val = EMPTY;
 		int value = number == null ? 0 : number.intValue();
 		if (value > 999) {
