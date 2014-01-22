@@ -111,6 +111,10 @@ public abstract class MessageConstants implements Serializable{
 	public static final String INVALID_CATALOG_NAME = "INVALID_CATALOG_NAME";
 	public static final String CATALOG_NAME_DOES_NOT_EXIST = "CATALOG_NAME_DOES_NOT_EXIST";
 	public static final String CATALOG_NAME_REQUIRED = "CATALOG_NAME_REQUIRED";
+	public static final String CATALOG_NAME_ALREADY_EXISTS = "CATALOG_NAME_ALREADY_EXISTS";
+	public static final String ENTRY_CODE_REQUIRED = "ENTRY_CODE_REQUIRED";
+	public static final String ENTRY_VALUE_REQUIRED = "ENTRY_VALUE_REQUIRED";
+	public static final String DUPLICATE_ENTRY_CODE = "DUPLICATE_ENTRY_CODE";
 	
 	public static final String INVALID_ORDER_BE_ID= "INVALID_ORDER_BE_ID";
 	public static final String INVALID_START_AND_END_DATES= "INVALID_START_AND_END_DATES";
