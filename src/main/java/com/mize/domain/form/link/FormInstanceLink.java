@@ -244,6 +244,8 @@ public class FormInstanceLink extends MizeEntity {
 		return inspectionDate;
 	}
 
+	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
 	public void setInspectionDate(DateTime inspectionDate) {
 		this.inspectionDate = inspectionDate;
 	}
