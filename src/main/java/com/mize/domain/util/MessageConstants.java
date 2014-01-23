@@ -111,6 +111,10 @@ public abstract class MessageConstants implements Serializable{
 	public static final String INVALID_CATALOG_NAME = "INVALID_CATALOG_NAME";
 	public static final String CATALOG_NAME_DOES_NOT_EXIST = "CATALOG_NAME_DOES_NOT_EXIST";
 	public static final String CATALOG_NAME_REQUIRED = "CATALOG_NAME_REQUIRED";
+	public static final String CATALOG_NAME_ALREADY_EXISTS = "CATALOG_NAME_ALREADY_EXISTS";
+	public static final String ENTRY_CODE_REQUIRED = "ENTRY_CODE_REQUIRED";
+	public static final String ENTRY_VALUE_REQUIRED = "ENTRY_VALUE_REQUIRED";
+	public static final String DUPLICATE_ENTRY_CODE = "DUPLICATE_ENTRY_CODE";
 	
 	public static final String INVALID_ORDER_BE_ID= "INVALID_ORDER_BE_ID";
 	public static final String INVALID_START_AND_END_DATES= "INVALID_START_AND_END_DATES";
@@ -120,4 +124,12 @@ public abstract class MessageConstants implements Serializable{
 	public static final String EITHER_AMOUNT_OR_PERCENT_ISREQUIRED= "EITHER_AMOUNT_OR_PERCENT_ISREQUIRED";
 	public static final String ACTIVITI_NOT_FOUND = "ACTIVITI_NOT_FOUND";
 	public static final String INVALID_SHIP_BE_ID ="INVALID_SHIP_BE_ID";
+	
+	public static final String ATLEAST_ONE_PRODUCT_NAME_REQUIRED = "ATLEAST_ONE_PRODUCT_NAME_DETAILS_REQUIRED";
+	public static final String PRODUCT_NAME_REQUIRED = "PRODUCT_NAME_REQUIRED";
+	public static final String DUPLICATE_BRAND_AND_MODEL = "DUPLICATE_BRAND_AND_MODEL";
+	public static final String DUPLICATE_PRODUCT_NAME = "DUPLICATE_PRODUCT_NAME";
+	public static final String DUPLICATE_CATEGORY = "DUPLICATE_CATEGORY";
 }
+
+

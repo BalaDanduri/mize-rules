@@ -273,6 +273,6 @@ public class Catalog extends MizeEntity {
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
 }
+	
+

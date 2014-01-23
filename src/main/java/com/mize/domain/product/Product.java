@@ -89,6 +89,10 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 		productDetails = new ProductDetails();
 	}
 	
+	public Product(String model) {
+		this.model = model;
+	}
+	
 	@Id
 	@GenericGenerator(name="prod_id",strategy="increment")
 	@GeneratedValue(strategy = GenerationType.AUTO)
