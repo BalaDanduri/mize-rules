@@ -33,9 +33,7 @@ import com.mize.domain.common.MizeEntity;
 import com.mize.domain.form.FormInstance;
 import com.mize.domain.product.ProductRegistration;
 import com.mize.domain.product.ProductSerial;
-import com.mize.domain.util.JodaDateDeserializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateSerializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
 @Entity
@@ -51,8 +49,6 @@ public class FormInstanceLink extends MizeEntity {
 	private String linkType;
 	private String linkDuration;
 	private String statusCode;
-	private DateTime reviewedDate;
-	private String reviewedBy;
 	private List<FormInstanceLinkAudit> audits;
 	private DateTime inspectionDate;
 	private String inspectedBy;
@@ -70,7 +66,7 @@ public class FormInstanceLink extends MizeEntity {
 	
 	public FormInstanceLink(FormInstance formInstance, ProductRegistration productRegistration, 
 			BusinessEntity linkBusinessEntity, String linkType, String linkDuration,
-			String statusCode, DateTime reviewedDate, String reviewedBy) {
+			String statusCode) {
 		super();
 		this.formInstance = formInstance;
 		this.productRegistration = productRegistration;
@@ -78,8 +74,6 @@ public class FormInstanceLink extends MizeEntity {
 		this.linkType = linkType;
 		this.linkDuration = linkDuration;
 		this.statusCode = statusCode;
-		this.reviewedDate = reviewedDate;
-		this.reviewedBy = reviewedBy;
 	}
 
 	@Id
@@ -150,29 +144,6 @@ public class FormInstanceLink extends MizeEntity {
 
 	public void setStatusCode(String statusCode) {
 		this.statusCode = statusCode;
-	}
-	
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@Column(name = "reviewed_date",  nullable = true)
-	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateSerializer.class,include=Inclusion.NON_DEFAULT)
-	public DateTime getReviewedDate() {
-		return reviewedDate;
-	}
-	
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateDeserializer.class)
-	public void setReviewedDate(DateTime reviewedDate) {
-		this.reviewedDate = reviewedDate;
-	}
-	
-	@Column( name = "reviewed_by", nullable = true, length = 100)
-	public String getReviewedBy() {
-		return reviewedBy;
-	}
-
-	public void setReviewedBy(String reviewedBy) {
-		this.reviewedBy = reviewedBy;
 	}
 	
 	@OneToMany(cascade={CascadeType.ALL}, fetch= FetchType.EAGER, mappedBy = "formInstanceLink")
@@ -266,7 +237,7 @@ public class FormInstanceLink extends MizeEntity {
 	}
 
 	@Column(name = "inspection_date")
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
 	@Type(type = "com.mize.domain.util.DateTimeJPA")
 	@JsonSerialize(using = JsonDateTimeSerializer.class, include = Inclusion.NON_NULL)
 	public DateTime getInspectionDate() {
@@ -308,11 +279,7 @@ public class FormInstanceLink extends MizeEntity {
 				+ ((linkDuration == null) ? 0 : linkDuration.hashCode());
 		result = prime * result
 				+ ((linkType == null) ? 0 : linkType.hashCode());
-		result = prime * result + ((number == null) ? 0 : number.hashCode());
-		result = prime * result
-				+ ((reviewedBy == null) ? 0 : reviewedBy.hashCode());
-		result = prime * result
-				+ ((reviewedDate == null) ? 0 : reviewedDate.hashCode());
+		result = prime * result + ((number == null) ? 0 : number.hashCode());		
 		result = prime * result
 				+ ((statusCode == null) ? 0 : statusCode.hashCode());
 		return result;
@@ -351,17 +318,7 @@ public class FormInstanceLink extends MizeEntity {
 			if (other.number != null)
 				return false;
 		} else if (!number.equals(other.number))
-			return false;
-		if (reviewedBy == null) {
-			if (other.reviewedBy != null)
-				return false;
-		} else if (!reviewedBy.equals(other.reviewedBy))
-			return false;
-		if (reviewedDate == null) {
-			if (other.reviewedDate != null)
-				return false;
-		} else if (!reviewedDate.equals(other.reviewedDate))
-			return false;
+			return false;		
 		if (statusCode == null) {
 			if (other.statusCode != null)
 				return false;
@@ -374,8 +331,7 @@ public class FormInstanceLink extends MizeEntity {
 	public String toString() {
 		return "FormInstanceLink [number=" + number + ", linkType=" + linkType
 				+ ", linkDuration=" + linkDuration + ", statusCode="
-				+ statusCode + ", reviewedDate=" + reviewedDate
-				+ ", reviewedBy=" + reviewedBy + ", inspectionDate="
+				+ statusCode + ",inspectionDate="
 				+ inspectionDate + ", inspectedBy=" + inspectedBy + "]";
 	}
 

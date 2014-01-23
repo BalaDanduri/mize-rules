@@ -95,8 +95,6 @@ public class FormInstanceLinkTest extends JPATest {
 		formInstanceLink.setLinkType("Pre-Delivery");
 		formInstanceLink.setLinkDuration("1");
 		formInstanceLink.setStatusCode("DRAFT");
-		formInstanceLink.setReviewedBy("TEST");
-		formInstanceLink.setReviewedDate(Formatter.date(DateTime.now().toString("MM-dd-yyy")));
 		
 		ProductSerial productSerial = entityManager.find(ProductSerial.class, 101000L);
 		formInstanceLink.setProductSerial(productSerial);
