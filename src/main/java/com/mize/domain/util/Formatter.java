@@ -81,6 +81,22 @@ public final class Formatter {
 		return value;
 	}
 	
+	public static boolean isNull(Integer number){
+		int value = 0;
+		if(number != null){
+			value = number.intValue();
+		}		
+		return value <= 0;
+	}
+	
+	public static boolean isNull(Long number){
+		long value = 0;
+		if(number != null){
+			value = number.intValue();
+		}		
+		return value <= 0;
+	}
+	
 	public static double doubleValue(Double dValue){
 		double value = 0.0;
 		if(dValue != null){

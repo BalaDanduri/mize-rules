@@ -31,10 +31,9 @@ import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.form.FormInstance;
+import com.mize.domain.product.ProductRegistration;
 import com.mize.domain.product.ProductSerial;
-import com.mize.domain.util.JodaDateDeserializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateSerializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
 @Entity
@@ -42,16 +41,17 @@ import com.mize.domain.util.JsonDateTimeSerializer;
 public class FormInstanceLink extends MizeEntity {
 	
 	private static final long serialVersionUID = -7681217621881172130L;
-	
+	private String number;
 	private FormInstance formInstance;
 	private ProductSerial productSerial;
+	private ProductRegistration productRegistration;
 	private BusinessEntity linkBusinessEntity;
 	private String linkType;
 	private String linkDuration;
 	private String statusCode;
-	private DateTime reviewedDate;
-	private String reviewedBy;
 	private List<FormInstanceLinkAudit> audits;
+	private DateTime inspectionDate;
+	private String inspectedBy;
 	
 	private User user;
 	
@@ -64,18 +64,16 @@ public class FormInstanceLink extends MizeEntity {
 		OPEN,COMPLETED,DELETED;
 	}
 	
-	public FormInstanceLink(FormInstance formInstance, ProductSerial productSerial, 
+	public FormInstanceLink(FormInstance formInstance, ProductRegistration productRegistration, 
 			BusinessEntity linkBusinessEntity, String linkType, String linkDuration,
-			String statusCode, DateTime reviewedDate, String reviewedBy) {
+			String statusCode) {
 		super();
 		this.formInstance = formInstance;
-		this.productSerial = productSerial;
+		this.productRegistration = productRegistration;
 		this.linkBusinessEntity = linkBusinessEntity;
 		this.linkType = linkType;
 		this.linkDuration = linkDuration;
 		this.statusCode = statusCode;
-		this.reviewedDate = reviewedDate;
-		this.reviewedBy = reviewedBy;
 	}
 
 	@Id
@@ -102,13 +100,13 @@ public class FormInstanceLink extends MizeEntity {
 	}
 	
 	@OneToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="prod_serial_id", nullable = true)
-	public ProductSerial getProductSerial() {
-		return productSerial;
+	@JoinColumn(name="prod_regn_id")
+	public ProductRegistration getProductRegistration() {
+		return productRegistration;
 	}
 	
-	public void setProductSerial(ProductSerial productSerial) {
-		this.productSerial = productSerial;
+	public void setProductRegistration(ProductRegistration productRegistration) {
+		this.productRegistration = productRegistration;
 	}	
 	
 	@OneToOne(fetch=FetchType.EAGER)
@@ -146,29 +144,6 @@ public class FormInstanceLink extends MizeEntity {
 
 	public void setStatusCode(String statusCode) {
 		this.statusCode = statusCode;
-	}
-	
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@Column(name = "reviewed_date",  nullable = true)
-	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateSerializer.class,include=Inclusion.NON_DEFAULT)
-	public DateTime getReviewedDate() {
-		return reviewedDate;
-	}
-	
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateDeserializer.class)
-	public void setReviewedDate(DateTime reviewedDate) {
-		this.reviewedDate = reviewedDate;
-	}
-	
-	@Column( name = "reviewed_by", nullable = true, length = 100)
-	public String getReviewedBy() {
-		return reviewedBy;
-	}
-
-	public void setReviewedBy(String reviewedBy) {
-		this.reviewedBy = reviewedBy;
 	}
 	
 	@OneToMany(cascade={CascadeType.ALL}, fetch= FetchType.EAGER, mappedBy = "formInstanceLink")
@@ -252,20 +227,63 @@ public class FormInstanceLink extends MizeEntity {
 		super.setUpdatedBy(updatedBy);
 	}
 
+	@Column(name = "link_number")
+	public String getNumber() {
+		return number;
+	}
+
+	public void setNumber(String number) {
+		this.number = number;
+	}
+
+	@Column(name = "inspection_date")
+	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
+	@Type(type = "com.mize.domain.util.DateTimeJPA")
+	@JsonSerialize(using = JsonDateTimeSerializer.class, include = Inclusion.NON_NULL)
+	public DateTime getInspectionDate() {
+		return inspectionDate;
+	}
+
+	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
+	public void setInspectionDate(DateTime inspectionDate) {
+		this.inspectionDate = inspectionDate;
+	}
+
+	@Column(name = "inspection_by")
+	public String getInspectedBy() {
+		return inspectedBy;
+	}
+
+	public void setInspectedBy(String inspectedBy) {
+		this.inspectedBy = inspectedBy;
+	}
+
+	@OneToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="prod_serial_id")
+	public ProductSerial getProductSerial() {
+		return productSerial;
+	}
+
+	public void setProductSerial(ProductSerial productSerial) {
+		this.productSerial = productSerial;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result
-				+ ((linkType == null) ? 0 : linkType.hashCode());
+				+ ((inspectedBy == null) ? 0 : inspectedBy.hashCode());
+		result = prime * result
+				+ ((inspectionDate == null) ? 0 : inspectionDate.hashCode());
 		result = prime * result
 				+ ((linkDuration == null) ? 0 : linkDuration.hashCode());
 		result = prime * result
+				+ ((linkType == null) ? 0 : linkType.hashCode());
+		result = prime * result + ((number == null) ? 0 : number.hashCode());		
+		result = prime * result
 				+ ((statusCode == null) ? 0 : statusCode.hashCode());
-		result = prime * result
-				+ ((reviewedDate == null) ? 0 : reviewedDate.hashCode());
-		result = prime * result
-				+ ((reviewedBy == null) ? 0 : reviewedBy.hashCode());
 		return result;
 	}
 
@@ -278,32 +296,46 @@ public class FormInstanceLink extends MizeEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		FormInstanceLink other = (FormInstanceLink) obj;
-		if (linkType == null) {
-			if (other.linkType != null)
+		if (inspectedBy == null) {
+			if (other.inspectedBy != null)
 				return false;
-		} else if (!linkType.equals(other.linkType))
-			return false;		
+		} else if (!inspectedBy.equals(other.inspectedBy))
+			return false;
+		if (inspectionDate == null) {
+			if (other.inspectionDate != null)
+				return false;
+		} else if (!inspectionDate.equals(other.inspectionDate))
+			return false;
 		if (linkDuration == null) {
 			if (other.linkDuration != null)
 				return false;
 		} else if (!linkDuration.equals(other.linkDuration))
 			return false;
+		if (linkType == null) {
+			if (other.linkType != null)
+				return false;
+		} else if (!linkType.equals(other.linkType))
+			return false;
+		if (number == null) {
+			if (other.number != null)
+				return false;
+		} else if (!number.equals(other.number))
+			return false;		
 		if (statusCode == null) {
 			if (other.statusCode != null)
 				return false;
 		} else if (!statusCode.equals(other.statusCode))
 			return false;
-		if (reviewedDate == null) {
-			if (other.reviewedDate != null)
-				return false;
-		} else if (!reviewedDate.equals(other.reviewedDate))
-			return false;
-		if (reviewedBy == null) {
-			if (other.reviewedBy != null)
-				return false;
-		} else if (!reviewedBy.equals(other.reviewedBy))
-			return false;
 		return true;
-	}	
+	}
 
+	@Override
+	public String toString() {
+		return "FormInstanceLink [number=" + number + ", linkType=" + linkType
+				+ ", linkDuration=" + linkDuration + ", statusCode="
+				+ statusCode + ",inspectionDate="
+				+ inspectionDate + ", inspectedBy=" + inspectedBy + "]";
+	}
+
+	
 }
