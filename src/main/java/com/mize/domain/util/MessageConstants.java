@@ -131,6 +131,11 @@ public abstract class MessageConstants implements Serializable{
 	public static final String DUPLICATE_PRODUCT_NAME = "DUPLICATE_PRODUCT_NAME";
 	public static final String DUPLICATE_CATEGORY = "DUPLICATE_CATEGORY";
 	public static final String DUPLICATE_INSTANCE_LINK = "DUPLICATE_INSTANCE_LINK";
+	public static final String PRODUCT_SERIAL_IS_REQUIRED = "PRODUCT_SERIAL_IS_REQUIRED";
+	public static final String INVALID_PRODUCT_SERIAL = "INVALID_PRODUCT_SERIAL";
+	public static final String INVALID_SHIP_LOCATION ="INVALID_SHIP_LOCATION";
+	public static final String DUPLICATE_BRAND_MODEL_SERIAL_COMBINATION = "DUPLICATE_BRAND_MODEL_SERIAL_COMBINATION";
 }
+
 
 
