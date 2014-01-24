@@ -165,6 +165,7 @@ public class ProductRegistration extends MizeEntity {
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Type(type = "com.mize.domain.util.DateTimeJPA")
 	@Column(name = "created_date",updatable=false)
+	@JsonSerialize(using = JsonDateTimeSerializer.class, include = Inclusion.NON_NULL)
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
@@ -173,6 +174,7 @@ public class ProductRegistration extends MizeEntity {
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Type(type = "com.mize.domain.util.DateTimeJPA")
 	@Column(name = "updated_date")
+	@JsonSerialize(using = JsonDateTimeSerializer.class, include = Inclusion.NON_NULL)
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
