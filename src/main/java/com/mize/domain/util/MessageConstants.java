@@ -130,6 +130,7 @@ public abstract class MessageConstants implements Serializable{
 	public static final String DUPLICATE_BRAND_AND_MODEL = "DUPLICATE_BRAND_AND_MODEL";
 	public static final String DUPLICATE_PRODUCT_NAME = "DUPLICATE_PRODUCT_NAME";
 	public static final String DUPLICATE_CATEGORY = "DUPLICATE_CATEGORY";
+	public static final String DUPLICATE_INSTANCE_LINK = "DUPLICATE_INSTANCE_LINK";
 }
 
 
