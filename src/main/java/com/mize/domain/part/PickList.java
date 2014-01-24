@@ -115,6 +115,7 @@ public class PickList extends MizeEntity {
 	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@Column(name = "created_date",updatable = false)
+	@JsonIgnore(value = false)
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
@@ -123,6 +124,7 @@ public class PickList extends MizeEntity {
 	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@Column(name = "updated_date")
+	@JsonIgnore(value = false)
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
@@ -176,8 +178,8 @@ public class PickList extends MizeEntity {
 
 	@Override
 	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
+	@JsonIgnore(false)
 	public void setCreatedDate(DateTime createdDate) {
 		super.createdDate = createdDate;
 	}
@@ -185,7 +187,7 @@ public class PickList extends MizeEntity {
 	@Override
 	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore
+	@JsonIgnore(false)
 	public void setUpdatedDate(DateTime updatedDate) {
 		super.updatedDate = updatedDate;
 	}

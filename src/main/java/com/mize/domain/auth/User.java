@@ -22,7 +22,6 @@ import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -295,11 +294,12 @@ public class User extends MizeEntity implements Comparable<User> {
 	}
 
 	@Transient
-	@JsonIgnore
+	@JsonIgnore(value=false)
 	public List<Group> getGroups() {
 		return groups;
 	}
 
+	@JsonIgnore(false)
 	public void setGroups(List<Group> groups) {
 		this.groups = groups;
 	}
