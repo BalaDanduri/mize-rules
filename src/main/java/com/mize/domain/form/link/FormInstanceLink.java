@@ -226,7 +226,7 @@ public class FormInstanceLink extends MizeEntity {
 
 	@Column(name = "link_number")
 	public String getNumber() {
-		return number;
+		return String.valueOf(id);
 	}
 
 	public void setNumber(String number) {
