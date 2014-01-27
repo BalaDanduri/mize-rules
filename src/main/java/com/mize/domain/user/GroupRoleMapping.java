@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
  
@@ -59,6 +60,7 @@ import com.mize.domain.util.JsonDateTimeSerializer;
    @ManyToOne(fetch=FetchType.LAZY,optional= false)
    @JoinColumn(name="group_id")
    @JsonBackReference(value="groupMapping")
+   @JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
    public Group getGroup() {
      return group;
    }

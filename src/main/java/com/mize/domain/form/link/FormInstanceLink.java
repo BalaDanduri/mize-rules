@@ -16,8 +16,6 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -148,7 +146,6 @@ public class FormInstanceLink extends MizeEntity {
 	
 	@OneToMany(cascade={CascadeType.ALL}, fetch= FetchType.EAGER, mappedBy = "formInstanceLink")
 	@JsonManagedReference(value="form_instance_link")
-	@Fetch(FetchMode.SUBSELECT)
 	public List<FormInstanceLinkAudit> getAudits() {
 		return audits;
 	}
@@ -229,7 +226,7 @@ public class FormInstanceLink extends MizeEntity {
 
 	@Column(name = "link_number")
 	public String getNumber() {
-		return number;
+		return String.valueOf(id);
 	}
 
 	public void setNumber(String number) {
@@ -250,7 +247,7 @@ public class FormInstanceLink extends MizeEntity {
 		this.inspectionDate = inspectionDate;
 	}
 
-	@Column(name = "inspection_by")
+	@Column(name = "inspected_by")
 	public String getInspectedBy() {
 		return inspectedBy;
 	}

@@ -21,6 +21,7 @@ public abstract class MizeEntity implements Serializable{
 	public static final int PRIME = 31;	
 	public static final int HASH_CODE_START = 17;
 	protected UploadError uploadError;
+	@JsonIgnore
 	protected Boolean isValid = Boolean.TRUE;
 			
 	protected Long createdBy;	
@@ -99,6 +100,10 @@ public abstract class MizeEntity implements Serializable{
 	public void setUploadError(UploadError uploadError) {
 		this.isValid = Boolean.FALSE;
 		this.uploadError = uploadError;
+	}
+	
+	public boolean isValid() {
+		return this.isValid.booleanValue();
 	}
 
 	@Override

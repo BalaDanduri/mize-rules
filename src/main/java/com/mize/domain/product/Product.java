@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -512,6 +514,76 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	@Override
 	public int compareTo(Product o) {	
 		return 0;
+	}
+	
+	@Override	
+	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
+	@Type(type="com.mize.domain.util.DateTimeJPA")
+	@Column(name = "created_date",updatable=false)
+	@JsonIgnore(value = false)
+	public DateTime getCreatedDate() {
+		return createdDate;
+	}
+
+	@Override	
+	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
+	@Type(type="com.mize.domain.util.DateTimeJPA")
+	@Column(name = "updated_date")
+	@JsonIgnore(value = false)
+	public DateTime getUpdatedDate() {
+		return updatedDate;
+	}
+
+	@Override
+	@JsonIgnore
+	@Column(name = "created_by",updatable=false)
+	public Long getCreatedBy() {		
+		return super.getCreatedBy();
+	}
+
+	@Override
+	@JsonIgnore
+	@Column(name = "updated_by")
+	public Long getUpdatedBy() {		
+		return super.getUpdatedBy();
+	}
+
+	
+	@Override
+	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	@JsonIgnore(false)
+	public void setCreatedDate(DateTime createdDate) {
+		super.createdDate = createdDate;
+	}
+
+	@Override
+	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	@JsonIgnore(false)
+	public void setUpdatedDate(DateTime updatedDate) {
+		super.updatedDate = updatedDate;
+	}
+
+	@Override
+	@JsonIgnore
+	public void setCreatedBy(Long createdBy) {		
+		super.setCreatedBy(createdBy);
+	}
+
+	@Override
+	@JsonIgnore
+	public void setUpdatedBy(Long updatedBy) {		
+		super.setUpdatedBy(updatedBy);
+	}
+
+	@PrePersist
+	@PreUpdate
+	public void auditFields(){
+		if(createdDate==null && id==null){
+			setCreatedDate(DateTime.now());
+		}
+		setUpdatedDate(DateTime.now());		
 	}
 
 	@Override
