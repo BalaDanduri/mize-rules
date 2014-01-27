@@ -247,7 +247,7 @@ public class FormInstanceLink extends MizeEntity {
 		this.inspectionDate = inspectionDate;
 	}
 
-	@Column(name = "inspection_by")
+	@Column(name = "inspected_by")
 	public String getInspectedBy() {
 		return inspectedBy;
 	}
