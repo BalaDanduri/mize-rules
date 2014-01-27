@@ -101,6 +101,10 @@ public abstract class MizeEntity implements Serializable{
 		this.isValid = Boolean.FALSE;
 		this.uploadError = uploadError;
 	}
+	
+	public boolean isValid() {
+		return this.isValid.booleanValue();
+	}
 
 	@Override
 	public int hashCode() {

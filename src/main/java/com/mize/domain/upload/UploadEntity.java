@@ -2,8 +2,10 @@ package com.mize.domain.upload;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
@@ -15,6 +17,7 @@ import com.mize.domain.auth.User;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.util.ServiceDTO;
 
 public final class UploadEntity extends MizeEntity implements Comparable<UploadEntity> {
 
@@ -262,6 +265,31 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 
 	public void setProdIds(List<Long> prodIds) {
 		this.prodIds = prodIds;
-	}	
+	}
+	
+	@JsonIgnore
+	@SuppressWarnings("rawtypes")
+	public <T> void addToFailureRecord(UploadEntity uploadEntity ,int recordNumber,String entityCode,ServiceDTO<T> dto) {
+		ProcessLog processLog = logMap.get(recordNumber);
+		if(processLog == null){
+			processLog = new ProcessLog();
+			MizeEntity entity = (MizeEntity)((List)uploadEntity.getEntity()).get(recordNumber-1);
+			processLog.setInputRecord(entity);
+			processLog.setEntityId(entity.getId());
+			processLog.setEntityCode(entityCode);
+			processLog.setRecordNumber(recordNumber);
+			logMap.put(recordNumber, processLog);
+			uploadEntity.getProcessLogs().add(processLog);
+		}			
+		Map<String,String> messages =  dto.getValidationMessages();
+		Set<String> msgCodeSet =  messages.keySet();
+		Iterator<String> it = msgCodeSet.iterator();
+		while(it.hasNext()) {
+			ErrorLog errorLog = new ErrorLog();
+			errorLog.setCode(it.next());
+			processLog.getErrorLogs().add(errorLog);
+		}
+				
+	}
 	
 }
