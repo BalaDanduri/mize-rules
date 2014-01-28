@@ -25,10 +25,9 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.auth.User;
 import com.mize.domain.brand.Brand;
 import com.mize.domain.businessentity.BusinessEntity;
@@ -114,8 +113,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	@Column(name = "release_date")
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_NULL)
+	@JsonSerialize(using = JsonDateTimeSerializer.class, include = Inclusion.NON_NULL)	
 	public DateTime getReleaseDate() {
 		return releaseDate;
 	}
@@ -169,8 +167,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 
 	
 	@Transient
-	@JsonSerialize(using=NumberValueSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
+	@JsonSerialize(using=NumberValueSerializer.class,include = Inclusion.NON_DEFAULT)
 	public Double getPrice() {
 		return price;
 	}
@@ -486,8 +483,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="tenant_id") 
-	@JsonSerialize(using=JPASerializer.class)
-	@JsonInclude(Include.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public BusinessEntity getTenant() {
 		return tenant;
 	}

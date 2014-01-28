@@ -24,11 +24,9 @@ import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityComment;
@@ -86,8 +84,7 @@ public class ProductSerial extends MizeEntity{
 
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="tenant_id")
-	@JsonSerialize(using=JPASerializer.class)
-	@JsonInclude(Include.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public BusinessEntity getTenant() {
 		return tenant;
 	}
@@ -117,8 +114,7 @@ public class ProductSerial extends MizeEntity{
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="ship_be_id", nullable = true)
-	@JsonSerialize(using=JPASerializer.class)
-	@JsonInclude(Include.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public BusinessEntity getShippedBusinessEntity() {
 		return shippedBusinessEntity;
 	}
@@ -130,8 +126,7 @@ public class ProductSerial extends MizeEntity{
 	@Column(name = "delivery_date", nullable = true)
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_NULL)
+	@JsonSerialize(using = JsonDateTimeSerializer.class, include = Inclusion.NON_NULL)	
 	public DateTime getDeliveryDate() {
 		return deliveryDate;
 	}
@@ -145,8 +140,7 @@ public class ProductSerial extends MizeEntity{
 	@Column(name = "build_date", nullable = true)
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_NULL)
+	@JsonSerialize(using = JsonDateTimeSerializer.class, include = Inclusion.NON_NULL)
 	public DateTime getBuildDate() {
 		return buildDate;
 	}
@@ -176,8 +170,7 @@ public class ProductSerial extends MizeEntity{
 	}
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "productSerial",orphanRemoval= true)
-	@JsonSerialize(using=JPASerializer.class)
-	@JsonInclude(Include.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public List<ProductSerialComment> getComments() {
 		return comments;
 	}
@@ -198,8 +191,7 @@ public class ProductSerial extends MizeEntity{
 	@Column(name = "ship_date", nullable = true)
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_NULL)
+	@JsonSerialize(using = JsonDateTimeSerializer.class, include = Inclusion.NON_NULL)
 	public DateTime getShipDate() {
 		return shipDate;
 	}
@@ -209,68 +201,7 @@ public class ProductSerial extends MizeEntity{
 	public void setShipDate(DateTime shipDate) {
 		this.shipDate = shipDate;
 	}
-	
-	@Override	
-	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
-	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@Column(name = "created_date",updatable=false)
-	@JsonIgnore(value = false)
-	public DateTime getCreatedDate() {
-		return createdDate;
-	}
 
-	@Override	
-	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
-	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@Column(name = "updated_date")
-	@JsonIgnore(value = false)
-	public DateTime getUpdatedDate() {
-		return updatedDate;
-	}
-
-	@Override
-	@JsonIgnore
-	@Column(name = "created_by",updatable=false)
-	public Long getCreatedBy() {		
-		return super.getCreatedBy();
-	}
-
-	@Override
-	@JsonIgnore
-	@Column(name = "updated_by")
-	public Long getUpdatedBy() {		
-		return super.getUpdatedBy();
-	}
-
-	
-	@Override
-	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore(false)
-	public void setCreatedDate(DateTime createdDate) {
-		super.createdDate = createdDate;
-	}
-
-	@Override
-	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore(false)
-	public void setUpdatedDate(DateTime updatedDate) {
-		super.updatedDate = updatedDate;
-	}
-
-	@Override
-	@JsonIgnore
-	public void setCreatedBy(Long createdBy) {		
-		super.setCreatedBy(createdBy);
-	}
-
-	@Override
-	@JsonIgnore
-	public void setUpdatedBy(Long updatedBy) {		
-		super.setUpdatedBy(updatedBy);
-	}
-	
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
