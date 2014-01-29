@@ -12,6 +12,7 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 	private String longDesc;
 	private Integer severity;
 	private String field;
+	private String fieldKey;
 	private Locale locale = new Locale();
 
 	public enum Severity {
@@ -34,6 +35,18 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 			return val;
 		}
 	}
+	
+	
+	public AppMessage(String code, String shortDesc, String longDesc, Integer severity, String field, String fieldKey, MessageType.Type messageType) {
+		this.code = code;		
+		this.shortDesc = shortDesc;
+		this.longDesc = longDesc;
+		this.severity = severity;
+		this.field = field;
+		this.fieldKey = fieldKey;
+		this.messageType.setType(messageType.toString());
+	}
+	
 	public AppMessage(String code,String shortDesc,String longDesc) {
 		this.code = code;
 		this.shortDesc = shortDesc;
@@ -119,18 +132,40 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 	public void setField(String field) {
 		this.field = field;
 	}
+	
+	public String getFieldKey() {
+		return fieldKey;
+	}
+
+	public void setFieldKey(String fieldKey) {
+		this.fieldKey = fieldKey;
+	}
 
 	@Override
 	public String toString() {
-		return "ApplicationMessage [messageType=" + messageType + ", code=" + code + ", shortDesc=" + shortDesc +
-				", longDesc=" + longDesc + ", severity=" + severity + ", id=" + id + "]";
+		return "AppMessage [messageType=" + messageType + ", code=" + code
+				+ ", shortDesc=" + shortDesc + ", longDesc=" + longDesc
+				+ ", severity=" + severity + ", field=" + field + ", fieldKey="
+				+ fieldKey + ", locale=" + locale + "]";
 	}
-
 	
 	@Override
 	public int hashCode() {
+		final int prime = 31;
 		int result = super.hashCode();
-		result = PRIME * result + ((code == null) ? 0 : code.hashCode());
+		result = prime * result + ((code == null) ? 0 : code.hashCode());
+		result = prime * result + ((field == null) ? 0 : field.hashCode());
+		result = prime * result
+				+ ((fieldKey == null) ? 0 : fieldKey.hashCode());
+		result = prime * result + ((locale == null) ? 0 : locale.hashCode());
+		result = prime * result
+				+ ((longDesc == null) ? 0 : longDesc.hashCode());
+		result = prime * result
+				+ ((messageType == null) ? 0 : messageType.hashCode());
+		result = prime * result
+				+ ((severity == null) ? 0 : severity.hashCode());
+		result = prime * result
+				+ ((shortDesc == null) ? 0 : shortDesc.hashCode());
 		return result;
 	}
 
@@ -147,6 +182,41 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 			if (other.code != null)
 				return false;
 		} else if (!code.equals(other.code))
+			return false;
+		if (field == null) {
+			if (other.field != null)
+				return false;
+		} else if (!field.equals(other.field))
+			return false;
+		if (fieldKey == null) {
+			if (other.fieldKey != null)
+				return false;
+		} else if (!fieldKey.equals(other.fieldKey))
+			return false;
+		if (locale == null) {
+			if (other.locale != null)
+				return false;
+		} else if (!locale.equals(other.locale))
+			return false;
+		if (longDesc == null) {
+			if (other.longDesc != null)
+				return false;
+		} else if (!longDesc.equals(other.longDesc))
+			return false;
+		if (messageType == null) {
+			if (other.messageType != null)
+				return false;
+		} else if (!messageType.equals(other.messageType))
+			return false;
+		if (severity == null) {
+			if (other.severity != null)
+				return false;
+		} else if (!severity.equals(other.severity))
+			return false;
+		if (shortDesc == null) {
+			if (other.shortDesc != null)
+				return false;
+		} else if (!shortDesc.equals(other.shortDesc))
 			return false;
 		return true;
 	}

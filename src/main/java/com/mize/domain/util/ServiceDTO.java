@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mize.domain.appmsg.AppMessage;
+import com.mize.domain.appmsg.MessageType;
 import com.mize.domain.exception.MizeError;
 
 public final class ServiceDTO<T> implements ServiceLiteral{
@@ -142,7 +142,7 @@ public final class ServiceDTO<T> implements ServiceLiteral{
 	
 	@JsonIgnore
 	public boolean isValid(){
-		return !(hasErrors() || hasValidations());
+		return !(hasErrors() || hasValidations() || hasValidationErrors());
 	}
 	
 	@JsonIgnore
@@ -193,7 +193,32 @@ public final class ServiceDTO<T> implements ServiceLiteral{
 		return Formatter.intValue(severity);
 	}
 
+	@JsonIgnore
+	public void addValidationMessage(String code, String shortDesc, Integer severity, String field, String fieldKey) {
+		if(appMessages == null){
+			appMessages = new ArrayList<AppMessage>();
+		}
+		appMessages.add(new AppMessage(code,shortDesc,shortDesc,severity, field,fieldKey,MessageType.Type.Validation));
+		if(Formatter.intValue(this.severity) > Formatter.intValue(severity)){
+			this.severity = severity;
+		}
+	}
+	
+	@JsonIgnore
+	public void addValidationMessages(List<AppMessage> messages) {
+		if(appMessages == null){
+			appMessages = new ArrayList<AppMessage>();
+		}
+		if(messages != null){
+			appMessages.addAll(messages);
+		}
+	}
 
+	@JsonIgnore
+	public boolean hasValidationErrors(){
+		return (appMessages!= null && appMessages.size() > 0) ? true : false;
+	}
+	
 	@Override
 	public String toString() {
 		return "ServiceDTO [errors=" + errors

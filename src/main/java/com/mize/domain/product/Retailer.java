@@ -1,8 +1,7 @@
 package com.mize.domain.product;
 
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.common.Entity;
 import com.mize.domain.util.DecimalValueDeserializer;
 import com.mize.domain.util.NumberValueSerializer;

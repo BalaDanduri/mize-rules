@@ -3,7 +3,7 @@ package com.mize.domain.exception;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class MizeException extends RuntimeException {
 	private static final long serialVersionUID = -438497898258707101L;
