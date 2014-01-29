@@ -102,6 +102,7 @@ public abstract class MizeEntity implements Serializable{
 		this.uploadError = uploadError;
 	}
 	
+	@JsonIgnore
 	public boolean isValid() {
 		return this.isValid.booleanValue();
 	}
