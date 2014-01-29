@@ -16,10 +16,14 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
+import com.mize.domain.util.JsonDateTimeSerializer;
 
 @Entity
 @Table(name = "form_instance")
@@ -84,8 +88,11 @@ public class FormInstance extends MizeEntity {
 	
 	@Override	
 	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
+	@Column(name = "created_date", updatable = false)
 	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@Column(name = "created_date")
+	@JsonSerialize(using=JsonDateTimeSerializer.class)	
+	@JsonInclude(Include.NON_NULL)
+	@JsonIgnore(value=false)
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
@@ -93,23 +100,26 @@ public class FormInstance extends MizeEntity {
 	@Override
 	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore
+	@JsonIgnore(value=false)
 	public void setCreatedDate(DateTime createdDate) {
 		super.createdDate = createdDate;
 	}
 	
-	@Override	
+	
 	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
+	@Column(name = "updated_date", nullable = true)
 	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@Column(name = "updated_date")
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	@JsonIgnore(value=false)
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
 	
-	@Override
+	
 	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore
+	@JsonIgnore(value=false)
 	public void setUpdatedDate(DateTime updatedDate) {
 		super.updatedDate = updatedDate;
 	}
