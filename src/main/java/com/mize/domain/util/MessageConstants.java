@@ -144,6 +144,8 @@ public abstract class MessageConstants implements Serializable{
 	public static final String MODEL_REQUIRED = "MODEL_REQUIRED";
 	public static final String FORM_NAME_REQUIRED = "FORM_NAME_REQUIRED";
 	public static final String DUPLICATE_FORM_NAME = "DUPLICATE_FORM_NAME";
+	public static final String LOCALE_IS_REQUIRED = "LOCALE_IS_REQUIRED";
+	public static final String BUILD_DATE_LESS_THAN_SHIP_DATE = "BUILD_DATE_LESS_THAN_SHIP_DATE";
 }
 
 
