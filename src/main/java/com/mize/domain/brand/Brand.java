@@ -226,7 +226,7 @@ public class Brand extends MizeEntity implements Comparable<Brand>{
 		return result;
 	}
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL,mappedBy="user")
+	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL,mappedBy="brand")
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)	
 	public List<UserBrandMapping> getUserBrands() {
 		return userBrands;
