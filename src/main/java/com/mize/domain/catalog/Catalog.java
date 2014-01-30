@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.Fetch;
@@ -24,6 +25,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
@@ -40,6 +42,8 @@ public class Catalog extends MizeEntity {
 	private String isActive;
 	private String catalogName;
 	private List<CatalogEntry> catalogEntry;
+	@Transient
+	private User user;
 	
 	public Catalog() {
 		super();
@@ -162,31 +166,40 @@ public class Catalog extends MizeEntity {
 
 	
 	@Override
-	@JsonIgnore
+	@JsonIgnore(value=false)
 	@Column(name = "created_by")
 	public Long getCreatedBy() {		
 		return super.getCreatedBy();
 	}
 	
 	@Override
-	@JsonIgnore
+	@JsonIgnore(value=false)
 	public void setCreatedBy(Long createdBy) {		
 		super.setCreatedBy(createdBy);
 	}
 	
 	@Override
-	@JsonIgnore
+	@JsonIgnore(value=false)
 	@Column(name = "updated_by")
 	public Long getUpdatedBy() {		
 		return super.getUpdatedBy();
 	}
 	
 	@Override
-	@JsonIgnore
+	@JsonIgnore(value=false)
 	public void setUpdatedBy(Long updatedBy) {		
 		super.setUpdatedBy(updatedBy);
 	}
 
+	@Transient
+	public User getUser() {
+		return user;
+	}
+	
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
 	@Override
 	public int hashCode() {
 		int result = super.hashCode();
