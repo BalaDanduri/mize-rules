@@ -2,10 +2,8 @@ package com.mize.domain.upload;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -13,6 +11,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.mize.domain.appmsg.AppMessage;
 import com.mize.domain.auth.User;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
@@ -281,12 +280,11 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 			logMap.put(recordNumber, processLog);
 			uploadEntity.getProcessLogs().add(processLog);
 		}			
-		Map<String,String> messages =  dto.getValidationMessages();
-		Set<String> msgCodeSet =  messages.keySet();
-		Iterator<String> it = msgCodeSet.iterator();
-		while(it.hasNext()) {
+		List<AppMessage> messages =  dto.getAppMessages();		
+		for(AppMessage message : messages) {
 			ErrorLog errorLog = new ErrorLog();
-			errorLog.setCode(it.next());
+			errorLog.setCode(message.getShortDesc());
+			errorLog.setField(message.getField());
 			processLog.getErrorLogs().add(errorLog);
 		}
 				
