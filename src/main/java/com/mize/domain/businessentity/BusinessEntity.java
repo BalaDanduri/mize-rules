@@ -61,6 +61,12 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 		this.id = id;
 	}
 	
+	public BusinessEntity(Long id,String code,String typeCode) {
+		this.id = id;
+		this.code = code;
+		this.typeCode = typeCode;
+	}
+	
 	public BusinessEntity(Long id, String code, String name, String typeCode, BusinessEntityIntl intl, 
 			BusinessEntityAddress address,String url,String hoursOfOp) {
 		super();
