@@ -70,6 +70,8 @@ public abstract class MessageConstants implements Serializable{
 	public static final String INVALID_BUSINESS_ENTITY_CODE = "INVALID_BUSINESS_ENTITY_CODE";
 	public static final String INVALID_BUSINESS_ENTITY_TYPE = "INVALID_BUSINESS_ENTITY_TYPE";
 	public static final String INVALID_CURRENCY = "INVALID_CURRENCY";
+	public static final String INVALID_LOCALE = "INVALID_LOCALE";
+	public static final String INVALID_BUSINESS_ENTITY_NAME = "INVALID_BUSINESS_ENTITY_NAME";
 	public static final String INVALID_BRAND = "INVALID_BRAND";
 	public static final String INVALID_PART_CODE = "INVALID_PART_CODE";
 	public static final String INVALID_TEMPLATE = "INVALID_TEMPLATE";
