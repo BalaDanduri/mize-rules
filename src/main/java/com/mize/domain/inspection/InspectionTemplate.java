@@ -16,6 +16,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -205,6 +207,7 @@ public class InspectionTemplate extends MizeEntity implements Comparable<Inspect
 	}
 	
 	@OneToMany(fetch = FetchType.EAGER, cascade={CascadeType.ALL}, mappedBy="template" )
+	@Fetch(FetchMode.SUBSELECT)
 	public List<InspectionTemplateIntl> getTemplateIntls() {
 		return templateIntls;
 	}

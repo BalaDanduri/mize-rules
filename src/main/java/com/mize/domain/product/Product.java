@@ -19,6 +19,8 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
@@ -135,6 +137,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	}	
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "product",orphanRemoval= true)
+	@Fetch(FetchMode.SUBSELECT)
 	public List<ProductIntl> getProductIntl() {
 		return productIntl;
 	}

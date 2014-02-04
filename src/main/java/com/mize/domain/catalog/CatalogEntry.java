@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -115,6 +117,7 @@ public class CatalogEntry extends MizeEntity {
 	}
 
 	@OneToMany(fetch = FetchType.EAGER, cascade={CascadeType.ALL}, mappedBy = "catalogEntry" ,orphanRemoval= true)
+	@Fetch(FetchMode.SUBSELECT)
 	@JsonManagedReference(value="catlog_entry")
 	public List<CatalogEntryIntl> getCatalogEntryIntl() {
 		return catalogEntryIntl;
