@@ -110,14 +110,14 @@ import com.mize.domain.util.JsonDateTimeSerializer;
 	}
 
 	@Override
-	@JsonIgnore
+	@JsonIgnore(value=false)
 	@Column(name = "created_by")
 	public Long getCreatedBy() {		
 		return super.getCreatedBy();
 	}
 
 	@Override
-	@JsonIgnore
+	@JsonIgnore(value=false)
 	@Column(name = "updated_by")
 	public Long getUpdatedBy() {		
 		return super.getUpdatedBy();
@@ -126,7 +126,7 @@ import com.mize.domain.util.JsonDateTimeSerializer;
 	@Override
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore
+	@JsonIgnore(false)
 	public void setCreatedDate(DateTime createdDate) {
 		super.createdDate = createdDate;
 	}
@@ -134,19 +134,19 @@ import com.mize.domain.util.JsonDateTimeSerializer;
 	@Override
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore
+	@JsonIgnore(false)
 	public void setUpdatedDate(DateTime updatedDate) {
 		super.updatedDate = updatedDate;
 	}
 
 	@Override
-	@JsonIgnore
+	@JsonIgnore(value=false)
 	public void setCreatedBy(Long createdBy) {		
 		super.setCreatedBy(createdBy);
 	}
 
 	@Override
-	@JsonIgnore
+	@JsonIgnore(value=false)
 	public void setUpdatedBy(Long updatedBy) {		
 		super.setUpdatedBy(updatedBy);
 	}
