@@ -25,9 +25,11 @@ public abstract class MizeEntity implements Serializable{
 	protected Boolean isValid = Boolean.TRUE;
 			
 	protected Long createdBy;	
+	@JsonIgnore
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	protected DateTime createdDate;	
-	protected Long updatedBy;	
+	protected Long updatedBy;
+	@JsonIgnore
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	protected DateTime updatedDate;	
 	protected Long id;
