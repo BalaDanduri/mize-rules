@@ -78,6 +78,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	private DateTime releaseDate;
 	@Transient
 	private User user;
+	//private List<ProductCategory> categories = new ArrayList<ProductCategory>();	
 
 	public enum Source{
 		MIZE(1),AMAZON(2),ETILIZE(3),BestBuy(4),Sears(5),Ebay(6);
@@ -92,6 +93,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	
 	public Product() {
 		category = new HashSet<ProductCategory>();
+		//categories = new ArrayList<ProductCategory>();
 		productSource = new ProductSource();
 		productDetails = new ProductDetails();
 	}
@@ -372,6 +374,15 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 		}
 		return Long.valueOf(Source.ETILIZE.getValue());
 	}
+	
+	/*@Transient
+	public List<ProductCategory> getCategories() {
+		return categories;
+	}
+	
+	public void setCategories(List<ProductCategory> categories) {
+		this.categories = categories;
+	}*/
 
 	@Override
 	public boolean equals(Object obj) {
