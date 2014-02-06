@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -99,6 +101,7 @@ public class PickList extends MizeEntity {
 	}
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "pickList", orphanRemoval= true)
+	@Fetch(FetchMode.SUBSELECT)
 	@JsonManagedReference(value="pickListItem")
 	public List<PickListItem> getListItems() {
 		return listItems;

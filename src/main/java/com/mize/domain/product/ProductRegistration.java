@@ -22,6 +22,8 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
@@ -120,7 +122,8 @@ public class ProductRegistration extends MizeEntity {
 	@Column(name = "cust_delivery_date", nullable = true)
 	@DateTimeFormat (pattern="MM-dd-yyyy")
 	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateTimeSerializer.class, include = Inclusion.NON_NULL)
+	@JsonSerialize(using = JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public DateTime getCustomerDeliveryDate() {
 		return customerDeliveryDate;
 	}
@@ -129,7 +132,8 @@ public class ProductRegistration extends MizeEntity {
 	@Column(name = "purchase_date", nullable = true)
 	@DateTimeFormat (pattern="MM-dd-yyyy")
 	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateTimeSerializer.class, include = Inclusion.NON_NULL)
+	@JsonSerialize(using = JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public DateTime getPurchaseDate() {
 		return purchaseDate;
 	}
@@ -138,7 +142,8 @@ public class ProductRegistration extends MizeEntity {
 	@Column(name = "warranty_expiry_date", nullable = true)
 	@DateTimeFormat (pattern="MM-dd-yyyy")
 	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateTimeSerializer.class, include = Inclusion.NON_NULL)
+	@JsonSerialize(using = JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public DateTime getWarrantyExpiryDate() {
 		return warrantyExpiryDate;
 	}
@@ -197,7 +202,8 @@ public class ProductRegistration extends MizeEntity {
 	@Column(name = "regn_date ", nullable = true)
 	@DateTimeFormat (pattern="MM-dd-yyyy")
 	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateTimeSerializer.class, include = Inclusion.NON_NULL)
+	@JsonSerialize(using = JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public DateTime getRegistrationDate() {
 		return registrationDate;
 	}

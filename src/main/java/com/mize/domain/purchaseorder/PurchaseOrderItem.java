@@ -18,6 +18,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -273,6 +275,7 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 		this.itemId = itemId;
 	}
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "orderItem",orphanRemoval= true)
+	@Fetch(FetchMode.SUBSELECT)
 	public List<PurchaseOrderItemWarehourse> getWarehourses() {
 		return warehourses;
 	}

@@ -108,7 +108,8 @@ public class UserBrandMapping extends MizeEntity implements Comparable<UserBrand
 	
 	@Override
 	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)		
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
+	@JsonIgnore(value=false)
 	public void setCreatedDate(DateTime createdDate) {
 		super.createdDate = createdDate;
 	}
@@ -125,32 +126,34 @@ public class UserBrandMapping extends MizeEntity implements Comparable<UserBrand
 	
 	
 	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)		
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
+	@JsonIgnore(value=false)
 	public void setUpdatedDate(DateTime updatedDate) {
 		super.updatedDate = updatedDate;
 	}
 	
 	@Override	
+	@JsonIgnore(value=false)
 	@Column(name = "created_by", nullable = true, length = 20, updatable = false)
 	public Long getCreatedBy() {		
 		return super.getCreatedBy();
 	}
 	
 	@Override
-	@JsonIgnore
+	@JsonIgnore(value=false)
 	public void setCreatedBy(Long createdBy) {		
 		super.setCreatedBy(createdBy);
 	}
 	
 	@Override
-	@JsonIgnore
+	@JsonIgnore(value=false)
 	@Column(name = "updated_by", nullable = true, length = 20)
 	public Long getUpdatedBy() {		
 		return super.getUpdatedBy();
 	}
 	
 	@Override
-	@JsonIgnore
+	@JsonIgnore(value=false)
 	public void setUpdatedBy(Long updatedBy) {		
 		super.setUpdatedBy(updatedBy);
 	}

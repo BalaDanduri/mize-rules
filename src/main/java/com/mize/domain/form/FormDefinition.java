@@ -115,7 +115,7 @@ public class FormDefinition extends MizeEntity {
 	
 	@Column( name = "form_code", nullable = true, length = 30)
 	public String getFormCode() {
-		return formCode;
+		return String.valueOf(id);
 	}
 
 	public void setFormCode(String formCode) {

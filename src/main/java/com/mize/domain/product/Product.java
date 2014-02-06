@@ -19,12 +19,16 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
@@ -35,8 +39,9 @@ import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.DecimalValueDeserializer;
 import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
+import com.mize.domain.util.JodaDateDeserializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.util.JsonDateSerializer;
 import com.mize.domain.util.NumberValueSerializer;
 
 @javax.persistence.Entity
@@ -73,6 +78,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	private DateTime releaseDate;
 	@Transient
 	private User user;
+	//private List<ProductCategory> categories = new ArrayList<ProductCategory>();	
 
 	public enum Source{
 		MIZE(1),AMAZON(2),ETILIZE(3),BestBuy(4),Sears(5),Ebay(6);
@@ -87,6 +93,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	
 	public Product() {
 		category = new HashSet<ProductCategory>();
+		//categories = new ArrayList<ProductCategory>();
 		productSource = new ProductSource();
 		productDetails = new ProductDetails();
 	}
@@ -111,15 +118,16 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	
 	
 	@Column(name = "release_date")
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@DateTimeFormat (pattern="MM-dd-yyyy")
 	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateTimeSerializer.class, include = Inclusion.NON_NULL)	
+	@JsonSerialize(using = JsonDateSerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public DateTime getReleaseDate() {
 		return releaseDate;
 	}
 	
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	@JsonDeserialize(using=JodaDateDeserializer.class)	
 	public void setReleaseDate(DateTime releaseDate) {
 		this.releaseDate = releaseDate;
 	}	
@@ -135,6 +143,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	}	
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "product",orphanRemoval= true)
+	@Fetch(FetchMode.SUBSELECT)
 	public List<ProductIntl> getProductIntl() {
 		return productIntl;
 	}
@@ -365,6 +374,15 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 		}
 		return Long.valueOf(Source.ETILIZE.getValue());
 	}
+	
+	/*@Transient
+	public List<ProductCategory> getCategories() {
+		return categories;
+	}
+	
+	public void setCategories(List<ProductCategory> categories) {
+		this.categories = categories;
+	}*/
 
 	@Override
 	public boolean equals(Object obj) {

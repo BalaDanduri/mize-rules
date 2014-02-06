@@ -69,6 +69,9 @@ public abstract class MessageConstants implements Serializable{
 	public static final String BUSINESS_ENTITY_CODE_ALL_READY_EXISTS = "BUSINESS_ENTITY_CODE_ALL_READY_EXISTS";
 	public static final String INVALID_BUSINESS_ENTITY_CODE = "INVALID_BUSINESS_ENTITY_CODE";
 	public static final String INVALID_BUSINESS_ENTITY_TYPE = "INVALID_BUSINESS_ENTITY_TYPE";
+	public static final String INVALID_CURRENCY = "INVALID_CURRENCY";
+	public static final String INVALID_LOCALE = "INVALID_LOCALE";
+	public static final String INVALID_BUSINESS_ENTITY_NAME = "INVALID_BUSINESS_ENTITY_NAME";
 	public static final String INVALID_BRAND = "INVALID_BRAND";
 	public static final String INVALID_PART_CODE = "INVALID_PART_CODE";
 	public static final String INVALID_TEMPLATE = "INVALID_TEMPLATE";
@@ -149,6 +152,12 @@ public abstract class MessageConstants implements Serializable{
 	public static final String DUPLICATE_FORM_NAME = "DUPLICATE_FORM_NAME";
 	public static final String LOCALE_IS_REQUIRED = "LOCALE_IS_REQUIRED";
 	public static final String BUILD_DATE_LESS_THAN_SHIP_DATE = "BUILD_DATE_LESS_THAN_SHIP_DATE";
+	
+	public static final String ATLEAST_ONE_ATTRIBUTE_REQUIRED = "ATLEAST_ONE_ATTRIBUTE_REQUIRED";
+	public static final String  ENTITY_PARAMETER_CODE_REQUIRED = "ENTITY_PARAMETER_CODE_REQUIRED";
+	public static final String  ENTITY_PARAMETER_VALUE_REQUIRED = "ENTITY_PARAMETER_VALUE_REQUIRED";
+	public static final String  ATTRIBUTE_CODE_IS_REQUIRED = "ATTRIBUTE_CODE_IS_REQUIRED";
+	public static final String  ATTRIBUTE_VALUE_REQUIRED = "ATTRIBUTE_VALUE_REQUIRED";
 }
 
 
