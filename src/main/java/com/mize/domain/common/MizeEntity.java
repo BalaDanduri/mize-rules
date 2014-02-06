@@ -26,9 +26,11 @@ public abstract class MizeEntity implements Serializable{
 			
 	protected Long createdBy;	
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonIgnore
 	protected DateTime createdDate;	
 	protected Long updatedBy;	
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonIgnore
 	protected DateTime updatedDate;	
 	protected Long id;
 
