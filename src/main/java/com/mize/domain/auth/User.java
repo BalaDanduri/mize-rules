@@ -64,6 +64,8 @@ public class User extends MizeEntity implements Comparable<User> {
     private UserProfilePrivacy privacy;
 	private List<Group> groups = new ArrayList<Group>();
     private List<UserGroup> userGroups = new ArrayList<UserGroup>();
+    
+    @Transient
 	private List<ProductRegister> productRegisters = new ArrayList<ProductRegister>();
 	private List<UserBrandMapping> userBrandMapping = new ArrayList<UserBrandMapping>();
 	private List<UserAddress> addresses = new ArrayList<UserAddress>();
@@ -379,11 +381,8 @@ public class User extends MizeEntity implements Comparable<User> {
 	public void setUpdatedDate(DateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}
-	
-	@OneToMany(fetch = FetchType.LAZY, cascade =CascadeType.ALL)
-	@JoinColumn(name="prod_regn_id") 
-	@JsonManagedReference(value="user_productRegisters")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+
+	@Transient
 	public List<ProductRegister> getProductRegisters() {
 		return productRegisters;
 	}
