@@ -145,7 +145,6 @@ public class ProductRegister extends MizeEntity implements Comparable<ProductReg
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id", nullable = true)
-	@JsonBackReference(value="user_productRegisters")
 	public User getUser() {
 		return user;
 	}

@@ -264,19 +264,19 @@ public class ProductRegistration extends MizeEntity {
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateDeserializer.class)	
+	@JsonDeserialize(using=JodaDateDeserializer.class)
 	public void setCustomerDeliveryDate(DateTime customerDeliveryDate) {
 		this.customerDeliveryDate = customerDeliveryDate;
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateDeserializer.class)	
+	@JsonDeserialize(using=JodaDateDeserializer.class)
 	public void setPurchaseDate(DateTime purchaseDate) {
 		this.purchaseDate = purchaseDate;
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateDeserializer.class)	
+	@JsonDeserialize(using=JodaDateDeserializer.class)
 	public void setWarrantyExpiryDate(DateTime warrantyExpireDate) {
 		this.warrantyExpiryDate = warrantyExpireDate;
 	}
@@ -327,7 +327,7 @@ public class ProductRegistration extends MizeEntity {
 	
 
 	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateDeserializer.class)	
+	@JsonDeserialize(using=JodaDateDeserializer.class)
 	public void setRegistrationDate(DateTime registrationDate) {
 		this.registrationDate = registrationDate;
 	}
