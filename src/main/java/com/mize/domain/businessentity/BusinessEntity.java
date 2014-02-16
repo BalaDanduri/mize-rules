@@ -82,6 +82,10 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 		this.beAttribute.setHoursOfOp(hoursOfOp);
 	}
 
+	public enum TypeCode{
+		dealer,company,service_center,brand;
+	}
+	
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
