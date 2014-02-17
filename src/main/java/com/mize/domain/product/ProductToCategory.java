@@ -1,6 +1,5 @@
 package com.mize.domain.product;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -47,7 +46,7 @@ public class ProductToCategory extends MizeEntity{
 		this.id = id;
 	}
 
-	@OneToOne(cascade={CascadeType.ALL},fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="prod_id")
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public Product getProduct() {
@@ -58,7 +57,7 @@ public class ProductToCategory extends MizeEntity{
 		this.product = product;
 	}
 
-	@OneToOne(cascade={CascadeType.ALL},fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="prod_cat_id")
 	public ProductCategory getProductCategory() {
 		return productCategory;
