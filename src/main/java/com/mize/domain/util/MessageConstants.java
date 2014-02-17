@@ -159,6 +159,9 @@ public abstract class MessageConstants implements Serializable{
 	public static final String ATTRIBUTE_VALUE_REQUIRED = "ATTRIBUTE_VALUE_REQUIRED";
 	public static final String LANGUAGE_CODE_IS_REQUIRED = "LANGUAGE_CODE_IS_REQUIRED";
 	public static final String COUNTRY_CODE_IS_REQUIRED = "COUNTRY_CODE_IS_REQUIRED";
+	public static final String ORDER_SEQUENCE_NUMARIC = "ORDER_SEQUENCE_NUMARIC";
+	public static final String IS_ACTIVE_VALUE_INVALID = "IS_ACTIVE_VALUE_INVALID";
+	public static final String IS_DEFAULT_VALUE_INVALID = "IS_DEFAULT_VALUE_INVALID";
 }
 
 
