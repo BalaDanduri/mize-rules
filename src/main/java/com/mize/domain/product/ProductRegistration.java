@@ -27,6 +27,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
+import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityComment;
@@ -58,6 +59,9 @@ public class ProductRegistration extends MizeEntity {
 	private String registrationSource;
 	private String registrationApplication;
 	private String registrationIndustry;
+	
+	@Transient
+	private User user;
 	
 	@Transient
 	private EntityComment entityComment;
@@ -229,6 +233,15 @@ public class ProductRegistration extends MizeEntity {
 		return registrationIndustry;
 	}
 
+	@Transient
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
 
 	@Override
 	public void setId(Long id) {
@@ -450,7 +463,7 @@ public class ProductRegistration extends MizeEntity {
 				+ ", registrationSource=" + registrationSource
 				+ ", registrationType=" + registrationType + ", statusCode="
 				+ statusCode + ", tenant=" + tenant + ", warrantyExpiryDate="
-				+ warrantyExpiryDate + "]";
+				+ warrantyExpiryDate +", user=" + user +  "]";
 	}
 
 
