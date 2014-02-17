@@ -9,6 +9,9 @@ public abstract class MessageConstants implements Serializable{
 	public static final String ENTITY_BRAND_NAME_REQUIRED = "ENTITY_BRAND_NAME_REQUIRED";
 	public static final String ADDRESS_REQUIRED = "ADDRESS_REQUIRED";
 	public static final String INVALID_ADDRESS = "INVALID_ADDRESS";
+	public static final String INVALID_ZIP = "INVALID_ZIP";
+	public static final String INVALID_STATE = "INVALID_STATE";
+	public static final String INVALID_COUNTRY = "INVALID_COUNTRY";
 	public static final String INVALID_BRAND_NAME = "INVALID_BRAND_NAME";
 	public static final String INVALID_DATE_RANGE = "INVALID_DATE_RANGE";
 	public static final String BRAND_NAME_REQUIRED = "BRAND_NAME_REQUIRED";
@@ -67,12 +70,22 @@ public abstract class MessageConstants implements Serializable{
 	public static final String FORM_ALREADY_EXISTS = "FORM_ALREADY_EXISTS";
 	public static final String BUSINESS_ENTITY_CODE_REQUIRED = "BUSINESS_ENTITY_CODE_REQUIRED";
 	public static final String BUSINESS_ENTITY_CODE_ALL_READY_EXISTS = "BUSINESS_ENTITY_CODE_ALL_READY_EXISTS";
+	public static final String INVALID_PARENT_ENTITY_CODE = "INVALID_PARENT_ENTITY_CODE";
 	public static final String INVALID_BUSINESS_ENTITY_CODE = "INVALID_BUSINESS_ENTITY_CODE";
 	public static final String INVALID_BUSINESS_ENTITY_TYPE = "INVALID_BUSINESS_ENTITY_TYPE";
+	public static final String INVALID_PARENT_BUSINESS_ENTITY_TYPE = "INVALID_PARENT_BUSINESS_ENTITY_TYPE";
 	public static final String INVALID_CURRENCY = "INVALID_CURRENCY";
 	public static final String INVALID_LOCALE = "INVALID_LOCALE";
 	public static final String INVALID_BUSINESS_ENTITY_NAME = "INVALID_BUSINESS_ENTITY_NAME";
 	public static final String INVALID_BRAND = "INVALID_BRAND";
+	public static final String INVALID_CONTACT_TYPE = "INVALID_CONTACT_TYPE";
+	public static final String INVALID_PHONE_TYPE = "INVALID_PHONE_TYPE";
+	public static final String INVALID_PHONE = "INVALID_PHONE";
+	public static final String INVALID_ADDRESS_TYPE = "INVALID_ADDRESS_TYPE";
+	public static final String INVALID_EMAIL = "INVALID_EMAIL";
+	public static final String FIRST_NAME_REQUIRED = "FIRST_NAME_REQUIRED";
+
+	
 	public static final String INVALID_PART_CODE = "INVALID_PART_CODE";
 	public static final String INVALID_TEMPLATE = "INVALID_TEMPLATE";
 	public static final String DUPLICATE_PART_CODE = "DUPLICATE_PART_CODE";
