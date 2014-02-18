@@ -170,6 +170,7 @@ public abstract class MessageConstants implements Serializable{
 	public static final String ENTITY_PARAMETER_VALUE_REQUIRED = "ENTITY_PARAMETER_VALUE_REQUIRED";
 	public static final String ATTRIBUTE_CODE_IS_REQUIRED = "ATTRIBUTE_CODE_IS_REQUIRED";
 	public static final String ATTRIBUTE_VALUE_REQUIRED = "ATTRIBUTE_VALUE_REQUIRED";
+	public static final String  DUPLICATE_ATTRIBUTE_TYPE = "DUPLICATE_ATTRIBUTE_TYPE";
 	public static final String LANGUAGE_CODE_IS_REQUIRED = "LANGUAGE_CODE_IS_REQUIRED";
 	public static final String COUNTRY_CODE_IS_REQUIRED = "COUNTRY_CODE_IS_REQUIRED";
 	public static final String ORDER_SEQUENCE_NUMARIC = "ORDER_SEQUENCE_NUMARIC";
