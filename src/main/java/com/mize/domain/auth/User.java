@@ -69,7 +69,8 @@ public class User extends MizeEntity implements Comparable<User> {
 	private List<ProductRegister> productRegisters = new ArrayList<ProductRegister>();
 	private List<UserBrandMapping> userBrandMapping = new ArrayList<UserBrandMapping>();
 	private List<UserAddress> addresses = new ArrayList<UserAddress>();
-    
+	private String isActive;
+	
     public enum Case {
 		SIGNUP, LOGIN , LOGOUT
 	}
@@ -411,6 +412,16 @@ public class User extends MizeEntity implements Comparable<User> {
 			name = Formatter.makeNotNullString(name);
 		}
 		return name;
+	}
+
+	
+	@Column(name = "is_active", length = 1, nullable = true)
+	public String getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(String isActive) {
+		this.isActive = isActive;
 	}
 
 	@Column(name = "login_id")
