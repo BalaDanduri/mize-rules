@@ -1,7 +1,7 @@
 package com.mize.domain.common;
 
 public enum AuthType {
-      USER("User"),BUSINESS_ENTITY("Business_Entity"),GROUP("Group");
+      USER("User"),BUSINESS_ENTITY("BusinessEntity"),GROUP("Group");
       
       	private String authType;
       
