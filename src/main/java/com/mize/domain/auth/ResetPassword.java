@@ -9,7 +9,8 @@ public class ResetPassword extends MizeEntity implements Comparable<ResetPasswor
 	private String repeatPassword;	
 	private String hashedPassword;	
 	private String hashedRepeatPassword;	
-	private String oldPassword;	
+	private String oldPassword;
+	private String hashedOldPassword;	
 	private String token;	
 	private String email;
 	private User user;
@@ -94,6 +95,14 @@ public class ResetPassword extends MizeEntity implements Comparable<ResetPasswor
 
 	public void setHashedRepeatPassword(String hashedRepeatPassword) {
 		this.hashedRepeatPassword = hashedRepeatPassword;
+	}
+
+	public String getHashedOldPassword() {
+		return hashedOldPassword;
+	}
+
+	public void setHashedOldPassword(String hashedOldPassword) {
+		this.hashedOldPassword = hashedOldPassword;
 	}
 
 	public int compareTo(ResetPassword entity) {
