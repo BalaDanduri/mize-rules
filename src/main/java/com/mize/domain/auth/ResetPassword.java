@@ -7,6 +7,8 @@ public class ResetPassword extends MizeEntity implements Comparable<ResetPasswor
 	private static final long serialVersionUID = 71752897031471580L;
 	private String password;	
 	private String repeatPassword;	
+	private String hashedPassword;	
+	private String hashedRepeatPassword;	
 	private String oldPassword;	
 	private String token;	
 	private String email;
@@ -76,6 +78,22 @@ public class ResetPassword extends MizeEntity implements Comparable<ResetPasswor
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public String getHashedPassword() {
+		return hashedPassword;
+	}
+
+	public void setHashedPassword(String hashedPassword) {
+		this.hashedPassword = hashedPassword;
+	}
+
+	public String getHashedRepeatPassword() {
+		return hashedRepeatPassword;
+	}
+
+	public void setHashedRepeatPassword(String hashedRepeatPassword) {
+		this.hashedRepeatPassword = hashedRepeatPassword;
 	}
 
 	public int compareTo(ResetPassword entity) {

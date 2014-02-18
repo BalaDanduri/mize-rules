@@ -184,6 +184,7 @@ public abstract class MessageConstants implements Serializable{
 	public static final String USR_REPEAT_PASSWORD_REQ = "USER_PWD_P006";
 	public static final String USR_NEED_EMAIL = "USER_LOGIN_005";
 	public static final String RESET_PASS_PASSWORD_MATCHES = "USER_CHGP_005";
+	public static final String PASS_PASSWORD_NOT_MATCHES = "USER_CHGP_105";
 	public static final String USR_WRONG_PASSWORD = "USER_LOGIN_002";
 	public static final String NO_USER_SESSION = "USER_SESS_001";
 }
