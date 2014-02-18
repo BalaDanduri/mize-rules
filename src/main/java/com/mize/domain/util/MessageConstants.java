@@ -176,7 +176,18 @@ public abstract class MessageConstants implements Serializable{
 	public static final String ORDER_SEQUENCE_NUMARIC = "ORDER_SEQUENCE_NUMARIC";
 	public static final String IS_ACTIVE_VALUE_INVALID = "IS_ACTIVE_VALUE_INVALID";
 	public static final String IS_DEFAULT_VALUE_INVALID = "IS_DEFAULT_VALUE_INVALID";
+	public static final String USR_PASSWORD_REQD = "USER_PWD_P001";
+	public static final String USR_PASSWORD_LENGTH = "USER_PWD_P002";
+	public static final String USR_PASSWORD_STRENGTH = "USER_PWD_P003";
+	public static final String USR_PASSWORD_UNMATCH = "USER_PWD_P004";
+	public static final String USR_OLD_PASSWORD_REQ = "USER_PWD_P005";
+	public static final String USR_REPEAT_PASSWORD_REQ = "USER_PWD_P006";
+	public static final String USR_NEED_EMAIL = "USER_LOGIN_005";
+	public static final String RESET_PASS_PASSWORD_MATCHES = "USER_CHGP_005";
+	public static final String USR_WRONG_PASSWORD = "USER_LOGIN_002";
+	public static final String NO_USER_SESSION = "USER_SESS_001";
 }
+
 
 
 
