@@ -13,6 +13,7 @@ public class ResetPassword extends MizeEntity implements Comparable<ResetPasswor
 	private String hashedOldPassword;	
 	private String token;	
 	private String email;
+	private boolean isPasswordMatched;
 	private User user;
 	
     @Override
@@ -103,6 +104,14 @@ public class ResetPassword extends MizeEntity implements Comparable<ResetPasswor
 
 	public void setHashedOldPassword(String hashedOldPassword) {
 		this.hashedOldPassword = hashedOldPassword;
+	}
+
+	public boolean isPasswordMatched() {
+		return isPasswordMatched;
+	}
+
+	public void setPasswordMatched(boolean isPasswordMatched) {
+		this.isPasswordMatched = isPasswordMatched;
 	}
 
 	public int compareTo(ResetPassword entity) {
