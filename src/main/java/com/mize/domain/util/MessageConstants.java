@@ -187,6 +187,7 @@ public abstract class MessageConstants implements Serializable{
 	public static final String PASS_PASSWORD_NOT_MATCHES = "USER_CHGP_105";
 	public static final String USR_WRONG_PASSWORD = "USER_LOGIN_002";
 	public static final String NO_USER_SESSION = "USER_SESS_001";
+	public static final String INVALID_TOKEN = "INVALID_TOKEN";
 }
 
 
