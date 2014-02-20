@@ -146,7 +146,7 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 		return "AppMessage [messageType=" + messageType + ", code=" + code
 				+ ", shortDesc=" + shortDesc + ", longDesc=" + longDesc
 				+ ", severity=" + severity + ", field=" + field + ", fieldKey="
-				+ fieldKey + ", locale=" + locale + "]";
+				+ fieldKey + "]";
 	}
 	
 	@Override

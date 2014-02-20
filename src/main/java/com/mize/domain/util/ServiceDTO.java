@@ -19,7 +19,7 @@ public final class ServiceDTO<T> implements ServiceLiteral{
 	private Map<String,String> validationMessages = new HashMap<String, String>();
 	private List<AppMessage> appMessages = new ArrayList<AppMessage>();
 	private Integer severity;
-	private boolean isValid;
+	public boolean isValid;
 
 	public T getDataObject() {
 		return dataObject;
@@ -223,7 +223,7 @@ public final class ServiceDTO<T> implements ServiceLiteral{
 	public String toString() {
 		return "ServiceDTO [errors=" + errors
 				+ ", messages=" + messages + ", validationMessages="
-				+ validationMessages + ", isValid=" + isValid + "]";
+				+ validationMessages + ", appMessages=" + appMessages + "]";
 	}
 	
 	
