@@ -188,6 +188,17 @@ public abstract class MessageConstants implements Serializable{
 	public static final String USR_WRONG_PASSWORD = "USER_LOGIN_002";
 	public static final String NO_USER_SESSION = "USER_SESS_001";
 	public static final String INVALID_TOKEN = "INVALID_TOKEN";
+	
+	public static final String LOGIN_ID_REQUIRED = "LOGIN_ID_REQUIRED";
+	public static final String USER_EMAIL_REQUIRED ="USER_EMAIL_REQUIRED";
+	public static final String ORGANIZATION_TYPE_REQUIRED = "ORGANIZATION_TYPE_REQUIRED";
+	public static final String ORGANIZATION_NUMBER_REQUIRED = "ORGANIZATION_NUMBER_REQUIRED";
+	public static final String BRAND_REQUIRED  = "BRAND_REQUIRED";
+	public static final String TIME_ZONE_REQUIRED = "TIME_ZONE_REQUIRED";
+	public static final String LOCALE_REQUIRED = "LOCALE_REQUIRED";
+	public static final String GROUP_REQUIRED = "GROUP_REQUIRED";
+	public static final String ADDRESS_TYPE_REQUIRED = "ADDRESS_TYPE_REQUIRED";
+	public static final String COUNTRY_REQUIRED = "COUNTRY_REQUIRED";
 }
 
 
