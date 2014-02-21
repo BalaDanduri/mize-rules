@@ -79,11 +79,14 @@ public abstract class MessageConstants implements Serializable{
 	public static final String INVALID_BUSINESS_ENTITY_NAME = "INVALID_BUSINESS_ENTITY_NAME";
 	public static final String INVALID_BRAND = "INVALID_BRAND";
 	public static final String INVALID_CONTACT_TYPE = "INVALID_CONTACT_TYPE";
+	public static final String INVALID_DEPARTMENT_TYPE = "INVALID_DEPARTMENT_TYPE";
 	public static final String INVALID_PHONE_TYPE = "INVALID_PHONE_TYPE";
 	public static final String INVALID_PHONE = "INVALID_PHONE";
 	public static final String INVALID_ADDRESS_TYPE = "INVALID_ADDRESS_TYPE";
 	public static final String INVALID_EMAIL = "INVALID_EMAIL";
 	public static final String FIRST_NAME_REQUIRED = "FIRST_NAME_REQUIRED";
+	public static final String LAST_NAME_REQUIRED = "LAST_NAME_REQUIRED";
+	public static final String PHONE_NUMBER_REQUIRED = "PHONE_NUMBER_REQUIRED";
 
 	
 	public static final String INVALID_PART_CODE = "INVALID_PART_CODE";
@@ -128,6 +131,7 @@ public abstract class MessageConstants implements Serializable{
 	public static final String INVALID_PRODUCT_REGISTRATION = "INVALID_PRODUCT_REGISTRATION";
 	
 	public static final String INVALID_CATALOG_NAME = "INVALID_CATALOG_NAME";
+	public static final String INVALID_CATALOG = "INVALID_CATALOG";
 	public static final String CATALOG_NAME_DOES_NOT_EXIST = "CATALOG_NAME_DOES_NOT_EXIST";
 	public static final String CATALOG_NAME_REQUIRED = "CATALOG_NAME_REQUIRED";
 	public static final String CATALOG_NAME_ALREADY_EXISTS = "CATALOG_NAME_ALREADY_EXISTS";
