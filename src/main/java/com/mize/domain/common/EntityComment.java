@@ -117,6 +117,12 @@ public class EntityComment extends MizeEntity implements Comparable<EntityCommen
 		return createdBy;
 	}
 	
+	@JsonIgnore(value=false)
+	@Column(name = "updated_by")
+	public Long getUpdatedBy() {
+		return updatedBy;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
