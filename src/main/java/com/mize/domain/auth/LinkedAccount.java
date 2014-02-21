@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
@@ -33,6 +34,7 @@ public class LinkedAccount extends MizeEntity implements Comparable<LinkedAccoun
     public String accessTokenSecret;
     public String userName;
     public String firstTime;
+    private String password;
     private User user;
     
 	/**
@@ -186,6 +188,15 @@ public class LinkedAccount extends MizeEntity implements Comparable<LinkedAccoun
 		this.updatedDate = updatedDate;
 	}
 	
+	@Transient
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	@Override
 	public String toString() {
 		return "LinkedAccount [providerUserId=" + providerUserId + ", providerKey=" + providerKey + ", accessToken=" + accessToken + 
