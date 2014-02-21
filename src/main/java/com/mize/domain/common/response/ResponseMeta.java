@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.mize.domain.appmsg.AppMessage;
 
 
 public class ResponseMeta {
 	
 	private String status;
 	private List<ResponseStatus> errors;
+	private List<AppMessage> appMessages;
 	private Integer resultSize;
 	private Long totalRecords;
 	private Integer pageNumber;
@@ -110,6 +112,14 @@ public class ResponseMeta {
 	}
 	public void setStartTime(Long startTime){
 		this.startTime = startTime;
+	}
+
+	public List<AppMessage> getAppMessages() {
+		return appMessages;
+	}
+
+	public void setAppMessages(List<AppMessage> appMessages) {
+		this.appMessages = appMessages;
 	}
 
 }

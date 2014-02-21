@@ -183,7 +183,7 @@ public final class ServiceDTO<T> implements ServiceLiteral{
 		if(appMessages == null){
 			appMessages = new ArrayList<AppMessage>();
 		}
-		if(Formatter.intValue(this.severity) > Formatter.intValue(severity)){
+		if(Formatter.intValue(severity) > Formatter.intValue(this.severity)){
 			this.severity = severity;
 		}
 		appMessages.add(new AppMessage(severity, code,shortDesc));
@@ -199,7 +199,7 @@ public final class ServiceDTO<T> implements ServiceLiteral{
 			appMessages = new ArrayList<AppMessage>();
 		}
 		appMessages.add(new AppMessage(code,shortDesc,shortDesc,severity, field,fieldKey,MessageType.Type.Validation));
-		if(Formatter.intValue(this.severity) > Formatter.intValue(severity)){
+		if(Formatter.intValue(severity) > Formatter.intValue(this.severity)){
 			this.severity = severity;
 		}
 	}
@@ -211,6 +211,11 @@ public final class ServiceDTO<T> implements ServiceLiteral{
 		}
 		if(messages != null){
 			appMessages.addAll(messages);
+			for(AppMessage appMessage : appMessages){
+				if(Formatter.intValue(appMessage.getSeverity()) > Formatter.intValue(this.severity)){
+					this.severity = appMessage.getSeverity();
+				}	
+			}
 		}
 	}
 
