@@ -242,6 +242,32 @@ public class ProductSerial extends MizeEntity{
 	public void setUpdatedDate(DateTime updatedDate) {
 		super.updatedDate = updatedDate;
 	}
+	
+	@Override
+	@JsonIgnore(value=false)
+	@Column(name = "created_by" , updatable=false)
+	public Long getCreatedBy() {
+		return createdBy;
+	}
+	
+	@Override
+	@JsonIgnore(value=false)
+	@Column(name = "updated_by")
+	public Long getUpdatedBy() {
+		return updatedBy;
+	}
+	
+	@JsonIgnore(value=false)
+	@Override
+	public void setUpdatedBy(Long updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+ 
+	@JsonIgnore(value=false)
+	@Override
+	public void setCreatedBy(Long createdBy) {
+		this.createdBy = createdBy;
+	}
 
 
 	@Override
