@@ -19,7 +19,8 @@ public final class ServiceDTO<T> implements ServiceLiteral{
 	private Map<String,String> validationMessages = new HashMap<String, String>();
 	private List<AppMessage> appMessages = new ArrayList<AppMessage>();
 	private Integer severity;
-	public boolean isValid;
+	@SuppressWarnings("unused")
+	private boolean isValid;
 
 	public T getDataObject() {
 		return dataObject;
