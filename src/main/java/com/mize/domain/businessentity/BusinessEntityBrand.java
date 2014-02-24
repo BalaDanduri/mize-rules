@@ -107,19 +107,9 @@ public class BusinessEntityBrand extends MizeEntity implements Comparable<Busine
 	
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("BusinessEntityBrand [isActive=");
-		builder.append(isActive);
-		builder.append(", businessEntity=");
-		builder.append(businessEntity);
-		builder.append(", brand=");
-		builder.append(brand);
-		builder.append(", id=");
-		builder.append(id);
-		builder.append("]");
-		return builder.toString();
+		return "BusinessEntityBrand [isActive=" + isActive + ", id=" + id + "]";
 	}
-	
+
 	@Override
 	public int compareTo(BusinessEntityBrand arg0) {
 		return 0;
