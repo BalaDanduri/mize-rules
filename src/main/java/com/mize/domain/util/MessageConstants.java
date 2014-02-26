@@ -220,6 +220,7 @@ public abstract class MessageConstants implements Serializable{
 	public static final String STARTDATE_IS_REQUIRED = "STARTDATE_IS_REQUIRED";
 	public static final String ENDDATE_IS_REQUIRED = "ENDDATE_IS_REQUIRED";
 	public static final String UNITPRICE_IS_REQUIRED = "UNITPRICE_IS_REQUIRED";
+	public static final String INVALID_ORDER_TYPE = "INVALID_ORDER_TYPE";
 	
 }
 
