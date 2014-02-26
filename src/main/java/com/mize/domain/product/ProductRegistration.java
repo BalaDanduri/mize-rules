@@ -63,6 +63,14 @@ public class ProductRegistration extends MizeEntity {
 	@Transient
 	private User user;
 	
+	public enum RegistrationType{
+		New,Transfer
+	}
+	public enum Status{
+		Open,Draft,Registered
+	}
+	
+	
 	@Transient
 	private EntityComment entityComment;
 	private List<ProductRegistrationComment> comments = new ArrayList<ProductRegistrationComment>();
