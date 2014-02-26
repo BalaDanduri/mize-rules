@@ -210,6 +210,16 @@ public abstract class MessageConstants implements Serializable{
 	public static final String MANUFACTURER_TYPE_REQUIRED = "MANUFACTURER_TYPE_REQUIRED";
 	public static final String SHIP_LOCATION_TYPE_REQUIRED = "SHIP_LOCATION_TYPE_REQUIRED";
 	
+	public static final String PART_NUMBER_IS_REQUIRED = "PART_NUMBER_IS_REQUIRED";
+	public static final String PART_TYPE_IS_REQUIRED = "PART_TYPE_IS_REQUIRED";
+	public static final String PART_UOM_IS_REQUIRED = "PART_UOM_IS_REQUIRED";
+	public static final String PART_NAME_IS_REQUIRED = "PART_NAME_IS_REQUIRED";
+	public static final String PART_DESCRIPTION_IS_REQUIRED = "PART_DESCRIPTION_IS_REQUIRED";
+	public static final String CURRENCYCODE_IS_REQUIRED = "CURRENCYCODE_IS_REQUIRED";
+	public static final String STARTDATE_IS_REQUIRED = "STARTDATE_IS_REQUIRED";
+	public static final String ENDDATE_IS_REQUIRED = "ENDDATE_IS_REQUIRED";
+	public static final String UNITPRICE_IS_REQUIRED = "UNITPRICE_IS_REQUIRED";
+	
 }
 
 
