@@ -63,7 +63,7 @@ public class ProductRegistration extends MizeEntity {
 	private String registrationApplication;
 	private String registrationIndustry;
 	
-	private List<ProductRegistrationWarranty> productRegistrationWarranties = new ArrayList<ProductRegistrationWarranty>();
+	private List<ProductRegistrationWarranty> warrantyList = new ArrayList<ProductRegistrationWarranty>();
 	
 	@Transient
 	private User user;
@@ -383,12 +383,12 @@ public class ProductRegistration extends MizeEntity {
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	@Fetch(FetchMode.SELECT)
 	@JsonManagedReference(value="productRegWarranty")
-	public List<ProductRegistrationWarranty> getProductRegistrationWarranties() {
-		return productRegistrationWarranties;
+	public List<ProductRegistrationWarranty> getWarrantyList() {
+		return warrantyList;
 	}
 	
-	public void setProductRegistrationWarranties(List<ProductRegistrationWarranty> productRegistrationWarranties) {
-		this.productRegistrationWarranties = productRegistrationWarranties;
+	public void setWarrantyList(List<ProductRegistrationWarranty> warrantyList) {
+		this.warrantyList = warrantyList;
 	}
 
 
