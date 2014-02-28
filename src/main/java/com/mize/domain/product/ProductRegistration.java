@@ -17,12 +17,15 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -59,6 +62,8 @@ public class ProductRegistration extends MizeEntity {
 	private String registrationSource;
 	private String registrationApplication;
 	private String registrationIndustry;
+	
+	private List<ProductRegistrationWarranty> productRegistrationWarranties = new ArrayList<ProductRegistrationWarranty>();
 	
 	@Transient
 	private User user;
@@ -374,6 +379,17 @@ public class ProductRegistration extends MizeEntity {
 	}
 
 
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "productRegistration",orphanRemoval= true)
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@Fetch(FetchMode.SELECT)
+	@JsonManagedReference(value="productRegWarranty")
+	public List<ProductRegistrationWarranty> getProductRegistrationWarranties() {
+		return productRegistrationWarranties;
+	}
+	
+	public void setProductRegistrationWarranties(List<ProductRegistrationWarranty> productRegistrationWarranties) {
+		this.productRegistrationWarranties = productRegistrationWarranties;
+	}
 
 
 	@Override
