@@ -223,6 +223,9 @@ public abstract class MessageConstants implements Serializable{
 	public static final String INVALID_ORDER_TYPE = "INVALID_ORDER_TYPE";
 	public static final String INVALID_PRODUCT_WARRANTY = "INVALID_PRODUCT_WARRANTY";
 	public static final String PART_QUANTITY_IS_REQUIRED = "PART_QUANTITY_IS_REQUIRED";
+	public static final String FAMILY_CODE_REQUIRED = "FAMILY_CODE_REQUIRED";
+	public static final String OLD_PART_CODE_REQUIRED = "OLD_PART_CODE_REQUIRED";
+	public static final String NEW_PART_CODE_REQUIRED = "NEW_PART_CODE_REQUIRED";
 	
 }
 
