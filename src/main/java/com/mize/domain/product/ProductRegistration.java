@@ -66,6 +66,12 @@ public class ProductRegistration extends MizeEntity {
 	private List<ProductRegistrationWarranty> warrantyList = new ArrayList<ProductRegistrationWarranty>();
 	
 	@Transient
+	private EntityComment entityComment;
+	private List<ProductRegistrationComment> comments = new ArrayList<ProductRegistrationComment>();
+	
+	private List<ProductRegistrationAttachment> attachments = new ArrayList<ProductRegistrationAttachment>();
+	
+	@Transient
 	private User user;
 	
 	public enum RegistrationType{
@@ -73,12 +79,7 @@ public class ProductRegistration extends MizeEntity {
 	}
 	public enum Status{
 		Open,Draft,Registered
-	}
-	
-	
-	@Transient
-	private EntityComment entityComment;
-	private List<ProductRegistrationComment> comments = new ArrayList<ProductRegistrationComment>();
+	}	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -377,18 +378,29 @@ public class ProductRegistration extends MizeEntity {
 	public void setRegistrationIndustry(String registrationIndustry) {
 		this.registrationIndustry = registrationIndustry;
 	}
-
-
+	
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "productRegistration",orphanRemoval= true)
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	@Fetch(FetchMode.SELECT)
 	@JsonManagedReference(value="productRegWarranty")
 	public List<ProductRegistrationWarranty> getWarrantyList() {
 		return warrantyList;
-	}
+	}	
 	
 	public void setWarrantyList(List<ProductRegistrationWarranty> warrantyList) {
 		this.warrantyList = warrantyList;
+	}
+	
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "productRegistration",orphanRemoval= true)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	@JsonManagedReference(value="prodRegn_attachments")
+	public List<ProductRegistrationAttachment> getAttachments() {
+		return attachments;
+	}
+	
+	public void setAttachments(List<ProductRegistrationAttachment> attachments) {
+		this.attachments = attachments;
 	}
 
 

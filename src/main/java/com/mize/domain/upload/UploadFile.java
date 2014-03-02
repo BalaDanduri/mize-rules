@@ -1,5 +1,7 @@
 package com.mize.domain.upload;
 
+import java.io.File;
+
 import com.mize.domain.auth.User;
 import com.mize.domain.common.MizeEntity;
 
@@ -14,6 +16,8 @@ public class UploadFile extends MizeEntity implements Comparable<UploadFile>{
 	private String folder;
 	private boolean local;
 	private User user;
+	private String url;
+	private File file;
 	
 	public String getFileFormat() {
 		return fileFormat;
@@ -71,6 +75,22 @@ public class UploadFile extends MizeEntity implements Comparable<UploadFile>{
 	@Override
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public String getUrl() {
+		return url;
+	}
+	
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	
+	public File getFile() {
+		return file;
+	}
+	
+	public void setFile(File file) {
+		this.file = file;
 	}
 	
 	@Override

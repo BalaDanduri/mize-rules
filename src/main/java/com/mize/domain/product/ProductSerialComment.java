@@ -47,7 +47,7 @@ public class ProductSerialComment extends MizeEntity implements Comparable<Produ
 		this.id = id;
 	}
 
-	@OneToOne(cascade={CascadeType.ALL},fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="prod_srl_id")
 	@JsonBackReference(value="comments_productSerial")
 	public ProductSerial getProductSerial() {

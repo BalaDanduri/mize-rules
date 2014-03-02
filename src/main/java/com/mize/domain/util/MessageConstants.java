@@ -226,6 +226,7 @@ public abstract class MessageConstants implements Serializable{
 	public static final String FAMILY_CODE_REQUIRED = "FAMILY_CODE_REQUIRED";
 	public static final String OLD_PART_CODE_REQUIRED = "OLD_PART_CODE_REQUIRED";
 	public static final String NEW_PART_CODE_REQUIRED = "NEW_PART_CODE_REQUIRED";
+	public static final String FILE_NOT_FOUND = "FILE_NOT_FOUND";
 	
 }
 
