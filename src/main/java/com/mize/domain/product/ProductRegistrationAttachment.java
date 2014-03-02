@@ -62,6 +62,5 @@ public class ProductRegistrationAttachment extends MizeEntity {
 		this.entityAttachment = entityAttachment;
 	}
 	
-	
 
 }
