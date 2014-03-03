@@ -17,12 +17,15 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -60,6 +63,14 @@ public class ProductRegistration extends MizeEntity {
 	private String registrationApplication;
 	private String registrationIndustry;
 	
+	private List<ProductRegistrationWarranty> warrantyList = new ArrayList<ProductRegistrationWarranty>();
+	
+	@Transient
+	private EntityComment entityComment;
+	private List<ProductRegistrationComment> comments = new ArrayList<ProductRegistrationComment>();
+	
+	private List<ProductRegistrationAttachment> attachments = new ArrayList<ProductRegistrationAttachment>();
+	
 	@Transient
 	private User user;
 	
@@ -68,12 +79,7 @@ public class ProductRegistration extends MizeEntity {
 	}
 	public enum Status{
 		Open,Draft,Registered
-	}
-	
-	
-	@Transient
-	private EntityComment entityComment;
-	private List<ProductRegistrationComment> comments = new ArrayList<ProductRegistrationComment>();
+	}	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -372,8 +378,30 @@ public class ProductRegistration extends MizeEntity {
 	public void setRegistrationIndustry(String registrationIndustry) {
 		this.registrationIndustry = registrationIndustry;
 	}
-
-
+	
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "productRegistration",orphanRemoval= true)
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@Fetch(FetchMode.SELECT)
+	@JsonManagedReference(value="productRegWarranty")
+	public List<ProductRegistrationWarranty> getWarrantyList() {
+		return warrantyList;
+	}	
+	
+	public void setWarrantyList(List<ProductRegistrationWarranty> warrantyList) {
+		this.warrantyList = warrantyList;
+	}
+	
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "productRegistration",orphanRemoval= true)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	@JsonManagedReference(value="prodRegn_attachments")
+	public List<ProductRegistrationAttachment> getAttachments() {
+		return attachments;
+	}
+	
+	public void setAttachments(List<ProductRegistrationAttachment> attachments) {
+		this.attachments = attachments;
+	}
 
 
 	@Override
