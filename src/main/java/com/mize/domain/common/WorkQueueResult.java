@@ -24,13 +24,14 @@ public class WorkQueueResult extends MizeEntity {
 	private String entityType;
 	private String serviceType;
 	private String serviceCode;
+	private String orderType;
 	private String ref;
 	private String serviceProductName;
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime serviceDate;
 	public BusinessEntity businessEntity;
 	public ProductSerial productSerial;
-	public PurchaseOrderRequester OrderRequester;
+	private String requesterCode;
 	
     public WorkQueueResult(){
     	super();
@@ -50,7 +51,7 @@ public class WorkQueueResult extends MizeEntity {
 		this.productSerial = productSerial;
 	}
 
-	public WorkQueueResult(Long id,Long entityId, String entityType,String entityCode,String status,
+	public WorkQueueResult(Long id,Long entityId, String entityType,String entityCode,String status,String orderType,
 			DateTime serviceDate,BusinessEntity businessEntity) {
 		super();
 		this.id = id;
@@ -58,6 +59,7 @@ public class WorkQueueResult extends MizeEntity {
 		this.entityType = entityType;
 		this.serviceCode = entityCode;
 		this.status = status;
+		this.orderType = orderType;
 		this.serviceDate = serviceDate;
 		this.businessEntity = businessEntity;
 	}
@@ -174,6 +176,23 @@ public class WorkQueueResult extends MizeEntity {
 
 	public void setProductSerial(ProductSerial productSerial) {
 		this.productSerial = productSerial;
+	}
+	
+	public String getOrderType() {
+		return orderType;
+	}
+
+	public void setOrderType(String orderType) {
+		this.orderType = orderType;
+	}
+
+	
+	public String getRequesterCode() {
+		return requesterCode;
+	}
+
+	public void setRequesterCode(String requesterCode) {
+		this.requesterCode = requesterCode;
 	}
 
 	@Override
