@@ -228,6 +228,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="tenant_id")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public BusinessEntity getTenant() {
 		return tenant;
 	}
@@ -246,6 +247,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	}	
 
 	@OneToOne(cascade=CascadeType.ALL,fetch = FetchType.LAZY,mappedBy="purchaseOrder")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public PurchaseOrderRequester getRequester() {
 		return requester;
 	}
@@ -256,6 +258,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	
 	@OneToOne(cascade=CascadeType.ALL,fetch = FetchType.LAZY,mappedBy="purchaseOrder")
 	@JoinColumn(name="id")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public PurchaseOrderPayment getPayment() {
 		return payment;
 	}
@@ -266,6 +269,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 
 	@OneToOne(cascade=CascadeType.ALL,fetch = FetchType.LAZY,mappedBy="purchaseOrder")
 	@JoinColumn(name="id")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public PurchaseOrderShipment getShipment() {
 		return shipment;
 	}

@@ -44,6 +44,7 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 	private DateTime estimatedShipmentDate;
 	private BigDecimal estimatedShipmentCost;
 	private PurchaseOrder purchaseOrder;
+	@Transient
 	private String updateAddress;
 
 	@Id
