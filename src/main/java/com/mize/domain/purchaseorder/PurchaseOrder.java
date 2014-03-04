@@ -97,7 +97,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 
 	@Column(name = "order_number")
 	public String getNumber() {
-		return String.valueOf(number);
+		return String.valueOf(id);
 	}
 
 	public void setNumber(String number) {
