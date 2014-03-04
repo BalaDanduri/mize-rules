@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.product.ProductSerial;
+import com.mize.domain.purchaseorder.PurchaseOrderRequester;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
@@ -29,6 +30,7 @@ public class WorkQueueResult extends MizeEntity {
 	private DateTime serviceDate;
 	public BusinessEntity businessEntity;
 	public ProductSerial productSerial;
+	public PurchaseOrderRequester OrderRequester;
 	
     public WorkQueueResult(){
     	super();
@@ -47,6 +49,19 @@ public class WorkQueueResult extends MizeEntity {
 		this.businessEntity = businessEntity;
 		this.productSerial = productSerial;
 	}
+
+	public WorkQueueResult(Long id,Long entityId, String entityType,String entityCode,String status,
+			DateTime serviceDate,BusinessEntity businessEntity) {
+		super();
+		this.id = id;
+		this.entityId = entityId;
+		this.entityType = entityType;
+		this.serviceCode = entityCode;
+		this.status = status;
+		this.serviceDate = serviceDate;
+		this.businessEntity = businessEntity;
+	}
+	
 
 	public String getRequester() {
 		return requester;
