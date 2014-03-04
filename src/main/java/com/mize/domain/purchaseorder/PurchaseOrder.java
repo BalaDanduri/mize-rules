@@ -65,7 +65,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	
 	public enum Status{
 		Draft,Pending,Approved,Deleted,Rejected,Closed,Open,Completed,
-		Shipped,In_Progress,Submitted;
+		Shipped,In_Process,Submitted;
 	}
 	
 	public enum Type{
