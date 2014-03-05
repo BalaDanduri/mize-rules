@@ -227,6 +227,10 @@ public abstract class MessageConstants implements Serializable{
 	public static final String OLD_PART_CODE_REQUIRED = "OLD_PART_CODE_REQUIRED";
 	public static final String NEW_PART_CODE_REQUIRED = "NEW_PART_CODE_REQUIRED";
 	public static final String FILE_NOT_FOUND = "FILE_NOT_FOUND";
+	public static final String SHIPPING_METHOD_REQUIRED = "SHIPPING_METHOD_REQUIRED";
+	public static final String SHIPPING_PRIORITY_REQUIRED = "SHIPPING_PRIORITY_REQUIRED";
+	public static final String SHIPPING_CARRIER_REQUIRED = "SHIPPING_CARRIER_REQUIRED";
+	public static final String PAYMENT_METHOD_REQUIRED = "PAYMENT_METHOD_REQUIRED";
 	
 }
 
