@@ -14,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 
 
 import com.mize.domain.businessentity.BusinessEntity;
+import com.mize.domain.common.EntityComment;
 import com.mize.domain.part.Part;
 import com.mize.domain.part.PartSubstitute;
 import com.mize.domain.test.util.JPATest;
@@ -60,7 +61,10 @@ public class PartSubsituteTest extends JPATest {
 		tx.begin();
 		PartSubstitute partSubstitute = new PartSubstitute();
 		partSubstitute.setCode("SubCode");
-		partSubstitute.setComments("Test Comments");
+		//partSubstitute.setComments("Test Comments");
+		EntityComment comment = new EntityComment();
+		comment.setComments("Test Comments");
+		comment.setCommentType(EntityComment.Type.Internal.toString());
 		partSubstitute.setDate(DateTime.now());
 		partSubstitute.setOriginalPart(originalPart);
 		partSubstitute.setFamilyCode("KW001");

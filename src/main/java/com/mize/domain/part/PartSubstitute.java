@@ -1,5 +1,8 @@
 package com.mize.domain.part;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,8 +11,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
@@ -19,7 +24,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
+import com.mize.domain.auth.User;
+import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.product.PartSubstituteComment;
+import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 @Entity
@@ -33,8 +42,11 @@ public class PartSubstitute extends MizeEntity {
 	private String code;
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime date;
-	private String comments;
+	//private String comments;
+	private EntityComment entityComment;
+	private List<PartSubstituteComment> comments = new ArrayList<PartSubstituteComment>();
     private String familyCode;
+    private User user;
 	
 	public PartSubstitute(){
 		super();
@@ -72,6 +84,15 @@ public class PartSubstitute extends MizeEntity {
 	}
 
 
+	@Transient
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
 	@Column(name = "substitute_date", nullable = true)
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Type(type = "com.mize.domain.util.DateTimeJPA")
@@ -80,12 +101,6 @@ public class PartSubstitute extends MizeEntity {
 		return date;
 	}
 
-	@Column(name = "substitute_comments")
-	public String getComments() {
-		return comments;
-	}
-
-	
 	@Override	
 	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
 	@Type(type="com.mize.domain.util.DateTimeJPA")
@@ -141,11 +156,6 @@ public class PartSubstitute extends MizeEntity {
 		this.date = date;
 	}
 
-	public void setComments(String comments) {
-		this.comments = comments;
-	}
-
-
 	@Override
 	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
@@ -177,14 +187,31 @@ public class PartSubstitute extends MizeEntity {
 	public void setFamilyCode(String familyCode) {
 		this.familyCode = familyCode;
 	}
+	
+	@Transient
+	public EntityComment getEntityComment() {
+		return entityComment;
+	}
+
+	public void setEntityComment(EntityComment entityComment) {
+		this.entityComment = entityComment;
+	}
+	
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "partSubstitute",orphanRemoval= true)
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	public List<PartSubstituteComment> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<PartSubstituteComment> comments) {
+		this.comments = comments;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
-		result = prime * result
-				+ ((comments == null) ? 0 : comments.hashCode());
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result
 				+ ((familyCode == null) ? 0 : familyCode.hashCode());
@@ -208,11 +235,6 @@ public class PartSubstitute extends MizeEntity {
 			if (other.code != null)
 				return false;
 		} else if (!code.equals(other.code))
-			return false;
-		if (comments == null) {
-			if (other.comments != null)
-				return false;
-		} else if (!comments.equals(other.comments))
 			return false;
 		if (date == null) {
 			if (other.date != null)
@@ -239,23 +261,10 @@ public class PartSubstitute extends MizeEntity {
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("PartSubstitute [originalPart=");
-		builder.append(originalPart);
-		builder.append(", substitutedPart=");
-		builder.append(substitutedPart);
-		builder.append(", code=");
-		builder.append(code);
-		builder.append(", date=");
-		builder.append(date);
-		builder.append(", comments=");
-		builder.append(comments);
-		builder.append(", familyCode=");
-		builder.append(familyCode);
-		builder.append("]");
-		return builder.toString();
+		return "PartSubstitute [originalPart=" + originalPart
+				+ ", substitutedPart=" + substitutedPart + ", code=" + code
+				+ ", date=" + date + ", familyCode=" + familyCode + "]";
 	}
 
-	
 	
 }
