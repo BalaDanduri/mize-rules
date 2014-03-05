@@ -59,6 +59,7 @@ public class ProductSerial extends MizeEntity{
 	@Transient
 	private User user;
 	private DateTime shipDate;
+	private String isValid;
 	
 	public ProductSerial(){
 		super();
@@ -192,6 +193,15 @@ public class ProductSerial extends MizeEntity{
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	@Column(name= "is_valid", length = 1)
+	public String getIsValid() {
+		return isValid;
+	}
+	
+	public void setIsValid(String isValid) {
+		this.isValid = isValid;
 	}
 	
 	@Column(name = "ship_date", nullable = true)

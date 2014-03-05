@@ -231,6 +231,8 @@ public abstract class MessageConstants implements Serializable{
 	public static final String SHIPPING_PRIORITY_REQUIRED = "SHIPPING_PRIORITY_REQUIRED";
 	public static final String SHIPPING_CARRIER_REQUIRED = "SHIPPING_CARRIER_REQUIRED";
 	public static final String PAYMENT_METHOD_REQUIRED = "PAYMENT_METHOD_REQUIRED";
+	public static final String INVALID_REGISTRATION_DATE = "INVALID_REGISTRATION_DATE";
+	public static final String INVALID_PURCHASE_DATE = "INVALID_PURCHASE_DATE";
 	
 }
 
