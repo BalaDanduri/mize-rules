@@ -13,6 +13,10 @@ public abstract class CatalogConstants implements Serializable{
 	public static final String BUSINESS_ENTITY_DEPARTMENT_TYPE = "BusinessEntityDepartmentType";
 	public static final String SHIPPING_LOCATION_TYPE ="ShipLocationType";
 	public static final String PURCHASE_ORDER_TYPE ="PurchaseOrderType";
+	public static final String SHIPPING_METHOD ="ShippingMethod";
+	public static final String SHIPPING_CARRIER ="ShippingCarrier";
+	public static final String SHIPPING_PRIORITY ="ShippingPriority";
+	public static final String PAYMENT_METHOD ="PaymentMethod";
 	
 	
 }
