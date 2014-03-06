@@ -26,6 +26,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
+import com.mize.domain.common.EntityAttachment;
+import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JPASerializer;
@@ -54,7 +56,11 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	private List<PurchaseOrderAttachment> attachments = new ArrayList<PurchaseOrderAttachment>();
 	private List<PurchaseOrderComment> comments = new ArrayList<PurchaseOrderComment>();
 	private List<PurchaseOrderMessage> messages = new ArrayList<PurchaseOrderMessage>();
-	private List<PurchaseOrderItem> orderItems = new ArrayList<PurchaseOrderItem>();  
+	private List<PurchaseOrderItem> orderItems = new ArrayList<PurchaseOrderItem>();
+	@Transient
+	private EntityComment entityComment;
+	@Transient
+	private EntityAttachment entityAttachment;
 	@Transient
 	private User user;
 	private String processId;
@@ -343,6 +349,24 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 		this.processId = processId;
 	}
 
+	@Transient
+	public EntityComment getEntityComment() {
+		return entityComment;
+	}
+
+	public void setEntityComment(EntityComment entityComment) {
+		this.entityComment = entityComment;
+	}
+
+	@Transient
+	public EntityAttachment getEntityAttachment() {
+		return entityAttachment;
+	}
+
+	public void setEntityAttachment(EntityAttachment entityAttachment) {
+		this.entityAttachment = entityAttachment;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
