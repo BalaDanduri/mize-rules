@@ -63,6 +63,10 @@ public class Discount extends MizeEntity {
 	private List<DiscountComment> comments = new ArrayList<DiscountComment>();
 	
 
+	public enum OrderType{
+		Emergency,Stock;
+	}
+	
 	public Discount() {
 		super();
 	}
