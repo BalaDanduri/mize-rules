@@ -13,15 +13,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
+import com.mize.domain.auth.User;
 import com.mize.domain.common.Country;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JPASerializer;
@@ -44,6 +47,8 @@ public class PartPrice extends MizeEntity {
 	private String currencyCode;
 	private Country country;
 	private Long taxId;
+	@Transient
+	private User user;
 
 	public PartPrice() {
 		super();
@@ -161,7 +166,40 @@ public class PartPrice extends MizeEntity {
 	public void setEndDate(DateTime endDate) {
 		this.endDate = endDate;
 	}
+	
+	@Override	
+	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
+	@Type(type="com.mize.domain.util.DateTimeJPA")
+	@Column(name = "created_date",updatable=false)
+	@JsonIgnore(value = false)
+	public DateTime getCreatedDate() {
+		return createdDate;
+	}
 
+	@Override	
+	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
+	@Type(type="com.mize.domain.util.DateTimeJPA")
+	@Column(name = "updated_date")
+	@JsonIgnore(value = false)
+	public DateTime getUpdatedDate() {
+		return updatedDate;
+	}
+	
+	@Override
+	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	@JsonIgnore(false)
+	public void setCreatedDate(DateTime createdDate) {
+		super.createdDate = createdDate;
+	}
+
+	@Override
+	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	@JsonIgnore(false)
+	public void setUpdatedDate(DateTime updatedDate) {
+		super.updatedDate = updatedDate;
+	}
 
 	public void setCurrencyCode(String currencyCode) {
 		this.currencyCode = currencyCode;
@@ -175,6 +213,15 @@ public class PartPrice extends MizeEntity {
 		this.taxId = taxId;
 	}
 
+	@Transient
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
