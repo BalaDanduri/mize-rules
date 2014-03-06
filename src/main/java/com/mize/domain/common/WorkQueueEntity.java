@@ -1,5 +1,7 @@
 package com.mize.domain.common;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -39,6 +41,10 @@ public class WorkQueueEntity extends MizeEntity implements Comparable<WorkQueueE
 	@Transient
 	private ServiceSchedule serviceEntity;
 	private String status;
+	@Transient
+	private Long entityCount;
+	@Transient
+	private List<Long> entityIds;
 	private User user;
 	@Transient
 	private WorkQueueResult result;
@@ -224,6 +230,24 @@ public class WorkQueueEntity extends MizeEntity implements Comparable<WorkQueueE
 
 	public void setResult(WorkQueueResult result) {
 		this.result = result;
+	}
+
+	@Transient
+	public Long getEntityCount() {
+		return entityCount;
+	}
+
+	public void setEntityCount(Long entityCount) {
+		this.entityCount = entityCount;
+	}
+
+	@Transient
+	public List<Long> getEntityIds() {
+		return entityIds;
+	}
+
+	public void setEntityIds(List<Long> entityIds) {
+		this.entityIds = entityIds;
 	}
 
 	@Override
