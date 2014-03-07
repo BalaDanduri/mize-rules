@@ -24,16 +24,16 @@ public class DiscountComment extends MizeEntity {
 
 	private static final long serialVersionUID = -867858860499195762L;
 	private Discount discount;
-	private EntityComment entityComment;
+	private EntityComment comment;
 	
 	public DiscountComment() {
 		super();
 	}
 	
-	public DiscountComment(Discount discount, EntityComment entityComment) {
+	public DiscountComment(Discount discount, EntityComment comment) {
 		super();
 		this.discount = discount;
-		this.entityComment = entityComment;
+		this.comment = comment;
 	}
 
 	@Id
@@ -63,16 +63,16 @@ public class DiscountComment extends MizeEntity {
 	@OneToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
 	@JoinColumn(name = "comment_id")
 	public EntityComment getEntityComment() {
-		return entityComment;
+		return comment;
 	}
 
-	public void setEntityComment(EntityComment entityComment) {
-		this.entityComment = entityComment;
+	public void setEntityComment(EntityComment comment) {
+		this.comment = comment;
 	}
 
 	@Override
 	public String toString() {
-		return "DiscountComment [entityComment=" + entityComment + "]";
+		return "DiscountComment [comment=" + comment + "]";
 	}
 
 	@Override
@@ -80,7 +80,7 @@ public class DiscountComment extends MizeEntity {
 		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result
-				+ ((entityComment == null) ? 0 : entityComment.hashCode());
+				+ ((comment == null) ? 0 : comment.hashCode());
 		return result;
 	}
 
@@ -93,10 +93,10 @@ public class DiscountComment extends MizeEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		DiscountComment other = (DiscountComment) obj;
-		if (entityComment == null) {
-			if (other.entityComment != null)
+		if (comment == null) {
+			if (other.comment != null)
 				return false;
-		} else if (!entityComment.equals(other.entityComment))
+		} else if (!comment.equals(other.comment))
 			return false;	
 		return true;
 	}

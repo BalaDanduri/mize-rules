@@ -22,16 +22,16 @@ public class EntityParameterComment  extends MizeEntity implements Comparable<En
 
 	private static final long serialVersionUID = -1218611300848444271L;
 	private EntityParameter entityParameter;
-	private EntityComment entityComment;
+	private EntityComment comment;
 	
 	public EntityParameterComment() {
 		super();
 	}
 	
-	public EntityParameterComment(EntityParameter entityParameter,EntityComment entityComment) {
+	public EntityParameterComment(EntityParameter entityParameter,EntityComment comment) {
 		super();
 		this.entityParameter = entityParameter;
-		this.entityComment = entityComment;
+		this.comment = comment;
 	}
 
 	@Id
@@ -60,11 +60,11 @@ public class EntityParameterComment  extends MizeEntity implements Comparable<En
 	@OneToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
 	@JoinColumn(name = "comment_id")
 	public EntityComment getEntityComment() {
-		return entityComment;
+		return comment;
 	}
 
-	public void setEntityComment(EntityComment entityComment) {
-		this.entityComment = entityComment;
+	public void setEntityComment(EntityComment comment) {
+		this.comment = comment;
 	}
 	
 	public int compareTo(EntityParameterComment entityParameterComment) {
@@ -81,7 +81,7 @@ public class EntityParameterComment  extends MizeEntity implements Comparable<En
 
 	@Override
 	public String toString() {
-		return "EntityParameterComment [entityComment=" + entityComment + "]";
+		return "EntityParameterComment [comment=" + comment + "]";
 	}
 
 	@Override
@@ -89,7 +89,7 @@ public class EntityParameterComment  extends MizeEntity implements Comparable<En
 		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result
-				+ ((entityComment == null) ? 0 : entityComment.hashCode());
+				+ ((comment == null) ? 0 : comment.hashCode());
 		return result;
 	}
 
@@ -102,10 +102,10 @@ public class EntityParameterComment  extends MizeEntity implements Comparable<En
 		if (getClass() != obj.getClass())
 			return false;
 		EntityParameterComment other = (EntityParameterComment) obj;
-		if (entityComment == null) {
-			if (other.entityComment != null)
+		if (comment == null) {
+			if (other.comment != null)
 				return false;
-		} else if (!entityComment.equals(other.entityComment))
+		} else if (!comment.equals(other.comment))
 			return false;	
 		return true;
 	}
