@@ -27,6 +27,7 @@ public final class UploadSearchResult extends MizeEntity implements Comparable<U
 	private String logFileURI;
 	private String uploadedByName;
 	private Long uploadedBy;
+	private String uploadedByBEName;
 	@Override
 	public Long getId() {
 		return id;
@@ -224,7 +225,7 @@ public final class UploadSearchResult extends MizeEntity implements Comparable<U
 			if (other.successCount != null)
 				return false;
 		} else if (!successCount.equals(other.successCount))
-			return false;		
+			return false;
 		return true;
 	}
 
@@ -243,5 +244,12 @@ public final class UploadSearchResult extends MizeEntity implements Comparable<U
 	public void setUploadedBy(Long uploadedBy) {
 		this.uploadedBy = uploadedBy;
 	}
+	
+	public String getUploadedByBEName() {
+		return uploadedByBEName;
+	}
 
+	public void setUploadedByBEName(String uploadedByBEName) {
+		this.uploadedByBEName = uploadedByBEName;
+	}
 }

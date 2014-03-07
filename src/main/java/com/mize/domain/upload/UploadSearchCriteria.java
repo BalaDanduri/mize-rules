@@ -27,6 +27,7 @@ public final class UploadSearchCriteria extends MizeEntity implements Comparable
 	private String fileName;
 	private User user;
 	private Integer pageIndex;
+	private boolean isAdmin;
 	private List<UploadSearchResult> results = new ArrayList<UploadSearchResult>();
 	
 	@Override
@@ -121,7 +122,7 @@ public final class UploadSearchCriteria extends MizeEntity implements Comparable
 		return "UploadSearchCriteria [entityType=" + entityType + ", fileType="
 				+ fileType + ", fromDate=" + fromDate + ", toDate=" + toDate
 				+ ", status=" + status + ", fileName=" + fileName + ", user="
-				+ user + "]";
+				+ user + " isAdmin=" + isAdmin + "]";
 	}
 
 	@Override
@@ -139,6 +140,7 @@ public final class UploadSearchCriteria extends MizeEntity implements Comparable
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((toDate == null) ? 0 : toDate.hashCode());
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		result = prime * result + (Boolean.valueOf(isAdmin).hashCode());
 		return result;
 	}
 
@@ -186,6 +188,9 @@ public final class UploadSearchCriteria extends MizeEntity implements Comparable
 				return false;
 		} else if (!user.equals(other.user))
 			return false;
+		if(isAdmin != other.isAdmin){
+			return false;
+		}
 		return true;
 	}
 
@@ -195,6 +200,14 @@ public final class UploadSearchCriteria extends MizeEntity implements Comparable
 
 	public void setPageIndex(Integer pageIndex) {
 		this.pageIndex = pageIndex;
+	}
+
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 	
 }

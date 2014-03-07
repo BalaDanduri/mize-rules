@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.appmsg.AppMessage;
 import com.mize.domain.auth.User;
+import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
@@ -45,6 +46,7 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 	public enum Status{
 		IN_PROGRESS,COMPLETED;
 	}
+	private BusinessEntity tenant;
 	
 	public enum EntityType{
 		BrandService("Brand"),BrandSupprtService("Brand Supprt"),ProductService("Product"),ProductDesriptionService("Product Desription"),
@@ -288,6 +290,14 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 			processLog.getErrorLogs().add(errorLog);
 		}
 				
+	}
+
+	public BusinessEntity getTenant() {
+		return tenant;
+	}
+
+	public void setTenant(BusinessEntity tenant) {
+		this.tenant = tenant;
 	}
 	
 }
