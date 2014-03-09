@@ -18,10 +18,13 @@ public final class ServiceDTO<T> implements ServiceLiteral{
 	private Map<String,Object> messages = new HashMap<String, Object>();
 	private Map<String,String> validationMessages = new HashMap<String, String>();
 	private List<AppMessage> appMessages = new ArrayList<AppMessage>();
-	private Integer severity;
+	private Integer severity;	
 	@SuppressWarnings("unused")
 	private boolean isValid;
-
+	
+	@JsonIgnore
+	private long recordNumber;
+	
 	public T getDataObject() {
 		return dataObject;
 	}
@@ -232,5 +235,14 @@ public final class ServiceDTO<T> implements ServiceLiteral{
 				+ validationMessages + ", appMessages=" + appMessages + "]";
 	}
 	
+	@JsonIgnore	
+	public long getRecordNumber() {
+		return recordNumber;
+	}
+	
+	@JsonIgnore	
+	public void setRecordNumber(long recordNumber) {
+		this.recordNumber = recordNumber;
+	}
 	
 }

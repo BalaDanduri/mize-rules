@@ -1,9 +1,9 @@
 package com.mize.domain.upload;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -39,7 +39,7 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 	private String logFileURI;
 	private User user;
 	@JsonIgnore
-	private Map<Integer,ProcessLog> logMap = new  HashMap<Integer,ProcessLog>();
+	private Map<Integer,ProcessLog> logMap = new  ConcurrentHashMap<Integer,ProcessLog>();
 	@JsonIgnore
 	private boolean isSolrUpdateReq = true;
 	private List<Long> prodIds = new ArrayList<Long>();
