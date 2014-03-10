@@ -67,6 +67,10 @@ public class Discount extends MizeEntity {
 		Emergency,Stock;
 	}
 	
+	public enum Level{
+		Order,Item;
+	}
+	
 	public Discount() {
 		super();
 	}
