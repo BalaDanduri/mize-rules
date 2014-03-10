@@ -62,6 +62,7 @@ public class ProductRegistration extends MizeEntity {
 	private String registrationSource;
 	private String registrationApplication;
 	private String registrationIndustry;
+	private String additionalInfo;
 	
 	private List<ProductRegistrationWarranty> warrantyList = new ArrayList<ProductRegistrationWarranty>();
 	
@@ -402,6 +403,16 @@ public class ProductRegistration extends MizeEntity {
 	public void setAttachments(List<ProductRegistrationAttachment> attachments) {
 		this.attachments = attachments;
 	}
+	
+
+	@Column(name = "addl_info")
+	public String getAdditionalInfo() {
+		return additionalInfo;
+	}
+
+	public void setAdditionalInfo(String additionalInfo) {
+		this.additionalInfo = additionalInfo;
+	}
 
 
 	@Override
@@ -485,10 +496,12 @@ public class ProductRegistration extends MizeEntity {
 
 	@Override
 	public String toString() {
-		return "ProductRegistration [id=" + id + ", comments=" + comments
-				+ ", customer=" + customer + ", customerAddress="
-				+ customerAddress + ", customerDeliveryDate="
-				+ customerDeliveryDate + ", entityComment=" + entityComment
+		return "ProductRegistration [id=" + id + ", additionalInfo="
+				+ additionalInfo + ", attachments=" + attachments
+				+ ", comments=" + comments + ", customer=" + customer
+				+ ", customerAddress=" + customerAddress
+				+ ", customerDeliveryDate=" + customerDeliveryDate
+				+ ", entityComment=" + entityComment
 				+ ", invoiceBusinessEntity=" + invoiceBusinessEntity
 				+ ", productSerial=" + productSerial + ", purchaseDate="
 				+ purchaseDate + ", purchasePrice=" + purchasePrice
@@ -498,13 +511,11 @@ public class ProductRegistration extends MizeEntity {
 				+ ", registrationRef=" + registrationRef
 				+ ", registrationSource=" + registrationSource
 				+ ", registrationType=" + registrationType + ", statusCode="
-				+ statusCode + ", tenant=" + tenant + ", warrantyExpiryDate="
-				+ warrantyExpiryDate +", user=" + user +  "]";
+				+ statusCode + ", tenant=" + tenant + ", user=" + user
+				+ ", warrantyExpiryDate=" + warrantyExpiryDate
+				+ ", warrantyList=" + warrantyList + "]";
 	}
 
 
-
-
-	
 
 }
