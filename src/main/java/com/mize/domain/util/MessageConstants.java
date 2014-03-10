@@ -140,8 +140,10 @@ public abstract class MessageConstants implements Serializable{
 	public static final String ENTRY_VALUE_REQUIRED = "ENTRY_VALUE_REQUIRED";
 	public static final String DUPLICATE_ENTRY_CODE = "DUPLICATE_ENTRY_CODE";
 	
-	public static final String INVALID_ORDER_BE_ID= "INVALID_ORDER_BE_ID";
-	public static final String INVALID_START_AND_END_DATES= "INVALID_START_AND_END_DATES";
+	public static final String DISCOUNT_NAME_IS_REQUIRED = "DISCOUNT_NAME_IS_REQUIRED";
+	public static final String ORDER_LOCATION_TYPE_IS_REQUIRED= "ORDER_LOCATION_TYPE_IS_REQUIRED";
+	public static final String INVALID_ORDER_LOCATION = "INVALID_ORDER_LOCATION";
+	public static final String START_DATE_LESS_THAN_END_DATE= "START_DATE_LESS_THAN_END_DATE";
 	public static final String DUPLICATE_DISCOUNT_NUMBER= "DUPLICATE_DISCOUNT_NUMBER";
 	public static final String MIN_AMT_LESS_THAN_MAX_AMT= "MIN_AMT_LESS_THAN_MAX_AMT";
 	public static final String MIN_QTY_LESS_THAN_MAX_QTY= "MIN_QTY_LESS_THAN_MAX_QTY";
