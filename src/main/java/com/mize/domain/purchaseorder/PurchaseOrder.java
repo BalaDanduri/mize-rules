@@ -54,7 +54,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	private PurchaseOrderShipment shipment;
 	private List<PurchaseOrderAudit> audits = new ArrayList<PurchaseOrderAudit>();
 	private List<PurchaseOrderAttachment> attachments = new ArrayList<PurchaseOrderAttachment>();
-	private List<PurchaseOrderComment> comments = new ArrayList<PurchaseOrderComment>();
+	private List<PurchaseOrderComment> comments;
 	private List<PurchaseOrderMessage> messages = new ArrayList<PurchaseOrderMessage>();
 	private List<PurchaseOrderItem> orderItems = new ArrayList<PurchaseOrderItem>();
 	@Transient
