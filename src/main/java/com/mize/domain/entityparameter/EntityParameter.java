@@ -29,6 +29,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
+import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
@@ -46,7 +47,8 @@ public class EntityParameter extends MizeEntity implements Comparable<EntityPara
 	private DateTime endDate;
 	@Transient
 	private User user;
-	
+	@Transient
+	private EntityComment entityComment;
 	private List<EntityParameterAttribute> attributes = new ArrayList<EntityParameterAttribute>();
 	private List<EntityParameterComment> comments = new ArrayList<EntityParameterComment>();
 	
@@ -57,7 +59,7 @@ public class EntityParameter extends MizeEntity implements Comparable<EntityPara
 
 	public EntityParameter(BusinessEntity owner, String type, String code,
 			DateTime startDate, DateTime endDate,
-			List<EntityParameterAttribute> attributes,User user,
+			List<EntityParameterAttribute> attributes,User user,EntityComment entityComment,
 			List<EntityParameterComment> comments) {
 		super();
 		this.owner = owner;
@@ -67,6 +69,7 @@ public class EntityParameter extends MizeEntity implements Comparable<EntityPara
 		this.endDate = endDate;
 		this.attributes = attributes;
 		this.user = user;
+		this.entityComment = entityComment;
 		this.comments = comments;
 	}
 
@@ -227,6 +230,15 @@ public class EntityParameter extends MizeEntity implements Comparable<EntityPara
 			setCreatedDate(DateTime.now());
 		}
 		setUpdatedDate(DateTime.now());		
+	}
+	
+	@Transient
+	public EntityComment getEntityComment() {
+		return entityComment;
+	}
+
+	public void setEntityComment(EntityComment entityComment) {
+		this.entityComment = entityComment;
 	}
 	
 	@Transient
