@@ -26,7 +26,7 @@ public class BusinessEntityRelation extends MizeEntity {
 	
 	private BusinessEntity businessEntity;
 	private BusinessEntity relatedBusinessEntity;
-	private String relatedReference;
+	private String referenceNumber;
 	
 	public BusinessEntityRelation() {
 		
@@ -71,12 +71,12 @@ public class BusinessEntityRelation extends MizeEntity {
 	}	
 	
 	@Column(name = "rltn_be_reference", length = 100, nullable = false)
-	public String getRelatedReference() {
-		return relatedReference;
+	public String getReferenceNumber() {
+		return referenceNumber;
 	}
 	
-	public void setRelatedReference(String relatedReference) {
-		this.relatedReference = relatedReference;
+	public void setReferenceNumber(String referenceNumber) {
+		this.referenceNumber = referenceNumber;
 	}
 
 }
