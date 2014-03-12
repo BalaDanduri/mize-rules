@@ -41,21 +41,32 @@ import com.mize.domain.util.JsonDateTimeSerializer;
 @Table(name = "discount", uniqueConstraints = { @UniqueConstraint(columnNames = {"id"}) })
 public class Discount extends MizeEntity {
 
-	private static final long serialVersionUID = -5386693947574878416L;
-	
+	private static final long serialVersionUID = -5386693947574878416L;	
 	private BusinessEntity tenant;
+	@SuppressWarnings("unused")
 	private String discountNumber;
-	private BigDecimal discountAmount;
-	private BigDecimal discountPercent;
-	private BigDecimal minimumAmount; 
-	private BigDecimal maximumAmount; 
-	private String discountLevel;
-	private BigDecimal minimumQuantity;
-	private BigDecimal maximumQuantity;
 	private String orderType;
-	private DateTime startDate;
-	private DateTime endDate;
 	private BusinessEntity orderBusinessEntity;	
+	private DateTime startDate;
+	private DateTime endDate;	
+	private BigDecimal lineDiscountAmount;
+	private BigDecimal lineDiscountPercent;
+	private BigDecimal orderDiscountAmount;
+	private BigDecimal orderDiscountPercent;
+	private BigDecimal orderMinimumLines;
+	private BigDecimal orderMaximumLines;
+	private BigDecimal orderMinimumAmount;
+	private BigDecimal orderMaximumAmount;
+	private BigDecimal shippingDiscountAmount;
+	private BigDecimal shippingDiscountPercent;
+	private BigDecimal shippingMinimumAmount;
+	private BigDecimal shippingMaximumAmount;
+	private BigDecimal shippingMinimumLines;
+	private BigDecimal shippingMaximumLines;
+	private String shippingMethod;	
+	private BigDecimal minimumQuantity;
+	private BigDecimal maximumQuantity;	
+	private BigDecimal maximumAmountAllowed;
 	@Transient
 	private User user;	
 	@Transient
@@ -73,32 +84,6 @@ public class Discount extends MizeEntity {
 	
 	public Discount() {
 		super();
-	}
-
-	public Discount(BusinessEntity tenant, String discountNumber,
-			BigDecimal discountAmount, BigDecimal discountPercent,
-			BigDecimal minimumAmount, BigDecimal maximumAmount,
-			String discountLevel, BigDecimal minimumQuantity,
-			BigDecimal maximumQuantity, String orderType, DateTime startDate,
-			DateTime endDate, BusinessEntity orderBusinessEntity, User user,
-			EntityComment entityComment, List<DiscountComment> comments) {
-		super();
-		this.tenant = tenant;
-		this.discountNumber = discountNumber;
-		this.discountAmount = discountAmount;
-		this.discountPercent = discountPercent;
-		this.minimumAmount = minimumAmount;
-		this.maximumAmount = maximumAmount;
-		this.discountLevel = discountLevel;
-		this.minimumQuantity = minimumQuantity;
-		this.maximumQuantity = maximumQuantity;
-		this.orderType = orderType;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.orderBusinessEntity = orderBusinessEntity;
-		this.user = user;
-		this.entityComment = entityComment;
-		this.comments = comments;
 	}
 
 	@Id
@@ -127,56 +112,11 @@ public class Discount extends MizeEntity {
 
 	@Column(name = "discount_number",length = 250)
 	public String getDiscountNumber() {
-		return discountNumber;
+		return String.valueOf(id);
 	}
 
 	public void setDiscountNumber(String discountNumber) {
 		this.discountNumber = discountNumber;
-	}
-
-	@Column(name = "discount_amount")
-	public BigDecimal getDiscountAmount() {
-		return discountAmount;
-	}
-
-	public void setDiscountAmount(BigDecimal DiscountAmount) {
-		this.discountAmount = DiscountAmount;
-	}
-
-	@Column(name = "discount_percent")
-	public BigDecimal getDiscountPercent() {
-		return discountPercent;
-	}
-
-	public void setDiscountPercent(BigDecimal DiscountPercent) {
-		this.discountPercent = DiscountPercent;
-	}
-	
-	@Column(name = "minimum_amount")
-	public BigDecimal getMinimumAmount() {
-		return minimumAmount;
-	}
-
-	public void setMinimumAmount(BigDecimal minimumAmount) {
-		this.minimumAmount = minimumAmount;
-	}
-	
-	@Column(name = "maximum_amount")
-	public BigDecimal getMaximumAmount() {
-		return maximumAmount;
-	}
-
-	public void setMaximumAmount(BigDecimal maximumAmount) {
-		this.maximumAmount = maximumAmount;
-	}
-
-	@Column(name = "discount_level")
-	public String getDiscountLevel() {
-		return discountLevel;
-	}
-
-	public void setDiscountLevel(String discountLevel) {
-		this.discountLevel = discountLevel;
 	}
 
 	@Column(name = "minimum_quantity")
@@ -193,6 +133,7 @@ public class Discount extends MizeEntity {
 		return maximumQuantity;
 	}
 
+	@Column(name = "maximum_quantity")
 	public void setMaximumQuantity(BigDecimal maximumQuantity) {
 		this.maximumQuantity = maximumQuantity;
 	}
@@ -343,107 +284,149 @@ public class Discount extends MizeEntity {
 		this.user = user;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = PRIME;
-		int result = super.hashCode();
-		result = prime * result + ((discountAmount == null) ? 0 : discountAmount.hashCode());
-		result = prime * result
-				+ ((discountLevel == null) ? 0 : discountLevel.hashCode());
-		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
-		result = prime * result
-				+ ((maximumAmount == null) ? 0 : maximumAmount.hashCode());
-		result = prime * result
-				+ ((maximumQuantity == null) ? 0 : maximumQuantity.hashCode());
-		result = prime * result
-				+ ((minimumAmount == null) ? 0 : minimumAmount.hashCode());
-		result = prime * result
-				+ ((minimumQuantity == null) ? 0 : minimumQuantity.hashCode());
-		result = prime * result + ((discountNumber == null) ? 0 : discountNumber.hashCode());
-		result = prime * result
-				+ ((orderType == null) ? 0 : orderType.hashCode());
-		result = prime * result + ((discountPercent == null) ? 0 : discountPercent.hashCode());
-		result = prime * result
-				+ ((startDate == null) ? 0 : startDate.hashCode());
-		return result;
+	@Column(name = "line_discount_amount")
+	public BigDecimal getLineDiscountAmount() {
+		return lineDiscountAmount;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Discount other = (Discount) obj;
-		if (discountAmount == null) {
-			if (other.discountAmount != null)
-				return false;
-		} else if (!discountAmount.equals(other.discountAmount))
-			return false;
-		if (discountLevel == null) {
-			if (other.discountLevel != null)
-				return false;
-		} else if (!discountLevel.equals(other.discountLevel))
-			return false;
-		if (endDate == null) {
-			if (other.endDate != null)
-				return false;
-		} else if (!endDate.equals(other.endDate))
-			return false;
-		if (maximumAmount == null) {
-			if (other.maximumAmount != null)
-				return false;
-		} else if (!maximumAmount.equals(other.maximumAmount))
-			return false;
-		if (maximumQuantity == null) {
-			if (other.maximumQuantity != null)
-				return false;
-		} else if (!maximumQuantity.equals(other.maximumQuantity))
-			return false;
-		if (minimumAmount == null) {
-			if (other.minimumAmount != null)
-				return false;
-		} else if (!minimumAmount.equals(other.minimumAmount))
-			return false;
-		if (minimumQuantity == null) {
-			if (other.minimumQuantity != null)
-				return false;
-		} else if (!minimumQuantity.equals(other.minimumQuantity))
-			return false;
-		if (discountNumber == null) {
-			if (other.discountNumber != null)
-				return false;
-		} else if (!discountNumber.equals(other.discountNumber))
-			return false;
-		if (orderType == null) {
-			if (other.orderType != null)
-				return false;
-		} else if (!orderType.equals(other.orderType))
-			return false;
-		if (discountPercent == null) {
-			if (other.discountPercent != null)
-				return false;
-		} else if (!discountPercent.equals(other.discountPercent))
-			return false;
-		if (startDate == null) {
-			if (other.startDate != null)
-				return false;
-		} else if (!startDate.equals(other.startDate))
-			return false;
-		return true;
+	public void setLineDiscountAmount(BigDecimal lineDiscountAmount) {
+		this.lineDiscountAmount = lineDiscountAmount;
 	}
 
-	@Override
-	public String toString() {
-		return "Discount [number=" + discountNumber + ", amount=" + discountAmount
-				+ ", percent=" + discountPercent + ", minimumAmount=" + minimumAmount
-				+ ", maximumAmount=" + maximumAmount + ", discountLevel="
-				+ discountLevel + ", minimumQuantity=" + minimumQuantity
-				+ ", maximumQuantity=" + maximumQuantity + ", orderType="
-				+ orderType + ", startDate=" + startDate + ", endDate="
-				+ endDate + "]";
+	@Column(name = "line_discount_percent")
+	public BigDecimal getLineDiscountPercent() {
+		return lineDiscountPercent;
 	}
+
+	public void setLineDiscountPercent(BigDecimal lineDiscountPercent) {
+		this.lineDiscountPercent = lineDiscountPercent;
+	}
+
+	@Column(name = "order_discount_amount")
+	public BigDecimal getOrderDiscountAmount() {
+		return orderDiscountAmount;
+	}
+
+	public void setOrderDiscountAmount(BigDecimal orderDiscountAmount) {
+		this.orderDiscountAmount = orderDiscountAmount;
+	}
+
+	@Column(name = "order_discount_percent")
+	public BigDecimal getOrderDiscountPercent() {
+		return orderDiscountPercent;
+	}
+
+	public void setOrderDiscountPercent(BigDecimal orderDiscountPercent) {
+		this.orderDiscountPercent = orderDiscountPercent;
+	}
+
+	@Column(name = "order_minimum_lines")
+	public BigDecimal getOrderMinimumLines() {
+		return orderMinimumLines;
+	}
+
+	public void setOrderMinimumLines(BigDecimal orderMinimumLines) {
+		this.orderMinimumLines = orderMinimumLines;
+	}
+
+	@Column(name = "order_maximum_lines")
+	public BigDecimal getOrderMaximumLines() {
+		return orderMaximumLines;
+	}
+
+	public void setOrderMaximumLines(BigDecimal orderMaximumLines) {
+		this.orderMaximumLines = orderMaximumLines;
+	}
+
+	@Column(name = "shipping_discount_amount")
+	public BigDecimal getShippingDiscountAmount() {
+		return shippingDiscountAmount;
+	}
+
+	public void setShippingDiscountAmount(BigDecimal shippingDiscountAmount) {
+		this.shippingDiscountAmount = shippingDiscountAmount;
+	}
+
+	@Column(name = "shipping_discount_percent")
+	public BigDecimal getShippingDiscountPercent() {
+		return shippingDiscountPercent;
+	}
+
+	public void setShippingDiscountPercent(BigDecimal shippingDiscountPercent) {
+		this.shippingDiscountPercent = shippingDiscountPercent;
+	}
+
+	@Column(name = "shipping_minimum_amount")
+	public BigDecimal getShippingMinimumAmount() {
+		return shippingMinimumAmount;
+	}
+
+	public void setShippingMinimumAmount(BigDecimal shippingMinimumAmount) {
+		this.shippingMinimumAmount = shippingMinimumAmount;
+	}
+
+	@Column(name = "shipping_maximum_amount")
+	public BigDecimal getShippingMaximumAmount() {
+		return shippingMaximumAmount;
+	}
+
+	public void setShippingMaximumAmount(BigDecimal shippingMaximumAmount) {
+		this.shippingMaximumAmount = shippingMaximumAmount;
+	}
+
+	@Column(name = "shipping_minimum_lines")
+	public BigDecimal getShippingMinimumLines() {
+		return shippingMinimumLines;
+	}
+
+	public void setShippingMinimumLines(BigDecimal shippingMinimumLines) {
+		this.shippingMinimumLines = shippingMinimumLines;
+	}
+
+	@Column(name = "shipping_maximum_lines")
+	public BigDecimal getShippingMaximumLines() {
+		return shippingMaximumLines;
+	}
+
+	public void setShippingMaximumLines(BigDecimal shippingMaximumLines) {
+		this.shippingMaximumLines = shippingMaximumLines;
+	}
+
+	@Column(name = "shipping_method")
+	public String getShippingMethod() {
+		return shippingMethod;
+	}
+
+	public void setShippingMethod(String shippingMethod) {
+		this.shippingMethod = shippingMethod;
+	}
+
+	@Column(name = "maximum_amount_allowed")
+	public BigDecimal getMaximumAmountAllowed() {
+		return maximumAmountAllowed;
+	}
+
+	public void setMaximumAmountAllowed(BigDecimal maximumAmountAllowed) {
+		this.maximumAmountAllowed = maximumAmountAllowed;
+	}
+
+	@Column(name = "order_minimum_amount")
+	public BigDecimal getOrderMinimumAmount() {
+		return orderMinimumAmount;
+	}
+
+	public void setOrderMinimumAmount(BigDecimal orderMinimumAmount) {
+		this.orderMinimumAmount = orderMinimumAmount;
+	}
+
+	@Column(name = "order_maximum_amount")
+	public BigDecimal getOrderMaximumAmount() {
+		return orderMaximumAmount;
+	}
+
+	public void setOrderMaximumAmount(BigDecimal orderMaximumAmount) {
+		this.orderMaximumAmount = orderMaximumAmount;
+	}
+
 	
 }
