@@ -30,6 +30,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityComment;
+import com.mize.domain.common.EntityReference;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
@@ -40,7 +41,7 @@ import com.mize.domain.util.JsonDateTimeSerializer;
 public class EntityParameter extends MizeEntity implements Comparable<EntityParameter>{
 
 	private static final long serialVersionUID = 841149014756400338L;
-	private BusinessEntity owner;
+	private BusinessEntity tenant;
 	private String type;
 	private String code;
 	private DateTime startDate;
@@ -49,28 +50,20 @@ public class EntityParameter extends MizeEntity implements Comparable<EntityPara
 	private User user;
 	@Transient
 	private EntityComment entityComment;
+	@Transient
+	private EntityReference entityReference;
 	private List<EntityParameterAttribute> attributes = new ArrayList<EntityParameterAttribute>();
 	private List<EntityParameterComment> comments = new ArrayList<EntityParameterComment>();
 	
 	public EntityParameter() {
 	}
 
+	public enum EntityType{
+		PurchaseOrderType;
+	}
 	
-
-	public EntityParameter(BusinessEntity owner, String type, String code,
-			DateTime startDate, DateTime endDate,
-			List<EntityParameterAttribute> attributes,User user,EntityComment entityComment,
-			List<EntityParameterComment> comments) {
-		super();
-		this.owner = owner;
-		this.type = type;
-		this.code = code;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.attributes = attributes;
-		this.user = user;
-		this.entityComment = entityComment;
-		this.comments = comments;
+	public enum PricingMethod{
+		LIST,UNIT,NET;
 	}
 
 	@Id
@@ -89,8 +82,8 @@ public class EntityParameter extends MizeEntity implements Comparable<EntityPara
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="tenant_id")
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
-	public BusinessEntity getOwner() {
-		return owner;
+	public BusinessEntity getTenant() {
+		return tenant;
 	}
 	
 	@Column(name = "entity_type",length = 50)
@@ -191,8 +184,8 @@ public class EntityParameter extends MizeEntity implements Comparable<EntityPara
 		super.setUpdatedBy(updatedBy);
 	}
 	
-	public void setOwner(BusinessEntity owner) {
-		this.owner = owner;
+	public void setTenant(BusinessEntity tenant) {
+		this.tenant = tenant;
 	}
 
 	public void setType(String type) {
@@ -205,6 +198,7 @@ public class EntityParameter extends MizeEntity implements Comparable<EntityPara
 	}
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "entityParameter", orphanRemoval=true)
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public List<EntityParameterAttribute> getAttributes() {
 		return attributes;
 	}
@@ -214,7 +208,7 @@ public class EntityParameter extends MizeEntity implements Comparable<EntityPara
 	}
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "entityParameter")
-	/*@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)*/
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public List<EntityParameterComment> getComments() {
 		return comments;
 	}
@@ -250,6 +244,15 @@ public class EntityParameter extends MizeEntity implements Comparable<EntityPara
 		this.user = user;
 	}
 
+	@Transient
+	public EntityReference getEntityReference() {
+		return entityReference;
+	}
+
+	public void setEntityReference(EntityReference entityReference) {
+		this.entityReference = entityReference;
+	}
+
 	public int compareTo(EntityParameter entityParameter) {
 		if (this == entityParameter)
 			return EQUAL;
@@ -263,24 +266,18 @@ public class EntityParameter extends MizeEntity implements Comparable<EntityPara
 	}
 
 	@Override
-	public String toString() {
-		return "EntityParameter [owner=" + owner + ", type=" + type + ", code="
-				+ code + ", startDate=" + startDate + ", endDate=" + endDate
-				+ "]";
-	}
-
-	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
+		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
 		result = prime * result
-				+ ((code == null) ? 0 : code.hashCode());
-		result = prime * result
-				+ ((type == null) ? 0 : type.hashCode());
-		result = prime * result + ((owner == null) ? 0 : owner.hashCode());		
+				+ ((entityReference == null) ? 0 : entityReference.hashCode());
 		result = prime * result
 				+ ((startDate == null) ? 0 : startDate.hashCode());
+		result = prime * result + ((tenant == null) ? 0 : tenant.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
 
@@ -293,30 +290,40 @@ public class EntityParameter extends MizeEntity implements Comparable<EntityPara
 		if (getClass() != obj.getClass())
 			return false;
 		EntityParameter other = (EntityParameter) obj;
+		if (code == null) {
+			if (other.code != null)
+				return false;
+		} else if (!code.equals(other.code))
+			return false;
 		if (endDate == null) {
 			if (other.endDate != null)
 				return false;
 		} else if (!endDate.equals(other.endDate))
 			return false;
-		if (code == null) {
-			if (other.code != null)
+		if (entityReference == null) {
+			if (other.entityReference != null)
 				return false;
-		} else if (!code.equals(other.code))
+		} else if (!entityReference.equals(other.entityReference))
+			return false;
+		if (startDate == null) {
+			if (other.startDate != null)
+				return false;
+		} else if (!startDate.equals(other.startDate))
+			return false;
+		if (tenant == null) {
+			if (other.tenant != null)
+				return false;
+		} else if (!tenant.equals(other.tenant))
 			return false;
 		if (type == null) {
 			if (other.type != null)
 				return false;
 		} else if (!type.equals(other.type))
 			return false;
-		if (owner == null) {
-			if (other.owner != null)
+		if (user == null) {
+			if (other.user != null)
 				return false;
-		} else if (!owner.equals(other.owner))
-			return false;		
-		if (startDate == null) {
-			if (other.startDate != null)
-				return false;
-		} else if (!startDate.equals(other.startDate))
+		} else if (!user.equals(other.user))
 			return false;
 		return true;
 	}

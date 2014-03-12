@@ -203,6 +203,20 @@ public final class Formatter {
 		return (dateTime == null ? null : dateTime.toString(DB_DATE_TIME_FORMAT));
 	}
 	
+	public static DateTime toEndDateTime(DateTime dateTime){
+		if(dateTime != null){
+			dateTime = dateTime.withTime(23, 59, 59, 999);
+		}
+		return dateTime;
+	}
+	
+	public static DateTime toStartDateTime(DateTime dateTime){
+		if(dateTime != null){
+			dateTime = dateTime.withTime(0, 0, 0, 0);
+		}
+		return dateTime;
+	}
+	
 	public static String getDateTime(DateTime dateTime){
 		return (dateTime == null ? null : dateTime.toString(DATE_FORMAT));
 	}
@@ -611,6 +625,16 @@ public final class Formatter {
 			val2 = BigDecimal.ZERO;
 		}
 		return val1.add(val2);		
+	}
+	
+	public static BigDecimal subtractBigDecimals(BigDecimal val1,BigDecimal val2){
+		if(val1 == null){
+			val1 = BigDecimal.ZERO;
+		}
+		if(val2 == null){
+			val2 = BigDecimal.ZERO;
+		}
+		return val1.subtract(val2);		
 	}
 	
 	public static BigDecimal multiplyBigDecimals(BigDecimal val1,BigDecimal val2){
