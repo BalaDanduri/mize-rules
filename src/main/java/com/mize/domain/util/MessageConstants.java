@@ -245,6 +245,9 @@ public abstract class MessageConstants implements Serializable{
 	public static final String PRODUCT_SERIAL_CREATION_FAILED = "PRODUCT_SERIAL_CREATION_FAILED";
 	public static final String CUSTOMER_BUSINESS_ENTITY_CREATION_FAILED = "CUSTOMER_BUSINESS_ENTITY_CREATION_FAILED";
 	
+	public static final String INVALID_ENTITY_PARAMETER_TYPE = "INVALID_ENTITY_PARAMETER_TYPE";
+	public static final String INVALID_ATTRIBUTE_VALUE = "INVALID_ATTRIBUTE_VALUE";
+	
 }
 
 

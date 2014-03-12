@@ -17,7 +17,8 @@ public abstract class CatalogConstants implements Serializable{
 	public static final String SHIPPING_CARRIER ="ShippingCarrier";
 	public static final String SHIPPING_PRIORITY ="ShippingPriority";
 	public static final String PAYMENT_METHOD ="PaymentMethod";
-	
+	public static final String ENTITY_PARAMETER_TYPE ="EntityParameterType";
+	public static final String ENTITY_ATTRIBUTE_TYPE = "EntityAttributeType";
 	
 }
 
