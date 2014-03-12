@@ -27,8 +27,6 @@ import com.mize.domain.test.util.JPATest;
 
 @ContextConfiguration(locations={"/test-context.xml"})
 public class DiscountTest  extends JPATest {
-	
-	private static final String GET_ALL_DISCOUNT_QUERY = "select * from discount where id = ?";
 	EntityManager entityManager;
 	Discount discount = null;
 	
@@ -61,11 +59,6 @@ public class DiscountTest  extends JPATest {
 		beEntity.setId(961L);
 		disCnt.setTenant(beEntity);
 		disCnt.setDiscountNumber("TEST NUMBER 001");
-		disCnt.setDiscountAmount(BigDecimal.valueOf(300));
-		disCnt.setDiscountPercent(BigDecimal.valueOf(20));
-		disCnt.setMinimumAmount(BigDecimal.valueOf(500));
-		disCnt.setMaximumAmount(BigDecimal.valueOf(1000));
-		disCnt.setDiscountLevel("Test Level");
 		disCnt.setMinimumQuantity(BigDecimal.valueOf(5));
 		disCnt.setMaximumQuantity(BigDecimal.valueOf(10));
 		disCnt.setOrderType("LINE");
