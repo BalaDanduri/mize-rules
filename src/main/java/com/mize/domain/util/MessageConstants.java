@@ -130,6 +130,8 @@ public abstract class MessageConstants implements Serializable{
 	public static final String CUSTOMER_NUMBER_IS_REQUIRED = "CUSTOMER_NUMBER_IS_REQUIRED";
 	public static final String INVALID_INVOICE_BUSINESS_ENTITY = "INVALID_INVOICE_BUSINESS_ENTITY";
 	public static final String INVALID_PRODUCT_REGISTRATION = "INVALID_PRODUCT_REGISTRATION";
+	public static final String INVOICE_BUSINESS_ENTITY_TYPE_IS_REQUIRED = "INVOICE_BUSINESS_ENTITY_TYPE_IS_REQUIRED";
+	public static final String INVOICE_BUSINESS_ENTITY_CODE_IS_REQUIRED = "INVOICE_BUSINESS_ENTITY_CODE_IS_REQUIRED";
 	
 	public static final String INVALID_CATALOG_NAME = "INVALID_CATALOG_NAME";
 	public static final String INVALID_CATALOG = "INVALID_CATALOG";
@@ -239,6 +241,9 @@ public abstract class MessageConstants implements Serializable{
 	public static final String INVALID_SHIPPING_CARRIER = "INVALID_SHIPPING_CARRIER";
 	public static final String INVALID_SHIPPING_PRIORITY = "INVALID_SHIPPING_PRIORITY";
 	public static final String INVALID_PAYMENT_METHOD = "INVALID_PAYMENT_METHOD";
+	public static final String INVALID_STATUS = "INVALID_STATUS";
+	public static final String PRODUCT_SERIAL_CREATION_FAILED = "PRODUCT_SERIAL_CREATION_FAILED";
+	public static final String CUSTOMER_BUSINESS_ENTITY_CREATION_FAILED = "CUSTOMER_BUSINESS_ENTITY_CREATION_FAILED";
 	
 }
 
