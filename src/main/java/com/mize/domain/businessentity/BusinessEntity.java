@@ -26,6 +26,8 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -53,6 +55,7 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	private List<BusinessEntityBrand> beBrand = new ArrayList<BusinessEntityBrand>();
 	private List<BusinessEntityContact> beContact = new ArrayList<BusinessEntityContact>();
 	private BusinessEntityAttribute beAttribute;
+	private List<BusinessEntityRelation> relatedEntities;
 	
 	public BusinessEntity() {
 	}
@@ -244,6 +247,18 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	
 	public void setTypeCode(String typeCode) {
 		this.typeCode = typeCode;
+	}
+	
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "businessEntity" , orphanRemoval = true)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	@JsonManagedReference(value="be_relation")
+	public List<BusinessEntityRelation> getRelatedEntities() {
+		return relatedEntities;
+	}
+	
+	public void setRelatedEntities(List<BusinessEntityRelation> relatedEntities) {
+		this.relatedEntities = relatedEntities;
 	}
 	
 	

@@ -63,6 +63,7 @@ public class ProductRegistration extends MizeEntity {
 	private String registrationApplication;
 	private String registrationIndustry;
 	private String additionalInfo;
+	private String invoiceCustomerReference;
 	
 	private List<ProductRegistrationWarranty> warrantyList = new ArrayList<ProductRegistrationWarranty>();
 	
@@ -412,6 +413,15 @@ public class ProductRegistration extends MizeEntity {
 
 	public void setAdditionalInfo(String additionalInfo) {
 		this.additionalInfo = additionalInfo;
+	}
+	
+	@Column(name = "invoice_customer_reference", length = 100, nullable = true)
+	public String getInvoiceCustomerReference() {
+		return invoiceCustomerReference;
+	}
+	
+	public void setInvoiceCustomerReference(String invoiceCustomerReference) {
+		this.invoiceCustomerReference = invoiceCustomerReference;
 	}
 
 
