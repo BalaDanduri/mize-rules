@@ -9,7 +9,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.product.ProductSerial;
-import com.mize.domain.purchaseorder.PurchaseOrderRequester;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
@@ -29,6 +28,8 @@ public class WorkQueueResult extends MizeEntity {
 	private String serviceProductName;
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime serviceDate;
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	private DateTime serviceUpdatedDate;
 	public BusinessEntity businessEntity;
 	public ProductSerial productSerial;
 	private String requesterCode;
@@ -52,7 +53,7 @@ public class WorkQueueResult extends MizeEntity {
 	}
 
 	public WorkQueueResult(Long id,Long entityId, String entityType,String entityCode,String status,String orderType,
-			DateTime serviceDate,BusinessEntity businessEntity) {
+			DateTime serviceDate,DateTime updatedDate,BusinessEntity businessEntity) {
 		super();
 		this.id = id;
 		this.entityId = entityId;
@@ -61,6 +62,7 @@ public class WorkQueueResult extends MizeEntity {
 		this.status = status;
 		this.orderType = orderType;
 		this.serviceDate = serviceDate;
+		this.serviceUpdatedDate = updatedDate;
 		this.businessEntity = businessEntity;
 	}
 	
@@ -148,6 +150,18 @@ public class WorkQueueResult extends MizeEntity {
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	public void setServiceDate(DateTime serviceDate) {
 		this.serviceDate = serviceDate;
+	}
+	
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	public DateTime getServiceUpdatedDate() {
+		return serviceUpdatedDate;
+	}
+
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	public void setServiceUpdatedDate(DateTime serviceUpdatedDate) {
+		this.serviceUpdatedDate = serviceUpdatedDate;
 	}
 
 	@Override
