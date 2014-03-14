@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.Fetch;
@@ -26,6 +27,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.mize.domain.auth.User;
+import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
@@ -43,6 +46,10 @@ public class PartKit extends MizeEntity{
 	private DateTime startDate;
 	private DateTime endDate;
 	private List<PartKitItem> partKitItems;
+	@Transient
+	private User user;
+	@Transient
+	private BusinessEntity tenant;
 	
 	public PartKit(){
 		super();
@@ -213,6 +220,15 @@ public class PartKit extends MizeEntity{
 		super.setUpdatedBy(updatedBy);
 	}
 	
+	@Transient	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	@PrePersist
 	@PreUpdate
 	public void auditFields(){
@@ -221,6 +237,15 @@ public class PartKit extends MizeEntity{
 		}
 		setUpdatedDate(DateTime.now());
 		
+	}
+	
+	@Transient
+	public BusinessEntity getTenant() {
+		return tenant;
+	}
+
+	public void setTenant(BusinessEntity tenant) {
+		this.tenant = tenant;
 	}
 
 	@Override
