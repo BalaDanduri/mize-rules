@@ -43,7 +43,6 @@ public class Discount extends MizeEntity {
 
 	private static final long serialVersionUID = -5386693947574878416L;	
 	private BusinessEntity tenant;
-	@SuppressWarnings("unused")
 	private String discountNumber;
 	private String orderType;
 	private BusinessEntity orderBusinessEntity;	
@@ -112,7 +111,7 @@ public class Discount extends MizeEntity {
 
 	@Column(name = "discount_number",length = 250)
 	public String getDiscountNumber() {
-		return String.valueOf(id);
+		return this.discountNumber;
 	}
 
 	public void setDiscountNumber(String discountNumber) {
