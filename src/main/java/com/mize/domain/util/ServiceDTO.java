@@ -176,22 +176,6 @@ public final class ServiceDTO<T> implements ServiceLiteral{
 	public void setAppMessages(List<AppMessage> appMessages) {
 		this.appMessages = appMessages;
 	}
-
-	@JsonIgnore
-	public void addAppMessage(Integer severity, String code){
-		addAppMessage(severity,code,null);
-	}
-	
-	@JsonIgnore
-	public void addAppMessage(Integer severity, String code,String shortDesc){
-		if(appMessages == null){
-			appMessages = new ArrayList<AppMessage>();
-		}
-		if(Formatter.intValue(severity) > Formatter.intValue(this.severity)){
-			this.severity = severity;
-		}
-		appMessages.add(new AppMessage(severity, code,shortDesc));
-	}
 	
 	public Integer getSeverity() {
 		return Formatter.intValue(severity);
@@ -203,6 +187,17 @@ public final class ServiceDTO<T> implements ServiceLiteral{
 			appMessages = new ArrayList<AppMessage>();
 		}
 		appMessages.add(new AppMessage(code,shortDesc,shortDesc,severity, field,fieldKey,MessageType.Type.Validation));
+		if(Formatter.intValue(severity) > Formatter.intValue(this.severity)){
+			this.severity = severity;
+		}
+	}
+	
+	@JsonIgnore
+	public void addAppMessage(String code, String shortDesc, Integer severity) {
+		if(appMessages == null){
+			appMessages = new ArrayList<AppMessage>();
+		}
+		appMessages.add(new AppMessage(code,shortDesc,shortDesc,severity, null,null,MessageType.Type.Application));
 		if(Formatter.intValue(severity) > Formatter.intValue(this.severity)){
 			this.severity = severity;
 		}
