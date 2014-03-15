@@ -245,15 +245,17 @@ public abstract class MessageConstants implements Serializable{
 	public static final String INVALID_STATUS = "INVALID_STATUS";
 	public static final String PRODUCT_SERIAL_CREATION_FAILED = "PRODUCT_SERIAL_CREATION_FAILED";
 	public static final String CUSTOMER_BUSINESS_ENTITY_CREATION_FAILED = "CUSTOMER_BUSINESS_ENTITY_CREATION_FAILED";
+	public static final String ORDER_TYPE_OR_ORDER_LOCATION_IS_REQUIRED = "ORDER_TYPE_OR_ORDER_LOCATION_IS_REQUIRED";
+	public static final String AMOUNT_OR_PERCENT_IS_VALID = "AMOUNT_OR_PERCENT_IS_VALID";
+	public static final String MIN_LINES_LESS_THAN_MAX_LINES = "MIN_LINES_LESS_THAN_MAX_LINES";
+	public static final String OVERLAPPING_RECORD_EXISTS = "OVERLAPPING_RECORD_EXISTS";
 	
 	public static final String INVALID_ENTITY_PARAMETER_TYPE = "INVALID_ENTITY_PARAMETER_TYPE";
 	public static final String INVALID_ATTRIBUTE_VALUE = "INVALID_ATTRIBUTE_VALUE";
 	
+	public static final String INVALID_PART_KIT_TYPE = "INVALID_PART_KIT_TYPE";
+	public static final String INVALID_PRICE_METHOD = "INVALID_PRICE_METHOD";
+	
 	public static final String DATE_RANGE_OVERLAP = "DATE_RANGE_OVERLAP";
 	public static final String DATE_RANGE_DUPLICATE = "DATE_RANGE_DUPLICATE";
-	
 }
-
-
-
-
