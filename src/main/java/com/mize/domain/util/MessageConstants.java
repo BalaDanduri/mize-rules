@@ -249,6 +249,9 @@ public abstract class MessageConstants implements Serializable{
 	public static final String INVALID_ENTITY_PARAMETER_TYPE = "INVALID_ENTITY_PARAMETER_TYPE";
 	public static final String INVALID_ATTRIBUTE_VALUE = "INVALID_ATTRIBUTE_VALUE";
 	
+	public static final String DATE_RANGE_OVERLAP = "DATE_RANGE_OVERLAP";
+	public static final String DATE_RANGE_DUPLICATE = "DATE_RANGE_DUPLICATE";
+	
 }
 
 
