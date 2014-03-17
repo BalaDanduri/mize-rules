@@ -20,6 +20,7 @@ public abstract class CatalogConstants implements Serializable{
 	public static final String ENTITY_PARAMETER_TYPE ="EntityParameterType";
 	public static final String ENTITY_ATTRIBUTE_TYPE = "EntityAttributeType";
 	public static final String PURCHASE_ORDER_LOCATION_TYPE = "PurchaseOrderLocationType";
+	public static final String PURCHASE_ORDER_STATUS = "OrderStatus";
 	public static final String PART_KIT_TYPE ="PartKitType";
 	public static final String PART_KIT_PRICE_METHOD ="PartKitPriceMethod";
 	

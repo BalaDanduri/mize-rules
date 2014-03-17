@@ -59,7 +59,7 @@ public class EntityParameter extends MizeEntity implements Comparable<EntityPara
 	}
 
 	public enum EntityType{
-		PurchaseOrderType;
+		PurchaseOrderType,OrderLocation;
 	}
 	
 	public enum PricingMethod{
