@@ -46,7 +46,9 @@ public class PartSubstitute extends MizeEntity {
 	private EntityComment entityComment;
 	private List<PartSubstituteComment> comments = new ArrayList<PartSubstituteComment>();
     private String familyCode;
+    @Transient
     private User user;
+    
 	
 	public PartSubstitute(){
 		super();
