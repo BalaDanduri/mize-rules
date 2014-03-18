@@ -259,6 +259,7 @@ public abstract class MessageConstants implements Serializable{
 	public static final String DATE_RANGE_OVERLAP = "DATE_RANGE_OVERLAP";
 	public static final String DATE_RANGE_DUPLICATE = "DATE_RANGE_DUPLICATE";
 	public static final String SUBSTITUTE_DATE_REQUIRED = "SUBSTITUTE_DATE_REQUIRED";
+	public static final String INVALID_SUBSTITUTE_CODE_TYPE = "INVALID_SUBSTITUTE_CODE_TYPE";
 	
 
 }
