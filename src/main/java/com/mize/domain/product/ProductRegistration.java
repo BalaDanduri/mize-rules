@@ -63,7 +63,8 @@ public class ProductRegistration extends MizeEntity {
 	private String registrationApplication;
 	private String registrationIndustry;
 	private String additionalInfo;
-	private String invoiceCustomerReference;
+	private String dealerCustomerReference;
+	private boolean customerUpdated;
 	
 	private List<ProductRegistrationWarranty> warrantyList = new ArrayList<ProductRegistrationWarranty>();
 	
@@ -133,7 +134,7 @@ public class ProductRegistration extends MizeEntity {
 		return invoiceBusinessEntity;
 	}
 
-	@OneToOne(fetch=FetchType.EAGER ,cascade= CascadeType.ALL)
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="cust_address_id")
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public EntityAddress getCustomerAddress() {
@@ -416,12 +417,23 @@ public class ProductRegistration extends MizeEntity {
 	}
 	
 	@Column(name = "invoice_customer_reference", length = 100, nullable = true)
-	public String getInvoiceCustomerReference() {
-		return invoiceCustomerReference;
+	public String getDealerCustomerReference() {
+		return dealerCustomerReference;
 	}
 	
-	public void setInvoiceCustomerReference(String invoiceCustomerReference) {
-		this.invoiceCustomerReference = invoiceCustomerReference;
+	public void setDealerCustomerReference(String dealerCustomerReference) {
+		this.dealerCustomerReference = dealerCustomerReference;
+	}
+	
+	@Transient
+	@JsonIgnore
+	public boolean isCustomerUpdated() {
+		return customerUpdated;
+	}
+
+
+	public void setCustomerUpdated(boolean customerUpdated) {
+		this.customerUpdated = customerUpdated;
 	}
 
 
