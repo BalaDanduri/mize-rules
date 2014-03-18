@@ -17,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -29,6 +30,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.part.Part;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
@@ -54,7 +56,9 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 	private BigDecimal backorderQuantity;
 	private BigDecimal itemPrice;
 	private PurchaseOrderAmount amount = new PurchaseOrderAmount();
-	private List<PurchaseOrderItemWarehourse> warehourses = new ArrayList<PurchaseOrderItemWarehourse>() ;
+	private List<PurchaseOrderItemWarehourse> warehourses = new ArrayList<PurchaseOrderItemWarehourse>();
+	@Transient
+	private Part part;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -292,6 +296,15 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 
 	public void setItemPrice(BigDecimal itemPrice) {
 		this.itemPrice = itemPrice;
+	}
+
+	@Transient
+	public Part getPart() {
+		return part;
+	}
+
+	public void setPart(Part part) {
+		this.part = part;
 	}
 
 	@Override
