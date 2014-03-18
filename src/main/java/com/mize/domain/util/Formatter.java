@@ -681,4 +681,14 @@ public final class Formatter {
 		return BigDecimal.valueOf(value.doubleValue());
 	}
 	
+	public static boolean inBetween(DateTime startTime,DateTime endTime , DateTime inputTime){
+		if(startTime == null && endTime == null && inputTime == null){
+			return true;
+		}
+		if(startTime == null || endTime == null || inputTime == null){
+			return false;
+		}
+		return (inputTime.compareTo(startTime) >= 0 && inputTime.compareTo(endTime) <= 0);
+	}
+	
 }
