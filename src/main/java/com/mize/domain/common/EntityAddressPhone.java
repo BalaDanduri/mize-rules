@@ -116,9 +116,7 @@ public class EntityAddressPhone extends MizeEntity implements Comparable<EntityA
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
+			return true;		
 		if (getClass() != obj.getClass())
 			return false;
 		EntityAddressPhone other = (EntityAddressPhone) obj;

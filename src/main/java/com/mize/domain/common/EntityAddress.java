@@ -276,8 +276,6 @@ public class EntityAddress extends MizeEntity implements Comparable<EntityAddres
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!super.equals(obj))
-			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		EntityAddress other = (EntityAddress) obj;

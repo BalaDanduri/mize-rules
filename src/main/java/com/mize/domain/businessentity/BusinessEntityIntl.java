@@ -133,9 +133,7 @@ public class BusinessEntityIntl extends MizeEntity {
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
+			return true;		
 		if (getClass() != obj.getClass())
 			return false;
 		BusinessEntityIntl other = (BusinessEntityIntl) obj;

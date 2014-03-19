@@ -101,9 +101,7 @@ public class Locale extends MizeEntity implements Comparable<Locale>{
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
+			return true;		
 		if (getClass() != obj.getClass())
 			return false;
 		Locale other = (Locale) obj;
