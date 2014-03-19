@@ -15,6 +15,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
 
 @Entity
@@ -137,18 +138,18 @@ public class BusinessEntityIntl extends MizeEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		BusinessEntityIntl other = (BusinessEntityIntl) obj;
-		if (description == null) {
-			if (other.description != null)
+		if (Formatter.isNull(description)) {
+			if (Formatter.isNotNull(other.description))
 				return false;
 		} else if (!description.equals(other.description))
 			return false;
-		if (firstName == null) {
-			if (other.firstName != null)
+		if (Formatter.isNull(firstName)) {
+			if (Formatter.isNotNull(other.firstName))
 				return false;
 		} else if (!firstName.equals(other.firstName))
 			return false;
-		if (lastName == null) {
-			if (other.lastName != null)
+		if (Formatter.isNull(lastName)) {
+			if (Formatter.isNotNull(other.lastName))
 				return false;
 		} else if (!lastName.equals(other.lastName))
 			return false;
@@ -157,13 +158,13 @@ public class BusinessEntityIntl extends MizeEntity {
 				return false;
 		} else if (!locale.equals(other.locale))
 			return false;
-		if (middleInitial == null) {
-			if (other.middleInitial != null)
+		if (Formatter.isNull(middleInitial)) {
+			if (Formatter.isNotNull(other.middleInitial))
 				return false;
 		} else if (!middleInitial.equals(other.middleInitial))
 			return false;
-		if (name == null) {
-			if (other.name != null)
+		if (Formatter.isNull(name)) {
+			if (Formatter.isNotNull(other.name))
 				return false;
 		} else if (!name.equals(other.name))
 			return false;

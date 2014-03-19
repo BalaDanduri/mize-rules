@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.mize.domain.util.Formatter;
 
 @Entity
 @Table(name = "entity_address_phone" )
@@ -120,18 +121,18 @@ public class EntityAddressPhone extends MizeEntity implements Comparable<EntityA
 		if (getClass() != obj.getClass())
 			return false;
 		EntityAddressPhone other = (EntityAddressPhone) obj;
-		if (phoneExt == null) {
-			if (other.phoneExt != null)
+		if (Formatter.isNull(phoneExt)) {
+			if (Formatter.isNotNull(other.phoneExt))
 				return false;
 		} else if (!phoneExt.equals(other.phoneExt))
 			return false;
-		if (phoneType == null) {
-			if (other.phoneType != null)
+		if (Formatter.isNull(phoneType)) {
+			if (Formatter.isNotNull(other.phoneType))
 				return false;
 		} else if (!phoneType.equals(other.phoneType))
 			return false;
-		if (phoneValue == null) {
-			if (other.phoneValue != null)
+		if (Formatter.isNotNull(other.phoneValue)) {
+			if (Formatter.isNotNull(other.phoneValue))
 				return false;
 		} else if (!phoneValue.equals(other.phoneValue))
 			return false;

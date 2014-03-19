@@ -8,6 +8,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.mize.domain.util.Formatter;
+
 @Entity
 @Table(name="locale")
 public class Locale extends MizeEntity implements Comparable<Locale>{
@@ -105,18 +107,18 @@ public class Locale extends MizeEntity implements Comparable<Locale>{
 		if (getClass() != obj.getClass())
 			return false;
 		Locale other = (Locale) obj;
-		if (countryCode == null) {
-			if (other.countryCode != null)
+		if (Formatter.isNull(countryCode)) {
+			if (Formatter.isNotNull(other.countryCode))
 				return false;
 		} else if (!countryCode.equals(other.countryCode))
 			return false;
-		if (languageCode == null) {
-			if (other.languageCode != null)
+		if (Formatter.isNull(languageCode)) {
+			if (Formatter.isNotNull(other.languageCode))
 				return false;
 		} else if (!languageCode.equals(other.languageCode))
 			return false;
-		if (name == null) {
-			if (other.name != null)
+		if (Formatter.isNull(name)) {
+			if (Formatter.isNotNull(other.name))
 				return false;
 		} else if (!name.equals(other.name))
 			return false;

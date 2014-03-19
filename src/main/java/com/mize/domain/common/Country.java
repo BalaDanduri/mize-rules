@@ -16,6 +16,7 @@ import javax.persistence.Transient;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
+import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
 
 @Entity
@@ -82,24 +83,22 @@ public class Country extends MizeEntity implements Comparable<Country>{
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
+			return true;		
 		if (getClass() != obj.getClass())
 			return false;
 		Country other = (Country) obj;
-		if (code == null) {
-			if (other.code != null)
+		if (Formatter.isNull(code)) {
+			if (Formatter.isNotNull(other.code))
 				return false;
 		} else if (!code.equals(other.code))
 			return false;
-		if (code3 == null) {
-			if (other.code3 != null)
+		if (Formatter.isNull(code3)) {
+			if (Formatter.isNotNull(other.code3))
 				return false;
 		} else if (!code3.equals(other.code3))
 			return false;
-		if (name == null) {
-			if (other.name != null)
+		if (Formatter.isNull(name)) {
+			if (Formatter.isNotNull(other.name))
 				return false;
 		} else if (!name.equals(other.name))
 			return false;

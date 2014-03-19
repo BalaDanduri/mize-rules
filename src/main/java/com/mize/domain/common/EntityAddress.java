@@ -24,6 +24,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
+import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
@@ -279,28 +280,28 @@ public class EntityAddress extends MizeEntity implements Comparable<EntityAddres
 		if (getClass() != obj.getClass())
 			return false;
 		EntityAddress other = (EntityAddress) obj;
-		if (address1 == null) {
-			if (other.address1 != null)
+		if (Formatter.isNull(address1)) {
+			if (Formatter.isNotNull(other.address1))
 				return false;
 		} else if (!address1.equals(other.address1))
 			return false;
-		if (address2 == null) {
-			if (other.address2 != null)
+		if (Formatter.isNull(address2)) {
+			if (Formatter.isNotNull(other.address2))
 				return false;
 		} else if (!address2.equals(other.address2))
 			return false;
-		if (address3 == null) {
-			if (other.address3 != null)
+		if (Formatter.isNull(address3)) {
+			if (Formatter.isNotNull(other.address3))
 				return false;
 		} else if (!address3.equals(other.address3))
 			return false;
 		if (addressPhones == null) {
 			if (other.addressPhones != null)
 				return false;
-		} else if (!addressPhones.equals(other.addressPhones))
+		} else if (!addressPhones.containsAll(other.addressPhones))
 			return false;
-		if (city == null) {
-			if (other.city != null)
+		if (Formatter.isNull(city)) {
+			if (Formatter.isNotNull(other.city))
 				return false;
 		} else if (!city.equals(other.city))
 			return false;
@@ -309,13 +310,13 @@ public class EntityAddress extends MizeEntity implements Comparable<EntityAddres
 				return false;
 		} else if (!country.equals(other.country))
 			return false;
-		if (email == null) {
-			if (other.email != null)
+		if (Formatter.isNull(email)) {
+			if (Formatter.isNotNull(other.email))
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
-		if (landmark == null) {
-			if (other.landmark != null)
+		if (Formatter.isNull(landmark)) {
+			if (Formatter.isNotNull(other.landmark))
 				return false;
 		} else if (!landmark.equals(other.landmark))
 			return false;
@@ -324,18 +325,18 @@ public class EntityAddress extends MizeEntity implements Comparable<EntityAddres
 				return false;
 		} else if (!state.equals(other.state))
 			return false;
-		if (type == null) {
-			if (other.type != null)
+		if (Formatter.isNull(type)) {
+			if (Formatter.isNotNull(other.type))
 				return false;
 		} else if (!type.equals(other.type))
 			return false;
-		if (zip == null) {
-			if (other.zip != null)
+		if (Formatter.isNull(zip)) {
+			if (Formatter.isNotNull(other.zip))
 				return false;
 		} else if (!zip.equals(other.zip))
 			return false;
-		if (zipExt == null) {
-			if (other.zipExt != null)
+		if (Formatter.isNull(zipExt)) {
+			if (Formatter.isNotNull(other.zipExt))
 				return false;
 		} else if (!zipExt.equals(other.zipExt))
 			return false;
