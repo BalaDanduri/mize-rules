@@ -252,6 +252,7 @@ public abstract class MessageConstants implements Serializable{
 	
 	public static final String INVALID_ENTITY_PARAMETER_TYPE = "INVALID_ENTITY_PARAMETER_TYPE";
 	public static final String INVALID_ATTRIBUTE_VALUE = "INVALID_ATTRIBUTE_VALUE";
+	public static final String INVALID_ATTRIBUTE_TYPE = "INVALID_ATTRIBUTE_TYPE";
 	
 	public static final String INVALID_PART_KIT_TYPE = "INVALID_PART_KIT_TYPE";
 	public static final String INVALID_PRICE_METHOD = "INVALID_PRICE_METHOD";
