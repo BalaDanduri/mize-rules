@@ -316,7 +316,7 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="user_id")
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
-	@JsonBackReference(value="userAddress_user")
+	@JsonBackReference(value="address")
 	public User getUser() {
 		return user;
 	}
