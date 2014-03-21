@@ -182,7 +182,7 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 		this.updatedDate = updatedDate;
 	}
 	
-	@OneToOne(fetch=FetchType.EAGER ,cascade =CascadeType.ALL)
+	@OneToOne(fetch=FetchType.EAGER ,cascade =CascadeType.ALL,orphanRemoval = true)
 	@JoinColumn(name="entity_address_id")
 	public EntityAddress getEntityAddress() {
 		return entityAddress;
@@ -191,6 +191,8 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 	public void setEntityAddress(EntityAddress entityAddress) {
 		this.entityAddress = entityAddress;
 	}
+	
+	
 
 	@Override
 	public int hashCode() {
@@ -313,7 +315,7 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="user_id")
-	@JsonIgnore
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	@JsonBackReference(value="userAddress_user")
 	public User getUser() {
 		return user;

@@ -209,6 +209,7 @@ public abstract class MessageConstants implements Serializable{
 	public static final String LOCALE_REQUIRED = "LOCALE_REQUIRED";
 	public static final String GROUP_REQUIRED = "GROUP_REQUIRED";
 	public static final String ADDRESS_TYPE_REQUIRED = "ADDRESS_TYPE_REQUIRED";
+	public static final String PHONE_TYPE_REQUIRED = "PHONE_TYPE_REQUIRED";
 	public static final String COUNTRY_REQUIRED = "COUNTRY_REQUIRED";
 	public static final String INVALID_GROUP = "INVALID_GROUP";
 	public static final String DUPLICATE_LANGUAGE_CODE = "DUPLICATE_LANGUAGE_CODE";

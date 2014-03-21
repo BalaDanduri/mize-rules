@@ -209,8 +209,9 @@ public class User extends MizeEntity implements Comparable<User> {
 		}
 	}
 	
-	@OneToMany(fetch = FetchType.LAZY,cascade={CascadeType.ALL}, mappedBy="user")
+	@OneToMany(fetch = FetchType.LAZY,cascade={CascadeType.ALL}, mappedBy="user",orphanRemoval = true)
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonManagedReference(value="address")
 	public List<UserAddress> getAddresses() {
 		return addresses;
 	}
