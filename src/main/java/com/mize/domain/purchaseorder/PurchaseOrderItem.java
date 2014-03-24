@@ -31,6 +31,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.part.Part;
+import com.mize.domain.part.PartKit;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
@@ -59,6 +60,8 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 	private List<PurchaseOrderItemWarehourse> warehourses = new ArrayList<PurchaseOrderItemWarehourse>();
 	@Transient
 	private Part part;
+	@Transient
+	private PartKit partKit;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -179,10 +182,6 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 	@JsonBackReference(value="item_purchaseOrder")
 	public PurchaseOrder getPurchaseOrder() {
 		return purchaseOrder;
-	}
-
-	public void setPartsOrder(PurchaseOrder purchaseOrder) {
-		this.purchaseOrder = purchaseOrder;
 	}
 	
 	@Column(name="item_type")
@@ -305,6 +304,15 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 
 	public void setPart(Part part) {
 		this.part = part;
+	}
+
+	@Transient
+	public PartKit getPartKit() {
+		return partKit;
+	}
+
+	public void setPartKit(PartKit partKit) {
+		this.partKit = partKit;
 	}
 
 	@Override
