@@ -29,6 +29,12 @@ public abstract class CatalogConstants implements Serializable{
 	public static final String PRICING_METHOD ="PricingMethod";
 	public static final String HANDLING_CHARGE_PERCENT ="HandlingChargePercent";
 	public static final String INVOICE_TYPE ="InvoiceType";
+	public static final String PURCHASE_LOCATION_TYPE ="PurchaseLocationType";
+	public static final String REGISTRATION_INDUSTRY_TYPE ="RegistrationIndustryType";
+	public static final String REGISTRATION_CUSTOMER_TYPE ="RegistrationCustomerType";
+	public static final String COVERAGE_TYPE = "CoverageType";
+
+
 }
 
 
