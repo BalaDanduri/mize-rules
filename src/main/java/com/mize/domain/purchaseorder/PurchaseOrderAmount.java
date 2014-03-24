@@ -25,7 +25,8 @@ public class PurchaseOrderAmount extends MizeEntity implements Comparable<Purcha
 	private BigDecimal taxAmount;
 	private BigDecimal miscellaneousAmount;	
 	private BigDecimal freightAmount;
-
+	private BigDecimal totalAdjustedAmount;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false, unique = true)
@@ -118,6 +119,15 @@ public class PurchaseOrderAmount extends MizeEntity implements Comparable<Purcha
 
 	public void setFreightAmount(BigDecimal freightAmount) {
 		this.freightAmount = freightAmount;
+	}
+
+	@Column(name = "total_adjusted_amount")
+	public BigDecimal getTotalAdjustedAmount() {
+		return totalAdjustedAmount;
+	}
+
+	public void setTotalAdjustedAmount(BigDecimal totalAdjustedAmount) {
+		this.totalAdjustedAmount = totalAdjustedAmount;
 	}
 
 	@Override

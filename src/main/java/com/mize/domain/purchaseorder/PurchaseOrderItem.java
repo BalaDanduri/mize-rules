@@ -55,7 +55,6 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 	private String productSerialNumber;
 	private BigDecimal requestedQuantity;
 	private BigDecimal backorderQuantity;
-	private BigDecimal itemPrice;
 	private PurchaseOrderAmount amount = new PurchaseOrderAmount();
 	private List<PurchaseOrderItemWarehourse> warehourses = new ArrayList<PurchaseOrderItemWarehourse>();
 	@Transient
@@ -286,15 +285,6 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 
 	public void setWarehourses(List<PurchaseOrderItemWarehourse> warehourses) {
 		this.warehourses = warehourses;
-	}
-
-	@Column(name="item_price")
-	public BigDecimal getItemPrice() {
-		return itemPrice;
-	}
-
-	public void setItemPrice(BigDecimal itemPrice) {
-		this.itemPrice = itemPrice;
 	}
 
 	@Transient
