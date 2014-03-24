@@ -50,8 +50,6 @@ public class ProductSerial extends MizeEntity{
 	private String serialNumber;
 	private BusinessEntity shippedBusinessEntity;
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	protected DateTime deliveryDate;	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime buildDate;
 	@Transient
 	private EntityComment entityComment;
@@ -72,7 +70,6 @@ public class ProductSerial extends MizeEntity{
 		this.product = product;
 		this.serialNumber = serialNumber;
 		this.shippedBusinessEntity = shippedBusinessEntity;
-		this.deliveryDate = deliveryDate;
 		this.buildDate = buildDate;
 	}
 
@@ -129,19 +126,6 @@ public class ProductSerial extends MizeEntity{
 		this.shippedBusinessEntity = shippedBE;
 	}
 
-	@Column(name = "delivery_date", nullable = true)
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateTimeSerializer.class, include = Inclusion.NON_NULL)	
-	public DateTime getDeliveryDate() {
-		return deliveryDate;
-	}
-
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	public void setDeliveryDate(DateTime deliveryDate) {
-		this.deliveryDate = deliveryDate;
-	}
 
 	@Column(name = "build_date", nullable = true)
 	@DateTimeFormat (pattern="MM-dd-yyyy")
@@ -288,8 +272,6 @@ public class ProductSerial extends MizeEntity{
 				+ ((buildDate == null) ? 0 : buildDate.hashCode());
 		result = prime * result
 				+ ((shippedBusinessEntity == null) ? 0 : shippedBusinessEntity.hashCode());
-		result = prime * result
-				+ ((deliveryDate == null) ? 0 : deliveryDate.hashCode());
 		result = prime
 				* result
 				+ ((serialNumber == null) ? 0 : serialNumber.hashCode());
@@ -317,11 +299,6 @@ public class ProductSerial extends MizeEntity{
 				return false;
 		} else if (!shippedBusinessEntity.equals(other.shippedBusinessEntity))
 			return false;
-		if (deliveryDate == null) {
-			if (other.deliveryDate != null)
-				return false;
-		} else if (!deliveryDate.equals(other.deliveryDate))
-			return false;
 		if (serialNumber == null) {
 			if (other.serialNumber != null)
 				return false;
@@ -344,8 +321,7 @@ public class ProductSerial extends MizeEntity{
 	public String toString() {
 		return "ProductSerial [tenant=" + tenant + ", product=" + product
 				+ ", serialNumber=" + serialNumber + ", deliveryBE="
-				+ shippedBusinessEntity + ", deliveryDate=" + deliveryDate
-				+ ", buildDate=" + buildDate + "]";
+				+ shippedBusinessEntity + ", buildDate=" + buildDate + "]";
 	}
 
 	
