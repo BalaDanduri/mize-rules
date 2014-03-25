@@ -23,6 +23,9 @@ public class BusinessEntityAttribute extends MizeEntity implements Comparable<Bu
 	 private String icon;
 	 private String hoursOfOp;
 	 private String creditOnHold;
+	 private String isPromoted;
+	 private String isServiceProvider;
+	 
 	
 	 @Id
 	 @Column(name="id",nullable=false,unique=true)
@@ -92,6 +95,26 @@ public class BusinessEntityAttribute extends MizeEntity implements Comparable<Bu
 	public void setCreditOnHold(String creditOnHold) {
 		this.creditOnHold = creditOnHold;
 	}
+	
+	@Column(name="is_promoted", length = 1)
+	public String getIsPromoted() {
+		return isPromoted;
+	}
+	
+	public void setIsPromoted(String isPromoted) {
+		this.isPromoted = isPromoted;
+	}
+	
+	@Column(name="is_service_provider", length = 1)
+	public String getIsServiceProvider() {
+		return isServiceProvider;
+	}
+	
+	public void setIsServiceProvider(String isServiceProvider) {
+		this.isServiceProvider = isServiceProvider;
+	}
+	
+	
 	
 	@Override
 	public int hashCode() {

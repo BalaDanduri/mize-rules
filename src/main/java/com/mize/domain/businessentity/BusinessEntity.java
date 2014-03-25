@@ -50,6 +50,7 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	private String isActive;
 	private String currencyCode;
 	private String name;
+	private String businessEntityReference;
 	private List<BusinessEntityAddress> addresses = new ArrayList<BusinessEntityAddress>();
 	private List<BusinessEntityIntl> intl = new ArrayList<BusinessEntityIntl>();
 	private List<BusinessEntityBrand> beBrand = new ArrayList<BusinessEntityBrand>();
@@ -261,6 +262,14 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 		this.relatedEntities = relatedEntities;
 	}
 	
+	public void setBusinessEntityReference(String businessEntityReference) {
+		this.businessEntityReference = businessEntityReference;
+	}
+	
+	@Column(name = "business_entity_reference", length = 100)
+	public String getBusinessEntityReference() {
+		return businessEntityReference;
+	}
 	
 	@Override	
 	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
@@ -356,6 +365,9 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 		result = prime * result + ((tenant == null) ? 0 : tenant.hashCode());
 		result = prime * result
 				+ ((typeCode == null) ? 0 : typeCode.hashCode());
+		result = prime * result
+				+ ((businessEntityReference == null) ? 0 : businessEntityReference.hashCode());
+		
 		return result;
 	}
 
@@ -423,8 +435,14 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 				return false;
 		} else if (!typeCode.equals(other.typeCode))
 			return false;
+		if (businessEntityReference == null) {
+			if (other.businessEntityReference != null)
+				return false;
+		} else if (!businessEntityReference.equals(other.businessEntityReference))
+			return false;
 		return true;
 	}
+	
 
 	@Override
 	public String toString() {
@@ -447,15 +465,26 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 		builder.append(currencyCode);
 		builder.append(", name=");
 		builder.append(name);
+		builder.append(", businessEntityReference=");
+		builder.append(businessEntityReference);
 		builder.append(", addresses=");
 		builder.append(addresses);
 		builder.append(", intl=");
 		builder.append(intl);
+		builder.append(", beBrand=");
+		builder.append(beBrand);
+		builder.append(", beContact=");
+		builder.append(beContact);
+		builder.append(", beAttribute=");
+		builder.append(beAttribute);
+		builder.append(", relatedEntities=");
+		builder.append(relatedEntities);
 		builder.append(", id=");
 		builder.append(id);
 		builder.append("]");
 		return builder.toString();
 	}
+	
 	
 	@Override
 	public int compareTo(BusinessEntity o) {
@@ -468,4 +497,5 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 		return super.clone();
 	}
 
+	
 }
