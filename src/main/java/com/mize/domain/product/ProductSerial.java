@@ -38,7 +38,6 @@ import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateDeserializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateSerializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
 
 @Entity
 @Table(name = "prod_serial", uniqueConstraints = {@UniqueConstraint (columnNames = {"id"})})
@@ -58,17 +57,22 @@ public class ProductSerial extends MizeEntity{
 	private User user;
 	private DateTime shipDate;
 	private String isValid;
+	private BusinessEntity invoiceBusinessEntity;
+	private DateTime invoiceDate;
+	private String invoiceNumber;
+	private List<ProductSerialRelation> productSerialRelations = new ArrayList<ProductSerialRelation>();
 	
 	public ProductSerial(){
 		super();
 	}
 
-	public ProductSerial(BusinessEntity tenantId, Product product, String serialNumber,
+	public ProductSerial(BusinessEntity tenantId, Product product, String serialNumber,BusinessEntity invoiceBusinessEntity,
 			BusinessEntity shippedBusinessEntity, DateTime deliveryDate, DateTime buildDate) {
 		super();
 		this.tenant = tenantId;
 		this.product = product;
 		this.serialNumber = serialNumber;
+		this.invoiceBusinessEntity = invoiceBusinessEntity;
 		this.shippedBusinessEntity = shippedBusinessEntity;
 		this.buildDate = buildDate;
 	}
@@ -203,6 +207,50 @@ public class ProductSerial extends MizeEntity{
 		this.shipDate = shipDate;
 	}
 	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="invoice_be_id", nullable = true)
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	public BusinessEntity getInvoiceBusinessEntity() {
+		return invoiceBusinessEntity;
+	}
+
+	public void setInvoiceBusinessEntity(BusinessEntity invoiceBusinessEntity) {
+		this.invoiceBusinessEntity = invoiceBusinessEntity;
+	}
+
+	@Column(name = "invoice_date", nullable = true)
+	@DateTimeFormat (pattern="MM-dd-yyyy")
+	@Type(type = "com.mize.domain.util.DateTimeJPA")
+	@JsonSerialize(using = JsonDateSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	public DateTime getInvoiceDate() {
+		return invoiceDate;
+	}
+
+	public void setInvoiceDate(DateTime invoiceDate) {
+		this.invoiceDate = invoiceDate;
+	}
+
+	@Column(name = "invoice_no", nullable = true)
+	public String getInvoiceNumber() {
+		return invoiceNumber;
+	}
+
+	public void setInvoiceNumber(String invoiceNumber) {
+		this.invoiceNumber = invoiceNumber;
+	}
+	
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "productSerial",orphanRemoval= true)
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	public List<ProductSerialRelation> getProductSerialRelations() {
+		return productSerialRelations;
+	}
+
+	public void setProductSerialRelations(
+			List<ProductSerialRelation> productSerialRelations) {
+		this.productSerialRelations = productSerialRelations;
+	}
+
 	@Override	
 	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
 	@Type(type="com.mize.domain.util.DateTimeJPA")
@@ -271,6 +319,8 @@ public class ProductSerial extends MizeEntity{
 		result = prime * result
 				+ ((buildDate == null) ? 0 : buildDate.hashCode());
 		result = prime * result
+				+ ((invoiceBusinessEntity == null) ? 0 : invoiceBusinessEntity.hashCode());
+		result = prime * result
 				+ ((shippedBusinessEntity == null) ? 0 : shippedBusinessEntity.hashCode());
 		result = prime
 				* result
@@ -293,6 +343,11 @@ public class ProductSerial extends MizeEntity{
 			if (other.buildDate != null)
 				return false;
 		} else if (!buildDate.equals(other.buildDate))
+			return false;
+		if (invoiceBusinessEntity == null) {
+			if (other.invoiceBusinessEntity != null)
+				return false;
+		} else if (!invoiceBusinessEntity.equals(other.invoiceBusinessEntity))
 			return false;
 		if (shippedBusinessEntity == null) {
 			if (other.shippedBusinessEntity != null)
@@ -320,7 +375,8 @@ public class ProductSerial extends MizeEntity{
 	@Override
 	public String toString() {
 		return "ProductSerial [tenant=" + tenant + ", product=" + product
-				+ ", serialNumber=" + serialNumber + ", deliveryBE="
+				+ ", serialNumber=" + serialNumber + ", invoiceBE="
+				+ invoiceBusinessEntity + ",deliveryBE="
 				+ shippedBusinessEntity + ", buildDate=" + buildDate + "]";
 	}
 
