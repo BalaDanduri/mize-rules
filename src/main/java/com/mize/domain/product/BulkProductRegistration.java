@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.joda.time.DateTime;
 
+import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityComment;
@@ -22,6 +23,8 @@ public class BulkProductRegistration extends MizeEntity {
 	private DateTime purchaseDate;
 	private EntityComment entityComment;
 	private List<ProductRegistration> productRegistrations = new ArrayList<ProductRegistration>();
+	private User user;
+	
 	
 	
 	@Override
@@ -63,6 +66,14 @@ public class BulkProductRegistration extends MizeEntity {
 
 	public List<ProductRegistration> getProductRegistrations() {
 		return productRegistrations;
+	}
+	
+	public User getUser() {
+		return user;
+	}
+	
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public void setInvoiceNumber(String invoiceNumber) {
