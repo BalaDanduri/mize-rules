@@ -62,6 +62,10 @@ public class EntityParameter extends MizeEntity implements Comparable<EntityPara
 		PurchaseOrderType,OrderLocation;
 	}
 	
+	public enum EntityAttributeType{
+		HandlingChargePercent;
+	}
+	
 	public enum PricingMethod{
 		LIST,UNIT,NET;
 	}

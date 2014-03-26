@@ -336,13 +336,24 @@ public final class Formatter {
 		BigInteger returnValue = BigInteger.ZERO;
 		if (value != null) {
 			try {
-			returnValue = new BigInteger(value);
+				returnValue = new BigInteger(value);
 			} catch(Exception e) {
 				Float floatVal = new Float(value);
 				returnValue = new BigInteger(String.valueOf(floatVal.intValue()+1));
 			}
 		}
-		return returnValue   ;
+		return returnValue;
+	}
+	
+	public static BigDecimal toBigDecimal(String value) {
+		BigDecimal returnValue = null;
+		if (value != null && value.trim().length() > 0) {
+			try {
+				returnValue = new BigDecimal(value);
+			} catch(Exception e) {
+			}
+		}
+		return returnValue;
 	}
 	
 	public static BigInteger toBigInt(int value) {

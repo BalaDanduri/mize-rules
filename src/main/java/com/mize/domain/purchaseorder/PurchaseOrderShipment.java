@@ -45,7 +45,7 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 	private BigDecimal estimatedShipmentCost;
 	private PurchaseOrder purchaseOrder;
 	@Transient
-	private String updateAddress;
+	private String updateMasterAddress;
 	private String shipComplete;
 	@Transient
 	private Long shipmentBeAddressId;
@@ -162,16 +162,7 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 	public void setEstimatedShipmentCost(BigDecimal estimatedShipmentCost) {
 		this.estimatedShipmentCost = estimatedShipmentCost;
 	}
-	
-	@Transient
-	public String getUpdateAddress() {
-		return updateAddress;
-	}
-
-	public void setUpdateAddress(String updateAddress) {
-		this.updateAddress = updateAddress;
-	}
-	
+		
 	@Override
 	public int compareTo(PurchaseOrderShipment o) {
 		return 0;
@@ -193,6 +184,15 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 
 	public void setShipmentBeAddressId(Long shipmentBeAddressId) {
 		this.shipmentBeAddressId = shipmentBeAddressId;
+	}
+
+	@Transient
+	public String getUpdateMasterAddress() {
+		return updateMasterAddress;
+	}
+
+	public void setUpdateMasterAddress(String updateMasterAddress) {
+		this.updateMasterAddress = updateMasterAddress;
 	}
 
 	@Override

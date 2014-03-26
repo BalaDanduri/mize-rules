@@ -9,6 +9,7 @@ public class CatalogCache implements Serializable{
 	private static final long serialVersionUID = -8488237770262609141L;	
 	private String catalogName;
 	private Long catalogId;	
+	private String isActive;
 	private List<CatalogEntryCache> catalogEntryCaches = new ArrayList<CatalogEntryCache>();
 	
 	public Long getCatalogId() {
@@ -30,6 +31,13 @@ public class CatalogCache implements Serializable{
 		this.catalogEntryCaches = catalogEntryCaches;
 	}
 	
+	public boolean isActive() {
+		return "Y".equalsIgnoreCase(isActive);
+	}
+
+	public void setIsActive(String isActive) {
+		this.isActive = isActive;
+	}
 }
 	
 

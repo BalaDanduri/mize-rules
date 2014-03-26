@@ -30,6 +30,8 @@ public class PurchaseOrderPayment extends MizeEntity implements Comparable<Purch
 	private String paymentReference;
 	@Transient
 	private Long paymentBeAddressId;
+	@Transient
+	private String updateMasterAddress;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -109,6 +111,15 @@ public class PurchaseOrderPayment extends MizeEntity implements Comparable<Purch
 
 	public void setPaymentBeAddressId(Long paymentBeAddressId) {
 		this.paymentBeAddressId = paymentBeAddressId;
+	}
+
+	@Transient	
+	public String getUpdateMasterAddress() {
+		return updateMasterAddress;
+	}
+
+	public void setUpdateMasterAddress(String updateMasterAddress) {
+		this.updateMasterAddress = updateMasterAddress;
 	}
 
 	@Override

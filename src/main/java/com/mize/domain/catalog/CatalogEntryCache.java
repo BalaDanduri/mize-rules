@@ -9,6 +9,8 @@ public class CatalogEntryCache implements Serializable{
 	private String entryName;
 	private Long localeId;
 	private Long entryId;
+	private String isDefault;
+	private String isActive;
 	
 	public CatalogEntryCache(){
 		super();
@@ -46,6 +48,22 @@ public class CatalogEntryCache implements Serializable{
 	}
 	public void setLocaleId(Long localeId) {
 		this.localeId = localeId;
+	}
+
+	public boolean isDefault() {
+		return "Y".equalsIgnoreCase(isDefault);
+	}
+
+	public void setIsDefault(String isDefault) {
+		this.isDefault = isDefault;
+	}
+
+	public boolean isActive() {
+		return "Y".equalsIgnoreCase(isActive);
+	}
+
+	public void setIsActive(String isActive) {
+		this.isActive = isActive;
 	}
 	
 }
