@@ -31,6 +31,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.auth.User;
+import com.mize.domain.brand.Brand;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityComment;
@@ -83,6 +84,27 @@ public class ProductRegistration extends MizeEntity {
 	public enum Status{
 		Open,Draft,Registered,Pending
 	}	
+	public ProductRegistration(){
+		
+	}
+	
+	public ProductRegistration(Long id,String statusCode,String serialNumber,String brandName,String model,String productName) {
+		this.id = id;
+		this.statusCode = statusCode;
+		ProductSerial productSerial = new ProductSerial();
+		Product product = new Product();
+		product.setModel(model);
+		Brand brand = new Brand();
+		brand.setName(brandName);
+		ProductIntl productIntl = new ProductIntl();
+		productIntl.setName(productName);
+		productSerial.setSerialNumber(serialNumber);
+		product.getProductIntl().add(productIntl);
+		product.setBrand(brand);
+		productSerial.setProduct(product);
+		this.productSerial = productSerial;
+		
+	}
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

@@ -266,6 +266,8 @@ public abstract class MessageConstants implements Serializable{
 	public static final String INVALID_REGISTRATION_INDUSTRY ="INVALID_REGISTRATION_INDUSTRY";
 	public static final String INVALID_CUSTOMER_TYPE = "INVALID_CUSTOMER_TYPE";
 	public static final String INVALID_INVOICE_BUSINESS_ENTITY_TYPE = "INVALID_INVOICE_BUSINESS_ENTITY_TYPE";
+	public static final String INVOICE_NUMBER_IS_REQUIRED = "INVOICE_NUMBER_IS_REQUIRED";
+	
 	
 
 }
