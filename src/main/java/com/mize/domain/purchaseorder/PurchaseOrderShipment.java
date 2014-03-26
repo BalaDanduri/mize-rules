@@ -47,6 +47,8 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 	@Transient
 	private String updateAddress;
 	private String shipComplete;
+	@Transient
+	private Long shipmentBeAddressId;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -182,6 +184,15 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 
 	public void setShipComplete(String shipComplete) {
 		this.shipComplete = shipComplete;
+	}
+
+	@Transient
+	public Long getShipmentBeAddressId() {
+		return shipmentBeAddressId;
+	}
+
+	public void setShipmentBeAddressId(Long shipmentBeAddressId) {
+		this.shipmentBeAddressId = shipmentBeAddressId;
 	}
 
 	@Override

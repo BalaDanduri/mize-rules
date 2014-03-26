@@ -28,6 +28,8 @@ public class PurchaseOrderPayment extends MizeEntity implements Comparable<Purch
 	private PurchaseOrder purchaseOrder;
 	private String updateAddress;
 	private String paymentReference;
+	@Transient
+	private Long paymentBeAddressId;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -98,6 +100,15 @@ public class PurchaseOrderPayment extends MizeEntity implements Comparable<Purch
 
 	public void setPaymentReference(String paymentReference) {
 		this.paymentReference = paymentReference;
+	}
+
+	@Transient
+	public Long getPaymentBeAddressId() {
+		return paymentBeAddressId;
+	}
+
+	public void setPaymentBeAddressId(Long paymentBeAddressId) {
+		this.paymentBeAddressId = paymentBeAddressId;
 	}
 
 	@Override

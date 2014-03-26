@@ -51,6 +51,10 @@ public class PartKit extends MizeEntity{
 	@Transient
 	private BusinessEntity tenant;
 	
+	public enum PricingMethod{
+		Item,Kit;
+	}
+	
 	public PartKit(){
 		super();
 	}
