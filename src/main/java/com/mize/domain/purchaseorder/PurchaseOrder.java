@@ -1,5 +1,6 @@
 package com.mize.domain.purchaseorder;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,7 +64,10 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	private EntityAttachment entityAttachment;
 	@Transient
 	private User user;
-	private String processId;
+	@Transient
+	private String isHandlingChargeApply;
+	@Transient
+	private BigDecimal handlingChargePercentage;
 	
 	public PurchaseOrder(){
 		super();
@@ -339,16 +343,6 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 		return 0;
 	}
 
-	@Column(name = "process_id")
-	@Transient
-	public String getProcessId() {
-		return processId;
-	}
-
-	public void setProcessId(String processId) {
-		this.processId = processId;
-	}
-
 	@Transient
 	public EntityComment getEntityComment() {
 		return entityComment;
@@ -367,6 +361,24 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 		this.entityAttachment = entityAttachment;
 	}
 	
+	@Transient
+	public String getIsHandlingChargeApply() {
+		return isHandlingChargeApply;
+	}
+
+	public void setIsHandlingChargeApply(String isHandlingChargeApply) {
+		this.isHandlingChargeApply = isHandlingChargeApply;
+	}
+
+	@Transient
+	public BigDecimal getHandlingChargePercentage() {
+		return handlingChargePercentage;
+	}
+
+	public void setHandlingChargePercentage(BigDecimal handlingChargePercentage) {
+		this.handlingChargePercentage = handlingChargePercentage;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
