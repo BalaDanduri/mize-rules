@@ -26,7 +26,6 @@ public class PurchaseOrderPayment extends MizeEntity implements Comparable<Purch
 	private EntityAddress address;
 	private String method;
 	private PurchaseOrder purchaseOrder;
-	private String updateAddress;
 	private String paymentReference;
 	@Transient
 	private Long paymentBeAddressId;
@@ -85,16 +84,7 @@ public class PurchaseOrderPayment extends MizeEntity implements Comparable<Purch
 	public void setPurchaseOrder(PurchaseOrder purchaseOrder) {
 		this.purchaseOrder = purchaseOrder;
 	}	
-	
-	@Transient
-	public String getUpdateAddress() {
-		return updateAddress;
-	}
-
-	public void setUpdateAddress(String updateAddress) {
-		this.updateAddress = updateAddress;
-	}
-	
+		
 	@Column(name="payment_reference")
 	public String getPaymentReference() {
 		return paymentReference;

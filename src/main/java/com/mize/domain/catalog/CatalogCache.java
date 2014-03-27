@@ -38,6 +38,14 @@ public class CatalogCache implements Serializable{
 	public void setIsActive(String isActive) {
 		this.isActive = isActive;
 	}
+	@Override
+	public String toString() {
+		return "CatalogCache [catalogName=" + catalogName + ", catalogId="
+				+ catalogId + ", isActive=" + isActive
+				+ ", catalogEntryCaches=" + catalogEntryCaches + "]";
+	}
+	
+	
 }
 	
 

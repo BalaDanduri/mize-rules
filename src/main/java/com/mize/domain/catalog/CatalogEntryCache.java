@@ -65,6 +65,13 @@ public class CatalogEntryCache implements Serializable{
 	public void setIsActive(String isActive) {
 		this.isActive = isActive;
 	}
+
+	@Override
+	public String toString() {
+		return "CatalogEntryCache [entryCode=" + entryCode + ", entryName="
+				+ entryName + ", localeId=" + localeId + ", entryId=" + entryId
+				+ ", isDefault=" + isDefault + ", isActive=" + isActive + "]";
+	}
 	
 }
 	
