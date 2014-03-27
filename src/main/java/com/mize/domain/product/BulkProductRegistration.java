@@ -24,6 +24,7 @@ public class BulkProductRegistration extends MizeEntity {
 	private EntityComment entityComment;
 	private List<ProductRegistration> productRegistrations = new ArrayList<ProductRegistration>();
 	private User user;
+	private String dealerCustomerReference;
 	
 	
 	
@@ -72,6 +73,10 @@ public class BulkProductRegistration extends MizeEntity {
 		return user;
 	}
 	
+	public String getDealerCustomerReference() {
+		return dealerCustomerReference;
+	}
+	
 	public void setUser(User user) {
 		this.user = user;
 	}
@@ -102,6 +107,10 @@ public class BulkProductRegistration extends MizeEntity {
 
 	public void setProductRegistrations(List<ProductRegistration> productRegistrations) {
 		this.productRegistrations = productRegistrations;
+	}
+	
+	public void setDealerCustomerReference(String dealerCustomerReference) {
+		this.dealerCustomerReference = dealerCustomerReference;
 	}
 
 	@Override
