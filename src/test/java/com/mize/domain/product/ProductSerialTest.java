@@ -5,6 +5,7 @@ import static org.junit.Assert.fail;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -70,18 +71,30 @@ public class ProductSerialTest extends JPATest {
 			BusinessEntity tenant = new BusinessEntity();
 			tenant.setId(rs.getLong("tenant_id"));
 			ps.setTenant(tenant);
+			BusinessEntity invoiceBE = new BusinessEntity();
+			invoiceBE.setId(rs.getLong("invoice_be_id"));
+			ps.setInvoiceBusinessEntity(invoiceBE);
+			ps.setInvoiceNumber(rs.getString("invoice_no"));
 			BusinessEntity deliveryBE = new BusinessEntity();
 			deliveryBE.setId(rs.getLong("ship_be_id"));
 			ps.setShippedBusinessEntity(deliveryBE);
+			/*ProductSerial productSerial= new ProductSerial();
+			productSerial.setId(rs.getLong("prod_serial_id"));
+			ProductSerial productSerialParent = new ProductSerial();
+			productSerialParent.setId(rs.getLong("parent_prod_serial_id"));
+			ProductSerialRelation productSerialRelation =new ProductSerialRelation(productSerial, productSerialParent,rs.getString("relation_type"));
+			List<ProductSerialRelation> productSerialRelations = new ArrayList<ProductSerialRelation>();
+			productSerialRelations.add(productSerialRelation);
+			ps.setProductSerialRelations(productSerialRelations);*/
 			return ps;
 		}
 	}
 	
 	private ProductSerial productSerialToBeSaved() {
 		ProductSerial prodSerial = new ProductSerial();
-		prodSerial.setId(101001L);
+		prodSerial.setId(230L);
 		prodSerial.setTenant(new BusinessEntity());
-		prodSerial.getTenant().setId(101000L);
+		prodSerial.getTenant().setId(7624L);
 		prodSerial.setProduct(new Product());
 		prodSerial.getProduct().setId(101000L);
 		ProductSource prodSource = new ProductSource();
@@ -90,13 +103,24 @@ public class ProductSerialTest extends JPATest {
 		prodSource.setSourceId(2L);
 		prodSource.setSourceProductId("TEST_SOURCE_ID");
 		prodSerial.getProduct().setProductSource(prodSource);
+		prodSerial.setInvoiceBusinessEntity(new BusinessEntity());
+		prodSerial.getInvoiceBusinessEntity().setId(962L);
+		prodSerial.setInvoiceNumber("INVOICE123");
 		prodSerial.setShippedBusinessEntity(new BusinessEntity());
-		prodSerial.getShippedBusinessEntity().setId(101000L);
+		prodSerial.getShippedBusinessEntity().setId(963L);
 		ProductSerialComment comment = new ProductSerialComment();
 		EntityComment ec = new EntityComment(EntityComment.Type.Internal.toString(),"test comments");
 		comment.setComment(ec);
 		comment.setProductSerial(prodSerial);
 		prodSerial.getComments().add(comment);
+		/*ProductSerial productSerial= new ProductSerial();
+		productSerial.setId(227L);
+		ProductSerial productSerialParent = new ProductSerial();
+		productSerialParent.setId(228L);
+		ProductSerialRelation productSerialRelation =new ProductSerialRelation(productSerial, productSerialParent,"reltype");
+		List<ProductSerialRelation> productSerialRelations = new ArrayList<ProductSerialRelation>();
+		productSerialRelations.add(productSerialRelation);
+		prodSerial.setProductSerialRelations(productSerialRelations);*/
 		return prodSerial;
 	}
 		

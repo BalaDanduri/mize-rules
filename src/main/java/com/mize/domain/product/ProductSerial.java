@@ -227,6 +227,8 @@ public class ProductSerial extends MizeEntity{
 		return invoiceDate;
 	}
 
+	@DateTimeFormat (pattern="MM-dd-yyyy")
+	@JsonDeserialize(using=JodaDateDeserializer.class)
 	public void setInvoiceDate(DateTime invoiceDate) {
 		this.invoiceDate = invoiceDate;
 	}

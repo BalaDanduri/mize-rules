@@ -268,6 +268,12 @@ public abstract class MessageConstants implements Serializable{
 	public static final String INVALID_INVOICE_BUSINESS_ENTITY_TYPE = "INVALID_INVOICE_BUSINESS_ENTITY_TYPE";
 	public static final String INVOICE_NUMBER_IS_REQUIRED = "INVOICE_NUMBER_IS_REQUIRED";
 	
+	public static final String BUILD_DATE_LESS_THAN_INVOICE_DATE = "BUILD_DATE_LESS_THAN_INVOICE_DATE";
+	public static final String INVOICE_DATE_LESS_THAN_SHIP_DATE = "INVOICE_DATE_LESS_THAN_SHIP_DATE";
+	public static final String INVOICE_LOCATION_TYPE_REQUIRED = "INVOICE_LOCATION_TYPE_REQUIRED";
+	public static final String INVALID_INVOICE_LOCATION ="INVALID_INVOICE_LOCATION";
+	
+	
 	
 
 }
