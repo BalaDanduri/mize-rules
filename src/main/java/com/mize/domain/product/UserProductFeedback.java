@@ -1,17 +1,17 @@
 package com.mize.domain.product;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
-import com.mize.domain.common.Entity;
+import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
-public class UserProductFeedback  extends Entity{
+public class UserProductFeedback  extends MizeEntity implements Comparable<UserProdFeedback>{
 	
 	private static final long serialVersionUID = 1784400215647825886L;
 	protected Long id;
@@ -21,6 +21,7 @@ public class UserProductFeedback  extends Entity{
 	protected User user;
 	protected Product product;
 	protected String reviewedBy;
+	protected int pageIndex;
 
 	public String getReviewedBy() {
 		return reviewedBy;
@@ -31,11 +32,12 @@ public class UserProductFeedback  extends Entity{
 		this.reviewedBy = reviewedBy;
 	}
 
+	@Override
 	public Long getId() {
 		return id;
 	}
 
-
+	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -117,12 +119,25 @@ public class UserProductFeedback  extends Entity{
 		this.updatedDate = updatedDate;
 	}
 	
-	@Override
-	public String toString() {
-		return "UserProductFeedback [id=" + id + ", feedbackTitle="
-				+ feedbackTitle + ", review=" + review + ", rating=" + rating
-				+ ", user=" + user + ", product=" + product + ", reviewedBy="
-				+ reviewedBy + "]";
+	public int getPageIndex() {
+		return pageIndex;
 	}
 
+
+	public void setPageIndex(int pageIndex) {
+		this.pageIndex = pageIndex;
+	}
+
+
+	@Override
+	public String toString() {
+		return "UserProductFeedback [id=" + id + ", feedbackTitle=" + feedbackTitle + ", review=" + review + ", rating=" + rating + ", user=" + user
+				+ ", product=" + product + ", reviewedBy=" + reviewedBy + ", pageIndex=" + pageIndex + "]";
+	}
+
+	@Override
+	public int compareTo(UserProdFeedback o) {
+		return 0;
+	}
+	
 }

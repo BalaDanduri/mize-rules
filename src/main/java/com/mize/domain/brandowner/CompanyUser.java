@@ -1,16 +1,18 @@
 package com.mize.domain.brandowner;
 
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.common.Entity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
 public class CompanyUser extends Entity {
+	
+	private static final long serialVersionUID = 3037663684148720786L;
 	private User user;
 	private Company company;
 	private boolean isValidated;
@@ -19,7 +21,6 @@ public class CompanyUser extends Entity {
 	private String internalComments;
 
 	public CompanyUser() {
-
 	}
 
 	public CompanyUser(User user, Company company, boolean isValidated,

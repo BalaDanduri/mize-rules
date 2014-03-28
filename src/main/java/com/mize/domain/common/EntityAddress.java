@@ -1,0 +1,371 @@
+package com.mize.domain.common;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.joda.time.DateTime;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
+import com.mize.domain.util.Formatter;
+import com.mize.domain.util.JPASerializer;
+import com.mize.domain.util.JodaDateTimeDeserializer;
+import com.mize.domain.util.JsonDateTimeSerializer;
+
+@Entity
+@Table(name = "entity_address")
+public class EntityAddress extends MizeEntity implements Comparable<EntityAddress>{
+	private static final long serialVersionUID = 8115479374038082156L;
+	private String type;
+	private String address1;
+	private String address2;
+	private String address3;
+	private String zip;
+	private String zipExt;
+	private String city;
+	private State state;
+	private Country country;
+	private String email;
+	private String landmark;
+	List<EntityAddressPhone> addressPhones = new ArrayList<EntityAddressPhone>();
+	EntityAddressGeo addressGeo = null;
+	
+	
+	public EntityAddress(){
+		super();
+	}
+	
+	public enum Type{
+		Shipping,Billing,Payment;
+	}
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id", nullable = false, unique = true)
+	@Override
+	public Long getId() {
+		return id;
+	}
+
+	@Override
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	@Column(name = "address_type", nullable = true)
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	@Column(name = "address_1", nullable = true)
+	public String getAddress1() {
+		return address1;
+	}
+
+	public void setAddress1(String address1) {
+		this.address1 = address1;
+	}
+
+	@Column(name = "address_2", nullable = true)
+	public String getAddress2() {
+		return address2;
+	}
+
+	public void setAddress2(String address2) {
+		this.address2 = address2;
+	}
+
+	@Column(name = "address_3", nullable = true)
+	public String getAddress3() {
+		return address3;
+	}
+
+	public void setAddress3(String address3) {
+		this.address3 = address3;
+	}
+
+	@Column(name = "zip", nullable = true)
+	public String getZip() {
+		return zip;
+	}
+
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
+
+	@Column(name = "zip_ext", nullable = true)
+	public String getZipExt() {
+		return zipExt;
+	}
+
+	public void setZipExt(String zipExt) {
+		this.zipExt = zipExt;
+	}
+
+	@Column(name = "city", nullable = true)
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "state_id")
+	public State getState() {
+		return state;
+	}
+
+	public void setState(State state) {
+		this.state = state;
+	}
+
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "country_id")
+	public Country getCountry() {
+		return country;
+	}
+
+	public void setCountry(Country country) {
+		this.country = country;
+	}
+
+	@Column(name = "email", nullable = true)
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	@JsonIgnore(false)
+	@Column(name = "updated_by")
+	public Long getUpdatedBy() {
+		return this.updatedBy;
+	}
+	
+	@JsonIgnore(false)
+	public void setUpdatedBy(Long updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+	
+	@JsonIgnore(false)
+	@Column(name = "created_by", updatable = false)
+	public Long getCreatedBy() {
+		return this.createdBy;
+	}
+	
+	@JsonIgnore(false)
+	public void setCreatedBy(Long createdBy) {
+		this.createdBy = createdBy;
+	}
+	
+	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using = JsonDateTimeSerializer.class, include = JsonSerialize.Inclusion.NON_DEFAULT)
+	@JsonIgnore(false)
+	@Column(name = "created_date", updatable = false)
+	@org.hibernate.annotations.Type(type = "com.mize.domain.util.DateTimeJPA")
+	public DateTime getCreatedDate() {
+		return this.createdDate;
+	}
+
+	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using = JodaDateTimeDeserializer.class)
+	@JsonIgnore(false)
+	public void setCreatedDate(DateTime createdDate) {
+		this.createdDate = createdDate;
+	}
+	
+	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using = JsonDateTimeSerializer.class, include = JsonSerialize.Inclusion.NON_DEFAULT)
+	@Column(name = "updated_date")
+	@org.hibernate.annotations.Type(type = "com.mize.domain.util.DateTimeJPA")
+	@JsonIgnore(false)
+	public DateTime getUpdatedDate() {
+		return this.updatedDate;
+	}
+	
+	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using = JodaDateTimeDeserializer.class)
+	@JsonIgnore(false)
+	public void setUpdatedDate(DateTime updatedDate) {
+		this.updatedDate = updatedDate;
+	} 
+	
+	@Column(name = "land_mark", nullable = true)
+	public String getLandmark() {
+		return landmark;
+	}
+
+	public void setLandmark(String landmark) {
+		this.landmark = landmark;
+	}
+	
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "address", orphanRemoval = true)
+	@JsonManagedReference(value="addressPhone")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	public List<EntityAddressPhone> getAddressPhones() {
+		return addressPhones;
+	}
+
+	public void setAddressPhones(List<EntityAddressPhone> addressPhones) {
+		this.addressPhones = addressPhones;
+	}
+
+	@OneToOne(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "address", orphanRemoval = true)
+	@JoinColumn(name="entity_address_id")
+	@JsonManagedReference(value="geoAddress")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	public EntityAddressGeo getAddressGeo() {
+		return addressGeo;
+	}
+
+	public void setAddressGeo(EntityAddressGeo addressGeo) {
+		this.addressGeo = addressGeo;
+	}
+	
+	
+
+	@Override
+	public int hashCode() {
+		final int prime = PRIME;
+		int result = super.hashCode();
+		result = prime * result
+				+ ((address1 == null) ? 0 : address1.hashCode());
+		result = prime * result
+				+ ((address2 == null) ? 0 : address2.hashCode());
+		result = prime * result
+				+ ((address3 == null) ? 0 : address3.hashCode());
+		result = prime * result
+				+ ((addressPhones == null) ? 0 : addressPhones.hashCode());
+		result = prime * result + ((city == null) ? 0 : city.hashCode());
+		result = prime * result + ((country == null) ? 0 : country.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result
+				+ ((landmark == null) ? 0 : landmark.hashCode());
+		result = prime * result + ((state == null) ? 0 : state.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		result = prime * result + ((zip == null) ? 0 : zip.hashCode());
+		result = prime * result + ((zipExt == null) ? 0 : zipExt.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (getClass() != obj.getClass())
+			return false;
+		EntityAddress other = (EntityAddress) obj;
+		if (Formatter.isNull(address1)) {
+			if (Formatter.isNotNull(other.address1))
+				return false;
+		} else if (!address1.equals(other.address1))
+			return false;
+		if (Formatter.isNull(address2)) {
+			if (Formatter.isNotNull(other.address2))
+				return false;
+		} else if (!address2.equals(other.address2))
+			return false;
+		if (Formatter.isNull(address3)) {
+			if (Formatter.isNotNull(other.address3))
+				return false;
+		} else if (!address3.equals(other.address3))
+			return false;
+		if (addressPhones == null) {
+			if (other.addressPhones != null)
+				return false;
+		} else if (!addressPhones.containsAll(other.addressPhones))
+			return false;
+		if (Formatter.isNull(city)) {
+			if (Formatter.isNotNull(other.city))
+				return false;
+		} else if (!city.equals(other.city))
+			return false;
+		if (country == null) {
+			if (other.country != null)
+				return false;
+		} else if (!country.equals(other.country))
+			return false;
+		if (Formatter.isNull(email)) {
+			if (Formatter.isNotNull(other.email))
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (Formatter.isNull(landmark)) {
+			if (Formatter.isNotNull(other.landmark))
+				return false;
+		} else if (!landmark.equals(other.landmark))
+			return false;
+		if (state == null) {
+			if (other.state != null)
+				return false;
+		} else if (!state.equals(other.state))
+			return false;
+		if (Formatter.isNull(type)) {
+			if (Formatter.isNotNull(other.type))
+				return false;
+		} else if (!type.equals(other.type))
+			return false;
+		if (Formatter.isNull(zip)) {
+			if (Formatter.isNotNull(other.zip))
+				return false;
+		} else if (!zip.equals(other.zip))
+			return false;
+		if (Formatter.isNull(zipExt)) {
+			if (Formatter.isNotNull(other.zipExt))
+				return false;
+		} else if (!zipExt.equals(other.zipExt))
+			return false;
+		return true;
+	}
+
+	
+	
+	@Override
+	public String toString() {
+		return "EntityAddress [type=" + type + ", address1=" + address1
+				+ ", address2=" + address2 + ", address3=" + address3
+				+ ", zip=" + zip + ", zipExt=" + zipExt + ", city=" + city
+				+ ", state=" + state + ", country=" + country + ", email="
+				+ email + ", landmark=" + landmark + ", addressPhones="
+				+ addressPhones + "]";
+	}
+
+	@Override
+	public int compareTo(EntityAddress o) {
+		return 0;
+	}
+	
+	@JsonIgnore
+	public static Comparator<EntityAddress> EntityAddressGeoDistanceComparator = new  Comparator<EntityAddress>() {
+		public int compare(EntityAddress addr1, EntityAddress addr2) {
+		      return  EntityAddressGeo.EntityGeoDistanceComparator.compare( addr1.getAddressGeo() , addr2.getAddressGeo());
+		    }
+	};
+
+	
+}

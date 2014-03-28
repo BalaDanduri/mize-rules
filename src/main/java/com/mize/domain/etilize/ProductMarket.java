@@ -1,8 +1,8 @@
 package com.mize.domain.etilize;
 
-import com.mize.domain.common.Entity;
+import com.mize.domain.common.MizeEntity;
 
-public class ProductMarket extends Entity{
+public class ProductMarket extends MizeEntity{
 
 	private static final long serialVersionUID = -2770711381739670331L;
 	
@@ -27,6 +27,15 @@ public class ProductMarket extends Entity{
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	
+	@Override
+	public Long getId() {
+		return id;
+	}
+	@Override
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 

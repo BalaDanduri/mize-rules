@@ -17,8 +17,6 @@ public class AESEncryptor {
     	try {
 			return encrypt(keyBytes, sPadding, key.getBytes()) ;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
     	return null;
     }
@@ -27,8 +25,6 @@ public class AESEncryptor {
     	try {
 			return decrypt(keyBytes, sPadding, key) ;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
     	 return null;   	
     }

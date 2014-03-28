@@ -1,8 +1,8 @@
 package com.mize.domain.etilize;
 
-import com.mize.domain.common.Entity;
+import com.mize.domain.common.MizeEntity;
 
-public class SearchAttribute extends Entity{
+public class SearchAttribute extends MizeEntity{
 
 	private static final long serialVersionUID = -6127521446685342752L;
 	private Long prodId;
@@ -48,6 +48,15 @@ public class SearchAttribute extends Entity{
 	}
 	public void setValueId(Long valueId) {
 		this.valueId = valueId;
+	}
+	
+	@Override
+	public Long getId() {
+		return id;
+	}
+	@Override
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 	

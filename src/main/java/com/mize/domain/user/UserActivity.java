@@ -69,6 +69,11 @@ public class UserActivity extends Entity{
 	public enum Action{
 		Accept,Ignore,Invite_Accepted,Invite_Accept_Viewed,Product_Response_Viewed;	
 	}
+	
+	public enum MailId{
+		All;
+	}
+	
 	public enum Status{
 		Sent,Ignore,Accept,Invite_Accepted,Invite_Accept_Viewed,Friend_Response_For_Product;
 	}

@@ -1,22 +1,36 @@
 package com.mize.domain.brand;
 
-import com.mize.domain.common.Entity;
+import com.mize.domain.common.MizeEntity;
 
-public class BrandFeedback extends Entity {
+public class BrandFeedback extends MizeEntity implements Comparable<BrandFeedback>{
 	
-	private int brandFeedbackId;
+	private static final long serialVersionUID = 1957219755183415343L;
+	private Long id;
 	private Brand brand;
 	private int userId;
 	private FeedbackCategory category;
 	private String subject;
 	private String description;
 	
-	public int getBrandFeedbackId() {
-		return brandFeedbackId;
+	
+	public Long getId() {
+		return id;
 	}
-	public void setBrandFeedbackId(int brandFeedbackId) {
-		this.brandFeedbackId = brandFeedbackId;
+		
+	public void setId(Long brandFeedbackId) {
+		this.id = brandFeedbackId;
 	}
+	
+	@Deprecated
+	public Long getBrandFeedbackId() {
+		return id;
+	}
+	
+	@Deprecated
+	public void setBrandFeedbackId(Long brandFeedbackId) {
+		this.id = brandFeedbackId;
+	}
+
 	public Brand getBrand() {
 		return brand;
 	}
@@ -48,5 +62,17 @@ public class BrandFeedback extends Entity {
 		this.description = description;
 	}
 	
+	public int compareTo(BrandFeedback entity) {
+		if ( this == entity ) 
+			return EQUAL;
+		else if (this.id < entity.id) 
+			return BEFORE;
+		else if (entity.id == this.id) 
+			return EQUAL;
+		else if (this.id > entity.id)
+			return AFTER;
+		return EQUAL;		
+	}	
+
 
 }

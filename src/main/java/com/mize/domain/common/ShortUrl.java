@@ -3,9 +3,9 @@ package com.mize.domain.common;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class ShortUrl extends Entity implements Comparable<ShortUrl>{
+public class ShortUrl extends MizeEntity implements Comparable<ShortUrl>{
 
 	private static final long serialVersionUID = -5226291820868027579L;
 	private String errorCode;
@@ -71,6 +71,16 @@ public class ShortUrl extends Entity implements Comparable<ShortUrl>{
 	public void setResults(Map<String, ShortUrlResults> results) {
 		this.results = results;
 	}	
+
+	@Override
+	public Long getId() {
+		return id;
+	}
+
+	@Override
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getUrl() {
 		return url;

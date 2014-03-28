@@ -1,18 +1,20 @@
 package com.mize.domain.etilize;
 
-import com.mize.domain.common.Entity;
+import com.mize.domain.common.MizeEntity;
 
 
-public class CampaignGallery extends Entity{
+public class CampaignGallery extends MizeEntity{
 
 	private static final long serialVersionUID = -6127526442345342722L;
-	private Long id;
 	private Long campaignId;
 	private String logoPic;
 	private String thumbPic;
+	
+	@Override
 	public Long getId() {
 		return id;
 	}
+	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}

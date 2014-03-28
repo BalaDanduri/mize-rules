@@ -1,12 +1,11 @@
 package com.mize.domain.auth;
 
-import com.mize.domain.common.Entity;
+import com.mize.domain.common.MizeEntity;
 
-public class UserConnect extends Entity {
-	/**
-	 * Adding these constants to avoid hardcoding in the code.
-	 */
-    private Long linkedAccountId;
+public class UserConnect extends MizeEntity implements Comparable<UserConnect> {
+	
+	private static final long serialVersionUID = 678341089266523579L;
+	private Long linkedAccountId;
     private Long userId;
     public String email;
     public String provider;
@@ -21,6 +20,13 @@ public class UserConnect extends Entity {
 		this.userId = userId;
 		this.email = email;
 		this.provider = provider;
+	}
+
+	public Long getId() {
+		return linkedAccountId;
+	}
+	public void setId(Long linkedAccountId) {
+		this.linkedAccountId = linkedAccountId;
 	}
 
 	public Long getLinkedAccountId() {
@@ -47,4 +53,22 @@ public class UserConnect extends Entity {
 	public void setProvider(String provider) {
 		this.provider = provider;
 	}
+	
+	public int compareTo(UserConnect entity) {
+		if ( this == entity ) 
+			return EQUAL;
+		else if (this.id < entity.id) 
+			return BEFORE;
+		else if (entity.id == this.id) 
+			return EQUAL;
+		else if (this.id > entity.id)
+			return AFTER;
+		return EQUAL;		
+	}
+	
+	@Override
+	public String toString() {
+		return "UserConnect [linkedAccountId=" + linkedAccountId + ", email=" + email + ", userId="+userId +", provider=" + provider +"]";
+	}
+
 }

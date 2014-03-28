@@ -1,19 +1,32 @@
 package com.mize.domain.brand;
 
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.GenericGenerator;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.mize.domain.common.Entity;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
-public class BrandSupport extends Entity {
+@Entity
+@Table(name = "brand_support")
+public class BrandSupport extends MizeEntity implements Comparable<BrandSupport>{
 
 	private static final long serialVersionUID = 8873185292574248278L;
-	private Brand brand;
-	private int id;
+	private Long brandId;
 	private String phone;
 	private String email;
 	private String site;
@@ -22,26 +35,41 @@ public class BrandSupport extends Entity {
 	private String hoursOfOp;
 	private String qualifier;
 	private String type;
-	private boolean validated;
-	private int validatedBy;
+	private Boolean validated;
+	private Integer validatedBy;
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime validatedDate;
 	private String twitter;
 	private String facebook;
 	private String countryCode;
+	private Long countryId;
+	private Brand brand;
 	
 	public BrandSupport() {
 		
 	}
+	@Id
+	@Column(name = "BRAND_SUPPORT_ID", unique = true, nullable = false, length = 10)
+	@GenericGenerator(name="brandsupportId" , strategy="increment")
+	@GeneratedValue(generator="brandsupportId")
 
+	@Override
+	public Long getId() {
+		return id;
+	}
+
+	@Override
+	public void setId(Long id) {
+		this.id = id;
+	}	
 	
-	public BrandSupport(Brand brand, int id, String phone, String email,
+	public BrandSupport(Long brandId, Long id, String phone, String email,
 			String site, String chatUrl, String tollFreePhone,
-			String hoursOfOp, String qualifier, String type, boolean validated,
-			int validatedBy, DateTime validatedDate, String twitter,String facebook,
-			String countryCode, int createdBy, DateTime createdDate,
-			int updatedBy, DateTime updatedDate) {
-		this.brand = brand;
+			String hoursOfOp, String qualifier, String type, Boolean validated,
+			Integer validatedBy, DateTime validatedDate, String twitter,String facebook,
+			String countryCode, Long createdBy, DateTime createdDate,
+			Long updatedBy, DateTime updatedDate) {
+		this.brandId = brandId;
 		this.id = id;
 		this.phone = phone;
 		this.email = email;
@@ -63,23 +91,7 @@ public class BrandSupport extends Entity {
 		this.updatedDate = updatedDate;
 	}
 
-
-	public Brand getBrand() {
-		return brand;
-	}
-
-	public void setBrand(Brand brand) {
-		this.brand = brand;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
+	@Column(name = "SUPPORT_PHONE",  nullable = true, length = 20)
 	public String getPhone() {
 		return phone;
 	}
@@ -88,6 +100,7 @@ public class BrandSupport extends Entity {
 		this.phone = phone;
 	}
 
+	@Column(name = "SUPPORT_EMAIL",  nullable = true, length = 100)
 	public String getEmail() {
 		return email;
 	}
@@ -96,6 +109,7 @@ public class BrandSupport extends Entity {
 		this.email = email;
 	}
 
+	@Column(name = "SUPPORT_SITE",  nullable = true, length = 250)
 	public String getSite() {
 		return site;
 	}
@@ -104,6 +118,7 @@ public class BrandSupport extends Entity {
 		this.site = site;
 	}
 
+	@Column(name = "SUPPORT_CHAT",  nullable = true, length = 500)
 	public String getChatUrl() {
 		return chatUrl;
 	}
@@ -112,6 +127,7 @@ public class BrandSupport extends Entity {
 		this.chatUrl = chatUrl;
 	}
 
+	@Column(name = "SUPPORT_PHONE_TF",  nullable = true, length = 20)
 	public String getTollFreePhone() {
 		return tollFreePhone;
 	}
@@ -120,6 +136,7 @@ public class BrandSupport extends Entity {
 		this.tollFreePhone = tollFreePhone;
 	}
 
+	@Column(name = "HOURS_OF_OP",  nullable = true, length = 250)
 	public String getHoursOfOp() {
 		return hoursOfOp;
 	}
@@ -128,6 +145,7 @@ public class BrandSupport extends Entity {
 		this.hoursOfOp = hoursOfOp;
 	}
 
+	@Column(name = "SUPPORT_QUALIFIER",  nullable = true, length = 250)
 	public String getQualifier() {
 		return qualifier;
 	}
@@ -136,6 +154,7 @@ public class BrandSupport extends Entity {
 		this.qualifier = qualifier;
 	}
 
+	@Column(name = "SUPPORT_TYPE",  nullable = true, length = 11)
 	public String getType() {
 		return type;
 	}
@@ -144,24 +163,27 @@ public class BrandSupport extends Entity {
 		this.type = type;
 	}
 
-	public boolean isValidated() {
+	@Column(name = "VALIDATED",  nullable = true, length = 1)
+	public Boolean isValidated() {
 		return validated;
 	}
 
-	public void setValidated(boolean validated) {
+	public void setValidated(Boolean validated) {
 		this.validated = validated;
 	}
 
-	public int getValidatedBy() {
+	@Column(name = "VALIDATED_BY",  nullable = true, length = 1)
+	public Integer getValidatedBy() {
 		return validatedBy;
 	}
 
-	public void setValidatedBy(int validatedBy) {
+	public void setValidatedBy(Integer validatedBy) {
 		this.validatedBy = validatedBy;
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@Column(name = "validated_on",  nullable = true)
 	public DateTime getValidatedDate() {
 		return validatedDate;
 	}
@@ -172,6 +194,7 @@ public class BrandSupport extends Entity {
 		this.validatedDate = validatedDate;
 	}
 
+	@Column(name = "support_twitter",  nullable = true)
 	public String getTwitter() {
 		return twitter;
 	}
@@ -179,6 +202,8 @@ public class BrandSupport extends Entity {
 	public void setTwitter(String twitter) {
 		this.twitter = twitter;
 	}
+	
+	@Column(name = "support_facebook",  nullable = true)
 	public String getFacebook() {
 		return facebook;
 	}
@@ -186,12 +211,119 @@ public class BrandSupport extends Entity {
 	public void setFacebook(String facebook) {
 		this.facebook = facebook;
 	}
+	
+	@Column(name = "country_id",  nullable = true)
+	public Long getCountryId() {
+		return countryId;
+	}
+	public void setCountryId(Long countryId) {
+		this.countryId = countryId;
+	}
+	
+	@Transient
 	public String getCountryCode() {
 		return countryCode;
 	}
 
 	public void setCountryCode(String countryCode) {
 		this.countryCode = countryCode;
+	}
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "BRAND_ID", nullable = false)
+	@JsonBackReference(value="brand_support")
+	public Brand getBrand() {
+		return brand;
+	}
+
+	public void setBrand(Brand brand) {
+		this.brand = brand;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("BrandSupport [brandId=");
+		builder.append(brandId);
+		builder.append(", phone=");
+		builder.append(phone);
+		builder.append(", email=");
+		builder.append(email);
+		builder.append(", site=");
+		builder.append(site);
+		builder.append(", chatUrl=");
+		builder.append(chatUrl);
+		builder.append(", tollFreePhone=");
+		builder.append(tollFreePhone);
+		builder.append(", hoursOfOp=");
+		builder.append(hoursOfOp);
+		builder.append(", qualifier=");
+		builder.append(qualifier);
+		builder.append(", type=");
+		builder.append(type);
+		builder.append(", validated=");
+		builder.append(validated);
+		builder.append(", validatedBy=");
+		builder.append(validatedBy);
+		builder.append(", validatedDate=");
+		builder.append(validatedDate);
+		builder.append(", twitter=");
+		builder.append(twitter);
+		builder.append(", facebook=");
+		builder.append(facebook);
+		builder.append(", countryCode=");
+		builder.append(countryCode);
+		builder.append(", createdBy=");
+		builder.append(createdBy);
+		builder.append(", createdDate=");
+		builder.append(createdDate);
+		builder.append(", updatedBy=");
+		builder.append(updatedBy);
+		builder.append(", updatedDate=");
+		builder.append(updatedDate);
+		builder.append(", id=");
+		builder.append(id);
+		builder.append("]");
+		return builder.toString();
+	}
+
+	@Override
+	public int hashCode() {
+		int result = super.hashCode();
+		result = PRIME * result + ((brandId == null) ? 0 : brandId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		
+		if (! super.equals(obj)) {
+			return false;
+		}
+		
+		if (!(obj instanceof BrandSupport)) {
+			return false;
+		}
+		
+		BrandSupport other = (BrandSupport) obj;
+		
+		if (!isLongFieldsEquals(this.brandId, other.brandId)) {
+			 return false;
+		}
+		
+		return true;
+	}
+
+	public int compareTo(BrandSupport that) {
+		if ( this == that ) 
+			return EQUAL;
+		else if (this.id < that.id) 
+			return BEFORE;
+		else if (that.id == this.id) 
+			return EQUAL;
+		else if (this.id > that.id)
+			return AFTER;
+		return EQUAL;
 	}
 
 }

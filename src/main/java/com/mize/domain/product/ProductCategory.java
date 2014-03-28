@@ -4,44 +4,70 @@ package com.mize.domain.product;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonPropertyOrder;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
-import com.mize.domain.common.Entity;
+import org.hibernate.annotations.GenericGenerator;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.mize.domain.businessentity.BusinessEntity;
+import com.mize.domain.common.MizeEntity;
 
 
 @JsonPropertyOrder ({"id", "name", "link", "parent"})
+@Entity
+@Table(name = "prod_cat")
 
-public class ProductCategory extends Entity{
+public class ProductCategory extends MizeEntity{
 
 	private static final long serialVersionUID = -2450196415219764436L;
-	protected Long id;
-	protected String name;
-	protected String photoLink;
-	protected ProductCategory parent = null;
 	@JsonIgnore
-	protected Set<ProductCategory> children = new HashSet<ProductCategory>();
-	protected ProdCategorySource sourceCategory  = new ProdCategorySource();
-	protected String department;
-	protected Integer level; 
+	private Long srcCategoryId;
+	private String name;
+	private String photoLink;
+	private ProductCategory parent = null;
+	@JsonIgnore
+	private Set<ProductCategory> children = new HashSet<ProductCategory>();
+	private ProdCategorySource sourceCategory  = new ProdCategorySource();
+	private String department;
+	private Integer level;
+	@JsonIgnore
+	private Integer displayOrder;
+	@JsonIgnore
+	private Integer orderNumber;
+	@Transient
+	private boolean isActive;
+	@JsonIgnore
+	private Integer active;
+	private BusinessEntity tenant;
+	
 	
 	public String getDepartment() {
 		return department;
 	}
 
-
 	public void setDepartment(String department) {
 		this.department = department;
-	}
-
-
-	protected boolean isActive;
+	}	
 	
 	public ProductCategory() {
 		
 	}
-
 	
+	@Id
+	@GenericGenerator(name="prod_cat_id",strategy="increment")
+	@GeneratedValue
+	@Column(name="prod_cat_id",unique=true,nullable=false,length=20)
+	@Override
 	public Long getId() {
 		return id;
 	}
@@ -50,6 +76,7 @@ public class ProductCategory extends Entity{
 		this.id = id;
 	}
 
+	@Column(name="prod_cat_name",nullable=true,length=100)
 	public String getName() {
 		return name;
 	}
@@ -58,6 +85,10 @@ public class ProductCategory extends Entity{
 		this.name = name;
 	}
 
+	//@OneToOne(fetch = FetchType.EAGER)
+	//@JoinColumn(name="prod_cat_id")
+	//@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@Transient
 	public ProductCategory getParent() {
 		return parent;
 	}
@@ -66,6 +97,7 @@ public class ProductCategory extends Entity{
 		this.parent = parent;
 	}
 
+	@Column(name="prod_cat_link",nullable=true,length=250)
 	public String getPhotoLink() {
 		return photoLink;
 	}
@@ -74,15 +106,102 @@ public class ProductCategory extends Entity{
 		this.photoLink = link;
 	}
 
-
+	@Column(name="is_active",nullable=true,length=1)
+	@Transient
 	public boolean isActive() {
 		return isActive;
+	}
+	
+	@JsonIgnore
+	@Transient
+	public Set<ProductCategory> getChildren() {
+		return children;
+	}
+
+	@JsonIgnore
+	public void setChildren(Set<ProductCategory> children) {
+		this.children = children;
+	}
+
+	@Transient
+	public boolean isLeaf() {
+		if ((children == null || children.isEmpty()) ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public void setLeaf(boolean leaf) {
+	}
+
+	@Transient
+	public ProdCategorySource getSourceCategory() {
+		return sourceCategory;
+	}
+
+	public void setSourceCategory(ProdCategorySource sourceCategory) {
+		this.sourceCategory = sourceCategory;
+	}
+
+	@Column(name="cat_level",nullable=true,length=11)
+	public Integer getLevel() {
+		return level;
+	}
+
+	public void setLevel(Integer level) {
+		this.level = level;
+	}
+
+	@Transient
+	public Long getSrcCategoryId() {
+		return srcCategoryId;
+	}
+
+	public void setSrcCategoryId(Long srcCategoryId) {
+		this.srcCategoryId = srcCategoryId;
+	}
+
+	@Column(name="display_order",nullable=true,length=11)
+	public Integer getDisplayOrder() {
+		return displayOrder;
+	}
+
+	public void setDisplayOrder(Integer displayOrder) {
+		this.displayOrder = displayOrder;
+	}
+
+	@Column(name="order_number",nullable=true,length=11)
+	public Integer getOrderNumber() {
+		return orderNumber;
+	}
+
+	public void setOrderNumber(Integer orderNumber) {
+		this.orderNumber = orderNumber;
 	}
 
 	public void setActive(boolean isActive) {
 		this.isActive = isActive;
 	}
 
+	@Transient
+	public Integer getActive() {
+		return active;
+	}
+
+	public void setActive(Integer active) {
+		this.active = active;
+	}
+
+	@OneToOne(fetch = FetchType.EAGER, cascade =CascadeType.ALL)
+	@JoinColumn(name="tenant_id") 
+	public BusinessEntity getTenant() {
+		return tenant;
+	}
+
+	public void setTenant(BusinessEntity tenant) {
+		this.tenant = tenant;
+	}
 
 	@Override
 	public String toString() {
@@ -92,18 +211,13 @@ public class ProductCategory extends Entity{
 				+ department + ", isActive=" + isActive + "]";
 	}
 
-	
-
-
-
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = PRIME;
 		int result = 1;
 		result = prime * result
 				+ ((department == null) ? 0 : department.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + (isActive ? 1231 : 1237);
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result
 				+ ((photoLink == null) ? 0 : photoLink.hashCode());
@@ -111,7 +225,6 @@ public class ProductCategory extends Entity{
 				+ ((sourceCategory == null) ? 0 : sourceCategory.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -161,49 +274,4 @@ public class ProductCategory extends Entity{
 			return false;
 		return true;
 	}
-
-
-
-
-	@JsonIgnore
-	public Set<ProductCategory> getChildren() {
-		return children;
-	}
-
-	@JsonIgnore
-	public void setChildren(Set<ProductCategory> children) {
-		this.children = children;
-	}
-
-	public boolean isLeaf() {
-		if ((children == null || children.isEmpty()) ) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	public void setLeaf(boolean leaf) {
-	}
-
-
-	public ProdCategorySource getSourceCategory() {
-		return sourceCategory;
-	}
-
-
-	public void setSourceCategory(ProdCategorySource sourceCategory) {
-		this.sourceCategory = sourceCategory;
-	}
-
-
-	public Integer getLevel() {
-		return level;
-	}
-
-
-	public void setLevel(Integer level) {
-		this.level = level;
-	}
-
 }

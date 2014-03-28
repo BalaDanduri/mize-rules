@@ -1,18 +1,20 @@
 package com.mize.domain.etilize;
 
-import com.mize.domain.common.Entity;
+import com.mize.domain.common.MizeEntity;
 
 
-public class CampaignKit extends Entity{
+public class CampaignKit extends MizeEntity{
 
 	private static final long serialVersionUID = -6127526412345342722L;
-	private Long id;
 	private Long campaignId;
 	private Long prodId;
 	private Long clickThroughCount;
+	
+	@Override
 	public Long getId() {
 		return id;
 	}
+	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}

@@ -1,23 +1,54 @@
 package com.mize.domain.product;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
+import com.mize.domain.auth.User;
 import com.mize.domain.brand.Brand;
-import com.mize.domain.common.Entity;
-import com.mize.domain.util.Formatter;
+import com.mize.domain.businessentity.BusinessEntity;
+import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.DecimalValueDeserializer;
+import com.mize.domain.util.Formatter;
+import com.mize.domain.util.JPASerializer;
+import com.mize.domain.util.JodaDateDeserializer;
+import com.mize.domain.util.JodaDateTimeDeserializer;
+import com.mize.domain.util.JsonDateSerializer;
 import com.mize.domain.util.NumberValueSerializer;
 
-public class Product  extends Entity{
+@javax.persistence.Entity
+@Table(name = "prod")
+public class Product  extends MizeEntity implements Comparable<Product>{
 	
 	private static final long serialVersionUID = 5379538452565383073L;
-	protected Long id;
 	protected String name;
 	protected Brand brand = new Brand();
 	protected Double price;
@@ -32,9 +63,25 @@ public class Product  extends Entity{
 	private ProductDetails productDetails;
 	private String model;
 	private String productLink;
-	
+	private List<ProductRegister> productRegisters = new ArrayList<ProductRegister>();
+	private String hasProdContent;
+	private String isConsumable;
+	private String isAccessory;
+	private String mpn;
+	private Long userId;
+	private Integer prodScore;
+	private String active;
+	private BusinessEntity tenant;
+	private BusinessEntity manufacturerBE;	
+	private List<ProductIntl> productIntl = new ArrayList<ProductIntl>();	
+	@DateTimeFormat(pattern="MM-dd-yyyy")
+	private DateTime releaseDate;
+	@Transient
+	private User user;
+	private List<ProductCategory> categories = new ArrayList<ProductCategory>();	
+
 	public enum Source{
-		MIZE(1),AMAZON(2),ETILIZE(3),BestBuy(4);
+		MIZE(1),AMAZON(2),ETILIZE(3),BestBuy(4),Sears(5),Ebay(6);
 		int value;
 		Source(int val){
 			value = val;
@@ -43,12 +90,49 @@ public class Product  extends Entity{
 			return value;
 		}
 	}	
+	
 	public Product() {
 		category = new HashSet<ProductCategory>();
+		categories = new ArrayList<ProductCategory>();
 		productSource = new ProductSource();
 		productDetails = new ProductDetails();
 	}
+	
+	public Product(String model) {
+		this.model = model;
+	}
+	
+	@Id
+	@GenericGenerator(name="prod_id",strategy="increment")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "prod_id", nullable = false, unique = true)
+	@Override	
+	public Long getId() {
+		return id;
+	}
 
+	@Column(name = "prod_id")
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	
+	@Column(name = "release_date")
+	@DateTimeFormat (pattern="MM-dd-yyyy")
+	@Type(type = "com.mize.domain.util.DateTimeJPA")
+	@JsonSerialize(using = JsonDateSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	public DateTime getReleaseDate() {
+		return releaseDate;
+	}
+	
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateDeserializer.class)	
+	public void setReleaseDate(DateTime releaseDate) {
+		this.releaseDate = releaseDate;
+	}	
+
+	@Transient
 	public ProductSource getProductSource() {
 		return productSource;
 	}
@@ -56,19 +140,20 @@ public class Product  extends Entity{
 
 	public void setProductSource(ProductSource productSource) {
 		this.productSource = productSource;
+	}	
+
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "product",orphanRemoval= true)
+	@Fetch(FetchMode.SUBSELECT)
+	public List<ProductIntl> getProductIntl() {
+		return productIntl;
 	}
 
-
-	public Long getId() {
-		return id;
+	public void setProductIntl(List<ProductIntl> productIntl) {
+		this.productIntl = productIntl;
 	}
+	
 
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-
+	@Column(name="prod_name",nullable=true,length=200)
 	public String getName() {
 		return name;
 	}
@@ -78,7 +163,8 @@ public class Product  extends Entity{
 		this.name = name;
 	}
 
-
+	@OneToOne(fetch = FetchType.EAGER, cascade =CascadeType.ALL)
+	@JoinColumn(name="brand_id") 
 	public Brand getBrand() {
 		return brand;
 	}
@@ -88,7 +174,9 @@ public class Product  extends Entity{
 		this.brand = brand;
 	}
 
-	@JsonSerialize(using=NumberValueSerializer.class)
+	
+	@Transient
+	@JsonSerialize(using=NumberValueSerializer.class,include = Inclusion.NON_DEFAULT)
 	public Double getPrice() {
 		return price;
 	}
@@ -98,7 +186,7 @@ public class Product  extends Entity{
 		this.price = price;
 	}
 
-
+	@Transient
 	public Set<ProductCategory> getCategory() {
 		return category;
 	}
@@ -108,6 +196,7 @@ public class Product  extends Entity{
 		this.category = category;
 	}
 
+	@Column(name="upc",nullable=true,length=20)
 	public String getUpc() {
 		return upc;
 	}
@@ -118,6 +207,7 @@ public class Product  extends Entity{
 	}
 
 
+	@Column(name="qr_code",nullable=true,length=100)
 	public String getQrCode() {
 		return qrCode;
 	}
@@ -128,6 +218,7 @@ public class Product  extends Entity{
 	}
 
 	
+	@Transient
 	public Double getMizeRating() {
 		return mizeRating;
 	}
@@ -138,6 +229,7 @@ public class Product  extends Entity{
 	}
 
 
+	@Transient
 	public ProductDetails getProductDetails() {
 		return productDetails;
 	}
@@ -147,7 +239,7 @@ public class Product  extends Entity{
 		this.productDetails = productDetails;
 	}
 
-
+	@Column(name="prod_image",nullable=true,length=500)
 	public String getImageLink() {
 		return imageLink;
 	}
@@ -158,6 +250,7 @@ public class Product  extends Entity{
 	}
 
 
+	@Transient
 	public List<String> getListNames() {
 		return listNames;
 	}
@@ -168,6 +261,7 @@ public class Product  extends Entity{
 	}
 
 
+	@Column(name="model",nullable=true,length=50)
 	public String getModel() {
 		return model;
 	}
@@ -177,7 +271,7 @@ public class Product  extends Entity{
 		this.model = model;
 	}
 
-
+	@Column(name="prod_desc",nullable=true,length=500)
 	public String getShortDescription() {
 		return shortDescription;
 	}
@@ -188,6 +282,7 @@ public class Product  extends Entity{
 	}
 
 
+	@Transient
 	public String getProductLink() {
 		return productLink;
 	}
@@ -197,6 +292,27 @@ public class Product  extends Entity{
 		this.productLink = productLink;
 	}	
 	
+	
+	@Transient
+	public List<ProductRegister> getProductRegisters() {
+		return productRegisters;
+	}
+
+	@Transient
+	public void setProductRegisters(List<ProductRegister> productRegisters) {
+		this.productRegisters = productRegisters;
+	}
+	
+	@Column(name="is_active",nullable=true,length=1)
+	public String getActive() {
+		return active;
+	}
+
+	public void setActive(String active) {
+		this.active = active;
+	}
+
+	@Transient
 	@JsonIgnore
 	public boolean isAmazonSource(){
 		boolean flag = false;
@@ -205,9 +321,332 @@ public class Product  extends Entity{
 		}
 		return flag;
 	}
+	
+	@Column(name="mfg_part_no",nullable=true,length=70)
+	public String getMpn() {
+		return mpn;
+	}
+
+	public void setMpn(String mpn) {
+		this.mpn = mpn;
+	}
+
+	@Transient
 	@JsonIgnore
 	public boolean isMizeSource(){
 		return (!isAmazonSource());
 	}
 
+	@Transient
+	public String getHasProdContent() {
+		return hasProdContent;
+	}
+
+	public void setHasProdContent(String hasProdContent) {
+		this.hasProdContent = hasProdContent;
+	}
+
+	@Transient
+	public String getIsConsumable() {
+		return isConsumable;
+	}
+
+	public void setIsConsumable(String isConsumable) {
+		this.isConsumable = isConsumable;
+	}
+
+	@Transient
+	public String getIsAccessory() {
+		return isAccessory;
+	}
+
+	public void setIsAccessory(String isAccessory) {
+		this.isAccessory = isAccessory;
+	}
+	
+	@JsonIgnore
+	@Transient
+	public static Long getValidSourceId(Long sourceId){
+		for(Source source : Source.values()){
+			if(Formatter.longValue(sourceId) == source.getValue()){
+				return sourceId;
+			}
+		}
+		return Long.valueOf(Source.ETILIZE.getValue());
+	}
+	
+	@Transient
+	public List<ProductCategory> getCategories() {
+		return categories;
+	}
+	
+	public void setCategories(List<ProductCategory> categories) {
+		this.categories = categories;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Product other = (Product) obj;
+		if (active == null) {
+			if (other.active != null)
+				return false;
+		} else if (!active.equals(other.active))
+			return false;
+		if (hasProdContent == null) {
+			if (other.hasProdContent != null)
+				return false;
+		} else if (!hasProdContent.equals(other.hasProdContent))
+			return false;
+		if (imageLink == null) {
+			if (other.imageLink != null)
+				return false;
+		} else if (!imageLink.equals(other.imageLink))
+			return false;
+		if (isAccessory == null) {
+			if (other.isAccessory != null)
+				return false;
+		} else if (!isAccessory.equals(other.isAccessory))
+			return false;
+		if (isConsumable == null) {
+			if (other.isConsumable != null)
+				return false;
+		} else if (!isConsumable.equals(other.isConsumable))
+			return false;
+		if (mizeRating == null) {
+			if (other.mizeRating != null)
+				return false;
+		} else if (!mizeRating.equals(other.mizeRating))
+			return false;
+		if (model == null) {
+			if (other.model != null)
+				return false;
+		} else if (!model.equals(other.model))
+			return false;
+		if (mpn == null) {
+			if (other.mpn != null)
+				return false;
+		} else if (!mpn.equals(other.mpn))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (price == null) {
+			if (other.price != null)
+				return false;
+		} else if (!price.equals(other.price))
+			return false;
+		if (prodScore == null) {
+			if (other.prodScore != null)
+				return false;
+		} else if (!prodScore.equals(other.prodScore))
+			return false;
+		if (productLink == null) {
+			if (other.productLink != null)
+				return false;
+		} else if (!productLink.equals(other.productLink))
+			return false;
+		if (qrCode == null) {
+			if (other.qrCode != null)
+				return false;
+		} else if (!qrCode.equals(other.qrCode))
+			return false;
+		if (releaseDate == null) {
+			if (other.releaseDate != null)
+				return false;
+		} else if (!releaseDate.equals(other.releaseDate))
+			return false;
+		if (shortDescription == null) {
+			if (other.shortDescription != null)
+				return false;
+		} else if (!shortDescription.equals(other.shortDescription))
+			return false;
+		if (upc == null) {
+			if (other.upc != null)
+				return false;
+		} else if (!upc.equals(other.upc))
+			return false;
+		if (userId == null) {
+			if (other.userId != null)
+				return false;
+		} else if (!userId.equals(other.userId))
+			return false;
+		return true;
+	}
+
+	@Column(name="user_id",nullable=true,length=20)
+	public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+	@Transient
+	public Integer getProdScore() {
+		return prodScore;
+	}
+
+	public void setProdScore(Integer prodScore) {
+		this.prodScore = prodScore;
+	}
+
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="tenant_id") 
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	public BusinessEntity getTenant() {
+		return tenant;
+	}
+
+	public void setTenant(BusinessEntity tenant) {
+		this.tenant = tenant;
+	}
+
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="manufacturer_be_id") 
+	public BusinessEntity getManufacturerBE() {
+		return manufacturerBE;
+	}
+
+	public void setManufacturerBE(BusinessEntity manufacturerBE) {
+		this.manufacturerBE = manufacturerBE;
+	}
+	
+	@Transient
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	@Override
+	public int compareTo(Product o) {	
+		return 0;
+	}
+	
+	@Override	
+	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
+	@Type(type="com.mize.domain.util.DateTimeJPA")
+	@Column(name = "created_date",updatable=false)
+	@JsonIgnore(value = false)
+	public DateTime getCreatedDate() {
+		return createdDate;
+	}
+
+	@Override	
+	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
+	@Type(type="com.mize.domain.util.DateTimeJPA")
+	@Column(name = "updated_date")
+	@JsonIgnore(value = false)
+	public DateTime getUpdatedDate() {
+		return updatedDate;
+	}
+
+	@Override
+	@JsonIgnore
+	@Column(name = "created_by",updatable=false)
+	public Long getCreatedBy() {		
+		return super.getCreatedBy();
+	}
+
+	@Override
+	@JsonIgnore
+	@Column(name = "updated_by")
+	public Long getUpdatedBy() {		
+		return super.getUpdatedBy();
+	}
+
+	
+	@Override
+	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	@JsonIgnore(false)
+	public void setCreatedDate(DateTime createdDate) {
+		super.createdDate = createdDate;
+	}
+
+	@Override
+	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	@JsonIgnore(false)
+	public void setUpdatedDate(DateTime updatedDate) {
+		super.updatedDate = updatedDate;
+	}
+
+	@Override
+	@JsonIgnore
+	public void setCreatedBy(Long createdBy) {		
+		super.setCreatedBy(createdBy);
+	}
+
+	@Override
+	@JsonIgnore
+	public void setUpdatedBy(Long updatedBy) {		
+		super.setUpdatedBy(updatedBy);
+	}
+
+	@PrePersist
+	@PreUpdate
+	public void auditFields(){
+		if(createdDate==null && id==null){
+			setCreatedDate(DateTime.now());
+		}
+		setUpdatedDate(DateTime.now());		
+	}
+
+	@Override
+	public String toString() {
+		return "Product [id" + id + ", name=" + name + ", brand=" + brand + ", price=" + price + ", category=" + category
+				+ ", shortDescription=" + shortDescription + ", upc=" + upc + ", qrCode=" + qrCode + ", productSource="
+				+ productSource + ", mizeRating=" + mizeRating + ", imageLink=" + imageLink + ", listNames="
+				+ listNames + ", productDetails=" + productDetails + ", model=" + model + ", productLink="
+				+ productLink + ", productRegisters=" + productRegisters + ", hasProdContent=" + hasProdContent
+				+ ", isConsumable=" + isConsumable + ", isAccessory=" + isAccessory + ", mpn=" + mpn + ", releaseDate="
+				+ releaseDate + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = PRIME;
+		int result = super.hashCode();
+		result = prime * result + ((active == null) ? 0 : active.hashCode());
+		result = prime * result
+				+ ((hasProdContent == null) ? 0 : hasProdContent.hashCode());
+		result = prime * result
+				+ ((imageLink == null) ? 0 : imageLink.hashCode());
+		result = prime * result
+				+ ((isAccessory == null) ? 0 : isAccessory.hashCode());
+		result = prime * result
+				+ ((isConsumable == null) ? 0 : isConsumable.hashCode());
+		result = prime * result
+				+ ((mizeRating == null) ? 0 : mizeRating.hashCode());
+		result = prime * result + ((model == null) ? 0 : model.hashCode());
+		result = prime * result + ((mpn == null) ? 0 : mpn.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((price == null) ? 0 : price.hashCode());
+		result = prime * result
+				+ ((prodScore == null) ? 0 : prodScore.hashCode());
+		result = prime * result
+				+ ((productLink == null) ? 0 : productLink.hashCode());
+		result = prime * result + ((qrCode == null) ? 0 : qrCode.hashCode());
+		result = prime * result
+				+ ((releaseDate == null) ? 0 : releaseDate.hashCode());
+		result = prime
+				* result
+				+ ((shortDescription == null) ? 0 : shortDescription.hashCode());
+		result = prime * result + ((upc == null) ? 0 : upc.hashCode());
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+		return result;
+	}
+	
 }

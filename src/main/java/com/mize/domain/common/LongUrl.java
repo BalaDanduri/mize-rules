@@ -3,9 +3,7 @@ package com.mize.domain.common;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.mize.domain.common.Entity;
-
-public class LongUrl extends Entity implements Comparable<LongUrl>{
+public class LongUrl extends MizeEntity implements Comparable<LongUrl>{
 
 	private static final long serialVersionUID = -5226291820868027579L;
 	private String errorCode;
@@ -58,6 +56,15 @@ public class LongUrl extends Entity implements Comparable<LongUrl>{
 		this.results = results;
 	}	
 
+	@Override
+	public Long getId() {
+		return id;
+	}
+
+	@Override
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getUrl() {
 		return url;

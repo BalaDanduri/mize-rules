@@ -1,24 +1,146 @@
 package com.mize.domain.brand;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mize.domain.common.Entity;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
-public class Brand extends Entity {
+import org.hibernate.annotations.GenericGenerator;
+
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
+import com.mize.domain.common.MizeEntity;
+import com.mize.domain.product.ProductRegister;
+import com.mize.domain.product.ProductRepeatOrderShipOptions;
+import com.mize.domain.user.UserBrandMapping;
+import com.mize.domain.util.JPASerializer;
+
+@Entity
+@Table(name = "brand")
+public class Brand extends MizeEntity implements Comparable<Brand>{
 	
-	private static final long serialVersionUID = -7447355457187568168L;
-	private int brandId;
-	private String brandName;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5317108190942485164L;
+	private String name;
+	private String department;
 	private String website;
 	private String logoName;
-	private String feedbackEmail ; 
+	private String feedbackEmail ; 	
+	private String registered;
 	private List<BrandSupport> brandSupports = new ArrayList<BrandSupport>();
+	private List<BrandFeed> brandFeeds = new ArrayList<BrandFeed>();
+	private List<ProductRepeatOrderShipOptions> shippings = new ArrayList<ProductRepeatOrderShipOptions>();
+	private List<ProductRegister> productRegisters = new ArrayList<ProductRegister>();
+	private String searchType;
+	private List<UserBrandMapping> userBrands = new ArrayList<UserBrandMapping>();
+
+	public enum SearchType{
+		equals,like;	
+	}
 	
+	public static SearchType getSearchType(String num){
+		for (SearchType sType : SearchType.values()) {
+			if( sType.toString().equals(num) ){
+				return sType;
+			}
+		}
+		return null;
+	}
+	
+	
+	@Id
+	@GenericGenerator(name="brandId" , strategy="increment")
+	@GeneratedValue(generator="brandId")
+	@Column(name = "BRAND_ID", unique = true, nullable = false, length = 10)
+	@Override
+	public Long getId() {
+		return id;
+	}
+
+	@Override
+	public void setId(Long id) {
+		this.id = id;
+	}	
+
+	@Transient
+	public Long getBrandId() {
+		return id;
+	}
+
+	public void setBrandId(Long id) {
+		this.id = id;
+	}	
+
 	public Brand() {
 		
 	}
 	
+	public Brand(Long id, String brandName, String website) {
+		this(id, brandName, website, null, null, null);
+	}
+
+	public Brand(Long id, String brandName, String website, String logoName) {
+		this(id, brandName, website, logoName, null, null);
+	}
+
+	public Brand(Long id, String name, String website, String logoName, String feedbackEmail, List<BrandSupport> brandSupports) {
+		this.id = id;
+		this.name = name;
+		this.website = website;
+		this.logoName = logoName;
+		this.feedbackEmail = feedbackEmail;
+		this.brandSupports = brandSupports;
+	}
+	
+	@Transient
+	public String getBrandName() {
+		return name;
+	}
+	public void setBrandName(String brandName) {
+		this.name = brandName;
+	}
+	
+	@Column(name = "BRAND_NAME", unique = true, nullable = false, length = 250)
+	public String getName() {
+		return name;
+	}
+	public void setName(String brandName) {
+		this.name = brandName;
+	}
+	@Column(name = "department",  nullable = true, length = 50)
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+
+	@Column(name = "BRAND_LINK",  nullable = true, length = 250)
+	public String getWebsite() {
+		return website;
+	}
+
+	public void setWebsite(String website) {
+		this.website = website;
+	}
+	
+//	@OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL,mappedBy = "brand")
+//	@Fetch(value=FetchMode.SUBSELECT)
+//	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+//	@JsonManagedReference(value="brand_support")
+	@Transient
 	public List<BrandSupport> getBrandSupports() {
 		return brandSupports;
 	}
@@ -26,110 +148,7 @@ public class Brand extends Entity {
 	public void setBrandSupports(List<BrandSupport> brandSupports) {
 		this.brandSupports = brandSupports;
 	}
-
-	public Brand(int brandId, String brandName, String website) {
-		this.brandId = brandId;
-		this.brandName = brandName;
-		this.website = website;
-	}
-
-	public Brand(int brandId, String brandName, String website, String logoName) {
-		this.brandId = brandId;
-		this.brandName = brandName;
-		this.website = website;
-		this.logoName = logoName;
-	}
-	
-	public int getBrandId() {
-		return brandId;
-	}
-	public void setBrandId(int brandId) {
-		this.brandId = brandId;
-	}
-	public String getBrandName() {
-		return brandName;
-	}
-	public void setBrandName(String brandName) {
-		this.brandName = brandName;
-	}
-	public String getWebsite() {
-		return website;
-	}
-	public void setWebsite(String website) {
-		this.website = website;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + brandId;
-		result = prime * result
-				+ ((brandName == null) ? 0 : brandName.hashCode());
-		result = prime * result
-				+ ((brandSupports == null) ? 0 : brandSupports.hashCode());
-		result = prime * result
-				+ ((feedbackEmail == null) ? 0 : feedbackEmail.hashCode());
-		result = prime * result
-				+ ((logoName == null) ? 0 : logoName.hashCode());
-		result = prime * result + ((website == null) ? 0 : website.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Brand other = (Brand) obj;
-		if (brandId != other.brandId)
-			return false;
-		if (brandName == null) {
-			if (other.brandName != null)
-				return false;
-		} else if (!brandName.equals(other.brandName))
-			return false;
-		if (brandSupports == null) {
-			if (other.brandSupports != null)
-				return false;
-		} else if (!brandSupports.equals(other.brandSupports))
-			return false;
-		if (feedbackEmail == null) {
-			if (other.feedbackEmail != null)
-				return false;
-		} else if (!feedbackEmail.equals(other.feedbackEmail))
-			return false;
-		if (logoName == null) {
-			if (other.logoName != null)
-				return false;
-		} else if (!logoName.equals(other.logoName))
-			return false;
-		if (website == null) {
-			if (other.website != null)
-				return false;
-		} else if (!website.equals(other.website))
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Brand [brandId=" + brandId + ", brandName=" + brandName
-				+ ", website=" + website + ", logoName=" + logoName
-				+ ", feedbackEmail=" + feedbackEmail + ", brandSupports="
-				+ brandSupports + "]";
-	}
-
-	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		// TODO Auto-generated method stub
-		return super.clone();
-	}
-	
-
+	@Column(name = "BRAND_LOGO",  nullable = true, length = 50)
 	public String getLogoName() {
 		return logoName;
 	}
@@ -137,7 +156,7 @@ public class Brand extends Entity {
 	public void setLogoName(String logoName) {
 		this.logoName = logoName;
 	}
-
+	@Column(name = "FEEDBACK_EMAIL",  nullable = true, length = 50)
 	public String getFeedbackEmail() {
 		return feedbackEmail;
 	}
@@ -145,4 +164,137 @@ public class Brand extends Entity {
 	public void setFeedbackEmail(String feedbackEmail) {
 		this.feedbackEmail = feedbackEmail;
 	}
+	
+	
+//	@OneToMany(fetch = FetchType.LAZY,cascade=CascadeType.ALL,mappedBy = "brand")
+//	@Fetch(value=FetchMode.SUBSELECT)
+//	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+//	@JsonManagedReference(value="brand_feed")
+	@Transient
+	public List<BrandFeed> getBrandFeeds() {
+		return brandFeeds;
+	}
+
+	public void setBrandFeeds(List<BrandFeed> brandFeeds) {
+		this.brandFeeds = brandFeeds;
+	}
+
+//	@OneToMany(fetch = FetchType.LAZY,cascade=CascadeType.ALL,mappedBy = "brand")
+//	@Fetch(value=FetchMode.SUBSELECT)
+//	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+//	@JsonManagedReference(value="brand_shippings")
+	@Transient
+	public List<ProductRepeatOrderShipOptions> getShippings() {
+		return shippings;
+	}
+
+	public void setShippings(List<ProductRepeatOrderShipOptions> shippings) {
+		this.shippings = shippings;
+	}
+
+	@Column(name = "registered",  nullable = true)
+	public String getRegistered() {
+		return registered;
+	}
+
+	public void setRegistered(String registered) {
+		this.registered = registered;
+	}
+	
+	@Transient
+	public List<ProductRegister> getProductRegisters() {
+		return productRegisters;
+	}
+
+	public void setProductRegisters(List<ProductRegister> productRegisters) {
+		this.productRegisters = productRegisters;
+	}
+
+	@Transient
+	public String getSearchType() {
+		return searchType;
+	}
+
+	public void setSearchType(String searchType) {
+		this.searchType = searchType;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = super.hashCode();
+		result = PRIME * result	+ ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+	
+	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL,mappedBy="brand")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)	
+	public List<UserBrandMapping> getUserBrands() {
+		return userBrands;
+	}
+	
+	public void setUserBrands(List<UserBrandMapping> userBrands) {
+		this.userBrands = userBrands;
+	}
+	
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if ( !(obj instanceof Brand))
+			return false;
+		Brand other = (Brand) obj;
+		
+		if (id==null) {
+			if (other.id!= null)
+				return false;
+		} else if (!id.equals(other.id)) 
+			return false;
+
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Brand [id=");
+		builder.append(id);
+		builder.append(", name=");
+		builder.append(name);
+		builder.append(", department=");
+		builder.append(department);
+		builder.append(", website=");
+		builder.append(website);
+		builder.append(", logoName=");
+		builder.append(logoName);
+		builder.append(", feedbackEmail=");
+		builder.append(feedbackEmail);
+		builder.append(", brandSupports=");
+		builder.append(brandSupports);
+		builder.append(", brandFeeds=");
+		builder.append(brandFeeds);
+		builder.append("]");
+		return builder.toString();
+	}
+
+	
+	public int compareTo(Brand thatBrand) {
+		if ( this == thatBrand ) 
+			return EQUAL;
+		else if (this.id < thatBrand.id) 
+			return BEFORE;
+		else if (thatBrand.id == this.id) 
+			return EQUAL;
+		else if (this.id > thatBrand.id)
+			return AFTER;
+		return EQUAL;		
+	}	
+	
 }

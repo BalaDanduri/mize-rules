@@ -1,13 +1,12 @@
 package com.mize.domain.etilize;
 
-import com.mize.domain.common.Entity;
+import com.mize.domain.common.MizeEntity;
 
 
-public class ProductMultimedia extends Entity{
+public class ProductMultimedia extends MizeEntity{
 
 	private static final long serialVersionUID = -623434234531123L;
 
-	private Long id;	
 	private String link;
 	private String shortDesc;
 	private Long localeId;
@@ -18,9 +17,12 @@ public class ProductMultimedia extends Entity{
 	private Double heigth;
 	private Double width;
 	private Long sourceId;
+	
+	@Override
 	public Long getId() {
 		return id;
-	}
+	}	
+	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}

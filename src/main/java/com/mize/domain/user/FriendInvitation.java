@@ -1,19 +1,18 @@
 package com.mize.domain.user;
 
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.mize.domain.common.Entity;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
+import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
-public class FriendInvitation extends Entity implements Comparable<FriendInvitation>{
+public class FriendInvitation extends MizeEntity implements Comparable<FriendInvitation>{
 
 	private static final long serialVersionUID = 3657381192795060009L;
-	private Long id;
 	private Long sentFrom ;
 	private String sentTo;
 	private String channel;
@@ -23,10 +22,12 @@ public class FriendInvitation extends Entity implements Comparable<FriendInvitat
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime successfulConversionDate ;	
 
+	@Override
 	public Long getId() {
 		return id;
 	}
 
+	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}	
@@ -94,15 +95,22 @@ public class FriendInvitation extends Entity implements Comparable<FriendInvitat
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
+		final int prime = PRIME;
+		int result = super.hashCode();
 		result = prime * result + ((channel == null) ? 0 : channel.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((sendDate == null) ? 0 : sendDate.hashCode());
-		result = prime * result + ((sentFrom == null) ? 0 : sentFrom.hashCode());
+		result = prime * result
+				+ ((sendDate == null) ? 0 : sendDate.hashCode());
+		result = prime * result
+				+ ((sentFrom == null) ? 0 : sentFrom.hashCode());
 		result = prime * result + ((sentTo == null) ? 0 : sentTo.hashCode());
-		result = prime * result + ((successfulConversion == null) ? 0 : successfulConversion.hashCode());
-		result = prime * result + ((successfulConversionDate == null) ? 0 : successfulConversionDate.hashCode());
+		result = prime
+				* result
+				+ ((successfulConversion == null) ? 0 : successfulConversion
+						.hashCode());
+		result = prime
+				* result
+				+ ((successfulConversionDate == null) ? 0
+						: successfulConversionDate.hashCode());
 		return result;
 	}
 
@@ -110,7 +118,7 @@ public class FriendInvitation extends Entity implements Comparable<FriendInvitat
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -119,11 +127,6 @@ public class FriendInvitation extends Entity implements Comparable<FriendInvitat
 			if (other.channel != null)
 				return false;
 		} else if (!channel.equals(other.channel))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
 			return false;
 		if (sendDate == null) {
 			if (other.sendDate != null)
@@ -148,18 +151,17 @@ public class FriendInvitation extends Entity implements Comparable<FriendInvitat
 		if (successfulConversionDate == null) {
 			if (other.successfulConversionDate != null)
 				return false;
-		} else if (!successfulConversionDate.equals(other.successfulConversionDate))
+		} else if (!successfulConversionDate
+				.equals(other.successfulConversionDate))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "SweepsTakeInvite [sentFrom=" + sentFrom + ", sentTo=" + sentTo
-				+ ", channel=" + channel + ", successfulConversion="
-				+ successfulConversion + ", sendDate=" + sendDate
-				+ ", successfulConversionDate=" + successfulConversionDate
-				+ "]";
+		return "FriendInvitation [sentFrom=" + sentFrom + ", sentTo=" + sentTo + ", channel=" + channel
+				+ ", successfulConversion=" + successfulConversion + ", sendDate=" + sendDate
+				+ ", successfulConversionDate=" + successfulConversionDate + "]";
 	}
 
 }

@@ -1,9 +1,9 @@
 package com.mize.domain.etilize;
 
-import com.mize.domain.common.Entity;
+import com.mize.domain.common.MizeEntity;
 
 
-public class ProductDescription extends Entity{
+public class ProductDescription extends MizeEntity{
 
 	private static final long serialVersionUID = -632131644234531123L;
 	private Long prodId;
@@ -20,6 +20,13 @@ public class ProductDescription extends Entity{
 	private String type;
 	private Long localeId;
 	
+	@Override
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 			
 	public Long getLocaleId() {
 		return localeId;
@@ -98,6 +105,17 @@ public class ProductDescription extends Entity{
 	}
 	public void setType(String type) {
 		this.type = type;
+	}
+	
+	@Override
+	public String toString() {
+		return "ProductDescription [prodId=" + prodId + ", shortDesc="
+				+ shortDesc + ", longDesc=" + longDesc + ", warrantyInfo="
+				+ warrantyInfo + ", officialUrl=" + officialUrl + ", pdfUrl="
+				+ pdfUrl + ", pdfSize=" + pdfSize + ", manualPdfUrl="
+				+ manualPdfUrl + ", manualPdfSize=" + manualPdfSize
+				+ ", sourceId=" + sourceId + ", isDefault=" + isDefault
+				+ ", type=" + type + ", localeId=" + localeId + "]";
 	}
 	
 }

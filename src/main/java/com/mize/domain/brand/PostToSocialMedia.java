@@ -1,25 +1,33 @@
 package com.mize.domain.brand;
 
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.mize.domain.common.Entity;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
-public class PostToSocialMedia extends Entity {
+public class PostToSocialMedia extends MizeEntity implements Comparable<PostToSocialMedia>{
 	
+	private static final long serialVersionUID = 4674350998777147719L;
 	String postId;
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	DateTime postedDate;
 	String postData;
 	String socialMedia;
-	int feedbackId;
-	
+	Long feedbackId;
 	public PostToSocialMedia() {
 		
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getPostId() {
@@ -58,12 +66,25 @@ public class PostToSocialMedia extends Entity {
 		this.socialMedia = socialMedia;
 	}
 
-	public int getFeedbackId() {
+	public Long getFeedbackId() {
 		return feedbackId;
 	}
 
-	public void setfeedbackId(int feedbackId) {
+	public void setfeedbackId(Long feedbackId) {
 		this.feedbackId = feedbackId;
 	}
+	
+	public int compareTo(PostToSocialMedia entity) {
+		if ( this == entity ) 
+			return EQUAL;
+		else if (this.id < entity.id) 
+			return BEFORE;
+		else if (entity.id == this.id) 
+			return EQUAL;
+		else if (this.id > entity.id)
+			return AFTER;
+		return EQUAL;
+	}
+
 
 }

@@ -4,6 +4,8 @@ import com.mize.domain.brand.Brand;
 import com.mize.domain.common.Entity;
 
 public class CompanyBrand extends Entity {
+	
+	private static final long serialVersionUID = 5820346684617703353L;
 	private Company company;
 	private Brand brand;
 

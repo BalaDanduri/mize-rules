@@ -1,27 +1,30 @@
 package com.mize.domain.product;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
-import com.mize.domain.common.Entity;
+import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
-public class UserProduct extends Entity{
+public class UserProduct extends MizeEntity{
 
 	private static final long serialVersionUID = -5270305444916049503L;
 	protected Long id;
-	protected User User = new User();
+	protected User user = new User();
 	protected Product product;
 	protected String listName;
 	protected String active;
 	protected UserProductFeedback productFeedback;
 	protected int pageIndex;
-	
+	private List<Long> prodRegnIds = new ArrayList<Long>(); 
 	public enum Wownit{
 		own,want,gift;
 	}
@@ -55,11 +58,11 @@ public class UserProduct extends Entity{
 	}
 	
 	public User getUser() {
-		return User;
+		return user;
 	}
 
 	public void setUser(User user) {
-		User = user;
+		this.user = user;
 	}
 
 	public Product getProduct() {
@@ -137,4 +140,15 @@ public class UserProduct extends Entity{
 	public void setUpdatedDate(DateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}
+
+	public List<Long> getProdRegnIds() {
+		return prodRegnIds;
+	}
+
+	public void setProdRegnIds(List<Long> prodRegnIds) {
+		this.prodRegnIds = prodRegnIds;
+	}
+
+	
+	
 }

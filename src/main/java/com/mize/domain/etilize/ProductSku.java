@@ -1,17 +1,17 @@
 package com.mize.domain.etilize;
 
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.mize.domain.common.Entity;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
 
 
-public class ProductSku extends Entity{
+public class ProductSku extends MizeEntity{
 	private static final long serialVersionUID = -6722341511569003526L;	
 	
 	private Long prodId;
@@ -70,7 +70,15 @@ public class ProductSku extends Entity{
 	public void setSku(String sku) {
 		this.sku = sku;
 	}
-	
-	
+
+	@Override
+	public Long getId() {
+		return id;
+	}
+
+	@Override
+	public void setId(Long id) {
+		this.id = id;
+	}
 	
 }

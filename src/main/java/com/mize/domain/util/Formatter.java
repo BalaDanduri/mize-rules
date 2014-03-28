@@ -18,12 +18,16 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-public class Formatter {
+import com.mize.domain.common.PaginationPage;
+
+public final class Formatter {
 	public static final String EMPTY = "";
 	public static final String YES = "Y";
 	public static final String NO = "N";
 	public static final DateTimeFormatter  DATE_FORMAT = DateTimeFormat.forPattern("MM-dd-yyyy HH:mm:ss");
+	public static final DateTimeFormatter  DATE_FORMAT1 = DateTimeFormat.forPattern("MM-dd-yyyy");
 	public static final DateTimeFormatter  DB_DATE_TIME_FORMAT = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+	public static final DateTimeFormatter  DATE_FORMAT2 = DateTimeFormat.forPattern("yyyy-MM-dd");
 	public static final String LIKE = "%";
 	private static final Pattern HTML_TAGS_PATTERN = Pattern.compile("<.+?>");
 	private static final String HTML_COMMENTS_PATTERN = "(?s)<!--.*?-->";
@@ -38,7 +42,9 @@ public class Formatter {
 	public static final String SPECIFICATION_WEIGHT = "Weight";
 	public static String UNIT_INCHES = "inches";
 	public static String UNIT_POUNDS = "pounds";
-	
+	public static String NEW_LINE = "\n";
+	public static String BR_LINE = "<br>";
+	public static final Map<Integer, String> SPL_CHAR_MAP = new HashMap<Integer,String>();
 	public static final List<String> amazonSpecList = new ArrayList<String>();
 	
 	private Formatter(){		
@@ -51,6 +57,12 @@ public class Formatter {
 		amazonSpecList.add(SPECIFICATION_LENGTH);
 		amazonSpecList.add(SPECIFICATION_WEIGHT);
 		amazonSpecList.add(SPECIFICATION_HEIGHT);
+		SPL_CHAR_MAP.put(153,"&trade;");
+		SPL_CHAR_MAP.put(169,"&copy;");
+		SPL_CHAR_MAP.put(174,"&reg;");
+		SPL_CHAR_MAP.put(8482,"&trade;");
+		
+		
 	}
 	
 	public static int intValue(Integer intVal){
@@ -69,10 +81,36 @@ public class Formatter {
 		return value;
 	}
 	
+	public static boolean isNull(Integer number){
+		int value = 0;
+		if(number != null){
+			value = number.intValue();
+		}		
+		return value <= 0;
+	}
+	
+	public static boolean isNull(Long number){
+		long value = 0;
+		if(number != null){
+			value = number.intValue();
+		}		
+		return value <= 0;
+	}
+	
 	public static double doubleValue(Double dValue){
 		double value = 0.0;
 		if(dValue != null){
 			value = dValue.doubleValue();
+		}		
+		return value;
+	}
+	
+	public static double doubleValue(String dValue){
+		double value = 0.0;
+		if(dValue != null){
+			try{
+				value = Double.valueOf(dValue);
+			}catch(Exception e){}
 		}		
 		return value;
 	}
@@ -156,6 +194,29 @@ public class Formatter {
 		return (dateTime == null ? null : dateTime.toString(DB_DATE_TIME_FORMAT));
 	}
 	
+	public static String dbDateTime(DateTime dateTime){
+		return (dateTime == null ? null : dateTime.toString(DB_DATE_TIME_FORMAT));
+	}
+	
+	public static String getDBEndDateTime(DateTime dateTime){
+		dateTime = dateTime.withTime(23, 59, 59, 999);
+		return (dateTime == null ? null : dateTime.toString(DB_DATE_TIME_FORMAT));
+	}
+	
+	public static DateTime toEndDateTime(DateTime dateTime){
+		if(dateTime != null){
+			dateTime = dateTime.withTime(23, 59, 59, 999);
+		}
+		return dateTime;
+	}
+	
+	public static DateTime toStartDateTime(DateTime dateTime){
+		if(dateTime != null){
+			dateTime = dateTime.withTime(0, 0, 0, 0);
+		}
+		return dateTime;
+	}
+	
 	public static String getDateTime(DateTime dateTime){
 		return (dateTime == null ? null : dateTime.toString(DATE_FORMAT));
 	}
@@ -228,6 +289,32 @@ public class Formatter {
 		return time;
 	}
 	
+	public static DateTime dateTime(String dateTime, String format){
+		DateTime time = null;
+		if(dateTime!= null && format != null){
+			try{
+				DateTimeFormatter  FORMAT = DateTimeFormat.forPattern(format);
+				if (dateTime.length() > format.length()) {
+					dateTime = dateTime.substring(0, format.length());
+				}
+				time = DateTime.parse(dateTime,FORMAT);
+			}catch(Exception e){
+			}
+		}		
+		return time;
+	}
+
+	public static DateTime date(String dateTime){
+		DateTime time = null;
+		if(dateTime!= null){
+			try{
+				time = DateTime.parse(dateTime,DATE_FORMAT1);
+			}catch(Exception e){
+			}
+		}		
+		return time;
+	}
+	
 	public static DateTime dateTime(Timestamp timestamp){
 		DateTime time = null;
 		if(timestamp!= null){
@@ -249,13 +336,24 @@ public class Formatter {
 		BigInteger returnValue = BigInteger.ZERO;
 		if (value != null) {
 			try {
-			returnValue = new BigInteger(value);
+				returnValue = new BigInteger(value);
 			} catch(Exception e) {
 				Float floatVal = new Float(value);
 				returnValue = new BigInteger(String.valueOf(floatVal.intValue()+1));
 			}
 		}
-		return returnValue   ;
+		return returnValue;
+	}
+	
+	public static BigDecimal toBigDecimal(String value) {
+		BigDecimal returnValue = null;
+		if (value != null && value.trim().length() > 0) {
+			try {
+				returnValue = new BigDecimal(value);
+			} catch(Exception e) {
+			}
+		}
+		return returnValue;
 	}
 	
 	public static BigInteger toBigInt(int value) {
@@ -277,6 +375,12 @@ public class Formatter {
 	public static String likeString(String value){		
 		return LIKE+toUpperCase(value)+LIKE;
 	}
+	
+	public static String likeStringStartsWith(String value){		
+		return toUpperCase(value)+LIKE;
+	}
+	
+	
 	public static String removeHtml(String value){
 		if(getLength(value) >0){
 			try{
@@ -284,13 +388,6 @@ public class Formatter {
 				Matcher m = HTML_TAGS_PATTERN.matcher(value);
 				value = m.replaceAll(EMPTY);
 				value = value.replaceAll("  ",EMPTY);
-				while(true){
-					if(value.contains("\n\n\n")){
-						value = value.replaceAll("\n\n\n","\n\n");
-					}else{
-						break;
-					}
-				}
 			}catch(Exception e){
 			}
 		}	
@@ -385,4 +482,255 @@ public class Formatter {
 			return EMPTY+longValue(longVal);
 		}
 	}
+	
+	public static String getTime(DateTime dateTime){
+		String time = EMPTY;
+		if(dateTime != null){			
+			String hours = dateTime.getHourOfDay() < 10 ? "0"+dateTime.getHourOfDay() : ""+dateTime.getHourOfDay() ;
+			String minutes = dateTime.getMinuteOfHour() < 10 ? "0"+dateTime.getMinuteOfHour() : ""+dateTime.getMinuteOfHour() ;
+			String seconds = dateTime.getSecondOfMinute() < 10 ? "0"+dateTime.getSecondOfMinute() : ""+dateTime.getSecondOfMinute() ;		
+			time = hours+":"+minutes+":"+seconds+ (dateTime.getHourOfDay() > 12 ? " PM" : " AM");
+		}
+		return time;
+	}
+	
+	public static String getDisplayDate(DateTime dateTime){
+		String time = EMPTY;
+		if(dateTime != null){	
+			time = getDateTime(dateTime)+(dateTime.getHourOfDay() > 12 ? " PM" : " AM");
+		}
+		return time;
+	}
+	
+	public static int calculatePageSize(String pagesize) {
+		int pageSize = Formatter.intValue(pagesize) == 0 ? 10: Formatter.intValue(pagesize);
+		return pageSize;
+	}
+	
+	public static int calculatePageSize(Integer pagesize) {
+		int pageSize = Formatter.intValue(pagesize) == 0 ? 10: Formatter.intValue(pagesize);
+		return pageSize;
+	}
+	
+	public static int calculatePageNumber(String pageIndex) {
+		int pageNumber = Formatter.intValue(pageIndex) == 0 ?  1 : Formatter.intValue(pageIndex)  ;
+		return pageNumber;
+	}
+	
+	public static int calculatePageNumber(Integer pageIndex) {
+		int pageNumber = Formatter.intValue(pageIndex) == 0 ?  1 : Formatter.intValue(pageIndex);
+		return pageNumber;
+	}
+	
+	public static int calculateAvailablePages(int totalavailabeRows, int pageSize) {
+		int avialablePage = totalavailabeRows/pageSize;
+		if (totalavailabeRows > pageSize * avialablePage) {
+			 avialablePage++;
+		}
+	   return avialablePage;
+	}	
+	
+	public static String getNewLineString(String input1,Object input2){
+		StringBuilder builder = new StringBuilder();
+		builder.append(makeNotNullString(input1)+": ");
+		if(input2 != null){
+			if(input2 instanceof String){
+				builder.append(makeNotNullString((String)input2));
+			}
+			if(input2 instanceof Long){
+				builder.append(longValue((Long)input2));
+			}
+			if(input2 instanceof Integer){
+				builder.append(intValue((Integer)input2));
+			}
+		}
+		builder.append(NEW_LINE);
+		return builder.toString();
+	}	
+	
+	public static int compareDates(DateTime startTime,DateTime endTime){
+		if(startTime != null && endTime != null){
+			return startTime.compareTo(endTime);
+		}
+		return 0;
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public static void populatePagination(PaginationPage page, int pageNo){
+		if(pageNo <= 0){
+			pageNo = 1;
+		}
+		if(page.getPageItems() == null){
+			page.setPageItems(new ArrayList());
+		}
+		int pageSize = PaginationPage.DEFAULT_PAGE_SIZE;
+		int pageCount = page.getPageItems().size() / pageSize;
+		if (page.getPageItems().size() > pageSize * pageCount) {
+			pageCount++;
+		}
+		int startIndex = (pageNo-1) *pageSize;
+		int endIndex = (pageNo) *pageSize;
+		if(endIndex > page.getPageItems().size()){
+			endIndex = page.getPageItems().size();
+		}
+		List subpages = new ArrayList();
+		try{
+			subpages = page.getPageItems().subList(startIndex, endIndex);
+		}catch(Exception e){			
+		}
+		page.setPageNumber(pageNo);
+		page.setPagesAvailable(pageCount);
+		page.setRowsAvailable(page.getPageItems().size());
+		page.setPageItems(subpages);
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public static void populatePagination(PaginationPage page, int pageNo,int totalPages){
+		int pageSize = PaginationPage.DEFAULT_PAGE_SIZE;
+		if(pageNo <= 0){
+			pageNo = 1;
+		}
+		if(page.getPageItems() == null){
+			page.setPageItems(new ArrayList());
+		}
+		int pageCount = page.getPageItems().size() / pageSize;
+		if (page.getPageItems().size() > pageSize * pageCount) {
+			pageCount++;
+		}		
+		page.setPageNumber(pageNo);
+		page.setPagesAvailable(pageCount);
+		page.setRowsAvailable(totalPages);
+	}
+	
+	public static String replaceSplCharForHtml(String str) {
+		StringBuilder filtered = new StringBuilder(str.length());
+		for (int i = 0; i < str.length(); i++) {
+			char current = str.charAt(i);	        
+			if (current >= 0x20 && current <= 0x7e) {
+				filtered.append(current);
+			}else{
+				int ik = (int)current;
+				String splChar = null;
+				if ((splChar = SPL_CHAR_MAP.get(ik)) != null){
+					filtered.append(splChar);
+				}else{
+					filtered.append(current);
+				}
+			}
+		}
+		return filtered.toString();
+	}
+	
+	public static double bigDecimalValue(BigDecimal value){
+		if(value == null){
+			return Double.valueOf(0);
+		}
+		return value.doubleValue();
+	}
+	
+	public static BigDecimal addBigDecimals(BigDecimal val1,BigDecimal val2){
+		if(val1 == null){
+			val1 = BigDecimal.ZERO;
+		}
+		if(val2 == null){
+			val2 = BigDecimal.ZERO;
+		}
+		return val1.add(val2);		
+	}
+	
+	public static BigDecimal subtractBigDecimals(BigDecimal val1,BigDecimal val2){
+		if(val1 == null){
+			val1 = BigDecimal.ZERO;
+		}
+		if(val2 == null){
+			val2 = BigDecimal.ZERO;
+		}
+		return val1.subtract(val2);		
+	}
+	
+	public static BigDecimal multiplyBigDecimals(BigDecimal val1,BigDecimal val2){
+		if(val1 == null){
+			val1 = BigDecimal.ZERO;
+		}
+		if(val2 == null){
+			val2 = BigDecimal.ZERO;
+		}
+		return val1.multiply(val2);		
+	}
+	
+	public static BigDecimal multiplyBigDecimals(BigDecimal val1,BigDecimal val2,BigDecimal val3){
+		if(val1 == null){
+			val1 = BigDecimal.ZERO;
+		}
+		if(val2 == null){
+			val2 = BigDecimal.ZERO;
+		}
+		if(val3 == null){
+			val3 = BigDecimal.ZERO;
+		}
+		return val1.multiply(val2).multiply(val3);		
+	}
+	
+	public static BigDecimal addBigDecimals(BigDecimal val1,BigDecimal val2,BigDecimal val3){
+		if(val1 == null){
+			val1 = BigDecimal.ZERO;
+		}
+		if(val2 == null){
+			val2 = BigDecimal.ZERO;
+		}
+		if(val3 == null){
+			val3 = BigDecimal.ZERO;
+		}
+		return val1.add(val2).add(val3);		
+	}
+	
+
+	public static BigDecimal formattBigDecimal(BigDecimal value){
+		if(value == null){
+			return null;
+		}
+		return BigDecimal.valueOf(value.doubleValue());
+	}
+	
+	public static boolean inBetween(DateTime startTime,DateTime endTime , DateTime inputTime){
+		if(startTime == null && endTime == null && inputTime == null){
+			return true;
+		}
+		if(startTime == null || endTime == null || inputTime == null){
+			return false;
+		}
+		return (inputTime.compareTo(startTime) >= 0 && inputTime.compareTo(endTime) <= 0);
+	}
+	
+	public static double formattedBigDecimal(BigDecimal value) {
+		if(value == null){
+			value = BigDecimal.ZERO;
+		}
+		double returnValue = Math.round(value.doubleValue() * 100) / 100.0;
+		return returnValue;
+	}
+	
+	public static BigDecimal formattedBigDecimal1(BigDecimal value) {
+		if(value == null){
+			value = BigDecimal.ZERO;
+		}
+		DecimalFormat decimalFormat = new DecimalFormat();
+		decimalFormat.setMinimumFractionDigits(2);
+		decimalFormat.setMaximumFractionDigits(2);
+		String val = decimalFormat.format(value.doubleValue());
+		BigDecimal returnValue = new BigDecimal(val);
+		return returnValue;
+	}
+	
+	public static String formattedBigDecimal2(BigDecimal value) {
+		if(value == null){
+			value = BigDecimal.ZERO;
+		}
+		DecimalFormat decimalFormat = new DecimalFormat();
+		decimalFormat.setMinimumFractionDigits(2);
+		decimalFormat.setMaximumFractionDigits(2);
+		String returnValue = decimalFormat.format(value.doubleValue());
+		return returnValue;
+	}	
+	
 }

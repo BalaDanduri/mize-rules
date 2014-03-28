@@ -5,9 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.mize.domain.common.Entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.mize.domain.common.MizeEntity;
 
-public class ProductDetails extends Entity{
+public class ProductDetails extends MizeEntity implements Comparable<ProductDetails>{
 	
 	private static final long serialVersionUID = -6338652951554117142L;
 
@@ -24,6 +25,7 @@ public class ProductDetails extends Entity{
 	private List<ProductFeature> productFeatures;
 	private List<SimilarProducts> similarProducts;
 	private List<SimilarProducts> accessories;
+	private List<SimilarProducts> consumables;
 	private Map<String,Dimension> dimensions;	
 	private String detailsDescription;
 	private String warranty;
@@ -39,6 +41,7 @@ public class ProductDetails extends Entity{
 		imageSets = new ArrayList<ProductImageSet>();
 		accessories = new ArrayList<SimilarProducts>();
 		retailersList = new ArrayList<Retailer>();
+		consumables = new ArrayList<SimilarProducts>();
 	}
 	
 	public String getWarranty() {
@@ -48,6 +51,16 @@ public class ProductDetails extends Entity{
 	public void setWarranty(String warranty) {
 		this.warranty = warranty;
 	}	
+	
+	@JsonIgnore
+	public void addRetailer(Retailer retailer){
+		if(retailer != null){
+			if(retailersList == null){
+				retailersList = new ArrayList<Retailer>();	
+			}
+			retailersList.add(retailer);
+		}
+	}
 	
 	public List<Retailer> getRetailersList() {
 		return retailersList;
@@ -112,5 +125,101 @@ public class ProductDetails extends Entity{
 	public void setAccessories(List<SimilarProducts> accessories) {
 		this.accessories = accessories;
 	}
-	
+
+	@Override
+	public int hashCode() {
+		final int prime = PRIME;
+		int result = 1;
+		result = prime * result + ((accessories == null) ? 0 : accessories.hashCode());
+		result = prime * result + ((detailsDescription == null) ? 0 : detailsDescription.hashCode());
+		result = prime * result + ((dimensions == null) ? 0 : dimensions.hashCode());
+		result = prime * result + ((imageSets == null) ? 0 : imageSets.hashCode());
+		result = prime * result + ((productFeatures == null) ? 0 : productFeatures.hashCode());
+		result = prime * result + ((productImages == null) ? 0 : productImages.hashCode());
+		result = prime * result + ((retailersList == null) ? 0 : retailersList.hashCode());
+		result = prime * result + ((similarProducts == null) ? 0 : similarProducts.hashCode());
+		result = prime * result + ((warranty == null) ? 0 : warranty.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ProductDetails other = (ProductDetails) obj;
+		if (accessories == null) {
+			if (other.accessories != null)
+				return false;
+		} else if (!accessories.equals(other.accessories))
+			return false;
+		if (detailsDescription == null) {
+			if (other.detailsDescription != null)
+				return false;
+		} else if (!detailsDescription.equals(other.detailsDescription))
+			return false;
+		if (dimensions == null) {
+			if (other.dimensions != null)
+				return false;
+		} else if (!dimensions.equals(other.dimensions))
+			return false;
+		if (imageSets == null) {
+			if (other.imageSets != null)
+				return false;
+		} else if (!imageSets.equals(other.imageSets))
+			return false;
+		if (productFeatures == null) {
+			if (other.productFeatures != null)
+				return false;
+		} else if (!productFeatures.equals(other.productFeatures))
+			return false;
+		if (productImages == null) {
+			if (other.productImages != null)
+				return false;
+		} else if (!productImages.equals(other.productImages))
+			return false;
+		if (retailersList == null) {
+			if (other.retailersList != null)
+				return false;
+		} else if (!retailersList.equals(other.retailersList))
+			return false;
+		if (similarProducts == null) {
+			if (other.similarProducts != null)
+				return false;
+		} else if (!similarProducts.equals(other.similarProducts))
+			return false;
+		if (warranty == null) {
+			if (other.warranty != null)
+				return false;
+		} else if (!warranty.equals(other.warranty))
+			return false;
+		return true;
+	}
+
+	@Override
+	public int compareTo(ProductDetails o) {
+		return 0;
+	}
+
+	@Override
+	public Long getId() {
+		return id;
+	}
+
+	@Override
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public List<SimilarProducts> getConsumables() {
+		return consumables;
+	}
+
+	public void setConsumables(List<SimilarProducts> consumables) {
+		this.consumables = consumables;
+	}
+
 }

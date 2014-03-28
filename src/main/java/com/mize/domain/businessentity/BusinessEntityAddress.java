@@ -1,0 +1,165 @@
+package com.mize.domain.businessentity;
+
+import java.util.Comparator;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
+import com.mize.domain.common.EntityAddress;
+import com.mize.domain.common.MizeEntity;
+import com.mize.domain.util.JPASerializer;
+
+@Entity(name="com.mize.domain.businessentity.BusinessEntityAddress")
+@Table(name="business_entity_address")
+public class BusinessEntityAddress  extends MizeEntity  implements Comparable<BusinessEntityAddress>{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8062274530036956916L;
+	private Long beId;
+	private BusinessEntity businessEntity;
+	private EntityAddress entityAddress;
+	private String isPreferred;
+	
+	public BusinessEntityAddress() {
+		super();
+	}
+	
+	@Id
+	@Column(name="id",nullable=false,unique=true)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Override
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	@Transient
+	@Column(name="be_id",insertable=false,updatable=false)
+	@JsonIgnore
+	public long getBeId() {
+		return beId;
+	}
+	public void setBeId(long beId) {
+		this.beId = beId;
+	}
+	
+	@OneToOne(cascade= {CascadeType.ALL},fetch=FetchType.EAGER,orphanRemoval = true)
+	@JoinColumn(name="be_address_id")
+	/*@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)*/
+	public EntityAddress getEntityAddress() {
+		return entityAddress;
+	}
+	
+	public void setEntityAddress(EntityAddress entityAddress) {
+		this.entityAddress = entityAddress;
+	}
+	
+	@Override
+	public int compareTo(BusinessEntityAddress o) {
+		return(int)( this.getId() - o.getId());
+	}
+
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="be_id")
+	@JsonBackReference(value="address")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	public BusinessEntity getBusinessEntity() {
+		return businessEntity;
+	}
+
+	public void setBusinessEntity(BusinessEntity businessEntity) {
+		this.businessEntity = businessEntity;
+	}
+	
+	@Column(name = "is_preferred", length = 1)
+	public String getIsPreferred() {
+		return isPreferred;
+	}
+	
+	public void setIsPreferred(String isPreferred) {
+		this.isPreferred = isPreferred;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = PRIME;
+		int result = super.hashCode();
+		result = prime * result + ((beId == null) ? 0 : beId.hashCode());
+		result = prime * result
+				+ ((businessEntity == null) ? 0 : businessEntity.hashCode());
+		result = prime * result
+				+ ((entityAddress == null) ? 0 : entityAddress.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		BusinessEntityAddress other = (BusinessEntityAddress) obj;
+		if (beId == null) {
+			if (other.beId != null)
+				return false;
+		} else if (!beId.equals(other.beId))
+			return false;
+		if (businessEntity == null) {
+			if (other.businessEntity != null)
+				return false;
+		} else if (!businessEntity.equals(other.businessEntity))
+			return false;
+		if (entityAddress == null) {
+			if (other.entityAddress != null)
+				return false;
+		} else if (!entityAddress.equals(other.entityAddress))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("BusinessEntityAddress [beId=");
+		builder.append(beId);
+		builder.append(", businessEntity=");
+		builder.append(businessEntity);
+		builder.append(", entityAddress=");
+		builder.append(entityAddress);
+		builder.append(", id=");
+		builder.append(id);
+		builder.append("]");
+		return builder.toString();
+	}
+	
+	@JsonIgnore
+	public static Comparator<BusinessEntityAddress> EntityAddressGeoDistanceComparator = new  Comparator<BusinessEntityAddress>() {
+		public int compare(BusinessEntityAddress addr1, BusinessEntityAddress addr2) {
+		      return  EntityAddress.EntityAddressGeoDistanceComparator.compare( addr1.getEntityAddress() , addr2.getEntityAddress());
+		    }
+	};
+	
+	
+	
+	
+}

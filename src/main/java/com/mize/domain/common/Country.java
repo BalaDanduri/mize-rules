@@ -1,87 +1,145 @@
 package com.mize.domain.common;
 
-public class Country {
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
+import com.mize.domain.util.Formatter;
+import com.mize.domain.util.JPASerializer;
+
+@Entity
+@Table(name = "country")
+public class Country extends MizeEntity implements Comparable<Country>{
+
+	private static final long serialVersionUID = 3412102873370612905L;
 	
-	private int countryId;
-	private String countryName;
-	private String countryCode;
+	private String code;
+	private String name;
+	private String code3;
+	private List<State> states = new ArrayList<State>();
+	private List<State> stateList;
 	
-	public Country(){
-		
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "country_id", nullable = false, unique = true)
+	@Override
+	public Long getId() {
+		return id;
 	}
 	
-	public Country(int countryId, String countryName, String countryCode) {
-		this.countryId = countryId;
-		this.countryName = countryName;
-		this.countryCode = countryCode;
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	@Column(name="country_code",nullable=false)
+	public String getCode() {
+		return code;
+	}
+	
+	public void setCode(String code) {
+		this.code = code;
 	}
 
-	public int getCountryId() {
-		return countryId;
+	@Column(name="country_name",nullable=false)
+	public String getName() {
+		return name;
 	}
-	public void setCountryId(int countryId) {
-		this.countryId = countryId;
+	
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getCountryName() {
-		return countryName;
+	
+	@Transient
+	public List<State> getStateList() {
+		return stateList;
 	}
-	public void setCountryName(String countryName) {
-		this.countryName = countryName;
-	}
-	public String getCountryCode() {
-		return countryCode;
-	}
-	public void setCountryCode(String countryCode) {
-		this.countryCode = countryCode;
+
+	public void setStateList(List<State> stateList) {
+		this.stateList = stateList;
 	}
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((countryCode == null) ? 0 : countryCode.hashCode());
-		result = prime * result + countryId;
-		result = prime * result
-				+ ((countryName == null) ? 0 : countryName.hashCode());
+		final int prime = PRIME;
+		int result = super.hashCode();
+		result = prime * result + ((code == null) ? 0 : code.hashCode());
+		result = prime * result + ((code3 == null) ? 0 : code3.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
+			return true;		
 		if (getClass() != obj.getClass())
 			return false;
 		Country other = (Country) obj;
-		if (countryCode == null) {
-			if (other.countryCode != null)
+		if (Formatter.isNull(code)) {
+			if (Formatter.isNotNull(other.code))
 				return false;
-		} else if (!countryCode.equals(other.countryCode))
+		} else if (!code.equals(other.code))
 			return false;
-		if (countryId != other.countryId)
-			return false;
-		if (countryName == null) {
-			if (other.countryName != null)
+		if (Formatter.isNull(code3)) {
+			if (Formatter.isNotNull(other.code3))
 				return false;
-		} else if (!countryName.equals(other.countryName))
+		} else if (!code3.equals(other.code3))
+			return false;
+		if (Formatter.isNull(name)) {
+			if (Formatter.isNotNull(other.name))
+				return false;
+		} else if (!name.equals(other.name))
 			return false;
 		return true;
 	}
-
+	
 	@Override
 	public String toString() {
-		return "Country [countryId=" + countryId + ", countryName="
-				+ countryName + ", countryCode=" + countryCode + "]";
+		return "Country [code=" + code + ", name=" + name + ", code3=" + code3+ "]";
+	}
+	
+	public int compareTo(Country country) {
+		if ( this == country ) 
+			return EQUAL;
+		else if (this.id < country.id) 
+			return BEFORE;
+		else if (country.id == this.id) 
+			return EQUAL;
+		else if (this.id > country.id)
+			return AFTER;
+		return EQUAL;		
 	}
 
-	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		// TODO Auto-generated method stub
-		return super.clone();
+	@OneToMany(fetch= FetchType.LAZY , mappedBy ="country")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonBackReference(value="country_states")
+	public List<State> getStates() {
+		return states;
 	}
 
+	public void setStates(List<State> states) {
+		this.states = states;
+	}
+
+	@Column(name="country_code_3")
+	public String getCode3() {
+		return code3;
+	}
+
+	public void setCode3(String code3) {
+		this.code3 = code3;
+	}		
 	
 }

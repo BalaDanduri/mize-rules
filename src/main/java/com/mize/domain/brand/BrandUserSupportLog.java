@@ -1,19 +1,21 @@
 package com.mize.domain.brand;
 
-import org.codehaus.jackson.map.annotate.JsonDeserialize;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.mize.domain.common.Entity;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
-public class BrandUserSupportLog extends Entity {
+public class BrandUserSupportLog extends MizeEntity implements Comparable<BrandUserSupportLog>{
 
-	private int brandId;
-	private int id;
-	private int userId;
+	private static final long serialVersionUID = -9120007688133372009L;
+	private Long brandId;
+	private Long id;
+	private Long userId;
 	private String supportType;
 	private String countryCode;
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
@@ -26,8 +28,8 @@ public class BrandUserSupportLog extends Entity {
 		
 	}
 	
-	public BrandUserSupportLog(int brandId, int id,
-			int userId, String supportType, String countryCode, DateTime startTime,
+	public BrandUserSupportLog(long brandId, long id,
+			long userId, String supportType, String countryCode, DateTime startTime,
 			DateTime endTime, long brandSupportId) {
 		this.brandId = brandId;
 		this.id = id;
@@ -39,22 +41,22 @@ public class BrandUserSupportLog extends Entity {
 		this.brandSupportId = brandSupportId;
 	}
 
-	public int getBrandId() {
+	public Long getBrandId() {
 		return brandId;
 	}
-	public void setBrandId(int brandId) {
+	public void setBrandId(Long brandId) {
 		this.brandId = brandId;
 	}
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
-	public int getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 	public String getSupportType() {
@@ -98,17 +100,15 @@ public class BrandUserSupportLog extends Entity {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
-		result = prime * result + brandId;
-		result = prime * result + id;
+		int result = super.hashCode();
+		result = prime * result + ((brandId == null) ? 0 : brandId.hashCode());
+		result = prime * result + (int) (brandSupportId ^ (brandSupportId >>> 32));
 		result = prime * result + ((countryCode == null) ? 0 : countryCode.hashCode());
 		result = prime * result + ((endTime == null) ? 0 : endTime.hashCode());
-		result = prime * result
-				+ ((startTime == null) ? 0 : startTime.hashCode());
-		result = prime * result
-				+ ((supportType == null) ? 0 : supportType.hashCode());
-		result = prime * result + userId;
-		
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((startTime == null) ? 0 : startTime.hashCode());
+		result = prime * result + ((supportType == null) ? 0 : supportType.hashCode());
+		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
 		return result;
 	}
 
@@ -116,23 +116,32 @@ public class BrandUserSupportLog extends Entity {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		BrandUserSupportLog other = (BrandUserSupportLog) obj;
-		if (brandId != other.brandId)
+		if (brandId == null) {
+			if (other.brandId != null)
+				return false;
+		} else if (!brandId.equals(other.brandId))
 			return false;
 		if (brandSupportId != other.brandSupportId)
 			return false;
-		if (id != other.id)
-			return false;
-		if (countryCode != other.countryCode)
+		if (countryCode == null) {
+			if (other.countryCode != null)
+				return false;
+		} else if (!countryCode.equals(other.countryCode))
 			return false;
 		if (endTime == null) {
 			if (other.endTime != null)
 				return false;
 		} else if (!endTime.equals(other.endTime))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		if (startTime == null) {
 			if (other.startTime != null)
@@ -144,7 +153,10 @@ public class BrandUserSupportLog extends Entity {
 				return false;
 		} else if (!supportType.equals(other.supportType))
 			return false;
-		if (userId != other.userId)
+		if (userId == null) {
+			if (other.userId != null)
+				return false;
+		} else if (!userId.equals(other.userId))
 			return false;
 		return true;
 	}
@@ -166,4 +178,17 @@ public class BrandUserSupportLog extends Entity {
 	public void setBrandSupportId(long brandSupportId) {
 		this.brandSupportId = brandSupportId;
 	}
+	
+	public int compareTo(BrandUserSupportLog entity) {
+		if ( this == entity ) 
+			return EQUAL;
+		else if (this.id < entity.id) 
+			return BEFORE;
+		else if (entity.id == this.id) 
+			return EQUAL;
+		else if (this.id > entity.id)
+			return AFTER;
+		return EQUAL;
+	}
+
 }

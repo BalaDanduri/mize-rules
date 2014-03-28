@@ -1,9 +1,9 @@
 package com.mize.domain.etilize;
 
-import com.mize.domain.common.Entity;
+import com.mize.domain.common.MizeEntity;
 
 
-public class ProductAttribute extends Entity{
+public class ProductAttribute extends MizeEntity{
 
 	private static final long serialVersionUID = 6493104044294016583L;
    
@@ -19,7 +19,15 @@ public class ProductAttribute extends Entity{
     private Double value;
     private Long catAttributeId;
     private Long prodId;
+    private String name;
     
+    @Override
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
 	public Long getProdId() {
 		return prodId;
 	}
@@ -93,6 +101,12 @@ public class ProductAttribute extends Entity{
 	}
 	public void setIsActive(Integer isActive) {
 		this.isActive = isActive;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 }
