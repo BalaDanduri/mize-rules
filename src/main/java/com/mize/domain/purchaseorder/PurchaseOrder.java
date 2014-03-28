@@ -68,6 +68,8 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	private String isHandlingChargeApply;
 	@Transient
 	private BigDecimal handlingChargePercentage;
+	@Transient
+	private String pickListCode;
 	
 	public PurchaseOrder(){
 		super();
@@ -377,6 +379,15 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 
 	public void setHandlingChargePercentage(BigDecimal handlingChargePercentage) {
 		this.handlingChargePercentage = handlingChargePercentage;
+	}
+
+	@Transient
+	public String getPickListCode() {
+		return pickListCode;
+	}
+
+	public void setPickListCode(String pickListCode) {
+		this.pickListCode = pickListCode;
 	}
 
 	@Override
