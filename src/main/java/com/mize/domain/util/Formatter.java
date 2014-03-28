@@ -702,4 +702,35 @@ public final class Formatter {
 		return (inputTime.compareTo(startTime) >= 0 && inputTime.compareTo(endTime) <= 0);
 	}
 	
+	public static double formattedBigDecimal(BigDecimal value) {
+		if(value == null){
+			value = BigDecimal.ZERO;
+		}
+		double returnValue = Math.round(value.doubleValue() * 100) / 100.0;
+		return returnValue;
+	}
+	
+	public static BigDecimal formattedBigDecimal1(BigDecimal value) {
+		if(value == null){
+			value = BigDecimal.ZERO;
+		}
+		DecimalFormat decimalFormat = new DecimalFormat();
+		decimalFormat.setMinimumFractionDigits(2);
+		decimalFormat.setMaximumFractionDigits(2);
+		String val = decimalFormat.format(value.doubleValue());
+		BigDecimal returnValue = new BigDecimal(val);
+		return returnValue;
+	}
+	
+	public static String formattedBigDecimal2(BigDecimal value) {
+		if(value == null){
+			value = BigDecimal.ZERO;
+		}
+		DecimalFormat decimalFormat = new DecimalFormat();
+		decimalFormat.setMinimumFractionDigits(2);
+		decimalFormat.setMaximumFractionDigits(2);
+		String returnValue = decimalFormat.format(value.doubleValue());
+		return returnValue;
+	}	
+	
 }
