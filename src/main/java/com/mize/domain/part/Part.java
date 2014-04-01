@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.Fetch;
@@ -28,6 +29,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
+import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JPASerializer;
@@ -51,6 +53,9 @@ public class Part extends MizeEntity {
 	private List<PartAttribute> partAttributes;
 	//private List<PartKit> partKits;
 
+	@Transient
+	private User user;
+	
 	public Part() {
 		super();
 	}
@@ -387,6 +392,15 @@ public class Part extends MizeEntity {
 		} else if (!uom.equals(other.uom))
 			return false;
 		return true;
+	}
+
+	@Transient
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 	
