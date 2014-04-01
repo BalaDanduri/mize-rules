@@ -131,7 +131,7 @@ public class EntityAddressPhone extends MizeEntity implements Comparable<EntityA
 				return false;
 		} else if (!phoneType.equals(other.phoneType))
 			return false;
-		if (Formatter.isNotNull(other.phoneValue)) {
+		if (Formatter.isNull(phoneValue)) {
 			if (Formatter.isNotNull(other.phoneValue))
 				return false;
 		} else if (!phoneValue.equals(other.phoneValue))
