@@ -23,6 +23,10 @@ public class PurchaseOrderAttachment extends MizeEntity implements Comparable<Pu
 	private PurchaseOrder purchaseOrder;
 	private EntityAttachment attachment = new EntityAttachment();
 
+	public  PurchaseOrderAttachment(){
+		
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false, unique = true)
@@ -38,7 +42,7 @@ public class PurchaseOrderAttachment extends MizeEntity implements Comparable<Pu
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="order_id")
-	@JsonBackReference(value="attachment_purchaseOrder")
+	@JsonBackReference(value="purchaseOrder_attachment")
 	public PurchaseOrder getPurchaseOrder() {
 		return purchaseOrder;
 	}
