@@ -72,6 +72,8 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	private String pickListCode;
 	@Transient
 	private PurchaseOrderParameter orderParameter;
+	@Transient
+	private Long entityParameterId;
 	
 	public PurchaseOrder(){
 		super();
@@ -399,6 +401,15 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 
 	public void setOrderParameter(PurchaseOrderParameter orderParameter) {
 		this.orderParameter = orderParameter;
+	}
+
+	@Transient
+	public Long getEntityParameterId() {
+		return entityParameterId;
+	}
+
+	public void setEntityParameterId(Long entityParameterId) {
+		this.entityParameterId = entityParameterId;
 	}
 
 	@Override
