@@ -7,6 +7,7 @@ import static org.junit.Assert.fail;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -18,8 +19,10 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.ContextConfiguration;
 
 import com.mize.domain.businessentity.BusinessEntity;
+import com.mize.domain.common.EntityComment;
 import com.mize.domain.part.Part;
 import com.mize.domain.part.PickList;
+import com.mize.domain.part.PickListComment;
 import com.mize.domain.part.PickListItem;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;
@@ -89,12 +92,11 @@ public class PickListTest extends JPATest {
 			PickList pickList = new PickList();
 			BusinessEntity be = new BusinessEntity();
 			be.setId(rs.getLong("be_id"));
-			pickList.setBusinessEntity(be);
+			pickList.setPickListLocation(be);
 			pickList.setId(rs.getLong("id"));
 			pickList.setIsActive(rs.getString("is_active"));
 			pickList.setCode(rs.getString("picklist_code"));
 			pickList.setType(rs.getString("picklist_type"));
-			pickList.setComments(rs.getString("picklist_comments"));
 			pickList.setCreatedBy(rs.getLong("created_by"));
 			pickList.setUpdatedBy(rs.getLong("updated_by"));
 			pickList.setCreatedDate(Formatter.dateTime(rs.getTimestamp("created_date")));
@@ -123,7 +125,33 @@ public class PickListTest extends JPATest {
 	}
 	
 	private PickList getPickListObjectToSave(BusinessEntity be) {
-		PickList pickList = new PickList(be, "PicklistCode", "Standard", "Y", "pickListComments", null, null) ;
+		
+		PickList pickList = new PickList();
+		pickList.setCode("pickListcode");
+		pickList.setType("Standard");
+		pickList.setIsActive("Y");
+		BusinessEntity tenant = new BusinessEntity();
+		tenant.setCode("10C000100P");
+		be = new BusinessEntity();
+		be.setTypeCode("dealer");
+		be.setCode("10C00100P");
+		pickList.setPickListLocation(be);
+		pickList.setTenant(tenant);
+		Part part = new Part();
+		part.setCode("Keer111");
+		pickListItem = new PickListItem(part, pickList, BigDecimal.valueOf(100));
+		List<PickListItem> items = new ArrayList<PickListItem>();
+		items.add(pickListItem);
+		pickList.setListItems(items);
+		List<PickListComment> comtsList = new ArrayList<PickListComment>();
+		PickListComment comment = new PickListComment();
+		EntityComment entityComment = new EntityComment();
+		entityComment.setComments("100-TEST-COMMENTS");
+		entityComment.setCommentType("Internal");
+		comment.setComment(entityComment);
+		comtsList.add(comment);
+		pickList.setComments(comtsList);
+		
 		return pickList;
 	}
 }
