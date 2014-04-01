@@ -62,7 +62,7 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 	@Transient
 	private PartKit partKit;
 	@Transient
-	private boolean isItemInfoUpdated;
+	private boolean isUpdated;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -313,12 +313,12 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 	}
 
 	@Transient
-	public boolean isItemInfoUpdated() {
-		return isItemInfoUpdated;
+	public boolean isUpdated() {
+		return isUpdated;
 	}
 
-	public void setItemInfoUpdated(boolean isItemInfoUpdated) {
-		this.isItemInfoUpdated = isItemInfoUpdated;
+	public void setUpdated(boolean isUpdated) {
+		this.isUpdated = isUpdated;
 	}
 
 	@Override
