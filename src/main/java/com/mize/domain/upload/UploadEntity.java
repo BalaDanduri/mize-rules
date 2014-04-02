@@ -43,6 +43,7 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 	@JsonIgnore
 	private boolean isSolrUpdateReq = true;
 	private List<Long> prodIds = new ArrayList<Long>();
+	private Boolean isHistorical;
 	public enum Status{
 		IN_PROGRESS,COMPLETED;
 	}
@@ -300,4 +301,10 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 		this.tenant = tenant;
 	}
 	
+	public void setIsHistorical(Boolean isHistorical) {
+		this.isHistorical = isHistorical;
+	}
+	public Boolean getIsHistorical() {
+		return isHistorical;
+	}
 }

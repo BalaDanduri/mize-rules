@@ -22,6 +22,9 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
@@ -68,6 +71,12 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	private String isHandlingChargeApply;
 	@Transient
 	private BigDecimal handlingChargePercentage;
+	@Transient
+	private String pickListCode;
+	@Transient
+	private PurchaseOrderParameter orderParameter;
+	@Transient
+	private Long entityParameterId;
 	
 	public PurchaseOrder(){
 		super();
@@ -309,7 +318,9 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	}
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "purchaseOrder",orphanRemoval= true)
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	@JsonManagedReference(value="purchaseOrder_attachment")
 	public List<PurchaseOrderAttachment> getAttachments() {
 		return attachments;
 	}
@@ -377,6 +388,33 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 
 	public void setHandlingChargePercentage(BigDecimal handlingChargePercentage) {
 		this.handlingChargePercentage = handlingChargePercentage;
+	}
+
+	@Transient
+	public String getPickListCode() {
+		return pickListCode;
+	}
+
+	public void setPickListCode(String pickListCode) {
+		this.pickListCode = pickListCode;
+	}
+
+	@Transient
+	public PurchaseOrderParameter getOrderParameter() {
+		return orderParameter;
+	}
+
+	public void setOrderParameter(PurchaseOrderParameter orderParameter) {
+		this.orderParameter = orderParameter;
+	}
+
+	@Transient
+	public Long getEntityParameterId() {
+		return entityParameterId;
+	}
+
+	public void setEntityParameterId(Long entityParameterId) {
+		this.entityParameterId = entityParameterId;
 	}
 
 	@Override

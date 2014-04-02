@@ -1,5 +1,6 @@
 package com.mize.domain.part;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,7 +13,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.Fetch;
@@ -26,7 +30,9 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
+import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
+import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
@@ -36,11 +42,15 @@ import com.mize.domain.util.JodaDateTimeDeserializer;
 public class PickList extends MizeEntity {
 
 	private static final long serialVersionUID = 7197887648853141829L;
-	private BusinessEntity businessEntity;
+	private BusinessEntity pickListLocation;
 	private String code;
 	private String type;
 	private String isActive;
-	private String comments;
+	@Transient
+	private User user;
+	@Transient
+	private EntityComment entityComment;
+	private List<PickListComment> comments = new ArrayList<PickListComment>();
 	private BusinessEntity tenant;
 	private List<PickListItem> listItems;
 
@@ -48,22 +58,21 @@ public class PickList extends MizeEntity {
 		super();
 	}
 
-	
-
-	public PickList(BusinessEntity businessEntity, String code, String type,
-			String isActive, String comments, BusinessEntity tenant,
+	public PickList(BusinessEntity pickListLocation, String code, String type,
+			String isActive, User user, EntityComment entityComment,
+			List<PickListComment> comments, BusinessEntity tenant,
 			List<PickListItem> listItems) {
 		super();
-		this.businessEntity = businessEntity;
+		this.pickListLocation = pickListLocation;
 		this.code = code;
 		this.type = type;
 		this.isActive = isActive;
+		this.user = user;
+		this.entityComment = entityComment;
 		this.comments = comments;
 		this.tenant = tenant;
 		this.listItems = listItems;
 	}
-
-
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -88,9 +97,23 @@ public class PickList extends MizeEntity {
 		return isActive;
 	}
 
-	@Column(name = "picklist_comments", length = 500, nullable = false)
-	public String getComments() {
+	@Transient
+	public EntityComment getEntityComment() {
+		return entityComment;
+	}
+
+	public void setEntityComment(EntityComment entityComment) {
+		this.entityComment = entityComment;
+	}
+	
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "pickList")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	public List<PickListComment> getComments() {
 		return comments;
+	}
+
+	public void setComments(List<PickListComment> comments) {
+		this.comments = comments;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -107,11 +130,11 @@ public class PickList extends MizeEntity {
 		return listItems;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "be_id")
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
-	public BusinessEntity getBusinessEntity() {
-		return businessEntity;
+	public BusinessEntity getPickListLocation() {
+		return pickListLocation;
 	}
 
 	@Override	
@@ -163,10 +186,6 @@ public class PickList extends MizeEntity {
 		this.isActive = isActive;
 	}
 
-	public void setComments(String comments) {
-		this.comments = comments;
-	}
-
 	public void setTenant(BusinessEntity tenant) {
 		this.tenant = tenant;
 	}
@@ -175,8 +194,8 @@ public class PickList extends MizeEntity {
 		this.listItems = listItems;
 	}
 
-	public void setBusinessEntity(BusinessEntity businessEntity) {
-		this.businessEntity = businessEntity;
+	public void setPickListLocation(BusinessEntity pickListLocation) {
+		this.pickListLocation = pickListLocation;
 	}
 
 	@Override
@@ -206,13 +225,31 @@ public class PickList extends MizeEntity {
 	public void setUpdatedBy(Long updatedBy) {		
 		super.setUpdatedBy(updatedBy);
 	}
+	
+	@Transient	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	@PrePersist
+	@PreUpdate
+	public void auditFields(){
+		if(createdDate==null && id==null){
+			setCreatedDate(DateTime.now());
+		}
+		setUpdatedDate(DateTime.now());
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result
-				+ ((businessEntity == null) ? 0 : businessEntity.hashCode());
+				+ ((pickListLocation == null) ? 0 : pickListLocation.hashCode());
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result
 				+ ((comments == null) ? 0 : comments.hashCode());
@@ -233,10 +270,10 @@ public class PickList extends MizeEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		PickList other = (PickList) obj;
-		if (businessEntity == null) {
-			if (other.businessEntity != null)
+		if (pickListLocation == null) {
+			if (other.pickListLocation != null)
 				return false;
-		} else if (!businessEntity.equals(other.businessEntity))
+		} else if (!pickListLocation.equals(other.pickListLocation))
 			return false;
 		if (code == null) {
 			if (other.code != null)
@@ -271,26 +308,4 @@ public class PickList extends MizeEntity {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("PickList [businessEntity=");
-		builder.append(businessEntity);
-		builder.append(", code=");
-		builder.append(code);
-		builder.append(", type=");
-		builder.append(type);
-		builder.append(", isActive=");
-		builder.append(isActive);
-		builder.append(", comments=");
-		builder.append(comments);
-		builder.append(", tenant=");
-		builder.append(tenant);
-		builder.append(", items=");
-		builder.append(listItems);
-		builder.append(", id=");
-		builder.append(id);
-		builder.append("]");
-		return builder.toString();
-	}
 }

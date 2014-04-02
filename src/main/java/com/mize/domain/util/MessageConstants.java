@@ -7,6 +7,7 @@ public abstract class MessageConstants implements Serializable{
 	
 	public static final String ENTITY_CODE_REQUIRED = "ENTITY_CODE_REQUIRED";
 	public static final String ENTITY_BRAND_NAME_REQUIRED = "ENTITY_BRAND_NAME_REQUIRED";
+	public static final String INVALID_BRAND_MODEL_CATEGORY_COMBINATION = "INVALID_BRAND_MODEL_CATEGORY_COMBINATION";
 	public static final String ADDRESS_REQUIRED = "ADDRESS_REQUIRED";
 	public static final String INVALID_ADDRESS = "INVALID_ADDRESS";
 	public static final String INVALID_ZIP = "INVALID_ZIP";
@@ -273,7 +274,12 @@ public abstract class MessageConstants implements Serializable{
 	public static final String INVOICE_LOCATION_TYPE_REQUIRED = "INVOICE_LOCATION_TYPE_REQUIRED";
 	public static final String INVALID_INVOICE_LOCATION ="INVALID_INVOICE_LOCATION";
 	
-	
-	
+	public static final String INVALID_PICKlIST_NUMBER = "INVALID_PICKlIST_NUMBER";
+	public static final String INVALID_PICKlIST_TYPE = "INVALID_PICKlIST_TYPE";
+	public static final String INVALID_PART_NUMBER = "INVALID_PART_NUMBER";
+	public static final String INVALID_PART_QUANTITY = "INVALID_PART_QUANTITY";
+	public static final String INVALID_PICKlIST_LOCATION_TYPE = "INVALID_PICKlIST_LOCATION_TYPE";
+	public static final String INVALID_PICKLIST_LOCATION = "INVALID_PICKLIST_LOCATION";
+	public static final String INVALID_PICKlIST_LOCATION_CODE = "INVALID_PICKlIST_LOCATION_CODE";
 
 }

@@ -57,20 +57,21 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	private List<BusinessEntityContact> beContact = new ArrayList<BusinessEntityContact>();
 	private BusinessEntityAttribute beAttribute;
 	private List<BusinessEntityRelation> relatedEntities = new ArrayList<BusinessEntityRelation>();
-	
+	private List<BusinessEntityServiceLink> beServiceLinks = new ArrayList<BusinessEntityServiceLink>();
+
 	public BusinessEntity() {
 	}
-	
+
 	public BusinessEntity(Long id) {
 		this.id = id;
 	}
-	
+
 	public BusinessEntity(Long id,String code,String typeCode) {
 		this.id = id;
 		this.code = code;
 		this.typeCode = typeCode;
 	}
-	
+
 	public BusinessEntity(Long id, String code, String name, String typeCode, BusinessEntityIntl intl, 
 			BusinessEntityAddress address,String url,String hoursOfOp) {
 		super();
@@ -89,7 +90,7 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	public enum TypeCode{
 		dealer,company,service_center,brand;
 	}
-	
+
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -169,7 +170,7 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	public void setCurrencyCode(String currencyCode) {
 		this.currencyCode = currencyCode;
 	}
-	
+
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "businessEntity" , orphanRemoval = true)
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	@JsonManagedReference(value="address")
@@ -180,7 +181,7 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	public void setAddresses(List<BusinessEntityAddress> addresses) {
 		this.addresses = addresses;
 	}
-	
+
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "businessEntity" ,orphanRemoval = true)
 	@Fetch(FetchMode.SELECT)
 	@JsonManagedReference(value="intl")
@@ -191,7 +192,7 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	public void setIntl(List<BusinessEntityIntl> intl) {
 		this.intl = intl;
 	}
-	
+
 	@Column(name = "name")
 	public String getName() {
 		return name;
@@ -200,7 +201,7 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "businessEntity" , orphanRemoval = true)
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	@JsonManagedReference(value="be_brand")
@@ -233,23 +234,23 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	public void setBeAttribute(BusinessEntityAttribute beAttribute) {
 		this.beAttribute = beAttribute;
 	}
-	
+
 	@JsonIgnore
 	public static Comparator<BusinessEntity> BusinessEntityAddressDistanceComparator = new  Comparator<BusinessEntity>() {
 		public int compare(BusinessEntity be1, BusinessEntity be2) {
-		    return BusinessEntityAddress.EntityAddressGeoDistanceComparator.compare(be1.addresses.get(0), be2.addresses.get(0));
+			return BusinessEntityAddress.EntityAddressGeoDistanceComparator.compare(be1.addresses.get(0), be2.addresses.get(0));
 		}
 	};
-	
+
 	@Column(name="type_code",nullable=true,length=50)
 	public String getTypeCode() {
 		return typeCode;
 	}
-	
+
 	public void setTypeCode(String typeCode) {
 		this.typeCode = typeCode;
 	}
-	
+
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "businessEntity" , orphanRemoval = true)
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
@@ -257,20 +258,32 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	public List<BusinessEntityRelation> getRelatedEntities() {
 		return relatedEntities;
 	}
-	
+
 	public void setRelatedEntities(List<BusinessEntityRelation> relatedEntities) {
 		this.relatedEntities = relatedEntities;
 	}
-	
+
 	public void setBusinessEntityReference(String businessEntityReference) {
 		this.businessEntityReference = businessEntityReference;
 	}
-	
+
 	@Column(name = "business_entity_reference", length = 100)
 	public String getBusinessEntityReference() {
 		return businessEntityReference;
 	}
-	
+
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "businessEntity")
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	@JsonManagedReference(value="be_servicelink")
+	public List<BusinessEntityServiceLink> getBeServiceLinks() {
+		return beServiceLinks;
+	}
+
+	public void setBeServiceLinks(List<BusinessEntityServiceLink> beServiceLinks) {
+		this.beServiceLinks = beServiceLinks;
+	}
+
 	@Override	
 	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
 	@Type(type="com.mize.domain.util.DateTimeJPA")
@@ -303,7 +316,7 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 		return super.getUpdatedBy();
 	}
 
-	
+
 	@Override
 	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
@@ -340,10 +353,10 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 		}
 		setUpdatedDate(DateTime.now());		
 	}
-	
-	
-	
-	
+
+
+
+
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
@@ -367,7 +380,7 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 				+ ((typeCode == null) ? 0 : typeCode.hashCode());
 		result = prime * result
 				+ ((businessEntityReference == null) ? 0 : businessEntityReference.hashCode());
-		
+
 		return result;
 	}
 
@@ -442,7 +455,7 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 			return false;
 		return true;
 	}
-	
+
 
 	@Override
 	public String toString() {
@@ -484,18 +497,16 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
+
+
 	@Override
 	public int compareTo(BusinessEntity o) {
 		return 0;
 	}
-	
+
 	@Override
 	public Object clone() throws CloneNotSupportedException {
 		// TODO Auto-generated method stub
 		return super.clone();
 	}
-
-	
 }

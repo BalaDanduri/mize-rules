@@ -3,13 +3,21 @@ package com.mize.domain.product;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.util.JodaDateDeserializer;
+import com.mize.domain.util.JsonDateSerializer;
 
 public class BulkProductRegistration extends MizeEntity {
 	
@@ -56,7 +64,12 @@ public class BulkProductRegistration extends MizeEntity {
 	public EntityAddress getCustomerAddress() {
 		return customerAddress;
 	}
-
+	
+	
+	@DateTimeFormat (pattern="MM-dd-yyyy")
+	@Type(type = "com.mize.domain.util.DateTimeJPA")
+	@JsonSerialize(using = JsonDateSerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public DateTime getPurchaseDate() {
 		return purchaseDate;
 	}
@@ -96,7 +109,9 @@ public class BulkProductRegistration extends MizeEntity {
 	public void setCustomerAddress(EntityAddress customerAddress) {
 		this.customerAddress = customerAddress;
 	}
-
+	
+	@DateTimeFormat (pattern="MM-dd-yyyy")
+	@JsonDeserialize(using=JodaDateDeserializer.class)
 	public void setPurchaseDate(DateTime purchaseDate) {
 		this.purchaseDate = purchaseDate;
 	}
