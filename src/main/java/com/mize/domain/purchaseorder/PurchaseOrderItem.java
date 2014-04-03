@@ -313,11 +313,11 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 	}
 
 	@Transient
-	public boolean isUpdated() {
+	public boolean getIsUpdated() {
 		return isUpdated;
 	}
 
-	public void setUpdated(boolean isUpdated) {
+	public void setIsUpdated(boolean isUpdated) {
 		this.isUpdated = isUpdated;
 	}
 
