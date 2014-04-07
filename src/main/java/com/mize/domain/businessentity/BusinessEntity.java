@@ -83,6 +83,7 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 		this.addresses.add(address);				
 		this.intl = new ArrayList<BusinessEntityIntl>();
 		this.intl.add(intl);
+		this.beAttribute = new BusinessEntityAttribute();
 		this.beAttribute.setUrl(url);
 		this.beAttribute.setHoursOfOp(hoursOfOp);
 	}
