@@ -88,7 +88,7 @@ public class ProductRegistration extends MizeEntity {
 		
 	}
 	
-	public ProductRegistration(Long id,String statusCode,String serialNumber,String brandName,String model,String productName) {
+	public ProductRegistration(Long id,String statusCode,String serialNumber,DateTime shipDate, String brandName,String model,String productName) {
 		this.id = id;
 		this.statusCode = statusCode;
 		ProductSerial productSerial = new ProductSerial();
@@ -99,6 +99,7 @@ public class ProductRegistration extends MizeEntity {
 		ProductIntl productIntl = new ProductIntl();
 		productIntl.setName(productName);
 		productSerial.setSerialNumber(serialNumber);
+		productSerial.setShipDate(shipDate);
 		product.getProductIntl().add(productIntl);
 		product.setBrand(brand);
 		productSerial.setProduct(product);

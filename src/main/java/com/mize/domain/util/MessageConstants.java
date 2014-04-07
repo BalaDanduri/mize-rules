@@ -281,5 +281,14 @@ public abstract class MessageConstants implements Serializable{
 	public static final String INVALID_PICKlIST_LOCATION_TYPE = "INVALID_PICKlIST_LOCATION_TYPE";
 	public static final String INVALID_PICKLIST_LOCATION = "INVALID_PICKLIST_LOCATION";
 	public static final String INVALID_PICKlIST_LOCATION_CODE = "INVALID_PICKlIST_LOCATION_CODE";
+	
+	public static final String INVALID_STATUS_UPDATE_DRAFT = "INVALID_STATUS_UPDATE_DRAFT";
+	public static final String INVALID_STATUS_UPDATE = "INVALID_STATUS_UPDATE";
+	public static final String INVALID_PRODUCT_SERIAL_ATTACHMENT = "INVALID_PRODUCT_SERIAL_ATTACHMENT";
+	public static final String INVALID_PURCHASE_DATE_SHIP_DATE = "INVALID_PURCHASE_DATE_SHIP_DATE";
+	public static final String INVALID_PURCHASE_DATE_ATTACHMENT = "INVALID_PURCHASE_DATE_ATTACHMENT";
+	
+	public static final String USER_REQUIRED="USER_REQUIRED";
+	public static final String INVOICE_NUMBER="INVOICE_NUMBER";
 
 }
