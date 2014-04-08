@@ -44,6 +44,7 @@ public class EntityParameter extends MizeEntity implements Comparable<EntityPara
 	private BusinessEntity tenant;
 	private String type;
 	private String code;
+	private Long beId;
 	private DateTime startDate;
 	private DateTime endDate;
 	@Transient
@@ -59,7 +60,7 @@ public class EntityParameter extends MizeEntity implements Comparable<EntityPara
 	}
 
 	public enum EntityType{
-		PurchaseOrderType,OrderLocation;
+		PurchaseOrderType,OrderLocation,OrderTypeAndLocation;
 	}
 	
 	public enum EntityAttributeType{
@@ -282,6 +283,7 @@ public class EntityParameter extends MizeEntity implements Comparable<EntityPara
 		result = prime * result + ((tenant == null) ? 0 : tenant.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		result = prime * result + ((beId == null) ? 0 : beId.hashCode());
 		return result;
 	}
 
@@ -329,7 +331,21 @@ public class EntityParameter extends MizeEntity implements Comparable<EntityPara
 				return false;
 		} else if (!user.equals(other.user))
 			return false;
+		if (beId == null) {
+			if (other.beId != null)
+				return false;
+		} else if (beId != other.beId)
+			return false;
 		return true;
 	}
 
+	@Column(name="entity_be_id")
+	public Long getBeId() {
+		return beId;
+	}
+
+	public void setBeId(Long beId) {
+		this.beId = beId;
+	}
+	
 }
