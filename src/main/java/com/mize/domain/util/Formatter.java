@@ -172,6 +172,13 @@ public final class Formatter {
 		return true;
 	}
 	
+	public static boolean isY(String str){
+		if(str != null && YES.equalsIgnoreCase(str.trim())){
+			return true;
+		}
+		return false;
+	}
+	
 	public static boolean charToBoolean(char c) {
 		return ((c == 'Y') || (c == 'y'));
 	}
