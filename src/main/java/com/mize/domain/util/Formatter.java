@@ -14,6 +14,9 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
+
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -26,6 +29,7 @@ public final class Formatter {
 	public static final String NO = "N";
 	public static final DateTimeFormatter  DATE_FORMAT = DateTimeFormat.forPattern("MM-dd-yyyy HH:mm:ss");
 	public static final DateTimeFormatter  DATE_FORMAT1 = DateTimeFormat.forPattern("MM-dd-yyyy");
+	public static final DateTimeFormatter  DATE_FORMAT3 = DateTimeFormat.forPattern("MM/dd/yyyy");
 	public static final DateTimeFormatter  DB_DATE_TIME_FORMAT = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
 	public static final DateTimeFormatter  DATE_FORMAT2 = DateTimeFormat.forPattern("yyyy-MM-dd");
 	public static final String LIKE = "%";
@@ -483,6 +487,14 @@ public final class Formatter {
 		}
 	}
 	
+	public static String toString(BigDecimal bigDecimal){
+		if(bigDecimal == null){
+			return EMPTY;
+		}else {
+			return EMPTY+bigDecimal.doubleValue();
+		}
+	}
+	
 	public static String getTime(DateTime dateTime){
 		String time = EMPTY;
 		if(dateTime != null){			
@@ -731,6 +743,19 @@ public final class Formatter {
 		decimalFormat.setMaximumFractionDigits(2);
 		String returnValue = decimalFormat.format(value.doubleValue());
 		return returnValue;
-	}	
+	}
+		 
+	 public static XMLGregorianCalendar toXMLGregorianCalendar(DateTime dateTime){
+		 XMLGregorianCalendar gregorianCalendar = null;
+		 if(dateTime == null){
+			 return null;
+		 }else {
+			 try {
+				 gregorianCalendar = DatatypeFactory.newInstance().newXMLGregorianCalendar(dateTime.toGregorianCalendar());
+			 } catch (Exception e) {
+			 }
+		 }
+		 return gregorianCalendar;
+	 }
 	
 }
