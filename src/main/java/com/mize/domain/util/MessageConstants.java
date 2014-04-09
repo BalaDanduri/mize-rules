@@ -293,5 +293,6 @@ public abstract class MessageConstants implements Serializable{
 	
 	public static final String INVALID_SHIPMENT_BUSINESS_ENTITY_CODE = "INVALID_SHIPMENT_BUSINESS_ENTITY_CODE";
 	public static final String INVALID_PAYMENT_BUSINESS_ENTITY_CODE = "INVALID_PAYMENT_BUSINESS_ENTITY_CODE";
+	public static final String  DUPLICATE_PART_NAME = "DUPLICATE_PART_NAME";
 
 }
