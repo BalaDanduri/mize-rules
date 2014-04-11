@@ -51,6 +51,22 @@ public class WorkQueueResult extends MizeEntity {
 		this.businessEntity = businessEntity;
 		this.productSerial = productSerial;
 	}
+	
+	public WorkQueueResult(Long id,Long entityId, String entityType,String status,String serviceType,String serviceCode,String providerName,
+			DateTime serviceDate,BusinessEntity businessEntity,ProductSerial productSerial) {
+		super();
+		this.id = id;
+		this.entityId = entityId;
+		this.entityType = entityType;
+		this.status = status;
+		this.serviceDate = serviceDate;
+		this.serviceType = serviceType;
+		this.serviceCode = serviceCode;
+		this.businessEntity = businessEntity;
+		this.productSerial = productSerial;
+		this.provider = providerName;
+	}
+	
 
 	public WorkQueueResult(Long id,Long entityId, String entityType,String entityCode,String status,String orderType,
 			DateTime serviceDate,DateTime updatedDate,BusinessEntity businessEntity) {

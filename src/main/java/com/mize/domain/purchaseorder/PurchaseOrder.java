@@ -67,8 +67,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	private EntityAttachment entityAttachment;
 	@Transient
 	private User user;
-	@Transient
-	private String isHandlingChargeApply;
+	private String applyHandlingCharge;
 	@Transient
 	private BigDecimal handlingChargePercentage;
 	@Transient
@@ -372,13 +371,13 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 		this.entityAttachment = entityAttachment;
 	}
 	
-	@Transient
-	public String getIsHandlingChargeApply() {
-		return isHandlingChargeApply;
+	@Column(name="apply_handling_charge")
+	public String getApplyHandlingCharge() {
+		return applyHandlingCharge;
 	}
 
-	public void setIsHandlingChargeApply(String isHandlingChargeApply) {
-		this.isHandlingChargeApply = isHandlingChargeApply;
+	public void setApplyHandlingCharge(String applyHandlingCharge) {
+		this.applyHandlingCharge = applyHandlingCharge;
 	}
 
 	@Transient

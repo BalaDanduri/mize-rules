@@ -274,13 +274,13 @@ public abstract class MessageConstants implements Serializable{
 	public static final String INVOICE_LOCATION_TYPE_REQUIRED = "INVOICE_LOCATION_TYPE_REQUIRED";
 	public static final String INVALID_INVOICE_LOCATION ="INVALID_INVOICE_LOCATION";
 	
-	public static final String INVALID_PICKlIST_NUMBER = "INVALID_PICKlIST_NUMBER";
-	public static final String INVALID_PICKlIST_TYPE = "INVALID_PICKlIST_TYPE";
+	public static final String INVALID_PICKLIST_NUMBER = "INVALID_PICKLIST_NUMBER";
+	public static final String INVALID_PICKLIST_TYPE = "INVALID_PICKLIST_TYPE";
 	public static final String INVALID_PART_NUMBER = "INVALID_PART_NUMBER";
 	public static final String INVALID_PART_QUANTITY = "INVALID_PART_QUANTITY";
-	public static final String INVALID_PICKlIST_LOCATION_TYPE = "INVALID_PICKlIST_LOCATION_TYPE";
+	public static final String INVALID_PICKLIST_LOCATION_TYPE = "INVALID_PICKLIST_LOCATION_TYPE";
 	public static final String INVALID_PICKLIST_LOCATION = "INVALID_PICKLIST_LOCATION";
-	public static final String INVALID_PICKlIST_LOCATION_CODE = "INVALID_PICKlIST_LOCATION_CODE";
+	public static final String INVALID_PICKLIST_LOCATION_CODE = "INVALID_PICKLIST_LOCATION_CODE";
 	
 	public static final String INVALID_STATUS_UPDATE_DRAFT = "INVALID_STATUS_UPDATE_DRAFT";
 	public static final String INVALID_STATUS_UPDATE = "INVALID_STATUS_UPDATE";
@@ -290,5 +290,19 @@ public abstract class MessageConstants implements Serializable{
 	
 	public static final String USER_REQUIRED="USER_REQUIRED";
 	public static final String INVOICE_NUMBER="INVOICE_NUMBER";
+	
+	public static final String INVALID_SHIPMENT_BUSINESS_ENTITY_CODE = "INVALID_SHIPMENT_BUSINESS_ENTITY_CODE";
+	public static final String INVALID_PAYMENT_BUSINESS_ENTITY_CODE = "INVALID_PAYMENT_BUSINESS_ENTITY_CODE";
+	public static final String DUPLICATE_PART_NAME = "DUPLICATE_PART_NAME";
+	
+	public static final String PART_NUMBER_REQUIRED = "PART_NUMBER_REQUIRED";
+	public static final String PART_KIT_TYPE_REQUIRED= "PART_KIT_TYPE_REQUIRED";
+	public static final String PRICE_METHOD_REQUIRED= "PRICE_METHOD_REQUIRED";
+	public static final String START_DATE_REQUIRED= "START_DATE_REQUIRED";
+	public static final String END_DATE_REQUIRED= "END_DATE_REQUIRED";
+	public static final String PART_QUANTITY_REQUIRED= "PART_QUANTITY_REQUIRED";
+	public static final String ATLEAST_ONE_PART_REQUIRED = "ATLEAST_ONE_PART_REQUIRED";
+	public static final String END_DATE_GREATER_THAN_OR_EQUAL_TO_START_DATE= "END_DATE_GREATER_THAN_OR_EQUAL_TO_START_DATE";
+	
 
 }

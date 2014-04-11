@@ -82,7 +82,7 @@ public class ProductRegistration extends MizeEntity {
 		New,Transfer
 	}
 	public enum Status{
-		Open,Draft,Registered,Pending
+		Open,Draft,Registered,Pending,Rejected
 	}	
 	public ProductRegistration(){
 		

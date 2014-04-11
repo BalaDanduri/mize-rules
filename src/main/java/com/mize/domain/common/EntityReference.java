@@ -13,8 +13,9 @@ public class EntityReference extends MizeEntity implements Comparable<EntityRefe
 	}
 	
 	public enum ReferenceType{
-		OrderLocation,PurchaseOrderType
+		//OrderLocation,PurchaseOrderType,OrderTypenLocation
 	}
+	
 	public String getReference() {
 		return reference;
 	}
