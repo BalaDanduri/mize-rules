@@ -15,6 +15,7 @@ import com.mize.domain.appmsg.AppMessage;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.exception.UploadError;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 import com.mize.domain.util.ServiceDTO;
@@ -291,6 +292,28 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 			processLog.getErrorLogs().add(errorLog);
 		}
 				
+	}
+
+	@JsonIgnore
+	@SuppressWarnings("rawtypes")
+	public <T> void addToFailureRecord(UploadEntity uploadEntity ,int recordNumber,String entityCode,UploadError error) {
+		ProcessLog processLog = logMap.get(recordNumber);
+		if(processLog == null){
+			processLog = new ProcessLog();
+			MizeEntity entity = (MizeEntity)((List)uploadEntity.getEntity()).get(recordNumber-1);
+			processLog.setInputRecord(entity);
+			processLog.setEntityId(entity.getId());
+			processLog.setEntityCode(entityCode);
+			processLog.setRecordNumber(recordNumber);
+			logMap.put(recordNumber, processLog);
+			uploadEntity.getProcessLogs().add(processLog);
+		}
+		if (error != null) {
+			ErrorLog errorLog = new ErrorLog();
+			errorLog.setCode(error.getMessage());
+			errorLog.setField(error.getCode());
+			processLog.getErrorLogs().add(errorLog);
+		}
 	}
 
 	public BusinessEntity getTenant() {
