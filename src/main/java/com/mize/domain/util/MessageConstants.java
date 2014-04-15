@@ -304,5 +304,12 @@ public abstract class MessageConstants implements Serializable{
 	public static final String ATLEAST_ONE_PART_REQUIRED = "ATLEAST_ONE_PART_REQUIRED";
 	public static final String END_DATE_GREATER_THAN_OR_EQUAL_TO_START_DATE= "END_DATE_GREATER_THAN_OR_EQUAL_TO_START_DATE";
 	
+	public static final String INVALID_ENTITY_IDS = "INVALID_ENTITY_IDS";
+	public static final String INVALID_TO_ENTITY_ID = "INVALID_TO_ENTITY_ID";
+	public static final String TO_ID_GREATER_THAN_OR_EQUAL_TO_FROM_ID = "TO_ID_GREATER_THAN_OR_EQUAL_TO_FROM_ID";
+	public static final String INVALID_FROM_ENTITY_ID = "INVALID_FROM_ENTITY_ID";
+	public static final String INVALID_ENTITY_ID = "INVALID_ENTITY_ID";
+	public static final String INVALID_SOLR_ENTITY = "INVALID_SOLR_ENTITY";
+	
 
 }
