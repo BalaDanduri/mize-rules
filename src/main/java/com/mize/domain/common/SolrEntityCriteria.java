@@ -10,10 +10,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.mize.domain.auth.User;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
-public class SolrEntityCriteria {
+public class SolrEntityCriteria extends MizeEntity implements Comparable<SolrEntityCriteria>{
+	
+	private static final long serialVersionUID = -6647895629560783567L;
 	private String entityName;
 	private String entityAliasName;
 	private DateTime startDate;
@@ -26,6 +29,7 @@ public class SolrEntityCriteria {
 	private Integer recordsCount;
 	private List<Long> inCluseIDsList = new ArrayList<Long>();
 	private Map<String,List<Long>> entityIDsMap;  
+	private User user;
 	
 	public String getCriteria() {
 		return criteria;
@@ -119,6 +123,12 @@ public class SolrEntityCriteria {
 		this.entityIDsMap = entityIDsMap;
 	}
 	
+	public User getUser() {
+		return user;
+	}
+	public void setUser(User user) {
+		this.user = user;
+	}
 	public static SolrEntityCriteria createCopyObject(Long entityId,String entityName,String aliasName) {
 		SolrEntityCriteria copy = new SolrEntityCriteria();
 		try {
@@ -128,6 +138,21 @@ public class SolrEntityCriteria {
 		} catch(Exception e) {	
 		}
 		return copy;
+	}
+	
+	@Override
+	public int compareTo(SolrEntityCriteria arg0) {
+		return 0;
+	}
+	
+	@Override
+	public Long getId() {
+		return id;
+	}
+	
+	@Override
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }
