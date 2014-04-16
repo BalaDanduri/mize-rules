@@ -34,7 +34,7 @@ public abstract class CatalogConstants implements Serializable{
 	public static final String REGISTRATION_CUSTOMER_TYPE ="RegistrationCustomerType";
 	public static final String COVERAGE_TYPE = "CoverageType";
 	public static final String PICK_LIST_TYPE = "PickListType";
-
+	public static final String SHIPPING_DAYS = "ShippingDays";
 
 }
 
