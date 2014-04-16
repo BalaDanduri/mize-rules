@@ -15,6 +15,7 @@ import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -49,6 +50,7 @@ public class ProductWarranty extends MizeEntity {
 	@ManyToOne(fetch = FetchType.EAGER ,cascade = CascadeType.REFRESH)
 	@JoinColumn(name="prod_serial_id")
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonBackReference(value="warranty_productSerial")
 	public ProductSerial getProductSerial() {
 		return productSerial;
 	}

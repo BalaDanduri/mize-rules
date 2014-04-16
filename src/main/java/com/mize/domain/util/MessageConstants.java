@@ -311,5 +311,9 @@ public abstract class MessageConstants implements Serializable{
 	public static final String INVALID_ENTITY_ID = "INVALID_ENTITY_ID";
 	public static final String INVALID_SOLR_ENTITY = "INVALID_SOLR_ENTITY";
 	
+	public static final String INVALID_BRAND_MODEL_SERIAL_COMBINATION = "INVALID_BRAND_MODEL_SERIAL_COMBINATION";
+	public static final String PRODUCT_COVERAGE_REQUIRED = "PRODUCT_COVERAGE_REQUIRED";
+	
+	
 
 }
