@@ -313,6 +313,7 @@ public abstract class MessageConstants implements Serializable{
 	
 	public static final String INVALID_BRAND_MODEL_SERIAL_COMBINATION = "INVALID_BRAND_MODEL_SERIAL_COMBINATION";
 	public static final String PRODUCT_COVERAGE_REQUIRED = "PRODUCT_COVERAGE_REQUIRED";
+	public static final String INVALID_CUSTOMER_REFERENCE = "INVALID_CUSTOMER_REFERENCE";
 	
 	
 
