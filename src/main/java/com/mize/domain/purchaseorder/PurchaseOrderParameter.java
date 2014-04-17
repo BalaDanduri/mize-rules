@@ -10,6 +10,7 @@ public class PurchaseOrderParameter extends MizeEntity {
 	private String shippingCarrier;
 	private String paymentMethod;
 	private String pricingMethod;
+	private String shippingDays;
 	
 	public String getShippingMethod() {
 		return shippingMethod;
@@ -41,6 +42,12 @@ public class PurchaseOrderParameter extends MizeEntity {
 	}
 	public void setPricingMethod(String pricingMethod) {
 		this.pricingMethod = pricingMethod;
+	}
+	public String getShippingDays() {
+		return shippingDays;
+	}
+	public void setShippingDays(String shippingDays) {
+		this.shippingDays = shippingDays;
 	}
 	@Override
 	public Long getId() {
