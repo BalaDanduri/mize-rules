@@ -88,6 +88,9 @@ public abstract class MessageConstants implements Serializable{
 	public static final String FIRST_NAME_REQUIRED = "FIRST_NAME_REQUIRED";
 	public static final String LAST_NAME_REQUIRED = "LAST_NAME_REQUIRED";
 	public static final String PHONE_NUMBER_REQUIRED = "PHONE_NUMBER_REQUIRED";
+	public static final String INVALID_CATEGORY = "INVALID_CATEGORY";
+	public static final String BRAND_MODEL_CATEGORY = "BRAND_MODEL_CATEGORY";
+	
 
 	
 	public static final String INVALID_PART_CODE = "INVALID_PART_CODE";
@@ -157,8 +160,10 @@ public abstract class MessageConstants implements Serializable{
 	public static final String ATLEAST_ONE_PRODUCT_NAME_REQUIRED = "ATLEAST_ONE_PRODUCT_NAME_DETAILS_REQUIRED";
 	public static final String PRODUCT_NAME_REQUIRED = "PRODUCT_NAME_REQUIRED";
 	public static final String DUPLICATE_BRAND_AND_MODEL = "DUPLICATE_BRAND_AND_MODEL";
+	public static final String DUPLICATE_BRAND_AND_CATEGORY_AND_MODEL = "DUPLICATE_BRAND_AND_CATEGORY_AND_MODEL";
 	public static final String PRODUCT_EXISTS_FOR_BRAND_MODEL = "PRODUCT_EXISTS_FOR_BRAND_MODEL";
 	public static final String DUPLICATE_PRODUCT_NAME = "DUPLICATE_PRODUCT_NAME";
+	public static final String DUPLICATE_RECORD_FOUND = "DUPLICATE_RECORD_FOUND";
 	public static final String DUPLICATE_CATEGORY = "DUPLICATE_CATEGORY";
 	public static final String DUPLICATE_INSTANCE_LINK = "DUPLICATE_INSTANCE_LINK";
 	public static final String PRODUCT_SERIAL_IS_REQUIRED = "PRODUCT_SERIAL_IS_REQUIRED";
