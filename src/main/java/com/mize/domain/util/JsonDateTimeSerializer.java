@@ -21,8 +21,7 @@ public class JsonDateTimeSerializer extends JsonSerializer<DateTime> {
 	
 	private static final DateTimeFormatter  dateFormat = DateTimeFormat.forPattern("MM-dd-yyyy HH:mm:ss");
     @Override
-    public void serialize(DateTime date, JsonGenerator gen, SerializerProvider provider)
-            throws IOException, JsonProcessingException {
+    public void serialize(DateTime date, JsonGenerator gen, SerializerProvider provider) throws IOException, JsonProcessingException {
         gen.writeString(dateFormat.print(date));
     }
 }

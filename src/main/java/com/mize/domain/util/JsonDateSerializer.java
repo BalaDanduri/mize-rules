@@ -20,8 +20,7 @@ public class JsonDateSerializer extends JsonSerializer<DateTime> {
 	
 	private static final DateTimeFormatter  dateFormat = DateTimeFormat.forPattern("MM-dd-yyyy");
     @Override
-    public void serialize(DateTime date,JsonGenerator gen, SerializerProvider provider)
-            throws IOException,JsonProcessingException {
+    public void serialize(DateTime date,JsonGenerator gen, SerializerProvider provider) throws IOException,JsonProcessingException {
         gen.writeString(dateFormat.print(date));
     }
 }

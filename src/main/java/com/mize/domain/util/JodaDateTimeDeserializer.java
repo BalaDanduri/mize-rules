@@ -18,9 +18,12 @@ public class JodaDateTimeDeserializer extends JsonDeserializer<DateTime> {
 	public static final DateTimeFormatter  dbdateTimeFormat = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
 
 	@Override
-	public DateTime deserialize(JsonParser parser, DeserializationContext context)
-			throws IOException, JsonProcessingException {
-    	return dateFormat.parseDateTime(parser.getText());
+	public DateTime deserialize(JsonParser parser, DeserializationContext context) throws IOException, JsonProcessingException {
+		if(parser.getText() != null && parser.getText().trim().length() > 0){
+			return dateFormat.parseDateTime(parser.getText());
+		}else{
+			return null;
+		}
    	}
 	
 
