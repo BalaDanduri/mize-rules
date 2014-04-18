@@ -1,5 +1,6 @@
 package com.mize.domain.part;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -51,7 +52,9 @@ public class Part extends MizeEntity {
 	private List<PartIntl> partIntl;
 	private List<PartPrice> partPrices;
 	private List<PartAttribute> partAttributes;
-	//private List<PartKit> partKits;
+	private BigDecimal unitListPrice;
+	private BigDecimal unitNetPrice;
+	private String productClass;
 
 	@Transient
 	private User user;
@@ -401,6 +404,33 @@ public class Part extends MizeEntity {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	@Transient
+	public BigDecimal getUnitListPrice() {
+		return unitListPrice;
+	}
+
+	public void setUnitListPrice(BigDecimal unitListPrice) {
+		this.unitListPrice = unitListPrice;
+	}
+
+	@Transient
+	public BigDecimal getUnitNetPrice() {
+		return unitNetPrice;
+	}
+
+	public void setUnitNetPrice(BigDecimal unitNetPrice) {
+		this.unitNetPrice = unitNetPrice;
+	}
+
+	@Transient
+	public String getProductClass() {
+		return productClass;
+	}
+
+	public void setProductClass(String productClass) {
+		this.productClass = productClass;
 	}
 	
 	

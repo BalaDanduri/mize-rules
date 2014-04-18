@@ -409,6 +409,8 @@ public class ProductRegistration extends MizeEntity {
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	@Fetch(FetchMode.SELECT)
 	@JsonManagedReference(value="productRegWarranty")
+	@JsonIgnore
+	@Transient
 	public List<ProductRegistrationWarranty> getWarrantyList() {
 		return warrantyList;
 	}	

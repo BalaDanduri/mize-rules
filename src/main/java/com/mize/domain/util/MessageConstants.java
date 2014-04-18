@@ -88,6 +88,9 @@ public abstract class MessageConstants implements Serializable{
 	public static final String FIRST_NAME_REQUIRED = "FIRST_NAME_REQUIRED";
 	public static final String LAST_NAME_REQUIRED = "LAST_NAME_REQUIRED";
 	public static final String PHONE_NUMBER_REQUIRED = "PHONE_NUMBER_REQUIRED";
+	public static final String INVALID_CATEGORY = "INVALID_CATEGORY";
+	public static final String BRAND_MODEL_CATEGORY = "BRAND_MODEL_CATEGORY";
+	
 
 	
 	public static final String INVALID_PART_CODE = "INVALID_PART_CODE";
@@ -157,8 +160,10 @@ public abstract class MessageConstants implements Serializable{
 	public static final String ATLEAST_ONE_PRODUCT_NAME_REQUIRED = "ATLEAST_ONE_PRODUCT_NAME_DETAILS_REQUIRED";
 	public static final String PRODUCT_NAME_REQUIRED = "PRODUCT_NAME_REQUIRED";
 	public static final String DUPLICATE_BRAND_AND_MODEL = "DUPLICATE_BRAND_AND_MODEL";
+	public static final String DUPLICATE_BRAND_AND_CATEGORY_AND_MODEL = "DUPLICATE_BRAND_AND_CATEGORY_AND_MODEL";
 	public static final String PRODUCT_EXISTS_FOR_BRAND_MODEL = "PRODUCT_EXISTS_FOR_BRAND_MODEL";
 	public static final String DUPLICATE_PRODUCT_NAME = "DUPLICATE_PRODUCT_NAME";
+	public static final String DUPLICATE_RECORD_FOUND = "DUPLICATE_RECORD_FOUND";
 	public static final String DUPLICATE_CATEGORY = "DUPLICATE_CATEGORY";
 	public static final String DUPLICATE_INSTANCE_LINK = "DUPLICATE_INSTANCE_LINK";
 	public static final String PRODUCT_SERIAL_IS_REQUIRED = "PRODUCT_SERIAL_IS_REQUIRED";
@@ -303,6 +308,18 @@ public abstract class MessageConstants implements Serializable{
 	public static final String PART_QUANTITY_REQUIRED= "PART_QUANTITY_REQUIRED";
 	public static final String ATLEAST_ONE_PART_REQUIRED = "ATLEAST_ONE_PART_REQUIRED";
 	public static final String END_DATE_GREATER_THAN_OR_EQUAL_TO_START_DATE= "END_DATE_GREATER_THAN_OR_EQUAL_TO_START_DATE";
+	
+	public static final String INVALID_ENTITY_IDS = "INVALID_ENTITY_IDS";
+	public static final String INVALID_TO_ENTITY_ID = "INVALID_TO_ENTITY_ID";
+	public static final String TO_ID_GREATER_THAN_OR_EQUAL_TO_FROM_ID = "TO_ID_GREATER_THAN_OR_EQUAL_TO_FROM_ID";
+	public static final String INVALID_FROM_ENTITY_ID = "INVALID_FROM_ENTITY_ID";
+	public static final String INVALID_ENTITY_ID = "INVALID_ENTITY_ID";
+	public static final String INVALID_SOLR_ENTITY = "INVALID_SOLR_ENTITY";
+	
+	public static final String INVALID_BRAND_MODEL_SERIAL_COMBINATION = "INVALID_BRAND_MODEL_SERIAL_COMBINATION";
+	public static final String PRODUCT_COVERAGE_REQUIRED = "PRODUCT_COVERAGE_REQUIRED";
+	public static final String INVALID_CUSTOMER_REFERENCE = "INVALID_CUSTOMER_REFERENCE";
+	
 	
 
 }

@@ -61,6 +61,7 @@ public class ProductSerial extends MizeEntity{
 	private DateTime invoiceDate;
 	private String invoiceNumber;
 	private List<ProductSerialRelation> productSerialRelations = new ArrayList<ProductSerialRelation>();
+	private List<ProductWarranty> productWarrantyList = new ArrayList<ProductWarranty>();
 	
 	public ProductSerial(){
 		super();
@@ -312,7 +313,16 @@ public class ProductSerial extends MizeEntity{
 	public void setCreatedBy(Long createdBy) {
 		this.createdBy = createdBy;
 	}
-
+	
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "productSerial",orphanRemoval= true)
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	public List<ProductWarranty> getProductWarrantyList() {
+		return productWarrantyList;
+	}
+	
+	public void setProductWarrantyList(List<ProductWarranty> productWarrantyList) {
+		this.productWarrantyList = productWarrantyList;
+	}
 
 	@Override
 	public int hashCode() {

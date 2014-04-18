@@ -76,6 +76,8 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	private PurchaseOrderParameter orderParameter;
 	@Transient
 	private Long entityParameterId;
+	private String model;
+	private String productSerial;
 	
 	public PurchaseOrder(){
 		super();
@@ -414,6 +416,24 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 
 	public void setEntityParameterId(Long entityParameterId) {
 		this.entityParameterId = entityParameterId;
+	}
+
+	@Column(name="prod_model")
+	public String getModel() {
+		return model;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	@Column(name="prod_srl_no")
+	public String getProductSerial() {
+		return productSerial;
+	}
+
+	public void setProductSerial(String productSerial) {
+		this.productSerial = productSerial;
 	}
 
 	@Override
