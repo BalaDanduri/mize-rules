@@ -124,11 +124,17 @@ public abstract class MessageConstants implements Serializable{
 	public static final String INVALID_PARENT_BUSINESS_ENTITY_CODE = "INVALID_PARENT_BUSINESS_ENTITY_CODE";
 	public static final String USER_CODE_REQUIRED = "USER_CODE_REQUIRED";
 	public static final String GROUP_CODE_REQUIRED = "GROUP_CODE_REQUIRED";
+	public static final String GROUP_NAME_REQUIRED= "GROUP_NAME_REQUIRED";	
+	public static final String ROLE_NAME_REQUIRED= "ROLE_NAME_REQUIRED";
 	public static final String DUPLICATE_GROUP_NAME= "DUPLICATE_GROUP_NAME";
 	public static final String DUPLICATE_WORK_QUEUE_CODE = "DUPLICATE_WORK_QUEUE_NAME";
 	public static final String DUPLICATE_WORK_QUEUE_AUTH_CODE = "DUPLICATE_WORK_QUEUE_AUTH_CODE";
 	public static final String DUPLICATE_ROLE_NAME= "DUPLICATE_ROLE_NAME";
 	public static final String INVALID_WQ_AUTHORIZATION= "INVALID_WQ_AUTHORIZATION";
+	public static final String WQ_NAME_REQUIRED= "WQ_NAME_REQUIRED";
+	public static final String WQ_AUTHORIZATION_TYPE_REQUIRED= "WQ_AUTHORIZATION_TYPE_REQUIRED";
+	public static final String WQ_AUTHORIZATION_VALUE_REQUIRED= "WQ_AUTHORIZATION_VALUE_REQUIRED";
+
 
 	public static final String INVALID_CUSTOMER = "INVALID_CUSTOMER";
 	public static final String CUSTOMER_NUMBER_IS_REQUIRED = "CUSTOMER_NUMBER_IS_REQUIRED";
