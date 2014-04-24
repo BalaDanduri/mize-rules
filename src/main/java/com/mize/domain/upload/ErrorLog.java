@@ -8,6 +8,7 @@ public class ErrorLog extends MizeEntity implements Comparable<ErrorLog> {
 	Long processLogId;
 	String code;
 	String field;
+	Integer severity;
 
 	public ErrorLog(){		
 	}
@@ -57,6 +58,14 @@ public class ErrorLog extends MizeEntity implements Comparable<ErrorLog> {
 		this.field = field;
 	}
 
+	public Integer getSeverity() {
+		return severity;
+	}
+
+	public void setSeverity(Integer severity) {
+		this.severity = severity;
+	}
+
 	@Override
 	public int compareTo(ErrorLog o) {
 		return 0;
@@ -64,12 +73,14 @@ public class ErrorLog extends MizeEntity implements Comparable<ErrorLog> {
 	
 	@Override
 	public int hashCode() {
-		final int prime = PRIME;
+		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result + ((field == null) ? 0 : field.hashCode());
 		result = prime * result
 				+ ((processLogId == null) ? 0 : processLogId.hashCode());
+		result = prime * result
+				+ ((severity == null) ? 0 : severity.hashCode());
 		return result;
 	}
 
@@ -97,13 +108,18 @@ public class ErrorLog extends MizeEntity implements Comparable<ErrorLog> {
 				return false;
 		} else if (!processLogId.equals(other.processLogId))
 			return false;
+		if (severity == null) {
+			if (other.severity != null)
+				return false;
+		} else if (!severity.equals(other.severity))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
 		return "ErrorLog [processLogId=" + processLogId + ", code=" + code
-				+ ", field=" + field + "]";
+				+ ", field=" + field + ", severity=" + severity + "]";
 	}
 	
 }
