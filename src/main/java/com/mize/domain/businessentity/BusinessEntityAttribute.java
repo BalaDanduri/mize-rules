@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -40,7 +40,7 @@ public class BusinessEntityAttribute extends MizeEntity implements Comparable<Bu
 		this.id = id;
 	}
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="be_id")
 	@JsonBackReference(value="be_attribute")
 	public BusinessEntity getBusinessEntity() {
