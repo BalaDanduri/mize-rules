@@ -131,7 +131,7 @@ public class Part extends MizeEntity {
 		return isReturnable;
 	}
 
-	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "part")
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "part",orphanRemoval= true)
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	@JsonManagedReference(value="partAttribute")
 	public List<PartAttribute> getPartAttributes() {

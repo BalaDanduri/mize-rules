@@ -1,8 +1,8 @@
 package com.mize.domain.catalog;
 
-import java.io.Serializable;
+import com.mize.domain.common.MizeEntity;
 
-public class CatalogEntryCache implements Serializable{
+public class CatalogEntryCache extends MizeEntity implements Comparable<CatalogEntryCache>{
 	
 	private static final long serialVersionUID = -8488237770262609141L;	
 	private String entryCode;
@@ -11,6 +11,7 @@ public class CatalogEntryCache implements Serializable{
 	private Long entryId;
 	private String isDefault;
 	private String isActive;
+	private Long orderSequence;
 	
 	public CatalogEntryCache(){
 		super();
@@ -21,6 +22,16 @@ public class CatalogEntryCache implements Serializable{
 		this.entryCode = entryCode;
 		this.entryName = entryName;
 		this.localeId = localeId;
+	}
+	
+	@Override
+	public Long getId() {
+		return id;
+	}
+
+	@Override
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 	public Long getEntryId() {
@@ -54,6 +65,14 @@ public class CatalogEntryCache implements Serializable{
 		return "Y".equalsIgnoreCase(isDefault);
 	}
 
+	public String getIsDefault() {
+		return isDefault;
+	}
+
+	public String getIsActive() {
+		return isActive;
+	}
+
 	public void setIsDefault(String isDefault) {
 		this.isDefault = isDefault;
 	}
@@ -66,11 +85,25 @@ public class CatalogEntryCache implements Serializable{
 		this.isActive = isActive;
 	}
 
+	public Long getOrderSequence() {
+		return orderSequence;
+	}
+
+	public void setOrderSequence(Long orderSequence) {
+		this.orderSequence = orderSequence;
+	}
+
 	@Override
 	public String toString() {
 		return "CatalogEntryCache [entryCode=" + entryCode + ", entryName="
 				+ entryName + ", localeId=" + localeId + ", entryId=" + entryId
-				+ ", isDefault=" + isDefault + ", isActive=" + isActive + "]";
+				+ ", isDefault=" + isDefault + ", isActive=" + isActive
+				+ ", orderSequence=" + orderSequence + "]";
+	}
+
+	@Override
+	public int compareTo(CatalogEntryCache o) {
+		return 0;
 	}
 	
 }

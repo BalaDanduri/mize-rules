@@ -4,7 +4,6 @@ package com.mize.domain.product;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,9 +17,13 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.util.JPASerializer;
 
 
 @JsonPropertyOrder ({"id", "name", "link", "parent"})
@@ -193,7 +196,9 @@ public class ProductCategory extends MizeEntity{
 		this.active = active;
 	}
 
-	@OneToOne(fetch = FetchType.EAGER, cascade =CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	@JoinColumn(name="tenant_id") 
 	public BusinessEntity getTenant() {
 		return tenant;

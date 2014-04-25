@@ -8,6 +8,7 @@ public abstract class MessageConstants implements Serializable{
 	public static final String ENTITY_CODE_REQUIRED = "ENTITY_CODE_REQUIRED";
 	public static final String ENTITY_BRAND_NAME_REQUIRED = "ENTITY_BRAND_NAME_REQUIRED";
 	public static final String INVALID_BRAND_MODEL_CATEGORY_COMBINATION = "INVALID_BRAND_MODEL_CATEGORY_COMBINATION";
+	public static final String INVALID_BRAND_MODEL_CATEGORY = "INVALID_BRAND_MODEL_CATEGORY";
 	public static final String ADDRESS_REQUIRED = "ADDRESS_REQUIRED";
 	public static final String INVALID_ADDRESS = "INVALID_ADDRESS";
 	public static final String INVALID_ZIP = "INVALID_ZIP";
@@ -124,11 +125,17 @@ public abstract class MessageConstants implements Serializable{
 	public static final String INVALID_PARENT_BUSINESS_ENTITY_CODE = "INVALID_PARENT_BUSINESS_ENTITY_CODE";
 	public static final String USER_CODE_REQUIRED = "USER_CODE_REQUIRED";
 	public static final String GROUP_CODE_REQUIRED = "GROUP_CODE_REQUIRED";
+	public static final String GROUP_NAME_REQUIRED= "GROUP_NAME_REQUIRED";	
+	public static final String ROLE_NAME_REQUIRED= "ROLE_NAME_REQUIRED";
 	public static final String DUPLICATE_GROUP_NAME= "DUPLICATE_GROUP_NAME";
 	public static final String DUPLICATE_WORK_QUEUE_CODE = "DUPLICATE_WORK_QUEUE_NAME";
 	public static final String DUPLICATE_WORK_QUEUE_AUTH_CODE = "DUPLICATE_WORK_QUEUE_AUTH_CODE";
 	public static final String DUPLICATE_ROLE_NAME= "DUPLICATE_ROLE_NAME";
 	public static final String INVALID_WQ_AUTHORIZATION= "INVALID_WQ_AUTHORIZATION";
+	public static final String WQ_NAME_REQUIRED= "WQ_NAME_REQUIRED";
+	public static final String WQ_AUTHORIZATION_TYPE_REQUIRED= "WQ_AUTHORIZATION_TYPE_REQUIRED";
+	public static final String WQ_AUTHORIZATION_VALUE_REQUIRED= "WQ_AUTHORIZATION_VALUE_REQUIRED";
+
 
 	public static final String INVALID_CUSTOMER = "INVALID_CUSTOMER";
 	public static final String CUSTOMER_NUMBER_IS_REQUIRED = "CUSTOMER_NUMBER_IS_REQUIRED";
@@ -223,6 +230,7 @@ public abstract class MessageConstants implements Serializable{
 	public static final String PART_NUMBER_IS_REQUIRED = "PART_NUMBER_IS_REQUIRED";
 	public static final String PART_TYPE_IS_REQUIRED = "PART_TYPE_IS_REQUIRED";
 	public static final String PART_UOM_IS_REQUIRED = "PART_UOM_IS_REQUIRED";
+	public static final String ATTRIBUTE_UOM_IS_REQUIRED = "ATTRIBUTE_UOM_IS_REQUIRED";
 	public static final String PART_NAME_IS_REQUIRED = "PART_NAME_IS_REQUIRED";
 	public static final String PART_QUANTITY_IS_REQUIRED = "PART_QUANTITY_IS_REQUIRED";
 	public static final String PART_DESCRIPTION_IS_REQUIRED = "PART_DESCRIPTION_IS_REQUIRED";
@@ -253,10 +261,19 @@ public abstract class MessageConstants implements Serializable{
 	public static final String AMOUNT_OR_PERCENT_IS_VALID = "AMOUNT_OR_PERCENT_IS_VALID";
 	public static final String MIN_LINES_LESS_THAN_MAX_LINES = "MIN_LINES_LESS_THAN_MAX_LINES";
 	public static final String OVERLAPPING_RECORD_EXISTS = "OVERLAPPING_RECORD_EXISTS";
+	public static final String LINE_DISCOUNT_AMOUNT_OR_PERCENT_IS_VALID = "LINE_DISCOUNT_AMOUNT_OR_PERCENT_IS_VALID";
+	public static final String ORDER_DISCOUNT_AMOUNT_OR_PERCENT_IS_VALID = "ORDER_DISCOUNT_AMOUNT_OR_PERCENT_IS_VALID";
+	public static final String ORDER_MIN_AMT_LESS_THAN_MAX_AMT = "ORDER_MIN_AMT_LESS_THAN_MAX_AMT";
+	public static final String ORDER_MIN_LINES_LESS_THAN_MAX_LINES = "ORDER_MIN_LINES_LESS_THAN_MAX_LINES";
+	public static final String SHIPPING_AMOUNT_OR_PERCENT_IS_VALID = "SHIPPING_AMOUNT_OR_PERCENT_IS_VALID";
+	public static final String SHIPPING_MIN_AMT_LESS_THAN_MAX_AMT = "SHIPPING_MIN_AMT_LESS_THAN_MAX_AMT";
+	public static final String SHIPPING_MIN_LINES_LESS_THAN_MAX_LINES = "SHIPPING_MIN_LINES_LESS_THAN_MAX_LINES";
 	
 	public static final String INVALID_ENTITY_PARAMETER_TYPE = "INVALID_ENTITY_PARAMETER_TYPE";
 	public static final String INVALID_ATTRIBUTE_VALUE = "INVALID_ATTRIBUTE_VALUE";
 	public static final String INVALID_ATTRIBUTE_TYPE = "INVALID_ATTRIBUTE_TYPE";
+	public static final String VALID_ATTRIBUTE_VALUE = "VALID_ATTRIBUTE_VALUE";
+	public static final String VALID_ATTRIBUTE_TYPE = "VALID_ATTRIBUTE_TYPE";
 	
 	public static final String INVALID_PART_KIT_TYPE = "INVALID_PART_KIT_TYPE";
 	public static final String INVALID_PRICE_METHOD = "INVALID_PRICE_METHOD";
@@ -319,6 +336,8 @@ public abstract class MessageConstants implements Serializable{
 	public static final String INVALID_BRAND_MODEL_SERIAL_COMBINATION = "INVALID_BRAND_MODEL_SERIAL_COMBINATION";
 	public static final String PRODUCT_COVERAGE_REQUIRED = "PRODUCT_COVERAGE_REQUIRED";
 	public static final String INVALID_CUSTOMER_REFERENCE = "INVALID_CUSTOMER_REFERENCE";
+	public static final String SERVICE_TYPE_IS_REQUIRED = "SERVICE_TYPE_IS_REQUIRED";
+
 	
 	
 

@@ -58,6 +58,7 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	private BusinessEntityAttribute beAttribute;
 	private List<BusinessEntityRelation> relatedEntities = new ArrayList<BusinessEntityRelation>();
 	private List<BusinessEntityServiceLink> beServiceLinks = new ArrayList<BusinessEntityServiceLink>();
+	private List<BusinessEntityServiceRate> beServiceRates = new ArrayList<BusinessEntityServiceRate>();
 
 	public BusinessEntity() {
 	}
@@ -120,14 +121,14 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 		return logo;
 	}
 
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="tenant_id")
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public BusinessEntity getTenant() {
 		return tenant;
 	}
 
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="parent_be_id")
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public BusinessEntity getParentBE() {
@@ -283,6 +284,18 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 
 	public void setBeServiceLinks(List<BusinessEntityServiceLink> beServiceLinks) {
 		this.beServiceLinks = beServiceLinks;
+	}
+	
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "businessEntity")
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	@JsonManagedReference(value="be_serviceRate")
+	public List<BusinessEntityServiceRate> getBeServiceRates() {
+		return beServiceRates;
+	}
+
+	public void setBeServiceRates(List<BusinessEntityServiceRate> beServiceRates) {
+		this.beServiceRates = beServiceRates;
 	}
 
 	@Override	

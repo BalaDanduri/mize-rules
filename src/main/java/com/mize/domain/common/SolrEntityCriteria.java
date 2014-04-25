@@ -24,6 +24,7 @@ public class SolrEntityCriteria extends MizeEntity implements Comparable<SolrEnt
 	private Long fromEntityID;
 	private Long toEntityID;
 	private String inCluseIDs;
+	private List<Long> entityIDList;
 	private Long entityID;
 	private String criteria;
 	private Integer recordsCount;
@@ -95,12 +96,27 @@ public class SolrEntityCriteria extends MizeEntity implements Comparable<SolrEnt
 	public void setInCluseIDs(String inCluseIDs) {
 		this.inCluseIDs = inCluseIDs;
 	}
+	public List<Long> getEntityIDList() {
+		if (entityIDList == null) {
+			entityIDList = new ArrayList<Long>();
+		}
+		
+		if (entityIDList.isEmpty() && entityID != null) {
+			entityIDList.add(entityID);
+		}
+		return entityIDList;
+	}
+	public void setEntityIDList(List<Long> entityIDList) {
+		this.entityIDList = entityIDList;
+	}
+
 	public Long getEntityID() {
 		return entityID;
 	}
 	public void setEntityID(Long entityID) {
 		this.entityID = entityID;
 	}
+
 	public Integer getRecordsCount() {
 		return recordsCount;
 	}
@@ -129,10 +145,10 @@ public class SolrEntityCriteria extends MizeEntity implements Comparable<SolrEnt
 	public void setUser(User user) {
 		this.user = user;
 	}
-	public static SolrEntityCriteria createCopyObject(Long entityId,String entityName,String aliasName) {
+	public static SolrEntityCriteria createCopyObject(List<Long> entityIDList,String entityName,String aliasName) {
 		SolrEntityCriteria copy = new SolrEntityCriteria();
 		try {
-			copy.setEntityID(entityId);
+			copy.setEntityIDList(entityIDList);
 			copy.setEntityName(entityName);
 			copy.setEntityAliasName(aliasName);
 		} catch(Exception e) {	

@@ -35,6 +35,11 @@ public abstract class CatalogConstants implements Serializable{
 	public static final String COVERAGE_TYPE = "CoverageType";
 	public static final String PICK_LIST_TYPE = "PickListType";
 	public static final String SHIPPING_DAYS = "ShippingDays";
+	public static final String WQ_AUTHORIZATION_TYPE = "WQAuthorizationType";
+	public static final String WQ_BUSINESS_ENTITY_TYPE = "WQBusinessEntityType";
+	public static final String FORM_DEFENITION_STATUS = "FormDefinitionStatus";
+	public static final String SERVICE_TYPE = "ServiceType";
+
 
 }
 

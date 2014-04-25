@@ -11,14 +11,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.appmsg.AppMessage;
 import com.mize.domain.auth.User;
+import com.mize.domain.batch.BatchBean;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeEntity;
-import com.mize.domain.exception.UploadError;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
-import com.mize.domain.util.ServiceDTO;
 
 public final class UploadEntity extends MizeEntity implements Comparable<UploadEntity> {
 
@@ -37,10 +35,12 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 	private String fileName;
 	private Object entity;
 	private List<ProcessLog> processLogs = new ArrayList<ProcessLog>();
+	private BatchBean batchBean;
+	private String delimiter;
 	private String logFileURI;
 	private User user;
 	@JsonIgnore
-	private Map<Integer,ProcessLog> logMap = new  ConcurrentHashMap<Integer,ProcessLog>();
+	private final Map<Integer,ProcessLog> processLogMap = new  ConcurrentHashMap<Integer,ProcessLog>();
 	@JsonIgnore
 	private boolean isSolrUpdateReq = true;
 	private List<Long> prodIds = new ArrayList<Long>();
@@ -189,6 +189,22 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 		this.logFileURI = logFileURI;
 	}
 
+	public BatchBean getBatchBean() {
+		return batchBean;
+	}
+
+	public void setBatchBean(BatchBean batchBean) {
+		this.batchBean = batchBean;
+	}
+
+	public String getDelimiter() {
+		return delimiter;
+	}
+
+	public void setDelimiter(String delimiter) {
+		this.delimiter = delimiter;
+	}
+
 	@Override
 	public int compareTo(UploadEntity o) {
 		return 0;
@@ -212,28 +228,14 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 				+ ", failureCount=" + failureCount + ", startTime=" + startTime
 				+ ", endTime=" + endTime + ", status=" + status + ", fileName="
 				+ fileName + ", entity=" + entity + ", processLogs="
-				+ processLogs + "]";
+				+ processLogs + ", batchBean=" + batchBean + ", delimiter="
+				+ delimiter + ", logFileURI=" + logFileURI + ", user=" + user
+				+ ", processLogMap=" + processLogMap + ", isSolrUpdateReq="
+				+ isSolrUpdateReq + ", prodIds=" + prodIds + ", isHistorical="
+				+ isHistorical + ", tenant=" + tenant + "]";
 	}
 	
 	
-	@JsonIgnore
-	@SuppressWarnings("rawtypes")
-	public void addToFailureRecord(UploadEntity uploadEntity ,int recordNumber,String entityCode,String field,String msgCode) {
-		ProcessLog processLog = logMap.get(recordNumber);
-		if(processLog == null){
-			processLog = new ProcessLog();
-			MizeEntity entity = (MizeEntity)((List)uploadEntity.getEntity()).get(recordNumber-1);
-			processLog.setInputRecord(entity);
-			processLog.setEntityId(entity.getId());
-			processLog.setEntityCode(entityCode);
-			processLog.setRecordNumber(recordNumber);
-			logMap.put(recordNumber, processLog);
-			uploadEntity.getProcessLogs().add(processLog);
-		}			
-		ErrorLog errorLog = new ErrorLog(field,msgCode);
-		processLog.getErrorLogs().add(errorLog);		
-	}
-
 	public User getUser() {
 		return user;
 	}
@@ -270,52 +272,6 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 		this.prodIds = prodIds;
 	}
 	
-	@JsonIgnore
-	@SuppressWarnings("rawtypes")
-	public <T> void addToFailureRecord(UploadEntity uploadEntity ,int recordNumber,String entityCode,ServiceDTO<T> dto) {
-		ProcessLog processLog = logMap.get(recordNumber);
-		if(processLog == null){
-			processLog = new ProcessLog();
-			MizeEntity entity = (MizeEntity)((List)uploadEntity.getEntity()).get(recordNumber-1);
-			processLog.setInputRecord(entity);
-			processLog.setEntityId(entity.getId());
-			processLog.setEntityCode(entityCode);
-			processLog.setRecordNumber(recordNumber);
-			logMap.put(recordNumber, processLog);
-			uploadEntity.getProcessLogs().add(processLog);
-		}			
-		List<AppMessage> messages =  dto.getAppMessages();		
-		for(AppMessage message : messages) {
-			ErrorLog errorLog = new ErrorLog();
-			errorLog.setCode(message.getShortDesc());
-			errorLog.setField(message.getField());
-			processLog.getErrorLogs().add(errorLog);
-		}
-				
-	}
-
-	@JsonIgnore
-	@SuppressWarnings("rawtypes")
-	public <T> void addToFailureRecord(UploadEntity uploadEntity ,int recordNumber,String entityCode,UploadError error) {
-		ProcessLog processLog = logMap.get(recordNumber);
-		if(processLog == null){
-			processLog = new ProcessLog();
-			MizeEntity entity = (MizeEntity)((List)uploadEntity.getEntity()).get(recordNumber-1);
-			processLog.setInputRecord(entity);
-			processLog.setEntityId(entity.getId());
-			processLog.setEntityCode(entityCode);
-			processLog.setRecordNumber(recordNumber);
-			logMap.put(recordNumber, processLog);
-			uploadEntity.getProcessLogs().add(processLog);
-		}
-		if (error != null) {
-			ErrorLog errorLog = new ErrorLog();
-			errorLog.setCode(error.getMessage());
-			errorLog.setField(error.getCode());
-			processLog.getErrorLogs().add(errorLog);
-		}
-	}
-
 	public BusinessEntity getTenant() {
 		return tenant;
 	}
@@ -330,4 +286,8 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 	public Boolean getIsHistorical() {
 		return isHistorical;
 	}
+
+	public Map<Integer, ProcessLog> getProcessLogMap() {
+		return processLogMap;
+	}	
 }

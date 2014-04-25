@@ -49,6 +49,7 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 	private String shipComplete;
 	@Transient
 	private Long shipmentBeAddressId;
+	private String isFreeShipping;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -193,6 +194,15 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 
 	public void setUpdateMasterAddress(String updateMasterAddress) {
 		this.updateMasterAddress = updateMasterAddress;
+	}
+
+	@Column(name = "is_free_shipping")
+	public String getIsFreeShipping() {
+		return isFreeShipping;
+	}
+
+	public void setIsFreeShipping(String isFreeShipping) {
+		this.isFreeShipping = isFreeShipping;
 	}
 
 	@Override

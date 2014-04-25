@@ -499,9 +499,10 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 		this.prodScore = prodScore;
 	}
 
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="tenant_id") 
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public BusinessEntity getTenant() {
 		return tenant;
 	}
@@ -511,7 +512,9 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	}
 
 	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="manufacturer_be_id") 
+	@JoinColumn(name="manufacturer_be_id")
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public BusinessEntity getManufacturerBE() {
 		return manufacturerBE;
 	}
