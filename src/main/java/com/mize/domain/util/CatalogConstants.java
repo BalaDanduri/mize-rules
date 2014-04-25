@@ -38,6 +38,7 @@ public abstract class CatalogConstants implements Serializable{
 	public static final String WQ_AUTHORIZATION_TYPE = "WQAuthorizationType";
 	public static final String WQ_BUSINESS_ENTITY_TYPE = "WQBusinessEntityType";
 	public static final String FORM_DEFENITION_STATUS = "FormDefinitionStatus";
+	public static final String SERVICE_TYPE = "ServiceType";
 
 
 }
