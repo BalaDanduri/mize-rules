@@ -7,6 +7,7 @@ import java.util.Map;
 public class BatchBean {
 	private String className;
 	private String[] fieldNames;
+	private String[] keyNames;
 	private String multiRecord;
 	private String sequence;
 	private Map<String,BatchBean> childBeanMap;
@@ -64,10 +65,21 @@ public class BatchBean {
 		return !"Y".equalsIgnoreCase(getMultiRecord());
 	}
 	
+	public String[] getKeyNames() {
+		return keyNames;
+	}
+
+	public void setKeyNames(String[] keyNames) {
+		this.keyNames = keyNames;
+	}
+
 	@Override
 	public String toString() {
 		return "BatchBean [className=" + className + ", fieldNames="
-				+ Arrays.toString(fieldNames) + "]";
+				+ Arrays.toString(fieldNames) + ", keyNames="
+				+ Arrays.toString(keyNames) + ", multiRecord=" + multiRecord
+				+ ", sequence=" + sequence + ", childBeanMap=" + childBeanMap
+				+ ", method=" + method + "]";
 	}
 
 	
