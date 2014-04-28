@@ -11,6 +11,12 @@ public class PurchaseOrderParameter extends MizeEntity {
 	private String paymentMethod;
 	private String pricingMethod;
 	private String shippingDays;
+	private String overrideParams;
+	
+	public enum Parameter{
+		ShippingMethod,ShippingDays,ShippingPriority,ShippingCarrier,PaymentMethod,PricingMethod,OverrideParams
+	}
+	
 	
 	public String getShippingMethod() {
 		return shippingMethod;
@@ -56,6 +62,13 @@ public class PurchaseOrderParameter extends MizeEntity {
 	@Override
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public String getOverrideParams() {
+		return overrideParams;
+	}
+	public void setOverrideParams(String overrideParams) {
+		this.overrideParams = overrideParams;
 	}
 	
 	@Override

@@ -461,6 +461,13 @@ public final class Formatter {
 	public static boolean equalIgnoreCase(String var1,String var2){
 		return (makeNotNullString(var1).equalsIgnoreCase(makeNotNullString(var2)));
 	}
+	@SuppressWarnings("rawtypes")
+	public static boolean equalIgnoreCase(Enum var1,String var2){
+		if(var1 == null){
+			return false;
+		}
+		return (makeNotNullString(var1.toString()).equalsIgnoreCase(makeNotNullString(var2)));
+	}
 	public static String concat(Long var1,String var2){
 		return longValue(var1)+makeNotNullString(var2);
 	}
