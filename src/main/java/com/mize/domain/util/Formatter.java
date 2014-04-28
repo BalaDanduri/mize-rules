@@ -736,6 +736,13 @@ public final class Formatter {
 		return returnValue;
 	}
 	
+	public static BigDecimal notNullBigDecimal(BigDecimal value) {
+		if(value == null){
+			value = BigDecimal.ZERO;
+		}
+		return value;
+	}
+	
 	public static BigDecimal formattedBigDecimal1(BigDecimal value) {
 		if(value == null){
 			value = BigDecimal.ZERO;
