@@ -147,8 +147,12 @@ public class SolrEntityCriteria extends MizeEntity implements Comparable<SolrEnt
 	}
 	public static SolrEntityCriteria createCopyObject(List<Long> entityIDList,String entityName,String aliasName) {
 		SolrEntityCriteria copy = new SolrEntityCriteria();
+		List<Long> copyList = new ArrayList<Long>();
+		for (Long id: entityIDList) {
+			copyList.add(id);
+		}
 		try {
-			copy.setEntityIDList(entityIDList);
+			copy.setEntityIDList(copyList);
 			copy.setEntityName(entityName);
 			copy.setEntityAliasName(aliasName);
 		} catch(Exception e) {	
@@ -170,5 +174,15 @@ public class SolrEntityCriteria extends MizeEntity implements Comparable<SolrEnt
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	@Override
+	public String toString() {
+		return "SolrEntityCriteria [entityName=" + entityName
+				+ ", entityAliasName=" + entityAliasName + ", startDate="
+				+ startDate + ", endDate=" + endDate + ", fromEntityID="
+				+ fromEntityID + ", toEntityID=" + toEntityID + ", inCluseIDs="
+				+ inCluseIDs + ", entityID=" + entityID + "]";
+	}
 
+	
 }
