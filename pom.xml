@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.mize</groupId>
 	<artifactId>mize-domain</artifactId>
-	<version>2.6.1.CR7-Test</version>
+	<version>2.6.1-SNAPSHOT-Test</version>
 	<packaging>jar</packaging>
 	<properties>
 		<project.reporting.outputEncoding>UF-8</project.reporting.outputEncoding>
