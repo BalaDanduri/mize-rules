@@ -23,6 +23,8 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -112,6 +114,8 @@ public class User extends MizeEntity implements Comparable<User> {
 	}
     
 	@ManyToOne(fetch = FetchType.EAGER)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	@JoinColumn(name = "tenant_id")
 	public BusinessEntity getTenant() {
 		return tenant;
