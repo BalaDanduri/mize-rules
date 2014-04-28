@@ -31,6 +31,7 @@ public class SolrEntityCriteria extends MizeEntity implements Comparable<SolrEnt
 	private List<Long> inCluseIDsList = new ArrayList<Long>();
 	private Map<String,List<Long>> entityIDsMap;  
 	private User user;
+	private Integer commitCount;
 	
 	public String getCriteria() {
 		return criteria;
@@ -175,13 +176,19 @@ public class SolrEntityCriteria extends MizeEntity implements Comparable<SolrEnt
 		this.id = id;
 	}
 	
+	public Integer getCommitCount() {
+		return commitCount;
+	}
+	public void setCommitCount(Integer commitCount) {
+		this.commitCount = commitCount;
+	}
 	@Override
 	public String toString() {
 		return "SolrEntityCriteria [entityName=" + entityName
 				+ ", entityAliasName=" + entityAliasName + ", startDate="
 				+ startDate + ", endDate=" + endDate + ", fromEntityID="
 				+ fromEntityID + ", toEntityID=" + toEntityID + ", inCluseIDs="
-				+ inCluseIDs + ", entityID=" + entityID + "]";
+				+ inCluseIDs + ", entityID=" + entityID + ", commitCount=" + commitCount +"]";
 	}
 
 	
