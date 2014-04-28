@@ -55,6 +55,8 @@ public class Part extends MizeEntity {
 	private BigDecimal unitListPrice;
 	private BigDecimal unitNetPrice;
 	private String productClass;
+	@Transient
+	private String originalPart;
 
 	@Transient
 	private User user;
@@ -432,7 +434,14 @@ public class Part extends MizeEntity {
 	public void setProductClass(String productClass) {
 		this.productClass = productClass;
 	}
-	
-	
+
+	@Transient
+	public String getOriginalPart() {
+		return originalPart;
+	}
+
+	public void setOriginalPart(String originalPart) {
+		this.originalPart = originalPart;
+	}	
 
 }
