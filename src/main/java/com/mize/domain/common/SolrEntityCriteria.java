@@ -174,5 +174,15 @@ public class SolrEntityCriteria extends MizeEntity implements Comparable<SolrEnt
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	@Override
+	public String toString() {
+		return "SolrEntityCriteria [entityName=" + entityName
+				+ ", entityAliasName=" + entityAliasName + ", startDate="
+				+ startDate + ", endDate=" + endDate + ", fromEntityID="
+				+ fromEntityID + ", toEntityID=" + toEntityID + ", inCluseIDs="
+				+ inCluseIDs + ", entityID=" + entityID + "]";
+	}
 
+	
 }

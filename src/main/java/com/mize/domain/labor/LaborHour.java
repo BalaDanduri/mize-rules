@@ -124,7 +124,7 @@ public class LaborHour extends MizeEntity implements Comparable<LaborHour>{
 		this.hours = hours;
 	}
 
-	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "laborHour" ,orphanRemoval= true)
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "laborHour" ,orphanRemoval= true)
 	@Fetch(FetchMode.SELECT)
 	@JsonManagedReference(value="laborHourIntl")
 	public List<LaborHourIntl> getLaborHourIntls() {
@@ -198,7 +198,6 @@ public class LaborHour extends MizeEntity implements Comparable<LaborHour>{
 		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
 		result = prime * result + ((hours == null) ? 0 : hours.hashCode());
 		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
-		result = prime * result + ((tenant == null) ? 0 : tenant.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
@@ -231,12 +230,7 @@ public class LaborHour extends MizeEntity implements Comparable<LaborHour>{
 			if (other.startDate != null)
 				return false;
 		} else if (!startDate.equals(other.startDate))
-			return false;
-		if (tenant == null) {
-			if (other.tenant != null)
-				return false;
-		} else if (!tenant.equals(other.tenant))
-			return false;
+			return false;		
 		if (type == null) {
 			if (other.type != null)
 				return false;
@@ -249,6 +243,5 @@ public class LaborHour extends MizeEntity implements Comparable<LaborHour>{
 	public int compareTo(LaborHour arg0) {
 		return 0;
 	}
-	
 	
 }

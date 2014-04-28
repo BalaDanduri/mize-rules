@@ -17,7 +17,7 @@ import com.mize.domain.common.MizeEntity;
 
 @Entity
 @Table(name = "labor_hour_intl", uniqueConstraints = {@UniqueConstraint (columnNames = {"labor_hour_id", "locale_id"})})
-public class LaborHourIntl extends MizeEntity{
+public class LaborHourIntl extends MizeEntity implements Comparable<LaborHourIntl>{
 
 	private static final long serialVersionUID = -1862266220815979799L;
 	private LaborHour laborHour;
@@ -86,7 +86,6 @@ public class LaborHourIntl extends MizeEntity{
 		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((laborHour == null) ? 0 : laborHour.hashCode());
 		result = prime * result + ((locale == null) ? 0 : locale.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
@@ -106,11 +105,6 @@ public class LaborHourIntl extends MizeEntity{
 				return false;
 		} else if (!description.equals(other.description))
 			return false;
-		if (laborHour == null) {
-			if (other.laborHour != null)
-				return false;
-		} else if (!laborHour.equals(other.laborHour))
-			return false;
 		if (locale == null) {
 			if (other.locale != null)
 				return false;
@@ -122,6 +116,11 @@ public class LaborHourIntl extends MizeEntity{
 		} else if (!name.equals(other.name))
 			return false;
 		return true;
+	}
+
+	@Override
+	public int compareTo(LaborHourIntl o) {
+		return 0;
 	}
 
 }
