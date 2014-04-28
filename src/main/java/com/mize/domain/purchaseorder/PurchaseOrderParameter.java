@@ -14,7 +14,7 @@ public class PurchaseOrderParameter extends MizeEntity {
 	private String overrideParams;
 	
 	public enum Parameter{
-		ShippingMethod,ShippingDays,ShippingPriority,ShippingCarrier,PaymentMethod,PricingMethod,OverrideParams
+		ShippingMethod,ShippingDays,ShippingPriority,ShippingCarrier,PaymentMethod,PricingMethod,AllowOverride
 	}
 	
 	
