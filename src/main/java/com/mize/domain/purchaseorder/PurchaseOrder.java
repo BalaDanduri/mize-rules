@@ -73,6 +73,8 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	@Transient
 	private String pickListCode;
 	@Transient
+	private String csvFileName;
+	@Transient
 	private PurchaseOrderParameter orderParameter;
 	@Transient
 	private Long entityParameterId;
@@ -434,6 +436,15 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 
 	public void setProductSerial(String productSerial) {
 		this.productSerial = productSerial;
+	}
+	
+	@Transient
+	public String getCsvFileName() {
+		return csvFileName;
+	}
+
+	public void setCsvFileName(String csvFileName) {
+		this.csvFileName = csvFileName;
 	}
 
 	@Override
