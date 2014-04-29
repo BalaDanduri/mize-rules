@@ -231,6 +231,7 @@ public abstract class MessageConstants implements Serializable{
 	public static final String PART_TYPE_IS_REQUIRED = "PART_TYPE_IS_REQUIRED";
 	public static final String PART_UOM_IS_REQUIRED = "PART_UOM_IS_REQUIRED";
 	public static final String ATTRIBUTE_UOM_IS_REQUIRED = "ATTRIBUTE_UOM_IS_REQUIRED";
+	public static final String ATTRIBUTE_CODE_IS_REQUIRED = "ATTRIBUTE_CODE_IS_REQUIRED";
 	public static final String PART_NAME_IS_REQUIRED = "PART_NAME_IS_REQUIRED";
 	public static final String PART_QUANTITY_IS_REQUIRED = "PART_QUANTITY_IS_REQUIRED";
 	public static final String PART_DESCRIPTION_IS_REQUIRED = "PART_DESCRIPTION_IS_REQUIRED";
@@ -338,7 +339,8 @@ public abstract class MessageConstants implements Serializable{
 	public static final String INVALID_CUSTOMER_REFERENCE = "INVALID_CUSTOMER_REFERENCE";
 	public static final String SERVICE_TYPE_IS_REQUIRED = "SERVICE_TYPE_IS_REQUIRED";
 
-	
-	
+	public static final String ATLEAST_ONE_PICKLIST_ITEM_IS_REQUIRED = "ATLEAST_ONE_PICKLIST_ITEM_IS_REQUIRED";
+	public static final String  ATLEAST_ONE_ATTRIBUTE_IS_REQUIRED = "ATLEAST_ONE_ATTRIBUTE_IS_REQUIRED";
+	public static final String  KIT_PART_IS_NOT_ALLOWED = "KIT_PART_IS_NOT_ALLOWED";
 
 }

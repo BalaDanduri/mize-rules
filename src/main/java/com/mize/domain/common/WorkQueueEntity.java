@@ -23,6 +23,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
+import com.mize.domain.businessentity.BusinessEntityIntl;
+import com.mize.domain.product.Product;
 import com.mize.domain.product.ProductSerial;
 import com.mize.domain.service.schedule.ServiceSchedule;
 import com.mize.domain.util.JodaDateTimeDeserializer;
@@ -63,6 +65,18 @@ public class WorkQueueEntity extends MizeEntity implements Comparable<WorkQueueE
 	
 	public WorkQueueEntity(Long id,Long entityId, String entityType,String entityCode,String status,String orderType,DateTime serviceDate,DateTime serviceUpdatedDate,BusinessEntity businessEntity) {
 		result = new WorkQueueResult(id,entityId, entityType,entityCode,status,orderType,serviceDate,serviceUpdatedDate,businessEntity);
+	}
+	
+	public WorkQueueEntity(Long id,Long entityId, String entityType,String status,String serviceType,String serviceCode,String providerName,DateTime serviceDate,String model,String serialNumber, String customerName) {
+		Product product = new Product(model);
+		ProductSerial productSerial = new ProductSerial();
+		productSerial.setProduct(product);
+		productSerial.setSerialNumber(serialNumber);
+		BusinessEntity customer = new BusinessEntity();
+		BusinessEntityIntl beIntl = new BusinessEntityIntl();
+		beIntl.setName(customerName);
+		customer.getIntl().add(beIntl);
+		result = new WorkQueueResult(id,entityId, entityType,status,serviceType,serviceCode,providerName,serviceDate,customer,productSerial);
 	}
 	
 	public WorkQueueEntity(WorkQueue workQueue, String entityType,
