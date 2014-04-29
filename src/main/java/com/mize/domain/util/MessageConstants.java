@@ -338,7 +338,8 @@ public abstract class MessageConstants implements Serializable{
 	public static final String INVALID_CUSTOMER_REFERENCE = "INVALID_CUSTOMER_REFERENCE";
 	public static final String SERVICE_TYPE_IS_REQUIRED = "SERVICE_TYPE_IS_REQUIRED";
 
-	
-	
+	public static final String ATLEAST_ONE_PICKLIST_ITEM_IS_REQUIRED = "ATLEAST_ONE_PICKLIST_ITEM_IS_REQUIRED";
+	public static final String  ATLEAST_ONE_ATTRIBUTE_IS_REQUIRED = "ATLEAST_ONE_ATTRIBUTE_IS_REQUIRED";
+	public static final String  KIT_PART_IS_NOT_ALLOWED = "KIT_PART_IS_NOT_ALLOWED";
 
 }
