@@ -97,10 +97,8 @@ public class AppMessageIntl extends MizeEntity {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime * result
-				+ ((appMessage == null) ? 0 : appMessage.hashCode());
 		result = prime * result + ((locale == null) ? 0 : locale.hashCode());
 		result = prime * result
 				+ ((longDesc == null) ? 0 : longDesc.hashCode());
@@ -117,12 +115,7 @@ public class AppMessageIntl extends MizeEntity {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		AppMessageIntl other = (AppMessageIntl) obj;
-		if (appMessage == null) {
-			if (other.appMessage != null)
-				return false;
-		} else if (!appMessage.equals(other.appMessage))
-			return false;
+		AppMessageIntl other = (AppMessageIntl) obj;		
 		if (locale == null) {
 			if (other.locale != null)
 				return false;
@@ -139,6 +132,13 @@ public class AppMessageIntl extends MizeEntity {
 		} else if (!shortDesc.equals(other.shortDesc))
 			return false;
 		return true;
+	}
+
+
+	@Override
+	public String toString() {
+		return "AppMessageIntl [shortDesc=" + shortDesc + ", longDesc="
+				+ longDesc + ", locale=" + locale + "]";
 	}
 	
 }

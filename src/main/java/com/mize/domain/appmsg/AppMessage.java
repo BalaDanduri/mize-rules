@@ -312,26 +312,22 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
-
-
-	@Override
-	public String toString() {
-		return "AppMessage [tenant=" + tenant + ", code=" + code + ", msgType="
-				+ msgType + ", severity=" + severity + ", intls=" + intls + "]";
-	}
 	
 	@Override
+	public String toString() {
+		return "AppMessage [code=" + code + ", msgType=" + msgType
+				+ ", severity=" + severity + "]";
+	}
+
+	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
-		result = prime * result + ((intls == null) ? 0 : intls.hashCode());
 		result = prime * result
 				+ ((msgType == null) ? 0 : msgType.hashCode());
 		result = prime * result
 				+ ((severity == null) ? 0 : severity.hashCode());
-		result = prime * result + ((tenant == null) ? 0 : tenant.hashCode());
 		return result;
 	}
 
@@ -349,11 +345,6 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 				return false;
 		} else if (!code.equals(other.code))
 			return false;
-		if (intls == null) {
-			if (other.intls != null)
-				return false;
-		} else if (!intls.equals(other.intls))
-			return false;
 		if (msgType == null) {
 			if (other.msgType != null)
 				return false;
@@ -363,12 +354,7 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 			if (other.severity != null)
 				return false;
 		} else if (!severity.equals(other.severity))
-			return false;
-		if (tenant == null) {
-			if (other.tenant != null)
-				return false;
-		} else if (!tenant.equals(other.tenant))
-			return false;
+			return false;		
 		return true;
 	}
 
