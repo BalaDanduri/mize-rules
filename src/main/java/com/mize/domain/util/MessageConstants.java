@@ -343,5 +343,9 @@ public abstract class MessageConstants implements Serializable{
 	public static final String  ATLEAST_ONE_ATTRIBUTE_IS_REQUIRED = "ATLEAST_ONE_ATTRIBUTE_IS_REQUIRED";
 	public static final String  KIT_PART_IS_NOT_ALLOWED = "KIT_PART_IS_NOT_ALLOWED";
 	public static final String  INVALID_CSV_DATA = "INVALID_CSV_DATA";
+	
+	public static final String MESSAGE_TYPE_REQUIRED = "MESSAGE_TYPE_REQUIRED";
+	public static final String MESSAGE_CODE_REQUIRED = "MESSAGE_CODE_REQUIRED";
+	public static final String MESSAGE_SHORT_DESCRIPTION_REQUIRED = "MESSAGE_SHORT_DESCRIPTION_REQUIRED";
 
 }
