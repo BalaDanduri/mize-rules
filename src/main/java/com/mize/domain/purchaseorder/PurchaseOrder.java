@@ -82,8 +82,6 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	private String productSerial;
 	@Transient
 	private String importFrom;
-	@Transient
-	private boolean isCSVItems;
 	
 	public PurchaseOrder(){
 		super();
@@ -458,14 +456,6 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 
 	public void setImportFrom(String importFrom) {
 		this.importFrom = importFrom;
-	}
-	@Transient
-	public boolean isCSVItems() {
-		return isCSVItems;
-	}
-
-	public void setCSVItems(boolean isCSVItems) {
-		this.isCSVItems = isCSVItems;
 	}
 
 	@Override
