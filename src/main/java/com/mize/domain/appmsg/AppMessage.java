@@ -59,9 +59,8 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 	private User user;
 	@Transient
 	private MessageType messageType = new MessageType();
-
-	
-	
+	@Transient
+	private boolean isExists;	
 
 	public enum Severity {
 		one(1),two(2),three(3),four(4),five(5);
@@ -73,6 +72,7 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 			return val;
 		}
 	}
+	
 	public enum MsgType {
 		Application(1),Error(2);
 		int val;
@@ -82,21 +82,19 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 		public int getValue(){
 			return val;
 		}
-	}
+	}	
 	
-	
-	public AppMessage(BusinessEntity tenant, String code,
-			String msgType, Integer severity, List<AppMessageIntl> intls) {
+	public AppMessage(Long id ,String code,String msgType, Integer severity) {
 		super();
-		this.tenant = tenant;
-		this.code = code;
+		this.id = id;
+		this.code = makeNotNullString(code);
 		this.msgType = msgType;
 		this.severity = severity;
-		this.intls = intls;
+		//this.intls = intls;
 	}
 
 	public AppMessage(String code, String shortDesc, String longDesc, Integer severity, String field, String fieldKey, MessageType.Type messageType) {
-		this.code = code;		
+		this.code = makeNotNullString(code);	
 		this.shortDesc = shortDesc;
 		this.longDesc = longDesc;
 		this.severity = severity;
@@ -106,7 +104,7 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 	}
 	
 	public AppMessage(String code,String shortDesc,String longDesc) {
-		this.code = code;
+		this.code = makeNotNullString(code);
 		this.shortDesc = shortDesc;
 		this.longDesc = longDesc;
 	}
@@ -124,6 +122,11 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 	
 	public AppMessage() {
 		super();
+	}
+	
+	public AppMessage(boolean isExists) {
+		super();
+		this.isExists = isExists;
 	}
 
 	@Id
@@ -163,7 +166,7 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 	}
 
 	public void setCode(String code) {
-		this.code = code;
+		this.code = makeNotNullString(code);
 	}
 	
 	@Column(name = "message_type")
@@ -221,7 +224,7 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 	}
 	
 	
-	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "appMessage" ,orphanRemoval = true)
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "appMessage" ,orphanRemoval = true)
 	@Fetch(FetchMode.SELECT)
 	@JsonManagedReference(value="intl")
 	public List<AppMessageIntl> getIntls() {
@@ -276,8 +279,6 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 		this.updatedDate = updatedDate;
 	} 
 	
-
-	
 	@Override
 	@JsonIgnore(value=false)
 	@Column(name = "created_by")
@@ -313,12 +314,24 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 		this.user = user;
 	}
 	
+	public boolean isExists() {
+		return isExists;
+	}
+
+	public void setExists(boolean isExists) {
+		this.isExists = isExists;
+	}
+
 	@Override
 	public String toString() {
 		return "AppMessage [code=" + code + ", msgType=" + msgType
-				+ ", severity=" + severity + "]";
+				+ ", severity=" + severity +", isExists=" + isExists + "]";
 	}
 
+	public static String makeNotNullString(String str){
+		return str == null ? null:str.trim();
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
