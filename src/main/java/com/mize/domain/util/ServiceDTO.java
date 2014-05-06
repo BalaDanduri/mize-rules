@@ -240,4 +240,20 @@ public final class ServiceDTO<T> implements ServiceLiteral{
 		this.recordNumber = recordNumber;
 	}
 	
+	@JsonIgnore
+	public boolean hasGenTechError(){
+		boolean flag = false;
+		for(AppMessage appMessage : appMessages){
+			if(MessageConstants.GEN_TECH_EXCEPTION.equalsIgnoreCase(appMessage.getCode())){
+				flag = true;
+				break;
+			}
+		}
+		return flag;
+	}
+
+	public void setSeverity(Integer severity) {
+		this.severity = severity;
+	}
+	
 }
