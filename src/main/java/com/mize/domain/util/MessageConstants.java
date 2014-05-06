@@ -131,10 +131,12 @@ public abstract class MessageConstants implements Serializable{
 	public static final String DUPLICATE_WORK_QUEUE_CODE = "DUPLICATE_WORK_QUEUE_NAME";
 	public static final String DUPLICATE_WORK_QUEUE_AUTH_CODE = "DUPLICATE_WORK_QUEUE_AUTH_CODE";
 	public static final String DUPLICATE_ROLE_NAME= "DUPLICATE_ROLE_NAME";
+	public static final String ATLEAST_ONE_ROLE_IS_REQUIRED = "ATLEAST_ONE_ROLE_IS_REQUIRED";
 	public static final String INVALID_WQ_AUTHORIZATION= "INVALID_WQ_AUTHORIZATION";
 	public static final String WQ_NAME_REQUIRED= "WQ_NAME_REQUIRED";
 	public static final String WQ_AUTHORIZATION_TYPE_REQUIRED= "WQ_AUTHORIZATION_TYPE_REQUIRED";
 	public static final String WQ_AUTHORIZATION_VALUE_REQUIRED= "WQ_AUTHORIZATION_VALUE_REQUIRED";
+	public static final String ATLEAST_ONE_WORKQUEUE_ITEM_IS_REQUIRED = "ATLEAST_ONE_WORKQUEUE_ITEM_IS_REQUIRED";
 
 
 	public static final String INVALID_CUSTOMER = "INVALID_CUSTOMER";
@@ -152,6 +154,7 @@ public abstract class MessageConstants implements Serializable{
 	public static final String ENTRY_CODE_REQUIRED = "ENTRY_CODE_REQUIRED";
 	public static final String ENTRY_VALUE_REQUIRED = "ENTRY_VALUE_REQUIRED";
 	public static final String DUPLICATE_ENTRY_CODE = "DUPLICATE_ENTRY_CODE";
+	public static final String ATLEAST_ONE_CATALOG_ENTRY_IS_REQUIRED = "ATLEAST_ONE_CATALOG_ENTRY_IS_REQUIRED";
 	
 	public static final String DISCOUNT_NAME_IS_REQUIRED = "DISCOUNT_NAME_IS_REQUIRED";
 	public static final String ORDER_LOCATION_TYPE_IS_REQUIRED= "ORDER_LOCATION_TYPE_IS_REQUIRED";
