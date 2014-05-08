@@ -15,6 +15,7 @@ public abstract class MessageConstants implements Serializable{
 	public static final String INVALID_STATE = "INVALID_STATE";
 	public static final String INVALID_COUNTRY = "INVALID_COUNTRY";
 	public static final String INVALID_BRAND_NAME = "INVALID_BRAND_NAME";
+	public static final String INVALID_REGION = "INVALID_REGION";
 	public static final String INVALID_DATE_RANGE = "INVALID_DATE_RANGE";
 	public static final String BRAND_NAME_REQUIRED = "BRAND_NAME_REQUIRED";
 	public static final String CREATED_BY_REQUIRED = "CREATED_BY_REQUIRED";
