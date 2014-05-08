@@ -32,6 +32,7 @@ import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.EntityReference;
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
@@ -348,4 +349,21 @@ public class EntityParameter extends MizeEntity implements Comparable<EntityPara
 		this.beId = beId;
 	}
 	
+	@JsonIgnore
+	@Transient
+	public boolean isPurchaseOrderType(){
+		return this.type!=null && Formatter.equalIgnoreCase(EntityParameter.EntityType.PurchaseOrderType, this.type);
+	}
+	
+	@JsonIgnore
+	@Transient
+	public boolean isOrderLocation(){
+		return this.type!=null && Formatter.equalIgnoreCase(EntityParameter.EntityType.OrderLocation, this.type);
+	}
+	
+	@JsonIgnore
+	@Transient
+	public boolean isOrderTypeAndLocation(){
+		return this.type!=null && Formatter.equalIgnoreCase(EntityParameter.EntityType.OrderTypeAndLocation, this.type);
+	}
 }

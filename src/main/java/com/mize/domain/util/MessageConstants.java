@@ -350,5 +350,5 @@ public abstract class MessageConstants implements Serializable{
 	public static final String MESSAGE_TYPE_REQUIRED = "MESSAGE_TYPE_REQUIRED";
 	public static final String MESSAGE_CODE_REQUIRED = "MESSAGE_CODE_REQUIRED";
 	public static final String MESSAGE_SHORT_DESCRIPTION_REQUIRED = "MESSAGE_SHORT_DESCRIPTION_REQUIRED";
-
+	public static final String INVALID_ENTITY_LOCATION_NUMBER = "INVALID_ENTITY_LOCATION_NUMBER";
 }
