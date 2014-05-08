@@ -82,10 +82,18 @@ public class ProductRegistration extends MizeEntity {
 		New,Transfer
 	}
 	public enum Status{
-		Open,Draft,Registered,Pending,Rejected
+		Open,Draft,Registered,Pending,Rejected,Transferred
 	}	
 	public ProductRegistration(){
 		
+	}
+	
+	public ProductRegistration(Long id,String statusCode,String registrationType,DateTime purchaseDate,DateTime registrationDate){
+		this.id = id;
+		this.statusCode = statusCode;
+		this.registrationType = registrationType;
+		this.purchaseDate = purchaseDate;
+		this.registrationDate = registrationDate;
 	}
 	
 	public ProductRegistration(Long id,String statusCode,String serialNumber,DateTime shipDate, String brandName,String model,String productName) {
