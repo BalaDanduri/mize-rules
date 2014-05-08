@@ -1,5 +1,7 @@
 package com.mize.domain.businessentity;
 
+import java.util.Comparator;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +13,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mize.domain.common.MizeEntity;
 
 @Entity
@@ -180,4 +183,21 @@ public class BusinessEntityAttribute extends MizeEntity implements Comparable<Bu
 	public int compareTo(BusinessEntityAttribute o) {
 		return 0;
 	}
+	
+	@JsonIgnore
+	public static Comparator<BusinessEntityAttribute> PromotedComparator = new  Comparator<BusinessEntityAttribute>() {
+		public int compare(BusinessEntityAttribute beAttr1, BusinessEntityAttribute beAttr2) {
+			if(beAttr1 != null && beAttr2 != null) {				
+				if( beAttr1.getIsPromoted().compareToIgnoreCase(beAttr2.getIsPromoted()) > 0) {
+					return -1;
+				}else if( beAttr1.getIsPromoted().compareToIgnoreCase(beAttr2.getIsPromoted()) < 0) {
+					return 1;
+				} else {
+					return 0;
+				}
+			}else {
+				return 0;
+			}
+		}
+	};
 }
