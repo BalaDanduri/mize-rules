@@ -25,8 +25,9 @@ public class BusinessEntityAttribute extends MizeEntity implements Comparable<Bu
 	 private String creditOnHold;
 	 private String isPromoted;
 	 private String isServiceProvider;
-	 
+	 private String region;
 	
+	 
 	 @Id
 	 @Column(name="id",nullable=false,unique=true)
 	 @GeneratedValue(strategy = GenerationType.AUTO)
@@ -114,7 +115,14 @@ public class BusinessEntityAttribute extends MizeEntity implements Comparable<Bu
 		this.isServiceProvider = isServiceProvider;
 	}
 	
+	@Column(name="region", length = 50)
+	public String getRegion() {
+		return region;
+	}
 	
+	public void setRegion(String region) {
+		this.region = region;
+	}
 	
 	@Override
 	public int hashCode() {
@@ -127,6 +135,13 @@ public class BusinessEntityAttribute extends MizeEntity implements Comparable<Bu
 		result = prime * result
 				+ ((hoursOfOp == null) ? 0 : hoursOfOp.hashCode());
 		result = prime * result + ((icon == null) ? 0 : icon.hashCode());
+		result = prime * result
+				+ ((isPromoted == null) ? 0 : isPromoted.hashCode());
+		result = prime
+				* result
+				+ ((isServiceProvider == null) ? 0 : isServiceProvider
+						.hashCode());
+		result = prime * result + ((region == null) ? 0 : region.hashCode());
 		result = prime * result
 				+ ((toolTipLogo == null) ? 0 : toolTipLogo.hashCode());
 		result = prime * result + ((url == null) ? 0 : url.hashCode());
@@ -162,6 +177,21 @@ public class BusinessEntityAttribute extends MizeEntity implements Comparable<Bu
 				return false;
 		} else if (!icon.equals(other.icon))
 			return false;
+		if (isPromoted == null) {
+			if (other.isPromoted != null)
+				return false;
+		} else if (!isPromoted.equals(other.isPromoted))
+			return false;
+		if (isServiceProvider == null) {
+			if (other.isServiceProvider != null)
+				return false;
+		} else if (!isServiceProvider.equals(other.isServiceProvider))
+			return false;
+		if (region == null) {
+			if (other.region != null)
+				return false;
+		} else if (!region.equals(other.region))
+			return false;
 		if (toolTipLogo == null) {
 			if (other.toolTipLogo != null)
 				return false;
@@ -175,9 +205,9 @@ public class BusinessEntityAttribute extends MizeEntity implements Comparable<Bu
 		return true;
 	}
 	
-	
 	@Override
 	public int compareTo(BusinessEntityAttribute o) {
 		return 0;
 	}
+	
 }
