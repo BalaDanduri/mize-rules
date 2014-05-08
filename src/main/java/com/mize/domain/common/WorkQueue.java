@@ -42,18 +42,17 @@ public class WorkQueue extends MizeEntity implements Comparable<WorkQueue>{
 	private String code;
 	private String isActive;
 	@Transient
-	private User user;
-	
-	private List<WorkQueueAuth> workQueueAuths  =new ArrayList<WorkQueueAuth>();
+	private User user;	
+	private List<WorkQueueAuth> workQueueAuths  = new ArrayList<WorkQueueAuth>();
 	private BusinessEntity tenant;
-
+	@Transient
+	private boolean isAssociateAuth;
+	
 	public WorkQueue(){
 		super();
-
 	}
 
-	public WorkQueue(String name, String desc,String code,
-			List<WorkQueueAuth> workQueueAuths) {
+	public WorkQueue(String name, String desc,String code,List<WorkQueueAuth> workQueueAuths) {
 		super();
 		this.name = name;
 		this.desc = desc;
@@ -61,17 +60,20 @@ public class WorkQueue extends MizeEntity implements Comparable<WorkQueue>{
 		this.workQueueAuths = workQueueAuths;
 	}
 
-
 	@Id
 	@GenericGenerator(name="id",strategy="increment")
 	@GeneratedValue
 	@Column(name = "id", nullable = false, unique = true)
 	@Override
-	public Long getId() {
-	
+	public Long getId() {	
 		return id;
 	}
- 
+
+	@Override
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 	@Column(name = "name", length = 30, nullable = false)
 	public String getName() {
 		return name;
@@ -92,7 +94,6 @@ public class WorkQueue extends MizeEntity implements Comparable<WorkQueue>{
 		return isActive;
 	}
 	
-
 	@OneToMany(fetch = FetchType.LAZY,cascade=CascadeType.ALL, mappedBy = "workQueue",orphanRemoval= true)
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	@JsonManagedReference(value="workQueue_workQueueAuth")
@@ -139,12 +140,6 @@ public class WorkQueue extends MizeEntity implements Comparable<WorkQueue>{
 	@Column(name = "updated_by")
 	public Long getUpdatedBy() {		
 		return super.getUpdatedBy();
-	}
-
-
-	@Override
-	public void setId(Long id) {
-		this.id = id;
 	}
     
 	public void setName(String name) {
@@ -210,6 +205,16 @@ public class WorkQueue extends MizeEntity implements Comparable<WorkQueue>{
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	@Transient
+	@JsonIgnore
+	public boolean isAssociateAuth() {
+		return isAssociateAuth;
+	}
+
+	public void setAssociateAuth(boolean isAssociateAuth) {
+		this.isAssociateAuth = isAssociateAuth;
 	}
 
 	@Override
