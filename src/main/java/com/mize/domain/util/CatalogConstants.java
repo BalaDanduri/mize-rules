@@ -45,6 +45,8 @@ public abstract class CatalogConstants implements Serializable{
 	public static final String PART_ATTRIBUTE_UOM  = "PartAttributeUOM";
 	public static final String MESSAGE_TYPE = "MessageType";
 	public static final String ENTITY_ORDER_TYPE = "EntityOrderType";
+	public static final String REGION = "Region";
+	
 
 }
 
