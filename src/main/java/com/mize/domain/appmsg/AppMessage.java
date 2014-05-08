@@ -314,6 +314,7 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 		this.user = user;
 	}
 	
+	@Transient
 	public boolean isExists() {
 		return isExists;
 	}
