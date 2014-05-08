@@ -370,7 +370,7 @@ public class FormDefinition extends MizeEntity {
 		if (tenant == null) {
 			if (other.tenant != null)
 				return false;
-		} else if (!tenant.getId().equals(other.tenant.getId()))
+		} else if (tenant.getId() != null && !tenant.getId().equals(other.tenant.getId()))
 			return false;
 		if (versionNumber == null) {
 			if (other.versionNumber != null)

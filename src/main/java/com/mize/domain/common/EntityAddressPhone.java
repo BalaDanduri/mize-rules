@@ -26,6 +26,10 @@ public class EntityAddressPhone extends MizeEntity implements Comparable<EntityA
 	private String phoneValue;
 	private String phoneExt;
 
+	public enum Type{
+		Work,Mobile,Fax;
+	}
+	
 	public EntityAddressPhone(){
 		super();
 	}

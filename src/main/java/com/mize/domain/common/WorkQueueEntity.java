@@ -47,7 +47,10 @@ public class WorkQueueEntity extends MizeEntity implements Comparable<WorkQueueE
 	private Long entityCount;
 	@Transient
 	private List<Long> entityIds;
+	@Transient
 	private User user;
+	@Transient
+	private BusinessEntity tenant;
 	@Transient
 	private WorkQueueResult result;
 	public WorkQueueEntity(){
@@ -267,6 +270,16 @@ public class WorkQueueEntity extends MizeEntity implements Comparable<WorkQueueE
 
 	public void setEntityIds(List<Long> entityIds) {
 		this.entityIds = entityIds;
+	}
+
+	@Transient
+	@JsonIgnore
+	public BusinessEntity getTenant() {
+		return tenant;
+	}
+
+	public void setTenant(BusinessEntity tenant) {
+		this.tenant = tenant;
 	}
 
 	@Override

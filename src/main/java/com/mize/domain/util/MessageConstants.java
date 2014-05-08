@@ -15,6 +15,7 @@ public abstract class MessageConstants implements Serializable{
 	public static final String INVALID_STATE = "INVALID_STATE";
 	public static final String INVALID_COUNTRY = "INVALID_COUNTRY";
 	public static final String INVALID_BRAND_NAME = "INVALID_BRAND_NAME";
+	public static final String INVALID_REGION = "INVALID_REGION";
 	public static final String INVALID_DATE_RANGE = "INVALID_DATE_RANGE";
 	public static final String BRAND_NAME_REQUIRED = "BRAND_NAME_REQUIRED";
 	public static final String CREATED_BY_REQUIRED = "CREATED_BY_REQUIRED";
@@ -131,10 +132,12 @@ public abstract class MessageConstants implements Serializable{
 	public static final String DUPLICATE_WORK_QUEUE_CODE = "DUPLICATE_WORK_QUEUE_NAME";
 	public static final String DUPLICATE_WORK_QUEUE_AUTH_CODE = "DUPLICATE_WORK_QUEUE_AUTH_CODE";
 	public static final String DUPLICATE_ROLE_NAME= "DUPLICATE_ROLE_NAME";
+	public static final String ATLEAST_ONE_ROLE_IS_REQUIRED = "ATLEAST_ONE_ROLE_IS_REQUIRED";
 	public static final String INVALID_WQ_AUTHORIZATION= "INVALID_WQ_AUTHORIZATION";
 	public static final String WQ_NAME_REQUIRED= "WQ_NAME_REQUIRED";
 	public static final String WQ_AUTHORIZATION_TYPE_REQUIRED= "WQ_AUTHORIZATION_TYPE_REQUIRED";
 	public static final String WQ_AUTHORIZATION_VALUE_REQUIRED= "WQ_AUTHORIZATION_VALUE_REQUIRED";
+	public static final String ATLEAST_ONE_WORKQUEUE_ITEM_IS_REQUIRED = "ATLEAST_ONE_WORKQUEUE_ITEM_IS_REQUIRED";
 
 
 	public static final String INVALID_CUSTOMER = "INVALID_CUSTOMER";
@@ -152,6 +155,7 @@ public abstract class MessageConstants implements Serializable{
 	public static final String ENTRY_CODE_REQUIRED = "ENTRY_CODE_REQUIRED";
 	public static final String ENTRY_VALUE_REQUIRED = "ENTRY_VALUE_REQUIRED";
 	public static final String DUPLICATE_ENTRY_CODE = "DUPLICATE_ENTRY_CODE";
+	public static final String ATLEAST_ONE_CATALOG_ENTRY_IS_REQUIRED = "ATLEAST_ONE_CATALOG_ENTRY_IS_REQUIRED";
 	
 	public static final String DISCOUNT_NAME_IS_REQUIRED = "DISCOUNT_NAME_IS_REQUIRED";
 	public static final String ORDER_LOCATION_TYPE_IS_REQUIRED= "ORDER_LOCATION_TYPE_IS_REQUIRED";
@@ -347,5 +351,12 @@ public abstract class MessageConstants implements Serializable{
 	public static final String MESSAGE_TYPE_REQUIRED = "MESSAGE_TYPE_REQUIRED";
 	public static final String MESSAGE_CODE_REQUIRED = "MESSAGE_CODE_REQUIRED";
 	public static final String MESSAGE_SHORT_DESCRIPTION_REQUIRED = "MESSAGE_SHORT_DESCRIPTION_REQUIRED";
-
+	public static final String INVALID_ENTITY_LOCATION_NUMBER = "INVALID_ENTITY_LOCATION_NUMBER";
+	public static final String MESSAGE_SEVERITY_REQUIRED = "MESSAGE_SEVERITY_REQUIRED";
+	
+	public static final String INVALID_PURCHASE_DATE_COMPARISON_PREV_PURCHASE_DATE ="INVALID_PURCHASE_DATE_COMPARISON_PREV_PURCHASE_DATE";
+	public static final String TRANSFERRED_NOT_ALLOWED ="TRANSFERRED_NOT_ALLOWED";
+	public static final String PREVIOUS_REGISTRATION_STATUS_IS_NOT_REGISTERED ="PREVIOUS_REGISTRATION_STATUS_IS_NOT_REGISTERED";
+	public static final String INVALID_REGISTRATION_DATE_COMPARISON_PREV_REGISTRATION_DATE ="INVALID_REGISTRATION_DATE_COMPARISON_PREV_REGISTRATION_DATE";
+	
 }
