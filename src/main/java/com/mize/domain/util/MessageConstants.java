@@ -92,9 +92,6 @@ public abstract class MessageConstants implements Serializable{
 	public static final String PHONE_NUMBER_REQUIRED = "PHONE_NUMBER_REQUIRED";
 	public static final String INVALID_CATEGORY = "INVALID_CATEGORY";
 	public static final String BRAND_MODEL_CATEGORY = "BRAND_MODEL_CATEGORY";
-	
-
-	
 	public static final String INVALID_PART_CODE = "INVALID_PART_CODE";
 	public static final String INVALID_TEMPLATE = "INVALID_TEMPLATE";
 	public static final String DUPLICATE_PART_CODE = "DUPLICATE_PART_CODE";
@@ -114,8 +111,7 @@ public abstract class MessageConstants implements Serializable{
 	public static final String INVALID_PROD_ID ="INVALID_PROD_ID";
 	public static final String INVALID_COMMENT_ID ="INVALID_COMMENT_ID";
 	public static final String INVALID_PROD_SRL_NO ="INVALID_PROD_SRL_NO";
-	public static final String INVALID_DELIVERY_BE_ID ="INVALID_DELIVERY_BE_ID";
-	
+	public static final String INVALID_DELIVERY_BE_ID ="INVALID_DELIVERY_BE_ID";	
 	public static final String INVALID_MANUFACTURER_BE_ID = "INVALID_MANUFACTURER_BE_ID";
 	public static final String INVALID_PROD_NAME = "INVALID_PROD_NAME";
 	public static final String INVALID_ITEM_NUMBER = "INVALID_ITEM_NUMBER";
@@ -350,6 +346,7 @@ public abstract class MessageConstants implements Serializable{
 	
 	public static final String MESSAGE_TYPE_REQUIRED = "MESSAGE_TYPE_REQUIRED";
 	public static final String MESSAGE_CODE_REQUIRED = "MESSAGE_CODE_REQUIRED";
+	public static final String DUPLICATE_MESSAGE_CODE = "DUPLICATE_MESSAGE_CODE";
 	public static final String MESSAGE_SHORT_DESCRIPTION_REQUIRED = "MESSAGE_SHORT_DESCRIPTION_REQUIRED";
 	public static final String INVALID_ENTITY_LOCATION_NUMBER = "INVALID_ENTITY_LOCATION_NUMBER";
 	public static final String MESSAGE_SEVERITY_REQUIRED = "MESSAGE_SEVERITY_REQUIRED";
