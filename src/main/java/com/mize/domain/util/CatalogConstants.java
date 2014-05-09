@@ -13,6 +13,8 @@ public abstract class CatalogConstants implements Serializable{
 	public static final String BUSINESS_ENTITY_DEPARTMENT_TYPE = "BusinessEntityDepartmentType";
 	public static final String SHIPPING_LOCATION_TYPE ="ShipLocationType";
 	public static final String PURCHASE_ORDER_TYPE ="PurchaseOrderType";
+	public static final String ORDER_RETURN_TYPE ="OrderReturnType";
+	public static final String ORDER_IMPORT_TYPE ="OrderImportType";
 	public static final String SHIPPING_METHOD ="ShippingMethod";
 	public static final String SHIPPING_CARRIER ="ShippingCarrier";
 	public static final String SHIPPING_PRIORITY ="ShippingPriority";
@@ -48,6 +50,10 @@ public abstract class CatalogConstants implements Serializable{
 	public static final String REGION = "Region";
 	public static final String LOCATOR_ENTITY_TYPE = "LocatorEntityType";
 	public static final String MESSAGE_SEVERITY = "MessageSeverity";
+	public static final String REASON_REQUIRED = "ReasonRequired";
+	public static final String ORDER_REQUIRED = "OrderRequired";
+	public static final String RETURN_WINDOW = "ReturnWindow";
+	public static final String NON_RETURNABLE = "NonReturnable";
 	
 
 }

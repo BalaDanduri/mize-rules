@@ -34,6 +34,7 @@ import com.mize.domain.common.EntityAttachment;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
@@ -94,7 +95,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	
 	public enum Type{
 		Claim,Warranty,Campaign,Extended_Warranty,PDI,Parts_Warranty,
-		Support_Request,Service_Order,Parts_Order,Purchase_Order;
+		Support_Request,Service_Order,Parts_Order,Purchase_Order,PartsReturn;
 	}
 	
 	@Id
@@ -457,7 +458,31 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	public void setImportFrom(String importFrom) {
 		this.importFrom = importFrom;
 	}
-
+	
+	@Transient
+	@JsonIgnore
+	public boolean isPartsReturn(){
+		return Formatter.equalIgnoreCase(Type.PartsReturn, type);
+	}
+	
+	@Transient
+	@JsonIgnore
+	public boolean isDraftStatus(){
+		return Formatter.equalIgnoreCase(Status.Draft, this.status);
+	}
+	
+	@Transient
+	@JsonIgnore
+	public boolean isPendingStatus(){
+		return Formatter.equalIgnoreCase(Status.Pending, this.status);
+	}
+	
+	@Transient
+	@JsonIgnore
+	public boolean isInProcessStatus(){
+		return Formatter.equalIgnoreCase(Status.In_Process, this.status);
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;

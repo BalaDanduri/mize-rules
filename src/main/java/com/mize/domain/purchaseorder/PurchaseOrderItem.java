@@ -63,6 +63,14 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 	private PartKit partKit;
 	@Transient
 	private boolean isUpdated;
+	@Transient
+	private String orderNumber;
+	@Transient
+	private Long orderNumberId;
+	@Transient
+	private String reason;
+	@Transient
+	private String orderType;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -319,6 +327,42 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 
 	public void setIsUpdated(boolean isUpdated) {
 		this.isUpdated = isUpdated;
+	}
+
+	@Transient
+	public String getOrderNumber() {
+		return orderNumber;
+	}
+
+	public void setOrderNumber(String orderNumber) {
+		this.orderNumber = orderNumber;
+	}
+
+	@Transient
+	public String getReason() {
+		return reason;
+	}
+
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
+	
+	@Transient
+	public Long getOrderNumberId() {
+		return orderNumberId;
+	}
+
+	public void setOrderNumberId(Long orderNumberId) {
+		this.orderNumberId = orderNumberId;
+	}
+	
+	@Transient
+	public String getOrderType() {
+		return orderType;
+	}
+
+	public void setOrderType(String orderType) {
+		this.orderType = orderType;
 	}
 
 	@Override

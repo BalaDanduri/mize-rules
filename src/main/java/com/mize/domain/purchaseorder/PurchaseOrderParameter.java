@@ -12,9 +12,17 @@ public class PurchaseOrderParameter extends MizeEntity {
 	private String pricingMethod;
 	private String shippingDays;
 	private String allowOverride;
+	private String returnWindow;
+	private String orderRequired;
+	private String reasonRequired;
+	private String nonReturnable;
+	private String maxAmtAllowed;
+	private String invoiceType;
+	private String purchaseOrderType;
 	
 	public enum Parameter{
-		ShippingMethod,ShippingDays,ShippingPriority,ShippingCarrier,PaymentMethod,PricingMethod,AllowOverride
+		ShippingMethod,ShippingDays,ShippingPriority,ShippingCarrier,PaymentMethod,PricingMethod,AllowOverride,
+		OrderRequired,ReturnWindow,NonReturnable,MaxAmtAllowed,ReasonRequired,InvoiceType,PurchaseOrderType,
 	}
 	
 	
@@ -70,6 +78,49 @@ public class PurchaseOrderParameter extends MizeEntity {
 		this.allowOverride = allowOverride;
 	}
 	
+	public String getReturnWindow() {
+		return returnWindow;
+	}
+	public void setReturnWindow(String returnWindow) {
+		this.returnWindow = returnWindow;
+	}
+	public String getOrderRequired() {
+		return orderRequired;
+	}
+	public void setOrderRequired(String orderRequired) {
+		this.orderRequired = orderRequired;
+	}
+	public String getReasonRequired() {
+		return reasonRequired;
+	}
+	public void setReasonRequired(String reasonRequired) {
+		this.reasonRequired = reasonRequired;
+	}
+	public String getNonReturnable() {
+		return nonReturnable;
+	}
+	public void setNonReturnable(String nonReturnable) {
+		this.nonReturnable = nonReturnable;
+	}
+	public String getMaxAmtAllowed() {
+		return maxAmtAllowed;
+	}
+	public void setMaxAmtAllowed(String maxAmtAllowed) {
+		this.maxAmtAllowed = maxAmtAllowed;
+	}
+	public String getInvoiceType() {
+		return invoiceType;
+	}
+	public void setInvoiceType(String invoiceType) {
+		this.invoiceType = invoiceType;
+	}
+	public String getPurchaseOrderType() {
+		return purchaseOrderType;
+	}
+	public void setPurchaseOrderType(String purchaseOrderType) {
+		this.purchaseOrderType = purchaseOrderType;
+	}
+	
 	@Override
 	public String toString() {
 		return "PurchaseOrderParameter [shippingMethod=" + shippingMethod
@@ -77,7 +128,13 @@ public class PurchaseOrderParameter extends MizeEntity {
 				+ ", shippingCarrier=" + shippingCarrier + ", paymentMethod="
 				+ paymentMethod + ", pricingMethod=" + pricingMethod
 				+ ", shippingDays=" + shippingDays + ", allowOverride="
-				+ allowOverride + "]";
+				+ allowOverride + ", returnWindow=" + returnWindow
+				+ ", orderRequired=" + orderRequired + ", reasonRequired="
+				+ reasonRequired + ", nonReturnable=" + nonReturnable
+				+ ", maxAmtAllowed=" + maxAmtAllowed + ", invoiceType="
+				+ invoiceType + ", purchaseOrderType=" + purchaseOrderType
+				+ "]";
 	}
+	
 	
 }
