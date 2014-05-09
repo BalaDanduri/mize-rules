@@ -26,6 +26,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.Locale;
@@ -60,7 +61,9 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 	@Transient
 	private MessageType messageType = new MessageType();
 	@Transient
-	private boolean isExists;	
+	private boolean isExists;
+	@Transient
+	private boolean isDuplicate;	
 
 	public enum Severity {
 		one(1),two(2),three(3),four(4),five(5);
@@ -227,6 +230,7 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "appMessage" ,orphanRemoval = true)
 	@Fetch(FetchMode.SELECT)
 	@JsonManagedReference(value="intl")
+	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public List<AppMessageIntl> getIntls() {
 		return intls;
 	}
@@ -235,7 +239,7 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 		this.intls = intls;
 	}
 	
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="tenant_id")
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_DEFAULT)
@@ -281,7 +285,7 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 	
 	@Override
 	@JsonIgnore(value=false)
-	@Column(name = "created_by")
+	@Column(name = "created_by",updatable = false)
 	public Long getCreatedBy() {		
 		return super.getCreatedBy();
 	}
@@ -314,6 +318,7 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 		this.user = user;
 	}
 	
+	@Transient
 	public boolean isExists() {
 		return isExists;
 	}
@@ -322,12 +327,24 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 		this.isExists = isExists;
 	}
 
+	@Transient
+	@JsonIgnore
+	public boolean isDuplicate() {
+		return isDuplicate;
+	}
+
+	public void setDuplicate(boolean isDuplicate) {
+		this.isDuplicate = isDuplicate;
+	}
+
 	@Override
 	public String toString() {
 		return "AppMessage [code=" + code + ", msgType=" + msgType
 				+ ", severity=" + severity +", isExists=" + isExists + "]";
 	}
 
+	@Transient
+	@JsonIgnore
 	public static String makeNotNullString(String str){
 		return str == null ? null:str.trim();
 	}

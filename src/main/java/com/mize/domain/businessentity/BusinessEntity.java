@@ -1,5 +1,6 @@
 package com.mize.domain.businessentity;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -32,7 +33,13 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
+import com.mize.domain.common.Country;
+import com.mize.domain.common.EntityAddress;
+import com.mize.domain.common.EntityAddressGeo;
+import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.State;
+import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 
@@ -73,19 +80,63 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 		this.typeCode = typeCode;
 	}
 
-	public BusinessEntity(Long id, String code, String name, String typeCode, BusinessEntityIntl intl, 
-			BusinessEntityAddress address,String url,String hoursOfOp) {
+	public BusinessEntity(Long id, String code, String name, String typeCode, String bename, String firstName,String lastName,String middleInitial, Locale locale, Long beaId,
+			Long eaId, String addressType, String address1, String address2, String address3, String zip, String zipExt, String city, String stateCode,
+			String stateName,String countryCode, String countryName, String countryCode3, String email, String landMark, 
+			BigDecimal latitude, BigDecimal longitude, Long geoId, String url, String isPromoted, String hoursOfOp) {
+		
+		     
 		super();
 		this.id = id;
 		this.code = code;
 		this.name = name;
-		this.typeCode = typeCode;		
+		this.typeCode = typeCode;
+		BusinessEntityAddress address = new BusinessEntityAddress();
+		address.setId(beaId);
+		address.setIsPreferred("Y");
+		EntityAddress entityAddress = new EntityAddress();
+		entityAddress.setId(eaId);
+		entityAddress.setType(addressType);
+		entityAddress.setAddress1(address1);
+		entityAddress.setAddress2(address2);
+		entityAddress.setAddress3(address3);
+		entityAddress.setZip(zip);
+		entityAddress.setZipExt(zipExt);
+		entityAddress.setCity(city);
+		State state = new State();
+		state.setCode(stateCode);
+		state.setName(stateName);
+		Country country = new Country();
+		country.setCode(countryCode);
+		country.setName(countryName);
+		country.setCode3(countryCode3);
+		entityAddress.setState(state);
+		entityAddress.setCountry(country);
+		entityAddress.setEmail(email);
+		entityAddress.setLandmark(landMark);		
+		EntityAddressGeo addressGeo = new EntityAddressGeo();
+		addressGeo.setId(geoId);
+		addressGeo.setLatitude(latitude);
+		addressGeo.setLongitude(longitude);
+		entityAddress.setAddressGeo(addressGeo);
+		address.setEntityAddress(entityAddress);		
 		this.addresses = new ArrayList<BusinessEntityAddress>();
 		this.addresses.add(address);				
+		BusinessEntityIntl beIntl = new BusinessEntityIntl();
+		beIntl.setName(bename);
+		beIntl.setFirstName(firstName);
+		beIntl.setLastName(lastName);
+		beIntl.setMiddleInitial(middleInitial);
+		beIntl.setLocale(locale);
 		this.intl = new ArrayList<BusinessEntityIntl>();
-		this.intl.add(intl);
+		this.intl.add(beIntl);
 		this.beAttribute = new BusinessEntityAttribute();
 		this.beAttribute.setUrl(url);
+		if(Formatter.isNull(isPromoted)) {
+			this.beAttribute.setIsPromoted("N");
+		} else {
+			this.beAttribute.setIsPromoted(isPromoted);
+		}
 		this.beAttribute.setHoursOfOp(hoursOfOp);
 	}
 
@@ -523,4 +574,11 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 		// TODO Auto-generated method stub
 		return super.clone();
 	}
+	
+	@JsonIgnore
+	public static Comparator<BusinessEntity> BusinessEntityPromotedComparator = new  Comparator<BusinessEntity>() {
+		public int compare(BusinessEntity be1, BusinessEntity be2) {
+			return BusinessEntityAttribute.PromotedComparator.compare(be1.getBeAttribute(), be2.getBeAttribute());
+		}
+	};
 }
