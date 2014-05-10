@@ -88,6 +88,15 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 		super();
 	}
 	
+	public PurchaseOrder(Long id,String number,String type,String requestType,String status){
+		super();
+		this.id = id;
+		this.number = number;
+		this.type = type;
+		this.requestType = requestType;
+		this.status = status;		
+	}
+	
 	public enum Status{
 		Draft,Pending,Approved,Deleted,Rejected,Closed,Open,Completed,
 		Shipped,In_Process,Submitted;

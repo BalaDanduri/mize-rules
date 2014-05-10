@@ -19,10 +19,12 @@ public class PurchaseOrderParameter extends MizeEntity {
 	private String maxAmtAllowed;
 	private String invoiceType;
 	private String purchaseOrderType;
+	private String approvalRequired;
 	
 	public enum Parameter{
 		ShippingMethod,ShippingDays,ShippingPriority,ShippingCarrier,PaymentMethod,PricingMethod,AllowOverride,
 		OrderRequired,ReturnWindow,NonReturnable,MaxAmtAllowed,ReasonRequired,InvoiceType,PurchaseOrderType,
+		ApprovalRequired,
 	}
 	
 	
@@ -121,6 +123,13 @@ public class PurchaseOrderParameter extends MizeEntity {
 		this.purchaseOrderType = purchaseOrderType;
 	}
 	
+	public String getApprovalRequired() {
+		return approvalRequired;
+	}
+	public void setApprovalRequired(String approvalRequired) {
+		this.approvalRequired = approvalRequired;
+	}
+	
 	@Override
 	public String toString() {
 		return "PurchaseOrderParameter [shippingMethod=" + shippingMethod
@@ -132,7 +141,8 @@ public class PurchaseOrderParameter extends MizeEntity {
 				+ ", orderRequired=" + orderRequired + ", reasonRequired="
 				+ reasonRequired + ", nonReturnable=" + nonReturnable
 				+ ", maxAmtAllowed=" + maxAmtAllowed + ", invoiceType="
-				+ invoiceType + ", purchaseOrderType=" + purchaseOrderType
+				+ invoiceType + ", purchaseOrderType=" + purchaseOrderType 
+				+ ", approvalRequired=" + approvalRequired
 				+ "]";
 	}
 	
