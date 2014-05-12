@@ -54,6 +54,20 @@ public class PartSubstitute extends MizeEntity {
 		super();
 	}
 	
+	public PartSubstitute(Long id , String originalPartCode,String substitutePartCode,String fmailyCode){
+		super();
+		this.id = id;
+		if(originalPartCode != null){
+			this.originalPart = new Part();
+			this.originalPart.setCode(originalPartCode);
+		}
+		if(substitutePartCode != null){
+			this.substitutedPart = new Part();
+			this.substitutedPart.setCode(substitutePartCode);
+		}
+		this.familyCode = fmailyCode;
+	}
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "id", nullable = false, unique = true)
