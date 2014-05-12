@@ -54,7 +54,7 @@ public class PartSubstitute extends MizeEntity {
 		super();
 	}
 	
-	public PartSubstitute(Long id , String originalPartCode,String substitutePartCode,String fmailyCode){
+	public PartSubstitute(Long id , String originalPartCode,String substitutePartCode,String fmailyCode,DateTime date){
 		super();
 		this.id = id;
 		if(originalPartCode != null){
@@ -66,6 +66,7 @@ public class PartSubstitute extends MizeEntity {
 			this.substitutedPart.setCode(substitutePartCode);
 		}
 		this.familyCode = fmailyCode;
+		this.date = date;
 	}
 	
 	@Id
