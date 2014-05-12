@@ -96,9 +96,29 @@ public final class Formatter {
 	public static boolean isNull(Long number){
 		long value = 0;
 		if(number != null){
-			value = number.intValue();
+			value = number.longValue();
 		}		
 		return value <= 0;
+	}
+	
+	public static boolean isNull(BigDecimal number){
+		double value = 0;
+		if(number != null){
+			value = number.doubleValue();
+		}		
+		return value <= 0;
+	}
+	
+	public static boolean isNotNull(Integer number){
+		return !isNull(number);
+	}
+	
+	public static boolean isNotNull(Long number){
+		return !isNull(number);
+	}
+	
+	public static boolean isNotNull(BigDecimal number){
+		return !isNull(number);
 	}
 	
 	public static double doubleValue(Double dValue){

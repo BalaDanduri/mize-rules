@@ -64,9 +64,9 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 	@Transient
 	private boolean isUpdated;
 	@Transient
-	private String orderNumber;
+	private String orignalOrderNumber;
 	@Transient
-	private Long orderNumberId;
+	private Long orignalOrderNumberId;
 	@Transient
 	private String reason;
 	@Transient
@@ -329,16 +329,7 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 		this.isUpdated = isUpdated;
 	}
 
-	@Transient
-	public String getOrderNumber() {
-		return orderNumber;
-	}
-
-	public void setOrderNumber(String orderNumber) {
-		this.orderNumber = orderNumber;
-	}
-
-	@Transient
+	@Column(name="reason_for_return")
 	public String getReason() {
 		return reason;
 	}
@@ -346,16 +337,25 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
-	
-	@Transient
-	public Long getOrderNumberId() {
-		return orderNumberId;
+
+	@Column(name="original_order_number")
+	public String getOrignalOrderNumber() {
+		return orignalOrderNumber;
 	}
 
-	public void setOrderNumberId(Long orderNumberId) {
-		this.orderNumberId = orderNumberId;
+	public void setOrignalOrderNumber(String orignalOrderNumber) {
+		this.orignalOrderNumber = orignalOrderNumber;
 	}
-	
+
+	@Transient
+	public Long getOrignalOrderNumberId() {
+		return orignalOrderNumberId;
+	}
+
+	public void setOrignalOrderNumberId(Long orignalOrderNumberId) {
+		this.orignalOrderNumberId = orignalOrderNumberId;
+	}
+
 	@Transient
 	public String getOrderType() {
 		return orderType;
