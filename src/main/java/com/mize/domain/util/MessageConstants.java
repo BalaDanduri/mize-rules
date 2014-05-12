@@ -357,7 +357,7 @@ public abstract class MessageConstants implements Serializable{
 	public static final String INVALID_REGISTRATION_DATE_COMPARISON_PREV_REGISTRATION_DATE ="INVALID_REGISTRATION_DATE_COMPARISON_PREV_REGISTRATION_DATE";
 	public static final String RETURN_REASON_REQUIRED = "RETURN_REASON_REQUIRED";
 	public static final String INVALID_RETURN_REASON = "INVALID_RETURN_REASON";
-	public static final String ORDER_NUMBER_REQUIRED = "RETURN_REASON_REQUIRED";
+	public static final String ORDER_NUMBER_REQUIRED = "ORDER_NUMBER_REQUIRED";
 	public static final String INVALID_ORDER_NUMBER = "INVALID_ORDER_NUMBER";
 	public static final String ORDER_TYPE_REQUIRED = "ORDER_TYPE_REQUIRED";
 	public static final String RETURN_WINDOW_REQUIRED = "RETURN_WINDOW_REQUIRED";
