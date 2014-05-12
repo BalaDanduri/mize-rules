@@ -362,5 +362,7 @@ public abstract class MessageConstants implements Serializable{
 	public static final String ORDER_TYPE_REQUIRED = "ORDER_TYPE_REQUIRED";
 	public static final String RETURN_WINDOW_REQUIRED = "RETURN_WINDOW_REQUIRED";
 	public static final String INVALID_RETURN_WINDOW = "INVALID_RETURN_WINDOW";
+	public static final String INVALID_ORDER_REQUEST_TYPE = "INVALID_ORDER_REQUEST_TYPE";
+	public static final String ORDER_REQUEST_TYPE_REQUIRED = "ORDER_REQUEST_TYPE_REQUIRED";
 	
 }
