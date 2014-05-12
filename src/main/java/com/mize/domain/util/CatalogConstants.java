@@ -55,6 +55,7 @@ public abstract class CatalogConstants implements Serializable{
 	public static final String RETURN_WINDOW = "ReturnWindow";
 	public static final String NON_RETURNABLE = "NonReturnable";
 	public static final String ORDER_REQUEST_TYPE = "OrderRequestType";
+	public static final String RETURN_REASON_TYPE = "ReturnReasonType";
 	
 
 }
