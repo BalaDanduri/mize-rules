@@ -104,7 +104,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	
 	public enum Type{
 		Claim,Warranty,Campaign,Extended_Warranty,PDI,Parts_Warranty,
-		Support_Request,Service_Order,Parts_Order,Purchase_Order,PartsReturn;
+		Support_Request,Service_Order,Parts_Order,Purchase_Order,PartsReturn,Order;
 	}
 	
 	@Id
