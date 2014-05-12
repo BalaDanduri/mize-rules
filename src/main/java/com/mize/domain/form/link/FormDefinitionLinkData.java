@@ -127,6 +127,16 @@ public class FormDefinitionLinkData extends MizeEntity {
 				return false;
 		} else if (!linkType.equals(other.linkType))
 			return false;
+		if (brand == null) {
+			if (other.brand != null)
+				return false;
+		} else if (!brand.equals(other.brand))
+			return false;
+		if (category == null) {
+			if (other.category != null)
+				return false;
+		} else if (!category.equals(other.category))
+			return false;
 		if (product == null) {
 			if (other.product != null)
 				return false;
