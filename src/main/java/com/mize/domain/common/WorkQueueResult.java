@@ -8,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.businessentity.BusinessEntity;
+import com.mize.domain.businessentity.BusinessEntityIntl;
 import com.mize.domain.product.ProductSerial;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
@@ -69,7 +70,7 @@ public class WorkQueueResult extends MizeEntity {
 	
 
 	public WorkQueueResult(Long id,Long entityId, String entityType,String entityCode,String status,String orderType,
-			DateTime serviceDate,DateTime updatedDate,BusinessEntity businessEntity) {
+			DateTime serviceDate,DateTime updatedDate,String beName) {
 		super();
 		this.id = id;
 		this.entityId = entityId;
@@ -79,7 +80,10 @@ public class WorkQueueResult extends MizeEntity {
 		this.orderType = orderType;
 		this.serviceDate = serviceDate;
 		this.serviceUpdatedDate = updatedDate;
-		this.businessEntity = businessEntity;
+		businessEntity = new BusinessEntity();
+		BusinessEntityIntl beIntl = new BusinessEntityIntl();
+		beIntl.setName(beName);
+		businessEntity.getIntl().add(beIntl);
 	}
 	
 
