@@ -88,13 +88,15 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 		super();
 	}
 	
-	public PurchaseOrder(Long id,String number,String type,String requestType,String status){
+	public PurchaseOrder(Long id,String number,String status,String type,String requestType,DateTime createdDate,DateTime updatedDate){
 		super();
 		this.id = id;
 		this.number = number;
 		this.type = type;
 		this.requestType = requestType;
-		this.status = status;		
+		this.status = status;	
+		this.createdDate = createdDate;
+		this.updatedDate = updatedDate;
 	}
 	
 	public enum Status{
@@ -104,7 +106,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	
 	public enum Type{
 		Claim,Warranty,Campaign,Extended_Warranty,PDI,Parts_Warranty,
-		Support_Request,Service_Order,Parts_Order,Purchase_Order,PartsReturn;
+		Support_Request,Service_Order,Parts_Order,Purchase_Order,PartsReturn,Stock,Emergency;
 	}
 	
 	public enum RequestType{

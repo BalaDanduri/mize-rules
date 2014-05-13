@@ -1,5 +1,7 @@
 package com.mize.domain.purchaseorder;
 
+import java.util.Map;
+
 import com.mize.domain.common.MizeEntity;
 
 public class PurchaseOrderParameter extends MizeEntity {
@@ -146,5 +148,22 @@ public class PurchaseOrderParameter extends MizeEntity {
 				+ "]";
 	}
 	
-	
+	public void populateAttributes(Map<String,String> attributes){
+		if(attributes != null && attributes.size() > 0){
+			this.setShippingMethod(attributes.get(Parameter.ShippingMethod.toString()));
+			this.setShippingDays(attributes.get(Parameter.ShippingDays.toString()));
+			this.setShippingPriority(attributes.get(Parameter.ShippingPriority.toString()));
+			this.setShippingCarrier(attributes.get(Parameter.ShippingCarrier.toString()));
+			this.setPaymentMethod(attributes.get(Parameter.PaymentMethod.toString()));
+			this.setPricingMethod(attributes.get(Parameter.PricingMethod.toString()));
+			this.setAllowOverride(attributes.get(Parameter.AllowOverride.toString()));
+			this.setReturnWindow(attributes.get(Parameter.ReturnWindow.toString()));
+			this.setOrderRequired(attributes.get(Parameter.OrderRequired.toString()));
+			this.setReasonRequired(attributes.get(Parameter.ReasonRequired.toString()));
+			this.setNonReturnable(attributes.get(Parameter.NonReturnable.toString()));
+			this.setMaxAmtAllowed(attributes.get(Parameter.MaxAmtAllowed.toString()));
+			this.setInvoiceType(attributes.get(Parameter.InvoiceType.toString()));
+			this.setPurchaseOrderType(attributes.get(Parameter.PurchaseOrderType.toString()));
+		}
+	}	
 }

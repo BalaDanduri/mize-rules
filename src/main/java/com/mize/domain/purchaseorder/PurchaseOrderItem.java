@@ -63,7 +63,6 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 	private PartKit partKit;
 	@Transient
 	private boolean isUpdated;
-	@Transient
 	private String originalOrderNumber;
 	@Transient
 	private Long originalOrderNumberId;
@@ -71,6 +70,8 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 	private String reason;
 	@Transient
 	private String orderType;
+	@Transient
+	private OriginalOrder originalOrder;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -340,20 +341,23 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 
 	@Column(name="original_order_number")
 	public String getOriginalOrderNumber() {
+		if(originalOrderNumber != null){
+			originalOrderNumber = originalOrderNumber.trim();
+		}
 		return originalOrderNumber;
 	}
 
 	public void setOriginalOrderNumber(String originalOrderNumber) {
 		this.originalOrderNumber = originalOrderNumber;
 	}
-
+	
 	@Transient
-	public Long getOriginalOrderNumberId() {
-		return originalOrderNumberId;
+	public OriginalOrder getOriginalOrder() {
+		return originalOrder;
 	}
 
-	public void setOriginalOrderNumberId(Long originalOrderNumberId) {
-		this.originalOrderNumberId = originalOrderNumberId;
+	public void setOriginalOrder(OriginalOrder originalOrder) {
+		this.originalOrder = originalOrder;
 	}
 
 	@Transient
@@ -363,6 +367,15 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 
 	public void setOrderType(String orderType) {
 		this.orderType = orderType;
+	}
+
+	@Transient
+	public Long getOriginalOrderNumberId() {
+		return originalOrderNumberId;
+	}
+
+	public void setOriginalOrderNumberId(Long originalOrderNumberId) {
+		this.originalOrderNumberId = originalOrderNumberId;
 	}
 
 	@Override

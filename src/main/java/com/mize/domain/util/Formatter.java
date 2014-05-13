@@ -185,6 +185,10 @@ public final class Formatter {
 		return (!isNull(str));
 	}
 	
+	public static boolean isNotNull(String val1,String val2){
+		return (!isNull(val1) && !isNull(val1));
+	}
+	
 	public static boolean isYorN(String str){
 		if(str == null || !(YES.equalsIgnoreCase(str.trim()) || NO.equalsIgnoreCase(str.trim()))){
 			return false;
