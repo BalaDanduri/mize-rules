@@ -69,8 +69,8 @@ public class WorkQueueResult extends MizeEntity {
 	}
 	
 
-	public WorkQueueResult(Long id,Long entityId, String entityType,String entityCode,String status,String orderType,
-			DateTime serviceDate,DateTime updatedDate,String beName) {
+	public WorkQueueResult(Long id,Long entityId, String entityType,String entityCode,String status,String orderType,String requestType,
+			DateTime serviceDate,DateTime updatedDate,String beCode,String beName) {
 		super();
 		this.id = id;
 		this.entityId = entityId;
@@ -78,9 +78,11 @@ public class WorkQueueResult extends MizeEntity {
 		this.serviceCode = entityCode;
 		this.status = status;
 		this.orderType = orderType;
+		this.serviceType = requestType;
 		this.serviceDate = serviceDate;
 		this.serviceUpdatedDate = updatedDate;
 		businessEntity = new BusinessEntity();
+		businessEntity.setCode(beCode);
 		BusinessEntityIntl beIntl = new BusinessEntityIntl();
 		beIntl.setName(beName);
 		businessEntity.getIntl().add(beIntl);

@@ -66,8 +66,8 @@ public class WorkQueueEntity extends MizeEntity implements Comparable<WorkQueueE
 	}
 	
 	
-	public WorkQueueEntity(Long id,Long entityId, String entityType,String entityCode,String status,String orderType,DateTime serviceDate,DateTime serviceUpdatedDate,String beName) {
-		result = new WorkQueueResult(id,entityId, entityType,entityCode,status,orderType,serviceDate,serviceUpdatedDate,beName);
+	public WorkQueueEntity(Long id,Long entityId, String entityType,String entityCode,String status,String orderType,String requestType,DateTime serviceDate,DateTime serviceUpdatedDate,String beCode,String beName) {
+		result = new WorkQueueResult(id,entityId, entityType,entityCode,status,orderType,requestType,serviceDate,serviceUpdatedDate,beCode,beName);
 	}
 	
 	public WorkQueueEntity(Long id,Long entityId, String entityType,String status,String serviceType,String serviceCode,String providerName,DateTime serviceDate,String model,String serialNumber, String customerName) {
