@@ -18,6 +18,10 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.joda.time.DateTime;
+import org.joda.time.Days;
+import org.joda.time.Hours;
+import org.joda.time.Minutes;
+import org.joda.time.Seconds;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
@@ -510,6 +514,35 @@ public final class Formatter {
 		}
 		return 0;		
 	}
+	
+	public static int daysBetween(DateTime startDate , DateTime endDate){
+		if(startDate != null && endDate != null){
+			return Days.daysBetween(startDate, endDate).getDays();
+		}
+		return 0;		
+	}
+	
+	public static int hoursBetween(DateTime startDate , DateTime endDate){
+		if(startDate != null && endDate != null){
+			return Hours.hoursBetween(startDate, endDate).getHours();
+		}
+		return 0;		
+	}
+	
+	public static int minutesBetween(DateTime startDate , DateTime endDate){
+		if(startDate != null && endDate != null){
+			return Minutes.minutesBetween(startDate, endDate).getMinutes();
+		}
+		return 0;		
+	}
+	
+	public static int secondsBetween(DateTime startDate , DateTime endDate){
+		if(startDate != null && endDate != null){
+			return Seconds.secondsBetween(startDate, endDate).getSeconds();
+		}
+		return 0;		
+	}
+	
 	public static String toString(Integer intVal){
 		if(intVal == null){
 			return EMPTY;
@@ -802,5 +835,9 @@ public final class Formatter {
 		 }
 		 return gregorianCalendar;
 	 }
+	 
+	 public static void main(String[] args) {
+		System.out.println(daysBetween(DateTime.now().minusDays(1), DateTime.now().plusMonths(1)));
+	}
 	
 }
