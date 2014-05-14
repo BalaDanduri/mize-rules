@@ -147,7 +147,7 @@ public class WorkQueueEntity extends MizeEntity implements Comparable<WorkQueueE
 	}
 
 	@Override
-	@Column(name = "created_by")
+	@Column(name = "created_by",updatable = false)
 	@JsonIgnore(value = false)
 	public Long getCreatedBy() {		
 		return super.getCreatedBy();
