@@ -33,6 +33,7 @@ import com.mize.domain.util.JsonDateTimeSerializer;
 public class PurchaseOrderShipment extends MizeEntity implements Comparable<PurchaseOrderShipment>{	
 
 	private static final long serialVersionUID = 261638805962518728L;
+	//shipTolocaton
 	private BusinessEntity businessEntity;
 	private EntityAddress address;
 	private String method;
@@ -50,7 +51,16 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 	@Transient
 	private Long shipmentBeAddressId;
 	private String isFreeShipping;
-
+	private BusinessEntity shipmentFromBE;
+	private EntityAddress shipmentFromAddress;
+	@Transient
+	private Long shipmentFromBeAddressId;
+	private String isNewShipFrom;
+	
+	public PurchaseOrderShipment(){
+		super();
+	}	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false, unique = true)
@@ -65,7 +75,7 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 	}
 	
 	@OneToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="shipment_be_id")
+	@JoinColumn(name="shipment_to_be_id")
 	public BusinessEntity getBusinessEntity() {
 		return businessEntity;
 	}
@@ -75,7 +85,7 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 	}
 
 	@OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name="shipment_address_id")
+	@JoinColumn(name="shipment_to_address_id")
 	public EntityAddress getAddress() {
 		return address;
 	}
@@ -111,7 +121,7 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 		this.carrier = carrier;
 	}
 
-	@Column(name="drop_ship")
+	@Column(name="is_new_ship_to")
 	public String getDropShip() {
 		return dropShip;
 	}
@@ -203,6 +213,45 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 
 	public void setIsFreeShipping(String isFreeShipping) {
 		this.isFreeShipping = isFreeShipping;
+	}
+	
+
+	@OneToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="shipment_from_be_id")
+	public BusinessEntity getShipmentFromBE() {
+		return shipmentFromBE;
+	}
+
+	public void setShipmentFromBE(BusinessEntity shipmentFromBE) {
+		this.shipmentFromBE = shipmentFromBE;
+	}
+
+	@OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name="shipment_from_address_id")
+	public EntityAddress getShipmentFromAddress() {
+		return shipmentFromAddress;
+	}
+
+	public void setShipmentFromAddress(EntityAddress shipmentFromAddress) {
+		this.shipmentFromAddress = shipmentFromAddress;
+	}
+
+	@Column(name="is_new_ship_from")
+	public String getIsNewShipFrom() {
+		return isNewShipFrom;
+	}
+
+	public void setIsNewShipFrom(String isNewShipFrom) {
+		this.isNewShipFrom = isNewShipFrom;
+	}
+	
+	@Transient
+	public Long getShipmentFromBeAddressId() {
+		return shipmentFromBeAddressId;
+	}
+
+	public void setShipmentFromBeAddressId(Long shipmentFromBeAddressId) {
+		this.shipmentFromBeAddressId = shipmentFromBeAddressId;
 	}
 
 	@Override

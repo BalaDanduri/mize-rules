@@ -22,11 +22,12 @@ public class PurchaseOrderParameter extends MizeEntity {
 	private String invoiceType;
 	private String purchaseOrderType;
 	private String approvalRequired;
+	private String defaultWarehouse;
 	
 	public enum Parameter{
 		ShippingMethod,ShippingDays,ShippingPriority,ShippingCarrier,PaymentMethod,PricingMethod,AllowOverride,
 		OrderRequired,ReturnWindow,NonReturnable,MaxAmtAllowed,ReasonRequired,InvoiceType,PurchaseOrderType,
-		ApprovalRequired,
+		ApprovalRequired,DefaultWarehouse,
 	}
 	
 	
@@ -130,6 +131,13 @@ public class PurchaseOrderParameter extends MizeEntity {
 	}
 	public void setApprovalRequired(String approvalRequired) {
 		this.approvalRequired = approvalRequired;
+	}	
+		
+	public String getDefaultWarehouse() {
+		return defaultWarehouse;
+	}
+	public void setDefaultWarehouse(String defaultWarehouse) {
+		this.defaultWarehouse = defaultWarehouse;
 	}
 	
 	@Override
@@ -143,9 +151,9 @@ public class PurchaseOrderParameter extends MizeEntity {
 				+ ", orderRequired=" + orderRequired + ", reasonRequired="
 				+ reasonRequired + ", nonReturnable=" + nonReturnable
 				+ ", maxAmtAllowed=" + maxAmtAllowed + ", invoiceType="
-				+ invoiceType + ", purchaseOrderType=" + purchaseOrderType 
+				+ invoiceType + ", purchaseOrderType=" + purchaseOrderType
 				+ ", approvalRequired=" + approvalRequired
-				+ "]";
+				+ ", defaultWarehouse=" + defaultWarehouse + "]";
 	}
 	
 	public void populateAttributes(Map<String,String> attributes){
@@ -164,6 +172,7 @@ public class PurchaseOrderParameter extends MizeEntity {
 			this.setMaxAmtAllowed(attributes.get(Parameter.MaxAmtAllowed.toString()));
 			this.setInvoiceType(attributes.get(Parameter.InvoiceType.toString()));
 			this.setPurchaseOrderType(attributes.get(Parameter.PurchaseOrderType.toString()));
+			this.setDefaultWarehouse(attributes.get(Parameter.DefaultWarehouse.toString()));
 		}
 	}	
 }
