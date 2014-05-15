@@ -501,7 +501,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	@Transient
 	@JsonIgnore
 	public boolean isPartsReturn(){
-		return Formatter.equalIgnoreCase(Type.PartsReturn, type);
+		return Formatter.equalIgnoreCase(RequestType.Return, requestType);
 	}
 	
 	@Transient
