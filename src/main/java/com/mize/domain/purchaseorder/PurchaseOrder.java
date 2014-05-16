@@ -74,7 +74,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	@Transient
 	private String pickListCode;
 	@Transient
-	private String csvFileName;
+	private String importFileName;
 	@Transient
 	private PurchaseOrderParameter orderParameter;
 	@Transient
@@ -83,6 +83,8 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	private String productSerial;
 	@Transient
 	private String importFrom;
+	@Transient
+	private String importFileType;
 	
 	public PurchaseOrder(){
 		super();
@@ -115,6 +117,10 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	
 	public enum ResonType{
 		Overstock,WrongPart,BadPart;
+	}
+	
+	public enum ImportType{
+		CSV,Excel;
 	}
 	
 	@Id
@@ -481,19 +487,19 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	}
 	
 	@Transient
-	public String getCsvFileName() {
-		return csvFileName;
+	public String getImportFileName() {
+		return importFileName;
 	}
-
-	public void setCsvFileName(String csvFileName) {
-		this.csvFileName = csvFileName;
+	
+	public void setImportFileName(String importFileName) {
+		this.importFileName = importFileName;
 	}
-
+	
 	@Transient
 	public String getImportFrom() {
 		return importFrom;
 	}
-
+	
 	public void setImportFrom(String importFrom) {
 		this.importFrom = importFrom;
 	}
@@ -522,6 +528,15 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 		return Formatter.equalIgnoreCase(Status.In_Process, this.status);
 	}
 	
+	@Transient
+	public String getImportFileType() {
+		return importFileType;
+	}
+
+	public void setImportFileType(String importFileType) {
+		this.importFileType = importFileType;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
@@ -543,6 +558,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
