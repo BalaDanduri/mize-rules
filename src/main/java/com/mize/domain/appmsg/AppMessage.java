@@ -98,13 +98,13 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 		//this.intls = intls;
 	}
 	
-	public AppMessage(Long id ,String code,Integer severity,String shortDesc, String longDesc){
+	public AppMessage(Long id ,String code,Integer severity){
 		super();
 		this.id = id;
 		this.code = makeNotNullString(code);
 		this.severity = severity;
-		this.shortDesc = shortDesc;
-		this.longDesc = longDesc;
+		//this.shortDesc = shortDesc;
+		//this.longDesc = longDesc;
 	}
 
 	public AppMessage(String code, String shortDesc, String longDesc, Integer severity, String field, String fieldKey, MessageType.Type messageType) {
