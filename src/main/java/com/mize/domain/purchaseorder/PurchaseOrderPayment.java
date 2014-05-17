@@ -1,5 +1,7 @@
 package com.mize.domain.purchaseorder;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,6 +33,8 @@ public class PurchaseOrderPayment extends MizeEntity implements Comparable<Purch
 	private Long paymentBeAddressId;
 	@Transient
 	private String updateMasterAddress;
+	@Transient
+	List<BusinessEntity> childBusinessEntities;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -111,7 +115,16 @@ public class PurchaseOrderPayment extends MizeEntity implements Comparable<Purch
 	public void setUpdateMasterAddress(String updateMasterAddress) {
 		this.updateMasterAddress = updateMasterAddress;
 	}
+	
+	@Transient
+	public List<BusinessEntity> getChildBusinessEntities() {
+		return childBusinessEntities;
+	}
 
+	public void setChildBusinessEntities(List<BusinessEntity> childBusinessEntities) {
+		this.childBusinessEntities = childBusinessEntities;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;

@@ -13,8 +13,10 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.mize.domain.brand.Brand;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.product.Product;
+import com.mize.domain.product.ProductCategory;
 
 @Entity
 @Table(name = "form_defn_link_data", uniqueConstraints = {@UniqueConstraint (columnNames = {"id"})})
@@ -24,6 +26,8 @@ public class FormDefinitionLinkData extends MizeEntity {
 	
 	private FormDefinitionLink formDefinitionLink;
 	private Product product;
+	private Brand brand;
+	private ProductCategory category;
 	private String linkType;
 	private String linkDuration;
 	
@@ -123,6 +127,16 @@ public class FormDefinitionLinkData extends MizeEntity {
 				return false;
 		} else if (!linkType.equals(other.linkType))
 			return false;
+		if (brand == null) {
+			if (other.brand != null)
+				return false;
+		} else if (!brand.equals(other.brand))
+			return false;
+		if (category == null) {
+			if (other.category != null)
+				return false;
+		} else if (!category.equals(other.category))
+			return false;
 		if (product == null) {
 			if (other.product != null)
 				return false;
@@ -135,6 +149,26 @@ public class FormDefinitionLinkData extends MizeEntity {
 	public String toString() {
 		return "FormDefinitionLinkData [product=" + product + ", linkType="
 				+ linkType + ", linkDuration=" + linkDuration + "]";
+	}
+	
+	@OneToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="brand_id", nullable = true)
+	public Brand getBrand() {
+		return brand;
+	}
+
+	public void setBrand(Brand brand) {
+		this.brand = brand;
+	}
+	
+	@OneToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="prod_cat_id", nullable = true)
+	public ProductCategory getCategory() {
+		return category;
+	}
+
+	public void setCategory(ProductCategory category) {
+		this.category = category;
 	}	
 	
 }

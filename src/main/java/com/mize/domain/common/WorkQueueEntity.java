@@ -66,8 +66,8 @@ public class WorkQueueEntity extends MizeEntity implements Comparable<WorkQueueE
 	}
 	
 	
-	public WorkQueueEntity(Long id,Long entityId, String entityType,String entityCode,String status,String orderType,DateTime serviceDate,DateTime serviceUpdatedDate,BusinessEntity businessEntity) {
-		result = new WorkQueueResult(id,entityId, entityType,entityCode,status,orderType,serviceDate,serviceUpdatedDate,businessEntity);
+	public WorkQueueEntity(Long id,Long entityId, String entityType,String entityCode,String status,String orderType,String requestType,DateTime serviceDate,DateTime serviceUpdatedDate,String beCode,String beName) {
+		result = new WorkQueueResult(id,entityId, entityType,entityCode,status,orderType,requestType,serviceDate,serviceUpdatedDate,beCode,beName);
 	}
 	
 	public WorkQueueEntity(Long id,Long entityId, String entityType,String status,String serviceType,String serviceCode,String providerName,DateTime serviceDate,String model,String serialNumber, String customerName) {
@@ -147,7 +147,7 @@ public class WorkQueueEntity extends MizeEntity implements Comparable<WorkQueueE
 	}
 
 	@Override
-	@Column(name = "created_by")
+	@Column(name = "created_by",updatable = false)
 	@JsonIgnore(value = false)
 	public Long getCreatedBy() {		
 		return super.getCreatedBy();

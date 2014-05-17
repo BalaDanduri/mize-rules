@@ -34,6 +34,7 @@ import com.mize.domain.common.EntityAttachment;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
@@ -73,7 +74,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	@Transient
 	private String pickListCode;
 	@Transient
-	private String csvFileName;
+	private String importFileName;
 	@Transient
 	private PurchaseOrderParameter orderParameter;
 	@Transient
@@ -82,9 +83,22 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	private String productSerial;
 	@Transient
 	private String importFrom;
+	@Transient
+	private String importFileType;
 	
 	public PurchaseOrder(){
 		super();
+	}
+	
+	public PurchaseOrder(Long id,String number,String status,String type,String requestType,DateTime createdDate,DateTime updatedDate){
+		super();
+		this.id = id;
+		this.number = number;
+		this.type = type;
+		this.requestType = requestType;
+		this.status = status;	
+		this.createdDate = createdDate;
+		this.updatedDate = updatedDate;
 	}
 	
 	public enum Status{
@@ -94,7 +108,19 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	
 	public enum Type{
 		Claim,Warranty,Campaign,Extended_Warranty,PDI,Parts_Warranty,
-		Support_Request,Service_Order,Parts_Order,Purchase_Order;
+		Support_Request,Service_Order,Parts_Order,Purchase_Order,PartsReturn,Stock,Emergency;
+	}
+	
+	public enum RequestType{
+		Order,Return;
+	}
+	
+	public enum ResonType{
+		Overstock,WrongPart,BadPart;
+	}
+	
+	public enum ImportType{
+		CSV,Excel;
 	}
 	
 	@Id
@@ -202,52 +228,72 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 		this.amount = amount;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore(value=false)
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@JsonIgnore(false)
+	@Column(name = "updated_by")
+	public Long getUpdatedBy() {
+		return this.updatedBy;
+	}
+	
+	@JsonIgnore(false)
+	public void setUpdatedBy(Long updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+	
+	@JsonIgnore(false)
+	@Column(name = "created_by", updatable = false)
+	public Long getCreatedBy() {
+		return this.createdBy;
+	}
+	
+	@JsonIgnore(false)
+	public void setCreatedBy(Long createdBy) {
+		this.createdBy = createdBy;
+	}
+	
+	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using = JsonDateTimeSerializer.class, include = JsonSerialize.Inclusion.NON_DEFAULT)
+	@JsonIgnore(false)
+	@Column(name = "created_date", updatable = false)
+	@org.hibernate.annotations.Type(type = "com.mize.domain.util.DateTimeJPA")
+	public DateTime getCreatedDate() {
+		return this.createdDate;
+	}
+
+	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using = JodaDateTimeDeserializer.class)
+	@JsonIgnore(false)
 	public void setCreatedDate(DateTime createdDate) {
 		this.createdDate = createdDate;
 	}
 	
-	@JsonIgnore(value=false)
-	public void setUpdatedBy(Long updatedBy) {
-		this.updatedBy = updatedBy;
+	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using = JsonDateTimeSerializer.class, include = JsonSerialize.Inclusion.NON_DEFAULT)
+	@Column(name = "updated_date")
+	@org.hibernate.annotations.Type(type = "com.mize.domain.util.DateTimeJPA")
+	@JsonIgnore(false)
+	public DateTime getUpdatedDate() {
+		return this.updatedDate;
 	}
- 
-	@JsonIgnore(value=false)
-	public void setCreatedBy(Long createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore(value=false)
+	
+	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using = JodaDateTimeDeserializer.class)
+	@JsonIgnore(false)
 	public void setUpdatedDate(DateTime updatedDate) {
 		this.updatedDate = updatedDate;
-	}
-	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
-	@JsonIgnore(value=false)
-	@Column(name = "created_date",updatable = false)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
-	public DateTime getCreatedDate() {
-		return createdDate;
-	}
-
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
-	@Column(name = "updated_date")
-	@JsonIgnore(value=false)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
-	public DateTime getUpdatedDate() {
-		return updatedDate;
-	}
-	
-	@JsonIgnore(value=false)
-	@Column(name = "created_by" , updatable=false)
-	public Long getCreatedBy() {
-		return createdBy;
 	}
 	
 	@OneToOne(fetch=FetchType.LAZY)
@@ -441,21 +487,54 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	}
 	
 	@Transient
-	public String getCsvFileName() {
-		return csvFileName;
+	public String getImportFileName() {
+		return importFileName;
 	}
-
-	public void setCsvFileName(String csvFileName) {
-		this.csvFileName = csvFileName;
+	
+	public void setImportFileName(String importFileName) {
+		this.importFileName = importFileName;
 	}
-
+	
 	@Transient
 	public String getImportFrom() {
 		return importFrom;
 	}
-
+	
 	public void setImportFrom(String importFrom) {
 		this.importFrom = importFrom;
+	}
+	
+	@Transient
+	@JsonIgnore
+	public boolean isPartsReturn(){
+		return Formatter.equalIgnoreCase(RequestType.Return, requestType);
+	}
+	
+	@Transient
+	@JsonIgnore
+	public boolean isDraftStatus(){
+		return Formatter.equalIgnoreCase(Status.Draft, this.status);
+	}
+	
+	@Transient
+	@JsonIgnore
+	public boolean isPendingStatus(){
+		return Formatter.equalIgnoreCase(Status.Pending, this.status);
+	}
+	
+	@Transient
+	@JsonIgnore
+	public boolean isInProcessStatus(){
+		return Formatter.equalIgnoreCase(Status.In_Process, this.status);
+	}
+	
+	@Transient
+	public String getImportFileType() {
+		return importFileType;
+	}
+
+	public void setImportFileType(String importFileType) {
+		this.importFileType = importFileType;
 	}
 
 	@Override
@@ -479,6 +558,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {

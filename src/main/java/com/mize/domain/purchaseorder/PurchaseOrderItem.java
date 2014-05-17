@@ -63,6 +63,15 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 	private PartKit partKit;
 	@Transient
 	private boolean isUpdated;
+	private String originalOrderNumber;
+	@Transient
+	private Long originalOrderNumberId;
+	@Transient
+	private String reason;
+	@Transient
+	private String orderType;
+	@Transient
+	private OriginalOrder originalOrder;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -319,6 +328,54 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 
 	public void setIsUpdated(boolean isUpdated) {
 		this.isUpdated = isUpdated;
+	}
+
+	@Column(name="reason_for_return")
+	public String getReason() {
+		return reason;
+	}
+
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
+
+	@Column(name="original_order_number")
+	public String getOriginalOrderNumber() {
+		if(originalOrderNumber != null){
+			originalOrderNumber = originalOrderNumber.trim();
+		}
+		return originalOrderNumber;
+	}
+
+	public void setOriginalOrderNumber(String originalOrderNumber) {
+		this.originalOrderNumber = originalOrderNumber;
+	}
+	
+	@Transient
+	public OriginalOrder getOriginalOrder() {
+		return originalOrder;
+	}
+
+	public void setOriginalOrder(OriginalOrder originalOrder) {
+		this.originalOrder = originalOrder;
+	}
+
+	@Transient
+	public String getOrderType() {
+		return orderType;
+	}
+
+	public void setOrderType(String orderType) {
+		this.orderType = orderType;
+	}
+
+	@Transient
+	public Long getOriginalOrderNumberId() {
+		return originalOrderNumberId;
+	}
+
+	public void setOriginalOrderNumberId(Long originalOrderNumberId) {
+		this.originalOrderNumberId = originalOrderNumberId;
 	}
 
 	@Override

@@ -87,6 +87,8 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 		}
 	}	
 	
+	
+	
 	public AppMessage(Long id ,String code,String msgType, Integer severity) {
 		super();
 		this.id = id;
@@ -94,6 +96,15 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 		this.msgType = msgType;
 		this.severity = severity;
 		//this.intls = intls;
+	}
+	
+	public AppMessage(Long id ,String code,Integer severity){
+		super();
+		this.id = id;
+		this.code = makeNotNullString(code);
+		this.severity = severity;
+		//this.shortDesc = shortDesc;
+		//this.longDesc = longDesc;
 	}
 
 	public AppMessage(String code, String shortDesc, String longDesc, Integer severity, String field, String fieldKey, MessageType.Type messageType) {

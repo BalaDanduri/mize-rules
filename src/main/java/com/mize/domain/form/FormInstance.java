@@ -126,7 +126,7 @@ public class FormInstance extends MizeEntity {
 	
 	@Override
 	@JsonIgnore
-	@Column(name = "created_by", nullable = true, length = 20)
+	@Column(name = "created_by", nullable = true, length = 20, updatable = false)
 	public Long getCreatedBy() {		
 		return super.getCreatedBy();
 	}
