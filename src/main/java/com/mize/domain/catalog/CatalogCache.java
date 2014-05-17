@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Transient;
-
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -24,11 +22,8 @@ public class CatalogCache extends MizeEntity implements Serializable{
 	private Long catalogId;	
 	private String isActive;
 	private List<CatalogEntryCache> catalogEntryCaches = new ArrayList<CatalogEntryCache>();
-	
-	@Transient
-	private List<Catalog> catalogNames = new ArrayList<Catalog>();
-	
-	@Transient
+	private List<Catalog> catalogNames = new ArrayList<Catalog>();	
+	private Long tenantId;
 	private BusinessEntity tenant;
 	
 	@Override
@@ -83,7 +78,6 @@ public class CatalogCache extends MizeEntity implements Serializable{
 		this.updatedDate = updatedDate;
 	}
 	
-	@Transient
 	public List<Catalog> getCatalogNames() {
 		return catalogNames;
 	}
@@ -91,20 +85,28 @@ public class CatalogCache extends MizeEntity implements Serializable{
 		this.catalogNames = catalogNames;
 	}
 
-	@Transient
 	public BusinessEntity getTenant() {
 		return tenant;
 	}
 	public void setTenant(BusinessEntity tenant) {
 		this.tenant = tenant;
 	}
+	
+	public Long getTenantId() {
+		return tenantId;
+	}
+	public void setTenantId(Long tenantId) {
+		this.tenantId = tenantId;
+	}
+	
 	@Override
 	public String toString() {
 		return "CatalogCache [catalogName=" + catalogName + ", catalogId="
 				+ catalogId + ", isActive=" + isActive
-				+ ", catalogEntryCaches=" + catalogEntryCaches + "]";
-	}
-	
+				+ ", catalogEntryCaches=" + catalogEntryCaches
+				+ ", catalogNames=" + catalogNames + ", tenantId=" + tenantId
+				+ ", tenant=" + tenant + "]";
+	}	
 }
 	
 

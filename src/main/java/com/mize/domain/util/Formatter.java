@@ -839,5 +839,27 @@ public final class Formatter {
 	 public static void main(String[] args) {
 		System.out.println(daysBetween(DateTime.now().minusDays(1), DateTime.now().plusMonths(1)));
 	}
+	 
+	 public static String htmlEncode(String input) {
+		 if (isNull(input)) {
+			 return EMPTY;
+		 }
+		 String tmpStr = globalReplace(input, "&", "&amp;");
+		 tmpStr = globalReplace(tmpStr, ">", "&gt;");
+		 tmpStr = globalReplace(tmpStr, "<", "&lt;");
+		 tmpStr = globalReplace(tmpStr, "\"", "&quot;");
+		 return tmpStr;
+	 }
+	 
+	 public static String globalReplace(String input, String find, String replace) {
+		 int start;
+		 start = input.indexOf(find);
+		 if (start == -1)
+			 return input;
+
+		 StringBuffer result = new StringBuffer("");
+		 result.append(input.substring(0, start)).append(replace).append(globalReplace(input.substring(start + find.length()), find, replace));
+		 return result.toString();
+	 }
 	
 }
