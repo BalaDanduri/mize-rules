@@ -150,14 +150,13 @@ public class BusinessEntityServiceRate extends MizeEntity implements Comparable<
 		this.endDate = endDate;
 	}
 	
-	@Override	
-	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
-	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@Column(name = "created_date",updatable=false)
-	@JsonIgnore(value = false)
-	public DateTime getCreatedDate() {
-		return createdDate;
-	}
+    @JsonIgnore(false)
+    @Column(name = "created_date", updatable = false)
+    @org.hibernate.annotations.Type(type = "com.mize.domain.util.DateTimeJPA")
+    public DateTime getCreatedDate() {
+        return this.createdDate;
+    } 
+
 
 	@Override	
 	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
@@ -184,12 +183,13 @@ public class BusinessEntityServiceRate extends MizeEntity implements Comparable<
 		super.updatedDate = updatedDate;
 	}
 
-	@Override
-	@JsonIgnore(value=false)
-	@Column(name = "created_by" , updatable=false)
-	public Long getCreatedBy() {
-		return createdBy;
-	}
+    @Override
+    @JsonIgnore(value=false)
+    @Column(name = "created_by",updatable = false)
+    public Long getCreatedBy() {                      
+        return super.getCreatedBy();
+    }        
+
 
 	@Override
 	@JsonIgnore(value=false)

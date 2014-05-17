@@ -118,14 +118,13 @@ public class PartSubstitute extends MizeEntity {
 		return date;
 	}
 
-	@Override	
-	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
-	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@Column(name = "created_date")
-	@JsonIgnore(value = false)
-	public DateTime getCreatedDate() {
-		return createdDate;
-	}
+	@JsonIgnore(false)
+    @Column(name = "created_date", updatable = false)
+    @org.hibernate.annotations.Type(type = "com.mize.domain.util.DateTimeJPA")
+    public DateTime getCreatedDate() {
+        return this.createdDate;
+    } 
+
 
 	@Override	
 	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
@@ -137,12 +136,12 @@ public class PartSubstitute extends MizeEntity {
 	}
 
 	@Override
-	@JsonIgnore
-	@Column(name = "created_by")
-	public Long getCreatedBy() {		
-		return super.getCreatedBy();
-	}
-
+    @JsonIgnore(value=false)
+    @Column(name = "created_by",updatable = false)
+    public Long getCreatedBy() {                      
+        return super.getCreatedBy();
+    }
+	
 	@Override
 	@JsonIgnore
 	@Column(name = "updated_by")
