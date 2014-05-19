@@ -1,6 +1,9 @@
 package com.mize.domain.appmsg;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -63,7 +66,11 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 	@Transient
 	private boolean isExists;
 	@Transient
-	private boolean isDuplicate;	
+	private boolean isDuplicate;
+	@Transient
+	private Map<String,Object> hotSpotMap = new HashMap<String,Object>();
+	@Transient
+	private List<Object> hotSpotList = new ArrayList<Object>();
 
 	public enum Severity {
 		one(1),two(2),three(3),four(4),five(5);
@@ -352,6 +359,24 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 	public String toString() {
 		return "AppMessage [code=" + code + ", msgType=" + msgType
 				+ ", severity=" + severity +", isExists=" + isExists + "]";
+	}
+
+	@Transient
+	public Map<String, Object> getHotSpotMap() {
+		return hotSpotMap;
+	}
+
+	public void setHotSpotMap(Map<String, Object> hotSpotMap) {
+		this.hotSpotMap = hotSpotMap;
+	}
+
+	@Transient
+	public List<Object> getHotSpotList() {
+		return hotSpotList;
+	}
+
+	public void setHotSpotList(List<Object> hotSpotList) {
+		this.hotSpotList = hotSpotList;
 	}
 
 	@Transient
