@@ -59,6 +59,9 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 	private String isNewShipFrom;
 	@Transient
 	List<BusinessEntity> childBusinessEntities;
+	@Transient
+	List<BusinessEntity> childShipFromBusinessEntities;
+	
 	
 	public PurchaseOrderShipment(){
 		super();
@@ -264,6 +267,16 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 
 	public void setChildBusinessEntities(List<BusinessEntity> childBusinessEntities) {
 		this.childBusinessEntities = childBusinessEntities;
+	}
+	
+	@Transient
+	public List<BusinessEntity> getChildShipFromBusinessEntities() {
+		return childShipFromBusinessEntities;
+	}
+
+	public void setChildShipFromBusinessEntities(
+			List<BusinessEntity> childShipFromBusinessEntities) {
+		this.childShipFromBusinessEntities = childShipFromBusinessEntities;
 	}
 
 	@Override
