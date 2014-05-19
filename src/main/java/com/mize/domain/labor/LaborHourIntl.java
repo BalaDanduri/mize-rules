@@ -52,7 +52,7 @@ public class LaborHourIntl extends MizeEntity implements Comparable<LaborHourInt
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "labor_hour_id")
-	@JsonBackReference(value ="intl")	
+	@JsonBackReference(value ="laborHourIntl")	
 	public LaborHour getLaborHour() {
 		return laborHour;
 	}
@@ -87,10 +87,6 @@ public class LaborHourIntl extends MizeEntity implements Comparable<LaborHourInt
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
 	}
 
 	@Override

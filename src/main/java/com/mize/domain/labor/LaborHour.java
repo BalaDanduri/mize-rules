@@ -164,7 +164,7 @@ public class LaborHour extends MizeEntity implements Comparable<LaborHour> {
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "laborHour" ,orphanRemoval= true)
 	@Fetch(FetchMode.SELECT)
-	@JsonManagedReference(value="intl")
+	@JsonManagedReference(value="laborHour")
 	public List<LaborHourIntl> getIntls() {
 		return intls;
 	}
