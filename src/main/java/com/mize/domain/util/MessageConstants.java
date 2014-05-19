@@ -367,4 +367,10 @@ public abstract class MessageConstants implements Serializable{
 	public static final String INVALID_ORDER_REQUEST_TYPE = "INVALID_ORDER_REQUEST_TYPE";
 	public static final String ORDER_REQUEST_TYPE_REQUIRED = "ORDER_REQUEST_TYPE_REQUIRED";
 	
+	public static final String LABOR_HOUR_TYPE_REQUIRED = "LABOR_HOUR_TYPE_REQUIRED";
+	public static final String LABOR_HOUR_CODE_REQUIRED = "LABOR_HOUR_CODE_REQUIRED";
+	public static final String DUPLICATE_LABOR_HOUR_CODE = "DUPLICATE_LABOR_HOUR_CODE";
+	public static final String LABOR_HOURS_REQUIRED = "LABOR_HOURS_REQUIRED";
+	public static final String LABOR_NAME_REQUIRED = "LABOR_NAME_REQUIRED";
+	
 }

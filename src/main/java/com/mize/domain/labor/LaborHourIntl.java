@@ -25,6 +25,18 @@ public class LaborHourIntl extends MizeEntity implements Comparable<LaborHourInt
 	private String name;
 	private String description;
 
+	public LaborHourIntl() {
+	}
+	
+	public LaborHourIntl(LaborHour laborHour, Locale locale, String name,
+			String description) {
+		super();
+		this.laborHour = laborHour;
+		this.locale = locale;
+		this.name = name;
+		this.description = description;
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false, unique = true)
@@ -40,7 +52,7 @@ public class LaborHourIntl extends MizeEntity implements Comparable<LaborHourInt
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "labor_hour_id")
-	@JsonBackReference(value ="laborHourIntl")	
+	@JsonBackReference(value ="intl")	
 	public LaborHour getLaborHour() {
 		return laborHour;
 	}
@@ -49,7 +61,7 @@ public class LaborHourIntl extends MizeEntity implements Comparable<LaborHourInt
 		this.laborHour = laborHour;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER ,optional = true)
+	@ManyToOne(fetch = FetchType.EAGER,optional = true)
 	@JoinColumn(name = "locale_id")
 	public Locale getLocale() {
 		return locale;
@@ -119,8 +131,16 @@ public class LaborHourIntl extends MizeEntity implements Comparable<LaborHourInt
 	}
 
 	@Override
-	public int compareTo(LaborHourIntl o) {
-		return 0;
+	public int compareTo(LaborHourIntl  intl) {
+		if ( this == intl ) 
+			return EQUAL;
+		else if (this.id < intl.id) 
+			return BEFORE;
+		else if (intl.id == this.id) 
+			return EQUAL;
+		else if (this.id > intl.id)
+			return AFTER;
+		return EQUAL;
 	}
 
 }

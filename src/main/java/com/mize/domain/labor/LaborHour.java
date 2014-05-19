@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.Fetch;
@@ -27,6 +28,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
+import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JPASerializer;
@@ -35,7 +37,7 @@ import com.mize.domain.util.JsonDateTimeSerializer;
 
 @Entity
 @Table(name = "labor_hour", uniqueConstraints = {@UniqueConstraint (columnNames = {"tenant_id", "labor_code"})})
-public class LaborHour extends MizeEntity implements Comparable<LaborHour>{
+public class LaborHour extends MizeEntity implements Comparable<LaborHour> {
 
 	private static final long serialVersionUID = 86846948813348698L;
 	private BusinessEntity tenant;
@@ -46,9 +48,39 @@ public class LaborHour extends MizeEntity implements Comparable<LaborHour>{
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime endDate;
 	private BigDecimal hours;
-	private List<LaborHourIntl> laborHourIntls;
+	private List<LaborHourIntl> intls;
 	
+	@Transient
+	private User user;
+	
+	public LaborHour() {
+	}
+	
+	public LaborHour(Long id , String code, String type, DateTime startDate,
+			DateTime endDate, BigDecimal hours) {
+		super();
+		this.id = id;
+		this.type = type;
+		this.code = code;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.hours = hours;
+	}
 
+	public LaborHour(BusinessEntity tenant, String type, String code,
+			DateTime startDate, DateTime endDate, BigDecimal hours,
+			List<LaborHourIntl> intls, User user) {
+		super();
+		this.tenant = tenant;
+		this.type = type;
+		this.code = code;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.hours = hours;
+		this.intls = intls;
+		this.user = user;
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false, unique = true)
@@ -62,7 +94,7 @@ public class LaborHour extends MizeEntity implements Comparable<LaborHour>{
 		this.id = id;
 	}
 	
-	@ManyToOne(cascade={CascadeType.ALL},fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="tenant_id")
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public BusinessEntity getTenant() {
@@ -99,6 +131,9 @@ public class LaborHour extends MizeEntity implements Comparable<LaborHour>{
 		return startDate;
 	}
 
+
+	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
 	public void setStartDate(DateTime startDate) {
 		this.startDate = startDate;
 	}
@@ -111,6 +146,9 @@ public class LaborHour extends MizeEntity implements Comparable<LaborHour>{
 		return endDate;
 	}
 
+
+	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
 	public void setEndDate(DateTime endDate) {
 		this.endDate = endDate;
 	}
@@ -126,13 +164,13 @@ public class LaborHour extends MizeEntity implements Comparable<LaborHour>{
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "laborHour" ,orphanRemoval= true)
 	@Fetch(FetchMode.SELECT)
-	@JsonManagedReference(value="laborHourIntl")
-	public List<LaborHourIntl> getLaborHourIntls() {
-		return laborHourIntls;
+	@JsonManagedReference(value="intl")
+	public List<LaborHourIntl> getIntls() {
+		return intls;
 	}
 
-	public void setLaborHourIntls(List<LaborHourIntl> laborHourIntls) {
-		this.laborHourIntls = laborHourIntls;
+	public void setIntls(List<LaborHourIntl> intls) {
+		this.intls = intls;
 	}
 
 	@JsonIgnore(value=false)
@@ -189,6 +227,14 @@ public class LaborHour extends MizeEntity implements Comparable<LaborHour>{
 		return updatedDate;
 	}
 	
+	@Transient
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 	
 	@Override
 	public int hashCode() {
@@ -240,8 +286,16 @@ public class LaborHour extends MizeEntity implements Comparable<LaborHour>{
 	}
 
 	@Override
-	public int compareTo(LaborHour arg0) {
-		return 0;
+	public int compareTo(LaborHour labor) {
+		if ( this == labor ) 
+			return EQUAL;
+		else if (this.id < labor.id) 
+			return BEFORE;
+		else if (labor.id == this.id) 
+			return EQUAL;
+		else if (this.id > labor.id)
+			return AFTER;
+		return EQUAL;
 	}
 	
 }
