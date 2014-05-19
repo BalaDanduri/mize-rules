@@ -63,8 +63,7 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 	private User user;
 	@Transient
 	private MessageType messageType = new MessageType();
-	@Transient
-	private boolean isExists;
+	
 	@Transient
 	private boolean isDuplicate;
 	@Transient
@@ -145,11 +144,6 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 		super();
 	}
 	
-	public AppMessage(boolean isExists) {
-		super();
-		this.isExists = isExists;
-	}
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", unique = true, nullable = false)
@@ -335,15 +329,6 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	@Transient
-	public boolean isExists() {
-		return isExists;
-	}
-
-	public void setExists(boolean isExists) {
-		this.isExists = isExists;
-	}
 
 	@Transient
 	@JsonIgnore
@@ -358,7 +343,7 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 	@Override
 	public String toString() {
 		return "AppMessage [code=" + code + ", msgType=" + msgType
-				+ ", severity=" + severity +", isExists=" + isExists + "]";
+				+ ", severity=" + severity + "]";
 	}
 
 	@Transient
