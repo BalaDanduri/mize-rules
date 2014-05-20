@@ -101,6 +101,23 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 		this.updatedDate = updatedDate;
 	}
 	
+	public PurchaseOrder(Long id,String number,String status,String type,String requestType,
+			DateTime createdDate,DateTime updatedDate,String itemNumber,BigDecimal quantity){
+		super();
+		this.id = id;
+		this.number = number;
+		this.type = type;
+		this.requestType = requestType;
+		this.status = status;	
+		this.createdDate = createdDate;
+		this.updatedDate = updatedDate;
+		this.orderItems = new ArrayList<PurchaseOrderItem>();
+		PurchaseOrderItem item = new PurchaseOrderItem();
+		item.setNumber(itemNumber);
+		item.setRequestedQuantity(quantity);
+		this.getOrderItems().add(item);
+	}
+	
 	public enum Status{
 		Draft,Pending,Approved,Deleted,Rejected,Closed,Open,Completed,
 		Shipped,In_Process,Submitted;

@@ -20,6 +20,7 @@ public class OriginalOrder extends MizeEntity {
 	private String status;
 	private String type;
 	private String requestType;
+	private boolean isValidCombination;
 	
 	public OriginalOrder(){
 		super();
@@ -101,4 +102,13 @@ public class OriginalOrder extends MizeEntity {
 	public void setCreatedDate(DateTime createdDate) {
 		this.createdDate = createdDate;
 	}
+
+	public boolean isValidCombination() {
+		return isValidCombination;
+	}
+
+	public void setValidCombination(boolean isValidCombination) {
+		this.isValidCombination = isValidCombination;
+	}	
+	
 }
