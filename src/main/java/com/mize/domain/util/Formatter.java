@@ -558,6 +558,14 @@ public final class Formatter {
 		}
 	}
 	
+	public static String toString(Double doubleVal){
+		if(doubleVal == null){
+			return EMPTY;
+		}else {
+			return EMPTY+doubleValue(doubleVal);
+		}
+	}
+	
 	public static String toString(BigDecimal bigDecimal){
 		if(bigDecimal == null){
 			return EMPTY;
@@ -835,11 +843,7 @@ public final class Formatter {
 		 }
 		 return gregorianCalendar;
 	 }
-	 
-	 public static void main(String[] args) {
-		System.out.println(daysBetween(DateTime.now().minusDays(1), DateTime.now().plusMonths(1)));
-	}
-	 
+	 	 
 	 public static String htmlEncode(String input) {
 		 if (isNull(input)) {
 			 return EMPTY;

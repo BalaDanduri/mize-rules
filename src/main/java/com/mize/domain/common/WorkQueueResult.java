@@ -1,5 +1,8 @@
 package com.mize.domain.common;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Transient;
 
 import org.joda.time.DateTime;
@@ -34,6 +37,7 @@ public class WorkQueueResult extends MizeEntity {
 	public BusinessEntity businessEntity;
 	public ProductSerial productSerial;
 	private String requesterCode;
+	private List<WorkQueueResults> results = new ArrayList<WorkQueueResults>();
 	
     public WorkQueueResult(){
     	super();
@@ -229,6 +233,14 @@ public class WorkQueueResult extends MizeEntity {
 
 	public void setRequesterCode(String requesterCode) {
 		this.requesterCode = requesterCode;
+	}
+	
+	public List<WorkQueueResults> getResults() {
+		return results;
+	}
+
+	public void setResults(List<WorkQueueResults> results) {
+		this.results = results;
 	}
 
 	@Override
