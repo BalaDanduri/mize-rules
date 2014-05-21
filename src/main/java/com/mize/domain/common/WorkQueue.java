@@ -101,7 +101,7 @@ public class WorkQueue extends MizeEntity implements Comparable<WorkQueue>{
 		return workQueueAuths;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "tenant_id")
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public BusinessEntity getTenant() {
