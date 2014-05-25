@@ -34,8 +34,6 @@ import com.mize.domain.util.JsonDateTimeSerializer;
 @Entity
 @Table(name="work_queue")
 public class WorkQueue extends MizeEntity implements Comparable<WorkQueue>{
-
-
 	private static final long serialVersionUID = -488011181561672299L;
 	private String name;
 	private String desc;

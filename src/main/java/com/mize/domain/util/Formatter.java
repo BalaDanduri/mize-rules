@@ -865,5 +865,9 @@ public final class Formatter {
 		 result.append(input.substring(0, start)).append(replace).append(globalReplace(input.substring(start + find.length()), find, replace));
 		 return result.toString();
 	 }
+	 
+	 public static void main(String[] args) {
+		 System.out.println(Double.toHexString(10));
+	}
 	
 }

@@ -274,8 +274,7 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 		return childShipFromBusinessEntities;
 	}
 
-	public void setChildShipFromBusinessEntities(
-			List<BusinessEntity> childShipFromBusinessEntities) {
+	public void setChildShipFromBusinessEntities(List<BusinessEntity> childShipFromBusinessEntities) {
 		this.childShipFromBusinessEntities = childShipFromBusinessEntities;
 	}
 
