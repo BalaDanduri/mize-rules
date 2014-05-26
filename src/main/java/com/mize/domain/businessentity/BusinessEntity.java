@@ -18,6 +18,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.Fetch;
@@ -33,6 +34,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
+import com.mize.domain.auth.User;
 import com.mize.domain.common.Country;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityAddressGeo;
@@ -58,6 +60,8 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	private String currencyCode;
 	private String name;
 	private String businessEntityReference;
+	@Transient
+	private User user;
 	private List<BusinessEntityAddress> addresses = new ArrayList<BusinessEntityAddress>();
 	private List<BusinessEntityIntl> intl = new ArrayList<BusinessEntityIntl>();
 	private List<BusinessEntityBrand> beBrand = new ArrayList<BusinessEntityBrand>();
@@ -323,6 +327,16 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	@Column(name = "business_entity_reference", length = 100)
 	public String getBusinessEntityReference() {
 		return businessEntityReference;
+	}
+	
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
+	@Transient
+	@JsonIgnore
+	public User getUser() {
+		return user;
 	}
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "businessEntity")
