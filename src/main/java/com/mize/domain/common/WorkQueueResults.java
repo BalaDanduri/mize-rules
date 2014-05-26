@@ -24,7 +24,7 @@ public class WorkQueueResults extends MizeEntity {
 		this.fieldType = fieldType;
 	}
 
-	public String getFieldName(String ...a) {
+	public String getFieldName() {
 		return fieldName;
 	}
 
@@ -107,8 +107,8 @@ public class WorkQueueResults extends MizeEntity {
 	}
 	
 	public void populateResult(Object fieldName ,Object fieldValue){
-		if(fieldName != null && fieldValue != null){
-			this.fieldName = fieldName.toString();
+		if(fieldName != null){
+			this.fieldName =   (String)fieldName;
 			if(fieldValue instanceof Integer){
 				this.fieldValue = Formatter.toString((Integer)fieldValue);
 				this.fieldType = Integer.class.getSimpleName();
@@ -124,7 +124,10 @@ public class WorkQueueResults extends MizeEntity {
 			}else if(fieldValue instanceof DateTime){
 				this.fieldValue = Formatter.getDateTime((DateTime)fieldValue);
 				this.fieldType = DateTime.class.getSimpleName();
-			}			
+			}else{
+				this.fieldValue = (String)fieldValue;
+				this.fieldType = String.class.getSimpleName();
+			}
 		}
 	}
 
