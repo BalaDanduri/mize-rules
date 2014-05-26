@@ -376,6 +376,6 @@ public abstract class MessageConstants implements Serializable{
 
 	public static final String SEQUENCE_NO_REQUIRED = "SEQUENCE_NO_REQUIRED";
 	public static final String INVALID_WORK_QUEUE_ENTITY_TYPE="INVALID_WORK_QUEUE_ENTITY_TYPE";
-
+	public static final String INVALID_SERVICE_TYPE = "INVALID_SERVICE_TYPE";
 	
 }
