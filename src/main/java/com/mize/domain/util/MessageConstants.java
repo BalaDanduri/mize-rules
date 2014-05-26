@@ -373,5 +373,7 @@ public abstract class MessageConstants implements Serializable{
 	public static final String LABOR_HOURS_REQUIRED = "LABOR_HOURS_REQUIRED";
 	public static final String LABOR_NAME_REQUIRED = "LABOR_NAME_REQUIRED";
 	public static final String  DUPLICATE_USER="DUPLICATE_USER";
+
+	public static final String SEQUENCE_NO_REQUIRED = "SEQUENCE_NO_REQUIRED";
 	
 }
