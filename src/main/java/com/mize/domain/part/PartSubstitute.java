@@ -50,12 +50,15 @@ public class PartSubstitute extends MizeEntity {
     @Transient
     private User user;
     
+    public enum TypeCode{
+    	Alternative,Substitute;
+    }
 	
 	public PartSubstitute(){
 		super();
 	}
-	
-	public PartSubstitute(Long id , String originalPartCode,String substitutePartCode,String fmailyCode,DateTime date,Integer sequenceNo){
+		
+	public PartSubstitute(Long id,String originalPartCode,String substitutePartCode,String fmailyCode,String code ,DateTime date,Integer sequenceNo){
 		super();
 		this.id = id;
 		if(originalPartCode != null){
@@ -67,6 +70,7 @@ public class PartSubstitute extends MizeEntity {
 			this.substitutedPart.setCode(substitutePartCode);
 		}
 		this.familyCode = fmailyCode;
+		this.code = code;
 		this.date = date;
 		this.sequenceNo = sequenceNo;
 	}

@@ -77,7 +77,6 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	private String importFileName;
 	@Transient
 	private PurchaseOrderParameter orderParameter;
-	@Transient
 	private Long entityParameterId;
 	private String model;
 	private String productSerial;
@@ -476,7 +475,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 		this.orderParameter = orderParameter;
 	}
 
-	@Transient
+	@Column(name="entity_parameter_id")
 	public Long getEntityParameterId() {
 		return entityParameterId;
 	}
