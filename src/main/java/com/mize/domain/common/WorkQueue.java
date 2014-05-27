@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
@@ -32,7 +33,7 @@ import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
 @Entity
-@Table(name="work_queue")
+@Table(name="work_queue", uniqueConstraints = {@UniqueConstraint (columnNames = {"name","tenant_id"})})
 public class WorkQueue extends MizeEntity implements Comparable<WorkQueue>{
 	private static final long serialVersionUID = -488011181561672299L;
 	private String name;
