@@ -472,6 +472,10 @@ public final class Formatter {
 		return (doubleValue(var1) == doubleValue(var2));
 	}
 	
+	public static boolean equal(BigDecimal var1,BigDecimal var2){
+		return (doubleValue(var1) == doubleValue(var2));
+	}
+	
 	public static boolean equal(Long var1,Long var2){
 		return (longValue(var1) == longValue(var2));
 	}
