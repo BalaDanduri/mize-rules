@@ -218,7 +218,7 @@ public class WorkQueueEntityHistory extends MizeEntity implements Comparable<Wor
 
 	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
 	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@Column(name = "entity_out_date",updatable = false)
+	@Column(name = "entity_out_date")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
 	public DateTime getEntityOutDate() {
 		return entityOutDate;
