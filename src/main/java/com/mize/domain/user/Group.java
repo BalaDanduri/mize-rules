@@ -71,6 +71,13 @@ public class Group extends MizeEntity implements Comparable<Group> {
 		this.name = name;
 		this.code = code;
 	}
+	
+	public Group(Long id,String name, String description) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.description = description;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
