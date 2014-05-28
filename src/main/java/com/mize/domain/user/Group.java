@@ -27,6 +27,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
+import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JPASerializer;
@@ -45,8 +46,10 @@ public class Group extends MizeEntity implements Comparable<Group> {
 	private List<Role> roles = new ArrayList<Role>();
 	private BusinessEntity owner;
 	private List<UserGroup> userGroups = new ArrayList<UserGroup>();
-	
 	private List<GroupRoleMapping> groupsToRole = new ArrayList<GroupRoleMapping>();
+	
+	@Transient
+	private User user;
 
 	public Group() {
 	}
@@ -175,6 +178,15 @@ public class Group extends MizeEntity implements Comparable<Group> {
 
 	public void setGroupsToRole(List<GroupRoleMapping> groupsToRole) {
 		this.groupsToRole = groupsToRole;
+	}
+	
+	@Transient
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 	@Override

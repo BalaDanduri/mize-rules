@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 
 import org.joda.time.DateTime;
@@ -21,6 +22,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
+import com.mize.domain.auth.User;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
@@ -34,18 +36,15 @@ public class Role extends MizeEntity implements Comparable<Role>{
 	private String name;
 	private String description;
 	private String code;
-	private String active;	
-   /* private List<Group> groups;*/
-	
+	private String active;
 	private List<GroupRoleMapping> groupsToRole;
 	
-	
+	@Transient
+	private User user;
 	
 	public Role(){		
 	}
 	
-	
-
 	public Role(String name, String description, String code, String active,List<GroupRoleMapping> groupsToRole) {
 		super();
 		this.name = name;
@@ -54,7 +53,6 @@ public class Role extends MizeEntity implements Comparable<Role>{
 		this.active = active;
 		this.groupsToRole = groupsToRole;
 	}
-
 
 
 	@Id
@@ -120,17 +118,16 @@ public class Role extends MizeEntity implements Comparable<Role>{
 	public void setGroupsToRole(List<GroupRoleMapping> groupsToRole) {
 		this.groupsToRole = groupsToRole;
 	}
-/*
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles")
-	@JsonManagedReference(value="role_groups")
-	public List<Group> getGroups() {
-		return groups;
-	}
 	
-	@JsonManagedReference(value="role_groups")
-	public void setGroups(List<Group> groups) {
-		this.groups = groups;
-	}*/
+	
+	@Transient
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 	
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
