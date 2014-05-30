@@ -340,6 +340,18 @@ public final class Formatter {
 		}		
 		return time;
 	}
+	
+	public static String trimLength(String input,int length){
+		String result = null;
+		try{
+			result = input;
+			if(input != null && input.trim().length() > length){
+				result = input.trim().substring(0, length-1);
+			}
+		}catch(Exception e){			
+		}
+		return result;
+	}
 
 	public static DateTime date(String dateTime){
 		DateTime time = null;
