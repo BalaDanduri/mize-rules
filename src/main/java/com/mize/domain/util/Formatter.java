@@ -68,9 +68,7 @@ public final class Formatter {
 		SPL_CHAR_MAP.put(153,"&trade;");
 		SPL_CHAR_MAP.put(169,"&copy;");
 		SPL_CHAR_MAP.put(174,"&reg;");
-		SPL_CHAR_MAP.put(8482,"&trade;");
-		
-		
+		SPL_CHAR_MAP.put(8482,"&trade;");		
 	}
 	
 	public static int intValue(Integer intVal){
@@ -342,6 +340,18 @@ public final class Formatter {
 		}		
 		return time;
 	}
+	
+	public static String trimLength(String input,int length){
+		String result = null;
+		try{
+			result = input;
+			if(input != null && input.trim().length() > length){
+				result = input.trim().substring(0, length-1);
+			}
+		}catch(Exception e){			
+		}
+		return result;
+	}
 
 	public static DateTime date(String dateTime){
 		DateTime time = null;
@@ -472,6 +482,10 @@ public final class Formatter {
 		return (doubleValue(var1) == doubleValue(var2));
 	}
 	
+	public static boolean equal(BigDecimal var1,BigDecimal var2){
+		return (doubleValue(var1) == doubleValue(var2));
+	}
+	
 	public static boolean equal(Long var1,Long var2){
 		return (longValue(var1) == longValue(var2));
 	}
@@ -555,6 +569,14 @@ public final class Formatter {
 			return EMPTY;
 		}else {
 			return EMPTY+longValue(longVal);
+		}
+	}
+	
+	public static String toString(Double doubleVal){
+		if(doubleVal == null){
+			return EMPTY;
+		}else {
+			return EMPTY+doubleValue(doubleVal);
 		}
 	}
 	
@@ -721,6 +743,10 @@ public final class Formatter {
 		return val1.add(val2);		
 	}
 	
+	public static BigDecimal addBigDecimals1(BigDecimal val1,BigDecimal val2){		
+		return roundBigDecimal(addBigDecimals(val1,val2));		
+	}
+	
 	public static BigDecimal subtractBigDecimals(BigDecimal val1,BigDecimal val2){
 		if(val1 == null){
 			val1 = BigDecimal.ZERO;
@@ -731,6 +757,10 @@ public final class Formatter {
 		return val1.subtract(val2);		
 	}
 	
+	public static BigDecimal subtractBigDecimals1(BigDecimal val1,BigDecimal val2){		
+		return roundBigDecimal(subtractBigDecimals(val1,val2));		
+	}
+	
 	public static BigDecimal multiplyBigDecimals(BigDecimal val1,BigDecimal val2){
 		if(val1 == null){
 			val1 = BigDecimal.ZERO;
@@ -739,6 +769,10 @@ public final class Formatter {
 			val2 = BigDecimal.ZERO;
 		}
 		return val1.multiply(val2);		
+	}
+	
+	public static BigDecimal multiplyBigDecimals1(BigDecimal val1,BigDecimal val2){		
+		return roundBigDecimal(multiplyBigDecimals(val1,val2));		
 	}
 	
 	public static BigDecimal multiplyBigDecimals(BigDecimal val1,BigDecimal val2,BigDecimal val3){
@@ -767,6 +801,9 @@ public final class Formatter {
 		return val1.add(val2).add(val3);		
 	}
 	
+	public static BigDecimal addBigDecimals1(BigDecimal val1,BigDecimal val2,BigDecimal val3){		
+		return addBigDecimals1(addBigDecimals1(val1,val2),val3);		
+	}	
 
 	public static BigDecimal formattBigDecimal(BigDecimal value){
 		if(value == null){
@@ -791,6 +828,14 @@ public final class Formatter {
 		}
 		double returnValue = Math.round(value.doubleValue() * 100) / 100.0;
 		return returnValue;
+	}
+	
+	public static BigDecimal roundBigDecimal(BigDecimal value) {
+		if(value == null){
+			value = BigDecimal.ZERO;
+		}
+		double returnValue = Math.round(value.doubleValue() * 100) / 100.0;
+		return BigDecimal.valueOf(returnValue);
 	}
 	
 	public static BigDecimal notNullBigDecimal(BigDecimal value) {
@@ -835,9 +880,37 @@ public final class Formatter {
 		 }
 		 return gregorianCalendar;
 	 }
+	 	 
+	 public static String htmlEncode(String input) {
+		 if (isNull(input)) {
+			 return EMPTY;
+		 }
+		 String tmpStr = globalReplace(input, "&", "&amp;");
+		 tmpStr = globalReplace(tmpStr, ">", "&gt;");
+		 tmpStr = globalReplace(tmpStr, "<", "&lt;");
+		 tmpStr = globalReplace(tmpStr, "\"", "&quot;");
+		 return tmpStr;
+	 }
+	 
+	 public static String globalReplace(String input, String find, String replace) {
+		 int start;
+		 start = input.indexOf(find);
+		 if (start == -1)
+			 return input;
+
+		 StringBuffer result = new StringBuffer("");
+		 result.append(input.substring(0, start)).append(replace).append(globalReplace(input.substring(start + find.length()), find, replace));
+		 return result.toString();
+	 }
 	 
 	 public static void main(String[] args) {
-		System.out.println(daysBetween(DateTime.now().minusDays(1), DateTime.now().plusMonths(1)));
+		 BigDecimal d = BigDecimal.valueOf(85.87);
+		 BigDecimal d1 = BigDecimal.valueOf(doubleValue(20.0)/100);
+		 BigDecimal d3 = multiplyBigDecimals(d,d1);
+		 //discountAmount = Formatter.multiplyBigDecimals(requestedAmount,BigDecimal.valueOf(Formatter.doubleValue(lineDiscountPercent)/100));
+		 BigDecimal d4 = Formatter.subtractBigDecimals(d,d3);
+		 System.out.println(d3);
+		 System.out.println(d4);
 	}
 	
 }

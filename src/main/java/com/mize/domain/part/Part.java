@@ -57,6 +57,8 @@ public class Part extends MizeEntity {
 	private String productClass;
 	@Transient
 	private String originalPart;
+	@Transient
+	private BigDecimal onHandQuantity;
 
 	@Transient
 	private User user;
@@ -442,6 +444,15 @@ public class Part extends MizeEntity {
 
 	public void setOriginalPart(String originalPart) {
 		this.originalPart = originalPart;
+	}
+	
+	@Transient
+	public BigDecimal getOnHandQuantity() {
+		return onHandQuantity;
+	}
+	
+	public void setOnHandQuantity(BigDecimal onHandQuantity) {
+		this.onHandQuantity = onHandQuantity;
 	}	
 
 }

@@ -33,9 +33,21 @@ public class WorkQueueAuth extends MizeEntity implements Comparable<WorkQueueAut
 	private String authType;
 	private Long authId;
 	private Authorization authorization;
+	@Transient
+	private Long workQueueId;
+	@Transient
+	private String workQueueName;
 	
 	public WorkQueueAuth(){
 		super();
+	}
+	
+	public WorkQueueAuth(Long id ,Long wqId ,String workQueueName,String authType){
+		super();
+		this.id = id;		
+		this.workQueueId = wqId;
+		this.workQueueName = workQueueName;
+		this.authType = authType;
 	}
 	
 	public WorkQueueAuth(WorkQueue workQueue, String authType,long authId, Authorization authorization) {
@@ -78,7 +90,19 @@ public class WorkQueueAuth extends MizeEntity implements Comparable<WorkQueueAut
 		return authType;
 	}
 	
+	
+	@Transient
+	public Long getWorkQueueId() {
+		return workQueueId;
+	}
 
+
+	@Transient
+	public String getWorkQueueName() {
+		return workQueueName;
+	}
+
+	
 	@Override	
 	@DateTimeFormat(pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
@@ -129,6 +153,13 @@ public class WorkQueueAuth extends MizeEntity implements Comparable<WorkQueueAut
 		this.authorization = authorization;
 	}
 
+	public void setWorkQueueId(Long workQueueId) {
+		this.workQueueId = workQueueId;
+	}
+
+	public void setWorkQueueName(String workQueueName) {
+		this.workQueueName = workQueueName;
+	}
 
 	@Override
 	public void setId(Long id) {

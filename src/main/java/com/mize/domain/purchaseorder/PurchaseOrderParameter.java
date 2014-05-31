@@ -173,6 +173,7 @@ public class PurchaseOrderParameter extends MizeEntity {
 			this.setInvoiceType(attributes.get(Parameter.InvoiceType.toString()));
 			this.setPurchaseOrderType(attributes.get(Parameter.PurchaseOrderType.toString()));
 			this.setDefaultWarehouse(attributes.get(Parameter.DefaultWarehouse.toString()));
+			this.setApprovalRequired(attributes.get(Parameter.ApprovalRequired.toString()));
 		}
 	}	
 }

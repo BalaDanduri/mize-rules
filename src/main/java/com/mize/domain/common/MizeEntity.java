@@ -106,6 +106,9 @@ public abstract class MizeEntity implements Serializable{
 	
 	@JsonIgnore
 	public boolean isValid() {
+		if(this.isValid == null){
+			return true;
+		}
 		return this.isValid.booleanValue();
 	}
 

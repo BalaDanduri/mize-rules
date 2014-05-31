@@ -15,6 +15,12 @@ public class PaginationPage<T> implements Serializable {
 	private List<T> pageItems = new ArrayList<T>();
 	private long rowsAvailable;
 	private Integer pageSize;
+	private String orderBy;
+	private String sortBy;
+	
+	public enum OrderBy{
+		DESC,ASC;
+	}
 
 	public PaginationPage() {
 
@@ -99,6 +105,23 @@ public class PaginationPage<T> implements Serializable {
 		return "PaginationPage [pageNumber=" + pageNumber + ", pagesAvailable="
 				+ pagesAvailable + ", rowsAvailable=" + rowsAvailable
 				+ ", pageSize=" + pageSize + "]";
+	}
+
+	public String getOrderBy() {
+		return orderBy;
+	}
+
+	public String getSortBy() {
+		return sortBy;
+	}
+
+	public void setOrderBy(String orderBy) {
+		this.orderBy = orderBy;
+	}
+
+	public void setSortBy(String sortBy) {
+		this.sortBy = sortBy;
 	}	
+	
 	
 }

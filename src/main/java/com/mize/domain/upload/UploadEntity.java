@@ -45,10 +45,11 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 	private boolean isSolrUpdateReq = true;
 	private List<Long> prodIds = new ArrayList<Long>();
 	private Boolean isHistorical;
+	private BusinessEntity tenant;
+	
 	public enum Status{
 		IN_PROGRESS,COMPLETED;
 	}
-	private BusinessEntity tenant;
 	
 	public enum EntityType{
 		BrandService("Brand"),BrandSupprtService("Brand Supprt"),ProductService("Product"),ProductDesriptionService("Product Desription"),

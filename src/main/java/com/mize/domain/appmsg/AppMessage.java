@@ -1,6 +1,9 @@
 package com.mize.domain.appmsg;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -60,10 +63,13 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 	private User user;
 	@Transient
 	private MessageType messageType = new MessageType();
+	
 	@Transient
-	private boolean isExists;
+	private boolean isDuplicate;
 	@Transient
-	private boolean isDuplicate;	
+	private Map<String,Object> hotSpotMap = new HashMap<String,Object>();
+	@Transient
+	private List<Object> hotSpotList = new ArrayList<Object>();
 
 	public enum Severity {
 		one(1),two(2),three(3),four(4),five(5);
@@ -117,6 +123,28 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 		this.messageType.setType(messageType.toString());
 	}
 	
+	public AppMessage(String code, String shortDesc, String longDesc, Integer severity, String field, String fieldKey, MessageType.Type messageType,Map<String,Object> hotSpotMap) {
+		this.code = makeNotNullString(code);	
+		this.shortDesc = shortDesc;
+		this.longDesc = longDesc;
+		this.severity = severity;
+		this.field = field;
+		this.fieldKey = fieldKey;
+		this.messageType.setType(messageType.toString());
+		this.hotSpotMap =hotSpotMap;
+	}
+	
+	public AppMessage(String code, String shortDesc, String longDesc, Integer severity, String field, String fieldKey, MessageType.Type messageType,List<Object> hotSpotList) {
+		this.code = makeNotNullString(code);	
+		this.shortDesc = shortDesc;
+		this.longDesc = longDesc;
+		this.severity = severity;
+		this.field = field;
+		this.fieldKey = fieldKey;
+		this.messageType.setType(messageType.toString());
+		this.hotSpotList =hotSpotList;
+	}
+	
 	public AppMessage(String code,String shortDesc,String longDesc) {
 		this.code = makeNotNullString(code);
 		this.shortDesc = shortDesc;
@@ -125,6 +153,10 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 	
 	public AppMessage(Integer severity, String code) {
 		this.severity = severity;
+		this.code = code;		
+	}
+	
+	public AppMessage(String code) {
 		this.code = code;		
 	}
 	
@@ -138,11 +170,6 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 		super();
 	}
 	
-	public AppMessage(boolean isExists) {
-		super();
-		this.isExists = isExists;
-	}
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", unique = true, nullable = false)
@@ -328,15 +355,6 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	@Transient
-	public boolean isExists() {
-		return isExists;
-	}
-
-	public void setExists(boolean isExists) {
-		this.isExists = isExists;
-	}
 
 	@Transient
 	@JsonIgnore
@@ -351,7 +369,25 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 	@Override
 	public String toString() {
 		return "AppMessage [code=" + code + ", msgType=" + msgType
-				+ ", severity=" + severity +", isExists=" + isExists + "]";
+				+ ", severity=" + severity + "]";
+	}
+
+	@Transient
+	public Map<String, Object> getHotSpotMap() {
+		return hotSpotMap;
+	}
+
+	public void setHotSpotMap(Map<String, Object> hotSpotMap) {
+		this.hotSpotMap = hotSpotMap;
+	}
+
+	@Transient
+	public List<Object> getHotSpotList() {
+		return hotSpotList;
+	}
+
+	public void setHotSpotList(List<Object> hotSpotList) {
+		this.hotSpotList = hotSpotList;
 	}
 
 	@Transient

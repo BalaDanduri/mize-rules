@@ -46,15 +46,19 @@ public class PartSubstitute extends MizeEntity {
 	private EntityComment entityComment;
 	private List<PartSubstituteComment> comments = new ArrayList<PartSubstituteComment>();
     private String familyCode;
+    private Integer sequenceNo;
     @Transient
     private User user;
     
+    public enum TypeCode{
+    	Alternative,Substitute;
+    }
 	
 	public PartSubstitute(){
 		super();
 	}
-	
-	public PartSubstitute(Long id , String originalPartCode,String substitutePartCode,String fmailyCode,DateTime date){
+		
+	public PartSubstitute(Long id,String originalPartCode,String substitutePartCode,String fmailyCode,String code ,DateTime date,Integer sequenceNo){
 		super();
 		this.id = id;
 		if(originalPartCode != null){
@@ -66,7 +70,9 @@ public class PartSubstitute extends MizeEntity {
 			this.substitutedPart.setCode(substitutePartCode);
 		}
 		this.familyCode = fmailyCode;
+		this.code = code;
 		this.date = date;
+		this.sequenceNo = sequenceNo;
 	}
 	
 	@Id
@@ -100,6 +106,14 @@ public class PartSubstitute extends MizeEntity {
 		return familyCode;
 	}
 
+	@Column(name = "sequence_no")
+	public Integer getSequenceNo() {
+		return sequenceNo;
+	}
+
+	public void setSequenceNo(Integer sequenceNo) {
+		this.sequenceNo = sequenceNo;
+	}
 
 	@Transient
 	public User getUser() {
@@ -222,7 +236,7 @@ public class PartSubstitute extends MizeEntity {
 	public void setComments(List<PartSubstituteComment> comments) {
 		this.comments = comments;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
@@ -234,10 +248,12 @@ public class PartSubstitute extends MizeEntity {
 		result = prime * result
 				+ ((originalPart == null) ? 0 : originalPart.hashCode());
 		result = prime * result
+				+ ((sequenceNo == null) ? 0 : sequenceNo.hashCode());
+		result = prime * result
 				+ ((substitutedPart == null) ? 0 : substitutedPart.hashCode());
 		return result;
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -267,6 +283,11 @@ public class PartSubstitute extends MizeEntity {
 				return false;
 		} else if (!originalPart.equals(other.originalPart))
 			return false;
+		if (sequenceNo == null) {
+			if (other.sequenceNo != null)
+				return false;
+		} else if (!sequenceNo.equals(other.sequenceNo))
+			return false;
 		if (substitutedPart == null) {
 			if (other.substitutedPart != null)
 				return false;
@@ -279,8 +300,8 @@ public class PartSubstitute extends MizeEntity {
 	public String toString() {
 		return "PartSubstitute [originalPart=" + originalPart
 				+ ", substitutedPart=" + substitutedPart + ", code=" + code
-				+ ", date=" + date + ", familyCode=" + familyCode + "]";
+				+ ", date=" + date + ", familyCode=" + familyCode
+				+ ", sequenceNo=" + sequenceNo + "]";
 	}
-
 	
 }

@@ -59,7 +59,7 @@ public abstract class CatalogConstants implements Serializable{
 	public static String RETURN_SHIP_TO_LOCATION_TYPE = "ReturnShipToLocationType";
 	public static final String INVOICE_LOCATION_TYPE = "InvoiceLocationType";
 	public static final String SHIP_LOCATION_TYPE = "ShipLocationType";
-	
+	public static final String LABOR_TYPE = "LaborType";
 
 }
 

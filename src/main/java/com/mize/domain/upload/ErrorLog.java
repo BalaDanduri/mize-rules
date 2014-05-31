@@ -5,20 +5,25 @@ import com.mize.domain.common.MizeEntity;
 public class ErrorLog extends MizeEntity implements Comparable<ErrorLog> {
 
 	private static final long serialVersionUID = -5103607209709356737L;
-	Long processLogId;
-	String code;
-	String field;
-	Integer severity;
+	private Long processLogId;
+	private String code;
+	private String field;
+	private Integer severity;
+	private String shortDesc;
+	private String longDesc;
 
-	public ErrorLog(){		
+	public ErrorLog(){	
+		super();
 	}
 	
 	public ErrorLog(String field,String code){
+		super();
 		this.field = field;
 		this.code = code;
 	}
 	
 	public ErrorLog(Long processLogId,String field,String code){
+		super();
 		this.processLogId = processLogId;
 		this.field = field;
 		this.code = code;
@@ -66,6 +71,22 @@ public class ErrorLog extends MizeEntity implements Comparable<ErrorLog> {
 		this.severity = severity;
 	}
 
+	public String getShortDesc() {
+		return shortDesc;
+	}
+
+	public void setShortDesc(String shortDesc) {
+		this.shortDesc = shortDesc;
+	}
+
+	public String getLongDesc() {
+		return longDesc;
+	}
+
+	public void setLongDesc(String longDesc) {
+		this.longDesc = longDesc;
+	}
+
 	@Override
 	public int compareTo(ErrorLog o) {
 		return 0;
@@ -73,7 +94,7 @@ public class ErrorLog extends MizeEntity implements Comparable<ErrorLog> {
 	
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result + ((field == null) ? 0 : field.hashCode());
