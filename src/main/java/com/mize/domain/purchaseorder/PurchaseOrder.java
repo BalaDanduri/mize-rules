@@ -119,7 +119,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	
 	public enum Status{
 		Draft,Pending,Approved,Deleted,Rejected,Closed,Open,Completed,
-		Shipped,In_Process,Submitted;
+		Shipped,In_Process,Submitted,Cancelled;
 	}
 	
 	public enum Type{
@@ -530,6 +530,18 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	@JsonIgnore
 	public boolean isDraftStatus(){
 		return Formatter.equalIgnoreCase(Status.Draft, this.status);
+	}
+	
+	@Transient
+	@JsonIgnore
+	public boolean isDeletedStatus(){
+		return Formatter.equalIgnoreCase(Status.Deleted, this.status);
+	}
+	
+	@Transient
+	@JsonIgnore
+	public boolean isCancelledtatus(){
+		return Formatter.equalIgnoreCase(Status.Cancelled, this.status);
 	}
 	
 	@Transient
