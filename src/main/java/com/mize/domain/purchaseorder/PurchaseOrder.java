@@ -84,6 +84,8 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	private String importFrom;
 	@Transient
 	private String importFileType;
+	@Transient
+	private String originalOrderNumber;
 	
 	public PurchaseOrder(){
 		super();
@@ -563,6 +565,15 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 
 	public void setImportFileType(String importFileType) {
 		this.importFileType = importFileType;
+	}
+
+	@Transient
+	public String getOriginalOrderNumber() {
+		return originalOrderNumber;
+	}
+
+	public void setOriginalOrderNumber(String originalOrderNumber) {
+		this.originalOrderNumber = originalOrderNumber;
 	}
 
 	@Override
