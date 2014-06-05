@@ -21,6 +21,7 @@ public class OriginalOrder extends MizeEntity {
 	private String type;
 	private String requestType;
 	private boolean isValidCombination;
+	private String isReturnable;
 	
 	public OriginalOrder(){
 		super();
@@ -109,6 +110,14 @@ public class OriginalOrder extends MizeEntity {
 
 	public void setValidCombination(boolean isValidCombination) {
 		this.isValidCombination = isValidCombination;
+	}
+
+	public String getIsReturnable() {
+		return isReturnable;
+	}
+
+	public void setIsReturnable(String isReturnable) {
+		this.isReturnable = isReturnable;
 	}	
 	
 }

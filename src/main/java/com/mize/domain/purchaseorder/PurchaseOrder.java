@@ -103,7 +103,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	}
 	
 	public PurchaseOrder(Long id,String number,String status,String type,String requestType,
-			DateTime createdDate,DateTime updatedDate,String itemNumber,BigDecimal quantity){
+			DateTime createdDate,DateTime updatedDate,String itemNumber,BigDecimal quantity,String isReturnable,String originalOrderNumber){
 		super();
 		this.id = id;
 		this.number = number;
@@ -116,6 +116,8 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 		PurchaseOrderItem item = new PurchaseOrderItem();
 		item.setNumber(itemNumber);
 		item.setRequestedQuantity(quantity);
+		item.setIsReturnable(isReturnable);
+		item.setOriginalOrderNumber(originalOrderNumber);
 		this.getOrderItems().add(item);
 	}
 	
