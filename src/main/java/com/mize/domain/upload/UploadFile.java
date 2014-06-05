@@ -18,6 +18,7 @@ public class UploadFile extends MizeEntity implements Comparable<UploadFile>{
 	private User user;
 	private String url;
 	private File file;
+	private String fileType;
 	
 	public String getFileFormat() {
 		return fileFormat;
@@ -93,6 +94,12 @@ public class UploadFile extends MizeEntity implements Comparable<UploadFile>{
 		this.file = file;
 	}
 	
+	public String getFileType() {
+		return fileType;
+	}
+	public void setFileType(String fileType) {
+		this.fileType = fileType;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
@@ -112,6 +119,8 @@ public class UploadFile extends MizeEntity implements Comparable<UploadFile>{
 		result = prime * result
 				+ ((s3Bucket == null) ? 0 : s3Bucket.hashCode());
 		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		result = prime * result
+				+ ((fileType == null) ? 0 : fileType.hashCode());
 		return result;
 	}
 	
@@ -161,6 +170,11 @@ public class UploadFile extends MizeEntity implements Comparable<UploadFile>{
 				return false;
 		} else if (!user.equals(other.user))
 			return false;
+		if (fileType == null) {
+			if (other.fileType != null)
+				return false;
+		} else if (!fileType.equals(other.fileType))
+			return false;
 		return true;
 	}
 	
@@ -169,7 +183,8 @@ public class UploadFile extends MizeEntity implements Comparable<UploadFile>{
 		return "UploadFile [fileFormat=" + fileFormat + ", fileName="
 				+ fileName + ", category=" + category + ", generatedFileName="
 				+ generatedFileName + ", s3Bucket=" + s3Bucket + ", folder="
-				+ folder + ", local=" + local + ", user=" + user + "]";
+				+ folder + ", local=" + local + ", user=" + user + ",fileType="
+				+ fileType + "]";
 	}
 	
 	@Override
