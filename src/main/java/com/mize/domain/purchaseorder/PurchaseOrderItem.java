@@ -72,6 +72,7 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 	private String orderType;
 	@Transient
 	private OriginalOrder originalOrder;
+	private String isReturnable;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -376,6 +377,15 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 
 	public void setOriginalOrderNumberId(Long originalOrderNumberId) {
 		this.originalOrderNumberId = originalOrderNumberId;
+	}
+
+	@Column(name="is_returnable")
+	public String getIsReturnable() {
+		return isReturnable;
+	}
+
+	public void setIsReturnable(String isReturnable) {
+		this.isReturnable = isReturnable;
 	}
 
 	@Override
