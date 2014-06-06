@@ -48,6 +48,7 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 	private String msgType;
 	private Integer severity;
 	private List<AppMessageIntl> intls;
+	private String isActive;
 	
 	@Transient
 	private Locale locale = new Locale();
@@ -289,6 +290,15 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 		this.tenant = tenant;
 	}
 	
+	@Column(name = "is_active")
+	public String getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(String isActive) {
+		this.isActive = isActive;
+	}
+
 	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using = JsonDateTimeSerializer.class, include = JsonSerialize.Inclusion.NON_DEFAULT)
 	@JsonIgnore(false)
@@ -369,7 +379,7 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 	@Override
 	public String toString() {
 		return "AppMessage [code=" + code + ", msgType=" + msgType
-				+ ", severity=" + severity + "]";
+				+ ", severity=" + severity + ", isActive =" + isActive + "]";
 	}
 
 	@Transient
@@ -405,6 +415,7 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 				+ ((msgType == null) ? 0 : msgType.hashCode());
 		result = prime * result
 				+ ((severity == null) ? 0 : severity.hashCode());
+		result = prime * result + ((isActive == null) ? 0 : isActive.hashCode());
 		return result;
 	}
 
@@ -432,6 +443,11 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 				return false;
 		} else if (!severity.equals(other.severity))
 			return false;		
+		if (isActive == null) {
+			if (other.isActive != null)
+				return false;
+		} else if (!isActive.equals(other.isActive))
+			return false;
 		return true;
 	}
 

@@ -25,6 +25,7 @@ public class AppMessageCache implements Comparable<AppMessageCache> , Serializab
 	private DateTime createdDate;
 	private DateTime updatedDate;
 	private Map<Long,AppMessageIntlCache> intlMap = new ConcurrentHashMap<Long, AppMessageIntlCache>();
+	private String isActive;
 	
 	public AppMessageCache() {
 		super();
@@ -67,6 +68,14 @@ public class AppMessageCache implements Comparable<AppMessageCache> , Serializab
 		this.severity = severity;
 	}	
 	
+	public String getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(String isActive) {
+		this.isActive = isActive;
+	}
+
 	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using = JsonDateTimeSerializer.class, include = JsonSerialize.Inclusion.NON_DEFAULT)
 	@JsonIgnore(false)
@@ -147,6 +156,8 @@ public class AppMessageCache implements Comparable<AppMessageCache> , Serializab
 				+ ((tenantId == null) ? 0 : tenantId.hashCode());
 		result = prime * result
 				+ ((updatedDate == null) ? 0 : updatedDate.hashCode());
+		result = prime * result
+				+ ((isActive == null) ? 0 : isActive.hashCode());
 		return result;
 	}
 
@@ -196,6 +207,11 @@ public class AppMessageCache implements Comparable<AppMessageCache> , Serializab
 				return false;
 		} else if (!updatedDate.equals(other.updatedDate))
 			return false;
+		if (isActive == null) {
+			if (other.isActive != null)
+				return false;
+		} else if (!isActive.equals(other.isActive))
+			return false;
 		return true;
 	}
 
@@ -204,7 +220,7 @@ public class AppMessageCache implements Comparable<AppMessageCache> , Serializab
 		return "AppMessageCache [id=" + id + ", code=" + code + ", msgType="
 				+ msgType + ", severity=" + severity + ", isExists=" + isExists
 				+ ", tenantId=" + tenantId + ", createdDate=" + createdDate
-				+ ", updatedDate=" + updatedDate + ", intlMap=" + intlMap + "]";
+				+ ", updatedDate=" + updatedDate + ", intlMap=" + intlMap + ", isActive=" + isActive + "]";
 	}
 
 	
