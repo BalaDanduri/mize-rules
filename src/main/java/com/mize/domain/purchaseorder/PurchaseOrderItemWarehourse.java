@@ -33,6 +33,7 @@ public class PurchaseOrderItemWarehourse extends MizeEntity implements Comparabl
 	private String name;
 	private String status;
 	private BigDecimal availableQuantity;
+	private BigDecimal requestedQuantity;
 	private BigDecimal backorderQuantity;
 	private BigDecimal estimatedShipmentCost;
 	private DateTime estimatedShipmentDate;
@@ -127,6 +128,15 @@ public class PurchaseOrderItemWarehourse extends MizeEntity implements Comparabl
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	public void setEstimatedShipmentDate(DateTime estimatedShipmentDate) {
 		this.estimatedShipmentDate = estimatedShipmentDate;
+	}
+
+	@Column(name = "requested_quantity")
+	public BigDecimal getRequestedQuantity() {
+		return requestedQuantity;
+	}
+
+	public void setRequestedQuantity(BigDecimal requestedQuantity) {
+		this.requestedQuantity = requestedQuantity;
 	}
 
 	@Override
