@@ -1,45 +1,153 @@
 package com.mize.domain.batch;
 
-import com.mize.domain.common.MizeEntity;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.mize.domain.common.MizeEntity;
+import com.mize.domain.util.JodaDateTimeDeserializer;
+
+@Entity
+@Table(name = "mize_job_instance_schedule")
 public class MizeJobSchedule extends MizeEntity{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -1040968045922261957L;
-	private Long id;
 	private Long instanceId;
+	private MizeJobInstance jobInstance;
 	private String expr;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id")
+	@Override
 	public Long getId() {
 		return id;
 	}
+	
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	@Transient
 	public Long getInstanceId() {
 		return instanceId;
 	}
+	
 	public void setInstanceId(Long instanceId) {
 		this.instanceId = instanceId;
 	}
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "instance_id")
+	@JsonBackReference(value = "schedule")
+	public MizeJobInstance getJobInstance() {
+		return jobInstance;
+	}
+
+	public void setJobInstance(MizeJobInstance jobInstance) {
+		this.jobInstance = jobInstance;
+	}
+
+	@Column(name = "schedule_expr",nullable = false,length = 50)
 	public String getExpr() {
 		return expr;
 	}
+	
 	public void setExpr(String expr) {
 		this.expr = expr;
 	}
+	
+	@Override
+	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
+	@Type(type="com.mize.domain.util.DateTimeJPA")
+	@Column(name="created_date",updatable=false)
+	@JsonIgnore(value=false)
+	public DateTime getCreatedDate() {
+		return createdDate;
+	}
+
+	@Override
+	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	@JsonIgnore(value=false)
+	public void setCreatedDate(DateTime createdDate) {
+		super.createdDate = createdDate;
+	}
+	
+	@Override
+	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
+	@Type(type="com.mize.domain.util.DateTimeJPA")
+	@Column(name="updated_date")
+	@JsonIgnore(value=false)
+	public DateTime getUpdatedDate() {
+		return updatedDate;
+	}
+	
+	@Override
+	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	@JsonIgnore(value=false)
+	public void setUpdatedDate(DateTime updatedDate) {
+		super.updatedDate = updatedDate;
+	}
+	
+	@Override	
+	@JsonIgnore
+	@Column(name = "created_by", nullable = true, length = 20, updatable = false)
+	public Long getCreatedBy() {		
+		return super.getCreatedBy();
+	}
+	
+	@Override
+	@JsonIgnore
+	public void setCreatedBy(Long createdBy) {		
+		super.setCreatedBy(createdBy);
+	}
+	
+	@Override
+	@JsonIgnore
+	@Column(name = "updated_by", nullable = true, length = 20)
+	public Long getUpdatedBy() {		
+		return super.getUpdatedBy();
+	}
+	
+	@Override
+	@JsonIgnore
+	public void setUpdatedBy(Long updatedBy) {		
+		super.setUpdatedBy(updatedBy);
+	}
+	
 	@Override
 	public String toString() {
-		return "MizeJobSchedule [id=" + id + ", instanceId=" + instanceId + ", expr=" + expr + "]";
+		return "MizeJobSchedule [jobInstance=" + jobInstance + ", expr=" + expr + ", id=" + id + "]";
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((expr == null) ? 0 : expr.hashCode());
+		result = prime * result + ((jobInstance == null) ? 0 : jobInstance.hashCode());
 		return result;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -49,10 +157,15 @@ public class MizeJobSchedule extends MizeEntity{
 		if (getClass() != obj.getClass())
 			return false;
 		MizeJobSchedule other = (MizeJobSchedule) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (expr == null) {
+			if (other.expr != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!expr.equals(other.expr))
+			return false;
+		if (jobInstance == null) {
+			if (other.jobInstance != null)
+				return false;
+		} else if (!jobInstance.equals(other.jobInstance))
 			return false;
 		return true;
 	}

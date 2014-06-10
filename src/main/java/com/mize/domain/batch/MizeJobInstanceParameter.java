@@ -9,7 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
@@ -26,14 +25,13 @@ import com.mize.domain.util.JodaDateTimeDeserializer;
 
 @Entity
 @Table(name = "mize_job_parameters")
-public class MizeJobParameter extends MizeEntity{
+public class MizeJobInstanceParameter extends MizeEntity{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 976447039451815450L;
 	private Long jobId;
-	private Long jobInstanceId;
-	private MizeJob job;
+	private MizeJobInstance jobInstance;
 	private String parmName;
 	private String parmType;
 	private String parmValue;
@@ -52,33 +50,24 @@ public class MizeJobParameter extends MizeEntity{
 	}
 
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name = "job_id")
-	@JsonBackReference(value = "job")
+	@JoinColumn(name = "instance_id")
+	@JsonBackReference(value = "jobInstance")
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
-	public MizeJob getJob() {
-		return job;
+	public MizeJobInstance getJobInstance() {
+		return jobInstance;
 	}
 
-	public void setJob(MizeJob job) {
-		this.job = job;
+	public void setJobInstance(MizeJobInstance jobInstance) {
+		this.jobInstance = jobInstance;
 	}
 
-	@Transient
+	@Column(name = "job_id",nullable = false)
 	public Long getJobId() {
 		return jobId;
 	}
 	
 	public void setJobId(Long jobId) {
 		this.jobId = jobId;
-	}
-	
-	@Column(name = "instance_id",nullable = true)
-	public Long getJobInstanceId() {
-		return jobInstanceId;
-	}
-	
-	public void setJobInstanceId(Long jobInstanceId) {
-		this.jobInstanceId = jobInstanceId;
 	}
 
 	@Column(name = "param_name", nullable = true, length = 50)
@@ -167,20 +156,24 @@ public class MizeJobParameter extends MizeEntity{
 	public void setUpdatedBy(Long updatedBy) {		
 		super.setUpdatedBy(updatedBy);
 	}
-
+	
+	@Override
+	public String toString() {
+		return "MizeJobParameter [jobInstance=" + jobInstance + ", parmName=" + parmName 
+				+ ", parmType=" + parmType + ", parmValue=" + parmValue + ", id=" + id + "]";
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((job == null) ? 0 : job.hashCode());
-		result = prime * result + ((jobId == null) ? 0 : jobId.hashCode());
-		result = prime * result + ((jobInstanceId == null) ? 0 : jobInstanceId.hashCode());
+		result = prime * result + ((jobInstance == null) ? 0 : jobInstance.hashCode());
 		result = prime * result + ((parmName == null) ? 0 : parmName.hashCode());
 		result = prime * result + ((parmType == null) ? 0 : parmType.hashCode());
 		result = prime * result + ((parmValue == null) ? 0 : parmValue.hashCode());
 		return result;
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -189,21 +182,11 @@ public class MizeJobParameter extends MizeEntity{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		MizeJobParameter other = (MizeJobParameter) obj;
-		if (job == null) {
-			if (other.job != null)
+		MizeJobInstanceParameter other = (MizeJobInstanceParameter) obj;
+		if (jobInstance == null) {
+			if (other.jobInstance != null)
 				return false;
-		} else if (!job.equals(other.job))
-			return false;
-		if (jobId == null) {
-			if (other.jobId != null)
-				return false;
-		} else if (!jobId.equals(other.jobId))
-			return false;
-		if (jobInstanceId == null) {
-			if (other.jobInstanceId != null)
-				return false;
-		} else if (!jobInstanceId.equals(other.jobInstanceId))
+		} else if (!jobInstance.equals(other.jobInstance))
 			return false;
 		if (parmName == null) {
 			if (other.parmName != null)
@@ -221,13 +204,6 @@ public class MizeJobParameter extends MizeEntity{
 		} else if (!parmValue.equals(other.parmValue))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "MizeJobParameter [jobId=" + jobId + ", jobInstanceId=" + jobInstanceId 
-				+ ", job=" + job + ", parmName=" + parmName + ", parmType=" + parmType 
-				+ ", parmValue=" + parmValue + ", id=" + id + "]";
 	}
 
 }
