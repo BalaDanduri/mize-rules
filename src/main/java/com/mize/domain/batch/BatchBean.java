@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Map;
 
 
-public class BatchBean {
+public class BatchBean implements IBatchBean{
 	private String className;
 	private String[] fieldNames;
 	private String[] keyNames;

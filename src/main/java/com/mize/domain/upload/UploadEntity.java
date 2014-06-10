@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.batch.BatchBean;
+import com.mize.domain.batch.IBatchBean;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
@@ -35,7 +36,7 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 	private String fileName;
 	private Object entity;
 	private List<ProcessLog> processLogs = new ArrayList<ProcessLog>();
-	private BatchBean batchBean;
+	private IBatchBean batchBean;
 	private String delimiter;
 	private String logFileURI;
 	private User user;
@@ -190,11 +191,11 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 		this.logFileURI = logFileURI;
 	}
 
-	public BatchBean getBatchBean() {
+	public IBatchBean getBatchBean() {
 		return batchBean;
 	}
 
-	public void setBatchBean(BatchBean batchBean) {
+	public void setBatchBean(IBatchBean batchBean) {
 		this.batchBean = batchBean;
 	}
 
