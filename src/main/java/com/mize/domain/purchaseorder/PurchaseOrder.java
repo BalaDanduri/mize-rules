@@ -86,6 +86,8 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	private String importFileType;
 	@Transient
 	private String originalOrderNumber;
+	@Transient
+	private String tabName;
 	
 	public PurchaseOrder(){
 		super();
@@ -129,6 +131,10 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	public enum Type{
 		Claim,Warranty,Campaign,Extended_Warranty,PDI,Parts_Warranty,
 		Support_Request,Service_Order,Parts_Order,Purchase_Order,PartsReturn,Stock,Emergency;
+	}
+	
+	public enum TabName{
+		Order,Items,Parts,Shipping,Payment,Summary,FullView
 	}
 	
 	public enum RequestType{
@@ -561,6 +567,48 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	}
 	
 	@Transient
+	@JsonIgnore
+	public boolean isOrderTab(){
+		return Formatter.equalIgnoreCase(TabName.Order, this.tabName);
+	}
+	
+	@Transient
+	@JsonIgnore
+	public boolean isItemsTab(){
+		return Formatter.equalIgnoreCase(TabName.Items, this.tabName);
+	}
+	
+	@Transient
+	@JsonIgnore
+	public boolean isPartsTab(){
+		return Formatter.equalIgnoreCase(TabName.Parts, this.tabName);
+	}
+	
+	@Transient
+	@JsonIgnore
+	public boolean isShppingTab(){
+		return Formatter.equalIgnoreCase(TabName.Shipping, this.tabName);
+	}
+	
+	@Transient
+	@JsonIgnore
+	public boolean isPaymentTab(){
+		return Formatter.equalIgnoreCase(TabName.Payment, this.tabName);
+	}
+	
+	@Transient
+	@JsonIgnore
+	public boolean isFullView(){
+		return Formatter.equalIgnoreCase(TabName.FullView, this.tabName);
+	}
+	
+	@Transient
+	@JsonIgnore
+	public boolean isTabbedView(){
+		return !Formatter.equalIgnoreCase(TabName.FullView, this.tabName);
+	}
+	
+	@Transient
 	public String getImportFileType() {
 		return importFileType;
 	}
@@ -576,6 +624,15 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 
 	public void setOriginalOrderNumber(String originalOrderNumber) {
 		this.originalOrderNumber = originalOrderNumber;
+	}
+
+	@Transient
+	public String getTabName() {
+		return tabName;
+	}
+
+	public void setTabName(String tabName) {
+		this.tabName = tabName;
 	}
 
 	@Override
