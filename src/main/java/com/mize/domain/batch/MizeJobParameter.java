@@ -17,12 +17,14 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
+import com.mize.domain.util.JsonDateTimeSerializer;
 
 @Entity
 @Table(name = "mize_job_parameters")
@@ -54,7 +56,8 @@ public class MizeJobParameter extends MizeEntity{
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "job_id")
 	@JsonBackReference(value = "job")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public MizeJob getJob() {
 		return job;
 	}
@@ -113,6 +116,8 @@ public class MizeJobParameter extends MizeEntity{
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@Column(name="created_date",updatable=false)
 	@JsonIgnore(value=false)
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
@@ -130,6 +135,8 @@ public class MizeJobParameter extends MizeEntity{
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@Column(name="updated_date")
 	@JsonIgnore(value=false)
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
