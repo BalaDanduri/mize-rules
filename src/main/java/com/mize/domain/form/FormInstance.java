@@ -91,7 +91,7 @@ public class FormInstance extends MizeEntity {
 	@Column(name = "created_date", updatable = false)
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@JsonSerialize(using=JsonDateTimeSerializer.class)	
-	@JsonInclude(Include.NON_NULL)
+	@JsonInclude(Include.NON_DEFAULT)
 	@JsonIgnore(value=false)
 	public DateTime getCreatedDate() {
 		return createdDate;
@@ -110,7 +110,7 @@ public class FormInstance extends MizeEntity {
 	@Column(name = "updated_date", nullable = true)
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_NULL)
+	@JsonInclude(Include.NON_DEFAULT)
 	@JsonIgnore(value=false)
 	public DateTime getUpdatedDate() {
 		return updatedDate;

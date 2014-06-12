@@ -17,9 +17,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
@@ -113,7 +114,8 @@ public class BrandFeed extends MizeEntity implements Comparable<BrandFeed>{
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Column(name = "start_time",  nullable = true)
 	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+    @JsonInclude(Include.NON_DEFAULT)
 	public DateTime getStartTime() {
 		return startTime;
 	}
@@ -127,7 +129,8 @@ public class BrandFeed extends MizeEntity implements Comparable<BrandFeed>{
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Column(name = "end_time",  nullable = true)
 	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+    @JsonInclude(Include.NON_DEFAULT)
 	public DateTime getEndTime() {
 		return endTime;
 	}

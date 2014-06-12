@@ -23,14 +23,16 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateDeserializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateSerializer;
@@ -180,7 +182,8 @@ public class FormDefinition extends MizeEntity {
 	@DateTimeFormat (pattern="MM-dd-yyyy")
 	@Column(name = "start_date",  nullable = true)
 	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateSerializer.class,include=Inclusion.NON_DEFAULT)
+	@JsonSerialize(using=JsonDateSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getStartDate() {
 		return startDate;
 	}
@@ -194,7 +197,8 @@ public class FormDefinition extends MizeEntity {
 	@DateTimeFormat (pattern="MM-dd-yyyy")
 	@Column(name = "end_date",  nullable = true)
 	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateSerializer.class,include=Inclusion.NON_DEFAULT)
+	@JsonSerialize(using=JsonDateSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getEndDate() {
 		return endDate;
 	}
@@ -208,6 +212,8 @@ public class FormDefinition extends MizeEntity {
 	@OneToMany(cascade={CascadeType.ALL}, fetch= FetchType.EAGER, mappedBy = "formDefinition")
 	@JsonManagedReference(value="form_def")
 	@Fetch(FetchMode.SUBSELECT)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public List<FormDefinitionAudit> getAudits() {
 		return audits;
 	}
@@ -229,7 +235,8 @@ public class FormDefinition extends MizeEntity {
 	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
 	@Column(name = "created_date", updatable = false)
 	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)	
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	@JsonIgnore(value=false)
 	public DateTime getCreatedDate() {
 		return createdDate;
@@ -247,7 +254,8 @@ public class FormDefinition extends MizeEntity {
 	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
 	@Column(name = "updated_date", nullable = true)
 	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	@JsonIgnore(value=false)
 	public DateTime getUpdatedDate() {
 		return updatedDate;

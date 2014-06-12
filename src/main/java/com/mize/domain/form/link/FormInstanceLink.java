@@ -26,13 +26,13 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.form.FormInstance;
 import com.mize.domain.product.ProductRegistration;
 import com.mize.domain.product.ProductSerial;
+import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
@@ -148,6 +148,8 @@ public class FormInstanceLink extends MizeEntity {
 	
 	@OneToMany(cascade={CascadeType.ALL}, fetch= FetchType.EAGER, mappedBy = "formInstanceLink")
 	@JsonManagedReference(value="form_instance_link")
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public List<FormInstanceLinkAudit> getAudits() {
 		return audits;
 	}
@@ -170,7 +172,7 @@ public class FormInstanceLink extends MizeEntity {
 	@Column(name = "created_date", updatable = false)
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@JsonSerialize(using=JsonDateTimeSerializer.class)	
-	@JsonInclude(Include.NON_NULL)
+	@JsonInclude(Include.NON_DEFAULT)
 	@JsonIgnore(value=false)
 	public DateTime getCreatedDate() {
 		return createdDate;
@@ -189,7 +191,7 @@ public class FormInstanceLink extends MizeEntity {
 	@Column(name = "updated_date", nullable = true)
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_NULL)
+	@JsonInclude(Include.NON_DEFAULT)
 	@JsonIgnore(value=false)
 	public DateTime getUpdatedDate() {
 		return updatedDate;
@@ -240,7 +242,8 @@ public class FormInstanceLink extends MizeEntity {
 	@Column(name = "inspection_date")
 	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
 	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateTimeSerializer.class, include = Inclusion.NON_NULL)
+	@JsonSerialize(using = JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getInspectionDate() {
 		return inspectionDate;
 	}

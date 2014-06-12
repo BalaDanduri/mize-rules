@@ -26,9 +26,10 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityComment;
@@ -100,7 +101,8 @@ public class Discount extends MizeEntity {
 	
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="tenant_id")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public BusinessEntity getTenant() {
 		return tenant;
 	}
@@ -149,7 +151,8 @@ public class Discount extends MizeEntity {
 	@Column(name = "start_date", nullable = true)
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateTimeSerializer.class, include = Inclusion.NON_NULL)	
+	@JsonSerialize(using = JsonDateTimeSerializer.class)	
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getStartDate() {
 		return startDate;
 	}
@@ -163,7 +166,8 @@ public class Discount extends MizeEntity {
 	@Column(name = "end_date", nullable = true)
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateTimeSerializer.class, include = Inclusion.NON_NULL)
+	@JsonSerialize(using = JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getEndDate() {
 		return endDate;
 	}
@@ -176,7 +180,8 @@ public class Discount extends MizeEntity {
 
 	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="order_be_id")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public BusinessEntity getOrderBusinessEntity() {
 		return orderBusinessEntity;
 	}
@@ -195,7 +200,9 @@ public class Discount extends MizeEntity {
 	}
 	
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "discount")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	
 	public List<DiscountComment> getComments() {
 		return comments;
 	}
@@ -209,6 +216,9 @@ public class Discount extends MizeEntity {
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@Column(name = "created_date",updatable=false)
 	@JsonIgnore(false)
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+    @JsonInclude(Include.NON_DEFAULT)
+
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
@@ -218,6 +228,9 @@ public class Discount extends MizeEntity {
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@Column(name = "updated_date")
 	@JsonIgnore(false)
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+    @JsonInclude(Include.NON_DEFAULT)
+
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}

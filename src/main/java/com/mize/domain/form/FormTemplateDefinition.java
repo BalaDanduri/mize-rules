@@ -13,9 +13,10 @@ import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateDeserializer;
 import com.mize.domain.util.JsonDateSerializer;
@@ -78,7 +79,8 @@ public class FormTemplateDefinition extends MizeEntity {
 	@DateTimeFormat (pattern="MM-dd-yyyy")
 	@Column(name = "start_date",  nullable = true)
 	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateSerializer.class,include=Inclusion.NON_DEFAULT)
+	@JsonSerialize(using=JsonDateSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getStartDate() {
 		return startDate;
 	}
@@ -92,7 +94,8 @@ public class FormTemplateDefinition extends MizeEntity {
 	@DateTimeFormat (pattern="MM-dd-yyyy")
 	@Column(name = "end_date",  nullable = true)
 	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateSerializer.class,include=Inclusion.NON_DEFAULT)
+	@JsonSerialize(using=JsonDateSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getEndDate() {
 		return endDate;
 	}

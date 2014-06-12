@@ -16,8 +16,9 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.product.ProductRegister;
 import com.mize.domain.product.ProductRepeatOrderShipOptions;
@@ -227,7 +228,8 @@ public class Brand extends MizeEntity implements Comparable<Brand>{
 	}
 	
 	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL,mappedBy="brand")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)	
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public List<UserBrandMapping> getUserBrands() {
 		return userBrands;
 	}
