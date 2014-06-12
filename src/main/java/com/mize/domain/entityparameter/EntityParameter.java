@@ -24,9 +24,10 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityComment;
@@ -87,7 +88,8 @@ public class EntityParameter extends MizeEntity implements Comparable<EntityPara
 
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="tenant_id")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public BusinessEntity getTenant() {
 		return tenant;
 	}
@@ -103,17 +105,19 @@ public class EntityParameter extends MizeEntity implements Comparable<EntityPara
 	}
 	
 	@Column(name = "start_date", nullable = false)
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getStartDate() {
 		return startDate;
 	}
 
 	@Column(name = "end_date", nullable = false)
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getEndDate() {
 		return endDate;
 	}
@@ -123,6 +127,8 @@ public class EntityParameter extends MizeEntity implements Comparable<EntityPara
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@Column(name = "created_date",updatable=false)
 	@JsonIgnore(false)
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+    @JsonInclude(Include.NON_DEFAULT)
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
@@ -132,6 +138,8 @@ public class EntityParameter extends MizeEntity implements Comparable<EntityPara
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@Column(name = "updated_date")
 	@JsonIgnore(false)
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+    @JsonInclude(Include.NON_DEFAULT)
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
@@ -150,13 +158,13 @@ public class EntityParameter extends MizeEntity implements Comparable<EntityPara
 		return super.getUpdatedBy();
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	public void setStartDate(DateTime startDate) {
 		this.startDate = startDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	public void setEndDate(DateTime endDate) {
 		this.endDate = endDate;
@@ -204,7 +212,8 @@ public class EntityParameter extends MizeEntity implements Comparable<EntityPara
 	}
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "entityParameter", orphanRemoval=true)
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public List<EntityParameterAttribute> getAttributes() {
 		return attributes;
 	}
@@ -214,7 +223,8 @@ public class EntityParameter extends MizeEntity implements Comparable<EntityPara
 	}
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "entityParameter")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public List<EntityParameterComment> getComments() {
 		return comments;
 	}

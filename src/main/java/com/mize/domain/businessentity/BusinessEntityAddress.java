@@ -17,8 +17,9 @@ import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JPASerializer;
@@ -63,7 +64,8 @@ public class BusinessEntityAddress  extends MizeEntity  implements Comparable<Bu
 	
 	@OneToOne(cascade= {CascadeType.ALL},fetch=FetchType.EAGER,orphanRemoval = true)
 	@JoinColumn(name="be_address_id")
-	/*@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)*/
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public EntityAddress getEntityAddress() {
 		return entityAddress;
 	}
@@ -80,7 +82,8 @@ public class BusinessEntityAddress  extends MizeEntity  implements Comparable<Bu
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="be_id")
 	@JsonBackReference(value="address")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public BusinessEntity getBusinessEntity() {
 		return businessEntity;
 	}

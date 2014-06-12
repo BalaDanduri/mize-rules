@@ -136,11 +136,12 @@ public class Catalog extends MizeEntity {
 		this.catalogEntry = catalogEntry;
 	}
 	
-	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using = JsonDateTimeSerializer.class, include = JsonSerialize.Inclusion.NON_DEFAULT)
 	@JsonIgnore(false)
 	@Column(name = "created_date", updatable = false)
 	@org.hibernate.annotations.Type(type = "com.mize.domain.util.DateTimeJPA")
+	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using = JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getCreatedDate() {
 		return this.createdDate;
 	}
@@ -152,11 +153,12 @@ public class Catalog extends MizeEntity {
 		this.createdDate = createdDate;
 	}
 	
-	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using = JsonDateTimeSerializer.class, include = JsonSerialize.Inclusion.NON_DEFAULT)
 	@Column(name = "updated_date")
+	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
 	@org.hibernate.annotations.Type(type = "com.mize.domain.util.DateTimeJPA")
 	@JsonIgnore(false)
+	@JsonSerialize(using = JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getUpdatedDate() {
 		return this.updatedDate;
 	}
@@ -167,8 +169,6 @@ public class Catalog extends MizeEntity {
 	public void setUpdatedDate(DateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	} 
-	
-
 	
 	@Override
 	@JsonIgnore(value=false)

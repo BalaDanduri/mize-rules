@@ -21,7 +21,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.brand.Brand;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.product.Product;
@@ -125,7 +124,8 @@ public class BusinessEntityServiceRate extends MizeEntity implements Comparable<
 	@Column(name = "start_date", nullable = true)
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateTimeSerializer.class, include = Inclusion.NON_NULL)	
+	@JsonSerialize(using = JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getStartDate() {
 		return startDate;
 	}
@@ -139,7 +139,8 @@ public class BusinessEntityServiceRate extends MizeEntity implements Comparable<
 	@Column(name = "end_date", nullable = true)
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateTimeSerializer.class, include = Inclusion.NON_NULL)
+	@JsonSerialize(using = JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getEndDate() {
 		return endDate;
 	}
@@ -151,8 +152,11 @@ public class BusinessEntityServiceRate extends MizeEntity implements Comparable<
 	}
 	
     @JsonIgnore(false)
+    @DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
     @Column(name = "created_date", updatable = false)
     @org.hibernate.annotations.Type(type = "com.mize.domain.util.DateTimeJPA")
+    @JsonSerialize(using = JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
     public DateTime getCreatedDate() {
         return this.createdDate;
     } 
@@ -163,6 +167,8 @@ public class BusinessEntityServiceRate extends MizeEntity implements Comparable<
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@Column(name = "updated_date")
 	@JsonIgnore(value = false)
+	@JsonSerialize(using = JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}

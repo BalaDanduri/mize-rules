@@ -27,6 +27,7 @@ import com.mize.domain.product.Product;
 import com.mize.domain.product.ProductCategory;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
+import com.mize.domain.util.JsonDateTimeSerializer;
 
 @Entity
 @Table(name = "business_entity_service_link")
@@ -72,6 +73,7 @@ public class BusinessEntityServiceLink extends MizeEntity implements Comparable<
 
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="prod_cat_id")
+	
 	public ProductCategory getProductCategory() {
 		return productCategory;
 	}
@@ -122,6 +124,8 @@ public class BusinessEntityServiceLink extends MizeEntity implements Comparable<
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@Column(name = "created_date",updatable=false)
 	@JsonIgnore(value = false)
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+    @JsonInclude(Include.NON_DEFAULT)
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
@@ -131,6 +135,8 @@ public class BusinessEntityServiceLink extends MizeEntity implements Comparable<
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@Column(name = "updated_date")
 	@JsonIgnore(value = false)
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+    @JsonInclude(Include.NON_DEFAULT)
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}

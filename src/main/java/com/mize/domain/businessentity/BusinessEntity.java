@@ -33,7 +33,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.auth.User;
 import com.mize.domain.common.Country;
 import com.mize.domain.common.EntityAddress;
@@ -44,6 +43,7 @@ import com.mize.domain.common.State;
 import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
+import com.mize.domain.util.JsonDateTimeSerializer;
 
 @Entity
 @Table(name = "business_entity", uniqueConstraints = {@UniqueConstraint (columnNames={"tenant_id", "code"})})
@@ -178,14 +178,16 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="tenant_id")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public BusinessEntity getTenant() {
 		return tenant;
 	}
 
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="parent_be_id")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public BusinessEntity getParentBE() {
 		return parentBE;
 	}
@@ -229,7 +231,8 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	}
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "businessEntity" , orphanRemoval = true)
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	@JsonManagedReference(value="address")
 	public List<BusinessEntityAddress> getAddresses() {
 		return addresses;
@@ -242,6 +245,8 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "businessEntity" ,orphanRemoval = true)
 	@Fetch(FetchMode.SELECT)
 	@JsonManagedReference(value="intl")
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public List<BusinessEntityIntl> getIntl() {
 		return intl;
 	}
@@ -260,7 +265,8 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	}
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "businessEntity" , orphanRemoval = true)
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	@JsonManagedReference(value="be_brand")
 	public List<BusinessEntityBrand> getBeBrand() {
 		return beBrand;
@@ -271,7 +277,8 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	}
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "businessEntity" , orphanRemoval = true)
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	@JsonManagedReference(value="be_contact")
 	public List<BusinessEntityContact> getBeContact() {
 		return beContact;
@@ -282,7 +289,8 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	}
 
 	@OneToOne(fetch=FetchType.LAZY ,cascade= CascadeType.ALL ,mappedBy ="businessEntity", orphanRemoval = true)
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	@JsonManagedReference(value="be_attribute")
 	public BusinessEntityAttribute getBeAttribute() {
 		return beAttribute;
@@ -368,6 +376,9 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@Column(name = "created_date",updatable=false)
 	@JsonIgnore(value = false)
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+    @JsonInclude(Include.NON_DEFAULT)
+
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
@@ -377,6 +388,9 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@Column(name = "updated_date")
 	@JsonIgnore(value = false)
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+    @JsonInclude(Include.NON_DEFAULT)
+
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
