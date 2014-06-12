@@ -21,9 +21,10 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.auth.User;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.MizeEntity;
@@ -42,7 +43,6 @@ public class PartSubstitute extends MizeEntity {
 	private String code;
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime date;
-	//private String comments;
 	private EntityComment entityComment;
 	private List<PartSubstituteComment> comments = new ArrayList<PartSubstituteComment>();
     private String familyCode;
@@ -125,9 +125,10 @@ public class PartSubstitute extends MizeEntity {
 	}
 	
 	@Column(name = "substitute_date", nullable = true)
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateTimeSerializer.class, include = Inclusion.NON_NULL)
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using = JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getDate() {
 		return date;
 	}
@@ -135,6 +136,9 @@ public class PartSubstitute extends MizeEntity {
 	@JsonIgnore(false)
     @Column(name = "created_date", updatable = false)
     @org.hibernate.annotations.Type(type = "com.mize.domain.util.DateTimeJPA")
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using = JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
     public DateTime getCreatedDate() {
         return this.createdDate;
     } 
@@ -145,6 +149,8 @@ public class PartSubstitute extends MizeEntity {
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@Column(name = "updated_date")
 	@JsonIgnore(value = false)
+	@JsonSerialize(using = JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
@@ -197,7 +203,7 @@ public class PartSubstitute extends MizeEntity {
 	@Override
 	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore
+	@JsonIgnore(false)
 	public void setUpdatedDate(DateTime updatedDate) {
 		super.updatedDate = updatedDate;
 	}
@@ -228,7 +234,8 @@ public class PartSubstitute extends MizeEntity {
 	}
 	
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "partSubstitute",orphanRemoval= true)
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public List<PartSubstituteComment> getComments() {
 		return comments;
 	}
