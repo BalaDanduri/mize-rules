@@ -193,6 +193,18 @@ public final class ServiceDTO<T> implements ServiceLiteral{
 	}
 	
 	@JsonIgnore
+	public void addValidationMessage(String code, Integer severity, String field, String fieldKey) {
+		if(appMessages == null){
+			appMessages = new ArrayList<AppMessage>();
+		}
+		appMessages.add(new AppMessage(code,null,null,severity, field,fieldKey,MessageType.Type.Validation));
+		if(Formatter.intValue(severity) > Formatter.intValue(this.severity)){
+			this.severity = severity;
+		}
+	}
+	
+	
+	@JsonIgnore
 	public void addAppMessage(String code, String shortDesc, Integer severity) {
 		if(appMessages == null){
 			appMessages = new ArrayList<AppMessage>();
