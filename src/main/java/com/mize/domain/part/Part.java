@@ -62,14 +62,11 @@ public class Part extends MizeEntity {
 	@Transient
 	private User user;
 	@Transient
-	private PartAvailability partAvailability;
-
+	private List<PartAvailability> partAvailabilities;
 	
 	public Part() {
 		super();
-	}
-
-	
+	}	
 
 	public Part(BusinessEntity tenant, String partCode, String partType,
 			String isActive, String isKit, String isSerialized,
@@ -456,14 +453,15 @@ public class Part extends MizeEntity {
 	public void setOnHandQuantity(BigDecimal onHandQuantity) {
 		this.onHandQuantity = onHandQuantity;
 	}
-	
+
 	@Transient
-	public PartAvailability getPartAvailability() {
-		return partAvailability;
+	public List<PartAvailability> getPartAvailabilities() {
+		return partAvailabilities;
+	}
+
+	public void setPartAvailabilities(List<PartAvailability> partAvailabilities) {
+		this.partAvailabilities = partAvailabilities;
 	}
 	
-	public void setPartAvailability(PartAvailability partAvailability) {
-		this.partAvailability = partAvailability;
-	}	
-
+	
 }

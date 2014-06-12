@@ -13,6 +13,18 @@ public class PartAvailability extends MizeEntity implements Comparable<PartAvail
 	private BigDecimal availableQuantity;
 	private BigDecimal backorderQuantity;
 	private BigDecimal requestedQuantity;
+	private String uom;
+
+	public PartAvailability(){
+		super();
+	}
+	
+	public PartAvailability(String code, BigDecimal availableQuantity,String uom) {
+		super();
+		this.code = code;
+		this.availableQuantity = availableQuantity;
+		this.uom = uom;
+	}
 
 	@Override
 	public Long getId() {
@@ -70,6 +82,14 @@ public class PartAvailability extends MizeEntity implements Comparable<PartAvail
 
 	public void setRequestedQuantity(BigDecimal requestedQuantity) {
 		this.requestedQuantity = requestedQuantity;
+	}
+
+	public String getUom() {
+		return uom;
+	}
+
+	public void setUom(String uom) {
+		this.uom = uom;
 	}
 
 	@Override
