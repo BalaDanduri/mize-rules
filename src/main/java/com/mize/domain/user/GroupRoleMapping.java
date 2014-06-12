@@ -4,12 +4,12 @@ package com.mize.domain.user;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.GenericGenerator;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -44,9 +44,8 @@ import com.mize.domain.util.JsonDateTimeSerializer;
  
  
    @Id
-   @GenericGenerator(name = "id", strategy = "increment")
-   @GeneratedValue(generator = "id")
-   @Column(name = "ID", unique = false, nullable = false, length = 11)
+   @GeneratedValue(strategy = GenerationType.AUTO)
+   @Column(name = "id", nullable = false, unique = true)
    @Override
    public Long getId() {
      return id;
