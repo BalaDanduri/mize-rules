@@ -18,6 +18,7 @@ public class ResponseMeta {
 	private Long totalPages;
 	private String version;
 	private String request;
+	private Integer pageSize;
 	@JsonIgnore
 	private Long startTime = System.currentTimeMillis();
 
@@ -29,7 +30,7 @@ public class ResponseMeta {
 	}
 	
 	public ResponseMeta(String status, List<ResponseStatus> errors, Integer resultSize, Long totalRecords,
-			Integer pageNumber, Long totalPages, String version, String request) {
+			Integer pageNumber, Long totalPages, String version, String request, Integer pageSize) {
 		this.status = status;
 		this.errors = errors;
 		this.resultSize = resultSize;
@@ -38,6 +39,7 @@ public class ResponseMeta {
 		this.totalPages = totalPages;
 		this.version = version;
 		this.request = request;
+		this.pageSize = pageSize;
 	}
 
 	public String getStatus() {
@@ -65,6 +67,14 @@ public class ResponseMeta {
 
 	public void setResultSize(Integer resultSize) {
 		this.resultSize = resultSize;
+	}
+	
+	public Integer getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(Integer pageSize) {
+		this.pageSize = pageSize;
 	}
 
 	public Long getTotalRecords() {
