@@ -30,7 +30,7 @@ public class MizeResponseTest extends MizeDomainTest {
 		statuses.add(status);
 		statuses.add(status1);
 		
-		ResponseMeta meta = new ResponseMeta("SUCCESS", null,10,900L,1,90L,"1.2","GET /brands/");
+		ResponseMeta meta = new ResponseMeta("SUCCESS", null,10,900L,1,90L,"1.2","GET /brands/",10);
 		
 		ResponseLink link0 = new ResponseLink("Brand Support", "/brand/support/{items.id}", new String[]{"BrandSupport"});
 		ResponseLink link1 = new ResponseLink("Brand Details", "/brand/details/{items.id}", new String[]{"BrandDetails"});
