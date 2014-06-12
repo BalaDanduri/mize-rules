@@ -28,7 +28,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeEntity;
@@ -125,7 +124,8 @@ public class MizeJobInstance extends MizeEntity{
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "job_id")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	@JsonBackReference(value = "jobInstance")
 	public MizeJob getJob() {
 		return job;
@@ -184,6 +184,7 @@ public class MizeJobInstance extends MizeEntity{
 	@Column(name = "last_run",  nullable = true)
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getLastRunTime() {
 		return lastRunTime;
 	}
@@ -198,6 +199,7 @@ public class MizeJobInstance extends MizeEntity{
 	@Column(name = "next_run",  nullable = true)
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getNextRunTime() {
 		return nextRunTime;
 	}
@@ -245,6 +247,8 @@ public class MizeJobInstance extends MizeEntity{
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@Column(name="created_date",updatable=false)
 	@JsonIgnore(value=false)
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
@@ -262,6 +266,8 @@ public class MizeJobInstance extends MizeEntity{
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@Column(name="updated_date")
 	@JsonIgnore(value=false)
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}

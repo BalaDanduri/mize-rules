@@ -153,7 +153,8 @@ public class User extends MizeEntity implements Comparable<User> {
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Column(name = "last_login",  nullable = false)
 	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getLastLogin() {
 		return lastLogin;
 	}
@@ -181,7 +182,8 @@ public class User extends MizeEntity implements Comparable<User> {
 	}
 	
 	@OneToMany(cascade={CascadeType.ALL}, mappedBy="user",orphanRemoval = true)
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	@JsonManagedReference(value="user_linkedAccount")
 	public List<LinkedAccount> getLinkedAccounts() {
 		return linkedAccounts;
@@ -223,7 +225,8 @@ public class User extends MizeEntity implements Comparable<User> {
 	}
 	
 	@OneToMany(fetch = FetchType.LAZY,cascade={CascadeType.ALL}, mappedBy="user",orphanRemoval = true)
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	@JsonManagedReference(value="address")
 	public List<UserAddress> getAddresses() {
 		return addresses;
@@ -301,7 +304,8 @@ public class User extends MizeEntity implements Comparable<User> {
 	}
 
 	@OneToOne(fetch=FetchType.EAGER,mappedBy = "user",cascade={CascadeType.ALL},orphanRemoval = true)
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public UserBE getUserBe() {
 		return userBe;
 	}
@@ -322,7 +326,8 @@ public class User extends MizeEntity implements Comparable<User> {
 	}
 	
 	@OneToMany(mappedBy="user", fetch=FetchType.LAZY, cascade={CascadeType.ALL},orphanRemoval = true)
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	@JsonManagedReference(value="user_userGroups")
 	public List<UserGroup> getUserGroups() {
 		return userGroups;
@@ -333,7 +338,8 @@ public class User extends MizeEntity implements Comparable<User> {
 	}
 	
 	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL,mappedBy="user",orphanRemoval = true)
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	@JsonManagedReference(value="user_brandMapping")
     public List<UserBrandMapping> getUserBrandMapping() {
 		return userBrandMapping;
@@ -366,7 +372,8 @@ public class User extends MizeEntity implements Comparable<User> {
 	}
 	
 	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using = JsonDateTimeSerializer.class, include = JsonSerialize.Inclusion.NON_DEFAULT)
+	@JsonSerialize(using = JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	@JsonIgnore(false)
 	@Column(name = "created_date", updatable = false)
 	@Type(type = "com.mize.domain.util.DateTimeJPA")
@@ -382,7 +389,8 @@ public class User extends MizeEntity implements Comparable<User> {
 	}
 	
 	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using = JsonDateTimeSerializer.class, include = JsonSerialize.Inclusion.NON_DEFAULT)
+	@JsonSerialize(using = JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	@Column(name = "updated_date")
 	@Type(type = "com.mize.domain.util.DateTimeJPA")
 	@JsonIgnore(false)

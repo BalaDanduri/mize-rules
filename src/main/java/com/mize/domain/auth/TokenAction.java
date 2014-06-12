@@ -16,7 +16,9 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.common.MizeEntity;
@@ -125,6 +127,7 @@ public class TokenAction extends MizeEntity implements Comparable<TokenAction> {
 	@Type(type = "com.mize.domain.util.DateTimeJPA")
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getExpires() {
 		return expires;
 	}
@@ -138,8 +141,9 @@ public class TokenAction extends MizeEntity implements Comparable<TokenAction> {
 
 	@Column(name="created",updatable = false)
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
 	@Type(type = "com.mize.domain.util.DateTimeJPA")
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getCreated() {
 		return created;
 	}
@@ -181,7 +185,8 @@ public class TokenAction extends MizeEntity implements Comparable<TokenAction> {
 	}
 	
 	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using = JsonDateTimeSerializer.class, include = JsonSerialize.Inclusion.NON_DEFAULT)
+	@JsonSerialize(using = JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	@JsonIgnore(value=false)
 	@Column(name = "created_date", updatable = false)
 	@Type(type = "com.mize.domain.util.DateTimeJPA")
@@ -197,7 +202,8 @@ public class TokenAction extends MizeEntity implements Comparable<TokenAction> {
 	}
 	
 	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using = JsonDateTimeSerializer.class, include = JsonSerialize.Inclusion.NON_DEFAULT)
+	@JsonSerialize(using = JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	@Column(name = "updated_date")
 	@Type(type = "com.mize.domain.util.DateTimeJPA")
 	@JsonIgnore(value=false)
