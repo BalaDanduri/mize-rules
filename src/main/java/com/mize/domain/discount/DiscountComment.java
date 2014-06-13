@@ -12,8 +12,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.MizeEntity;
@@ -37,7 +35,6 @@ public class DiscountComment extends MizeEntity {
 	}
 
 	@Id
-	@GenericGenerator(name="id",strategy="increment")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false, unique = true)
 	@Override
