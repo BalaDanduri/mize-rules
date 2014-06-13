@@ -28,6 +28,7 @@ public final class UploadSearchCriteria extends MizeEntity implements Comparable
 	private User user;
 	private Integer pageIndex;
 	private boolean isAdmin;
+	private Integer pageSize;
 	private List<UploadSearchResult> results = new ArrayList<UploadSearchResult>();
 	
 	@Override
@@ -200,6 +201,14 @@ public final class UploadSearchCriteria extends MizeEntity implements Comparable
 
 	public void setPageIndex(Integer pageIndex) {
 		this.pageIndex = pageIndex;
+	}
+	
+	public Integer getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(Integer pageSize) {
+		this.pageSize = pageSize;
 	}
 
 	public boolean isAdmin() {
