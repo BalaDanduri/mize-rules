@@ -42,8 +42,8 @@ public class BusinessEntityAddress  extends MizeEntity  implements Comparable<Bu
 	}
 	
 	@Id
-	@Column(name="id",nullable=false,unique=true)
 	@GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id",unique=true,nullable=false)
 	@Override
 	public Long getId() {
 		return id;

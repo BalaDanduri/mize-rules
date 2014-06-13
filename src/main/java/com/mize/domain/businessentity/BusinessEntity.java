@@ -151,7 +151,7 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
+    @Column(name="id",unique=true,nullable=false)
 	public Long getId() {
 		return id;
 	}
