@@ -130,8 +130,6 @@ public class PickList extends MizeEntity {
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "pickList", orphanRemoval= true)
 	@Fetch(FetchMode.SUBSELECT)
 	@JsonManagedReference(value="pickListItem")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-    @JsonInclude(Include.NON_DEFAULT)
 
 	public List<PickListItem> getListItems() {
 		return listItems;
