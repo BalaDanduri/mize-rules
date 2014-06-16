@@ -17,9 +17,10 @@ import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.auth.User;
 import com.mize.domain.brand.Brand;
 import com.mize.domain.common.Country;
@@ -242,7 +243,8 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 	@Column(name="scheduled_date",nullable=true)
 	@DateTimeFormat(pattern="MM-dd-yyyy")
 	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateSerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using = JsonDateSerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public DateTime getScheduledDate() {
 		return scheduledDate;
 	}

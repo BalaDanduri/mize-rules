@@ -4,6 +4,8 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.common.Entity;
@@ -143,6 +145,7 @@ public class JobInstance extends Entity{
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class)
 	@JsonIgnore
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getLastRunDate() {
 		return lastRunDate;
 	}
@@ -157,6 +160,7 @@ public class JobInstance extends Entity{
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class)
 	@JsonIgnore
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getNextRunDate() {
 		return nextRunDate;
 	}
@@ -171,6 +175,7 @@ public class JobInstance extends Entity{
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class)
 	@JsonIgnore
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getExecutionQueueDate() {
 		return executionQueueDate;
 	}
