@@ -14,8 +14,9 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
 
@@ -123,7 +124,8 @@ public class Country extends MizeEntity implements Comparable<Country>{
 	}
 
 	@OneToMany(fetch= FetchType.LAZY , mappedBy ="country")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	@JsonBackReference(value="country_states")
 	public List<State> getStates() {
 		return states;

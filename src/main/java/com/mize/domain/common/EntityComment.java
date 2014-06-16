@@ -12,8 +12,12 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.util.JodaDateTimeDeserializer;
+import com.mize.domain.util.JsonDateTimeSerializer;
 
 @Entity
 @Table(name = "entity_comment", uniqueConstraints = {@UniqueConstraint (columnNames = {"id"})})
@@ -99,6 +103,8 @@ public class EntityComment extends MizeEntity implements Comparable<EntityCommen
 	@JsonIgnore(value=false)
 	@Column(name = "created_date",updatable = false)
 	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
@@ -107,6 +113,8 @@ public class EntityComment extends MizeEntity implements Comparable<EntityCommen
 	@Column(name = "updated_date")
 	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
 	@JsonIgnore(value = false)
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}

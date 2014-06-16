@@ -20,10 +20,11 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
@@ -184,7 +185,8 @@ public class EntityAddress extends MizeEntity implements Comparable<EntityAddres
 	}
 	
 	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using = JsonDateTimeSerializer.class, include = JsonSerialize.Inclusion.NON_DEFAULT)
+	@JsonSerialize(using = JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	@JsonIgnore(false)
 	@Column(name = "created_date", updatable = false)
 	@org.hibernate.annotations.Type(type = "com.mize.domain.util.DateTimeJPA")
@@ -200,7 +202,8 @@ public class EntityAddress extends MizeEntity implements Comparable<EntityAddres
 	}
 	
 	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using = JsonDateTimeSerializer.class, include = JsonSerialize.Inclusion.NON_DEFAULT)
+	@JsonSerialize(using = JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	@Column(name = "updated_date")
 	@org.hibernate.annotations.Type(type = "com.mize.domain.util.DateTimeJPA")
 	@JsonIgnore(false)
@@ -226,7 +229,8 @@ public class EntityAddress extends MizeEntity implements Comparable<EntityAddres
 	
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "address", orphanRemoval = true)
 	@JsonManagedReference(value="addressPhone")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public List<EntityAddressPhone> getAddressPhones() {
 		return addressPhones;
 	}
@@ -238,7 +242,8 @@ public class EntityAddress extends MizeEntity implements Comparable<EntityAddres
 	@OneToOne(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "address", orphanRemoval = true)
 	@JoinColumn(name="entity_address_id")
 	@JsonManagedReference(value="geoAddress")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public EntityAddressGeo getAddressGeo() {
 		return addressGeo;
 	}

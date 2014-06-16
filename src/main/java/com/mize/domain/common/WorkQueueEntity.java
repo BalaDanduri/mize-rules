@@ -18,9 +18,10 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.businessentity.BusinessEntityIntl;
@@ -131,7 +132,8 @@ public class WorkQueueEntity extends MizeEntity implements Comparable<WorkQueueE
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@Column(name = "created_date",updatable = false)
 	@JsonIgnore(value = false)
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
@@ -141,7 +143,8 @@ public class WorkQueueEntity extends MizeEntity implements Comparable<WorkQueueE
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@Column(name = "updated_date")
 	@JsonIgnore(value = false)
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
