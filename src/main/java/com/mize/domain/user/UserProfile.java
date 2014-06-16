@@ -28,9 +28,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.auth.User;
 import com.mize.domain.common.Gender;
 import com.mize.domain.common.Locale;
@@ -198,7 +199,8 @@ public class UserProfile extends MizeEntity implements Serializable, Comparable<
 	}
 	
 	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonSerialize(using=JsonDateSerializer.class,include=Inclusion.NON_DEFAULT)
+	@JsonSerialize(using=JsonDateSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	@Column(name = "birth_day",updatable = false, nullable = true)
 	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
 	public DateTime getBirthdate() {
@@ -607,7 +609,8 @@ public class UserProfile extends MizeEntity implements Serializable, Comparable<
 	}
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "user")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public List<UserAddress> getAddresses() {
 		return addresses;
 	}
@@ -658,7 +661,8 @@ public class UserProfile extends MizeEntity implements Serializable, Comparable<
 	}
 	
 	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using = JsonDateTimeSerializer.class, include = JsonSerialize.Inclusion.NON_DEFAULT)
+	@JsonSerialize(using = JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	@JsonIgnore(false)
 	@Column(name = "created_date", updatable = false)
 	@Type(type = "com.mize.domain.util.DateTimeJPA")
@@ -674,7 +678,8 @@ public class UserProfile extends MizeEntity implements Serializable, Comparable<
 	}
 	
 	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using = JsonDateTimeSerializer.class, include = JsonSerialize.Inclusion.NON_DEFAULT)
+	@JsonSerialize(using = JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	@Column(name = "updated_date")
 	@Type(type = "com.mize.domain.util.DateTimeJPA")
 	@JsonIgnore(false)

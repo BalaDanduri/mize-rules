@@ -15,9 +15,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
@@ -59,7 +60,8 @@ import com.mize.domain.util.JsonDateTimeSerializer;
    @ManyToOne(fetch=FetchType.LAZY,optional= false)
    @JoinColumn(name="group_id")
    @JsonBackReference(value="groupMapping")
-   @JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+   @JsonSerialize(using=JPASerializer.class)
+   @JsonInclude(Include.NON_NULL)
    public Group getGroup() {
      return group;
    }
@@ -90,7 +92,8 @@ import com.mize.domain.util.JsonDateTimeSerializer;
  
     @Override	
 	@DateTimeFormat(pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+    @JsonInclude(Include.NON_DEFAULT)
 	@JsonIgnore(value=false)
 	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
 	@Column(name = "created_date",updatable=false)
@@ -100,7 +103,8 @@ import com.mize.domain.util.JsonDateTimeSerializer;
 
 	@Override	
 	@DateTimeFormat(pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	@JsonIgnore(value=false)
 	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
 	@Column(name = "updated_date")

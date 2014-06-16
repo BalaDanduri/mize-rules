@@ -18,9 +18,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.auth.User;
 import com.mize.domain.common.Country;
 import com.mize.domain.common.EntityAddress;
@@ -142,7 +143,8 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	@JsonIgnore(value=false)
 	@Transient
 	public DateTime getCreatedDate() {
@@ -168,7 +170,8 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	@JsonIgnore(value=false)
 	@Transient
 	public DateTime getUpdatedDate() {
@@ -293,7 +296,8 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 	
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "state_id")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public State getState() {
 		return state;
 	}
@@ -304,7 +308,8 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 	
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "country_id")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public Country getCountry() {
 		return country;
 	}
@@ -315,7 +320,8 @@ public class UserAddress extends MizeEntity implements Comparable<UserAddress> {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="user_id")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	@JsonBackReference(value="address")
 	public User getUser() {
 		return user;

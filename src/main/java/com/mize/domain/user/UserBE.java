@@ -21,9 +21,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.auth.User;
 import com.mize.domain.brand.Brand;
 import com.mize.domain.businessentity.BusinessEntity;
@@ -47,7 +48,8 @@ public class UserBE extends MizeEntity implements Comparable<UserBE>{
 	
 	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="be_id")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public BusinessEntity getBe() {
 		return be;
 	}
@@ -58,7 +60,8 @@ public class UserBE extends MizeEntity implements Comparable<UserBE>{
 
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="user_id")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	@JsonBackReference(value="userBE_user")
 	public User getUser() {
 		return user;
@@ -135,7 +138,8 @@ public class UserBE extends MizeEntity implements Comparable<UserBE>{
 	}
 	
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	@JsonIgnore(value=false)
 	@Column(name = "created_date",updatable = false)
 	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
@@ -144,7 +148,8 @@ public class UserBE extends MizeEntity implements Comparable<UserBE>{
 	}
 
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	@Column(name = "updated_date")
 	@JsonIgnore(value=false)
 	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")

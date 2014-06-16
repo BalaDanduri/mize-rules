@@ -17,9 +17,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.auth.User;
 import com.mize.domain.brand.Brand;
 import com.mize.domain.common.MizeEntity;
@@ -66,7 +67,8 @@ public class UserBrandMapping extends MizeEntity implements Comparable<UserBrand
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="user_id")
 	@JsonBackReference(value="user_brandMapping")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public User getUser() {
 		return user;
 	}
@@ -77,7 +79,8 @@ public class UserBrandMapping extends MizeEntity implements Comparable<UserBrand
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="brand_id")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	@JsonBackReference(value="brand_userbrandMapping")
 	public Brand getBrand() {
 		return brand;
@@ -100,7 +103,8 @@ public class UserBrandMapping extends MizeEntity implements Comparable<UserBrand
 	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
 	@Column(name = "created_date", updatable = false)
 	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)	
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	@JsonIgnore(value=false)
 	public DateTime getCreatedDate() {
 		return createdDate;
@@ -118,7 +122,8 @@ public class UserBrandMapping extends MizeEntity implements Comparable<UserBrand
 	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
 	@Column(name = "updated_date", nullable = true)
 	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	@JsonIgnore(value=false)
 	public DateTime getUpdatedDate() {
 		return updatedDate;
