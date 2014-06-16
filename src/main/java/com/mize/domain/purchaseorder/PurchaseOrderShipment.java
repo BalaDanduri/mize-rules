@@ -62,7 +62,6 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 	List<BusinessEntity> childBusinessEntities;
 	@Transient
 	List<BusinessEntity> childShipFromBusinessEntities;
-	@Transient
 	private String accountNumber;	
 	
 	public PurchaseOrderShipment(){
@@ -281,7 +280,7 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 		this.childShipFromBusinessEntities = childShipFromBusinessEntities;
 	}
 
-	@Transient
+	@Column(name="account_no")
 	public String getAccountNumber() {
 		return accountNumber;
 	}
