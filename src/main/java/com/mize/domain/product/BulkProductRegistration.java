@@ -34,8 +34,6 @@ public class BulkProductRegistration extends MizeEntity {
 	private User user;
 	private String dealerCustomerReference;
 	
-	
-	
 	@Override
 	public Long getId() {
 		return id;
@@ -224,6 +222,5 @@ public class BulkProductRegistration extends MizeEntity {
 				+ ", productRegistrations=" + productRegistrations
 				+ ", purchaseDate=" + purchaseDate + "]";
 	}
-	
 
 }

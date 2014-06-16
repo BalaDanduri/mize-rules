@@ -29,7 +29,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityComment;
@@ -123,7 +122,8 @@ public class ProductSerial extends MizeEntity{
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="ship_be_id", nullable = true)
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public BusinessEntity getShippedBusinessEntity() {
 		return shippedBusinessEntity;
 	}
@@ -167,7 +167,8 @@ public class ProductSerial extends MizeEntity{
 	}
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "productSerial",orphanRemoval= true)
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public List<ProductSerialComment> getComments() {
 		return comments;
 	}
@@ -211,7 +212,8 @@ public class ProductSerial extends MizeEntity{
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="invoice_be_id", nullable = true)
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public BusinessEntity getInvoiceBusinessEntity() {
 		return invoiceBusinessEntity;
 	}
@@ -245,7 +247,8 @@ public class ProductSerial extends MizeEntity{
 	}
 	
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "productSerial",orphanRemoval= true)
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public List<ProductSerialRelation> getProductSerialRelations() {
 		return productSerialRelations;
 	}
@@ -260,6 +263,7 @@ public class ProductSerial extends MizeEntity{
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@Column(name = "created_date",updatable=false)
 	@JsonIgnore(value = false)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
@@ -269,6 +273,7 @@ public class ProductSerial extends MizeEntity{
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@Column(name = "updated_date")
 	@JsonIgnore(value = false)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
@@ -316,7 +321,8 @@ public class ProductSerial extends MizeEntity{
 	}
 	
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "productSerial",orphanRemoval= true)
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public List<ProductWarranty> getProductWarrantyList() {
 		return productWarrantyList;
 	}

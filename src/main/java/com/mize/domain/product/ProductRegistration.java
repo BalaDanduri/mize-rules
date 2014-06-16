@@ -25,11 +25,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.auth.User;
 import com.mize.domain.brand.Brand;
 import com.mize.domain.businessentity.BusinessEntity;
@@ -134,7 +133,8 @@ public class ProductRegistration extends MizeEntity {
 
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="prod_serial_id")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public ProductSerial getProductSerial() {
 		return productSerial;
 	}
@@ -153,7 +153,8 @@ public class ProductRegistration extends MizeEntity {
 
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="cust_be_id")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public BusinessEntity getCustomer() {
 		return customer;
 	}
@@ -161,14 +162,16 @@ public class ProductRegistration extends MizeEntity {
 
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="invoice_be_id")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public BusinessEntity getInvoiceBusinessEntity() {
 		return invoiceBusinessEntity;
 	}
 
 	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="cust_address_id")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public EntityAddress getCustomerAddress() {
 		return customerAddress;
 	}
@@ -214,7 +217,8 @@ public class ProductRegistration extends MizeEntity {
 	}
 	
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "productRegistration",orphanRemoval= true)
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public List<ProductRegistrationComment> getComments() {
 		return comments;
 	}
@@ -224,6 +228,7 @@ public class ProductRegistration extends MizeEntity {
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@Column(name = "created_date",updatable=false)
 	@JsonIgnore(value = false)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
@@ -233,6 +238,7 @@ public class ProductRegistration extends MizeEntity {
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@Column(name = "updated_date")
 	@JsonIgnore(value = false)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
@@ -415,7 +421,8 @@ public class ProductRegistration extends MizeEntity {
 	}
 	
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "productRegistration",orphanRemoval= true)
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	@Fetch(FetchMode.SELECT)
 	@JsonManagedReference(value="productRegWarranty")
 	@JsonIgnore

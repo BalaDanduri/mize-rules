@@ -31,7 +31,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.auth.User;
 import com.mize.domain.brand.Brand;
 import com.mize.domain.businessentity.BusinessEntity;
@@ -181,7 +180,8 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 
 	
 	@Transient
-	@JsonSerialize(using=NumberValueSerializer.class,include = Inclusion.NON_DEFAULT)
+	@JsonSerialize(using=NumberValueSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	public Double getPrice() {
 		return price;
 	}
@@ -547,6 +547,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@Column(name = "created_date",updatable=false)
 	@JsonIgnore(value = false)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
@@ -556,6 +557,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@Column(name = "updated_date")
 	@JsonIgnore(value = false)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}

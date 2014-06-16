@@ -17,14 +17,16 @@ import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.brand.Brand;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
+import com.mize.domain.util.JsonDateTimeSerializer;
 
 @Entity
 @Table(name = "coverage_link")
@@ -43,9 +45,9 @@ public class CoverageLink extends MizeEntity {
 	private String coverageTriggerType;
 	private BigDecimal coverageTriggerDuration;
 	private String coverageTriggerUOM;
-	
-	
-	
+
+
+
 	public CoverageLink() {
 		super();
 	}
@@ -65,7 +67,8 @@ public class CoverageLink extends MizeEntity {
 
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="tenant_id")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public BusinessEntity getTenant() {
 		return tenant;
 	}
@@ -101,7 +104,7 @@ public class CoverageLink extends MizeEntity {
 	public String getCoverageUOM() {
 		return coverageUOM;
 	}
-	
+
 	@Column(name ="coverage_duration")
 	public BigDecimal getCoverageDuration() {
 		return coverageDuration;
@@ -111,12 +114,12 @@ public class CoverageLink extends MizeEntity {
 	public String getCoverageTriggerType() {
 		return coverageTriggerType;
 	}
-	
+
 	@Column(name ="coverage_trigger_duration")
 	public BigDecimal getCoverageTriggerDuration() {
 		return coverageTriggerDuration;
 	}
-	
+
 	@Column(name ="coverage_trigger_uom")
 	public String getCoverageTriggerUOM() {
 		return coverageTriggerUOM;
@@ -166,12 +169,15 @@ public class CoverageLink extends MizeEntity {
 		this.coverageTriggerUOM = coverageTriggerUOM;
 	}
 
-	
+
 	@Override	
 	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@Column(name = "created_date",updatable=false)
 	@JsonIgnore(value = false)
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
+
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
@@ -181,10 +187,13 @@ public class CoverageLink extends MizeEntity {
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@Column(name = "updated_date")
 	@JsonIgnore(value = false)
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
+
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
-	
+
 	@Override
 	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
@@ -200,27 +209,27 @@ public class CoverageLink extends MizeEntity {
 	public void setUpdatedDate(DateTime updatedDate) {
 		super.updatedDate = updatedDate;
 	}
-	
+
 	@Override
 	@JsonIgnore(value=false)
 	@Column(name = "created_by" , updatable=false)
 	public Long getCreatedBy() {
 		return createdBy;
 	}
-	
+
 	@Override
 	@JsonIgnore(value=false)
 	@Column(name = "updated_by")
 	public Long getUpdatedBy() {
 		return updatedBy;
 	}
-	
+
 	@JsonIgnore(value=false)
 	@Override
 	public void setUpdatedBy(Long updatedBy) {
 		this.updatedBy = updatedBy;
 	}
- 
+
 	@JsonIgnore(value=false)
 	@Override
 	public void setCreatedBy(Long createdBy) {
@@ -332,13 +341,5 @@ public class CoverageLink extends MizeEntity {
 				+ ", productCategory=" + productCategory + ", tenant=" + tenant
 				+ "]";
 	}
-	
-	
 
-	
-	
-	
-	
-	
-	
 }

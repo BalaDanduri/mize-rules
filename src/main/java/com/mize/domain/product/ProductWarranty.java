@@ -20,7 +20,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateDeserializer;
@@ -49,7 +48,8 @@ public class ProductWarranty extends MizeEntity {
 
 	@ManyToOne(fetch = FetchType.EAGER ,cascade = CascadeType.REFRESH)
 	@JoinColumn(name="prod_serial_id")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	@JsonBackReference(value="warranty_productSerial")
 	public ProductSerial getProductSerial() {
 		return productSerial;

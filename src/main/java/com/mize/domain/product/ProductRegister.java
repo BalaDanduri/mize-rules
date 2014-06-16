@@ -21,6 +21,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
@@ -163,7 +165,8 @@ public class ProductRegister extends MizeEntity implements Comparable<ProductReg
 	@DateTimeFormat (pattern="MM-dd-yyyy")
 	@Column(name = "purchase_date",  nullable = true)
 	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateSerializer.class,include=Inclusion.NON_DEFAULT)
+	@JsonSerialize(using=JsonDateSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getPurchaseDate() {
 		return purchaseDate;
 	}
@@ -193,7 +196,8 @@ public class ProductRegister extends MizeEntity implements Comparable<ProductReg
 	@DateTimeFormat (pattern="MM-dd-yyyy")
 	@Column(name = "warranty_expiry_date",  nullable = true)
 	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateSerializer.class,include=Inclusion.NON_DEFAULT)
+	@JsonSerialize(using=JsonDateSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getWarrantyExpiryDate() {
 		return warrantyExpiryDate;
 	}
@@ -594,7 +598,8 @@ public class ProductRegister extends MizeEntity implements Comparable<ProductReg
 	
 	@Transient
 	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonSerialize(using=JsonDateSerializer.class,include=Inclusion.NON_DEFAULT)
+	@JsonSerialize(using=JsonDateSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getCreatedDateFrom() {
 		return createdDateFrom;
 	}
@@ -607,7 +612,8 @@ public class ProductRegister extends MizeEntity implements Comparable<ProductReg
 
 	@Transient
 	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonSerialize(using=JsonDateSerializer.class,include=Inclusion.NON_DEFAULT)
+	@JsonSerialize(using=JsonDateSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getCreatedDateTo() {
 		return createdDateTo;
 	}
@@ -620,7 +626,8 @@ public class ProductRegister extends MizeEntity implements Comparable<ProductReg
 
 	@Transient
 	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonSerialize(using=JsonDateSerializer.class,include=Inclusion.NON_DEFAULT)
+	@JsonSerialize(using=JsonDateSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getUpdatedDateFrom() {
 		return updatedDateFrom;
 	}
@@ -633,7 +640,8 @@ public class ProductRegister extends MizeEntity implements Comparable<ProductReg
 
 	@Transient
 	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonSerialize(using=JsonDateSerializer.class,include=Inclusion.NON_DEFAULT)
+	@JsonSerialize(using=JsonDateSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getUpdatedDateTo() {
 		return updatedDateTo;
 	}
