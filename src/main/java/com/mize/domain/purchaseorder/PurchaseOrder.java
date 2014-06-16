@@ -27,7 +27,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityAttachment;
@@ -253,20 +252,6 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	public void setAmount(PurchaseOrderAmount amount) {
 		this.amount = amount;
 	}
-
-
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	@JsonIgnore(false)
 	@Column(name = "updated_by")
@@ -291,7 +276,8 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	}
 	
 	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using = JsonDateTimeSerializer.class, include = JsonSerialize.Inclusion.NON_DEFAULT)
+	@JsonSerialize(using = JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	@JsonIgnore(false)
 	@Column(name = "created_date", updatable = false)
 	@org.hibernate.annotations.Type(type = "com.mize.domain.util.DateTimeJPA")
@@ -307,7 +293,8 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	}
 	
 	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using = JsonDateTimeSerializer.class, include = JsonSerialize.Inclusion.NON_DEFAULT)
+	@JsonSerialize(using = JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	@Column(name = "updated_date")
 	@org.hibernate.annotations.Type(type = "com.mize.domain.util.DateTimeJPA")
 	@JsonIgnore(false)
@@ -322,9 +309,10 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 		this.updatedDate = updatedDate;
 	}
 	
-	@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="tenant_id")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public BusinessEntity getTenant() {
 		return tenant;
 	}
@@ -342,8 +330,9 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 		this.discountId = discountId;
 	}	
 
-	@OneToOne(cascade=CascadeType.ALL,fetch = FetchType.LAZY,mappedBy="purchaseOrder")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@OneToOne(cascade=CascadeType.ALL,fetch = FetchType.EAGER,mappedBy="purchaseOrder")
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public PurchaseOrderRequester getRequester() {
 		return requester;
 	}
@@ -352,9 +341,10 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 		this.requester = requester;
 	}
 	
-	@OneToOne(cascade=CascadeType.ALL,fetch = FetchType.LAZY,mappedBy="purchaseOrder")
+	@OneToOne(cascade=CascadeType.ALL,fetch = FetchType.EAGER,mappedBy="purchaseOrder")
 	@JoinColumn(name="id")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public PurchaseOrderPayment getPayment() {
 		return payment;
 	}
@@ -363,9 +353,10 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 		this.payment = payment;
 	}
 
-	@OneToOne(cascade=CascadeType.ALL,fetch = FetchType.LAZY,mappedBy="purchaseOrder")
+	@OneToOne(cascade=CascadeType.ALL,fetch = FetchType.EAGER,mappedBy="purchaseOrder")
 	@JoinColumn(name="id")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public PurchaseOrderShipment getShipment() {
 		return shipment;
 	}
@@ -375,7 +366,8 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	}
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "purchaseOrder",orphanRemoval= true)
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public List<PurchaseOrderItem> getOrderItems() {
 		return orderItems;
 	}
@@ -385,7 +377,8 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	}
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "purchaseOrder",orphanRemoval= true)
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public List<PurchaseOrderAudit> getAudits() {
 		return audits;
 	}
@@ -407,7 +400,8 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	}
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "purchaseOrder",orphanRemoval= true)
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public List<PurchaseOrderComment> getComments() {
 		return comments;
 	}
@@ -417,7 +411,8 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	}
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "purchaseOrder",orphanRemoval= true)
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public List<PurchaseOrderMessage> getMessages() {
 		return messages;
 	}
