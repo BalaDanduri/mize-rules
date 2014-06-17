@@ -61,7 +61,11 @@ public abstract class CatalogConstants implements Serializable{
 	public static final String SHIP_LOCATION_TYPE = "ShipLocationType";
 	public static final String LABOR_TYPE = "LaborType";
 	public static final String PAGE_SIZE = "PageSize";
+
 	public static final String CUSTOMER_SUB_TYPE ="CustomerSubType";
+
+	public static final String COUNTRY = "country";
+	public static final String MANUFACTURER_TYPE = "ManufacturerType";
 
 }
 
