@@ -32,9 +32,11 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.brand.Brand;
 import com.mize.domain.businessentity.BusinessEntity;
+import com.mize.domain.businessentity.BusinessEntityIntl;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateDeserializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
@@ -64,7 +66,10 @@ public class ProductRegistration extends MizeEntity {
 	private String registrationIndustry;
 	private String additionalInfo;
 	private String dealerCustomerReference;
-	private boolean customerUpdated;
+	private boolean customerUpdated; 
+	private String invoiceNumber;
+	private String salesPerson;
+	private boolean isRegistered;
 	
 	private List<ProductRegistrationWarranty> warrantyList = new ArrayList<ProductRegistrationWarranty>();
 	
@@ -81,7 +86,7 @@ public class ProductRegistration extends MizeEntity {
 		New,Transfer
 	}
 	public enum Status{
-		Open,Draft,Registered,Pending,Rejected,Transferred
+		Open,Draft,Registered,Pending,Rejected,Transferred,NeedInfo
 	}	
 	public ProductRegistration(){
 		
@@ -110,6 +115,42 @@ public class ProductRegistration extends MizeEntity {
 		product.getProductIntl().add(productIntl);
 		product.setBrand(brand);
 		productSerial.setProduct(product);
+		this.productSerial = productSerial;
+		
+	}
+	
+	public ProductRegistration(Long id,String statusCode,String serialNumber,DateTime shipDate, String brandName,String model,String productName,String invoiceBeType,String invoiceBeCode,String invoiceBEName,String shippedBeType,String shippedBeCode,String shippedBeName) {
+		this.id = id;
+		this.statusCode = statusCode;
+		ProductSerial productSerial = new ProductSerial();
+		Product product = new Product();
+		product.setModel(model);
+		Brand brand = new Brand();
+		brand.setName(brandName);
+		ProductIntl productIntl = new ProductIntl();
+		productIntl.setName(productName);
+		productSerial.setSerialNumber(serialNumber);
+		productSerial.setShipDate(shipDate);
+		product.getProductIntl().add(productIntl);
+		product.setBrand(brand);
+		productSerial.setProduct(product);
+		if(Formatter.isNotNull(invoiceBeCode) && Formatter.isNotNull(invoiceBeType) ){
+			BusinessEntity invoiceBusinessEntity = new BusinessEntity();
+			invoiceBusinessEntity.setTypeCode(invoiceBeType);
+			invoiceBusinessEntity.setCode(invoiceBeCode);
+			BusinessEntityIntl intl = new BusinessEntityIntl();
+			intl.setName(invoiceBEName);
+			invoiceBusinessEntity.getIntl().add(intl);
+			this.invoiceBusinessEntity = invoiceBusinessEntity;
+		}else if(Formatter.isNotNull(shippedBeType) && Formatter.isNotNull(shippedBeCode) ){
+			BusinessEntity invoiceBusinessEntity = new BusinessEntity();
+			invoiceBusinessEntity.setTypeCode(shippedBeType);
+			invoiceBusinessEntity.setCode(shippedBeCode);
+			BusinessEntityIntl intl = new BusinessEntityIntl();
+			intl.setName(shippedBeName);
+			invoiceBusinessEntity.getIntl().add(intl);
+			this.invoiceBusinessEntity = invoiceBusinessEntity;
+		}
 		this.productSerial = productSerial;
 		
 	}
@@ -477,6 +518,33 @@ public class ProductRegistration extends MizeEntity {
 		this.customerUpdated = customerUpdated;
 	}
 
+	
+	@Column(name = "invoice_no")
+	public String getInvoiceNumber() {
+		return invoiceNumber;
+	}
+	@Column(name = "sales_person")
+	public String getSalesPerson() {
+		return salesPerson;
+	}
+
+	public void setInvoiceNumber(String invoiceNumber) {
+		this.invoiceNumber = invoiceNumber;
+	}
+
+	public void setSalesPerson(String salesPerson) {
+		this.salesPerson = salesPerson;
+	}
+
+	@Transient
+	@JsonIgnore
+	public boolean isRegistered() {
+		return isRegistered;
+	}
+
+	public void setRegistered(boolean isRegistered) {
+		this.isRegistered = isRegistered;
+	}
 
 	@Override
 	public int hashCode() {
