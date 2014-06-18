@@ -127,7 +127,7 @@ public class WorkQueueAuth extends MizeEntity implements Comparable<WorkQueueAut
 
 	@Override
 	@JsonIgnore
-	@Column(name = "created_by")
+	@Column(name = "created_by",updatable = false)
 	public Long getCreatedBy() {		
 		return super.getCreatedBy();
 	}
