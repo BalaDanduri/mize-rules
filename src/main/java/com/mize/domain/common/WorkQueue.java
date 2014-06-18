@@ -78,7 +78,7 @@ public class WorkQueue extends MizeEntity implements Comparable<WorkQueue>{
 		return name;
 	}
   
-	@Column(name = "description", length = 100, nullable = false)
+	@Column(name = "description", length = 100, nullable = true)
 	public String getDesc() {
 		return desc;
 	}
