@@ -3,6 +3,7 @@ package com.mize.domain.upload;
 import java.io.File;
 
 import com.mize.domain.auth.User;
+import com.mize.domain.batch.BatchJobMapper;
 import com.mize.domain.common.MizeEntity;
 
 public class UploadFile extends MizeEntity implements Comparable<UploadFile>{
@@ -19,6 +20,7 @@ public class UploadFile extends MizeEntity implements Comparable<UploadFile>{
 	private String url;
 	private File file;
 	private String fileType;
+	private BatchJobMapper batchJobMapper;
 	
 	public String getFileFormat() {
 		return fileFormat;
@@ -99,6 +101,14 @@ public class UploadFile extends MizeEntity implements Comparable<UploadFile>{
 	}
 	public void setFileType(String fileType) {
 		this.fileType = fileType;
+	}
+	
+	
+	public BatchJobMapper getBatchJobMapper() {
+		return batchJobMapper;
+	}
+	public void setBatchJobMapper(BatchJobMapper batchJobMapper) {
+		this.batchJobMapper = batchJobMapper;
 	}
 	@Override
 	public int hashCode() {
@@ -183,8 +193,9 @@ public class UploadFile extends MizeEntity implements Comparable<UploadFile>{
 		return "UploadFile [fileFormat=" + fileFormat + ", fileName="
 				+ fileName + ", category=" + category + ", generatedFileName="
 				+ generatedFileName + ", s3Bucket=" + s3Bucket + ", folder="
-				+ folder + ", local=" + local + ", user=" + user + ",fileType="
-				+ fileType + "]";
+				+ folder + ", local=" + local + ", user=" + user + ", url="
+				+ url + ", file=" + file + ", fileType=" + fileType
+				+ ", batchJobMapper=" + batchJobMapper + "]";
 	}
 	
 	@Override
