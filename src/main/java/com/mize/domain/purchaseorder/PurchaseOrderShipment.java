@@ -1,7 +1,6 @@
 package com.mize.domain.purchaseorder;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -57,11 +56,7 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 	private EntityAddress shipmentFromAddress;
 	@Transient
 	private Long shipmentFromBeAddressId;
-	private String isNewShipFrom;
-	@Transient
-	List<BusinessEntity> childBusinessEntities;
-	@Transient
-	List<BusinessEntity> childShipFromBusinessEntities;
+	private String isNewShipFrom;	
 	private String accountNumber;	
 	
 	public PurchaseOrderShipment(){
@@ -260,24 +255,6 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 
 	public void setShipmentFromBeAddressId(Long shipmentFromBeAddressId) {
 		this.shipmentFromBeAddressId = shipmentFromBeAddressId;
-	}
-
-	@Transient
-	public List<BusinessEntity> getChildBusinessEntities() {
-		return childBusinessEntities;
-	}
-
-	public void setChildBusinessEntities(List<BusinessEntity> childBusinessEntities) {
-		this.childBusinessEntities = childBusinessEntities;
-	}
-	
-	@Transient
-	public List<BusinessEntity> getChildShipFromBusinessEntities() {
-		return childShipFromBusinessEntities;
-	}
-
-	public void setChildShipFromBusinessEntities(List<BusinessEntity> childShipFromBusinessEntities) {
-		this.childShipFromBusinessEntities = childShipFromBusinessEntities;
 	}
 
 	@Column(name="account_no")

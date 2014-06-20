@@ -1,5 +1,8 @@
 package com.mize.domain.purchaseorder;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,9 +16,13 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.util.JPASerializer;
 
 @Entity
 @Table(name = "purchase_order_requester")
@@ -26,6 +33,8 @@ public class PurchaseOrderRequester extends MizeEntity implements Comparable<Pur
 	private BusinessEntity businessEntity;
 	private EntityAddress address;
 	private String updateAddress;
+	@Transient
+	List<BusinessEntity> childBusinessEntities = new ArrayList<BusinessEntity>();
 
 	public PurchaseOrderRequester(){
 		super();
@@ -88,6 +97,17 @@ public class PurchaseOrderRequester extends MizeEntity implements Comparable<Pur
 
 	public void setUpdateAddress(String updateAddress) {
 		this.updateAddress = updateAddress;
+	}
+
+	@Transient
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	public List<BusinessEntity> getChildBusinessEntities() {
+		return childBusinessEntities;
+	}
+
+	public void setChildBusinessEntities(List<BusinessEntity> childBusinessEntities) {
+		this.childBusinessEntities = childBusinessEntities;
 	}
 
 	@Override
