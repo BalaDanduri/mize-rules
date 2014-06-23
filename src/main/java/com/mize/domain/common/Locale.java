@@ -3,10 +3,9 @@ package com.mize.domain.common;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.GenericGenerator;
 
 import com.mize.domain.util.Formatter;
 
@@ -31,8 +30,7 @@ public class Locale extends MizeEntity implements Comparable<Locale>{
     
 	@Override
 	@Id
-	@GenericGenerator(name="localeId" , strategy="increment")
-	@GeneratedValue(generator="localeId")
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="locale_id",nullable=false)
 	public Long getId() {
 		return id;

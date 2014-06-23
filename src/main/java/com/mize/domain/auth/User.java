@@ -28,7 +28,6 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.product.ProductRegister;
@@ -112,7 +111,7 @@ public class User extends MizeEntity implements Comparable<User> {
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
+    @Column(name="id",unique=true,nullable=false)
 	public Long getId() {
 		return id;
 	}

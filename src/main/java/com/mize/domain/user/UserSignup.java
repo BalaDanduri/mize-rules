@@ -3,11 +3,11 @@ package com.mize.domain.user;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.Range;
 
 import com.mize.domain.common.MizeEntity;
@@ -72,9 +72,8 @@ public class UserSignup extends MizeEntity implements Comparable<UserSignup>{
 	}
 
 	@Id
-	@GenericGenerator(name="Id" , strategy="increment")
-	@GeneratedValue(generator="Id")
-	@Column(name = "id", unique = true, nullable = false, length = 11)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id", unique = true, nullable = false)
 	@Override
 	public Long getId() {
 		return id;

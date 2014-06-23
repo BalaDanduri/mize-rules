@@ -4,13 +4,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.GenericGenerator;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -51,9 +51,8 @@ public class BrandSupport extends MizeEntity implements Comparable<BrandSupport>
 		
 	}
 	@Id
-	@Column(name = "BRAND_SUPPORT_ID", unique = true, nullable = false, length = 10)
-	@GenericGenerator(name="brandsupportId" , strategy="increment")
-	@GeneratedValue(generator="brandsupportId")
+	@Column(name = "BRAND_SUPPORT_ID", unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 
 	@Override
 	public Long getId() {

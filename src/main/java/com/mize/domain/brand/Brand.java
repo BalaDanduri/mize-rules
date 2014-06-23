@@ -9,12 +9,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-
-import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -61,9 +60,8 @@ public class Brand extends MizeEntity implements Comparable<Brand>{
 	
 	
 	@Id
-	@GenericGenerator(name="brandId" , strategy="increment")
-	@GeneratedValue(generator="brandId")
-	@Column(name = "BRAND_ID", unique = true, nullable = false, length = 10)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "BRAND_ID", unique = true, nullable = false)
 	@Override
 	public Long getId() {
 		return id;
