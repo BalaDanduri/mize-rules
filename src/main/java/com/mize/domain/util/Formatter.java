@@ -258,6 +258,10 @@ public final class Formatter {
 		return (dateTime == null ? null : dateTime.toString(DATE_FORMAT));
 	}
 	
+	public static String getDateTimeFormat(DateTime dateTime){
+		return (dateTime == null ? null : dateTime.toString(DATE_FORMAT3));
+	}
+	
 	public static String formStringInClause(List<String> list){
 		StringBuffer sb = new StringBuffer(EMPTY);
 		if(list == null)

@@ -87,6 +87,12 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	private String originalOrderNumber;
 	@Transient
 	private String tabName;
+	@Transient
+	private String submittedBy;
+	@Transient
+	private DateTime submittedDate;
+	@Transient
+	private String imageURL;
 	
 	public PurchaseOrder(){
 		super();
@@ -634,6 +640,33 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 
 	public void setTabName(String tabName) {
 		this.tabName = tabName;
+	}
+	
+	@Transient
+	public String getSubmittedBy() {
+		return submittedBy;
+	}
+
+	public void setSubmittedBy(String submittedBy) {
+		this.submittedBy = submittedBy;
+	}
+
+	@Transient
+	public DateTime getSubmittedDate() {
+		return submittedDate;
+	}
+
+	public void setSubmittedDate(DateTime submittedDate) {
+		this.submittedDate = submittedDate;
+	}
+	
+	@Transient
+	public String getImageURL() {
+		return imageURL;
+	}
+
+	public void setImageURL(String imageURL) {
+		this.imageURL = imageURL;
 	}
 
 	@Override
