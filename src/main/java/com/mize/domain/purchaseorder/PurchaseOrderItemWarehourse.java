@@ -38,6 +38,7 @@ public class PurchaseOrderItemWarehourse extends MizeEntity implements Comparabl
 	private BigDecimal backorderQuantity;
 	private BigDecimal estimatedShipmentCost;
 	private DateTime estimatedShipmentDate;
+	private String binLocation;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -139,6 +140,15 @@ public class PurchaseOrderItemWarehourse extends MizeEntity implements Comparabl
 
 	public void setRequestedQuantity(BigDecimal requestedQuantity) {
 		this.requestedQuantity = requestedQuantity;
+	}
+
+	@Column(name = "bin_location")
+	public String getBinLocation() {
+		return binLocation;
+	}
+
+	public void setBinLocation(String binLocation) {
+		this.binLocation = binLocation;
 	}
 
 	@Override
