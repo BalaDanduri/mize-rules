@@ -133,6 +133,7 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 		this.fieldKey = fieldKey;
 		this.messageType.setType(messageType.toString());
 		this.hotSpotMap =hotSpotMap;
+		this.msgType = messageType.toString();
 	}
 	
 	public AppMessage(String code, String shortDesc, String longDesc, Integer severity, String field, String fieldKey, MessageType.Type messageType,List<Object> hotSpotList) {
@@ -144,6 +145,7 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 		this.fieldKey = fieldKey;
 		this.messageType.setType(messageType.toString());
 		this.hotSpotList =hotSpotList;
+		this.msgType = messageType.toString();
 	}
 	
 	public AppMessage(String code,String shortDesc,String longDesc) {
