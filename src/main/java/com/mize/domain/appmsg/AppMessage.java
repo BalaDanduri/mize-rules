@@ -72,7 +72,7 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 	private List<Object> hotSpotList = new ArrayList<Object>();
 
 	public enum Severity {
-		one(1),two(2),three(3),four(4),five(5);
+		one(1),two(2),three(3),four(4),five(5),dummy(100);
 		int val;
 		Severity(int v){
 			val = v;
@@ -121,6 +121,7 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 		this.field = field;
 		this.fieldKey = fieldKey;
 		this.messageType.setType(messageType.toString());
+		this.msgType = messageType.toString();
 	}
 	
 	public AppMessage(String code, String shortDesc, String longDesc, Integer severity, String field, String fieldKey, MessageType.Type messageType,Map<String,Object> hotSpotMap) {
