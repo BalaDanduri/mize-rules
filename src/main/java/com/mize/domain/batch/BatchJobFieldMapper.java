@@ -1,5 +1,8 @@
 package com.mize.domain.batch;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -89,7 +92,7 @@ public class BatchJobFieldMapper extends MizeEntity implements Comparable<BatchJ
 
 	@Override
 	public int compareTo(BatchJobFieldMapper o) {
-		return o.getSequenceNumber().compareTo(getSequenceNumber());
+		return sequenceNumber.compareTo(o.getSequenceNumber());
 	}
 
 	@Override
