@@ -33,6 +33,7 @@ public class BulkProductRegistration extends MizeEntity {
 	private List<ProductRegistration> productRegistrations = new ArrayList<ProductRegistration>();
 	private User user;
 	private String dealerCustomerReference;
+	private String registrationSource;
 	
 	@Override
 	public Long getId() {
@@ -124,6 +125,15 @@ public class BulkProductRegistration extends MizeEntity {
 	
 	public void setDealerCustomerReference(String dealerCustomerReference) {
 		this.dealerCustomerReference = dealerCustomerReference;
+	}
+
+	
+	public String getRegistrationSource() {
+		return registrationSource;
+	}
+
+	public void setRegistrationSource(String registrationSource) {
+		this.registrationSource = registrationSource;
 	}
 
 	@Override
