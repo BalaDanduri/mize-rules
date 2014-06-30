@@ -72,15 +72,6 @@ public class Discount extends MizeEntity {
 	private EntityComment entityComment;
 	private List<DiscountComment> comments = new ArrayList<DiscountComment>();
 	
-
-	public enum OrderType{
-		Emergency,Stock;
-	}
-	
-	public enum Level{
-		Order,Item;
-	}
-	
 	public Discount() {
 		super();
 	}
