@@ -128,32 +128,6 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 		this.getOrderItems().add(item);
 	}
 	
-	public enum Status{
-		Draft,Pending,Approved,Deleted,Rejected,Closed,Open,Completed,
-		Shipped,In_Process,Submitted,Cancelled,NeedInfo;
-	}
-	
-	public enum Type{
-		Claim,Warranty,Campaign,Extended_Warranty,PDI,Parts_Warranty,
-		Support_Request,Service_Order,Parts_Order,Purchase_Order,PartsReturn,Stock,Emergency;
-	}
-	
-	public enum TabName{
-		Order,Items,Parts,Shipping,Payment,Summary,FullView
-	}
-	
-	public enum RequestType{
-		Order,Return;
-	}
-	
-	public enum ResonType{
-		Overstock,WrongPart,BadPart;
-	}
-	
-	public enum ImportType{
-		CSV,Excel;
-	}
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false, unique = true)
@@ -178,7 +152,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 
 	@Column(name = "order_number")
 	public String getNumber() {
-		return String.valueOf(id);
+		return number;
 	}
 
 	public void setNumber(String number) {
@@ -529,90 +503,6 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	
 	public void setImportFrom(String importFrom) {
 		this.importFrom = importFrom;
-	}
-	
-	@Transient
-	@JsonIgnore
-	public boolean isPartsReturn(){
-		return Formatter.equalIgnoreCase(RequestType.Return, requestType);
-	}
-	
-	@Transient
-	@JsonIgnore
-	public boolean isDraftStatus(){
-		return Formatter.equalIgnoreCase(Status.Draft, this.status);
-	}
-	
-	@Transient
-	@JsonIgnore
-	public boolean isNeedInfoStatus(){
-		return Formatter.equalIgnoreCase(Status.NeedInfo, this.status);
-	}
-	
-	@Transient
-	@JsonIgnore
-	public boolean isDeletedStatus(){
-		return Formatter.equalIgnoreCase(Status.Deleted, this.status);
-	}
-	
-	@Transient
-	@JsonIgnore
-	public boolean isCancelledtatus(){
-		return Formatter.equalIgnoreCase(Status.Cancelled, this.status);
-	}
-	
-	@Transient
-	@JsonIgnore
-	public boolean isPendingStatus(){
-		return Formatter.equalIgnoreCase(Status.Pending, this.status);
-	}
-	
-	@Transient
-	@JsonIgnore
-	public boolean isInProcessStatus(){
-		return Formatter.equalIgnoreCase(Status.In_Process, this.status);
-	}
-	
-	@Transient
-	@JsonIgnore
-	public boolean isOrderTab(){
-		return Formatter.equalIgnoreCase(TabName.Order, this.tabName);
-	}
-	
-	@Transient
-	@JsonIgnore
-	public boolean isItemsTab(){
-		return Formatter.equalIgnoreCase(TabName.Items, this.tabName);
-	}
-	
-	@Transient
-	@JsonIgnore
-	public boolean isPartsTab(){
-		return Formatter.equalIgnoreCase(TabName.Parts, this.tabName);
-	}
-	
-	@Transient
-	@JsonIgnore
-	public boolean isShppingTab(){
-		return Formatter.equalIgnoreCase(TabName.Shipping, this.tabName);
-	}
-	
-	@Transient
-	@JsonIgnore
-	public boolean isPaymentTab(){
-		return Formatter.equalIgnoreCase(TabName.Payment, this.tabName);
-	}
-	
-	@Transient
-	@JsonIgnore
-	public boolean isFullView(){
-		return Formatter.equalIgnoreCase(TabName.FullView, this.tabName);
-	}
-	
-	@Transient
-	@JsonIgnore
-	public boolean isTabbedView(){
-		return !Formatter.equalIgnoreCase(TabName.FullView, this.tabName);
 	}
 	
 	@Transient

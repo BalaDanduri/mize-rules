@@ -78,7 +78,7 @@ public class PurchaseOrderTest extends JPATest {
 			order = new PurchaseOrder();
 			order.setNumber(System.currentTimeMillis()+"");
 		}
-		order.setStatus(PurchaseOrder.Status.Draft.toString());
+		order.setStatus("Draft");
 		order.setLocale(new Locale(1l));
 		order.setCurrencyCode("Dollar");
 		order.setRequestType("Back_Order");
