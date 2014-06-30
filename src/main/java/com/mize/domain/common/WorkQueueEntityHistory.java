@@ -49,10 +49,6 @@ public class WorkQueueEntityHistory extends MizeEntity implements Comparable<Wor
 		super();
 	}
 	
-	public enum EntityType{
-		Claim,Service_Order,Support_Request,Parts_Order,Service_Entity,Inspection,ProductRegistration,Purchase_Order
-	}
-	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "id", nullable = false, unique = true)

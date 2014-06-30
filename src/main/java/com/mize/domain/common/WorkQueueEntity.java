@@ -93,10 +93,6 @@ public class WorkQueueEntity extends MizeEntity implements Comparable<WorkQueueE
 		this.status = status;
 	}
 
-	public enum EntityType{
-		Claim,Service_Order,Support_Request,Parts_Order,Service_Entity,Inspection,ProductRegistration,Purchase_Order
-	}
-	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "id", nullable = false, unique = true)
