@@ -1,4 +1,4 @@
 mize-domain
 ===========
 
-Mize Applications Business Domain Model 
+Common Mize Applications Business Domain Model 
