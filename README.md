@@ -1,4 +1,4 @@
 mize-domain
 ===========
 
-Mize Business Domain Model
+Mize Products Business Domain Model
