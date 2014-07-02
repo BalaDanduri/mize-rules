@@ -70,6 +70,7 @@ public class ProductRegistration extends MizeEntity {
 	private String invoiceNumber;
 	private String salesPerson;
 	private boolean isRegistered;
+	private List<ProductRegistrationAudit> audits = new ArrayList<ProductRegistrationAudit>();
 	
 	private List<ProductRegistrationWarranty> warrantyList = new ArrayList<ProductRegistrationWarranty>();
 	
@@ -98,6 +99,13 @@ public class ProductRegistration extends MizeEntity {
 		this.registrationType = registrationType;
 		this.purchaseDate = purchaseDate;
 		this.registrationDate = registrationDate;
+	}
+	
+	public ProductRegistration(Long id,String statusCode,String registrationType,List<ProductRegistrationAudit> audits){
+		this.id = id;
+		this.statusCode = statusCode;
+		this.registrationType = registrationType;
+		this.audits = audits;
 	}
 	
 	public ProductRegistration(Long id,String statusCode,String serialNumber,DateTime shipDate, String brandName,String model,String productName) {
@@ -328,6 +336,7 @@ public class ProductRegistration extends MizeEntity {
 	public String getRegistrationIndustry() {
 		return registrationIndustry;
 	}
+	
 
 	@Transient
 	public User getUser() {
@@ -474,6 +483,18 @@ public class ProductRegistration extends MizeEntity {
 	
 	public void setWarrantyList(List<ProductRegistrationWarranty> warrantyList) {
 		this.warrantyList = warrantyList;
+	}
+	
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "productRegistration",orphanRemoval= true)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_EMPTY)
+	@JsonManagedReference(value="productRegistration_audit")
+	public List<ProductRegistrationAudit> getAudits() {
+		return audits;
+	}
+	
+	public void setAudits(List<ProductRegistrationAudit> audits) {
+		this.audits = audits;
 	}
 	
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "productRegistration",orphanRemoval= true)
