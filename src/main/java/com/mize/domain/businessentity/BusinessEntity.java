@@ -70,6 +70,8 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	private List<BusinessEntityRelation> relatedEntities = new ArrayList<BusinessEntityRelation>();
 	private List<BusinessEntityServiceLink> beServiceLinks = new ArrayList<BusinessEntityServiceLink>();
 	private List<BusinessEntityServiceRate> beServiceRates = new ArrayList<BusinessEntityServiceRate>();
+	@Transient
+	private BusinessEntityRelation customerEntityRelation;
 
 	public BusinessEntity() {
 	}
@@ -618,4 +620,14 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 			return BusinessEntityAttribute.PromotedComparator.compare(be1.getBeAttribute(), be2.getBeAttribute());
 		}
 	};
+
+	@Transient
+	@JsonIgnore
+	public BusinessEntityRelation getCustomerEntityRelation() {
+		return customerEntityRelation;
+	}
+	
+	public void setCustomerEntityRelation(BusinessEntityRelation customerEntityRelation) {
+		this.customerEntityRelation = customerEntityRelation;
+	}
 }
