@@ -1,8 +1,5 @@
 package com.mize.domain.batch;
 
-import java.util.ArrayList;
-import java.util.Collections;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -29,6 +26,18 @@ public class BatchJobFieldMapper extends MizeEntity implements Comparable<BatchJ
 	private String headerName;
 	private String domainName;
 	private String aliasName;
+
+	public BatchJobFieldMapper() {
+		super();
+	}
+	
+	public BatchJobFieldMapper(Integer sequenceNumber, String headerName, String domainName,String aliasName) {
+		super();
+		this.sequenceNumber = sequenceNumber;
+		this.headerName = headerName;
+		this.domainName = domainName;
+		this.aliasName = aliasName;
+	}
 
 	@Override
 	@Id

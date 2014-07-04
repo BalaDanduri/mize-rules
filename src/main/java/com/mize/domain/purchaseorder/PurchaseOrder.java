@@ -33,7 +33,6 @@ import com.mize.domain.common.EntityAttachment;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeEntity;
-import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
