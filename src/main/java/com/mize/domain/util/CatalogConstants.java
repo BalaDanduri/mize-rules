@@ -6,6 +6,7 @@ public abstract class CatalogConstants implements Serializable{
 	private static final long serialVersionUID = 1893011032395196052L;
 	public static final String ENTITY_TYPE_COMPANY = "company";
 	public static final String BUSINESS_ENTITY_TYPE = "BusinessEntityType";
+	public static final String CUSTOMER_BUSINESS_ENTITY_TYPE = "CustomerBusinessEntityType";
 	public static final String CURRENCY = "Currency";
 	public static final String ADDRESS_TYPE = "AddressType";
 	public static final String PHONE_TYPE = "PhoneType";
