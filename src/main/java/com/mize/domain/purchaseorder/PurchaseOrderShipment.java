@@ -25,6 +25,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityAddress;
+import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
@@ -57,7 +58,9 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 	@Transient
 	private Long shipmentFromBeAddressId;
 	private String isNewShipFrom;	
-	private String accountNumber;	
+	private String accountNumber;
+	@Transient
+	private EntityComment entityComment;
 	
 	public PurchaseOrderShipment(){
 		super();
@@ -264,6 +267,15 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 
 	public void setAccountNumber(String accountNumber) {
 		this.accountNumber = accountNumber;
+	}
+	
+	@Transient
+	public EntityComment getEntityComment() {
+		return entityComment;
+	}
+
+	public void setEntityComment(EntityComment entityComment) {
+		this.entityComment = entityComment;
 	}
 
 	@Override
