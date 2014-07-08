@@ -33,6 +33,7 @@ import com.mize.domain.common.EntityAttachment;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
@@ -92,6 +93,8 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	private DateTime submittedDate;
 	@Transient
 	private String imageURL;
+	@Transient
+	private String action;
 	
 	public PurchaseOrder(){
 		super();
@@ -557,6 +560,25 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	public void setImageURL(String imageURL) {
 		this.imageURL = imageURL;
 	}
+	
+	@Transient
+	public String getAction() {
+		return action;
+	}
+
+	public void setAction(String action) {
+		this.action = action;
+	}
+	
+	@Transient
+	public String getFormattedDisplayDate(DateTime inputDate) {
+		String date="";
+		if(inputDate!=null){
+			date = Formatter.getDateTimeFormat(inputDate);
+		}
+		return date;
+	}
+
 
 	@Override
 	public int hashCode() {
