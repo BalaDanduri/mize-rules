@@ -60,11 +60,7 @@ public class PartKit extends MizeEntity{
 	private BigDecimal partPrice;
 	@Transient
 	private List<PartSubstitute> partSubstitutes = new ArrayList<PartSubstitute>();
-	
-	public enum PricingMethod{
-		Item,Kit;
-	}
-	
+		
 	public PartKit(){
 		super();
 	}

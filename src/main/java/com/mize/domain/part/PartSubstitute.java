@@ -49,10 +49,7 @@ public class PartSubstitute extends MizeEntity {
     private Integer sequenceNo;
     @Transient
     private User user;
-    
-    public enum TypeCode{
-    	Alternative,Substitute;
-    }
+   
 	
 	public PartSubstitute(){
 		super();
