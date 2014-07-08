@@ -1,10 +1,8 @@
 package com.mize.domain.purchaseorder;
 
 import java.math.BigDecimal;
-import java.util.Map;
 
 import com.mize.domain.common.MizeEntity;
-import com.mize.domain.util.Formatter;
 
 public class PurchaseOrderParameter extends MizeEntity {
 	
@@ -27,14 +25,7 @@ public class PurchaseOrderParameter extends MizeEntity {
 	private String defaultWarehouse;
 	private BigDecimal handlingChargePercent;
 	private BigDecimal lineHandlingChargePercent;
-	
-	public enum Parameter{
-		ShippingMethod,ShippingDays,ShippingPriority,ShippingCarrier,PaymentMethod,PricingMethod,AllowOverride,
-		OrderRequired,ReturnWindow,NonReturnable,MaxAmtAllowed,ReasonRequired,InvoiceType,PurchaseOrderType,
-		ApprovalRequired,DefaultWarehouse,HandlingChargePercent,LineHandlingChargePercent,
-	}
-	
-	
+		
 	public String getShippingMethod() {
 		return shippingMethod;
 	}
@@ -175,26 +166,4 @@ public class PurchaseOrderParameter extends MizeEntity {
 				+ "]";
 	}
 	
-	public void populateAttributes(Map<String,String> attributes){
-		if(attributes != null && attributes.size() > 0){
-			this.setShippingMethod(attributes.get(Parameter.ShippingMethod.toString()));
-			this.setShippingDays(attributes.get(Parameter.ShippingDays.toString()));
-			this.setShippingPriority(attributes.get(Parameter.ShippingPriority.toString()));
-			this.setShippingCarrier(attributes.get(Parameter.ShippingCarrier.toString()));
-			this.setPaymentMethod(attributes.get(Parameter.PaymentMethod.toString()));
-			this.setPricingMethod(attributes.get(Parameter.PricingMethod.toString()));
-			this.setAllowOverride(attributes.get(Parameter.AllowOverride.toString()));
-			this.setReturnWindow(attributes.get(Parameter.ReturnWindow.toString()));
-			this.setOrderRequired(attributes.get(Parameter.OrderRequired.toString()));
-			this.setReasonRequired(attributes.get(Parameter.ReasonRequired.toString()));
-			this.setNonReturnable(attributes.get(Parameter.NonReturnable.toString()));
-			this.setMaxAmtAllowed(attributes.get(Parameter.MaxAmtAllowed.toString()));
-			this.setInvoiceType(attributes.get(Parameter.InvoiceType.toString()));
-			this.setPurchaseOrderType(attributes.get(Parameter.PurchaseOrderType.toString()));
-			this.setDefaultWarehouse(attributes.get(Parameter.DefaultWarehouse.toString()));
-			this.setApprovalRequired(attributes.get(Parameter.ApprovalRequired.toString()));
-			this.setHandlingChargePercent(Formatter.toBigDecimal(attributes.get(Parameter.HandlingChargePercent.toString())));
-			this.setLineHandlingChargePercent(Formatter.toBigDecimal(attributes.get(Parameter.LineHandlingChargePercent.toString())));
-		}
-	}	
 }
