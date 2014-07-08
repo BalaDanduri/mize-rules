@@ -1,8 +1,10 @@
 package com.mize.domain.purchaseorder;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.util.Formatter;
 
 public class PurchaseOrderParameter extends MizeEntity {
 	
@@ -23,11 +25,13 @@ public class PurchaseOrderParameter extends MizeEntity {
 	private String purchaseOrderType;
 	private String approvalRequired;
 	private String defaultWarehouse;
+	private BigDecimal handlingChargePercent;
+	private BigDecimal lineHandlingChargePercent;
 	
 	public enum Parameter{
 		ShippingMethod,ShippingDays,ShippingPriority,ShippingCarrier,PaymentMethod,PricingMethod,AllowOverride,
 		OrderRequired,ReturnWindow,NonReturnable,MaxAmtAllowed,ReasonRequired,InvoiceType,PurchaseOrderType,
-		ApprovalRequired,DefaultWarehouse,
+		ApprovalRequired,DefaultWarehouse,HandlingChargePercent,LineHandlingChargePercent,
 	}
 	
 	
@@ -138,7 +142,19 @@ public class PurchaseOrderParameter extends MizeEntity {
 	}
 	public void setDefaultWarehouse(String defaultWarehouse) {
 		this.defaultWarehouse = defaultWarehouse;
+	}	
+	public BigDecimal getHandlingChargePercent() {
+		return handlingChargePercent;
 	}
+	public void setHandlingChargePercent(BigDecimal handlingChargePercent) {
+		this.handlingChargePercent = handlingChargePercent;
+	}
+	public BigDecimal getLineHandlingChargePercent() {
+		return lineHandlingChargePercent;
+	}
+	public void setLineHandlingChargePercent(BigDecimal lineHandlingChargePercent) {
+		this.lineHandlingChargePercent = lineHandlingChargePercent;
+	}	
 	
 	@Override
 	public String toString() {
@@ -153,7 +169,10 @@ public class PurchaseOrderParameter extends MizeEntity {
 				+ ", maxAmtAllowed=" + maxAmtAllowed + ", invoiceType="
 				+ invoiceType + ", purchaseOrderType=" + purchaseOrderType
 				+ ", approvalRequired=" + approvalRequired
-				+ ", defaultWarehouse=" + defaultWarehouse + "]";
+				+ ", defaultWarehouse=" + defaultWarehouse
+				+ ", handlingChargePercent=" + handlingChargePercent
+				+ ", lineHandlingChargePercent=" + lineHandlingChargePercent
+				+ "]";
 	}
 	
 	public void populateAttributes(Map<String,String> attributes){
@@ -174,6 +193,8 @@ public class PurchaseOrderParameter extends MizeEntity {
 			this.setPurchaseOrderType(attributes.get(Parameter.PurchaseOrderType.toString()));
 			this.setDefaultWarehouse(attributes.get(Parameter.DefaultWarehouse.toString()));
 			this.setApprovalRequired(attributes.get(Parameter.ApprovalRequired.toString()));
+			this.setHandlingChargePercent(Formatter.toBigDecimal(attributes.get(Parameter.HandlingChargePercent.toString())));
+			this.setLineHandlingChargePercent(Formatter.toBigDecimal(attributes.get(Parameter.LineHandlingChargePercent.toString())));
 		}
 	}	
 }
