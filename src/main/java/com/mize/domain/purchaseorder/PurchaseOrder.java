@@ -538,16 +538,22 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	public String getSubmittedBy() {
 		return submittedBy;
 	}
-
+	
+	
 	public void setSubmittedBy(String submittedBy) {
 		this.submittedBy = submittedBy;
 	}
 
 	@Transient
+	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
+    @JsonSerialize(using = JsonDateTimeSerializer.class)
+    @JsonInclude(Include.NON_NULL)
 	public DateTime getSubmittedDate() {
 		return submittedDate;
 	}
-
+	
+	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using = JodaDateTimeDeserializer.class)
 	public void setSubmittedDate(DateTime submittedDate) {
 		this.submittedDate = submittedDate;
 	}
