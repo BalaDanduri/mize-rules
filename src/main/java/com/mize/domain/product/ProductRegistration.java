@@ -69,7 +69,7 @@ public class ProductRegistration extends MizeEntity {
 	private boolean customerUpdated; 
 	private String invoiceNumber;
 	private String salesPerson;
-	private boolean isRegistered;
+	private boolean registered;
 	private List<ProductRegistrationAudit> audits = new ArrayList<ProductRegistrationAudit>();
 	
 	private List<ProductRegistrationWarranty> warrantyList = new ArrayList<ProductRegistrationWarranty>();
@@ -559,13 +559,15 @@ public class ProductRegistration extends MizeEntity {
 
 	@Transient
 	@JsonIgnore
-	public boolean isRegistered() {
-		return isRegistered;
+	public boolean getRegistered() {
+		return registered;
 	}
-
-	public void setRegistered(boolean isRegistered) {
-		this.isRegistered = isRegistered;
+	
+	public void setRegistered(boolean registered) {
+		this.registered = registered;
 	}
+	
+	
 
 	@Override
 	public int hashCode() {
