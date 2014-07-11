@@ -43,6 +43,8 @@ public class PartSubstitute extends MizeEntity {
 	private String code;
 	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime date;
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	private DateTime endDate;
 	private EntityComment entityComment;
 	private List<PartSubstituteComment> comments = new ArrayList<PartSubstituteComment>();
     private String familyCode;
@@ -55,7 +57,7 @@ public class PartSubstitute extends MizeEntity {
 		super();
 	}
 		
-	public PartSubstitute(Long id,String originalPartCode,String substitutePartCode,String fmailyCode,String code ,DateTime date,Integer sequenceNo){
+	public PartSubstitute(Long id,String originalPartCode,String substitutePartCode,String fmailyCode,String code ,DateTime date,DateTime endDate,Integer sequenceNo){
 		super();
 		this.id = id;
 		if(originalPartCode != null){
@@ -69,6 +71,7 @@ public class PartSubstitute extends MizeEntity {
 		this.familyCode = fmailyCode;
 		this.code = code;
 		this.date = date;
+		this.endDate = endDate;
 		this.sequenceNo = sequenceNo;
 	}
 	
@@ -129,6 +132,15 @@ public class PartSubstitute extends MizeEntity {
 	public DateTime getDate() {
 		return date;
 	}
+	
+	@Column(name = "end_date", nullable = true)
+	@Type(type = "com.mize.domain.util.DateTimeJPA")
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using = JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
+	public DateTime getEndDate() {
+		return endDate;
+	}
 
 	@JsonIgnore(false)
     @Column(name = "created_date", updatable = false)
@@ -187,6 +199,12 @@ public class PartSubstitute extends MizeEntity {
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	public void setDate(DateTime date) {
 		this.date = date;
+	}
+	
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	public void setEndDate(DateTime endDate) {
+		this.endDate = endDate;
 	}
 
 	@Override
@@ -247,6 +265,7 @@ public class PartSubstitute extends MizeEntity {
 		int result = super.hashCode();
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
+		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
 		result = prime * result
 				+ ((familyCode == null) ? 0 : familyCode.hashCode());
 		result = prime * result
@@ -277,6 +296,11 @@ public class PartSubstitute extends MizeEntity {
 				return false;
 		} else if (!date.equals(other.date))
 			return false;
+		if (endDate == null) {
+			if (other.endDate != null)
+				return false;
+		} else if (!endDate.equals(other.endDate))
+			return false;
 		if (familyCode == null) {
 			if (other.familyCode != null)
 				return false;
@@ -304,7 +328,7 @@ public class PartSubstitute extends MizeEntity {
 	public String toString() {
 		return "PartSubstitute [originalPart=" + originalPart
 				+ ", substitutedPart=" + substitutedPart + ", code=" + code
-				+ ", date=" + date + ", familyCode=" + familyCode
+				+ ", date=" + date + ", endDate=" + endDate + ",familyCode=" + familyCode
 				+ ", sequenceNo=" + sequenceNo + "]";
 	}
 	
