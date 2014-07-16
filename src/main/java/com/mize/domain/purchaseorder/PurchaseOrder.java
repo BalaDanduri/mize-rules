@@ -33,6 +33,7 @@ import com.mize.domain.common.EntityAttachment;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeErrorTab;
 import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
@@ -95,6 +96,8 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	private String imageURL;
 	@Transient
 	private String action;
+	@Transient
+	private List<MizeErrorTab> errorTabs = new ArrayList<MizeErrorTab>();
 	
 	public PurchaseOrder(){
 		super();
@@ -584,6 +587,16 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 		}
 		return date;
 	}
+	
+	@Transient
+	public List<MizeErrorTab> getErrorTabs() {
+		return errorTabs;
+	}
+
+	public void setErrorTabs(List<MizeErrorTab> errorTabs) {
+		this.errorTabs = errorTabs;
+	}
+
 
 
 	@Override
