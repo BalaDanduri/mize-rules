@@ -42,7 +42,7 @@ public class SolrEntityCriteria extends MizeEntity implements Comparable<SolrEnt
 		this.criteria = criteria;
 	}
 	public enum Criteria {
-		Between,InClause,Equals,DateRange;
+		Between,InClause,Equals,DateRange,UpdatedDate,CreatedDate;
 	}
 	
 	public String getEntityName() {

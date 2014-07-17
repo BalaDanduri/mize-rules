@@ -908,13 +908,22 @@ public final class Formatter {
 	 }
 	 
 	 public static void main(String[] args) {
-		 BigDecimal d = BigDecimal.valueOf(85.87);
-		 BigDecimal d1 = BigDecimal.valueOf(doubleValue(20.0)/100);
-		 BigDecimal d3 = multiplyBigDecimals(d,d1);
-		 //discountAmount = Formatter.multiplyBigDecimals(requestedAmount,BigDecimal.valueOf(Formatter.doubleValue(lineDiscountPercent)/100));
-		 BigDecimal d4 = Formatter.subtractBigDecimals(d,d3);
-		 System.out.println(d3);
-		 System.out.println(d4);
+		System.out.println(generateRandomPassword());
 	}
+	 
+	 private static final String generateRandomPassword() {
+			final String ALPHA_NUMERIC = "12345690abcdefghijklmnopqrstuvwxyz";
+			int passwordLength = 10;
+			StringBuilder sb = new StringBuilder();
+			for (int i=0; i < passwordLength; i++) {
+				double d = Math.random();
+				double d1 = d * ALPHA_NUMERIC.length();
+				System.out.println(d);
+				System.out.println(d1);
+				System.out.println((int)d1);
+				sb.append(ALPHA_NUMERIC.charAt((int) (Math.random() * ALPHA_NUMERIC.length())));
+			}
+			return sb.toString();
+		}
 	
 }
