@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.MizeEntity;
@@ -24,6 +25,7 @@ public class PurchaseOrderMessage extends MizeEntity implements Comparable<Purch
 	private String field;
 	private String uiReference;
 	private String hotSpotValue;
+	private String shortDescription;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -92,6 +94,15 @@ public class PurchaseOrderMessage extends MizeEntity implements Comparable<Purch
 
 	public void setHotSpotValue(String hotSpotValue) {
 		this.hotSpotValue = hotSpotValue;
+	}
+
+	@Transient
+	public String getShortDescription() {
+		return shortDescription;
+	}
+
+	public void setShortDescription(String shortDescription) {
+		this.shortDescription = shortDescription;
 	}
 
 	@Override
