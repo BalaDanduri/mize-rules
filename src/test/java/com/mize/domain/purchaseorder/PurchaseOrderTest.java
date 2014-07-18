@@ -123,9 +123,6 @@ public class PurchaseOrderTest extends JPATest {
 		attachment.setPurchaseOrder(order);
 		order.getAttachments().add(attachment);
 		PurchaseOrderMessage message = new PurchaseOrderMessage();
-		message.getErrorMessage().setCode("0011");
-		message.getErrorMessage().setField("name");
-		message.getErrorMessage().setShortDescription("name is required");
 		message.setPurchaseOrder(order);
 		order.getMessages().add(message);
 		return order;

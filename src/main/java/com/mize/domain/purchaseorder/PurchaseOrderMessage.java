@@ -1,6 +1,5 @@
 package com.mize.domain.purchaseorder;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,7 +11,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.mize.domain.common.EntityErrorMessage;
 import com.mize.domain.common.MizeEntity;
 
 @Entity
@@ -21,8 +19,12 @@ public class PurchaseOrderMessage extends MizeEntity implements Comparable<Purch
 
 	private static final long serialVersionUID = 261638805962518728L;
 	private PurchaseOrder purchaseOrder;
-	private EntityErrorMessage errorMessage = new EntityErrorMessage();
-
+	private Long appMessageId;
+	private Integer severity;
+	private String field;
+	private String uiReference;
+	private String hotSpotValue;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", nullable = false, unique = true)
@@ -46,15 +48,50 @@ public class PurchaseOrderMessage extends MizeEntity implements Comparable<Purch
 	public void setPurchaseOrder(PurchaseOrder purchaseOrder) {
 		this.purchaseOrder = purchaseOrder;
 	}
-
-	@ManyToOne(fetch=FetchType.EAGER,cascade = CascadeType.ALL)
-	@JoinColumn(name="error_message_id")
-	public EntityErrorMessage getErrorMessage() {
-		return errorMessage;
+	
+	@Column(name = "message_id")
+	public Long getAppMessageId() {
+		return appMessageId;
 	}
 
-	public void setErrorMessage(EntityErrorMessage errorMessage) {
-		this.errorMessage = errorMessage;
+	public void setAppMessageId(Long appMessageId) {
+		this.appMessageId = appMessageId;
+	}
+
+	@Column(name = "message_severity")
+	public Integer getSeverity() {
+		return severity;
+	}
+
+	public void setSeverity(Integer severity) {
+		this.severity = severity;
+	}
+
+	@Column(name = "message_field")
+	public String getField() {
+		return field;
+	}
+
+	public void setField(String field) {
+		this.field = field;
+	}
+
+	@Column(name = "message_uireference")
+	public String getUiReference() {
+		return uiReference;
+	}
+
+	public void setUiReference(String uiReference) {
+		this.uiReference = uiReference;
+	}
+
+	@Column(name = "message_value")
+	public String getHotSpotValue() {
+		return hotSpotValue;
+	}
+
+	public void setHotSpotValue(String hotSpotValue) {
+		this.hotSpotValue = hotSpotValue;
 	}
 
 	@Override
@@ -62,7 +99,14 @@ public class PurchaseOrderMessage extends MizeEntity implements Comparable<Purch
 		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result
-				+ ((errorMessage == null) ? 0 : errorMessage.hashCode());
+				+ ((appMessageId == null) ? 0 : appMessageId.hashCode());
+		result = prime * result + ((field == null) ? 0 : field.hashCode());
+		result = prime * result
+				+ ((hotSpotValue == null) ? 0 : hotSpotValue.hashCode());
+		result = prime * result
+				+ ((severity == null) ? 0 : severity.hashCode());
+		result = prime * result
+				+ ((uiReference == null) ? 0 : uiReference.hashCode());
 		return result;
 	}
 
@@ -75,10 +119,30 @@ public class PurchaseOrderMessage extends MizeEntity implements Comparable<Purch
 		if (getClass() != obj.getClass())
 			return false;
 		PurchaseOrderMessage other = (PurchaseOrderMessage) obj;
-		if (errorMessage == null) {
-			if (other.errorMessage != null)
+		if (appMessageId == null) {
+			if (other.appMessageId != null)
 				return false;
-		} else if (!errorMessage.equals(other.errorMessage))
+		} else if (!appMessageId.equals(other.appMessageId))
+			return false;
+		if (field == null) {
+			if (other.field != null)
+				return false;
+		} else if (!field.equals(other.field))
+			return false;
+		if (hotSpotValue == null) {
+			if (other.hotSpotValue != null)
+				return false;
+		} else if (!hotSpotValue.equals(other.hotSpotValue))
+			return false;
+		if (severity == null) {
+			if (other.severity != null)
+				return false;
+		} else if (!severity.equals(other.severity))
+			return false;
+		if (uiReference == null) {
+			if (other.uiReference != null)
+				return false;
+		} else if (!uiReference.equals(other.uiReference))
 			return false;
 		return true;
 	}
