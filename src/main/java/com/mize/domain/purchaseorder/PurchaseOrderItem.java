@@ -74,6 +74,8 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 	@Transient
 	private OriginalOrder originalOrder;
 	private String isReturnable;
+	private String oldItemNumber;
+	private List<PurchaseOrderMessage> itemMessages = new ArrayList<PurchaseOrderMessage>();
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -391,6 +393,24 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 		this.isReturnable = isReturnable;
 	}
 	
+	@Column(name="old_item_number")
+	public String getOldItemNumber() {
+		return oldItemNumber;
+	}
+
+	public void setOldItemNumber(String oldItemNumber) {
+		this.oldItemNumber = oldItemNumber;
+	}
+
+	@Transient
+	public List<PurchaseOrderMessage> getItemMessages() {
+		return itemMessages;
+	}
+
+	public void setItemMessages(List<PurchaseOrderMessage> itemMessages) {
+		this.itemMessages = itemMessages;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
