@@ -30,7 +30,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.appmsg.AppMessage;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.part.Part;
 import com.mize.domain.part.PartKit;
@@ -75,8 +74,6 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 	@Transient
 	private OriginalOrder originalOrder;
 	private String isReturnable;
-	@Transient
-	private List<AppMessage> appMessages = new ArrayList<AppMessage>();
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -394,15 +391,6 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 		this.isReturnable = isReturnable;
 	}
 	
-	@Transient
-	public List<AppMessage> getAppMessages() {
-		return appMessages;
-	}
-
-	public void setAppMessages(List<AppMessage> appMessages) {
-		this.appMessages = appMessages;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
