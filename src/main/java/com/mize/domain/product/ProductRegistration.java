@@ -83,6 +83,9 @@ public class ProductRegistration extends MizeEntity {
 	@Transient
 	private User user;
 	
+	@Transient
+	private Long count;
+	
 	public enum RegistrationType{
 		New,Transfer
 	}
@@ -91,6 +94,11 @@ public class ProductRegistration extends MizeEntity {
 	}	
 	public ProductRegistration(){
 		
+	}
+	
+	public ProductRegistration(String statusCode,Long count){
+		this.statusCode = statusCode;
+		this.count = count;
 	}
 	
 	public ProductRegistration(Long id,String statusCode,String registrationType,DateTime purchaseDate,DateTime registrationDate){
@@ -568,6 +576,14 @@ public class ProductRegistration extends MizeEntity {
 	}
 	
 	
+	@Transient
+	public Long getCount() {
+		return count;
+	}
+
+	public void setCount(Long count) {
+		this.count = count;
+	}
 
 	@Override
 	public int hashCode() {
