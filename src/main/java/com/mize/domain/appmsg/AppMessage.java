@@ -1,6 +1,5 @@
 package com.mize.domain.appmsg;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -66,7 +65,7 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 	@Transient
 	private boolean isDuplicate;
 	@Transient
-	private Map<String,Object> hotSpotMap = new HashMap<String,Object>();
+	private Map<String,Object> hotSpotMap;
 
 	public enum Severity {
 		one(1),two(2),three(3),four(4),five(5),dummy(100);
@@ -86,7 +85,6 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 		this.code = makeNotNullString(code);
 		this.msgType = msgType;
 		this.severity = severity;
-		//this.intls = intls;
 	}
 	
 	public AppMessage(Long id ,String code,Integer severity){
@@ -94,8 +92,6 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 		this.id = id;
 		this.code = makeNotNullString(code);
 		this.severity = severity;
-		//this.shortDesc = shortDesc;
-		//this.longDesc = longDesc;
 	}
 
 	public AppMessage(String code, String shortDesc, String longDesc, Integer severity, String field, String fieldKey, MessageType.Type messageType) {
@@ -117,7 +113,7 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 		this.field = field;
 		this.fieldKey = fieldKey;
 		this.messageType.setType(messageType.toString());
-		this.hotSpotMap =hotSpotMap;
+		this.hotSpotMap = hotSpotMap;
 		this.msgType = messageType.toString();
 	}
 		
