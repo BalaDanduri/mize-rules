@@ -68,30 +68,6 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 	@Transient
 	private Map<String,Object> hotSpotMap = new HashMap<String,Object>();
 
-	public enum Severity {
-		one(1),two(2),three(3),four(4),five(5),dummy(100);
-		int val;
-		Severity(int v){
-			val = v;
-		}
-		public int getValue(){
-			return val;
-		}
-	}
-	
-	public enum MsgType {
-		Application(1),Error(2);
-		int val;
-		MsgType(int v){
-			val = v;
-		}
-		public int getValue(){
-			return val;
-		}
-	}	
-	
-	
-	
 	public AppMessage(Long id ,String code,String msgType, Integer severity) {
 		super();
 		this.id = id;
