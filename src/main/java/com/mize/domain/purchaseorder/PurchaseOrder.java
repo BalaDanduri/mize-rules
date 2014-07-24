@@ -98,6 +98,8 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	private String action;
 	@Transient
 	private List<MizeErrorTab> errorTabs = new ArrayList<MizeErrorTab>();
+	@Transient
+	private String dBStatus;
 	
 	public PurchaseOrder(){
 		super();
@@ -596,8 +598,15 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	public void setErrorTabs(List<MizeErrorTab> errorTabs) {
 		this.errorTabs = errorTabs;
 	}
+	
+	@Transient
+	public String getDBStatus() {
+		return dBStatus;
+	}
 
-
+	public void setDBStatus(String dBStatus) {
+		this.dBStatus = dBStatus;
+	}
 
 	@Override
 	public int hashCode() {
