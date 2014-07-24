@@ -99,7 +99,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	@Transient
 	private List<MizeErrorTab> errorTabs = new ArrayList<MizeErrorTab>();
 	@Transient
-	private String dBStatus;
+	private String dbStatus;
 	
 	public PurchaseOrder(){
 		super();
@@ -600,12 +600,12 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	}
 	
 	@Transient
-	public String getDBStatus() {
-		return dBStatus;
+	public String getDbStatus() {
+		return dbStatus;
 	}
 
-	public void setDBStatus(String dBStatus) {
-		this.dBStatus = dBStatus;
+	public void setDbStatus(String dbStatus) {
+		this.dbStatus = dbStatus;
 	}
 
 	@Override
