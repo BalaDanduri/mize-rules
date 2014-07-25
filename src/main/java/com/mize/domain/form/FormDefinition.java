@@ -1,6 +1,7 @@
 package com.mize.domain.form;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -55,7 +56,7 @@ public class FormDefinition extends MizeEntity {
 	private String isActive;
 	private DateTime startDate;
 	private DateTime endDate;
-	private List<FormDefinitionAudit> audits;
+	private List<FormDefinitionAudit> audits = new ArrayList<FormDefinitionAudit>();;
 	private User user;
 	
 	public FormDefinition() {
@@ -209,7 +210,7 @@ public class FormDefinition extends MizeEntity {
 		this.endDate = endDate;
 	}
 	
-	@OneToMany(cascade={CascadeType.ALL}, fetch= FetchType.EAGER, mappedBy = "formDefinition")
+	@OneToMany(cascade={CascadeType.ALL}, fetch= FetchType.LAZY, mappedBy = "formDefinition", orphanRemoval=true)
 	@JsonManagedReference(value="form_def")
 	@Fetch(FetchMode.SUBSELECT)
 	@JsonSerialize(using=JPASerializer.class)

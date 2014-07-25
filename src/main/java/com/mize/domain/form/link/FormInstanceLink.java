@@ -1,5 +1,6 @@
 package com.mize.domain.form.link;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -49,19 +50,16 @@ public class FormInstanceLink extends MizeEntity {
 	private String linkType;
 	private String linkDuration;
 	private String statusCode;
-	private List<FormInstanceLinkAudit> audits;
+	private List<FormInstanceLinkAudit> audits = new ArrayList<FormInstanceLinkAudit>();
 	private DateTime inspectionDate;
 	private String inspectedBy;
+	private String oldstatusCode;
 	
 	private User user;
 	
 	public FormInstanceLink() {
 		super();
 		formInstance = new FormInstance();
-	}
-	
-	public enum Status{
-		OPEN,COMPLETED,DELETED;
 	}
 	
 	public FormInstanceLink(FormInstance formInstance, ProductRegistration productRegistration, 
@@ -146,7 +144,7 @@ public class FormInstanceLink extends MizeEntity {
 		this.statusCode = statusCode;
 	}
 	
-	@OneToMany(cascade={CascadeType.ALL}, fetch= FetchType.EAGER, mappedBy = "formInstanceLink")
+	@OneToMany(cascade={CascadeType.ALL}, fetch= FetchType.LAZY, mappedBy = "formInstanceLink", orphanRemoval= true)
 	@JsonManagedReference(value="form_instance_link")
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
@@ -271,6 +269,15 @@ public class FormInstanceLink extends MizeEntity {
 
 	public void setProductSerial(ProductSerial productSerial) {
 		this.productSerial = productSerial;
+	}
+	
+	@Transient
+	public String getOldstatusCode() {
+		return oldstatusCode;
+	}
+
+	public void setOldstatusCode(String oldstatusCode) {
+		this.oldstatusCode = oldstatusCode;
 	}
 
 	@Override

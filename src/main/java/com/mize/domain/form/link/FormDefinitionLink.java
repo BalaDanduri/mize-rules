@@ -1,5 +1,6 @@
 package com.mize.domain.form.link;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -42,7 +43,7 @@ public class FormDefinitionLink extends MizeEntity {
 	private static final long serialVersionUID = -5813531097572778442L;
 	
 	private FormDefinition formDefinition;
-	private List<FormDefinitionLinkData> formDefnLinkData;
+	private List<FormDefinitionLinkData> formDefnLinkData = new ArrayList<FormDefinitionLinkData>();
 	private User user;
 	
 	public FormDefinitionLink() {
