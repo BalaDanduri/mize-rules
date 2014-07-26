@@ -27,6 +27,7 @@ public class PurchaseOrderMessage extends MizeEntity implements Comparable<Purch
 	private String hotSpotValue;
 	private String shortDescription;
 	private String code;
+	private String msgType;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -113,6 +114,15 @@ public class PurchaseOrderMessage extends MizeEntity implements Comparable<Purch
 
 	public void setCode(String code) {
 		this.code = code;
+	}
+	
+	@Transient
+	public String getMsgType() {
+		return msgType;
+	}
+
+	public void setMsgType(String msgType) {
+		this.msgType = msgType;
 	}
 
 	@Override
