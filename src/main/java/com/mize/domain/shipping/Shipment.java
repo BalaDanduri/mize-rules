@@ -65,6 +65,7 @@ public class Shipment extends MizeEntity {
 	private Double handlingAmount;
 	private Double freightAmount;
 	private Double totalAmount;
+	private String deliveryInstructions;
 	
 	@Override
 	@Id
@@ -336,6 +337,24 @@ public class Shipment extends MizeEntity {
 		this.totalAmount = totalAmount;
 	}
 
+	@Column(name="shipping_amount")
+	public Double getShippingAmount() {
+		return shippingAmount;
+	}
+
+	public void setShippingAmount(Double shippingAmount) {
+		this.shippingAmount = shippingAmount;
+	}
+
+	@Column(name="delivery_instructions")
+	public String getDeliveryInstructions() {
+		return deliveryInstructions;
+	}
+
+	public void setDeliveryInstructions(String deliveryInstructions) {
+		this.deliveryInstructions = deliveryInstructions;
+	}
+
 	@Override
 	public String toString() {
 		return "Shipment [businessEntity=" + businessEntity + ", partyList="
@@ -355,7 +374,8 @@ public class Shipment extends MizeEntity {
 				+ ", packageCount=" + packageCount + ", shippingAmount="
 				+ shippingAmount + ", handlingAmount=" + handlingAmount
 				+ ", freightAmount=" + freightAmount + ", totalAmount="
-				+ totalAmount + "]";
+				+ totalAmount + ", deliveryInstructions="
+				+ deliveryInstructions + "]";
 	}
 
 }
