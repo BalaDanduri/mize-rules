@@ -21,7 +21,6 @@ import com.mize.domain.common.MizeEntity;
 public class PurchaseOrderItemStatus extends MizeEntity implements Comparable<PurchaseOrderItemStatus>{	
 	
 	private static final long serialVersionUID = -472283743881333248L;
-	private PurchaseOrderShipPackage shipmentPackage;
 	private PurchaseOrderItem orderItem;
 	private BigDecimal quantity;
 	private String status;
@@ -40,17 +39,6 @@ public class PurchaseOrderItemStatus extends MizeEntity implements Comparable<Pu
 	@Override
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	@OneToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="ship_package_id")
-	@JsonBackReference(value="status_shipmentPackage")
-	public PurchaseOrderShipPackage getShipmentPackage() {
-		return shipmentPackage;
-	}
-
-	public void setShipmentPackage(PurchaseOrderShipPackage shipmentPackage) {
-		this.shipmentPackage = shipmentPackage;
 	}
 
 	@OneToOne(fetch=FetchType.LAZY)

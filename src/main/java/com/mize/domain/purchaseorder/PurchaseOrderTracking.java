@@ -1,4 +1,4 @@
-package com.mize.domain.shipping;
+package com.mize.domain.purchaseorder;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,19 +15,15 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.common.MizeEntity;
-import com.mize.domain.purchaseorder.PurchaseOrder;
+import com.mize.domain.shipping.ShipmentTracking;
 import com.mize.domain.util.JPASerializer;
 
 @Entity
 @Table(name="purchase_order_tracking")
-public class PurchaseOrderTracking extends MizeEntity {
-
-	/**
-	 * 
-	 */
+public class PurchaseOrderTracking extends MizeEntity implements Comparable<PurchaseOrderTracking> {
 	private static final long serialVersionUID = -1717047364038293135L;
 
-	private Shipment shipment;
+	private ShipmentTracking shipment;
 	private PurchaseOrder purchaseOrder;
 	
 	@Override
@@ -47,11 +43,11 @@ public class PurchaseOrderTracking extends MizeEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="shipment_tracking_id")
 	@JsonBackReference(value="shipment_po")
-	public Shipment getShipment() {
+	public ShipmentTracking getShipment() {
 		return shipment;
 	}
 
-	public void setShipment(Shipment shipment) {
+	public void setShipment(ShipmentTracking shipment) {
 		this.shipment = shipment;
 	}
 
@@ -68,10 +64,8 @@ public class PurchaseOrderTracking extends MizeEntity {
 	}
 
 	@Override
-	public String toString() {
-		return "PurchaseOrderTracking [shipment=" + shipment
-				+ ", purchaseOrder=" + purchaseOrder + "]";
+	public int compareTo(PurchaseOrderTracking o) {
+		return 0;
 	}
-
 	
 }

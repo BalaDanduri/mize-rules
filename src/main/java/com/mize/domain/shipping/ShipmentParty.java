@@ -22,30 +22,25 @@ import com.mize.domain.util.JPASerializer;
 @Entity
 @Table(name="shipment_tracking_party")
 public class ShipmentParty extends MizeEntity {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -7073856017006485033L;
-	private Shipment shipment;
+	private ShipmentTracking shipmentTracking;
 	private String partyType;
 	private BusinessEntity businessEntity;
 	private String code;
 	private String typeCode;
+	private String subTypeCode;
 	private String name;
 	private String firstName;
 	private String lastName;
-	private String middleNameInitial;
+	private String middleInitial;
 	private String contactName;
-	private EntityAddress partyAddress;
-	
+	private EntityAddress address;	
 
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id",unique=true,nullable=false)
 	public Long getId() {
-		// TODO Auto-generated method stub
 		return id;
 	}
 
@@ -57,12 +52,12 @@ public class ShipmentParty extends MizeEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="shipment_tracking_id")
 	@JsonBackReference(value="shipment_party")
-	public Shipment getShipment() {
-		return shipment;
+	public ShipmentTracking getShipmentTracking() {
+		return shipmentTracking;
 	}
 
-	public void setShipment(Shipment shipment) {
-		this.shipment = shipment;
+	public void setShipmentTracking(ShipmentTracking shipmentTracking) {
+		this.shipmentTracking = shipmentTracking;
 	}
 
 	@Column(name="party_type")
@@ -132,12 +127,12 @@ public class ShipmentParty extends MizeEntity {
 	}
 
 	@Column(name="party_be_middle_initial")
-	public String getMiddleNameInitial() {
-		return middleNameInitial;
+	public String getMiddleInitial() {
+		return middleInitial;
 	}
 
-	public void setMiddleNameInitial(String middleNameInitial) {
-		this.middleNameInitial = middleNameInitial;
+	public void setMiddleInitial(String middleInitial) {
+		this.middleInitial = middleInitial;
 	}
 
 	@Column(name="party_contact_name")
@@ -153,22 +148,31 @@ public class ShipmentParty extends MizeEntity {
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_DEFAULT)
 	@JoinColumn(name = "party_address_id")
-	public EntityAddress getPartyAddress() {
-		return partyAddress;
+	public EntityAddress getAddress() {
+		return address;
 	}
 
-	public void setPartyAddress(EntityAddress partyAddress) {
-		this.partyAddress = partyAddress;
+	public void setAddress(EntityAddress address) {
+		this.address = address;
+	}
+
+	@Column(name="party_be_sub_type_code")
+	public String getSubTypeCode() {
+		return subTypeCode;
+	}
+
+	public void setSubTypeCode(String subTypeCode) {
+		this.subTypeCode = subTypeCode;
 	}
 
 	@Override
 	public String toString() {
-		return "ShipmentParty [shipment=" + shipment + ", partyType="
+		return "ShipmentParty [partyType="
 				+ partyType + ", businessEntity=" + businessEntity + ", code="
 				+ code + ", typeCode=" + typeCode + ", name=" + name
 				+ ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", middleNameInitial=" + middleNameInitial + ", contactName="
-				+ contactName + ", partyAddress=" + partyAddress + "]";
+				+ ", middleInitial=" + middleInitial + ", contactName="
+				+ contactName + "]";
 	}
 
 }
