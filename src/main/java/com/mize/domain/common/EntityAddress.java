@@ -224,7 +224,6 @@ public class EntityAddress extends MizeEntity implements Comparable<EntityAddres
 	}
 	
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "address", orphanRemoval = true)
-	@JsonManagedReference(value="addressPhone")
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
 	public List<EntityAddressPhone> getAddressPhones() {
