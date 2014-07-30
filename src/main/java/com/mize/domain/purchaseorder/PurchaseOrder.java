@@ -100,6 +100,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	private List<MizeErrorTab> errorTabs = new ArrayList<MizeErrorTab>();
 	@Transient
 	private String dbStatus;
+	private List<PurchaseOrderTracking> orderTrackings = new ArrayList<PurchaseOrderTracking>();
 	
 	public PurchaseOrder(){
 		super();
@@ -606,6 +607,17 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 
 	public void setDbStatus(String dbStatus) {
 		this.dbStatus = dbStatus;
+	}
+
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "purchaseOrder",orphanRemoval= true)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	public List<PurchaseOrderTracking> getOrderTrackings() {
+		return orderTrackings;
+	}
+
+	public void setOrderTrackings(List<PurchaseOrderTracking> orderTrackings) {
+		this.orderTrackings = orderTrackings;
 	}
 
 	@Override

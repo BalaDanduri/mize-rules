@@ -21,7 +21,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -91,7 +90,6 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 	@OneToMany(cascade={CascadeType.ALL}, mappedBy="shipmentTracking",orphanRemoval = true)
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
-	@JsonManagedReference(value="shipment_party")
 	public List<ShipmentParty> getParties() {
 		return parties;
 	}
@@ -103,7 +101,6 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 	@OneToMany(cascade={CascadeType.ALL}, mappedBy="shipmentTracking",orphanRemoval = true)
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
-	@JsonManagedReference(value="shipment_packages")
 	public List<ShipmentPackage> getPackages() {
 		return packages;
 	}
@@ -115,7 +112,6 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 	@OneToMany(cascade={CascadeType.ALL}, mappedBy="shipmentTracking",orphanRemoval = true)
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
-	@JsonManagedReference(value="shipment_comments")
 	public List<ShipmentComment> getComments() {
 		return comments;
 	}
@@ -330,6 +326,49 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 	public void setShippingAmount(Double shippingAmount) {
 		this.shippingAmount = shippingAmount;
 	}
+	
+	@Column(name="delivery_instructions")
+	public String getDeliveryInstructions() {
+		return deliveryInstructions;
+	}
+
+	public void setDeliveryInstructions(String deliveryInstructions) {
+		this.deliveryInstructions = deliveryInstructions;
+	}
+	
+	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using = JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	@JsonIgnore(false)
+	@Column(name = "created_date", updatable = false)
+	@org.hibernate.annotations.Type(type = "com.mize.domain.util.DateTimeJPA")
+	public DateTime getCreatedDate() {
+		return this.createdDate;
+	}
+
+	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using = JodaDateTimeDeserializer.class)
+	@JsonIgnore(false)
+	public void setCreatedDate(DateTime createdDate) {
+		this.createdDate = createdDate;
+	}
+	
+	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using = JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	@Column(name = "updated_date")
+	@org.hibernate.annotations.Type(type = "com.mize.domain.util.DateTimeJPA")
+	@JsonIgnore(false)
+	public DateTime getUpdatedDate() {
+		return this.updatedDate;
+	}
+	
+	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using = JodaDateTimeDeserializer.class)
+	@JsonIgnore(false)
+	public void setUpdatedDate(DateTime updatedDate) {
+		this.updatedDate = updatedDate;
+	}	
 
 	@Override
 	public int hashCode() {
@@ -495,18 +534,7 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 			return false;
 		return true;
 	}
-
-	@Column(name="delivery_instructions")
-	public String getDeliveryInstructions() {
-		return deliveryInstructions;
-	}
-
-	public void setDeliveryInstructions(String deliveryInstructions) {
-		this.deliveryInstructions = deliveryInstructions;
-	}
-
 	
-
 	@Override
 	public int compareTo(ShipmentTracking o) {
 		return 0;

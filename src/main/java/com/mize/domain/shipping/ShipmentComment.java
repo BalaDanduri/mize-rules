@@ -23,7 +23,7 @@ import com.mize.domain.util.JPASerializer;
 public class ShipmentComment extends MizeEntity implements Comparable<ShipmentComment>{
 	private static final long serialVersionUID = -1285187789767965930L;
 
-	private ShipmentTracking shipment;
+	private ShipmentTracking shipmentTracking;
 	private EntityComment entityComment;
 	
 	@Override
@@ -42,12 +42,12 @@ public class ShipmentComment extends MizeEntity implements Comparable<ShipmentCo
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="shipment_tracking_id")
 	@JsonBackReference(value="shipment_comments")
-	public ShipmentTracking getShipment() {
-		return shipment;
+	public ShipmentTracking getShipmentTracking() {
+		return shipmentTracking;
 	}
 
-	public void setShipment(ShipmentTracking shipment) {
-		this.shipment = shipment;
+	public void setShipmentTracking(ShipmentTracking shipmentTracking) {
+		this.shipmentTracking = shipmentTracking;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

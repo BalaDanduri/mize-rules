@@ -27,7 +27,7 @@ import com.mize.domain.util.JPASerializer;
 @Table(name="shipment_package")
 public class ShipmentPackage extends MizeEntity implements Comparable<ShipmentPackage> {
 	private static final long serialVersionUID = 8265420845919537745L;
-	private ShipmentTracking shipment;
+	private ShipmentTracking shipmentTracking;
 	private String number;
 	private String type;
 	private Long itemQuantity;
@@ -53,12 +53,12 @@ public class ShipmentPackage extends MizeEntity implements Comparable<ShipmentPa
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="shipment_tracking_id")
 	@JsonBackReference(value="shipment_packages")
-	public ShipmentTracking getShipment() {
-		return shipment;
+	public ShipmentTracking getShipmentTracking() {
+		return shipmentTracking;
 	}
 
-	public void setShipment(ShipmentTracking shipment) {
-		this.shipment = shipment;
+	public void setShipmentTracking(ShipmentTracking shipmentTracking) {
+		this.shipmentTracking = shipmentTracking;
 	}
 
 	@Column(name="package_number")
