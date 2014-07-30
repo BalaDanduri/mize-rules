@@ -41,15 +41,15 @@ public class ShipmentPackage extends MizeEntity {
 	private Double freightAmount;
 	private Double totalAmount;
 	private List<ShipmentPackageAttribute> shipmentPackageAttributes = new ArrayList<ShipmentPackageAttribute>();
-	@Override
-	public Long getId() {
-		return id;
-	}
-
+	
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id",unique=true,nullable=false)
+	public Long getId() {
+		return id;
+	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
