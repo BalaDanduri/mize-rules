@@ -301,11 +301,6 @@ public class Shipment extends MizeEntity {
 		this.packageCount = packageCount;
 	}
 
-	@Column(name="shipping_amount")
-	public Double getShipingAmount() {
-		return shippingAmount;
-	}
-
 	public void setShipingAmount(Double shippingAmount) {
 		this.shippingAmount = shippingAmount;
 	}
