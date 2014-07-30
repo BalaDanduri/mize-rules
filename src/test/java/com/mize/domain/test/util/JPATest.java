@@ -4,7 +4,6 @@ package com.mize.domain.test.util;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import org.h2.tools.Console;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.runner.RunWith;
@@ -13,6 +12,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.businessentity.BusinessEntityIntl;
 import com.mize.domain.catalog.Catalog;
@@ -35,6 +35,8 @@ public class JPATest {
 	
 	@Autowired
 	protected JdbcTemplate jdbcTemplate;
+	
+	private static ObjectMapper mapper = new ObjectMapper();
 
 	public JdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;
@@ -148,6 +150,16 @@ public class JPATest {
 	public FormDefinition findExistingFormDefinition(EntityManager entityManager) {
 		FormDefinition formDef = (FormDefinition) entityManager.find(FormDefinition.class, new Long(1));
 		return formDef;
+	}
+	
+	public static String getJsonResponse(Object object) throws Exception {
+		return mapper.writeValueAsString(object);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static  <T> T  getObjectFromRequest(String request,Class<?> valueType) throws Exception{			
+		Object readValue = mapper.readValue(request, valueType);
+		return (T) readValue;
 	}
 
 }
