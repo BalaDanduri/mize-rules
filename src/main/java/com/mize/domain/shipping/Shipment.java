@@ -61,9 +61,11 @@ public class Shipment extends MizeEntity {
 	private Double customsValue;
 	private String currencyCode;
 	private Long packageCount;
+	private Double shippingAmount;
 	private Double handlingAmount;
 	private Double freightAmount;
 	private Double totalAmount;
+	private String deliveryInstructions;
 	
 	@Override
 	@Id
@@ -299,6 +301,15 @@ public class Shipment extends MizeEntity {
 		this.packageCount = packageCount;
 	}
 
+	@Column(name="shipping_amount")
+	public Double getShipingAmount() {
+		return shippingAmount;
+	}
+
+	public void setShipingAmount(Double shippingAmount) {
+		this.shippingAmount = shippingAmount;
+	}
+
 	@Column(name="handling_amount")
 	public Double getHandlingAmount() {
 		return handlingAmount;
@@ -326,6 +337,24 @@ public class Shipment extends MizeEntity {
 		this.totalAmount = totalAmount;
 	}
 
+	@Column(name="shipping_amount")
+	public Double getShippingAmount() {
+		return shippingAmount;
+	}
+
+	public void setShippingAmount(Double shippingAmount) {
+		this.shippingAmount = shippingAmount;
+	}
+
+	@Column(name="delivery_instructions")
+	public String getDeliveryInstructions() {
+		return deliveryInstructions;
+	}
+
+	public void setDeliveryInstructions(String deliveryInstructions) {
+		this.deliveryInstructions = deliveryInstructions;
+	}
+
 	@Override
 	public String toString() {
 		return "Shipment [businessEntity=" + businessEntity + ", partyList="
@@ -342,11 +371,11 @@ public class Shipment extends MizeEntity {
 				+ ", shipmentAccountNumber=" + shipmentAccountNumber
 				+ ", invoiceNumber=" + invoiceNumber + ", customsValue="
 				+ customsValue + ", currencyCode=" + currencyCode
-				+ ", packageCount=" + packageCount + ", handlingAmount="
-				+ handlingAmount + ", freightAmount=" + freightAmount
-				+ ", totalAmount=" + totalAmount + "]";
+				+ ", packageCount=" + packageCount + ", shippingAmount="
+				+ shippingAmount + ", handlingAmount=" + handlingAmount
+				+ ", freightAmount=" + freightAmount + ", totalAmount="
+				+ totalAmount + ", deliveryInstructions="
+				+ deliveryInstructions + "]";
 	}
-	
-	
 
 }

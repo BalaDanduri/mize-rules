@@ -41,15 +41,15 @@ public class ShipmentPackage extends MizeEntity {
 	private Double freightAmount;
 	private Double totalAmount;
 	private List<ShipmentPackageAttribute> shipmentPackageAttributes = new ArrayList<ShipmentPackageAttribute>();
-	@Override
-	public Long getId() {
-		return id;
-	}
-
+	private String shipmentLabel;
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id",unique=true,nullable=false)
+	public Long getId() {
+		return id;
+	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -141,6 +141,15 @@ public class ShipmentPackage extends MizeEntity {
 		this.shipmentPackageAttributes = shipmentPackageAttributes;
 	}
 
+	@Column(name="shipment_label")
+	public String getShipmentLabel() {
+		return shipmentLabel;
+	}
+
+	public void setShipmentLabel(String shipmentLabel) {
+		this.shipmentLabel = shipmentLabel;
+	}
+
 	@Override
 	public String toString() {
 		return "ShipmentPackage [shipment=" + shipment + ", packageNumber="
@@ -149,7 +158,8 @@ public class ShipmentPackage extends MizeEntity {
 				+ trackingNumber + ", handlingAmount=" + handlingAmount
 				+ ", freightAmount=" + freightAmount + ", totalAmount="
 				+ totalAmount + ", shipmentPackageAttributes="
-				+ shipmentPackageAttributes + "]";
+				+ shipmentPackageAttributes + ", shipmentLabel="
+				+ shipmentLabel + "]";
 	}
 	
 }
