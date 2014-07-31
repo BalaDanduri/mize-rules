@@ -174,8 +174,13 @@ public class EntityAddressGeo extends MizeEntity implements Comparable<EntityAdd
 	@JsonIgnore
 	public static Comparator<EntityAddressGeo> EntityGeoDistanceComparator = new  Comparator<EntityAddressGeo>() {
 		public int compare(EntityAddressGeo geo1, EntityAddressGeo geo2) {
-		      return Double.compare( geo1.getAddressGeoData().getDistance() , geo2.getAddressGeoData().getDistance());
-		    }
+			 if(geo1.getAddressGeoData() != null && geo2.getAddressGeoData() != null) {
+				 return Double.compare( geo1.getAddressGeoData().getDistance() , geo2.getAddressGeoData().getDistance());
+			 }  else {
+				 return 0;
+			 }  
+		      
+		}
 	};
 
 	

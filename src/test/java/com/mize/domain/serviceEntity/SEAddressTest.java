@@ -1,4 +1,4 @@
-package com.mize.domain.sce.serviceEntity;
+package com.mize.domain.serviceEntity;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;

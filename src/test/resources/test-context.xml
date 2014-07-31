@@ -44,9 +44,9 @@
 	</jdbc:initialize-database> -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-	    <property name="url" value="jdbc:mysql://23.23.109.69:3306/MIZEDDB" />
+	    <property name="url" value="jdbc:mysql://tapimizetestdb.c7tjyqjoeuyp.us-east-1.rds.amazonaws.com:3306/MIZEDDB" />
 	    <property name="username"  value="ddbuser" />
-	    <property name="password" value="ddbpwd" />	 
+	    <property name="password" value="ddbuser_1234" />	 
 	</bean> 
 	
  	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
