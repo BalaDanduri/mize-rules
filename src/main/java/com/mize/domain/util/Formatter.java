@@ -911,7 +911,7 @@ public final class Formatter {
 		System.out.println(generateRandomPassword());
 	}
 	 
-	 private static final String generateRandomPassword() {
+	 public static final String generateRandomPassword() {
 			final String ALPHA_NUMERIC = "12345690abcdefghijklmnopqrstuvwxyz";
 			int passwordLength = 10;
 			StringBuilder sb = new StringBuilder();

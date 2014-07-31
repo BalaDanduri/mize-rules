@@ -1,5 +1,6 @@
 package com.mize.domain.shipping;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,22 +26,18 @@ import com.mize.domain.util.JPASerializer;
 
 @Entity
 @Table(name="shipment_package")
-public class ShipmentPackage extends MizeEntity {
-
-	/**
-	 * 
-	 */
+public class ShipmentPackage extends MizeEntity implements Comparable<ShipmentPackage> {
 	private static final long serialVersionUID = 8265420845919537745L;
-
-	private Shipment shipment;
-	private String packageNumber;
-	private String packageType;
+	private ShipmentTracking shipmentTracking;
+	private String number;
+	private String type;
 	private Long itemQuantity;
 	private String trackingNumber;
-	private Double handlingAmount;
-	private Double freightAmount;
-	private Double totalAmount;
-	private List<ShipmentPackageAttribute> shipmentPackageAttributes = new ArrayList<ShipmentPackageAttribute>();
+	private BigDecimal handlingAmount;
+	private BigDecimal freightAmount;
+	private BigDecimal totalAmount;
+	private String shipmentLabel;
+	private List<ShipmentPackageAttribute> attributes = new ArrayList<ShipmentPackageAttribute>();	
 	
 	@Override
 	@Id
@@ -57,30 +54,30 @@ public class ShipmentPackage extends MizeEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="shipment_tracking_id")
 	@JsonBackReference(value="shipment_packages")
-	public Shipment getShipment() {
-		return shipment;
+	public ShipmentTracking getShipmentTracking() {
+		return shipmentTracking;
 	}
 
-	public void setShipment(Shipment shipment) {
-		this.shipment = shipment;
+	public void setShipmentTracking(ShipmentTracking shipmentTracking) {
+		this.shipmentTracking = shipmentTracking;
 	}
 
 	@Column(name="package_number")
-	public String getPackageNumber() {
-		return packageNumber;
+	public String getNumber() {
+		return number;
 	}
 
-	public void setPackageNumber(String packageNumber) {
-		this.packageNumber = packageNumber;
+	public void setNumber(String number) {
+		this.number = number;
 	}
 
 	@Column(name="package_type")
-	public String getPackageType() {
-		return packageType;
+	public String getType() {
+		return type;
 	}
 
-	public void setPackageType(String packageType) {
-		this.packageType = packageType;
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	@Column(name="package_item_quantity")
@@ -102,29 +99,29 @@ public class ShipmentPackage extends MizeEntity {
 	}
 
 	@Column(name="handling_amount")
-	public Double getHandlingAmount() {
+	public BigDecimal getHandlingAmount() {
 		return handlingAmount;
 	}
 
-	public void setHandlingAmount(Double handlingAmount) {
+	public void setHandlingAmount(BigDecimal handlingAmount) {
 		this.handlingAmount = handlingAmount;
 	}
 
 	@Column(name="freight_amount")
-	public Double getFreightAmount() {
+	public BigDecimal getFreightAmount() {
 		return freightAmount;
 	}
 
-	public void setFreightAmount(Double freightAmount) {
+	public void setFreightAmount(BigDecimal freightAmount) {
 		this.freightAmount = freightAmount;
 	}
 
 	@Column(name="total_amount")
-	public Double getTotalAmount() {
+	public BigDecimal getTotalAmount() {
 		return totalAmount;
 	}
 
-	public void setTotalAmount(Double totalAmount) {
+	public void setTotalAmount(BigDecimal totalAmount) {
 		this.totalAmount = totalAmount;
 	}
 
@@ -132,24 +129,26 @@ public class ShipmentPackage extends MizeEntity {
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
 	@JsonManagedReference(value="shipment_package_attribute")
-	public List<ShipmentPackageAttribute> getShipmentPackageAttributes() {
-		return shipmentPackageAttributes;
+	public List<ShipmentPackageAttribute> getAttributes() {
+		return attributes;
 	}
 
-	public void setShipmentPackageAttributes(
-			List<ShipmentPackageAttribute> shipmentPackageAttributes) {
-		this.shipmentPackageAttributes = shipmentPackageAttributes;
+	public void setAttributes(List<ShipmentPackageAttribute> attributes) {
+		this.attributes = attributes;
+	}
+
+	@Column(name="shipment_label")
+	public String getShipmentLabel() {
+		return shipmentLabel;
+	}
+
+	public void setShipmentLabel(String shipmentLabel) {
+		this.shipmentLabel = shipmentLabel;
 	}
 
 	@Override
-	public String toString() {
-		return "ShipmentPackage [shipment=" + shipment + ", packageNumber="
-				+ packageNumber + ", packageType=" + packageType
-				+ ", itemQuantity=" + itemQuantity + ", trackingNumber="
-				+ trackingNumber + ", handlingAmount=" + handlingAmount
-				+ ", freightAmount=" + freightAmount + ", totalAmount="
-				+ totalAmount + ", shipmentPackageAttributes="
-				+ shipmentPackageAttributes + "]";
+	public int compareTo(ShipmentPackage o) {
+		return 0;
 	}
-	
+
 }

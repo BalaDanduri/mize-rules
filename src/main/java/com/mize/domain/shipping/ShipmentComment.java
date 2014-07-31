@@ -20,14 +20,10 @@ import com.mize.domain.util.JPASerializer;
 
 @Entity
 @Table(name="shipment_tracking_comment")
-public class ShipmentComment extends MizeEntity {
-
-	/**
-	 * 
-	 */
+public class ShipmentComment extends MizeEntity implements Comparable<ShipmentComment>{
 	private static final long serialVersionUID = -1285187789767965930L;
 
-	private Shipment shipment;
+	private ShipmentTracking shipmentTracking;
 	private EntityComment entityComment;
 	
 	@Override
@@ -41,18 +37,17 @@ public class ShipmentComment extends MizeEntity {
 	@Override
 	public void setId(Long id) {
 		this.id = id;
-
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="shipment_tracking_id")
 	@JsonBackReference(value="shipment_comments")
-	public Shipment getShipment() {
-		return shipment;
+	public ShipmentTracking getShipmentTracking() {
+		return shipmentTracking;
 	}
 
-	public void setShipment(Shipment shipment) {
-		this.shipment = shipment;
+	public void setShipmentTracking(ShipmentTracking shipmentTracking) {
+		this.shipmentTracking = shipmentTracking;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -68,9 +63,34 @@ public class ShipmentComment extends MizeEntity {
 	}
 
 	@Override
-	public String toString() {
-		return "ShipmentComment [shipment=" + shipment + ", entityComment="
-				+ entityComment + "]";
+	public int hashCode() {
+		final int prime = PRIME;
+		int result = super.hashCode();
+		result = prime * result
+				+ ((entityComment == null) ? 0 : entityComment.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ShipmentComment other = (ShipmentComment) obj;
+		if (entityComment == null) {
+			if (other.entityComment != null)
+				return false;
+		} else if (!entityComment.equals(other.entityComment))
+			return false;
+		return true;
+	}
+
+	@Override
+	public int compareTo(ShipmentComment o) {
+		return 0;
 	}
 
 	

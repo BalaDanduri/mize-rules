@@ -15,17 +15,13 @@ import com.mize.domain.common.MizeEntity;
 
 @Entity
 @Table(name="shipment_package_attributes")
-public class ShipmentPackageAttribute extends MizeEntity {
-
-	/**
-	 * 
-	 */
+public class ShipmentPackageAttribute extends MizeEntity implements Comparable<ShipmentPackageAttribute>{
 	private static final long serialVersionUID = 289509348269489424L;
 
 	private ShipmentPackage shipmentPackage;
-	private String attributeCode;
-	private String attributeUom;
-	private String attributeValue;
+	private String code;
+	private String uom;
+	private String value;
 	
 	@Override
 	@Id
@@ -53,37 +49,72 @@ public class ShipmentPackageAttribute extends MizeEntity {
 	}
 
 	@Column(name="attribute_code")
-	public String getAttributeCode() {
-		return attributeCode;
+	public String getCode() {
+		return code;
 	}
 
-	public void setAttributeCode(String attributeCode) {
-		this.attributeCode = attributeCode;
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	@Column(name="attribute_uom")
-	public String getAttributeUom() {
-		return attributeUom;
+	public String getUom() {
+		return uom;
 	}
 
-	public void setAttributeUom(String attributeUom) {
-		this.attributeUom = attributeUom;
+	public void setUom(String uom) {
+		this.uom = uom;
 	}
 
 	@Column(name="attribute_value")
-	public String getAttributeValue() {
-		return attributeValue;
+	public String getValue() {
+		return value;
 	}
 
-	public void setAttributeValue(String attributeValue) {
-		this.attributeValue = attributeValue;
+	public void setValue(String value) {
+		this.value = value;
 	}
 
 	@Override
-	public String toString() {
-		return "ShipmentPackageAttribute [shipmentPackage=" + shipmentPackage
-				+ ", attributeCode=" + attributeCode + ", attributeUom="
-				+ attributeUom + ", attributeValue=" + attributeValue + "]";
+	public int hashCode() {
+		final int prime = PRIME;
+		int result = super.hashCode();
+		result = prime * result + ((code == null) ? 0 : code.hashCode());
+		result = prime * result + ((uom == null) ? 0 : uom.hashCode());
+		result = prime * result + ((value == null) ? 0 : value.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ShipmentPackageAttribute other = (ShipmentPackageAttribute) obj;
+		if (code == null) {
+			if (other.code != null)
+				return false;
+		} else if (!code.equals(other.code))
+			return false;
+		if (uom == null) {
+			if (other.uom != null)
+				return false;
+		} else if (!uom.equals(other.uom))
+			return false;
+		if (value == null) {
+			if (other.value != null)
+				return false;
+		} else if (!value.equals(other.value))
+			return false;
+		return true;
+	}
+
+	@Override
+	public int compareTo(ShipmentPackageAttribute o) {
+		return 0;
 	}
 
 }

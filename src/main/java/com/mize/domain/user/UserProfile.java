@@ -174,7 +174,7 @@ public class UserProfile extends MizeEntity implements Serializable, Comparable<
 		this.postalAddress = postalAddress;
 	}
 	
-	@Column(name = "first_name", length = 30, nullable = false)
+	@Column(name = "first_name", length = 30, nullable = true)
 	public String getFirstName() {
 		return firstName;
 	}
@@ -190,7 +190,7 @@ public class UserProfile extends MizeEntity implements Serializable, Comparable<
 		this.middleName = middleName;
 	}
 	
-	@Column(name = "last_name", length = 30, nullable = false)
+	@Column(name = "last_name", length = 30, nullable = true)
 	public String getLastName() {
 		return lastName;
 	}
@@ -231,7 +231,7 @@ public class UserProfile extends MizeEntity implements Serializable, Comparable<
 		this.photoLink = photoLink;
 	}
 	
-	@Column(name = "profile_name", length = 30, nullable = false)
+	@Column(name = "profile_name", length = 30, nullable = true)
 	public String getProfileName() {
 		return profileName;
 	}
@@ -274,7 +274,7 @@ public class UserProfile extends MizeEntity implements Serializable, Comparable<
 		this.jobTitle = jobTitle;
 	}
 	
-	@Column(name = "email_opt_out", nullable = false)
+	@Column(name = "email_opt_out", nullable = true)
 	public String getEmailOptOut() {
 		return emailOptOut;
 	}
