@@ -1,5 +1,6 @@
 package com.mize.domain.shipping;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
@@ -24,7 +26,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
+import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
@@ -53,14 +57,18 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 	private String shipmentLinkInfo;
 	private String accountNumber;
 	private String invoiceNumber;
-	private Double customsValue;
+	private BigDecimal customsValue;
 	private String currencyCode;
 	private Long packageCount;
-	private Double shippingAmount;
-	private Double handlingAmount;
-	private Double freightAmount;
-	private Double totalAmount;
+	private BigDecimal shippingAmount;
+	private BigDecimal handlingAmount;
+	private BigDecimal freightAmount;
+	private BigDecimal totalAmount;
 	private String deliveryInstructions;
+	@Transient
+	private EntityComment entityComment;
+	@Transient
+	private User user;
 	
 	@Override
 	@Id
@@ -252,11 +260,11 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 	}
 
 	@Column(name="customs_value")
-	public Double getCustomsValue() {
+	public BigDecimal getCustomsValue() {
 		return customsValue;
 	}
 
-	public void setCustomsValue(Double customsValue) {
+	public void setCustomsValue(BigDecimal customsValue) {
 		this.customsValue = customsValue;
 	}
 
@@ -278,39 +286,39 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 		this.packageCount = packageCount;
 	}
 
-	public void setShipingAmount(Double shippingAmount) {
+	public void setShipingAmount(BigDecimal shippingAmount) {
 		this.shippingAmount = shippingAmount;
 	}
 
 	@Column(name="handling_amount")
-	public Double getHandlingAmount() {
+	public BigDecimal getHandlingAmount() {
 		return handlingAmount;
 	}
 
-	public void setHandlingAmount(Double handlingAmount) {
+	public void setHandlingAmount(BigDecimal handlingAmount) {
 		this.handlingAmount = handlingAmount;
 	}
 
 	@Column(name="freight_amount")
-	public Double getFreightAmount() {
+	public BigDecimal getFreightAmount() {
 		return freightAmount;
 	}
 
-	public void setFreightAmount(Double freightAmount) {
+	public void setFreightAmount(BigDecimal freightAmount) {
 		this.freightAmount = freightAmount;
 	}
 
 	@Column(name="total_amount")
-	public Double getTotalAmount() {
+	public BigDecimal getTotalAmount() {
 		return totalAmount;
 	}
 
-	public void setTotalAmount(Double totalAmount) {
+	public void setTotalAmount(BigDecimal totalAmount) {
 		this.totalAmount = totalAmount;
 	}
 
 	@Column(name="shipping_amount")
-	public Double getShippingAmount() {
+	public BigDecimal getShippingAmount() {
 		return shippingAmount;
 	}
 	
@@ -323,7 +331,7 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 		this.entityId = entityId;
 	}
 
-	public void setShippingAmount(Double shippingAmount) {
+	public void setShippingAmount(BigDecimal shippingAmount) {
 		this.shippingAmount = shippingAmount;
 	}
 	
@@ -369,6 +377,24 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 	public void setUpdatedDate(DateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}	
+
+	@Transient
+	public EntityComment getEntityComment() {
+		return entityComment;
+	}
+
+	public void setEntityComment(EntityComment entityComment) {
+		this.entityComment = entityComment;
+	}
+
+	@Transient
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	@Override
 	public int hashCode() {

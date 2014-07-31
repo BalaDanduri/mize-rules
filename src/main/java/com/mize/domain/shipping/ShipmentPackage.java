@@ -1,5 +1,6 @@
 package com.mize.domain.shipping;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,11 +33,11 @@ public class ShipmentPackage extends MizeEntity implements Comparable<ShipmentPa
 	private String type;
 	private Long itemQuantity;
 	private String trackingNumber;
-	private Double handlingAmount;
-	private Double freightAmount;
-	private Double totalAmount;
-	private List<ShipmentPackageAttribute> attributes = new ArrayList<ShipmentPackageAttribute>();
+	private BigDecimal handlingAmount;
+	private BigDecimal freightAmount;
+	private BigDecimal totalAmount;
 	private String shipmentLabel;
+	private List<ShipmentPackageAttribute> attributes = new ArrayList<ShipmentPackageAttribute>();	
 	
 	@Override
 	@Id
@@ -98,29 +99,29 @@ public class ShipmentPackage extends MizeEntity implements Comparable<ShipmentPa
 	}
 
 	@Column(name="handling_amount")
-	public Double getHandlingAmount() {
+	public BigDecimal getHandlingAmount() {
 		return handlingAmount;
 	}
 
-	public void setHandlingAmount(Double handlingAmount) {
+	public void setHandlingAmount(BigDecimal handlingAmount) {
 		this.handlingAmount = handlingAmount;
 	}
 
 	@Column(name="freight_amount")
-	public Double getFreightAmount() {
+	public BigDecimal getFreightAmount() {
 		return freightAmount;
 	}
 
-	public void setFreightAmount(Double freightAmount) {
+	public void setFreightAmount(BigDecimal freightAmount) {
 		this.freightAmount = freightAmount;
 	}
 
 	@Column(name="total_amount")
-	public Double getTotalAmount() {
+	public BigDecimal getTotalAmount() {
 		return totalAmount;
 	}
 
-	public void setTotalAmount(Double totalAmount) {
+	public void setTotalAmount(BigDecimal totalAmount) {
 		this.totalAmount = totalAmount;
 	}
 
