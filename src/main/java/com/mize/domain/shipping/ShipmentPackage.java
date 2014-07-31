@@ -31,11 +31,12 @@ public class ShipmentPackage extends MizeEntity implements Comparable<ShipmentPa
 	private ShipmentTracking shipmentTracking;
 	private String number;
 	private String type;
-	private Long itemQuantity;
+	private Integer itemQuantity;
 	private String trackingNumber;
 	private BigDecimal handlingAmount;
 	private BigDecimal freightAmount;
 	private BigDecimal totalAmount;
+	private BigDecimal shippingAmount;
 	private String shipmentLabel;
 	private List<ShipmentPackageAttribute> attributes = new ArrayList<ShipmentPackageAttribute>();	
 	
@@ -80,12 +81,12 @@ public class ShipmentPackage extends MizeEntity implements Comparable<ShipmentPa
 		this.type = type;
 	}
 
-	@Column(name="package_item_quantity")
-	public Long getItemQuantity() {
+	@Column(name="item_quantity")
+	public Integer getItemQuantity() {
 		return itemQuantity;
 	}
 
-	public void setItemQuantity(Long itemQuantity) {
+	public void setItemQuantity(Integer itemQuantity) {
 		this.itemQuantity = itemQuantity;
 	}
 
@@ -144,6 +145,15 @@ public class ShipmentPackage extends MizeEntity implements Comparable<ShipmentPa
 
 	public void setShipmentLabel(String shipmentLabel) {
 		this.shipmentLabel = shipmentLabel;
+	}
+
+	@Column(name="shipping_amount")
+	public BigDecimal getShippingAmount() {
+		return shippingAmount;
+	}
+
+	public void setShippingAmount(BigDecimal shippingAmount) {
+		this.shippingAmount = shippingAmount;
 	}
 
 	@Override

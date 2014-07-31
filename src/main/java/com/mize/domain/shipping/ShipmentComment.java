@@ -1,5 +1,6 @@
 package com.mize.domain.shipping;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,15 +9,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.MizeEntity;
-import com.mize.domain.util.JPASerializer;
 
 @Entity
 @Table(name="shipment_tracking_comment")
@@ -50,10 +48,8 @@ public class ShipmentComment extends MizeEntity implements Comparable<ShipmentCo
 		this.shipmentTracking = shipmentTracking;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JsonSerialize(using=JPASerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
 	@JoinColumn(name = "comment_id")
+	@OneToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
 	public EntityComment getEntityComment() {
 		return entityComment;
 	}
@@ -91,7 +87,5 @@ public class ShipmentComment extends MizeEntity implements Comparable<ShipmentCo
 	@Override
 	public int compareTo(ShipmentComment o) {
 		return 0;
-	}
-
-	
+	}	
 }

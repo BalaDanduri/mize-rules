@@ -59,7 +59,7 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 	private String invoiceNumber;
 	private BigDecimal customsValue;
 	private String currencyCode;
-	private Long packageCount;
+	private Integer packageCount;
 	private BigDecimal shippingAmount;
 	private BigDecimal handlingAmount;
 	private BigDecimal freightAmount;
@@ -278,11 +278,11 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 	}
 
 	@Column(name="package_count")
-	public Long getPackageCount() {
+	public Integer getPackageCount() {
 		return packageCount;
 	}
 
-	public void setPackageCount(Long packageCount) {
+	public void setPackageCount(Integer packageCount) {
 		this.packageCount = packageCount;
 	}
 

@@ -1,5 +1,6 @@
 package com.mize.domain.shipping;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -144,9 +146,7 @@ public class ShipmentParty extends MizeEntity {
 		this.contactName = contactName;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JsonSerialize(using=JPASerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
+	@OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "party_address_id")
 	public EntityAddress getAddress() {
 		return address;
