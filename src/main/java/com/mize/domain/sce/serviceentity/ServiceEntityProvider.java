@@ -22,7 +22,7 @@ import com.mize.domain.util.JPASerializer;
  * @author HarishBurra
  * @version 1.0
  */
-@Entity(name = "sce.ServiceEntityProvider")
+@Entity
 @Table(name = "srvc_enty_prvdr")
 public class ServiceEntityProvider extends MizeEntity {
 

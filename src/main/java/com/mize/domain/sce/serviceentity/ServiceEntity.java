@@ -36,7 +36,7 @@ import com.mize.domain.util.JsonDateTimeSerializer;
  * @author HarishBurra
  * @version 1.0
  */
-@Entity(name = "sce.ServiceEntity")
+@Entity
 @Table(name = "srvc_enty")
 public class ServiceEntity extends MizeEntity {
 

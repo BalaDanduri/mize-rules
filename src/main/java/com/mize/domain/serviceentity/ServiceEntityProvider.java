@@ -26,7 +26,7 @@ import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
-@Entity
+@Entity(name = "se.ServiceEntityProvider")
 @Table(name = "service_entity_provider")
 public class ServiceEntityProvider extends MizeEntity implements Comparable<ServiceEntityProvider> {
 

@@ -34,7 +34,7 @@ import com.mize.domain.util.JsonDateSerializer;
  * @author HarishBurra
  * @version 1.0
  */
-@Entity(name = "sce.ServiceEntityRequest")
+@Entity
 @Table(name = "srvc_enty_rqst")
 public class ServiceEntityRequest extends MizeEntity {
 	

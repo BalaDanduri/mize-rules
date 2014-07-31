@@ -22,7 +22,7 @@ import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
-@Entity
+@Entity(name = "se.ServiceEntityAmount")
 @Table(name = "service_entity_amount")
 public class ServiceEntityAmount extends MizeEntity implements Comparable<ServiceEntityAmount> {
 	private static final long serialVersionUID = 6821336389676111L;

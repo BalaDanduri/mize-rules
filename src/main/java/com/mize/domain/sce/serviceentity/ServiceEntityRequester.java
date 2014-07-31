@@ -22,7 +22,7 @@ import com.mize.domain.util.JPASerializer;
  * @author HarishBurra
  * @version 1.0
  */
-@Entity(name = "sce.ServiceEntityRequester")
+@Entity
 @Table(name = "srvc_enty_rqstr")
 public class ServiceEntityRequester extends MizeEntity {
 

@@ -32,7 +32,7 @@ import com.mize.domain.product.ProductRegister;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
-@Entity
+@Entity(name = "se.ServiceEntityRequest")
 @Table(name = "service_entity_request")
 public class ServiceEntityRequest extends MizeEntity implements Comparable<ServiceEntityRequest> {
 

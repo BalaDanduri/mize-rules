@@ -27,7 +27,7 @@ import com.mize.domain.util.JsonDateSerializer;
  * @author HarishBurra
  * @version 1.0
  */
-@Entity(name = "sce.ServiceEntityAudit")
+@Entity
 @Table(name = "srvc_enty_audit")
 public class ServiceEntityAudit extends MizeEntity {
 

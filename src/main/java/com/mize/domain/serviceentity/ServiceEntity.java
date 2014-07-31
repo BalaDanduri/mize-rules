@@ -32,7 +32,7 @@ import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
-@Entity
+@Entity(name = "se.ServiceEntity")
 @Table(name = "service_entity", uniqueConstraints = {@UniqueConstraint (columnNames = {"entity_code"})})
 public class ServiceEntity extends MizeEntity implements Comparable<ServiceEntity> {
 

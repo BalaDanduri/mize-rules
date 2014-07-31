@@ -15,7 +15,7 @@ import com.mize.domain.common.MizeEntity;
  * @author HarishBurra
  * @version 1.0
  */
-@Entity(name = "sce.ServiceEntityAmount")
+@Entity
 @Table(name = "srvc_enty_amt")
 public class ServiceEntityAmount extends MizeEntity {
 
