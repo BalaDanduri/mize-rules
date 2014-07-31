@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
@@ -24,6 +25,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeEntity;
@@ -62,6 +64,8 @@ public class ServiceEntity extends MizeEntity {
 	private List<ServiceEntityMessage> messages;
 	private List<ServiceEntityComment> comments;
 	private List<ServiceEntityAttachment> attachments;
+	
+	private User user;
 	
 
 	public ServiceEntity() {
@@ -295,6 +299,16 @@ public class ServiceEntity extends MizeEntity {
 
 	public void setAttachments(List<ServiceEntityAttachment> attachments) {
 		this.attachments = attachments;
+	}
+	
+	@Transient
+	@JsonIgnore
+	public User getUser() {
+		return user;
+	}
+	
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override	
