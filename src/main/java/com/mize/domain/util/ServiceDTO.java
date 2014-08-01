@@ -255,10 +255,26 @@ public final class ServiceDTO<T> implements ServiceLiteral{
 	@JsonIgnore
 	public boolean hasGenTechError(){
 		boolean flag = false;
-		for(AppMessage appMessage : appMessages){
-			if(MessageConstants.GEN_TECH_EXCEPTION.equalsIgnoreCase(appMessage.getCode())){
-				flag = true;
-				break;
+		if(appMessages != null){
+			for(AppMessage appMessage : appMessages){
+				if(MessageConstants.GEN_TECH_EXCEPTION.equalsIgnoreCase(appMessage.getCode())){
+					flag = true;
+					break;
+				}
+			}
+		}
+		return flag;
+	}
+	
+	@JsonIgnore
+	public boolean hasActivitiError(){
+		boolean flag = false;
+		if(appMessages != null){
+			for(AppMessage appMessage : appMessages){
+				if(MessageConstants.ACTIVITI_NOT_FOUND.equalsIgnoreCase(appMessage.getCode())){
+					flag = true;
+					break;
+				}
 			}
 		}
 		return flag;
