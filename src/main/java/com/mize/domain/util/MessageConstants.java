@@ -120,7 +120,7 @@ public abstract class MessageConstants implements Serializable{
 	public static final String INVALID_CATEGORY_NAME = "INVALID_CATEGORY_NAME";
 	public static final String NAME_REQUIRED = "NAME_REQUIRED";	
 	public static final String DUPLICATE_TYPE_AND_CODE = "DUPLICATE_TYPE_AND_CODE";	
-	public static final String INVALID_LINK_TYPE = "INVALID_LINK_TYPE";
+	public static final String INVALID_INSP_TYPE = "INVALID_INSP_TYPE";
 	public static final String INVALID_PARENT_BUSINESS_ENTITY_CODE = "INVALID_PARENT_BUSINESS_ENTITY_CODE";
 	public static final String USER_CODE_REQUIRED = "USER_CODE_REQUIRED";
 	public static final String GROUP_CODE_REQUIRED = "GROUP_CODE_REQUIRED";
@@ -136,6 +136,8 @@ public abstract class MessageConstants implements Serializable{
 	public static final String WQ_AUTHORIZATION_TYPE_REQUIRED= "WQ_AUTHORIZATION_TYPE_REQUIRED";
 	public static final String WQ_AUTHORIZATION_VALUE_REQUIRED= "WQ_AUTHORIZATION_VALUE_REQUIRED";
 	public static final String ATLEAST_ONE_WORKQUEUE_ITEM_IS_REQUIRED = "ATLEAST_ONE_WORKQUEUE_ITEM_IS_REQUIRED";
+	public static final String INVALID_INSPECTION_LOCATION = "INVALID_INSPECTION_LOCATION";
+	public static final String INVALID_INSP_LOC_TYPE = "INVALID_INSP_LOC_TYPE";
 
 
 	public static final String INVALID_CUSTOMER = "INVALID_CUSTOMER";
