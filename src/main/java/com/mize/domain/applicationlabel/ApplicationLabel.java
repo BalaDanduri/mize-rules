@@ -59,6 +59,10 @@ public class ApplicationLabel extends MizeEntity  implements Comparable<Applicat
 		this.isDefault = isDefault;
 	}
 
+	public ApplicationLabel(String code) {
+		this.code = code;	
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", unique = true, nullable = false)
