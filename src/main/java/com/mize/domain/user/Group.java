@@ -171,7 +171,7 @@ public class Group extends MizeEntity implements Comparable<Group> {
 	}
 	
 
-	@OneToMany(fetch = FetchType.LAZY,cascade=CascadeType.ALL , mappedBy ="group")
+	@OneToMany(fetch = FetchType.LAZY,cascade=CascadeType.ALL , mappedBy ="group", orphanRemoval = true)
 	@Fetch(value=FetchMode.SUBSELECT)
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)

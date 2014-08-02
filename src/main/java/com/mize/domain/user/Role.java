@@ -177,7 +177,7 @@ public class Role extends MizeEntity implements Comparable<Role>{
 	
 	@Override
 	@JsonIgnore
-	@Column(name = "created_by")
+	@Column(name = "created_by", updatable = false)
 	public Long getCreatedBy() {		
 		return super.getCreatedBy();
 	}
