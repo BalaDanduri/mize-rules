@@ -1,5 +1,6 @@
 package com.mize.domain.appmsg;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -140,6 +141,7 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 	
 	public AppMessage() {
 		super();
+		intls = new ArrayList<AppMessageIntl>();
 	}
 	
 	@Id

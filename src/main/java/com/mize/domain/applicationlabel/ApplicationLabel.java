@@ -1,5 +1,6 @@
 package com.mize.domain.applicationlabel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -48,6 +49,7 @@ public class ApplicationLabel extends MizeEntity  implements Comparable<Applicat
 	
 	public ApplicationLabel() {
 		super();
+		intls = new ArrayList<ApplicationLabelIntl>();
 	}
 
 	public ApplicationLabel(BusinessEntity tenant, String code, String isActive,
