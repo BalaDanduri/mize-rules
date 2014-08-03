@@ -173,7 +173,7 @@ public class ApplicationLabel extends MizeEntity  implements Comparable<Applicat
 	
 	@Override
 	@JsonIgnore
-	@Column(name = "created_by")
+	@Column(name = "created_by", updatable = false)
 	public Long getCreatedBy() {		
 		return super.getCreatedBy();
 	}
