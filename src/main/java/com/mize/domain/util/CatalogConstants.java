@@ -67,5 +67,8 @@ public abstract class CatalogConstants implements Serializable{
 	public static final String MANUFACTURER_TYPE = "ManufacturerType";
 	public static final String PRODUCT_REGISTRATION_SOURCE = "ProductRegistrationSource";
 	public static final String INSPECTION_STATUS = "InspectionStatus";
+	public static final String PACKAGE_ATTRIBUTES = "PackageAttributes";
+	public static final String PACKAGE_SIZE_UOM = "PackageSizeUOM";
+	public static final String PACKAGE_WEIGHT_UOM = "PackageWeightUOM";
 }
 
