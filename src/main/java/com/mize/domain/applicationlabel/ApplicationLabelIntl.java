@@ -138,7 +138,7 @@ public class ApplicationLabelIntl extends MizeEntity {
 	
 	@Override
 	@JsonIgnore
-	@Column(name = "created_by")
+	@Column(name = "created_by", updatable = false)
 	public Long getCreatedBy() {		
 		return super.getCreatedBy();
 	}
