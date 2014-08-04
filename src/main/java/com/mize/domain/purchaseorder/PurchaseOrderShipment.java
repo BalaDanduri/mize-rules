@@ -35,30 +35,48 @@ import com.mize.domain.util.JsonDateTimeSerializer;
 public class PurchaseOrderShipment extends MizeEntity implements Comparable<PurchaseOrderShipment>{	
 
 	private static final long serialVersionUID = 261638805962518728L;
+	private PurchaseOrder purchaseOrder;
 	//shipTolocaton
 	private BusinessEntity businessEntity;
-	private EntityAddress address;
-	private String method;
-	private String priority;
-	private String carrier;
-	private String estimatedShipmentDays;
-	private String dropShip;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private DateTime estimatedShipmentDate;
-	private BigDecimal estimatedShipmentCost;
-	private PurchaseOrder purchaseOrder;
+	private EntityAddress address;	
+	private String dropShip;	
 	@Transient
-	private String updateMasterAddress;
-	private String shipComplete;
+	private String updateMasterAddress;	
 	@Transient
-	private Long shipmentBeAddressId;
-	private String isFreeShipping;
+	private Long shipmentBeAddressId;	
+	private String beCode;
+	private String beTypeCode;
+	private String beSubTypeCode;
+	private String beName;
+	private String beFirstName;
+	private String beLastName;
+	private String beMiddleIntial;
+	
+	//shipFromlocaton
 	private BusinessEntity shipmentFromBE;
 	private EntityAddress shipmentFromAddress;
 	@Transient
 	private Long shipmentFromBeAddressId;
 	private String isNewShipFrom;	
+	private String fromBECode;
+	private String fromBETypeCode;
+	private String fromBESubTypeCode;
+	private String fromBEName;
+	private String fromBEFirstName;
+	private String fromBELastName;
+	private String fromBEMiddleIntial;
+	
+	
 	private String accountNumber;
+	private String isFreeShipping;
+	private String method;
+	private String priority;
+	private String carrier;
+	private String estimatedShipmentDays;
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	private DateTime estimatedShipmentDate;
+	private BigDecimal estimatedShipmentCost;
+	private String shipComplete;
 	@Transient
 	private EntityComment entityComment;
 	
@@ -278,6 +296,132 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 		this.entityComment = entityComment;
 	}
 
+	@Column(name = "ship_to_be_code")
+	public String getBeCode() {
+		return beCode;
+	}
+
+	public void setBeCode(String beCode) {
+		this.beCode = beCode;
+	}
+
+	@Column(name = "ship_to_be_type_code")
+	public String getBeTypeCode() {
+		return beTypeCode;
+	}
+
+	public void setBeTypeCode(String beTypeCode) {
+		this.beTypeCode = beTypeCode;
+	}
+
+	@Column(name = "ship_to_be_sub_type_code")
+	public String getBeSubTypeCode() {
+		return beSubTypeCode;
+	}
+
+	public void setBeSubTypeCode(String beSubTypeCode) {
+		this.beSubTypeCode = beSubTypeCode;
+	}
+
+	@Column(name = "ship_to_be_name")
+	public String getBeName() {
+		return beName;
+	}
+
+	public void setBeName(String beName) {
+		this.beName = beName;
+	}
+
+	@Column(name = "ship_to_be_first_name")
+	public String getBeFirstName() {
+		return beFirstName;
+	}
+
+	public void setBeFirstName(String beFirstName) {
+		this.beFirstName = beFirstName;
+	}
+
+	@Column(name = "ship_to_be_last_name")
+	public String getBeLastName() {
+		return beLastName;
+	}
+
+	public void setBeLastName(String beLastName) {
+		this.beLastName = beLastName;
+	}
+
+	@Column(name = "ship_to_be_middle_initial")
+	public String getBeMiddleIntial() {
+		return beMiddleIntial;
+	}
+
+	public void setBeMiddleIntial(String beMiddleIntial) {
+		this.beMiddleIntial = beMiddleIntial;
+	}
+
+	@Column(name = "ship_from_be_code")
+	public String getFromBECode() {
+		return fromBECode;
+	}
+
+	public void setFromBECode(String fromBECode) {
+		this.fromBECode = fromBECode;
+	}
+
+	@Column(name = "ship_from_be_type_code")
+	public String getFromBETypeCode() {
+		return fromBETypeCode;
+	}
+
+	public void setFromBETypeCode(String fromBETypeCode) {
+		this.fromBETypeCode = fromBETypeCode;
+	}
+
+	@Column(name = "ship_from_be_sub_type_code")
+	public String getFromBESubTypeCode() {
+		return fromBESubTypeCode;
+	}
+
+	public void setFromBESubTypeCode(String fromBESubTypeCode) {
+		this.fromBESubTypeCode = fromBESubTypeCode;
+	}
+
+	@Column(name = "ship_from_be_name")
+	public String getFromBEName() {
+		return fromBEName;
+	}
+
+	public void setFromBEName(String fromBEName) {
+		this.fromBEName = fromBEName;
+	}
+
+	@Column(name = "ship_from_be_first_name")
+	public String getFromBEFirstName() {
+		return fromBEFirstName;
+	}
+
+	public void setFromBEFirstName(String fromBEFirstName) {
+		this.fromBEFirstName = fromBEFirstName;
+	}
+
+	@Column(name = "ship_from_be_last_name")
+	public String getFromBELastName() {
+		return fromBELastName;
+	}
+
+	public void setFromBELastName(String fromBELastName) {
+		this.fromBELastName = fromBELastName;
+	}
+
+	@Column(name = "ship_from_be_middle_initial")
+	public String getFromBEMiddleIntial() {
+		return fromBEMiddleIntial;
+	}
+
+	public void setFromBEMiddleIntial(String fromBEMiddleIntial) {
+		this.fromBEMiddleIntial = fromBEMiddleIntial;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
@@ -358,14 +502,28 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 
 	@Override
 	public String toString() {
-		return "PurchaseOrderShipment [address=" + address + ", method="
-				+ method + ", priority=" + priority + ", carrier=" + carrier
+		return "PurchaseOrderShipment [dropShip=" + dropShip
+				+ ", updateMasterAddress=" + updateMasterAddress
+				+ ", shipmentBeAddressId=" + shipmentBeAddressId + ", beCode="
+				+ beCode + ", beTypeCode=" + beTypeCode + ", beSubTypeCode="
+				+ beSubTypeCode + ", beName=" + beName + ", beFirstName="
+				+ beFirstName + ", beLastName=" + beLastName
+				+ ", beMiddleIntial=" + beMiddleIntial
+				+ ", shipmentFromBeAddressId=" + shipmentFromBeAddressId
+				+ ", isNewShipFrom=" + isNewShipFrom + ", fromBECode="
+				+ fromBECode + ", fromBETypeCode=" + fromBETypeCode
+				+ ", fromBESubTypeCode=" + fromBESubTypeCode + ", fromBEName="
+				+ fromBEName + ", fromBEFirstName=" + fromBEFirstName
+				+ ", fromBELastName=" + fromBELastName
+				+ ", fromBEMiddleIntial=" + fromBEMiddleIntial
+				+ ", accountNumber=" + accountNumber + ", isFreeShipping="
+				+ isFreeShipping + ", method=" + method + ", priority="
+				+ priority + ", carrier=" + carrier
 				+ ", estimatedShipmentDays=" + estimatedShipmentDays
-				+ ", dropShip=" + dropShip + ", estimatedShipmentDate="
-				+ estimatedShipmentDate + ", estimatedShipmentCost="
-				+ estimatedShipmentCost + "]";
+				+ ", estimatedShipmentDate=" + estimatedShipmentDate
+				+ ", estimatedShipmentCost=" + estimatedShipmentCost
+				+ ", shipComplete=" + shipComplete + "]";
 	}
-	
-	
 
+	
 }

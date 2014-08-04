@@ -35,6 +35,13 @@ public class PurchaseOrderRequester extends MizeEntity implements Comparable<Pur
 	private String updateAddress;
 	@Transient
 	List<BusinessEntity> childBusinessEntities = new ArrayList<BusinessEntity>();
+	private String beCode;
+	private String beTypeCode;
+	private String beSubTypeCode;
+	private String beName;
+	private String beFirstName;
+	private String beLastName;
+	private String beMiddleIntial;
 
 	public PurchaseOrderRequester(){
 		super();
@@ -109,6 +116,69 @@ public class PurchaseOrderRequester extends MizeEntity implements Comparable<Pur
 	public void setChildBusinessEntities(List<BusinessEntity> childBusinessEntities) {
 		this.childBusinessEntities = childBusinessEntities;
 	}
+	
+	@Column(name="requester_be_code")
+	public String getBeCode() {
+		return beCode;
+	}
+
+	public void setBeCode(String beCode) {
+		this.beCode = beCode;
+	}
+
+	@Column(name="requester_be_type_code")
+	public String getBeTypeCode() {
+		return beTypeCode;
+	}
+
+	public void setBeTypeCode(String beTypeCode) {
+		this.beTypeCode = beTypeCode;
+	}
+
+	@Column(name="requester_be_sub_type_code")
+	public String getBeSubTypeCode() {
+		return beSubTypeCode;
+	}
+
+	public void setBeSubTypeCode(String beSubTypeCode) {
+		this.beSubTypeCode = beSubTypeCode;
+	}
+
+	@Column(name="requester_be_name")
+	public String getBeName() {
+		return beName;
+	}
+
+	public void setBeName(String beName) {
+		this.beName = beName;
+	}
+
+	@Column(name="requester_be_first_name")
+	public String getBeFirstName() {
+		return beFirstName;
+	}
+
+	public void setBeFirstName(String beFirstName) {
+		this.beFirstName = beFirstName;
+	}
+
+	@Column(name="requester_be_last_name")
+	public String getBeLastName() {
+		return beLastName;
+	}
+
+	public void setBeLastName(String beLastName) {
+		this.beLastName = beLastName;
+	}
+
+	@Column(name="requester_be_middle_initial")
+	public String getBeMiddleIntial() {
+		return beMiddleIntial;
+	}
+
+	public void setBeMiddleIntial(String beMiddleIntial) {
+		this.beMiddleIntial = beMiddleIntial;
+	}
 
 	@Override
 	public int compareTo(PurchaseOrderRequester o) {
@@ -142,7 +212,11 @@ public class PurchaseOrderRequester extends MizeEntity implements Comparable<Pur
 
 	@Override
 	public String toString() {
-		return "PartsOrderRequester [id=" + id + "]";
-	}	
+		return "PurchaseOrderRequester [updateAddress=" + updateAddress
+				+ ", beCode=" + beCode + ", beTypeCode=" + beTypeCode
+				+ ", beSubTypeCode=" + beSubTypeCode + ", beName=" + beName
+				+ ", beFirstName=" + beFirstName + ", beLastName=" + beLastName
+				+ ", beMiddleIntial=" + beMiddleIntial + "]";
+	}
 
 }

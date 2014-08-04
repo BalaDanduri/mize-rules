@@ -395,7 +395,28 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 	public void setUser(User user) {
 		this.user = user;
 	}
-
+	
+	@JsonIgnore(false)
+	@Column(name = "updated_by")
+	public Long getUpdatedBy() {
+		return this.updatedBy;
+	}
+	
+	@JsonIgnore(false)
+	public void setUpdatedBy(Long updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+	
+	@JsonIgnore(false)
+	@Column(name = "created_by", updatable = false)
+	public Long getCreatedBy() {
+		return this.createdBy;
+	}
+	
+	@JsonIgnore(false)
+	public void setCreatedBy(Long createdBy) {
+		this.createdBy = createdBy;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;

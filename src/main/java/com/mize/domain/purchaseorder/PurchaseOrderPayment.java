@@ -31,6 +31,13 @@ public class PurchaseOrderPayment extends MizeEntity implements Comparable<Purch
 	private Long paymentBeAddressId;
 	@Transient
 	private String updateMasterAddress;
+	private String beCode;
+	private String beTypeCode;
+	private String beSubTypeCode;
+	private String beName;
+	private String beFirstName;
+	private String beLastName;
+	private String beMiddleIntial;
 
 	public PurchaseOrderPayment(){
 		super();
@@ -116,6 +123,69 @@ public class PurchaseOrderPayment extends MizeEntity implements Comparable<Purch
 		this.updateMasterAddress = updateMasterAddress;
 	}
 	
+	@Column(name="payee_be_code")
+	public String getBeCode() {
+		return beCode;
+	}
+
+	public void setBeCode(String beCode) {
+		this.beCode = beCode;
+	}
+
+	@Column(name="payee_be_type_code")
+	public String getBeTypeCode() {
+		return beTypeCode;
+	}
+
+	public void setBeTypeCode(String beTypeCode) {
+		this.beTypeCode = beTypeCode;
+	}
+
+	@Column(name="payee_be_sub_type_code")
+	public String getBeSubTypeCode() {
+		return beSubTypeCode;
+	}
+
+	public void setBeSubTypeCode(String beSubTypeCode) {
+		this.beSubTypeCode = beSubTypeCode;
+	}
+
+	@Column(name="payee_be_name")
+	public String getBeName() {
+		return beName;
+	}
+
+	public void setBeName(String beName) {
+		this.beName = beName;
+	}
+
+	@Column(name="payee_be_first_name")
+	public String getBeFirstName() {
+		return beFirstName;
+	}
+
+	public void setBeFirstName(String beFirstName) {
+		this.beFirstName = beFirstName;
+	}
+
+	@Column(name="payee_be_last_name")
+	public String getBeLastName() {
+		return beLastName;
+	}
+
+	public void setBeLastName(String beLastName) {
+		this.beLastName = beLastName;
+	}
+
+	@Column(name="payee_be_middle_initial")
+	public String getBeMiddleIntial() {
+		return beMiddleIntial;
+	}
+
+	public void setBeMiddleIntial(String beMiddleIntial) {
+		this.beMiddleIntial = beMiddleIntial;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
@@ -155,8 +225,31 @@ public class PurchaseOrderPayment extends MizeEntity implements Comparable<Purch
 
 	@Override
 	public String toString() {
-		return "PartsOrderPayment [id=" + id + ", address=" + address
-				+ ", method=" + method + "]";
+		return "PurchaseOrderPayment [method=" + method + ", paymentReference="
+				+ paymentReference + ", paymentBeAddressId="
+				+ paymentBeAddressId + ", updateMasterAddress="
+				+ updateMasterAddress + ", beCode=" + beCode + ", beTypeCode="
+				+ beTypeCode + ", beSubTypeCode=" + beSubTypeCode + ", beName="
+				+ beName + ", beFirstName=" + beFirstName + ", beLastName="
+				+ beLastName + ", beMiddleIntial=" + beMiddleIntial
+				+ ", getId()=" + getId() + ", getBusinessEntity()="
+				+ getBusinessEntity() + ", getAddress()=" + getAddress()
+				+ ", getMethod()=" + getMethod() + ", getPurchaseOrder()="
+				+ getPurchaseOrder() + ", getPaymentReference()="
+				+ getPaymentReference() + ", getPaymentBeAddressId()="
+				+ getPaymentBeAddressId() + ", getUpdateMasterAddress()="
+				+ getUpdateMasterAddress() + ", getBeCode()=" + getBeCode()
+				+ ", getBeTypeCode()=" + getBeTypeCode()
+				+ ", getBeSubTypeCode()=" + getBeSubTypeCode()
+				+ ", getBeName()=" + getBeName() + ", getBeFirstName()="
+				+ getBeFirstName() + ", getBeLastName()=" + getBeLastName()
+				+ ", getBeMiddleIntial()=" + getBeMiddleIntial()
+				+ ", hashCode()=" + hashCode() + ", getCreatedBy()="
+				+ getCreatedBy() + ", getCreatedDate()=" + getCreatedDate()
+				+ ", getUpdatedBy()=" + getUpdatedBy() + ", getUpdatedDate()="
+				+ getUpdatedDate() + ", getUploadError()=" + getUploadError()
+				+ ", isValid()=" + isValid() + ", getClass()=" + getClass()
+				+ ", toString()=" + super.toString() + "]";
 	}
 
 	@Override

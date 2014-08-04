@@ -80,7 +80,7 @@ public class PurchaseOrderMessage extends MizeEntity implements Comparable<Purch
 		this.field = field;
 	}
 
-	@Column(name = "message_uireference")
+	@Column(name = "message_ui_reference")	
 	public String getUiReference() {
 		return uiReference;
 	}
