@@ -368,6 +368,17 @@ public final class Formatter {
 		return time;
 	}
 	
+	public static DateTime date1(String dateTime){
+		DateTime time = null;
+		if(dateTime!= null){
+			try{
+				time = DateTime.parse(dateTime,DATE_FORMAT3);
+			}catch(Exception e){
+			}
+		}		
+		return time;
+	}
+	
 	public static DateTime dateTime(Timestamp timestamp){
 		DateTime time = null;
 		if(timestamp!= null){
