@@ -69,7 +69,7 @@ public class ServiceEntityRelation extends MizeEntity {
 		this.relatedEntity = relatedEntity;
 	}
 	
-	@Column(name = "service_entity_rltn_type")
+	@Column(name = "srvc_enty_rltn_type")
 	public String getRelationType() {
 		return relationType;
 	}
