@@ -84,12 +84,12 @@ public class PickList extends MizeEntity {
 		return id;
 	}
 
-	@Column(name = "picklist_code", length = 30, nullable = false)
+	@Column(name = "picklist_code", length = 50, nullable = false)
 	public String getCode() {
 		return code;
 	}
 
-	@Column(name = "picklist_type", length = 30, nullable = true)
+	@Column(name = "picklist_type", length = 50, nullable = true)
 	public String getType() {
 		return type;
 	}

@@ -60,12 +60,12 @@ public class PartAttribute extends MizeEntity{
 		return value;
 	}
 
-	@Column(name = "attribute_uom", length = 30, nullable = true)
+	@Column(name = "attribute_uom", length = 50, nullable = true)
 	public String getUom() {
 		return uom;
 	}
 	
-	@Column(name = "attribute_code", length = 30, nullable = true)
+	@Column(name = "attribute_code", length = 50, nullable = true)
 	public String getCode() {
 		return code;
 	}

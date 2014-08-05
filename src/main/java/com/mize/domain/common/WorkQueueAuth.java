@@ -85,7 +85,7 @@ public class WorkQueueAuth extends MizeEntity implements Comparable<WorkQueueAut
 		return workQueue;
 	}
 
-	@Column(name = "auth_type", length = 30, nullable = false)
+	@Column(name = "auth_type", length = 50, nullable = false)
 	public String getAuthType() {
 		return authType;
 	}

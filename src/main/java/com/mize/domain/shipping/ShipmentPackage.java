@@ -15,11 +15,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JPASerializer;
@@ -38,6 +39,7 @@ public class ShipmentPackage extends MizeEntity implements Comparable<ShipmentPa
 	private BigDecimal totalAmount;
 	private BigDecimal shippingAmount;
 	private String shipmentLabel;
+	private String shipmentLabelPath;
 	private List<ShipmentPackageAttribute> attributes = new ArrayList<ShipmentPackageAttribute>();	
 	
 	@Override
@@ -156,9 +158,118 @@ public class ShipmentPackage extends MizeEntity implements Comparable<ShipmentPa
 		this.shippingAmount = shippingAmount;
 	}
 
+	@Transient
+	public String getShipmentLabelPath() {
+		return shipmentLabelPath;
+	}
+
+	public void setShipmentLabelPath(String shipmentLabelPath) {
+		this.shipmentLabelPath = shipmentLabelPath;
+	}
+
+	@Override
+	public String toString() {
+		return "ShipmentPackage [number=" + number + ", type=" + type
+				+ ", itemQuantity=" + itemQuantity + ", trackingNumber="
+				+ trackingNumber + ", handlingAmount=" + handlingAmount
+				+ ", freightAmount=" + freightAmount + ", totalAmount="
+				+ totalAmount + ", shippingAmount=" + shippingAmount
+				+ ", shipmentLabel=" + shipmentLabel + ", shipmentLabelPath="
+				+ shipmentLabelPath + ", attributes=" + attributes + "]";
+	}
+
 	@Override
 	public int compareTo(ShipmentPackage o) {
 		return 0;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = PRIME;
+		int result = super.hashCode();
+		result = prime * result
+				+ ((freightAmount == null) ? 0 : freightAmount.hashCode());
+		result = prime * result
+				+ ((handlingAmount == null) ? 0 : handlingAmount.hashCode());
+		result = prime * result
+				+ ((itemQuantity == null) ? 0 : itemQuantity.hashCode());
+		result = prime * result + ((number == null) ? 0 : number.hashCode());
+		result = prime * result
+				+ ((shipmentLabel == null) ? 0 : shipmentLabel.hashCode());
+		result = prime
+				* result
+				+ ((shipmentLabelPath == null) ? 0 : shipmentLabelPath
+						.hashCode());
+		result = prime * result
+				+ ((shippingAmount == null) ? 0 : shippingAmount.hashCode());
+		result = prime * result
+				+ ((totalAmount == null) ? 0 : totalAmount.hashCode());
+		result = prime * result
+				+ ((trackingNumber == null) ? 0 : trackingNumber.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ShipmentPackage other = (ShipmentPackage) obj;
+		if (freightAmount == null) {
+			if (other.freightAmount != null)
+				return false;
+		} else if (!freightAmount.equals(other.freightAmount))
+			return false;
+		if (handlingAmount == null) {
+			if (other.handlingAmount != null)
+				return false;
+		} else if (!handlingAmount.equals(other.handlingAmount))
+			return false;
+		if (itemQuantity == null) {
+			if (other.itemQuantity != null)
+				return false;
+		} else if (!itemQuantity.equals(other.itemQuantity))
+			return false;
+		if (number == null) {
+			if (other.number != null)
+				return false;
+		} else if (!number.equals(other.number))
+			return false;
+		if (shipmentLabel == null) {
+			if (other.shipmentLabel != null)
+				return false;
+		} else if (!shipmentLabel.equals(other.shipmentLabel))
+			return false;
+		if (shipmentLabelPath == null) {
+			if (other.shipmentLabelPath != null)
+				return false;
+		} else if (!shipmentLabelPath.equals(other.shipmentLabelPath))
+			return false;
+		if (shippingAmount == null) {
+			if (other.shippingAmount != null)
+				return false;
+		} else if (!shippingAmount.equals(other.shippingAmount))
+			return false;
+		if (totalAmount == null) {
+			if (other.totalAmount != null)
+				return false;
+		} else if (!totalAmount.equals(other.totalAmount))
+			return false;
+		if (trackingNumber == null) {
+			if (other.trackingNumber != null)
+				return false;
+		} else if (!trackingNumber.equals(other.trackingNumber))
+			return false;
+		if (type == null) {
+			if (other.type != null)
+				return false;
+		} else if (!type.equals(other.type))
+			return false;
+		return true;
 	}
 
 }

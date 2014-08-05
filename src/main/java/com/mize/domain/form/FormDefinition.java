@@ -116,7 +116,7 @@ public class FormDefinition extends MizeEntity {
 		this.tenant = tenant;
 	}
 	
-	@Column( name = "form_code", nullable = true, length = 30)
+	@Column( name = "form_code", nullable = true, length = 50)
 	public String getFormCode() {
 		return String.valueOf(id);
 	}
@@ -153,7 +153,7 @@ public class FormDefinition extends MizeEntity {
 		this.versionNumber = versionNumber;
 	}
 	
-	@Column( name = "status_code", nullable = true, length = 30)
+	@Column( name = "status_code", nullable = true, length = 50)
 	public String getStatusCode() {
 		return statusCode;
 	}
