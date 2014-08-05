@@ -117,4 +117,10 @@ public class ShipmentPackageAttribute extends MizeEntity implements Comparable<S
 		return 0;
 	}
 
+	@Override
+	public String toString() {
+		return "ShipmentPackageAttribute [code=" + code + ", uom=" + uom
+				+ ", value=" + value + "]";
+	}
+
 }
