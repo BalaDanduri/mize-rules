@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -379,6 +380,17 @@ public final class Formatter {
 		return time;
 	}
 	
+	public static DateTime date2(Date date){
+		DateTime time = null;
+		if(date!= null){
+			try{
+				time = new DateTime(date.getTime());
+			}catch(Exception e){
+			}
+		}		
+		return time;
+	}
+	
 	public static DateTime dateTime(Timestamp timestamp){
 		DateTime time = null;
 		if(timestamp!= null){
@@ -412,6 +424,17 @@ public final class Formatter {
 	public static BigDecimal toBigDecimal(String value) {
 		BigDecimal returnValue = null;
 		if (value != null && value.trim().length() > 0) {
+			try {
+				returnValue = new BigDecimal(value);
+			} catch(Exception e) {
+			}
+		}
+		return returnValue;
+	}
+	
+	public static BigDecimal toBigDecimal(Double value) {
+		BigDecimal returnValue = null;
+		if (value != null) {
 			try {
 				returnValue = new BigDecimal(value);
 			} catch(Exception e) {
