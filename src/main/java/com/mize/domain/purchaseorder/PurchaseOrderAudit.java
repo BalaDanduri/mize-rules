@@ -50,7 +50,7 @@ public class PurchaseOrderAudit extends MizeEntity implements Comparable<Purchas
 		this.id = id;
 	}
 	
-	@Column(name="status_code")
+	@Column(name="status_code",length = 50)
 	public String getStatusCode() {
 		return statusCode;
 	}

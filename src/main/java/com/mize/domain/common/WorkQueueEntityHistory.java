@@ -63,18 +63,18 @@ public class WorkQueueEntityHistory extends MizeEntity implements Comparable<Wor
 		return workQueue;
 	}
 
-	@Column(name = "entity_type", length = 30)
+	@Column(name = "entity_type", length = 50)
 	public String getEntityType() {
 		return entityType;
 	}
 
-	@Column(name = "entity_code", length = 30)
+	@Column(name = "entity_code", length = 50)
 	public String getEntityCode() {
 		return entityCode;
 	}
 
 
-	@Column(name = "entity_status", length = 30)
+	@Column(name = "entity_status", length = 50)
 	public String getStatus() {
 		return status;
 	}

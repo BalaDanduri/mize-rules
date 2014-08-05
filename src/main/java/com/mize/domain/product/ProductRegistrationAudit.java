@@ -52,7 +52,7 @@ public class ProductRegistrationAudit extends MizeEntity implements Comparable<P
 		this.id = id;
 	}
 	
-	@Column(name="status_code")
+	@Column(name="status_code",length = 50)
 	public String getStatusCode() {
 		return statusCode;
 	}

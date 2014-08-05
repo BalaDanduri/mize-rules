@@ -127,7 +127,7 @@ public class PartPrice extends MizeEntity {
 		return country;
 	}
 	
-	@Column(name = "currency_code", nullable = true, length = 30)
+	@Column(name = "currency_code", nullable = true, length = 50)
 	public String getCurrencyCode() {
 		return currencyCode;
 	}

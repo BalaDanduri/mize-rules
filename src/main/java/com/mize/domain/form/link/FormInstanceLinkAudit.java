@@ -72,7 +72,7 @@ public class FormInstanceLinkAudit extends MizeEntity {
 		this.formInstanceLink = formInstanceLink;
 	}
 	
-	@Column( name = "status_code", nullable = true, length = 30)
+	@Column( name = "status_code", nullable = true, length = 50)
 	public String getStatusCode() {
 		return statusCode;
 	}

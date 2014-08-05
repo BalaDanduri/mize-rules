@@ -107,12 +107,12 @@ public class Part extends MizeEntity {
 		return tenant;
 	}
 
-	@Column(name = "part_code", length = 30, nullable = false)
+	@Column(name = "part_code", length = 50, nullable = false)
 	public String getCode() {
 		return code;
 	}
 
-	@Column(name = "part_type", length = 30, nullable = true)
+	@Column(name = "part_type", length = 50, nullable = true)
 	public String getType() {
 		return type;
 	}
@@ -145,7 +145,7 @@ public class Part extends MizeEntity {
 		return partAttributes;
 	}
 
-	@Column(name = "uom", length = 30, nullable = true)
+	@Column(name = "uom", length = 50, nullable = true)
 	public String getUom() {
 		return uom;
 	}

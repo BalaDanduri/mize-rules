@@ -93,12 +93,12 @@ public class PartKit extends MizeEntity{
 		return part;
 	}
 
-	@Column(name = "price_method", length = 30, nullable = false)
+	@Column(name = "price_method", length = 50, nullable = false)
 	public String getPriceMethod() {
 		return priceMethod;
 	}
 
-	@Column(name = "kit_type", length = 30, nullable = false)
+	@Column(name = "kit_type", length = 50, nullable = false)
 	public String getType() {
 		return type;
 	}
