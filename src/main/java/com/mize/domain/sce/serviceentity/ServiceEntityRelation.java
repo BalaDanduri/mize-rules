@@ -2,11 +2,13 @@ package com.mize.domain.sce.serviceentity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -25,7 +27,7 @@ public class ServiceEntityRelation extends MizeEntity {
 	private static final long serialVersionUID = 1131204751473949728L;
 	
 	private ServiceEntity serviceEntity;
-	private Long relationId;
+	private ServiceEntity relatedEntity;
 	private String relationType;
 
 	public ServiceEntityRelation() {
@@ -57,13 +59,14 @@ public class ServiceEntityRelation extends MizeEntity {
 		this.serviceEntity = serviceEntity;
 	}
 	
-	@Column(name = "service_entity_rltn_id")
-	public Long getRelationId() {
-		return relationId;
+	@OneToOne(fetch = FetchType.LAZY )
+	@JoinColumn(name = "service_entity_rltn_id")
+	public ServiceEntity getRelatedEntity() {
+		return relatedEntity;
 	}
-
-	public void setRelationId(Long relationId) {
-		this.relationId = relationId;
+	
+	public void setRelatedEntity(ServiceEntity relatedEntity) {
+		this.relatedEntity = relatedEntity;
 	}
 	
 	@Column(name = "service_entity_rltn_type")
@@ -77,10 +80,10 @@ public class ServiceEntityRelation extends MizeEntity {
 
 	@Override
 	public int hashCode() {
-		final int prime = PRIME;
+		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result
-				+ ((relationId == null) ? 0 : relationId.hashCode());
+				+ ((relatedEntity == null) ? 0 : relatedEntity.hashCode());
 		result = prime * result
 				+ ((relationType == null) ? 0 : relationType.hashCode());
 		result = prime * result
@@ -97,10 +100,10 @@ public class ServiceEntityRelation extends MizeEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		ServiceEntityRelation other = (ServiceEntityRelation) obj;
-		if (relationId == null) {
-			if (other.relationId != null)
+		if (relatedEntity == null) {
+			if (other.relatedEntity != null)
 				return false;
-		} else if (!relationId.equals(other.relationId))
+		} else if (!relatedEntity.equals(other.relatedEntity))
 			return false;
 		if (relationType == null) {
 			if (other.relationType != null)
@@ -119,6 +122,8 @@ public class ServiceEntityRelation extends MizeEntity {
 		}
 		return true;
 	}
+
+	
 	
 
 }
