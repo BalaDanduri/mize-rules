@@ -2,13 +2,15 @@ package com.mize.domain.applicationlabel;
 
 import java.io.Serializable;
 
+import com.mize.domain.common.Locale;
+
 public class ApplicationLabelIntlCache implements Comparable<ApplicationLabelIntlCache> , Serializable{
 
 	private static final long serialVersionUID = -872099738445639878L;
 	private Long id;
 	private String name;
 	private String description;
-	Long localeId;
+	private Locale locale;
 	
 	public ApplicationLabelIntlCache() {
 		super();
@@ -38,12 +40,12 @@ public class ApplicationLabelIntlCache implements Comparable<ApplicationLabelInt
 		this.description = description;
 	}
 
-	public Long getLocaleId() {
-		return localeId;
+	public Locale getLocale() {
+		return locale;
 	}
 
-	public void setLocaleId(Long localeId) {
-		this.localeId = localeId;
+	public void setLocale(Locale locale) {
+		this.locale = locale;
 	}
 
 	@Override
@@ -55,11 +57,8 @@ public class ApplicationLabelIntlCache implements Comparable<ApplicationLabelInt
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result
-				+ ((localeId == null) ? 0 : localeId.hashCode());
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((locale == null) ? 0 : locale.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
@@ -78,15 +77,10 @@ public class ApplicationLabelIntlCache implements Comparable<ApplicationLabelInt
 				return false;
 		} else if (!description.equals(other.description))
 			return false;
-		if (id == null) {
-			if (other.id != null)
+		if (locale == null) {
+			if (other.locale != null)
 				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (localeId == null) {
-			if (other.localeId != null)
-				return false;
-		} else if (!localeId.equals(other.localeId))
+		} else if (!locale.equals(other.locale))
 			return false;
 		if (name == null) {
 			if (other.name != null)
@@ -98,8 +92,6 @@ public class ApplicationLabelIntlCache implements Comparable<ApplicationLabelInt
 
 	@Override
 	public String toString() {
-		return "ApplicationLabelIntlCache [id=" + id + ", name=" + name
-				+ ", description=" + description + ", localeId=" + localeId
-				+ "]";
+		return "ApplicationLabelIntlCache [name=" + name + ", description=" + description + ", locale=" + locale + "]";
 	}
 }
