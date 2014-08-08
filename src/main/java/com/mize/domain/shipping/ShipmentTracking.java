@@ -68,6 +68,8 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 	@Transient
 	private EntityComment entityComment;
 	@Transient
+	private Integer totalPackages;
+	@Transient
 	private User user;
 	
 	@Override
@@ -417,6 +419,16 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 	public void setCreatedBy(Long createdBy) {
 		this.createdBy = createdBy;
 	}
+	
+	@Transient
+	public Integer getTotalPackages() {
+		return totalPackages;
+	}
+
+	public void setTotalPackages(Integer totalPackages) {
+		this.totalPackages = totalPackages;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
