@@ -25,14 +25,15 @@ public class AppMessageEntity extends MizeEntity implements Serializable {
 	private Integer severity;
 	private boolean isExists;
 	private String isActive;
+	private String shortDesc;
+	private String languageCode;
+    private String countryCode;
 	private List<AppMessage> appMessages;
-	private AppMessageIntlCache intlCache;
 	private BusinessEntity tenant;
 
 	public AppMessageEntity() {
 		super();
 		appMessages = new ArrayList<AppMessage>();
-		intlCache = new AppMessageIntlCache();
 	}
 
 	public AppMessageEntity(boolean isExists) {
@@ -104,12 +105,28 @@ public class AppMessageEntity extends MizeEntity implements Serializable {
 		this.appMessages = appMessages;
 	}
 
-	public AppMessageIntlCache getIntlCache() {
-		return intlCache;
+	public String getShortDesc() {
+		return shortDesc;
 	}
 
-	public void setIntlCache(AppMessageIntlCache intlCache) {
-		this.intlCache = intlCache;
+	public void setShortDesc(String shortDesc) {
+		this.shortDesc = shortDesc;
+	}
+
+	public String getLanguageCode() {
+		return languageCode;
+	}
+
+	public void setLanguageCode(String languageCode) {
+		this.languageCode = languageCode;
+	}
+
+	public String getCountryCode() {
+		return countryCode;
+	}
+
+	public void setCountryCode(String countryCode) {
+		this.countryCode = countryCode;
 	}
 
 	@Override
@@ -134,11 +151,13 @@ public class AppMessageEntity extends MizeEntity implements Serializable {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
-		result = prime * result + ((intlCache == null) ? 0 : intlCache.hashCode());
+		result = prime * result + ((countryCode == null) ? 0 : countryCode.hashCode());
 		result = prime * result + ((isActive == null) ? 0 : isActive.hashCode());
 		result = prime * result + (isExists ? 1231 : 1237);
+		result = prime * result + ((languageCode == null) ? 0 : languageCode.hashCode());
 		result = prime * result + ((msgType == null) ? 0 : msgType.hashCode());
 		result = prime * result + ((severity == null) ? 0 : severity.hashCode());
+		result = prime * result + ((shortDesc == null) ? 0 : shortDesc.hashCode());
 		return result;
 	}
 
@@ -156,10 +175,10 @@ public class AppMessageEntity extends MizeEntity implements Serializable {
 				return false;
 		} else if (!code.equals(other.code))
 			return false;
-		if (intlCache == null) {
-			if (other.intlCache != null)
+		if (countryCode == null) {
+			if (other.countryCode != null)
 				return false;
-		} else if (!intlCache.equals(other.intlCache))
+		} else if (!countryCode.equals(other.countryCode))
 			return false;
 		if (isActive == null) {
 			if (other.isActive != null)
@@ -167,6 +186,11 @@ public class AppMessageEntity extends MizeEntity implements Serializable {
 		} else if (!isActive.equals(other.isActive))
 			return false;
 		if (isExists != other.isExists)
+			return false;
+		if (languageCode == null) {
+			if (other.languageCode != null)
+				return false;
+		} else if (!languageCode.equals(other.languageCode))
 			return false;
 		if (msgType == null) {
 			if (other.msgType != null)
@@ -178,13 +202,18 @@ public class AppMessageEntity extends MizeEntity implements Serializable {
 				return false;
 		} else if (!severity.equals(other.severity))
 			return false;
+		if (shortDesc == null) {
+			if (other.shortDesc != null)
+				return false;
+		} else if (!shortDesc.equals(other.shortDesc))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "AppMessageEntity [code=" + code + ", msgType=" + msgType + ", severity=" + severity + ", isExists=" + isExists 
-				+ ", isActive=" + isActive + ", intlCache=" + intlCache + "]";
+		return "AppMessageEntity [code=" + code + ", msgType=" + msgType + ", severity=" + severity + ", isExists=" + isExists + ", isActive=" 
+				+ isActive + ", shortDesc=" + shortDesc + ", languageCode=" + languageCode + ", countryCode=" + countryCode + "]";
 	}
 
 }

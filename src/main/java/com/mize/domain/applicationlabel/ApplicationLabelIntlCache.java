@@ -2,15 +2,13 @@ package com.mize.domain.applicationlabel;
 
 import java.io.Serializable;
 
-import com.mize.domain.common.Locale;
-
 public class ApplicationLabelIntlCache implements Comparable<ApplicationLabelIntlCache> , Serializable{
 
 	private static final long serialVersionUID = -872099738445639878L;
 	private Long id;
 	private String name;
 	private String description;
-	private Locale locale;
+	private Long localeId;
 	
 	public ApplicationLabelIntlCache() {
 		super();
@@ -40,12 +38,12 @@ public class ApplicationLabelIntlCache implements Comparable<ApplicationLabelInt
 		this.description = description;
 	}
 
-	public Locale getLocale() {
-		return locale;
+	public Long getLocaleId() {
+		return localeId;
 	}
 
-	public void setLocale(Locale locale) {
-		this.locale = locale;
+	public void setLocaleId(Long localeId) {
+		this.localeId = localeId;
 	}
 
 	@Override
@@ -58,7 +56,7 @@ public class ApplicationLabelIntlCache implements Comparable<ApplicationLabelInt
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((locale == null) ? 0 : locale.hashCode());
+		result = prime * result + ((localeId == null) ? 0 : localeId.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
@@ -77,10 +75,10 @@ public class ApplicationLabelIntlCache implements Comparable<ApplicationLabelInt
 				return false;
 		} else if (!description.equals(other.description))
 			return false;
-		if (locale == null) {
-			if (other.locale != null)
+		if (localeId == null) {
+			if (other.localeId != null)
 				return false;
-		} else if (!locale.equals(other.locale))
+		} else if (!localeId.equals(other.localeId))
 			return false;
 		if (name == null) {
 			if (other.name != null)
@@ -92,6 +90,6 @@ public class ApplicationLabelIntlCache implements Comparable<ApplicationLabelInt
 
 	@Override
 	public String toString() {
-		return "ApplicationLabelIntlCache [name=" + name + ", description=" + description + ", locale=" + locale + "]";
+		return "ApplicationLabelIntlCache [name=" + name + ", description=" + description + ", localeId=" + localeId + "]";
 	}
 }

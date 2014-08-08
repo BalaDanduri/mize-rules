@@ -8,7 +8,7 @@ public class AppMessageIntlCache implements Comparable<AppMessageIntlCache> , Se
 	private Long id;
 	private String shortDesc;
 	private String longDesc;
-	Long localeId;
+	private Long localeId;
 	boolean isDefault;
 	
 	public AppMessageIntlCache() {
@@ -64,13 +64,10 @@ public class AppMessageIntlCache implements Comparable<AppMessageIntlCache> , Se
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result
-				+ ((localeId == null) ? 0 : localeId.hashCode());
-		result = prime * result
-				+ ((longDesc == null) ? 0 : longDesc.hashCode());
-		result = prime * result
-				+ ((shortDesc == null) ? 0 : shortDesc.hashCode());
+		result = prime * result + (isDefault ? 1231 : 1237);
+		result = prime * result + ((localeId == null) ? 0 : localeId.hashCode());
+		result = prime * result + ((longDesc == null) ? 0 : longDesc.hashCode());
+		result = prime * result + ((shortDesc == null) ? 0 : shortDesc.hashCode());
 		return result;
 	}
 
@@ -83,10 +80,7 @@ public class AppMessageIntlCache implements Comparable<AppMessageIntlCache> , Se
 		if (getClass() != obj.getClass())
 			return false;
 		AppMessageIntlCache other = (AppMessageIntlCache) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
+		if (isDefault != other.isDefault)
 			return false;
 		if (localeId == null) {
 			if (other.localeId != null)
@@ -108,9 +102,7 @@ public class AppMessageIntlCache implements Comparable<AppMessageIntlCache> , Se
 
 	@Override
 	public String toString() {
-		return "AppMessageIntlCache [id=" + id + ", shortDesc=" + shortDesc
-				+ ", longDesc=" + longDesc + ", localeId=" + localeId
-				+ ", isDefault=" + isDefault + "]";
+		return "AppMessageIntlCache [shortDesc=" + shortDesc + ", longDesc=" + longDesc + ", localeId=" + localeId + ", isDefault=" + isDefault + "]";
 	}
 	
 }

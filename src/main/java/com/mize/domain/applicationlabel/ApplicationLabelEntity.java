@@ -23,14 +23,15 @@ public class ApplicationLabelEntity extends MizeEntity implements Serializable {
 	private String code;
 	private String isActive;
 	private String isDefault;
+	private String name;
+	private String languageCode;
+    private String countryCode;
 	private List<ApplicationLabel> applicationLabels;
-	private ApplicationLabelIntlCache intlCache;
 	private BusinessEntity tenant;
 
 	public ApplicationLabelEntity() {
 		super();
 		applicationLabels = new ArrayList<ApplicationLabel>();
-		intlCache = new ApplicationLabelIntlCache();
 	}
 	
 	public Long getId() {
@@ -72,13 +73,29 @@ public class ApplicationLabelEntity extends MizeEntity implements Serializable {
 	public void setApplicationLabels(List<ApplicationLabel> applicationLabels) {
 		this.applicationLabels = applicationLabels;
 	}
-
-	public ApplicationLabelIntlCache getIntlCache() {
-		return intlCache;
+	
+	public String getName() {
+		return name;
 	}
 
-	public void setIntlCache(ApplicationLabelIntlCache intlCache) {
-		this.intlCache = intlCache;
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getLanguageCode() {
+		return languageCode;
+	}
+
+	public void setLanguageCode(String languageCode) {
+		this.languageCode = languageCode;
+	}
+
+	public String getCountryCode() {
+		return countryCode;
+	}
+
+	public void setCountryCode(String countryCode) {
+		this.countryCode = countryCode;
 	}
 
 	public BusinessEntity getTenant() {
@@ -111,9 +128,11 @@ public class ApplicationLabelEntity extends MizeEntity implements Serializable {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
-		result = prime * result + ((intlCache == null) ? 0 : intlCache.hashCode());
+		result = prime * result + ((countryCode == null) ? 0 : countryCode.hashCode());
 		result = prime * result + ((isActive == null) ? 0 : isActive.hashCode());
 		result = prime * result + ((isDefault == null) ? 0 : isDefault.hashCode());
+		result = prime * result + ((languageCode == null) ? 0 : languageCode.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
 
@@ -131,10 +150,10 @@ public class ApplicationLabelEntity extends MizeEntity implements Serializable {
 				return false;
 		} else if (!code.equals(other.code))
 			return false;
-		if (intlCache == null) {
-			if (other.intlCache != null)
+		if (countryCode == null) {
+			if (other.countryCode != null)
 				return false;
-		} else if (!intlCache.equals(other.intlCache))
+		} else if (!countryCode.equals(other.countryCode))
 			return false;
 		if (isActive == null) {
 			if (other.isActive != null)
@@ -146,12 +165,23 @@ public class ApplicationLabelEntity extends MizeEntity implements Serializable {
 				return false;
 		} else if (!isDefault.equals(other.isDefault))
 			return false;
+		if (languageCode == null) {
+			if (other.languageCode != null)
+				return false;
+		} else if (!languageCode.equals(other.languageCode))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "ApplicationLabelEntity [code=" + code + ", isActive=" + isActive + ", isDefault=" + isDefault + "]";
+		return "ApplicationLabelEntity [code=" + code + ", isActive=" + isActive + ", isDefault=" + isDefault 
+				+ ", name=" + name + ", languageCode=" + languageCode + ", countryCode=" + countryCode + "]";
 	}
 	
 }
