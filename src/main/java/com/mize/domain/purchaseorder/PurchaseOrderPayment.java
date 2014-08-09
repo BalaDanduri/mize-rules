@@ -37,7 +37,7 @@ public class PurchaseOrderPayment extends MizeEntity implements Comparable<Purch
 	private String beName;
 	private String beFirstName;
 	private String beLastName;
-	private String beMiddleIntial;
+	private String beMiddleInitial;
 
 	public PurchaseOrderPayment(){
 		super();
@@ -178,12 +178,12 @@ public class PurchaseOrderPayment extends MizeEntity implements Comparable<Purch
 	}
 
 	@Column(name="payee_be_middle_initial")
-	public String getBeMiddleIntial() {
-		return beMiddleIntial;
+	public String getBeMiddleInitial() {
+		return beMiddleInitial;
 	}
 
-	public void setBeMiddleIntial(String beMiddleIntial) {
-		this.beMiddleIntial = beMiddleIntial;
+	public void setBeMiddleInitial(String beMiddleInitial) {
+		this.beMiddleInitial = beMiddleInitial;
 	}
 
 	@Override
@@ -231,7 +231,7 @@ public class PurchaseOrderPayment extends MizeEntity implements Comparable<Purch
 				+ updateMasterAddress + ", beCode=" + beCode + ", beTypeCode="
 				+ beTypeCode + ", beSubTypeCode=" + beSubTypeCode + ", beName="
 				+ beName + ", beFirstName=" + beFirstName + ", beLastName="
-				+ beLastName + ", beMiddleIntial=" + beMiddleIntial
+				+ beLastName + ", beMiddleIntial=" + beMiddleInitial
 				+ ", getId()=" + getId() + ", getBusinessEntity()="
 				+ getBusinessEntity() + ", getAddress()=" + getAddress()
 				+ ", getMethod()=" + getMethod() + ", getPurchaseOrder()="
@@ -243,7 +243,7 @@ public class PurchaseOrderPayment extends MizeEntity implements Comparable<Purch
 				+ ", getBeSubTypeCode()=" + getBeSubTypeCode()
 				+ ", getBeName()=" + getBeName() + ", getBeFirstName()="
 				+ getBeFirstName() + ", getBeLastName()=" + getBeLastName()
-				+ ", getBeMiddleIntial()=" + getBeMiddleIntial()
+				+ ", getBeMiddleInitial()=" + getBeMiddleInitial()
 				+ ", hashCode()=" + hashCode() + ", getCreatedBy()="
 				+ getCreatedBy() + ", getCreatedDate()=" + getCreatedDate()
 				+ ", getUpdatedBy()=" + getUpdatedBy() + ", getUpdatedDate()="

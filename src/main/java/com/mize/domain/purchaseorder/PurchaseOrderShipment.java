@@ -50,7 +50,7 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 	private String beName;
 	private String beFirstName;
 	private String beLastName;
-	private String beMiddleIntial;
+	private String beMiddleInitial;
 	
 	//shipFromlocaton
 	private BusinessEntity shipmentFromBE;
@@ -64,7 +64,7 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 	private String fromBEName;
 	private String fromBEFirstName;
 	private String fromBELastName;
-	private String fromBEMiddleIntial;
+	private String fromBEMiddleInitial;
 	
 	
 	private String accountNumber;
@@ -351,12 +351,12 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 	}
 
 	@Column(name = "ship_to_be_middle_initial")
-	public String getBeMiddleIntial() {
-		return beMiddleIntial;
+	public String getBeMiddleInitial() {
+		return beMiddleInitial;
 	}
 
-	public void setBeMiddleIntial(String beMiddleIntial) {
-		this.beMiddleIntial = beMiddleIntial;
+	public void setBeMiddleInitial(String beMiddleInitial) {
+		this.beMiddleInitial = beMiddleInitial;
 	}
 
 	@Column(name = "ship_from_be_code")
@@ -414,12 +414,12 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 	}
 
 	@Column(name = "ship_from_be_middle_initial")
-	public String getFromBEMiddleIntial() {
-		return fromBEMiddleIntial;
+	public String getFromBEMiddleInitial() {
+		return fromBEMiddleInitial;
 	}
 
-	public void setFromBEMiddleIntial(String fromBEMiddleIntial) {
-		this.fromBEMiddleIntial = fromBEMiddleIntial;
+	public void setFromBEMiddleInitial(String fromBEMiddleInitial) {
+		this.fromBEMiddleInitial = fromBEMiddleInitial;
 	}
 
 	@Override
@@ -508,14 +508,14 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 				+ beCode + ", beTypeCode=" + beTypeCode + ", beSubTypeCode="
 				+ beSubTypeCode + ", beName=" + beName + ", beFirstName="
 				+ beFirstName + ", beLastName=" + beLastName
-				+ ", beMiddleIntial=" + beMiddleIntial
+				+ ", beMiddleInitial=" + beMiddleInitial
 				+ ", shipmentFromBeAddressId=" + shipmentFromBeAddressId
 				+ ", isNewShipFrom=" + isNewShipFrom + ", fromBECode="
 				+ fromBECode + ", fromBETypeCode=" + fromBETypeCode
 				+ ", fromBESubTypeCode=" + fromBESubTypeCode + ", fromBEName="
 				+ fromBEName + ", fromBEFirstName=" + fromBEFirstName
 				+ ", fromBELastName=" + fromBELastName
-				+ ", fromBEMiddleIntial=" + fromBEMiddleIntial
+				+ ", fromBEMiddleInitial=" + fromBEMiddleInitial
 				+ ", accountNumber=" + accountNumber + ", isFreeShipping="
 				+ isFreeShipping + ", method=" + method + ", priority="
 				+ priority + ", carrier=" + carrier
