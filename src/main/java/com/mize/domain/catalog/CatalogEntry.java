@@ -1,5 +1,6 @@
 package com.mize.domain.catalog;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -42,7 +43,7 @@ public class CatalogEntry extends MizeEntity {
 	private String isActive;
 	private String isDefault;
 	private Long orderSequence;
-	private List<CatalogEntryIntl> catalogEntryIntl;
+	private List<CatalogEntryIntl> catalogEntryIntl = new ArrayList<CatalogEntryIntl>();
 	
 	public CatalogEntry() {
 		super();

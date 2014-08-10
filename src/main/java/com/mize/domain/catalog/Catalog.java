@@ -1,5 +1,6 @@
 package com.mize.domain.catalog;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -44,7 +45,7 @@ public class Catalog extends MizeEntity {
 	private String catalogType;
 	private String isActive;
 	private String catalogName;
-	private List<CatalogEntry> catalogEntry;
+	private List<CatalogEntry> catalogEntry =  new ArrayList<CatalogEntry>();;
 	@Transient
 	private User user;
 	

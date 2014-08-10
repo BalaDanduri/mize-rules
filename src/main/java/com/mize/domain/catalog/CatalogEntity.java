@@ -29,7 +29,8 @@ public class CatalogEntity extends MizeEntity implements Serializable{
 	private List<Catalog> catalogNames = new ArrayList<Catalog>();	
 	private BusinessEntity tenant;
 	private User user;
-	
+	private String languageCode;
+	private String countryCode;
 	@Override
 	public Long getId() {
 		return id;
@@ -85,6 +86,22 @@ public class CatalogEntity extends MizeEntity implements Serializable{
 	}
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	public String getLanguageCode() {
+		return languageCode;
+	}
+
+	public void setLanguageCode(String languageCode) {
+		this.languageCode = languageCode;
+	}
+
+	public String getCountryCode() {
+		return countryCode;
+	}
+
+	public void setCountryCode(String countryCode) {
+		this.countryCode = countryCode;
 	}
 	
 	@Override	

@@ -1,5 +1,8 @@
 package com.mize.domain.catalog;
 
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 import com.mize.domain.common.MizeEntity;
 
 public class CatalogEntryCache extends MizeEntity implements Comparable<CatalogEntryCache>{
@@ -7,21 +10,19 @@ public class CatalogEntryCache extends MizeEntity implements Comparable<CatalogE
 	private static final long serialVersionUID = -8488237770262609141L;	
 	private String entryCode;
 	private String entryName;
-	private Long localeId;
 	private Long entryId;
 	private String isDefault;
 	private String isActive;
 	private Long orderSequence;
-	
+	private Map<Long,CatalogEntryIntlCache> intlMap = new ConcurrentHashMap<Long, CatalogEntryIntlCache>();
 	public CatalogEntryCache(){
 		super();
 	}
 	
-	public CatalogEntryCache(String entryCode,String entryName,Long localeId){
+	public CatalogEntryCache(String entryCode,String entryName){
 		super();
 		this.entryCode = entryCode;
 		this.entryName = entryName;
-		this.localeId = localeId;
 	}
 	
 	@Override
@@ -47,18 +48,6 @@ public class CatalogEntryCache extends MizeEntity implements Comparable<CatalogE
 	}
 	public void setEntryCode(String entryCode) {
 		this.entryCode = entryCode;
-	}
-	public String getEntryName() {
-		return entryName;
-	}
-	public void setEntryName(String entryName) {
-		this.entryName = entryName;
-	}
-	public Long getLocaleId() {
-		return localeId;
-	}
-	public void setLocaleId(Long localeId) {
-		this.localeId = localeId;
 	}
 
 	public boolean isDefault() {
@@ -92,13 +81,30 @@ public class CatalogEntryCache extends MizeEntity implements Comparable<CatalogE
 	public void setOrderSequence(Long orderSequence) {
 		this.orderSequence = orderSequence;
 	}
+	
 
+	public Map<Long, CatalogEntryIntlCache> getIntlMap() {
+		return intlMap;
+	}
+
+	public void setIntlMap(Map<Long, CatalogEntryIntlCache> intlMap) {
+		this.intlMap = intlMap;
+	}
+
+	public String getEntryName() {
+		return entryName;
+	}
+
+	public void setEntryName(String entryName) {
+		this.entryName = entryName;
+	}
+	
 	@Override
 	public String toString() {
 		return "CatalogEntryCache [entryCode=" + entryCode + ", entryName="
-				+ entryName + ", localeId=" + localeId + ", entryId=" + entryId
-				+ ", isDefault=" + isDefault + ", isActive=" + isActive
-				+ ", orderSequence=" + orderSequence + "]";
+				+ entryName + ", entryId=" + entryId + ", isDefault="
+				+ isDefault + ", isActive=" + isActive + ", orderSequence="
+				+ orderSequence + ", intlMap=" + intlMap + "]";
 	}
 
 	@Override
