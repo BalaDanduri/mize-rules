@@ -69,7 +69,9 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 	private EntityComment entityComment;
 	@Transient
 	private User user;
-	private BigDecimal totalWeight;
+	private BigDecimal totalWeight;	
+	@Transient
+	private ShipmentEntity shipmentEntity;
 	
 	@Override
 	@Id
@@ -428,6 +430,15 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 		this.totalWeight = totalWeight;
 	}
 
+	@Transient
+	public ShipmentEntity getShipmentEntity() {
+		return shipmentEntity;
+	}
+
+	public void setShipmentEntity(ShipmentEntity shipmentEntity) {
+		this.shipmentEntity = shipmentEntity;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
@@ -596,6 +607,25 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 	@Override
 	public int compareTo(ShipmentTracking o) {
 		return 0;
+	}
+
+	@Override
+	public String toString() {
+		return "ShipmentTracking [entityId=" + entityId + ", entityCode="
+				+ entityCode + ", entityType=" + entityType
+				+ ", trackingNumber=" + trackingNumber + ", method=" + method
+				+ ", priority=" + priority + ", carrier=" + carrier
+				+ ", shipmentDate=" + shipmentDate + ", deliveryDate="
+				+ deliveryDate + ", status=" + status + ", label=" + label
+				+ ", shipmentLinkInfo=" + shipmentLinkInfo + ", accountNumber="
+				+ accountNumber + ", invoiceNumber=" + invoiceNumber
+				+ ", customsValue=" + customsValue + ", currencyCode="
+				+ currencyCode + ", packageCount=" + packageCount
+				+ ", shippingAmount=" + shippingAmount + ", handlingAmount="
+				+ handlingAmount + ", freightAmount=" + freightAmount
+				+ ", totalAmount=" + totalAmount + ", deliveryInstructions="
+				+ deliveryInstructions + ", totalWeight=" + totalWeight
+				+ ", shipmentEntity=" + shipmentEntity + "]";
 	}	
 
 }
