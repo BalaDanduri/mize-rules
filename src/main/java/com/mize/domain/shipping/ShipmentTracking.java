@@ -68,9 +68,8 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 	@Transient
 	private EntityComment entityComment;
 	@Transient
-	private Integer totalPackages;
-	@Transient
 	private User user;
+	private BigDecimal totalWeight;
 	
 	@Override
 	@Id
@@ -419,14 +418,14 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 	public void setCreatedBy(Long createdBy) {
 		this.createdBy = createdBy;
 	}
-	
-	@Transient
-	public Integer getTotalPackages() {
-		return totalPackages;
+
+	@Column(name = "total_weight")
+	public BigDecimal getTotalWeight() {
+		return totalWeight;
 	}
 
-	public void setTotalPackages(Integer totalPackages) {
-		this.totalPackages = totalPackages;
+	public void setTotalWeight(BigDecimal totalWeight) {
+		this.totalWeight = totalWeight;
 	}
 
 	@Override

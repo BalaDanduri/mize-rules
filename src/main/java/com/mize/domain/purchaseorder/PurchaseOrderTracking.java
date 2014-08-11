@@ -7,16 +7,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.shipping.ShipmentTracking;
-import com.mize.domain.util.JPASerializer;
 
 @Entity
 @Table(name="purchase_order_tracking")
@@ -40,9 +36,8 @@ public class PurchaseOrderTracking extends MizeEntity implements Comparable<Purc
 
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch=FetchType.EAGER)
     @JoinColumn(name ="shipment_tracking_id")
-	@JsonBackReference(value="shipment_po")
 	public ShipmentTracking getShipment() {
 		return shipment;
 	}
@@ -51,10 +46,9 @@ public class PurchaseOrderTracking extends MizeEntity implements Comparable<Purc
 		this.shipment = shipment;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JsonSerialize(using=JPASerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	@JoinColumn(name = "order_id")
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="order_id")
+	@JsonBackReference(value="shipment_po")
 	public PurchaseOrder getPurchaseOrder() {
 		return purchaseOrder;
 	}
