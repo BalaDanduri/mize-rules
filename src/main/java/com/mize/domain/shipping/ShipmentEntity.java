@@ -9,6 +9,8 @@ public class ShipmentEntity extends MizeEntity implements Comparable<ShipmentEnt
 	private String orderType;
 	private String orderReference;
 	private String status;
+	private String paymentReference;
+	private String paymentMethod;
 	
 	public ShipmentEntity(){		
 	}
@@ -46,13 +48,31 @@ public class ShipmentEntity extends MizeEntity implements Comparable<ShipmentEnt
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
+	public String getPaymentReference() {
+		return paymentReference;
+	}
+
+	public void setPaymentReference(String paymentReference) {
+		this.paymentReference = paymentReference;
+	}
+	
+	public String getPaymentMethod() {
+		return paymentMethod;
+	}
+
+	public void setPaymentMethod(String paymentMethod) {
+		this.paymentMethod = paymentMethod;
+	}
+
 	@Override
 	public String toString() {
 		return "ShipmentEntity [requestType=" + requestType + ", orderType="
 				+ orderType + ", orderReference=" + orderReference
-				+ ", status=" + status + "]";
+				+ ", status=" + status + ", paymentReference="
+				+ paymentReference + ", paymentMethod=" + paymentMethod + "]";
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
