@@ -22,7 +22,7 @@ public class ShipmentComment extends MizeEntity implements Comparable<ShipmentCo
 	private static final long serialVersionUID = -1285187789767965930L;
 
 	private ShipmentTracking shipmentTracking;
-	private EntityComment entityComment;
+	private EntityComment comment;
 	
 	@Override
 	@Id
@@ -50,12 +50,12 @@ public class ShipmentComment extends MizeEntity implements Comparable<ShipmentCo
 
 	@JoinColumn(name = "comment_id")
 	@OneToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
-	public EntityComment getEntityComment() {
-		return entityComment;
+	public EntityComment getComment() {
+		return comment;
 	}
 
-	public void setEntityComment(EntityComment entityComment) {
-		this.entityComment = entityComment;
+	public void setComment(EntityComment comment) {
+		this.comment = comment;
 	}
 
 	@Override
@@ -63,7 +63,7 @@ public class ShipmentComment extends MizeEntity implements Comparable<ShipmentCo
 		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result
-				+ ((entityComment == null) ? 0 : entityComment.hashCode());
+				+ ((comment == null) ? 0 : comment.hashCode());
 		return result;
 	}
 
@@ -76,10 +76,10 @@ public class ShipmentComment extends MizeEntity implements Comparable<ShipmentCo
 		if (getClass() != obj.getClass())
 			return false;
 		ShipmentComment other = (ShipmentComment) obj;
-		if (entityComment == null) {
-			if (other.entityComment != null)
+		if (comment == null) {
+			if (other.comment != null)
 				return false;
-		} else if (!entityComment.equals(other.entityComment))
+		} else if (!comment.equals(other.comment))
 			return false;
 		return true;
 	}
