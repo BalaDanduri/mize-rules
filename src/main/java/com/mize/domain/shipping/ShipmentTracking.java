@@ -70,8 +70,11 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 	@Transient
 	private User user;
 	private BigDecimal totalWeight;	
+	private BigDecimal totalWeightUOM;	
 	@Transient
 	private ShipmentEntity shipmentEntity;
+	@Transient
+	private String fromEntity;
 	
 	@Override
 	@Id
@@ -437,6 +440,23 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 
 	public void setShipmentEntity(ShipmentEntity shipmentEntity) {
 		this.shipmentEntity = shipmentEntity;
+	}
+
+	@Transient
+	public String getFromEntity() {
+		return fromEntity;
+	}
+
+	public void setFromEntity(String fromEntity) {
+		this.fromEntity = fromEntity;
+	}
+
+	public BigDecimal getTotalWeightUOM() {
+		return totalWeightUOM;
+	}
+
+	public void setTotalWeightUOM(BigDecimal totalWeightUOM) {
+		this.totalWeightUOM = totalWeightUOM;
 	}
 
 	@Override
