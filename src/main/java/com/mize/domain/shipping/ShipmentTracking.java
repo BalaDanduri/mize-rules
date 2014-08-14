@@ -451,6 +451,7 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 		this.fromEntity = fromEntity;
 	}
 
+	@Column(name="total_weight_uom")
 	public BigDecimal getTotalWeightUOM() {
 		return totalWeightUOM;
 	}
