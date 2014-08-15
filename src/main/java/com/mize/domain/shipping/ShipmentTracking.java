@@ -70,7 +70,7 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 	@Transient
 	private User user;
 	private BigDecimal totalWeight;	
-	private BigDecimal totalWeightUOM;	
+	private String totalWeightUOM;	
 	@Transient
 	private ShipmentEntity shipmentEntity;
 	@Transient
@@ -452,11 +452,11 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 	}
 
 	@Column(name="total_weight_uom")
-	public BigDecimal getTotalWeightUOM() {
+	public String getTotalWeightUOM() {
 		return totalWeightUOM;
 	}
 
-	public void setTotalWeightUOM(BigDecimal totalWeightUOM) {
+	public void setTotalWeightUOM(String totalWeightUOM) {
 		this.totalWeightUOM = totalWeightUOM;
 	}
 
