@@ -1,5 +1,7 @@
 package com.mize.domain.businessentity;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -42,7 +44,7 @@ public class BusinessEntityServiceRate extends MizeEntity implements Comparable<
 	private String currencyCode;
 	private DateTime startDate;
 	private DateTime endDate;
-	
+	private BigDecimal serviceRate;
 
 	public BusinessEntityServiceRate(){
 	}
@@ -151,7 +153,16 @@ public class BusinessEntityServiceRate extends MizeEntity implements Comparable<
 		this.endDate = endDate;
 	}
 	
-    @JsonIgnore(false)
+	@Column(name = "service_rate")
+    public BigDecimal getServiceRate() {
+		return serviceRate;
+	}
+
+	public void setServiceRate(BigDecimal serviceRate) {
+		this.serviceRate = serviceRate;
+	}
+
+	@JsonIgnore(false)
     @DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
     @Column(name = "created_date", updatable = false)
     @org.hibernate.annotations.Type(type = "com.mize.domain.util.DateTimeJPA")
@@ -218,21 +229,17 @@ public class BusinessEntityServiceRate extends MizeEntity implements Comparable<
 
 	@Override
 	public int hashCode() {
-		final int prime = PRIME;
+		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ((brand == null) ? 0 : brand.hashCode());
-		result = prime * result
-				+ ((businessEntity == null) ? 0 : businessEntity.hashCode());
-		result = prime * result
-				+ ((currencyCode == null) ? 0 : currencyCode.hashCode());
+		result = prime * result + ((businessEntity == null) ? 0 : businessEntity.hashCode());
+		result = prime * result + ((currencyCode == null) ? 0 : currencyCode.hashCode());
 		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
 		result = prime * result + ((product == null) ? 0 : product.hashCode());
-		result = prime * result
-				+ ((productCategory == null) ? 0 : productCategory.hashCode());
-		result = prime * result
-				+ ((serviceType == null) ? 0 : serviceType.hashCode());
-		result = prime * result
-				+ ((startDate == null) ? 0 : startDate.hashCode());
+		result = prime * result + ((productCategory == null) ? 0 : productCategory.hashCode());
+		result = prime * result + ((serviceRate == null) ? 0 : serviceRate.hashCode());
+		result = prime * result + ((serviceType == null) ? 0 : serviceType.hashCode());
+		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
 		return result;
 	}
 
@@ -275,6 +282,11 @@ public class BusinessEntityServiceRate extends MizeEntity implements Comparable<
 				return false;
 		} else if (!productCategory.equals(other.productCategory))
 			return false;
+		if (serviceRate == null) {
+			if (other.serviceRate != null)
+				return false;
+		} else if (!serviceRate.equals(other.serviceRate))
+			return false;
 		if (serviceType == null) {
 			if (other.serviceType != null)
 				return false;
@@ -290,11 +302,9 @@ public class BusinessEntityServiceRate extends MizeEntity implements Comparable<
 
 	@Override
 	public String toString() {
-		return "BusinessEntityServiceRate [businessEntity=" + businessEntity
-				+ ", brand=" + brand + ", productCategory=" + productCategory
-				+ ", product=" + product + ", serviceType=" + serviceType
-				+ ", currencyCode=" + currencyCode + ", startDate=" + startDate
-				+ ", endDate=" + endDate + "]";
+		return "BusinessEntityServiceRate [businessEntity=" + businessEntity + ", brand=" + brand + ", productCategory=" + productCategory 
+				+ ", product=" + product + ", serviceType=" + serviceType + ", currencyCode=" + currencyCode + ", startDate=" + startDate 
+				+ ", endDate=" + endDate + ", serviceRate=" + serviceRate + "]";
 	}
 
 	@Override
