@@ -48,6 +48,7 @@ public class Group extends MizeEntity implements Comparable<Group> {
 	private BusinessEntity owner;
 	private List<UserGroup> userGroups = new ArrayList<UserGroup>();
 	private List<GroupRoleMapping> groupsToRole = new ArrayList<GroupRoleMapping>();
+	private List<GroupRelation> relatedGroups = new ArrayList<GroupRelation>();
 	
 	@Transient
 	private User user;
@@ -57,7 +58,7 @@ public class Group extends MizeEntity implements Comparable<Group> {
 	 
 	public Group(String name, String code, String description, String active,
 			List<Role> roles, BusinessEntity owner,
-			List<GroupRoleMapping> groupsToRole) {
+			List<GroupRoleMapping> groupsToRole, List<GroupRelation> relatedGroups) {
 		super();
 		this.name = name;
 		this.code = code;
@@ -66,6 +67,7 @@ public class Group extends MizeEntity implements Comparable<Group> {
 		this.roles = roles;
 		this.owner = owner;
 		this.groupsToRole = groupsToRole;
+		this.relatedGroups = relatedGroups;
 	}
 
 
@@ -182,6 +184,19 @@ public class Group extends MizeEntity implements Comparable<Group> {
 
 	public void setGroupsToRole(List<GroupRoleMapping> groupsToRole) {
 		this.groupsToRole = groupsToRole;
+	}
+	
+	@OneToMany(fetch = FetchType.LAZY,cascade=CascadeType.ALL , mappedBy ="group", orphanRemoval = true)
+	@Fetch(value=FetchMode.SUBSELECT)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	@JsonManagedReference(value="groupRelationMapping")
+	public List<GroupRelation> getRelatedGroups() {
+		return relatedGroups;
+	}
+
+	public void setRelatedGroups(List<GroupRelation> relatedGroups) {
+		this.relatedGroups = relatedGroups;
 	}
 	
 	@Transient
