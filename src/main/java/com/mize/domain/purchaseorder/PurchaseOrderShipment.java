@@ -98,7 +98,7 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 	}
 	
 	@OneToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="shipment_to_be_id")
+	@JoinColumn(name="ship_to_be_id")
 	public BusinessEntity getBusinessEntity() {
 		return businessEntity;
 	}
@@ -108,7 +108,7 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 	}
 
 	@OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name="shipment_to_address_id")
+	@JoinColumn(name="ship_to_address_id")
 	public EntityAddress getAddress() {
 		return address;
 	}
@@ -241,7 +241,7 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 	
 
 	@OneToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="shipment_from_be_id")
+	@JoinColumn(name="ship_from_be_id")
 	public BusinessEntity getShipmentFromBE() {
 		return shipmentFromBE;
 	}
@@ -251,7 +251,7 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 	}
 
 	@OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name="shipment_from_address_id")
+	@JoinColumn(name="ship_from_address_id")
 	public EntityAddress getShipmentFromAddress() {
 		return shipmentFromAddress;
 	}
