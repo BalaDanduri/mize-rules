@@ -52,6 +52,7 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 	private String carrier;
 	private DateTime shipmentDate;
 	private DateTime deliveryDate;
+	private DateTime confirmationDate;
 	private String status;
 	private String label;
 	private String shipmentLinkInfo;
@@ -459,6 +460,26 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 	public void setTotalWeightUOM(String totalWeightUOM) {
 		this.totalWeightUOM = totalWeightUOM;
 	}
+	
+	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using = JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	@Column(name = "confirmation_date")
+	@org.hibernate.annotations.Type(type = "com.mize.domain.util.DateTimeJPA")
+	public DateTime getConfirmationDate() {
+		return confirmationDate;
+	}
+
+	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using = JodaDateTimeDeserializer.class)
+	public void setConfirmationDate(DateTime confirmationDate) {
+		this.confirmationDate = confirmationDate;
+	}
+
+	@Override
+	public int compareTo(ShipmentTracking o) {
+		return 0;
+	}
 
 	@Override
 	public int hashCode() {
@@ -467,6 +488,9 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 		result = prime * result
 				+ ((accountNumber == null) ? 0 : accountNumber.hashCode());
 		result = prime * result + ((carrier == null) ? 0 : carrier.hashCode());
+		result = prime
+				* result
+				+ ((confirmationDate == null) ? 0 : confirmationDate.hashCode());
 		result = prime * result
 				+ ((currencyCode == null) ? 0 : currencyCode.hashCode());
 		result = prime * result
@@ -480,9 +504,13 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 		result = prime * result
 				+ ((entityCode == null) ? 0 : entityCode.hashCode());
 		result = prime * result
+				+ ((entityId == null) ? 0 : entityId.hashCode());
+		result = prime * result
 				+ ((entityType == null) ? 0 : entityType.hashCode());
 		result = prime * result
 				+ ((freightAmount == null) ? 0 : freightAmount.hashCode());
+		result = prime * result
+				+ ((fromEntity == null) ? 0 : fromEntity.hashCode());
 		result = prime * result
 				+ ((handlingAmount == null) ? 0 : handlingAmount.hashCode());
 		result = prime * result
@@ -495,6 +523,8 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 				+ ((priority == null) ? 0 : priority.hashCode());
 		result = prime * result
 				+ ((shipmentDate == null) ? 0 : shipmentDate.hashCode());
+		result = prime * result
+				+ ((shipmentEntity == null) ? 0 : shipmentEntity.hashCode());
 		result = prime
 				* result
 				+ ((shipmentLinkInfo == null) ? 0 : shipmentLinkInfo.hashCode());
@@ -503,6 +533,10 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result
 				+ ((totalAmount == null) ? 0 : totalAmount.hashCode());
+		result = prime * result
+				+ ((totalWeight == null) ? 0 : totalWeight.hashCode());
+		result = prime * result
+				+ ((totalWeightUOM == null) ? 0 : totalWeightUOM.hashCode());
 		result = prime * result
 				+ ((trackingNumber == null) ? 0 : trackingNumber.hashCode());
 		return result;
@@ -526,6 +560,11 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 			if (other.carrier != null)
 				return false;
 		} else if (!carrier.equals(other.carrier))
+			return false;
+		if (confirmationDate == null) {
+			if (other.confirmationDate != null)
+				return false;
+		} else if (!confirmationDate.equals(other.confirmationDate))
 			return false;
 		if (currencyCode == null) {
 			if (other.currencyCode != null)
@@ -552,6 +591,11 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 				return false;
 		} else if (!entityCode.equals(other.entityCode))
 			return false;
+		if (entityId == null) {
+			if (other.entityId != null)
+				return false;
+		} else if (!entityId.equals(other.entityId))
+			return false;
 		if (entityType == null) {
 			if (other.entityType != null)
 				return false;
@@ -561,6 +605,11 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 			if (other.freightAmount != null)
 				return false;
 		} else if (!freightAmount.equals(other.freightAmount))
+			return false;
+		if (fromEntity == null) {
+			if (other.fromEntity != null)
+				return false;
+		} else if (!fromEntity.equals(other.fromEntity))
 			return false;
 		if (handlingAmount == null) {
 			if (other.handlingAmount != null)
@@ -597,6 +646,11 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 				return false;
 		} else if (!shipmentDate.equals(other.shipmentDate))
 			return false;
+		if (shipmentEntity == null) {
+			if (other.shipmentEntity != null)
+				return false;
+		} else if (!shipmentEntity.equals(other.shipmentEntity))
+			return false;
 		if (shipmentLinkInfo == null) {
 			if (other.shipmentLinkInfo != null)
 				return false;
@@ -617,6 +671,16 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 				return false;
 		} else if (!totalAmount.equals(other.totalAmount))
 			return false;
+		if (totalWeight == null) {
+			if (other.totalWeight != null)
+				return false;
+		} else if (!totalWeight.equals(other.totalWeight))
+			return false;
+		if (totalWeightUOM == null) {
+			if (other.totalWeightUOM != null)
+				return false;
+		} else if (!totalWeightUOM.equals(other.totalWeightUOM))
+			return false;
 		if (trackingNumber == null) {
 			if (other.trackingNumber != null)
 				return false;
@@ -624,29 +688,5 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 			return false;
 		return true;
 	}
-	
-	@Override
-	public int compareTo(ShipmentTracking o) {
-		return 0;
-	}
-
-	@Override
-	public String toString() {
-		return "ShipmentTracking [entityId=" + entityId + ", entityCode="
-				+ entityCode + ", entityType=" + entityType
-				+ ", trackingNumber=" + trackingNumber + ", method=" + method
-				+ ", priority=" + priority + ", carrier=" + carrier
-				+ ", shipmentDate=" + shipmentDate + ", deliveryDate="
-				+ deliveryDate + ", status=" + status + ", label=" + label
-				+ ", shipmentLinkInfo=" + shipmentLinkInfo + ", accountNumber="
-				+ accountNumber + ", invoiceNumber=" + invoiceNumber
-				+ ", customsValue=" + customsValue + ", currencyCode="
-				+ currencyCode + ", packageCount=" + packageCount
-				+ ", shippingAmount=" + shippingAmount + ", handlingAmount="
-				+ handlingAmount + ", freightAmount=" + freightAmount
-				+ ", totalAmount=" + totalAmount + ", deliveryInstructions="
-				+ deliveryInstructions + ", totalWeight=" + totalWeight
-				+ ", shipmentEntity=" + shipmentEntity + "]";
-	}	
 
 }
