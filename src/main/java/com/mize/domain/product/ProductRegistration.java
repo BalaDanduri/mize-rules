@@ -116,7 +116,7 @@ public class ProductRegistration extends MizeEntity {
 		this.audits = audits;
 	}
 	
-	public ProductRegistration(Long id,String statusCode,String serialNumber,DateTime shipDate, String brandName,String model,String productName) {
+	public ProductRegistration(Long id,String statusCode,String serialNumber,DateTime shipDate, String brandName,String model,String productName,String productDesc) {
 		this.id = id;
 		this.statusCode = statusCode;
 		ProductSerial productSerial = new ProductSerial();
@@ -126,6 +126,7 @@ public class ProductRegistration extends MizeEntity {
 		brand.setName(brandName);
 		ProductIntl productIntl = new ProductIntl();
 		productIntl.setName(productName);
+		productIntl.setDescription(productDesc);
 		productSerial.setSerialNumber(serialNumber);
 		productSerial.setShipDate(shipDate);
 		product.getProductIntl().add(productIntl);
@@ -135,7 +136,8 @@ public class ProductRegistration extends MizeEntity {
 		
 	}
 	
-	public ProductRegistration(Long id,String statusCode,String serialNumber,DateTime shipDate, String brandName,String model,String productName,String invoiceBeType,String invoiceBeCode,String invoiceBEName,String shippedBeType,String shippedBeCode,String shippedBeName) {
+		
+	public ProductRegistration(Long id,String statusCode,String serialNumber,DateTime shipDate, String brandName,String model,String productName,String productDesc,String invoiceBeType,String invoiceBeCode,String invoiceBEName,String shippedBeType,String shippedBeCode,String shippedBeName) {
 		this.id = id;
 		this.statusCode = statusCode;
 		ProductSerial productSerial = new ProductSerial();
@@ -145,6 +147,7 @@ public class ProductRegistration extends MizeEntity {
 		brand.setName(brandName);
 		ProductIntl productIntl = new ProductIntl();
 		productIntl.setName(productName);
+		productIntl.setDescription(productDesc);
 		productSerial.setSerialNumber(serialNumber);
 		productSerial.setShipDate(shipDate);
 		product.getProductIntl().add(productIntl);

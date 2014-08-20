@@ -1,6 +1,5 @@
 package com.mize.domain.product;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -46,11 +45,11 @@ public class ProductWarranty extends MizeEntity {
 		return id;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER ,cascade = CascadeType.REFRESH)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="prod_serial_id")
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
-	@JsonBackReference(value="warranty_productSerial")
+	@JsonBackReference(value="productSerial_warranty")
 	public ProductSerial getProductSerial() {
 		return productSerial;
 	}

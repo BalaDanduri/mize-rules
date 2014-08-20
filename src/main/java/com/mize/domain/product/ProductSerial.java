@@ -26,6 +26,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -320,9 +321,10 @@ public class ProductSerial extends MizeEntity{
 		this.createdBy = createdBy;
 	}
 	
-	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "productSerial",orphanRemoval= true)
+	@OneToMany(cascade={CascadeType.ALL },fetch = FetchType.LAZY, mappedBy = "productSerial",orphanRemoval= false)
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
+	@JsonManagedReference(value="productSerial_warranty")
 	public List<ProductWarranty> getProductWarrantyList() {
 		return productWarrantyList;
 	}

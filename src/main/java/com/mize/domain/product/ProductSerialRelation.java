@@ -1,6 +1,5 @@
 package com.mize.domain.product;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -30,18 +29,20 @@ public class ProductSerialRelation extends MizeEntity{
 	
 	private static final long serialVersionUID = -2610914671026405288L;
 	private ProductSerial productSerial;
-	private ProductSerial parentProductSerial;
+	private Long parentProductSerialId;
 	private String relationType;
+	private String parentSerialNumber;
+	private String parentModel;
 	
 	public ProductSerialRelation(){
 		super();
 	}
 	
 	public ProductSerialRelation(ProductSerial productSerial,
-			ProductSerial parentProductSerial, String relationType) {
+			Long parentProductSerialId, String relationType) {
 		super();
 		this.productSerial = productSerial;
-		this.parentProductSerial = parentProductSerial;
+		this.parentProductSerialId = parentProductSerialId;
 		this.relationType = relationType;
 	}
 
@@ -58,7 +59,7 @@ public class ProductSerialRelation extends MizeEntity{
 		this.id = id;
 	}
 	
-	@OneToOne(fetch = FetchType.LAZY,cascade=CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="prod_serial_id")
 	@JsonBackReference(value="relation_productSerial")
 	public ProductSerial getProductSerial() {
@@ -68,17 +69,8 @@ public class ProductSerialRelation extends MizeEntity{
 	public void setProductSerial(ProductSerial productSerial) {
 		this.productSerial = productSerial;
 	}
-	
-	@OneToOne(fetch = FetchType.LAZY,cascade=CascadeType.ALL)
-	@JoinColumn(name="parent_prod_serial_id")
-	@JsonBackReference(value="relation_parent_productSerial")
-	public ProductSerial getParentProductSerial() {
-		return parentProductSerial;
-	}
 
-	public void setParentProductSerial(ProductSerial parentProductSerial) {
-		this.parentProductSerial = parentProductSerial;
-	}
+	
 
 	@Column(name = "relation_type", nullable = true)
 	public String getRelationType() {
@@ -87,6 +79,33 @@ public class ProductSerialRelation extends MizeEntity{
 
 	public void setRelationType(String relationType) {
 		this.relationType = relationType;
+	}
+	
+	@Column(name = "parent_prod_serial_id", nullable = true)
+	public Long getParentProductSerialId() {
+		return parentProductSerialId;
+	}
+
+	public void setParentProductSerialId(Long parentProductSerialId) {
+		this.parentProductSerialId = parentProductSerialId;
+	}
+
+	@Column(name = "rltd_prod_srl_no", nullable = true,length = 200)
+	public String getParentSerialNumber() {
+		return parentSerialNumber;
+	}
+
+	@Column(name = "rltd_model", nullable = true ,length = 50)
+	public String getParentModel() {
+		return parentModel;
+	}
+
+	public void setParentSerialNumber(String parentSerialNumber) {
+		this.parentSerialNumber = parentSerialNumber;
+	}
+
+	public void setParentModel(String parentModel) {
+		this.parentModel = parentModel;
 	}
 
 	@Override	
@@ -151,7 +170,7 @@ public class ProductSerialRelation extends MizeEntity{
 		int result = super.hashCode();
 		result = prime
 				* result
-				+ ((parentProductSerial == null) ? 0 : parentProductSerial
+				+ ((parentProductSerialId == null) ? 0 : parentProductSerialId
 						.hashCode());
 		result = prime * result
 				+ ((productSerial == null) ? 0 : productSerial.hashCode());
@@ -169,10 +188,10 @@ public class ProductSerialRelation extends MizeEntity{
 		if (getClass() != obj.getClass())
 			return false;
 		ProductSerialRelation other = (ProductSerialRelation) obj;
-		if (parentProductSerial == null) {
-			if (other.parentProductSerial != null)
+		if (parentProductSerialId == null) {
+			if (other.parentProductSerialId != null)
 				return false;
-		} else if (!parentProductSerial.equals(other.parentProductSerial))
+		} else if (!parentProductSerialId.equals(other.parentProductSerialId))
 			return false;
 		if (productSerial == null) {
 			if (other.productSerial != null)
@@ -190,7 +209,7 @@ public class ProductSerialRelation extends MizeEntity{
 	@Override
 	public String toString() {
 		return "ProductSerialRelation [productSerial=" + productSerial
-				+ ", parentProductSerial=" + parentProductSerial
+				+ ", parentProductSerial=" + parentProductSerialId
 				+ ", relationType=" + relationType + "]";
 	}
 
