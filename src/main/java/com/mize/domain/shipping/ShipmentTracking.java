@@ -50,6 +50,7 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 	private String method;
 	private String priority;
 	private String carrier;
+	private String shipmentCarrierName;
 	private DateTime shipmentDate;
 	private DateTime deliveryDate;
 	private DateTime confirmationDate;
@@ -187,6 +188,14 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 
 	public void setCarrier(String carrier) {
 		this.carrier = carrier;
+	}
+	@Column(name="shipment_carrier_name")
+	public String getShipmentCarrierName() {
+		return shipmentCarrierName;
+	}
+
+	public void setShipmentCarrierName(String shipmentCarrierName) {
+		this.shipmentCarrierName = shipmentCarrierName;
 	}
 
 	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
