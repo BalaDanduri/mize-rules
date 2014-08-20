@@ -383,4 +383,6 @@ public abstract class MessageConstants implements Serializable{
 	public static final String ENTITY_TYPE_REQUIRED ="ENTITY_TYPE_REQUIRED";
 	public static final String INVALID_REGISTRATION_TYPE ="INVALID_REGISTRATION_TYPE";
 	public static final String INVALID_REGISTRATION_SOURCE ="INVALID_REGISTRATION_SOURCE";
+	public static final String FEDEX_EXCEPTION = "FEDEX_EXCEPTION";
+	public static final String UPS_EXCEPTION = "UPS_EXCEPTION";
 }
