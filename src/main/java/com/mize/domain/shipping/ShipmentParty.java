@@ -71,7 +71,7 @@ public class ShipmentParty extends MizeEntity {
 		this.partyType = partyType;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_DEFAULT)
 	@JoinColumn(name = "party_be_id")

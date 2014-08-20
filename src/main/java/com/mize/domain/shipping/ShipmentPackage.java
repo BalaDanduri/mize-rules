@@ -128,7 +128,7 @@ public class ShipmentPackage extends MizeEntity implements Comparable<ShipmentPa
 		this.totalAmount = totalAmount;
 	}
 
-	@OneToMany(cascade={CascadeType.ALL}, mappedBy="shipmentPackage",orphanRemoval = true)
+	@OneToMany(cascade={CascadeType.ALL}, mappedBy="shipmentPackage",orphanRemoval = true,fetch=FetchType.LAZY)
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
 	@JsonManagedReference(value="shipment_package_attribute")
