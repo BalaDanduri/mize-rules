@@ -1,5 +1,6 @@
 package com.mize.domain.shipping;
 
+import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeEntity;
 
 public class ShipmentEntity extends MizeEntity implements Comparable<ShipmentEntity>{
@@ -11,6 +12,7 @@ public class ShipmentEntity extends MizeEntity implements Comparable<ShipmentEnt
 	private String status;
 	private String paymentReference;
 	private String paymentMethod;
+	private BusinessEntity businessEntity;
 	
 	public ShipmentEntity(){		
 	}
@@ -65,6 +67,14 @@ public class ShipmentEntity extends MizeEntity implements Comparable<ShipmentEnt
 		this.paymentMethod = paymentMethod;
 	}
 
+	public BusinessEntity getBusinessEntity() {
+		return businessEntity;
+	}
+
+	public void setBusinessEntity(BusinessEntity businessEntity) {
+		this.businessEntity = businessEntity;
+	}
+	
 	@Override
 	public String toString() {
 		return "ShipmentEntity [requestType=" + requestType + ", orderType="
@@ -121,6 +131,5 @@ public class ShipmentEntity extends MizeEntity implements Comparable<ShipmentEnt
 	@Override
 	public int compareTo(ShipmentEntity o) {
 		return 0;
-	}
-		
+	}		
 }
