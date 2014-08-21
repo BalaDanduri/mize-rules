@@ -942,7 +942,10 @@ public final class Formatter {
 	 }
 	 
 	 public static void main(String[] args) {
-		System.out.println(generateRandomPassword());
+		DateTime dateTime = DateTime.now();
+		DateTime dateTime1 = DateTime.now();
+		System.out.println(daysDiff(dateTime, dateTime1));
+		//System.out.println(daysDiff(dateTime1, dateTime));
 	}
 	 
 	 public static final String generateRandomPassword() {
