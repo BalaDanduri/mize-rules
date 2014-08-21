@@ -11,8 +11,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.part.Part;
@@ -30,7 +32,8 @@ public class ServiceEntityRequestPart extends MizeEntity {
 	private static final long serialVersionUID = 609285366151566036L;
 	
 	private ServiceEntityRequest serviceEntityRequest;
-	private Part part;	
+	private Part part;
+	private Long partId;
 	private String partType;
 	private String partCode;
 	private String partName;
@@ -69,14 +72,23 @@ public class ServiceEntityRequestPart extends MizeEntity {
 		this.serviceEntityRequest = serviceEntityRequest;
 	}
 	
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "part_id",nullable = true)
+	@Transient
+	@JsonIgnore
 	public Part getPart() {
 		return part;
 	}
 
 	public void setPart(Part part) {
 		this.part = part;
+	}
+	
+	@Column(name = "part_id", nullable = true)
+	public Long getPartId() {
+		return partId;
+	}
+	
+	public void setPartId(Long partId) {
+		this.partId = partId;
 	}
 	
 	@Column(name = "part_type", length = 50)
@@ -133,7 +145,7 @@ public class ServiceEntityRequestPart extends MizeEntity {
 		this.partSerial = partSerial;
 	}
 	
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "part_amount_id")
 	public ServiceEntityAmount getPartAmount() {
 		return partAmount;

@@ -1,5 +1,6 @@
 package com.mize.domain.sce.serviceentity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -21,8 +22,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
@@ -59,11 +60,12 @@ public class ServiceEntity extends MizeEntity {
 	private ServiceEntityAmount laborAmount;
 	private ServiceEntityAmount otherAmount;
 	private ServiceEntityAmount totalAmount;
-	private List<ServiceEntityAudit> audits;
-	private List<ServiceEntityRelation> entityRelations;
-	private List<ServiceEntityMessage> messages;
-	private List<ServiceEntityComment> comments;
-	private List<ServiceEntityAttachment> attachments;
+	private List<ServiceEntityAudit> audits = new ArrayList<ServiceEntityAudit>();
+	private List<ServiceEntityRelation> entityRelations = new ArrayList<ServiceEntityRelation>();
+	private List<ServiceEntityMessage> messages = new ArrayList<ServiceEntityMessage>();
+	private List<ServiceEntityComment> comments = new ArrayList<ServiceEntityComment>();
+	private List<ServiceEntityAttachment> attachments = new ArrayList<ServiceEntityAttachment>();
+	private String source;	
 	
 	private User user;
 	
@@ -198,7 +200,7 @@ public class ServiceEntity extends MizeEntity {
 		this.payment = payment;
 	}
 
-	@OneToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name="part_amount_id")
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
@@ -210,7 +212,7 @@ public class ServiceEntity extends MizeEntity {
 		this.partAmount = partAmount;
 	}
 	
-	@OneToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name="labor_amount_id")
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
@@ -222,7 +224,7 @@ public class ServiceEntity extends MizeEntity {
 		this.laborAmount = laborAmount;
 	}
 	
-	@OneToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name="other_amount_id")
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
@@ -234,7 +236,7 @@ public class ServiceEntity extends MizeEntity {
 		this.otherAmount = otherAmount;
 	}
 	
-	@OneToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name="total_amount_id")
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
@@ -305,6 +307,15 @@ public class ServiceEntity extends MizeEntity {
 	@JsonIgnore
 	public User getUser() {
 		return user;
+	}	
+	
+	@Column(name = "entity_source", length = 100)
+	public String getSource() {
+		return source;
+	}
+	
+	public void setSource(String source) {
+		this.source = source;
 	}
 	
 	public void setUser(User user) {

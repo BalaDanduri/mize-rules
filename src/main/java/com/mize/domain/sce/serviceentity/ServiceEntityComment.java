@@ -61,7 +61,7 @@ public class ServiceEntityComment extends MizeEntity {
 		this.serviceEntity = serviceEntity;
 	}
 	
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "comment_id")
 	public EntityComment getEntityComment() {
 		return entityComment;

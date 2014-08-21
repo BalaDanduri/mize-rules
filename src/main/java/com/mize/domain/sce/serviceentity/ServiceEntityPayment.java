@@ -10,13 +10,25 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import org.hibernate.annotations.Type;
+import org.joda.time.DateTime;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityAddress;
+import com.mize.domain.common.EntityContact;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JPASerializer;
+import com.mize.domain.util.JodaDateDeserializer;
+import com.mize.domain.util.JsonDateSerializer;
 
 /**
  * @author HarishBurra
@@ -30,6 +42,7 @@ public class ServiceEntityPayment extends MizeEntity {
 	
 	private ServiceEntity serviceEntity;
 	private BusinessEntity payeeEntity;
+	private Long payeeId;
 	private String payeeCode;
 	private String payeeTypeCode;
 	private String payeeName;
@@ -37,6 +50,11 @@ public class ServiceEntityPayment extends MizeEntity {
 	private String payeeLastName;
 	private String payeeMiddleInitial;
 	private EntityAddress payeeAddress;
+	private EntityContact payeeContact;
+	private String payeeReference;
+	private String isNewPayee;
+	private DateTime paymentDate;
+	private String paymentType;
 
 	public ServiceEntityPayment() {
 		
@@ -67,6 +85,8 @@ public class ServiceEntityPayment extends MizeEntity {
 		this.serviceEntity = serviceEntity;
 	}
 	
+	@Transient
+	@JsonIgnore
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "payee_be_id", nullable = true)
 	public BusinessEntity getPayeeEntity() {
@@ -75,6 +95,15 @@ public class ServiceEntityPayment extends MizeEntity {
 
 	public void setPayeeEntity(BusinessEntity payeeEntity) {
 		this.payeeEntity = payeeEntity;
+	}
+	
+	@Column(name = "payee_be_id")
+	public Long getPayeeId() {
+		return payeeId;
+	}
+	
+	public void setPayeeId(Long payeeId) {
+		this.payeeId = payeeId;
 	}
 	
 	@Column(name = "payee_be_code", length = 50)
@@ -131,7 +160,7 @@ public class ServiceEntityPayment extends MizeEntity {
 		this.payeeMiddleInitial = payeeMiddleInitial;
 	}
 	
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "payee_address_id")
 	public EntityAddress getPayeeAddress() {
 		return payeeAddress;
@@ -139,16 +168,72 @@ public class ServiceEntityPayment extends MizeEntity {
 
 	public void setPayeeAddress(EntityAddress payeeAddress) {
 		this.payeeAddress = payeeAddress;
+	}	
+	
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "payee_contact_id")
+	public EntityContact getPayeeContact() {
+		return payeeContact;
+	}
+
+	public void setPayeeContact(EntityContact payeeContact) {
+		this.payeeContact = payeeContact;
+	}
+	
+	@Column(name = "payee_be_reference", length = 100)
+	public String getPayeeReference() {
+		return payeeReference;
+	}
+
+	public void setPayeeReference(String payeeReference) {
+		this.payeeReference = payeeReference;
+	}
+	
+	@Column(name = "is_new_payee", length = 1)
+	public String getIsNewPayee() {
+		return isNewPayee;
+	}
+
+	public void setIsNewPayee(String isNewPayee) {
+		this.isNewPayee = isNewPayee;
+	}
+	
+	@Column(name = "pymt_date", nullable = true)
+	@DateTimeFormat (pattern="MM-dd-yyyy")
+	@Type(type = "com.mize.domain.util.DateTimeJPA")
+	@JsonSerialize(using = JsonDateSerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	public DateTime getPaymentDate() {
+		return paymentDate;
+	}
+	
+	@DateTimeFormat (pattern="MM-dd-yyyy")
+	@JsonDeserialize(using=JodaDateDeserializer.class)
+	public void setPaymentDate(DateTime paymentDate) {
+		this.paymentDate = paymentDate;
+	}
+	
+	@Column(name = "pymt_type", length = 50)
+	public String getPaymentType() {
+		return paymentType;
+	}
+
+	public void setPaymentType(String paymentType) {
+		this.paymentType = paymentType;
 	}
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = PRIME;
 		int result = super.hashCode();
+		result = prime * result
+				+ ((isNewPayee == null) ? 0 : isNewPayee.hashCode());
 		result = prime * result
 				+ ((payeeAddress == null) ? 0 : payeeAddress.hashCode());
 		result = prime * result
 				+ ((payeeCode == null) ? 0 : payeeCode.hashCode());
+		result = prime * result
+				+ ((payeeContact == null) ? 0 : payeeContact.hashCode());
 		result = prime * result
 				+ ((payeeEntity == null) ? 0 : payeeEntity.hashCode());
 		result = prime * result
@@ -162,7 +247,13 @@ public class ServiceEntityPayment extends MizeEntity {
 		result = prime * result
 				+ ((payeeName == null) ? 0 : payeeName.hashCode());
 		result = prime * result
+				+ ((payeeReference == null) ? 0 : payeeReference.hashCode());
+		result = prime * result
 				+ ((payeeTypeCode == null) ? 0 : payeeTypeCode.hashCode());
+		result = prime * result
+				+ ((paymentDate == null) ? 0 : paymentDate.hashCode());
+		result = prime * result
+				+ ((paymentType == null) ? 0 : paymentType.hashCode());
 		result = prime * result
 				+ ((serviceEntity == null) ? 0 : serviceEntity.hashCode());
 		return result;
@@ -177,6 +268,11 @@ public class ServiceEntityPayment extends MizeEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		ServiceEntityPayment other = (ServiceEntityPayment) obj;
+		if (isNewPayee == null) {
+			if (other.isNewPayee != null)
+				return false;
+		} else if (!isNewPayee.equals(other.isNewPayee))
+			return false;
 		if (payeeAddress == null) {
 			if (other.payeeAddress != null)
 				return false;
@@ -186,6 +282,11 @@ public class ServiceEntityPayment extends MizeEntity {
 			if (other.payeeCode != null)
 				return false;
 		} else if (!payeeCode.equals(other.payeeCode))
+			return false;
+		if (payeeContact == null) {
+			if (other.payeeContact != null)
+				return false;
+		} else if (!payeeContact.equals(other.payeeContact))
 			return false;
 		if (payeeEntity == null) {
 			if (other.payeeEntity != null)
@@ -212,10 +313,25 @@ public class ServiceEntityPayment extends MizeEntity {
 				return false;
 		} else if (!payeeName.equals(other.payeeName))
 			return false;
+		if (payeeReference == null) {
+			if (other.payeeReference != null)
+				return false;
+		} else if (!payeeReference.equals(other.payeeReference))
+			return false;
 		if (payeeTypeCode == null) {
 			if (other.payeeTypeCode != null)
 				return false;
 		} else if (!payeeTypeCode.equals(other.payeeTypeCode))
+			return false;
+		if (paymentDate == null) {
+			if (other.paymentDate != null)
+				return false;
+		} else if (!paymentDate.equals(other.paymentDate))
+			return false;
+		if (paymentType == null) {
+			if (other.paymentType != null)
+				return false;
+		} else if (!paymentType.equals(other.paymentType))
 			return false;
 		if (serviceEntity == null) {
 			if (other.serviceEntity != null)
@@ -229,5 +345,6 @@ public class ServiceEntityPayment extends MizeEntity {
 		}
 		return true;
 	}
+	
 
 }

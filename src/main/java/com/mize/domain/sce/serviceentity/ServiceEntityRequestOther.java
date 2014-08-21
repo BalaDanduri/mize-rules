@@ -90,7 +90,7 @@ public class ServiceEntityRequestOther extends MizeEntity {
 		this.chargeDescription = chargeDescription;
 	}
 	
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "other_amount_id")
 	public ServiceEntityAmount getChargeAmount() {
 		return chargeAmount;

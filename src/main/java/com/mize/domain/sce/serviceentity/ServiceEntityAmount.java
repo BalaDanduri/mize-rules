@@ -25,9 +25,12 @@ public class ServiceEntityAmount extends MizeEntity {
 	private BigDecimal requestedQty;
 	private BigDecimal adjustedQty;
 	private BigDecimal requestedAmount;
-	private BigDecimal adjustedAmount;
+	private BigDecimal requestedTotalAmount;
+	private BigDecimal adjustedAmount;	
+	private BigDecimal adjustedTotalAmount;
 	private BigDecimal taxAmount;
 	private BigDecimal totalAmount;
+	private BigDecimal paidAmount;
 
 	public ServiceEntityAmount() {
 		
@@ -98,6 +101,33 @@ public class ServiceEntityAmount extends MizeEntity {
 
 	public void setTotalAmount(BigDecimal totalAmount) {
 		this.totalAmount = totalAmount;
+	}	
+	
+	@Column(name = "requested_total_amount", precision = 20, scale = 6)
+	public BigDecimal getRequestedTotalAmount() {
+		return requestedTotalAmount;
+	}
+
+	public void setRequestedTotalAmount(BigDecimal requestedTotalAmount) {
+		this.requestedTotalAmount = requestedTotalAmount;
+	}
+	
+	@Column(name = "adjusted_total_amount", precision = 20, scale = 6)
+	public BigDecimal getAdjustedTotalAmount() {
+		return adjustedTotalAmount;
+	}
+
+	public void setAdjustedTotalAmount(BigDecimal adjustedTotalAmount) {
+		this.adjustedTotalAmount = adjustedTotalAmount;
+	}
+	
+	@Column(name = "paid_amount", precision = 20, scale = 6)
+	public BigDecimal getPaidAmount() {
+		return paidAmount;
+	}
+
+	public void setPaidAmount(BigDecimal paidAmount) {
+		this.paidAmount = paidAmount;
 	}
 
 	@Override
@@ -108,10 +138,20 @@ public class ServiceEntityAmount extends MizeEntity {
 				+ ((adjustedAmount == null) ? 0 : adjustedAmount.hashCode());
 		result = prime * result
 				+ ((adjustedQty == null) ? 0 : adjustedQty.hashCode());
+		result = prime
+				* result
+				+ ((adjustedTotalAmount == null) ? 0 : adjustedTotalAmount
+						.hashCode());
+		result = prime * result
+				+ ((paidAmount == null) ? 0 : paidAmount.hashCode());
 		result = prime * result
 				+ ((requestedAmount == null) ? 0 : requestedAmount.hashCode());
 		result = prime * result
 				+ ((requestedQty == null) ? 0 : requestedQty.hashCode());
+		result = prime
+				* result
+				+ ((requestedTotalAmount == null) ? 0 : requestedTotalAmount
+						.hashCode());
 		result = prime * result
 				+ ((taxAmount == null) ? 0 : taxAmount.hashCode());
 		result = prime * result
@@ -138,6 +178,16 @@ public class ServiceEntityAmount extends MizeEntity {
 				return false;
 		} else if (!adjustedQty.equals(other.adjustedQty))
 			return false;
+		if (adjustedTotalAmount == null) {
+			if (other.adjustedTotalAmount != null)
+				return false;
+		} else if (!adjustedTotalAmount.equals(other.adjustedTotalAmount))
+			return false;
+		if (paidAmount == null) {
+			if (other.paidAmount != null)
+				return false;
+		} else if (!paidAmount.equals(other.paidAmount))
+			return false;
 		if (requestedAmount == null) {
 			if (other.requestedAmount != null)
 				return false;
@@ -147,6 +197,11 @@ public class ServiceEntityAmount extends MizeEntity {
 			if (other.requestedQty != null)
 				return false;
 		} else if (!requestedQty.equals(other.requestedQty))
+			return false;
+		if (requestedTotalAmount == null) {
+			if (other.requestedTotalAmount != null)
+				return false;
+		} else if (!requestedTotalAmount.equals(other.requestedTotalAmount))
 			return false;
 		if (taxAmount == null) {
 			if (other.taxAmount != null)

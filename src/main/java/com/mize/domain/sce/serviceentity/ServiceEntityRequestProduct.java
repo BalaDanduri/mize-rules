@@ -1,5 +1,6 @@
 package com.mize.domain.sce.serviceentity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,9 +10,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.mize.domain.common.EntityAddress;
+import com.mize.domain.common.EntityContact;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.product.Product;
 import com.mize.domain.product.ProductRegistration;
@@ -30,13 +35,28 @@ public class ServiceEntityRequestProduct extends MizeEntity {
 	
 	private ServiceEntityRequest serviceEntityRequest;
 	private Product product;
+	private Long productId;
 	private ProductSerial productSerial;
+	private Long productSerialId;
 	private ProductRegistration registration;
+	private Long ProdRegnId;
 	private String productName;
 	private String model;
 	private String brandName;
 	private String categoryName;
 	private String serialNumber;
+	private Long customerId;
+	private String customerCode;
+	private String customerTypeCode;
+	private String customerSubTypeCode;
+	private String customerName;
+	private String customerFirstName;
+	private String customerLastName;
+	private String customerMiddleInitial;
+	private String customerReference;
+	private EntityAddress customerAddress;
+	private EntityContact customerContact;
+	private String isNewCustomer;
 
 	public ServiceEntityRequestProduct() {
 		
@@ -67,8 +87,8 @@ public class ServiceEntityRequestProduct extends MizeEntity {
 		this.serviceEntityRequest = serviceEntityRequest;
 	}
 	
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "prod_id", nullable = true)
+	@Transient
+	@JsonIgnore
 	public Product getProduct() {
 		return product;
 	}
@@ -77,24 +97,51 @@ public class ServiceEntityRequestProduct extends MizeEntity {
 		this.product = product;
 	}
 	
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "prod_serial_id", nullable = true)
+	@Column(name = "prod_id", nullable = true)
+	public Long getProductId() {
+		return productId;
+	}
+	
+	public void setProductId(Long productId) {
+		this.productId = productId;
+	}
+	
+	@Transient
+	@JsonIgnore
 	public ProductSerial getProductSerial() {
 		return productSerial;
-	}
-
+	}	
+	
 	public void setProductSerial(ProductSerial productSerial) {
 		this.productSerial = productSerial;
 	}
 	
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "prod_regn_id", nullable = true)	
+	@Column(name = "prod_serial_id", nullable = true)
+	public Long getProductSerialId() {
+		return productSerialId;
+	}
+	
+	public void setProductSerialId(Long productSerialId) {
+		this.productSerialId = productSerialId;
+	}
+	
+	@Transient
+	@JsonIgnore
 	public ProductRegistration getRegistration() {
 		return registration;
 	}
 
 	public void setRegistration(ProductRegistration registration) {
 		this.registration = registration;
+	}
+	
+	@Column(name = "prod_regn_id", nullable = true)
+	public Long getProdRegnId() {
+		return ProdRegnId;
+	}
+	
+	public void setProdRegnId(Long prodRegnId) {
+		ProdRegnId = prodRegnId;
 	}
 	
 	@Column(name = "prod_name", length = 250)
@@ -140,6 +187,117 @@ public class ServiceEntityRequestProduct extends MizeEntity {
 
 	public void setSerialNumber(String serialNumber) {
 		this.serialNumber = serialNumber;
+	}	
+	
+	@Column(name = "customer_be_id")
+	public Long getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
+	}
+	
+	@Column(name = "customer_be_code", length = 50)
+	public String getCustomerCode() {
+		return customerCode;
+	}
+
+	public void setCustomerCode(String customerCode) {
+		this.customerCode = customerCode;
+	}
+	
+	@Column(name = "customer_be_type_code", length = 50)
+	public String getCustomerTypeCode() {
+		return customerTypeCode;
+	}
+
+	public void setCustomerTypeCode(String customerTypeCode) {
+		this.customerTypeCode = customerTypeCode;
+	}
+	
+	@Column(name = "customer_be_sub_type_code", length = 50)
+	public String getCustomerSubTypeCode() {
+		return customerSubTypeCode;
+	}
+	
+	
+	public void setCustomerSubTypeCode(String customerSubTypeCode) {
+		this.customerSubTypeCode = customerSubTypeCode;
+	}
+	
+	@Column(name = "customer_be_name", length = 250)
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+	
+	@Column(name = "customer_be_first_name", length = 100)
+	public String getCustomerFirstName() {
+		return customerFirstName;
+	}
+
+	public void setCustomerFirstName(String customerFirstName) {
+		this.customerFirstName = customerFirstName;
+	}
+	
+	@Column(name = "customer_be_last_name", length = 100)
+	public String getCustomerLastName() {
+		return customerLastName;
+	}
+
+	public void setCustomerLastName(String customerLastName) {
+		this.customerLastName = customerLastName;
+	}
+	
+	@Column(name = "customer_be_middle_initial", length = 50)
+	public String getCustomerMiddleInitial() {
+		return customerMiddleInitial;
+	}
+
+	public void setCustomerMiddleInitial(String customerMiddleInitial) {
+		this.customerMiddleInitial = customerMiddleInitial;
+	}
+	
+	@Column(name = "customer_be_reference", length = 100)
+	public String getCustomerReference() {
+		return customerReference;
+	}
+
+	public void setCustomerReference(String customerReference) {
+		this.customerReference = customerReference;
+	}
+	
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	@JoinColumn(name = "customer_address_id")
+	public EntityAddress getCustomerAddress() {
+		return customerAddress;
+	}
+
+	public void setCustomerAddress(EntityAddress customerAddress) {
+		this.customerAddress = customerAddress;
+	}
+	
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+	@JoinColumn(name = "customer_contact_id")
+	public EntityContact getCustomerContact() {
+		return customerContact;
+	}
+
+	public void setCustomerContact(EntityContact customerContact) {
+		this.customerContact = customerContact;
+	}
+	
+	@Column(name = "is_new_customer", length = 1)
+	public String getIsNewCustomer() {
+		return isNewCustomer;
+	}
+
+	public void setIsNewCustomer(String isNewCustomer) {
+		this.isNewCustomer = isNewCustomer;
 	}
 
 	@Override

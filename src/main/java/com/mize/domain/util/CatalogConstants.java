@@ -71,5 +71,7 @@ public abstract class CatalogConstants implements Serializable{
 	public static final String PACKAGE_SIZE_UOM = "PackageSizeUOM";
 	public static final String PACKAGE_WEIGHT_UOM = "PackageWeightUOM";
 	public static final String SHIPMENT_TRACKING_ENTITY = "ShipmentTrackingEntity";
+	public static final String CLAIM_REQUESTER_TYPE = "ClaimRequesterType";
+	public static final String CLAIM_REQUEST_TYPE = "ClaimRequestType";
 }
 

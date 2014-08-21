@@ -11,8 +11,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.labor.LaborHour;
@@ -31,6 +33,7 @@ public class ServiceEntityRequestLabor extends MizeEntity {
 	
 	private ServiceEntityRequest serviceEntityRequest;
 	private LaborHour laborHour;
+	private Long laborHourId;
 	private String laborType;
 	private String laborCode;
 	private String laborName;
@@ -66,15 +69,24 @@ public class ServiceEntityRequestLabor extends MizeEntity {
 		this.serviceEntityRequest = serviceEntityRequest;
 	}
 	
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "labor_id", nullable = true)
+	@Transient
+	@JsonIgnore
 	public LaborHour getLaborHour() {
 		return laborHour;
 	}
 
 	public void setLaborHour(LaborHour laborHour) {
 		this.laborHour = laborHour;
-	}	
+	}
+	
+	@Column(name = "labor_id", nullable = true)
+	public Long getLaborHourId() {
+		return laborHourId;
+	}
+	
+	public void setLaborHourId(Long laborHourId) {
+		this.laborHourId = laborHourId;
+	}
 	
 	@Column(name = "labor_type", length = 50)
 	public String getLaborType() {
@@ -112,7 +124,7 @@ public class ServiceEntityRequestLabor extends MizeEntity {
 		this.laborDescription = laborDescription;
 	}
 	
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "labor_amount_id")
 	public ServiceEntityAmount getLaborAmount() {
 		return laborAmount;

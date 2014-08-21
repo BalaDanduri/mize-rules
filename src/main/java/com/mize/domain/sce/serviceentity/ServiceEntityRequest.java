@@ -42,6 +42,7 @@ public class ServiceEntityRequest extends MizeEntity {
 	
 	private ServiceEntity serviceEntity;
 	private String requestType;
+	private String requestCode;
 	private DateTime failureDate;
 	private DateTime repairDate;
 	private String repairSiteCode;
@@ -78,7 +79,7 @@ public class ServiceEntityRequest extends MizeEntity {
 		this.id = id;
 	}
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "service_entity_id")
 	@JsonBackReference(value="service_entity_request")
 	@JsonSerialize(using=JPASerializer.class)
@@ -97,6 +98,15 @@ public class ServiceEntityRequest extends MizeEntity {
 
 	public void setRequestType(String requestType) {
 		this.requestType = requestType;
+	}
+	
+	@Column(name = "request_code", length = 50)
+	public String getRequestCode() {
+		return requestCode;
+	}
+	
+	public void setRequestCode(String requestCode) {
+		this.requestCode = requestCode;
 	}
 	
 	@Column(name = "failure_date", nullable = true)
@@ -247,7 +257,7 @@ public class ServiceEntityRequest extends MizeEntity {
 		this.coverage = coverage;
 	}
 
-	@OneToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="part_amount_id")
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
@@ -259,7 +269,7 @@ public class ServiceEntityRequest extends MizeEntity {
 		this.partAmount = partAmount;
 	}
 	
-	@OneToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="labor_amount_id")
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
@@ -271,7 +281,7 @@ public class ServiceEntityRequest extends MizeEntity {
 		this.laborAmount = laborAmount;
 	}
 	
-	@OneToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="other_amount_id")
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
@@ -283,7 +293,7 @@ public class ServiceEntityRequest extends MizeEntity {
 		this.otherAmount = otherAmount;
 	}
 	
-	@OneToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="total_amount_id")
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
@@ -336,6 +346,8 @@ public class ServiceEntityRequest extends MizeEntity {
 				+ ((repairSiteCode == null) ? 0 : repairSiteCode.hashCode());
 		result = prime * result
 				+ ((requestType == null) ? 0 : requestType.hashCode());
+		result = prime * result
+				+ ((requestCode == null) ? 0 : requestCode.hashCode());
 		result = prime * result
 				+ ((serviceEntity == null) ? 0 : serviceEntity.hashCode());
 		result = prime * result
@@ -432,6 +444,11 @@ public class ServiceEntityRequest extends MizeEntity {
 			if (other.requestType != null)
 				return false;
 		} else if (!requestType.equals(other.requestType))
+			return false;
+		if (requestCode == null) {
+			if (other.requestCode != null)
+				return false;
+		} else if (!requestCode.equals(other.requestCode))
 			return false;
 		if (serviceEntity == null) {
 			if (other.serviceEntity != null)
