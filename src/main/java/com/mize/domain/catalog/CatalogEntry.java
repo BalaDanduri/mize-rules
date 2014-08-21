@@ -73,7 +73,7 @@ public class CatalogEntry extends MizeEntity {
 		super.id = id;
 	}
 	
-	@Column(name = "item_code", length = 30, nullable = false)
+	@Column(name = "item_code", length = 50, nullable = false)
 	public String getItemCode() {
 		return itemCode;
 	}

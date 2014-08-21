@@ -136,6 +136,16 @@ public class ProductRegistration extends MizeEntity {
 		
 	}
 	
+	public ProductRegistration(Long id,String statusCode,String invoiceBeType,String invoiceBeCode){
+		this.id = id;
+		this.statusCode = statusCode;
+		if(Formatter.isNotNull(invoiceBeType) && Formatter.isNotNull(invoiceBeCode)){
+			BusinessEntity invoiceBusinessEntity = new BusinessEntity();
+			invoiceBusinessEntity.setTypeCode(invoiceBeType);
+			invoiceBusinessEntity.setCode(invoiceBeCode);
+		}
+	}
+	
 		
 	public ProductRegistration(Long id,String statusCode,String serialNumber,DateTime shipDate, String brandName,String model,String productName,String productDesc,String invoiceBeType,String invoiceBeCode,String invoiceBEName,String shippedBeType,String shippedBeCode,String shippedBeName) {
 		this.id = id;
