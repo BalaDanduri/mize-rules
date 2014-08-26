@@ -35,6 +35,8 @@ public class SolrEntityCriteria extends MizeEntity implements Comparable<SolrEnt
 	private User user;
 	private Integer commitCount;
 	
+	private Boolean nestedDocument;
+	
 	public String getCriteria() {
 		return criteria;
 	}
@@ -186,13 +188,25 @@ public class SolrEntityCriteria extends MizeEntity implements Comparable<SolrEnt
 	public void setCommitCount(Integer commitCount) {
 		this.commitCount = commitCount;
 	}
+	
+	public Boolean getNestedDocument() {
+		return nestedDocument;
+	}
+	public void setNestedDocument(Boolean nestedDocument) {
+		this.nestedDocument = nestedDocument;
+	}
 	@Override
 	public String toString() {
 		return "SolrEntityCriteria [entityName=" + entityName
 				+ ", entityAliasName=" + entityAliasName + ", startDate="
 				+ startDate + ", endDate=" + endDate + ", fromEntityID="
 				+ fromEntityID + ", toEntityID=" + toEntityID + ", inCluseIDs="
-				+ inCluseIDs + ", entityID=" + entityID + ", commitCount=" + commitCount +"]";
+				+ inCluseIDs + ", entityIDList=" + entityIDList + ", entityID="
+				+ entityID + ", criteria=" + criteria + ", recordsCount="
+				+ recordsCount + ", inCluseIDsList=" + inCluseIDsList
+				+ ", entityIDsMap=" + entityIDsMap + ", user=" + user
+				+ ", commitCount=" + commitCount + ", nestedDocument="
+				+ nestedDocument + "]";
 	}
 
 	
