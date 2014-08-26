@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.MizeEntity;
 
@@ -22,7 +24,7 @@ public class EntityParameterAttribute extends MizeEntity implements Comparable<E
 	private EntityParameter entityParameter;
 	private String code;
 	private String value;
-	
+	Long parameterId;
 	public EntityParameterAttribute() {
 		super();
 	}
@@ -31,6 +33,14 @@ public class EntityParameterAttribute extends MizeEntity implements Comparable<E
 		super();
 		this.code = code;
 		this.value = value;
+	}
+	
+	public EntityParameterAttribute(Long id ,Long parameterId ,String code, String value) {
+		super();
+		this.code = code;
+		this.value = value;
+		this.id = id;
+		this.parameterId = parameterId;
 	}
 
 	@Id
@@ -73,6 +83,15 @@ public class EntityParameterAttribute extends MizeEntity implements Comparable<E
 
 	public void setEntityParameter(EntityParameter entityParameter) {
 		this.entityParameter = entityParameter;
+	}
+
+	@Transactional
+	public Long getParameterId() {
+		return parameterId;
+	}
+
+	public void setParameterId(Long parameterId) {
+		this.parameterId = parameterId;
 	}
 
 	public int compareTo(EntityParameterAttribute entityParameterAttribute) {
