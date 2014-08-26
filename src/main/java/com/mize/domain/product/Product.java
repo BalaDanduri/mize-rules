@@ -106,6 +106,23 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 		this.model = model;
 	}
 	
+	public Product(Long id, String model, Long brandId, String brandName, String name, String description ) {
+		this.model = model;
+		this.id = id;
+		Brand brand = new Brand();
+		brand.setId(brandId);
+		brand.setName(brandName);
+		this.brand = brand;
+		ProductIntl intl = new ProductIntl();
+		intl.setName(name);
+		intl.setDescription(description);
+		if(this.productIntl == null) {
+			List<ProductIntl> intls = new ArrayList<ProductIntl>();
+			this.setProductIntl(intls);
+		}
+		this.getProductIntl().add(intl);
+	}
+	
 	@Id
 	@GenericGenerator(name="prod_id",strategy="increment")
 	@GeneratedValue(strategy = GenerationType.AUTO)

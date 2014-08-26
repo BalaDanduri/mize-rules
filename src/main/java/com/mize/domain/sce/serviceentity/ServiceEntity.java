@@ -52,7 +52,7 @@ public class ServiceEntity extends MizeEntity {
 	private BusinessEntity tenant;
 	private Locale locale;
 	private String currencyCode;
-	private List<ServiceEntityRequest> serviceRequests;
+	private List<ServiceEntityRequest> serviceRequests = new ArrayList<ServiceEntityRequest>();
 	private ServiceEntityRequester requester;
 	private ServiceEntityProvider provider;
 	private ServiceEntityPayment payment;

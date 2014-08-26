@@ -151,7 +151,7 @@ public class ServiceEntityTest extends JPATest {
 	private void prepareMessages() {
 		message = new ServiceEntityMessage();
 		message.setServiceEntity(serviceEntity);
-		message.setMessageSeverity(5L);
+		message.setMessageSeverity(5);
 		message.setMessageValue("Invalid Address Type");
 		message.setMessageId(462L);
 		message.setMessageUiReference("Address");

@@ -28,7 +28,7 @@ public class ServiceEntityMessage extends MizeEntity {
 	
 	private ServiceEntity serviceEntity;
 	private Long messageId;
-	private Long messageSeverity;
+	private Integer messageSeverity;
 	private String messageField;
 	private String messageUiReference;
 	private String messageValue;
@@ -71,13 +71,13 @@ public class ServiceEntityMessage extends MizeEntity {
 	public void setMessageId(Long messageId) {
 		this.messageId = messageId;
 	}
-
+	
 	@Column(name = "message_severity")
-	public Long getMessageSeverity() {
+	public Integer getMessageSeverity() {
 		return messageSeverity;
 	}
-
-	public void setMessageSeverity(Long messageSeverity) {
+	
+	public void setMessageSeverity(Integer messageSeverity) {
 		this.messageSeverity = messageSeverity;
 	}
 	
