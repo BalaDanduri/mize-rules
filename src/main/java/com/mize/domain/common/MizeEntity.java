@@ -8,7 +8,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.exception.UploadError;
+import com.mize.domain.util.JodaDateTimeDeserializer;
+import com.mize.domain.util.JsonDateTimeSerializer;
 
 public abstract class MizeEntity implements Serializable{
 	
@@ -22,10 +26,13 @@ public abstract class MizeEntity implements Serializable{
 	@JsonIgnore
 	protected Boolean isValid = Boolean.TRUE;
 			
-	protected Long createdBy;
+	protected Long createdBy;	
+	@JsonIgnore
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	protected DateTime createdDate;	
 	protected Long updatedBy;
 	@JsonIgnore
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	protected DateTime updatedDate;	
 	protected Long id;
 
@@ -50,10 +57,17 @@ public abstract class MizeEntity implements Serializable{
 		this.createdBy = createdBy;
 	}
 
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
+	@JsonIgnore
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
 
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	@JsonIgnore
 	public void setCreatedDate(DateTime createdDate) {
 		this.createdDate = createdDate;
 	}
@@ -68,10 +82,16 @@ public abstract class MizeEntity implements Serializable{
 		this.updatedBy = updatedBy;
 	}
 
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
+	@JsonIgnore
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
 	
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore
 	public void setUpdatedDate(DateTime updatedDate) {
 		this.updatedDate = updatedDate;

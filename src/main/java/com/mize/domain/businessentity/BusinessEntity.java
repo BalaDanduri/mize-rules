@@ -382,16 +382,25 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	}
 
 	@Override	
+	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@Column(name = "created_date",updatable=false)
+	@JsonIgnore(value = false)
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
+    @JsonInclude(Include.NON_DEFAULT)
+
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
 
 	@Override	
+	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@Column(name = "updated_date")
+	@JsonIgnore(value = false)
+	@JsonSerialize(using=JsonDateTimeSerializer.class)
     @JsonInclude(Include.NON_DEFAULT)
+
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
@@ -412,12 +421,16 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 
 
 	@Override
+	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(false)
 	public void setCreatedDate(DateTime createdDate) {
 		super.createdDate = createdDate;
 	}
 
 	@Override
+	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(false)
 	public void setUpdatedDate(DateTime updatedDate) {
 		super.updatedDate = updatedDate;
