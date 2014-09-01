@@ -39,8 +39,10 @@ public class ServiceEntityRequestPart extends MizeEntity {
 	private String partName;
 	private String partDescription;
 	private String partUom;
-	private String partSerial;
+	private String partSerial;	
 	private ServiceEntityAmount partAmount;
+	
+	private boolean isUpdated;
 	
 
 	public ServiceEntityRequestPart() {
@@ -143,7 +145,7 @@ public class ServiceEntityRequestPart extends MizeEntity {
 
 	public void setPartSerial(String partSerial) {
 		this.partSerial = partSerial;
-	}
+	}	
 	
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "part_amount_id")
@@ -153,6 +155,15 @@ public class ServiceEntityRequestPart extends MizeEntity {
 
 	public void setPartAmount(ServiceEntityAmount partAmount) {
 		this.partAmount = partAmount;
+	}
+	
+	@Transient
+	public boolean getIsUpdated() {
+		return isUpdated;
+	}
+
+	public void setIsUpdated(boolean isUpdated) {
+		this.isUpdated = isUpdated;
 	}
 
 	@Override

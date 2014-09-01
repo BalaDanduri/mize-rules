@@ -75,11 +75,16 @@ public abstract class CatalogConstants implements Serializable{
 	public static final String PACKAGE_WEIGHT_UOM = "PackageWeightUOM";
 	public static final String SHIPMENT_TRACKING_ENTITY = "ShipmentTrackingEntity";
 	public static final String CLAIM_REQUESTER_TYPE = "ClaimRequesterType";
-	public static final String CLAIM_REQUEST_TYPE = "ClaimRequestType";
+	public static final String CLAIM_SERVICE_TYPE = "ClaimServiceType";
 	public static final String CLAIM_STATUS = "ClaimStatus";
 	public static final String OTHER_CHARGE_TYPE = "OtherChargeType";
 	public static final String PAYMENT_TYPE = "PaymentType";
-	public static final String PROVIDER_TYPE = "ProviderType";
+	public static final String CLAIM_PROVIDER_TYPE = "ClaimProviderType";
 	public static final String PAYEE_TYPE = "PayeeType";
+	public static final String CLAIM_CUSTOMER_TYPE = "ClaimCustomerType";
+	public static final String CLAIM_COMMENT_TYPE = "ClaimCommentType";
+	public static final String COMPLAINT = "Complaint";
+	public static final String CAUSE = "Cause";
+	public static final String CORRECTIVE_ACTION = "CorrectiveAction";
 }
 

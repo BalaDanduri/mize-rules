@@ -39,6 +39,8 @@ public class ServiceEntityRequestLabor extends MizeEntity {
 	private String laborName;
 	private String laborDescription;
 	private ServiceEntityAmount laborAmount;
+	
+	private boolean isUpdated;
 
 	public ServiceEntityRequestLabor() {
 		
@@ -132,6 +134,15 @@ public class ServiceEntityRequestLabor extends MizeEntity {
 
 	public void setLaborAmount(ServiceEntityAmount laborAmount) {
 		this.laborAmount = laborAmount;
+	}
+	
+	@Transient
+	public boolean getIsUpdated() {
+		return isUpdated;
+	}
+
+	public void setIsUpdated(boolean isUpdated) {
+		this.isUpdated = isUpdated;
 	}
 
 	@Override
