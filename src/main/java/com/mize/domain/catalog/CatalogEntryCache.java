@@ -3,6 +3,7 @@ package com.mize.domain.catalog;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mize.domain.common.MizeEntity;
 
 public class CatalogEntryCache extends MizeEntity implements Comparable<CatalogEntryCache>{
@@ -82,7 +83,7 @@ public class CatalogEntryCache extends MizeEntity implements Comparable<CatalogE
 		this.orderSequence = orderSequence;
 	}
 	
-
+	@JsonIgnore
 	public Map<Long, CatalogEntryIntlCache> getIntlMap() {
 		return intlMap;
 	}
