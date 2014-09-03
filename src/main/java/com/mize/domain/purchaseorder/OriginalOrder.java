@@ -25,13 +25,14 @@ public class OriginalOrder extends MizeEntity {
 	private String requestType;
 	private boolean isValidCombination;
 	private String isReturnable;
+	private String returnReason;
 	private BigDecimal requestedQuantity;
 	
 	public OriginalOrder(){
 		super();
 	}
 	
-	public OriginalOrder(Long id,String number, String status, String type,	String requestType,DateTime createdDate,DateTime updatedDate,BigDecimal requestedQuantity) {
+	public OriginalOrder(Long id,String number, String status, String type,	String requestType,DateTime createdDate,DateTime updatedDate,BigDecimal requestedQuantity,String returnReason) {
 		super();
 		this.id = id;
 		this.number = number;
@@ -41,6 +42,7 @@ public class OriginalOrder extends MizeEntity {
 		this.createdDate = createdDate;
 		this.updatedDate = updatedDate;
 		this.requestedQuantity = requestedQuantity;
+		this.returnReason = returnReason;
 	}
 	
 	@Override
@@ -135,13 +137,22 @@ public class OriginalOrder extends MizeEntity {
 		this.requestedQuantity = requestedQuantity;
 	}
 
+	public String getReturnReason() {
+		return returnReason;
+	}
+
+	public void setReturnReason(String returnReason) {
+		this.returnReason = returnReason;
+	}
+
 	@Override
 	public String toString() {
 		return "OriginalOrder [number=" + number + ", status=" + status
 				+ ", type=" + type + ", requestType=" + requestType
 				+ ", isValidCombination=" + isValidCombination
-				+ ", isReturnable=" + isReturnable + ", requestedQuantity="
-				+ requestedQuantity + "]";
+				+ ", isReturnable=" + isReturnable + ", returnReason="
+				+ returnReason + ", requestedQuantity=" + requestedQuantity
+				+ "]";
 	}
 
 	@Override
@@ -158,6 +169,8 @@ public class OriginalOrder extends MizeEntity {
 				* result
 				+ ((requestedQuantity == null) ? 0 : requestedQuantity
 						.hashCode());
+		result = prime * result
+				+ ((returnReason == null) ? 0 : returnReason.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
@@ -194,6 +207,11 @@ public class OriginalOrder extends MizeEntity {
 				return false;
 		} else if (!requestedQuantity.equals(other.requestedQuantity))
 			return false;
+		if (returnReason == null) {
+			if (other.returnReason != null)
+				return false;
+		} else if (!returnReason.equals(other.returnReason))
+			return false;
 		if (status == null) {
 			if (other.status != null)
 				return false;
@@ -205,6 +223,6 @@ public class OriginalOrder extends MizeEntity {
 		} else if (!type.equals(other.type))
 			return false;
 		return true;
-	}	
-	
+	}
+
 }
