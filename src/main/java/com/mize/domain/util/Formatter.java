@@ -36,6 +36,7 @@ public final class Formatter {
 	public static final DateTimeFormatter  DATE_FORMAT1 = DateTimeFormat.forPattern("MM-dd-yyyy");
 	public static final DateTimeFormatter  DATE_FORMAT3 = DateTimeFormat.forPattern("MM/dd/yyyy");
 	public static final DateTimeFormatter  DB_DATE_TIME_FORMAT = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+	public static final DateTimeFormatter  DB_DATE_TIME_FORMAT1 = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss:SSS");
 	public static final DateTimeFormatter  DATE_FORMAT2 = DateTimeFormat.forPattern("yyyy-MM-dd");
 	public static final String LIKE = "%";
 	private static final Pattern HTML_TAGS_PATTERN = Pattern.compile("<.+?>");

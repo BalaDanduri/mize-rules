@@ -1,5 +1,7 @@
 package com.mize.domain.purchaseorder;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 
 import org.joda.time.DateTime;
@@ -23,12 +25,13 @@ public class OriginalOrder extends MizeEntity {
 	private String requestType;
 	private boolean isValidCombination;
 	private String isReturnable;
+	private BigDecimal requestedQuantity;
 	
 	public OriginalOrder(){
 		super();
 	}
 	
-	public OriginalOrder(Long id,String number, String status, String type,	String requestType,DateTime createdDate,DateTime updatedDate) {
+	public OriginalOrder(Long id,String number, String status, String type,	String requestType,DateTime createdDate,DateTime updatedDate,BigDecimal requestedQuantity) {
 		super();
 		this.id = id;
 		this.number = number;
@@ -37,6 +40,7 @@ public class OriginalOrder extends MizeEntity {
 		this.requestType = requestType;
 		this.createdDate = createdDate;
 		this.updatedDate = updatedDate;
+		this.requestedQuantity = requestedQuantity;
 	}
 	
 	@Override
@@ -121,6 +125,86 @@ public class OriginalOrder extends MizeEntity {
 
 	public void setIsReturnable(String isReturnable) {
 		this.isReturnable = isReturnable;
+	}
+
+	public BigDecimal getRequestedQuantity() {
+		return requestedQuantity;
+	}
+
+	public void setRequestedQuantity(BigDecimal requestedQuantity) {
+		this.requestedQuantity = requestedQuantity;
+	}
+
+	@Override
+	public String toString() {
+		return "OriginalOrder [number=" + number + ", status=" + status
+				+ ", type=" + type + ", requestType=" + requestType
+				+ ", isValidCombination=" + isValidCombination
+				+ ", isReturnable=" + isReturnable + ", requestedQuantity="
+				+ requestedQuantity + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = PRIME;
+		int result = super.hashCode();
+		result = prime * result
+				+ ((isReturnable == null) ? 0 : isReturnable.hashCode());
+		result = prime * result + (isValidCombination ? 1231 : 1237);
+		result = prime * result + ((number == null) ? 0 : number.hashCode());
+		result = prime * result
+				+ ((requestType == null) ? 0 : requestType.hashCode());
+		result = prime
+				* result
+				+ ((requestedQuantity == null) ? 0 : requestedQuantity
+						.hashCode());
+		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		OriginalOrder other = (OriginalOrder) obj;
+		if (isReturnable == null) {
+			if (other.isReturnable != null)
+				return false;
+		} else if (!isReturnable.equals(other.isReturnable))
+			return false;
+		if (isValidCombination != other.isValidCombination)
+			return false;
+		if (number == null) {
+			if (other.number != null)
+				return false;
+		} else if (!number.equals(other.number))
+			return false;
+		if (requestType == null) {
+			if (other.requestType != null)
+				return false;
+		} else if (!requestType.equals(other.requestType))
+			return false;
+		if (requestedQuantity == null) {
+			if (other.requestedQuantity != null)
+				return false;
+		} else if (!requestedQuantity.equals(other.requestedQuantity))
+			return false;
+		if (status == null) {
+			if (other.status != null)
+				return false;
+		} else if (!status.equals(other.status))
+			return false;
+		if (type == null) {
+			if (other.type != null)
+				return false;
+		} else if (!type.equals(other.type))
+			return false;
+		return true;
 	}	
 	
 }
