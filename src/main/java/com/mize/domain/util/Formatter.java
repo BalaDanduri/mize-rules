@@ -444,6 +444,18 @@ public final class Formatter {
 		return returnValue;
 	}
 	
+	public static BigDecimal formattedBigDecimal1(Double value) {
+		BigDecimal returnValue = null;
+		if (value != null) {
+			try {
+				returnValue = new BigDecimal(value);
+				returnValue = formattedBigDecimal1(returnValue);
+			} catch(Exception e) {
+			}
+		}
+		return returnValue;
+	}
+	
 	public static BigInteger toBigInt(int value) {
 		return value == 0 ? BigInteger.ZERO : new BigInteger(String.valueOf(value))  ;
 	}
