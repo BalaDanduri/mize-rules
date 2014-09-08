@@ -3,7 +3,6 @@ package com.mize.domain.form;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -48,25 +47,31 @@ public class FormDefinitionTest extends JPATest {
 		entityManager = getEntityManager();
 		formTemplateDefinition = findExistingFormTemplateDef(entityManager);
 		tenant = findExistingBE(entityManager);
-		locale = new Locale();
 		
 		formDef = new FormDefinition();
 		formDef.setFormTemplateDefinition(formTemplateDefinition);
 		formDef.setTenant(tenant);
-		locale.setId(1L);
-		formDef.setLocale(locale);
 		formDef.setFormCode("FORM123");
-		formDef.setFormName("Test Form");
 		formDef.setIsActive("Y");
 		formDef.setStartDate(Formatter.date(DateTime.now().toString("MM-dd-yyy")));
 		formDef.setEndDate(Formatter.date(DateTime.now().plusYears(1).toString("MM-dd-yyy")));
 		formDef.setStatusCode("DRAFT");
-		formDef.setVersionNumber(BigDecimal.valueOf(1.0));
+		formDef.setVersionNumber("1.0");
 		formDef.setCreatedDate(DateTime.now());
 		formDef.setUpdatedDate(DateTime.now());
 		formDef.setCreatedBy(Long.valueOf(779));
 		formDef.setUpdatedBy(Long.valueOf(779));
 		formDef.setFormDefinitionData("formDefinitionData");
+		
+		FormDefinitionIntl intl = new FormDefinitionIntl();
+		locale = new Locale();
+		locale.setId(1L);
+		intl.setLocale(locale);
+		intl.setName("Test Form");
+		intl.setDescription("Test Form Description");
+		intl.setFormDefinition(formDef);
+		formDef.getIntls().add(intl);
+		
         EntityTransaction tx = entityManager.getTransaction();
         tx.begin();
         entityManager.persist(formDef);            
@@ -99,12 +104,8 @@ public class FormDefinitionTest extends JPATest {
 			FormDefinition formDef = new FormDefinition();
 			formDef.setId(rs.getLong("id"));
 			formDef.setFormCode(rs.getString("form_code"));
-			formDef.setFormName(rs.getString("form_name"));
 			formDef.setStatusCode(rs.getString("status_code"));
 			formDef.setIsActive(rs.getString("is_active"));
-			Locale locale = new Locale();
-			locale.setId(rs.getLong("locale_id"));
-			formDef.setLocale(locale);
 			BusinessEntity tenant =  new BusinessEntity();
 			tenant.setId(rs.getLong("tenant_id"));
 			formDef.setTenant(tenant);
@@ -118,7 +119,7 @@ public class FormDefinitionTest extends JPATest {
 			formDef.setUpdatedDate(Formatter.dateTime(rs.getTimestamp("updated_date")));
 			formDef.setCreatedBy(rs.getLong("created_by"));
 			formDef.setUpdatedBy(rs.getLong("updated_by"));
-			formDef.setVersionNumber(rs.getBigDecimal("version_number"));
+			formDef.setVersionNumber(rs.getString("version_number"));
 			return formDef;
 		}
 		
