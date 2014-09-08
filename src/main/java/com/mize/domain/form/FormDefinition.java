@@ -73,7 +73,7 @@ public class FormDefinition extends MizeEntity {
 		this.isActive = isActive;
 		this.startDate = startDate;
 		this.endDate = endDate;
-		intls = new ArrayList<FormDefinitionIntl>();
+		this.intls = new ArrayList<FormDefinitionIntl>();
 	}
 
 	@Id
