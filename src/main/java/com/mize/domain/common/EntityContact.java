@@ -26,12 +26,11 @@ import com.mize.domain.util.JsonDateTimeSerializer;
 @Table(name = "entity_contact")
 public class EntityContact extends MizeEntity {
 
-	
 	private static final long serialVersionUID = -3798576336173472676L;
-	
 	private String isPrimary;
 	private String isActive;
 	private String contactType;	
+	private String contactName;
 	private String firstName;
 	private String lastName;
 	private String middleInitial;
@@ -51,7 +50,7 @@ public class EntityContact extends MizeEntity {
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = false)
+	@Column(name = "id", unique = true, nullable = false)
 	public Long getId() {
 		return id;
 	}
@@ -60,7 +59,7 @@ public class EntityContact extends MizeEntity {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	@Column(name = "is_primary", length = 1)
 	public String getIsPrimary() {
 		return isPrimary;
@@ -69,7 +68,7 @@ public class EntityContact extends MizeEntity {
 	public void setIsPrimary(String isPrimary) {
 		this.isPrimary = isPrimary;
 	}
-	
+
 	@Column(name = "is_active", length = 1)
 	public String getIsActive() {
 		return isActive;
@@ -78,7 +77,7 @@ public class EntityContact extends MizeEntity {
 	public void setIsActive(String isActive) {
 		this.isActive = isActive;
 	}
-	
+
 	@Column(name = "contact_type", length = 50)
 	public String getContactType() {
 		return contactType;
@@ -87,7 +86,16 @@ public class EntityContact extends MizeEntity {
 	public void setContactType(String contactType) {
 		this.contactType = contactType;
 	}
-	
+
+	@Column(name = "contact_name", length = 250)
+	public String getContactName() {
+		return contactName;
+	}
+
+	public void setContactName(String contactName) {
+		this.contactName = contactName;
+	}
+
 	@Column(name = "first_name", length = 100)
 	public String getFirstName() {
 		return firstName;
@@ -96,7 +104,7 @@ public class EntityContact extends MizeEntity {
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-	
+
 	@Column(name = "last_name", length = 100)
 	public String getLastName() {
 		return lastName;
@@ -105,7 +113,7 @@ public class EntityContact extends MizeEntity {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
+
 	@Column(name = "middle_initial", length = 50)
 	public String getMiddleInitial() {
 		return middleInitial;
@@ -114,7 +122,7 @@ public class EntityContact extends MizeEntity {
 	public void setMiddleInitial(String middleInitial) {
 		this.middleInitial = middleInitial;
 	}
-	
+
 	@Column(name = "phone", length = 50)
 	public String getPhone() {
 		return phone;
@@ -123,7 +131,7 @@ public class EntityContact extends MizeEntity {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	
+
 	@Column(name = "phone_ext", length = 10)
 	public String getPhoneExt() {
 		return phoneExt;
@@ -132,7 +140,7 @@ public class EntityContact extends MizeEntity {
 	public void setPhoneExt(String phoneExt) {
 		this.phoneExt = phoneExt;
 	}
-	
+
 	@Column(name = "alt_phone", length = 50)
 	public String getAlternatePhone() {
 		return alternatePhone;
@@ -141,7 +149,7 @@ public class EntityContact extends MizeEntity {
 	public void setAlternatePhone(String alternatePhone) {
 		this.alternatePhone = alternatePhone;
 	}
-	
+
 	@Column(name = "alt_phone_ext", length = 10)
 	public String getAlternatePhoneExt() {
 		return alternatePhoneExt;
@@ -150,7 +158,7 @@ public class EntityContact extends MizeEntity {
 	public void setAlternatePhoneExt(String alternatePhoneExt) {
 		this.alternatePhoneExt = alternatePhoneExt;
 	}
-	
+
 	@Column(name = "fax", length = 50)
 	public String getFax() {
 		return fax;
@@ -159,7 +167,7 @@ public class EntityContact extends MizeEntity {
 	public void setFax(String fax) {
 		this.fax = fax;
 	}
-	
+
 	@Column(name = "fax_ext", length = 10)
 	public String getFaxExt() {
 		return faxExt;
@@ -168,7 +176,7 @@ public class EntityContact extends MizeEntity {
 	public void setFaxExt(String faxExt) {
 		this.faxExt = faxExt;
 	}
-	
+
 	@Column(name = "email", length = 100)
 	public String getEmail() {
 		return email;
@@ -177,7 +185,7 @@ public class EntityContact extends MizeEntity {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	@Column(name = "department", length = 50)
 	public String getDepartment() {
 		return department;
@@ -186,7 +194,7 @@ public class EntityContact extends MizeEntity {
 	public void setDepartment(String department) {
 		this.department = department;
 	}
-	
+
 	@Override
 	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
@@ -194,12 +202,12 @@ public class EntityContact extends MizeEntity {
 	public void setCreatedDate(DateTime createdDate) {
 		this.createdDate = createdDate;
 	}
-	
+
 	@JsonIgnore(value=false)
 	public void setUpdatedBy(Long updatedBy) {
 		this.updatedBy = updatedBy;
 	}
- 
+
 	@JsonIgnore(value=false)
 	public void setCreatedBy(Long createdBy) {
 		this.createdBy = createdBy;
@@ -212,7 +220,7 @@ public class EntityContact extends MizeEntity {
 	public void setUpdatedDate(DateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}
-	
+
 	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
 	@JsonIgnore(value=false)
 	@Column(name = "created_date",updatable = false)
@@ -232,13 +240,13 @@ public class EntityContact extends MizeEntity {
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
-	
+
 	@JsonIgnore(value=false)
 	@Column(name = "created_by" , updatable=false)
 	public Long getCreatedBy() {
 		return createdBy;
 	}
-	
+
 	@JsonIgnore(value=false)
 	@Column(name = "updated_by")
 	public Long getUpdatedBy() {
@@ -255,6 +263,8 @@ public class EntityContact extends MizeEntity {
 				* result
 				+ ((alternatePhoneExt == null) ? 0 : alternatePhoneExt
 						.hashCode());
+		result = prime * result
+				+ ((contactName == null) ? 0 : contactName.hashCode());
 		result = prime * result
 				+ ((contactType == null) ? 0 : contactType.hashCode());
 		result = prime * result
@@ -296,6 +306,11 @@ public class EntityContact extends MizeEntity {
 			if (other.alternatePhoneExt != null)
 				return false;
 		} else if (!alternatePhoneExt.equals(other.alternatePhoneExt))
+			return false;
+		if (contactName == null) {
+			if (other.contactName != null)
+				return false;
+		} else if (!contactName.equals(other.contactName))
 			return false;
 		if (contactType == null) {
 			if (other.contactType != null)
@@ -359,7 +374,5 @@ public class EntityContact extends MizeEntity {
 			return false;
 		return true;
 	}
-	
-	
 }
 
