@@ -21,6 +21,7 @@ import com.mize.domain.common.Country;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityAddressGeo;
 import com.mize.domain.common.EntityAddressPhone;
+import com.mize.domain.common.EntityContact;
 import com.mize.domain.common.State;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;
@@ -109,19 +110,22 @@ public class BusinessEntityTest extends JPATest {
 		
 		List<BusinessEntityContact> beContactList = new ArrayList<BusinessEntityContact>();
 		BusinessEntityContact beContact = new BusinessEntityContact();
-		beContact.setBusinessEntity(be);
-		beContact.setDepartment("department");
-		beContact.setEmail("email");
-		beContact.setFax("fax");
-		beContact.setFaxExt("faxExt");
-		beContact.setIsPrimary("Y");
-		beContact.setFirstName("firstName");
-		beContact.setLastName("lastName");
-		beContact.setMiddleName("MiddleName");
-		beContact.setPhone("phone");
-		beContact.setPhoneExt("phoneExt");
+		EntityContact eContact = new EntityContact();
+		eContact.setDepartment("department");
+		eContact.setEmail("email");
+		eContact.setFax("fax");
+		eContact.setFaxExt("faxExt");
+		eContact.setIsPrimary("Y");
+		eContact.setFirstName("firstName");
+		eContact.setLastName("lastName");
+		eContact.setMiddleInitial("MiddleName");
+		eContact.setPhone("phone");
+		eContact.setPhoneExt("phoneExt");
+		beContact.setEntityContact(eContact);
 		beContactList.add(beContact);
 		be.setBeContact(beContactList);
+		beContact.setBusinessEntity(be);
+		
 		
 		BusinessEntityAttribute beAttribute = new BusinessEntityAttribute();
 		beAttribute.setBusinessEntity(be);
