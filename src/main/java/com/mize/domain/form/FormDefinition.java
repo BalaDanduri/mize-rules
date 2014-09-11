@@ -31,6 +31,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.form.link.FormDefinitionLink;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateDeserializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
@@ -54,12 +55,14 @@ public class FormDefinition extends MizeEntity {
 	private DateTime endDate;
 	private List<FormDefinitionAudit> audits = new ArrayList<FormDefinitionAudit>();
 	private List<FormDefinitionIntl> intls;
+	private List<FormDefinitionLink> links;
 	private User user;
 
 	public FormDefinition() {
 		tenant = new BusinessEntity();
 		formTemplateDefinition = new FormTemplateDefinition();
 		intls = new ArrayList<FormDefinitionIntl>();
+		links = new ArrayList<FormDefinitionLink>();
 	}
 
 	public FormDefinition(FormTemplateDefinition formTemplateDefinition, BusinessEntity tenant, String formCode, String versionNumber, String statusCode, String formDefinitionData, String isActive, DateTime startDate, DateTime endDate) {
@@ -74,6 +77,7 @@ public class FormDefinition extends MizeEntity {
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.intls = new ArrayList<FormDefinitionIntl>();
+		this.links = new ArrayList<FormDefinitionLink>();
 	}
 
 	@Id
@@ -206,6 +210,18 @@ public class FormDefinition extends MizeEntity {
 
 	public void setIntls(List<FormDefinitionIntl> intls) {
 		this.intls = intls;
+	}
+	
+	@OneToMany(cascade={CascadeType.ALL}, fetch= FetchType.LAZY, mappedBy = "formDefinition", orphanRemoval= true)
+	@JsonSerialize(using = JPASerializer.class)
+	@JsonManagedReference(value="form_defn_links")
+	@JsonInclude(Include.NON_NULL)
+	public List<FormDefinitionLink> getLinks() {
+		return links;
+	}
+	
+	public void setLinks(List<FormDefinitionLink> links) {
+		this.links = links;
 	}
 
 	@Transient

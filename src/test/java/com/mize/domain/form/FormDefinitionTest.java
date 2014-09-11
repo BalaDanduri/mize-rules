@@ -20,6 +20,7 @@ import org.springframework.test.context.ContextConfiguration;
 
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.Locale;
+import com.mize.domain.form.link.FormDefinitionLink;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;
 
@@ -72,6 +73,20 @@ public class FormDefinitionTest extends JPATest {
 		intl.setFormDefinition(formDef);
 		formDef.getIntls().add(intl);
 		
+		FormDefinitionLink formDefinitionLink = new FormDefinitionLink();
+		formDefinitionLink.setFormDefinition(formDef);
+		//formDefinitionLink.setModel("ABC");
+		formDefinitionLink.setBrandName("DieHard");
+		formDefinitionLink.setCategoryName("Televisions");
+		formDefinitionLink.setInspectionType("Pre-Delivery");
+		formDef.getLinks().add(formDefinitionLink);
+		
+		formDefinitionLink = new FormDefinitionLink();
+		formDefinitionLink.setFormDefinition(formDef);
+		formDefinitionLink.setBrandName("DieHard");
+		formDefinitionLink.setInspectionType("Pre-Delivery");
+		formDef.getLinks().add(formDefinitionLink);
+		
         EntityTransaction tx = entityManager.getTransaction();
         tx.begin();
         entityManager.persist(formDef);            
@@ -106,7 +121,7 @@ public class FormDefinitionTest extends JPATest {
 			formDef.setFormCode(rs.getString("form_code"));
 			formDef.setStatusCode(rs.getString("status_code"));
 			formDef.setIsActive(rs.getString("is_active"));
-			BusinessEntity tenant =  new BusinessEntity();
+			tenant =  new BusinessEntity();
 			tenant.setId(rs.getLong("tenant_id"));
 			formDef.setTenant(tenant);
 			FormTemplateDefinition ftdef = new FormTemplateDefinition();
