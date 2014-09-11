@@ -118,7 +118,7 @@ public class JPATest {
 	}
 	
 	public BusinessEntity findExistingBE(EntityManager entityManager) {
-		BusinessEntity be = (BusinessEntity) entityManager.find(BusinessEntity.class, new Long(961));
+		BusinessEntity be = (BusinessEntity) entityManager.find(BusinessEntity.class, new Long(7624l));
 		return be;
 	}
 	
