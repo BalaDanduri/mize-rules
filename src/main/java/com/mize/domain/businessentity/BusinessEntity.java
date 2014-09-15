@@ -34,6 +34,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
+import com.mize.domain.brand.Brand;
 import com.mize.domain.common.Country;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityAddressGeo;
@@ -71,6 +72,8 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	private List<BusinessEntityServiceLink> beServiceLinks = new ArrayList<BusinessEntityServiceLink>();
 	private List<BusinessEntityServiceRate> beServiceRates = new ArrayList<BusinessEntityServiceRate>();
 	private BusinessEntityRelation customerEntityRelation;
+	private String referenceNumber;
+	private List<Brand> brandList = new ArrayList<Brand>();
 
 	public BusinessEntity() {
 	}
@@ -628,4 +631,24 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	public void setCustomerEntityRelation(BusinessEntityRelation customerEntityRelation) {
 		this.customerEntityRelation = customerEntityRelation;
 	}
+
+	@Transient
+	public String getReferenceNumber() {
+		return referenceNumber;
+	}
+
+	public void setReferenceNumber(String referenceNumber) {
+		this.referenceNumber = referenceNumber;
+	}
+
+	@Transient
+	public List<Brand> getBrandList() {
+		return brandList;
+	}
+
+	public void setBrandList(List<Brand> brandList) {
+		this.brandList = brandList;
+	}
+
+	
 }
