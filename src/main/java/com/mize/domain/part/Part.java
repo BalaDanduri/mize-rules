@@ -89,8 +89,9 @@ public class Part extends MizeEntity {
 		this.partAttributes = partAttributes;
 	}
 	
-	public Part(String partCode, String partType, String isActive, String isKit, String isSerialized, String isReturnable, String uom) {
+	public Part(Long id, String partCode, String partType, String isActive, String isKit, String isSerialized, String isReturnable, String uom) {
 		super();
+		this.id = id;
 		this.code = partCode;
 		this.type = partType;
 		this.isActive = isActive;

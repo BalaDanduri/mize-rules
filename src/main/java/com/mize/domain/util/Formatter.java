@@ -207,6 +207,13 @@ public final class Formatter {
 		return false;
 	}
 	
+	public static boolean isN(String str){
+		if(str != null && NO.equalsIgnoreCase(str.trim())){
+			return true;
+		}
+		return false;
+	}
+	
 	public static boolean charToBoolean(char c) {
 		return ((c == 'Y') || (c == 'y'));
 	}
@@ -955,10 +962,7 @@ public final class Formatter {
 	 }
 	 
 	 public static void main(String[] args) {
-		DateTime dateTime = DateTime.now();
-		DateTime dateTime1 = DateTime.now();
-		System.out.println(daysDiff(dateTime, dateTime1));
-		//System.out.println(daysDiff(dateTime1, dateTime));
+		 System.out.println(formattedBigDecimal1(new BigDecimal(12002.123)));
 	}
 	 
 	 public static final String generateRandomPassword() {
