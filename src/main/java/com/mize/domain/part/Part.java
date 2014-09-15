@@ -86,9 +86,18 @@ public class Part extends MizeEntity {
 		this.partIntl = partIntl;
 		this.partPrices = partPrices;
 		this.partAttributes = partAttributes;
-		//this.partKits = partKits;
 	}
-
+	
+	public Part(String partCode, String partType, String isActive, String isKit, String isSerialized, String isReturnable, String uom) {
+		super();
+		this.code = partCode;
+		this.type = partType;
+		this.isActive = isActive;
+		this.isKit = isKit;
+		this.isSerialized = isSerialized;
+		this.isReturnable = isReturnable;
+		this.uom = uom;
+	}
 
 
 	@Id
