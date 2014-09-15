@@ -29,6 +29,8 @@ public class FormDefinitionAuditTest extends JPATest {
 	EntityManager entityManager = null;
 	FormDefinition formDef = null;
 	FormDefinitionAudit formDefAudit = null;
+	EntityTransaction tx ;
+	FormDefinitionTest formDefTest = new FormDefinitionTest();
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -41,16 +43,24 @@ public class FormDefinitionAuditTest extends JPATest {
 	@Before
 	public void setUp() throws Exception {
 		entityManager = getEntityManager();
-		formDef = findExistingFormDefinition(entityManager);
-		formDefAudit = createFormDefAudit(formDef);
-		EntityTransaction tx = entityManager.getTransaction();
+		tx = entityManager.getTransaction();
 		tx.begin();
+		formDef = formDefTest.createFormDef();
+		entityManager.persist(formDef);
+		formDefAudit = createFormDefAudit(formDef);
+		
 		entityManager.persist(formDefAudit);
 		tx.commit();
 	}
 
 	@After
 	public void tearDown() throws Exception {
+		if(formDefAudit != null)
+			tx.begin();
+		
+		entityManager.remove(formDefAudit);
+		entityManager.remove(formDef);
+		tx.commit();
 		entityManager.close();
 	}
 

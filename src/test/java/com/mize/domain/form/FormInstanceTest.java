@@ -26,6 +26,8 @@ public class FormInstanceTest extends JPATest {
 	FormInstance formInstance = null;
 	FormDefinition formDef = null;
 	EntityManager entityManager = null;
+	EntityTransaction tx;
+	FormDefinitionTest formDefTest = new FormDefinitionTest();
 			
 
 	@BeforeClass
@@ -39,16 +41,25 @@ public class FormInstanceTest extends JPATest {
 	@Before
 	public void setUp() throws Exception {
 		entityManager = getEntityManager();
-		formDef = findExistingFormDefinition(entityManager);
-		formInstance = createFormInstance(formDef);
-		EntityTransaction tx = entityManager.getTransaction();
+		tx = entityManager.getTransaction();
 		tx.begin();
+		formDef = formDefTest.createFormDef();
+		entityManager.persist(formDef);
+		formInstance = createFormInstance(formDef);
+		
 		entityManager.persist(formInstance);
 		tx.commit();
 	}
 
 	@After
 	public void tearDown() throws Exception {
+		if(formInstance !=null){
+			tx.begin();
+			entityManager.remove(formInstance);
+			entityManager.remove(formDef);
+			tx.commit();
+		}
+		entityManager.close();
 	}
 
 	@Test
@@ -77,7 +88,7 @@ public class FormInstanceTest extends JPATest {
 		
 	}
 	
-	private FormInstance createFormInstance(FormDefinition formDef) {
+	public FormInstance createFormInstance(FormDefinition formDef) {
 		FormInstance formInstance = new FormInstance(formDef, "Form Data");
 		return formInstance;
 	}

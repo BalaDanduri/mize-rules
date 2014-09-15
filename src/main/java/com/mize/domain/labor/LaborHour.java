@@ -1,6 +1,7 @@
 package com.mize.domain.labor;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -17,8 +18,6 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -32,6 +31,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
@@ -49,7 +49,7 @@ public class LaborHour extends MizeEntity implements Comparable<LaborHour> {
 	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
 	private DateTime endDate;
 	private BigDecimal hours;
-	private List<LaborHourIntl> intls;
+	private List<LaborHourIntl> intls=new ArrayList<LaborHourIntl>();
 	
 	@Transient
 	private User user;
@@ -167,7 +167,7 @@ public class LaborHour extends MizeEntity implements Comparable<LaborHour> {
 	}
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "laborHour" ,orphanRemoval= true)
-	@Fetch(FetchMode.SELECT)
+	//@Fetch(FetchMode.SELECT)
 	@JsonManagedReference(value="laborHour")
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
@@ -278,7 +278,7 @@ public class LaborHour extends MizeEntity implements Comparable<LaborHour> {
 		if (hours == null) {
 			if (other.hours != null)
 				return false;
-		} else if (!hours.equals(other.hours))
+		} else if (!Formatter.equal(hours, other.hours))
 			return false;
 		if (startDate == null) {
 			if (other.startDate != null)

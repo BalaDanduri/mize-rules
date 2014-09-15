@@ -1,6 +1,5 @@
 package com.mize.domain.sce.part;
 
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -13,6 +12,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
+import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
@@ -29,60 +29,95 @@ import com.mize.domain.util.Formatter;
 
 @ContextConfiguration(locations={"/test-context.xml"})
 public class PickListTest extends JPATest {
+	
 	private static final String PICKLIST_QUERY = "select * from picklist where id = ?";
-	private static final String PICKLIST_ITEM_QUERY = "select * from picklist_item where id = ?";
-	EntityManager entityManager = null;
+	private static final String PICKLIST_ITEM_QUERY = "select * from picklist_item where picklist_id = ?";
+	private static final String PICKLIST_COMMENT = "select * from picklist_comment where picklist_id = ?";
+	EntityManager entityManager;
+	EntityTransaction tx;
+	BusinessEntity businessEntity;
+	BusinessEntity tenant;
+	PartTest partTest = new PartTest();
 	PickList pickList = null;
+	Part part;
+	PickList dbPickList = null;
 	PickListItem pickListItem =null;
 	
+	
 	@Before
-	public void setUp(){
+	public void setUp() throws Exception {
 		entityManager = getEntityManager();
-		BusinessEntity be = findExistingBE(entityManager);
-		pickList = getPickListObjectToSave(be);
-		EntityTransaction tx =entityManager.getTransaction();
+		createMasterData();
+	}
+
+	private void persist() {
+		tx = entityManager.getTransaction();
 		tx.begin();
 		entityManager.persist(pickList);
 		tx.commit();
 	}
-	
 
-	@Test
-	public void test() {
-		try {
-			List<PickList>  pickLists = jdbcTemplate.query(PICKLIST_QUERY, new Object[]{pickList.getId()}, new PickListRowMapper());	
-			if(!Formatter.isEmpty(pickLists)){
-				PickList pick = pickLists.get(0);
-				assertTrue(pickList.getId().equals(pick.getId()));
-			}
-		}catch(Throwable th) {
-			th.printStackTrace();
-			fail("Got Exception");
-			throw th;
+	
+	private void createMasterData() {
+		if (entityManager != null) {
+			tx = entityManager.getTransaction();
+			tx.begin();
+			tenant = createTenant();
+			entityManager.persist(tenant);
+			businessEntity = createBusinessEntity("dealer");
+			businessEntity.setTenant(tenant);
+			entityManager.persist(businessEntity);
+			part = partTest.partObjectToSave();
+			entityManager.persist(part);
+			tx.commit();
+		}
+	}
+	
+	private void createPickList() {
+		if (entityManager != null) {
+			tx = entityManager.getTransaction();
+			tx.begin();
+			pickList = createPartKitObject();
+			setPickListItems(part,pickList);
+			setPickListComments(pickList);
+			entityManager.persist(pickList);
+			tx.commit();
+
 		}
 	}
 
-	@Test
-	public void testPickListItem(){
-	    pickListItem = createPickListItem(pickList);
-		EntityTransaction tx = entityManager.getTransaction();
-		tx.begin();
-		entityManager.persist(pickListItem);
-		assertNotNull(pickListItem.getId());
-		tx.commit();
+	private PickList createPartKitObject() {
 		
-		List<PickListItem>  pickListItems = jdbcTemplate.query(PICKLIST_ITEM_QUERY, new Object[]{pickListItem.getId()}, new PickListItemRowMapper());
-		if(!Formatter.isEmpty(pickListItems)){
-			PickListItem pickListItem1 = pickListItems.get(0);
-			assertTrue(pickListItem.getId().equals(pickListItem1.getId()));
-		}
+		PickList pickList = new PickList();
+		pickList.setCode("admin"+System.currentTimeMillis());
+		pickList.setType("mizeInc");
+		pickList.setIsActive("Y");
+		pickList.setPickListLocation(businessEntity);
+		pickList.setTenant(tenant);
+		pickList.setCreatedDate(DateTime.now());
+		pickList.setUpdatedDate(DateTime.now());
+		pickList.setCreatedBy(776l);
+		pickList.setUpdatedBy(776L);
+		return pickList;
+	}
+	private void setPickListItems(Part part,PickList pickList){
+		PickListItem pickListItem = new PickListItem();
+		List<PickListItem> listItems = new ArrayList<PickListItem>();
+		pickListItem.setPart(part);
+		pickListItem.setPickList(pickList);
+		pickListItem.setPartQty(BigDecimal.valueOf(2));
+		listItems.add(pickListItem);
+		pickList.setListItems(listItems);
 		
 	}
-	
-	private PickListItem createPickListItem(PickList pickList) {
-		Part part =entityManager.find(Part.class, new Long(101));
-		PickListItem pickListItem = new PickListItem(part,pickList,new BigDecimal(100.00));
-		return pickListItem;
+	private void setPickListComments(PickList pickList){
+		PickListComment pickListComment = new PickListComment();
+		List<PickListComment> comments = new ArrayList<PickListComment>();
+		EntityComment comment = createEntityComment();
+		pickListComment.setComment(comment);
+		pickListComment.setPickList(pickList);
+		comments.add(pickListComment);
+		pickList.setComments(comments);
 		
 	}
 	private class PickListRowMapper implements RowMapper<PickList>{
@@ -100,12 +135,11 @@ public class PickListTest extends JPATest {
 			pickList.setCreatedBy(rs.getLong("created_by"));
 			pickList.setUpdatedBy(rs.getLong("updated_by"));
 			pickList.setCreatedDate(Formatter.dateTime(rs.getTimestamp("created_date")));
-			pickList.setUpdatedDate(Formatter.dateTime("updated_date"));
+			pickList.setUpdatedDate(Formatter.dateTime(rs.getTimestamp("updated_date")));
 			return pickList;
 		}
-		
 	}
-	
+		
 	private class PickListItemRowMapper implements RowMapper<PickListItem>{
 
 		@Override
@@ -123,35 +157,114 @@ public class PickListTest extends JPATest {
 		}
 		
 	}
+	private class PickListCommentRowMapper implements RowMapper<PickListComment>{
+
+		@Override
+		public PickListComment mapRow(ResultSet rs, int rowNum)
+				throws SQLException {
+			PickListComment pickListComment = new PickListComment();
+			EntityComment comment = new EntityComment();
+			comment.setId(rs.getLong("id"));
+			pickListComment.setComment(comment);
+			PickList pickList = new PickList();
+			pickList.setId(rs.getLong("picklist_id"));
+			pickListComment.setPickList(pickList);	
+			return pickListComment;
+		}
+		
+	}
+	private PickList retrievePickList(){
+		dbPickList=jdbcTemplate.queryForObject(PICKLIST_QUERY,new Object[] { pickList.getId() }, new PickListRowMapper());
+		if(dbPickList != null){
+			List<PickListItem> pickListItems = jdbcTemplate.query(PICKLIST_ITEM_QUERY, new Object[] { dbPickList.getId() }, new PickListItemRowMapper());
+			dbPickList.setListItems(pickListItems);
+		}
+		if(dbPickList != null){
+			List<PickListComment> pickListComments = jdbcTemplate.query(PICKLIST_COMMENT, new Object[] { dbPickList.getId() }, new PickListCommentRowMapper());
+			dbPickList.setComments(pickListComments);
+		}
+		
+		return dbPickList;
+	}
 	
-	private PickList getPickListObjectToSave(BusinessEntity be) {
+	@Test
+	public void savePickListTest()
+	{
+		createPickList();
+		try{
 		
-		PickList pickList = new PickList();
-		pickList.setCode("pickListcode");
-		pickList.setType("Standard");
-		pickList.setIsActive("Y");
-		BusinessEntity tenant = new BusinessEntity();
-		tenant.setCode("10C000100P");
-		be = new BusinessEntity();
-		be.setTypeCode("dealer");
-		be.setCode("10C00100P");
-		pickList.setPickListLocation(be);
-		pickList.setTenant(tenant);
-		Part part = new Part();
-		part.setCode("Keer111");
-		pickListItem = new PickListItem(part, pickList, BigDecimal.valueOf(100));
-		List<PickListItem> items = new ArrayList<PickListItem>();
-		items.add(pickListItem);
-		pickList.setListItems(items);
-		List<PickListComment> comtsList = new ArrayList<PickListComment>();
-		PickListComment comment = new PickListComment();
-		EntityComment entityComment = new EntityComment();
-		entityComment.setComments("100-TEST-COMMENTS");
-		entityComment.setCommentType("Internal");
-		comment.setComment(entityComment);
-		comtsList.add(comment);
-		pickList.setComments(comtsList);
-		
-		return pickList;
+		if(pickList != null){
+			dbPickList = retrievePickList();
+			if(dbPickList != null){
+				assertTrue(pickList.getId()!=null);
+				assertTrue(compare(pickList, dbPickList));
+			}
+		}
+		tearDown();
+		}catch(Throwable th){
+			th.printStackTrace();
+			fail("Got Exception");
+		}
+	}
+	
+	@Test
+	public void updatePickListTest()
+	{
+		createPickList();
+		try{
+			if(pickList != null){
+				pickList.setCode("testAdmin"+System.currentTimeMillis());
+				pickList.setType("Mize");
+				persist();
+				if(pickList!=null){
+					dbPickList = retrievePickList();
+					if(dbPickList != null){
+						assertTrue(pickList.getId()!=null);
+						assertTrue(compare(pickList, dbPickList));
+					}
+					
+				}
+			}tearDown();
+		}catch(Throwable th){
+			th.printStackTrace();
+			fail("Got Exception");
+		}
+	}
+	public void tearDown() throws Exception {
+		try {
+			if (pickList != null) {
+				tx.begin();
+				entityManager.remove(pickList);
+				entityManager.remove(part);
+				entityManager.remove(businessEntity);
+				entityManager.remove(tenant);
+				tx.commit();
+			}
+			entityManager.close();
+		} catch (Throwable th) {
+			th.printStackTrace();
+		}
+	}
+	
+	private boolean compare(PickList pickList ,PickList dbPickList){
+		if(pickList == null && dbPickList == null){
+			return true;
+		}
+		if(pickList == null  ){
+			if(dbPickList != null){
+				return false;
+			}
+		}else if(pickList!=null ){
+			if(dbPickList == null){
+				return false;
+			}
+		}
+		if(!pickList.getId().equals(dbPickList.getId())){
+			return false;
+		}
+		if(!pickList.getCode().equals(dbPickList.getCode())){
+			return false;
+		}
+		return true;
 	}
 }

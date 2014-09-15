@@ -2,59 +2,78 @@ package com.mize.domain.product;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashSet;
-import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.ContextConfiguration;
 
+import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.test.util.JPATest;
-import com.mize.domain.util.Formatter;
 
 @ContextConfiguration(locations={"/test-context.xml"})
 public class ProductToCategoryTest extends JPATest {
 	private static final String PRODUCT_CATEGORY_QUERY = "select * from prod_to_cat where id = ?";
 	EntityManager entityManager;
 	ProductToCategory prodToCategory = null;
+	ProductToCategory dbProdToCategory = null;
+	BusinessEntity tenant ;
+	BusinessEntity businessEntity;
+	EntityTransaction tx;
+	Product product;
+	ProductCategory productCategory;
+	
 	
 	@Before
-	public void setUp(){
+	public void setUp() throws Exception {
 		entityManager = getEntityManager();
-		prodToCategory = ProductToCategoryToBeSaved();
-		EntityTransaction tx = entityManager.getTransaction();
+		createMasterData();
+		tx = entityManager.getTransaction();
 		tx.begin();
-		if(prodToCategory.getId() != null){
-			prodToCategory = entityManager.merge(prodToCategory);
-		}else{
-			entityManager.persist(prodToCategory);
-		}
+		product = productObjectToSave(tenant, businessEntity, entityManager);
+		entityManager.persist(product);
+		productCategory = findById(8455l, ProductCategory.class, entityManager);
 		tx.commit();
+		
 	}
-
-	public ProductToCategory findExistingProductToCategory(EntityManager entityManager) {
-		return entityManager.find(ProductToCategory.class, new Long(1));
+	private void createMasterData() {
+		if (entityManager != null) {
+			tx = entityManager.getTransaction();
+			tx.begin();
+			tenant = createTenant();
+			entityManager.persist(tenant);
+			businessEntity = createBusinessEntity("dealer");
+			businessEntity.setTenant(tenant);
+			entityManager.persist(businessEntity);
+			tx.commit();
+		}
 	}
 	
-	@Test
-	public void test() {
-		try {
-			List<ProductToCategory>  be = jdbcTemplate.query(PRODUCT_CATEGORY_QUERY, new Object[]{prodToCategory.getId()}, new ProductToCategoryRowMapper());
-			if(!Formatter.isEmpty(be)){
-				ProductToCategory beList = be.get(0);
-				assertTrue(prodToCategory.getId().equals(beList.getId()));
-			} else {
-				fail("Expected object to be returned");
-			}
-		}catch(Throwable th) {
-			th.printStackTrace();
-			fail("Got Exception");
-			throw th;
+	
+	private void createProductToCat() {
+		if (entityManager != null) {
+			tx = entityManager.getTransaction();
+			tx.begin();
+			prodToCategory = ProductToCategoryToBeSaved();
+			
+			entityManager.persist(prodToCategory);
+			tx.commit();
 		}
+
+	}
+	
+	private ProductToCategory ProductToCategoryToBeSaved() {
+		
+		ProductToCategory category = new ProductToCategory();
+		category.setProduct(product);
+		category.setProductCategory(productCategory);
+		return category;
 	}
 	
 	class ProductToCategoryRowMapper implements RowMapper<ProductToCategory> {
@@ -71,18 +90,46 @@ public class ProductToCategoryTest extends JPATest {
 		}
 	}
 	
-	
-	private ProductToCategory ProductToCategoryToBeSaved() {
-		ProductToCategory prodToCategory = new ProductToCategory();
-		ProductToCategory category = new ProductToCategory();
-		category.setId(1L);
-		Product product = new Product();
-		product.setId(1L);
-		ProductCategory productCategory = new ProductCategory();
-		productCategory.setId(1L);
-		category.setProduct(product);
-		category.setProductCategory(productCategory);
-		return prodToCategory;
+	public ProductToCategory retrievProdToCat(){
+		dbProdToCategory = jdbcTemplate.queryForObject(PRODUCT_CATEGORY_QUERY, new Object[]{prodToCategory.getId()}, new ProductToCategoryRowMapper());
+		
+		return dbProdToCategory;
 	}
+	
+	@Test
+	public void saveProdToCatTest(){
+		createProductToCat();
+		try{
+		if(prodToCategory != null){
+			if(dbProdToCategory != null){
+				assertTrue(prodToCategory.getId()!=null);
+				assertTrue(dbProdToCategory.getId()!=null);
+			}
+		}tearDown();
+		}catch(Throwable th){
+			th.printStackTrace();
+			fail("Got Exception");
+		}
+	}
+
+	
+	private void tearDown() {
+		try{
+		if(prodToCategory != null){
+			tx.begin();
+			entityManager.remove(prodToCategory);
+			entityManager.remove(product);
+			entityManager.remove(businessEntity);
+			entityManager.remove(tenant);
+			tx.commit();
+		}
+		entityManager.close();
+		}catch(Throwable th){
+			th.printStackTrace();
+			fail("Got Exception");
+		}
+	}
+	
+	
 		
 }

@@ -103,7 +103,7 @@ public class ServiceEntityRequestTest extends JPATest {
 			serviceEntityRequest.setOtherCharges(others);			
 			persistServiceEntityRequest();
 			
-			TypedQuery<ServiceEntityRequest> query = entityManager.createQuery("select ser from sce.ServiceEntityRequest ser where ser.id = "+serviceEntityRequest.getId(), ServiceEntityRequest.class);
+			TypedQuery<ServiceEntityRequest> query = entityManager.createQuery("select ser from ServiceEntityRequest ser where ser.id = "+serviceEntityRequest.getId(), ServiceEntityRequest.class);
 			ServiceEntityRequest dbRequest = query.getSingleResult();
 			assertTrue(dbRequest != null && dbRequest.getId() != null);
 		}catch(Throwable th) {

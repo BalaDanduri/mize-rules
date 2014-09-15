@@ -184,7 +184,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 		this.name = name;
 	}
 
-	@OneToOne(fetch = FetchType.EAGER, cascade =CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="brand_id") 
 	public Brand getBrand() {
 		return brand;

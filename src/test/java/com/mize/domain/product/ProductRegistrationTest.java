@@ -1,96 +1,249 @@
 package com.mize.domain.product;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.math.BigDecimal;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import org.joda.time.DateTime;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.ContextConfiguration;
 
 import com.mize.domain.businessentity.BusinessEntity;
+import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.test.util.JPATest;
+import com.mize.domain.util.Formatter;
 
 
 @ContextConfiguration(locations={"/test-context.xml"})
 public class ProductRegistrationTest  extends JPATest {
-
+	
+	private static final String PROD_REG_QUERY = "select * from prod_regn where prod_regn_id =?";
+	private static final String PROD_REG_COMMENT_QUERY = "select * from prod_regn_comment where prod_regn_id=?";
 	EntityManager entityManager;
+	EntityTransaction tx;
+	BusinessEntity businessEntity;
+	BusinessEntity tenant;
 	ProductRegistration productRegistration;
+	ProductSerialTest productSerialTest = new ProductSerialTest();
+	ProductSerial productSerial = null;
+	ProductRegistration dbProdReg = null;
+	EntityAddress entityAddress = null;
+	
+	
+	
+	
 	@Before
-	public void setUp(){
+	public void setUp() throws Exception {
 		entityManager = getEntityManager();
-		productRegistration = getProductRegistrationObject();
-		EntityTransaction tx = entityManager.getTransaction();
+		createMasterData();
+	}
+	private void persist() {
+		tx = entityManager.getTransaction();
 		tx.begin();
-		if(productRegistration.getId() != null){
-			productRegistration = entityManager.merge(productRegistration);
-		}else{
-			entityManager.persist(productRegistration);
-		}
+		entityManager.persist(productRegistration);
 		tx.commit();
 	}
+	private void createMasterData() {
+		if (entityManager != null) {
+			tx = entityManager.getTransaction();
+			tx.begin();
+			tenant = createTenant();
+			entityManager.persist(tenant);
+			businessEntity = createBusinessEntity("dealer");
+			businessEntity.setTenant(tenant);
+			entityManager.persist(businessEntity);
+			productSerial= productSerialTest.productSerialObjectToSave(businessEntity, tenant);
+			entityManager.persist(productSerial);
+			entityAddress=createEntityAddress();
+			entityManager.persist(entityAddress);
+			tx.commit();
+		}
+	}
 	
-	private ProductRegistration getProductRegistrationObject() {
-		productRegistration = new ProductRegistration();
-		BusinessEntity be = new BusinessEntity();
-		be.setId(961L);
-		productRegistration.setCustomer(be);
-		productRegistration.setTenant(be);
-		productRegistration.setInvoiceBusinessEntity(be);
+	private void createProductRegistration() {
+		if (entityManager != null) {
+			tx = entityManager.getTransaction();
+			tx.begin();
+			productRegistration = productRegistrationObjectToSave();
+			createProdRegComment(productRegistration);
+			entityManager.persist(productRegistration);
+			tx.commit();
+		}
+
+	}
+	private ProductRegistration productRegistrationObjectToSave() {
+		ProductRegistration productRegistration = new ProductRegistration();
+		productRegistration.setTenant(tenant);
+		productRegistration.setProductSerial(productSerial);
+		productRegistration.setStatusCode("Active");
+		productRegistration.setRegistrationType("STORE");
+		productRegistration.setCustomer(businessEntity);
+		productRegistration.setInvoiceBusinessEntity(businessEntity);
 		productRegistration.setCustomerDeliveryDate(DateTime.now());
 		productRegistration.setPurchasePrice(new BigDecimal(200.00));
-		productRegistration.setRegistrationType("STORE");
-		productRegistration.setStatusCode("Active");
 		productRegistration.setCustomerDeliveryDate(DateTime.now().plusDays(3));
 		productRegistration.setWarrantyExpiryDate(DateTime.now().plusMonths(24));
-		ProductSerial serial = new ProductSerial();
-		serial.setId(11l);
-		productRegistration.setProductSerial(serial);
-		/*EntityAddress customerAddress = new EntityAddress();
-		customerAddress.setId(476L);
-		productRegistration.setCustomerAddress(customerAddress);*/
+		productRegistration.setCustomerAddress(entityAddress);
 		return productRegistration;
+		
+	}
+	private void createProdRegComment(ProductRegistration productRegistration){
+		List<ProductRegistrationComment> comments = new ArrayList<ProductRegistrationComment>();
+		ProductRegistrationComment prodRegComment = new ProductRegistrationComment();
+		prodRegComment.setProductRegistration(productRegistration);
+		EntityComment comment= createEntityComment();
+		prodRegComment.setComment(comment);
+		comments.add(prodRegComment);
+		productRegistration.setComments(comments);
+		
 	}
 	
-	public ProductSerial productSerialToBeSaved() {
-		ProductSerial prodSerial = new ProductSerial();
-		prodSerial.setId(101001L);
-		prodSerial.setTenant(new BusinessEntity());
-		prodSerial.getTenant().setId(961L);
-		prodSerial.setProduct(new Product());
-		prodSerial.getProduct().setId(101000L);
-		ProductSource prodSource = new ProductSource();
-		prodSource.setId(1L);
-		prodSource.setProductId(101000L);
-		prodSource.setSourceId(2L);
-		prodSource.setSourceProductId("TEST_SOURCE_ID");
-		prodSerial.getProduct().setProductSource(prodSource);
-		prodSerial.setShippedBusinessEntity(new BusinessEntity());
-		prodSerial.getShippedBusinessEntity().setId(101000L);
-		ProductSerialComment comment = new ProductSerialComment();
-		EntityComment ec = new EntityComment(EntityComment.Type.Internal.toString(),"test comments");
-		comment.setComment(ec);
-		comment.setProductSerial(prodSerial);
-		prodSerial.getComments().add(comment);
-		return prodSerial;
+	public class ProdRegRowMapper implements RowMapper<ProductRegistration>{
+
+		@Override
+		public ProductRegistration mapRow(ResultSet rs, int rowNum)
+				throws SQLException {
+			ProductRegistration productRegistration = new ProductRegistration();
+			productRegistration.setId(rs.getLong("prod_regn_id"));
+			BusinessEntity tenant = new BusinessEntity();
+			tenant.setId(rs.getLong("tenant_id"));
+			productRegistration.setTenant(tenant);
+			ProductSerial prodSerial = new ProductSerial();
+			prodSerial.setId(rs.getLong("prod_serial_id"));
+			productRegistration.setProductSerial(prodSerial);
+			productRegistration.setStatusCode(rs.getString("status_code"));
+			productRegistration.setRegistrationType(rs.getString("regn_type"));
+			BusinessEntity businessEntity = new BusinessEntity();
+			businessEntity.setId(rs.getLong("cust_be_id"));
+			productRegistration.setCustomer(businessEntity);
+			BusinessEntity be= new BusinessEntity();
+			be.setId(rs.getLong("invoice_be_id"));
+			productRegistration.setInvoiceBusinessEntity(be);
+			productRegistration.setCustomerDeliveryDate(Formatter.dateTime(rs.getTimestamp("cust_delivery_date")));
+			productRegistration.setPurchasePrice(rs.getBigDecimal("purchase_price"));
+			productRegistration.setWarrantyExpiryDate(Formatter.dateTime(rs.getTimestamp("warranty_expiry_date")));
+			
+			EntityAddress customerAddress = new EntityAddress();
+			customerAddress.setId(rs.getLong("cust_address_id"));
+			productRegistration.setCustomerAddress(customerAddress);
+			return productRegistration;
+		
+		}
+		
 	}
+	
+	public class ProdRegCommentRowMapper implements RowMapper<ProductRegistrationComment>{
+
+		@Override
+		public ProductRegistrationComment mapRow(ResultSet rs, int rowNum)
+				throws SQLException {
+			ProductRegistrationComment prodRegComment = new ProductRegistrationComment();
+			prodRegComment.setId(rs.getLong("id"));
+			ProductRegistration prodReg = new ProductRegistration();
+			prodReg.setId(rs.getLong("prod_regn_id"));
+			prodRegComment.setProductRegistration(prodReg);
+			EntityComment comment = new EntityComment();
+			comment.setId(rs.getLong("comment_id"));
+			prodRegComment.setComment(comment);
+			return prodRegComment;
+		}
+		
+	}
+	public ProductRegistration retrieveProdReg(){
+		dbProdReg = jdbcTemplate.queryForObject(PROD_REG_QUERY, new Object[]{ productRegistration.getId()}, new ProdRegRowMapper());
+		if(dbProdReg !=null){
+			List<ProductRegistrationComment> productRegistrationComments= jdbcTemplate.query(PROD_REG_COMMENT_QUERY, new Object[]{dbProdReg.getId()}, new ProdRegCommentRowMapper());
+			dbProdReg.setComments(productRegistrationComments);
+		}
+		return dbProdReg;
+	}
+	
 	
 	@Test
-	public void test(){
-		assertNotNull(productRegistration);
+	public void saveProdRegTest(){
+		createProductRegistration();
+		try{
+			if(productRegistration != null){
+				dbProdReg = retrieveProdReg();
+				if(dbProdReg != null){
+					assertTrue(productRegistration.getId()!=null);
+					assertTrue(dbProdReg.getId()!= null);
+					assertTrue(compare(productRegistration,dbProdReg));
+				}
+			}tearDown();
+		}catch(Throwable th){
+			th.printStackTrace();
+			fail("Got Exception");
+		}
+		
 	}
-	
-	@After
-	public void tearDown(){
-		entityManager.remove(productRegistration);
-		entityManager.close();
+	@Test
+	public void updateProdTest(){
+		createProductRegistration();
+		try{
+			if(productRegistration != null){
+				productRegistration.setStatusCode("admin"+System.currentTimeMillis());
+				productRegistration.setRegistrationType("New");
+				persist();
+				dbProdReg = retrieveProdReg();
+				if(dbProdReg != null){
+					assertTrue(productRegistration.getId()!=null);
+					assertTrue(dbProdReg.getId()!= null);
+					assertTrue(compare(productRegistration,dbProdReg));
+				}
+			}tearDown();
+		}catch(Throwable th){
+			th.printStackTrace();
+			fail("Got Exception");
+		}
+		
+	}
+	public void tearDown() throws Exception {
+		try {
+			if (productRegistration != null) {
+				tx.begin();
+				entityManager.remove(productRegistration);
+				entityManager.remove(productSerial);
+				entityManager.remove(businessEntity);
+				entityManager.remove(tenant);
+				tx.commit();
+			}
+			entityManager.close();
+		} catch (Throwable th) {
+			th.printStackTrace();
+		}
+	}
+	private boolean compare(ProductRegistration productRegistration ,ProductRegistration dbProdReg){
+		if(productRegistration == null && dbProdReg == null){
+			return true;
+		}
+		if(productRegistration == null  ){
+			if(dbProdReg != null){
+				return false;
+			}
+		}else if(productRegistration!=null ){
+			if(dbProdReg == null){
+				return false;
+			}
+		}
+		if(!productRegistration.getId().equals(dbProdReg.getId())){
+			return false;
+		}
+		if(!productRegistration.getRegistrationType().equals(dbProdReg.getRegistrationType())){
+			return false;
+		}
+		return true;
 	}
 	
 }

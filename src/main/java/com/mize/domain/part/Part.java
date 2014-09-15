@@ -1,6 +1,7 @@
 package com.mize.domain.part;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -51,9 +52,9 @@ public class Part extends MizeEntity {
 	private String isSerialized;
 	private String isReturnable;
 	private String uom;
-	private List<PartIntl> partIntl;
-	private List<PartPrice> partPrices;
-	private List<PartAttribute> partAttributes;
+	private List<PartIntl> partIntl = new ArrayList<PartIntl>();
+	private List<PartPrice> partPrices = new ArrayList<PartPrice>();
+	private List<PartAttribute> partAttributes = new ArrayList<PartAttribute>();
 	private BigDecimal unitListPrice;
 	private BigDecimal unitNetPrice;
 	private String productClass;
@@ -100,6 +101,7 @@ public class Part extends MizeEntity {
 	}
 
 
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "id", nullable = false, unique = true)
@@ -108,7 +110,7 @@ public class Part extends MizeEntity {
 		return id;
 	}
 
-	@ManyToOne(cascade={CascadeType.ALL},fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="tenant_id")
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
@@ -407,8 +409,13 @@ public class Part extends MizeEntity {
 		if (tenant == null) {
 			if (other.tenant != null)
 				return false;
-		} else if (!tenant.equals(other.tenant))
-			return false;
+		} else {
+			if(tenant.getId() == null) {
+				if(other.tenant.getId() != null)
+					return false;
+				} else if(!tenant.getId().equals(other.tenant.getId()))
+				return false;
+		}
 		if (type == null) {
 			if (other.type != null)
 				return false;
