@@ -53,6 +53,7 @@ public class FormDefinition extends MizeEntity {
 	private String isActive;
 	private DateTime startDate;
 	private DateTime endDate;
+	private String isNewVersion;
 	private List<FormDefinitionAudit> audits = new ArrayList<FormDefinitionAudit>();
 	private List<FormDefinitionIntl> intls;
 	private List<FormDefinitionLink> links;
@@ -186,6 +187,15 @@ public class FormDefinition extends MizeEntity {
 	@JsonDeserialize(using = JodaDateDeserializer.class)
 	public void setEndDate(DateTime endDate) {
 		this.endDate = endDate;
+	}
+
+	@Transient
+	public String getIsNewVersion() {
+		return isNewVersion;
+	}
+
+	public void setIsNewVersion(String isNewVersion) {
+		this.isNewVersion = isNewVersion;
 	}
 
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "formDefinition", orphanRemoval = true)
