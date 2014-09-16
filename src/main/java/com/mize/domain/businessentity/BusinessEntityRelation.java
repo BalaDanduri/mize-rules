@@ -17,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
+import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JPASerializer;
 
@@ -31,6 +32,8 @@ public class BusinessEntityRelation extends MizeEntity {
 	private String referenceNumber;
 	private User user;
 	private BusinessEntity tenant;
+	private String source;
+	private EntityAddress address;
 	
 	public BusinessEntityRelation() {
 		super();
@@ -113,6 +116,24 @@ public class BusinessEntityRelation extends MizeEntity {
 
 	public void setTenant(BusinessEntity tenant) {
 		this.tenant = tenant;
+	}
+
+	@Transient
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
+	}
+
+	@Transient
+	public EntityAddress getAddress() {
+		return address;
+	}
+
+	public void setAddress(EntityAddress address) {
+		this.address = address;
 	}
 
 }
