@@ -10,11 +10,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.mize.domain.auth.User;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JPASerializer;
 
@@ -27,9 +29,11 @@ public class BusinessEntityRelation extends MizeEntity {
 	private BusinessEntity businessEntity;
 	private BusinessEntity relatedBusinessEntity;
 	private String referenceNumber;
+	private User user;
+	private BusinessEntity tenant;
 	
 	public BusinessEntityRelation() {
-		
+		super();
 	}
 	
 	public BusinessEntityRelation(Long id, Long rebeId, String rebeCode, String rebeTypeCode, String rebeIntlName, String referenceNumber) {
@@ -91,6 +95,24 @@ public class BusinessEntityRelation extends MizeEntity {
 	
 	public void setReferenceNumber(String referenceNumber) {
 		this.referenceNumber = referenceNumber;
+	}
+
+	@Transient
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	@Transient
+	public BusinessEntity getTenant() {
+		return tenant;
+	}
+
+	public void setTenant(BusinessEntity tenant) {
+		this.tenant = tenant;
 	}
 
 }
