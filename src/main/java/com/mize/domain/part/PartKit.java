@@ -49,7 +49,7 @@ public class PartKit extends MizeEntity{
 	private String isActive;
 	private DateTime startDate;
 	private DateTime endDate;
-	private List<PartKitItem> partKitItems;
+	private List<PartKitItem> partKitItems = new ArrayList<PartKitItem>();
 	@Transient
 	private User user;
 	@Transient

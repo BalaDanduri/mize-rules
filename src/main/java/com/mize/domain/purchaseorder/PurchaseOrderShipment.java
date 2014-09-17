@@ -79,6 +79,8 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 	private String shipComplete;
 	@Transient
 	private EntityComment entityComment;
+	private String fromBEReferenceNumber;
+	private String beReferenceNumber;
 	
 	public PurchaseOrderShipment(){
 		super();
@@ -422,6 +424,24 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 		this.fromBEMiddleInitial = fromBEMiddleInitial;
 	}
 
+	@Column(name = "ship_from_be_reference")
+	public String getFromBEReferenceNumber() {
+		return fromBEReferenceNumber;
+	}
+
+	public void setFromBEReferenceNumber(String fromBEReferenceNumber) {
+		this.fromBEReferenceNumber = fromBEReferenceNumber;
+	}
+
+	@Column(name = "ship_to_be_reference")
+	public String getBeReferenceNumber() {
+		return beReferenceNumber;
+	}
+
+	public void setBeReferenceNumber(String beReferenceNumber) {
+		this.beReferenceNumber = beReferenceNumber;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
@@ -522,8 +542,9 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 				+ ", estimatedShipmentDays=" + estimatedShipmentDays
 				+ ", estimatedShipmentDate=" + estimatedShipmentDate
 				+ ", estimatedShipmentCost=" + estimatedShipmentCost
-				+ ", shipComplete=" + shipComplete + "]";
+				+ ", shipComplete=" + shipComplete + ", fromBEReferenceNumber="
+				+ fromBEReferenceNumber + ", beReferenceNumber="
+				+ beReferenceNumber + "]";
 	}
-
 	
 }

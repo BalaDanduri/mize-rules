@@ -496,7 +496,7 @@ public class User extends MizeEntity implements Comparable<User> {
 		if (lastLogin == null) {
 			if (other.lastLogin != null)
 				return false;
-		} else if (!lastLogin.equals(other.lastLogin))
+		} else if (lastLogin.compareTo(other.lastLogin) != 0)
 			return false;
 		if (loginId == null) {
 			if (other.loginId != null)

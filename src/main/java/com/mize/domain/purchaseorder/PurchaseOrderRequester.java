@@ -42,6 +42,7 @@ public class PurchaseOrderRequester extends MizeEntity implements Comparable<Pur
 	private String beFirstName;
 	private String beLastName;
 	private String beMiddleInitial;
+	private String beReferenceNumber;
 
 	public PurchaseOrderRequester(){
 		super();
@@ -180,6 +181,15 @@ public class PurchaseOrderRequester extends MizeEntity implements Comparable<Pur
 		this.beMiddleInitial = beMiddleInitial;
 	}
 
+	@Column(name="requester_be_reference")	
+	public String getBeReferenceNumber() {
+		return beReferenceNumber;
+	}
+
+	public void setBeReferenceNumber(String beReferenceNumber) {
+		this.beReferenceNumber = beReferenceNumber;
+	}
+
 	@Override
 	public int compareTo(PurchaseOrderRequester o) {
 		return 0;
@@ -216,7 +226,10 @@ public class PurchaseOrderRequester extends MizeEntity implements Comparable<Pur
 				+ ", beCode=" + beCode + ", beTypeCode=" + beTypeCode
 				+ ", beSubTypeCode=" + beSubTypeCode + ", beName=" + beName
 				+ ", beFirstName=" + beFirstName + ", beLastName=" + beLastName
-				+ ", beMiddleInitial=" + beMiddleInitial + "]";
+				+ ", beMiddleInitial=" + beMiddleInitial
+				+ ", beReferenceNumber=" + beReferenceNumber + "]";
 	}
+
+	
 
 }

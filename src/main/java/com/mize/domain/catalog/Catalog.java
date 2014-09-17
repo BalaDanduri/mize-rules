@@ -45,7 +45,7 @@ public class Catalog extends MizeEntity {
 	private String catalogType;
 	private String isActive;
 	private String catalogName;
-	private List<CatalogEntry> catalogEntry =  new ArrayList<CatalogEntry>();;
+	private List<CatalogEntry> catalogEntry =  new ArrayList<CatalogEntry>();
 	@Transient
 	private User user;
 	

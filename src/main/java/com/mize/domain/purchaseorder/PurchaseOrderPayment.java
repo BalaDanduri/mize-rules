@@ -38,7 +38,7 @@ public class PurchaseOrderPayment extends MizeEntity implements Comparable<Purch
 	private String beFirstName;
 	private String beLastName;
 	private String beMiddleInitial;
-
+	private String beReferenceNumber;
 	public PurchaseOrderPayment(){
 		super();
 	}
@@ -186,6 +186,15 @@ public class PurchaseOrderPayment extends MizeEntity implements Comparable<Purch
 		this.beMiddleInitial = beMiddleInitial;
 	}
 
+	@Column(name="payee_be_reference")	
+	public String getBeReferenceNumber() {
+		return beReferenceNumber;
+	}
+
+	public void setBeReferenceNumber(String beReferenceNumber) {
+		this.beReferenceNumber = beReferenceNumber;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
@@ -231,25 +240,8 @@ public class PurchaseOrderPayment extends MizeEntity implements Comparable<Purch
 				+ updateMasterAddress + ", beCode=" + beCode + ", beTypeCode="
 				+ beTypeCode + ", beSubTypeCode=" + beSubTypeCode + ", beName="
 				+ beName + ", beFirstName=" + beFirstName + ", beLastName="
-				+ beLastName + ", beMiddleIntial=" + beMiddleInitial
-				+ ", getId()=" + getId() + ", getBusinessEntity()="
-				+ getBusinessEntity() + ", getAddress()=" + getAddress()
-				+ ", getMethod()=" + getMethod() + ", getPurchaseOrder()="
-				+ getPurchaseOrder() + ", getPaymentReference()="
-				+ getPaymentReference() + ", getPaymentBeAddressId()="
-				+ getPaymentBeAddressId() + ", getUpdateMasterAddress()="
-				+ getUpdateMasterAddress() + ", getBeCode()=" + getBeCode()
-				+ ", getBeTypeCode()=" + getBeTypeCode()
-				+ ", getBeSubTypeCode()=" + getBeSubTypeCode()
-				+ ", getBeName()=" + getBeName() + ", getBeFirstName()="
-				+ getBeFirstName() + ", getBeLastName()=" + getBeLastName()
-				+ ", getBeMiddleInitial()=" + getBeMiddleInitial()
-				+ ", hashCode()=" + hashCode() + ", getCreatedBy()="
-				+ getCreatedBy() + ", getCreatedDate()=" + getCreatedDate()
-				+ ", getUpdatedBy()=" + getUpdatedBy() + ", getUpdatedDate()="
-				+ getUpdatedDate() + ", getUploadError()=" + getUploadError()
-				+ ", isValid()=" + isValid() + ", getClass()=" + getClass()
-				+ ", toString()=" + super.toString() + "]";
+				+ beLastName + ", beMiddleInitial=" + beMiddleInitial
+				+ ", beReferenceNumber=" + beReferenceNumber + "]";
 	}
 
 	@Override

@@ -84,13 +84,13 @@ public class PartSubstitute extends MizeEntity {
 	}
 
 	
-	@OneToOne(fetch=FetchType.EAGER ,cascade= CascadeType.ALL)
+	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="old_part_id")
 	public Part getOriginalPart() {
 		return originalPart;
 	}
 
-	@OneToOne(fetch=FetchType.EAGER ,cascade= CascadeType.ALL)
+	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="new_part_id")
 	public Part getSubstitutedPart() {
 		return substitutedPart;

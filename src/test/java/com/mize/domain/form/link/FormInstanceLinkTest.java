@@ -21,7 +21,10 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.ContextConfiguration;
 
 import com.mize.domain.businessentity.BusinessEntity;
+import com.mize.domain.form.FormDefinition;
+import com.mize.domain.form.FormDefinitionTest;
 import com.mize.domain.form.FormInstance;
+import com.mize.domain.form.FormInstanceTest;
 import com.mize.domain.product.ProductSerial;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;
@@ -33,6 +36,11 @@ public class FormInstanceLinkTest extends JPATest {
 	
 	FormInstanceLink formInstanceLink = null;
 	EntityManager entityManager = null;
+	FormDefinitionTest formDefinitionTest = new FormDefinitionTest();
+	FormInstanceTest formInstanceTest = new FormInstanceTest();
+	FormDefinition formDef;
+	FormInstance formInstance;
+	EntityTransaction tx;
 			
 
 	@BeforeClass
@@ -45,10 +53,17 @@ public class FormInstanceLinkTest extends JPATest {
 
 	@Before
 	public void setUp() throws Exception {
-		entityManager = getEntityManager();		
-		formInstanceLink = getFormInstanceLink();
-		
-		EntityTransaction tx = entityManager.getTransaction();
+		entityManager = getEntityManager();	
+		tx = entityManager.getTransaction();
+		tx.begin();
+		formDef=formDefinitionTest.createFormDef();
+		entityManager.persist(formDef);
+		formInstance=formInstanceTest.createFormInstance(formDef);
+		entityManager.persist(formInstance);
+		tx.commit();
+	}
+
+	private void persist() {
 		tx.begin();
 		if(formInstanceLink.getId() == null){
 			entityManager.persist(formInstanceLink);	
@@ -60,11 +75,27 @@ public class FormInstanceLinkTest extends JPATest {
 
 	@After
 	public void tearDown() throws Exception {
+		try{
+		if(formInstanceLink !=null){
+			tx.begin();
+			entityManager.remove(formInstanceLink);
+			entityManager.remove(formInstance);
+			entityManager.remove(formDef);
+			tx.commit();
+		}
+		entityManager.close();
+		}catch(Throwable th){
+			th.printStackTrace();
+			fail("Got Exception");
+		}
+		
 	}
 
 	@Test
 	public void testFormInstanceLink() {
 		try {
+			formInstanceLink = getFormInstanceLink();
+			persist();
 			FormInstanceLink formInstanceLinkDB =  jdbcTemplate.queryForObject(FORM_INSTANCE_LINK_QUERY, new FormInstanceLinkRowMapper(), new Object[]{formInstanceLink.getId()});
 			assertTrue(formInstanceLink.getId().equals(formInstanceLinkDB.getId()));
 		} catch (Exception e) {
@@ -86,11 +117,12 @@ public class FormInstanceLinkTest extends JPATest {
 	}
 	
 	
-	private FormInstanceLink getFormInstanceLink() {
-		FormInstanceLink formInstanceLink = new FormInstanceLink();
+		
+		private FormInstanceLink getFormInstanceLink() {
+			FormInstanceLink formInstanceLink = new FormInstanceLink();
 		formInstanceLink.setId(1L);
 		
-		FormInstance formInstance = entityManager.find(FormInstance.class, 1L);
+		
 		formInstanceLink.setFormInstance(formInstance);
 		formInstanceLink.setLinkType("Pre-Delivery");
 		formInstanceLink.setLinkDuration("1");
