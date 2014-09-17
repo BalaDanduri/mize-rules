@@ -9,7 +9,7 @@ public class LabelIntl {
 	public Locale getLocale() {
 		return locale;
 	}
-	public void setLocaleId(Locale locale) {
+	public void setLocale(Locale locale) {
 		this.locale = locale;
 	}
 	public String getName() {
