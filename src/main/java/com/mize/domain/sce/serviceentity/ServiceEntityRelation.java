@@ -61,6 +61,7 @@ public class ServiceEntityRelation extends MizeEntity {
 	
 	@OneToOne(fetch = FetchType.LAZY )
 	@JoinColumn(name = "service_entity_rltn_id")
+	@JsonSerialize(using=JPASerializer.class)
 	public ServiceEntity getRelatedEntity() {
 		return relatedEntity;
 	}
