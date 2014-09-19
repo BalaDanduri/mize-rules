@@ -1,7 +1,6 @@
 package com.mize.domain.applicationlabel;
 
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,6 +16,7 @@ import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.ContextConfiguration;
 
+import com.mize.domain.appmsg.AppMessage;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.Locale;
 import com.mize.domain.test.util.JPATest;
@@ -35,22 +35,13 @@ public class ApplicationLabelTest extends JPATest{
 	@Before
 	public void setUp() throws Exception {
 		entityManager = getEntityManager();
-		createMasterData();
+		tenant = findExistingBE(entityManager);
 	}
 	private void persist() {
 		tx = entityManager.getTransaction();
 		tx.begin();
 		entityManager.persist(appLabel);
 		tx.commit();
-	}
-	private void createMasterData() {
-		if (entityManager != null) {
-			tx = entityManager.getTransaction();
-			tx.begin();
-			tenant = createTenant();
-			entityManager.persist(tenant);
-			tx.commit();
-		}
 	}
 	private void createAppLabel() {
 		if (entityManager != null) {
@@ -142,7 +133,7 @@ public class ApplicationLabelTest extends JPATest{
 		return dbAppLabel;
 	}
 	
-	@Test
+	/*@Test
 	public void saveAppLabelTest(){
 		createAppLabel();
 		try{
@@ -179,7 +170,16 @@ public class ApplicationLabelTest extends JPATest{
 			fail("Got Exception");
 		}
 		
+	}*/
+	
+	@Test
+	public void retreiveAppLabelTest() {
+		appLabel = new ApplicationLabel();
+		appLabel.setId(300L);
+		ApplicationLabel dbAppLabel = retrieveLabel();
+		assertTrue(dbAppLabel != null && dbAppLabel.getId() != null);
 	}
+	
 	public void tearDown() throws Exception {
 		try {
 			if (appLabel != null) {

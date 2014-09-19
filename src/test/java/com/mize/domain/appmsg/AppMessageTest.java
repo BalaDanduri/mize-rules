@@ -1,7 +1,6 @@
 package com.mize.domain.appmsg;
 
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -35,22 +34,13 @@ public class AppMessageTest extends JPATest {
 	@Before
 	public void setUp() throws Exception {
 		entityManager = getEntityManager();
-		createMasterData();
+		tenant = findExistingBE(entityManager);
 	}
 	private void persist() {
 		tx = entityManager.getTransaction();
 		tx.begin();
 		entityManager.persist(appMessage);
 		tx.commit();
-	}
-	private void createMasterData() {
-		if (entityManager != null) {
-			tx = entityManager.getTransaction();
-			tx.begin();
-			tenant = createTenant();
-			entityManager.persist(tenant);
-			tx.commit();
-		}
 	}
 	private void createAppMessage() {
 		if (entityManager != null) {
@@ -147,7 +137,7 @@ public class AppMessageTest extends JPATest {
 		return dbAppMessage;
 	}
 	
-	@Test
+	/*@Test
 	public void saveAppMessageTest(){
 		createAppMessage();
 		try{
@@ -183,6 +173,14 @@ public class AppMessageTest extends JPATest {
 			th.printStackTrace();
 			fail("Got Exception");
 		}
+	}*/
+	
+	@Test
+	public void retreiveAppMessageTest() {
+		appMessage = new AppMessage();
+		appMessage.setId(300L);
+		AppMessage dbAppMessage = retrieveAppMessage();
+		assertTrue(dbAppMessage != null && dbAppMessage.getId() != null);
 	}
 	
 	public void tearDown() throws Exception {

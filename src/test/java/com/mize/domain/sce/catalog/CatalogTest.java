@@ -17,6 +17,7 @@ import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.ContextConfiguration;
 
+import com.mize.domain.appmsg.AppMessage;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.catalog.Catalog;
 import com.mize.domain.catalog.CatalogEntry;
@@ -44,7 +45,8 @@ public class CatalogTest extends JPATest {
 	@Before
 	public void setUp() throws Exception {
 		entityManager = getEntityManager();
-		createMasterData();
+		tenant = new BusinessEntity();
+		tenant.setId(7624L);
 	}
 	private void persist() {
 		tx = entityManager.getTransaction();
@@ -52,17 +54,7 @@ public class CatalogTest extends JPATest {
 		entityManager.persist(catalog);
 		tx.commit();
 	}
-
 	
-	private void createMasterData() {
-		if (entityManager != null) {
-			tx = entityManager.getTransaction();
-			tx.begin();
-			tenant = createTenant();
-			entityManager.persist(tenant);
-			tx.commit();
-		}
-	}
 	private void createCatalog() {
 		if (entityManager != null) {
 			tx = entityManager.getTransaction();
@@ -196,8 +188,10 @@ public class CatalogTest extends JPATest {
 		if(dbCatalog != null){
 			List<CatalogEntry> catalogEntries = jdbcTemplate.query(CATALOG_ENTRY_QUERY, new Object[]{dbCatalog.getId()}, new CatalogEntryRowMapper());
 			if(catalogEntries !=null){
-				List<CatalogEntryIntl> intls = jdbcTemplate.query(CATALOG_ENTRY_INTL_QUERY, new Object[]{catalogEntry.getId()}, new CatalogEntryIntlRowMapper());
-				catalogEntry.setCatalogEntryIntl(intls);
+				for (CatalogEntry entry : catalogEntries) {
+					List<CatalogEntryIntl> intls = jdbcTemplate.query(CATALOG_ENTRY_INTL_QUERY, new Object[]{entry.getId()}, new CatalogEntryIntlRowMapper());
+					entry.setCatalogEntryIntl(intls);
+				}
 				dbCatalog.setCatalogEntry(catalogEntries);
 			}
 			
@@ -206,7 +200,7 @@ public class CatalogTest extends JPATest {
 		return dbCatalog;
 	}
 	
-	@Test
+	/*@Test
 	public void saveCatalogTest(){
 		
 		createCatalog();
@@ -245,6 +239,14 @@ public class CatalogTest extends JPATest {
 			fail("Got Exception");
 		}
 		
+	}*/
+	
+	@Test
+	public void retreiveCatalogTest() {
+		catalog = new Catalog();
+		catalog.setId(630L);
+		Catalog dbCatalog = retrievCatalog();
+		assertTrue(dbCatalog != null && dbCatalog.getId() != null);
 	}
 	
 	public void tearDown() throws Exception {
