@@ -146,7 +146,7 @@ public class InspectionForm extends MizeEntity {
 		this.inspectedBy = inspectedBy;
 	}
 
-	@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="locale_id")
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
