@@ -8,6 +8,7 @@ import java.util.Map;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -36,6 +37,8 @@ public class SolrEntityCriteria extends MizeEntity implements Comparable<SolrEnt
 	private Integer commitCount;
 	
 	private Boolean nestedDocument;
+	
+	private Map<String,Object> defaultCriteriaMap;
 	
 	public String getCriteria() {
 		return criteria;
@@ -152,6 +155,16 @@ public class SolrEntityCriteria extends MizeEntity implements Comparable<SolrEnt
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	@JsonIgnore
+	public Map<String, Object> getDefaultCriteriaMap() {
+		return defaultCriteriaMap;
+	}
+	
+	public void setDefaultCriteriaMap(Map<String, Object> defaultCriteriaMap) {
+		this.defaultCriteriaMap = defaultCriteriaMap;
+	}
+	
 	public static SolrEntityCriteria createCopyObject(List<Long> entityIDList,String entityName,String aliasName) {
 		SolrEntityCriteria copy = new SolrEntityCriteria();
 		List<Long> copyList = new ArrayList<Long>();
