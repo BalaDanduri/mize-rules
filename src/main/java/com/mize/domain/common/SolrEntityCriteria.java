@@ -14,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
+import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
@@ -34,10 +35,11 @@ public class SolrEntityCriteria extends MizeEntity implements Comparable<SolrEnt
 	private List<Long> inCluseIDsList = new ArrayList<Long>();
 	private Map<String,List<Long>> entityIDsMap;  
 	private User user;
+	private BusinessEntity tenant;
 	private Integer commitCount;
-	
-	private Boolean nestedDocument;
-	
+	private String jpqlQuery;
+	private String nativeQuery;	
+	private Boolean nestedDocument;	
 	private Map<String,Object> defaultCriteriaMap;
 	
 	public String getCriteria() {
@@ -47,7 +49,7 @@ public class SolrEntityCriteria extends MizeEntity implements Comparable<SolrEnt
 		this.criteria = criteria;
 	}
 	public enum Criteria {
-		Between,InClause,Equals,DateRange,UpdatedDate,CreatedDate;
+		Between,InClause,Equals,DateRange,UpdatedDate,CreatedDate,JpqlQuery,NativeQuery;
 	}
 	
 	public String getEntityName() {
@@ -165,24 +167,17 @@ public class SolrEntityCriteria extends MizeEntity implements Comparable<SolrEnt
 		this.defaultCriteriaMap = defaultCriteriaMap;
 	}
 	
-	public static SolrEntityCriteria createCopyObject(List<Long> entityIDList,String entityName,String aliasName) {
-		SolrEntityCriteria copy = new SolrEntityCriteria();
-		List<Long> copyList = new ArrayList<Long>();
-		for (Long id: entityIDList) {
-			copyList.add(id);
-		}
-		try {
-			copy.setEntityIDList(copyList);
-			copy.setEntityName(entityName);
-			copy.setEntityAliasName(aliasName);
-		} catch(Exception e) {	
-		}
-		return copy;
+	public String getJpqlQuery() {
+		return jpqlQuery;
 	}
-	
-	@Override
-	public int compareTo(SolrEntityCriteria arg0) {
-		return 0;
+	public void setJpqlQuery(String jpqlQuery) {
+		this.jpqlQuery = jpqlQuery;
+	}
+	public String getNativeQuery() {
+		return nativeQuery;
+	}
+	public void setNativeQuery(String nativeQuery) {
+		this.nativeQuery = nativeQuery;
 	}
 	
 	@Override
@@ -208,6 +203,32 @@ public class SolrEntityCriteria extends MizeEntity implements Comparable<SolrEnt
 	public void setNestedDocument(Boolean nestedDocument) {
 		this.nestedDocument = nestedDocument;
 	}
+	
+	public BusinessEntity getTenant() {
+		return tenant;
+	}
+	public void setTenant(BusinessEntity tenant) {
+		this.tenant = tenant;
+	}
+	public static SolrEntityCriteria createCopyObject(List<Long> entityIDList,String entityName,String aliasName) {
+		SolrEntityCriteria copy = new SolrEntityCriteria();
+		List<Long> copyList = new ArrayList<Long>();
+		for (Long id: entityIDList) {
+			copyList.add(id);
+		}
+		try {
+			copy.setEntityIDList(copyList);
+			copy.setEntityName(entityName);
+			copy.setEntityAliasName(aliasName);
+		} catch(Exception e) {	
+		}
+		return copy;
+	}
+	
+	@Override
+	public int compareTo(SolrEntityCriteria arg0) {
+		return 0;
+	}
 	@Override
 	public String toString() {
 		return "SolrEntityCriteria [entityName=" + entityName
@@ -217,10 +238,10 @@ public class SolrEntityCriteria extends MizeEntity implements Comparable<SolrEnt
 				+ inCluseIDs + ", entityIDList=" + entityIDList + ", entityID="
 				+ entityID + ", criteria=" + criteria + ", recordsCount="
 				+ recordsCount + ", inCluseIDsList=" + inCluseIDsList
-				+ ", entityIDsMap=" + entityIDsMap + ", user=" + user
-				+ ", commitCount=" + commitCount + ", nestedDocument="
-				+ nestedDocument + "]";
+				+ ", entityIDsMap=" + entityIDsMap + ", commitCount="
+				+ commitCount + ", jpqlQuery=" + jpqlQuery + ", nativeQuery="
+				+ nativeQuery + ", nestedDocument=" + nestedDocument
+				+ ", defaultCriteriaMap=" + defaultCriteriaMap + "]";
 	}
-
 	
 }
