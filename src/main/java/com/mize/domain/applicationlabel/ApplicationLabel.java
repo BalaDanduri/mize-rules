@@ -43,6 +43,7 @@ public class ApplicationLabel extends MizeEntity  implements Comparable<Applicat
 	private String code;
 	private String isActive;
 	private String isDefault;
+	private String category;
 	private List<ApplicationLabelIntl> intls;
 	@Transient
 	private User user;
@@ -130,6 +131,15 @@ public class ApplicationLabel extends MizeEntity  implements Comparable<Applicat
 		this.intls = intls;
 	}
 
+	@Column(name = "label_category", nullable = true, length = 50)
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
 	@Transient
 	public User getUser() {
 		return user;
@@ -198,11 +208,11 @@ public class ApplicationLabel extends MizeEntity  implements Comparable<Applicat
 	public void setUpdatedBy(Long updatedBy) {		
 		super.setUpdatedBy(updatedBy);
 	}
+	
 	@Override
 	public String toString() {
-		return "ApplicationLabel [tenant=" + tenant + ", code="
-				+ code + ", isActive=" + isActive + ", isDefault="
-				+ isDefault + "]";
+		return "ApplicationLabel [code=" + code + ", isActive=" + isActive + ", isDefault=" + isDefault + ", category=" + category 
+				+ ", intls=" + intls + "]";
 	}
 
 	@Override
@@ -215,6 +225,8 @@ public class ApplicationLabel extends MizeEntity  implements Comparable<Applicat
 				+ ((isDefault == null) ? 0 : isDefault.hashCode());
 		result = prime * result
 				+ ((code == null) ? 0 : code.hashCode());
+		result = prime * result
+				+ ((category == null) ? 0 : category.hashCode());
 		result = prime * result + ((tenant == null) ? 0 : tenant.hashCode());
 		return result;
 	}
@@ -242,6 +254,11 @@ public class ApplicationLabel extends MizeEntity  implements Comparable<Applicat
 			if (other.code != null)
 				return false;
 		} else if (!code.equals(other.code))
+			return false;
+		if (category == null) {
+			if (other.category != null)
+				return false;
+		} else if (!category.equals(other.category))
 			return false;
 		if (tenant == null) {
 			if (other.tenant != null)

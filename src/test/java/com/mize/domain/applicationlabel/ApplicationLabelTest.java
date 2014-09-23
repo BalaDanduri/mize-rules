@@ -60,6 +60,7 @@ public class ApplicationLabelTest extends JPATest{
 		appLabel.setCode("USR_DTLS");
 		appLabel.setIsActive("Y");
 		appLabel.setIsDefault("Y");
+		appLabel.setCategory("application");
 		appLabel.setCreatedBy(796L);
 		appLabel.setUpdatedBy(796L);
 		appLabel.setCreatedDate(DateTime.now());
@@ -93,6 +94,7 @@ public class ApplicationLabelTest extends JPATest{
 			tenant.setId(rs.getLong("tenant_id"));
 			appLabel.setTenant(tenant);
 			appLabel.setCode(rs.getString("label_code"));
+			appLabel.setCategory(rs.getString("label_category"));
 			appLabel.setIsActive(rs.getString("is_active"));
 			appLabel.setIsDefault(rs.getString("is_default"));
 			appLabel.setCreatedBy(rs.getLong("created_by"));
