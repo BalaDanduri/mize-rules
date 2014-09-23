@@ -54,6 +54,7 @@ public class FormDefinition extends MizeEntity {
 	private DateTime startDate;
 	private DateTime endDate;
 	private String isNewVersion;
+	private Form form;
 	private List<FormDefinitionAudit> audits = new ArrayList<FormDefinitionAudit>();
 	private List<FormDefinitionIntl> intls;
 	private List<FormDefinitionLink> links;
@@ -235,10 +236,19 @@ public class FormDefinition extends MizeEntity {
 	}
 
 	@Transient
+	public Form getForm() {
+		return form;
+	}
+	
+	public void setForm(Form form) {
+		this.form = form;
+	}
+
+	@Transient
 	public User getUser() {
 		return user;
 	}
-
+	
 	public void setUser(User user) {
 		this.user = user;
 	}
