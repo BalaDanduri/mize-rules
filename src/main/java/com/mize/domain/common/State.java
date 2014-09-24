@@ -28,6 +28,17 @@ public class State extends MizeEntity implements Comparable<State>{
 		super();		
 	}
 	
+	public State(Long id) {
+		super();
+		this.id = id;		
+	}
+	
+	public State(Long id,String code) {
+		super();
+		this.id = id;
+		this.code = code;	
+	}
+	
 	public State(Long id,String code, String name) {
 		super();
 		this.id = id;

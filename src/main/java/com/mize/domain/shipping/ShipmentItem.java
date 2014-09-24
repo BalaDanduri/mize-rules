@@ -22,9 +22,9 @@ import com.mize.domain.common.State;
 @Table(name="shipment_item")
 public class ShipmentItem extends MizeEntity implements Comparable<ShipmentItem> {
 	private static final long serialVersionUID = -7073856017006485033L;
-	private ShipmentTracking shipmentTracking;
-	private String itemDescription;
+	private ShipmentTracking shipmentTracking;	
 	private String itemNumber;
+	private String itemDescription;
 	private Country country;
 	private State state;
 	private BigDecimal weight;

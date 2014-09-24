@@ -32,6 +32,31 @@ public class Country extends MizeEntity implements Comparable<Country>{
 	private List<State> states = new ArrayList<State>();
 	private List<State> stateList;
 	
+	public Country(){
+		super();
+	}
+	
+	public Country(Long id){
+		super();
+		this.id = id;
+	}
+	
+	public Country(Long id,String code, String name, String code3) {
+		super();
+		this.id = id;
+		this.code = code;
+		this.name = name;
+		this.code3 = code3;
+	}
+	
+	public Country(String code, String code3) {
+		super();
+		this.code = code;
+		this.code3 = code3;
+	}
+	
+	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "country_id", nullable = false, unique = true)
