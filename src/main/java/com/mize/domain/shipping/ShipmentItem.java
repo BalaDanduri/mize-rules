@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.Country;
@@ -23,6 +24,7 @@ import com.mize.domain.common.State;
 public class ShipmentItem extends MizeEntity implements Comparable<ShipmentItem> {
 	private static final long serialVersionUID = -7073856017006485033L;
 	private ShipmentTracking shipmentTracking;	
+	private Long itemId;
 	private String itemNumber;
 	private String itemDescription;
 	private Country country;
@@ -169,6 +171,15 @@ public class ShipmentItem extends MizeEntity implements Comparable<ShipmentItem>
 
 	public void setWeightUOM(String weightUOM) {
 		this.weightUOM = weightUOM;
+	}
+
+	@Transient
+	public Long getItemId() {
+		return itemId;
+	}
+
+	public void setItemId(Long itemId) {
+		this.itemId = itemId;
 	}
 
 	@Override
