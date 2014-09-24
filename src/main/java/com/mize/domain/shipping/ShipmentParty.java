@@ -23,7 +23,7 @@ import com.mize.domain.util.JPASerializer;
 
 @Entity
 @Table(name="shipment_tracking_party")
-public class ShipmentParty extends MizeEntity {
+public class ShipmentParty extends MizeEntity implements Comparable<ShipmentParty>{
 	private static final long serialVersionUID = -7073856017006485033L;
 	private ShipmentTracking shipmentTracking;
 	private String partyType;
@@ -173,6 +173,11 @@ public class ShipmentParty extends MizeEntity {
 				+ ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", middleInitial=" + middleInitial + ", contactName="
 				+ contactName + "]";
+	}
+
+	@Override
+	public int compareTo(ShipmentParty o) {
+		return 0;
 	}
 
 }

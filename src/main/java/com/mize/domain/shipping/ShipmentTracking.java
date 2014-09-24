@@ -77,6 +77,7 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 	private ShipmentEntity shipmentEntity;
 	@Transient
 	private String fromEntity;
+	private List<ShipmentItem> shipmentItems;
 	
 	@Override
 	@Id
@@ -483,6 +484,17 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 	@JsonDeserialize(using = JodaDateTimeDeserializer.class)
 	public void setConfirmationDate(DateTime confirmationDate) {
 		this.confirmationDate = confirmationDate;
+	}
+
+	@OneToMany(cascade={CascadeType.ALL}, mappedBy="shipmentTracking",orphanRemoval = true)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	public List<ShipmentItem> getShipmentItems() {
+		return shipmentItems;
+	}
+
+	public void setShipmentItems(List<ShipmentItem> shipmentItems) {
+		this.shipmentItems = shipmentItems;
 	}
 
 	@Override
