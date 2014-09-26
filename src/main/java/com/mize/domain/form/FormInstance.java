@@ -35,6 +35,9 @@ public class FormInstance extends MizeEntity {
 	private String formInstanceData;
 	private User user;
 	
+	@Transient
+	private Form form;
+	
 	public FormInstance() {
 		formDefinition = new FormDefinition();
 	}
@@ -73,6 +76,7 @@ public class FormInstance extends MizeEntity {
 		return formInstanceData;
 	}
 
+	
 	public void setFormInstanceData(String formInstanceData) {
 		this.formInstanceData = formInstanceData;
 	}
@@ -174,6 +178,15 @@ public class FormInstance extends MizeEntity {
 		} else if (!formInstanceData.equals(other.formInstanceData))
 			return false;
 		return true;
+	}
+	
+	public void setForm(Form form) {
+		this.form = form;
+	}
+	
+	@Transient
+	public Form getForm() {
+		return form;
 	}
 	
 }

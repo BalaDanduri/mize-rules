@@ -1,13 +1,18 @@
 package com.mize.domain.form;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class FormElement {
+public class FormElement implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2467819665340668161L;
 	private Long id;
 	private String name;
 	private String ref;

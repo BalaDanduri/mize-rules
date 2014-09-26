@@ -1,8 +1,14 @@
 package com.mize.domain.form;
 
+import java.io.Serializable;
+
 import com.mize.domain.common.Locale;
 
-public class LabelIntl {
+public class LabelIntl implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1332602324562292216L;
 	private Locale locale;
 	private String name;
 	private String description;

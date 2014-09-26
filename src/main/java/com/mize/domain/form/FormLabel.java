@@ -1,9 +1,14 @@
 package com.mize.domain.form;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FormLabel {
+public class FormLabel implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 650988974672502526L;
 	private Long id;
 	private String code;
 	private List<LabelIntl> intl = new ArrayList<LabelIntl>();

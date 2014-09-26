@@ -1,8 +1,14 @@
 package com.mize.domain.form;
 
+import java.io.Serializable;
 
-public class Attribute {
 
+public class Attribute implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4495186453091139534L;
 	private String name;	
 	private String value;
 	private String severity;

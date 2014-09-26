@@ -5,6 +5,10 @@ import java.util.List;
 
 public class Field extends FormElement {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7247110131511609763L;
 	private String type;
 	private String value;
 	private String sameRow;
