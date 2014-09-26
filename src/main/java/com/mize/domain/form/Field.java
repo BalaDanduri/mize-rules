@@ -5,29 +5,11 @@ import java.util.List;
 
 public class Field extends FormElement {
 
-	private String id;
-	private String name;
 	private String type;
 	private String value;
-	private String ref;
 	private String sameRow;
 	List<Attribute> attrs = new ArrayList<Attribute>();
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
+	List<GroupField> fieldList = new ArrayList<GroupField>();
 
 	public String getType() {
 		return type;
@@ -43,14 +25,6 @@ public class Field extends FormElement {
 
 	public void setValue(String value) {
 		this.value = value;
-	}
-
-	public String getRef() {
-		return ref;
-	}
-
-	public void setRef(String ref) {
-		this.ref = ref;
 	}
 
 	public String getSameRow() {
@@ -69,10 +43,17 @@ public class Field extends FormElement {
 		this.attrs = attrs;
 	}
 
+	public List<GroupField> getFieldList() {
+		return fieldList;
+	}
+
+	public void setFieldList(List<GroupField> fieldList) {
+		this.fieldList = fieldList;
+	}
+
 	@Override
 	public String toString() {
-		return "Field [id=" + id + ", name=" + name + ", type=" + type + ", value=" + value + ", ref=" + ref 
-				+ ", sameRow=" + sameRow + ", attrs=" + attrs + "]";
+		return "Field [type=" + type + ", value=" + value + ", sameRow=" + sameRow + ", attrs=" + attrs + ", fieldList=" + fieldList + "]";
 	}
 
 }
