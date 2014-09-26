@@ -19,6 +19,7 @@ import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityContact;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.product.Product;
+import com.mize.domain.product.ProductCategory;
 import com.mize.domain.product.ProductRegistration;
 import com.mize.domain.product.ProductSerial;
 import com.mize.domain.util.JPASerializer;
@@ -35,11 +36,12 @@ public class ServiceEntityRequestProduct extends MizeEntity {
 	
 	private ServiceEntityRequest serviceEntityRequest;
 	private Product product;
+	private ProductCategory productCategory;
 	private Long productId;
 	private ProductSerial productSerial;
 	private Long productSerialId;
 	private ProductRegistration registration;
-	private Long ProdRegnId;
+	private Long prodRegnId;
 	private String productName;
 	private String model;
 	private String brandName;
@@ -97,6 +99,16 @@ public class ServiceEntityRequestProduct extends MizeEntity {
 		this.product = product;
 	}
 	
+	@Transient
+	@JsonIgnore
+	public ProductCategory getProductCategory() {
+		return productCategory;
+	}
+	
+	public void setProductCategory(ProductCategory productCategory) {
+		this.productCategory = productCategory;
+	}
+	
 	@Column(name = "prod_id", nullable = true)
 	public Long getProductId() {
 		return productId;
@@ -137,11 +149,11 @@ public class ServiceEntityRequestProduct extends MizeEntity {
 	
 	@Column(name = "prod_regn_id", nullable = true)
 	public Long getProdRegnId() {
-		return ProdRegnId;
+		return prodRegnId;
 	}
 	
 	public void setProdRegnId(Long prodRegnId) {
-		ProdRegnId = prodRegnId;
+		this.prodRegnId = prodRegnId;
 	}
 	
 	@Column(name = "prod_name", length = 250)
