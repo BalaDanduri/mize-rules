@@ -7,6 +7,13 @@ public class FormLabel {
 	private Long id;
 	private String code;
 	private List<LabelIntl> intl = new ArrayList<LabelIntl>();
+	
+	public FormLabel() {}
+			
+	public FormLabel(String code) {
+		this.code = code;
+	}	
+	
 	public Long getId() {
 		return id;
 	}

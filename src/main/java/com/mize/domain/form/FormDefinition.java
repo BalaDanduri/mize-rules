@@ -30,6 +30,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
+import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.form.link.FormDefinitionLink;
 import com.mize.domain.util.JPASerializer;
@@ -55,6 +56,7 @@ public class FormDefinition extends MizeEntity {
 	private DateTime endDate;
 	private String isNewVersion;
 	private Form form;
+	private Locale locale;
 	private List<FormDefinitionAudit> audits = new ArrayList<FormDefinitionAudit>();
 	private List<FormDefinitionIntl> intls;
 	private List<FormDefinitionLink> links;
@@ -242,6 +244,15 @@ public class FormDefinition extends MizeEntity {
 	
 	public void setForm(Form form) {
 		this.form = form;
+	}
+
+	@Transient
+	public Locale getLocale() {
+		return locale;
+	}
+
+	public void setLocale(Locale locale) {
+		this.locale = locale;
 	}
 
 	@Transient
