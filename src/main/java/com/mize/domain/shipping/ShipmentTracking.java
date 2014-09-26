@@ -78,6 +78,7 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 	@Transient
 	private String fromEntity;
 	private List<ShipmentItem> shipmentItems;
+	private String reasonForExport;
 	
 	@Override
 	@Id
@@ -495,6 +496,15 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 
 	public void setShipmentItems(List<ShipmentItem> shipmentItems) {
 		this.shipmentItems = shipmentItems;
+	}
+
+	@Column(name="reason_for_export")
+	public String getReasonForExport() {
+		return reasonForExport;
+	}
+
+	public void setReasonForExport(String reasonForExport) {
+		this.reasonForExport = reasonForExport;
 	}
 
 	@Override
