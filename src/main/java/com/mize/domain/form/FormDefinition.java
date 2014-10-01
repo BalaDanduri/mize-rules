@@ -144,6 +144,7 @@ public class FormDefinition extends MizeEntity {
 		this.statusCode = statusCode;
 	}
 
+	@JsonIgnore
 	@Column(name = "form_defn_data", nullable = true)
 	public String getFormDefinitionData() {
 		return formDefinitionData;
