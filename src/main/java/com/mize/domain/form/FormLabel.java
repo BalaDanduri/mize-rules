@@ -37,5 +37,10 @@ public class FormLabel implements Serializable {
 	public void setIntl(List<LabelIntl> intl) {
 		this.intl = intl;
 	}
+
+	@Override
+	public String toString() {
+		return "FormLabel [id=" + id + ", code=" + code + ", intl=" + intl + "]";
+	}
 	
 }

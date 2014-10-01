@@ -12,6 +12,7 @@ public class ApplicationLabelCache implements Comparable<ApplicationLabelCache>,
 
 	private Long id;
 	private String code;
+	private String category;
 	private String isActive;
 	private String isDefault;
 	private Long tenantId;
@@ -33,6 +34,14 @@ public class ApplicationLabelCache implements Comparable<ApplicationLabelCache>,
 
 	public String getCode() {
 		return code;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	public void setCode(String code) {
