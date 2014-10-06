@@ -360,7 +360,7 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 		return user;
 	}
 
-	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "businessEntity", orphanRemoval = true)
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "businessEntity")
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
 	@JsonManagedReference(value="be_servicelink")
