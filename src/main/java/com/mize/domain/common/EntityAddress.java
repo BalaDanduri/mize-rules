@@ -235,7 +235,6 @@ public class EntityAddress extends MizeEntity implements Comparable<EntityAddres
 	}
 
 	@OneToOne(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "address", orphanRemoval = true)
-	@JoinColumn(name="entity_address_id")
 	@JsonManagedReference(value="geoAddress")
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
