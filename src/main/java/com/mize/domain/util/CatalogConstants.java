@@ -86,6 +86,9 @@ public abstract class CatalogConstants implements Serializable{
 	public static final String COMPLAINT = "Complaint";
 	public static final String CAUSE = "Cause";
 	public static final String CORRECTIVE_ACTION = "CorrectiveAction";
+	public static final String GOOD_WILL_TYPE = "GoodwillType";
+	public static final String GOOD_WILL_STATUS = "GoodwillStatus";
+	public static final String GOOD_WILL_LOCATION_TYPE = "GoodwillLocationType";
 	
 	public static final String SERVICE_ORDER_REQUESTER_TYPE = "ServiceOrderRequesterType";
 	public static final String SERVICE_ORDER_SERVICE_TYPE = "ServiceOrderServiceType";
