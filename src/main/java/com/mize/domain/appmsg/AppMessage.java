@@ -239,7 +239,7 @@ public class AppMessage extends MizeEntity implements Comparable<AppMessage> {
 	}
 	
 	
-	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "appMessage", orphanRemoval = true)
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "appMessage", orphanRemoval = true)
 	@Fetch(FetchMode.SELECT)
 	@JsonManagedReference(value="intl")
 	@JsonSerialize(using=JPASerializer.class)
