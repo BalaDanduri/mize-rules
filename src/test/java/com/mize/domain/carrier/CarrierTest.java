@@ -20,6 +20,7 @@ import org.springframework.test.context.ContextConfiguration;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.Locale;
 import com.mize.domain.test.util.JPATest;
+import com.mize.domain.util.Formatter;
 
 
 @ContextConfiguration(locations = { "/test-context.xml" })
@@ -126,13 +127,14 @@ public class CarrierTest extends JPATest{
 	}
 	
 	private Carrier retrieveCarrier() {
-		dbCarrier = jdbcTemplate.queryForObject(CARRIER_QUERY, new Object[] {carrier.getId()}, new CarrierRowMapper());
-		
-		if(dbCarrier != null) {
-			List<CarrierIntl> intlList =  jdbcTemplate.query(CARRIER_INTL_QUERY,  new Object[] {dbCarrier.getId()}, new CarrierIntlRowMapper());
-			dbCarrier.setIntls(intlList);
+		List<Carrier> dbCarriers = jdbcTemplate.query(CARRIER_QUERY, new Object[] {carrier.getId()}, new CarrierRowMapper());
+		if(!Formatter.isEmpty(dbCarriers)) {
+			dbCarrier = dbCarriers.get(0);
+			if(dbCarrier != null) {
+				List<CarrierIntl> intlList =  jdbcTemplate.query(CARRIER_INTL_QUERY,  new Object[] {dbCarrier.getId()}, new CarrierIntlRowMapper());
+				dbCarrier.setIntls(intlList);
+			}
 		}
-		
 		return dbCarrier;
 	}
 	
