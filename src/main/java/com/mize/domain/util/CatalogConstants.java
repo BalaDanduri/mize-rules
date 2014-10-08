@@ -97,6 +97,9 @@ public abstract class CatalogConstants implements Serializable{
 	public static final String SERVICE_ORDER_CUSTOMER_TYPE = "ServiceOrderCustomerType";
 	public static final String SERVICE_ORDER_COMMENT_TYPE = "ServiceOrderCommentType";
 	public static final String REASON_FOR_EXPORT = "ReasonForExport";
+	public static final String REASON_CATEGORY = "ReasonCategory"; 
+	public static final String CLAIM_REASON_TYPE = "ClaimReasonType"; 
+	public static final String SERVICE_REQUEST_REASON_TYPE = "SRReasonType"; 
 	
 }
 
