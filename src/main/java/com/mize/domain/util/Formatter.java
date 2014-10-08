@@ -451,18 +451,6 @@ public final class Formatter {
 		return returnValue;
 	}
 	
-	public static BigDecimal formattedBigDecimal1(Double value) {
-		BigDecimal returnValue = null;
-		if (value != null) {
-			try {
-				returnValue = new BigDecimal(value);
-				returnValue = formattedBigDecimal1(returnValue);
-			} catch(Exception e) {
-			}
-		}
-		return returnValue;
-	}
-	
 	public static BigInteger toBigInt(int value) {
 		return value == 0 ? BigInteger.ZERO : new BigInteger(String.valueOf(value))  ;
 	}
@@ -902,19 +890,7 @@ public final class Formatter {
 		}
 		return value;
 	}
-	
-	public static BigDecimal formattedBigDecimal1(BigDecimal value) {
-		if(value == null){
-			value = BigDecimal.ZERO;
-		}
-		DecimalFormat decimalFormat = new DecimalFormat();
-		decimalFormat.setMinimumFractionDigits(2);
-		decimalFormat.setMaximumFractionDigits(2);
-		String val = decimalFormat.format(value.doubleValue());
-		BigDecimal returnValue = new BigDecimal(val);
-		return returnValue;
-	}
-	
+		
 	public static String formattedBigDecimal2(BigDecimal value) {
 		if(value == null){
 			value = BigDecimal.ZERO;
@@ -962,7 +938,19 @@ public final class Formatter {
 	 }
 	 
 	 public static void main(String[] args) {
-		 System.out.println(formattedBigDecimal1(new BigDecimal(12002.123)));
+		DateTime date = DateTime.now();		 
+		//02/01/2014 -- 10/06/2014  02>=01
+		//07/31/2014                07<=10
+		DateTime date1 = new DateTime(Formatter.DATE_FORMAT3.parseDateTime("09/11/"+date.getYear()));
+		DateTime startDate = new DateTime(Formatter.DATE_FORMAT3.parseDateTime("02/01/"+date.getYear()));
+		DateTime endDate = new DateTime(Formatter.DATE_FORMAT3.parseDateTime("07/31/"+date.getYear()));
+		//System.out.println(startDate.compareTo(date1));
+		//System.out.println(date1.compareTo(date1));
+		//int count = (startDate.compareTo(date1))+(date1.compareTo(endDate));
+		if(date1.compareTo(startDate) == -1 || endDate.compareTo(date1) == -1 ) {
+			System.out.println("test");
+		}
+		
 	}
 	 
 	 public static final String generateRandomPassword() {
