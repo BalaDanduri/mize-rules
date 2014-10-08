@@ -101,6 +101,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	@Transient
 	private String dbStatus;
 	private List<PurchaseOrderTracking> orderTrackings = new ArrayList<PurchaseOrderTracking>();
+	private String email;
 	
 	public PurchaseOrder(){
 		super();
@@ -618,6 +619,15 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 
 	public void setOrderTrackings(List<PurchaseOrderTracking> orderTrackings) {
 		this.orderTrackings = orderTrackings;
+	}
+
+	@Transient
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	@Override
