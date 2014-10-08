@@ -16,8 +16,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -118,8 +116,7 @@ public class ApplicationLabel extends MizeEntity  implements Comparable<Applicat
 		this.isDefault = isDefault;
 	}
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade={CascadeType.ALL}, mappedBy = "applicationLabel" ,orphanRemoval= true)
-	@Fetch(FetchMode.SELECT)
+	@OneToMany(fetch = FetchType.EAGER, cascade={CascadeType.ALL}, mappedBy = "applicationLabel" ,orphanRemoval= true)
 	@JsonManagedReference(value="appLabel_intl")
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)	
