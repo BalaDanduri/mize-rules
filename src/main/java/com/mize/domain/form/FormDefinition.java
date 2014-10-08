@@ -60,6 +60,7 @@ public class FormDefinition extends MizeEntity {
 	private List<FormDefinitionAudit> audits = new ArrayList<FormDefinitionAudit>();
 	private List<FormDefinitionIntl> intls;
 	private List<FormDefinitionLink> links;
+	private List<FormDefinitionMessage> messages;
 	private User user;
 
 	public FormDefinition() {
@@ -67,6 +68,7 @@ public class FormDefinition extends MizeEntity {
 		formTemplateDefinition = new FormTemplateDefinition();
 		intls = new ArrayList<FormDefinitionIntl>();
 		links = new ArrayList<FormDefinitionLink>();
+		messages = new ArrayList<FormDefinitionMessage>();
 	}
 
 	public FormDefinition(FormTemplateDefinition formTemplateDefinition, BusinessEntity tenant, String formCode, String versionNumber, String statusCode, String formDefinitionData, String isActive, DateTime startDate, DateTime endDate) {
@@ -97,8 +99,10 @@ public class FormDefinition extends MizeEntity {
 		super.id = id;
 	}
 
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "template_defn_id", nullable = true)
+	/*@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "template_defn_id", nullable = true)*/
+	@Transient
+	@JsonIgnore
 	public FormTemplateDefinition getFormTemplateDefinition() {
 		return formTemplateDefinition;
 	}
@@ -254,6 +258,16 @@ public class FormDefinition extends MizeEntity {
 
 	public void setLocale(Locale locale) {
 		this.locale = locale;
+	}
+
+	@OneToMany(cascade={CascadeType.ALL}, fetch = FetchType.LAZY, mappedBy = "formDefinition", orphanRemoval = true)
+	@JsonIgnore
+	public List<FormDefinitionMessage> getMessages() {
+		return messages;
+	}
+
+	public void setMessages(List<FormDefinitionMessage> messages) {
+		this.messages = messages;
 	}
 
 	@Transient
