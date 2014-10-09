@@ -10,7 +10,7 @@ public class Field extends FormElement {
 	 */
 	private static final long serialVersionUID = -7247110131511609763L;
 	private String type;
-	private String value;
+	private Object value;
 	private String sameRow;
 	List<Attribute> attrs = new ArrayList<Attribute>();
 	List<GroupField> fieldList = new ArrayList<GroupField>();
@@ -23,11 +23,11 @@ public class Field extends FormElement {
 		this.type = type;
 	}
 
-	public String getValue() {
+	public Object getValue() {
 		return value;
 	}
 
-	public void setValue(String value) {
+	public void setValue(Object value) {
 		this.value = value;
 	}
 
