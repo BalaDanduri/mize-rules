@@ -13,6 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import org.joda.time.DateTime;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
@@ -30,25 +31,23 @@ public class GoodwillTest extends JPATest {
 	private static final String GOOD_WILL_QUERY = "select * from goodwill where id = ?";
 	EntityManager entityManager;
 	Goodwill goodwill = null;
+	EntityTransaction tx =null;
 	
 	
 	@Before
 	public void setUp(){
 		entityManager = getEntityManager();
 		goodwill = goodwillObjectTobeSaved(goodwill);
-		EntityTransaction tx = entityManager.getTransaction();
+		persist();
+	}
+	
+	private void persist() {
+		tx = entityManager.getTransaction();
 		tx.begin();
-		if(goodwill.getId() != null){
-			goodwill = entityManager.merge(goodwill);
-		}else{
-			entityManager.persist(goodwill);
-		}
+		entityManager.persist(goodwill);
 		tx.commit();
 	}
 	
-	public Goodwill findExistingGoodwill(EntityManager entityManager) {
-		return entityManager.find(Goodwill.class, new Long(3));
-	}
 	
 	@Test
 	public void testSaveGoodwill() {
@@ -107,7 +106,7 @@ public class GoodwillTest extends JPATest {
 		Goodwill gw = new Goodwill();
 		BusinessEntity tenant = new BusinessEntity();
 		tenant.setId(7624L);
-		gw.setId(3L);
+		//gw.setId(3L);
 		gw.setTenant(tenant);
 		gw.setCode("testCode");
 		gw.setStatusCode("completed");
@@ -152,7 +151,7 @@ public class GoodwillTest extends JPATest {
 		List<GoodwillComment> commentsList = new ArrayList<GoodwillComment>();
 		GoodwillComment gwComment = new GoodwillComment();
 		EntityComment entityComment = new EntityComment();
-		entityComment.setId(2384L);
+		//entityComment.setId(2384L);
 		entityComment.setCommentType("internal");
 		entityComment.setComments("masterComment");
 		gwComment.setEntityComment(entityComment);
@@ -163,10 +162,22 @@ public class GoodwillTest extends JPATest {
 		GoodwillAmount gwAmt = new GoodwillAmount();
 		gwAmt.setLaborAmount(new BigDecimal(300.00));
 		gwAmt.setPartAmount(new BigDecimal(300.00));
-		gwAmt.setTotalAmount(new BigDecimal(300.00));
 		gwAmt.setOtherAmount(new BigDecimal(300.00));
 		gw.setApprovedAmount(gwAmt);
-		gw.setClaimedAmount(gwAmt);
 		return gw;
+	}
+	
+	@After
+	public void tearDown() throws Exception {
+		try {
+			if (goodwill != null) {
+				tx.begin();
+				entityManager.remove(goodwill);
+				tx.commit();
+			}
+			entityManager.close();
+		} catch (Throwable th) {
+			th.printStackTrace();
+		}
 	}
 }
