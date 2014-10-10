@@ -69,6 +69,7 @@ public class FormInstance extends MizeEntity {
 		this.formDefinition = formDefinition;
 	}
 	
+	@JsonIgnore
 	@Column(name = "form_instance_data", nullable = true)
 	public String getFormInstanceData() {
 		return formInstanceData;
