@@ -27,7 +27,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
-import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
@@ -46,14 +45,7 @@ public class Carrier extends MizeEntity implements Comparable<Carrier>{
 	private List<CarrierIntl> intls = new ArrayList<CarrierIntl>();
 	
 	@Transient
-	private Locale locale;
-	@Transient
-	private String carrierName;
-	@Transient
-	private String carrierDesc;
-	@Transient
 	private User user;
-	
 	
 	public Carrier() {
 		super();
@@ -67,14 +59,11 @@ public class Carrier extends MizeEntity implements Comparable<Carrier>{
 		this.trackingUrl = trackingUrl;
 	}
 	
-	public Carrier(String carrierCode, String websiteUrl, String trackingUrl,
-			 String carrierName, String carrierDesc) {
+	public Carrier(String carrierCode, String websiteUrl, String trackingUrl) {
 		super();
 		this.carrierCode =  makeNotNullString(carrierCode);
 		this.websiteUrl = websiteUrl;
 		this.trackingUrl = trackingUrl;
-		this.carrierName = carrierName;
-		this.carrierDesc = carrierDesc;
 	}
 
 	@Id
@@ -129,7 +118,7 @@ public class Carrier extends MizeEntity implements Comparable<Carrier>{
 		this.trackingUrl = trackingUrl;
 	}
 	
-	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "carrier", orphanRemoval = true)
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "carrier", orphanRemoval = true)
 	@JsonManagedReference(value="intl")
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
@@ -199,33 +188,6 @@ public class Carrier extends MizeEntity implements Comparable<Carrier>{
 	@JsonIgnore(value=false)
 	public void setUpdatedBy(Long updatedBy) {		
 		super.setUpdatedBy(updatedBy);
-	}
-	
-	@Transient
-	public Locale getLocale() {
-		return locale;
-	}
-
-	public void setLocale(Locale locale) {
-		this.locale = locale;
-	}
-	
-	@Transient
-	public String getCarrierName() {
-		return carrierName;
-	}
-
-	public void setCarrierName(String carrierName) {
-		this.carrierName = carrierName;
-	}
-
-	@Transient
-	public String getCarrierDesc() {
-		return carrierDesc;
-	}
-
-	public void setCarrierDesc(String carrierDesc) {
-		this.carrierDesc = carrierDesc;
 	}
 	
 	@Transient
