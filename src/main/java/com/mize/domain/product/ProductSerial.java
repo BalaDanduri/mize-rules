@@ -321,7 +321,7 @@ public class ProductSerial extends MizeEntity{
 		this.createdBy = createdBy;
 	}
 	
-	@OneToMany(cascade={CascadeType.ALL },fetch = FetchType.LAZY, mappedBy = "productSerial",orphanRemoval= false)
+	@OneToMany(cascade={CascadeType.ALL },fetch = FetchType.LAZY, mappedBy = "productSerial",orphanRemoval= true)
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
 	@JsonManagedReference(value="productSerial_warranty")
