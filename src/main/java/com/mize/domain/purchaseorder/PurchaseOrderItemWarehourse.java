@@ -9,7 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.joda.time.DateTime;
@@ -53,7 +53,7 @@ public class PurchaseOrderItemWarehourse extends MizeEntity implements Comparabl
 		this.id = id;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "order_item_id")
 	@JsonBackReference(value = "warehouse_itemOrder")
 	public PurchaseOrderItem getOrderItem() {

@@ -19,8 +19,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -33,6 +31,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.part.Part;
 import com.mize.domain.part.PartKit;
+import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
@@ -75,7 +74,6 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 	private OriginalOrder originalOrder;
 	private String isReturnable;
 	private String oldItemNumber;
-	private List<PurchaseOrderMessage> itemMessages = new ArrayList<PurchaseOrderMessage>();
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -294,8 +292,9 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 	public void setItemId(Long itemId) {
 		this.itemId = itemId;
 	}
-	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "orderItem",orphanRemoval= true)
-	@Fetch(FetchMode.SUBSELECT)
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "orderItem",orphanRemoval= true)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public List<PurchaseOrderItemWarehourse> getWarehourses() {
 		return warehourses;
 	}
@@ -400,15 +399,6 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 
 	public void setOldItemNumber(String oldItemNumber) {
 		this.oldItemNumber = oldItemNumber;
-	}
-
-	@Transient
-	public List<PurchaseOrderMessage> getItemMessages() {
-		return itemMessages;
-	}
-
-	public void setItemMessages(List<PurchaseOrderMessage> itemMessages) {
-		this.itemMessages = itemMessages;
 	}
 
 	@Override
