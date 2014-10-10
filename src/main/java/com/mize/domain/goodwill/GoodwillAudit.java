@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.common.MizeEntity;
+import com.mize.domain.form.FormDefinition;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
@@ -35,6 +36,11 @@ public class GoodwillAudit extends MizeEntity implements Comparable<GoodwillAudi
 	private String status;
 	private DateTime statusDate;
 	private Long statusBy;
+	
+	
+	public GoodwillAudit(){
+		goodwill = new Goodwill();
+	}
 
 	@Override
 	@Id

@@ -28,6 +28,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
+import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.product.Product;
 import com.mize.domain.product.ProductSerial;
@@ -59,8 +60,14 @@ public class Goodwill extends MizeEntity {
 	private Long claimedEntityId;
 	private List<GoodwillAudit> audits = new ArrayList<GoodwillAudit>();
 	private List<GoodwillComment> comments = new ArrayList<GoodwillComment>();
+	@Transient
+	private EntityComment entityComment;
+	@Transient
 	private User user;
 	
+	public Goodwill(){
+		super();
+	}
 	
 	
 	@Override
@@ -209,6 +216,11 @@ public class Goodwill extends MizeEntity {
 		return comments;
 	}
 
+	@Transient
+	public EntityComment getEntityComment() {
+		return entityComment;
+	}
+	
 	public void setTenant(BusinessEntity tenant) {
 		this.tenant = tenant;
 	}
@@ -292,6 +304,10 @@ public class Goodwill extends MizeEntity {
 	public void setComments(List<GoodwillComment> comments) {
 		this.comments = comments;
 	}
+	
+	public void setEntityComment(EntityComment entityComment) {
+		this.entityComment = entityComment;
+	}
 
 	@Override
 	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
@@ -361,6 +377,7 @@ public class Goodwill extends MizeEntity {
 		this.user = user;
 	}
 
+
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
@@ -390,6 +407,8 @@ public class Goodwill extends MizeEntity {
 		result = prime * result
 				+ ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
+		result = prime * result
+				+ ((entityComment == null) ? 0 : entityComment.hashCode());
 		result = prime * result + ((product == null) ? 0 : product.hashCode());
 		result = prime * result
 				+ ((productSerial == null) ? 0 : productSerial.hashCode());
@@ -399,12 +418,15 @@ public class Goodwill extends MizeEntity {
 				+ ((requestor == null) ? 0 : requestor.hashCode());
 		result = prime * result
 				+ ((startDate == null) ? 0 : startDate.hashCode());
-		result = prime * result + ((statusCode == null) ? 0 : statusCode.hashCode());
+		result = prime * result
+				+ ((statusCode == null) ? 0 : statusCode.hashCode());
 		result = prime * result + ((tenant == null) ? 0 : tenant.hashCode());
 		result = prime * result
 				+ ((typeCode == null) ? 0 : typeCode.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -475,6 +497,11 @@ public class Goodwill extends MizeEntity {
 				return false;
 		} else if (!endDate.equals(other.endDate))
 			return false;
+		if (entityComment == null) {
+			if (other.entityComment != null)
+				return false;
+		} else if (!entityComment.equals(other.entityComment))
+			return false;
 		if (product == null) {
 			if (other.product != null)
 				return false;
@@ -514,6 +541,11 @@ public class Goodwill extends MizeEntity {
 			if (other.typeCode != null)
 				return false;
 		} else if (!typeCode.equals(other.typeCode))
+			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
 			return false;
 		return true;
 	}

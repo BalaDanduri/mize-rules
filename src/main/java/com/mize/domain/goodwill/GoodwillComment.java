@@ -13,12 +13,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.MizeEntity;
-import com.mize.domain.util.JPASerializer;
 /**
  * @author Raghavendra Serikar
  * @version 1.0
@@ -29,6 +25,15 @@ public class GoodwillComment extends MizeEntity implements Comparable<GoodwillCo
 	private static final long serialVersionUID = 1L;
 	private Goodwill goodwill;
 	private EntityComment entityComment;
+	
+	public GoodwillComment(){
+		super();
+	}
+	
+	public GoodwillComment(EntityComment entityComment){
+		super();
+		this.entityComment = entityComment;
+	}
 
 	@Override
 	@Id
