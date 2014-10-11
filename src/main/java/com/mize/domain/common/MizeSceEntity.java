@@ -2,16 +2,10 @@ package com.mize.domain.common;
 
 import java.io.Serializable;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.exception.UploadError;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
 import com.mize.domain.util.MizeDateTime;
 
 public abstract class MizeSceEntity implements Serializable{
@@ -65,16 +59,12 @@ public abstract class MizeSceEntity implements Serializable{
 	public void setUpdatedBy(Long updatedBy) {
 		this.updatedBy = updatedBy;
 	}
-
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
+	
 	@JsonInclude(Include.NON_DEFAULT)
 	public MizeDateTime getUpdatedDate() {
 		return updatedDate;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	public void setUpdatedDate(MizeDateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}
