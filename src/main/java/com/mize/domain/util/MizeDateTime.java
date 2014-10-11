@@ -3,8 +3,10 @@ package com.mize.domain.util;
 import java.io.Serializable;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.ISODateTimeFormat;
 
 public class MizeDateTime implements Serializable, Comparable<MizeDateTime>{
 	
@@ -38,12 +40,40 @@ public class MizeDateTime implements Serializable, Comparable<MizeDateTime>{
 		return isValid;
 	}
 	
+	public static MizeDateTime now(){
+		return new MizeDateTime();
+	}
+	
 	public MizeDateTime getInstance(){
 		return new MizeDateTime();
 	}
 	
+	public MizeDateTime getInstance(long millis, DateTimeZone timeZone){
+		return new MizeDateTime(millis, timeZone);
+	}
+	
+	public MizeDateTime getInstance(String dateValue,String dateFormatt){
+		return new MizeDateTime(dateValue,dateFormatt);
+	}
+	
+	protected MizeDateTime(String dateValue,String dateFormatt) {		
+		try{
+			DateTimeFormatter  DATE_FORMAT1 = DateTimeFormat.forPattern(dateFormatt);
+			this.dateTime = DateTime.parse(dateValue,DATE_FORMAT1);		
+			this.dateValue = dateValue;
+			this.dateFormatt = dateFormatt;
+			this.isValid = true;
+		}catch(Exception e){
+		}
+	}
+	
 	protected MizeDateTime(DateTime dateTime) {
 		this.dateTime = dateTime;
+		this.isValid = true;
+	}
+	
+	protected MizeDateTime(long millis, DateTimeZone timeZone) {
+		this.dateTime = new DateTime(millis,timeZone);
 		this.isValid = true;
 	}
 	
@@ -83,12 +113,12 @@ public class MizeDateTime implements Serializable, Comparable<MizeDateTime>{
 		}
 	}
 	
-	static {
+	/*static {
 		DateTimeFormatter simpleDateFormat = DateTimeFormat.forPattern(DEF_DATE_FORMAT);
 		DateTime.parse(DEF_END_DATE);
 		@SuppressWarnings("unused")
 		DateTime time = DateTime.parse(DEF_END_DATE,simpleDateFormat);
-	}
+	}*/
 	
 	public MizeDateTime defaultEndDate(){
 		DateTimeFormatter simpleDateFormat = DateTimeFormat.forPattern(DEF_DATE_FORMAT);
@@ -150,6 +180,15 @@ public class MizeDateTime implements Serializable, Comparable<MizeDateTime>{
 	
 	public String toDBDateTime(){		
 		return this.dateTime.toString(DB_DATE_TIME_FORMAT);
+	}
+	
+	public String toString(String dateFormatt){		
+		return DateTimeFormat.forPattern(dateFormatt).print(this.dateTime);
+	}
+	
+	@Override
+	public String toString() {
+		return ISODateTimeFormat.dateTime().print(this.dateTime);
 	}
 	
 }
