@@ -240,6 +240,10 @@ public final class Formatter {
 		return (dateTime == null ? null : dateTime.toString(DB_DATE_TIME_FORMAT));
 	}
 	
+	public static String getDBDateTime(MizeDateTime mizeDateTime){
+		return (mizeDateTime == null ? null : mizeDateTime.toDBDateTime());
+	}
+	
 	public static String dbDateTime(DateTime dateTime){
 		return (dateTime == null ? null : dateTime.toString(DB_DATE_TIME_FORMAT));
 	}
