@@ -1,14 +1,12 @@
 package com.mize.domain.common;
 
-import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.mize.domain.exception.UploadError;
 import com.mize.domain.util.MizeDateTime;
 
-public abstract class MizeSceEntity implements Serializable{
+public abstract class MizeSceEntity implements IEntity {
 	
 	private static final long serialVersionUID = 4810418252575043078L;	
 	public static final int EQUAL = 0;

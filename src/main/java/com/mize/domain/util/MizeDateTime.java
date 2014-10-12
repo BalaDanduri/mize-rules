@@ -139,17 +139,17 @@ public class MizeDateTime implements Serializable, Comparable<MizeDateTime>{
 		return this;
 	}
 	
-	public MizeDateTime addDays(int days){
+	public MizeDateTime plusDays(int days){
 		dateTime.plusDays(days);
 		return this;
 	}
 	
-	public MizeDateTime substractMonths(int months){
+	public MizeDateTime minusMonths(int months){
 		dateTime.minusMonths(months);
 		return this;
 	}
 	
-	public MizeDateTime addMonths(int months){
+	public MizeDateTime plusMonths(int months){
 		dateTime.plusMonths(months);
 		return this;
 	}
@@ -159,12 +159,12 @@ public class MizeDateTime implements Serializable, Comparable<MizeDateTime>{
 		return this;
 	}
 	
-	public MizeDateTime substractYears(int years){
+	public MizeDateTime minusYears(int years){
 		dateTime.minusYears(years);
 		return this;
 	}
 	
-	public MizeDateTime substractDays(int days){
+	public MizeDateTime minusDays(int days){
 		dateTime.minusDays(days);
 		return this;
 	}
@@ -174,7 +174,9 @@ public class MizeDateTime implements Serializable, Comparable<MizeDateTime>{
 		return this;
 	}	
 	
-	public boolean equals(MizeDateTime mizeDateTime){
+	@Override
+	public boolean equals(Object object){
+		MizeDateTime mizeDateTime = (MizeDateTime)object;
 		return this.dateTime.equals(mizeDateTime.getDateTime());
 	}
 	

@@ -1,7 +1,5 @@
 package com.mize.domain.common;
 
-import java.io.Serializable;
-
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -14,7 +12,7 @@ import com.mize.domain.exception.UploadError;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
-public abstract class MizeEntity implements Serializable{
+public abstract class MizeEntity implements IEntity {
 	
 	private static final long serialVersionUID = 4810418252575043078L;	
 	public static final int EQUAL = 0;

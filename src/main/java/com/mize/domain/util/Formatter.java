@@ -181,6 +181,10 @@ public final class Formatter {
 		return str == null?EMPTY:str.trim();
 	}
 	
+	public static String notNullString(String str){
+		return str == null?EMPTY:str.trim();
+	}
+	
 	public static boolean isNull(String str){
 		return (str == null || str.trim().length()==0);
 	}
