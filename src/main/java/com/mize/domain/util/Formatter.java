@@ -945,6 +945,20 @@ public final class Formatter {
 		 return result.toString();
 	 }
 	 
+	 public static MizeDateTime toMizeDateTime(DateTime dateTime){
+		 if(dateTime !=null){
+			 return new MizeDateTime(dateTime);
+		 }
+		 return null;
+	 }
+	 
+	 public static DateTime toDateTime(MizeDateTime mizeDateTime){
+		 if(mizeDateTime !=null){
+			 return mizeDateTime.getDateTime();
+		 }
+		 return null;
+	 }
+	 
 	 public static void main(String[] args) {
 		DateTime date = DateTime.now();		 
 		//02/01/2014 -- 10/06/2014  02>=01
