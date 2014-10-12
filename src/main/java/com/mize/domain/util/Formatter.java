@@ -414,6 +414,14 @@ public final class Formatter {
 		}
 		return time;
 	}
+	
+	public static MizeDateTime toMizeDateTime(Timestamp timestamp){
+		MizeDateTime mizeDateTime = null;
+		if(timestamp!= null){
+			mizeDateTime = new MizeDateTime(new DateTime(timestamp));
+		}
+		return mizeDateTime;
+	}
 
 	public static String toLowerCase(String value){
 		return value == null ? EMPTY : value.trim().toLowerCase();	

@@ -44,15 +44,15 @@ public class MizeDateTime implements Serializable, Comparable<MizeDateTime>{
 		return new MizeDateTime();
 	}
 	
-	public MizeDateTime getInstance(){
+	public static MizeDateTime getInstance(){
 		return new MizeDateTime();
 	}
 	
-	public MizeDateTime getInstance(long millis, DateTimeZone timeZone){
+	public static MizeDateTime getInstance(long millis, DateTimeZone timeZone){
 		return new MizeDateTime(millis, timeZone);
 	}
 	
-	public MizeDateTime getInstance(String dateValue,String dateFormatt){
+	public static MizeDateTime getInstance(String dateValue,String dateFormatt){
 		return new MizeDateTime(dateValue,dateFormatt);
 	}
 	
