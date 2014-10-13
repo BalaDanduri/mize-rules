@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.IEntity;
 
 @JsonPropertyOrder({"meta","rel","items"})
 public class MizeResponse {
 	private ResponseMeta meta = new ResponseMeta();
 	private List<ResponseLink>  rels = new ArrayList<ResponseLink>();
-	private List<? extends MizeEntity> items;
+	private List<? extends IEntity> items;
 	
 	public ResponseMeta getMeta() {
 		return meta;
@@ -24,14 +24,14 @@ public class MizeResponse {
 	public void setRels(List<ResponseLink> rels) {
 		this.rels = rels;
 	}
-	public List<? extends MizeEntity> getItems() {
+	public List<? extends IEntity> getItems() {
 		return items;
 	}
-	public void setItems(List<? extends MizeEntity> items) {
+	public void setItems(List<? extends IEntity> items) {
 		this.items = items;
 	}
 
-	public MizeResponse(ResponseMeta meta, List<ResponseLink> rels, List<? extends MizeEntity>items) {
+	public MizeResponse(ResponseMeta meta, List<ResponseLink> rels, List<? extends IEntity>items) {
 		this.meta = meta;
 		this.rels = rels;
 		this.items = items;
