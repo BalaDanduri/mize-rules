@@ -722,6 +722,13 @@ public final class Formatter {
 		return 0;
 	}
 	
+	public static int compareDates(MizeDateTime startTime,MizeDateTime endTime){
+		if(startTime != null && startTime.getDateTime() != null && endTime != null && endTime.getDateTime() != null){
+			return startTime.compareTo(endTime);
+		}
+		return 0;
+	}
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void populatePagination(PaginationPage page, int pageNo){
 		if(pageNo <= 0){

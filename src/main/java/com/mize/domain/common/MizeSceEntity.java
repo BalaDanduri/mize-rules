@@ -101,12 +101,10 @@ public abstract class MizeSceEntity implements IEntity {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		MizeSceEntity other = (MizeSceEntity) obj;
-		
+		MizeSceEntity other = (MizeSceEntity) obj;		
 		if (!isLongFieldsEquals(this.id, other.id)) {
 			return false;
-		}
-		
+		}		
 		return true;
 	}
 	
