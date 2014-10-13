@@ -54,7 +54,7 @@ public class MizeDateTimeJPA implements UserType{
 			return null;
 		}
         DateTime dateTime = new DateTime(timestamp);
-        return new MizeDateTime(dateTime);
+        return MizeDateTime.getInstance(dateTime);
 	}
 	
 	@Override
@@ -67,9 +67,8 @@ public class MizeDateTimeJPA implements UserType{
 		return arg0;
 	}
 
-	@SuppressWarnings("rawtypes")
 	@Override
-	public Class returnedClass() {		
+	public Class<MizeDateTime> returnedClass() {		
 		return MizeDateTime.class;
 	}
 

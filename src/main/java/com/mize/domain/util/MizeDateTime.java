@@ -8,7 +8,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 
-public class MizeDateTime implements Serializable, Comparable<MizeDateTime>{
+public class MizeDateTime implements Serializable, Comparable<MizeDateTime>, Cloneable{
 	
 	private static final long serialVersionUID = 7257173124058180557L;
 	private static final String DEF_DATE_FORMAT = "MM/dd/yyyy";	
@@ -19,33 +19,17 @@ public class MizeDateTime implements Serializable, Comparable<MizeDateTime>{
 	private String dateValue;
 	private DateTime dateTime;
 	private boolean isValid;
-	
-	public String getDateFormatt() {
-		return dateFormatt;
-	}
-	public void setDateFormatt(String dateFormatt) {
-		this.dateFormatt = dateFormatt;
-	}
-	public String getDateValue() {
-		return dateValue;
-	}
-	public void setDateValue(String dateValue) {
-		this.dateValue = dateValue;
-	}
-	public DateTime getDateTime() {
-		return dateTime;
-	}
-	
-	public boolean isValid() {
-		return isValid;
-	}
-	
+		
 	public static MizeDateTime now(){
 		return new MizeDateTime();
 	}
 	
 	public static MizeDateTime getInstance(){
 		return new MizeDateTime();
+	}
+	
+	public static MizeDateTime getInstance(DateTime dateTime){
+		return new MizeDateTime(dateTime);
 	}
 	
 	public static MizeDateTime getInstance(long millis, DateTimeZone timeZone){
@@ -173,6 +157,26 @@ public class MizeDateTime implements Serializable, Comparable<MizeDateTime>{
 		this.dateTime.minusDays(1);
 		return this;
 	}	
+	
+	public String getDateFormatt() {
+		return dateFormatt;
+	}
+	public void setDateFormatt(String dateFormatt) {
+		this.dateFormatt = dateFormatt;
+	}
+	public String getDateValue() {
+		return dateValue;
+	}
+	public void setDateValue(String dateValue) {
+		this.dateValue = dateValue;
+	}
+	public DateTime getDateTime() {
+		return dateTime;
+	}
+	
+	public boolean isValid() {
+		return isValid;
+	}
 	
 	@Override
 	public boolean equals(Object object){
