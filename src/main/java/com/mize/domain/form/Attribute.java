@@ -2,17 +2,30 @@ package com.mize.domain.form;
 
 import java.io.Serializable;
 
+import com.mize.domain.common.MizeEntity;
 
-public class Attribute implements Serializable{
+
+public class Attribute extends MizeEntity implements Serializable{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 4495186453091139534L;
+	
 	private String name;	
 	private String value;
 	private String severity;
 	private String formula;
+	
+	@Override
+	public Long getId() {
+		return id;
+	}
+
+	@Override
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;

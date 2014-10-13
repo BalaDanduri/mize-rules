@@ -12,12 +12,23 @@ public class Form extends FormElement{
 	 * 
 	 */
 	private static final long serialVersionUID = 7727863385524569981L;
-	private final List<SectionGroup> sectionGroups = new ArrayList<SectionGroup>();
+	
+	private List<SectionGroup> sectionGroups;
 	
 	private List<ApplicationLabel> appLabels;
 	
+	public Form() {
+		super();
+		sectionGroups = new ArrayList<SectionGroup>();
+		appLabels = new ArrayList<ApplicationLabel>();
+	}
+	
 	public List<SectionGroup> getSectionGroups() {
 		return sectionGroups;
+	}
+
+	public void setSectionGroups(List<SectionGroup> sectionGroups) {
+		this.sectionGroups = sectionGroups;
 	}
 
 	@JsonIgnore

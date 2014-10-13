@@ -65,6 +65,7 @@ public class FormDefinition extends MizeEntity {
 
 	public FormDefinition() {
 		tenant = new BusinessEntity();
+		form = new Form();
 		formTemplateDefinition = new FormTemplateDefinition();
 		intls = new ArrayList<FormDefinitionIntl>();
 		links = new ArrayList<FormDefinitionLink>();

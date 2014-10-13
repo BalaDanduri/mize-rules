@@ -6,23 +6,30 @@ import java.util.Map;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.mize.domain.common.MizeEntity;
 
-public class FormElement implements Serializable{
+public class FormElement extends MizeEntity implements Serializable{
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 2467819665340668161L;
-	private Long id;
 	private String name;
 	private String ref;
 	private FormLabel label;
-	private final Map<String, String> meta = new HashMap<String, String>();
+	private Map<String, String> meta;
 	
+	public FormElement() {
+		super();
+		meta = new HashMap<String, String>();
+	}
+	
+	@Override
 	public Long getId() {
 		return id;
 	}
 
+	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}

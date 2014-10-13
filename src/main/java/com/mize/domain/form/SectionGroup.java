@@ -8,9 +8,20 @@ public class SectionGroup extends FormElement{
 	 * 
 	 */
 	private static final long serialVersionUID = -3738122979818002211L;
-	private final List<Section> sections = new ArrayList<Section>();
-		
+	
+	private List<Section> sections;
+	
+	public SectionGroup() {
+		super();
+		sections = new ArrayList<Section>();
+	}
+	
 	public List<Section> getSections() {
 		return sections;
 	}
+	
+	public void setSections(List<Section> sections) {
+		this.sections = sections;
+	}
+	
 }

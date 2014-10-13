@@ -9,9 +9,20 @@ public class Section extends FormElement{
 	 * 
 	 */
 	private static final long serialVersionUID = -1131177443126701114L;
-	private final List<Field> fields = new ArrayList<Field>();
+	
+	private List<Field> fields;
+	
+	public Section() {
+		super();
+		fields = new ArrayList<Field>();
+	}
 	
 	public List<Field> getFields() {
 		return fields;
 	}
+	
+	public void setFields(List<Field> fields) {
+		this.fields = fields;
+	}
+	
 }

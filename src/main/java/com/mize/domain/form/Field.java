@@ -9,11 +9,18 @@ public class Field extends FormElement {
 	 * 
 	 */
 	private static final long serialVersionUID = -7247110131511609763L;
+	
 	private String type;
 	private String value;
 	private String sameRow;
-	List<Attribute> attrs = new ArrayList<Attribute>();
-	List<GroupField> fieldList = new ArrayList<GroupField>();
+	private List<Attribute> attrs;
+	private List<GroupField> fieldList;
+	
+	public Field() {
+		super();
+		attrs = new ArrayList<Attribute>();
+		fieldList = new ArrayList<GroupField>();
+	}
 
 	public String getType() {
 		return type;

@@ -4,27 +4,36 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FormLabel implements Serializable {
+import com.mize.domain.common.MizeEntity;
+
+public class FormLabel extends MizeEntity implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 650988974672502526L;
-	private Long id;
-	private String code;
-	private List<LabelIntl> intl = new ArrayList<LabelIntl>();
 	
-	public FormLabel() {}
+	private String code;
+	private List<LabelIntl> intl;
+	
+	public FormLabel() {
+		super();
+		intl = new ArrayList<LabelIntl>();
+	}
 			
 	public FormLabel(String code) {
 		this.code = code;
 	}	
 	
+	@Override
 	public Long getId() {
 		return id;
 	}
+	
+	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
 	public String getCode() {
 		return code;
 	}
