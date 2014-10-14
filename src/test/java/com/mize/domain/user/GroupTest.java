@@ -43,7 +43,7 @@ public class GroupTest extends JPATest {
 	BusinessEntity tenant;
 	User user ;
 	
-
+   
 	@Before
 	public void setUp() throws Exception {
 		entityManager = getEntityManager();
