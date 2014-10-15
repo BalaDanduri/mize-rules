@@ -3,6 +3,9 @@ package com.mize.domain.form;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 public class Field extends FormElement {
 
 	/**
@@ -15,11 +18,13 @@ public class Field extends FormElement {
 	private String sameRow;
 	private List<Attribute> attrs;
 	private List<GroupField> fieldList;
+	private List<FormAttachment> attachments;
 	
 	public Field() {
 		super();
 		attrs = new ArrayList<Attribute>();
 		fieldList = new ArrayList<GroupField>();
+		attachments = new ArrayList<FormAttachment>();
 	}
 
 	public String getType() {
@@ -46,6 +51,7 @@ public class Field extends FormElement {
 		this.sameRow = sameRow;
 	}
 
+	@JsonInclude(Include.NON_EMPTY)
 	public List<Attribute> getAttrs() {
 		return attrs;
 	}
@@ -54,6 +60,7 @@ public class Field extends FormElement {
 		this.attrs = attrs;
 	}
 
+	@JsonInclude(Include.NON_EMPTY)
 	public List<GroupField> getFieldList() {
 		return fieldList;
 	}
@@ -62,9 +69,23 @@ public class Field extends FormElement {
 		this.fieldList = fieldList;
 	}
 
+	@JsonInclude(Include.NON_EMPTY)
+	public List<FormAttachment> getAttachments() {
+		return attachments;
+	}
+
+	public void setAttachments(List<FormAttachment> attachments) {
+		this.attachments = attachments;
+	}
+
 	@Override
 	public String toString() {
-		return "Field [type=" + type + ", value=" + value + ", sameRow=" + sameRow + ", attrs=" + attrs + ", fieldList=" + fieldList + "]";
+		return "Field [type=" + type + ", value=" + value + ", sameRow="
+				+ sameRow + ", attrs=" + attrs + ", fieldList=" + fieldList
+				+ ", attachments=" + attachments + "]";
 	}
+	
+	
+	
 
 }
