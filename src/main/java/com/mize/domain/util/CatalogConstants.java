@@ -101,5 +101,8 @@ public abstract class CatalogConstants implements Serializable{
 	public static final String CLAIM_REASON_TYPE = "ClaimReasonType"; 
 	public static final String SERVICE_REQUEST_REASON_TYPE = "SRReasonType"; 
 	
+	public static final String SERVUCE_BULLETIN_STATUS = "ServiceBulletinStatus";
+	public static final String SERVUCE_BULLETIN_TYPE = "BulletinType";
+	
 }
 
