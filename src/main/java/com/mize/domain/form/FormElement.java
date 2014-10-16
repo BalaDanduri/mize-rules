@@ -14,7 +14,7 @@ public class FormElement extends MizeEntity implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 2467819665340668161L;
-	private String name;
+	private String alias;
 	private String ref;
 	private FormLabel label;
 	private Map<String, String> meta;
@@ -34,12 +34,12 @@ public class FormElement extends MizeEntity implements Serializable{
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getAlias() {
+		return alias;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setAlias(String alias) {
+		this.alias = alias;
 	}
 
 	public String getRef() {
