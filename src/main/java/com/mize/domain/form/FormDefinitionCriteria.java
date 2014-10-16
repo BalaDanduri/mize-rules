@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
+import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.product.Product;
 import com.mize.domain.util.JodaDateDeserializer;
@@ -23,7 +24,7 @@ public class FormDefinitionCriteria extends MizeEntity {
 	private Product product;
 	private DateTime inspectionDate;
 	private User user;
-	
+	private Locale locale;
 	
 	@Override
 	public Long getId() {
@@ -72,6 +73,16 @@ public class FormDefinitionCriteria extends MizeEntity {
 	public void setUser(User user) {
 		this.user = user;
 	}
+	
+	public Locale getLocale() {
+		return locale;
+	}
+
+	public void setLocale(Locale locale) {
+		this.locale = locale;
+	}
+	
+	
 
 	@Override
 	public String toString() {
@@ -79,7 +90,7 @@ public class FormDefinitionCriteria extends MizeEntity {
 				+ ", product=" + product + ", inspectionDate=" + inspectionDate
 				+ ", user=" + user + "]";
 	}
-	
+
 	
 	
 
