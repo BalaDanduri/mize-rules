@@ -81,6 +81,10 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 	private String reasonForExport;
 	@Transient
 	private String isIntlShipment;
+	private String documentContentType;
+	private String payeePartyType;
+	private String shipmentImporter;
+	
 	
 	@Override
 	@Id
@@ -521,6 +525,33 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 	@Override
 	public int compareTo(ShipmentTracking o) {
 		return 0;
+	}
+
+	@Column(name="dcmnt_cntnt_type")
+	public String getDocumentContentType() {
+		return documentContentType;
+	}
+
+	public void setDocumentContentType(String documentContentType) {
+		this.documentContentType = documentContentType;
+	}
+
+	@Column(name="payee_party_type")
+	public String getPayeePartyType() {
+		return payeePartyType;
+	}
+
+	public void setPayeePartyType(String payeePartyType) {
+		this.payeePartyType = payeePartyType;
+	}
+
+	@Column(name="shipment_importer")
+	public String getShipmentImporter() {
+		return shipmentImporter;
+	}
+
+	public void setShipmentImporter(String shipmentImporter) {
+		this.shipmentImporter = shipmentImporter;
 	}
 
 	@Override
