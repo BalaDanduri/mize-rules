@@ -527,7 +527,8 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 		return 0;
 	}
 
-	@Column(name="dcmnt_cntnt_type")
+	//@Column(name="dcmnt_cntnt_type")
+	@Transient
 	public String getDocumentContentType() {
 		return documentContentType;
 	}
@@ -536,7 +537,8 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 		this.documentContentType = documentContentType;
 	}
 
-	@Column(name="payee_party_type")
+	//@Column(name="payee_party_type")
+	@Transient
 	public String getPayeePartyType() {
 		return payeePartyType;
 	}
@@ -545,7 +547,8 @@ public class ShipmentTracking extends MizeEntity implements Comparable<ShipmentT
 		this.payeePartyType = payeePartyType;
 	}
 
-	@Column(name="shipment_importer")
+	//@Column(name="shipment_importer")
+	@Transient
 	public String getShipmentImporter() {
 		return shipmentImporter;
 	}
