@@ -171,6 +171,18 @@ public class MizeDateTime implements Serializable, Comparable<MizeDateTime>, Clo
 	}
 	
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((dateFormat == null) ? 0 : dateFormat.hashCode());
+		result = prime * result
+				+ ((dateTime == null) ? 0 : dateTime.hashCode());
+		result = prime * result
+				+ ((dateValue == null) ? 0 : dateValue.hashCode());
+		return result;
+	}
+
 	public boolean equals(Object object){
 		MizeDateTime mizeDateTime = (MizeDateTime)object;
 		return this.dateTime.equals(mizeDateTime.getDateTime());
