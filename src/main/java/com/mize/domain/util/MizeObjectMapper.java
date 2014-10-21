@@ -29,8 +29,8 @@ public class MizeObjectMapper extends ObjectMapper {
 	public static final String DB_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 	public static final String DATE_AS_LONG = "LONG";
 
-	String dateFormat = DATE_FORMAT;
-	DateTimeFormatter dateTimeFormatter;
+	protected String dateFormat = DATE_FORMAT;
+	protected  DateTimeFormatter dateTimeFormatter;
 
 	public MizeObjectMapper() {
 		this(DATE_FORMAT);

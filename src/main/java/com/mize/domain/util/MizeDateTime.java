@@ -15,7 +15,7 @@ public class MizeDateTime implements Serializable, Comparable<MizeDateTime>, Clo
 	private static final String DEF_END_DATE = "12/31/9999";	
 	public static final DateTimeFormatter  DB_DATE_TIME_FORMAT = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
 	
-	private String dateFormatt;
+	private String dateFormat;
 	private String dateValue;
 	private DateTime dateTime;
 	private boolean isValid;
@@ -36,14 +36,14 @@ public class MizeDateTime implements Serializable, Comparable<MizeDateTime>, Clo
 		return new MizeDateTime(millis, timeZone);
 	}
 	
-	public static MizeDateTime getInstance(String dateValue,String dateFormatt){
-		return new MizeDateTime(dateValue,dateFormatt);
+	public static MizeDateTime getInstance(String dateValue,String dateFormat){
+		return new MizeDateTime(dateValue,dateFormat);
 	}
 	
 	protected MizeDateTime(String dateValue,String dateFormatt) {		
 		try{		
 			this.dateValue = dateValue;
-			this.dateFormatt = dateFormatt;
+			this.dateFormat = dateFormatt;
 			this.dateTime = DateTime.parse(dateValue,DateTimeFormat.forPattern(dateFormatt));	
 			this.isValid = true;
 		}catch(Exception e){
@@ -95,14 +95,7 @@ public class MizeDateTime implements Serializable, Comparable<MizeDateTime>, Clo
 			return new MizeDateTime(currentTimeInMillis - millis);
 		}
 	}
-	
-	/*static {
-		DateTimeFormatter simpleDateFormat = DateTimeFormat.forPattern(DEF_DATE_FORMAT);
-		DateTime.parse(DEF_END_DATE);
-		@SuppressWarnings("unused")
-		DateTime time = DateTime.parse(DEF_END_DATE,simpleDateFormat);
-	}*/
-	
+		
 	public MizeDateTime defaultEndDate(){
 		DateTimeFormatter simpleDateFormat = DateTimeFormat.forPattern(DEF_DATE_FORMAT);
 		DateTime.parse(DEF_END_DATE);
@@ -157,11 +150,11 @@ public class MizeDateTime implements Serializable, Comparable<MizeDateTime>, Clo
 		return this;
 	}	
 	
-	public String getDateFormatt() {
-		return dateFormatt;
+	public String getDateFormat() {
+		return dateFormat;
 	}
-	public void setDateFormatt(String dateFormatt) {
-		this.dateFormatt = dateFormatt;
+	public void setDateFormat(String dateFormat) {
+		this.dateFormat = dateFormat;
 	}
 	public String getDateValue() {
 		return dateValue;
@@ -178,6 +171,18 @@ public class MizeDateTime implements Serializable, Comparable<MizeDateTime>, Clo
 	}
 	
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((dateFormat == null) ? 0 : dateFormat.hashCode());
+		result = prime * result
+				+ ((dateTime == null) ? 0 : dateTime.hashCode());
+		result = prime * result
+				+ ((dateValue == null) ? 0 : dateValue.hashCode());
+		return result;
+	}
+
 	public boolean equals(Object object){
 		MizeDateTime mizeDateTime = (MizeDateTime)object;
 		return this.dateTime.equals(mizeDateTime.getDateTime());
@@ -187,12 +192,13 @@ public class MizeDateTime implements Serializable, Comparable<MizeDateTime>, Clo
 		return this.dateTime.toString(DB_DATE_TIME_FORMAT);
 	}
 	
-	public String toString(String dateFormatt){		
-		return DateTimeFormat.forPattern(dateFormatt).print(this.dateTime);
+	public String toString(String dateFormat){		
+		return DateTimeFormat.forPattern(dateFormat).print(this.dateTime);
 	}
 	
 	@Override
 	public String toString() {
+		// user default time formatt to print
 		return ISODateTimeFormat.dateTime().print(this.dateTime);
 	}
 	
