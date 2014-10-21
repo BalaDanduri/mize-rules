@@ -70,7 +70,6 @@ public class MizeObjectMapper extends ObjectMapper {
 			JsonToken t = parser.getCurrentToken();
 			TimeZone tz = context.getTimeZone();
 			DateTimeZone dtz = (tz == null) ? DateTimeZone.UTC : DateTimeZone.forTimeZone(tz);
-
 			if (t == JsonToken.VALUE_NUMBER_INT) {
 				return new MizeDateTime(parser.getLongValue(), dtz);
 			}
@@ -113,10 +112,16 @@ public class MizeObjectMapper extends ObjectMapper {
 	public class MizeDateTimeSerializer extends JsonSerializer<MizeDateTime> {
 		@Override
 		public void serialize(MizeDateTime mizeDateTime, JsonGenerator gen, SerializerProvider provider) throws IOException, JsonProcessingException {
-			if (dateFormat.equalsIgnoreCase(DATE_AS_LONG)) {
-				gen.writeNumber(mizeDateTime.getMillis());
-			} else {
-				gen.writeString(mizeDateTime.toString(dateFormat));
+			if(mizeDateTime != null){
+				if (dateFormat.equalsIgnoreCase(DATE_AS_LONG)) {
+					gen.writeNumber(mizeDateTime.getMillis());
+				} else {
+					if(mizeDateTime.isValid()){
+						gen.writeString(mizeDateTime.toString(dateFormat));
+					}else{
+						gen.writeString(mizeDateTime.getDateValue());
+					}
+				}
 			}
 		}
 	}

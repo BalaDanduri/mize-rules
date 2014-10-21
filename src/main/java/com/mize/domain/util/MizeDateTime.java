@@ -41,11 +41,10 @@ public class MizeDateTime implements Serializable, Comparable<MizeDateTime>, Clo
 	}
 	
 	protected MizeDateTime(String dateValue,String dateFormatt) {		
-		try{
-			DateTimeFormatter  DATE_FORMAT1 = DateTimeFormat.forPattern(dateFormatt);
-			this.dateTime = DateTime.parse(dateValue,DATE_FORMAT1);		
+		try{		
 			this.dateValue = dateValue;
 			this.dateFormatt = dateFormatt;
+			this.dateTime = DateTime.parse(dateValue,DateTimeFormat.forPattern(dateFormatt));	
 			this.isValid = true;
 		}catch(Exception e){
 		}

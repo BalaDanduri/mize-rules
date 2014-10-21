@@ -20,8 +20,8 @@ public class ResponseMeta {
 	private String request;
 	private Integer pageSize;
 	@JsonIgnore
-	private Long startTime = System.currentTimeMillis();
-
+	private Long startTime;
+	private Long responseTime;
 	public static final String STATUS_SUCCESS = "SUCCESS";
 	public static final String STATUS_FAILURE = "FAILURE";
 	
@@ -118,8 +118,17 @@ public class ResponseMeta {
 	}
 	
 	public Long getResponseTime() {
-		return System.currentTimeMillis() - startTime;
+		if(this.responseTime == null && startTime != null){
+			return System.currentTimeMillis() - startTime;
+		}else{
+			return this.responseTime;
+		}
 	}
+	
+	public void setResponseTime(Long responseTime) {
+		this.responseTime = responseTime;
+	}
+
 	public void setStartTime(Long startTime){
 		this.startTime = startTime;
 	}
