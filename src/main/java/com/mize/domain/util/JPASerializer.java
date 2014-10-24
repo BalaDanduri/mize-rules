@@ -2,10 +2,11 @@ package com.mize.domain.util;
 
 import java.io.IOException;
 
-import org.hibernate.collection.PersistentBag;
-import org.hibernate.collection.PersistentCollection;
-import org.hibernate.collection.PersistentMap;
-import org.hibernate.collection.PersistentSet;
+
+import org.hibernate.collection.internal.PersistentBag;
+import org.hibernate.collection.internal.PersistentMap;
+import org.hibernate.collection.internal.PersistentSet;
+import org.hibernate.collection.spi.PersistentCollection;
 import org.hibernate.proxy.HibernateProxy;
 
 import com.fasterxml.jackson.core.JsonGenerator;

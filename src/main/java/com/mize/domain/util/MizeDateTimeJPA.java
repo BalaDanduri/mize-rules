@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 import java.sql.Types;
 
 import org.hibernate.HibernateException;
+import org.hibernate.engine.spi.SessionImplementor;
 import org.hibernate.usertype.UserType;
 import org.joda.time.DateTime;
 
@@ -47,20 +48,6 @@ public class MizeDateTimeJPA implements UserType{
 		return false;
 	}
 	
-	@Override
-	public Object nullSafeGet(ResultSet arg0, String[] arg1, Object arg2) throws HibernateException, SQLException {
-		Timestamp timestamp = arg0.getTimestamp(arg1[0]);
-		if (arg0.wasNull()) {
-			return null;
-		}
-        DateTime dateTime = new DateTime(timestamp);
-        return MizeDateTime.getInstance(dateTime);
-	}
-	
-	@Override
-	public void nullSafeSet(PreparedStatement arg0, Object arg1, int arg2) throws HibernateException, SQLException {
-		arg0.setString(arg2,Formatter.getDBDateTime((MizeDateTime)arg1));
-	}
 
 	@Override
 	public Object replace(Object arg0, Object arg1, Object arg2) throws HibernateException {
@@ -77,19 +64,22 @@ public class MizeDateTimeJPA implements UserType{
 		 return new int[] {Types.TIMESTAMP};
 	}
 
-	/*@Override
-	public Object nullSafeGet(ResultSet arg0, String[] arg1,SessionImplementor arg2, Object arg3) throws HibernateException, SQLException {
-		Timestamp timestamp = arg0.getTimestamp(arg1[0]);
-        if (arg0.wasNull()) {
-            return null;
-        }
-        return new DateTime(timestamp);
+	@Override
+	public Object nullSafeGet(ResultSet rs, String[] names,SessionImplementor session, Object owner) throws HibernateException, SQLException {
+		Timestamp timestamp = rs.getTimestamp(names[0]);
+		if (rs.wasNull()) {
+			return null;
+		}
+        DateTime dateTime = new DateTime(timestamp);
+        return MizeDateTime.getInstance(dateTime);
 	}
 
 	@Override
-	public void nullSafeSet(PreparedStatement arg0, Object arg1, int arg2,SessionImplementor arg3) throws HibernateException, SQLException {
-		arg0.setString(arg2,Formatter.getDBDateTime((DateTime)arg1));
+	public void nullSafeSet(PreparedStatement st, Object value, int index,
+			SessionImplementor session) throws HibernateException, SQLException {
+		st.setString(index,Formatter.getDBDateTime((MizeDateTime)value));
 		
-	}*/
+	}
+
 
 }
