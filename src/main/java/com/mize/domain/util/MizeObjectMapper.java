@@ -65,9 +65,9 @@ public class MizeObjectMapper extends ObjectMapper {
 	
 	public MizeObjectMapper(Map<String,String> paramsMap) {
 		this.paramsMap = paramsMap;
-		if(this.paramsMap != null){
-			this.dateFormat = this.paramsMap.get(PARAM_DATE_FORMAT);
-			this.dateTimeFormat = this.paramsMap.get(PARAM_DATE_TIME_FORMAT);
+		if(paramsMap != null){
+			this.dateFormat = paramsMap.get(PARAM_DATE_FORMAT);
+			this.dateTimeFormat = paramsMap.get(PARAM_DATE_TIME_FORMAT);
 		}
 		if(this.dateFormat == null){
 			this.dateFormat = DATE_FORMAT;
@@ -96,8 +96,8 @@ public class MizeObjectMapper extends ObjectMapper {
 		SimpleModule module = new SimpleModule("MizeDeserializerModule",new Version(1, 0, 0, null));
 		module.addSerializer(MizeDateTime.class, new MizeDateTimeSerializer());
 		module.addDeserializer(MizeDateTime.class, new MizeDateTimeDeserializer());	
-		//module.addSerializer(MizeDate.class, new MizeDateSerializer());
-		//module.addDeserializer(MizeDate.class, new MizeDateDeserializer());	
+		module.addSerializer(MizeDate.class, new MizeDateSerializer());
+		module.addDeserializer(MizeDate.class, new MizeDateDeserializer());	
 		registerModule(module);
 	}
 
