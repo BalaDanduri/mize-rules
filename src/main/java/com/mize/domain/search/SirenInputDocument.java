@@ -11,22 +11,15 @@ public class SirenInputDocument {
 	public static final String FACET_SUFFIX = "_facet";
 	
 	private String id;
-	private String entityType;
 	private Map<String, Object> sortFields;
 	private Map<String, String> facetFields;
-	private Object jsonObject;
+	private SirenDataObject jsonObject;
 	
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
-	}
-	public String getEntityType() {
-		return entityType;
-	}
-	public void setEntityType(String entityType) {
-		this.entityType = entityType;
 	}
 	public Map<String, Object> getSortFields() {
 		return sortFields;
@@ -41,15 +34,15 @@ public class SirenInputDocument {
 		this.facetFields = facetFields;
 	}
 	
-	public Object getJsonObject() {
+	public SirenDataObject getJsonObject() {
 		return jsonObject;
 	}
-	public void setJsonObject(Object jsonObject) {
+	public void setJsonObject(SirenDataObject jsonObject) {
 		this.jsonObject = jsonObject;
 	}
 	@Override
 	public String toString() {
-		return "SirenInputDocument [id=" + id + ", entityType=" + entityType
+		return "SirenInputDocument [id=" + id + ", "
 				+ ", sortFields=" + sortFields + ", facetFields=" + facetFields
 				+ ", jsonObject=" + jsonObject + "]";
 	}
