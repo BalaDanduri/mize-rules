@@ -16,7 +16,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.persistence.UniqueConstraint;
 
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -39,7 +38,7 @@ import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 @Entity
-@Table(name = "purchase_order", uniqueConstraints = {@UniqueConstraint (columnNames = {"order_number"})})
+@Table(name = "purchase_order")
 public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrder>{	
 	
 	private static final long serialVersionUID = 6676650598420396291L;
