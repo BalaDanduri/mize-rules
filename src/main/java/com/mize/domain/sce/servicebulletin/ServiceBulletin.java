@@ -30,7 +30,9 @@ import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JPASerializer;
+import com.mize.domain.util.JodaDateDeserializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
+import com.mize.domain.util.JsonDateSerializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
 
@@ -132,14 +134,14 @@ public class ServiceBulletin extends MizeEntity {
 	@Column(name = "start_date", nullable = true)
 	@DateTimeFormat (pattern="MM-dd-yyyy")
 	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateTimeSerializer.class)
+	@JsonSerialize(using = JsonDateSerializer.class)
     @JsonInclude(Include.NON_NULL)
 	public DateTime getStartDate() {
 		return startDate;
 	}
 	
 	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	@JsonDeserialize(using=JodaDateDeserializer.class)	
 	public void setStartDate(DateTime startDate) {
 		this.startDate = startDate;
 	}
@@ -147,14 +149,14 @@ public class ServiceBulletin extends MizeEntity {
 	@Column(name = "end_date", nullable = true)
 	@DateTimeFormat (pattern="MM-dd-yyyy")
 	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateTimeSerializer.class)
+	@JsonSerialize(using = JsonDateSerializer.class)
     @JsonInclude(Include.NON_NULL)
 	public DateTime getEndDate() {
 		return endDate;
 	}
 	
 	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	@JsonDeserialize(using=JodaDateDeserializer.class)	
 	public void setEndDate(DateTime endDate) {
 		this.endDate = endDate;
 	}
