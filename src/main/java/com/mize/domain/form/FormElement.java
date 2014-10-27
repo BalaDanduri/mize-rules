@@ -16,6 +16,8 @@ public class FormElement extends MizeEntity implements Serializable{
 	private static final long serialVersionUID = 2467819665340668161L;
 	private String alias;
 	private String ref;
+	private String canskiprules;
+	private String skiprules;
 	private FormLabel label;
 	private Map<String, String> meta;
 	
@@ -48,6 +50,22 @@ public class FormElement extends MizeEntity implements Serializable{
 
 	public void setRef(String ref) {
 		this.ref = ref;
+	}
+
+	public String getCanskiprules() {
+		return canskiprules;
+	}
+
+	public void setCanskiprules(String canskiprules) {
+		this.canskiprules = canskiprules;
+	}
+
+	public String getSkiprules() {
+		return skiprules;
+	}
+
+	public void setSkiprules(String skiprules) {
+		this.skiprules = skiprules;
 	}
 
 	public FormLabel getLabel() {
