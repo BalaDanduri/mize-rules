@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Types;
 
 import org.hibernate.HibernateException;
+import org.hibernate.engine.spi.SessionImplementor;
 import org.hibernate.usertype.UserType;
 
 import com.mize.domain.common.Gender;
@@ -47,16 +48,16 @@ public class GenderJPA implements UserType{
 		return false;
 	}
 	
-	@Override
+	/*//@Override
 	public Object nullSafeGet(ResultSet arg0, String[] arg1, Object arg2) throws HibernateException, SQLException {
 		String output = arg0.getString(arg1[0]);
 		return Gender.getGender(output);
 	}
 	
-	@Override
+	//@Override
 	public void nullSafeSet(PreparedStatement arg0, Object arg1, int arg2) throws HibernateException, SQLException {
 		arg0.setString(arg2,( (arg1!=null) ? arg1.toString() : null));
-	}
+	}*/
 
 	@Override
 	public Object replace(Object arg0, Object arg1, Object arg2) throws HibernateException {
@@ -72,6 +73,18 @@ public class GenderJPA implements UserType{
 	@Override
 	public int[] sqlTypes() {
 		 return new int[] {Types.VARCHAR};
+	}
+
+	@Override
+	public Object nullSafeGet(ResultSet arg0, String[] arg1,SessionImplementor arg2, Object arg3) throws HibernateException,SQLException {
+		String output = arg0.getString(arg1[0]);
+		return Gender.getGender(output);
+	}
+
+	@Override
+	public void nullSafeSet(PreparedStatement arg0, Object arg1, int arg2,SessionImplementor arg3) throws HibernateException, SQLException {
+		arg0.setString(arg2,( (arg1!=null) ? arg1.toString() : null));
+		
 	}	
 	
 }

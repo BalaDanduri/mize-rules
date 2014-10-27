@@ -49,9 +49,7 @@ public class ServiceBulletin extends MizeEntity {
 	private String bulletinSubType;
 	private String bulletinStatus;
 	private String bulletinReference;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime startDate;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime endDate;
 	private BusinessEntity tenant;
 	private String currencyCode;
@@ -132,30 +130,30 @@ public class ServiceBulletin extends MizeEntity {
 	}
 	
 	@Column(name = "start_date", nullable = true)
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@DateTimeFormat (pattern="MM-dd-yyyy")
 	@Type(type = "com.mize.domain.util.DateTimeJPA")
 	@JsonSerialize(using = JsonDateTimeSerializer.class)
-    @JsonInclude(Include.NON_DEFAULT)
+    @JsonInclude(Include.NON_NULL)
 	public DateTime getStartDate() {
 		return startDate;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@DateTimeFormat (pattern="MM-dd-yyyy")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	public void setStartDate(DateTime startDate) {
 		this.startDate = startDate;
 	}
 
 	@Column(name = "end_date", nullable = true)
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@DateTimeFormat (pattern="MM-dd-yyyy")
 	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@JsonSerialize(using = JsonDateTimeSerializer.class)
-    @JsonInclude(Include.NON_DEFAULT)
+    @JsonInclude(Include.NON_NULL)
 	public DateTime getEndDate() {
 		return endDate;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@DateTimeFormat (pattern="MM-dd-yyyy")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	public void setEndDate(DateTime endDate) {
 		this.endDate = endDate;

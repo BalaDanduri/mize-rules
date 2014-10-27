@@ -121,7 +121,6 @@ public class LaborHour extends MizeSceEntity implements Comparable<LaborHour> {
 
 	@Column(name = "start_date", nullable = true)
 	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	@JsonInclude(Include.NON_DEFAULT)
 	public MizeDateTime getStartDate() {
 		return startDate;
 	}
@@ -132,7 +131,6 @@ public class LaborHour extends MizeSceEntity implements Comparable<LaborHour> {
 
 	@Column(name = "end_date", nullable = true)
 	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@JsonInclude(Include.NON_DEFAULT)
 	public MizeDateTime getEndDate() {
 		return endDate;
 	}
