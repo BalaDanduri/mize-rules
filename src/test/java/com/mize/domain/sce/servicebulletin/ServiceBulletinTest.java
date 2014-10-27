@@ -114,9 +114,9 @@ public class ServiceBulletinTest extends JPATest {
 		serviceBulletinProcedure.setServiceBulletin(serviceBulletin);
 		serviceBulletinProcedure.setProcedureCode("SBL01");
 		serviceBulletinProcedure.setProcedureReference("SBL01REF");
-		serviceBulletinProcedure.setCauseCode("cause Code");
-		serviceBulletinProcedure.setComplaintCode("complaint Code");
-		serviceBulletinProcedure.setCorrectiveActionCode("corrective ActionCode");
+		serviceBulletinProcedure.setCauseCode("04");
+		serviceBulletinProcedure.setComplaintCode("001");
+		serviceBulletinProcedure.setCorrectiveActionCode("01");
 		prepareServiceBulletinProcedureIntls();
 		prepareLabor();
 		prepareParts();
