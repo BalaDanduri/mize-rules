@@ -107,6 +107,15 @@ public class User extends MizeEntity implements Comparable<User> {
 		this.userProfile.setLastName(lastName);
 	}
 	
+	public User(Long id, String email,String firstName ,String middleName,String lastName,String loginId) {
+		this.id = id;
+		this.email = email;
+		this.userProfile = new UserProfile();
+		this.userProfile.setFirstName(firstName);
+		this.userProfile.setMiddleName(middleName);
+		this.userProfile.setLastName(lastName);
+		this.loginId = loginId;
+	}
 	
 	@Override
 	@Id
