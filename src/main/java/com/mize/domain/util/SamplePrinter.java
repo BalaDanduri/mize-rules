@@ -17,7 +17,8 @@ import javax.print.attribute.standard.PrinterName;
 
 public class SamplePrinter {
 
-	   public static void main(String[] args) {
+	   @SuppressWarnings("resource")
+	public static void main(String[] args) {
 	       
 	       try {
 	           
@@ -60,9 +61,6 @@ public class SamplePrinter {
 	                      e1.printStackTrace();
 	            }
 	           
-	           String s = "^XA^FO100,40^BY3^B3,,30^FD123ABC^XZ";
-
-	          // byte[] by = s.getBytes();
 	           DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
 	           Doc doc = new SimpleDoc(b, flavor, null);
 	           job.print(doc, null);

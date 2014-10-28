@@ -1,7 +1,5 @@
 package com.mize.domain.util;
 
-
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,7 +7,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -37,8 +34,15 @@ public class MizeDateFormat extends MizeSceEntity implements Comparable<MizeDate
 	@Transient
 	private Long tenantId;
 	
-	public MizeDateFormat(){
-		
+	public MizeDateFormat(){		
+	}
+	
+	public MizeDateFormat(String dateFormat, String dateTimeFormat,String isDefault, Locale locale) {
+		super();
+		this.dateFormat = dateFormat;
+		this.dateTimeFormat = dateTimeFormat;
+		this.isDefault = isDefault;
+		this.locale = locale;
 	}
 
 	@Id
@@ -81,7 +85,7 @@ public class MizeDateFormat extends MizeSceEntity implements Comparable<MizeDate
 		this.isDefault = isDefault;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="tenant_id")
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
@@ -177,7 +181,5 @@ public class MizeDateFormat extends MizeSceEntity implements Comparable<MizeDate
 	@Override
 	public int compareTo(MizeDateFormat arg0) {
 		return 0;
-	}
-
-		
+	}		
 }
