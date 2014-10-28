@@ -40,7 +40,7 @@ public class MizeDateTime implements IMizeDate, Comparable<MizeDateTime>, Clonea
 	
 	protected MizeDateTime(String dateTimeValue,String dateTimeFormat) {		
 		try{		
-			this.dateTimeValue = dateTimeValue;
+			this.dateTimeValue = checkAndAppendTime(dateTimeValue);
 			this.dateTimeFormat = dateTimeFormat;
 			this.dateTime = DateTime.parse(dateTimeValue,DateTimeFormat.forPattern(dateTimeFormat));	
 			this.isValid = true;
@@ -48,6 +48,15 @@ public class MizeDateTime implements IMizeDate, Comparable<MizeDateTime>, Clonea
 		}
 	}
 	
+	private String checkAndAppendTime(String dateTimeValue) {
+		dateTimeValue = dateTimeValue.trim();
+		String arr[] = dateTimeValue.split(" ");
+		if(arr.length == 1){
+			dateTimeValue = dateTimeValue+" 00:00:00";
+		}
+		return dateTimeValue;
+	}
+
 	protected MizeDateTime(DateTime dateTime) {
 		this.dateTime = dateTime;
 		this.isValid = true;
@@ -197,7 +206,11 @@ public class MizeDateTime implements IMizeDate, Comparable<MizeDateTime>, Clonea
 	@Override
 	public String toString() {
 		// use default time format to print
-		return ISODateTimeFormat.dateTime().print(this.dateTime);
+		if(this.dateTime != null){
+			return ISODateTimeFormat.dateTime().print(this.dateTime);
+		}else{
+			return this.dateTimeValue;
+		}
 	}
 	
 }
