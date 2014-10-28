@@ -12,12 +12,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.Type;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeSceEntity;
@@ -32,6 +32,8 @@ public class MizeDateFormat extends MizeSceEntity implements Comparable<MizeDate
 	private String isDefault;
 	private BusinessEntity tenant;
 	private Locale locale;
+	@Transient
+	private User user;
 	
 	public MizeDateFormat(){
 		
@@ -51,8 +53,6 @@ public class MizeDateFormat extends MizeSceEntity implements Comparable<MizeDate
 	}
 	
 	@Column(name = "date_format", nullable = true)
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	@JsonInclude(Include.NON_DEFAULT)
 	public String getDateFormat() {
 		return dateFormat;
 	}
@@ -61,9 +61,7 @@ public class MizeDateFormat extends MizeSceEntity implements Comparable<MizeDate
 		this.dateFormat = dateFormat;
 	}
 
-	@Column(name = "date_format", nullable = true,insertable=false,updatable=false)
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	@JsonInclude(Include.NON_DEFAULT)
+	@Column(name = "date_time_format", nullable = true)
 	public String getDateTimeFormat() {
 		return dateTimeFormat;
 	}
@@ -101,6 +99,15 @@ public class MizeDateFormat extends MizeSceEntity implements Comparable<MizeDate
 
 	public void setLocale(Locale locale) {
 		this.locale = locale;
+	}
+	
+	@Transient
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Override

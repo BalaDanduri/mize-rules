@@ -35,22 +35,24 @@ public class MizeObjectMapper extends ObjectMapper {
 	public static final String PARAM_DATE_FORMAT = "dateFormat";
 	protected Map<String,String> paramsMap = new HashMap<String,String>();
 	protected String dateFormat;
-	protected String dateTimeFormat;
-	
-	
+	protected String dateTimeFormat;	
 
-	public MizeObjectMapper() {
-		this(DATE_FORMAT,DATE_TIME_FORMAT);
-	}
-
-	public String getDateFormat() {
-		return dateFormat;
+	public String getDateTimeFormat() {
+		return dateTimeFormat;
 	}
 
 	public void setDateFormat(String dateFormat) {
 		this.dateFormat = dateFormat;
 	}
 
+	public String getDateFormat() {
+		return dateFormat;
+	}
+
+	public MizeObjectMapper() {
+		this(DATE_FORMAT,DATE_TIME_FORMAT);
+	}
+	
 	public DateTimeFormatter getDateTimeFormatter() {
 		return DateTimeFormat.forPattern(this.dateTimeFormat);
 	}
@@ -60,7 +62,11 @@ public class MizeObjectMapper extends ObjectMapper {
 	}
 
 	public MizeObjectMapper(String dateFormat) {
-		new MizeObjectMapper(dateFormat,null);
+		this(dateFormat,null);
+	}
+	
+	public MizeObjectMapper(MizeDateFormat mizeDateFormat) {
+		this(mizeDateFormat.getDateFormat(),mizeDateFormat.getDateTimeFormat());
 	}
 	
 	public MizeObjectMapper(Map<String,String> paramsMap) {
