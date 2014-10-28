@@ -34,6 +34,8 @@ public class MizeDateFormat extends MizeSceEntity implements Comparable<MizeDate
 	private Locale locale;
 	@Transient
 	private User user;
+	@Transient
+	private Long tenantId;
 	
 	public MizeDateFormat(){
 		
@@ -110,20 +112,28 @@ public class MizeDateFormat extends MizeSceEntity implements Comparable<MizeDate
 		this.user = user;
 	}
 
-	@Override
-	public int compareTo(MizeDateFormat arg0) {
-		return 0;
+	@Transient
+	public Long getTenantId() {
+		return tenantId;
+	}
+
+	public void setTenantId(Long tenantId) {
+		this.tenantId = tenantId;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime * result + ((dateFormat == null) ? 0 : dateFormat.hashCode());
-		result = prime * result + ((dateTimeFormat == null) ? 0 : dateTimeFormat.hashCode());
-		result = prime * result + ((isDefault == null) ? 0 : isDefault.hashCode());
+		result = prime * result
+				+ ((dateFormat == null) ? 0 : dateFormat.hashCode());
+		result = prime * result
+				+ ((dateTimeFormat == null) ? 0 : dateTimeFormat.hashCode());
+		result = prime * result
+				+ ((isDefault == null) ? 0 : isDefault.hashCode());
 		result = prime * result + ((locale == null) ? 0 : locale.hashCode());
-		result = prime * result + ((tenant == null) ? 0 : tenant.hashCode());
+		result = prime * result
+				+ ((tenantId == null) ? 0 : tenantId.hashCode());
 		return result;
 	}
 
@@ -156,15 +166,18 @@ public class MizeDateFormat extends MizeSceEntity implements Comparable<MizeDate
 				return false;
 		} else if (!locale.equals(other.locale))
 			return false;
-		if (tenant == null) {
-			if (other.tenant != null)
+		if (tenantId == null) {
+			if (other.tenantId != null)
 				return false;
-		} else if (!tenant.equals(other.tenant))
+		} else if (!tenantId.equals(other.tenantId))
 			return false;
 		return true;
-	} 
-	
-	
-	
-	
+	}
+
+	@Override
+	public int compareTo(MizeDateFormat arg0) {
+		return 0;
+	}
+
+		
 }
