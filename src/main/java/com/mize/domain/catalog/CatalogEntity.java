@@ -54,8 +54,13 @@ public class CatalogEntity extends MizeEntity implements Serializable{
 		this.catalogId = catalogId;
 	}
 	
+	@JsonIgnore
 	public boolean isActive() {
 		return "Y".equalsIgnoreCase(isActive);
+	}
+	
+	public String getIsActive() {
+		return isActive;
 	}
 
 	public void setIsActive(String isActive) {
