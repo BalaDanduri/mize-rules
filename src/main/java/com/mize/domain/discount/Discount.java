@@ -22,32 +22,30 @@ import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityComment;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name = "discount", uniqueConstraints = { @UniqueConstraint(columnNames = {"id"}) })
-public class Discount extends MizeEntity {
+public class Discount extends MizeSceEntity {
 
 	private static final long serialVersionUID = -5386693947574878416L;	
 	private BusinessEntity tenant;
 	private String discountNumber;
 	private String orderType;
 	private BusinessEntity orderBusinessEntity;	
-	private DateTime startDate;
-	private DateTime endDate;	
+	private MizeDateTime startDate;
+	private MizeDateTime endDate;	
 	private BigDecimal lineDiscountAmount;
 	private BigDecimal lineDiscountPercent;
 	private BigDecimal orderDiscountAmount;
@@ -138,32 +136,22 @@ public class Discount extends MizeEntity {
 	}
 
 	@Column(name = "start_date", nullable = true)
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateTimeSerializer.class)	
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getStartDate() {
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getStartDate() {
 		return startDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
-	public void setStartDate(DateTime startDate) {
+	public void setStartDate(MizeDateTime startDate) {
 		this.startDate = startDate;
 	}
 
 	@Column(name = "end_date", nullable = true)
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getEndDate() {
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getEndDate() {
 		return endDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
-	public void setEndDate(DateTime endDate) {
+	public void setEndDate(MizeDateTime endDate) {
 		this.endDate = endDate;
 	}
 
@@ -200,70 +188,46 @@ public class Discount extends MizeEntity {
 		this.comments = comments;
 	}
 	
-	@Override	
-	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
-	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@Column(name = "created_date",updatable=false)
-	@JsonIgnore(false)
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-    @JsonInclude(Include.NON_DEFAULT)
-
-	public DateTime getCreatedDate() {
-		return createdDate;
+	public void setCreatedBy(Long createdBy) {
+		this.createdBy = createdBy;
 	}
 	
-	@Override	
-	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
-	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@Column(name = "updated_date")
-	@JsonIgnore(false)
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-    @JsonInclude(Include.NON_DEFAULT)
-
-	public DateTime getUpdatedDate() {
-		return updatedDate;
+	@Column(name = "created_by" , updatable=false)
+	public Long getCreatedBy() {
+		return createdBy;
 	}
 	
-	@Override
-	@JsonIgnore(false)
-	@Column(name = "created_by",updatable=false)
-	public Long getCreatedBy() {		
-		return super.getCreatedBy();
+	@JsonIgnore(value=false)
+	public void setUpdatedBy(Long updatedBy) {
+		this.updatedBy = updatedBy;
 	}
 
-	@Override
-	@JsonIgnore(false)
+	@JsonIgnore(value=false)
 	@Column(name = "updated_by")
 	public Long getUpdatedBy() {		
 		return super.getUpdatedBy();
 	}
 	
-	@Override
-	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore(false)
-	public void setCreatedDate(DateTime createdDate) {
-		super.createdDate = createdDate;
+	public void setCreatedDate(MizeDateTime createdDate) {
+		this.createdDate = createdDate;
 	}
 	
-	@Override
-	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore(false)
-	public void setUpdatedDate(DateTime updatedDate) {
-		super.updatedDate = updatedDate;
+	@Column(name = "created_date",updatable = false)
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	@JsonInclude(Include.NON_DEFAULT)
+	public MizeDateTime getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setUpdatedDate(MizeDateTime updatedDate) {
+		this.updatedDate = updatedDate;
 	}
 	
-	@Override
-	@JsonIgnore(false)
-	public void setCreatedBy(Long createdBy) {		
-		super.setCreatedBy(createdBy);
-	}
-	
-	@Override
-	@JsonIgnore(false)
-	public void setUpdatedBy(Long updatedBy) {		
-		super.setUpdatedBy(updatedBy);
+	@Column(name = "updated_date")
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	@JsonInclude(Include.NON_DEFAULT)
+	public MizeDateTime getUpdatedDate() {
+		return updatedDate;
 	}
 	
 	
@@ -271,9 +235,9 @@ public class Discount extends MizeEntity {
 	@PreUpdate
 	public void auditFields(){
 		if(createdDate==null && id==null){
-			setCreatedDate(DateTime.now());
+			setCreatedDate(Formatter.toMizeDateTime(DateTime.now()));
 		}
-		setUpdatedDate(DateTime.now());		
+		setUpdatedDate(Formatter.toMizeDateTime(DateTime.now()));		
 	}
 	
 	@Transient

@@ -264,11 +264,23 @@ public final class Formatter {
 		return dateTime;
 	}
 	
+	public static MizeDateTime toEndMizeDateTime(MizeDateTime mizeDateTime){
+		DateTime  dateTime = toDateTime(mizeDateTime);
+		dateTime = toEndDateTime(dateTime);
+		return toMizeDateTime(dateTime);
+	}
+	
 	public static DateTime toStartDateTime(DateTime dateTime){
 		if(dateTime != null){
 			dateTime = dateTime.withTime(0, 0, 0, 0);
 		}
 		return dateTime;
+	}
+	
+	public static MizeDateTime toStartMizeDateTime(MizeDateTime mizeDateTime){
+		DateTime  dateTime = toDateTime(mizeDateTime);
+		dateTime = toStartDateTime(dateTime);
+		return toMizeDateTime(dateTime);
 	}
 	
 	public static String getDateTime(DateTime dateTime){
