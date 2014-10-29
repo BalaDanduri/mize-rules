@@ -1,8 +1,6 @@
 package com.mize.domain.util;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.TimeZone;
 
 import org.joda.time.DateTime;
@@ -31,9 +29,6 @@ public class MizeObjectMapper extends ObjectMapper {
 	public static final String DATE_FORMAT1 = "dd-MM-yyyy HH:mm:ss";
 	public static final String DB_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 	public static final String DATE_AS_LONG = "LONG";
-	public static final String PARAM_DATE_TIME_FORMAT = "dateTimeFormat";
-	public static final String PARAM_DATE_FORMAT = "dateFormat";
-	protected Map<String,String> paramsMap = new HashMap<String,String>();
 	protected String dateFormat;
 	protected String dateTimeFormat;	
 
@@ -66,7 +61,7 @@ public class MizeObjectMapper extends ObjectMapper {
 	}
 	
 	public static MizeObjectMapper getInstance(MizeDateFormat mizeDateFormat) {
-		if(mizeDateFormat!=null){
+		if(mizeDateFormat != null){
 			return new MizeObjectMapper(mizeDateFormat.getDateFormat(),mizeDateFormat.getDateTimeFormat());
 		}else{
 			return new MizeObjectMapper();
@@ -75,21 +70,6 @@ public class MizeObjectMapper extends ObjectMapper {
 	
 	public MizeObjectMapper(MizeDateFormat mizeDateFormat) {
 		this(mizeDateFormat.getDateFormat(),mizeDateFormat.getDateTimeFormat());
-	}
-	
-	public MizeObjectMapper(Map<String,String> paramsMap) {
-		this.paramsMap = paramsMap;
-		if(paramsMap != null){
-			this.dateFormat = paramsMap.get(PARAM_DATE_FORMAT);
-			this.dateTimeFormat = paramsMap.get(PARAM_DATE_TIME_FORMAT);
-		}
-		if(this.dateFormat == null){
-			this.dateFormat = DATE_FORMAT;
-		}
-		if(this.dateTimeFormat == null){
-			this.dateTimeFormat = DATE_TIME_FORMAT;
-		}
-		registerModule();
 	}
 	
 	public MizeObjectMapper(String dateFormat, String dateTimeFormat) {

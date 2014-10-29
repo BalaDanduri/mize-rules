@@ -167,19 +167,6 @@ public class MizeDate implements IMizeDate, Comparable<MizeDate>, Cloneable{
 	public boolean isValid() {
 		return isValid;
 	}
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((dateFormat == null) ? 0 : dateFormat.hashCode());
-		result = prime * result
-				+ ((dateTime == null) ? 0 : dateTime.hashCode());
-		result = prime * result
-				+ ((dateValue == null) ? 0 : dateValue.hashCode());
-		return result;
-	}
 
 	public boolean equals(Object object){
 		MizeDate mizeDateTime = (MizeDate)object;
@@ -196,8 +183,24 @@ public class MizeDate implements IMizeDate, Comparable<MizeDate>, Cloneable{
 	
 	@Override
 	public String toString() {
-		// user default time formatt to print
-		return ISODateTimeFormat.dateTime().print(this.dateTime);
+		if(this.dateTime != null){
+			return ISODateTimeFormat.dateTime().print(this.dateTime);
+		}else{
+			return this.dateValue;
+		}
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((dateFormat == null) ? 0 : dateFormat.hashCode());
+		result = prime * result
+				+ ((dateTime == null) ? 0 : dateTime.hashCode());
+		result = prime * result
+				+ ((dateValue == null) ? 0 : dateValue.hashCode());
+		return result;
 	}
 	
 }
