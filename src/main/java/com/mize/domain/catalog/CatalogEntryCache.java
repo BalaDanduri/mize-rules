@@ -51,6 +51,7 @@ public class CatalogEntryCache extends MizeEntity implements Comparable<CatalogE
 		this.entryCode = entryCode;
 	}
 
+	@JsonIgnore
 	public boolean isDefault() {
 		return "Y".equalsIgnoreCase(isDefault);
 	}
@@ -67,6 +68,7 @@ public class CatalogEntryCache extends MizeEntity implements Comparable<CatalogE
 		this.isDefault = isDefault;
 	}
 
+	@JsonIgnore
 	public boolean isActive() {
 		return "Y".equalsIgnoreCase(isActive);
 	}
