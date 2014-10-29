@@ -59,6 +59,9 @@ public class MizeObjectMapper extends ObjectMapper {
 	public MizeObjectMapper(String dateFormat) {
 		this(dateFormat,null);
 	}
+	public static MizeObjectMapper getInstance() {
+		return new MizeObjectMapper();
+	}
 	
 	public static MizeObjectMapper getInstance(MizeDateFormat mizeDateFormat) {
 		if(mizeDateFormat != null){
@@ -66,6 +69,10 @@ public class MizeObjectMapper extends ObjectMapper {
 		}else{
 			return new MizeObjectMapper();
 		}
+	}
+	
+	public static MizeObjectMapper getInstance(String dateTimeFormat){
+		return new MizeObjectMapper(dateTimeFormat);
 	}
 	
 	public MizeObjectMapper(MizeDateFormat mizeDateFormat) {
