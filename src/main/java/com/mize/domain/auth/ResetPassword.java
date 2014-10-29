@@ -15,6 +15,7 @@ public class ResetPassword extends MizeEntity implements Comparable<ResetPasswor
 	private String email;
 	private boolean isPasswordMatched;
 	private User user;
+	private String loginId;
 	
     @Override
 	public Long getId() {
@@ -124,6 +125,14 @@ public class ResetPassword extends MizeEntity implements Comparable<ResetPasswor
 		else if (this.id > entity.id)
 			return AFTER;
 		return EQUAL;		
+	}
+
+	public String getLoginId() {
+		return loginId;
+	}
+
+	public void setLoginId(String loginId) {
+		this.loginId = loginId;
 	}
     
 }
