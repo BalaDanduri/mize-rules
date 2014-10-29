@@ -17,29 +17,24 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityAttachment;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.Locale;
-import com.mize.domain.common.MizeEntity;
 import com.mize.domain.common.MizeErrorTab;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.util.MizeDateTime;
 @Entity
 @Table(name = "purchase_order")
-public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrder>{	
+public class PurchaseOrder extends MizeSceEntity implements Comparable<PurchaseOrder>{	
 	
 	private static final long serialVersionUID = 6676650598420396291L;
 	private BusinessEntity tenant;
@@ -90,7 +85,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	@Transient
 	private String submittedBy;
 	@Transient
-	private DateTime submittedDate;
+	private MizeDateTime submittedDate;
 	@Transient
 	private String imageURL;
 	@Transient
@@ -106,7 +101,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 		super();
 	}
 	
-	public PurchaseOrder(Long id,String number,String status,String type,String requestType,DateTime createdDate,DateTime updatedDate){
+	public PurchaseOrder(Long id,String number,String status,String type,String requestType,MizeDateTime createdDate,MizeDateTime updatedDate){
 		super();
 		this.id = id;
 		this.number = number;
@@ -118,7 +113,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	}
 	
 	public PurchaseOrder(Long id,String number,String status,String type,String requestType,
-			DateTime createdDate,DateTime updatedDate,String itemNumber,BigDecimal quantity,String isReturnable,String originalOrderNumber){
+			MizeDateTime createdDate,MizeDateTime updatedDate,String itemNumber,BigDecimal quantity,String isReturnable,String originalOrderNumber){
 		super();
 		this.id = id;
 		this.number = number;
@@ -263,37 +258,29 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 		this.createdBy = createdBy;
 	}
 	
-	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using = JsonDateTimeSerializer.class)
 	@JsonInclude(Include.NON_NULL)
 	@JsonIgnore(false)
 	@Column(name = "created_date", updatable = false)
-	@org.hibernate.annotations.Type(type = "com.mize.domain.util.DateTimeJPA")
-	public DateTime getCreatedDate() {
+	@org.hibernate.annotations.Type(type = "com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getCreatedDate() {
 		return this.createdDate;
 	}
 
-	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using = JodaDateTimeDeserializer.class)
 	@JsonIgnore(false)
-	public void setCreatedDate(DateTime createdDate) {
+	public void setCreatedDate(MizeDateTime createdDate) {
 		this.createdDate = createdDate;
 	}
 	
-	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using = JsonDateTimeSerializer.class)
 	@JsonInclude(Include.NON_NULL)
 	@Column(name = "updated_date")
-	@org.hibernate.annotations.Type(type = "com.mize.domain.util.DateTimeJPA")
+	@org.hibernate.annotations.Type(type = "com.mize.domain.util.MizeDateTimeJPA")
 	@JsonIgnore(false)
-	public DateTime getUpdatedDate() {
+	public MizeDateTime getUpdatedDate() {
 		return this.updatedDate;
 	}
 	
-	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using = JodaDateTimeDeserializer.class)
 	@JsonIgnore(false)
-	public void setUpdatedDate(DateTime updatedDate) {
+	public void setUpdatedDate(MizeDateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}
 	
@@ -551,16 +538,12 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	}
 
 	@Transient
-	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-    @JsonSerialize(using = JsonDateTimeSerializer.class)
     @JsonInclude(Include.NON_NULL)
-	public DateTime getSubmittedDate() {
+	public MizeDateTime getSubmittedDate() {
 		return submittedDate;
 	}
 	
-	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using = JodaDateTimeDeserializer.class)
-	public void setSubmittedDate(DateTime submittedDate) {
+	public void setSubmittedDate(MizeDateTime submittedDate) {
 		this.submittedDate = submittedDate;
 	}
 	
@@ -583,7 +566,7 @@ public class PurchaseOrder extends MizeEntity implements Comparable<PurchaseOrde
 	}
 	
 	@Transient
-	public String getFormattedDisplayDate(DateTime inputDate) {
+	public String getFormattedDisplayDate(MizeDateTime inputDate) {
 		String date="";
 		if(inputDate!=null){
 			date = Formatter.getDateTimeFormat(inputDate);

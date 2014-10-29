@@ -19,25 +19,20 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.part.Part;
 import com.mize.domain.part.PartKit;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name = "purchase_order_item")
-public class PurchaseOrderItem extends MizeEntity implements Comparable<PurchaseOrderItem>{	
+public class PurchaseOrderItem extends MizeSceEntity implements Comparable<PurchaseOrderItem>{	
 
 	private static final long serialVersionUID = 26123880591518728L;
 	private PurchaseOrder purchaseOrder;
@@ -133,39 +128,31 @@ public class PurchaseOrderItem extends MizeEntity implements Comparable<Purchase
 		this.productSerialNumber = productSerialNumber;
 	}	
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
 	@JsonInclude(Include.NON_DEFAULT)
 	@JsonIgnore(value=false)
 	@Column(name="updated_date")
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
-	public DateTime getUpdatedDate() {
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getUpdatedDate() {
 		return updatedDate;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(value=false)	
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
-	public void setUpdatedDate(DateTime updatedDate) {
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	public void setUpdatedDate(MizeDateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
 	@JsonInclude(Include.NON_DEFAULT)
 	@JsonIgnore(value=false)
 	@Column(name="created_date",updatable = false)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
-	public DateTime getCreatedDate() {
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getCreatedDate() {
 		return createdDate;
 	}
-
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	
 	@JsonIgnore(value=false)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
-	public void setCreatedDate(DateTime createdDate) {
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	public void setCreatedDate(MizeDateTime createdDate) {
 		this.createdDate = createdDate;
 	}
 	

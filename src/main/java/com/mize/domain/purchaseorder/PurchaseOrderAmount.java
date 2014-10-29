@@ -9,11 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
 @Entity
 @Table(name = "purchase_order_amount")
-public class PurchaseOrderAmount extends MizeEntity implements Comparable<PurchaseOrderAmount>{	
+public class PurchaseOrderAmount extends MizeSceEntity implements Comparable<PurchaseOrderAmount>{	
 
 	private static final long serialVersionUID = 261638805962518728L;
 	private BigDecimal requestedAmount;

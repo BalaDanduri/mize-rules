@@ -12,17 +12,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.common.MizeEntity;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name = "purchase_order_item_warehouse")
@@ -37,7 +31,7 @@ public class PurchaseOrderItemWarehourse extends MizeEntity implements Comparabl
 	private BigDecimal requestedQuantity;
 	private BigDecimal backorderQuantity;
 	private BigDecimal estimatedShipmentCost;
-	private DateTime estimatedShipmentDate;
+	private MizeDateTime estimatedShipmentDate;
 	private String binLocation;
 
 	@Id
@@ -119,17 +113,13 @@ public class PurchaseOrderItemWarehourse extends MizeEntity implements Comparabl
 	}
 
 	@Column(name = "estimated_ship_date")
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
 	@JsonInclude(Include.NON_DEFAULT)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
-	public DateTime getEstimatedShipmentDate() {
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getEstimatedShipmentDate() {
 		return estimatedShipmentDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	public void setEstimatedShipmentDate(DateTime estimatedShipmentDate) {
+	public void setEstimatedShipmentDate(MizeDateTime estimatedShipmentDate) {
 		this.estimatedShipmentDate = estimatedShipmentDate;
 	}
 

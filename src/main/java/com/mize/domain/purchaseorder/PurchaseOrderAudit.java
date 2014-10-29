@@ -10,18 +10,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.common.MizeEntity;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name = "purchase_order_audit")
@@ -29,7 +23,7 @@ public class PurchaseOrderAudit extends MizeEntity implements Comparable<Purchas
 
 	private static final long serialVersionUID = 268638805962518728L;
 	private String statusCode;
-	private DateTime statusDate;
+	private MizeDateTime statusDate;
 	private Long statusBy;
 	private PurchaseOrder purchaseOrder;
 
@@ -59,21 +53,17 @@ public class PurchaseOrderAudit extends MizeEntity implements Comparable<Purchas
 		this.statusCode = statusCode;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
 	@JsonInclude(Include.NON_DEFAULT)
 	@Column(name = "status_date")
 	@JsonIgnore(value=false)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
-	public DateTime getStatusDate() {
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getStatusDate() {
 		return statusDate;
 	}
 
 	@JsonIgnore(value=false)
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
-	public void setStatusDate(DateTime statusDate) {
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	public void setStatusDate(MizeDateTime statusDate) {
 		this.statusDate = statusDate;
 	}
 

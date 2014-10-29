@@ -2,21 +2,13 @@ package com.mize.domain.purchaseorder;
 
 import java.math.BigDecimal;
 
-import javax.persistence.Column;
-
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.common.MizeEntity;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.MizeDateTime;
 
-public class OriginalOrder extends MizeEntity {
+public class OriginalOrder extends MizeSceEntity {
 	
 	private static final long serialVersionUID = 34019502927801711L;
 	private String number;
@@ -32,7 +24,7 @@ public class OriginalOrder extends MizeEntity {
 		super();
 	}
 	
-	public OriginalOrder(Long id,String number, String status, String type,	String requestType,DateTime createdDate,DateTime updatedDate,BigDecimal requestedQuantity,String returnReason) {
+	public OriginalOrder(Long id,String number, String status, String type,	String requestType,MizeDateTime createdDate,MizeDateTime updatedDate,BigDecimal requestedQuantity,String returnReason) {
 		super();
 		this.id = id;
 		this.number = number;
@@ -79,37 +71,27 @@ public class OriginalOrder extends MizeEntity {
 		this.requestType = requestType;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(value=false)
-	public void setUpdatedDate(DateTime updatedDate) {
+	public void setUpdatedDate(MizeDateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
 	@JsonInclude(Include.NON_DEFAULT)
 	@JsonIgnore(value=false)
-	@Column(name = "created_date",updatable = false)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
-	public DateTime getCreatedDate() {
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getCreatedDate() {
 		return createdDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
 	@JsonInclude(Include.NON_DEFAULT)
-	@Column(name = "updated_date")
 	@JsonIgnore(value=false)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
-	public DateTime getUpdatedDate() {
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getUpdatedDate() {
 		return updatedDate;
 	}
-	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+		
 	@JsonIgnore(value=false)
-	public void setCreatedDate(DateTime createdDate) {
+	public void setCreatedDate(MizeDateTime createdDate) {
 		this.createdDate = createdDate;
 	}
 

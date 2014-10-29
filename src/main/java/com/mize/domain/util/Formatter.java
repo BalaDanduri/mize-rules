@@ -291,6 +291,10 @@ public final class Formatter {
 		return (dateTime == null ? null : dateTime.toString(DATE_FORMAT3));
 	}
 	
+	public static String getDateTimeFormat(MizeDateTime mizeDateTime){
+		return (mizeDateTime == null ? null : mizeDateTime.getDateTime().toString(DATE_FORMAT3));
+	}
+	
 	public static String formStringInClause(List<String> list){
 		StringBuffer sb = new StringBuffer(EMPTY);
 		if(list == null)
@@ -610,6 +614,13 @@ public final class Formatter {
 		return 0;		
 	}
 	
+	public static int daysBetween(MizeDateTime startDate , MizeDateTime endDate){
+		if(startDate != null && endDate != null){
+			return Days.daysBetween(startDate.getDateTime(), endDate.getDateTime()).getDays();
+		}
+		return 0;		
+	}
+	
 	public static int hoursBetween(DateTime startDate , DateTime endDate){
 		if(startDate != null && endDate != null){
 			return Hours.hoursBetween(startDate, endDate).getHours();
@@ -901,6 +912,13 @@ public final class Formatter {
 			return false;
 		}
 		return (inputTime.compareTo(startTime) >= 0 && inputTime.compareTo(endTime) <= 0);
+	}
+	
+	public static boolean inBetween(MizeDateTime startTime,MizeDateTime endTime , MizeDateTime inputTime){
+		if(startTime == null && endTime == null && inputTime == null){
+			return true;
+		}
+		return inBetween(startTime.getDateTime(), endTime.getDateTime(), inputTime.getDateTime());
 	}
 	
 	public static double formattedBigDecimal(BigDecimal value) {

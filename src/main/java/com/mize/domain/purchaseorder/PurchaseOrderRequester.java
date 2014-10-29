@@ -21,12 +21,12 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityAddress;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JPASerializer;
 
 @Entity
 @Table(name = "purchase_order_requester")
-public class PurchaseOrderRequester extends MizeEntity implements Comparable<PurchaseOrderRequester>{	
+public class PurchaseOrderRequester extends MizeSceEntity implements Comparable<PurchaseOrderRequester>{	
 
 	private static final long serialVersionUID = 444432988617420731L;
 	private PurchaseOrder purchaseOrder;

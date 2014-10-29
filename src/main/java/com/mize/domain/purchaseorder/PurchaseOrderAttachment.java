@@ -13,11 +13,11 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.EntityAttachment;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
 @Entity
 @Table(name = "purchase_order_attach")
-public class PurchaseOrderAttachment extends MizeEntity implements Comparable<PurchaseOrderAttachment>{	
+public class PurchaseOrderAttachment extends MizeSceEntity implements Comparable<PurchaseOrderAttachment>{	
 
 	private static final long serialVersionUID = 261638805962518728L;
 	private PurchaseOrder purchaseOrder;

@@ -14,11 +14,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
 @Entity
 @Table(name = "purchase_order_item_status")
-public class PurchaseOrderItemStatus extends MizeEntity implements Comparable<PurchaseOrderItemStatus>{	
+public class PurchaseOrderItemStatus extends MizeSceEntity implements Comparable<PurchaseOrderItemStatus>{	
 	
 	private static final long serialVersionUID = -472283743881333248L;
 	private PurchaseOrderItem orderItem;

@@ -14,25 +14,19 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityComment;
-import com.mize.domain.common.MizeEntity;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name = "purchase_order_shipment")
-public class PurchaseOrderShipment extends MizeEntity implements Comparable<PurchaseOrderShipment>{	
+public class PurchaseOrderShipment extends MizeSceEntity implements Comparable<PurchaseOrderShipment>{	
 
 	private static final long serialVersionUID = 261638805962518728L;
 	private PurchaseOrder purchaseOrder;
@@ -73,8 +67,7 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 	private String priority;
 	private String carrier;
 	private String estimatedShipmentDays;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private DateTime estimatedShipmentDate;
+	private MizeDateTime estimatedShipmentDate;
 	private BigDecimal estimatedShipmentCost;
 	private String shipComplete;
 	@Transient
@@ -155,19 +148,15 @@ public class PurchaseOrderShipment extends MizeEntity implements Comparable<Purc
 		this.dropShip = dropShip;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
 	@JsonInclude(Include.NON_DEFAULT)
 	@JsonIgnore(value=false)
 	@Column(name = "estimated_ship_date")
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
-	public DateTime getEstimatedShipmentDate() {
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getEstimatedShipmentDate() {
 		return estimatedShipmentDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	public void setEstimatedShipmentDate(DateTime estimatedShipmentDate) {
+	public void setEstimatedShipmentDate(MizeDateTime estimatedShipmentDate) {
 		this.estimatedShipmentDate = estimatedShipmentDate;
 	}
 	

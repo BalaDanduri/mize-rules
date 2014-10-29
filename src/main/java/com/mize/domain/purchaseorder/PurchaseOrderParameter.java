@@ -2,9 +2,9 @@ package com.mize.domain.purchaseorder;
 
 import java.math.BigDecimal;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
-public class PurchaseOrderParameter extends MizeEntity {
+public class PurchaseOrderParameter extends MizeSceEntity {
 	
 	private static final long serialVersionUID = 3401950292780169711L;
 	private String shippingMethod;
