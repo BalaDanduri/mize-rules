@@ -8,8 +8,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mize.domain.brand.Brand;
+import com.mize.domain.util.MizeObjectMapper;
 
 public class MizeResponseTest extends MizeDomainTest {
 
@@ -49,7 +49,7 @@ public class MizeResponseTest extends MizeDomainTest {
 		MizeResponse response = new MizeResponse(meta, rels, brandList);
 		
 		try {
-			System.out.print( new ObjectMapper().writeValueAsString(response));
+			System.out.print( new MizeObjectMapper().writeValueAsString(response));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

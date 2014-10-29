@@ -22,7 +22,6 @@ import org.springframework.test.context.ContextConfiguration;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.Country;
 import com.mize.domain.common.EntityAddress;
@@ -33,6 +32,7 @@ import com.mize.domain.common.State;
 import com.mize.domain.labor.LaborHour;
 import com.mize.domain.part.Part;
 import com.mize.domain.test.util.JPATest;
+import com.mize.domain.util.MizeObjectMapper;
 
 @ContextConfiguration(locations = { "/test-context.xml" })
 public class ServiceBulletinTest extends JPATest {
@@ -370,7 +370,8 @@ public class ServiceBulletinTest extends JPATest {
 	}
 
 	public String getJsonNotNullString(Object object) {
-		ObjectMapper notNullMapper = new ObjectMapper().setVisibility(PropertyAccessor.FIELD, Visibility.ANY);
+		MizeObjectMapper notNullMapper = MizeObjectMapper.getInstance();
+		notNullMapper.setVisibility(PropertyAccessor.FIELD, Visibility.ANY);
 		notNullMapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
 		try {
 			return notNullMapper.writeValueAsString(object);

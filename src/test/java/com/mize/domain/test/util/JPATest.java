@@ -18,7 +18,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mize.domain.auth.User;
 import com.mize.domain.brand.Brand;
 import com.mize.domain.businessentity.BusinessEntity;
@@ -42,6 +41,7 @@ import com.mize.domain.serviceentity.ServiceEntityAddress;
 import com.mize.domain.serviceentity.ServiceEntityAudit;
 import com.mize.domain.user.UserProfile;
 import com.mize.domain.util.Formatter;
+import com.mize.domain.util.MizeObjectMapper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @Ignore
@@ -55,7 +55,7 @@ public class JPATest {
 	
 	@SuppressWarnings("unused")
 	private static String brandQuery = "select * from brand where brand_name=?";
-	private static ObjectMapper mapper = new ObjectMapper();
+	private static MizeObjectMapper mapper = MizeObjectMapper.getInstance();
 
 	public JdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;
