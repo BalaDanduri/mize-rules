@@ -245,7 +245,7 @@ public final class Formatter {
 	}
 	
 	public static String getDBDateTime(MizeDateTime mizeDateTime){
-		return (mizeDateTime == null ? null : mizeDateTime.toDBDateTime());
+		return (mizeDateTime == null ? null : getDBDateTime(mizeDateTime.getDateTime()));
 	}
 	
 	public static String dbDateTime(DateTime dateTime){

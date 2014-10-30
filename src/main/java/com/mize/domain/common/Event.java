@@ -10,16 +10,9 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name = "event")
@@ -31,17 +24,13 @@ public class Event extends MizeEntity implements Comparable<Event>{
 	private String eventType;
 	private String description;
 	private String eventStatus;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private DateTime startDate;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private DateTime endDate;
+	private MizeDateTime startDate;
+	private MizeDateTime endDate;
 	private String active;
 	private Integer frequencyValue;
 	private Unit frequencyUnit;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private DateTime lastEventDate;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private DateTime nextEventDate;
+	private MizeDateTime lastEventDate;
+	private MizeDateTime nextEventDate;
 	
 	public enum Unit{
 		DAYS,WEEKS,MONTHS,YEARS
@@ -92,33 +81,24 @@ public class Event extends MizeEntity implements Comparable<Event>{
 		this.eventStatus = eventStatus;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Column(name = "start_date",  nullable = true)
-	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getStartDate() {
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getStartDate() {
 		return startDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
-	public void setStartDate(DateTime startDate) {
+	
+	public void setStartDate(MizeDateTime startDate) {
 		this.startDate = startDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Column(name = "end_date",  nullable = true)
-	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getEndDate() {
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getEndDate() {
 		return endDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
-	public void setEndDate(DateTime endDate) {
+	public void setEndDate(MizeDateTime endDate) {
 		this.endDate = endDate;
 	}
 
@@ -148,33 +128,23 @@ public class Event extends MizeEntity implements Comparable<Event>{
 		this.frequencyUnit = frequencyUnit;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Column(name = "last_event_date",  nullable = true)
-	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getLastEventDate() {
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getLastEventDate() {
 		return lastEventDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
-	public void setLastEventDate(DateTime lastEventDate) {
+	public void setLastEventDate(MizeDateTime lastEventDate) {
 		this.lastEventDate = lastEventDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Column(name = "next_event_date",  nullable = true)
-	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getNextEventDate() {
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getNextEventDate() {
 		return nextEventDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
-	public void setNextEventDate(DateTime nextEventDate) {
+	public void setNextEventDate(MizeDateTime nextEventDate) {
 		this.nextEventDate = nextEventDate;
 	}
 	
@@ -210,6 +180,8 @@ public class Event extends MizeEntity implements Comparable<Event>{
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	
 	
 	@Override
 	public int hashCode() {
@@ -298,7 +270,7 @@ public class Event extends MizeEntity implements Comparable<Event>{
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Event [code=" + code + ", eventName=" + eventName + ", eventType=" + eventType + ", description="
