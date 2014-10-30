@@ -49,7 +49,7 @@ public class MizeResponseTest extends MizeDomainTest {
 		MizeResponse response = new MizeResponse(meta, rels, brandList);
 		
 		try {
-			System.out.print( new MizeObjectMapper().writeValueAsString(response));
+			System.out.print(MizeObjectMapper.getInstance().writeValueAsString(response));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -1005,19 +1005,9 @@ public final class Formatter {
 	 }
 	 
 	 public static void main(String[] args) {
-		DateTime date = DateTime.now();		 
-		//02/01/2014 -- 10/06/2014  02>=01
-		//07/31/2014                07<=10
-		DateTime date1 = new DateTime(Formatter.DATE_FORMAT3.parseDateTime("09/11/"+date.getYear()));
-		DateTime startDate = new DateTime(Formatter.DATE_FORMAT3.parseDateTime("02/01/"+date.getYear()));
-		DateTime endDate = new DateTime(Formatter.DATE_FORMAT3.parseDateTime("07/31/"+date.getYear()));
-		//System.out.println(startDate.compareTo(date1));
-		//System.out.println(date1.compareTo(date1));
-		//int count = (startDate.compareTo(date1))+(date1.compareTo(endDate));
-		if(date1.compareTo(startDate) == -1 || endDate.compareTo(date1) == -1 ) {
-			System.out.println("test");
-		}
-		
+			DateTimeFormatter  test = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+			System.out.println(test.getParser().toString());
+			
 	}
 	 
 	 public static final String generateRandomPassword() {

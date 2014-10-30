@@ -34,6 +34,16 @@ public class MizeDateTime implements IMizeDate, Comparable<MizeDateTime>, Clonea
 		return new MizeDateTime(millis, timeZone);
 	}
 	
+	public MizeDateTime(String dateTimeValue,DateTimeFormatter dateTimeFormat){
+		try{		
+			this.dateTimeValue = checkAndAppendTime(dateTimeValue);
+			this.dateTimeFormat = dateTimeFormat.toString();
+			this.dateTime = DateTime.parse(dateTimeValue,dateTimeFormat);	
+			this.isValid = true;
+		}catch(Exception e){
+		}
+	}
+	
 	public static MizeDateTime getInstance(String dateTimeValue,String dateTimeFormat){
 		return new MizeDateTime(dateTimeValue,dateTimeFormat);
 	}
