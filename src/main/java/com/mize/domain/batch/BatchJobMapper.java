@@ -10,16 +10,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
+import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.mize.domain.auth.User;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateTimeDeserializer;
@@ -39,7 +42,22 @@ public class BatchJobMapper extends MizeEntity implements Comparable<BatchJobMap
 	private String isDefault;
 	private String versionNumber;
 	private List<BatchJobBeanMapper> batchJobBeanMappers;
+	private boolean isUpdated;
+	private String isActive;
+	private User user;
 	
+	public BatchJobMapper() {
+	}
+	
+	public BatchJobMapper(Long id, String jobCode, String description, String isDefault, String versionNumber) {
+		super();
+		super.id = id;
+		this.jobCode = jobCode;
+		this.description = description;
+		this.isDefault = isDefault;
+		this.versionNumber = versionNumber;
+	}
+
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -111,66 +129,157 @@ public class BatchJobMapper extends MizeEntity implements Comparable<BatchJobMap
 		this.batchJobBeanMappers = batchJobBeanMappers;
 	}
 	
-	@JsonIgnore(false)
-	@Column(name = "created_by", updatable = false)
-	public Long getCreatedBy() {
-		return this.createdBy;
-	}
-	
-	@JsonIgnore(false)
-	public void setCreatedBy(Long createdBy) {
-		this.createdBy = createdBy;
-	}
-	
-	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
+	@Override
+	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
+	@Type(type="com.mize.domain.util.DateTimeJPA")
+	@Column(name="created_date",updatable=false)
+	@JsonIgnore(value=false)
 	@JsonSerialize(using = JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_NULL)
-	@JsonIgnore(false)
-	@Column(name = "created_date", updatable = false)
-	@org.hibernate.annotations.Type(type = "com.mize.domain.util.DateTimeJPA")
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getCreatedDate() {
-		return this.createdDate;
+		return createdDate;
 	}
 
-	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using = JodaDateTimeDeserializer.class)
-	@JsonIgnore(false)
+	@Override
+	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	@JsonIgnore(value=false)
 	public void setCreatedDate(DateTime createdDate) {
-		this.createdDate = createdDate;
+		super.createdDate = createdDate;
 	}
 	
-	@JsonIgnore(false)
-	@Column(name = "updated_by")
-	public Long getUpdatedBy() {
-		return this.updatedBy;
-	}
-	
-	@JsonIgnore(false)
-	public void setUpdatedBy(Long updatedBy) {
-		this.updatedBy = updatedBy;
-	}
-	
-	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
+	@Override
+	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
+	@Type(type="com.mize.domain.util.DateTimeJPA")
+	@Column(name="updated_date")
+	@JsonIgnore(value=false)
 	@JsonSerialize(using = JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_NULL)
-	@Column(name = "updated_date")
-	@org.hibernate.annotations.Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonIgnore(false)
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getUpdatedDate() {
-		return this.updatedDate;
+		return updatedDate;
 	}
 	
-	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using = JodaDateTimeDeserializer.class)
-	@JsonIgnore(false)
+	@Override
+	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
+	@JsonIgnore(value=false)
 	public void setUpdatedDate(DateTime updatedDate) {
-		this.updatedDate = updatedDate;
+		super.updatedDate = updatedDate;
 	}
 	
+	@Override	
+	@JsonIgnore
+	@Column(name = "created_by", nullable = true, length = 20, updatable = false)
+	public Long getCreatedBy() {		
+		return super.getCreatedBy();
+	}
+	
+	@Override
+	@JsonIgnore
+	public void setCreatedBy(Long createdBy) {		
+		super.setCreatedBy(createdBy);
+	}
+	
+	@Override
+	@JsonIgnore
+	@Column(name = "updated_by", nullable = true, length = 20)
+	public Long getUpdatedBy() {		
+		return super.getUpdatedBy();
+	}
+	
+	@Override
+	@JsonIgnore
+	public void setUpdatedBy(Long updatedBy) {		
+		super.setUpdatedBy(updatedBy);
+	}
+
 	@Override
 	public int compareTo(BatchJobMapper o) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	@Transient
+	public boolean getIsUpdated() {
+		return isUpdated;
+	}
+
+	public void setUpdated(boolean isUpdated) {
+		this.isUpdated = isUpdated;
+	}
+	
+	@Column(name="is_active")
+	public String getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(String isActive) {
+		this.isActive = isActive;
+	}
+	
+	@Transient
+	@JsonIgnore
+	public User getUser() {
+		return user;
+	}	
+	
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((batchJobBeanMappers == null) ? 0 : batchJobBeanMappers.hashCode());
+		result = prime * result + ((businessEntityId == null) ? 0 : businessEntityId.hashCode());
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((isDefault == null) ? 0 : isDefault.hashCode());
+		result = prime * result + ((jobCode == null) ? 0 : jobCode.hashCode());
+		result = prime * result + ((versionNumber == null) ? 0 : versionNumber.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		BatchJobMapper other = (BatchJobMapper) obj;
+		if (batchJobBeanMappers == null) {
+			if (other.batchJobBeanMappers != null)
+				return false;
+		} else if (!batchJobBeanMappers.equals(other.batchJobBeanMappers))
+			return false;
+		if (businessEntityId == null) {
+			if (other.businessEntityId != null)
+				return false;
+		} else if (!businessEntityId.equals(other.businessEntityId))
+			return false;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (isDefault == null) {
+			if (other.isDefault != null)
+				return false;
+		} else if (!isDefault.equals(other.isDefault))
+			return false;
+		if (jobCode == null) {
+			if (other.jobCode != null)
+				return false;
+		} else if (!jobCode.equals(other.jobCode))
+			return false;
+		if (versionNumber == null) {
+			if (other.versionNumber != null)
+				return false;
+		} else if (!versionNumber.equals(other.versionNumber))
+			return false;
+		return true;
 	}
 
 	@Override
@@ -181,6 +290,5 @@ public class BatchJobMapper extends MizeEntity implements Comparable<BatchJobMap
 				+ versionNumber + ", batchJobBeanMappers="
 				+ batchJobBeanMappers + "]";
 	}
-
 	
 }
