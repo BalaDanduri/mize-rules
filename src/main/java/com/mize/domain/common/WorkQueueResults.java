@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import org.joda.time.DateTime;
 
 import com.mize.domain.util.Formatter;
+import com.mize.domain.util.MizeDateTime;
 
 public class WorkQueueResults extends MizeEntity {
 	private static final long serialVersionUID = 310189284913911659L;
@@ -124,6 +125,9 @@ public class WorkQueueResults extends MizeEntity {
 			}else if(fieldValue instanceof DateTime){
 				this.fieldValue = Formatter.getDateTime((DateTime)fieldValue);
 				this.fieldType = DateTime.class.getSimpleName();
+			}else if(fieldValue instanceof MizeDateTime){
+				this.fieldValue = Formatter.getMizeDateTime((MizeDateTime)fieldValue);
+				this.fieldType = MizeDateTime.class.getSimpleName();
 			}else{
 				this.fieldValue = (String)fieldValue;
 				this.fieldType = String.class.getSimpleName();

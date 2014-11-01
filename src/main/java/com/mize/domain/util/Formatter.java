@@ -287,6 +287,10 @@ public final class Formatter {
 		return (dateTime == null ? null : dateTime.toString(DATE_FORMAT));
 	}
 	
+	public static String getMizeDateTime(MizeDateTime mizeDateTime){
+		return ((mizeDateTime == null || mizeDateTime.getDateTime() == null) ? null : mizeDateTime.getDateTime().toString(DATE_FORMAT));
+	}
+	
 	public static String getDateTimeFormat(DateTime dateTime){
 		return (dateTime == null ? null : dateTime.toString(DATE_FORMAT3));
 	}
