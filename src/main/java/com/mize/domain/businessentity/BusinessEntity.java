@@ -63,6 +63,9 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	private String businessEntityReference;
 	@Transient
 	private User user;
+    private String statusCode;
+	private DateTime startDate;
+	private DateTime endDate;	
 	private List<BusinessEntityAddress> addresses = new ArrayList<BusinessEntityAddress>();
 	private List<BusinessEntityIntl> intl = new ArrayList<BusinessEntityIntl>();
 	private List<BusinessEntityBrand> beBrand = new ArrayList<BusinessEntityBrand>();
@@ -359,7 +362,46 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	public User getUser() {
 		return user;
 	}
+	
+	public void setStatusCode(String statusCode) {
+		this.statusCode = statusCode;
+	}
+	
+	@Column(name = "status_code", length = 50)
+	public String getStatusCode() {
+		return statusCode;
+	}
+	
+	@Column(name = "start_date", nullable = true)
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@Type(type = "com.mize.domain.util.DateTimeJPA")
+	@JsonSerialize(using = JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
+	public DateTime getStartDate() {
+		return startDate;
+	}
 
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
+	public void setStartDate(DateTime startDate) {
+		this.startDate = startDate;
+	}
+	
+	@Column(name = "end_date", nullable = true)
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@Type(type = "com.mize.domain.util.DateTimeJPA")
+	@JsonSerialize(using = JsonDateTimeSerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
+	public DateTime getEndDate() {
+		return endDate;
+	}
+	
+	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
+	public void setEndDate(DateTime endDate) {
+		this.endDate = endDate;
+	}
+	
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "businessEntity")
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
