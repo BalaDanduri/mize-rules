@@ -33,6 +33,8 @@ public class MizeDateFormat extends MizeSceEntity implements Comparable<MizeDate
 	private User user;
 	@Transient
 	private Long tenantId;
+	@Transient
+	private String timeZone;
 	
 	public MizeDateFormat(){		
 	}
@@ -123,6 +125,15 @@ public class MizeDateFormat extends MizeSceEntity implements Comparable<MizeDate
 
 	public void setTenantId(Long tenantId) {
 		this.tenantId = tenantId;
+	}
+
+	@Transient
+	public String getTimeZone() {
+		return timeZone;
+	}
+
+	public void setTimeZone(String timeZone) {
+		this.timeZone = timeZone;
 	}
 
 	@Override

@@ -1,7 +1,6 @@
 package com.mize.domain.util;
 
 import java.io.IOException;
-import java.util.TimeZone;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -30,7 +29,8 @@ public class MizeObjectMapper extends ObjectMapper {
 	public static final String DB_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 	public static final String DATE_AS_LONG = "LONG";
 	protected String dateFormat;
-	protected String dateTimeFormat;	
+	protected String dateTimeFormat;
+	protected String timeZone;	
 
 	public String getDateTimeFormat() {
 		return dateTimeFormat;
@@ -102,18 +102,22 @@ public class MizeObjectMapper extends ObjectMapper {
 		registerModule(module);
 	}
 
+	public DateTimeZone getTimeZone(){
+		DateTimeZone tz = DateTimeZone.forID(timeZone);
+		DateTimeZone dtz = tz == null ? DateTimeZone.UTC : tz;
+		return  dtz;
+	}
 	
 	public class MizeDateTimeDeserializer extends JsonDeserializer<MizeDateTime> {
 		@Override
 		public MizeDateTime deserialize(JsonParser parser, DeserializationContext context) throws IOException, JsonProcessingException {
 			JsonToken t = parser.getCurrentToken();
-			TimeZone tz = context.getTimeZone();
-			DateTimeZone dtz = (tz == null) ? DateTimeZone.UTC : DateTimeZone.forTimeZone(tz);
+			DateTimeZone dtz = getTimeZone();
 			if (t == JsonToken.VALUE_NUMBER_INT) {
 				return new MizeDateTime(parser.getLongValue(), dtz);
 			}
 			if (isNotNull(parser.getText())) {
-				return new MizeDateTime(parser.getText().trim(),dateTimeFormat);
+				return new MizeDateTime(parser.getText().trim(),dateTimeFormat, dtz);
 			} else {
 				return null;
 			}
@@ -124,8 +128,7 @@ public class MizeObjectMapper extends ObjectMapper {
 		@Override
 		public MizeDate deserialize(JsonParser parser, DeserializationContext context) throws IOException, JsonProcessingException {
 			JsonToken t = parser.getCurrentToken();
-			TimeZone tz = context.getTimeZone();
-			DateTimeZone dtz = (tz == null) ? DateTimeZone.UTC : DateTimeZone.forTimeZone(tz);
+			DateTimeZone dtz = getTimeZone();
 			if (t == JsonToken.VALUE_NUMBER_INT) {
 				return new MizeDate(parser.getLongValue(), dtz);
 			}
@@ -148,9 +151,7 @@ public class MizeObjectMapper extends ObjectMapper {
 		@Override
 		public DateTime deserialize(JsonParser parser,DeserializationContext context) throws IOException, JsonProcessingException {
 			JsonToken t = parser.getCurrentToken();
-			TimeZone tz = context.getTimeZone();
-			DateTimeZone dtz = (tz == null) ? DateTimeZone.UTC : DateTimeZone.forTimeZone(tz);
-
+			DateTimeZone dtz = getTimeZone();
 			if (t == JsonToken.VALUE_NUMBER_INT) {
 				return new DateTime(parser.getLongValue(), dtz);
 			}
@@ -166,11 +167,12 @@ public class MizeObjectMapper extends ObjectMapper {
 		@Override
 		public void serialize(MizeDateTime mizeDateTime, JsonGenerator gen, SerializerProvider provider) throws IOException, JsonProcessingException {
 			if(mizeDateTime != null){
+				DateTimeZone dtz = getTimeZone();
 				if (dateTimeFormat.equalsIgnoreCase(DATE_AS_LONG)) {
 					gen.writeNumber(mizeDateTime.getMillis());
 				} else {
 					if(mizeDateTime.isValid()){
-						gen.writeString(mizeDateTime.toString(dateTimeFormat));
+						gen.writeString(mizeDateTime.toString(dateTimeFormat, dtz));
 					}else{
 						gen.writeString(mizeDateTime.getDateTimeValue());
 					}
