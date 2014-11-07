@@ -68,7 +68,7 @@ public class FormDefinitionAuditTest extends JPATest {
 	public void testFormDefinitionAudit() {
 		try {
 			FormDefinitionAudit formDefAuditDB = jdbcTemplate.queryForObject(FORM_DEFINITION_AUDIT_QUERY, new FormDefAuditRowMapper(), new Object[]{formDefAudit.getId()});
-			assertEquals(formDefAudit, formDefAuditDB);
+			assertEquals(formDefAudit.getStatusCode(), formDefAuditDB.getStatusCode());
 		} catch(Exception e) {
 			e.printStackTrace();
 			fail("Got exception");
