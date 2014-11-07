@@ -57,6 +57,8 @@ public class FormDefinition extends MizeEntity {
 	private String isNewVersion;
 	private Form form;
 	private Locale locale;
+	private String source;
+	private String reference;
 	private List<FormDefinitionAudit> audits = new ArrayList<FormDefinitionAudit>();
 	private List<FormDefinitionIntl> intls;
 	private List<FormDefinitionLink> links;
@@ -261,6 +263,24 @@ public class FormDefinition extends MizeEntity {
 		this.locale = locale;
 	}
 
+	@Column(name = "form_source", nullable = true, length = 100)
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
+	}
+
+	@Column(name = "form_reference", nullable = true, length = 100)
+	public String getReference() {
+		return reference;
+	}
+
+	public void setReference(String reference) {
+		this.reference = reference;
+	}
+
 	@OneToMany(cascade={CascadeType.ALL}, fetch = FetchType.LAZY, mappedBy = "formDefinition", orphanRemoval = true)
 	@JsonIgnore
 	public List<FormDefinitionMessage> getMessages() {
@@ -348,13 +368,17 @@ public class FormDefinition extends MizeEntity {
 		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
 		result = prime * result + ((formCode == null) ? 0 : formCode.hashCode());
 		result = prime * result + ((formDefinitionData == null) ? 0 : formDefinitionData.hashCode());
-		result = prime * result + ((isActive == null) ? 0 : isActive.hashCode());
 		result = prime * result + ((formTemplateDefinition == null) ? 0 : formTemplateDefinition.hashCode());
+		result = prime * result + ((intls == null) ? 0 : intls.hashCode());
+		result = prime * result + ((isActive == null) ? 0 : isActive.hashCode());
+		result = prime * result + ((isNewVersion == null) ? 0 : isNewVersion.hashCode());
+		result = prime * result + ((links == null) ? 0 : links.hashCode());
+		result = prime * result + ((reference == null) ? 0 : reference.hashCode());
+		result = prime * result + ((source == null) ? 0 : source.hashCode());
 		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
 		result = prime * result + ((statusCode == null) ? 0 : statusCode.hashCode());
 		result = prime * result + ((tenant == null) ? 0 : tenant.hashCode());
 		result = prime * result + ((versionNumber == null) ? 0 : versionNumber.hashCode());
-		result = prime * result + ((intls == null) ? 0 : intls.hashCode());
 		return result;
 	}
 
@@ -382,15 +406,40 @@ public class FormDefinition extends MizeEntity {
 				return false;
 		} else if (!formDefinitionData.equals(other.formDefinitionData))
 			return false;
+		if (formTemplateDefinition == null) {
+			if (other.formTemplateDefinition != null)
+				return false;
+		} else if (!formTemplateDefinition.equals(other.formTemplateDefinition))
+			return false;
+		if (intls == null) {
+			if (other.intls != null)
+				return false;
+		} else if (!intls.equals(other.intls))
+			return false;
 		if (isActive == null) {
 			if (other.isActive != null)
 				return false;
 		} else if (!isActive.equals(other.isActive))
 			return false;
-		if (formTemplateDefinition == null) {
-			if (other.formTemplateDefinition != null)
+		if (isNewVersion == null) {
+			if (other.isNewVersion != null)
 				return false;
-		} else if (!formTemplateDefinition.equals(other.formTemplateDefinition))
+		} else if (!isNewVersion.equals(other.isNewVersion))
+			return false;
+		if (links == null) {
+			if (other.links != null)
+				return false;
+		} else if (!links.equals(other.links))
+			return false;
+		if (reference == null) {
+			if (other.reference != null)
+				return false;
+		} else if (!reference.equals(other.reference))
+			return false;
+		if (source == null) {
+			if (other.source != null)
+				return false;
+		} else if (!source.equals(other.source))
 			return false;
 		if (startDate == null) {
 			if (other.startDate != null)
@@ -405,17 +454,12 @@ public class FormDefinition extends MizeEntity {
 		if (tenant == null) {
 			if (other.tenant != null)
 				return false;
-		} else if (tenant.getId() != null && !tenant.getId().equals(other.tenant.getId()))
+		} else if (!tenant.equals(other.tenant))
 			return false;
 		if (versionNumber == null) {
 			if (other.versionNumber != null)
 				return false;
-		} else if (versionNumber.compareTo(other.versionNumber) != 0)
-			return false;
-		if (intls == null) {
-			if (other.intls != null)
-				return false;
-		} else if (!intls.equals(other.intls))
+		} else if (!versionNumber.equals(other.versionNumber))
 			return false;
 		return true;
 	}

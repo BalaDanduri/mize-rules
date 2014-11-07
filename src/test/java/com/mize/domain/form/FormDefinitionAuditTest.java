@@ -77,7 +77,7 @@ public class FormDefinitionAuditTest extends JPATest {
 	}
 	
 	private FormDefinitionAudit createFormDefAudit(FormDefinition formDef) {
-		FormDefinitionAudit audit = new FormDefinitionAudit(formDef, formDef.getStatusCode(), Formatter.dateTime(DateTime.now().toString("MM-dd-yyyy HH:mm:ss")), 779L);
+		FormDefinitionAudit audit = new FormDefinitionAudit(formDef, formDef.getStatusCode(), Formatter.dateTime(DateTime.now().toString("MM-dd-yyyy HH:mm:ss")), 779L, "mizeadmin");
 		return audit;
 	}
 	
@@ -93,6 +93,7 @@ public class FormDefinitionAuditTest extends JPATest {
 			audit.setStatusBy(rs.getLong("status_by"));
 			audit.setStatusCode(rs.getString("status_code"));
 			audit.setStatusDate(Formatter.dateTime(rs.getTimestamp("status_date")));
+			audit.setStatusByUser(rs.getString("status_by_user"));
 			return audit;
 		}
 		

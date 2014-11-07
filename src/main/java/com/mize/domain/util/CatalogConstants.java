@@ -107,5 +107,7 @@ public abstract class CatalogConstants implements Serializable{
 	public static final String CAMPAIGN_TYPE = "CampaignType";
 	public static final String CAMPAIGN_RBU_TYPE = "CampaignRBUType";
 	
+	public static final String ENTITY_SOURCE = "EntitySource";
+	
 }
 
