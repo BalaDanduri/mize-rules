@@ -31,55 +31,33 @@ public class MizeObjectMapper extends ObjectMapper {
 	protected String dateFormat;
 	protected String dateTimeFormat;
 	protected String timeZone;	
-
-	public String getDateTimeFormat() {
-		return dateTimeFormat;
-	}
-
-	public void setDateFormat(String dateFormat) {
-		this.dateFormat = dateFormat;
-	}
-
-	public String getDateFormat() {
-		return dateFormat;
-	}
-
+	protected DateTimeZone dateTimeZone;
+	
 	public MizeObjectMapper() {
 		this(DATE_FORMAT,DATE_TIME_FORMAT);
-	}
-	
-	public DateTimeFormatter getDateTimeFormatter() {
-		return DateTimeFormat.forPattern(this.dateTimeFormat);
-	}
-	
-	public DateTimeFormatter getDateFormatter() {
-		return DateTimeFormat.forPattern(this.dateFormat);
-	}
-
-	public MizeObjectMapper(String dateFormat) {
-		this(dateFormat,null);
-	}
+	}	
+		
 	public static MizeObjectMapper getInstance() {
 		return new MizeObjectMapper();
 	}
 	
 	public static MizeObjectMapper getInstance(MizeDateFormat mizeDateFormat) {
 		if(mizeDateFormat != null){
-			return new MizeObjectMapper(mizeDateFormat.getDateFormat(),mizeDateFormat.getDateTimeFormat());
+			return new MizeObjectMapper(mizeDateFormat.getDateFormat(),mizeDateFormat.getDateTimeFormat(),mizeDateFormat.getTimeZone());
 		}else{
 			return new MizeObjectMapper();
 		}
 	}
-	
-	public static MizeObjectMapper getInstance(String dateTimeFormat){
-		return new MizeObjectMapper(dateTimeFormat);
-	}
-	
+		
 	public MizeObjectMapper(MizeDateFormat mizeDateFormat) {
-		this(mizeDateFormat.getDateFormat(),mizeDateFormat.getDateTimeFormat());
+		this(mizeDateFormat.getDateFormat(),mizeDateFormat.getDateTimeFormat(),mizeDateFormat.getTimeZone());
 	}
 	
 	public MizeObjectMapper(String dateFormat, String dateTimeFormat) {
+		this(dateFormat, dateTimeFormat, null);
+	}
+	
+	public MizeObjectMapper(String dateFormat, String dateTimeFormat,String timeZone) {
 		this.dateFormat = dateFormat;
 		this.dateTimeFormat = dateTimeFormat;	
 		if(this.dateFormat == null){
@@ -88,6 +66,8 @@ public class MizeObjectMapper extends ObjectMapper {
 		if(this.dateTimeFormat == null){
 			this.dateTimeFormat = DATE_TIME_FORMAT;
 		}
+		this.timeZone = timeZone;
+		this.dateTimeZone = getTimeZone();
 		registerModule();
 	}
 	
@@ -102,22 +82,26 @@ public class MizeObjectMapper extends ObjectMapper {
 		registerModule(module);
 	}
 
-	public DateTimeZone getTimeZone(){
-		DateTimeZone tz = DateTimeZone.forID(timeZone);
-		DateTimeZone dtz = tz == null ? DateTimeZone.UTC : tz;
-		return  dtz;
+	private DateTimeZone getTimeZone(){
+		DateTimeZone tz = null;
+		if(this.timeZone == null || this.timeZone.isEmpty()){
+			tz = DateTimeZone.UTC;
+		}else{
+			tz = DateTimeZone.forID(this.timeZone);			
+		}
+		tz = (tz == null ? DateTimeZone.UTC : tz);
+		return  tz;
 	}
 	
 	public class MizeDateTimeDeserializer extends JsonDeserializer<MizeDateTime> {
 		@Override
 		public MizeDateTime deserialize(JsonParser parser, DeserializationContext context) throws IOException, JsonProcessingException {
 			JsonToken t = parser.getCurrentToken();
-			DateTimeZone dtz = getTimeZone();
 			if (t == JsonToken.VALUE_NUMBER_INT) {
-				return new MizeDateTime(parser.getLongValue(), dtz);
+				return new MizeDateTime(parser.getLongValue(), dateTimeZone);
 			}
 			if (isNotNull(parser.getText())) {
-				return new MizeDateTime(parser.getText().trim(),dateTimeFormat, dtz);
+				return new MizeDateTime(parser.getText().trim(),dateTimeFormat, dateTimeZone);
 			} else {
 				return null;
 			}
@@ -128,9 +112,8 @@ public class MizeObjectMapper extends ObjectMapper {
 		@Override
 		public MizeDate deserialize(JsonParser parser, DeserializationContext context) throws IOException, JsonProcessingException {
 			JsonToken t = parser.getCurrentToken();
-			DateTimeZone dtz = getTimeZone();
 			if (t == JsonToken.VALUE_NUMBER_INT) {
-				return new MizeDate(parser.getLongValue(), dtz);
+				return new MizeDate(parser.getLongValue(), dateTimeZone);
 			}
 			if (isNotNull(parser.getText())) {
 				return new MizeDate(parser.getText().trim(),dateFormat);
@@ -151,9 +134,8 @@ public class MizeObjectMapper extends ObjectMapper {
 		@Override
 		public DateTime deserialize(JsonParser parser,DeserializationContext context) throws IOException, JsonProcessingException {
 			JsonToken t = parser.getCurrentToken();
-			DateTimeZone dtz = getTimeZone();
 			if (t == JsonToken.VALUE_NUMBER_INT) {
-				return new DateTime(parser.getLongValue(), dtz);
+				return new DateTime(parser.getLongValue(), dateTimeZone);
 			}
 			if (isNotNull(parser.getText())) {
 				return getDateTimeFormatter().parseDateTime(parser.getText().trim());
@@ -166,13 +148,12 @@ public class MizeObjectMapper extends ObjectMapper {
 	public class MizeDateTimeSerializer extends JsonSerializer<MizeDateTime> {
 		@Override
 		public void serialize(MizeDateTime mizeDateTime, JsonGenerator gen, SerializerProvider provider) throws IOException, JsonProcessingException {
-			if(mizeDateTime != null){
-				DateTimeZone dtz = getTimeZone();
+			if(mizeDateTime != null){				
 				if (dateTimeFormat.equalsIgnoreCase(DATE_AS_LONG)) {
 					gen.writeNumber(mizeDateTime.getMillis());
 				} else {
 					if(mizeDateTime.isValid()){
-						gen.writeString(mizeDateTime.toString(dateTimeFormat, dtz));
+						gen.writeString(mizeDateTime.toString(dateTimeFormat, dateTimeZone));
 					}else{
 						gen.writeString(mizeDateTime.getDateTimeValue());
 					}
@@ -208,19 +189,20 @@ public class MizeObjectMapper extends ObjectMapper {
 			}
 		}
 	}
+	
+	public String getDateTimeFormat() {
+		return dateTimeFormat;
+	}
 
-	public static void main(String[] args) {
-		try {
-			MizeObjectMapper mapper = new MizeObjectMapper(DATE_FORMAT);
-			Employee emp = new Employee();
-			emp.setCreatedDate(MizeDateTime.now());
-			emp.setId(100l);
-			emp.setName("bala");
-			System.out.println(mapper.writeValueAsString(emp));
-			Employee e = mapper.readValue(mapper.writeValueAsString(emp), Employee.class);
-			System.out.println(e);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public String getDateFormat() {
+		return dateFormat;
+	}
+	
+	private DateTimeFormatter getDateTimeFormatter() {
+		return DateTimeFormat.forPattern(this.dateTimeFormat);
+	}
+	
+	public DateTimeFormatter getDateFormatter() {
+		return DateTimeFormat.forPattern(this.dateFormat);
 	}
 }

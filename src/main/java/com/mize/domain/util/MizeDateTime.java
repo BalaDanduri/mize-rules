@@ -11,7 +11,7 @@ public class MizeDateTime implements IMizeDate, Comparable<MizeDateTime>, Clonea
 	private static final long serialVersionUID = 7257173124058180557L;
 	private static final String DEF_DATE_FORMAT = "MM/dd/yyyy";	
 	private static final String DEF_END_DATE = "12/31/9999";	
-	public static final DateTimeFormatter  DB_DATE_TIME_FORMAT = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+	private static final DateTimeFormatter DB_DATE_TIME_FORMAT = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
 	
 	private String dateTimeFormat;
 	private String dateTimeValue;
