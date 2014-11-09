@@ -41,6 +41,14 @@ public class MizeObjectMapper extends ObjectMapper {
 		return new MizeObjectMapper();
 	}
 	
+	public static MizeObjectMapper getInstance(String dateFormat) {
+		return new MizeObjectMapper(dateFormat, null, null);
+	}
+	
+	public static MizeObjectMapper getInstance(String dateFormat, String dateTimeFormat) {
+		return new MizeObjectMapper(dateFormat, dateTimeFormat, null);
+	}
+	
 	public static MizeObjectMapper getInstance(MizeDateFormat mizeDateFormat) {
 		if(mizeDateFormat != null){
 			return new MizeObjectMapper(mizeDateFormat.getDateFormat(),mizeDateFormat.getDateTimeFormat(),mizeDateFormat.getTimeZone());
