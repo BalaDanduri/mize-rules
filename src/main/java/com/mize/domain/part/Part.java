@@ -6,11 +6,14 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -40,8 +43,11 @@ import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
 @Entity
+@Inheritance
+@DiscriminatorColumn(name = "discriminator")
+@DiscriminatorValue("Part")
 @Table(name = "part", uniqueConstraints = {@UniqueConstraint (columnNames = {"tenant_id", "part_code"})})
-public class Part extends MizeEntity {	
+public class Part extends MizeEntity implements Comparable<Part>{	
 
 	private static final long serialVersionUID = 2686388059625468728L;
 	private BusinessEntity tenant;
@@ -491,6 +497,11 @@ public class Part extends MizeEntity {
 
 	public void setPartAvailabilities(List<PartAvailability> partAvailabilities) {
 		this.partAvailabilities = partAvailabilities;
+	}
+
+	@Override
+	public int compareTo(Part arg0) {
+		return 0;
 	}
 	
 	

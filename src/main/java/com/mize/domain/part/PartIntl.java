@@ -1,11 +1,14 @@
 package com.mize.domain.part;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
@@ -20,8 +23,11 @@ import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeEntity;
 
 @Entity
+@Inheritance
+@DiscriminatorColumn(name = "discriminator")
+@DiscriminatorValue("PartIntl")
 @Table(name = "part_intl", uniqueConstraints = {@UniqueConstraint (columnNames = {"part_id", "locale_id"})})
-public class PartIntl extends MizeEntity {	
+public class PartIntl extends MizeEntity  implements Comparable<PartIntl>{	
 	
 	private static final long serialVersionUID = -1164448119809296797L;
 	private Part part;
@@ -154,6 +160,11 @@ public class PartIntl extends MizeEntity {
 		} else if (!part.equals(other.part))
 			return false;
 		return true;
+	}
+
+	@Override
+	public int compareTo(PartIntl arg0) {
+		return 0;
 	}
 	
 	

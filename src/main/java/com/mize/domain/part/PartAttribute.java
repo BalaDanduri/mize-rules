@@ -1,11 +1,14 @@
 package com.mize.domain.part;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
@@ -19,6 +22,9 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.MizeEntity;
 
 @Entity
+@Inheritance
+@DiscriminatorColumn(name = "discriminator")
+@DiscriminatorValue("PartAttribute")
 @Table(name = "part_attribute", uniqueConstraints = {@UniqueConstraint (columnNames = {"part_id"})})
 public class PartAttribute extends MizeEntity{
 

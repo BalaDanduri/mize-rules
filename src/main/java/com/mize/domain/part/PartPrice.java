@@ -3,11 +3,14 @@ package com.mize.domain.part;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
@@ -33,8 +36,11 @@ import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
 @Entity
+@Inheritance
+@DiscriminatorColumn(name = "discriminator")
+@DiscriminatorValue("PartPrice")
 @Table(name = "part_price")
-public class PartPrice extends MizeEntity {
+public class PartPrice extends MizeEntity implements Comparable<PartPrice>{
 
 	private static final long serialVersionUID = -3133914500164853623L;
 	private Part part;
@@ -342,5 +348,10 @@ public class PartPrice extends MizeEntity {
 		}
 		setUpdatedDate(DateTime.now());
 		
+	}
+
+	@Override
+	public int compareTo(PartPrice arg0) {
+		return 0;
 	}
 }
