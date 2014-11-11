@@ -1,11 +1,14 @@
 package com.mize.domain.form;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -21,6 +24,9 @@ import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JPASerializer;
 
 @Entity
+@Inheritance
+@DiscriminatorColumn(name = "discriminator")
+@DiscriminatorValue("FormDefinitionIntl")
 @Table(name = "form_defn_intl")
 public class FormDefinitionIntl extends MizeEntity {
 
