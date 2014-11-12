@@ -1,10 +1,13 @@
 package com.mize.domain.businessentity;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -15,6 +18,9 @@ import com.mize.domain.brand.Brand;
 import com.mize.domain.common.MizeEntity;
 
 @Entity
+@Inheritance
+@DiscriminatorColumn(name = "discriminator")
+@DiscriminatorValue("BusinessEntityBrand")
 @Table(name="business_entity_brand",uniqueConstraints = { @UniqueConstraint(columnNames = {"be_id","brand_id"} )} )
 public class BusinessEntityBrand extends MizeEntity implements Comparable<BusinessEntityBrand>{
 	private static final long serialVersionUID = -269538922800687629L;

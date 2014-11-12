@@ -4,11 +4,14 @@ import java.util.Comparator;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -25,6 +28,9 @@ import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JPASerializer;
 
 @Entity(name="com.mize.domain.businessentity.BusinessEntityAddress")
+@Inheritance
+@DiscriminatorColumn(name = "discriminator")
+@DiscriminatorValue("BusinessEntityAddress")
 @Table(name="business_entity_address")
 public class BusinessEntityAddress  extends MizeEntity  implements Comparable<BusinessEntityAddress>{
 

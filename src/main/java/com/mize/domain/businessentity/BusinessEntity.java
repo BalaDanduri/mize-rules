@@ -7,11 +7,14 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -47,6 +50,9 @@ import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
 @Entity
+@Inheritance
+@DiscriminatorColumn(name = "discriminator")
+@DiscriminatorValue("BusinessEntity")
 @Table(name = "business_entity", uniqueConstraints = {@UniqueConstraint (columnNames={"tenant_id", "code"})})
 public class BusinessEntity extends MizeEntity implements Comparable<BusinessEntity>, Cloneable{
 
@@ -84,6 +90,8 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	public BusinessEntity(Long id) {
 		this.id = id;
 	}
+	
+	
 
 	public BusinessEntity(Long id,String code,String typeCode) {
 		this.id = id;
@@ -159,6 +167,8 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 		}
 		this.beAttribute.setHoursOfOp(hoursOfOp);
 	}
+	
+	
 
 	public enum TypeCode{
 		dealer,company,service_center,brand;
