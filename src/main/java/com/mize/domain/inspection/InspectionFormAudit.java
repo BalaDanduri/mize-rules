@@ -19,29 +19,24 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeAuditEntity;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.JodaDateDeserializer;
 import com.mize.domain.util.JsonDateSerializer;
 
 @Entity
 @Table(name = "insp_form_audit")
-public class InspectionFormAudit extends MizeEntity implements Comparable<InspectionFormAudit> {
+public class InspectionFormAudit extends MizeAuditEntity implements Comparable<InspectionFormAudit> {
 
 	private static final long serialVersionUID = 6821133638967617947L;
 
 	private InspectionForm inspectionForm;
 	private String statusCode;
-	private DateTime statusDate;
-	private Long statusBy;
-
 	
 	public InspectionFormAudit(){
 	
 	}
 	
-	
-
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "id", nullable = false, unique = true)
@@ -103,7 +98,15 @@ public class InspectionFormAudit extends MizeEntity implements Comparable<Inspec
 		this.statusBy = statusBy;
 	}
 	
-	
+	@Column(name = "status_by_user", nullable = true, length = 250)
+	@Override
+	public String getStatusByUser() {
+		return statusByUser;
+	}
+
+	public void setStatusByUser(String statusByUser) {
+		this.statusByUser = statusByUser;
+	}
 
 
 

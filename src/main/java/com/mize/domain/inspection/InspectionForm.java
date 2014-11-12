@@ -58,8 +58,11 @@ public class InspectionForm extends MizeEntity {
 	private List<InspectionFormAudit> audits = new ArrayList<InspectionFormAudit>();
 	private List<InspectionFormMessage> messages = new ArrayList<InspectionFormMessage>();
 	private List<InspectionFormComment> comments = new ArrayList<InspectionFormComment>();
+	private List<InspectionFormAttachment> attachments = new ArrayList<InspectionFormAttachment>();
 
 	private User user;
+	private String source;
+	private String syncStatus;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -298,6 +301,35 @@ public class InspectionForm extends MizeEntity {
 		super.setUpdatedBy(updatedBy);
 	}
 
+	@Column(name = "insp_source", length = 100)
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
+	}
+
+	@Column(name = "insp_sync_status", length = 50)
+	public String getSyncStatus() {
+		return syncStatus;
+	}
+
+	public void setSyncStatus(String syncStatus) {
+		this.syncStatus = syncStatus;
+	}
+	
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "inspectionForm",orphanRemoval= true)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	@JsonManagedReference(value="insp_form_attachments")
+	public List<InspectionFormAttachment> getAttachments() {
+		return attachments;
+	}
+	
+	public void setAttachments(List<InspectionFormAttachment> attachments) {
+		this.attachments = attachments;
+	}
 	
 	@Override
 	public int hashCode() {
@@ -452,9 +484,5 @@ public class InspectionForm extends MizeEntity {
 		return true;
 	}
 
-	
-	
-	
-	
 	
 }

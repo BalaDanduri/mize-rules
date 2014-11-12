@@ -29,7 +29,9 @@ public class InspectionFormMessage extends MizeEntity {
 	private String messageField;
 	private String messageUiReference;
 	private String messageValue;
-	
+	private String messageCode;
+	private String shortDesc;
+	private String longDesc;
 
 	public InspectionFormMessage() {
 		
@@ -103,6 +105,33 @@ public class InspectionFormMessage extends MizeEntity {
 
 	public void setMessageValue(String messageValue) {
 		this.messageValue = messageValue;
+	}
+	
+	@Column(name = "message_code", nullable = true, length = 50)
+	public String getMessageCode() {
+		return messageCode;
+	}
+
+	public void setMessageCode(String messageCode) {
+		this.messageCode = messageCode;
+	}
+
+	@Column(name = "short_description", nullable = true, length = 250)
+	public String getShortDesc() {
+		return shortDesc;
+	}
+
+	public void setShortDesc(String shortDesc) {
+		this.shortDesc = shortDesc;
+	}
+
+	@Column(name = "long_description", nullable = true, length = 500)
+	public String getLongDesc() {
+		return longDesc;
+	}
+
+	public void setLongDesc(String longDesc) {
+		this.longDesc = longDesc;
 	}
 
 	@Override
