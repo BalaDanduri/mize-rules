@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
@@ -30,6 +31,7 @@ public class AppMessageEntity extends MizeEntity implements Serializable {
     private String countryCode;
 	private List<AppMessage> appMessages;
 	private BusinessEntity tenant;
+	private User user;
 
 	public AppMessageEntity() {
 		super();
@@ -95,6 +97,14 @@ public class AppMessageEntity extends MizeEntity implements Serializable {
 
 	public void setTenant(BusinessEntity tenant) {
 		this.tenant = tenant;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public List<AppMessage> getAppMessages() {
