@@ -27,6 +27,7 @@ public class MizeDateFormat extends MizeSceEntity implements Comparable<MizeDate
 	private String dateFormat;
 	private String dateTimeFormat;
 	private String isDefault;
+	private String isActive;
 	private BusinessEntity tenant;
 	private Locale locale;
 	@Transient
@@ -39,11 +40,12 @@ public class MizeDateFormat extends MizeSceEntity implements Comparable<MizeDate
 	public MizeDateFormat(){		
 	}
 	
-	public MizeDateFormat(String dateFormat, String dateTimeFormat,String isDefault, Locale locale) {
+	public MizeDateFormat(String dateFormat, String dateTimeFormat,String isDefault,String isActive, Locale locale) {
 		super();
 		this.dateFormat = dateFormat;
 		this.dateTimeFormat = dateTimeFormat;
 		this.isDefault = isDefault;
+		this.isActive = isActive;
 		this.locale = locale;
 	}
 
@@ -60,7 +62,7 @@ public class MizeDateFormat extends MizeSceEntity implements Comparable<MizeDate
 		this.id = id;
 	}
 	
-	@Column(name = "date_format", nullable = true)
+	@Column(name = "date_format")
 	public String getDateFormat() {
 		return dateFormat;
 	}
@@ -69,7 +71,7 @@ public class MizeDateFormat extends MizeSceEntity implements Comparable<MizeDate
 		this.dateFormat = dateFormat;
 	}
 
-	@Column(name = "date_time_format", nullable = true)
+	@Column(name = "date_time_format")
 	public String getDateTimeFormat() {
 		return dateTimeFormat;
 	}
@@ -78,7 +80,7 @@ public class MizeDateFormat extends MizeSceEntity implements Comparable<MizeDate
 		this.dateTimeFormat = dateTimeFormat;
 	}
 
-	@Column(name = "is_default", length = 1, nullable = true)
+	@Column(name = "is_default")
 	public String getIsDefault() {
 		return isDefault;
 	}
@@ -134,6 +136,15 @@ public class MizeDateFormat extends MizeSceEntity implements Comparable<MizeDate
 
 	public void setTimeZone(String timeZone) {
 		this.timeZone = timeZone;
+	}
+
+	@Column(name = "is_active")
+	public String getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(String isActive) {
+		this.isActive = isActive;
 	}
 
 	@Override
@@ -192,5 +203,15 @@ public class MizeDateFormat extends MizeSceEntity implements Comparable<MizeDate
 	@Override
 	public int compareTo(MizeDateFormat arg0) {
 		return 0;
-	}		
+	}
+
+	@Override
+	public String toString() {
+		return "MizeDateFormat [dateFormat=" + dateFormat + ", dateTimeFormat="
+				+ dateTimeFormat + ", isDefault=" + isDefault + ", isActive="
+				+ isActive + ", locale=" + locale + ", tenantId=" + tenantId
+				+ ", timeZone=" + timeZone + "]";
+	}
+	
+	
 }

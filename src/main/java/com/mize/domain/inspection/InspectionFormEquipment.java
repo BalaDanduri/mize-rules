@@ -5,11 +5,14 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -19,13 +22,18 @@ import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.product.ProductRegistration;
 import com.mize.domain.util.JPASerializer;
 
 @Entity
+@Inheritance
+@DiscriminatorColumn(name = "discriminator")
+@DiscriminatorValue("InspectionFormEquipment")
 @Table(name="insp_form_eqpmnt")
 public class InspectionFormEquipment extends MizeEntity {
 
@@ -165,6 +173,7 @@ public class InspectionFormEquipment extends MizeEntity {
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "inspectionFormEquipment" , orphanRemoval = true)
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonManagedReference(value="insp_eqpmnt_attr")
+	@JsonInclude(Include.NON_EMPTY)
 	public List<InspectionFormEquipmentAttribute> getEquipmentAttributes() {
 		return equipmentAttributes;
 	}

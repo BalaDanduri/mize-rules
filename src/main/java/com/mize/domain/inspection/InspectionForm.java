@@ -5,11 +5,14 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -38,6 +41,9 @@ import com.mize.domain.util.JsonDateSerializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
 @Entity
+@Inheritance
+@DiscriminatorColumn(name = "discriminator")
+@DiscriminatorValue("InspectionForm")
 @Table(name="insp_form")
 public class InspectionForm extends MizeEntity {
 
@@ -185,6 +191,7 @@ public class InspectionForm extends MizeEntity {
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "inspectionForm" , orphanRemoval = true)
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonManagedReference(value="insp_form_eqpmnt")
+	@JsonInclude(Include.NON_EMPTY)
 	public List<InspectionFormEquipment> getInspectionEquipments() {
 		return inspectionEquipments;
 	}
@@ -196,6 +203,7 @@ public class InspectionForm extends MizeEntity {
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "inspectionForm" , orphanRemoval = true)
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonManagedReference(value="insp_form_audits")
+	@JsonInclude(Include.NON_EMPTY)
 	public List<InspectionFormAudit> getAudits() {
 		return audits;
 	}
@@ -207,6 +215,7 @@ public class InspectionForm extends MizeEntity {
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "inspectionForm" , orphanRemoval = true)
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonManagedReference(value="insp_form_messages")
+	@JsonInclude(Include.NON_EMPTY)
 	public List<InspectionFormMessage> getMessages() {
 		return messages;
 	}
@@ -218,6 +227,7 @@ public class InspectionForm extends MizeEntity {
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "inspectionForm" , orphanRemoval = true)
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonManagedReference(value="insp_form_comments")
+	@JsonInclude(Include.NON_EMPTY)
 	public List<InspectionFormComment> getComments() {
 		return comments;
 	}
