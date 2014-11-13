@@ -191,6 +191,7 @@ public class InspectionForm extends MizeEntity {
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "inspectionForm" , orphanRemoval = true)
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonManagedReference(value="insp_form_eqpmnt")
+	@JsonInclude(Include.NON_EMPTY)
 	public List<InspectionFormEquipment> getInspectionEquipments() {
 		return inspectionEquipments;
 	}
@@ -202,6 +203,7 @@ public class InspectionForm extends MizeEntity {
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "inspectionForm" , orphanRemoval = true)
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonManagedReference(value="insp_form_audits")
+	@JsonInclude(Include.NON_EMPTY)
 	public List<InspectionFormAudit> getAudits() {
 		return audits;
 	}
@@ -213,6 +215,7 @@ public class InspectionForm extends MizeEntity {
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "inspectionForm" , orphanRemoval = true)
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonManagedReference(value="insp_form_messages")
+	@JsonInclude(Include.NON_EMPTY)
 	public List<InspectionFormMessage> getMessages() {
 		return messages;
 	}
@@ -224,6 +227,7 @@ public class InspectionForm extends MizeEntity {
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "inspectionForm" , orphanRemoval = true)
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonManagedReference(value="insp_form_comments")
+	@JsonInclude(Include.NON_EMPTY)
 	public List<InspectionFormComment> getComments() {
 		return comments;
 	}

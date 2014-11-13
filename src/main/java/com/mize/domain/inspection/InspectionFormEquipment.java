@@ -22,7 +22,9 @@ import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.product.ProductRegistration;
@@ -171,6 +173,7 @@ public class InspectionFormEquipment extends MizeEntity {
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "inspectionFormEquipment" , orphanRemoval = true)
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonManagedReference(value="insp_eqpmnt_attr")
+	@JsonInclude(Include.NON_EMPTY)
 	public List<InspectionFormEquipmentAttribute> getEquipmentAttributes() {
 		return equipmentAttributes;
 	}
