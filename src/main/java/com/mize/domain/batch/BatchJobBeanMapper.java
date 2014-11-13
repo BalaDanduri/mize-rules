@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -104,6 +105,7 @@ public class BatchJobBeanMapper extends MizeEntity implements Comparable<BatchJo
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
 	@JsonManagedReference(value="batchJobFieldMapper")
+	@OrderBy("sequenceNumber") 
 	public List<BatchJobFieldMapper> getBatchJobFieldMappers() {
 		return batchJobFieldMappers;
 	}
