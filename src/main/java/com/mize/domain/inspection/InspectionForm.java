@@ -31,6 +31,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
+import com.mize.domain.common.EntityOffline;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.form.FormInstance;
@@ -69,6 +70,8 @@ public class InspectionForm extends MizeEntity {
 	private User user;
 	private String source;
 	private String syncStatus;
+	
+	private EntityOffline entityOffline;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -341,6 +344,18 @@ public class InspectionForm extends MizeEntity {
 		this.attachments = attachments;
 	}
 	
+	@JsonInclude(Include.NON_NULL)
+	@Transient
+	public EntityOffline getEntityOffline() {
+		return entityOffline;
+	}
+
+	public void setEntityOffline(EntityOffline entityOffline) {
+		this.entityOffline = entityOffline;
+	}
+
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
@@ -493,6 +508,6 @@ public class InspectionForm extends MizeEntity {
 		}
 		return true;
 	}
-
+	
 	
 }
