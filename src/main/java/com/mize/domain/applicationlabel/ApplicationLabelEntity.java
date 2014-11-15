@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
@@ -28,6 +29,7 @@ public class ApplicationLabelEntity extends MizeEntity implements Serializable {
     private String countryCode;
 	private List<ApplicationLabel> applicationLabels;
 	private BusinessEntity tenant;
+	private User user;
 
 	public ApplicationLabelEntity() {
 		super();
@@ -106,6 +108,14 @@ public class ApplicationLabelEntity extends MizeEntity implements Serializable {
 		this.tenant = tenant;
 	}
 	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	@Override
 	@JsonIgnore(false)
 	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")

@@ -5,11 +5,14 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -28,6 +31,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
+import com.mize.domain.common.EntityOffline;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeEntity;
 import com.mize.domain.form.FormInstance;
@@ -38,6 +42,9 @@ import com.mize.domain.util.JsonDateSerializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
 @Entity
+@Inheritance
+@DiscriminatorColumn(name = "discriminator")
+@DiscriminatorValue("InspectionForm")
 @Table(name="insp_form")
 public class InspectionForm extends MizeEntity {
 
@@ -63,6 +70,8 @@ public class InspectionForm extends MizeEntity {
 	private User user;
 	private String source;
 	private String syncStatus;
+	
+	private EntityOffline entityOffline;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -185,6 +194,7 @@ public class InspectionForm extends MizeEntity {
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "inspectionForm" , orphanRemoval = true)
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonManagedReference(value="insp_form_eqpmnt")
+	@JsonInclude(Include.NON_EMPTY)
 	public List<InspectionFormEquipment> getInspectionEquipments() {
 		return inspectionEquipments;
 	}
@@ -196,6 +206,7 @@ public class InspectionForm extends MizeEntity {
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "inspectionForm" , orphanRemoval = true)
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonManagedReference(value="insp_form_audits")
+	@JsonInclude(Include.NON_EMPTY)
 	public List<InspectionFormAudit> getAudits() {
 		return audits;
 	}
@@ -207,6 +218,7 @@ public class InspectionForm extends MizeEntity {
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "inspectionForm" , orphanRemoval = true)
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonManagedReference(value="insp_form_messages")
+	@JsonInclude(Include.NON_EMPTY)
 	public List<InspectionFormMessage> getMessages() {
 		return messages;
 	}
@@ -218,6 +230,7 @@ public class InspectionForm extends MizeEntity {
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "inspectionForm" , orphanRemoval = true)
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonManagedReference(value="insp_form_comments")
+	@JsonInclude(Include.NON_EMPTY)
 	public List<InspectionFormComment> getComments() {
 		return comments;
 	}
@@ -330,6 +343,18 @@ public class InspectionForm extends MizeEntity {
 	public void setAttachments(List<InspectionFormAttachment> attachments) {
 		this.attachments = attachments;
 	}
+	
+	@JsonInclude(Include.NON_NULL)
+	@Transient
+	public EntityOffline getEntityOffline() {
+		return entityOffline;
+	}
+
+	public void setEntityOffline(EntityOffline entityOffline) {
+		this.entityOffline = entityOffline;
+	}
+
+	
 	
 	@Override
 	public int hashCode() {
@@ -483,6 +508,6 @@ public class InspectionForm extends MizeEntity {
 		}
 		return true;
 	}
-
+	
 	
 }
