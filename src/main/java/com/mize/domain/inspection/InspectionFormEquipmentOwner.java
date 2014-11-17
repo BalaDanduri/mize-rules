@@ -195,22 +195,14 @@ public class InspectionFormEquipmentOwner extends MizeEntity {
 		result = prime * result + ((ownerAddress == null) ? 0 : ownerAddress.hashCode());
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result + ((ownerContact == null) ? 0 : ownerContact.hashCode());
-		result = prime * result
-				+ ((firstName == null) ? 0 : firstName.hashCode());
-		
-		result = prime * result
-				+ ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result
-				+ ((middleInitial == null) ? 0 : middleInitial.hashCode());
+		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
+		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result + ((middleInitial == null) ? 0 : middleInitial.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result
-				+ ((ownerReference == null) ? 0 : ownerReference.hashCode());
-		result = prime * result
-				+ ((ownerId == null) ? 0 : ownerId.hashCode());
-		result = prime * result
-				+ ((inspectionFormEquipment == null) ? 0 : inspectionFormEquipment.hashCode());
-		result = prime * result
-				+ ((typeCode == null) ? 0 : typeCode.hashCode());
+		result = prime * result + ((ownerReference == null) ? 0 : ownerReference.hashCode());
+		result = prime * result + ((ownerId == null) ? 0 : ownerId.hashCode());
+		result = prime * result + ((typeCode == null) ? 0 : typeCode.hashCode());
+		
 		return result;
 	}
 
@@ -268,16 +260,6 @@ public class InspectionFormEquipmentOwner extends MizeEntity {
 				return false;
 		} else if (!ownerId.equals(other.ownerId))
 			return false;
-		if (inspectionFormEquipment == null) {
-			if (other.inspectionFormEquipment != null)
-				return false;
-		} else {
-			if(inspectionFormEquipment.getId() == null) {
-				if(other.inspectionFormEquipment.getId() != null)
-					return false;
-			} else if(!inspectionFormEquipment.getId().equals(other.inspectionFormEquipment.getId()))
-				return false;
-		}
 		if (typeCode == null) {
 			if (other.typeCode != null)
 				return false;
@@ -289,8 +271,21 @@ public class InspectionFormEquipmentOwner extends MizeEntity {
 		} else if (!subTypeCode.equals(other.subTypeCode))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "InspectionFormEquipmentOwner [id=" + id + ", businessEntity="
+				+ businessEntity + ", code=" + code + ", firstName="
+				+ firstName + ", lastName=" + lastName + ", middleInitial="
+				+ middleInitial + ", name=" + name + ", ownerAddress="
+				+ ownerAddress + ", ownerContact=" + ownerContact
+				+ ", ownerId=" + ownerId + ", ownerReference=" + ownerReference
+				+ ", subTypeCode=" + subTypeCode + ", typeCode=" + typeCode
+				+ "]";
 	}	
 
+	
 	
 	
 }

@@ -189,15 +189,16 @@ public class InspectionFormMessage extends MizeEntity {
 				return false;
 		} else if (!messageValue.equals(other.messageValue))
 			return false;
-		if (inspectionForm == null) {
-			if (other.inspectionForm != null)
+		if (shortDesc == null) {
+			if (other.shortDesc != null)
 				return false;
-		} else {
-			if(inspectionForm.getId() == null) {
-				if(other.inspectionForm.getId() != null)
-					return false;
-			} else if(!inspectionForm.getId().equals(other.inspectionForm.getId()))
+		} else if (!shortDesc.equals(other.shortDesc))
+			return false;
+		if (longDesc == null) {
+			if (other.longDesc != null)
 				return false;
+		} else if (!longDesc.equals(other.longDesc)){
+			return false;
 		}
 		return true;
 	}

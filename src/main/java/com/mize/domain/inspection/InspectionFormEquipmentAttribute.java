@@ -92,20 +92,10 @@ public class InspectionFormEquipmentAttribute extends MizeEntity {
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime * result
-				+ ((attributeCode == null) ? 0 : attributeCode.hashCode());
-		result = prime
-				* result
-				+ ((attributeDataType == null) ? 0 : attributeDataType
-						.hashCode());
-		result = prime * result
-				+ ((attributeUom == null) ? 0 : attributeUom.hashCode());
-		result = prime * result
-				+ ((attributeValue == null) ? 0 : attributeValue.hashCode());
-		result = prime
-				* result
-				+ ((inspectionFormEquipment == null) ? 0 : inspectionFormEquipment
-						.hashCode());
+		result = prime * result + ((attributeCode == null) ? 0 : attributeCode.hashCode());
+		result = prime * result + ((attributeDataType == null) ? 0 : attributeDataType.hashCode());
+		result = prime * result + ((attributeUom == null) ? 0 : attributeUom.hashCode());
+		result = prime * result + ((attributeValue == null) ? 0 : attributeValue.hashCode());
 		return result;
 	}
 
@@ -149,24 +139,14 @@ public class InspectionFormEquipmentAttribute extends MizeEntity {
 		} else if (!attributeValue.equals(other.attributeValue)) {
 			return false;
 		}
-		if (inspectionFormEquipment == null) {
-			if (other.inspectionFormEquipment != null) {
-				return false;
-			}
-		} else {
-			if(inspectionFormEquipment.getId() == null) {
-				if(other.inspectionFormEquipment.getId() != null)
-					return false;
-			} else if(!inspectionFormEquipment.getId().equals(other.inspectionFormEquipment.getId()))
-				return false;
-		} 
+		
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "InspectionFormItemAttribute [inspectionFormEquipment="
-				+ inspectionFormEquipment + ", attributeCode=" + attributeCode
+		return "InspectionFormItemAttribute [id="
+				+ id + ", attributeCode=" + attributeCode
 				+ ", attributeUom=" + attributeUom + ", attributeValue="
 				+ attributeValue + ", attributeDataType=" + attributeDataType
 				+ "]";

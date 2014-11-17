@@ -163,27 +163,47 @@ public class FormInstance extends MizeEntity {
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime * result
-				+ ((formInstanceData == null) ? 0 : formInstanceData.hashCode());
+		result = prime * result + ((formDefinition == null) ? 0 : formDefinition.hashCode());
+		result = prime * result + ((formInstanceData == null) ? 0 : formInstanceData.hashCode());
 		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (!super.equals(obj))
+		}
+		if (!super.equals(obj)) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (!(obj instanceof FormInstance)) {
 			return false;
+		}
 		FormInstance other = (FormInstance) obj;
-		if (formInstanceData == null) {
-			if (other.formInstanceData != null)
+		if (formDefinition == null) {
+			if (other.formDefinition != null) {
 				return false;
-		} else if (!formInstanceData.equals(other.formInstanceData))
+			}
+		} else if (!formDefinition.equals(other.formDefinition)) {
 			return false;
+		}
+		if (formInstanceData == null) {
+			if (other.formInstanceData != null) {
+				return false;
+			}
+		} else if (!formInstanceData.equals(other.formInstanceData)) {
+			return false;
+		}
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "FormInstance [id=" + id + ", formDefinition=" + formDefinition
+				+ ", formInstanceData=" + formInstanceData + "]";
+	}
+
+	
 	
 
 }

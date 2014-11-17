@@ -72,39 +72,33 @@ public class InspectionFormComment extends MizeEntity {
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime * result
-				+ ((entityComment == null) ? 0 : entityComment.hashCode());
-		result = prime * result
-				+ ((inspectionForm == null) ? 0 : inspectionForm.hashCode());
+		result = prime * result + ((entityComment == null) ? 0 : entityComment.hashCode());
 		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (!super.equals(obj))
+		}
+		if (!super.equals(obj)) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (!(obj instanceof InspectionFormComment)) {
 			return false;
+		}
 		InspectionFormComment other = (InspectionFormComment) obj;
 		if (entityComment == null) {
-			if (other.entityComment != null)
+			if (other.entityComment != null) {
 				return false;
-		} else if (!entityComment.equals(other.entityComment))
+			}
+		} else if (!entityComment.equals(other.entityComment)) {
 			return false;
-		if (inspectionForm == null) {
-			if (other.inspectionForm != null)
-				return false;
-		} else {
-			if(inspectionForm.getId() == null) {
-				if(other.inspectionForm.getId() != null)
-					return false;
-			} else if(!inspectionForm.getId().equals(other.inspectionForm.getId()))
-				return false;
 		}
 		return true;
-	}	
+	}
+
+	
 	
 
 }

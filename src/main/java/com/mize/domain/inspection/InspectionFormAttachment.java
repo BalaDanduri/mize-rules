@@ -58,6 +58,44 @@ public class InspectionFormAttachment extends MizeEntity {
 	public void setInspectionForm(InspectionForm inspectionForm) {
 		this.inspectionForm = inspectionForm;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = PRIME;
+		int result = super.hashCode();
+		result = prime * result + ((entityAttachment == null) ? 0 : entityAttachment.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!super.equals(obj)) {
+			return false;
+		}
+		if (!(obj instanceof InspectionFormAttachment)) {
+			return false;
+		}
+		InspectionFormAttachment other = (InspectionFormAttachment) obj;
+		if (entityAttachment == null) {
+			if (other.entityAttachment != null) {
+				return false;
+			}
+		} else if (!entityAttachment.equals(other.entityAttachment)) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "InspectionFormAttachment [id=" + id + ", entityAttachment="
+				+ entityAttachment + "]";
+	}
+	
+	
 	
 	
 	

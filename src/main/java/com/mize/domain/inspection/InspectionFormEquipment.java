@@ -197,29 +197,18 @@ public class InspectionFormEquipment extends MizeEntity {
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime * result
-				+ ((equipmentAttributes == null) ? 0 : equipmentAttributes.hashCode());
-		result = prime * result
-				+ ((equipmentBrand == null) ? 0 : equipmentBrand.hashCode());
-		result = prime * result
-				+ ((equipmentCategory == null) ? 0 : equipmentCategory.hashCode());
-		result = prime * result
-				+ ((inspectionForm == null) ? 0 : inspectionForm.hashCode());
-		result = prime * result
-				+ ((equipmentDescription == null) ? 0 : equipmentDescription.hashCode());
+		result = prime * result + ((equipmentAttributes == null) ? 0 : equipmentAttributes.hashCode());
+		result = prime * result + ((equipmentBrand == null) ? 0 : equipmentBrand.hashCode());
+		result = prime * result + ((equipmentCategory == null) ? 0 : equipmentCategory.hashCode());
+		result = prime * result + ((equipmentDescription == null) ? 0 : equipmentDescription.hashCode());
 		result = prime * result + ((equipmentId == null) ? 0 : equipmentId.hashCode());
-		result = prime * result
-				+ ((equipmentName == null) ? 0 : equipmentName.hashCode());
-		result = prime * result
-				+ ((equipmentCode == null) ? 0 : equipmentCode.hashCode());
-		result = prime * result
-				+ ((equipmentType == null) ? 0 : equipmentType.hashCode());
+		result = prime * result + ((equipmentName == null) ? 0 : equipmentName.hashCode());
+		result = prime * result + ((equipmentCode == null) ? 0 : equipmentCode.hashCode());
+		result = prime * result + ((equipmentType == null) ? 0 : equipmentType.hashCode());
 		result = prime * result + ((equipmentModel == null) ? 0 : equipmentModel.hashCode());
 		result = prime * result + ((equipmentOwner == null) ? 0 : equipmentOwner.hashCode());
-		result = prime * result
-				+ ((equipmentReference == null) ? 0 : equipmentReference.hashCode());
-		result = prime * result
-				+ ((equipmentSerial == null) ? 0 : equipmentSerial.hashCode());
+		result = prime * result + ((equipmentReference == null) ? 0 : equipmentReference.hashCode());
+		result = prime * result + ((equipmentSerial == null) ? 0 : equipmentSerial.hashCode());
 		return result;
 	}
 
@@ -256,17 +245,6 @@ public class InspectionFormEquipment extends MizeEntity {
 		} else if (!equipmentCategory.equals(other.equipmentCategory)) {
 			return false;
 		}
-		if (inspectionForm == null) {
-			if (other.inspectionForm != null) {
-				return false;
-			}
-		} else {
-			if(inspectionForm.getId() == null) {
-				if(other.inspectionForm.getId() != null)
-					return false;
-			} else if(!inspectionForm.getId().equals(other.inspectionForm.getId()))
-				return false;
-		} 
 		if (equipmentDescription == null) {
 			if (other.equipmentDescription != null) {
 				return false;
@@ -347,6 +325,22 @@ public class InspectionFormEquipment extends MizeEntity {
 		this.productRegistration = productRegistration;
 	}
 
+	@Override
+	public String toString() {
+		return "InspectionFormEquipment [id=" + id + ", equipmentAttributes="
+				+ equipmentAttributes + ", equipmentBrand=" + equipmentBrand
+				+ ", equipmentCategory=" + equipmentCategory
+				+ ", equipmentCode=" + equipmentCode
+				+ ", equipmentDescription=" + equipmentDescription
+				+ ", equipmentId=" + equipmentId + ", equipmentModel="
+				+ equipmentModel + ", equipmentName=" + equipmentName
+				+ ", equipmentOwner=" + equipmentOwner
+				+ ", equipmentReference=" + equipmentReference
+				+ ", equipmentSerial=" + equipmentSerial + ", equipmentType="
+				+ equipmentType + "]";
+	}
+
+	
 	
 	
 	

@@ -113,14 +113,9 @@ public class InspectionFormAudit extends MizeAuditEntity implements Comparable<I
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime * result
-				+ ((inspectionForm == null) ? 0 : inspectionForm.hashCode());
-		result = prime * result
-				+ ((statusBy == null) ? 0 : statusBy.hashCode());
-		result = prime * result
-				+ ((statusCode == null) ? 0 : statusCode.hashCode());
-		result = prime * result
-				+ ((statusDate == null) ? 0 : statusDate.hashCode());
+		result = prime * result + ((statusBy == null) ? 0 : statusBy.hashCode());
+		result = prime * result + ((statusCode == null) ? 0 : statusCode.hashCode());
+		result = prime * result + ((statusDate == null) ? 0 : statusDate.hashCode());
 		return result;
 	}
 
@@ -133,16 +128,6 @@ public class InspectionFormAudit extends MizeAuditEntity implements Comparable<I
 		if (getClass() != obj.getClass())
 			return false;
 		InspectionFormAudit other = (InspectionFormAudit) obj;
-		if (inspectionForm == null) {
-			if (other.inspectionForm != null)
-				return false;
-		} else {
-			if(inspectionForm.getId() == null) {
-				if(other.inspectionForm.getId() != null)
-					return false;
-			} else if(!inspectionForm.getId().equals(other.inspectionForm.getId()))
-				return false;
-		}
 		if (statusBy == null) {
 			if (other.statusBy != null)
 				return false;
@@ -171,8 +156,7 @@ public class InspectionFormAudit extends MizeAuditEntity implements Comparable<I
 
 	@Override
 	public String toString() {
-		return "InspectionFormAudit [id=" + id
-				+ ", inspectionForm=" + inspectionForm + ", statusCode="
+		return "InspectionFormAudit [id=" + id + ", statusCode="
 				+ statusCode + ", statusDate=" + statusDate + ", statusBy="
 				+ statusBy +  "]";
 	}

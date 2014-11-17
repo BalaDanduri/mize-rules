@@ -362,25 +362,21 @@ public class InspectionForm extends MizeEntity {
 		int result = super.hashCode();
 		result = prime * result + ((audits == null) ? 0 : audits.hashCode());
 		result = prime * result + ((inspectionCode == null) ? 0 : inspectionCode.hashCode());
-		result = prime * result
-				+ ((comments == null) ? 0 : comments.hashCode());
-		result = prime * result
-				+ ((formInstance == null) ? 0 : formInstance.hashCode());
-		result = prime * result
-				+ ((inspectedBy == null) ? 0 : inspectedBy.hashCode());
-		result = prime * result
-				+ ((inspectionDate == null) ? 0 : inspectionDate.hashCode());
+		result = prime * result + ((comments == null) ? 0 : comments.hashCode());
+		result = prime * result + ((formInstance == null) ? 0 : formInstance.hashCode());
+		result = prime * result + ((inspectedBy == null) ? 0 : inspectedBy.hashCode());
+		result = prime * result + ((inspectionDate == null) ? 0 : inspectionDate.hashCode());
 		result = prime * result + ((inspectionEquipments == null) ? 0 : inspectionEquipments.hashCode());
 		result = prime * result + ((locale == null) ? 0 : locale.hashCode());
-		result = prime * result
-				+ ((messages == null) ? 0 : messages.hashCode());
-		result = prime * result
-				+ ((inspectionReference == null) ? 0 : inspectionReference.hashCode());
-		result = prime * result
-				+ ((requestor == null) ? 0 : requestor.hashCode());
+		result = prime * result + ((messages == null) ? 0 : messages.hashCode());
+		result = prime * result + ((inspectionReference == null) ? 0 : inspectionReference.hashCode());
+		result = prime * result + ((requestor == null) ? 0 : requestor.hashCode());
 		result = prime * result + ((inspectionStatus == null) ? 0 : inspectionStatus.hashCode());
 		result = prime * result + ((tenant == null) ? 0 : tenant.hashCode());
 		result = prime * result + ((inspectionType == null) ? 0 : inspectionType.hashCode());
+		result = prime * result + ((source == null) ? 0 : source.hashCode());
+		result = prime * result + ((syncStatus == null) ? 0 : syncStatus.hashCode());
+		result = prime * result + ((attachments == null) ? 0 : attachments.hashCode());
 		return result;
 	}
 
@@ -496,14 +492,39 @@ public class InspectionForm extends MizeEntity {
 			if (other.tenant != null) {
 				return false;
 			}
-		} else if (!tenant.equals(other.tenant)) {
-			return false;
+		} else {
+			if(tenant.getId() == null) {
+				if(other.tenant.getId() != null)
+					return false;
+			} else if(!tenant.getId().equals(other.tenant.getId()))
+				return false;
 		}
 		if (inspectionType == null) {
 			if (other.inspectionType != null) {
 				return false;
 			}
 		} else if (!inspectionType.equals(other.inspectionType)) {
+			return false;
+		}
+		if (source == null) {
+			if (other.source != null) {
+				return false;
+			}
+		} else if (!source.equals(other.source)) {
+			return false;
+		}
+		if (syncStatus  == null) {
+			if (other.syncStatus != null) {
+				return false;
+			}
+		} else if (!syncStatus.equals(other.syncStatus)) {
+			return false;
+		}
+		if (attachments  == null) {
+			if (other.attachments != null) {
+				return false;
+			}
+		} else if (!attachments.equals(other.attachments)) {
 			return false;
 		}
 		return true;

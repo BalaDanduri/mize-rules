@@ -77,8 +77,6 @@ public class InspectionFormRequestor extends MizeEntity {
 
 	@Transient
 	@JsonIgnore
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "rqstr_be_id", nullable = true)
 	public BusinessEntity getBusinessEntity() {
 		return businessEntity;
 	}
@@ -199,22 +197,13 @@ public class InspectionFormRequestor extends MizeEntity {
 		result = prime * result + ((requestorAddress == null) ? 0 : requestorAddress.hashCode());
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result + ((requestorContact == null) ? 0 : requestorContact.hashCode());
-		result = prime * result
-				+ ((firstName == null) ? 0 : firstName.hashCode());
-		
-		result = prime * result
-				+ ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result
-				+ ((middleInitial == null) ? 0 : middleInitial.hashCode());
+		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
+		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result + ((middleInitial == null) ? 0 : middleInitial.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result
-				+ ((requestorReference == null) ? 0 : requestorReference.hashCode());
-		result = prime * result
-				+ ((requestorId == null) ? 0 : requestorId.hashCode());
-		result = prime * result
-				+ ((inspectionForm == null) ? 0 : inspectionForm.hashCode());
-		result = prime * result
-				+ ((typeCode == null) ? 0 : typeCode.hashCode());
+		result = prime * result + ((requestorReference == null) ? 0 : requestorReference.hashCode());
+		result = prime * result + ((requestorId == null) ? 0 : requestorId.hashCode());
+		result = prime * result + ((typeCode == null) ? 0 : typeCode.hashCode());
 		return result;
 	}
 
@@ -272,16 +261,6 @@ public class InspectionFormRequestor extends MizeEntity {
 				return false;
 		} else if (!requestorId.equals(other.requestorId))
 			return false;
-		if (inspectionForm == null) {
-			if (other.inspectionForm != null)
-				return false;
-		} else {
-			if(inspectionForm.getId() == null) {
-				if(other.inspectionForm.getId() != null)
-					return false;
-			} else if(!inspectionForm.getId().equals(other.inspectionForm.getId()))
-				return false;
-		}
 		if (typeCode == null) {
 			if (other.typeCode != null)
 				return false;
@@ -293,6 +272,17 @@ public class InspectionFormRequestor extends MizeEntity {
 		} else if (!subTypeCode.equals(other.subTypeCode))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "InspectionFormRequestor [id=" + id + ", code=" + code + ", firstName="
+				+ firstName + ", lastName=" + lastName + ", middleInitial="
+				+ middleInitial + ", name=" + name + ", requestorAddress="
+				+ requestorAddress + ", requestorContact=" + requestorContact
+				+ ", requestorId=" + requestorId + ", requestorReference="
+				+ requestorReference + ", subTypeCode=" + subTypeCode
+				+ ", typeCode=" + typeCode + "]";
 	}	
 
 
