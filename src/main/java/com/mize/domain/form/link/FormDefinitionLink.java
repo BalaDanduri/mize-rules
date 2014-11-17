@@ -202,7 +202,7 @@ public class FormDefinitionLink extends MizeEntity {
 	
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result + ((brandName == null) ? 0 : brandName.hashCode());
 		result = prime * result + ((businessEntityType == null) ? 0 : businessEntityType.hashCode());

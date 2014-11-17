@@ -97,8 +97,14 @@ public class FormDefinitionIntl extends MizeEntity {
 	}
 	
 	@Override
+	@JsonIgnore
+	public void setUpdatedBy(Long updatedBy) {		
+		super.setUpdatedBy(updatedBy);
+	}
+	
+	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((locale == null) ? 0 : locale.hashCode());
@@ -131,12 +137,6 @@ public class FormDefinitionIntl extends MizeEntity {
 		} else if (!name.equals(other.name))
 			return false;
 		return true;
-	}
-
-	@Override
-	@JsonIgnore
-	public void setUpdatedBy(Long updatedBy) {		
-		super.setUpdatedBy(updatedBy);
 	}
 
 	@Override

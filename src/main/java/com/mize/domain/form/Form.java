@@ -44,18 +44,12 @@ public class Form extends FormElement{
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime * result
-				+ ((appLabels == null) ? 0 : appLabels.hashCode());
-		result = prime * result
-				+ ((sectionGroups == null) ? 0 : sectionGroups.hashCode());
+		result = prime * result + ((sectionGroups == null) ? 0 : sectionGroups.hashCode());
 		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (!super.equals(obj)){
-	         return false;
-	     }
 		if (this == obj)
 			return true;
 		if (!super.equals(obj))
@@ -63,22 +57,17 @@ public class Form extends FormElement{
 		if (getClass() != obj.getClass())
 			return false;
 		Form other = (Form) obj;
-		if (appLabels == null) {
-			if (other.appLabels != null)
-				return false;
-		} else if (!appLabels.equals(other.appLabels))
-			return false;
 		if (sectionGroups == null) {
 			if (other.sectionGroups != null)
 				return false;
 		} else if (!sectionGroups.equals(other.sectionGroups))
 			return false;
-		
-		return false;
+		return true;
 	}
 
-	
-	
-	
-	
+	@Override
+	public String toString() {
+		return "Form [sectionGroups=" + sectionGroups + "]";
+	}
+
 }

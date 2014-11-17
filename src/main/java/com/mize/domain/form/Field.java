@@ -79,13 +79,65 @@ public class Field extends FormElement {
 	}
 
 	@Override
+	public int hashCode() {
+		final int prime = PRIME;
+		int result = super.hashCode();
+		result = prime * result + ((attachments == null) ? 0 : attachments.hashCode());
+		result = prime * result + ((attrs == null) ? 0 : attrs.hashCode());
+		result = prime * result + ((fieldList == null) ? 0 : fieldList.hashCode());
+		result = prime * result + ((sameRow == null) ? 0 : sameRow.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		result = prime * result + ((value == null) ? 0 : value.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Field other = (Field) obj;
+		if (attachments == null) {
+			if (other.attachments != null)
+				return false;
+		} else if (!attachments.equals(other.attachments))
+			return false;
+		if (attrs == null) {
+			if (other.attrs != null)
+				return false;
+		} else if (!attrs.equals(other.attrs))
+			return false;
+		if (fieldList == null) {
+			if (other.fieldList != null)
+				return false;
+		} else if (!fieldList.equals(other.fieldList))
+			return false;
+		if (sameRow == null) {
+			if (other.sameRow != null)
+				return false;
+		} else if (!sameRow.equals(other.sameRow))
+			return false;
+		if (type == null) {
+			if (other.type != null)
+				return false;
+		} else if (!type.equals(other.type))
+			return false;
+		if (value == null) {
+			if (other.value != null)
+				return false;
+		} else if (!value.equals(other.value))
+			return false;
+		return true;
+	}
+
+	@Override
 	public String toString() {
 		return "Field [type=" + type + ", value=" + value + ", sameRow="
 				+ sameRow + ", attrs=" + attrs + ", fieldList=" + fieldList
 				+ ", attachments=" + attachments + "]";
 	}
 	
-	
-	
-
 }

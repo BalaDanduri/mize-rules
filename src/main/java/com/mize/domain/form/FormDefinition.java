@@ -371,19 +371,23 @@ public class FormDefinition extends MizeEntity {
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
+		result = prime * result + ((audits == null) ? 0 : audits.hashCode());
 		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
+		result = prime * result + ((form == null) ? 0 : form.hashCode());
 		result = prime * result + ((formCode == null) ? 0 : formCode.hashCode());
-		result = prime * result + ((formDefinitionData == null) ? 0 : formDefinitionData.hashCode());
 		result = prime * result + ((formTemplateDefinition == null) ? 0 : formTemplateDefinition.hashCode());
 		result = prime * result + ((intls == null) ? 0 : intls.hashCode());
 		result = prime * result + ((isActive == null) ? 0 : isActive.hashCode());
 		result = prime * result + ((isNewVersion == null) ? 0 : isNewVersion.hashCode());
 		result = prime * result + ((links == null) ? 0 : links.hashCode());
+		result = prime * result + ((locale == null) ? 0 : locale.hashCode());
+		result = prime * result + ((messages == null) ? 0 : messages.hashCode());
 		result = prime * result + ((reference == null) ? 0 : reference.hashCode());
 		result = prime * result + ((source == null) ? 0 : source.hashCode());
 		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
 		result = prime * result + ((statusCode == null) ? 0 : statusCode.hashCode());
 		result = prime * result + ((tenant == null) ? 0 : tenant.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		result = prime * result + ((versionNumber == null) ? 0 : versionNumber.hashCode());
 		return result;
 	}
@@ -397,20 +401,25 @@ public class FormDefinition extends MizeEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		FormDefinition other = (FormDefinition) obj;
+		if (audits == null) {
+			if (other.audits != null)
+				return false;
+		} else if (!audits.equals(other.audits))
+			return false;
 		if (endDate == null) {
 			if (other.endDate != null)
 				return false;
 		} else if (!endDate.equals(other.endDate))
 			return false;
+		if (form == null) {
+			if (other.form != null)
+				return false;
+		} else if (!form.equals(other.form))
+			return false;
 		if (formCode == null) {
 			if (other.formCode != null)
 				return false;
 		} else if (!formCode.equals(other.formCode))
-			return false;
-		if (formDefinitionData == null) {
-			if (other.formDefinitionData != null)
-				return false;
-		} else if (!formDefinitionData.equals(other.formDefinitionData))
 			return false;
 		if (formTemplateDefinition == null) {
 			if (other.formTemplateDefinition != null)
@@ -437,6 +446,16 @@ public class FormDefinition extends MizeEntity {
 				return false;
 		} else if (!links.equals(other.links))
 			return false;
+		if (locale == null) {
+			if (other.locale != null)
+				return false;
+		} else if (!locale.equals(other.locale))
+			return false;
+		if (messages == null) {
+			if (other.messages != null)
+				return false;
+		} else if (!messages.equals(other.messages))
+			return false;
 		if (reference == null) {
 			if (other.reference != null)
 				return false;
@@ -462,12 +481,26 @@ public class FormDefinition extends MizeEntity {
 				return false;
 		} else if (!tenant.equals(other.tenant))
 			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
 		if (versionNumber == null) {
 			if (other.versionNumber != null)
 				return false;
 		} else if (!versionNumber.equals(other.versionNumber))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "FormDefinition [formTemplateDefinition=" + formTemplateDefinition + ", tenant=" + tenant + ", formCode=" + formCode 
+				+ ", versionNumber=" + versionNumber + ", statusCode=" + statusCode + ", isActive=" + isActive + ", startDate=" + startDate 
+				+ ", endDate=" + endDate + ", isNewVersion=" + isNewVersion + ", form=" + form + ", locale=" + locale + ", source=" + source 
+				+ ", reference=" + reference + ", audits=" + audits + ", intls=" + intls + ", links=" + links + ", messages=" + messages 
+				+ ", user=" + user + "]";
 	}
 
 }

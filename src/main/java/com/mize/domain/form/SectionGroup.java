@@ -23,5 +23,35 @@ public class SectionGroup extends FormElement{
 	public void setSections(List<Section> sections) {
 		this.sections = sections;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = PRIME;
+		int result = super.hashCode();
+		result = prime * result + ((sections == null) ? 0 : sections.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SectionGroup other = (SectionGroup) obj;
+		if (sections == null) {
+			if (other.sections != null)
+				return false;
+		} else if (!sections.equals(other.sections))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "SectionGroup [sections=" + sections + "]";
+	}
 	
 }

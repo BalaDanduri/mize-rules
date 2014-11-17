@@ -92,5 +92,66 @@ public class FormElement extends MizeEntity implements Serializable{
 	public Map<String, String> getMeta() {
 		return meta;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = PRIME;
+		int result = super.hashCode();
+		result = prime * result + ((alias == null) ? 0 : alias.hashCode());
+		result = prime * result + ((canskiprules == null) ? 0 : canskiprules.hashCode());
+		result = prime * result + ((label == null) ? 0 : label.hashCode());
+		result = prime * result + ((meta == null) ? 0 : meta.hashCode());
+		result = prime * result + ((ref == null) ? 0 : ref.hashCode());
+		result = prime * result + ((skiprules == null) ? 0 : skiprules.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		FormElement other = (FormElement) obj;
+		if (alias == null) {
+			if (other.alias != null)
+				return false;
+		} else if (!alias.equals(other.alias))
+			return false;
+		if (canskiprules == null) {
+			if (other.canskiprules != null)
+				return false;
+		} else if (!canskiprules.equals(other.canskiprules))
+			return false;
+		if (label == null) {
+			if (other.label != null)
+				return false;
+		} else if (!label.equals(other.label))
+			return false;
+		if (meta == null) {
+			if (other.meta != null)
+				return false;
+		} else if (!meta.equals(other.meta))
+			return false;
+		if (ref == null) {
+			if (other.ref != null)
+				return false;
+		} else if (!ref.equals(other.ref))
+			return false;
+		if (skiprules == null) {
+			if (other.skiprules != null)
+				return false;
+		} else if (!skiprules.equals(other.skiprules))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "FormElement [alias=" + alias + ", ref=" + ref + ", canskiprules=" + canskiprules + ", skiprules=" + skiprules 
+				+ ", label=" + label + ", meta=" + meta + "]";
+	}
 	
 }
