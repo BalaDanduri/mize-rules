@@ -20,19 +20,17 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeAuditEntity;
 import com.mize.domain.util.JodaDateDeserializer;
 import com.mize.domain.util.JsonDateSerializer;
 
 @Entity
 @Table(name = "prod_regn_audit")
-public class ProductRegistrationAudit extends MizeEntity implements Comparable<ProductRegistrationAudit>{	
+public class ProductRegistrationAudit extends MizeAuditEntity implements Comparable<ProductRegistrationAudit>{	
 
 
 	private static final long serialVersionUID = -5121973394689627876L;
 	private String statusCode;
-	private DateTime statusDate;
-	private Long statusBy;
 	private ProductRegistration productRegistration;
 
 	public ProductRegistrationAudit(){
@@ -100,17 +98,24 @@ public class ProductRegistrationAudit extends MizeEntity implements Comparable<P
 		this.productRegistration = productRegistration;
 	}
 	
+	@Column(name = "status_by_user", nullable = true, length = 250)
+	@Override
+	public String getStatusByUser() {
+		return statusByUser;
+	}
+
+	public void setStatusByUser(String statusByUser) {
+		this.statusByUser = statusByUser;
+	}
 	
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime * result
-				+ ((statusBy == null) ? 0 : statusBy.hashCode());
-		result = prime * result
-				+ ((statusCode == null) ? 0 : statusCode.hashCode());
-		result = prime * result
-				+ ((statusDate == null) ? 0 : statusDate.hashCode());
+		result = prime * result + ((statusBy == null) ? 0 : statusBy.hashCode());
+		result = prime * result + ((statusCode == null) ? 0 : statusCode.hashCode());
+		result = prime * result + ((statusDate == null) ? 0 : statusDate.hashCode());
+		result = prime * result + ((statusByUser == null) ? 0 : statusByUser.hashCode());
 		return result;
 	}
 
@@ -136,8 +141,15 @@ public class ProductRegistrationAudit extends MizeEntity implements Comparable<P
 		if (statusDate == null) {
 			if (other.statusDate != null)
 				return false;
-		} else if (!statusDate.equals(other.statusDate))
+		} else if (!statusDate.equals(other.statusDate)){
 			return false;
+		}
+		if (statusByUser == null) {
+			if (other.statusByUser != null)
+				return false;
+		} else if (!statusByUser.equals(other.statusByUser)){
+			return false;
+		}
 		return true;
 	}
 
