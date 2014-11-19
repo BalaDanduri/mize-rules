@@ -146,6 +146,46 @@ public class MizeDateFormat extends MizeSceEntity implements Comparable<MizeDate
 	public void setIsActive(String isActive) {
 		this.isActive = isActive;
 	}
+	
+	public void setCreatedBy(Long createdBy) {
+		this.createdBy = createdBy;
+	}
+	
+	@Column(name = "created_by" , updatable=false)
+	public Long getCreatedBy() {
+		return createdBy;
+	}
+	
+	public void setUpdatedBy(Long updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	@Column(name = "updated_by")
+	public Long getUpdatedBy() {		
+		return super.getUpdatedBy();
+	}
+	
+	public void setCreatedDate(MizeDateTime createdDate) {
+		this.createdDate = createdDate;
+	}
+	
+	@Column(name = "created_date",updatable = false)
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	@JsonInclude(Include.NON_DEFAULT)
+	public MizeDateTime getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setUpdatedDate(MizeDateTime updatedDate) {
+		this.updatedDate = updatedDate;
+	}
+	
+	@Column(name = "updated_date")
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	@JsonInclude(Include.NON_DEFAULT)
+	public MizeDateTime getUpdatedDate() {
+		return updatedDate;
+	}
 
 	@Override
 	public int hashCode() {
