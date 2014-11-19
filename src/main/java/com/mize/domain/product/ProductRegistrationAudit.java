@@ -11,18 +11,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.common.MizeAuditEntity;
-import com.mize.domain.util.JodaDateDeserializer;
-import com.mize.domain.util.JsonDateSerializer;
+import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name = "prod_regn_audit")
@@ -60,21 +53,15 @@ public class ProductRegistrationAudit extends MizeAuditEntity implements Compara
 	}
 
 
-
 	@Column(name = "status_date")
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	@JsonIgnore(value=false)
-	public DateTime getStatusDate() {
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
+	@JsonIgnore(false)
+	public MizeDateTime getStatusDate() {
 		return statusDate;
 	}
 
-	@JsonIgnore(value=false)
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateDeserializer.class)
-	public void setStatusDate(DateTime statusDate) {
+	@JsonIgnore(false)
+	public void setStatusDate(MizeDateTime statusDate) {
 		this.statusDate = statusDate;
 	}
 
