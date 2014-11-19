@@ -12,7 +12,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
@@ -23,6 +22,7 @@ import com.mize.domain.part.PartKit;
 import com.mize.domain.part.PartKitItem;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;
+import com.mize.domain.util.MizeDateTime;
 
 @ContextConfiguration(locations = { "/test-context.xml" })
 public class PartKitTest extends JPATest {
@@ -80,10 +80,10 @@ public class PartKitTest extends JPATest {
 		partKit.setIsActive("Y");
 		partKit.setCreatedBy(776L);
 		partKit.setUpdatedBy(776L);
-		partKit.setCreatedDate(DateTime.now());
-		partKit.setUpdatedDate(DateTime.now());
-		partKit.setStartDate(DateTime.now());
-		partKit.setEndDate(DateTime.now());
+		partKit.setCreatedDate(MizeDateTime.now());
+		partKit.setUpdatedDate(MizeDateTime.now());
+		partKit.setStartDate(MizeDateTime.now());
+		partKit.setEndDate(MizeDateTime.now());
 
 		return partKit;
 	}
@@ -126,13 +126,13 @@ public class PartKitTest extends JPATest {
 			partKit.setIsActive(rs.getString("is_active"));
 			partKit.setCreatedBy(rs.getLong("created_by"));
 			partKit.setUpdatedBy(rs.getLong("updated_by"));
-			partKit.setCreatedDate(Formatter.dateTime(rs
+			partKit.setCreatedDate(Formatter.toMizeDateTime(rs
 					.getTimestamp("created_date")));
-			partKit.setUpdatedDate(Formatter.dateTime(rs
+			partKit.setUpdatedDate(Formatter.toMizeDateTime(rs
 					.getTimestamp("updated_date")));
-			partKit.setStartDate(Formatter.dateTime(rs
+			partKit.setStartDate(Formatter.toMizeDateTime(rs
 					.getTimestamp("start_date")));
-			partKit.setEndDate(Formatter.dateTime(rs.getTimestamp("end_date")));
+			partKit.setEndDate(Formatter.toMizeDateTime(rs.getTimestamp("end_date")));
 
 			return partKit;
 		}

@@ -5,19 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
-import com.mize.domain.common.MizeEntity;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.MizeDateTime;
 
-public class ExportDataCriteria extends MizeEntity implements Comparable<ExportDataCriteria>{
+public class ExportDataCriteria extends MizeSceEntity implements Comparable<ExportDataCriteria>{
 	
 	private static final long serialVersionUID = -6647895629560783568L;
 	private String entityName;
@@ -25,8 +17,8 @@ public class ExportDataCriteria extends MizeEntity implements Comparable<ExportD
 	private Long fromEntityID;
 	private Long toEntityID;
 	private String inCluseIDs;
-	private DateTime startDate;
-	private DateTime endDate;
+	private MizeDateTime startDate;
+	private MizeDateTime endDate;
 	private String criteria;
 	private List<Long> entityIDList;
 	private List<Long> inCluseIDsList = new ArrayList<Long>();
@@ -49,29 +41,19 @@ public class ExportDataCriteria extends MizeEntity implements Comparable<ExportD
 		this.entityName = entityName;
 	}
 	
-	@DateTimeFormat(pattern = "MM-dd-yyyy")
-	@JsonSerialize(using = JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getStartDate() {
+	public MizeDateTime getStartDate() {
 		return startDate;
 	}
 	
-	@DateTimeFormat(pattern = "MM-dd-yyyy")
-	@JsonDeserialize(using = JodaDateTimeDeserializer.class)
-	public void setStartDate(DateTime startDate) {
+	public void setStartDate(MizeDateTime startDate) {
 		this.startDate = startDate;
 	}
 	
-	@DateTimeFormat(pattern = "MM-dd-yyyy")
-	@JsonSerialize(using = JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getEndDate() {
+	public MizeDateTime getEndDate() {
 		return endDate;
 	}
-	
-	@DateTimeFormat(pattern = "MM-dd-yyyy")
-	@JsonDeserialize(using = JodaDateTimeDeserializer.class)
-	public void setEndDate(DateTime endDate) {
+
+	public void setEndDate(MizeDateTime endDate) {
 		this.endDate = endDate;
 	}
 	public Long getFromEntityID() {

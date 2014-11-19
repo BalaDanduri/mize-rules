@@ -20,33 +20,27 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityOffline;
 import com.mize.domain.common.Locale;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.form.FormInstance;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.JodaDateDeserializer;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateSerializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Inheritance
 @DiscriminatorColumn(name = "discriminator")
 @DiscriminatorValue("InspectionForm")
 @Table(name="insp_form")
-public class InspectionForm extends MizeEntity {
+public class InspectionForm extends MizeSceEntity implements Comparable<InspectionForm> {
 
 	
 	private static final long serialVersionUID = -666112603626187346L;
@@ -56,7 +50,7 @@ public class InspectionForm extends MizeEntity {
 	private String inspectionType;
 	private String inspectionStatus;
 	private String inspectionReference;
-	private DateTime inspectionDate;
+	private MizeDateTime inspectionDate;
 	private String inspectedBy;
 	private Locale locale;
 	private FormInstance formInstance;
@@ -134,18 +128,15 @@ public class InspectionForm extends MizeEntity {
 		this.inspectionReference = inspectionReference;
 	}
 
+	
 	@Column(name = "insp_date", nullable = true)
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateSerializer.class)
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
 	@JsonInclude(Include.NON_NULL)
-	public DateTime getInspectionDate() {
+	public MizeDateTime getInspectionDate() {
 		return inspectionDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateDeserializer.class)
-	public void setInspectionDate(DateTime inspectionDate) {
+	public void setInspectionDate(MizeDateTime inspectionDate) {
 		this.inspectionDate = inspectionDate;
 	}
 
@@ -250,24 +241,20 @@ public class InspectionForm extends MizeEntity {
 	
 	
 	@Override	
-	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
-	@Type(type="com.mize.domain.util.DateTimeJPA")
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	@JsonIgnore(false)
 	@Column(name = "created_date",updatable=false)
-	@JsonIgnore(value = false)
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-    @JsonInclude(Include.NON_DEFAULT)
-	public DateTime getCreatedDate() {
+	@JsonInclude(Include.NON_NULL)
+	public MizeDateTime getCreatedDate() {
 		return createdDate;
 	}
 
 	@Override	
-	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
-	@Type(type="com.mize.domain.util.DateTimeJPA")
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@Column(name = "updated_date")
-	@JsonIgnore(value = false)
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-    @JsonInclude(Include.NON_DEFAULT)
-	public DateTime getUpdatedDate() {
+	@JsonIgnore(false)
+	@JsonInclude(Include.NON_NULL)
+	public MizeDateTime getUpdatedDate() {
 		return updatedDate;
 	}
 
@@ -287,18 +274,14 @@ public class InspectionForm extends MizeEntity {
 
 
 	@Override
-	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(false)
-	public void setCreatedDate(DateTime createdDate) {
+	public void setCreatedDate(MizeDateTime createdDate) {
 		super.createdDate = createdDate;
 	}
 
 	@Override
-	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(false)
-	public void setUpdatedDate(DateTime updatedDate) {
+	public void setUpdatedDate(MizeDateTime updatedDate) {
 		super.updatedDate = updatedDate;
 	}
 
@@ -528,6 +511,12 @@ public class InspectionForm extends MizeEntity {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public int compareTo(InspectionForm arg0) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 	

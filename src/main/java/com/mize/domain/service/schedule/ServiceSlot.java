@@ -1,31 +1,25 @@
 package com.mize.domain.service.schedule;
 
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
+import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.MizeDateTime;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.common.MizeEntity;
-import com.mize.domain.util.JodaDateDeserializer;
-import com.mize.domain.util.JsonDateSerializer;
-
-public class ServiceSlot  extends MizeEntity implements Comparable<ServiceSlot>{
+public class ServiceSlot  extends MizeSceEntity implements Comparable<ServiceSlot>{
 	
 	private static final long serialVersionUID = 4264889614013460395L;
 
-	@DateTimeFormat (pattern="dd-MM-yyyy")
-	private DateTime date;
+	//@DateTimeFormat (pattern="dd-MM-yyyy")
+	private MizeDateTime date;
 	
 	private String startTime;
 	
 	private String endTime;
 	
-	@JsonSerialize(using=JsonDateSerializer.class)
-	public DateTime getDate() {
+	//@JsonSerialize(using=JsonDateSerializer.class)
+	public MizeDateTime getDate() {
 		return date;
 	}
-	@JsonDeserialize(using=JodaDateDeserializer.class)
-	public void setDate(DateTime date) {
+	//@JsonDeserialize(using=JodaDateDeserializer.class)
+	public void setDate(MizeDateTime date) {
 		this.date = date;
 	}
 		

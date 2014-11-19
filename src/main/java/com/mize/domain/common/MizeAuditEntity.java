@@ -1,23 +1,18 @@
 package com.mize.domain.common;
 
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.util.MizeDateTime;
 
-public abstract class MizeAuditEntity extends MizeEntity {
+public abstract class MizeAuditEntity extends MizeSceEntity {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 4275213588169261386L;
 
-	protected DateTime statusDate;
+	protected MizeDateTime statusDate;
 	protected Long statusBy;
 	protected String statusByUser;
 
@@ -25,16 +20,13 @@ public abstract class MizeAuditEntity extends MizeEntity {
 		super();
 	}
 
-	@DateTimeFormat(pattern = "MM-dd-yyyy HH:mm:ss")
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonIgnore(value = false)
-	@JsonSerialize(using = JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getStatusDate() {
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
+	@JsonIgnore(false)
+	public MizeDateTime getStatusDate() {
 		return statusDate;
 	}
 
-	public void setStatusDate(DateTime statusDate) {
+	public void setStatusDate(MizeDateTime statusDate) {
 		this.statusDate = statusDate;
 	}
 

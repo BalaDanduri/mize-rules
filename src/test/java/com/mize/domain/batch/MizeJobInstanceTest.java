@@ -8,7 +8,6 @@ import java.sql.SQLException;
 
 import javax.persistence.EntityManager;
 
-import org.joda.time.DateTime;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -18,9 +17,10 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.ContextConfiguration;
 
 import com.mize.domain.businessentity.BusinessEntity;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;
+import com.mize.domain.util.MizeDateTime;
 
 @ContextConfiguration(locations={"/test-context.xml"})
 public class MizeJobInstanceTest extends JPATest {
@@ -53,7 +53,7 @@ public class MizeJobInstanceTest extends JPATest {
 		jobInstance.setJob(mizeJob);
 		jobInstance.setInstanceCode("TestMizeJobInst001");
 		jobInstance.setInstanceName("Test Mize Job Inst 001");
-		jobInstance.setNextRunTime(DateTime.now());
+		jobInstance.setNextRunTime(MizeDateTime.now());
 		jobInstance.setJobStatus("RUNNING");
 		jobInstance.setIsActive("Y");
 		
@@ -96,17 +96,17 @@ public class MizeJobInstanceTest extends JPATest {
 			jobInstance.setId(rs.getLong("id"));
 			jobInstance.setInstanceCode(rs.getString("instance_code"));
 			jobInstance.setInstanceName(rs.getString("instance_name"));
-			jobInstance.setLastRunTime(Formatter.dateTime(rs.getTimestamp("last_run")));
-			jobInstance.setNextRunTime(Formatter.dateTime(rs.getTimestamp("next_run")));
+			jobInstance.setLastRunTime(Formatter.toMizeDateTime(rs.getTimestamp("last_run")));
+			jobInstance.setNextRunTime(Formatter.toMizeDateTime(rs.getTimestamp("next_run")));
 			jobInstance.setJobStatus(rs.getString("job_status"));
 			jobInstance.setIsActive(rs.getString("is_active"));
 			return jobInstance;
 		}
 	}
 	
-	private void populateAuditFields(MizeEntity entity) {
-		entity.setCreatedDate(DateTime.now());
-		entity.setUpdatedDate(DateTime.now());
+	private void populateAuditFields(MizeSceEntity entity) {
+		entity.setCreatedDate(MizeDateTime.now());
+		entity.setUpdatedDate(MizeDateTime.now());
 		entity.setCreatedBy(Long.valueOf(779));
 		entity.setUpdatedBy(Long.valueOf(779));
 	}

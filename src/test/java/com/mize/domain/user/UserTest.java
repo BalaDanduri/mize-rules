@@ -85,8 +85,8 @@ public class UserTest extends JPATest {
 			user.setId(rs.getLong("id"));
 			user.setEmail(rs.getString("email"));
 			user.setName(rs.getString("name"));
-			user.setLastLogin(Formatter.dateTime(rs.getTimestamp("last_login")));
-			user.setCreatedDate(Formatter.dateTime(rs
+			user.setLastLogin(Formatter.toMizeDateTime(rs.getTimestamp("last_login")));
+			user.setCreatedDate(Formatter.toMizeDateTime(rs
 					.getTimestamp("created_date")));
 
 			return user;
@@ -105,7 +105,7 @@ public class UserTest extends JPATest {
 			userProfile.setFirstName(rs.getString("first_name"));
 			userProfile.setLastName(rs.getString("last_name"));
 			userProfile
-					.setBirthdate(Formatter.date2((rs.getDate("birth_day"))));
+					.setBirthdate(Formatter.toMizeDateTime(Formatter.date2((rs.getDate("birth_day")))));
 			userProfile.setGender(Gender.getGender(rs.getString("gender")));
 
 			userProfile.setUser(user);

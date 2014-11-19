@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mize.domain.auth.User;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
 
-public class ProductRating extends MizeEntity implements Comparable<ProductRating>{
+public class ProductRating extends MizeSceEntity implements Comparable<ProductRating>{
 	private static final long serialVersionUID = -7410842260731182272L;
 	private Long productId;
 	private Long userId;

@@ -9,7 +9,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
-import org.joda.time.DateTime;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.runner.RunWith;
@@ -41,6 +40,7 @@ import com.mize.domain.serviceentity.ServiceEntityAddress;
 import com.mize.domain.serviceentity.ServiceEntityAudit;
 import com.mize.domain.user.UserProfile;
 import com.mize.domain.util.Formatter;
+import com.mize.domain.util.MizeDateTime;
 import com.mize.domain.util.MizeObjectMapper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -219,8 +219,8 @@ public class JPATest {
 			tenant.setIsActive("Y");
 			tenant.setCreatedBy(1l);
 			tenant.setUpdatedBy(1l);
-			tenant.setCreatedDate(DateTime.now());
-			tenant.setUpdatedDate(DateTime.now());
+			tenant.setCreatedDate(MizeDateTime.now());
+			tenant.setUpdatedDate(MizeDateTime.now());
 			if (!type.equalsIgnoreCase("company")) {
 				BusinessEntityIntl intl = new BusinessEntityIntl();
 				intl.setName(type);
@@ -240,9 +240,9 @@ public class JPATest {
 		User user = new User();
 		user.setEmail("admin"+System.currentTimeMillis()+"@mize.com");
 		user.setName("Mize");
-		user.setLastLogin(DateTime.now());
-		user.setCreatedDate(DateTime.now());
-		user.setUpdatedDate(DateTime.now());
+		user.setLastLogin(MizeDateTime.now());
+		user.setCreatedDate(MizeDateTime.now());
+		user.setUpdatedDate(MizeDateTime.now());
 		UserProfile userProfile = user.getUserProfile();
 		if(userProfile == null){
 			userProfile = new UserProfile();
@@ -250,7 +250,7 @@ public class JPATest {
 		userProfile.setEmailOptOut("N");
 		userProfile.setFirstName("Test");
 		userProfile.setLastName("Admin");
-		userProfile.setBirthdate(DateTime.now().minusYears(28));
+		userProfile.setBirthdate(MizeDateTime.now().minusYears(28));
 		userProfile.setGender(Gender.F);
 		userProfile.setUser(user);
 		
@@ -272,9 +272,9 @@ public class JPATest {
 		product.setBrand(brand);
 		product.setTenant(tenant);
 		product.setManufacturerBE((businessEntity));
-		product.setCreatedDate(DateTime.now());
-		product.setUpdatedDate(DateTime.now());
-		product.setReleaseDate(DateTime.now());
+		product.setCreatedDate(MizeDateTime.now());
+		product.setUpdatedDate(MizeDateTime.now());
+		product.setReleaseDate(MizeDateTime.now());
 		
 		return product;
 

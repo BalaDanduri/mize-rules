@@ -25,16 +25,16 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.product.Product;
 import com.mize.domain.product.ProductRegister;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.util.MizeDateTime;
 
 @Entity(name = "se.ServiceEntityRequest")
 @Table(name = "service_entity_request")
-public class ServiceEntityRequest extends MizeEntity implements Comparable<ServiceEntityRequest> {
+public class ServiceEntityRequest extends MizeSceEntity implements Comparable<ServiceEntityRequest> {
 
 	private static final long serialVersionUID = 6821133638967617947L;
 	@Transient
@@ -356,22 +356,22 @@ public class ServiceEntityRequest extends MizeEntity implements Comparable<Servi
 		this.othersCharges = othersCharges;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
-	@JsonIgnore(value=false)
+	@JsonIgnore(value=false)*/
 	@Column(name = "created_date",updatable = false)
 	@Transient
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
-	public DateTime getCreatedDate() {
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getCreatedDate() {
 		return createdDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)*/
 	@Column(name = "updated_date")
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@Transient
-	public DateTime getUpdatedDate() {
+	public MizeDateTime getUpdatedDate() {
 		return updatedDate;
 	}
 	
@@ -389,10 +389,10 @@ public class ServiceEntityRequest extends MizeEntity implements Comparable<Servi
 		return updatedBy;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore(value=false)
-	public void setCreatedDate(DateTime createdDate) {
+	@JsonIgnore(value=false)*/
+	public void setCreatedDate(MizeDateTime createdDate) {
 		this.createdDate = createdDate;
 	}
 	
@@ -406,10 +406,10 @@ public class ServiceEntityRequest extends MizeEntity implements Comparable<Servi
 		this.createdBy = createdBy;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore(value=false)
-	public void setUpdatedDate(DateTime updatedDate) {
+	@JsonIgnore(value=false)*/
+	public void setUpdatedDate(MizeDateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}
 	

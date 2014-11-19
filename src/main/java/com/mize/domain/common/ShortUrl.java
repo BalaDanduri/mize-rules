@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class ShortUrl extends MizeEntity implements Comparable<ShortUrl>{
+public class ShortUrl extends MizeSceEntity implements Comparable<ShortUrl>{
 
 	private static final long serialVersionUID = -5226291820868027579L;
 	private String errorCode;

@@ -22,7 +22,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.businessentity.BusinessEntity;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JPASerializer;
 
 
@@ -30,7 +30,7 @@ import com.mize.domain.util.JPASerializer;
 @Entity
 @Table(name = "prod_cat")
 
-public class ProductCategory extends MizeEntity{
+public class ProductCategory extends MizeSceEntity implements Comparable<ProductCategory>{
 
 	private static final long serialVersionUID = -2450196415219764436L;
 	@JsonIgnore
@@ -278,5 +278,11 @@ public class ProductCategory extends MizeEntity{
 		} else if (!sourceCategory.equals(other.sourceCategory))
 			return false;
 		return true;
+	}
+
+	@Override
+	public int compareTo(ProductCategory o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

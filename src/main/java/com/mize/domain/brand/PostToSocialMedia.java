@@ -1,22 +1,13 @@
 package com.mize.domain.brand;
 
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.common.MizeEntity;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.util.MizeDateTime;
 
 public class PostToSocialMedia extends MizeEntity implements Comparable<PostToSocialMedia>{
 	
 	private static final long serialVersionUID = 4674350998777147719L;
 	String postId;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	DateTime postedDate;
+	MizeDateTime postedDate;
 	String postData;
 	String socialMedia;
 	Long feedbackId;
@@ -40,16 +31,11 @@ public class PostToSocialMedia extends MizeEntity implements Comparable<PostToSo
 		this.postId = postId;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getPostedDate() {
+	public MizeDateTime getPostedDate() {
 		return postedDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	public void setPostedDate(DateTime postedDate) {
+	public void setPostedDate(MizeDateTime postedDate) {
 		this.postedDate = postedDate;
 	}
 

@@ -15,12 +15,12 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name = "purchase_order_item_warehouse")
-public class PurchaseOrderItemWarehourse extends MizeEntity implements Comparable<PurchaseOrderItemWarehourse> {
+public class PurchaseOrderItemWarehourse extends MizeSceEntity implements Comparable<PurchaseOrderItemWarehourse> {
 
 	private static final long serialVersionUID = -8674802160381208633L;
 	private PurchaseOrderItem orderItem;

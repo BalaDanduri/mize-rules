@@ -4,9 +4,9 @@ import java.io.File;
 
 import com.mize.domain.auth.User;
 import com.mize.domain.batch.BatchJobMapper;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
-public class UploadFile extends MizeEntity implements Comparable<UploadFile>{
+public class UploadFile extends MizeSceEntity implements Comparable<UploadFile>{
 
 	private static final long serialVersionUID = -4764734738730804430L;
 	

@@ -12,12 +12,12 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.mize.domain.brand.Brand;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
 
 @Entity
 @Table(name = "device_list")
-public class DeviceList extends MizeEntity implements Comparable<DeviceList>{
+public class DeviceList extends MizeSceEntity implements Comparable<DeviceList>{
 
 	private static final long serialVersionUID = -3440812506217447673L;
 	private Brand brand;

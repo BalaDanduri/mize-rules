@@ -2,10 +2,11 @@ package com.mize.domain.appmsg;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.mize.domain.common.MizeEntity;
+
+import com.mize.domain.common.MizeSceEntity;
 
 
-public class AppMessages extends MizeEntity implements Comparable<AppMessages> {
+public class AppMessages extends MizeSceEntity implements Comparable<AppMessages> {
 
 	private static final long serialVersionUID = 9139589850515749395L;
 	List<AppMessage> appMessages = new ArrayList<AppMessage>();

@@ -15,12 +15,12 @@ import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JPASerializer;
 
 @Entity
 @Table(name = "prod_to_cat", uniqueConstraints = {@UniqueConstraint (columnNames = {"id"})})
-public class ProductToCategory extends MizeEntity{
+public class ProductToCategory extends MizeSceEntity implements Comparable<ProductToCategory>{
 
 	/**
 	 * 
@@ -103,6 +103,12 @@ public class ProductToCategory extends MizeEntity{
 	public String toString() {
 		return "ProductToCategory [product=" + product + ", productCategory="
 				+ productCategory + "]";
+	}
+
+	@Override
+	public int compareTo(ProductToCategory o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

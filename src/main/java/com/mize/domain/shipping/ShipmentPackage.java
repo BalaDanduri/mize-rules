@@ -22,12 +22,12 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JPASerializer;
 
 @Entity
 @Table(name="shipment_package")
-public class ShipmentPackage extends MizeEntity implements Comparable<ShipmentPackage> {
+public class ShipmentPackage extends MizeSceEntity implements Comparable<ShipmentPackage> {
 	private static final long serialVersionUID = 8265420845919537745L;
 	private ShipmentTracking shipmentTracking;
 	private String number;

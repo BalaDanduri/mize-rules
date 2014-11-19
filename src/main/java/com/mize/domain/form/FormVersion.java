@@ -3,9 +3,9 @@ package com.mize.domain.form;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
-public class FormVersion extends MizeEntity {
+public class FormVersion extends MizeSceEntity implements Comparable<FormVersion> {
 
 	private static final long serialVersionUID = -659127151003519230L;
 	private String formCode;
@@ -54,6 +54,12 @@ public class FormVersion extends MizeEntity {
 
 	public void setVersionNumbers(List<String> versionNumbers) {
 		this.versionNumbers = versionNumbers;
+	}
+
+	@Override
+	public int compareTo(FormVersion o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

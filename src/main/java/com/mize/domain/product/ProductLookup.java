@@ -3,10 +3,10 @@ package com.mize.domain.product;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
 
-public class ProductLookup extends MizeEntity implements Comparable<ProductLookup>{
+public class ProductLookup extends MizeSceEntity implements Comparable<ProductLookup>{
 		
 	private static final long serialVersionUID = 7754176397823092647L;
 	public static final String SOURCE_MIZE = "1";

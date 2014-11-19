@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.common.EntityAddress;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JPASerializer;
 
 @Entity(name="com.mize.domain.businessentity.BusinessEntityAddress")
@@ -32,7 +32,7 @@ import com.mize.domain.util.JPASerializer;
 @DiscriminatorColumn(name = "discriminator")
 @DiscriminatorValue("BusinessEntityAddress")
 @Table(name="business_entity_address")
-public class BusinessEntityAddress  extends MizeEntity  implements Comparable<BusinessEntityAddress>{
+public class BusinessEntityAddress  extends MizeSceEntity  implements Comparable<BusinessEntityAddress>{
 
 	/**
 	 * 

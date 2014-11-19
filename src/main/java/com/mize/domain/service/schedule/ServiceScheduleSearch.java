@@ -1,12 +1,6 @@
 package com.mize.domain.service.schedule;
 
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.util.JodaDateDeserializer;
-import com.mize.domain.util.JsonDateSerializer;
+import com.mize.domain.util.MizeDateTime;
 
 public class ServiceScheduleSearch {
 	
@@ -26,7 +20,7 @@ public class ServiceScheduleSearch {
 	Long productId;
 	String productName;
 	String productSerialNumber;		
-	DateTime scheduleDate;
+	MizeDateTime scheduleDate;
 	String startTime;
 	String endTime;
 	Double latitude;
@@ -171,15 +165,15 @@ public class ServiceScheduleSearch {
 		this.productSerialNumber = productSerialNumber;
 	}
 	
-	@DateTimeFormat(pattern="MM-dd-yyyy")
-	@JsonSerialize(using = JsonDateSerializer.class)
-	public DateTime getScheduleDate() {
+	/*@DateTimeFormat(pattern="MM-dd-yyyy")
+	@JsonSerialize(using = JsonDateSerializer.class)*/
+	public MizeDateTime getScheduleDate() {
 		return scheduleDate;
 	}
 	
-	@DateTimeFormat(pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateDeserializer.class)
-	public void setScheduleDate(DateTime scheduleDate) {
+	/*@DateTimeFormat(pattern="MM-dd-yyyy")
+	@JsonDeserialize(using=JodaDateDeserializer.class)*/
+	public void setScheduleDate(MizeDateTime scheduleDate) {
 		this.scheduleDate = scheduleDate;
 	}
 

@@ -11,7 +11,7 @@ import com.mize.domain.util.Formatter;
 
 @Entity
 @Table(name="locale")
-public class Locale extends MizeEntity implements Comparable<Locale>{
+public class Locale extends MizeSceEntity implements Comparable<Locale>{
 	
 	private static final long serialVersionUID = -3914800360286751871L;
 	private String isActive;

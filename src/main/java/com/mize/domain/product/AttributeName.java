@@ -1,8 +1,8 @@
 package com.mize.domain.product;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
-public class AttributeName extends MizeEntity implements Comparable<AttributeName>{
+public class AttributeName extends MizeSceEntity implements Comparable<AttributeName>{
 	
 	private static final long serialVersionUID = 9200960678285880479L;
 	private Long srcAttrId;

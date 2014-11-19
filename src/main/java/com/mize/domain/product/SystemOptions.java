@@ -8,21 +8,14 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.common.MizeEntity;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name = "system_options")
-public class SystemOptions extends MizeEntity implements Comparable<SystemOptions>{
+public class SystemOptions extends MizeSceEntity implements Comparable<SystemOptions>{
 
 	private static final long serialVersionUID = -8578576996983187261L;
 	private String forceLogin;
@@ -57,20 +50,15 @@ public class SystemOptions extends MizeEntity implements Comparable<SystemOption
 		this.createdBy = createdBy;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Column(name = "created_date",  nullable = true)
-	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@JsonIgnore(value=false)
-	public DateTime getCreatedDate() {
+	public MizeDateTime getCreatedDate() {
 		return createdDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore(value=false)
-	public void setCreatedDate(DateTime createdDate) {
+	@JsonIgnore(false)
+	public void setCreatedDate(MizeDateTime createdDate) {
 		this.createdDate = createdDate;
 	}
 	
@@ -85,20 +73,15 @@ public class SystemOptions extends MizeEntity implements Comparable<SystemOption
 		this.updatedBy = updatedBy;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Column(name = "updated_date",  nullable = true)
-	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	@JsonIgnore(value=false)
-	public DateTime getUpdatedDate() {
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	@JsonIgnore(false)
+	public MizeDateTime getUpdatedDate() {
 		return updatedDate;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore(value=false)
-	public void setUpdatedDate(DateTime updatedDate) {
+	@JsonIgnore(false)
+	public void setUpdatedDate(MizeDateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}
 

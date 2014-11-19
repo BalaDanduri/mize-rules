@@ -17,28 +17,25 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityComment;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.product.Product;
 import com.mize.domain.product.ProductSerial;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name="goodwill")
-public class Goodwill extends MizeEntity {
+public class Goodwill extends MizeSceEntity implements Comparable<Goodwill> {
 	private static final long serialVersionUID = 7577184605741571133L;
 	private BusinessEntity tenant;
 	private String code;
@@ -48,8 +45,8 @@ public class Goodwill extends MizeEntity {
 	private String currencyCode;
 	private String reference;
 	private String authorisedBy;
-	private DateTime startDate;
-	private DateTime endDate;
+	private MizeDateTime startDate;
+	private MizeDateTime endDate;
 	private BusinessEntity requestor;
 	private Product product;
 	private ProductSerial productSerial;
@@ -126,21 +123,16 @@ public class Goodwill extends MizeEntity {
 		return authorisedBy;
 	}
 
+	
 	@Column(name = "goodwill_start_date", nullable = true)
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getStartDate() {
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getStartDate() {
 		return startDate;
 	}
-
+	
 	@Column(name = "goodwill_end_date", nullable = true)
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getEndDate() {
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getEndDate() {
 		return endDate;
 	}
 
@@ -253,15 +245,11 @@ public class Goodwill extends MizeEntity {
 		this.authorisedBy = authorisedBy;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
-	public void setStartDate(DateTime startDate) {
+	public void setStartDate(MizeDateTime startDate) {
 		this.startDate = startDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
-	public void setEndDate(DateTime endDate) {
+	public void setEndDate(MizeDateTime endDate) {
 		this.endDate = endDate;
 	}
 
@@ -310,10 +298,8 @@ public class Goodwill extends MizeEntity {
 	}
 
 	@Override
-	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(false)
-	public void setCreatedDate(DateTime createdDate) {
+	public void setCreatedDate(MizeDateTime createdDate) {
 		this.createdDate = createdDate;
 	}
 
@@ -328,30 +314,23 @@ public class Goodwill extends MizeEntity {
 	}
 
 	@Override
-	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(false)
-	public void setUpdatedDate(DateTime updatedDate) {
+	public void setUpdatedDate(MizeDateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}
 
-	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonIgnore(value=false)
 	@Column(name = "created_date",updatable = false)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getCreatedDate() {
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	@JsonIgnore(false)
+	public MizeDateTime getCreatedDate() {
 		return createdDate;
 	}
 
-	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
+	
 	@Column(name = "updated_date")
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonIgnore(value = false)
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getUpdatedDate() {
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	@JsonIgnore(false)
+	public MizeDateTime getUpdatedDate() {
 		return updatedDate;
 	}
 
@@ -548,5 +527,11 @@ public class Goodwill extends MizeEntity {
 		} else if (!user.equals(other.user))
 			return false;
 		return true;
+	}
+
+
+	@Override
+	public int compareTo(Goodwill o) {
+		return 0;
 	}
 }

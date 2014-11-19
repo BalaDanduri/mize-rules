@@ -1,18 +1,10 @@
 package com.mize.domain.brand;
 
 
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
+import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.MizeDateTime;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.common.MizeEntity;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
-
-public class BrandUserSupportLog extends MizeEntity implements Comparable<BrandUserSupportLog>{
+public class BrandUserSupportLog extends MizeSceEntity implements Comparable<BrandUserSupportLog>{
 
 	private static final long serialVersionUID = -9120007688133372009L;
 	private Long brandId;
@@ -20,10 +12,8 @@ public class BrandUserSupportLog extends MizeEntity implements Comparable<BrandU
 	private Long userId;
 	private String supportType;
 	private String countryCode;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private DateTime startTime;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private DateTime endTime;
+	private MizeDateTime startTime;
+	private MizeDateTime endTime;
 	private long brandSupportId;
 	
 	public BrandUserSupportLog(){
@@ -31,8 +21,8 @@ public class BrandUserSupportLog extends MizeEntity implements Comparable<BrandU
 	}
 	
 	public BrandUserSupportLog(long brandId, long id,
-			long userId, String supportType, String countryCode, DateTime startTime,
-			DateTime endTime, long brandSupportId) {
+			long userId, String supportType, String countryCode, MizeDateTime startTime,
+			MizeDateTime endTime, long brandSupportId) {
 		this.brandId = brandId;
 		this.id = id;
 		this.userId = userId;
@@ -75,29 +65,19 @@ public class BrandUserSupportLog extends MizeEntity implements Comparable<BrandU
 		this.countryCode = countryCode;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getStartTime() {
+	public MizeDateTime getStartTime() {
 		return startTime;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	public void setStartTime(DateTime startTime) {
+	public void setStartTime(MizeDateTime startTime) {
 		this.startTime = startTime;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getEndTime() {
+	public MizeDateTime getEndTime() {
 		return endTime;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)		
-	public void setEndTime(DateTime endTime) {
+	public void setEndTime(MizeDateTime endTime) {
 		this.endTime = endTime;
 	}
 

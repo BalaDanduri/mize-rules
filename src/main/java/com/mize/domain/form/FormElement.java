@@ -6,9 +6,9 @@ import java.util.Map;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
-public class FormElement extends MizeEntity implements Serializable{
+public class FormElement extends MizeSceEntity implements Serializable{
 	
 	/**
 	 * 

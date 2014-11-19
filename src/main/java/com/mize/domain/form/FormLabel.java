@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
-public class FormLabel extends MizeEntity implements Serializable {
+public class FormLabel extends MizeSceEntity implements Serializable {
 	/**
 	 * 
 	 */

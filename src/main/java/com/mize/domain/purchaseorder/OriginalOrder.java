@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.MizeDateTime;
 
-public class OriginalOrder extends MizeSceEntity {
+public class OriginalOrder extends MizeSceEntity implements Comparable<OriginalOrder>{
 	
 	private static final long serialVersionUID = 34019502927801711L;
 	private String number;
@@ -205,6 +205,12 @@ public class OriginalOrder extends MizeSceEntity {
 		} else if (!type.equals(other.type))
 			return false;
 		return true;
+	}
+
+	@Override
+	public int compareTo(OriginalOrder o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

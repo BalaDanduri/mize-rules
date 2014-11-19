@@ -12,32 +12,23 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.common.MizeEntity;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name = "brand_feed")
-public class BrandFeed extends MizeEntity implements Comparable<BrandFeed>{
+public class BrandFeed extends MizeSceEntity implements Comparable<BrandFeed>{
 	
 	private static final long serialVersionUID = -8006941720446513027L;
 	private Brand brand;
 	private String feedType;
 	private String feedDesc;
 	private String feedTitle;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private DateTime startTime;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private DateTime endTime;
+	private MizeDateTime startTime;
+	private MizeDateTime endTime;
 	@Transient
 	private Integer pageIndex;
 	
@@ -50,7 +41,7 @@ public class BrandFeed extends MizeEntity implements Comparable<BrandFeed>{
 		this.brand = brand;
 	}
 
-	public BrandFeed(Brand brand, String feedType, String feedDesc, DateTime startTime, DateTime endTime,Integer pageIndex) {
+	public BrandFeed(Brand brand, String feedType, String feedDesc, MizeDateTime startTime, MizeDateTime endTime,Integer pageIndex) {
 		super();
 		this.brand = brand;
 		this.feedType = feedType;
@@ -60,7 +51,7 @@ public class BrandFeed extends MizeEntity implements Comparable<BrandFeed>{
 		this.pageIndex = pageIndex;
 	}
 
-	public BrandFeed(Long id,Brand brand, String feedType, String feedDesc, DateTime startTime, DateTime endTime,Integer pageIndex) {
+	public BrandFeed(Long id,Brand brand, String feedType, String feedDesc, MizeDateTime startTime, MizeDateTime endTime,Integer pageIndex) {
 		this.id = id;
 		this.brand = brand;
 		this.feedType = feedType;
@@ -110,34 +101,26 @@ public class BrandFeed extends MizeEntity implements Comparable<BrandFeed>{
 		this.feedDesc = feedDesc;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	
 	@Column(name = "start_time",  nullable = true)
-	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-    @JsonInclude(Include.NON_DEFAULT)
-	public DateTime getStartTime() {
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getStartTime() {
 		return startTime;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
-	public void setStartTime(DateTime startTime) {
+	public void setStartTime(MizeDateTime startTime) {
 		this.startTime = startTime;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	
 	@Column(name = "end_time",  nullable = true)
-	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-    @JsonInclude(Include.NON_DEFAULT)
-	public DateTime getEndTime() {
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getEndTime() {
 		return endTime;
 	}
 	
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	public void setEndTime(DateTime endTime) {
+	public void setEndTime(MizeDateTime endTime) {
 		this.endTime = endTime;
 	}
 	

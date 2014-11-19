@@ -10,11 +10,11 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
 @Entity
 @Table(name = "prod_content")
-public class ProductContent extends MizeEntity{
+public class ProductContent extends MizeSceEntity implements Comparable<ProductContent>{
 	
 	private static final long serialVersionUID = -76159028571766886L;
 	
@@ -292,6 +292,12 @@ public class ProductContent extends MizeEntity{
 				+ ", productName=" + productName + ", contentType=" + contentType + ", seqNo=" + seqNo + ", title="
 				+ title + ", description=" + description + ", url=" + url + ", pageIndex=" + pageIndex + ", upc=" + upc
 				+ ", mpn=" + mpn + "]";
+	}
+
+	@Override
+	public int compareTo(ProductContent o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 }

@@ -2,9 +2,9 @@ package com.mize.domain.product;
 
 import java.util.List;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
-public class ProdListItems extends MizeEntity implements Comparable<ProdListItems>{
+public class ProdListItems extends MizeSceEntity implements Comparable<ProdListItems>{
 
 	private static final long serialVersionUID = 8289857282481014535L;
 

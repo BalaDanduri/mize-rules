@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.user.FriendsActivities;
 import com.mize.domain.user.UserFriend;
 
-public class UserProdFeedback extends MizeEntity{
+public class UserProdFeedback extends MizeSceEntity implements Comparable<UserProdFeedback>{
 	
 	private static final long serialVersionUID = -3952329917212635913L;
 	Map<Long, FriendsActivities> commentsMap ;
@@ -111,5 +111,10 @@ public class UserProdFeedback extends MizeEntity{
 	public void setId(Long id) {
 		// TODO Auto-generated method stub
 		
+	}
+	@Override
+	public int compareTo(UserProdFeedback o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

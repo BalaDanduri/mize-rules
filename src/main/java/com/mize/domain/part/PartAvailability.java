@@ -2,9 +2,9 @@ package com.mize.domain.part;
 
 import java.math.BigDecimal;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
-public class PartAvailability extends MizeEntity implements Comparable<PartAvailability> {
+public class PartAvailability extends MizeSceEntity implements Comparable<PartAvailability> {
 
 	private static final long serialVersionUID = -8604802160381208633L;
 	private String code;

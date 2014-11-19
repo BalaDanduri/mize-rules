@@ -1,8 +1,8 @@
 package com.mize.domain.product;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
-public class MizeProductSearchCriteria extends MizeEntity implements Comparable<MizeProductSearchCriteria>{
+public class MizeProductSearchCriteria extends MizeSceEntity implements Comparable<MizeProductSearchCriteria>{
 	private static final long serialVersionUID = 155385665556860537L;
 	private String brandName;
 	private String searchKey;

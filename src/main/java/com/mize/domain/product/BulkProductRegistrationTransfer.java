@@ -6,9 +6,9 @@ import java.util.List;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityComment;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
-public class BulkProductRegistrationTransfer extends MizeEntity {
+public class BulkProductRegistrationTransfer extends MizeSceEntity implements Comparable<BulkProductRegistrationTransfer> {
 	
 	private static final long serialVersionUID = -6823485629435457415L;
 	
@@ -145,6 +145,12 @@ public class BulkProductRegistrationTransfer extends MizeEntity {
 				+ ", entityComment=" + entityComment
 				+ ", productRegistrations=" + productRegistrations + ", user="
 				+ user + "]";
+	}
+
+	@Override
+	public int compareTo(BulkProductRegistrationTransfer o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 

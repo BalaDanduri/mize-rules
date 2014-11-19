@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.product.ProductRegistration;
 import com.mize.domain.util.JPASerializer;
 
@@ -35,7 +35,7 @@ import com.mize.domain.util.JPASerializer;
 @DiscriminatorColumn(name = "discriminator")
 @DiscriminatorValue("InspectionFormEquipment")
 @Table(name="insp_form_eqpmnt")
-public class InspectionFormEquipment extends MizeEntity {
+public class InspectionFormEquipment extends MizeSceEntity implements Comparable<InspectionFormEquipment> {
 
 	
 	private static final long serialVersionUID = -5051962833279097787L;
@@ -338,6 +338,12 @@ public class InspectionFormEquipment extends MizeEntity {
 				+ ", equipmentReference=" + equipmentReference
 				+ ", equipmentSerial=" + equipmentSerial + ", equipmentType="
 				+ equipmentType + "]";
+	}
+
+	@Override
+	public int compareTo(InspectionFormEquipment arg0) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	

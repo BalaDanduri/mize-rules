@@ -1,27 +1,17 @@
 package com.mize.domain.user;
 
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
+import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.MizeDateTime;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.common.MizeEntity;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
-
-public class FriendInvitation extends MizeEntity implements Comparable<FriendInvitation>{
+public class FriendInvitation extends MizeSceEntity implements Comparable<FriendInvitation>{
 
 	private static final long serialVersionUID = 3657381192795060009L;
 	private Long sentFrom ;
 	private String sentTo;
 	private String channel;
 	private String successfulConversion;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private DateTime sendDate;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private DateTime successfulConversionDate ;	
+	private MizeDateTime sendDate;
+	private MizeDateTime successfulConversionDate ;	
 
 	@Override
 	public Long getId() {
@@ -48,30 +38,19 @@ public class FriendInvitation extends MizeEntity implements Comparable<FriendInv
 	public void setSuccessfulConversion(String successfulConversion) {
 		this.successfulConversion = successfulConversion;
 	}
-
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getSendDate() {
+	public MizeDateTime getSendDate() {
 		return sendDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	public void setSendDate(DateTime sendDate) {
+	public void setSendDate(MizeDateTime sendDate) {
 		this.sendDate = sendDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getSuccessfulConversionDate() {
+	public MizeDateTime getSuccessfulConversionDate() {
 		return successfulConversionDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	public void setSuccessfulConversionDate(DateTime successfulConversionDate) {
+	public void setSuccessfulConversionDate(MizeDateTime successfulConversionDate) {
 		this.successfulConversionDate = successfulConversionDate;
 	}
 

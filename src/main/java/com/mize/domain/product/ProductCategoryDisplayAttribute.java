@@ -1,9 +1,9 @@
 package com.mize.domain.product;
 
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
-public class ProductCategoryDisplayAttribute extends MizeEntity implements Comparable<ProductCategoryDisplayAttribute>{
+public class ProductCategoryDisplayAttribute extends MizeSceEntity implements Comparable<ProductCategoryDisplayAttribute>{
 
 	private static final long serialVersionUID = -2450196415219764436L;
 	private Long srcCategoryId;

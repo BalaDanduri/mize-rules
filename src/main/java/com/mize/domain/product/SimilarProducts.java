@@ -3,9 +3,9 @@ package com.mize.domain.product;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
-public class SimilarProducts extends MizeEntity {
+public class SimilarProducts extends MizeSceEntity implements Comparable<SimilarProducts> {
 
 	private static final long serialVersionUID = -1394688774116638338L;
 	private ProductSource productSource;
@@ -78,6 +78,13 @@ public class SimilarProducts extends MizeEntity {
 	@JsonIgnore
 	public void setIsConsumable(String isConsumable) {
 		this.isConsumable = isConsumable;
+	}
+
+
+	@Override
+	public int compareTo(SimilarProducts o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}	
 
 }

@@ -8,11 +8,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
-public class ProcessLog extends MizeEntity implements Comparable<ProcessLog> {
+public class ProcessLog extends MizeSceEntity implements Comparable<ProcessLog> {
 
 	private static final long serialVersionUID = -8664572130656627545L;
 	private Long uploadFileId;

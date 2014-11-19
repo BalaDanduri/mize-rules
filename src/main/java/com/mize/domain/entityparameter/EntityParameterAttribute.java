@@ -13,11 +13,11 @@ import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
 @Entity
 @Table(name = "entity_parameter_attribute", uniqueConstraints = { @UniqueConstraint(columnNames = {"id"}) })
-public class EntityParameterAttribute extends MizeEntity implements Comparable<EntityParameterAttribute>{
+public class EntityParameterAttribute extends MizeSceEntity implements Comparable<EntityParameterAttribute>{
 
 	private static final long serialVersionUID = -4461151996428842735L;
 	private EntityParameter entityParameter;

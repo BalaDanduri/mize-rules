@@ -1,8 +1,8 @@
 package com.mize.domain.form;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
-public class FormAttachment extends MizeEntity {
+public class FormAttachment extends MizeSceEntity implements Comparable<FormAttachment> {
 
 	private static final long serialVersionUID = 1062311193646728616L;
 	private String type;
@@ -83,6 +83,12 @@ public class FormAttachment extends MizeEntity {
 	@Override
 	public String toString() {
 		return "FormAttachment [type=" + type + ", name=" + name + ", url=" + url + "]";
+	}
+
+	@Override
+	public int compareTo(FormAttachment arg0) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

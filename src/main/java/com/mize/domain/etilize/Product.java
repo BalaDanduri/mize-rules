@@ -3,18 +3,12 @@ package com.mize.domain.etilize;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.product.ProductCategory;
 import com.mize.domain.product.ProductContent;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.util.MizeDateTime;
 
-public class Product extends MizeEntity{
+public class Product extends MizeSceEntity{
 
 	private static final long serialVersionUID = 6738887069779058581L;
 	private Long manufacturerId;
@@ -25,8 +19,7 @@ public class Product extends MizeEntity{
 	private Long categoryId;
 	private Integer isAccesory;
 	private Long brandId;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	protected DateTime modifiedDate;
+	protected MizeDateTime modifiedDate;
 	private List<ProductAccessories> accessories = new ArrayList<ProductAccessories>();
 	private ProductDescription prdDescription;
 	private List<ProductImages>  images = new ArrayList<ProductImages>();
@@ -150,14 +143,12 @@ public class Product extends MizeEntity{
 	public void setSimilarProducts(List<SimilarProduct> similarProducts) {
 		this.similarProducts = similarProducts;
 	}
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	public DateTime getModifiedDate() {
+	
+	public MizeDateTime getModifiedDate() {
 		return modifiedDate;
 	}
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	public void setModifiedDate(DateTime modifiedDate) {
+	
+	public void setModifiedDate(MizeDateTime modifiedDate) {
 		this.modifiedDate = modifiedDate;
 	}
 

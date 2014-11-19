@@ -2,9 +2,9 @@ package com.mize.domain.batch;
 
 import java.util.Date;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
-public class MizeJobExecution extends MizeEntity{
+public class MizeJobExecution extends MizeSceEntity{
 
 	private static final long serialVersionUID = 2316762090397722064L;
 	

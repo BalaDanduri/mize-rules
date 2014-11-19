@@ -1,8 +1,8 @@
 package com.mize.domain.product;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
-public class UserStats extends MizeEntity implements Comparable<UserStats> {
+public class UserStats extends MizeSceEntity implements Comparable<UserStats> {
 	private static final long serialVersionUID = -3151359495279040285L;
 
 	Long userId;

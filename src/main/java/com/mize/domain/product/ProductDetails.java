@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
-public class ProductDetails extends MizeEntity implements Comparable<ProductDetails>{
+public class ProductDetails extends MizeSceEntity implements Comparable<ProductDetails>{
 	
 	private static final long serialVersionUID = -6338652951554117142L;
 

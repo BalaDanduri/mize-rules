@@ -11,30 +11,21 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
-import com.mize.domain.common.MizeEntity;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.MizeDateTime;
 
 @Entity(name = "se.ServiceEntityAudit")
 @Table(name = "service_entity_audit")
-public class ServiceEntityAudit extends MizeEntity implements Comparable<ServiceEntityAudit> {
+public class ServiceEntityAudit extends MizeSceEntity implements Comparable<ServiceEntityAudit> {
 
 	private static final long serialVersionUID = 6821133638967617947L;
 	@Transient
 	private Long entityId;
 	private ServiceEntity serviceEntity;
 	private String statusCode;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private DateTime statusDate;
+//	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	private MizeDateTime statusDate;
 	private Long statusBy;
 	@Transient
 	private String userName;
@@ -44,7 +35,7 @@ public class ServiceEntityAudit extends MizeEntity implements Comparable<Service
 	}
 	
 	public ServiceEntityAudit(Long entityId, ServiceEntity serviceEntity,
-			String statusCode, DateTime statusDate, Long statusBy,
+			String statusCode, MizeDateTime statusDate, Long statusBy,
 			String userName) {
 		super();
 		this.entityId = entityId;
@@ -78,11 +69,11 @@ public class ServiceEntityAudit extends MizeEntity implements Comparable<Service
 		return statusCode;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)
+	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)*/
 	@Column(name = "status_date")
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
-	public DateTime getStatusDate() {
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getStatusDate() {
 		return statusDate;
 	}
 
@@ -91,19 +82,19 @@ public class ServiceEntityAudit extends MizeEntity implements Comparable<Service
 		return statusBy;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class)
 	@JsonInclude(Include.NON_DEFAULT)
-	@JsonIgnore(value=false)
-	public DateTime getUpdatedDate() {
+	@JsonIgnore(value=false)*/
+	public MizeDateTime getUpdatedDate() {
 		return updatedDate;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class)
 	@JsonInclude(Include.NON_DEFAULT)
-	@JsonIgnore(value=false)
-	public DateTime getCreatedDate() {
+	@JsonIgnore(value=false)*/
+	public MizeDateTime getCreatedDate() {
 		return createdDate;
 	}
 	
@@ -138,9 +129,9 @@ public class ServiceEntityAudit extends MizeEntity implements Comparable<Service
 		this.statusCode = statusCode;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	public void setStatusDate(DateTime statusDate) {
+	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	*/
+	public void setStatusDate(MizeDateTime statusDate) {
 		this.statusDate = statusDate;
 	}
 	
@@ -148,17 +139,17 @@ public class ServiceEntityAudit extends MizeEntity implements Comparable<Service
 		this.statusBy = statusBy;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore(value=false)
-	public void setUpdatedDate(DateTime updatedDate) {
+	@JsonIgnore(value=false)*/
+	public void setUpdatedDate(MizeDateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore(value=false)
-	public void setCreatedDate(DateTime createdDate) {
+	@JsonIgnore(value=false)*/
+	public void setCreatedDate(MizeDateTime createdDate) {
 		this.createdDate = createdDate;
 	}
 

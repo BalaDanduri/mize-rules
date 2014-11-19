@@ -2,7 +2,7 @@ package com.mize.domain.common;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class Authorization extends MizeEntity{
+public class Authorization extends MizeSceEntity{
  
 	private static final long serialVersionUID = 4053341559871679892L;
 	

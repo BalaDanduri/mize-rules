@@ -2,10 +2,10 @@ package com.mize.domain.product;
 
 import java.util.List;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.Formatter;
 
-public class ProdAverageCalculation extends MizeEntity implements Comparable<ProdAverageCalculation> {
+public class ProdAverageCalculation extends MizeSceEntity implements Comparable<ProdAverageCalculation> {
 
 	private static final long serialVersionUID = 5514877109183117116L;
 	private Long productId;

@@ -27,14 +27,11 @@ import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.brand.Brand;
@@ -42,19 +39,18 @@ import com.mize.domain.common.Country;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityAddressGeo;
 import com.mize.domain.common.Locale;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.common.State;
 import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Inheritance
 @DiscriminatorColumn(name = "discriminator")
 @DiscriminatorValue("BusinessEntity")
 @Table(name = "business_entity", uniqueConstraints = {@UniqueConstraint (columnNames={"tenant_id", "code"})})
-public class BusinessEntity extends MizeEntity implements Comparable<BusinessEntity>, Cloneable{
+public class BusinessEntity extends MizeSceEntity implements Comparable<BusinessEntity>, Cloneable{
 
 	private static final long serialVersionUID = 5842902035928465555L;
 	private String code;
@@ -70,8 +66,8 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	@Transient
 	private User user;
     private String statusCode;
-	private DateTime startDate;
-	private DateTime endDate;	
+	private MizeDateTime startDate;
+	private MizeDateTime endDate;	
 	private List<BusinessEntityAddress> addresses = new ArrayList<BusinessEntityAddress>();
 	private List<BusinessEntityIntl> intl = new ArrayList<BusinessEntityIntl>();
 	private List<BusinessEntityBrand> beBrand = new ArrayList<BusinessEntityBrand>();
@@ -382,33 +378,25 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 		return statusCode;
 	}
 	
+	
 	@Column(name = "start_date", nullable = true)
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getStartDate() {
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getStartDate() {
 		return startDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
-	public void setStartDate(DateTime startDate) {
+	public void setStartDate(MizeDateTime startDate) {
 		this.startDate = startDate;
 	}
 	
+	
 	@Column(name = "end_date", nullable = true)
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getEndDate() {
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getEndDate() {
 		return endDate;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
-	public void setEndDate(DateTime endDate) {
+	public void setEndDate(MizeDateTime endDate) {
 		this.endDate = endDate;
 	}
 	
@@ -437,26 +425,18 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	}
 
 	@Override	
-	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
-	@Type(type="com.mize.domain.util.DateTimeJPA")
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@Column(name = "created_date",updatable=false)
 	@JsonIgnore(value = false)
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-    @JsonInclude(Include.NON_DEFAULT)
-
-	public DateTime getCreatedDate() {
+	public MizeDateTime getCreatedDate() {
 		return createdDate;
 	}
 
 	@Override	
-	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
-	@Type(type="com.mize.domain.util.DateTimeJPA")
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@Column(name = "updated_date")
 	@JsonIgnore(value = false)
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-    @JsonInclude(Include.NON_DEFAULT)
-
-	public DateTime getUpdatedDate() {
+	public MizeDateTime getUpdatedDate() {
 		return updatedDate;
 	}
 
@@ -476,18 +456,14 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 
 
 	@Override
-	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(false)
-	public void setCreatedDate(DateTime createdDate) {
+	public void setCreatedDate(MizeDateTime createdDate) {
 		super.createdDate = createdDate;
 	}
 
 	@Override
-	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(false)
-	public void setUpdatedDate(DateTime updatedDate) {
+	public void setUpdatedDate(MizeDateTime updatedDate) {
 		super.updatedDate = updatedDate;
 	}
 
@@ -507,9 +483,9 @@ public class BusinessEntity extends MizeEntity implements Comparable<BusinessEnt
 	@PreUpdate
 	public void auditFields(){
 		if(createdDate==null && id==null){
-			setCreatedDate(DateTime.now());
+			setCreatedDate(MizeDateTime.now());
 		}
-		setUpdatedDate(DateTime.now());		
+		setUpdatedDate(MizeDateTime.now());		
 	}
 
 

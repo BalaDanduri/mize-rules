@@ -1,22 +1,16 @@
 package com.mize.domain.etilize;
 
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.common.MizeEntity;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.MizeDateTime;
 
 
 
-public class ProductSku extends MizeEntity{
+public class ProductSku extends MizeSceEntity{
 	private static final long serialVersionUID = -6722341511569003526L;	
 	
 	private Long prodId;
-	private DateTime discontinueDate;
-	private DateTime addedDate;
+	private MizeDateTime discontinueDate;
+	private MizeDateTime addedDate;
 	private String name;
 	private String sku;
 	private Long localeId;
@@ -36,26 +30,22 @@ public class ProductSku extends MizeEntity{
 	public void setProdId(Long prodId) {
 		this.prodId = prodId;
 	}
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	public DateTime getAddedDate() {
+	
+	public MizeDateTime getAddedDate() {
 		return addedDate;
 	}
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	public void setAddedDate(DateTime addedDate) {
+	
+	public void setAddedDate(MizeDateTime addedDate) {
 		this.addedDate = addedDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	public DateTime getDiscontinueDate() {
+	
+	public MizeDateTime getDiscontinueDate() {
 		return discontinueDate;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	public void setDiscontinueDate(DateTime discontinueDate) {
+	
+	public void setDiscontinueDate(MizeDateTime discontinueDate) {
 		this.discontinueDate = discontinueDate;
 	}
 	public String getName() {

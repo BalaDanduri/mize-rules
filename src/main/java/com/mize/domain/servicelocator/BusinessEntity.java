@@ -20,11 +20,11 @@ import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
 @Entity(name="com.mize.domain.servicelocator.BusinessEntity")
 @Table(name="business_entity")
-public class BusinessEntity  extends MizeEntity implements Comparable<BusinessEntity>{
+public class BusinessEntity  extends MizeSceEntity implements Comparable<BusinessEntity>{
 	
 	private static final long serialVersionUID = 3712437162456355278L;	
 	private String code;	

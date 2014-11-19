@@ -7,12 +7,12 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
 
 @javax.persistence.Entity
 @Table(name = "prod_to_source")
-public class ProductSource  extends MizeEntity implements Comparable<ProductSource>{
+public class ProductSource  extends MizeSceEntity implements Comparable<ProductSource>{
 	
 	private static final long serialVersionUID = -4500817575280246709L;
 	public static final String SOURCE_MIZE = "1";

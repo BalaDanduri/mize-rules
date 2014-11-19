@@ -16,12 +16,12 @@ import org.hibernate.annotations.Parameter;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.DecimalValueDeserializer;
 
 @Entity(name="com.mize.domain.servicelocator.BusinessEntityGeo")
 @Table(name="business_entity_geo")
-public class BusinessEntityGeo extends MizeEntity implements Comparable<BusinessEntityGeo> {
+public class BusinessEntityGeo extends MizeSceEntity implements Comparable<BusinessEntityGeo> {
 
 	
 	private static final long serialVersionUID = -2024187778230039496L;

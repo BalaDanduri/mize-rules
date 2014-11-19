@@ -13,12 +13,12 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.user.UserAddress;
 
 @Entity
 @Table(name = "prod_repeat_order_address")
-public class ProductRepeatOrderAddress extends MizeEntity implements Comparable<ProductRepeatOrderAddress>{
+public class ProductRepeatOrderAddress extends MizeSceEntity implements Comparable<ProductRepeatOrderAddress>{
 	
 	private static final long serialVersionUID = 5924025513879604072L;
 	

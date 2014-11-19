@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.common.Locale;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JPASerializer;
 
 @Entity
@@ -28,7 +28,7 @@ import com.mize.domain.util.JPASerializer;
 @DiscriminatorColumn(name = "discriminator")
 @DiscriminatorValue("FormDefinitionIntl")
 @Table(name = "form_defn_intl")
-public class FormDefinitionIntl extends MizeEntity {
+public class FormDefinitionIntl extends MizeSceEntity implements Comparable<FormDefinitionIntl> {
 
 	private static final long serialVersionUID = 1899101185232987319L;
 	private FormDefinition formDefinition;
@@ -142,6 +142,12 @@ public class FormDefinitionIntl extends MizeEntity {
 	@Override
 	public String toString() {
 		return "FormDefinitionIntl [name=" + name + ", description=" + description + ", locale=" + locale + "]";
+	}
+
+	@Override
+	public int compareTo(FormDefinitionIntl o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

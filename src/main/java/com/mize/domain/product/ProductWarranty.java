@@ -11,29 +11,25 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.JodaDateDeserializer;
-import com.mize.domain.util.JsonDateSerializer;
+import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name = "prod_warranty")
-public class ProductWarranty extends MizeEntity {
+public class ProductWarranty extends MizeSceEntity implements Comparable<ProductWarranty> {
 
 
 	private static final long serialVersionUID = -7775495768578959130L;
 	
 	 private ProductSerial productSerial;
-	 private DateTime startDate;
-	 private DateTime endDate;
+	 private MizeDateTime startDate;
+	 private MizeDateTime endDate;
 	 private String coverageType;
 	 private String coverageName;
 	 
@@ -54,22 +50,17 @@ public class ProductWarranty extends MizeEntity {
 		return productSerial;
 	}
 
+	
 	@Column(name = "start_date", nullable = true)
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateSerializer.class)
-	@JsonInclude(Include.NON_NULL)
-	public DateTime getStartDate() {
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getStartDate() {
 		return startDate;
 	}
 
 
 	@Column(name = "end_date", nullable = true)
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateSerializer.class)
-	@JsonInclude(Include.NON_NULL)
-	public DateTime getEndDate() {
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getEndDate() {
 		return endDate;
 	}
 
@@ -88,15 +79,11 @@ public class ProductWarranty extends MizeEntity {
 	}
 
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateDeserializer.class)
-	public void setStartDate(DateTime startDate) {
+	public void setStartDate(MizeDateTime startDate) {
 		this.startDate = startDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateDeserializer.class)
-	public void setEndDate(DateTime endDate) {
+	public void setEndDate(MizeDateTime endDate) {
 		this.endDate = endDate;
 	}
 
@@ -176,6 +163,12 @@ public class ProductWarranty extends MizeEntity {
 				+ ", coverageType=" + coverageType + ", endDate=" + endDate
 				+ ", productSerial=" + productSerial + ", startDate="
 				+ startDate + "]";
+	}
+
+	@Override
+	public int compareTo(ProductWarranty o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	

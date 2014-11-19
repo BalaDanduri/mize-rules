@@ -15,14 +15,14 @@ import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.brand.Brand;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
 @Entity
 @Inheritance
 @DiscriminatorColumn(name = "discriminator")
 @DiscriminatorValue("BusinessEntityBrand")
 @Table(name="business_entity_brand",uniqueConstraints = { @UniqueConstraint(columnNames = {"be_id","brand_id"} )} )
-public class BusinessEntityBrand extends MizeEntity implements Comparable<BusinessEntityBrand>{
+public class BusinessEntityBrand extends MizeSceEntity implements Comparable<BusinessEntityBrand>{
 	private static final long serialVersionUID = -269538922800687629L;
 	private String isActive;
 	private BusinessEntity businessEntity;

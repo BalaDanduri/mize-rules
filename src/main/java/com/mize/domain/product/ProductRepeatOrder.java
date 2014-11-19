@@ -16,21 +16,14 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.common.MizeEntity;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name = "prod_repeat_order")
-public class ProductRepeatOrder extends MizeEntity implements Comparable<ProductRepeatOrder>{
+public class ProductRepeatOrder extends MizeSceEntity implements Comparable<ProductRepeatOrder>{
 	
 	private static final long serialVersionUID = 3558480216294413887L;
 	private Long userId;
@@ -38,14 +31,10 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 	private Product product;
 	private ProductRepeatOrderType productRepeatOrderType;
 	private ProductRepeatOrderShipOptions productRepeatOrderShipOptions;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private DateTime startDate;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private DateTime endDate;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private DateTime lastOrderDate;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private DateTime nextOrderDate;
+	private MizeDateTime startDate;
+	private MizeDateTime endDate;
+	private MizeDateTime lastOrderDate;
+	private MizeDateTime nextOrderDate;
 	private String active;
 	private Double quantity;
 	private Double unitAmount;
@@ -112,65 +101,44 @@ public class ProductRepeatOrder extends MizeEntity implements Comparable<Product
 		this.productRepeatOrderShipOptions = productRepeatOrderShipOptions;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Column(name = "start_date",  nullable = true)
-	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getStartDate() {
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getStartDate() {
 		return startDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
-	public void setStartDate(DateTime startDate) {
+	public void setStartDate(MizeDateTime startDate) {
 		this.startDate = startDate;
 	}
-	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Column(name = "end_date",  nullable = true)
-	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getEndDate() {
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getEndDate() {
 		return endDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
-	public void setEndDate(DateTime endDate) {
+	public void setEndDate(MizeDateTime endDate) {
 		this.endDate = endDate;
 	}
 
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Column(name = "last_order_date",  nullable = true)
-	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getLastOrderDate() {
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getLastOrderDate() {
 		return lastOrderDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
-	public void setLastOrderDate(DateTime lastOrderDate) {
+	public void setLastOrderDate(MizeDateTime lastOrderDate) {
 		this.lastOrderDate = lastOrderDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Column(name = "next_order_date",  nullable = true)
-	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getNextOrderDate() {
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getNextOrderDate() {
 		return nextOrderDate;
 	}
 	
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
-	public void setNextOrderDate(DateTime nextOrderDate) {
+	public void setNextOrderDate(MizeDateTime nextOrderDate) {
 		this.nextOrderDate = nextOrderDate;
 	}
 

@@ -1,25 +1,16 @@
 package com.mize.domain.user;
 
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.Formatter;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.util.MizeDateTime;
 
-public class SweepstakeEnrollment extends MizeEntity implements Comparable<SweepstakeEnrollment>{
+public class SweepstakeEnrollment extends MizeSceEntity implements Comparable<SweepstakeEnrollment>{
 
 	private static final long serialVersionUID = 3657381192795060009L;
 	private Long sweepstakeId;
 	private Long userId;
 	private String email;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private DateTime enrollmentDate;	
+	private MizeDateTime enrollmentDate;	
 	private String emailValidated;
 	private Sweepstake sweepstake;
 	private Integer invitationCount;
@@ -60,16 +51,11 @@ public class SweepstakeEnrollment extends MizeEntity implements Comparable<Sweep
 		this.email = email;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getEnrollmentDate() {
+	public MizeDateTime getEnrollmentDate() {
 		return enrollmentDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	public void setEnrollmentDate(DateTime enrollmentDate) {
+	public void setEnrollmentDate(MizeDateTime enrollmentDate) {
 		this.enrollmentDate = enrollmentDate;
 	}
 	

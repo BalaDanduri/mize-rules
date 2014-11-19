@@ -3,9 +3,9 @@ package com.mize.domain.product;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
-public class ProductSearchCriteria extends MizeEntity implements Comparable<ProductSearchCriteria>{
+public class ProductSearchCriteria extends MizeSceEntity implements Comparable<ProductSearchCriteria>{
 	private static final long serialVersionUID = 155385665556860537L;
 	private String category;
 	private String searchKey;

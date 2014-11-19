@@ -14,26 +14,19 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.brand.Brand;
 import com.mize.domain.common.Country;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.common.State;
 import com.mize.domain.product.Product;
 import com.mize.domain.user.UserAddress;
-import com.mize.domain.util.JodaDateDeserializer;
-import com.mize.domain.util.JsonDateSerializer;
+import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name="service_schedule")
-public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceSchedule> {	
+public class ServiceSchedule  extends MizeSceEntity  implements Comparable<ServiceSchedule> {	
 	
 	private static final long serialVersionUID = -5351211947355990640L;	
 	
@@ -48,7 +41,7 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 	private String problem;
 	Long productCategoryId;
 	private Long productSubCategoryId;		
-	private DateTime scheduledDate;
+	private MizeDateTime scheduledDate;
 	private String startTime;
 	private String endTime;
 	private String address1;
@@ -103,7 +96,7 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 	public ServiceSchedule(User user, Brand brand, String serviceFormat,
 			Long beId, String serviceType, String problem,
 			Long productCategoryId, Long productSubCategoryId,
-			DateTime scheduledDate, String startTime, String endTime,
+			MizeDateTime scheduledDate, String startTime, String endTime,
 			String address1, String address2, String address3, String city,
 			State state, Country country, String email, String zipCode,
 			String mobilePhone, String homePhone, String workPhone,
@@ -240,18 +233,19 @@ public class ServiceSchedule  extends MizeEntity  implements Comparable<ServiceS
 		this.lastName = lastName;
 	}
 
-	@Column(name="scheduled_date",nullable=true)
-	@DateTimeFormat(pattern="MM-dd-yyyy")
-	@Type(type="com.mize.domain.util.DateTimeJPA")
+	
+	/*@DateTimeFormat(pattern="MM-dd-yyyy")
 	@JsonSerialize(using = JsonDateSerializer.class)
-	@JsonInclude(Include.NON_NULL)
-	public DateTime getScheduledDate() {
+	@JsonInclude(Include.NON_NULL)*/
+	@Column(name="scheduled_date",nullable=true)
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getScheduledDate() {
 		return scheduledDate;
 	}
 	
-	@DateTimeFormat(pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateDeserializer.class)
-	public void setScheduledDate(DateTime scheduledDate) {
+	/*@DateTimeFormat(pattern="MM-dd-yyyy")
+	@JsonDeserialize(using=JodaDateDeserializer.class)*/
+	public void setScheduledDate(MizeDateTime scheduledDate) {
 		this.scheduledDate = scheduledDate;
 	}
 

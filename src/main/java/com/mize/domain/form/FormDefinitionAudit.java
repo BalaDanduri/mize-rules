@@ -11,16 +11,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.common.MizeAuditEntity;
-import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name = "form_defn_audit")
@@ -38,7 +35,7 @@ public class FormDefinitionAudit extends MizeAuditEntity {
 	}
 
 	public FormDefinitionAudit(FormDefinition formDefinition,
-			String statusCode, DateTime statusDate, Long statusBy, String statusByUser) {
+			String statusCode, MizeDateTime statusDate, Long statusBy, String statusByUser) {
 		this.statusCode = statusCode;
 		super.statusDate = statusDate;
 		super.statusBy = statusBy;
@@ -79,18 +76,17 @@ public class FormDefinitionAudit extends MizeAuditEntity {
 		this.statusCode = statusCode;
 	}
 	
-	@DateTimeFormat(pattern = "MM-dd-yyyy HH:mm:ss")
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
+	
+	@Override
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
 	@Column(name = "status_date")
 	@JsonIgnore(value = false)
-	@JsonSerialize(using = JsonDateTimeSerializer.class)
 	@JsonInclude(Include.NON_DEFAULT)
-	@Override
-	public DateTime getStatusDate() {
+	public MizeDateTime getStatusDate() {
 		return statusDate;
 	}
 
-	public void setStatusDate(DateTime statusDate) {
+	public void setStatusDate(MizeDateTime statusDate) {
 		this.statusDate = statusDate;
 	}
 

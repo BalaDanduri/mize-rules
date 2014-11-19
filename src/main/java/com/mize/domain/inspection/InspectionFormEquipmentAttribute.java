@@ -12,11 +12,11 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JPASerializer;
 @Entity
 @Table(name="insp_form_eqpmnt_attribute")
-public class InspectionFormEquipmentAttribute extends MizeEntity {
+public class InspectionFormEquipmentAttribute extends MizeSceEntity implements Comparable<InspectionFormEquipmentAttribute> {
 
 
 	private static final long serialVersionUID = 4209438685260898918L;
@@ -150,6 +150,12 @@ public class InspectionFormEquipmentAttribute extends MizeEntity {
 				+ ", attributeUom=" + attributeUom + ", attributeValue="
 				+ attributeValue + ", attributeDataType=" + attributeDataType
 				+ "]";
+	}
+
+	@Override
+	public int compareTo(InspectionFormEquipmentAttribute o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	

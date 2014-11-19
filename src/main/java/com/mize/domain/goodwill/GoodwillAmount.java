@@ -9,14 +9,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 /**
  * @author Raghavendra Serikar
  * @version 1.0
  */
 @Entity
 @Table(name="goodwill_amount")
-public class GoodwillAmount extends MizeEntity implements Comparable<GoodwillAmount>{
+public class GoodwillAmount extends MizeSceEntity implements Comparable<GoodwillAmount>{
 	
 	private static final long serialVersionUID = 6653001788453076837L;
 	private BigDecimal partAmount;

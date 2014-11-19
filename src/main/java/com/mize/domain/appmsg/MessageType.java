@@ -1,9 +1,9 @@
 package com.mize.domain.appmsg;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
 
-public class MessageType extends MizeEntity implements Comparable<MessageType>{
+public class MessageType extends MizeSceEntity implements Comparable<MessageType>{
 	
 	private static final long serialVersionUID = 1023272589160106886L;
 	

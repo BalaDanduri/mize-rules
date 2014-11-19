@@ -2,7 +2,7 @@ package com.mize.domain.common;
 
 
 
-public class EntityReference extends MizeEntity implements Comparable<EntityReference>{
+public class EntityReference extends MizeSceEntity implements Comparable<EntityReference>{
 
 	private static final long serialVersionUID = 11149014756400338L;
 	private String reference;

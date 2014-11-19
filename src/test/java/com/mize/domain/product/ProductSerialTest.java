@@ -11,7 +11,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
@@ -21,6 +20,7 @@ import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;
+import com.mize.domain.util.MizeDateTime;
 
 
 @ContextConfiguration(locations={"/test-context.xml"})
@@ -83,12 +83,12 @@ public class ProductSerialTest extends JPATest {
 		productSerial.setProduct(product);
 		productSerial.setSerialNumber("testAdmin"+System.currentTimeMillis());
 		productSerial.setShippedBusinessEntity(businessEntity);
-		productSerial.setBuildDate(DateTime.now());
+		productSerial.setBuildDate(MizeDateTime.now());
 		productSerial.setInvoiceBusinessEntity(businessEntity);
 		productSerial.setCreatedBy(776l);
-		productSerial.setCreatedDate(DateTime.now());
+		productSerial.setCreatedDate(MizeDateTime.now());
 		productSerial.setUpdatedBy(776L);
-		productSerial.setUpdatedDate(DateTime.now());
+		productSerial.setUpdatedDate(MizeDateTime.now());
 		productSerial.setIsValid("Y");
 		
 		return productSerial;
@@ -137,14 +137,14 @@ public class ProductSerialTest extends JPATest {
 			BusinessEntity businessEntity = new BusinessEntity();
 			businessEntity.setId(rs.getLong("ship_be_id"));
 			prodSerial.setShippedBusinessEntity(businessEntity);
-			prodSerial.setBuildDate(Formatter.dateTime(rs.getTimestamp("build_date")));
+			prodSerial.setBuildDate(Formatter.toMizeDateTime(rs.getTimestamp("build_date")));
 			BusinessEntity invoiceBE = new BusinessEntity();
 			invoiceBE.setId(rs.getLong("invoice_be_id"));
 			prodSerial.setInvoiceBusinessEntity(invoiceBE);
 			prodSerial.setCreatedBy(rs.getLong("created_by"));
 			prodSerial.setUpdatedBy(rs.getLong("updated_by"));
-			prodSerial.setCreatedDate(Formatter.dateTime(rs.getTimestamp("created_date")));
-			prodSerial.setUpdatedDate(Formatter.dateTime(rs.getTimestamp("updated_date")));
+			prodSerial.setCreatedDate(Formatter.toMizeDateTime(rs.getTimestamp("created_date")));
+			prodSerial.setUpdatedDate(Formatter.toMizeDateTime(rs.getTimestamp("updated_date")));
 			prodSerial.setIsValid(rs.getString("is_valid"));
 			return prodSerial;
 		}

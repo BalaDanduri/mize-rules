@@ -16,7 +16,7 @@ import javax.persistence.Transient;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.labor.LaborHour;
 import com.mize.domain.util.JPASerializer;
 
@@ -27,7 +27,7 @@ import com.mize.domain.util.JPASerializer;
 
 @Entity
 @Table(name = "srvc_blltn_proc_lbr")
-public class ServiceBulletinProcedureLabor extends MizeEntity {
+public class ServiceBulletinProcedureLabor extends MizeSceEntity implements Comparable<ServiceBulletinProcedureLabor>{
 
 	
 	private static final long serialVersionUID = 7457276515383997804L;
@@ -240,5 +240,11 @@ public class ServiceBulletinProcedureLabor extends MizeEntity {
 				return false;
 		}
 		return true;
+	}
+
+	@Override
+	public int compareTo(ServiceBulletinProcedureLabor o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

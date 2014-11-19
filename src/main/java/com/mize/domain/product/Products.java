@@ -3,9 +3,9 @@ package com.mize.domain.product;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
-public class Products extends MizeEntity implements Comparable<Products>{
+public class Products extends MizeSceEntity implements Comparable<Products>{
 
 	private static final long serialVersionUID = 5620440549204450869L;
 	private long searchResults;

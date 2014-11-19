@@ -1,6 +1,7 @@
 package com.mize.domain.product;
 
 import java.net.URL;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,11 +15,11 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
 @Entity
 @Table(name = "prod_regn_attach")
-public class ProductRegnAttachment extends MizeEntity{
+public class ProductRegnAttachment extends MizeSceEntity implements Comparable<ProductRegistrationAttachment>{
 	private static final long serialVersionUID = -6722341511569003526L;	
 	
 	private String name;
@@ -112,6 +113,11 @@ public class ProductRegnAttachment extends MizeEntity{
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+	@Override
+	public int compareTo(ProductRegistrationAttachment o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 	

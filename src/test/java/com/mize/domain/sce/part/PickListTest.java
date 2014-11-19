@@ -12,7 +12,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
@@ -26,6 +25,7 @@ import com.mize.domain.part.PickListComment;
 import com.mize.domain.part.PickListItem;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;
+import com.mize.domain.util.MizeDateTime;
 
 @ContextConfiguration(locations={"/test-context.xml"})
 public class PickListTest extends JPATest {
@@ -94,8 +94,8 @@ public class PickListTest extends JPATest {
 		pickList.setIsActive("Y");
 		pickList.setPickListLocation(businessEntity);
 		pickList.setTenant(tenant);
-		pickList.setCreatedDate(DateTime.now());
-		pickList.setUpdatedDate(DateTime.now());
+		pickList.setCreatedDate(MizeDateTime.now());
+		pickList.setUpdatedDate(MizeDateTime.now());
 		pickList.setCreatedBy(776l);
 		pickList.setUpdatedBy(776L);
 		return pickList;
@@ -134,8 +134,8 @@ public class PickListTest extends JPATest {
 			pickList.setType(rs.getString("picklist_type"));
 			pickList.setCreatedBy(rs.getLong("created_by"));
 			pickList.setUpdatedBy(rs.getLong("updated_by"));
-			pickList.setCreatedDate(Formatter.dateTime(rs.getTimestamp("created_date")));
-			pickList.setUpdatedDate(Formatter.dateTime(rs.getTimestamp("updated_date")));
+			pickList.setCreatedDate(Formatter.toMizeDateTime(rs.getTimestamp("created_date")));
+			pickList.setUpdatedDate(Formatter.toMizeDateTime(rs.getTimestamp("updated_date")));
 			return pickList;
 		}
 	}

@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
 /**
  * @author SrinivasThodupunuri
@@ -17,7 +17,7 @@ import com.mize.domain.common.MizeEntity;
  */
 @Entity
 @Table(name = "srvc_blltn_amt")
-public class ServiceBulletinAmount extends MizeEntity {
+public class ServiceBulletinAmount extends MizeSceEntity implements Comparable<ServiceBulletinAmount> {
 
 	
 	private static final long serialVersionUID = 2518021731761580833L;
@@ -104,6 +104,12 @@ public class ServiceBulletinAmount extends MizeEntity {
 				return false;
 		}
 		return true;
+	}
+
+	@Override
+	public int compareTo(ServiceBulletinAmount o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 

@@ -13,11 +13,11 @@ import org.hibernate.annotations.GenericGenerator;
 
 import com.mize.domain.auth.User;
 import com.mize.domain.brand.Brand;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
 @Entity
 @Table(name = "prod_list")
-public class ProdList extends MizeEntity implements Comparable<ProdList>{
+public class ProdList extends MizeSceEntity implements Comparable<ProdList>{
 
 	private static final long serialVersionUID = -2714713561037519108L;
 	private String listName;

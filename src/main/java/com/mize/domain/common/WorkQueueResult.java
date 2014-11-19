@@ -5,20 +5,12 @@ import java.util.List;
 
 import javax.persistence.Transient;
 
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.businessentity.BusinessEntityIntl;
 import com.mize.domain.product.ProductSerial;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.util.MizeDateTime;
 
-public class WorkQueueResult extends MizeEntity {
+public class WorkQueueResult extends MizeSceEntity {
 
 	private static final long serialVersionUID = 3360189284913911659L;
 	
@@ -32,10 +24,8 @@ public class WorkQueueResult extends MizeEntity {
 	private String orderType;
 	private String ref;
 	private String serviceProductName;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private DateTime serviceDate;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private DateTime serviceUpdatedDate;
+	private MizeDateTime serviceDate;
+	private MizeDateTime serviceUpdatedDate;
 	public BusinessEntity businessEntity;
 	public ProductSerial productSerial;
 	private String requesterCode;
@@ -46,7 +36,7 @@ public class WorkQueueResult extends MizeEntity {
     }
 
 	public WorkQueueResult(Long id,Long entityId, String entityType,String status,String serviceType,String serviceCode,
-			DateTime serviceDate,BusinessEntity businessEntity,ProductSerial productSerial) {
+			MizeDateTime serviceDate,BusinessEntity businessEntity,ProductSerial productSerial) {
 		super();
 		this.id = id;
 		this.entityId = entityId;
@@ -60,7 +50,7 @@ public class WorkQueueResult extends MizeEntity {
 	}
 	
 	public WorkQueueResult(Long id,Long entityId, String entityType,String status,String serviceType,String serviceCode,String providerName,
-			DateTime serviceDate,BusinessEntity businessEntity,ProductSerial productSerial) {
+			MizeDateTime serviceDate,BusinessEntity businessEntity,ProductSerial productSerial) {
 		super();
 		this.id = id;
 		this.entityId = entityId;
@@ -76,7 +66,7 @@ public class WorkQueueResult extends MizeEntity {
 	
 
 	public WorkQueueResult(Long id,Long entityId, String entityType,String entityCode,String status,String orderType,String requestType,
-			DateTime serviceDate,DateTime updatedDate,String beCode,String beName) {
+			MizeDateTime serviceDate,MizeDateTime updatedDate,String beCode,String beName) {
 		super();
 		this.id = id;
 		this.entityId = entityId;
@@ -119,10 +109,7 @@ public class WorkQueueResult extends MizeEntity {
 		return serviceProductName;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getServiceDate() {
+	public MizeDateTime getServiceDate() {
 		return serviceDate;
 	}
 	
@@ -175,22 +162,15 @@ public class WorkQueueResult extends MizeEntity {
 		this.serviceProductName = serviceProductName;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	public void setServiceDate(DateTime serviceDate) {
+	public void setServiceDate(MizeDateTime serviceDate) {
 		this.serviceDate = serviceDate;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getServiceUpdatedDate() {
+	public MizeDateTime getServiceUpdatedDate() {
 		return serviceUpdatedDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	public void setServiceUpdatedDate(DateTime serviceUpdatedDate) {
+	public void setServiceUpdatedDate(MizeDateTime serviceUpdatedDate) {
 		this.serviceUpdatedDate = serviceUpdatedDate;
 	}
 

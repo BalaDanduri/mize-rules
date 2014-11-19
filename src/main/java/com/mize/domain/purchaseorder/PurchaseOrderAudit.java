@@ -14,12 +14,12 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name = "purchase_order_audit")
-public class PurchaseOrderAudit extends MizeEntity implements Comparable<PurchaseOrderAudit>{	
+public class PurchaseOrderAudit extends MizeSceEntity implements Comparable<PurchaseOrderAudit>{	
 
 	private static final long serialVersionUID = 268638805962518728L;
 	private String statusCode;

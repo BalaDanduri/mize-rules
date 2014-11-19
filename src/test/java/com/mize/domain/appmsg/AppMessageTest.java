@@ -10,7 +10,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
@@ -20,6 +19,7 @@ import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.Locale;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;
+import com.mize.domain.util.MizeDateTime;
 @ContextConfiguration(locations={"/test-context.xml"})
 public class AppMessageTest extends JPATest {
 
@@ -59,8 +59,8 @@ public class AppMessageTest extends JPATest {
 		appMessage.setSeverity(5);
 		appMessage.setCreatedBy(796L);
 		appMessage.setUpdatedBy(796l);
-		appMessage.setCreatedDate(DateTime.now());
-		appMessage.setUpdatedDate(DateTime.now());
+		appMessage.setCreatedDate(MizeDateTime.now());
+		appMessage.setUpdatedDate(MizeDateTime.now());
 		appMessage.setMsgType("validation");
 		appMessage.setTenant(tenant);
 		appMessage.setIsActive("Y");
@@ -75,8 +75,8 @@ public class AppMessageTest extends JPATest {
 		appMessageIntl.setAppMessage(appMessage);
 		appMessageIntl.setCreatedBy(796L);
 		appMessageIntl.setUpdatedBy(796L);
-		appMessageIntl.setCreatedDate(DateTime.now());
-		appMessageIntl.setUpdatedDate(DateTime.now());
+		appMessageIntl.setCreatedDate(MizeDateTime.now());
+		appMessageIntl.setUpdatedDate(MizeDateTime.now());
 		appMessageIntl.setShortDesc("Valid Location # is required");
 		appMessageIntl.setLongDesc("Valid Location # is required");
 		intls.add(appMessageIntl);
@@ -94,8 +94,8 @@ public class AppMessageTest extends JPATest {
 			appMessage.setSeverity(rs.getInt("message_severity"));
 			appMessage.setCreatedBy(rs.getLong("created_by"));
 			appMessage.setUpdatedBy(rs.getLong("updated_by"));
-			appMessage.setCreatedDate(Formatter.dateTime(rs.getTimestamp("created_date")));
-			appMessage.setUpdatedDate(Formatter.dateTime(rs.getTimestamp("updated_date")));
+			appMessage.setCreatedDate(Formatter.toMizeDateTime(rs.getTimestamp("created_date")));
+			appMessage.setUpdatedDate(Formatter.toMizeDateTime(rs.getTimestamp("updated_date")));
 			appMessage.setMsgType(rs.getString("message_type"));
 			BusinessEntity tenant = new BusinessEntity();
 			tenant.setId(rs.getLong("tenant_id"));
@@ -120,8 +120,8 @@ public class AppMessageTest extends JPATest {
 			appMessageIntl.setAppMessage(appMessage);
 			appMessageIntl.setCreatedBy(rs.getLong("created_by"));
 			appMessageIntl.setUpdatedBy(rs.getLong("updated_by"));
-			appMessageIntl.setCreatedDate(Formatter.dateTime(rs.getTimestamp("created_date")));
-			appMessageIntl.setUpdatedDate(Formatter.dateTime(rs.getTimestamp("updated_date")));
+			appMessageIntl.setCreatedDate(Formatter.toMizeDateTime(rs.getTimestamp("created_date")));
+			appMessageIntl.setUpdatedDate(Formatter.toMizeDateTime(rs.getTimestamp("updated_date")));
 			appMessageIntl.setShortDesc(rs.getString("short_description"));
 			appMessageIntl.setLongDesc(rs.getString("long_description"));	
 			return appMessageIntl;

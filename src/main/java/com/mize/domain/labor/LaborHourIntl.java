@@ -16,14 +16,14 @@ import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.Locale;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
 @Entity
 @Inheritance
 @DiscriminatorColumn(name = "discriminator")
 @DiscriminatorValue("LaborHourIntl")
 @Table(name = "labor_hour_intl", uniqueConstraints = {@UniqueConstraint (columnNames = {"labor_hour_id", "locale_id"})})
-public class LaborHourIntl extends MizeEntity implements Comparable<LaborHourIntl>{
+public class LaborHourIntl extends MizeSceEntity implements Comparable<LaborHourIntl>{
 
 	private static final long serialVersionUID = -1862266220815979799L;
 	private LaborHour laborHour;

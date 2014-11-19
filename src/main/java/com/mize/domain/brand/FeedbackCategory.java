@@ -1,8 +1,8 @@
 package com.mize.domain.brand;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
-public class FeedbackCategory extends MizeEntity implements Comparable<FeedbackCategory>{
+public class FeedbackCategory extends MizeSceEntity implements Comparable<FeedbackCategory>{
 	
 	private static final long serialVersionUID = -3371001783622958001L;
 	private String feedbackCategory;

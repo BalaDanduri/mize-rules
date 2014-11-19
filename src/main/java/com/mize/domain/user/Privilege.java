@@ -1,8 +1,8 @@
 package com.mize.domain.user;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
-public class Privilege extends MizeEntity{
+public class Privilege extends MizeSceEntity{
 
 	private static final long serialVersionUID = -5913874308418995423L;
 

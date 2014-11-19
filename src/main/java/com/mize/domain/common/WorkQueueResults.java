@@ -7,7 +7,7 @@ import org.joda.time.DateTime;
 import com.mize.domain.util.Formatter;
 import com.mize.domain.util.MizeDateTime;
 
-public class WorkQueueResults extends MizeEntity {
+public class WorkQueueResults extends MizeSceEntity implements Comparable<WorkQueueResults>{
 	private static final long serialVersionUID = 310189284913911659L;
 
 	private String fieldName;
@@ -133,6 +133,12 @@ public class WorkQueueResults extends MizeEntity {
 				this.fieldType = String.class.getSimpleName();
 			}
 		}
+	}
+
+	@Override
+	public int compareTo(WorkQueueResults arg0) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	

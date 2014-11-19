@@ -18,7 +18,7 @@ import javax.persistence.Transient;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.product.ProductRegister;
 import com.mize.domain.product.ProductRepeatOrderShipOptions;
 import com.mize.domain.user.UserBrandMapping;
@@ -26,7 +26,7 @@ import com.mize.domain.util.JPASerializer;
 
 @Entity
 @Table(name = "brand")
-public class Brand extends MizeEntity implements Comparable<Brand>{
+public class Brand extends MizeSceEntity implements Comparable<Brand>{
 	
 	/**
 	 * 

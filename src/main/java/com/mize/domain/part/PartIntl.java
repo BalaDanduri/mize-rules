@@ -16,18 +16,17 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import org.joda.time.DateTime;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.Locale;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Inheritance
 @DiscriminatorColumn(name = "discriminator")
 @DiscriminatorValue("PartIntl")
 @Table(name = "part_intl", uniqueConstraints = {@UniqueConstraint (columnNames = {"part_id", "locale_id"})})
-public class PartIntl extends MizeEntity  implements Comparable<PartIntl>{	
+public class PartIntl extends MizeSceEntity implements Comparable<PartIntl> {	
 	
 	private static final long serialVersionUID = -1164448119809296797L;
 	private Part part;
@@ -106,9 +105,9 @@ public class PartIntl extends MizeEntity  implements Comparable<PartIntl>{
 	@PreUpdate
 	public void auditFields(){
 		if(createdDate==null && id==null){
-			setCreatedDate(DateTime.now());
+			setCreatedDate(MizeDateTime.now());
 		}
-		setUpdatedDate(DateTime.now());		
+		setUpdatedDate(MizeDateTime.now());		
 	}
 	
 

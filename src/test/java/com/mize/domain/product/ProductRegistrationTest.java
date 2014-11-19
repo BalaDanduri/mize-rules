@@ -12,7 +12,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
@@ -23,6 +22,7 @@ import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;
+import com.mize.domain.util.MizeDateTime;
 
 
 @ContextConfiguration(locations={"/test-context.xml"})
@@ -90,10 +90,10 @@ public class ProductRegistrationTest  extends JPATest {
 		productRegistration.setRegistrationType("STORE");
 		productRegistration.setCustomer(businessEntity);
 		productRegistration.setInvoiceBusinessEntity(businessEntity);
-		productRegistration.setCustomerDeliveryDate(DateTime.now());
+		productRegistration.setCustomerDeliveryDate(MizeDateTime.now());
 		productRegistration.setPurchasePrice(new BigDecimal(200.00));
-		productRegistration.setCustomerDeliveryDate(DateTime.now().plusDays(3));
-		productRegistration.setWarrantyExpiryDate(DateTime.now().plusMonths(24));
+		productRegistration.setCustomerDeliveryDate(MizeDateTime.now().plusDays(3));
+		productRegistration.setWarrantyExpiryDate(MizeDateTime.now().plusMonths(24));
 		productRegistration.setCustomerAddress(entityAddress);
 		return productRegistration;
 		
@@ -130,9 +130,9 @@ public class ProductRegistrationTest  extends JPATest {
 			BusinessEntity be= new BusinessEntity();
 			be.setId(rs.getLong("invoice_be_id"));
 			productRegistration.setInvoiceBusinessEntity(be);
-			productRegistration.setCustomerDeliveryDate(Formatter.dateTime(rs.getTimestamp("cust_delivery_date")));
+			productRegistration.setCustomerDeliveryDate(Formatter.toMizeDateTime(rs.getTimestamp("cust_delivery_date")));
 			productRegistration.setPurchasePrice(rs.getBigDecimal("purchase_price"));
-			productRegistration.setWarrantyExpiryDate(Formatter.dateTime(rs.getTimestamp("warranty_expiry_date")));
+			productRegistration.setWarrantyExpiryDate(Formatter.toMizeDateTime(rs.getTimestamp("warranty_expiry_date")));
 			
 			EntityAddress customerAddress = new EntityAddress();
 			customerAddress.setId(rs.getLong("cust_address_id"));

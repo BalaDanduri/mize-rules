@@ -13,11 +13,11 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.EntityAttachment;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
 @Entity
 @Table(name = "prod_regn_attach")
-public class ProductRegistrationAttachment extends MizeEntity {
+public class ProductRegistrationAttachment extends MizeSceEntity implements Comparable<ProductRegistrationAttachment>{
 
 	
 	private static final long serialVersionUID = 688498435019563124L;
@@ -60,6 +60,12 @@ public class ProductRegistrationAttachment extends MizeEntity {
 
 	public void setEntityAttachment(EntityAttachment entityAttachment) {
 		this.entityAttachment = entityAttachment;
+	}
+
+	@Override
+	public int compareTo(ProductRegistrationAttachment o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 

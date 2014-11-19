@@ -13,11 +13,11 @@ import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.Locale;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
 @Entity
 @Table(name="carrier_intl", uniqueConstraints = {@UniqueConstraint (columnNames = {"carrier_id", "locale_id"})})
-public class CarrierIntl extends MizeEntity {
+public class CarrierIntl extends MizeSceEntity implements Comparable<CarrierIntl> {
 	
 	private static final long serialVersionUID = -3193421149712191082L;
 	
@@ -134,6 +134,11 @@ public class CarrierIntl extends MizeEntity {
 		} else if (!locale.equals(other.locale))
 			return false;
 		return true;
+	}
+
+	@Override
+	public int compareTo(CarrierIntl o) {
+		return 0;
 	}
 	
 }

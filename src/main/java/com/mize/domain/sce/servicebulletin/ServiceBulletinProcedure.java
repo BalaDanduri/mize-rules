@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JPASerializer;
 
 /**
@@ -31,7 +31,7 @@ import com.mize.domain.util.JPASerializer;
 
 @Entity
 @Table(name = "srvc_blltn_proc")
-public class ServiceBulletinProcedure extends MizeEntity {
+public class ServiceBulletinProcedure extends MizeSceEntity implements Comparable<ServiceBulletinProcedure> {
 	
 	private static final long serialVersionUID = -7125659097589369685L;
 	
@@ -319,5 +319,11 @@ public class ServiceBulletinProcedure extends MizeEntity {
 		} else if (!totalAmount.equals(other.totalAmount))
 			return false;
 		return true;
+	}
+
+	@Override
+	public int compareTo(ServiceBulletinProcedure o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

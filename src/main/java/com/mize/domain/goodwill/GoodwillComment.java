@@ -14,14 +14,14 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.EntityComment;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 /**
  * @author Raghavendra Serikar
  * @version 1.0
  */
 @Entity
 @Table(name="goodwill_comment")
-public class GoodwillComment extends MizeEntity implements Comparable<GoodwillComment>{
+public class GoodwillComment extends MizeSceEntity implements Comparable<GoodwillComment>{
 	private static final long serialVersionUID = 1L;
 	private Goodwill goodwill;
 	private EntityComment entityComment;

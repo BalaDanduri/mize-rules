@@ -3,9 +3,9 @@ package com.mize.domain.form;
 import java.io.Serializable;
 
 import com.mize.domain.common.Locale;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
-public class LabelIntl extends MizeEntity implements Serializable {
+public class LabelIntl extends MizeSceEntity implements Serializable {
 	/**
 	 * 
 	 */

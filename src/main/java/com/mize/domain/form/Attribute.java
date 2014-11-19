@@ -2,10 +2,10 @@ package com.mize.domain.form;
 
 import java.io.Serializable;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
 
-public class Attribute extends MizeEntity implements Serializable{
+public class Attribute extends MizeSceEntity implements Serializable{
 
 	/**
 	 * 

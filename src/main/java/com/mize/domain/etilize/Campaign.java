@@ -2,9 +2,9 @@ package com.mize.domain.etilize;
 
 import org.joda.time.DateTime;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
-public class Campaign extends MizeEntity{
+public class Campaign extends MizeSceEntity{
 
 	private static final long serialVersionUID = -6127526446685342722L;
 	private String name;

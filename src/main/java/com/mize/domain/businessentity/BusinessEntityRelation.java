@@ -18,12 +18,12 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.common.EntityAddress;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JPASerializer;
 
 @Entity
 @Table(name = "business_entity_rltn")
-public class BusinessEntityRelation extends MizeEntity {
+public class BusinessEntityRelation extends MizeSceEntity implements Comparable<BusinessEntityRelation> {
 	
 	private static final long serialVersionUID = 6120918610246685696L;
 	
@@ -134,6 +134,12 @@ public class BusinessEntityRelation extends MizeEntity {
 
 	public void setAddress(EntityAddress address) {
 		this.address = address;
+	}
+
+	@Override
+	public int compareTo(BusinessEntityRelation o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

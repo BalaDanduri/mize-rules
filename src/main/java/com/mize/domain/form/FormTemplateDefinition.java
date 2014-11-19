@@ -10,34 +10,27 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.common.MizeEntity;
-import com.mize.domain.util.JodaDateDeserializer;
-import com.mize.domain.util.JsonDateSerializer;
+import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name = "form_template_defn")
-public class FormTemplateDefinition extends MizeEntity {
+public class FormTemplateDefinition extends MizeSceEntity implements Comparable<FormTemplateDefinition> {
 	
 	private static final long serialVersionUID = -153672496480024450L;	
 	
 	private String templateDefinitionData;
 	private BigDecimal versionNumber;
-	private DateTime startDate;
-	private DateTime endDate;
+	private MizeDateTime startDate;
+	private MizeDateTime endDate;
 	
 	public FormTemplateDefinition() {
 		
 	}		
 
 	public FormTemplateDefinition(String templateDefinitionData,
-			BigDecimal versionNumber, DateTime startDate, DateTime endDate) {
+			BigDecimal versionNumber, MizeDateTime startDate, MizeDateTime endDate) {
 		super();
 		this.templateDefinitionData = templateDefinitionData;
 		this.versionNumber = versionNumber;
@@ -76,33 +69,23 @@ public class FormTemplateDefinition extends MizeEntity {
 		this.versionNumber = versionNumber;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy")
 	@Column(name = "start_date",  nullable = true)
-	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getStartDate() {
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getStartDate() {
 		return startDate;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateDeserializer.class)
-	public void setStartDate(DateTime startDate) {
+	public void setStartDate(MizeDateTime startDate) {
 		this.startDate = startDate;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy")
 	@Column(name = "end_date",  nullable = true)
-	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getEndDate() {
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getEndDate() {
 		return endDate;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateDeserializer.class)
-	public void setEndDate(DateTime endDate) {
+	public void setEndDate(MizeDateTime endDate) {
 		this.endDate = endDate;
 	}
 
@@ -152,6 +135,12 @@ public class FormTemplateDefinition extends MizeEntity {
 		} else if (!versionNumber.equals(other.versionNumber))
 			return false;
 		return true;
+	}
+
+	@Override
+	public int compareTo(FormTemplateDefinition o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 

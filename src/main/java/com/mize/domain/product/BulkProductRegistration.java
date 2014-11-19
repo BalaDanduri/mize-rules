@@ -4,22 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityComment;
-import com.mize.domain.common.MizeEntity;
-import com.mize.domain.util.JodaDateDeserializer;
-import com.mize.domain.util.JsonDateSerializer;
+import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.MizeDateTime;
 
-public class BulkProductRegistration extends MizeEntity {
+public class BulkProductRegistration extends MizeSceEntity implements Comparable<BulkProductRegistration> {
 	
 
 	private static final long serialVersionUID = -382244544017949006L;
@@ -28,7 +21,7 @@ public class BulkProductRegistration extends MizeEntity {
 	private BusinessEntity invoiceEntity;
 	private BusinessEntity customer;
 	private EntityAddress customerAddress;
-	private DateTime purchaseDate;
+	private MizeDateTime purchaseDate;
 	private EntityComment entityComment;
 	private List<ProductRegistration> productRegistrations = new ArrayList<ProductRegistration>();
 	private User user;
@@ -65,11 +58,8 @@ public class BulkProductRegistration extends MizeEntity {
 	}
 	
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateSerializer.class)
-	@JsonInclude(Include.NON_NULL)
-	public DateTime getPurchaseDate() {
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getPurchaseDate() {
 		return purchaseDate;
 	}
 
@@ -109,9 +99,7 @@ public class BulkProductRegistration extends MizeEntity {
 		this.customerAddress = customerAddress;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateDeserializer.class)
-	public void setPurchaseDate(DateTime purchaseDate) {
+	public void setPurchaseDate(MizeDateTime purchaseDate) {
 		this.purchaseDate = purchaseDate;
 	}
 
@@ -231,6 +219,12 @@ public class BulkProductRegistration extends MizeEntity {
 				+ ", invoiceNumber=" + invoiceNumber
 				+ ", productRegistrations=" + productRegistrations
 				+ ", purchaseDate=" + purchaseDate + "]";
+	}
+
+	@Override
+	public int compareTo(BulkProductRegistration arg0) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

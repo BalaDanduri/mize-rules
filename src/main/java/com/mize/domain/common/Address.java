@@ -1,6 +1,6 @@
 package com.mize.domain.common;
 
-public class Address extends MizeEntity implements Comparable<Address>{
+public class Address extends MizeSceEntity implements Comparable<Address>{
 	
 	private static final long serialVersionUID = 752510264260453186L;
 	private String address1;

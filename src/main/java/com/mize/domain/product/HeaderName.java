@@ -1,9 +1,9 @@
 package com.mize.domain.product;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
 
-public class HeaderName extends MizeEntity implements Comparable<HeaderName>{
+public class HeaderName extends MizeSceEntity implements Comparable<HeaderName>{
 
 	private static final long serialVersionUID = -632231234234531123L;
 	private Long headerId;

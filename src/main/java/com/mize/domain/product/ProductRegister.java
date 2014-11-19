@@ -16,28 +16,24 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.auth.User;
 import com.mize.domain.brand.Brand;
 import com.mize.domain.businessentity.BusinessEntity;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.user.UserAddress;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.JodaDateDeserializer;
-import com.mize.domain.util.JsonDateSerializer;
+import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name = "prod_regn")
-public class ProductRegister extends MizeEntity implements Comparable<ProductRegister>{
+public class ProductRegister extends MizeSceEntity implements Comparable<ProductRegister>{
 
 	private static final long serialVersionUID = -6338652951554117142L;
 	private Brand brand;
@@ -45,12 +41,10 @@ public class ProductRegister extends MizeEntity implements Comparable<ProductReg
 	private Product product;
 	private User user;
 	private String serialNumber;
-	@DateTimeFormat (pattern="dd-MM-yyyy")
-	private DateTime purchaseDate;
+	private MizeDateTime purchaseDate;
 	private Double purchasePrice;
 	private String purchaseStore;
-	@DateTimeFormat (pattern="dd-MM-yyyy")
-	private DateTime warrantyExpiryDate;
+	private MizeDateTime warrantyExpiryDate;
 	private String additionalInfo;
 	private String firstName;
 	private String lastName;	
@@ -74,17 +68,13 @@ public class ProductRegister extends MizeEntity implements Comparable<ProductReg
 	private String template = "json";
 	
 	@Transient
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	private DateTime createdDateFrom;
+	private MizeDateTime createdDateFrom;
 	@Transient
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	private DateTime createdDateTo;
+	private MizeDateTime createdDateTo;
 	@Transient
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	private DateTime updatedDateFrom;
+	private MizeDateTime updatedDateFrom;
 	@Transient
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	private DateTime updatedDateTo;
+	private MizeDateTime updatedDateTo;
 	
 	private Long addressId;
 	@Transient
@@ -162,18 +152,14 @@ public class ProductRegister extends MizeEntity implements Comparable<ProductReg
 		this.serialNumber = serialNumber;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy")
 	@Column(name = "purchase_date",  nullable = true)
-	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateSerializer.class)
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getPurchaseDate() {
+	public MizeDateTime getPurchaseDate() {
 		return purchaseDate;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateDeserializer.class)
-	public void setPurchaseDate(DateTime purchaseDate) {
+	public void setPurchaseDate(MizeDateTime purchaseDate) {
 		this.purchaseDate = purchaseDate;
 	}
 	
@@ -193,17 +179,13 @@ public class ProductRegister extends MizeEntity implements Comparable<ProductReg
 		this.purchaseStore = purchaseStore;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy")
 	@Column(name = "warranty_expiry_date",  nullable = true)
-	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateSerializer.class)
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getWarrantyExpiryDate() {
+	public MizeDateTime getWarrantyExpiryDate() {
 		return warrantyExpiryDate;
 	}
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateDeserializer.class)
-	public void setWarrantyExpiryDate(DateTime warrantyExpiryDate) {
+	public void setWarrantyExpiryDate(MizeDateTime warrantyExpiryDate) {
 		this.warrantyExpiryDate = warrantyExpiryDate;
 	}
 	
@@ -597,58 +579,45 @@ public class ProductRegister extends MizeEntity implements Comparable<ProductReg
 	}
 	
 	@Transient
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonSerialize(using=JsonDateSerializer.class)
 	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getCreatedDateFrom() {
+	public MizeDateTime getCreatedDateFrom() {
 		return createdDateFrom;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateDeserializer.class)
-	public void setCreatedDateFrom(DateTime createdDateFrom) {
+	
+	public void setCreatedDateFrom(MizeDateTime createdDateFrom) {
 		this.createdDateFrom = createdDateFrom;
 	}
 
 	@Transient
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonSerialize(using=JsonDateSerializer.class)
 	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getCreatedDateTo() {
+	public MizeDateTime getCreatedDateTo() {
 		return createdDateTo;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateDeserializer.class)
-	public void setCreatedDateTo(DateTime createdDateTo) {
+	
+	public void setCreatedDateTo(MizeDateTime createdDateTo) {
 		this.createdDateTo = createdDateTo;
 	}
 
 	@Transient
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonSerialize(using=JsonDateSerializer.class)
 	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getUpdatedDateFrom() {
+	public MizeDateTime getUpdatedDateFrom() {
 		return updatedDateFrom;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateDeserializer.class)
-	public void setUpdatedDateFrom(DateTime updatedDateFrom) {
+	public void setUpdatedDateFrom(MizeDateTime updatedDateFrom) {
 		this.updatedDateFrom = updatedDateFrom;
 	}
 
 	@Transient
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonSerialize(using=JsonDateSerializer.class)
 	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getUpdatedDateTo() {
+	public MizeDateTime getUpdatedDateTo() {
 		return updatedDateTo;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateDeserializer.class)
-	public void setUpdatedDateTo(DateTime updatedDateTo) {
+	
+	public void setUpdatedDateTo(MizeDateTime updatedDateTo) {
 		this.updatedDateTo = updatedDateTo;
 	}
 

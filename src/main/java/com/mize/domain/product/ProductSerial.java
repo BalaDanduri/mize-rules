@@ -21,44 +21,38 @@ import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityComment;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.JodaDateDeserializer;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateSerializer;
+import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name = "prod_serial", uniqueConstraints = {@UniqueConstraint (columnNames = {"id"})})
-public class ProductSerial extends MizeEntity{
+public class ProductSerial extends MizeSceEntity implements Comparable<ProductSerial>{
 	
 	private static final long serialVersionUID = 1396934864607540803L;
 	private BusinessEntity tenant;
 	private Product product;
 	private String serialNumber;
 	private BusinessEntity shippedBusinessEntity;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private DateTime buildDate;
+	private MizeDateTime buildDate;
 	@Transient
 	private EntityComment entityComment;
 	private List<ProductSerialComment> comments = new ArrayList<ProductSerialComment>();
 	@Transient
 	private User user;
-	private DateTime shipDate;
+	private MizeDateTime shipDate;
 	private String isValid;
 	private BusinessEntity invoiceBusinessEntity;
-	private DateTime invoiceDate;
+	private MizeDateTime invoiceDate;
 	private String invoiceNumber;
 	private List<ProductSerialRelation> productSerialRelations = new ArrayList<ProductSerialRelation>();
 	private List<ProductWarranty> productWarrantyList = new ArrayList<ProductWarranty>();
@@ -68,7 +62,7 @@ public class ProductSerial extends MizeEntity{
 	}
 
 	public ProductSerial(BusinessEntity tenantId, Product product, String serialNumber,BusinessEntity invoiceBusinessEntity,
-			BusinessEntity shippedBusinessEntity, DateTime deliveryDate, DateTime buildDate) {
+			BusinessEntity shippedBusinessEntity, MizeDateTime deliveryDate, MizeDateTime buildDate) {
 		super();
 		this.tenant = tenantId;
 		this.product = product;
@@ -134,18 +128,14 @@ public class ProductSerial extends MizeEntity{
 	}
 
 
+	
 	@Column(name = "build_date", nullable = true)
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateSerializer.class)
-	@JsonInclude(Include.NON_NULL)
-	public DateTime getBuildDate() {
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getBuildDate() {
 		return buildDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateDeserializer.class)	
-	public void setBuildDate(DateTime buildDate) {
+	public void setBuildDate(MizeDateTime buildDate) {
 		this.buildDate = buildDate;
 	}
 
@@ -153,9 +143,9 @@ public class ProductSerial extends MizeEntity{
 	@PreUpdate
 	public void auditFields(){
 		if(createdDate==null && id==null){
-			setCreatedDate(DateTime.now());
+			setCreatedDate(MizeDateTime.now());
 		}
-		setUpdatedDate(DateTime.now());		
+		setUpdatedDate(MizeDateTime.now());		
 	}
 	
 	@Transient
@@ -196,18 +186,14 @@ public class ProductSerial extends MizeEntity{
 		this.isValid = isValid;
 	}
 	
+	
 	@Column(name = "ship_date", nullable = true)
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateSerializer.class)
-	@JsonInclude(Include.NON_NULL)
-	public DateTime getShipDate() {
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getShipDate() {
 		return shipDate;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateDeserializer.class)
-	public void setShipDate(DateTime shipDate) {
+	public void setShipDate(MizeDateTime shipDate) {
 		this.shipDate = shipDate;
 	}
 	
@@ -223,18 +209,14 @@ public class ProductSerial extends MizeEntity{
 		this.invoiceBusinessEntity = invoiceBusinessEntity;
 	}
 
+	
 	@Column(name = "invoice_date", nullable = true)
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateSerializer.class)
-	@JsonInclude(Include.NON_NULL)
-	public DateTime getInvoiceDate() {
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getInvoiceDate() {
 		return invoiceDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateDeserializer.class)
-	public void setInvoiceDate(DateTime invoiceDate) {
+	public void setInvoiceDate(MizeDateTime invoiceDate) {
 		this.invoiceDate = invoiceDate;
 	}
 
@@ -260,38 +242,30 @@ public class ProductSerial extends MizeEntity{
 	}
 
 	@Override	
-	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
-	@Type(type="com.mize.domain.util.DateTimeJPA")
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@Column(name = "created_date",updatable=false)
-	@JsonIgnore(value = false)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getCreatedDate() {
+	@JsonIgnore(false)
+	public MizeDateTime getCreatedDate() {
 		return createdDate;
 	}
 
 	@Override	
-	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
-	@Type(type="com.mize.domain.util.DateTimeJPA")
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@Column(name = "updated_date")
-	@JsonIgnore(value = false)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getUpdatedDate() {
+	@JsonIgnore(false)
+	public MizeDateTime getUpdatedDate() {
 		return updatedDate;
 	}
 	
 	@Override
-	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(false)
-	public void setCreatedDate(DateTime createdDate) {
+	public void setCreatedDate(MizeDateTime createdDate) {
 		super.createdDate = createdDate;
 	}
 
 	@Override
-	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(false)
-	public void setUpdatedDate(DateTime updatedDate) {
+	public void setUpdatedDate(MizeDateTime updatedDate) {
 		super.updatedDate = updatedDate;
 	}
 	
@@ -399,6 +373,12 @@ public class ProductSerial extends MizeEntity{
 				+ ", serialNumber=" + serialNumber + ", invoiceBE="
 				+ invoiceBusinessEntity + ",deliveryBE="
 				+ shippedBusinessEntity + ", buildDate=" + buildDate + "]";
+	}
+
+	@Override
+	public int compareTo(ProductSerial o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	

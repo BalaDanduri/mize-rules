@@ -1,8 +1,8 @@
 package com.mize.domain.auth;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
-public class UserPermission extends MizeEntity implements Comparable<UserPermission> {
+public class UserPermission extends MizeSceEntity implements Comparable<UserPermission> {
    
 	private static final long serialVersionUID = 377175289703147158L;
 	private Long id; 

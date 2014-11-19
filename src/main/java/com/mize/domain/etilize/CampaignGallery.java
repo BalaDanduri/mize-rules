@@ -1,9 +1,9 @@
 package com.mize.domain.etilize;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
 
-public class CampaignGallery extends MizeEntity{
+public class CampaignGallery extends MizeSceEntity{
 
 	private static final long serialVersionUID = -6127526442345342722L;
 	private Long campaignId;

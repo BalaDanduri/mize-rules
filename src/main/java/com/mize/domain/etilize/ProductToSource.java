@@ -5,13 +5,12 @@ import javax.persistence.Column;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
-import com.mize.domain.common.MizeEntity;
-
+import com.mize.domain.common.MizeSceEntity;
 
 
-public class ProductToSource extends MizeEntity{
+
+public class ProductToSource extends MizeSceEntity{
 
 	private static final long serialVersionUID = -17526446685342722L;
 	

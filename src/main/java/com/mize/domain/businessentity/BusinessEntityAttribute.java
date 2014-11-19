@@ -17,17 +17,14 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.mize.domain.common.MizeEntity;
-/**
- * @author Raghavendra Serikar
- * @version 1.0
-*/
+import com.mize.domain.common.MizeSceEntity;
+
 @Entity
 @Inheritance
 @DiscriminatorColumn(name = "discriminator")
 @DiscriminatorValue("BusinessEntityAttribute")
 @Table(name="business_entity_attribute")
-public class BusinessEntityAttribute extends MizeEntity implements Comparable<BusinessEntityAttribute>{
+public class BusinessEntityAttribute extends MizeSceEntity implements Comparable<BusinessEntityAttribute>{
 	private static final long serialVersionUID = 7270726663818044384L;
 	 private BusinessEntity businessEntity;
 	 private String url;

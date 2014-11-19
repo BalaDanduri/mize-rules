@@ -16,12 +16,12 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JPASerializer;
 
 @Entity
 @Table(name="mize_asset")
-public class MizeAsset extends MizeEntity implements Comparable<MizeAsset>{
+public class MizeAsset extends MizeSceEntity implements Comparable<MizeAsset>{
 	
 	/**
 	 * 

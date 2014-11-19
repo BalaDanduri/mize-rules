@@ -20,14 +20,11 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.brand.Brand;
@@ -35,16 +32,14 @@ import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.businessentity.BusinessEntityIntl;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityComment;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.JodaDateDeserializer;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateSerializer;
+import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name = "prod_regn")
-public class ProductRegistration extends MizeEntity {
+public class ProductRegistration extends MizeSceEntity implements Comparable<ProductRegistration>{
 
 	private static final long serialVersionUID = 2928234510268602315L;
 	
@@ -55,11 +50,11 @@ public class ProductRegistration extends MizeEntity {
 	private BusinessEntity customer;
 	private BusinessEntity invoiceBusinessEntity;
 	private EntityAddress customerAddress;
-	private DateTime customerDeliveryDate;
-	private DateTime purchaseDate;
-	private DateTime warrantyExpiryDate;
+	private MizeDateTime customerDeliveryDate;
+	private MizeDateTime purchaseDate;
+	private MizeDateTime warrantyExpiryDate;
 	private BigDecimal purchasePrice;
-	private DateTime registrationDate;
+	private MizeDateTime registrationDate;
 	private String registrationRef;
 	private String registrationSource;
 	private String registrationApplication;
@@ -101,7 +96,7 @@ public class ProductRegistration extends MizeEntity {
 		this.count = count;
 	}
 	
-	public ProductRegistration(Long id,String statusCode,String registrationType,DateTime purchaseDate,DateTime registrationDate){
+	public ProductRegistration(Long id,String statusCode,String registrationType,MizeDateTime purchaseDate,MizeDateTime registrationDate){
 		this.id = id;
 		this.statusCode = statusCode;
 		this.registrationType = registrationType;
@@ -116,7 +111,7 @@ public class ProductRegistration extends MizeEntity {
 		this.audits = audits;
 	}
 	
-	public ProductRegistration(Long id,String statusCode,String serialNumber,DateTime shipDate, String brandName,String model,String productName,String productDesc) {
+	public ProductRegistration(Long id,String statusCode,String serialNumber,MizeDateTime shipDate, String brandName,String model,String productName,String productDesc) {
 		this.id = id;
 		this.statusCode = statusCode;
 		ProductSerial productSerial = new ProductSerial();
@@ -149,7 +144,7 @@ public class ProductRegistration extends MizeEntity {
 	}
 	
 		
-	public ProductRegistration(Long id,String statusCode,String serialNumber,DateTime shipDate, String brandName,String model,String productName,String productDesc,String invoiceBeType,String invoiceBeCode,String invoiceBEName,String shippedBeType,String shippedBeCode,String shippedBeName) {
+	public ProductRegistration(Long id,String statusCode,String serialNumber,MizeDateTime shipDate, String brandName,String model,String productName,String productDesc,String invoiceBeType,String invoiceBeCode,String invoiceBEName,String shippedBeType,String shippedBeCode,String shippedBeName) {
 		this.id = id;
 		this.statusCode = statusCode;
 		ProductSerial productSerial = new ProductSerial();
@@ -247,33 +242,21 @@ public class ProductRegistration extends MizeEntity {
 	public EntityAddress getCustomerAddress() {
 		return customerAddress;
 	}
-	
 	@Column(name = "cust_delivery_date", nullable = true)
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateSerializer.class)
-	@JsonInclude(Include.NON_NULL)
-	public DateTime getCustomerDeliveryDate() {
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getCustomerDeliveryDate() {
 		return customerDeliveryDate;
 	}
 
-
 	@Column(name = "purchase_date", nullable = true)
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateSerializer.class)
-	@JsonInclude(Include.NON_NULL)
-	public DateTime getPurchaseDate() {
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getPurchaseDate() {
 		return purchaseDate;
 	}
 
-
 	@Column(name = "warranty_expiry_date", nullable = true)
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateSerializer.class)
-	@JsonInclude(Include.NON_NULL)
-	public DateTime getWarrantyExpiryDate() {
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getWarrantyExpiryDate() {
 		return warrantyExpiryDate;
 	}
 
@@ -296,22 +279,18 @@ public class ProductRegistration extends MizeEntity {
 	}
 
 	@Override	
-	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
-	@Type(type="com.mize.domain.util.DateTimeJPA")
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@Column(name = "created_date",updatable=false)
-	@JsonIgnore(value = false)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getCreatedDate() {
+	@JsonIgnore(false)
+	public MizeDateTime getCreatedDate() {
 		return createdDate;
 	}
 
 	@Override	
-	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
-	@Type(type="com.mize.domain.util.DateTimeJPA")
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@Column(name = "updated_date")
-	@JsonIgnore(value = false)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getUpdatedDate() {
+	@JsonIgnore(false)
+	public MizeDateTime getUpdatedDate() {
 		return updatedDate;
 	}
 
@@ -330,13 +309,9 @@ public class ProductRegistration extends MizeEntity {
 	}
 	
 	
-	
 	@Column(name = "regn_date ", nullable = true)
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateSerializer.class)
-	@JsonInclude(Include.NON_NULL)
-	public DateTime getRegistrationDate() {
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getRegistrationDate() {
 		return registrationDate;
 	}
 
@@ -404,21 +379,17 @@ public class ProductRegistration extends MizeEntity {
 		this.customerAddress = customerAddress;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateDeserializer.class)
-	public void setCustomerDeliveryDate(DateTime customerDeliveryDate) {
+	
+	public void setCustomerDeliveryDate(MizeDateTime customerDeliveryDate) {
 		this.customerDeliveryDate = customerDeliveryDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateDeserializer.class)
-	public void setPurchaseDate(DateTime purchaseDate) {
+	public void setPurchaseDate(MizeDateTime purchaseDate) {
 		this.purchaseDate = purchaseDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateDeserializer.class)
-	public void setWarrantyExpiryDate(DateTime warrantyExpireDate) {
+	
+	public void setWarrantyExpiryDate(MizeDateTime warrantyExpireDate) {
 		this.warrantyExpiryDate = warrantyExpireDate;
 	}
 
@@ -437,18 +408,14 @@ public class ProductRegistration extends MizeEntity {
 
 
 	@Override
-	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(false)
-	public void setCreatedDate(DateTime createdDate) {
+	public void setCreatedDate(MizeDateTime createdDate) {
 		super.createdDate = createdDate;
 	}
 
 	@Override
-	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(false)
-	public void setUpdatedDate(DateTime updatedDate) {
+	public void setUpdatedDate(MizeDateTime updatedDate) {
 		super.updatedDate = updatedDate;
 	}
 
@@ -467,9 +434,7 @@ public class ProductRegistration extends MizeEntity {
 	
 	
 
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateDeserializer.class)
-	public void setRegistrationDate(DateTime registrationDate) {
+	public void setRegistrationDate(MizeDateTime registrationDate) {
 		this.registrationDate = registrationDate;
 	}
 
@@ -699,6 +664,12 @@ public class ProductRegistration extends MizeEntity {
 				+ statusCode + ", tenant=" + tenant + ", user=" + user
 				+ ", warrantyExpiryDate=" + warrantyExpiryDate
 				+ ", warrantyList=" + warrantyList + "]";
+	}
+
+	@Override
+	public int compareTo(ProductRegistration o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 

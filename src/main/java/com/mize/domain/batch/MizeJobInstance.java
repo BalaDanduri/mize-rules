@@ -18,26 +18,22 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name="mize_job_instance")
-public class MizeJobInstance extends MizeEntity{
+public class MizeJobInstance extends MizeSceEntity{
 	/**
 	 * 
 	 */
@@ -48,8 +44,8 @@ public class MizeJobInstance extends MizeEntity{
 	private String instanceName;
 	private Date lastRun;
 	private Date nextRun;
-	private DateTime lastRunTime;
-	private DateTime nextRunTime;
+	private MizeDateTime lastRunTime;
+	private MizeDateTime nextRunTime;
 	private String jobStatus;
 	private List<MizeJobInstanceParameter> jobParameters;
 	private MizeJobSchedule schedule;
@@ -65,7 +61,7 @@ public class MizeJobInstance extends MizeEntity{
 		
 	}
 
-	public MizeJobInstance(Long id, String instanceCode, String instanceName, DateTime lastRunTime, DateTime nextRunTime, String jobStatus, String isActive) {
+	public MizeJobInstance(Long id, String instanceCode, String instanceName, MizeDateTime lastRunTime, MizeDateTime nextRunTime, String jobStatus, String isActive) {
 		super();
 		super.id = id;
 		this.instanceCode = instanceCode;
@@ -180,33 +176,24 @@ public class MizeJobInstance extends MizeEntity{
 		this.nextRun = nextRun;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
+	
 	@Column(name = "last_run",  nullable = true)
-	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getLastRunTime() {
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getLastRunTime() {
 		return lastRunTime;
 	}
 
-	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
-	public void setLastRunTime(DateTime lastRunTime) {
+	public void setLastRunTime(MizeDateTime lastRunTime) {
 		this.lastRunTime = lastRunTime;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
 	@Column(name = "next_run",  nullable = true)
-	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getNextRunTime() {
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getNextRunTime() {
 		return nextRunTime;
 	}
 
-	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
-	public void setNextRunTime(DateTime nextRunTime) {
+	public void setNextRunTime(MizeDateTime nextRunTime) {
 		this.nextRunTime = nextRunTime;
 	}
 
@@ -243,40 +230,30 @@ public class MizeJobInstance extends MizeEntity{
 	}
 
 	@Override
-	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
-	@Type(type="com.mize.domain.util.DateTimeJPA")
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@Column(name="created_date",updatable=false)
 	@JsonIgnore(value=false)
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getCreatedDate() {
+	public MizeDateTime getCreatedDate() {
 		return createdDate;
 	}
 
 	@Override
-	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(value=false)
-	public void setCreatedDate(DateTime createdDate) {
+	public void setCreatedDate(MizeDateTime createdDate) {
 		super.createdDate = createdDate;
 	}
 	
 	@Override
-	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
-	@Type(type="com.mize.domain.util.DateTimeJPA")
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@Column(name="updated_date")
 	@JsonIgnore(value=false)
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getUpdatedDate() {
+	public MizeDateTime getUpdatedDate() {
 		return updatedDate;
 	}
 	
 	@Override
-	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(value=false)
-	public void setUpdatedDate(DateTime updatedDate) {
+	public void setUpdatedDate(MizeDateTime updatedDate) {
 		super.updatedDate = updatedDate;
 	}
 	

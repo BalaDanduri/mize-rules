@@ -1,8 +1,8 @@
 package com.mize.domain.auth;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
-public class ResetPassword extends MizeEntity implements Comparable<ResetPassword> {
+public class ResetPassword extends MizeSceEntity implements Comparable<ResetPassword> {
    
 	private static final long serialVersionUID = 71752897031471580L;
 	private String password;	

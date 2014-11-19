@@ -1,12 +1,12 @@
 package com.mize.domain.prod.bby;
 
-import org.joda.time.DateTime;
+import com.mize.domain.util.MizeDateTime;
 
 public class Product {
 	private long sku;
 	private float salePrice;
 	private String upc;
-	private DateTime priceUpdateDate;
+	private MizeDateTime priceUpdateDate;
 	
 	public long getSku() {
 		return sku;
@@ -26,10 +26,10 @@ public class Product {
 	public void setUpc(String upc) {
 		this.upc = upc;
 	}
-	public DateTime getPriceUpdateDate() {
+	public MizeDateTime getPriceUpdateDate() {
 		return priceUpdateDate;
 	}
-	public void setPriceUpdateDate(DateTime priceUpdateDate) {
+	public void setPriceUpdateDate(MizeDateTime priceUpdateDate) {
 		this.priceUpdateDate = priceUpdateDate;
 	}
 	

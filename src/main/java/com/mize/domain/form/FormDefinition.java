@@ -22,32 +22,26 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.Locale;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.form.link.FormDefinitionLink;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.JodaDateDeserializer;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateSerializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Inheritance
 @DiscriminatorColumn(name = "discriminator")
 @DiscriminatorValue("FormDefinition")
 @Table(name = "form_defn")
-public class FormDefinition extends MizeEntity {
+public class FormDefinition extends MizeSceEntity implements Comparable<FormDefinition> {
 
 	private static final long serialVersionUID = -6036421353518015224L;
 
@@ -58,8 +52,8 @@ public class FormDefinition extends MizeEntity {
 	private String statusCode;
 	private String formDefinitionData;
 	private String isActive;
-	private DateTime startDate;
-	private DateTime endDate;
+	private MizeDateTime startDate;
+	private MizeDateTime endDate;
 	private String isNewVersion;
 	private Form form;
 	private Locale locale;
@@ -80,7 +74,7 @@ public class FormDefinition extends MizeEntity {
 		messages = new ArrayList<FormDefinitionMessage>();
 	}
 
-	public FormDefinition(FormTemplateDefinition formTemplateDefinition, BusinessEntity tenant, String formCode, String versionNumber, String statusCode, String formDefinitionData, String isActive, DateTime startDate, DateTime endDate) {
+	public FormDefinition(FormTemplateDefinition formTemplateDefinition, BusinessEntity tenant, String formCode, String versionNumber, String statusCode, String formDefinitionData, String isActive, MizeDateTime startDate, MizeDateTime endDate) {
 		super();
 		this.formTemplateDefinition = formTemplateDefinition;
 		this.tenant = tenant;
@@ -176,33 +170,26 @@ public class FormDefinition extends MizeEntity {
 		this.isActive = isActive;
 	}
 
-	@DateTimeFormat(pattern = "MM-dd-yyyy")
+	
 	@Column(name = "start_date", nullable = true)
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateSerializer.class)
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
 	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getStartDate() {
+	public MizeDateTime getStartDate() {
 		return startDate;
 	}
 
-	@DateTimeFormat(pattern = "MM-dd-yyyy")
-	@JsonDeserialize(using = JodaDateDeserializer.class)
-	public void setStartDate(DateTime startDate) {
+	public void setStartDate(MizeDateTime startDate) {
 		this.startDate = startDate;
 	}
 
-	@DateTimeFormat(pattern = "MM-dd-yyyy")
 	@Column(name = "end_date", nullable = true)
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateSerializer.class)
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
 	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getEndDate() {
+	public MizeDateTime getEndDate() {
 		return endDate;
 	}
 
-	@DateTimeFormat(pattern = "MM-dd-yyyy")
-	@JsonDeserialize(using = JodaDateDeserializer.class)
-	public void setEndDate(DateTime endDate) {
+	public void setEndDate(MizeDateTime endDate) {
 		this.endDate = endDate;
 	}
 
@@ -307,38 +294,30 @@ public class FormDefinition extends MizeEntity {
 	}
 
 	@Override
-	@DateTimeFormat(pattern = "MM-dd-yyyy HH:mm:ss")
 	@Column(name = "created_date", updatable = false)
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateTimeSerializer.class)
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
 	@JsonInclude(Include.NON_DEFAULT)
 	@JsonIgnore(value = false)
-	public DateTime getCreatedDate() {
+	public MizeDateTime getCreatedDate() {
 		return createdDate;
 	}
 
 	@Override
-	@DateTimeFormat(pattern = "MM-dd-yyyy HH:mm:ss")
-	@JsonDeserialize(using = JodaDateTimeDeserializer.class)
 	@JsonIgnore(value = false)
-	public void setCreatedDate(DateTime createdDate) {
+	public void setCreatedDate(MizeDateTime createdDate) {
 		super.createdDate = createdDate;
 	}
 
-	@DateTimeFormat(pattern = "MM-dd-yyyy HH:mm:ss")
 	@Column(name = "updated_date", nullable = true)
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateTimeSerializer.class)
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
 	@JsonInclude(Include.NON_DEFAULT)
-	@JsonIgnore(value = false)
-	public DateTime getUpdatedDate() {
+	@JsonIgnore(false)
+	public MizeDateTime getUpdatedDate() {
 		return updatedDate;
 	}
 
-	@DateTimeFormat(pattern = "MM-dd-yyyy HH:mm:ss")
-	@JsonDeserialize(using = JodaDateTimeDeserializer.class)
-	@JsonIgnore(value = false)
-	public void setUpdatedDate(DateTime updatedDate) {
+	@JsonIgnore(false)
+	public void setUpdatedDate(MizeDateTime updatedDate) {
 		super.updatedDate = updatedDate;
 	}
 
@@ -501,6 +480,12 @@ public class FormDefinition extends MizeEntity {
 				+ ", endDate=" + endDate + ", isNewVersion=" + isNewVersion + ", form=" + form + ", locale=" + locale + ", source=" + source 
 				+ ", reference=" + reference + ", audits=" + audits + ", intls=" + intls + ", links=" + links + ", messages=" + messages 
 				+ ", user=" + user + "]";
+	}
+
+	@Override
+	public int compareTo(FormDefinition arg0) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

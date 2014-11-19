@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
 /**
  * @author HarishBurra
@@ -17,7 +17,7 @@ import com.mize.domain.common.MizeEntity;
  */
 @Entity
 @Table(name = "srvc_enty_amt")
-public class ServiceEntityAmount extends MizeEntity {
+public class ServiceEntityAmount extends MizeSceEntity implements Comparable<ServiceEntityAmount> {
 
 	
 	private static final long serialVersionUID = 2518021731761580833L;
@@ -214,6 +214,11 @@ public class ServiceEntityAmount extends MizeEntity {
 		} else if (!totalAmount.equals(other.totalAmount))
 			return false;
 		return true;
+	}
+
+	@Override
+	public int compareTo(ServiceEntityAmount o) {
+		return 0;
 	}
 	
 

@@ -11,18 +11,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.JodaDateDeserializer;
-import com.mize.domain.util.JsonDateSerializer;
+import com.mize.domain.util.MizeDateTime;
 
 /**
  * @author HarishBurra
@@ -30,14 +24,14 @@ import com.mize.domain.util.JsonDateSerializer;
  */
 @Entity
 @Table(name = "srvc_enty_rqst_cvrg")
-public class ServiceEntityRequestCoverage extends MizeEntity {
+public class ServiceEntityRequestCoverage extends MizeSceEntity implements Comparable<ServiceEntityRequestCoverage> {
 	
 	private static final long serialVersionUID = 4345200969206488758L;
 	
 	private ServiceEntityRequest serviceEntityRequest;
 	private Long coverageId;
 	private String coverageName;
-	private DateTime coverageEndDate;
+	private MizeDateTime coverageEndDate;
 
 	public ServiceEntityRequestCoverage() {
 		
@@ -87,18 +81,13 @@ public class ServiceEntityRequestCoverage extends MizeEntity {
 	}
 	
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateSerializer.class)
-	@JsonInclude(Include.NON_NULL)
 	@Column(name = "coverage_end_date")
-	public DateTime getCoverageEndDate() {
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getCoverageEndDate() {
 		return coverageEndDate;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateDeserializer.class)
-	public void setCoverageEndDate(DateTime coverageEndDate) {
+	public void setCoverageEndDate(MizeDateTime coverageEndDate) {
 		this.coverageEndDate = coverageEndDate;
 	}
 
@@ -154,6 +143,12 @@ public class ServiceEntityRequestCoverage extends MizeEntity {
 				return false;
 		}
 		return true;
+	}
+
+	@Override
+	public int compareTo(ServiceEntityRequestCoverage o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 

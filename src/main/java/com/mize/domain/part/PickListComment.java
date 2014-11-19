@@ -14,11 +14,11 @@ import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.EntityComment;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
 @Entity
 @Table(name = "picklist_comment", uniqueConstraints = { @UniqueConstraint(columnNames = {"id"}) })
-public class PickListComment  extends MizeEntity {
+public class PickListComment  extends MizeSceEntity implements Comparable<PickListComment> {
 	private static final long serialVersionUID = 5105389907084215025L;
 	private PickList pickList;
 	private EntityComment comment;
@@ -96,6 +96,11 @@ public class PickListComment  extends MizeEntity {
 		} else if (!pickList.equals(other.pickList))
 			return false;
 		return true;
+	}
+
+	@Override
+	public int compareTo(PickListComment o) {
+		return 0;
 	}
 
 }

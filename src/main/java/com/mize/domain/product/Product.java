@@ -23,8 +23,6 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -34,18 +32,16 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.brand.Brand;
 import com.mize.domain.businessentity.BusinessEntity;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.DecimalValueDeserializer;
 import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.JodaDateDeserializer;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateSerializer;
+import com.mize.domain.util.MizeDateTime;
 import com.mize.domain.util.NumberValueSerializer;
 
 @javax.persistence.Entity
 @Table(name = "prod")
-public class Product  extends MizeEntity implements Comparable<Product>{
+public class Product  extends MizeSceEntity implements Comparable<Product>{
 	
 	private static final long serialVersionUID = 5379538452565383073L;
 	protected String name;
@@ -73,8 +69,7 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	private BusinessEntity tenant;
 	private BusinessEntity manufacturerBE;	
 	private List<ProductIntl> productIntl = new ArrayList<ProductIntl>();	
-	@DateTimeFormat(pattern="MM-dd-yyyy")
-	private DateTime releaseDate;
+	private MizeDateTime releaseDate;
 	@Transient
 	private User user;
 	private List<ProductCategory> categories = new ArrayList<ProductCategory>();
@@ -140,17 +135,12 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	
 	
 	@Column(name = "release_date")
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateSerializer.class)
-	@JsonInclude(Include.NON_NULL)
-	public DateTime getReleaseDate() {
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getReleaseDate() {
 		return releaseDate;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateDeserializer.class)	
-	public void setReleaseDate(DateTime releaseDate) {
+	public void setReleaseDate(MizeDateTime releaseDate) {
 		this.releaseDate = releaseDate;
 	}	
 
@@ -571,22 +561,18 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	}
 	
 	@Override	
-	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
-	@Type(type="com.mize.domain.util.DateTimeJPA")
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@Column(name = "created_date",updatable=false)
-	@JsonIgnore(value = false)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getCreatedDate() {
+	@JsonIgnore(false)
+	public MizeDateTime getCreatedDate() {
 		return createdDate;
 	}
 
 	@Override	
-	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
-	@Type(type="com.mize.domain.util.DateTimeJPA")
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@Column(name = "updated_date")
-	@JsonIgnore(value = false)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getUpdatedDate() {
+	@JsonIgnore(false)
+	public MizeDateTime getUpdatedDate() {
 		return updatedDate;
 	}
 
@@ -606,18 +592,14 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 
 	
 	@Override
-	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(false)
-	public void setCreatedDate(DateTime createdDate) {
+	public void setCreatedDate(MizeDateTime createdDate) {
 		super.createdDate = createdDate;
 	}
 
 	@Override
-	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(false)
-	public void setUpdatedDate(DateTime updatedDate) {
+	public void setUpdatedDate(MizeDateTime updatedDate) {
 		super.updatedDate = updatedDate;
 	}
 
@@ -637,9 +619,9 @@ public class Product  extends MizeEntity implements Comparable<Product>{
 	@PreUpdate
 	public void auditFields(){
 		if(createdDate==null && id==null){
-			setCreatedDate(DateTime.now());
+			setCreatedDate(MizeDateTime.now());
 		}
-		setUpdatedDate(DateTime.now());		
+		setUpdatedDate(MizeDateTime.now());		
 	}
 
 	@Override

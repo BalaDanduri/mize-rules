@@ -22,32 +22,26 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.common.Gender;
 import com.mize.domain.common.Locale;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.common.PostalAddress;
 import com.mize.domain.product.UserProduct;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.JodaDateDeserializer;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateSerializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name = "user_profile")
 @JsonAutoDetect
-public class UserProfile extends MizeEntity implements Serializable, Comparable<UserProfile> {
+public class UserProfile extends MizeSceEntity implements Serializable, Comparable<UserProfile> {
 
 	private static final long serialVersionUID = 1396029824729565589L;
 	private Long userId;
@@ -67,8 +61,7 @@ public class UserProfile extends MizeEntity implements Serializable, Comparable<
 	private String firstName;
 	private String middleName;
 	private String lastName;	
-	@DateTimeFormat (pattern="dd-MM-yyyy")
-	private DateTime birthdate;
+	private MizeDateTime birthdate;
 	private Gender gender;
 	private String cityState;
 	private List<User> friends = new ArrayList<User>();
@@ -101,7 +94,7 @@ public class UserProfile extends MizeEntity implements Serializable, Comparable<
 	}
 	
 	public UserProfile(Long userId, UserType userType, PostalAddress postalAddress,
-			String firstName, String lastName, DateTime birthdate, Gender gender,String photoLink, String jobTitle) {
+			String firstName, String lastName, MizeDateTime birthdate, Gender gender,String photoLink, String jobTitle) {
 		
 		this.userId = userId;
 		this.userType = userType;
@@ -115,7 +108,7 @@ public class UserProfile extends MizeEntity implements Serializable, Comparable<
 	}
 	
 	public UserProfile(Long userId, UserType userType, PostalAddress postalAddress,
-			String firstName, String lastName, DateTime birthdate, Gender gender) {
+			String firstName, String lastName, MizeDateTime birthdate, Gender gender) {
 		
 		this.userId = userId;
 		this.userType = userType;
@@ -198,18 +191,13 @@ public class UserProfile extends MizeEntity implements Serializable, Comparable<
 		this.lastName = lastName;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonSerialize(using=JsonDateSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
 	@Column(name = "birth_day",updatable = false, nullable = true)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
-	public DateTime getBirthdate() {
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getBirthdate() {
 		return birthdate;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateDeserializer.class)
-	public void setBirthdate(DateTime birthdate) {
+	public void setBirthdate(MizeDateTime birthdate) {
 		this.birthdate = birthdate;
 	}
 	
@@ -660,37 +648,37 @@ public class UserProfile extends MizeEntity implements Serializable, Comparable<
 		this.createdBy = createdBy;
 	}
 	
-	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
+	/*@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using = JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
+	@JsonInclude(Include.NON_DEFAULT)*/
 	@JsonIgnore(false)
 	@Column(name = "created_date", updatable = false)
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	public DateTime getCreatedDate() {
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getCreatedDate() {
 		return this.createdDate;
 	}
 
-	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using = JodaDateTimeDeserializer.class)
+	/*@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using = JodaDateTimeDeserializer.class)*/
 	@JsonIgnore(false)
-	public void setCreatedDate(DateTime createdDate) {
+	public void setCreatedDate(MizeDateTime createdDate) {
 		this.createdDate = createdDate;
 	}
 	
-	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
+	/*@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using = JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
+	@JsonInclude(Include.NON_DEFAULT)*/
 	@Column(name = "updated_date")
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
 	@JsonIgnore(false)
-	public DateTime getUpdatedDate() {
+	public MizeDateTime getUpdatedDate() {
 		return this.updatedDate;
 	}
 	
-	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using = JodaDateTimeDeserializer.class)
+	/*@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using = JodaDateTimeDeserializer.class)*/
 	@JsonIgnore(false)
-	public void setUpdatedDate(DateTime updatedDate) {
+	public void setUpdatedDate(MizeDateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}
 

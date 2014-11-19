@@ -13,28 +13,22 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.common.MizeEntity;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name="token_action")
-public class TokenAction extends MizeEntity implements Comparable<TokenAction> {
+public class TokenAction extends MizeSceEntity implements Comparable<TokenAction> {
 	
 	private static final long serialVersionUID = 7260474936022570280L;
 	private String token;
 	private User targetUser;
 	private TokenType type;
-	private DateTime created;
-	private DateTime expires;
+	private MizeDateTime created;
+	private MizeDateTime expires;
 	private String tokenType;
 	public TokenAction() {		
 	}
@@ -61,7 +55,7 @@ public class TokenAction extends MizeEntity implements Comparable<TokenAction> {
 	}
 	
 	public TokenAction(Long id, String token, User targetUser, TokenType type,
-			DateTime created, DateTime expires) {
+			MizeDateTime created, MizeDateTime expires) {
 		this.id = id;
 		this.token = token;
 		this.targetUser = targetUser;
@@ -123,35 +117,25 @@ public class TokenAction extends MizeEntity implements Comparable<TokenAction> {
 		this.type = TokenType.valueOf(type);
 	}
 	
+	
 	@Column(name="expires")
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getExpires() {
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getExpires() {
 		return expires;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	public void setExpires(DateTime expires) {
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
+	public void setExpires(MizeDateTime expires) {
 		this.expires = expires;
 	}
-
+	
 	@Column(name="created",updatable = false)
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getCreated() {
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getCreated() {
 		return created;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	public void setCreated(DateTime created) {
+	public void setCreated(MizeDateTime created) {
 		this.created = created;
 	}
 	
@@ -159,7 +143,7 @@ public class TokenAction extends MizeEntity implements Comparable<TokenAction> {
 	@JsonProperty("wrapper")
 	@JsonIgnore
 	public boolean isValid() {
-		return (this.expires!=null?this.expires.isAfter(DateTime.now()) : false);
+		return ((this.expires!=null && this.expires.getDateTime() != null)?this.expires.getDateTime().isAfter(DateTime.now()) : false);
 	}
 
 	@JsonIgnore(value=false)
@@ -184,37 +168,27 @@ public class TokenAction extends MizeEntity implements Comparable<TokenAction> {
 		this.createdBy = createdBy;
 	}
 	
-	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using = JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	@JsonIgnore(value=false)
 	@Column(name = "created_date", updatable = false)
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	public DateTime getCreatedDate() {
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
+	@JsonIgnore(value=false)
+	public MizeDateTime getCreatedDate() {
 		return this.createdDate;
 	}
-
-	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using = JodaDateTimeDeserializer.class)
+	
 	@JsonIgnore(value=false)
-	public void setCreatedDate(DateTime createdDate) {
+	public void setCreatedDate(MizeDateTime createdDate) {
 		this.createdDate = createdDate;
 	}
 	
-	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using = JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
 	@Column(name = "updated_date")
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
 	@JsonIgnore(value=false)
-	public DateTime getUpdatedDate() {
+	public MizeDateTime getUpdatedDate() {
 		return this.updatedDate;
 	}
 	
-	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using = JodaDateTimeDeserializer.class)
 	@JsonIgnore(value=false)
-	public void setUpdatedDate(DateTime updatedDate) {
+	public void setUpdatedDate(MizeDateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}
 	

@@ -3,7 +3,7 @@ package com.mize.domain.common;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LongUrl extends MizeEntity implements Comparable<LongUrl>{
+public class LongUrl extends MizeSceEntity implements Comparable<LongUrl>{
 
 	private static final long serialVersionUID = -5226291820868027579L;
 	private String errorCode;

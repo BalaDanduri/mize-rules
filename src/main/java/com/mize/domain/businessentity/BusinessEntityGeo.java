@@ -11,11 +11,11 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
 @Entity(name="com.mize.domain.businessentity.BusinessEntityGeo")
 @Table(name="business_entity_geo")
-public class BusinessEntityGeo extends MizeEntity implements Comparable<BusinessEntityGeo> {
+public class BusinessEntityGeo extends MizeSceEntity implements Comparable<BusinessEntityGeo> {
 	private static final long serialVersionUID = -2024187778230039496L;
 	private Long  beAddressId;
 	private Double latitude;

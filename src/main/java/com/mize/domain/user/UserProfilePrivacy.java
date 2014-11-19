@@ -9,21 +9,15 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.auth.User;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
 @Entity
 @Table(name="user_profile_privacy")
-public class UserProfilePrivacy extends MizeEntity implements Comparable<UserProfilePrivacy> {
-	/**
-	 * 
-	 */
+public class UserProfilePrivacy extends MizeSceEntity implements Comparable<UserProfilePrivacy> {
+	
 	private static final long serialVersionUID = 6808879417363134780L;
-	/*private Long userId;*/
 	private String displayBirthYear;
 	private Long email;
 	private Long friends;
@@ -33,10 +27,6 @@ public class UserProfilePrivacy extends MizeEntity implements Comparable<UserPro
 	private Long birthDate;
 	private Long gender;
 	private Long cityState;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	protected DateTime createdDate;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	protected DateTime updatedDate;
 	protected int createdBy;
 	protected int updatedBy;
 	private User user;

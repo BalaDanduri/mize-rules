@@ -3,18 +3,10 @@ package com.mize.domain.user;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.common.Entity;
 import com.mize.domain.product.Product;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.util.MizeDateTime;
 
 public class UserActivityLog extends Entity{
 	
@@ -25,10 +17,8 @@ public class UserActivityLog extends Entity{
 	private Integer activityAction;
 	private String activityStatus;
 	private String activityComments;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	protected DateTime firstActivityTime;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	protected DateTime lastActivityTime;
+	protected MizeDateTime firstActivityTime;
+	protected MizeDateTime lastActivityTime;
 	private String userGroupName;
 	private String activityName;
 	private Integer mutualFriendsCount;
@@ -78,29 +68,19 @@ public class UserActivityLog extends Entity{
 	}
 	
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getFirstActivityTime() {
+	public MizeDateTime getFirstActivityTime() {
 		return firstActivityTime;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
-	public void setFirstActivityTime(DateTime firstActivityTime) {
+	public void setFirstActivityTime(MizeDateTime firstActivityTime) {
 		this.firstActivityTime = firstActivityTime;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getLastActivityTime() {
+	public MizeDateTime getLastActivityTime() {
 		return lastActivityTime;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
-	public void setLastActivityTime(DateTime lastActivityTime) {
+	public void setLastActivityTime(MizeDateTime lastActivityTime) {
 		this.lastActivityTime = lastActivityTime;
 	}
 	

@@ -18,7 +18,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityContact;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JPASerializer;
 
 /**
@@ -27,7 +27,7 @@ import com.mize.domain.util.JPASerializer;
  */
 @Entity
 @Table(name = "srvc_enty_prvdr")
-public class ServiceEntityProvider extends MizeEntity {
+public class ServiceEntityProvider extends MizeSceEntity implements Comparable<ServiceEntityProvider> {
 
 	private static final long serialVersionUID = 9214349120967693304L;
 	
@@ -289,6 +289,11 @@ public class ServiceEntityProvider extends MizeEntity {
 		} else if (!typeCode.equals(other.typeCode))
 			return false;
 		return true;
+	}
+
+	@Override
+	public int compareTo(ServiceEntityProvider o) {
+		return 0;
 	}	
 	
 

@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "entity_address_geo")
-public class EntityAddressGeo extends MizeEntity implements Comparable<EntityAddressGeo>{
+public class EntityAddressGeo extends MizeSceEntity implements Comparable<EntityAddressGeo>{
 
 	private static final long serialVersionUID = 1L;
 	@Transient

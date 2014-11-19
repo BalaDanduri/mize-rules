@@ -2,7 +2,7 @@ package com.mize.domain.common;
 
 import com.mize.domain.servicelocator.BusinessEntity;
 
-public class WorkQueueSearch extends MizeEntity {
+public class WorkQueueSearch extends MizeSceEntity implements Comparable<WorkQueueSearch> {
 
 	private static final long serialVersionUID = -1226485305364653303L;
 	
@@ -91,6 +91,13 @@ public class WorkQueueSearch extends MizeEntity {
 		builder.append(type);
 		builder.append("]");
 		return builder.toString();
+	}
+
+
+	@Override
+	public int compareTo(WorkQueueSearch arg0) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 

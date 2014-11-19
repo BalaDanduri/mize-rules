@@ -18,11 +18,11 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.brand.Brand;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JPASerializer;
 @Entity
 @Table(name = "prod_repeat_ship_options")
-public class ProductRepeatOrderShipOptions extends MizeEntity implements Comparable<ProductRepeatOrderShipOptions>{
+public class ProductRepeatOrderShipOptions extends MizeSceEntity implements Comparable<ProductRepeatOrderShipOptions>{
 	
 	private static final long serialVersionUID = -8538782322766644151L;
 	private Brand brand;

@@ -14,13 +14,13 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JPASerializer;
 
 
 @Entity
 @Table(name = "prod_regn_warranty")
-public class ProductRegistrationWarranty extends MizeEntity {
+public class ProductRegistrationWarranty extends MizeSceEntity implements Comparable<ProductRegistrationWarranty> {
 
 	private static final long serialVersionUID = -4939768925948855898L;
 	
@@ -105,6 +105,12 @@ public class ProductRegistrationWarranty extends MizeEntity {
 		return "ProductRegistrationWarranty [id=" + id
 				+ ", productRegistration=" + productRegistration
 				+ ", warranty=" + warranty + "]";
+	}
+
+	@Override
+	public int compareTo(ProductRegistrationWarranty o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	

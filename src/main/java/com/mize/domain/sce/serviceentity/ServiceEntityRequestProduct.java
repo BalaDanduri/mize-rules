@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityContact;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.product.Product;
 import com.mize.domain.product.ProductCategory;
 import com.mize.domain.product.ProductRegistration;
@@ -30,7 +30,7 @@ import com.mize.domain.util.JPASerializer;
  */
 @Entity
 @Table(name = "srvc_enty_rqst_prd")
-public class ServiceEntityRequestProduct extends MizeEntity {
+public class ServiceEntityRequestProduct extends MizeSceEntity implements Comparable<ServiceEntityRequestProduct> {
 
 	private static final long serialVersionUID = -1812475489451721317L;
 	
@@ -397,6 +397,12 @@ public class ServiceEntityRequestProduct extends MizeEntity {
 				return false;
 		}
 		return true;
+	}
+
+	@Override
+	public int compareTo(ServiceEntityRequestProduct o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}	
 	
 

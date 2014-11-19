@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.common.EntityContact;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JPASerializer;
 /**
  * @author Raghavendra Serikar
@@ -30,7 +30,7 @@ import com.mize.domain.util.JPASerializer;
 @DiscriminatorColumn(name = "discriminator")
 @DiscriminatorValue("BusinessEntityContact")
 @Table(name="business_entity_contact")
-public class BusinessEntityContact extends MizeEntity implements Comparable<BusinessEntityContact> {
+public class BusinessEntityContact extends MizeSceEntity implements Comparable<BusinessEntityContact> {
 	private static final long serialVersionUID = -1908157637318196738L;
 	private BusinessEntity businessEntity;
 	private EntityContact entityContact;

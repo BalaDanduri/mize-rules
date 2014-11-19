@@ -13,7 +13,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
-import org.joda.time.DateTime;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,6 +25,7 @@ import com.mize.domain.product.Product;
 import com.mize.domain.product.ProductRegistration;
 import com.mize.domain.product.ProductSerial;
 import com.mize.domain.test.util.JPATest;
+import com.mize.domain.util.MizeDateTime;
 
 @ContextConfiguration(locations={"/test-context.xml"})
 public class ServiceEntityRequestTest extends JPATest {
@@ -160,8 +160,8 @@ public class ServiceEntityRequestTest extends JPATest {
 		serviceEntityRequest = new ServiceEntityRequest();
 		serviceEntityRequest.setRequestType("Repair");
 		serviceEntityRequest.setRepairSiteCode("RST100");
-		serviceEntityRequest.setRepairDate(DateTime.now().minusDays(3));
-		serviceEntityRequest.setFailureDate(DateTime.now().minusDays(4));
+		serviceEntityRequest.setRepairDate(MizeDateTime.now().minusDays(3));
+		serviceEntityRequest.setFailureDate(MizeDateTime.now().minusDays(4));
 		
 		serviceEntityRequest.setCauseCode("CUSC001");
 		serviceEntityRequest.setCauseDescription("Monitor problem");
@@ -170,7 +170,7 @@ public class ServiceEntityRequestTest extends JPATest {
 		serviceEntityRequest.setCorrectiveActionCode("CORC001");
 		serviceEntityRequest.setCorrectiveActionDescription("Turn off and on the monitor");
 		serviceEntityRequest.setCreatedBy(779L);
-		serviceEntityRequest.setCreatedDate(DateTime.now());
+		serviceEntityRequest.setCreatedDate(MizeDateTime.now());
 		serviceEntityRequest.setServiceEntity(serviceEntity);
 		
 		ServiceEntityAmount partAmount = new ServiceEntityAmount();
@@ -235,7 +235,7 @@ public class ServiceEntityRequestTest extends JPATest {
 	private void createCoverage() {
 		coverage = new ServiceEntityRequestCoverage();
 		coverage.setServiceEntityRequest(serviceEntityRequest);
-		coverage.setCoverageEndDate(DateTime.now().plusYears(1));
+		coverage.setCoverageEndDate(MizeDateTime.now().addYears(1));
 		coverage.setCoverageName("Standard 1 Year Warranty");
 	}
 	

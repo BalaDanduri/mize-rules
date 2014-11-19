@@ -37,7 +37,7 @@ import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name = "discount", uniqueConstraints = { @UniqueConstraint(columnNames = {"id"}) })
-public class Discount extends MizeSceEntity {
+public class Discount extends MizeSceEntity implements Comparable<Discount> {
 
 	private static final long serialVersionUID = -5386693947574878416L;	
 	private BusinessEntity tenant;
@@ -391,6 +391,12 @@ public class Discount extends MizeSceEntity {
 
 	public void setOrderMaximumAmount(BigDecimal orderMaximumAmount) {
 		this.orderMaximumAmount = orderMaximumAmount;
+	}
+
+	@Override
+	public int compareTo(Discount o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	

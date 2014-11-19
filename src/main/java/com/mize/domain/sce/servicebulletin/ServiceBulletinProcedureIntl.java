@@ -12,11 +12,10 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
-import org.joda.time.DateTime;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.Locale;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.MizeDateTime;
 
 /**
  * @author SrinivasThodupunuri
@@ -25,7 +24,7 @@ import com.mize.domain.common.MizeEntity;
 
 @Entity
 @Table(name = "srvc_blltn_proc_intl")
-public class ServiceBulletinProcedureIntl extends MizeEntity {
+public class ServiceBulletinProcedureIntl extends MizeSceEntity implements Comparable<ServiceBulletinProcedureIntl> {
 	
 	private static final long serialVersionUID = -1164448119809296797L;
 	private ServiceBulletinProcedure serviceBulletinProcedure;
@@ -108,9 +107,9 @@ public class ServiceBulletinProcedureIntl extends MizeEntity {
 	@PreUpdate
 	public void auditFields(){
 		if(createdDate==null && id==null){
-			setCreatedDate(DateTime.now());
+			setCreatedDate(MizeDateTime.now());
 		}
-		setUpdatedDate(DateTime.now());		
+		setUpdatedDate(MizeDateTime.now());		
 	}
 	
 	@Column(name = "complaint_descr", length = 1000, nullable = true)
@@ -212,6 +211,12 @@ public class ServiceBulletinProcedureIntl extends MizeEntity {
 		} else if (!serviceBulletinProcedure.equals(other.serviceBulletinProcedure))
 			return false;
 		return true;
+	}
+
+	@Override
+	public int compareTo(ServiceBulletinProcedureIntl o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

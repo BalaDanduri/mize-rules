@@ -22,7 +22,7 @@ import com.mize.domain.util.JPASerializer;
 
 @Entity
 @Table(name = "country")
-public class Country extends MizeEntity implements Comparable<Country>{
+public class Country extends MizeSceEntity implements Comparable<Country>{
 
 	private static final long serialVersionUID = 3412102873370612905L;
 	

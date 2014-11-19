@@ -10,12 +10,12 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Range;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.NonEmpty;
 
 @Entity
 @Table(name = "user_signup")
-public class UserSignup extends MizeEntity implements Comparable<UserSignup>{
+public class UserSignup extends MizeSceEntity implements Comparable<UserSignup>{
 
 	private static final long serialVersionUID = 6078249173358032532L;
 	

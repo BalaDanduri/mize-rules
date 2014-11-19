@@ -14,11 +14,11 @@ import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.EntityComment;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
 @Entity
 @Table(name = "discount_comment", uniqueConstraints = { @UniqueConstraint(columnNames = {"id"}) })
-public class DiscountComment extends MizeEntity {
+public class DiscountComment extends MizeSceEntity implements Comparable<DiscountComment> {
 
 	private static final long serialVersionUID = -867858860499195762L;
 	private Discount discount;
@@ -96,6 +96,11 @@ public class DiscountComment extends MizeEntity {
 		} else if (!comment.equals(other.comment))
 			return false;	
 		return true;
+	}
+
+	@Override
+	public int compareTo(DiscountComment o) {
+		return 0;
 	}
 
 }

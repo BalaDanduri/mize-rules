@@ -16,12 +16,12 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.common.Locale;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JPASerializer;
 
 @Entity
 @Table(name="reason_intl")
-public class ReasonIntl extends MizeEntity {
+public class ReasonIntl extends MizeSceEntity implements Comparable<ReasonIntl> {
 
 	private static final long serialVersionUID = 3605561224344122428L;
 	private Reason reason;
@@ -124,6 +124,13 @@ public class ReasonIntl extends MizeEntity {
 	@Override
 	public String toString() {
 		return "ReasonIntl [desc=" + description + ", locale=" + locale + "]";
+	}
+
+
+	@Override
+	public int compareTo(ReasonIntl o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 }

@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityContact;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JPASerializer;
 
 @Entity
@@ -29,7 +29,7 @@ import com.mize.domain.util.JPASerializer;
 @DiscriminatorColumn(name = "discriminator")
 @DiscriminatorValue("InspectionFormRequestor")
 @Table(name = "insp_form_rqstr")
-public class InspectionFormRequestor extends MizeEntity {
+public class InspectionFormRequestor extends MizeSceEntity implements Comparable<InspectionFormRequestor> {
 
 	
 	private static final long serialVersionUID = 344568895809535824L;
@@ -283,6 +283,12 @@ public class InspectionFormRequestor extends MizeEntity {
 				+ ", requestorId=" + requestorId + ", requestorReference="
 				+ requestorReference + ", subTypeCode=" + subTypeCode
 				+ ", typeCode=" + typeCode + "]";
+	}
+
+	@Override
+	public int compareTo(InspectionFormRequestor arg0) {
+		// TODO Auto-generated method stub
+		return 0;
 	}	
 
 

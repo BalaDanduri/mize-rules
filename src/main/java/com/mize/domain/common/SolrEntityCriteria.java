@@ -18,7 +18,7 @@ import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
-public class SolrEntityCriteria extends MizeEntity implements Comparable<SolrEntityCriteria>{
+public class SolrEntityCriteria extends MizeSceEntity implements Comparable<SolrEntityCriteria>{
 	
 	private static final long serialVersionUID = -6647895629560783567L;
 	private String entityName;

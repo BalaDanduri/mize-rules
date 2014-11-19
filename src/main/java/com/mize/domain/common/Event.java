@@ -16,7 +16,7 @@ import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name = "event")
-public class Event extends MizeEntity implements Comparable<Event>{
+public class Event extends MizeSceEntity implements Comparable<Event>{
 
 	private static final long serialVersionUID = 1166174073700459014L;
 	private String code;

@@ -1,9 +1,9 @@
 package com.mize.domain.shipping;
 
 import com.mize.domain.businessentity.BusinessEntity;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
-public class ShipmentEntity extends MizeEntity implements Comparable<ShipmentEntity>{
+public class ShipmentEntity extends MizeSceEntity implements Comparable<ShipmentEntity>{
 	
 	private static final long serialVersionUID = -3279332499661281505L;	
 	private String requestType;

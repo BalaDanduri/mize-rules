@@ -10,18 +10,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.JodaDateDeserializer;
-import com.mize.domain.util.JsonDateSerializer;
+import com.mize.domain.util.MizeDateTime;
 
 /**
  * @author SrinivasThodupunuri
@@ -29,14 +23,14 @@ import com.mize.domain.util.JsonDateSerializer;
  */
 @Entity
 @Table(name = "srvc_blltn_audit")
-public class ServiceBulletinAudit extends MizeEntity {
+public class ServiceBulletinAudit extends MizeSceEntity implements Comparable<ServiceBulletinAudit> {
 
 	
 	private static final long serialVersionUID = -4801057184698573353L;
 	
 	private ServiceBulletin serviceBulletin;
 	private String statusCode;
-	private DateTime statusDate;
+	private MizeDateTime statusDate;
 	private Long statusBy;
 
 	public ServiceBulletinAudit() {
@@ -78,18 +72,14 @@ public class ServiceBulletinAudit extends MizeEntity {
 		this.statusCode = statusCode;
 	}
 	
+	
 	@Column(name = "status_date", nullable = true)
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateSerializer.class)
-	@JsonInclude(Include.NON_NULL)
-	public DateTime getStatusDate() {
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getStatusDate() {
 		return statusDate;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateDeserializer.class)
-	public void setStatusDate(DateTime statusDate) {
+	public void setStatusDate(MizeDateTime statusDate) {
 		this.statusDate = statusDate;
 	}
 	
@@ -152,6 +142,12 @@ public class ServiceBulletinAudit extends MizeEntity {
 		} else if (!statusDate.equals(other.statusDate))
 			return false;
 		return true;
+	}
+
+	@Override
+	public int compareTo(ServiceBulletinAudit o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

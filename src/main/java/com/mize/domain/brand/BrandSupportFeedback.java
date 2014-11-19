@@ -2,20 +2,10 @@ package com.mize.domain.brand;
 
 import java.util.List;
 
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
+import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.MizeDateTime;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.common.MizeEntity;
-import com.mize.domain.util.JodaDateDeserializer;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateSerializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
-
-public class BrandSupportFeedback extends MizeEntity implements Comparable<BrandSupportFeedback>{
+public class BrandSupportFeedback extends MizeSceEntity implements Comparable<BrandSupportFeedback>{
 
 	private static final long serialVersionUID = 7832228152060883799L;
 	private Long supportLogId;
@@ -27,18 +17,18 @@ public class BrandSupportFeedback extends MizeEntity implements Comparable<Brand
 	private int rating;
 	private String feedback;
 	private boolean resolved;	
-	private DateTime feedbackDate;
+	private MizeDateTime feedbackDate;
 	private String ticketNo;
 	private Long brandSupportId;
 	private List<PostToSocialMedia> socialMediaPosts;
-	private DateTime startDate;
+	private MizeDateTime startDate;
 
 	public BrandSupportFeedback(){
 		
 	}
 
 	public BrandSupportFeedback(long supportLogId, long id, Brand brand, long brandSupportId, long userId, String userName, String supportType, int rating,
-			String feedback, boolean resolved, DateTime feedbackDate, String ticketNo, List<PostToSocialMedia> socialMediaPosts) {
+			String feedback, boolean resolved, MizeDateTime feedbackDate, String ticketNo, List<PostToSocialMedia> socialMediaPosts) {
 		this.supportLogId = supportLogId;
 		this.id = id;
 		this.brand = brand;
@@ -55,16 +45,10 @@ public class BrandSupportFeedback extends MizeEntity implements Comparable<Brand
 	}
 	
 
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonSerialize(using=JsonDateSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getStartDate() {
+	public MizeDateTime getStartDate() {
 		return startDate;
 	}
-
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateDeserializer.class)
-	public void setStartDate(DateTime startDate) {
+	public void setStartDate(MizeDateTime startDate) {
 		this.startDate = startDate;
 	}
 
@@ -141,16 +125,11 @@ public class BrandSupportFeedback extends MizeEntity implements Comparable<Brand
 		this.resolved = resolved;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getFeedbackDate() {
+	public MizeDateTime getFeedbackDate() {
 		return feedbackDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	public void setFeedbackDate(DateTime feedbackDate) {
+	public void setFeedbackDate(MizeDateTime feedbackDate) {
 		this.feedbackDate = feedbackDate;
 	}
 

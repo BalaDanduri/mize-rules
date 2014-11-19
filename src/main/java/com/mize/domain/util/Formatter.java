@@ -19,6 +19,7 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.joda.time.Days;
 import org.joda.time.Hours;
 import org.joda.time.Minutes;
@@ -257,6 +258,11 @@ public final class Formatter {
 		return (dateTime == null ? null : dateTime.toString(DB_DATE_TIME_FORMAT));
 	}
 	
+	public static String getDBEndDateTime(MizeDateTime mizeDateTime){		 
+		return (mizeDateTime == null ? null : getDBEndDateTime(mizeDateTime.getDateTime()));
+		
+	}
+	
 	public static DateTime toEndDateTime(DateTime dateTime){
 		if(dateTime != null){
 			dateTime = dateTime.withTime(23, 59, 59, 999);
@@ -438,7 +444,7 @@ public final class Formatter {
 	public static MizeDateTime toMizeDateTime(Timestamp timestamp){
 		MizeDateTime mizeDateTime = null;
 		if(timestamp!= null){
-			mizeDateTime = new MizeDateTime(new DateTime(timestamp));
+			mizeDateTime = new MizeDateTime(new DateTime(timestamp,DateTimeZone.UTC));
 		}
 		return mizeDateTime;
 	}
@@ -610,7 +616,12 @@ public final class Formatter {
 		}
 		return 0;		
 	}
-	
+	public static int daysDiff(MizeDateTime time1,MizeDateTime time2){
+		if(time1 != null && time2 != null){
+			return time1.compareTo(time2);
+		}
+		return 0;	
+	}
 	public static int daysBetween(DateTime startDate , DateTime endDate){
 		if(startDate != null && endDate != null){
 			return Days.daysBetween(startDate, endDate).getDays();
@@ -695,6 +706,7 @@ public final class Formatter {
 		}
 		return time;
 	}
+	
 	
 	public static int calculatePageSize(String pagesize) {
 		int pageSize = Formatter.intValue(pagesize) == 0 ? 10: Formatter.intValue(pagesize);

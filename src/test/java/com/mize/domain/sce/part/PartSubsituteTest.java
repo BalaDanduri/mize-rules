@@ -11,7 +11,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
@@ -24,6 +23,7 @@ import com.mize.domain.part.PartSubstitute;
 import com.mize.domain.product.PartSubstituteComment;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;
+import com.mize.domain.util.MizeDateTime;
 
 @ContextConfiguration(locations={"/test-context.xml"})
 public class PartSubsituteTest extends JPATest {
@@ -87,9 +87,9 @@ public class PartSubsituteTest extends JPATest {
 			partSubstitute.setFamilyCode("KW001");
 			partSubstitute.setCode("admin"+System.currentTimeMillis());
 			partSubstitute.setCreatedBy(776L);
-			partSubstitute.setCreatedDate(DateTime.now());
-			partSubstitute.setEndDate(DateTime.now());
-			partSubstitute.setDate(DateTime.now());
+			partSubstitute.setCreatedDate(MizeDateTime.now());
+			partSubstitute.setEndDate(MizeDateTime.now());
+			partSubstitute.setDate(MizeDateTime.now());
 			partSubstitute.setSequenceNo(1);
 			partSubstitute.setUpdatedBy(776l);
 			
@@ -122,9 +122,9 @@ public class PartSubsituteTest extends JPATest {
 				partSubstitute.setFamilyCode(rs.getString("family_code"));
 				partSubstitute.setCode(rs.getString("substitute_code"));
 				partSubstitute.setCreatedBy(rs.getLong("created_by"));
-				partSubstitute.setCreatedDate(Formatter.dateTime(rs.getTimestamp("created_date")));
-				partSubstitute.setEndDate(Formatter.dateTime(rs.getTimestamp("end_date")));
-				partSubstitute.setDate(Formatter.dateTime(rs.getTimestamp("substitute_date")));
+				partSubstitute.setCreatedDate(Formatter.toMizeDateTime(rs.getTimestamp("created_date")));
+				partSubstitute.setEndDate(Formatter.toMizeDateTime(rs.getTimestamp("end_date")));
+				partSubstitute.setDate(Formatter.toMizeDateTime(rs.getTimestamp("substitute_date")));
 				partSubstitute.setSequenceNo(rs.getInt("sequence_no"));
 				partSubstitute.setUpdatedBy(rs.getLong("updated_by"));
 				

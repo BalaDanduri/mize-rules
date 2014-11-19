@@ -15,11 +15,11 @@ import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mize.domain.brand.Brand;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
 @Entity
 @Table(name = "prod_repeat_type")
-public class ProductRepeatOrderType extends MizeEntity implements Comparable<ProductRepeatOrderType> {
+public class ProductRepeatOrderType extends MizeSceEntity implements Comparable<ProductRepeatOrderType> {
 
 	private static final long serialVersionUID = 6185921069844911176L;
 

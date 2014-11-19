@@ -1,9 +1,9 @@
 package com.mize.domain.user;
 
 import com.mize.domain.brand.Brand;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
-public class Division extends MizeEntity implements Comparable<Division>{
+public class Division extends MizeSceEntity implements Comparable<Division>{
 
 	private static final long serialVersionUID = -5870162404398103231L;
 	private String name;

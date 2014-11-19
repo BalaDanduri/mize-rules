@@ -6,11 +6,11 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.mize.domain.brand.Brand;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
 @Entity
 @Table(name="engagement_options_link")
-public class EngagementLink extends MizeEntity{
+public class EngagementLink extends MizeSceEntity implements Comparable<EngagementLink>{
 	private static final long serialVersionUID = 8076842078721402700L;
 	
 	
@@ -175,6 +175,12 @@ public class EngagementLink extends MizeEntity{
 				+ engagementLinkPK + ", product=" + product + ", brand="
 				+ brand + ", productCategory=" + productCategory + ", id=" + id
 				+ "]";
+	}
+
+	@Override
+	public int compareTo(EngagementLink o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 }

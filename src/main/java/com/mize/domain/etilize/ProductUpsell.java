@@ -1,9 +1,9 @@
 package com.mize.domain.etilize;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
 
-public class ProductUpsell extends MizeEntity{
+public class ProductUpsell extends MizeSceEntity{
 
 	private static final long serialVersionUID = 6738887069779058581L;
 	private Long prodId;

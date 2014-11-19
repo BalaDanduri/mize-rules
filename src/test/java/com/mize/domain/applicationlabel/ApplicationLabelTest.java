@@ -10,7 +10,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
@@ -20,6 +19,7 @@ import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.Locale;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;
+import com.mize.domain.util.MizeDateTime;
 @ContextConfiguration(locations={"/test-context.xml"})
 public class ApplicationLabelTest extends JPATest{
 
@@ -62,8 +62,8 @@ public class ApplicationLabelTest extends JPATest{
 		appLabel.setCategory("application");
 		appLabel.setCreatedBy(796L);
 		appLabel.setUpdatedBy(796L);
-		appLabel.setCreatedDate(DateTime.now());
-		appLabel.setUpdatedDate(DateTime.now());
+		appLabel.setCreatedDate(MizeDateTime.now());
+		appLabel.setUpdatedDate(MizeDateTime.now());
 		return appLabel;
 	}
 	private void setAppLabelIntl(ApplicationLabel appLabel2) {
@@ -76,8 +76,8 @@ public class ApplicationLabelTest extends JPATest{
 		appLabelIntl.setDescription("Label Description");
 		appLabelIntl.setCreatedBy(796L);
 		appLabelIntl.setUpdatedBy(796L);
-		appLabelIntl.setCreatedDate(DateTime.now());
-		appLabelIntl.setUpdatedDate(DateTime.now());
+		appLabelIntl.setCreatedDate(MizeDateTime.now());
+		appLabelIntl.setUpdatedDate(MizeDateTime.now());
 		intls.add(appLabelIntl);
 		appLabel.setIntls(intls);
 		
@@ -98,8 +98,8 @@ public class ApplicationLabelTest extends JPATest{
 			appLabel.setIsDefault(rs.getString("is_default"));
 			appLabel.setCreatedBy(rs.getLong("created_by"));
 			appLabel.setUpdatedBy(rs.getLong("updated_by"));
-			appLabel.setCreatedDate(Formatter.dateTime(rs.getTimestamp("created_date")));
-			appLabel.setUpdatedDate(Formatter.dateTime(rs.getTimestamp("updated_date")));	
+			appLabel.setCreatedDate(Formatter.toMizeDateTime(rs.getTimestamp("created_date")));
+			appLabel.setUpdatedDate(Formatter.toMizeDateTime(rs.getTimestamp("updated_date")));	
 			return appLabel;
 		}	
 	}
@@ -119,8 +119,8 @@ public class ApplicationLabelTest extends JPATest{
 			appLabelIntl.setDescription(rs.getString("label_description"));
 			appLabelIntl.setCreatedBy(rs.getLong("created_by"));
 			appLabelIntl.setUpdatedBy(rs.getLong("updated_by"));
-			appLabelIntl.setCreatedDate(Formatter.dateTime(rs.getTimestamp("created_date")));
-			appLabelIntl.setUpdatedDate(Formatter.dateTime(rs.getTimestamp("updated_date")));
+			appLabelIntl.setCreatedDate(Formatter.toMizeDateTime(rs.getTimestamp("created_date")));
+			appLabelIntl.setUpdatedDate(Formatter.toMizeDateTime(rs.getTimestamp("updated_date")));
 			return appLabelIntl;
 		}
 		

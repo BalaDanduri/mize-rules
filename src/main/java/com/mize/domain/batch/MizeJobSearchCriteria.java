@@ -1,12 +1,12 @@
 package com.mize.domain.batch;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.MizeDate;
 
-public class MizeJobSearchCriteria extends MizeEntity{
+public class MizeJobSearchCriteria extends MizeSceEntity implements Comparable<MizeJobSearchCriteria>{
 
 	/**
 	 * 
@@ -17,10 +17,10 @@ public class MizeJobSearchCriteria extends MizeEntity{
 	private String jobName;
 	private Long instanceId;
 	private String instanceCode;
-	private Date jobFromDate;
-	private Date jobToDate;
-	private Date instanceFromDate;
-	private Date instanceToDate;
+	private MizeDate jobFromDate;
+	private MizeDate jobToDate;
+	private MizeDate instanceFromDate;
+	private MizeDate instanceToDate;
 	private Boolean jobActive;
 	private Boolean instanceActive;
 	private List<String> roles = new ArrayList<String>();
@@ -54,28 +54,28 @@ public class MizeJobSearchCriteria extends MizeEntity{
 	public void setInstanceCode(String instanceCode) {
 		this.instanceCode = instanceCode;
 	}
-	public Date getJobFromDate() {
+	public MizeDate getJobFromDate() {
 		return jobFromDate;
 	}
-	public void setJobFromDate(Date jobFromDate) {
+	public void setJobFromDate(MizeDate jobFromDate) {
 		this.jobFromDate = jobFromDate;
 	}
-	public Date getJobToDate() {
+	public MizeDate getJobToDate() {
 		return jobToDate;
 	}
-	public void setJobToDate(Date jobToDate) {
+	public void setJobToDate(MizeDate jobToDate) {
 		this.jobToDate = jobToDate;
 	}
-	public Date getInstanceFromDate() {
+	public MizeDate getInstanceFromDate() {
 		return instanceFromDate;
 	}
-	public void setInstanceFromDate(Date instanceFromDate) {
+	public void setInstanceFromDate(MizeDate instanceFromDate) {
 		this.instanceFromDate = instanceFromDate;
 	}
-	public Date getInstanceToDate() {
+	public MizeDate getInstanceToDate() {
 		return instanceToDate;
 	}
-	public void setInstanceToDate(Date instanceToDate) {
+	public void setInstanceToDate(MizeDate instanceToDate) {
 		this.instanceToDate = instanceToDate;
 	}
 	public Boolean getJobActive() {
@@ -106,6 +106,11 @@ public class MizeJobSearchCriteria extends MizeEntity{
 				+ ", instanceToDate=" + instanceToDate + ", jobActive="
 				+ jobActive + ", instanceActive=" + instanceActive + ", roles="
 				+ roles + "]";
+	}
+	@Override
+	public int compareTo(MizeJobSearchCriteria o) {
+	
+		return 0;
 	}
 	
 }

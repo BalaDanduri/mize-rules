@@ -16,7 +16,7 @@ import com.mize.domain.util.Formatter;
 
 @Entity
 @Table(name = "state")
-public class State extends MizeEntity implements Comparable<State>{
+public class State extends MizeSceEntity implements Comparable<State>{
 	
 	private static final long serialVersionUID = -1518811417788517045L;
 	private String name;

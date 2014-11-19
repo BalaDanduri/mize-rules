@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JPASerializer;
 
 /**
@@ -22,7 +22,7 @@ import com.mize.domain.util.JPASerializer;
  */
 @Entity
 @Table(name = "srvc_enty_rltn")
-public class ServiceEntityRelation extends MizeEntity {
+public class ServiceEntityRelation extends MizeSceEntity implements Comparable<ServiceEntityRelation> {
 	
 	private static final long serialVersionUID = 1131204751473949728L;
 	
@@ -122,6 +122,12 @@ public class ServiceEntityRelation extends MizeEntity {
 				return false;
 		}
 		return true;
+	}
+
+	@Override
+	public int compareTo(ServiceEntityRelation o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	

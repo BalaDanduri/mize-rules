@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import org.joda.time.DateTime;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -20,6 +19,7 @@ import org.springframework.test.context.ContextConfiguration;
 
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;
+import com.mize.domain.util.MizeDateTime;
 
 @ContextConfiguration(locations={"/test-context.xml"})
 public class FormDefinitionAuditTest extends JPATest {	
@@ -77,7 +77,7 @@ public class FormDefinitionAuditTest extends JPATest {
 	}
 	
 	private FormDefinitionAudit createFormDefAudit(FormDefinition formDef) {
-		FormDefinitionAudit audit = new FormDefinitionAudit(formDef, formDef.getStatusCode(), Formatter.dateTime(DateTime.now().toString("MM-dd-yyyy HH:mm:ss")), 779L, "mizeadmin");
+		FormDefinitionAudit audit = new FormDefinitionAudit(formDef, formDef.getStatusCode(), Formatter.toMizeDateTime(MizeDateTime.now().getDateTime()), 779L,"Process");
 		return audit;
 	}
 	
@@ -92,8 +92,7 @@ public class FormDefinitionAuditTest extends JPATest {
 			audit.setFormDefinition(formDef);
 			audit.setStatusBy(rs.getLong("status_by"));
 			audit.setStatusCode(rs.getString("status_code"));
-			audit.setStatusDate(Formatter.dateTime(rs.getTimestamp("status_date")));
-			audit.setStatusByUser(rs.getString("status_by_user"));
+			audit.setStatusDate(Formatter.toMizeDateTime(rs.getTimestamp("status_date")));
 			return audit;
 		}
 		

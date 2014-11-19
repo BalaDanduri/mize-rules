@@ -19,19 +19,12 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.brand.Brand;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.EmptyOrAlpha;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.util.MizeDateTime;
 import com.mize.domain.util.NonEmpty;
 import com.mize.domain.util.ValidateOnDependentFeild;
 
@@ -45,7 +38,7 @@ import com.mize.domain.util.ValidateOnDependentFeild;
         regex = true,
         regexValue ="^[0-9a-zA-Z-:.,_ ]+$",
         message ="code.notempty")})
-public class Engagement extends MizeEntity  {
+public class Engagement extends MizeSceEntity implements Comparable<Engagement>  {
 	
 	private static final long serialVersionUID = 6140543699715462721L;
 	@Transient
@@ -66,10 +59,8 @@ public class Engagement extends MizeEntity  {
 	private Integer maxRedemptions;
 	private Integer redemptions;
 	private Integer useLimit;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private DateTime startDate;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private DateTime endDate;
+	private MizeDateTime startDate;
+	private MizeDateTime endDate;
 	private List<EngagementLink> engagementLinks = new ArrayList<EngagementLink>();
 	@Transient
 	private Integer pageIndex;
@@ -84,7 +75,7 @@ public class Engagement extends MizeEntity  {
 	public Engagement(String type, String code, Brand brand, String title, String description, String imagePath,
 			String imageTitle, String url, String urlTitle, String redeemInstructions, String termsConditions,
 			String discountType, Double discountValue, Integer maxRedemptions, Integer redemptions, Integer useLimit,
-			DateTime startDate, DateTime endDate, List<EngagementLink> engagementLinks, Integer pageIndex, String status) {
+			MizeDateTime startDate, MizeDateTime endDate, List<EngagementLink> engagementLinks, Integer pageIndex, String status) {
 		super();
 		this.type = type;
 		this.code = code;
@@ -295,35 +286,24 @@ public class Engagement extends MizeEntity  {
 		this.useLimit = useLimit;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Column(name = "start_date",  nullable = true)
-	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	@NonEmpty(message="start_date.notempty")
-	public DateTime getStartDate() {
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getStartDate() {
 		return startDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
-	public void setStartDate(DateTime startDate) {
+	public void setStartDate(MizeDateTime startDate) {
 		this.startDate = startDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Column(name = "end_date",  nullable = true)
-	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@NonEmpty(message="end_date.notempty")
-	public DateTime getEndDate() {
+	public MizeDateTime getEndDate() {
 		return endDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	public void setEndDate(DateTime endDate) {
+	public void setEndDate(MizeDateTime endDate) {
 		this.endDate = endDate;
 	}
 
@@ -589,5 +569,12 @@ public class Engagement extends MizeEntity  {
 				+ startDate + ", endDate=" + endDate + ", engagementLinks="
 				+ engagementLinks + ", pageIndex=" + pageIndex + ", status="
 				+ status + ", level=" + level + "]";
+	}
+
+
+	@Override
+	public int compareTo(Engagement o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

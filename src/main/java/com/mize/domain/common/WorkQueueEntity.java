@@ -14,26 +14,19 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.businessentity.BusinessEntityIntl;
 import com.mize.domain.product.Product;
 import com.mize.domain.product.ProductSerial;
 import com.mize.domain.service.schedule.ServiceSchedule;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name="work_queue_entity")
-public class WorkQueueEntity extends MizeEntity implements Comparable<WorkQueueEntity>{
+public class WorkQueueEntity extends MizeSceEntity implements Comparable<WorkQueueEntity>{
 
 	private static final long serialVersionUID = -3725309680746498668L;
 
@@ -58,20 +51,20 @@ public class WorkQueueEntity extends MizeEntity implements Comparable<WorkQueueE
 		super();
 	}
 	
-	public WorkQueueEntity(Long id,Long entityId, String entityType,String status,String serviceType,String serviceCode,DateTime serviceDate,BusinessEntity businessEntity,ProductSerial productSerial) {
+	public WorkQueueEntity(Long id,Long entityId, String entityType,String status,String serviceType,String serviceCode,MizeDateTime serviceDate,BusinessEntity businessEntity,ProductSerial productSerial) {
 		result = new WorkQueueResult(id,entityId, entityType,status,serviceType,serviceCode,serviceDate,businessEntity,productSerial);
 	}
 	
-	public WorkQueueEntity(Long id,Long entityId, String entityType,String status,String serviceType,String serviceCode,String providerName,DateTime serviceDate,BusinessEntity businessEntity,ProductSerial productSerial) {
+	public WorkQueueEntity(Long id,Long entityId, String entityType,String status,String serviceType,String serviceCode,String providerName,MizeDateTime serviceDate,BusinessEntity businessEntity,ProductSerial productSerial) {
 		result = new WorkQueueResult(id,entityId, entityType,status,serviceType,serviceCode,providerName,serviceDate,businessEntity,productSerial);
 	}
 	
 	
-	public WorkQueueEntity(Long id,Long entityId, String entityType,String entityCode,String status,String orderType,String requestType,DateTime serviceDate,DateTime serviceUpdatedDate,String beCode,String beName) {
+	public WorkQueueEntity(Long id,Long entityId, String entityType,String entityCode,String status,String orderType,String requestType,MizeDateTime serviceDate,MizeDateTime serviceUpdatedDate,String beCode,String beName) {
 		result = new WorkQueueResult(id,entityId, entityType,entityCode,status,orderType,requestType,serviceDate,serviceUpdatedDate,beCode,beName);
 	}
 	
-	public WorkQueueEntity(Long id,Long entityId, String entityType,String status,String serviceType,String serviceCode,String providerName,DateTime serviceDate,String model,String serialNumber, String customerName) {
+	public WorkQueueEntity(Long id,Long entityId, String entityType,String status,String serviceType,String serviceCode,String providerName,MizeDateTime serviceDate,String model,String serialNumber, String customerName) {
 		Product product = new Product(model);
 		ProductSerial productSerial = new ProductSerial();
 		productSerial.setProduct(product);
@@ -124,24 +117,18 @@ public class WorkQueueEntity extends MizeEntity implements Comparable<WorkQueueE
 	}
 
 	@Override	
-	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
-	@Type(type="com.mize.domain.util.DateTimeJPA")
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@Column(name = "created_date",updatable = false)
-	@JsonIgnore(value = false)
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getCreatedDate() {
+	@JsonIgnore(false)
+	public MizeDateTime getCreatedDate() {
 		return createdDate;
 	}
 
 	@Override	
-	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
-	@Type(type="com.mize.domain.util.DateTimeJPA")
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@Column(name = "updated_date")
-	@JsonIgnore(value = false)
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getUpdatedDate() {
+	@JsonIgnore(false)
+	public MizeDateTime getUpdatedDate() {
 		return updatedDate;
 	}
 
@@ -160,7 +147,7 @@ public class WorkQueueEntity extends MizeEntity implements Comparable<WorkQueueE
 	}
 	
 	@Transient
-	public MizeEntity getServiceEntity() {
+	public MizeSceEntity getServiceEntity() {
 		return serviceEntity;
 	}
 
@@ -191,20 +178,16 @@ public class WorkQueueEntity extends MizeEntity implements Comparable<WorkQueueE
 	}
 	
 	@Override
-	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@Type(type="com.mize.domain.util.DateTimeJPA")
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@JsonIgnore(value = false)
-	public void setCreatedDate(DateTime createdDate) {
+	public void setCreatedDate(MizeDateTime createdDate) {
 		super.createdDate = createdDate;
 	}
 
 	@Override
-	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
-	@Type(type="com.mize.domain.util.DateTimeJPA")
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@JsonIgnore(value = false)
-	public void setUpdatedDate(DateTime updatedDate) {
+	public void setUpdatedDate(MizeDateTime updatedDate) {
 		super.updatedDate = updatedDate;
 	}
 

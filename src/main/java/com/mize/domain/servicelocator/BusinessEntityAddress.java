@@ -17,12 +17,12 @@ import org.hibernate.annotations.GenericGenerator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mize.domain.common.Country;
 import com.mize.domain.common.Locale;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.common.State;
 
 @Entity(name="com.mize.domain.servicelocator.BusinessEntityAddress")
 @Table(name="business_entity_address")
-public class BusinessEntityAddress  extends MizeEntity  implements Comparable<BusinessEntityAddress>{
+public class BusinessEntityAddress  extends MizeSceEntity  implements Comparable<BusinessEntityAddress>{
 
 	private static final long serialVersionUID = 625412111910612584L;	
 	private long beId;

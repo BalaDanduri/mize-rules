@@ -12,7 +12,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import org.joda.time.DateTime;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,6 +25,7 @@ import com.mize.domain.common.EntityAttachment;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.State;
 import com.mize.domain.test.util.JPATest;
+import com.mize.domain.util.MizeDateTime;
 
 @ContextConfiguration(locations={"/test-context.xml"})
 public class ServiceEntityTest extends JPATest {
@@ -141,7 +141,7 @@ public class ServiceEntityTest extends JPATest {
 		audit = new ServiceEntityAudit();
 		audit.setServiceEntity(serviceEntity);
 		audit.setStatusCode("DRAFT");
-		audit.setStatusDate(DateTime.now());
+		audit.setStatusDate(MizeDateTime.now());
 		audit.setStatusBy(779L);	
 		audits = new ArrayList<ServiceEntityAudit>();
 		audits.add(audit);
@@ -167,9 +167,9 @@ public class ServiceEntityTest extends JPATest {
 		EntityComment entityComment = new EntityComment();
 		entityComment.setComments("Creating draft claim");
 		entityComment.setCreatedBy(779L);
-		entityComment.setCreatedDate(DateTime.now());
+		entityComment.setCreatedDate(MizeDateTime.now());
 		entityComment.setUpdatedBy(779L);
-		entityComment.setUpdatedDate(DateTime.now());
+		entityComment.setUpdatedDate(MizeDateTime.now());
 		entityComment.setCommentType("Internal");
 		comment.setEntityComment(entityComment);
 		comments = new ArrayList<ServiceEntityComment>();
@@ -185,9 +185,9 @@ public class ServiceEntityTest extends JPATest {
 		entityAttachment.setName("MachineInternal.jpg");
 		entityAttachment.setUrl("http://amazon.s3.com/image/MachineInternal.jpg");
 		entityAttachment.setCreatedBy(779L);
-		entityAttachment.setCreatedDate(DateTime.now());
+		entityAttachment.setCreatedDate(MizeDateTime.now());
 		entityAttachment.setUpdatedBy(779L);
-		entityAttachment.setUpdatedDate(DateTime.now());
+		entityAttachment.setUpdatedDate(MizeDateTime.now());
 		attachment.setEntityAttachment(entityAttachment);
 		attachments = new ArrayList<ServiceEntityAttachment>();
 		attachments.add(attachment);

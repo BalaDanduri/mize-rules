@@ -16,17 +16,16 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import org.joda.time.DateTime;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Inheritance
 @DiscriminatorColumn(name = "discriminator")
 @DiscriminatorValue("PartAttribute")
 @Table(name = "part_attribute", uniqueConstraints = {@UniqueConstraint (columnNames = {"part_id"})})
-public class PartAttribute extends MizeEntity{
+public class PartAttribute extends MizeSceEntity implements Comparable<PartAttribute>{
 
 	private static final long serialVersionUID = 5827509183800749241L;
 	private Part part;
@@ -102,9 +101,9 @@ public class PartAttribute extends MizeEntity{
 	@PreUpdate
 	public void auditFields(){
 		if(createdDate==null && id==null){
-			setCreatedDate(DateTime.now());
+			setCreatedDate(MizeDateTime.now());
 		}
-		setUpdatedDate(DateTime.now());		
+		setUpdatedDate(MizeDateTime.now());		
 	}
 
 	@Override
@@ -156,5 +155,9 @@ public class PartAttribute extends MizeEntity{
 				+ value + ", uom=" + uom + "]";
 	}
 
+	@Override
+	public int compareTo(PartAttribute o) {
+		return 0;
+	}
 
 }

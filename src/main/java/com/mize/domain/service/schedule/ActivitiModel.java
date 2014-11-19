@@ -1,8 +1,8 @@
 package com.mize.domain.service.schedule;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
-public class ActivitiModel  extends MizeEntity  implements Comparable<ActivitiModel> {	
+public class ActivitiModel  extends MizeSceEntity  implements Comparable<ActivitiModel> {	
 	
 	private static final long serialVersionUID = -5351211947355990640L;
 

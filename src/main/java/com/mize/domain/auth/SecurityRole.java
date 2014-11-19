@@ -1,8 +1,8 @@
 package com.mize.domain.auth;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
-public class SecurityRole extends MizeEntity implements Comparable<SecurityRole> {
+public class SecurityRole extends MizeSceEntity implements Comparable<SecurityRole> {
 	private static final long serialVersionUID = -926097655061859317L;
 	private Long id;
     public String roleName;

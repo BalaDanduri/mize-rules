@@ -7,11 +7,11 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
 @Entity
 @Table(name="prod_ratings_summary")
-public class ProductRatingSummary extends MizeEntity implements Comparable<ProductRatingSummary> {
+public class ProductRatingSummary extends MizeSceEntity implements Comparable<ProductRatingSummary> {
 	private static final long serialVersionUID = -7710842260731182272L;
 	public static final Integer DEFAULT_VIEW_COUNT = 1;
 	protected Long productId;

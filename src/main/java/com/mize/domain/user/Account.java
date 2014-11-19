@@ -3,9 +3,9 @@ package com.mize.domain.user;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
-public class Account extends MizeEntity implements Comparable<Account>{
+public class Account extends MizeSceEntity implements Comparable<Account>{
 
 	private static final long serialVersionUID = -1260385580583739007L;
 	private String type;

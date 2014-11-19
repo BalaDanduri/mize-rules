@@ -17,34 +17,28 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.common.EntityComment;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.product.PartSubstituteComment;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.util.MizeDateTime;
 @Entity
 @Table(name = "part_substitute")
-public class PartSubstitute extends MizeEntity {
+public class PartSubstitute extends MizeSceEntity implements Comparable<PartSubstitute> {
 
 	private static final long serialVersionUID = -8910398875058216907L;
 
 	private Part originalPart;
 	private Part substitutedPart;
 	private String code;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private DateTime date;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private DateTime endDate;
+	private MizeDateTime date;
+	private MizeDateTime endDate;
 	private EntityComment entityComment;
 	private List<PartSubstituteComment> comments = new ArrayList<PartSubstituteComment>();
     private String familyCode;
@@ -57,7 +51,7 @@ public class PartSubstitute extends MizeEntity {
 		super();
 	}
 		
-	public PartSubstitute(Long id,String originalPartCode,String substitutePartCode,String fmailyCode,String code ,DateTime date,DateTime endDate,Integer sequenceNo){
+	public PartSubstitute(Long id,String originalPartCode,String substitutePartCode,String fmailyCode,String code ,MizeDateTime date,MizeDateTime endDate,Integer sequenceNo){
 		super();
 		this.id = id;
 		if(originalPartCode != null){
@@ -125,42 +119,29 @@ public class PartSubstitute extends MizeEntity {
 	}
 	
 	@Column(name = "substitute_date", nullable = true)
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using = JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getDate() {
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getDate() {
 		return date;
 	}
 	
 	@Column(name = "end_date", nullable = true)
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using = JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getEndDate() {
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getEndDate() {
 		return endDate;
 	}
-
+	@Column(name = "created_date", updatable = false)
+    @org.hibernate.annotations.Type(type = "com.mize.domain.util.MizeDateTimeJPA")
 	@JsonIgnore(false)
-    @Column(name = "created_date", updatable = false)
-    @org.hibernate.annotations.Type(type = "com.mize.domain.util.DateTimeJPA")
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using = JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-    public DateTime getCreatedDate() {
+    public MizeDateTime getCreatedDate() {
         return this.createdDate;
     } 
 
 
 	@Override	
-	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
-	@Type(type="com.mize.domain.util.DateTimeJPA")
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@Column(name = "updated_date")
-	@JsonIgnore(value = false)
-	@JsonSerialize(using = JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getUpdatedDate() {
+	@JsonIgnore(false)
+	public MizeDateTime getUpdatedDate() {
 		return updatedDate;
 	}
 
@@ -195,31 +176,23 @@ public class PartSubstitute extends MizeEntity {
 		this.code = code;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	public void setDate(DateTime date) {
+	public void setDate(MizeDateTime date) {
 		this.date = date;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	public void setEndDate(DateTime endDate) {
+	public void setEndDate(MizeDateTime endDate) {
 		this.endDate = endDate;
 	}
 
 	@Override
-	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(false)
-	public void setCreatedDate(DateTime createdDate) {
+	public void setCreatedDate(MizeDateTime createdDate) {
 		super.createdDate = createdDate;
 	}
 
 	@Override
-	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(false)
-	public void setUpdatedDate(DateTime updatedDate) {
+	public void setUpdatedDate(MizeDateTime updatedDate) {
 		super.updatedDate = updatedDate;
 	}
 
@@ -330,6 +303,11 @@ public class PartSubstitute extends MizeEntity {
 				+ ", substitutedPart=" + substitutedPart + ", code=" + code
 				+ ", date=" + date + ", endDate=" + endDate + ",familyCode=" + familyCode
 				+ ", sequenceNo=" + sequenceNo + "]";
+	}
+
+	@Override
+	public int compareTo(PartSubstitute o) {
+		return 0;
 	}
 	
 }

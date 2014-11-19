@@ -11,11 +11,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
 @Entity
 @Table(name="shipment_package_attributes")
-public class ShipmentPackageAttribute extends MizeEntity implements Comparable<ShipmentPackageAttribute>{
+public class ShipmentPackageAttribute extends MizeSceEntity implements Comparable<ShipmentPackageAttribute>{
 	private static final long serialVersionUID = 289509348269489424L;
 
 	private ShipmentPackage shipmentPackage;

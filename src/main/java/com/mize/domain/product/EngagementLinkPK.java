@@ -4,10 +4,10 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Transient;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
 @Embeddable
-public class EngagementLinkPK  extends MizeEntity{
+public class EngagementLinkPK  extends MizeSceEntity implements Comparable<EngagementLinkPK>{
 
 	private static final long serialVersionUID = 3572751841558747212L;
 	
@@ -116,6 +116,12 @@ public class EngagementLinkPK  extends MizeEntity{
 	@Override
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	@Override
+	public int compareTo(EngagementLinkPK o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

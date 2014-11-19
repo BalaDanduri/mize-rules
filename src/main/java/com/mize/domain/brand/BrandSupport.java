@@ -11,21 +11,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.common.MizeEntity;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name = "brand_support")
-public class BrandSupport extends MizeEntity implements Comparable<BrandSupport>{
+public class BrandSupport extends MizeSceEntity implements Comparable<BrandSupport>{
 
 	private static final long serialVersionUID = 8873185292574248278L;
 	private Long brandId;
@@ -39,8 +31,7 @@ public class BrandSupport extends MizeEntity implements Comparable<BrandSupport>
 	private String type;
 	private Boolean validated;
 	private Integer validatedBy;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private DateTime validatedDate;
+	private MizeDateTime validatedDate;
 	private String twitter;
 	private String facebook;
 	private String countryCode;
@@ -67,9 +58,9 @@ public class BrandSupport extends MizeEntity implements Comparable<BrandSupport>
 	public BrandSupport(Long brandId, Long id, String phone, String email,
 			String site, String chatUrl, String tollFreePhone,
 			String hoursOfOp, String qualifier, String type, Boolean validated,
-			Integer validatedBy, DateTime validatedDate, String twitter,String facebook,
-			String countryCode, Long createdBy, DateTime createdDate,
-			Long updatedBy, DateTime updatedDate) {
+			Integer validatedBy, MizeDateTime validatedDate, String twitter,String facebook,
+			String countryCode, Long createdBy, MizeDateTime createdDate,
+			Long updatedBy, MizeDateTime updatedDate) {
 		this.brandId = brandId;
 		this.id = id;
 		this.phone = phone;
@@ -182,17 +173,12 @@ public class BrandSupport extends MizeEntity implements Comparable<BrandSupport>
 		this.validatedBy = validatedBy;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
 	@Column(name = "validated_on",  nullable = true)
-	public DateTime getValidatedDate() {
+	public MizeDateTime getValidatedDate() {
 		return validatedDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	public void setValidatedDate(DateTime validatedDate) {
+	public void setValidatedDate(MizeDateTime validatedDate) {
 		this.validatedDate = validatedDate;
 	}
 

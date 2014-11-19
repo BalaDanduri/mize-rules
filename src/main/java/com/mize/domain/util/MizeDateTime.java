@@ -97,11 +97,8 @@ public class MizeDateTime implements IMizeDate, Comparable<MizeDateTime>, Clonea
 		return dateTimeValue;
 	}
 
-	protected MizeDateTime(DateTime dateTime) {
+	public MizeDateTime(DateTime dateTime) {
 		this.dateTime = dateTime;
-		this.dateTimeZone = dateTime.getZone();
-		//this.dateTimeFormat = DATE_TIME_FORMAT;
-		//this.dateTimeValue = getNewDateTimeValue(this.dateTime);
 		this.isValid = true;
 	}
 	
@@ -114,7 +111,7 @@ public class MizeDateTime implements IMizeDate, Comparable<MizeDateTime>, Clonea
 		this.isValid = true;
 	}
 	
-	protected MizeDateTime() {
+	public MizeDateTime() {
 		this.dateTime = new DateTime(DateTimeZone.UTC);
 		this.dateTimeFormat = DATE_TIME_FORMAT;
 		this.dateTimeZone = this.dateTime.getZone();
@@ -131,7 +128,11 @@ public class MizeDateTime implements IMizeDate, Comparable<MizeDateTime>, Clonea
 		return dateTime.getMillis();
 	}
 	
-	protected MizeDateTime(long millis) {
+	/*protected MizeDateTime(long millis) {
+		dateTime = new DateTime(millis);
+		isValid = true;
+	}*/
+	public MizeDateTime(long millis) {
 		dateTime = new DateTime(millis);
 		isValid = true;
 	}
@@ -173,6 +174,10 @@ public class MizeDateTime implements IMizeDate, Comparable<MizeDateTime>, Clonea
 		DateTime dt = this.dateTime.plusDays(days);
 		return new MizeDateTime(getNewDateTimeValue(dt), this.dateTimeFormat, this.dateTimeZone,dt);
 	}
+	public MizeDateTime plusWeeks(int weeks){
+		dateTime.plusWeeks(weeks);
+		return this;
+	}
 	
 	public MizeDateTime minusMonths(int months){
 		DateTime dt = this.dateTime.minusMonths(months);
@@ -189,6 +194,20 @@ public class MizeDateTime implements IMizeDate, Comparable<MizeDateTime>, Clonea
 		return new MizeDateTime(getNewDateTimeValue(dt), this.dateTimeFormat, this.dateTimeZone,dt);
 	}
 	
+	public MizeDateTime minusHours(int hours){
+		if (hours == 0) {
+            return this;
+        }
+		dateTime.minusHours(hours);
+		return this;
+	}
+	public MizeDateTime minusMillis(int millis){
+		if(millis ==0){
+			return this;
+		}
+		dateTime.minusMillis(millis);
+		return this;
+	}
 	public MizeDateTime minusYears(int years){
 		DateTime dt = this.dateTime.minusYears(years);
 		return new MizeDateTime(getNewDateTimeValue(dt), this.dateTimeFormat, this.dateTimeZone,dt);
@@ -241,7 +260,7 @@ public class MizeDateTime implements IMizeDate, Comparable<MizeDateTime>, Clonea
 		return isValid;
 	}
 	
-	public String toDBDateTime(){		
+	/*public String toDBDateTime(){		
 		return this.dateTime.toString(DB_DATE_TIME_FORMAT);
 	}
 	
@@ -251,7 +270,7 @@ public class MizeDateTime implements IMizeDate, Comparable<MizeDateTime>, Clonea
 	
 	public String toString(String dateFormat, DateTimeZone dateTimeZone){		
 		return DateTimeFormat.forPattern(dateFormat).withZone(dateTimeZone).print(this.dateTime);
-	}
+	}*/
 	
 	public String toString(String dateFormat, DateTimeZone dateTimeZone, DateTime dateTime){	
 		if(dateTimeZone != null){
@@ -275,10 +294,6 @@ public class MizeDateTime implements IMizeDate, Comparable<MizeDateTime>, Clonea
 		return new MizeDateTime(dateTime.getMillis(),dateTime.getZone());
 	}
 	
-	public boolean equals(Object object){
-		MizeDateTime mizeDateTime = (MizeDateTime)object;
-		return this.dateTime.equals(mizeDateTime.getDateTime());
-	}
 	
 	@Override
 	public int hashCode() {
@@ -292,5 +307,24 @@ public class MizeDateTime implements IMizeDate, Comparable<MizeDateTime>, Clonea
 				+ ((dateTimeValue == null) ? 0 : dateTimeValue.hashCode());
 		return result;
 	}
+
+	public boolean equals(Object object){
+		MizeDateTime mizeDateTime = (MizeDateTime)object;
+		return this.dateTime.equals(mizeDateTime.getDateTime());
+	}
+	
+	public String toDBDateTime(){		
+		return this.dateTime.toString(DB_DATE_TIME_FORMAT);
+	}
+	
+	public String toString(String dateFormat){		
+		return toString(dateFormat, DateTimeZone.UTC);
+	}
+	
+	public String toString(String dateFormat, DateTimeZone dateTimeZone){		
+		return DateTimeFormat.forPattern(dateFormat).withZone(dateTimeZone).print(this.dateTime);
+	}
+	
+	
 	
 }

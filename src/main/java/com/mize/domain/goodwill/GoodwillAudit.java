@@ -11,30 +11,21 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.common.MizeEntity;
-import com.mize.domain.form.FormDefinition;
-import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.MizeDateTime;
 /**
  * @author Raghavendra Serikar
  * @version 1.0
  */
 @Entity
 @Table(name="goodwill_audit")
-public class GoodwillAudit extends MizeEntity implements Comparable<GoodwillAudit>{
+public class GoodwillAudit extends MizeSceEntity implements Comparable<GoodwillAudit>{
 	private static final long serialVersionUID = -4806940799417432658L;
 	private Goodwill goodwill;
 	private String status;
-	private DateTime statusDate;
+	private MizeDateTime statusDate;
 	private Long statusBy;
 	
 	
@@ -67,12 +58,10 @@ public class GoodwillAudit extends MizeEntity implements Comparable<GoodwillAudi
 		return status;
 	}
 
+	
 	@Column(name = "status_date", nullable = true)
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getStatusDate() {
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getStatusDate() {
 		return statusDate;
 	}
 
@@ -89,9 +78,7 @@ public class GoodwillAudit extends MizeEntity implements Comparable<GoodwillAudi
 		this.status = status;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
-	public void setStatusDate(DateTime statusDate) {
+	public void setStatusDate(MizeDateTime statusDate) {
 		this.statusDate = statusDate;
 	}
 

@@ -1,9 +1,9 @@
 package com.mize.domain.product;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.common.PaginationPage;
 
-public class MizeProductSearchResponse extends MizeEntity implements Comparable<MizeProductSearchResponse>{
+public class MizeProductSearchResponse extends MizeSceEntity implements Comparable<MizeProductSearchResponse>{
 	private static final long serialVersionUID = 155385665556860537L;
 	private PaginationPage<Product> productPage;
 	private RefineFilters refineFilters;

@@ -1,8 +1,8 @@
 package com.mize.domain.product;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
-public class MizeValueAdditionCriteria extends MizeEntity implements Comparable<MizeValueAdditionCriteria>{
+public class MizeValueAdditionCriteria extends MizeSceEntity implements Comparable<MizeValueAdditionCriteria>{
 	private static final long serialVersionUID = 155385665556860537L;
 	private Long prodId;
 	private String upc;

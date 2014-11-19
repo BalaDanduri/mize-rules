@@ -17,23 +17,17 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.JodaDateDeserializer;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateSerializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.util.MizeDateTime;
 
 
 /**
@@ -42,7 +36,7 @@ import com.mize.domain.util.JsonDateTimeSerializer;
  */
 @Entity
 @Table(name = "srvc_blltn")
-public class ServiceBulletin extends MizeEntity {
+public class ServiceBulletin extends MizeSceEntity implements Comparable<ServiceBulletin> {
 
 	private static final long serialVersionUID = -1780679493288392673L;
 	
@@ -51,8 +45,8 @@ public class ServiceBulletin extends MizeEntity {
 	private String bulletinSubType;
 	private String bulletinStatus;
 	private String bulletinReference;
-	private DateTime startDate;
-	private DateTime endDate;
+	private MizeDateTime startDate;
+	private MizeDateTime endDate;
 	private BusinessEntity tenant;
 	private String currencyCode;
 	private List<ServiceBulletinProcedure> procedures = new ArrayList<ServiceBulletinProcedure>();
@@ -131,33 +125,25 @@ public class ServiceBulletin extends MizeEntity {
 		this.bulletinReference = bulletinReference;
 	}
 	
+	
 	@Column(name = "start_date", nullable = true)
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateSerializer.class)
-    @JsonInclude(Include.NON_NULL)
-	public DateTime getStartDate() {
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getStartDate() {
 		return startDate;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateDeserializer.class)	
-	public void setStartDate(DateTime startDate) {
+	public void setStartDate(MizeDateTime startDate) {
 		this.startDate = startDate;
 	}
 
+	
 	@Column(name = "end_date", nullable = true)
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateSerializer.class)
-    @JsonInclude(Include.NON_NULL)
-	public DateTime getEndDate() {
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getEndDate() {
 		return endDate;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateDeserializer.class)	
-	public void setEndDate(DateTime endDate) {
+	public void setEndDate(MizeDateTime endDate) {
 		this.endDate = endDate;
 	}
 	
@@ -319,25 +305,25 @@ public class ServiceBulletin extends MizeEntity {
 		this.bulletinIntl = bulletinIntl;
 	}
 	
-	@Override	
+	/*@Override	
 	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
-	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@Column(name = "created_date",updatable=false)
 	@JsonIgnore(value = false)
 	@JsonSerialize(using=JsonDateTimeSerializer.class)
-    @JsonInclude(Include.NON_DEFAULT)
-	public DateTime getCreatedDate() {
+    @JsonInclude(Include.NON_DEFAULT)*/
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	@Column(name = "created_date",updatable=false)
+	public MizeDateTime getCreatedDate() {
 		return createdDate;
 	}
 
-	@Override	
+	/*@Override	
 	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
-	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@Column(name = "updated_date")
 	@JsonIgnore(value = false)
 	@JsonSerialize(using=JsonDateTimeSerializer.class)
-    @JsonInclude(Include.NON_DEFAULT)
-	public DateTime getUpdatedDate() {
+    @JsonInclude(Include.NON_DEFAULT)*/
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	@Column(name = "updated_date")
+	public MizeDateTime getUpdatedDate() {
 		return updatedDate;
 	}
 
@@ -356,19 +342,19 @@ public class ServiceBulletin extends MizeEntity {
 	}
 
 
-	@Override
+	/*@Override
 	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore(false)
-	public void setCreatedDate(DateTime createdDate) {
+	@JsonIgnore(false)*/
+	public void setCreatedDate(MizeDateTime createdDate) {
 		super.createdDate = createdDate;
 	}
 
-	@Override
+	/*@Override
 	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore(false)
-	public void setUpdatedDate(DateTime updatedDate) {
+	@JsonIgnore(false)*/
+	public void setUpdatedDate(MizeDateTime updatedDate) {
 		super.updatedDate = updatedDate;
 	}
 
@@ -518,5 +504,11 @@ public class ServiceBulletin extends MizeEntity {
 		} else if (!totalAmount.equals(other.totalAmount))
 			return false;
 		return true;
+	}
+
+	@Override
+	public int compareTo(ServiceBulletin o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

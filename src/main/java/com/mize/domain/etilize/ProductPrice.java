@@ -1,8 +1,8 @@
 package com.mize.domain.etilize;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
-public class ProductPrice extends MizeEntity{
+public class ProductPrice extends MizeSceEntity{
 
 	private static final long serialVersionUID = 6738887069118581L;
 	private Double netPrice;

@@ -1,8 +1,8 @@
 package com.mize.domain.upload;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
-public class ErrorLog extends MizeEntity implements Comparable<ErrorLog> {
+public class ErrorLog extends MizeSceEntity implements Comparable<ErrorLog> {
 
 	private static final long serialVersionUID = -5103607209709356737L;
 	private Long processLogId;

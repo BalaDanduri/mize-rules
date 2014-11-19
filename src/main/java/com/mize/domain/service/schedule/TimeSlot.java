@@ -1,8 +1,8 @@
 package com.mize.domain.service.schedule;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
-public class TimeSlot extends MizeEntity implements Comparable<TimeSlot>{
+public class TimeSlot extends MizeSceEntity implements Comparable<TimeSlot>{
 	
 	private static final long serialVersionUID = -2233609855179446789L;
 	String startTime;

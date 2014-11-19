@@ -4,9 +4,9 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
-public class CatalogEntryCache extends MizeEntity implements Comparable<CatalogEntryCache>{
+public class CatalogEntryCache extends MizeSceEntity implements Comparable<CatalogEntryCache>{
 	
 	private static final long serialVersionUID = -8488237770262609141L;	
 	private String entryCode;

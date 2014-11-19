@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.common.EntityComment;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JPASerializer;
 
 /**
@@ -24,7 +24,7 @@ import com.mize.domain.util.JPASerializer;
  */
 @Entity
 @Table(name = "srvc_blltn_cmnt")
-public class ServiceBulletinComment extends MizeEntity {
+public class ServiceBulletinComment extends MizeSceEntity implements Comparable<ServiceBulletinComment> {
 
 	
 	private static final long serialVersionUID = -3606993641052519739L;
@@ -109,6 +109,12 @@ public class ServiceBulletinComment extends MizeEntity {
 				return false;
 		}
 		return true;
+	}
+
+	@Override
+	public int compareTo(ServiceBulletinComment o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

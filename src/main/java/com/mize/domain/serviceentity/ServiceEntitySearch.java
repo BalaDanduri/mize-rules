@@ -3,26 +3,18 @@ package com.mize.domain.serviceentity;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
+import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.MizeDateTime;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.common.MizeEntity;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
-
-public class ServiceEntitySearch extends MizeEntity implements Comparable<ServiceEntitySearch> {
+public class ServiceEntitySearch extends MizeSceEntity implements Comparable<ServiceEntitySearch> {
 
 	private static final long serialVersionUID = 6821133638967617947L;
 	private String code;
 	private String status;
 	private ServiceEntityAddress address;
 	private String type;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private DateTime createdDate;
+//	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	private MizeDateTime createdDate;
 	private Long createdBy;
 	private Long submittedBy;
 	
@@ -60,16 +52,16 @@ public class ServiceEntitySearch extends MizeEntity implements Comparable<Servic
 		this.type = type;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getCreatedDate() {
+	@JsonInclude(Include.NON_DEFAULT)*/
+	public MizeDateTime getCreatedDate() {
 		return createdDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	public void setCreatedDate(DateTime createdDate) {
+	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	*/
+	public void setCreatedDate(MizeDateTime createdDate) {
 		this.createdDate = createdDate;
 	}
 

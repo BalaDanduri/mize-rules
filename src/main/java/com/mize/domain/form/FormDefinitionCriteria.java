@@ -1,28 +1,21 @@
 package com.mize.domain.form;
 
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.common.Locale;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.product.Product;
-import com.mize.domain.util.JodaDateDeserializer;
-import com.mize.domain.util.JsonDateSerializer;
+import com.mize.domain.util.MizeDateTime;
 
-public class FormDefinitionCriteria extends MizeEntity {
+public class FormDefinitionCriteria extends MizeSceEntity implements Comparable<FormDefinitionCriteria> {
 
 	
 	private static final long serialVersionUID = 478530840631021065L;
 	
 	private String inspectionType;
 	private Product product;
-	private DateTime inspectionDate;
+	private MizeDateTime inspectionDate;
 	private User user;
 	private Locale locale;
 	
@@ -52,17 +45,12 @@ public class FormDefinitionCriteria extends MizeEntity {
 		this.product = product;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateSerializer.class)
-	@JsonInclude(Include.NON_NULL)
-	public DateTime getInspectionDate() {
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getInspectionDate() {
 		return inspectionDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateDeserializer.class)
-	public void setInspectionDate(DateTime inspectionDate) {
+	public void setInspectionDate(MizeDateTime inspectionDate) {
 		this.inspectionDate = inspectionDate;
 	}
 
@@ -89,6 +77,12 @@ public class FormDefinitionCriteria extends MizeEntity {
 		return "FormDefinitionCriteria [inspectionType=" + inspectionType
 				+ ", product=" + product + ", inspectionDate=" + inspectionDate
 				+ ", user=" + user + "]";
+	}
+
+	@Override
+	public int compareTo(FormDefinitionCriteria o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	

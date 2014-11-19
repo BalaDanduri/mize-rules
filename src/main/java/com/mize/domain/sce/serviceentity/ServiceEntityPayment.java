@@ -13,22 +13,16 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityContact;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.JodaDateDeserializer;
-import com.mize.domain.util.JsonDateSerializer;
+import com.mize.domain.util.MizeDateTime;
 
 /**
  * @author HarishBurra
@@ -36,7 +30,7 @@ import com.mize.domain.util.JsonDateSerializer;
  */
 @Entity
 @Table(name = "srvc_enty_pymt")
-public class ServiceEntityPayment extends MizeEntity {
+public class ServiceEntityPayment extends MizeSceEntity implements Comparable<ServiceEntityPayment> {
 
 	private static final long serialVersionUID = -7468833613615827599L;
 	
@@ -53,7 +47,7 @@ public class ServiceEntityPayment extends MizeEntity {
 	private EntityContact payeeContact;
 	private String payeeReference;
 	private String isNewPayee;
-	private DateTime paymentDate;
+	private MizeDateTime paymentDate;
 	private String paymentType;
 
 	public ServiceEntityPayment() {
@@ -198,18 +192,14 @@ public class ServiceEntityPayment extends MizeEntity {
 		this.isNewPayee = isNewPayee;
 	}
 	
+	
 	@Column(name = "pymt_date", nullable = true)
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using = JsonDateSerializer.class)
-	@JsonInclude(Include.NON_NULL)
-	public DateTime getPaymentDate() {
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getPaymentDate() {
 		return paymentDate;
 	}
 	
-	@DateTimeFormat (pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateDeserializer.class)
-	public void setPaymentDate(DateTime paymentDate) {
+	public void setPaymentDate(MizeDateTime paymentDate) {
 		this.paymentDate = paymentDate;
 	}
 	
@@ -344,6 +334,11 @@ public class ServiceEntityPayment extends MizeEntity {
 				return false;
 		}
 		return true;
+	}
+
+	@Override
+	public int compareTo(ServiceEntityPayment o) {
+		return 0;
 	}
 	
 

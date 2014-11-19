@@ -10,29 +10,20 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.common.MizeEntity;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name = "prod_repeat_order_history")
-public class ProductRepeatOrderHistory extends MizeEntity implements Comparable<ProductRepeatOrderHistory>{
+public class ProductRepeatOrderHistory extends MizeSceEntity implements Comparable<ProductRepeatOrderHistory>{
 	
 	private static final long serialVersionUID = -3861494853684026293L;
 	
 	private ProductRepeatOrder productRepeatOrder;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private DateTime orderDate;
+	private MizeDateTime orderDate;
 	private ProductRepeatOrder orderSnapshot;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private DateTime createdDate;
+	private MizeDateTime createdDate;
 	
 	
 	@ManyToOne
@@ -45,18 +36,13 @@ public class ProductRepeatOrderHistory extends MizeEntity implements Comparable<
 		this.productRepeatOrder = productRepeatOrder;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Column(name = "order_date",  nullable = true)
-	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getOrderDate() {
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getOrderDate() {
 		return orderDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
-	public void setOrderDate(DateTime orderDate) {
+	public void setOrderDate(MizeDateTime orderDate) {
 		this.orderDate = orderDate;
 	}
 
@@ -69,18 +55,13 @@ public class ProductRepeatOrderHistory extends MizeEntity implements Comparable<
 		this.orderSnapshot = orderSnapshot;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@Column(name = "created_date",  nullable = true)
-	@Type(type="com.mize.domain.util.DateTimeJPA")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getCreatedDate() {
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getCreatedDate() {
 		return createdDate;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)
-	public void setCreatedDate(DateTime createdDate) {
+	public void setCreatedDate(MizeDateTime createdDate) {
 		this.createdDate = createdDate;
 	}
 

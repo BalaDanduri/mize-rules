@@ -15,12 +15,12 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.auth.User;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JPASerializer;
 
 @Entity
 @Table(name="user_to_groups")
-public class UserGroup extends MizeEntity implements Comparable<UserGroup> {
+public class UserGroup extends MizeSceEntity implements Comparable<UserGroup> {
 
 	private static final long serialVersionUID = -922509907830867390L;
 	private User user;

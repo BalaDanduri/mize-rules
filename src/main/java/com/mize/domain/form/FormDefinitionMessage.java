@@ -9,11 +9,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
 @Entity
 @Table(name = "form_defn_msg")
-public class FormDefinitionMessage extends MizeEntity {
+public class FormDefinitionMessage extends MizeSceEntity implements Comparable<FormDefinitionMessage> {
 
 	/**
 	 * 
@@ -202,5 +202,9 @@ public class FormDefinitionMessage extends MizeEntity {
 				+ ", messageUiReference=" + messageUiReference + ", messageValue=" + messageValue + ", messageCode=" + messageCode 
 				+ ", shortDesc=" + shortDesc + ", longDesc=" + longDesc + "]";
 	}
-
+	@Override
+	public int compareTo(FormDefinitionMessage o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

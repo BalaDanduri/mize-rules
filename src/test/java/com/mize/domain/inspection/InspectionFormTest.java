@@ -11,7 +11,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import org.joda.time.DateTime;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,6 +26,7 @@ import com.mize.domain.common.State;
 import com.mize.domain.form.FormDefinition;
 import com.mize.domain.form.FormInstance;
 import com.mize.domain.test.util.JPATest;
+import com.mize.domain.util.MizeDateTime;
 
 @ContextConfiguration(locations={"/test-context.xml"})
 public class InspectionFormTest extends JPATest {
@@ -223,12 +223,12 @@ public class InspectionFormTest extends JPATest {
 		inspectionForm.setInspectedBy("FRM"+System.currentTimeMillis());
 		inspectionForm.setCreatedBy(776l);
 		inspectionForm.setUpdatedBy(776l);
-		inspectionForm.setCreatedDate(DateTime.now());
-		inspectionForm.setUpdatedDate(DateTime.now());
+		inspectionForm.setCreatedDate(MizeDateTime.now());
+		inspectionForm.setUpdatedDate(MizeDateTime.now());
 		inspectionForm.setFormInstance(getFormInstance());
 		inspectionForm.setTenant(getTenant());
 		inspectionForm.setLocale(findLocaleObjectFromDB());
-		inspectionForm.setInspectionDate(DateTime.now());
+		inspectionForm.setInspectionDate(MizeDateTime.now());
 		inspectionForm.setInspectionReference("FRM-#"+System.currentTimeMillis());
 		
 	}
@@ -254,9 +254,9 @@ public class InspectionFormTest extends JPATest {
 		EntityComment entityComment = new EntityComment();
 		entityComment.setComments("Creating draft claim");
 		entityComment.setCreatedBy(779L);
-		entityComment.setCreatedDate(DateTime.now());
+		entityComment.setCreatedDate(MizeDateTime.now());
 		entityComment.setUpdatedBy(779L);
-		entityComment.setUpdatedDate(DateTime.now());
+		entityComment.setUpdatedDate(MizeDateTime.now());
 		entityComment.setCommentType("Internal");
 		comment.setEntityComment(entityComment);
 		comments = new ArrayList<InspectionFormComment>();
@@ -268,7 +268,7 @@ public class InspectionFormTest extends JPATest {
 		audit = new InspectionFormAudit();
 		audit.setInspectionForm(inspectionForm);
 		audit.setStatusCode("DRAFT");
-		audit.setStatusDate(DateTime.now());
+		audit.setStatusDate(MizeDateTime.now());
 		audit.setStatusBy(779L);	
 		audits = new ArrayList<InspectionFormAudit>();
 		audits.add(audit);

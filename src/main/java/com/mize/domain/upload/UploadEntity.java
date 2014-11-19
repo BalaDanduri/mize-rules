@@ -5,22 +5,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.batch.IBatchBean;
 import com.mize.domain.businessentity.BusinessEntity;
-import com.mize.domain.common.MizeEntity;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.MizeDateTime;
 
-public final class UploadEntity extends MizeEntity implements Comparable<UploadEntity> {
+public final class UploadEntity extends MizeSceEntity implements Comparable<UploadEntity> {
 
 	private static final long serialVersionUID = 8241122531831985362L;
 	private Long parentId;
@@ -29,10 +21,10 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 	private Integer recordCount;
 	private Integer successCount;
 	private Integer failureCount;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private DateTime startTime;
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private DateTime endTime;
+//	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	private MizeDateTime startTime;
+//	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	private MizeDateTime endTime;
 	private String status;
 	private String fileName;
 	private Object entity;
@@ -78,29 +70,29 @@ public final class UploadEntity extends MizeEntity implements Comparable<UploadE
 		this.id = id;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getStartTime() {
+	@JsonInclude(Include.NON_DEFAULT)*/
+	public MizeDateTime getStartTime() {
 		return startTime;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	public void setStartTime(DateTime startTime) {
+	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	*/
+	public void setStartTime(MizeDateTime startTime) {
 		this.startTime = startTime;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getEndTime() {
+	@JsonInclude(Include.NON_DEFAULT)*/
+	public MizeDateTime getEndTime() {
 		return endTime;
 	}
 
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	public void setEndTime(DateTime endTime) {
+	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
+	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	*/
+	public void setEndTime(MizeDateTime endTime) {
 		this.endTime = endTime;
 	}
 	

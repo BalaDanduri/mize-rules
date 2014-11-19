@@ -18,12 +18,12 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityAddress;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JPASerializer;
 
 @Entity
 @Table(name="shipment_tracking_party")
-public class ShipmentParty extends MizeEntity implements Comparable<ShipmentParty>{
+public class ShipmentParty extends MizeSceEntity implements Comparable<ShipmentParty>{
 	private static final long serialVersionUID = -7073856017006485033L;
 	private ShipmentTracking shipmentTracking;
 	private String partyType;

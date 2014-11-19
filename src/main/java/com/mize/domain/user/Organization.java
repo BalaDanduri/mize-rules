@@ -1,9 +1,9 @@
 package com.mize.domain.user;
 
 import com.mize.domain.common.Address;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
-public class Organization extends MizeEntity{
+public class Organization extends MizeSceEntity implements Comparable<Organization>{
 
 	private static final long serialVersionUID = -4714984452033714839L;
 	private String name;
@@ -66,6 +66,12 @@ public class Organization extends MizeEntity{
 		} else if (!name.equals(other.name))
 			return false;
 		return true;
+	}
+
+	@Override
+	public int compareTo(Organization arg0) {
+	
+		return 0;
 	}
 
 }

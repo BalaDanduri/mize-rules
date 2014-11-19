@@ -16,11 +16,11 @@ import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
 @Entity
 @Table(name = "part_kit_item", uniqueConstraints = {@UniqueConstraint (columnNames = {"part_id", "part_kit_id"})})
-public class PartKitItem extends MizeEntity{
+public class PartKitItem extends MizeSceEntity implements Comparable<PartKitItem>{
 
 	private static final long serialVersionUID = 1L;
 	private Part part;
@@ -122,6 +122,11 @@ public class PartKitItem extends MizeEntity{
 		builder.append(id);
 		builder.append("]");
 		return builder.toString();
+	}
+
+	@Override
+	public int compareTo(PartKitItem o) {
+		return 0;
 	}
 
 	

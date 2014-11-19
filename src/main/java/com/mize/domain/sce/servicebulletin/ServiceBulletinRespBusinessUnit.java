@@ -18,7 +18,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityContact;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JPASerializer;
 
 /**
@@ -28,7 +28,7 @@ import com.mize.domain.util.JPASerializer;
 
 @Entity
 @Table(name = "srvc_blltn_rbu")
-public class ServiceBulletinRespBusinessUnit extends MizeEntity {
+public class ServiceBulletinRespBusinessUnit extends MizeSceEntity implements Comparable<ServiceBulletinRespBusinessUnit> {
 
 
 	private static final long serialVersionUID = 489453764812566721L;
@@ -286,6 +286,12 @@ public class ServiceBulletinRespBusinessUnit extends MizeEntity {
 		} else if (!typeCode.equals(other.typeCode))
 			return false;
 		return true;
+	}
+
+	@Override
+	public int compareTo(ServiceBulletinRespBusinessUnit o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

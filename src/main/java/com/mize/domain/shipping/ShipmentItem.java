@@ -16,12 +16,12 @@ import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.Country;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.common.State;
 
 @Entity
 @Table(name="shipment_item")
-public class ShipmentItem extends MizeEntity implements Comparable<ShipmentItem> {
+public class ShipmentItem extends MizeSceEntity implements Comparable<ShipmentItem> {
 	private static final long serialVersionUID = -7073856017006485033L;
 	private ShipmentTracking shipmentTracking;	
 	private Long itemId;
