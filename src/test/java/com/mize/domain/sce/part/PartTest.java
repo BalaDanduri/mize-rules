@@ -12,7 +12,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
@@ -27,6 +26,7 @@ import com.mize.domain.part.PartIntl;
 import com.mize.domain.part.PartPrice;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;
+import com.mize.domain.util.MizeDateTime;
 
 @ContextConfiguration(locations = { "/test-context.xml" })
 public class PartTest extends JPATest {
@@ -92,8 +92,8 @@ public class PartTest extends JPATest {
 		part.setIsReturnable("Y");
 		part.setIsSerialized("Y");
 		part.setUom("Each");
-		part.setCreatedDate(DateTime.now());
-		part.setUpdatedDate(DateTime.now().plusMonths(2));
+		part.setCreatedDate(MizeDateTime.now());
+		part.setUpdatedDate(MizeDateTime.now().plusMonths(2));
 		part.setCreatedBy(779l);
 		part.setUpdatedBy(779l);
 		return part;
@@ -122,12 +122,12 @@ public class PartTest extends JPATest {
 		partPrice.setNetPrice(BigDecimal.valueOf(1));
 		partPrice.setCurrencyCode("USD");
 		partPrice.setTaxId(1l);
-		partPrice.setCreatedDate(DateTime.now());
+		partPrice.setCreatedDate(MizeDateTime.now());
 		partPrice.setCreatedBy(776l);
-		partPrice.setEndDate(DateTime.now().plusMonths(2));
-		partPrice.setStartDate(DateTime.now());
+		partPrice.setEndDate(MizeDateTime.now().plusMonths(2));
+		partPrice.setStartDate(MizeDateTime.now());
 		partPrice.setUpdatedBy(776l);
-		partPrice.setUpdatedDate(DateTime.now().plusMonths(1));
+		partPrice.setUpdatedDate(MizeDateTime.now().plusMonths(1));
 		partPrices.add(partPrice);
 
 		part.setPartPrices(partPrices);
@@ -155,9 +155,9 @@ public class PartTest extends JPATest {
 			part.setIsSerialized(resultSet.getString("is_serialized"));
 			part.setIsReturnable(resultSet.getString("is_returnable"));
 			part.setUom(resultSet.getString("uom"));
-			part.setCreatedDate(Formatter.dateTime(resultSet
+			part.setCreatedDate(Formatter.toMizeDateTime(resultSet
 					.getTimestamp("created_date")));
-			part.setUpdatedDate(Formatter.dateTime(resultSet
+			part.setUpdatedDate(Formatter.toMizeDateTime(resultSet
 					.getTimestamp("updated_date")));
 			BusinessEntity beEntity = new BusinessEntity();
 			beEntity.setId(resultSet.getLong("tenant_id"));
@@ -205,15 +205,15 @@ public class PartTest extends JPATest {
 			partPrice.setNetPrice(rs.getBigDecimal("net_price"));
 			partPrice.setCurrencyCode(rs.getString("currency_code"));
 			partPrice.setTaxId(rs.getLong("tax_id"));
-			partPrice.setCreatedDate(Formatter.dateTime(rs
+			partPrice.setCreatedDate(Formatter.toMizeDateTime(rs
 					.getTimestamp("created_date")));
 			partPrice.setCreatedBy(rs.getLong("created_by"));
 			partPrice
-					.setEndDate(Formatter.dateTime(rs.getTimestamp("end_date")));
-			partPrice.setStartDate(Formatter.dateTime(rs
+					.setEndDate(Formatter.toMizeDateTime(rs.getTimestamp("end_date")));
+			partPrice.setStartDate(Formatter.toMizeDateTime(rs
 					.getTimestamp("start_date")));
 			partPrice.setUpdatedBy(rs.getLong("updated_by"));
-			partPrice.setUpdatedDate(Formatter.dateTime(rs
+			partPrice.setUpdatedDate(Formatter.toMizeDateTime(rs
 					.getTimestamp("updated_date")));
 
 			return partPrice;

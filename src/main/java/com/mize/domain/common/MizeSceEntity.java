@@ -23,6 +23,10 @@ public abstract class MizeSceEntity implements IEntity {
 	protected Long updatedBy;
 	protected MizeDateTime updatedDate;	
 	protected Long id;
+	
+	protected String createdByUser;
+	
+	protected String updatedByUser;
 
 	@JsonIgnore
 	public static String STATUS = "status";
@@ -78,6 +82,25 @@ public abstract class MizeSceEntity implements IEntity {
 		this.uploadError = uploadError;
 	}
 	
+	
+	public String getCreatedByUser() {
+		return createdByUser;
+	}
+
+	public void setCreatedByUser(String createdByUser) {
+		this.createdByUser = createdByUser;
+	}
+
+	
+	public String getUpdatedByUser() {
+		return updatedByUser;
+	}
+
+	public void setUpdatedByUser(String updatedByUser) {
+		this.updatedByUser = updatedByUser;
+	}
+
+	
 	@JsonIgnore
 	public boolean isValid() {
 		if(this.isValid == null){
@@ -85,7 +108,7 @@ public abstract class MizeSceEntity implements IEntity {
 		}
 		return this.isValid.booleanValue();
 	}
-
+	
 	@Override
 	public int hashCode() {
 		int result = HASH_CODE_START;
@@ -118,4 +141,5 @@ public abstract class MizeSceEntity implements IEntity {
 		}
 		return true;
 	}
+	
 }
