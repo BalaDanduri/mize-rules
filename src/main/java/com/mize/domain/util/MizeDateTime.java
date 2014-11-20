@@ -68,7 +68,8 @@ public class MizeDateTime implements IMizeDate, Comparable<MizeDateTime>, Clonea
 		try{		
 			this.dateTimeValue = checkAndAppendTime(dateTimeValue);
 			this.dateTimeFormat = dateTimeFormat;
-			this.dateTime = DateTime.parse(this.dateTimeValue,DateTimeFormat.forPattern(dateTimeFormat).withZone(dateTimeZone));
+			//this.dateTime = DateTime.parse(this.dateTimeValue,DateTimeFormat.forPattern(dateTimeFormat).withZone(dateTimeZone));
+			this.dateTime = DateTime.parse(this.dateTimeValue,DateTimeFormat.forPattern(dateTimeFormat));
 			this.dateTimeZone = dateTimeZone;
 			this.timeZone = dateTimeZone.getID();
 			this.isValid = true;
