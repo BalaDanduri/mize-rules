@@ -64,16 +64,17 @@ public class ProductRegistrationWarranty extends MizeSceEntity implements Compar
 		this.warranty = warranty;
 	}
 	
+
+	@Override
+	public int compareTo(ProductRegistrationWarranty o) {
+		return 0;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime
-				* result
-				+ ((productRegistration == null) ? 0 : productRegistration
-						.hashCode());
-		result = prime * result
-				+ ((warranty == null) ? 0 : warranty.hashCode());
+		result = prime * result + ((warranty == null) ? 0 : warranty.hashCode());
 		return result;
 	}
 
@@ -89,30 +90,23 @@ public class ProductRegistrationWarranty extends MizeSceEntity implements Compar
 			return false;
 		}
 		ProductRegistrationWarranty other = (ProductRegistrationWarranty) obj;
-		if (productRegistration == null) {
-			if (other.productRegistration != null) {
+		if (warranty == null) {
+			if (other.warranty != null) {
 				return false;
 			}
-		} else if (!productRegistration.equals(other.productRegistration)) {
+		} else if (!warranty.equals(other.warranty)) {
 			return false;
 		}
-	
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "ProductRegistrationWarranty [id=" + id
-				+ ", productRegistration=" + productRegistration
-				+ ", warranty=" + warranty + "]";
+		return "ProductRegistrationWarranty [id=" + id + ", warranty="
+				+ warranty + "]";
 	}
 
-	@Override
-	public int compareTo(ProductRegistrationWarranty o) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
+	
 	
 	
 }

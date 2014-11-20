@@ -67,6 +67,45 @@ public class ProductRegistrationAttachment extends MizeSceEntity implements Comp
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = PRIME;
+		int result = super.hashCode();
+		result = prime * result + ((entityAttachment == null) ? 0 : entityAttachment.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (!super.equals(obj)) {
+			return false;
+		}
+		if (!(obj instanceof ProductRegistrationAttachment)) {
+			return false;
+		}
+		ProductRegistrationAttachment other = (ProductRegistrationAttachment) obj;
+		if (entityAttachment == null) {
+			if (other.entityAttachment != null) {
+				return false;
+			}
+		} else if (!entityAttachment.equals(other.entityAttachment)) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "ProductRegistrationAttachment [id=" + id + ", entityAttachment=" + entityAttachment + "]";
+	}
+
+	
+	
+	
 	
 
 }

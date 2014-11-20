@@ -565,26 +565,67 @@ public class ProductRegistration extends MizeSceEntity implements Comparable<Pro
 		this.count = count;
 	}
 
+	
+	@Override
+	@Column(name = "created_by_user")
+	public String getCreatedByUser() {
+		return createdByUser;
+	}
+	
+	@Override
+	@Column(name = "updated_by_user")
+	public String getUpdatedByUser() {
+		return updatedByUser;
+	}
+
+	@Override
+	public void setCreatedByUser(String createdByUser) {
+		this.createdByUser = createdByUser;
+	}
+	
+	@Override
+	public void setUpdatedByUser(String updatedByUser) {
+		this.updatedByUser = updatedByUser;
+	}
+	
+	
+
+	@Override
+	public int compareTo(ProductRegistration o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime * result
-				+ ((purchaseDate == null) ? 0 : purchaseDate.hashCode());
-		result = prime * result
-				+ ((purchasePrice == null) ? 0 : purchasePrice.hashCode());
-		result = prime
-				* result
-				+ ((registrationType == null) ? 0 : registrationType.hashCode());
-		result = prime * result
-				+ ((statusCode == null) ? 0 : statusCode.hashCode());
-		result = prime
-				* result
-				+ ((warrantyExpiryDate == null) ? 0 : warrantyExpiryDate
-						.hashCode());
+		result = prime * result + ((additionalInfo == null) ? 0 : additionalInfo.hashCode());
+		result = prime * result + ((attachments == null) ? 0 : attachments.hashCode());
+		result = prime * result + ((audits == null) ? 0 : audits.hashCode());
+		result = prime * result + ((comments == null) ? 0 : comments.hashCode());
+		result = prime * result + ((customer == null) ? 0 : customer.hashCode());
+		result = prime * result + ((customerAddress == null) ? 0 : customerAddress.hashCode());
+		result = prime * result + ((customerDeliveryDate == null) ? 0 : customerDeliveryDate.hashCode());
+		result = prime * result + ((dealerCustomerReference == null) ? 0 : dealerCustomerReference.hashCode());
+		result = prime * result + ((invoiceBusinessEntity == null) ? 0 : invoiceBusinessEntity.hashCode());
+		result = prime * result + ((invoiceNumber == null) ? 0 : invoiceNumber.hashCode());
+		result = prime * result + ((productSerial == null) ? 0 : productSerial.hashCode());
+		result = prime * result + ((purchaseDate == null) ? 0 : purchaseDate.hashCode());
+		result = prime * result + ((purchasePrice == null) ? 0 : purchasePrice.hashCode());
+		result = prime * result + ((registrationApplication == null) ? 0 : registrationApplication.hashCode());
+		result = prime * result + ((registrationDate == null) ? 0 : registrationDate.hashCode());
+		result = prime * result + ((registrationIndustry == null) ? 0 : registrationIndustry.hashCode());
+		result = prime * result + ((registrationRef == null) ? 0 : registrationRef.hashCode());
+		result = prime * result + ((registrationSource == null) ? 0 : registrationSource.hashCode());
+		result = prime * result + ((registrationType == null) ? 0 : registrationType.hashCode());
+		result = prime * result + ((salesPerson == null) ? 0 : salesPerson.hashCode());
+		result = prime * result + ((statusCode == null) ? 0 : statusCode.hashCode());
+		result = prime * result + ((tenant == null) ? 0 : tenant.hashCode());
+		result = prime * result + ((warrantyExpiryDate == null) ? 0 : warrantyExpiryDate.hashCode());
+		
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -598,11 +639,82 @@ public class ProductRegistration extends MizeSceEntity implements Comparable<Pro
 			return false;
 		}
 		ProductRegistration other = (ProductRegistration) obj;
-		if (id == null) {
-			if (other.id != null) {
+		if (additionalInfo == null) {
+			if (other.additionalInfo != null) {
 				return false;
 			}
-		} else if (!id.equals(other.id)) {
+		} else if (!additionalInfo.equals(other.additionalInfo)) {
+			return false;
+		}
+		if (attachments == null) {
+			if (other.attachments != null) {
+				return false;
+			}
+		} else if (!attachments.equals(other.attachments)) {
+			return false;
+		}
+		if (audits == null) {
+			if (other.audits != null) {
+				return false;
+			}
+		} else if (!audits.equals(other.audits)) {
+			return false;
+		}
+		if (comments == null) {
+			if (other.comments != null) {
+				return false;
+			}
+		} else if (!comments.equals(other.comments)) {
+			return false;
+		}
+		if (customer == null) {
+			if (other.customer != null) {
+				return false;
+			}
+		} else if (!customer.equals(other.customer)) {
+			return false;
+		}
+		if (customerAddress == null) {
+			if (other.customerAddress != null) {
+				return false;
+			}
+		} else if (!customerAddress.equals(other.customerAddress)) {
+			return false;
+		}
+		if (customerDeliveryDate == null) {
+			if (other.customerDeliveryDate != null) {
+				return false;
+			}
+		} else if (!customerDeliveryDate.equals(other.customerDeliveryDate)) {
+			return false;
+		}
+		if (dealerCustomerReference == null) {
+			if (other.dealerCustomerReference != null) {
+				return false;
+			}
+		} else if (!dealerCustomerReference
+				.equals(other.dealerCustomerReference)) {
+			return false;
+		}
+		if (invoiceBusinessEntity == null) {
+			if (other.invoiceBusinessEntity != null) {
+				return false;
+			}
+		} else if (!invoiceBusinessEntity.equals(other.invoiceBusinessEntity)) {
+			return false;
+		}
+		if (invoiceNumber == null) {
+			if (other.invoiceNumber != null) {
+				return false;
+			}
+		} else if (!invoiceNumber.equals(other.invoiceNumber)) {
+			return false;
+		}
+		if (productSerial == null) {
+			if (other.productSerial != null) {
+				return false;
+			}
+		} else if (!productSerial.equals(other.productSerial)) {
 			return false;
 		}
 		if (purchaseDate == null) {
@@ -619,6 +731,42 @@ public class ProductRegistration extends MizeSceEntity implements Comparable<Pro
 		} else if (!purchasePrice.equals(other.purchasePrice)) {
 			return false;
 		}
+		if (registrationApplication == null) {
+			if (other.registrationApplication != null) {
+				return false;
+			}
+		} else if (!registrationApplication
+				.equals(other.registrationApplication)) {
+			return false;
+		}
+		if (registrationDate == null) {
+			if (other.registrationDate != null) {
+				return false;
+			}
+		} else if (!registrationDate.equals(other.registrationDate)) {
+			return false;
+		}
+		if (registrationIndustry == null) {
+			if (other.registrationIndustry != null) {
+				return false;
+			}
+		} else if (!registrationIndustry.equals(other.registrationIndustry)) {
+			return false;
+		}
+		if (registrationRef == null) {
+			if (other.registrationRef != null) {
+				return false;
+			}
+		} else if (!registrationRef.equals(other.registrationRef)) {
+			return false;
+		}
+		if (registrationSource == null) {
+			if (other.registrationSource != null) {
+				return false;
+			}
+		} else if (!registrationSource.equals(other.registrationSource)) {
+			return false;
+		}
 		if (registrationType == null) {
 			if (other.registrationType != null) {
 				return false;
@@ -626,11 +774,25 @@ public class ProductRegistration extends MizeSceEntity implements Comparable<Pro
 		} else if (!registrationType.equals(other.registrationType)) {
 			return false;
 		}
+		if (salesPerson == null) {
+			if (other.salesPerson != null) {
+				return false;
+			}
+		} else if (!salesPerson.equals(other.salesPerson)) {
+			return false;
+		}
 		if (statusCode == null) {
 			if (other.statusCode != null) {
 				return false;
 			}
 		} else if (!statusCode.equals(other.statusCode)) {
+			return false;
+		}
+		if (tenant == null) {
+			if (other.tenant != null) {
+				return false;
+			}
+		} else if (!tenant.equals(other.tenant)) {
 			return false;
 		}
 		if (warrantyExpiryDate == null) {
@@ -643,35 +805,32 @@ public class ProductRegistration extends MizeSceEntity implements Comparable<Pro
 		return true;
 	}
 
-
 	@Override
 	public String toString() {
 		return "ProductRegistration [id=" + id + ", additionalInfo="
-				+ additionalInfo + ", attachments=" + attachments
-				+ ", comments=" + comments + ", customer=" + customer
+				+ additionalInfo + ", attachments=" + attachments + ", audits="
+				+ audits + ", comments=" + comments + ", customer=" + customer
 				+ ", customerAddress=" + customerAddress
 				+ ", customerDeliveryDate=" + customerDeliveryDate
+				+ ", dealerCustomerReference=" + dealerCustomerReference
 				+ ", entityComment=" + entityComment
 				+ ", invoiceBusinessEntity=" + invoiceBusinessEntity
-				+ ", productSerial=" + productSerial + ", purchaseDate="
-				+ purchaseDate + ", purchasePrice=" + purchasePrice
+				+ ", invoiceNumber=" + invoiceNumber + ", productSerial="
+				+ productSerial + ", purchaseDate=" + purchaseDate
+				+ ", purchasePrice=" + purchasePrice
 				+ ", registrationApplication=" + registrationApplication
 				+ ", registrationDate=" + registrationDate
 				+ ", registrationIndustry=" + registrationIndustry
 				+ ", registrationRef=" + registrationRef
 				+ ", registrationSource=" + registrationSource
-				+ ", registrationType=" + registrationType + ", statusCode="
-				+ statusCode + ", tenant=" + tenant + ", user=" + user
-				+ ", warrantyExpiryDate=" + warrantyExpiryDate
-				+ ", warrantyList=" + warrantyList + "]";
+				+ ", registrationType=" + registrationType + ", salesPerson="
+				+ salesPerson + ", statusCode=" + statusCode
+				+ ", warrantyExpiryDate=" + warrantyExpiryDate + "]";
 	}
 
-	@Override
-	public int compareTo(ProductRegistration o) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
+	
+	
+	
 
 
 }
