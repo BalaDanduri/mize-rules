@@ -154,10 +154,16 @@ public class WorkQueueAuth extends MizeSceEntity implements Comparable<WorkQueue
 		this.id = id;
 	}
  
+	@Override
+	@JsonIgnore(value = false)
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	public void setCreatedDate(MizeDateTime createdDate) {
 		super.createdDate = createdDate;
 	}
-	
+
+	@Override
+	@JsonIgnore(value = false)
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	public void setUpdatedDate(MizeDateTime updatedDate) {
 		super.updatedDate = updatedDate;
 	}
