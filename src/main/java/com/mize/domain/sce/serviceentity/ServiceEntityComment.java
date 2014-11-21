@@ -77,8 +77,6 @@ public class ServiceEntityComment extends MizeSceEntity implements Comparable<Se
 		int result = super.hashCode();
 		result = prime * result
 				+ ((entityComment == null) ? 0 : entityComment.hashCode());
-		result = prime * result
-				+ ((serviceEntity == null) ? 0 : serviceEntity.hashCode());
 		return result;
 	}
 
@@ -96,22 +94,17 @@ public class ServiceEntityComment extends MizeSceEntity implements Comparable<Se
 				return false;
 		} else if (!entityComment.equals(other.entityComment))
 			return false;
-		if (serviceEntity == null) {
-			if (other.serviceEntity != null)
-				return false;
-		} else {
-			if(serviceEntity.getId() == null) {
-				if(other.serviceEntity.getId() != null)
-					return false;
-			} else if(!serviceEntity.getId().equals(other.serviceEntity.getId()))
-				return false;
-		}
 		return true;
 	}
 
 	@Override
 	public int compareTo(ServiceEntityComment o) {
 		return 0;
+	}
+
+	@Override
+	public String toString() {
+		return "ServiceEntityComment [entityComment=" + entityComment + "]";
 	}	
 	
 

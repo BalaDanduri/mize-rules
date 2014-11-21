@@ -13,7 +13,7 @@ import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeAuditEntity;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.MizeDateTime;
 
@@ -23,15 +23,14 @@ import com.mize.domain.util.MizeDateTime;
  */
 @Entity
 @Table(name = "srvc_enty_audit")
-public class ServiceEntityAudit extends MizeSceEntity implements Comparable<ServiceEntityAudit> {
+public class ServiceEntityAudit extends MizeAuditEntity implements Comparable<ServiceEntityAudit> {
 
 	
 	private static final long serialVersionUID = -4801057184698573353L;
 	
 	private ServiceEntity serviceEntity;
 	private String statusCode;
-	private MizeDateTime statusDate;
-	private Long statusBy;
+	
 
 	public ServiceEntityAudit() {
 		
@@ -89,15 +88,25 @@ public class ServiceEntityAudit extends MizeSceEntity implements Comparable<Serv
 	public void setStatusBy(Long statusBy) {
 		this.statusBy = statusBy;
 	}
+	
+	@Column(name = "status_by_user", nullable = true, length = 250)
+	@Override
+	public String getStatusByUser() {
+		return statusByUser;
+	}
+
+	public void setStatusByUser(String statusByUser) {
+		this.statusByUser = statusByUser;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result
-				+ ((serviceEntity == null) ? 0 : serviceEntity.hashCode());
-		result = prime * result
 				+ ((statusBy == null) ? 0 : statusBy.hashCode());
+		result = prime * result
+				+ ((statusByUser == null) ? 0 : statusByUser.hashCode());
 		result = prime * result
 				+ ((statusCode == null) ? 0 : statusCode.hashCode());
 		result = prime * result
@@ -114,20 +123,15 @@ public class ServiceEntityAudit extends MizeSceEntity implements Comparable<Serv
 		if (getClass() != obj.getClass())
 			return false;
 		ServiceEntityAudit other = (ServiceEntityAudit) obj;
-		if (serviceEntity == null) {
-			if (other.serviceEntity != null)
-				return false;
-		} else {
-			if(serviceEntity.getId() == null) {
-				if(other.serviceEntity.getId() != null)
-					return false;
-			} else if(!serviceEntity.getId().equals(other.serviceEntity.getId()))
-				return false;
-		}
 		if (statusBy == null) {
 			if (other.statusBy != null)
 				return false;
 		} else if (!statusBy.equals(other.statusBy))
+			return false;
+		if (statusByUser == null) {
+			if (other.statusByUser != null)
+				return false;
+		} else if (!statusByUser.equals(other.statusByUser))
 			return false;
 		if (statusCode == null) {
 			if (other.statusCode != null)
@@ -145,6 +149,13 @@ public class ServiceEntityAudit extends MizeSceEntity implements Comparable<Serv
 	@Override
 	public int compareTo(ServiceEntityAudit o) {
 		return 0;
+	}
+
+	@Override
+	public String toString() {
+		return "ServiceEntityAudit [statusCode=" + statusCode + ", statusDate="
+				+ statusDate + ", statusBy=" + statusBy + ", statusByUser="
+				+ statusByUser + "]";
 	}
 	
 

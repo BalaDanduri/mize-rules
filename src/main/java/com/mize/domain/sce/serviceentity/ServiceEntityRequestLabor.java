@@ -149,6 +149,7 @@ public class ServiceEntityRequestLabor extends MizeSceEntity implements Comparab
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
+		result = prime * result + (isUpdated ? 1231 : 1237);
 		result = prime * result
 				+ ((laborAmount == null) ? 0 : laborAmount.hashCode());
 		result = prime * result
@@ -159,13 +160,11 @@ public class ServiceEntityRequestLabor extends MizeSceEntity implements Comparab
 		result = prime * result
 				+ ((laborHour == null) ? 0 : laborHour.hashCode());
 		result = prime * result
+				+ ((laborHourId == null) ? 0 : laborHourId.hashCode());
+		result = prime * result
 				+ ((laborName == null) ? 0 : laborName.hashCode());
 		result = prime * result
 				+ ((laborType == null) ? 0 : laborType.hashCode());
-		result = prime
-				* result
-				+ ((serviceEntityRequest == null) ? 0 : serviceEntityRequest
-						.hashCode());
 		return result;
 	}
 
@@ -178,6 +177,8 @@ public class ServiceEntityRequestLabor extends MizeSceEntity implements Comparab
 		if (getClass() != obj.getClass())
 			return false;
 		ServiceEntityRequestLabor other = (ServiceEntityRequestLabor) obj;
+		if (isUpdated != other.isUpdated)
+			return false;
 		if (laborAmount == null) {
 			if (other.laborAmount != null)
 				return false;
@@ -198,6 +199,11 @@ public class ServiceEntityRequestLabor extends MizeSceEntity implements Comparab
 				return false;
 		} else if (!laborHour.equals(other.laborHour))
 			return false;
+		if (laborHourId == null) {
+			if (other.laborHourId != null)
+				return false;
+		} else if (!laborHourId.equals(other.laborHourId))
+			return false;
 		if (laborName == null) {
 			if (other.laborName != null)
 				return false;
@@ -208,16 +214,6 @@ public class ServiceEntityRequestLabor extends MizeSceEntity implements Comparab
 				return false;
 		} else if (!laborType.equals(other.laborType))
 			return false;
-		if (serviceEntityRequest == null) {
-			if (other.serviceEntityRequest != null)
-				return false;
-		} else {
-			if(serviceEntityRequest.getId() == null) {
-				if(other.serviceEntityRequest.getId() != null)
-					return false;
-			} else if(!serviceEntityRequest.getId().equals(other.serviceEntityRequest.getId()))
-				return false;
-		}
 		return true;
 	}
 
@@ -225,6 +221,15 @@ public class ServiceEntityRequestLabor extends MizeSceEntity implements Comparab
 	public int compareTo(ServiceEntityRequestLabor o) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public String toString() {
+		return "ServiceEntityRequestLabor [laborHour=" + laborHour
+				+ ", laborHourId=" + laborHourId + ", laborType=" + laborType
+				+ ", laborCode=" + laborCode + ", laborName=" + laborName
+				+ ", laborDescription=" + laborDescription + ", laborAmount="
+				+ laborAmount + ", isUpdated=" + isUpdated + "]";
 	}
 	
 

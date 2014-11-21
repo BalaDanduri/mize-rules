@@ -318,22 +318,60 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 		int result = super.hashCode();
 		result = prime * result
 				+ ((brandName == null) ? 0 : brandName.hashCode());
-		result = prime * result + ((model == null) ? 0 : model.hashCode());
-		result = prime * result + ((product == null) ? 0 : product.hashCode());
 		result = prime * result
 				+ ((categoryName == null) ? 0 : categoryName.hashCode());
+		result = prime * result
+				+ ((customerAddress == null) ? 0 : customerAddress.hashCode());
+		result = prime * result
+				+ ((customerCode == null) ? 0 : customerCode.hashCode());
+		result = prime * result
+				+ ((customerContact == null) ? 0 : customerContact.hashCode());
+		result = prime
+				* result
+				+ ((customerFirstName == null) ? 0 : customerFirstName
+						.hashCode());
+		result = prime * result
+				+ ((customerId == null) ? 0 : customerId.hashCode());
+		result = prime
+				* result
+				+ ((customerLastName == null) ? 0 : customerLastName.hashCode());
+		result = prime
+				* result
+				+ ((customerMiddleInitial == null) ? 0 : customerMiddleInitial
+						.hashCode());
+		result = prime * result
+				+ ((customerName == null) ? 0 : customerName.hashCode());
+		result = prime
+				* result
+				+ ((customerReference == null) ? 0 : customerReference
+						.hashCode());
+		result = prime
+				* result
+				+ ((customerSubTypeCode == null) ? 0 : customerSubTypeCode
+						.hashCode());
+		result = prime
+				* result
+				+ ((customerTypeCode == null) ? 0 : customerTypeCode.hashCode());
+		result = prime * result
+				+ ((isNewCustomer == null) ? 0 : isNewCustomer.hashCode());
+		result = prime * result + ((model == null) ? 0 : model.hashCode());
+		result = prime * result
+				+ ((prodRegnId == null) ? 0 : prodRegnId.hashCode());
+		result = prime * result + ((product == null) ? 0 : product.hashCode());
+		result = prime * result
+				+ ((productCategory == null) ? 0 : productCategory.hashCode());
+		result = prime * result
+				+ ((productId == null) ? 0 : productId.hashCode());
 		result = prime * result
 				+ ((productName == null) ? 0 : productName.hashCode());
 		result = prime * result
 				+ ((productSerial == null) ? 0 : productSerial.hashCode());
 		result = prime * result
+				+ ((productSerialId == null) ? 0 : productSerialId.hashCode());
+		result = prime * result
 				+ ((registration == null) ? 0 : registration.hashCode());
 		result = prime * result
 				+ ((serialNumber == null) ? 0 : serialNumber.hashCode());
-		result = prime
-				* result
-				+ ((serviceEntityRequest == null) ? 0 : serviceEntityRequest
-						.hashCode());
 		return result;
 	}
 
@@ -351,20 +389,95 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 				return false;
 		} else if (!brandName.equals(other.brandName))
 			return false;
+		if (categoryName == null) {
+			if (other.categoryName != null)
+				return false;
+		} else if (!categoryName.equals(other.categoryName))
+			return false;
+		if (customerAddress == null) {
+			if (other.customerAddress != null)
+				return false;
+		} else if (!customerAddress.equals(other.customerAddress))
+			return false;
+		if (customerCode == null) {
+			if (other.customerCode != null)
+				return false;
+		} else if (!customerCode.equals(other.customerCode))
+			return false;
+		if (customerContact == null) {
+			if (other.customerContact != null)
+				return false;
+		} else if (!customerContact.equals(other.customerContact))
+			return false;
+		if (customerFirstName == null) {
+			if (other.customerFirstName != null)
+				return false;
+		} else if (!customerFirstName.equals(other.customerFirstName))
+			return false;
+		if (customerId == null) {
+			if (other.customerId != null)
+				return false;
+		} else if (!customerId.equals(other.customerId))
+			return false;
+		if (customerLastName == null) {
+			if (other.customerLastName != null)
+				return false;
+		} else if (!customerLastName.equals(other.customerLastName))
+			return false;
+		if (customerMiddleInitial == null) {
+			if (other.customerMiddleInitial != null)
+				return false;
+		} else if (!customerMiddleInitial.equals(other.customerMiddleInitial))
+			return false;
+		if (customerName == null) {
+			if (other.customerName != null)
+				return false;
+		} else if (!customerName.equals(other.customerName))
+			return false;
+		if (customerReference == null) {
+			if (other.customerReference != null)
+				return false;
+		} else if (!customerReference.equals(other.customerReference))
+			return false;
+		if (customerSubTypeCode == null) {
+			if (other.customerSubTypeCode != null)
+				return false;
+		} else if (!customerSubTypeCode.equals(other.customerSubTypeCode))
+			return false;
+		if (customerTypeCode == null) {
+			if (other.customerTypeCode != null)
+				return false;
+		} else if (!customerTypeCode.equals(other.customerTypeCode))
+			return false;
+		if (isNewCustomer == null) {
+			if (other.isNewCustomer != null)
+				return false;
+		} else if (!isNewCustomer.equals(other.isNewCustomer))
+			return false;
 		if (model == null) {
 			if (other.model != null)
 				return false;
 		} else if (!model.equals(other.model))
+			return false;
+		if (prodRegnId == null) {
+			if (other.prodRegnId != null)
+				return false;
+		} else if (!prodRegnId.equals(other.prodRegnId))
 			return false;
 		if (product == null) {
 			if (other.product != null)
 				return false;
 		} else if (!product.equals(other.product))
 			return false;
-		if (categoryName == null) {
-			if (other.categoryName != null)
+		if (productCategory == null) {
+			if (other.productCategory != null)
 				return false;
-		} else if (!categoryName.equals(other.categoryName))
+		} else if (!productCategory.equals(other.productCategory))
+			return false;
+		if (productId == null) {
+			if (other.productId != null)
+				return false;
+		} else if (!productId.equals(other.productId))
 			return false;
 		if (productName == null) {
 			if (other.productName != null)
@@ -376,6 +489,11 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 				return false;
 		} else if (!productSerial.equals(other.productSerial))
 			return false;
+		if (productSerialId == null) {
+			if (other.productSerialId != null)
+				return false;
+		} else if (!productSerialId.equals(other.productSerialId))
+			return false;
 		if (registration == null) {
 			if (other.registration != null)
 				return false;
@@ -386,16 +504,6 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 				return false;
 		} else if (!serialNumber.equals(other.serialNumber))
 			return false;
-		if (serviceEntityRequest == null) {
-			if (other.serviceEntityRequest != null)
-				return false;
-		} else {
-			if(serviceEntityRequest.getId() == null) {
-				if(other.serviceEntityRequest.getId() != null)
-					return false;
-			} else if(!serviceEntityRequest.getId().equals(other.serviceEntityRequest.getId()))
-				return false;
-		}
 		return true;
 	}
 
@@ -403,6 +511,27 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 	public int compareTo(ServiceEntityRequestProduct o) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public String toString() {
+		return "ServiceEntityRequestProduct [product=" + product
+				+ ", productCategory=" + productCategory + ", productId="
+				+ productId + ", productSerial=" + productSerial
+				+ ", productSerialId=" + productSerialId + ", registration="
+				+ registration + ", prodRegnId=" + prodRegnId
+				+ ", productName=" + productName + ", model=" + model
+				+ ", brandName=" + brandName + ", categoryName=" + categoryName
+				+ ", serialNumber=" + serialNumber + ", customerId="
+				+ customerId + ", customerCode=" + customerCode
+				+ ", customerTypeCode=" + customerTypeCode
+				+ ", customerSubTypeCode=" + customerSubTypeCode
+				+ ", customerName=" + customerName + ", customerFirstName="
+				+ customerFirstName + ", customerLastName=" + customerLastName
+				+ ", customerMiddleInitial=" + customerMiddleInitial
+				+ ", customerReference=" + customerReference
+				+ ", customerAddress=" + customerAddress + ", customerContact="
+				+ customerContact + ", isNewCustomer=" + isNewCustomer + "]";
 	}	
 	
 

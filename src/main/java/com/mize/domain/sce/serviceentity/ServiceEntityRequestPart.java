@@ -171,6 +171,7 @@ public class ServiceEntityRequestPart extends MizeEntity implements Comparable<S
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
+		result = prime * result + (isUpdated ? 1231 : 1237);
 		result = prime * result + ((part == null) ? 0 : part.hashCode());
 		result = prime * result
 				+ ((partAmount == null) ? 0 : partAmount.hashCode());
@@ -178,6 +179,7 @@ public class ServiceEntityRequestPart extends MizeEntity implements Comparable<S
 				+ ((partCode == null) ? 0 : partCode.hashCode());
 		result = prime * result
 				+ ((partDescription == null) ? 0 : partDescription.hashCode());
+		result = prime * result + ((partId == null) ? 0 : partId.hashCode());
 		result = prime * result
 				+ ((partName == null) ? 0 : partName.hashCode());
 		result = prime * result
@@ -185,10 +187,6 @@ public class ServiceEntityRequestPart extends MizeEntity implements Comparable<S
 		result = prime * result
 				+ ((partType == null) ? 0 : partType.hashCode());
 		result = prime * result + ((partUom == null) ? 0 : partUom.hashCode());
-		result = prime
-				* result
-				+ ((serviceEntityRequest == null) ? 0 : serviceEntityRequest
-						.hashCode());
 		return result;
 	}
 
@@ -201,6 +199,8 @@ public class ServiceEntityRequestPart extends MizeEntity implements Comparable<S
 		if (getClass() != obj.getClass())
 			return false;
 		ServiceEntityRequestPart other = (ServiceEntityRequestPart) obj;
+		if (isUpdated != other.isUpdated)
+			return false;
 		if (part == null) {
 			if (other.part != null)
 				return false;
@@ -220,6 +220,11 @@ public class ServiceEntityRequestPart extends MizeEntity implements Comparable<S
 			if (other.partDescription != null)
 				return false;
 		} else if (!partDescription.equals(other.partDescription))
+			return false;
+		if (partId == null) {
+			if (other.partId != null)
+				return false;
+		} else if (!partId.equals(other.partId))
 			return false;
 		if (partName == null) {
 			if (other.partName != null)
@@ -241,22 +246,22 @@ public class ServiceEntityRequestPart extends MizeEntity implements Comparable<S
 				return false;
 		} else if (!partUom.equals(other.partUom))
 			return false;
-		if (serviceEntityRequest == null) {
-			if (other.serviceEntityRequest != null)
-				return false;
-		} else {
-			if(serviceEntityRequest.getId() == null) {
-				if(other.serviceEntityRequest.getId() != null)
-					return false;
-			} else if(!serviceEntityRequest.getId().equals(other.serviceEntityRequest.getId()))
-				return false;
-		}
 		return true;
 	}
 
 	@Override
 	public int compareTo(ServiceEntityRequestPart o) {
 		return 0;
+	}
+
+	@Override
+	public String toString() {
+		return "ServiceEntityRequestPart [part=" + part + ", partId=" + partId
+				+ ", partType=" + partType + ", partCode=" + partCode
+				+ ", partName=" + partName + ", partDescription="
+				+ partDescription + ", partUom=" + partUom + ", partSerial="
+				+ partSerial + ", partAmount=" + partAmount + ", isUpdated="
+				+ isUpdated + "]";
 	}
 	
 

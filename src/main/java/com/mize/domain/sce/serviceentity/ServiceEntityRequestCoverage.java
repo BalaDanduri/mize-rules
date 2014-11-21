@@ -101,10 +101,6 @@ public class ServiceEntityRequestCoverage extends MizeSceEntity implements Compa
 				+ ((coverageId == null) ? 0 : coverageId.hashCode());
 		result = prime * result
 				+ ((coverageName == null) ? 0 : coverageName.hashCode());
-		result = prime
-				* result
-				+ ((serviceEntityRequest == null) ? 0 : serviceEntityRequest
-						.hashCode());
 		return result;
 	}
 
@@ -132,16 +128,6 @@ public class ServiceEntityRequestCoverage extends MizeSceEntity implements Compa
 				return false;
 		} else if (!coverageName.equals(other.coverageName))
 			return false;
-		if (serviceEntityRequest == null) {
-			if (other.serviceEntityRequest != null)
-				return false;
-		} else {
-			if(serviceEntityRequest.getId() == null) {
-				if(other.serviceEntityRequest.getId() != null)
-					return false;
-			} else if(!serviceEntityRequest.getId().equals(other.serviceEntityRequest.getId()))
-				return false;
-		}
 		return true;
 	}
 
@@ -149,6 +135,13 @@ public class ServiceEntityRequestCoverage extends MizeSceEntity implements Compa
 	public int compareTo(ServiceEntityRequestCoverage o) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public String toString() {
+		return "ServiceEntityRequestCoverage [coverageId=" + coverageId
+				+ ", coverageName=" + coverageName + ", coverageEndDate="
+				+ coverageEndDate + "]";
 	}
 	
 

@@ -347,7 +347,20 @@ public class ServiceEntity extends MizeSceEntity implements Comparable<ServiceEn
 	public Long getUpdatedBy() {		
 		return super.getUpdatedBy();
 	}
-
+	
+	@Override
+	@JsonIgnore
+	@Column(name = "created_by_user",updatable=false)
+	public String getCreatedByUser() {
+		return super.getCreatedByUser();
+	}
+	
+	@Override
+	@JsonIgnore
+	@Column(name = "updated_by_user")
+	public String getUpdatedByUser() {
+		return super.getUpdatedByUser();
+	}
 
 	@Override
 	@JsonIgnore(false)
@@ -370,6 +383,18 @@ public class ServiceEntity extends MizeSceEntity implements Comparable<ServiceEn
 	@JsonIgnore
 	public void setUpdatedBy(Long updatedBy) {		
 		super.setUpdatedBy(updatedBy);
+	}
+	
+	@Override
+	@JsonIgnore
+	public void setCreatedByUser(String createdByUser) {
+		super.setCreatedByUser(createdByUser);
+	}
+	
+	@Override
+	@JsonIgnore
+	public void setUpdatedByUser(String updatedByUser) {
+		super.setUpdatedByUser(updatedByUser);
 	}
 
 	@Override
@@ -531,6 +556,21 @@ public class ServiceEntity extends MizeSceEntity implements Comparable<ServiceEn
 	public int compareTo(ServiceEntity o) {
 		return 0;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "ServiceEntity [entityCode=" + entityCode + ", entityType="
+				+ entityType + ", entityStatus=" + entityStatus
+				+ ", entityReference=" + entityReference + ", tenant=" + tenant
+				+ ", locale=" + locale + ", currencyCode=" + currencyCode
+				+ ", serviceRequests=" + serviceRequests + ", requester="
+				+ requester + ", provider=" + provider + ", payment=" + payment
+				+ ", partAmount=" + partAmount + ", laborAmount=" + laborAmount
+				+ ", otherAmount=" + otherAmount + ", totalAmount="
+				+ totalAmount + ", audits=" + audits + ", entityRelations="
+				+ entityRelations + ", messages=" + messages + ", comments="
+				+ comments + ", attachments=" + attachments + ", source="
+				+ source + ", user=" + user + "]";
+	}
 
 }

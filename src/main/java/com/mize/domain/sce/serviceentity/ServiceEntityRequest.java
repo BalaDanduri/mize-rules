@@ -317,6 +317,8 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 				+ ((correctiveActionDescription == null) ? 0
 						: correctiveActionDescription.hashCode());
 		result = prime * result
+				+ ((coverage == null) ? 0 : coverage.hashCode());
+		result = prime * result
 				+ ((failureDate == null) ? 0 : failureDate.hashCode());
 		result = prime * result
 				+ ((laborAmount == null) ? 0 : laborAmount.hashCode());
@@ -328,16 +330,15 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 		result = prime * result
 				+ ((partAmount == null) ? 0 : partAmount.hashCode());
 		result = prime * result + ((parts == null) ? 0 : parts.hashCode());
+		result = prime * result + ((product == null) ? 0 : product.hashCode());
 		result = prime * result
 				+ ((repairDate == null) ? 0 : repairDate.hashCode());
 		result = prime * result
 				+ ((repairSiteCode == null) ? 0 : repairSiteCode.hashCode());
 		result = prime * result
-				+ ((requestType == null) ? 0 : requestType.hashCode());
-		result = prime * result
 				+ ((requestCode == null) ? 0 : requestCode.hashCode());
 		result = prime * result
-				+ ((serviceEntity == null) ? 0 : serviceEntity.hashCode());
+				+ ((requestType == null) ? 0 : requestType.hashCode());
 		result = prime * result
 				+ ((totalAmount == null) ? 0 : totalAmount.hashCode());
 		return result;
@@ -383,6 +384,11 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 		} else if (!correctiveActionDescription
 				.equals(other.correctiveActionDescription))
 			return false;
+		if (coverage == null) {
+			if (other.coverage != null)
+				return false;
+		} else if (!coverage.equals(other.coverage))
+			return false;
 		if (failureDate == null) {
 			if (other.failureDate != null)
 				return false;
@@ -396,7 +402,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 		if (labors == null) {
 			if (other.labors != null)
 				return false;
-		} else if (!labors.containsAll(other.labors))
+		} else if (!labors.equals(other.labors))
 			return false;
 		if (otherAmount == null) {
 			if (other.otherAmount != null)
@@ -406,7 +412,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 		if (otherCharges == null) {
 			if (other.otherCharges != null)
 				return false;
-		} else if (!otherCharges.containsAll(other.otherCharges))
+		} else if (!otherCharges.equals(other.otherCharges))
 			return false;
 		if (partAmount == null) {
 			if (other.partAmount != null)
@@ -416,7 +422,12 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 		if (parts == null) {
 			if (other.parts != null)
 				return false;
-		} else if (!parts.containsAll(other.parts))
+		} else if (!parts.equals(other.parts))
+			return false;
+		if (product == null) {
+			if (other.product != null)
+				return false;
+		} else if (!product.equals(other.product))
 			return false;
 		if (repairDate == null) {
 			if (other.repairDate != null)
@@ -428,26 +439,16 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 				return false;
 		} else if (!repairSiteCode.equals(other.repairSiteCode))
 			return false;
-		if (requestType == null) {
-			if (other.requestType != null)
-				return false;
-		} else if (!requestType.equals(other.requestType))
-			return false;
 		if (requestCode == null) {
 			if (other.requestCode != null)
 				return false;
 		} else if (!requestCode.equals(other.requestCode))
 			return false;
-		if (serviceEntity == null) {
-			if (other.serviceEntity != null)
+		if (requestType == null) {
+			if (other.requestType != null)
 				return false;
-		} else {
-			if(serviceEntity.getId() == null) {
-				if(other.serviceEntity.getId() != null)
-					return false;
-			} else if(!serviceEntity.getId().equals(other.serviceEntity.getId()))
-				return false;
-		}
+		} else if (!requestType.equals(other.requestType))
+			return false;
 		if (totalAmount == null) {
 			if (other.totalAmount != null)
 				return false;
@@ -459,6 +460,25 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	@Override
 	public int compareTo(ServiceEntityRequest o) {
 		return 0;
+	}
+
+	@Override
+	public String toString() {
+		return "ServiceEntityRequest [requestType=" + requestType
+				+ ", requestCode=" + requestCode + ", failureDate="
+				+ failureDate + ", repairDate=" + repairDate
+				+ ", repairSiteCode=" + repairSiteCode + ", complaintCode="
+				+ complaintCode + ", complaintDescription="
+				+ complaintDescription + ", causeCode=" + causeCode
+				+ ", causeDescription=" + causeDescription
+				+ ", correctiveActionCode=" + correctiveActionCode
+				+ ", correctiveActionDescription="
+				+ correctiveActionDescription + ", parts=" + parts
+				+ ", labors=" + labors + ", otherCharges=" + otherCharges
+				+ ", product=" + product + ", coverage=" + coverage
+				+ ", partAmount=" + partAmount + ", laborAmount=" + laborAmount
+				+ ", otherAmount=" + otherAmount + ", totalAmount="
+				+ totalAmount + "]";
 	}	
 	
 

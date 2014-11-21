@@ -81,14 +81,10 @@ public class ServiceEntityRelation extends MizeSceEntity implements Comparable<S
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result
-				+ ((relatedEntity == null) ? 0 : relatedEntity.hashCode());
-		result = prime * result
 				+ ((relationType == null) ? 0 : relationType.hashCode());
-		result = prime * result
-				+ ((serviceEntity == null) ? 0 : serviceEntity.hashCode());
 		return result;
 	}
 
@@ -101,26 +97,11 @@ public class ServiceEntityRelation extends MizeSceEntity implements Comparable<S
 		if (getClass() != obj.getClass())
 			return false;
 		ServiceEntityRelation other = (ServiceEntityRelation) obj;
-		if (relatedEntity == null) {
-			if (other.relatedEntity != null)
-				return false;
-		} else if (!relatedEntity.equals(other.relatedEntity))
-			return false;
 		if (relationType == null) {
 			if (other.relationType != null)
 				return false;
 		} else if (!relationType.equals(other.relationType))
 			return false;
-		if (serviceEntity == null) {
-			if (other.serviceEntity != null)
-				return false;
-		} else {
-			if(serviceEntity.getId() == null) {
-				if(other.serviceEntity.getId() != null)
-					return false;
-			} else if(!serviceEntity.getId().equals(other.serviceEntity.getId()))
-				return false;
-		}
 		return true;
 	}
 
@@ -130,7 +111,10 @@ public class ServiceEntityRelation extends MizeSceEntity implements Comparable<S
 		return 0;
 	}
 
-	
+	@Override
+	public String toString() {
+		return "ServiceEntityRelation [relationType=" + relationType + "]";
+	}
 	
 
 }

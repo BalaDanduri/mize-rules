@@ -228,6 +228,7 @@ public class ServiceEntityPayment extends MizeSceEntity implements Comparable<Se
 				+ ((payeeEntity == null) ? 0 : payeeEntity.hashCode());
 		result = prime * result
 				+ ((payeeFirstName == null) ? 0 : payeeFirstName.hashCode());
+		result = prime * result + ((payeeId == null) ? 0 : payeeId.hashCode());
 		result = prime * result
 				+ ((payeeLastName == null) ? 0 : payeeLastName.hashCode());
 		result = prime
@@ -244,8 +245,6 @@ public class ServiceEntityPayment extends MizeSceEntity implements Comparable<Se
 				+ ((paymentDate == null) ? 0 : paymentDate.hashCode());
 		result = prime * result
 				+ ((paymentType == null) ? 0 : paymentType.hashCode());
-		result = prime * result
-				+ ((serviceEntity == null) ? 0 : serviceEntity.hashCode());
 		return result;
 	}
 
@@ -288,6 +287,11 @@ public class ServiceEntityPayment extends MizeSceEntity implements Comparable<Se
 				return false;
 		} else if (!payeeFirstName.equals(other.payeeFirstName))
 			return false;
+		if (payeeId == null) {
+			if (other.payeeId != null)
+				return false;
+		} else if (!payeeId.equals(other.payeeId))
+			return false;
 		if (payeeLastName == null) {
 			if (other.payeeLastName != null)
 				return false;
@@ -323,22 +327,26 @@ public class ServiceEntityPayment extends MizeSceEntity implements Comparable<Se
 				return false;
 		} else if (!paymentType.equals(other.paymentType))
 			return false;
-		if (serviceEntity == null) {
-			if (other.serviceEntity != null)
-				return false;
-		} else {
-			if(serviceEntity.getId() == null) {
-				if(other.serviceEntity.getId() != null)
-					return false;
-			} else if(!serviceEntity.getId().equals(other.serviceEntity.getId()))
-				return false;
-		}
 		return true;
 	}
 
 	@Override
 	public int compareTo(ServiceEntityPayment o) {
 		return 0;
+	}
+
+	@Override
+	public String toString() {
+		return "ServiceEntityPayment [payeeEntity=" + payeeEntity
+				+ ", payeeId=" + payeeId + ", payeeCode=" + payeeCode
+				+ ", payeeTypeCode=" + payeeTypeCode + ", payeeName="
+				+ payeeName + ", payeeFirstName=" + payeeFirstName
+				+ ", payeeLastName=" + payeeLastName + ", payeeMiddleInitial="
+				+ payeeMiddleInitial + ", payeeAddress=" + payeeAddress
+				+ ", payeeContact=" + payeeContact + ", payeeReference="
+				+ payeeReference + ", isNewPayee=" + isNewPayee
+				+ ", paymentDate=" + paymentDate + ", paymentType="
+				+ paymentType + "]";
 	}
 	
 

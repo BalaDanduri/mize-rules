@@ -220,6 +220,17 @@ public class ServiceEntityAmount extends MizeSceEntity implements Comparable<Ser
 	public int compareTo(ServiceEntityAmount o) {
 		return 0;
 	}
+
+	@Override
+	public String toString() {
+		return "ServiceEntityAmount [requestedQty=" + requestedQty
+				+ ", adjustedQty=" + adjustedQty + ", requestedAmount="
+				+ requestedAmount + ", requestedTotalAmount="
+				+ requestedTotalAmount + ", adjustedAmount=" + adjustedAmount
+				+ ", adjustedTotalAmount=" + adjustedTotalAmount
+				+ ", taxAmount=" + taxAmount + ", totalAmount=" + totalAmount
+				+ ", paidAmount=" + paidAmount + "]";
+	}
 	
 
 }

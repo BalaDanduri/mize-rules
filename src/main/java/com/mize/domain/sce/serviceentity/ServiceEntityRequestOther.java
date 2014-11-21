@@ -104,22 +104,16 @@ public class ServiceEntityRequestOther extends MizeSceEntity implements Comparab
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime
-				* result
-				+ ((chargeAmount == null) ? 0 : chargeAmount
-						.hashCode());
+		result = prime * result
+				+ ((chargeAmount == null) ? 0 : chargeAmount.hashCode());
 		result = prime * result
 				+ ((chargeCode == null) ? 0 : chargeCode.hashCode());
 		result = prime
 				* result
-				+ ((chargeDescription == null) ? 0
-						: chargeDescription.hashCode());
+				+ ((chargeDescription == null) ? 0 : chargeDescription
+						.hashCode());
 		result = prime * result
 				+ ((chargeType == null) ? 0 : chargeType.hashCode());
-		result = prime
-				* result
-				+ ((serviceEntityRequest == null) ? 0 : serviceEntityRequest
-						.hashCode());
 		return result;
 	}
 
@@ -152,16 +146,6 @@ public class ServiceEntityRequestOther extends MizeSceEntity implements Comparab
 				return false;
 		} else if (!chargeType.equals(other.chargeType))
 			return false;
-		if (serviceEntityRequest == null) {
-			if (other.serviceEntityRequest != null)
-				return false;
-		} else {
-			if(serviceEntityRequest.getId() == null) {
-				if(other.serviceEntityRequest.getId() != null)
-					return false;
-			} else if(!serviceEntityRequest.getId().equals(other.serviceEntityRequest.getId()))
-				return false;
-		}
 		return true;
 	}
 
@@ -169,6 +153,13 @@ public class ServiceEntityRequestOther extends MizeSceEntity implements Comparab
 	public int compareTo(ServiceEntityRequestOther o) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public String toString() {
+		return "ServiceEntityRequestOther [chargeType=" + chargeType
+				+ ", chargeCode=" + chargeCode + ", chargeDescription="
+				+ chargeDescription + ", chargeAmount=" + chargeAmount + "]";
 	}
 	
 

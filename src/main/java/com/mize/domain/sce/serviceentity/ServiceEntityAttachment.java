@@ -79,8 +79,6 @@ public class ServiceEntityAttachment extends MizeSceEntity implements Comparable
 		result = prime
 				* result
 				+ ((entityAttachment == null) ? 0 : entityAttachment.hashCode());
-		result = prime * result
-				+ ((serviceEntity == null) ? 0 : serviceEntity.hashCode());
 		return result;
 	}
 
@@ -98,22 +96,18 @@ public class ServiceEntityAttachment extends MizeSceEntity implements Comparable
 				return false;
 		} else if (!entityAttachment.equals(other.entityAttachment))
 			return false;
-		if (serviceEntity == null) {
-			if (other.serviceEntity != null)
-				return false;
-		} else {
-			if(serviceEntity.getId() == null) {
-				if(other.serviceEntity.getId() != null)
-					return false;
-			} else if(!serviceEntity.getId().equals(other.serviceEntity.getId()))
-				return false;
-		}
 		return true;
 	}
 
 	@Override
 	public int compareTo(ServiceEntityAttachment arg0) {
 		return 0;
+	}
+
+	@Override
+	public String toString() {
+		return "ServiceEntityAttachment [entityAttachment=" + entityAttachment
+				+ "]";
 	}
 	
 

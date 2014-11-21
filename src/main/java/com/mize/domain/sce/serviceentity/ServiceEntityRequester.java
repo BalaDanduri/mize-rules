@@ -193,6 +193,8 @@ public class ServiceEntityRequester extends MizeSceEntity implements Comparable<
 		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
+		result = prime * result
+				+ ((businessEntity == null) ? 0 : businessEntity.hashCode());
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result + ((contact == null) ? 0 : contact.hashCode());
 		result = prime * result
@@ -208,8 +210,6 @@ public class ServiceEntityRequester extends MizeSceEntity implements Comparable<
 				+ ((reference == null) ? 0 : reference.hashCode());
 		result = prime * result
 				+ ((requesterId == null) ? 0 : requesterId.hashCode());
-		result = prime * result
-				+ ((serviceEntity == null) ? 0 : serviceEntity.hashCode());
 		result = prime * result
 				+ ((typeCode == null) ? 0 : typeCode.hashCode());
 		return result;
@@ -228,6 +228,11 @@ public class ServiceEntityRequester extends MizeSceEntity implements Comparable<
 			if (other.address != null)
 				return false;
 		} else if (!address.equals(other.address))
+			return false;
+		if (businessEntity == null) {
+			if (other.businessEntity != null)
+				return false;
+		} else if (!businessEntity.equals(other.businessEntity))
 			return false;
 		if (code == null) {
 			if (other.code != null)
@@ -274,16 +279,6 @@ public class ServiceEntityRequester extends MizeSceEntity implements Comparable<
 				return false;
 		} else if (!requesterId.equals(other.requesterId))
 			return false;
-		if (serviceEntity == null) {
-			if (other.serviceEntity != null)
-				return false;
-		} else {
-			if(serviceEntity.getId() == null) {
-				if(other.serviceEntity.getId() != null)
-					return false;
-			} else if(!serviceEntity.getId().equals(other.serviceEntity.getId()))
-				return false;
-		}
 		if (typeCode == null) {
 			if (other.typeCode != null)
 				return false;
@@ -296,6 +291,17 @@ public class ServiceEntityRequester extends MizeSceEntity implements Comparable<
 	public int compareTo(ServiceEntityRequester o) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public String toString() {
+		return "ServiceEntityRequester [businessEntity=" + businessEntity
+				+ ", requesterId=" + requesterId + ", code=" + code
+				+ ", typeCode=" + typeCode + ", name=" + name + ", firstName="
+				+ firstName + ", lastName=" + lastName + ", middleInitial="
+				+ middleInitial + ", address=" + address + ", contact="
+				+ contact + ", reference=" + reference + ", isNewRequester="
+				+ isNewRequester + "]";
 	}
 
 	

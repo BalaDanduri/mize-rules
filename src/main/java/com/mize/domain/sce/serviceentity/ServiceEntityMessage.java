@@ -124,8 +124,6 @@ public class ServiceEntityMessage extends MizeSceEntity implements Comparable<Se
 						.hashCode());
 		result = prime * result
 				+ ((messageValue == null) ? 0 : messageValue.hashCode());
-		result = prime * result
-				+ ((serviceEntity == null) ? 0 : serviceEntity.hashCode());
 		return result;
 	}
 
@@ -163,22 +161,20 @@ public class ServiceEntityMessage extends MizeSceEntity implements Comparable<Se
 				return false;
 		} else if (!messageValue.equals(other.messageValue))
 			return false;
-		if (serviceEntity == null) {
-			if (other.serviceEntity != null)
-				return false;
-		} else {
-			if(serviceEntity.getId() == null) {
-				if(other.serviceEntity.getId() != null)
-					return false;
-			} else if(!serviceEntity.getId().equals(other.serviceEntity.getId()))
-				return false;
-		}
 		return true;
 	}
 
 	@Override
 	public int compareTo(ServiceEntityMessage o) {
 		return 0;
+	}
+
+	@Override
+	public String toString() {
+		return "ServiceEntityMessage [messageId=" + messageId
+				+ ", messageSeverity=" + messageSeverity + ", messageField="
+				+ messageField + ", messageUiReference=" + messageUiReference
+				+ ", messageValue=" + messageValue + "]";
 	}
 	
 
