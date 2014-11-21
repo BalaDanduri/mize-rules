@@ -104,7 +104,7 @@ public class WorkQueueAuth extends MizeSceEntity implements Comparable<WorkQueue
 	}
 
 	@Override	
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@Column(name = "updated_date")
 	@JsonIgnore(value=false)
 	public MizeDateTime getUpdatedDate() {
