@@ -115,6 +115,19 @@ public class EntityComment extends MizeSceEntity implements Comparable<EntityCom
 	}
 	
 	@Override
+	@Column(name = "created_by_user" , updatable=false,length=250)
+	public String getCreatedByUser() {
+		return super.getCreatedByUser();
+	}
+	
+	@Override
+	@Column(name = "updated_by_user" , length=250)
+	public String getUpdatedByUser() {
+		return super.getUpdatedByUser();
+	}
+	
+	
+	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();

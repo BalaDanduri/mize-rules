@@ -99,6 +99,17 @@ public class EntityAttachment extends MizeSceEntity implements Comparable<Entity
 		return createdBy;
 	}
 	
+	@Override
+	@Column(name = "created_by_user" , updatable=false,length=250)
+	public String getCreatedByUser() {
+		return super.getCreatedByUser();
+	}
+	
+	@Override
+	@Column(name = "updated_by_user" , length=250)
+	public String getUpdatedByUser() {
+		return super.getUpdatedByUser();
+	}
 	
 	@Override
 	public int hashCode() {
