@@ -140,7 +140,7 @@ public class BatchJobMapper extends MizeSceEntity implements Comparable<BatchJob
 	}
 	
 	@Override
-	@Type(type="com.mize.domain.util.DateTimeJPA")
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@Column(name="updated_date")
 	@JsonIgnore(value=false)
 	public MizeDateTime getUpdatedDate() {

@@ -32,6 +32,7 @@ public final class UploadEntity extends MizeSceEntity implements Comparable<Uplo
 	private IBatchBean batchBean;
 	private String delimiter;
 	private String logFileURI;
+	private String rejectedFileURI;
 	private User user;
 	@JsonIgnore
 	private final Map<Integer,ProcessLog> processLogMap = new  ConcurrentHashMap<Integer,ProcessLog>();
@@ -184,6 +185,14 @@ public final class UploadEntity extends MizeSceEntity implements Comparable<Uplo
 
 	public void setLogFileURI(String logFileURI) {
 		this.logFileURI = logFileURI;
+	}
+
+	public String getRejectedFileURI() {
+		return rejectedFileURI;
+	}
+
+	public void setRejectedFileURI(String rejectedFileURI) {
+		this.rejectedFileURI = rejectedFileURI;
 	}
 
 	public IBatchBean getBatchBean() {

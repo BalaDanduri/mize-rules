@@ -19,6 +19,7 @@ public final class UploadSearchResult extends MizeSceEntity implements Comparabl
 	private Integer successCount;
 	private Integer failureCount;
 	private String logFileURI;
+	private String rejectedFileURI;
 	private String uploadedByName;
 	private Long uploadedBy;
 	private String uploadedByBEName;
@@ -125,6 +126,14 @@ public final class UploadSearchResult extends MizeSceEntity implements Comparabl
 
 	public void setLogFileURI(String logFileURI) {
 		this.logFileURI = logFileURI;
+	}
+
+	public String getRejectedFileURI() {
+		return rejectedFileURI;
+	}
+
+	public void setRejectedFileURI(String rejectedFileURI) {
+		this.rejectedFileURI = rejectedFileURI;
 	}
 
 	@Override
