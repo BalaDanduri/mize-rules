@@ -283,6 +283,32 @@ public class ProductSerial extends MizeSceEntity implements Comparable<ProductSe
 		return updatedBy;
 	}
 	
+	
+	@Override
+	public void setCreatedByUser(String createdByUser){
+	      this.createdByUser=createdByUser;
+	}
+	@Override
+	@JsonIgnore(value=false)
+	@Column(name = "created_by_user" , updatable=false)
+	public String getCreatedByUser(){
+		 return createdByUser;
+		 
+	}
+	
+	@Override
+	@JsonIgnore(value=false)
+	@Column(name = "updated_by_user")
+	public String getUpdatedByUser() {
+		return updatedByUser;
+	}
+    
+	@JsonIgnore(value=false)
+	@Override
+	public void setUpdatedByUser(String updatedByUser) {
+		this.updatedByUser = updatedByUser;
+	}
+
 	@JsonIgnore(value=false)
 	@Override
 	public void setUpdatedBy(Long updatedBy) {

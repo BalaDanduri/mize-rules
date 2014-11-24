@@ -65,7 +65,30 @@ public class ProductSerialRelation extends MizeSceEntity implements Comparable<P
 		this.productSerial = productSerial;
 	}
 
+	@Override
+	public void setCreatedByUser(String createdByUser){
+	      this.createdByUser=createdByUser;
+	}
+	@Override
+	@JsonIgnore(value=false)
+	@Column(name = "created_by_user" , updatable=false)
+	public String getCreatedByUser(){
+		 return createdByUser;
+		 
+	}
 	
+	@Override
+	@JsonIgnore(value=false)
+	@Column(name = "updated_by_user")
+	public String getUpdatedByUser() {
+		return updatedByUser;
+	}
+    
+	@JsonIgnore(value=false)
+	@Override
+	public void setUpdatedByUser(String updatedByUser) {
+		this.updatedByUser = updatedByUser;
+	}
 
 	@Column(name = "relation_type", nullable = true)
 	public String getRelationType() {
@@ -151,18 +174,17 @@ public class ProductSerialRelation extends MizeSceEntity implements Comparable<P
 		this.updatedBy = updatedBy;
 	}
 
+	
+
+	
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime
-				* result
-				+ ((parentProductSerialId == null) ? 0 : parentProductSerialId
-						.hashCode());
-		result = prime * result
-				+ ((productSerial == null) ? 0 : productSerial.hashCode());
-		result = prime * result
-				+ ((relationType == null) ? 0 : relationType.hashCode());
+		result = prime * result + ((parentModel == null) ? 0 : parentModel.hashCode());
+		result = prime * result + ((parentProductSerialId == null) ? 0 : parentProductSerialId.hashCode());
+		result = prime * result + ((parentSerialNumber == null) ? 0 : parentSerialNumber.hashCode());
+		result = prime * result + ((relationType == null) ? 0 : relationType.hashCode());
 		return result;
 	}
 
@@ -175,15 +197,20 @@ public class ProductSerialRelation extends MizeSceEntity implements Comparable<P
 		if (getClass() != obj.getClass())
 			return false;
 		ProductSerialRelation other = (ProductSerialRelation) obj;
+		if (parentModel == null) {
+			if (other.parentModel != null)
+				return false;
+		} else if (!parentModel.equals(other.parentModel))
+			return false;
 		if (parentProductSerialId == null) {
 			if (other.parentProductSerialId != null)
 				return false;
 		} else if (!parentProductSerialId.equals(other.parentProductSerialId))
 			return false;
-		if (productSerial == null) {
-			if (other.productSerial != null)
+		if (parentSerialNumber == null) {
+			if (other.parentSerialNumber != null)
 				return false;
-		} else if (!productSerial.equals(other.productSerial))
+		} else if (!parentSerialNumber.equals(other.parentSerialNumber))
 			return false;
 		if (relationType == null) {
 			if (other.relationType != null)

@@ -567,7 +567,7 @@ public class ProductRegistration extends MizeSceEntity implements Comparable<Pro
 
 	
 	@Override
-	@Column(name = "created_by_user")
+	@Column(name = "created_by_user",updatable = false)
 	public String getCreatedByUser() {
 		return createdByUser;
 	}

@@ -262,6 +262,32 @@ public class Product  extends MizeSceEntity implements Comparable<Product>{
 		this.imageLink = imageLink;
 	}
 
+	
+	@Override
+	public void setCreatedByUser(String createdByUser){
+	      this.createdByUser=createdByUser;
+	}
+	
+	@Override
+	@Column(name = "created_by_user" , updatable=false)
+	public String getCreatedByUser(){
+		 return createdByUser;
+		 
+	}
+	
+	@Override
+	@Column(name = "updated_by_user")
+	public String getUpdatedByUser() {
+		return updatedByUser;
+	}
+    
+
+	@Override
+	public void setUpdatedByUser(String updatedByUser) {
+		this.updatedByUser = updatedByUser;
+	}
+	
+	
 
 	@Transient
 	public List<String> getListNames() {

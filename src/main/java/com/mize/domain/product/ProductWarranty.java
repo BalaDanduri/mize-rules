@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -79,6 +80,34 @@ public class ProductWarranty extends MizeSceEntity implements Comparable<Product
 	}
 
 	
+	@Override
+	public void setCreatedByUser(String createdByUser){
+	      this.createdByUser=createdByUser;
+	}
+	
+	@Override
+	@JsonIgnore(value=false)
+	@Column(name = "created_by_user" , updatable=false)
+	public String getCreatedByUser(){
+		 return createdByUser;
+		 
+	}
+	
+	@Override
+	@JsonIgnore(value=false)
+	@Column(name = "updated_by_user")
+	public String getUpdatedByUser() {
+		return updatedByUser;
+	}
+    
+	@JsonIgnore(value=false)
+	@Override
+	public void setUpdatedByUser(String updatedByUser) {
+		this.updatedByUser = updatedByUser;
+	}
+	
+	
+	
 	public void setStartDate(MizeDateTime startDate) {
 		this.startDate = startDate;
 	}
@@ -104,13 +133,10 @@ public class ProductWarranty extends MizeSceEntity implements Comparable<Product
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime * result
-				+ ((coverageName == null) ? 0 : coverageName.hashCode());
-		result = prime * result
-				+ ((coverageType == null) ? 0 : coverageType.hashCode());
+		result = prime * result + ((coverageName == null) ? 0 : coverageName.hashCode());
+		result = prime * result + ((coverageType == null) ? 0 : coverageType.hashCode());
 		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
-		result = prime * result
-				+ ((startDate == null) ? 0 : startDate.hashCode());
+		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
 		return result;
 	}
 
