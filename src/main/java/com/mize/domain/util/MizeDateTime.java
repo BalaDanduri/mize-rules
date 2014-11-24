@@ -21,15 +21,18 @@ public class MizeDateTime implements IMizeDate, Comparable<MizeDateTime>, Clonea
 	private DateTimeZone dateTimeZone;
 	private String timeZone;
 	private boolean isValid;
-		
+	
+	@Deprecated
 	public static MizeDateTime now(){
 		return new MizeDateTime();
 	}
 	
+	@Deprecated
 	public static MizeDateTime getInstance(){
 		return new MizeDateTime();
 	}
 	
+	@Deprecated
 	public static MizeDateTime getInstance(DateTime dateTime){
 		return new MizeDateTime(dateTime);
 	}
@@ -60,6 +63,10 @@ public class MizeDateTime implements IMizeDate, Comparable<MizeDateTime>, Clonea
 		return new MizeDateTime(dateTimeValue,dateTimeFormat);
 	}
 	
+	public static MizeDateTime getInstance(String dateTimeFormat,DateTimeZone dateTimeZone){
+		return new MizeDateTime(dateTimeFormat,dateTimeZone);
+	}
+	
 	protected MizeDateTime(String dateTimeValue,String dateTimeFormat) {		
 		this(dateTimeValue, dateTimeFormat, DateTimeZone.UTC);
 	}
@@ -73,6 +80,19 @@ public class MizeDateTime implements IMizeDate, Comparable<MizeDateTime>, Clonea
 			this.dateTimeZone = dateTimeZone;
 			this.timeZone = dateTimeZone.getID();
 			this.isValid = true;
+		}catch(Exception e){
+		}
+	}
+	
+	protected MizeDateTime(String dateTimeFormat,DateTimeZone dateTimeZone) {		
+		try{		
+			this.dateTimeFormat = dateTimeFormat;
+			this.dateTimeZone = dateTimeZone;
+			this.dateTime = new DateTime(dateTimeZone);
+			this.dateTimeValue = DateTimeFormat.forPattern(dateTimeFormat).print(this.dateTime);
+			this.timeZone = dateTimeZone.getID();
+			this.isValid = true;
+			
 		}catch(Exception e){
 		}
 	}
