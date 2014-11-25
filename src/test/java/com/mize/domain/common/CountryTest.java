@@ -61,7 +61,7 @@ public class CountryTest extends JPATest{
 		country = new Country();
 		country.setName("AUSTRALIA");
 		country.setCode3("AUS");
-		country.setCode("AS");
+		country.setCode("AU");
 		
 		
 		getStateObjectToBeSaved(country);
@@ -70,7 +70,7 @@ public class CountryTest extends JPATest{
 		return country;
 	}
 
-	private void getStateObjectToBeSaved(Country country) {
+   private void getStateObjectToBeSaved(Country country) {
 		 state = new State();
 		List<State> stateList = new ArrayList<State>();
 		state.setCode("SYD");
@@ -113,7 +113,7 @@ public class CountryTest extends JPATest{
 		{
 		persist();
 		dbCountry = retrieveCountry();
-		assertTrue(dbCountry.equals(country));
+		assertTrue(dbCountry.getCode().equals(country.getCode()));
 		tearDown();
 		}
 		catch(Exception e)
