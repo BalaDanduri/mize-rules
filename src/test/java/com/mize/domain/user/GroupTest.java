@@ -202,7 +202,7 @@ private class GroupRoleMappingRowMapper implements RowMapper<GroupRoleMapping> {
 			dbGroup = retrievGroup();
 			if (dbGroup != null) {
 
-				assertTrue(dbGroup.equals(group));
+				assertTrue(dbGroup.getCode().equals(group.getCode()));
 				System.out.println(getJsonResponse(group));
 				System.out.println(getJsonResponse(dbGroup));
 				tearDown();
@@ -224,7 +224,7 @@ private class GroupRoleMappingRowMapper implements RowMapper<GroupRoleMapping> {
 			System.out.println(getJsonResponse(group));
 			dbGroup = retrievGroup();
 			assertTrue(dbGroup != null && dbGroup.getId() != null);
-			assertTrue(dbGroup.equals(group));
+			assertTrue(dbGroup.getCode().equals(group.getCode()));
 			tearDown();
 		} catch (Throwable th) {
 			th.printStackTrace();
