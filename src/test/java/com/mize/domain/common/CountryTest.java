@@ -27,6 +27,7 @@ public class CountryTest extends JPATest{
 	EntityTransaction tx;
 	Country country;
 	Country dbCountry;
+	State state; 
 
 	
 	@BeforeClass
@@ -61,7 +62,7 @@ public class CountryTest extends JPATest{
 		country.setName("AUSTRALIA");
 		country.setCode3("AUS");
 		country.setCode("AS");
-		country.setCreatedBy(778L);
+		
 		
 		getStateObjectToBeSaved(country);
 		
@@ -70,11 +71,11 @@ public class CountryTest extends JPATest{
 	}
 
 	private void getStateObjectToBeSaved(Country country) {
-		State state = new State();
+		 state = new State();
 		List<State> stateList = new ArrayList<State>();
-		state.setCode("TS");
+		state.setCode("SYD");
 		state.setCountry(country);
-		state.setName("TELANGANA");
+		state.setName("SYD");
 		stateList.add(state);
 		country.setStates(stateList);
 	}
@@ -91,7 +92,6 @@ public class CountryTest extends JPATest{
 		contry.setName(rs.getString("country_name"));
 		contry.setCode3(rs.getString("country_code_3"));
 		contry.setCode(rs.getString("country_code"));
-		contry.setCreatedBy(rs.getLong("created_by"));
 		return contry;
 	}
 	   
@@ -124,6 +124,11 @@ public class CountryTest extends JPATest{
 	
 	
 	public void tearDown() throws Exception {
+		if(state!=null ){
+			tx.begin();
+			entityManager.remove(state);
+			tx.commit();
+		}
 		if (country != null) {
 			tx.begin();
 			entityManager.remove(country);
