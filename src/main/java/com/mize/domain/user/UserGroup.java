@@ -94,6 +94,28 @@ public class UserGroup extends MizeSceEntity implements Comparable<UserGroup> {
 	public void setUserGroup(Group userGroup) {
 		this.userGroup = userGroup;
 	}
+	
+	@Override
+	public void setCreatedByUser(String createdByUser){
+		this.createdByUser=createdByUser;
+	}
+	
+	@Override
+	@Column(name= "created_by_user",updatable=false)
+	public String getCreatedByUser(){
+		return createdByUser;
+	}
+	
+	@Override
+	public void setUpdatedByUser(String updatedByUser){
+		this.updatedByUser=updatedByUser;
+	}
+	
+	@Override
+	@Column(name= "updated_by_user")
+	public String getUpdatedByUser(){
+		return updatedByUser;
+	}
 
 	@Override
 	public String toString() {

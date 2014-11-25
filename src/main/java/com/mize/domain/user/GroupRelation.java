@@ -116,6 +116,28 @@ public class GroupRelation extends MizeSceEntity implements Comparable<GroupRela
 	public Long getUpdatedBy() {		
 		return super.getUpdatedBy();
 	}
+	
+	@Override
+	public void setCreatedByUser(String createdByUser){
+		this.createdByUser=createdByUser;
+	}
+	
+	@Override
+	@Column(name= "created_by_user",updatable=false)
+	public String getCreatedByUser(){
+		return createdByUser;
+	}
+	
+	@Override
+	public void setUpdatedByUser(String updatedByUser){
+		this.updatedByUser=updatedByUser;
+	}
+	
+	@Override
+	@Column(name= "updated_by_user")
+	public String getUpdatedByUser(){
+		return updatedByUser;
+	}
 
 	@Override
 	@JsonIgnore(false)
@@ -158,5 +180,30 @@ public class GroupRelation extends MizeSceEntity implements Comparable<GroupRela
        return AFTER;
      return EQUAL;
    }
+
+@Override
+public int hashCode() {
+	final int prime = PRIME;
+	int result = super.hashCode();
+	result = prime * result + ((relationType == null) ? 0 : relationType.hashCode());
+	return result;
+}
+
+@Override
+public boolean equals(Object obj) {
+	if (this == obj)
+		return true;
+	if (!super.equals(obj))
+		return false;
+	if (getClass() != obj.getClass())
+		return false;
+	GroupRelation other = (GroupRelation) obj;
+	if (relationType == null) {
+		if (other.relationType != null)
+			return false;
+	} else if (!relationType.equals(other.relationType))
+		return false;
+	return true;
+}
 
 }

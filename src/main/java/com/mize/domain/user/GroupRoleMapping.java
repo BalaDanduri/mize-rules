@@ -114,6 +114,28 @@ import com.mize.domain.util.MizeDateTime;
 	public Long getUpdatedBy() {		
 		return super.getUpdatedBy();
 	}
+	
+	@Override
+	public void setCreatedByUser(String createdByUser){
+		this.createdByUser=createdByUser;
+	}
+	
+	@Override
+	@Column(name= "created_by_user",updatable=false)
+	public String getCreatedByUser(){
+		return createdByUser;
+	}
+	
+	@Override
+	public void setUpdatedByUser(String updatedByUser){
+		this.updatedByUser=updatedByUser;
+	}
+	
+	@Override
+	@Column(name= "updated_by_user")
+	public String getUpdatedByUser(){
+		return updatedByUser;
+	}
 
 	@Override
 	@JsonIgnore(false)
@@ -145,6 +167,31 @@ import com.mize.domain.util.MizeDateTime;
 public String toString() {
 	return "GroupRoleMapping [active="+ active + "]";
 }
+@Override
+public int hashCode() {
+	final int prime = PRIME;
+	int result = super.hashCode();
+	result = prime * result + ((active == null) ? 0 : active.hashCode());
+	return result;
+}
+
+@Override
+public boolean equals(Object obj) {
+	if (this == obj)
+		return true;
+	if (!super.equals(obj))
+		return false;
+	if (getClass() != obj.getClass())
+		return false;
+	GroupRoleMapping other = (GroupRoleMapping) obj;
+	if (active == null) {
+		if (other.active != null)
+			return false;
+	} else if (!active.equals(other.active))
+		return false;
+		return true;
+}
+
 @Override
    public int compareTo(GroupRoleMapping groupsToRole) {
      if ( this == groupsToRole ) 

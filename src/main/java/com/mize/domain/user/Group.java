@@ -124,6 +124,29 @@ public class Group extends MizeSceEntity implements Comparable<Group> {
 	public String getActive() {
 		return active;
 	}
+	
+	@Override
+	public void setCreatedByUser(String createdByUser){
+		this.createdByUser=createdByUser;
+	}
+	
+	@Override
+	@Column(name= "created_by_user",updatable=false)
+	public String getCreatedByUser(){
+		return createdByUser;
+	}
+	
+	@Override
+	public void setUpdatedByUser(String updatedByUser){
+		this.updatedByUser=updatedByUser;
+	}
+	
+	@Override
+	@Column(name= "updated_by_user")
+	public String getUpdatedByUser(){
+		return updatedByUser;
+	}
+	
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "tenant_id")
@@ -281,8 +304,17 @@ public class Group extends MizeSceEntity implements Comparable<Group> {
 
 	@Override
 	public int hashCode() {
+		final int prime = PRIME;
 		int result = super.hashCode();
-		result = PRIME * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((active == null) ? 0 : active.hashCode());
+		result = prime * result + ((code == null) ? 0 : code.hashCode());
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((groupsToRole == null) ? 0 : groupsToRole.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((owner == null) ? 0 : owner.hashCode());
+		result = prime * result + ((relatedGroups == null) ? 0 : relatedGroups.hashCode());
+		result = prime * result + ((roles == null) ? 0 : roles.hashCode());
+		result = prime * result + ((userGroups == null) ? 0 : userGroups.hashCode());
 		return result;
 	}
 
@@ -295,16 +327,54 @@ public class Group extends MizeSceEntity implements Comparable<Group> {
 		if (getClass() != obj.getClass())
 			return false;
 		Group other = (Group) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (active == null) {
+			if (other.active != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!active.equals(other.active))
+			return false;
+		if (code == null) {
+			if (other.code != null)
+				return false;
+		} else if (!code.equals(other.code))
+			return false;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (groupsToRole == null) {
+			if (other.groupsToRole != null)
+				return false;
+		} else if (!groupsToRole.equals(other.groupsToRole))
 			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
+		if (owner == null) {
+			if (other.owner != null)
+				return false;
+		} else if (!owner.equals(other.owner))
+			return false;
+		if (relatedGroups == null) {
+			if (other.relatedGroups != null)
+				return false;
+		} else if (!relatedGroups.equals(other.relatedGroups))
+			return false;
+		if (roles == null) {
+			if (other.roles != null)
+				return false;
+		} else if (!roles.equals(other.roles))
+			return false;
+		if (userGroups == null) {
+			if (other.userGroups != null)
+				return false;
+		} else if (!userGroups.equals(other.userGroups))
+			return false;
 		return true;
 	}
+
+	
+	
 }

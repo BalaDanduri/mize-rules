@@ -104,6 +104,29 @@ public class Role extends MizeSceEntity implements Comparable<Role>{
 		this.active = active;
 	}
 	
+	@Override
+	public void setCreatedByUser(String createdByUser){
+		this.createdByUser=createdByUser;
+	}
+	
+	@Override
+	@Column(name= "created_by_user",updatable=false)
+	public String getCreatedByUser(){
+		return createdByUser;
+	}
+	
+	@Override
+	public void setUpdatedByUser(String updatedByUser){
+		this.updatedByUser=updatedByUser;
+	}
+	
+	@Override
+	@Column(name= "updated_by_user")
+	public String getUpdatedByUser(){
+		return updatedByUser;
+	}
+	
+	
 	@OneToMany(fetch = FetchType.LAZY,cascade={CascadeType.ALL}, mappedBy ="role")
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
@@ -177,10 +200,18 @@ public class Role extends MizeSceEntity implements Comparable<Role>{
 	}
 
 
+	
+	
+	
 	@Override
 	public int hashCode() {
+		final int prime = PRIME;
 		int result = super.hashCode();
-		result = PRIME * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((active == null) ? 0 : active.hashCode());
+		result = prime * result + ((code == null) ? 0 : code.hashCode());
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((groupsToRole == null) ? 0 : groupsToRole.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
 
@@ -193,21 +224,34 @@ public class Role extends MizeSceEntity implements Comparable<Role>{
 		if (getClass() != obj.getClass())
 			return false;
 		Role other = (Role) obj;
-		if (id == null) {
-			if (other.id != null)
+		if (active == null) {
+			if (other.active != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!active.equals(other.active))
 			return false;
 		if (code == null) {
 			if (other.code != null)
 				return false;
 		} else if (!code.equals(other.code))
 			return false;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (groupsToRole == null) {
+			if (other.groupsToRole != null)
+				return false;
+		} else if (!groupsToRole.equals(other.groupsToRole))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
 		return true;
 	}
 
-	
-	
 	@Override
 	public String toString() {
 		return "Role [name=" + name + ", description=" + description
