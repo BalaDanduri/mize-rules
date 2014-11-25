@@ -30,7 +30,6 @@ import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.product.Product;
 import com.mize.domain.product.ProductSerial;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
 import com.mize.domain.util.MizeDateTime;
 
 @Entity
@@ -346,6 +345,32 @@ public class Goodwill extends MizeSceEntity implements Comparable<Goodwill> {
 		return updatedBy;
 	}
 	
+	@Override
+	@JsonIgnore
+	@Column(name = "created_by_user",updatable=false)
+	public String getCreatedByUser() {
+		return super.getCreatedByUser();
+	}
+	
+	@Override
+	@JsonIgnore
+	@Column(name = "updated_by_user")
+	public String getUpdatedByUser() {
+		return super.getUpdatedByUser();
+	}
+	
+	@Override
+	@JsonIgnore
+	public void setCreatedByUser(String createdByUser) {
+		super.setCreatedByUser(createdByUser);
+	}
+	
+	@Override
+	@JsonIgnore
+	public void setUpdatedByUser(String updatedByUser) {
+		super.setUpdatedByUser(updatedByUser);
+	}
+	
 	@Transient
 	@JsonIgnore
 	public User getUser() {
@@ -386,8 +411,6 @@ public class Goodwill extends MizeSceEntity implements Comparable<Goodwill> {
 		result = prime * result
 				+ ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
-		result = prime * result
-				+ ((entityComment == null) ? 0 : entityComment.hashCode());
 		result = prime * result + ((product == null) ? 0 : product.hashCode());
 		result = prime * result
 				+ ((productSerial == null) ? 0 : productSerial.hashCode());
@@ -402,7 +425,6 @@ public class Goodwill extends MizeSceEntity implements Comparable<Goodwill> {
 		result = prime * result + ((tenant == null) ? 0 : tenant.hashCode());
 		result = prime * result
 				+ ((typeCode == null) ? 0 : typeCode.hashCode());
-		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
 
@@ -476,11 +498,6 @@ public class Goodwill extends MizeSceEntity implements Comparable<Goodwill> {
 				return false;
 		} else if (!endDate.equals(other.endDate))
 			return false;
-		if (entityComment == null) {
-			if (other.entityComment != null)
-				return false;
-		} else if (!entityComment.equals(other.entityComment))
-			return false;
 		if (product == null) {
 			if (other.product != null)
 				return false;
@@ -521,12 +538,25 @@ public class Goodwill extends MizeSceEntity implements Comparable<Goodwill> {
 				return false;
 		} else if (!typeCode.equals(other.typeCode))
 			return false;
-		if (user == null) {
-			if (other.user != null)
-				return false;
-		} else if (!user.equals(other.user))
-			return false;
 		return true;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Goodwill [tenant=" + tenant + ", code=" + code
+				+ ", statusCode=" + statusCode + ", typeCode=" + typeCode
+				+ ", description=" + description + ", currencyCode="
+				+ currencyCode + ", reference=" + reference + ", authorisedBy="
+				+ authorisedBy + ", startDate=" + startDate + ", endDate="
+				+ endDate + ", requestor=" + requestor + ", product=" + product
+				+ ", productSerial=" + productSerial + ", approvedAmount="
+				+ approvedAmount + ", claimedAmount=" + claimedAmount
+				+ ", claimedEntityCode=" + claimedEntityCode
+				+ ", claimedEntityType=" + claimedEntityType
+				+ ", claimedEntityId=" + claimedEntityId + ", audits=" + audits
+				+ ", comments=" + comments + ", entityComment=" + entityComment
+				+ ", user=" + user + "]";
 	}
 
 

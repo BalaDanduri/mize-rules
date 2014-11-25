@@ -171,22 +171,23 @@ public class ServiceBulletinProcedureLabor extends MizeSceEntity implements Comp
 		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result
+				+ ((description == null) ? 0 : description.hashCode());
+		result = prime * result + (isUpdated ? 1231 : 1237);
+		result = prime * result
 				+ ((laborAmount == null) ? 0 : laborAmount.hashCode());
 		result = prime * result
 				+ ((laborCode == null) ? 0 : laborCode.hashCode());
-		result = prime
-				* result
-				+ ((laborReference == null) ? 0 : laborReference.hashCode());
 		result = prime * result
 				+ ((laborHour == null) ? 0 : laborHour.hashCode());
 		result = prime * result
-				+ ((laborUom == null) ? 0 : laborUom.hashCode());
+				+ ((laborHourId == null) ? 0 : laborHourId.hashCode());
+		result = prime * result
+				+ ((laborReference == null) ? 0 : laborReference.hashCode());
 		result = prime * result
 				+ ((laborType == null) ? 0 : laborType.hashCode());
-		result = prime
-				* result
-				+ ((serviceBulletinProcedure == null) ? 0 : serviceBulletinProcedure
-						.hashCode());
+		result = prime * result
+				+ ((laborUom == null) ? 0 : laborUom.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
 
@@ -199,6 +200,13 @@ public class ServiceBulletinProcedureLabor extends MizeSceEntity implements Comp
 		if (getClass() != obj.getClass())
 			return false;
 		ServiceBulletinProcedureLabor other = (ServiceBulletinProcedureLabor) obj;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (isUpdated != other.isUpdated)
+			return false;
 		if (laborAmount == null) {
 			if (other.laborAmount != null)
 				return false;
@@ -209,37 +217,47 @@ public class ServiceBulletinProcedureLabor extends MizeSceEntity implements Comp
 				return false;
 		} else if (!laborCode.equals(other.laborCode))
 			return false;
-		if (laborReference == null) {
-			if (other.laborReference != null)
-				return false;
-		} else if (!laborReference.equals(other.laborReference))
-			return false;
 		if (laborHour == null) {
 			if (other.laborHour != null)
 				return false;
 		} else if (!laborHour.equals(other.laborHour))
 			return false;
-		if (laborUom == null) {
-			if (other.laborUom != null)
+		if (laborHourId == null) {
+			if (other.laborHourId != null)
 				return false;
-		} else if (!laborUom.equals(other.laborUom))
+		} else if (!laborHourId.equals(other.laborHourId))
+			return false;
+		if (laborReference == null) {
+			if (other.laborReference != null)
+				return false;
+		} else if (!laborReference.equals(other.laborReference))
 			return false;
 		if (laborType == null) {
 			if (other.laborType != null)
 				return false;
 		} else if (!laborType.equals(other.laborType))
 			return false;
-		if (serviceBulletinProcedure == null) {
-			if (other.serviceBulletinProcedure != null)
+		if (laborUom == null) {
+			if (other.laborUom != null)
 				return false;
-		} else {
-			if(serviceBulletinProcedure.getId() == null) {
-				if(other.serviceBulletinProcedure.getId() != null)
-					return false;
-			} else if(!serviceBulletinProcedure.getId().equals(other.serviceBulletinProcedure.getId()))
+		} else if (!laborUom.equals(other.laborUom))
+			return false;
+		if (name == null) {
+			if (other.name != null)
 				return false;
-		}
+		} else if (!name.equals(other.name))
+			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "ServiceBulletinProcedureLabor [laborHour=" + laborHour
+				+ ", laborHourId=" + laborHourId + ", laborType=" + laborType
+				+ ", laborCode=" + laborCode + ", laborUom=" + laborUom
+				+ ", laborReference=" + laborReference + ", laborAmount="
+				+ laborAmount + ", description=" + description + ", name="
+				+ name + ", isUpdated=" + isUpdated + "]";
 	}
 
 	@Override

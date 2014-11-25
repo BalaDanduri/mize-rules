@@ -180,20 +180,23 @@ public class ServiceBulletinProcedurePart extends MizeSceEntity implements Compa
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
+		result = prime * result
+				+ ((description == null) ? 0 : description.hashCode());
+		result = prime * result
+				+ ((isReturnable == null) ? 0 : isReturnable.hashCode());
+		result = prime * result + (isUpdated ? 1231 : 1237);
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((part == null) ? 0 : part.hashCode());
 		result = prime * result
 				+ ((partAmount == null) ? 0 : partAmount.hashCode());
 		result = prime * result
 				+ ((partCode == null) ? 0 : partCode.hashCode());
+		result = prime * result + ((partId == null) ? 0 : partId.hashCode());
 		result = prime * result
 				+ ((partReference == null) ? 0 : partReference.hashCode());
 		result = prime * result
 				+ ((partType == null) ? 0 : partType.hashCode());
 		result = prime * result + ((partUom == null) ? 0 : partUom.hashCode());
-		result = prime
-				* result
-				+ ((serviceBulletinProcedure == null) ? 0 : serviceBulletinProcedure
-						.hashCode());
 		return result;
 	}
 
@@ -206,6 +209,23 @@ public class ServiceBulletinProcedurePart extends MizeSceEntity implements Compa
 		if (getClass() != obj.getClass())
 			return false;
 		ServiceBulletinProcedurePart other = (ServiceBulletinProcedurePart) obj;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (isReturnable == null) {
+			if (other.isReturnable != null)
+				return false;
+		} else if (!isReturnable.equals(other.isReturnable))
+			return false;
+		if (isUpdated != other.isUpdated)
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
 		if (part == null) {
 			if (other.part != null)
 				return false;
@@ -220,6 +240,11 @@ public class ServiceBulletinProcedurePart extends MizeSceEntity implements Compa
 			if (other.partCode != null)
 				return false;
 		} else if (!partCode.equals(other.partCode))
+			return false;
+		if (partId == null) {
+			if (other.partId != null)
+				return false;
+		} else if (!partId.equals(other.partId))
 			return false;
 		if (partReference == null) {
 			if (other.partReference != null)
@@ -236,17 +261,17 @@ public class ServiceBulletinProcedurePart extends MizeSceEntity implements Compa
 				return false;
 		} else if (!partUom.equals(other.partUom))
 			return false;
-		if (serviceBulletinProcedure == null) {
-			if (other.serviceBulletinProcedure != null)
-				return false;
-		} else {
-			if(serviceBulletinProcedure.getId() == null) {
-				if(other.serviceBulletinProcedure.getId() != null)
-					return false;
-			} else if(!serviceBulletinProcedure.getId().equals(other.serviceBulletinProcedure.getId()))
-				return false;
-		}
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "ServiceBulletinProcedurePart [part=" + part + ", partId="
+				+ partId + ", partType=" + partType + ", partCode=" + partCode
+				+ ", partUom=" + partUom + ", partReference=" + partReference
+				+ ", partAmount=" + partAmount + ", isReturnable="
+				+ isReturnable + ", description=" + description + ", name="
+				+ name + ", isUpdated=" + isUpdated + "]";
 	}
 
 	@Override

@@ -196,6 +196,8 @@ public class ServiceBulletinRespBusinessUnit extends MizeSceEntity implements Co
 		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
+		result = prime * result
+				+ ((businessEntity == null) ? 0 : businessEntity.hashCode());
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result + ((contact == null) ? 0 : contact.hashCode());
 		result = prime * result
@@ -205,12 +207,11 @@ public class ServiceBulletinRespBusinessUnit extends MizeSceEntity implements Co
 		result = prime * result
 				+ ((middleInitial == null) ? 0 : middleInitial.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((rbuId == null) ? 0 : rbuId.hashCode());
 		result = prime * result
 				+ ((reference == null) ? 0 : reference.hashCode());
 		result = prime * result
-				+ ((rbuId == null) ? 0 : rbuId.hashCode());
-		result = prime * result
-				+ ((serviceBulletin == null) ? 0 : serviceBulletin.hashCode());
+				+ ((subTypeCode == null) ? 0 : subTypeCode.hashCode());
 		result = prime * result
 				+ ((typeCode == null) ? 0 : typeCode.hashCode());
 		return result;
@@ -229,6 +230,11 @@ public class ServiceBulletinRespBusinessUnit extends MizeSceEntity implements Co
 			if (other.address != null)
 				return false;
 		} else if (!address.equals(other.address))
+			return false;
+		if (businessEntity == null) {
+			if (other.businessEntity != null)
+				return false;
+		} else if (!businessEntity.equals(other.businessEntity))
 			return false;
 		if (code == null) {
 			if (other.code != null)
@@ -260,32 +266,38 @@ public class ServiceBulletinRespBusinessUnit extends MizeSceEntity implements Co
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (reference == null) {
-			if (other.reference != null)
-				return false;
-		} else if (!reference.equals(other.reference))
-			return false;
 		if (rbuId == null) {
 			if (other.rbuId != null)
 				return false;
 		} else if (!rbuId.equals(other.rbuId))
 			return false;
-		if (serviceBulletin == null) {
-			if (other.serviceBulletin != null)
+		if (reference == null) {
+			if (other.reference != null)
 				return false;
-		} else {
-			if(serviceBulletin.getId() == null) {
-				if(other.serviceBulletin.getId() != null)
-					return false;
-			} else if(!serviceBulletin.getId().equals(other.serviceBulletin.getId()))
+		} else if (!reference.equals(other.reference))
+			return false;
+		if (subTypeCode == null) {
+			if (other.subTypeCode != null)
 				return false;
-		}
+		} else if (!subTypeCode.equals(other.subTypeCode))
+			return false;
 		if (typeCode == null) {
 			if (other.typeCode != null)
 				return false;
 		} else if (!typeCode.equals(other.typeCode))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "ServiceBulletinRespBusinessUnit [businessEntity="
+				+ businessEntity + ", rbuId=" + rbuId + ", code=" + code
+				+ ", typeCode=" + typeCode + ", subTypeCode=" + subTypeCode
+				+ ", name=" + name + ", firstName=" + firstName + ", lastName="
+				+ lastName + ", middleInitial=" + middleInitial + ", address="
+				+ address + ", contact=" + contact + ", reference=" + reference
+				+ "]";
 	}
 
 	@Override

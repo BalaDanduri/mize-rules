@@ -126,8 +126,6 @@ public class ServiceBulletinMessage extends MizeSceEntity implements Comparable<
 						.hashCode());
 		result = prime * result
 				+ ((messageValue == null) ? 0 : messageValue.hashCode());
-		result = prime * result
-				+ ((serviceBulletin == null) ? 0 : serviceBulletin.hashCode());
 		return result;
 	}
 
@@ -165,17 +163,15 @@ public class ServiceBulletinMessage extends MizeSceEntity implements Comparable<
 				return false;
 		} else if (!messageValue.equals(other.messageValue))
 			return false;
-		if (serviceBulletin == null) {
-			if (other.serviceBulletin != null)
-				return false;
-		} else {
-			if(serviceBulletin.getId() == null) {
-				if(other.serviceBulletin.getId() != null)
-					return false;
-			} else if(!serviceBulletin.getId().equals(other.serviceBulletin.getId()))
-				return false;
-		}
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "ServiceBulletinMessage [messageId=" + messageId
+				+ ", messageSeverity=" + messageSeverity + ", messageField="
+				+ messageField + ", messageUiReference=" + messageUiReference
+				+ ", messageValue=" + messageValue + "]";
 	}
 
 	@Override

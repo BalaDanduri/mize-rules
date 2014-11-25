@@ -239,11 +239,13 @@ public class ServiceBulletinProcedure extends MizeSceEntity implements Comparabl
 				+ ((partAmount == null) ? 0 : partAmount.hashCode());
 		result = prime * result + ((parts == null) ? 0 : parts.hashCode());
 		result = prime * result
-				+ ((procedureReference == null) ? 0 : procedureReference.hashCode());
-		result = prime * result
 				+ ((procedureCode == null) ? 0 : procedureCode.hashCode());
 		result = prime * result
-				+ ((serviceBulletin == null) ? 0 : serviceBulletin.hashCode());
+				+ ((procedureIntl == null) ? 0 : procedureIntl.hashCode());
+		result = prime
+				* result
+				+ ((procedureReference == null) ? 0 : procedureReference
+						.hashCode());
 		result = prime * result
 				+ ((totalAmount == null) ? 0 : totalAmount.hashCode());
 		return result;
@@ -273,11 +275,6 @@ public class ServiceBulletinProcedure extends MizeSceEntity implements Comparabl
 				return false;
 		} else if (!correctiveActionCode.equals(other.correctiveActionCode))
 			return false;
-		if (procedureReference == null) {
-			if (other.procedureReference != null)
-				return false;
-		} else if (!procedureReference.equals(other.procedureReference))
-			return false;
 		if (laborAmount == null) {
 			if (other.laborAmount != null)
 				return false;
@@ -286,7 +283,7 @@ public class ServiceBulletinProcedure extends MizeSceEntity implements Comparabl
 		if (labors == null) {
 			if (other.labors != null)
 				return false;
-		} else if (!labors.containsAll(other.labors))
+		} else if (!labors.equals(other.labors))
 			return false;
 		if (otherAmount == null) {
 			if (other.otherAmount != null)
@@ -296,7 +293,7 @@ public class ServiceBulletinProcedure extends MizeSceEntity implements Comparabl
 		if (otherCharges == null) {
 			if (other.otherCharges != null)
 				return false;
-		} else if (!otherCharges.containsAll(other.otherCharges))
+		} else if (!otherCharges.equals(other.otherCharges))
 			return false;
 		if (partAmount == null) {
 			if (other.partAmount != null)
@@ -306,12 +303,22 @@ public class ServiceBulletinProcedure extends MizeSceEntity implements Comparabl
 		if (parts == null) {
 			if (other.parts != null)
 				return false;
-		} else if (!parts.containsAll(other.parts))
+		} else if (!parts.equals(other.parts))
 			return false;
 		if (procedureCode == null) {
 			if (other.procedureCode != null)
 				return false;
 		} else if (!procedureCode.equals(other.procedureCode))
+			return false;
+		if (procedureIntl == null) {
+			if (other.procedureIntl != null)
+				return false;
+		} else if (!procedureIntl.equals(other.procedureIntl))
+			return false;
+		if (procedureReference == null) {
+			if (other.procedureReference != null)
+				return false;
+		} else if (!procedureReference.equals(other.procedureReference))
 			return false;
 		if (totalAmount == null) {
 			if (other.totalAmount != null)
@@ -319,6 +326,19 @@ public class ServiceBulletinProcedure extends MizeSceEntity implements Comparabl
 		} else if (!totalAmount.equals(other.totalAmount))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "ServiceBulletinProcedure [procedureCode=" + procedureCode
+				+ ", procedureReference=" + procedureReference
+				+ ", complaintCode=" + complaintCode + ", causeCode="
+				+ causeCode + ", correctiveActionCode=" + correctiveActionCode
+				+ ", parts=" + parts + ", labors=" + labors + ", otherCharges="
+				+ otherCharges + ", partAmount=" + partAmount
+				+ ", laborAmount=" + laborAmount + ", otherAmount="
+				+ otherAmount + ", totalAmount=" + totalAmount
+				+ ", procedureIntl=" + procedureIntl + "]";
 	}
 
 	@Override

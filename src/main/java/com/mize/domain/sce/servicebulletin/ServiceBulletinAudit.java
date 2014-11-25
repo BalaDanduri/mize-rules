@@ -13,7 +13,7 @@ import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeAuditEntity;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.MizeDateTime;
 
@@ -23,15 +23,13 @@ import com.mize.domain.util.MizeDateTime;
  */
 @Entity
 @Table(name = "srvc_blltn_audit")
-public class ServiceBulletinAudit extends MizeSceEntity implements Comparable<ServiceBulletinAudit> {
+public class ServiceBulletinAudit extends MizeAuditEntity implements Comparable<ServiceBulletinAudit> {
 
 	
 	private static final long serialVersionUID = -4801057184698573353L;
 	
 	private ServiceBulletin serviceBulletin;
 	private String statusCode;
-	private MizeDateTime statusDate;
-	private Long statusBy;
 
 	public ServiceBulletinAudit() {
 		
@@ -91,19 +89,23 @@ public class ServiceBulletinAudit extends MizeSceEntity implements Comparable<Se
 	public void setStatusBy(Long statusBy) {
 		this.statusBy = statusBy;
 	}
+	
+	@Column(name = "status_by_user", nullable = true, length = 250)
+	@Override
+	public String getStatusByUser() {
+		return statusByUser;
+	}
+
+	public void setStatusByUser(String statusByUser) {
+		this.statusByUser = statusByUser;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result
-				+ ((serviceBulletin == null) ? 0 : serviceBulletin.hashCode());
-		result = prime * result
-				+ ((statusBy == null) ? 0 : statusBy.hashCode());
-		result = prime * result
 				+ ((statusCode == null) ? 0 : statusCode.hashCode());
-		result = prime * result
-				+ ((statusDate == null) ? 0 : statusDate.hashCode());
 		return result;
 	}
 
@@ -116,32 +118,17 @@ public class ServiceBulletinAudit extends MizeSceEntity implements Comparable<Se
 		if (getClass() != obj.getClass())
 			return false;
 		ServiceBulletinAudit other = (ServiceBulletinAudit) obj;
-		if (serviceBulletin == null) {
-			if (other.serviceBulletin != null)
-				return false;
-		} else {
-			if(serviceBulletin.getId() == null) {
-				if(other.serviceBulletin.getId() != null)
-					return false;
-			} else if(!serviceBulletin.getId().equals(other.serviceBulletin.getId()))
-				return false;
-		}
-		if (statusBy == null) {
-			if (other.statusBy != null)
-				return false;
-		} else if (!statusBy.equals(other.statusBy))
-			return false;
 		if (statusCode == null) {
 			if (other.statusCode != null)
 				return false;
 		} else if (!statusCode.equals(other.statusCode))
 			return false;
-		if (statusDate == null) {
-			if (other.statusDate != null)
-				return false;
-		} else if (!statusDate.equals(other.statusDate))
-			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "ServiceBulletinAudit [statusCode=" + statusCode + "]";
 	}
 
 	@Override

@@ -110,19 +110,18 @@ public class ServiceBulletinIntl extends MizeSceEntity implements Comparable<Ser
 
 	@Override
 	public String toString() {
-		return "ServiceBulletinIntl [ServiceBulletin=" + serviceBulletin + ", locale=" + locale + ", name="
-				+ name + ", description=" + description + "]";
+		return "ServiceBulletinIntl [locale=" + locale + ", name=" + name
+				+ ", description=" + description + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result
 				+ ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((locale == null) ? 0 : locale.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((serviceBulletin == null) ? 0 : serviceBulletin.hashCode());
 		return result;
 	}
 
@@ -149,11 +148,6 @@ public class ServiceBulletinIntl extends MizeSceEntity implements Comparable<Ser
 			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
-			return false;
-		if (serviceBulletin == null) {
-			if (other.serviceBulletin != null)
-				return false;
-		} else if (!serviceBulletin.equals(other.serviceBulletin))
 			return false;
 		return true;
 	}

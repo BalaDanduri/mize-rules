@@ -340,6 +340,20 @@ public class ServiceBulletin extends MizeSceEntity implements Comparable<Service
 	public Long getUpdatedBy() {		
 		return super.getUpdatedBy();
 	}
+	
+	@Override
+	@JsonIgnore
+	@Column(name = "created_by_user",updatable=false)
+	public String getCreatedByUser() {
+		return super.getCreatedByUser();
+	}
+	
+	@Override
+	@JsonIgnore
+	@Column(name = "updated_by_user")
+	public String getUpdatedByUser() {
+		return super.getUpdatedByUser();
+	}
 
 
 	/*@Override
@@ -368,6 +382,18 @@ public class ServiceBulletin extends MizeSceEntity implements Comparable<Service
 	@JsonIgnore
 	public void setUpdatedBy(Long updatedBy) {		
 		super.setUpdatedBy(updatedBy);
+	}
+	
+	@Override
+	@JsonIgnore
+	public void setCreatedByUser(String createdByUser) {
+		super.setCreatedByUser(createdByUser);
+	}
+	
+	@Override
+	@JsonIgnore
+	public void setUpdatedByUser(String updatedByUser) {
+		super.setUpdatedByUser(updatedByUser);
 	}
 
 	@Override
@@ -504,6 +530,23 @@ public class ServiceBulletin extends MizeSceEntity implements Comparable<Service
 		} else if (!totalAmount.equals(other.totalAmount))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "ServiceBulletin [bulletinCode=" + bulletinCode
+				+ ", bulletinType=" + bulletinType + ", bulletinSubType="
+				+ bulletinSubType + ", bulletinStatus=" + bulletinStatus
+				+ ", bulletinReference=" + bulletinReference + ", startDate="
+				+ startDate + ", endDate=" + endDate + ", tenant=" + tenant
+				+ ", currencyCode=" + currencyCode + ", procedures="
+				+ procedures + ", partAmount=" + partAmount + ", laborAmount="
+				+ laborAmount + ", otherAmount=" + otherAmount
+				+ ", totalAmount=" + totalAmount + ", bulletinIntl="
+				+ bulletinIntl + ", audits=" + audits + ", messages="
+				+ messages + ", comments=" + comments + ", attachments="
+				+ attachments + ", respBusinessUnit=" + respBusinessUnit
+				+ ", user=" + user + "]";
 	}
 
 	@Override

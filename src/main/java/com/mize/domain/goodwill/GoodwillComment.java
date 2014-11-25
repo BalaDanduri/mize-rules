@@ -71,11 +71,10 @@ public class GoodwillComment extends MizeSceEntity implements Comparable<Goodwil
 
 	@Override
 	public int hashCode() {
-		final int prime = PRIME;
+		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((entityComment == null) ? 0 : entityComment.hashCode());
 		result = prime * result
-				+ ((goodwill == null) ? 0 : goodwill.hashCode());
+				+ ((entityComment == null) ? 0 : entityComment.hashCode());
 		return result;
 	}
 
@@ -93,12 +92,12 @@ public class GoodwillComment extends MizeSceEntity implements Comparable<Goodwil
 				return false;
 		} else if (!entityComment.equals(other.entityComment))
 			return false;
-		if (goodwill == null) {
-			if (other.goodwill != null)
-				return false;
-		} else if (!goodwill.equals(other.goodwill))
-			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "GoodwillComment [entityComment=" + entityComment + "]";
 	}
 
 	@Override

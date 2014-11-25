@@ -107,6 +107,13 @@ public class ServiceBulletinAmount extends MizeSceEntity implements Comparable<S
 	}
 
 	@Override
+	public String toString() {
+		return "ServiceBulletinAmount [approvedQty=" + approvedQty
+				+ ", approvedAmount=" + approvedAmount
+				+ ", approvedTotalAmount=" + approvedTotalAmount + "]";
+	}
+
+	@Override
 	public int compareTo(ServiceBulletinAmount o) {
 		// TODO Auto-generated method stub
 		return 0;

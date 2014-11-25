@@ -126,26 +126,20 @@ public class ServiceBulletinProcedureOther extends MizeSceEntity implements Comp
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime
-				* result
-				+ ((chargeAmount == null) ? 0 : chargeAmount
-						.hashCode());
+		result = prime * result
+				+ ((chargeAmount == null) ? 0 : chargeAmount.hashCode());
 		result = prime * result
 				+ ((chargeCode == null) ? 0 : chargeCode.hashCode());
 		result = prime
 				* result
-				+ ((chargeDescription == null) ? 0
-						: chargeDescription.hashCode());
+				+ ((chargeDescription == null) ? 0 : chargeDescription
+						.hashCode());
+		result = prime * result
+				+ ((chargeReference == null) ? 0 : chargeReference.hashCode());
 		result = prime * result
 				+ ((chargeType == null) ? 0 : chargeType.hashCode());
 		result = prime * result
 				+ ((chargeUom == null) ? 0 : chargeUom.hashCode());
-		result = prime * result
-				+ ((chargeReference == null) ? 0 : chargeReference.hashCode());
-		result = prime
-				* result
-				+ ((serviceBulletinProcedure == null) ? 0 : serviceBulletinProcedure
-						.hashCode());
 		return result;
 	}
 
@@ -173,22 +167,31 @@ public class ServiceBulletinProcedureOther extends MizeSceEntity implements Comp
 				return false;
 		} else if (!chargeDescription.equals(other.chargeDescription))
 			return false;
+		if (chargeReference == null) {
+			if (other.chargeReference != null)
+				return false;
+		} else if (!chargeReference.equals(other.chargeReference))
+			return false;
 		if (chargeType == null) {
 			if (other.chargeType != null)
 				return false;
 		} else if (!chargeType.equals(other.chargeType))
 			return false;
-		if (serviceBulletinProcedure == null) {
-			if (other.serviceBulletinProcedure != null)
+		if (chargeUom == null) {
+			if (other.chargeUom != null)
 				return false;
-		} else {
-			if(serviceBulletinProcedure.getId() == null) {
-				if(other.serviceBulletinProcedure.getId() != null)
-					return false;
-			} else if(!serviceBulletinProcedure.getId().equals(other.serviceBulletinProcedure.getId()))
-				return false;
-		}
+		} else if (!chargeUom.equals(other.chargeUom))
+			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "ServiceBulletinProcedureOther [chargeType=" + chargeType
+				+ ", chargeCode=" + chargeCode + ", chargeDescription="
+				+ chargeDescription + ", chargeUom=" + chargeUom
+				+ ", chargeReference=" + chargeReference + ", chargeAmount="
+				+ chargeAmount + "]";
 	}
 
 	@Override

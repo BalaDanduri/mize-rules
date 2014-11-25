@@ -79,8 +79,6 @@ public class ServiceBulletinAttachment extends MizeSceEntity implements Comparab
 		result = prime
 				* result
 				+ ((entityAttachment == null) ? 0 : entityAttachment.hashCode());
-		result = prime * result
-				+ ((serviceBulletin == null) ? 0 : serviceBulletin.hashCode());
 		return result;
 	}
 
@@ -98,17 +96,13 @@ public class ServiceBulletinAttachment extends MizeSceEntity implements Comparab
 				return false;
 		} else if (!entityAttachment.equals(other.entityAttachment))
 			return false;
-		if (serviceBulletin == null) {
-			if (other.serviceBulletin != null)
-				return false;
-		} else {
-			if(serviceBulletin.getId() == null) {
-				if(other.serviceBulletin.getId() != null)
-					return false;
-			} else if(!serviceBulletin.getId().equals(other.serviceBulletin.getId()))
-				return false;
-		}
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "ServiceBulletinAttachment [entityAttachment="
+				+ entityAttachment + "]";
 	}
 
 	@Override

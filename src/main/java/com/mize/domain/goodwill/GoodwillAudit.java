@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeAuditEntity;
 import com.mize.domain.util.MizeDateTime;
 /**
  * @author Raghavendra Serikar
@@ -21,12 +21,10 @@ import com.mize.domain.util.MizeDateTime;
  */
 @Entity
 @Table(name="goodwill_audit")
-public class GoodwillAudit extends MizeSceEntity implements Comparable<GoodwillAudit>{
+public class GoodwillAudit extends MizeAuditEntity implements Comparable<GoodwillAudit>{
 	private static final long serialVersionUID = -4806940799417432658L;
 	private Goodwill goodwill;
 	private String status;
-	private MizeDateTime statusDate;
-	private Long statusBy;
 	
 	
 	public GoodwillAudit(){
@@ -69,6 +67,12 @@ public class GoodwillAudit extends MizeSceEntity implements Comparable<GoodwillA
 	public Long getStatusBy() {
 		return statusBy;
 	}
+	
+	@Column(name = "status_by_user", nullable = true, length = 250)
+	@Override
+	public String getStatusByUser() {
+		return statusByUser;
+	}
 
 	public void setGoodwill(Goodwill goodwill) {
 		this.goodwill = goodwill;
@@ -84,6 +88,10 @@ public class GoodwillAudit extends MizeSceEntity implements Comparable<GoodwillA
 
 	public void setStatusBy(Long statusBy) {
 		this.statusBy = statusBy;
+	}
+	
+	public void setStatusByUser(String statusByUser) {
+		this.statusByUser = statusByUser;
 	}
 	
 

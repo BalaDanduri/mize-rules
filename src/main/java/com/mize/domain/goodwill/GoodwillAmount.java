@@ -121,6 +121,14 @@ public class GoodwillAmount extends MizeSceEntity implements Comparable<Goodwill
 			return false;
 		return true;
 	}
+	
+
+	@Override
+	public String toString() {
+		return "GoodwillAmount [partAmount=" + partAmount + ", laborAmount="
+				+ laborAmount + ", otherAmount=" + otherAmount
+				+ ", totalAmount=" + totalAmount + "]";
+	}
 
 	@Override
 	public int compareTo(GoodwillAmount o) {

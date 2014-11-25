@@ -141,28 +141,37 @@ public class ServiceBulletinProcedureIntl extends MizeSceEntity implements Compa
 
 	@Override
 	public String toString() {
-		return "ServiceBulletinIntl [ServiceBulletin="
-				+ serviceBulletinProcedure + ", locale=" + locale
+		return "ServiceBulletinProcedureIntl [locale=" + locale
 				+ ", procedureName=" + procedureName
 				+ ", procedureDescription=" + procedureDescription
 				+ ", complaintDescription=" + complaintDescription
 				+ ", causeDescription=" + causeDescription
-				+ ", correctiveActionDescription=" + correctiveActionDescription
-				+ "]";
+				+ ", correctiveActionDescription="
+				+ correctiveActionDescription + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime * result
-				+ ((procedureDescription == null) ? 0 : procedureDescription.hashCode());
+		result = prime
+				* result
+				+ ((causeDescription == null) ? 0 : causeDescription.hashCode());
+		result = prime
+				* result
+				+ ((complaintDescription == null) ? 0 : complaintDescription
+						.hashCode());
+		result = prime
+				* result
+				+ ((correctiveActionDescription == null) ? 0
+						: correctiveActionDescription.hashCode());
 		result = prime * result + ((locale == null) ? 0 : locale.hashCode());
-		result = prime * result + ((procedureName == null) ? 0 : procedureName.hashCode());
-		result = prime * result + ((complaintDescription == null) ? 0 : complaintDescription.hashCode());
-		result = prime * result + ((causeDescription == null) ? 0 : causeDescription.hashCode());
-		result = prime * result + ((correctiveActionDescription == null) ? 0 : correctiveActionDescription.hashCode());
-		result = prime * result + ((serviceBulletinProcedure == null) ? 0 : serviceBulletinProcedure.hashCode());
+		result = prime
+				* result
+				+ ((procedureDescription == null) ? 0 : procedureDescription
+						.hashCode());
+		result = prime * result
+				+ ((procedureName == null) ? 0 : procedureName.hashCode());
 		return result;
 	}
 
@@ -175,40 +184,36 @@ public class ServiceBulletinProcedureIntl extends MizeSceEntity implements Compa
 		if (getClass() != obj.getClass())
 			return false;
 		ServiceBulletinProcedureIntl other = (ServiceBulletinProcedureIntl) obj;
-		if (procedureDescription == null) {
-			if (other.procedureDescription != null)
+		if (causeDescription == null) {
+			if (other.causeDescription != null)
 				return false;
-		} else if (!procedureDescription.equals(other.procedureDescription))
-			return false;
-		if (locale == null) {
-			if (other.locale != null)
-				return false;
-		} else if (!locale.equals(other.locale))
-			return false;
-		if (procedureName == null) {
-			if (other.procedureName != null)
-				return false;
-		} else if (!procedureName.equals(other.procedureName))
+		} else if (!causeDescription.equals(other.causeDescription))
 			return false;
 		if (complaintDescription == null) {
 			if (other.complaintDescription != null)
 				return false;
 		} else if (!complaintDescription.equals(other.complaintDescription))
 			return false;
-		if (causeDescription == null) {
-			if (other.causeDescription != null)
-				return false;
-		} else if (!causeDescription.equals(other.causeDescription))
-			return false;
 		if (correctiveActionDescription == null) {
 			if (other.correctiveActionDescription != null)
 				return false;
-		} else if (!correctiveActionDescription.equals(other.correctiveActionDescription))
+		} else if (!correctiveActionDescription
+				.equals(other.correctiveActionDescription))
 			return false;
-		if (serviceBulletinProcedure == null) {
-			if (other.serviceBulletinProcedure != null)
+		if (locale == null) {
+			if (other.locale != null)
 				return false;
-		} else if (!serviceBulletinProcedure.equals(other.serviceBulletinProcedure))
+		} else if (!locale.equals(other.locale))
+			return false;
+		if (procedureDescription == null) {
+			if (other.procedureDescription != null)
+				return false;
+		} else if (!procedureDescription.equals(other.procedureDescription))
+			return false;
+		if (procedureName == null) {
+			if (other.procedureName != null)
+				return false;
+		} else if (!procedureName.equals(other.procedureName))
 			return false;
 		return true;
 	}
