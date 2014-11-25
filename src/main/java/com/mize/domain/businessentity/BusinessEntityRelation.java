@@ -24,7 +24,6 @@ import com.mize.domain.util.JPASerializer;
 @Entity
 @Table(name = "business_entity_rltn")
 public class BusinessEntityRelation extends MizeSceEntity {
-	
 	private static final long serialVersionUID = 6120918610246685696L;
 	private BusinessEntity businessEntity;
 	private BusinessEntity relatedBusinessEntity;
@@ -137,13 +136,11 @@ public class BusinessEntityRelation extends MizeSceEntity {
 
 	@Override
 	public int hashCode() {
-		final int prime = PRIME;
+		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result
 				+ ((referenceNumber == null) ? 0 : referenceNumber.hashCode());
-		result = prime * result + ((source == null) ? 0 : source.hashCode());
-		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
 
@@ -166,23 +163,12 @@ public class BusinessEntityRelation extends MizeSceEntity {
 				return false;
 		} else if (!referenceNumber.equals(other.referenceNumber))
 			return false;
-		if (source == null) {
-			if (other.source != null)
-				return false;
-		} else if (!source.equals(other.source))
-			return false;
-		if (user == null) {
-			if (other.user != null)
-				return false;
-		} else if (!user.equals(other.user))
-			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
 		return "BusinessEntityRelation [referenceNumber=" + referenceNumber
-				+ ", user=" + user + ", source=" + source + ", address="
-				+ address + ", id=" + id + "]";
+				+ ", address=" + address + "]";
 	}
 }

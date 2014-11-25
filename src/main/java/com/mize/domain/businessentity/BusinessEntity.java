@@ -18,8 +18,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
@@ -63,7 +61,7 @@ public class BusinessEntity extends MizeSceEntity implements Comparable<Business
 	private String businessEntityReference;
 	@Transient
 	private User user;
-    private String statusCode;
+	private String statusCode;
 	private MizeDateTime startDate;
 	private MizeDateTime endDate;	
 	private List<BusinessEntityAddress> addresses = new ArrayList<BusinessEntityAddress>();
@@ -90,7 +88,7 @@ public class BusinessEntity extends MizeSceEntity implements Comparable<Business
 		this.code = code;
 		this.typeCode = typeCode;
 	}
-	
+
 	public BusinessEntity(Long id,String code,String name,String firstName,String lastName) {
 		this.id = id;
 		this.code = code;
@@ -104,8 +102,6 @@ public class BusinessEntity extends MizeSceEntity implements Comparable<Business
 			Long eaId, String addressType, String address1, String address2, String address3, String zip, String zipExt, String city, String stateCode,
 			String stateName,String countryCode, String countryName, String countryCode3, String email, String landMark, 
 			BigDecimal latitude, BigDecimal longitude, Long geoId, String url, String isPromoted, String hoursOfOp) {
-		
-		     
 		super();
 		this.id = id;
 		this.code = code;
@@ -159,8 +155,8 @@ public class BusinessEntity extends MizeSceEntity implements Comparable<Business
 		}
 		this.beAttribute.setHoursOfOp(hoursOfOp);
 	}
-	
-	
+
+
 
 	public enum TypeCode{
 		dealer,company,service_center,brand;
@@ -169,7 +165,7 @@ public class BusinessEntity extends MizeSceEntity implements Comparable<Business
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id",unique=true,nullable=false)
+	@Column(name="id",unique=true,nullable=false)
 	public Long getId() {
 		return id;
 	}
@@ -354,26 +350,26 @@ public class BusinessEntity extends MizeSceEntity implements Comparable<Business
 	public String getBusinessEntityReference() {
 		return businessEntityReference;
 	}
-	
+
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
+
 	@Transient
 	@JsonIgnore
 	public User getUser() {
 		return user;
 	}
-	
+
 	public void setStatusCode(String statusCode) {
 		this.statusCode = statusCode;
 	}
-	
+
 	@Column(name = "status_code", length = 50)
 	public String getStatusCode() {
 		return statusCode;
 	}
-	
+
 	@Column(name = "start_date", nullable = true)
 	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@JsonInclude(Include.NON_DEFAULT)
@@ -384,18 +380,18 @@ public class BusinessEntity extends MizeSceEntity implements Comparable<Business
 	public void setStartDate(MizeDateTime startDate) {
 		this.startDate = startDate;
 	}
-	
+
 	@Column(name = "end_date", nullable = true)
 	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@JsonInclude(Include.NON_DEFAULT)
 	public MizeDateTime getEndDate() {
 		return endDate;
 	}
-	
+
 	public void setEndDate(MizeDateTime endDate) {
 		this.endDate = endDate;
 	}
-	
+
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "businessEntity")
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
@@ -407,7 +403,7 @@ public class BusinessEntity extends MizeSceEntity implements Comparable<Business
 	public void setBeServiceLinks(List<BusinessEntityServiceLink> beServiceLinks) {
 		this.beServiceLinks = beServiceLinks;
 	}
-	
+
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "businessEntity")
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
@@ -420,7 +416,7 @@ public class BusinessEntity extends MizeSceEntity implements Comparable<Business
 		this.beServiceRates = beServiceRates;
 	}
 
-	
+
 	@Column(name = "created_date", updatable=false)
 	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@JsonInclude(Include.NON_DEFAULT)
@@ -439,7 +435,7 @@ public class BusinessEntity extends MizeSceEntity implements Comparable<Business
 	public Long getCreatedBy() {		
 		return super.getCreatedBy();
 	}
-	
+
 	@Column(name = "created_by_user", updatable = false)
 	public String getCreatedByUser() {
 		return createdByUser;
@@ -466,7 +462,7 @@ public class BusinessEntity extends MizeSceEntity implements Comparable<Business
 	public void setCreatedBy(Long createdBy) {		
 		super.setCreatedBy(createdBy);
 	}
-	
+
 	public void setCreatedByUser(String createdByUser) {
 		this.createdByUser = createdByUser;
 	}
@@ -474,22 +470,12 @@ public class BusinessEntity extends MizeSceEntity implements Comparable<Business
 	public void setUpdatedBy(Long updatedBy) {		
 		super.setUpdatedBy(updatedBy);
 	}
-	
+
 	public void setUpdatedByUser(String updatedByUser) {
 		this.updatedByUser = updatedByUser;
 	}
 
-	
-	@PrePersist
-	@PreUpdate
-	public void auditFields(){
-		if(createdDate==null && id==null){
-			setCreatedDate(MizeDateTime.now());
-		}
-		setUpdatedDate(MizeDateTime.now());		
-	}
 
-	
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
@@ -525,6 +511,8 @@ public class BusinessEntity extends MizeSceEntity implements Comparable<Business
 		result = prime * result + ((logo == null) ? 0 : logo.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result
+				+ ((parentBE == null) ? 0 : parentBE.hashCode());
+		result = prime * result
 				+ ((referenceNumber == null) ? 0 : referenceNumber.hashCode());
 		result = prime * result
 				+ ((relatedEntities == null) ? 0 : relatedEntities.hashCode());
@@ -534,9 +522,9 @@ public class BusinessEntity extends MizeSceEntity implements Comparable<Business
 				+ ((statusCode == null) ? 0 : statusCode.hashCode());
 		result = prime * result
 				+ ((subTypeCode == null) ? 0 : subTypeCode.hashCode());
+		result = prime * result + ((tenant == null) ? 0 : tenant.hashCode());
 		result = prime * result
 				+ ((typeCode == null) ? 0 : typeCode.hashCode());
-		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
 
@@ -630,6 +618,11 @@ public class BusinessEntity extends MizeSceEntity implements Comparable<Business
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
+		if (parentBE == null) {
+			if (other.parentBE != null)
+				return false;
+		} else if (!parentBE.equals(other.parentBE))
+			return false;
 		if (referenceNumber == null) {
 			if (other.referenceNumber != null)
 				return false;
@@ -655,15 +648,15 @@ public class BusinessEntity extends MizeSceEntity implements Comparable<Business
 				return false;
 		} else if (!subTypeCode.equals(other.subTypeCode))
 			return false;
+		if (tenant == null) {
+			if (other.tenant != null)
+				return false;
+		} else if (!tenant.equals(other.tenant))
+			return false;
 		if (typeCode == null) {
 			if (other.typeCode != null)
 				return false;
 		} else if (!typeCode.equals(other.typeCode))
-			return false;
-		if (user == null) {
-			if (other.user != null)
-				return false;
-		} else if (!user.equals(other.user))
 			return false;
 		return true;
 	}
@@ -672,18 +665,18 @@ public class BusinessEntity extends MizeSceEntity implements Comparable<Business
 	public String toString() {
 		return "BusinessEntity [code=" + code + ", typeCode=" + typeCode
 				+ ", subTypeCode=" + subTypeCode + ", logo=" + logo
+				+ ", tenant=" + tenant + ", parentBE=" + parentBE
 				+ ", isActive=" + isActive + ", currencyCode=" + currencyCode
 				+ ", name=" + name + ", businessEntityReference="
-				+ businessEntityReference + ", user=" + user + ", statusCode="
-				+ statusCode + ", startDate=" + startDate + ", endDate="
-				+ endDate + ", addresses=" + addresses + ", intl=" + intl
-				+ ", beBrand=" + beBrand + ", beContact=" + beContact
-				+ ", beAttribute=" + beAttribute + ", relatedEntities="
-				+ relatedEntities + ", beServiceLinks=" + beServiceLinks
-				+ ", beServiceRates=" + beServiceRates
-				+ ", customerEntityRelation=" + customerEntityRelation
-				+ ", referenceNumber=" + referenceNumber + ", brandList="
-				+ brandList + ", id=" + id + "]";
+				+ businessEntityReference + ", statusCode=" + statusCode
+				+ ", startDate=" + startDate + ", endDate=" + endDate
+				+ ", addresses=" + addresses + ", intl=" + intl + ", beBrand="
+				+ beBrand + ", beContact=" + beContact + ", beAttribute="
+				+ beAttribute + ", relatedEntities=" + relatedEntities
+				+ ", beServiceLinks=" + beServiceLinks + ", beServiceRates="
+				+ beServiceRates + ", customerEntityRelation="
+				+ customerEntityRelation + ", referenceNumber="
+				+ referenceNumber + ", brandList=" + brandList + "]";
 	}
 
 	@Override
@@ -695,7 +688,7 @@ public class BusinessEntity extends MizeSceEntity implements Comparable<Business
 	public Object clone() throws CloneNotSupportedException {
 		return super.clone();
 	}
-	
+
 	@JsonIgnore
 	public static Comparator<BusinessEntity> BusinessEntityPromotedComparator = new  Comparator<BusinessEntity>() {
 		public int compare(BusinessEntity be1, BusinessEntity be2) {
@@ -707,7 +700,7 @@ public class BusinessEntity extends MizeSceEntity implements Comparable<Business
 	public BusinessEntityRelation getCustomerEntityRelation() {
 		return customerEntityRelation;
 	}
-	
+
 	public void setCustomerEntityRelation(BusinessEntityRelation customerEntityRelation) {
 		this.customerEntityRelation = customerEntityRelation;
 	}

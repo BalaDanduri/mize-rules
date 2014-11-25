@@ -63,7 +63,6 @@ public class BusinessEntityBrand extends MizeSceEntity implements Comparable<Bus
 
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="brand_id")
-	/*@JsonBackReference(value="brand_be")*/
 	public Brand getBrand() {
 		return brand;
 	}

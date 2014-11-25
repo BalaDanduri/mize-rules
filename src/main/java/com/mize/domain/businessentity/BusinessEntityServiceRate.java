@@ -116,7 +116,7 @@ public class BusinessEntityServiceRate extends MizeSceEntity implements Comparab
 		this.currencyCode = currencyCode;
 	}
 
-	@Column(name = "start_date",updatable=false)
+	@Column(name = "start_date")
 	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@JsonInclude(Include.NON_DEFAULT)
 	public MizeDateTime getStartDate() {
