@@ -33,7 +33,6 @@ import com.mize.domain.util.JPASerializer;
 @DiscriminatorValue("BusinessEntityAddress")
 @Table(name="business_entity_address")
 public class BusinessEntityAddress  extends MizeSceEntity  implements Comparable<BusinessEntityAddress>{
-
 	/**
 	 * 
 	 */
@@ -107,15 +106,17 @@ public class BusinessEntityAddress  extends MizeSceEntity  implements Comparable
 		this.isPreferred = isPreferred;
 	}
 
+	
+
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result + ((beId == null) ? 0 : beId.hashCode());
 		result = prime * result
-				+ ((businessEntity == null) ? 0 : businessEntity.hashCode());
-		result = prime * result
 				+ ((entityAddress == null) ? 0 : entityAddress.hashCode());
+		result = prime * result
+				+ ((isPreferred == null) ? 0 : isPreferred.hashCode());
 		return result;
 	}
 
@@ -133,42 +134,30 @@ public class BusinessEntityAddress  extends MizeSceEntity  implements Comparable
 				return false;
 		} else if (!beId.equals(other.beId))
 			return false;
-		if (businessEntity == null) {
-			if (other.businessEntity != null)
-				return false;
-		} else if (!businessEntity.equals(other.businessEntity))
-			return false;
 		if (entityAddress == null) {
 			if (other.entityAddress != null)
 				return false;
 		} else if (!entityAddress.equals(other.entityAddress))
 			return false;
+		if (isPreferred == null) {
+			if (other.isPreferred != null)
+				return false;
+		} else if (!isPreferred.equals(other.isPreferred))
+			return false;
 		return true;
 	}
-
+	
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("BusinessEntityAddress [beId=");
-		builder.append(beId);
-		builder.append(", businessEntity=");
-		builder.append(businessEntity);
-		builder.append(", entityAddress=");
-		builder.append(entityAddress);
-		builder.append(", id=");
-		builder.append(id);
-		builder.append("]");
-		return builder.toString();
+		return "BusinessEntityAddress [beId=" + beId + ", businessEntity="
+				+ businessEntity + ", entityAddress=" + entityAddress
+				+ ", isPreferred=" + isPreferred + ", id=" + id + "]";
 	}
-	
+
 	@JsonIgnore
 	public static Comparator<BusinessEntityAddress> EntityAddressGeoDistanceComparator = new  Comparator<BusinessEntityAddress>() {
 		public int compare(BusinessEntityAddress addr1, BusinessEntityAddress addr2) {
 		      return  EntityAddress.EntityAddressGeoDistanceComparator.compare( addr1.getEntityAddress() , addr2.getEntityAddress());
 		    }
 	};
-	
-	
-	
-	
 }

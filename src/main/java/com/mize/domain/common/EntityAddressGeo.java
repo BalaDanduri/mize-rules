@@ -107,7 +107,6 @@ public class EntityAddressGeo extends MizeSceEntity implements Comparable<Entity
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result
 				+ ((entityAddressId == null) ? 0 : entityAddressId.hashCode());
 		result = prime * result
@@ -126,11 +125,6 @@ public class EntityAddressGeo extends MizeSceEntity implements Comparable<Entity
 		if (getClass() != obj.getClass())
 			return false;
 		EntityAddressGeo other = (EntityAddressGeo) obj;
-		if (address == null) {
-			if (other.address != null)
-				return false;
-		} else if (!address.equals(other.address))
-			return false;
 		if (entityAddressId == null) {
 			if (other.entityAddressId != null)
 				return false;
@@ -148,24 +142,14 @@ public class EntityAddressGeo extends MizeSceEntity implements Comparable<Entity
 			return false;
 		return true;
 	}
-
+	
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("EntityAddressGeo [entityAddressId=");
-		builder.append(entityAddressId);
-		builder.append(", address=");
-		builder.append(address);
-		builder.append(", latitude=");
-		builder.append(latitude);
-		builder.append(", longitude=");
-		builder.append(longitude);
-		builder.append(", id=");
-		builder.append(id);
-		builder.append("]");
-		return builder.toString();
+		return "EntityAddressGeo [entityAddressId=" + entityAddressId
+				+ ", latitude=" + latitude + ", longitude=" + longitude
+				+ ", addressGeoData=" + addressGeoData + ", id=" + id + "]";
 	}
-	
+
 	@Override
 	public int compareTo(EntityAddressGeo o) {
 		return 0;

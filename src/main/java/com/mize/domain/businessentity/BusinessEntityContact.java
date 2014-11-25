@@ -77,13 +77,10 @@ public class BusinessEntityContact extends MizeSceEntity implements Comparable<B
 		this.entityContact = entityContact;
 	}
 
-
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime * result
-				+ ((businessEntity == null) ? 0 : businessEntity.hashCode());
 		result = prime * result
 				+ ((entityContact == null) ? 0 : entityContact.hashCode());
 		return result;
@@ -98,17 +95,18 @@ public class BusinessEntityContact extends MizeSceEntity implements Comparable<B
 		if (getClass() != obj.getClass())
 			return false;
 		BusinessEntityContact other = (BusinessEntityContact) obj;
-		if (businessEntity == null) {
-			if (other.businessEntity != null)
-				return false;
-		} else if (!businessEntity.equals(other.businessEntity))
-			return false;
 		if (entityContact == null) {
 			if (other.entityContact != null)
 				return false;
 		} else if (!entityContact.equals(other.entityContact))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "BusinessEntityContact [entityContact=" + entityContact
+				+ ", id=" + id + "]";
 	}
 
 	@Override

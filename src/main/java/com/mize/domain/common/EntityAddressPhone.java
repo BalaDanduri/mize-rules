@@ -12,11 +12,10 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.mize.domain.util.Formatter;
 
 @Entity
 @Table(name = "entity_address_phone" )
-public class EntityAddressPhone extends MizeSceEntity implements Comparable<EntityAddressPhone> {
+public class EntityAddressPhone extends MizeEntity implements Comparable<EntityAddressPhone> {
 
 	private static final long serialVersionUID = 1L;
 	@Transient
@@ -100,11 +99,12 @@ public class EntityAddressPhone extends MizeSceEntity implements Comparable<Enti
 		this.phoneExt = phoneExt;
 	}
 
-
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
+		result = prime * result
+				+ ((entityAddressId == null) ? 0 : entityAddressId.hashCode());
 		result = prime * result
 				+ ((phoneExt == null) ? 0 : phoneExt.hashCode());
 		result = prime * result
@@ -117,34 +117,40 @@ public class EntityAddressPhone extends MizeSceEntity implements Comparable<Enti
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
-			return true;		
+			return true;
+		if (!super.equals(obj))
+			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		EntityAddressPhone other = (EntityAddressPhone) obj;
-		if (Formatter.isNull(phoneExt)) {
-			if (Formatter.isNotNull(other.phoneExt))
+		if (entityAddressId == null) {
+			if (other.entityAddressId != null)
+				return false;
+		} else if (!entityAddressId.equals(other.entityAddressId))
+			return false;
+		if (phoneExt == null) {
+			if (other.phoneExt != null)
 				return false;
 		} else if (!phoneExt.equals(other.phoneExt))
 			return false;
-		if (Formatter.isNull(phoneType)) {
-			if (Formatter.isNotNull(other.phoneType))
+		if (phoneType == null) {
+			if (other.phoneType != null)
 				return false;
 		} else if (!phoneType.equals(other.phoneType))
 			return false;
-		if (Formatter.isNull(phoneValue)) {
-			if (Formatter.isNotNull(other.phoneValue))
+		if (phoneValue == null) {
+			if (other.phoneValue != null)
 				return false;
 		} else if (!phoneValue.equals(other.phoneValue))
 			return false;
 		return true;
 	}
 
-
 	@Override
 	public String toString() {
 		return "EntityAddressPhone [entityAddressId=" + entityAddressId
 				+ ", phoneType=" + phoneType + ", phoneValue=" + phoneValue
-				+ ", phoneExt=" + phoneExt + "]";
+				+ ", phoneExt=" + phoneExt + ", id=" + id + "]";
 	}
 
 	@Override

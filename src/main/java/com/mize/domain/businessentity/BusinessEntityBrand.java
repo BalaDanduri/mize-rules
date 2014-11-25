@@ -78,8 +78,6 @@ public class BusinessEntityBrand extends MizeSceEntity implements Comparable<Bus
 		int result = super.hashCode();
 		result = prime * result + ((brand == null) ? 0 : brand.hashCode());
 		result = prime * result
-				+ ((businessEntity == null) ? 0 : businessEntity.hashCode());
-		result = prime * result
 				+ ((isActive == null) ? 0 : isActive.hashCode());
 		return result;
 	}
@@ -98,11 +96,6 @@ public class BusinessEntityBrand extends MizeSceEntity implements Comparable<Bus
 				return false;
 		} else if (!brand.equals(other.brand))
 			return false;
-		if (businessEntity == null) {
-			if (other.businessEntity != null)
-				return false;
-		} else if (!businessEntity.equals(other.businessEntity))
-			return false;
 		if (isActive == null) {
 			if (other.isActive != null)
 				return false;
@@ -110,7 +103,7 @@ public class BusinessEntityBrand extends MizeSceEntity implements Comparable<Bus
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "BusinessEntityBrand [isActive=" + isActive + ", id=" + id + "]";

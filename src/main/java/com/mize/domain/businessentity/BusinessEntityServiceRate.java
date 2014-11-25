@@ -13,8 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Type;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -30,7 +28,6 @@ import com.mize.domain.util.MizeDateTime;
 @Entity
 @Table(name = "business_entity_service_rate")
 public class BusinessEntityServiceRate extends MizeSceEntity implements Comparable<BusinessEntity>{
-
 	private static final long serialVersionUID = -434328833392204604L;
 	private BusinessEntity businessEntity;
 	private Brand brand;
@@ -119,8 +116,9 @@ public class BusinessEntityServiceRate extends MizeSceEntity implements Comparab
 		this.currencyCode = currencyCode;
 	}
 
-	@Column(name = "start_date", nullable = true)
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
+	@Column(name = "start_date",updatable=false)
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	@JsonInclude(Include.NON_DEFAULT)
 	public MizeDateTime getStartDate() {
 		return startDate;
 	}
@@ -130,7 +128,8 @@ public class BusinessEntityServiceRate extends MizeSceEntity implements Comparab
 	}
 
 	@Column(name = "end_date", nullable = true)
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	@JsonInclude(Include.NON_DEFAULT)
 	public MizeDateTime getEndDate() {
 		return endDate;
 	}
@@ -148,74 +147,83 @@ public class BusinessEntityServiceRate extends MizeSceEntity implements Comparab
 		this.serviceRate = serviceRate;
 	}
 
-	@Column(name = "created_date", updatable = false)
-    @org.hibernate.annotations.Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	@JsonIgnore(false)
+	@Column(name = "created_date", updatable=false)
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	@JsonInclude(Include.NON_DEFAULT)
     public MizeDateTime getCreatedDate() {
         return this.createdDate;
     } 
 
-
-	@Override	
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@Column(name = "updated_date")
-	@JsonIgnore(false)
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	@JsonInclude(Include.NON_DEFAULT)
 	public MizeDateTime getUpdatedDate() {
 		return updatedDate;
 	}
 
-	@Override
-	@JsonIgnore(false)
 	public void setCreatedDate(MizeDateTime createdDate) {
 		super.createdDate = createdDate;
 	}
 
-	@Override
-	@JsonIgnore(false)
 	public void setUpdatedDate(MizeDateTime updatedDate) {
 		super.updatedDate = updatedDate;
 	}
 
-    @Override
-    @JsonIgnore(value=false)
-    @Column(name = "created_by",updatable = false)
+	@Column(name = "created_by" , updatable=false)
     public Long getCreatedBy() {                      
         return super.getCreatedBy();
     }        
 
-
-	@Override
-	@JsonIgnore(value=false)
 	@Column(name = "updated_by")
 	public Long getUpdatedBy() {
 		return updatedBy;
 	}
 
 	@JsonIgnore(value=false)
-	@Override
 	public void setUpdatedBy(Long updatedBy) {
 		this.updatedBy = updatedBy;
 	}
 
-	@JsonIgnore(value=false)
-	@Override
 	public void setCreatedBy(Long createdBy) {
 		this.createdBy = createdBy;
 	}
+	
+	@Column(name = "created_by_user", updatable=false)
+	public String getCreatedByUser() {
+		return createdByUser;
+	}
+	
+	@Column(name = "updated_by_user")
+	public String getUpdatedByUser() {
+		return updatedByUser;
+	}
+	
+	public void setCreatedByUser(String createdByUser) {
+		this.createdByUser = createdByUser;
+	}
+	
+	public void setUpdatedByUser(String updatedByUser) {
+		this.updatedByUser = updatedByUser;
+	}
 
+	
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result + ((brand == null) ? 0 : brand.hashCode());
-		result = prime * result + ((businessEntity == null) ? 0 : businessEntity.hashCode());
-		result = prime * result + ((currencyCode == null) ? 0 : currencyCode.hashCode());
+		result = prime * result
+				+ ((currencyCode == null) ? 0 : currencyCode.hashCode());
 		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
 		result = prime * result + ((product == null) ? 0 : product.hashCode());
-		result = prime * result + ((productCategory == null) ? 0 : productCategory.hashCode());
-		result = prime * result + ((serviceRate == null) ? 0 : serviceRate.hashCode());
-		result = prime * result + ((serviceType == null) ? 0 : serviceType.hashCode());
-		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
+		result = prime * result
+				+ ((productCategory == null) ? 0 : productCategory.hashCode());
+		result = prime * result
+				+ ((serviceRate == null) ? 0 : serviceRate.hashCode());
+		result = prime * result
+				+ ((serviceType == null) ? 0 : serviceType.hashCode());
+		result = prime * result
+				+ ((startDate == null) ? 0 : startDate.hashCode());
 		return result;
 	}
 
@@ -232,11 +240,6 @@ public class BusinessEntityServiceRate extends MizeSceEntity implements Comparab
 			if (other.brand != null)
 				return false;
 		} else if (!brand.equals(other.brand))
-			return false;
-		if (businessEntity == null) {
-			if (other.businessEntity != null)
-				return false;
-		} else if (!businessEntity.equals(other.businessEntity))
 			return false;
 		if (currencyCode == null) {
 			if (other.currencyCode != null)
@@ -275,12 +278,14 @@ public class BusinessEntityServiceRate extends MizeSceEntity implements Comparab
 			return false;
 		return true;
 	}
-
+	
 	@Override
 	public String toString() {
-		return "BusinessEntityServiceRate [businessEntity=" + businessEntity + ", brand=" + brand + ", productCategory=" + productCategory 
-				+ ", product=" + product + ", serviceType=" + serviceType + ", currencyCode=" + currencyCode + ", startDate=" + startDate 
-				+ ", endDate=" + endDate + ", serviceRate=" + serviceRate + "]";
+		return "BusinessEntityServiceRate [brand=" + brand
+				+ ", productCategory=" + productCategory + ", product="
+				+ product + ", serviceType=" + serviceType + ", currencyCode="
+				+ currencyCode + ", startDate=" + startDate + ", endDate="
+				+ endDate + ", serviceRate=" + serviceRate + ", id=" + id + "]";
 	}
 
 	@Override

@@ -23,10 +23,9 @@ import com.mize.domain.util.JPASerializer;
 
 @Entity
 @Table(name = "business_entity_rltn")
-public class BusinessEntityRelation extends MizeSceEntity implements Comparable<BusinessEntityRelation> {
+public class BusinessEntityRelation extends MizeSceEntity {
 	
 	private static final long serialVersionUID = 6120918610246685696L;
-	
 	private BusinessEntity businessEntity;
 	private BusinessEntity relatedBusinessEntity;
 	private String referenceNumber;
@@ -137,9 +136,53 @@ public class BusinessEntityRelation extends MizeSceEntity implements Comparable<
 	}
 
 	@Override
-	public int compareTo(BusinessEntityRelation o) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int hashCode() {
+		final int prime = PRIME;
+		int result = super.hashCode();
+		result = prime * result + ((address == null) ? 0 : address.hashCode());
+		result = prime * result
+				+ ((referenceNumber == null) ? 0 : referenceNumber.hashCode());
+		result = prime * result + ((source == null) ? 0 : source.hashCode());
+		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		return result;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		BusinessEntityRelation other = (BusinessEntityRelation) obj;
+		if (address == null) {
+			if (other.address != null)
+				return false;
+		} else if (!address.equals(other.address))
+			return false;
+		if (referenceNumber == null) {
+			if (other.referenceNumber != null)
+				return false;
+		} else if (!referenceNumber.equals(other.referenceNumber))
+			return false;
+		if (source == null) {
+			if (other.source != null)
+				return false;
+		} else if (!source.equals(other.source))
+			return false;
+		if (user == null) {
+			if (other.user != null)
+				return false;
+		} else if (!user.equals(other.user))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "BusinessEntityRelation [referenceNumber=" + referenceNumber
+				+ ", user=" + user + ", source=" + source + ", address="
+				+ address + ", id=" + id + "]";
+	}
 }

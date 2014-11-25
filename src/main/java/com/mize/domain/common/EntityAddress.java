@@ -21,7 +21,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.MizeDateTime;
 
@@ -153,49 +152,43 @@ public class EntityAddress extends MizeSceEntity implements Comparable<EntityAdd
 		this.email = email;
 	}
 
-	@JsonIgnore(false)
 	@Column(name = "updated_by")
 	public Long getUpdatedBy() {
 		return this.updatedBy;
 	}
 	
-	@JsonIgnore(false)
 	public void setUpdatedBy(Long updatedBy) {
 		this.updatedBy = updatedBy;
 	}
 	
-	@JsonIgnore(false)
-	@Column(name = "created_by", updatable = false)
+	@Column(name = "created_by" , updatable=false)
 	public Long getCreatedBy() {
 		return this.createdBy;
 	}
 	
-	@JsonIgnore(false)
 	public void setCreatedBy(Long createdBy) {
 		this.createdBy = createdBy;
 	}
 	
 	
-	@Column(name = "created_date", updatable = false)
-	@org.hibernate.annotations.Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	@JsonIgnore(false)
+	@Column(name = "created_date", updatable=false)
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	@JsonInclude(Include.NON_DEFAULT)
 	public MizeDateTime getCreatedDate() {
 		return this.createdDate;
 	}
 
-	@JsonIgnore(false)
 	public void setCreatedDate(MizeDateTime createdDate) {
 		this.createdDate = createdDate;
 	}
 	
 	@Column(name = "updated_date")
-	@org.hibernate.annotations.Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	@JsonIgnore(false)
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	@JsonInclude(Include.NON_DEFAULT)
 	public MizeDateTime getUpdatedDate() {
 		return this.updatedDate;
 	}
 	
-	@JsonIgnore(false)
 	public void setUpdatedDate(MizeDateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	} 
@@ -232,8 +225,24 @@ public class EntityAddress extends MizeSceEntity implements Comparable<EntityAdd
 		this.addressGeo = addressGeo;
 	}
 	
+	@Column(name = "created_by_user", updatable=false)
+	public String getCreatedByUser() {
+		return createdByUser;
+	}
 	
-
+	public void setCreatedByUser(String createdByUser) {
+		this.createdByUser = createdByUser;
+	}
+	
+	@Column(name = "updated_by_user")
+	public String getUpdatedByUser() {
+		return updatedByUser;
+	}
+	
+	public void setUpdatedByUser(String updatedByUser) {
+		this.updatedByUser = updatedByUser;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
@@ -244,6 +253,8 @@ public class EntityAddress extends MizeSceEntity implements Comparable<EntityAdd
 				+ ((address2 == null) ? 0 : address2.hashCode());
 		result = prime * result
 				+ ((address3 == null) ? 0 : address3.hashCode());
+		result = prime * result
+				+ ((addressGeo == null) ? 0 : addressGeo.hashCode());
 		result = prime * result
 				+ ((addressPhones == null) ? 0 : addressPhones.hashCode());
 		result = prime * result + ((city == null) ? 0 : city.hashCode());
@@ -262,31 +273,38 @@ public class EntityAddress extends MizeSceEntity implements Comparable<EntityAdd
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
+		if (!super.equals(obj))
+			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		EntityAddress other = (EntityAddress) obj;
-		if (Formatter.isNull(address1)) {
-			if (Formatter.isNotNull(other.address1))
+		if (address1 == null) {
+			if (other.address1 != null)
 				return false;
 		} else if (!address1.equals(other.address1))
 			return false;
-		if (Formatter.isNull(address2)) {
-			if (Formatter.isNotNull(other.address2))
+		if (address2 == null) {
+			if (other.address2 != null)
 				return false;
 		} else if (!address2.equals(other.address2))
 			return false;
-		if (Formatter.isNull(address3)) {
-			if (Formatter.isNotNull(other.address3))
+		if (address3 == null) {
+			if (other.address3 != null)
 				return false;
 		} else if (!address3.equals(other.address3))
+			return false;
+		if (addressGeo == null) {
+			if (other.addressGeo != null)
+				return false;
+		} else if (!addressGeo.equals(other.addressGeo))
 			return false;
 		if (addressPhones == null) {
 			if (other.addressPhones != null)
 				return false;
-		} else if (!addressPhones.containsAll(other.addressPhones))
+		} else if (!addressPhones.equals(other.addressPhones))
 			return false;
-		if (Formatter.isNull(city)) {
-			if (Formatter.isNotNull(other.city))
+		if (city == null) {
+			if (other.city != null)
 				return false;
 		} else if (!city.equals(other.city))
 			return false;
@@ -295,13 +313,13 @@ public class EntityAddress extends MizeSceEntity implements Comparable<EntityAdd
 				return false;
 		} else if (!country.equals(other.country))
 			return false;
-		if (Formatter.isNull(email)) {
-			if (Formatter.isNotNull(other.email))
+		if (email == null) {
+			if (other.email != null)
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
-		if (Formatter.isNull(landmark)) {
-			if (Formatter.isNotNull(other.landmark))
+		if (landmark == null) {
+			if (other.landmark != null)
 				return false;
 		} else if (!landmark.equals(other.landmark))
 			return false;
@@ -310,26 +328,24 @@ public class EntityAddress extends MizeSceEntity implements Comparable<EntityAdd
 				return false;
 		} else if (!state.equals(other.state))
 			return false;
-		if (Formatter.isNull(type)) {
-			if (Formatter.isNotNull(other.type))
+		if (type == null) {
+			if (other.type != null)
 				return false;
 		} else if (!type.equals(other.type))
 			return false;
-		if (Formatter.isNull(zip)) {
-			if (Formatter.isNotNull(other.zip))
+		if (zip == null) {
+			if (other.zip != null)
 				return false;
 		} else if (!zip.equals(other.zip))
 			return false;
-		if (Formatter.isNull(zipExt)) {
-			if (Formatter.isNotNull(other.zipExt))
+		if (zipExt == null) {
+			if (other.zipExt != null)
 				return false;
 		} else if (!zipExt.equals(other.zipExt))
 			return false;
 		return true;
 	}
 
-	
-	
 	@Override
 	public String toString() {
 		return "EntityAddress [type=" + type + ", address1=" + address1
@@ -337,7 +353,8 @@ public class EntityAddress extends MizeSceEntity implements Comparable<EntityAdd
 				+ ", zip=" + zip + ", zipExt=" + zipExt + ", city=" + city
 				+ ", state=" + state + ", country=" + country + ", email="
 				+ email + ", landmark=" + landmark + ", addressPhones="
-				+ addressPhones + "]";
+				+ addressPhones + ", addressGeo=" + addressGeo + ", id=" + id
+				+ "]";
 	}
 
 	@Override

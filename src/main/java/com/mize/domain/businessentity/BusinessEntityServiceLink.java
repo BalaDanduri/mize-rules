@@ -11,8 +11,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Type;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -38,6 +36,19 @@ public class BusinessEntityServiceLink extends MizeSceEntity implements Comparab
 
 	public BusinessEntityServiceLink(){
 	}
+	
+	public BusinessEntityServiceLink(BusinessEntity businessEntity,
+			Brand brand, ProductCategory productCategory, Product product,
+			Long radius, String radiusUom) {
+		super();
+		this.businessEntity = businessEntity;
+		this.brand = brand;
+		this.productCategory = productCategory;
+		this.product = product;
+		this.radius = radius;
+		this.radiusUom = radiusUom;
+	}
+
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -114,59 +125,64 @@ public class BusinessEntityServiceLink extends MizeSceEntity implements Comparab
 		this.radiusUom = radiusUom;
 	}
 
-
-	@Override	
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	
 	@Column(name = "created_date",updatable=false)
-	@JsonIgnore(value = false)
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	@JsonInclude(Include.NON_DEFAULT)
 	public MizeDateTime getCreatedDate() {
 		return createdDate;
 	}
 
-	@Override	
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@Column(name = "updated_date")
-	@JsonIgnore(value = false)
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	@JsonInclude(Include.NON_DEFAULT)
 	public MizeDateTime getUpdatedDate() {
 		return updatedDate;
 	}
 
-	@Override
-	@JsonIgnore(false)
 	public void setCreatedDate(MizeDateTime createdDate) {
 		super.createdDate = createdDate;
 	}
 
-	@Override
-	@JsonIgnore(false)
 	public void setUpdatedDate(MizeDateTime updatedDate) {
 		super.updatedDate = updatedDate;
 	}
 
-	@Override
-	@JsonIgnore(value=false)
-	@Column(name = "created_by" , updatable=false)
+	@Column(name = "created_by" ,updatable=false)
 	public Long getCreatedBy() {
 		return createdBy;
 	}
 
-	@Override
-	@JsonIgnore(value=false)
 	@Column(name = "updated_by")
 	public Long getUpdatedBy() {
 		return updatedBy;
 	}
 
 	@JsonIgnore(value=false)
-	@Override
 	public void setUpdatedBy(Long updatedBy) {
 		this.updatedBy = updatedBy;
 	}
 
-	@JsonIgnore(value=false)
-	@Override
 	public void setCreatedBy(Long createdBy) {
 		this.createdBy = createdBy;
+	}
+	
+	@Column(name = "created_by_user", updatable=false)
+	public String getCreatedByUser() {
+		return createdByUser;
+	}
+	
+	@Column(name = "updated_by_user")
+	public String getUpdatedByUser() {
+		return updatedByUser;
+	}
+	
+	public void setCreatedByUser(String createdByUser) {
+		this.createdByUser = createdByUser;
+	}
+	
+	public void setUpdatedByUser(String updatedByUser) {
+		this.updatedByUser = updatedByUser;
 	}
 
 	@Override
@@ -174,8 +190,6 @@ public class BusinessEntityServiceLink extends MizeSceEntity implements Comparab
 		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result + ((brand == null) ? 0 : brand.hashCode());
-		result = prime * result
-				+ ((businessEntity == null) ? 0 : businessEntity.hashCode());
 		result = prime * result + ((product == null) ? 0 : product.hashCode());
 		result = prime * result
 				+ ((productCategory == null) ? 0 : productCategory.hashCode());
@@ -198,11 +212,6 @@ public class BusinessEntityServiceLink extends MizeSceEntity implements Comparab
 			if (other.brand != null)
 				return false;
 		} else if (!brand.equals(other.brand))
-			return false;
-		if (businessEntity == null) {
-			if (other.businessEntity != null)
-				return false;
-		} else if (!businessEntity.equals(other.businessEntity))
 			return false;
 		if (product == null) {
 			if (other.product != null)
@@ -229,23 +238,10 @@ public class BusinessEntityServiceLink extends MizeSceEntity implements Comparab
 
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("BusinessEntityServiceLink [businessEntity=");
-		builder.append(businessEntity);
-		builder.append(", brand=");
-		builder.append(brand);
-		builder.append(", productCategory=");
-		builder.append(productCategory);
-		builder.append(", product=");
-		builder.append(product);
-		builder.append(", radius=");
-		builder.append(radius);
-		builder.append(", radiusUom=");
-		builder.append(radiusUom);
-		builder.append(", id=");
-		builder.append(id);
-		builder.append("]");
-		return builder.toString();
+		return "BusinessEntityServiceLink [brand=" + brand
+				+ ", productCategory=" + productCategory + ", product="
+				+ product + ", radius=" + radius + ", radiusUom=" + radiusUom
+				+ ", id=" + id + "]";
 	}
 
 	@Override

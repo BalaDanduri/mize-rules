@@ -7,7 +7,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.mize.domain.util.MizeDateTime;
 
 /**
@@ -187,54 +188,64 @@ public class EntityContact extends MizeSceEntity {
 		this.department = department;
 	}
 
-	@Override
-	@JsonIgnore(false)
 	public void setCreatedDate(MizeDateTime createdDate) {
 		this.createdDate = createdDate;
 	}
 
-	@JsonIgnore(value=false)
 	public void setUpdatedBy(Long updatedBy) {
 		this.updatedBy = updatedBy;
 	}
 
-	@JsonIgnore(value=false)
 	public void setCreatedBy(Long createdBy) {
 		this.createdBy = createdBy;
 	}
 
-	@Override
-	@JsonIgnore(false)
 	public void setUpdatedDate(MizeDateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}
 
-	
-	@Column(name = "created_date",updatable = false)
+	@Column(name = "created_date", updatable=false)
 	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@JsonIgnore(value=false)
+	@JsonInclude(Include.NON_DEFAULT)
 	public MizeDateTime getCreatedDate() {
 		return createdDate;
 	}
 
 	@Column(name = "updated_date")
 	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@JsonIgnore(value = false)
+	@JsonInclude(Include.NON_DEFAULT)
 	public MizeDateTime getUpdatedDate() {
 		return updatedDate;
 	}
 
-	@JsonIgnore(value=false)
 	@Column(name = "created_by" , updatable=false)
 	public Long getCreatedBy() {
 		return createdBy;
 	}
 
-	@JsonIgnore(value=false)
+	@Column(name = "created_by_user", updatable=false)
+	public String getCreatedByUser() {
+		return createdByUser;
+	}
+	
+	@Column(name = "updated_by_user")
+	public String getUpdatedByUser() {
+		return updatedByUser;
+	}
+	
+	public void setCreatedByUser(String createdByUser) {
+		this.createdByUser = createdByUser;
+	}
+	
+	public void setUpdatedByUser(String updatedByUser) {
+		this.updatedByUser = updatedByUser;
+	}
+	
 	@Column(name = "updated_by")
 	public Long getUpdatedBy() {
 		return updatedBy;
 	}
+	
 
 	@Override
 	public int hashCode() {
@@ -244,8 +255,7 @@ public class EntityContact extends MizeSceEntity {
 				+ ((alternatePhone == null) ? 0 : alternatePhone.hashCode());
 		result = prime
 				* result
-				+ ((alternatePhoneExt == null) ? 0 : alternatePhoneExt
-						.hashCode());
+				+ ((alternatePhoneExt == null) ? 0 : alternatePhoneExt.hashCode());
 		result = prime * result
 				+ ((contactName == null) ? 0 : contactName.hashCode());
 		result = prime * result
@@ -270,6 +280,7 @@ public class EntityContact extends MizeSceEntity {
 				+ ((phoneExt == null) ? 0 : phoneExt.hashCode());
 		return result;
 	}
+	
 
 	@Override
 	public boolean equals(Object obj) {

@@ -18,7 +18,10 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mize.domain.common.MizeSceEntity;
-
+/**
+ * @author Raghavendra Serikar
+ * @version 1.0
+*/
 @Entity
 @Inheritance
 @DiscriminatorColumn(name = "discriminator")
@@ -138,8 +141,6 @@ public class BusinessEntityAttribute extends MizeSceEntity implements Comparable
 		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result
-				+ ((businessEntity == null) ? 0 : businessEntity.hashCode());
-		result = prime * result
 				+ ((creditOnHold == null) ? 0 : creditOnHold.hashCode());
 		result = prime * result
 				+ ((hoursOfOp == null) ? 0 : hoursOfOp.hashCode());
@@ -166,11 +167,6 @@ public class BusinessEntityAttribute extends MizeSceEntity implements Comparable
 		if (getClass() != obj.getClass())
 			return false;
 		BusinessEntityAttribute other = (BusinessEntityAttribute) obj;
-		if (businessEntity == null) {
-			if (other.businessEntity != null)
-				return false;
-		} else if (!businessEntity.equals(other.businessEntity))
-			return false;
 		if (creditOnHold == null) {
 			if (other.creditOnHold != null)
 				return false;
@@ -213,7 +209,17 @@ public class BusinessEntityAttribute extends MizeSceEntity implements Comparable
 			return false;
 		return true;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "BusinessEntityAttribute [businessEntity=" + businessEntity
+				+ ", url=" + url + ", toolTipLogo=" + toolTipLogo + ", icon="
+				+ icon + ", hoursOfOp=" + hoursOfOp + ", creditOnHold="
+				+ creditOnHold + ", isPromoted=" + isPromoted
+				+ ", isServiceProvider=" + isServiceProvider + ", region="
+				+ region + ", id=" + id + "]";
+	}
+
 	@Override
 	public int compareTo(BusinessEntityAttribute o) {
 		return 0;
@@ -235,6 +241,4 @@ public class BusinessEntityAttribute extends MizeSceEntity implements Comparable
 			}
 		}
 	};
-	
-
 }

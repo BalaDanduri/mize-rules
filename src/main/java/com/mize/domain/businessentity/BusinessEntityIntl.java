@@ -17,8 +17,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.common.Locale;
-import com.mize.domain.common.MizeEntity;
-import com.mize.domain.util.Formatter;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JPASerializer;
 /**
  * @author Raghavendra Serikar
@@ -29,7 +28,7 @@ import com.mize.domain.util.JPASerializer;
 @DiscriminatorColumn(name = "discriminator")
 @DiscriminatorValue("BusinessEntityIntl")
 @Table(name="business_entity_intl")
-public class BusinessEntityIntl extends MizeEntity {
+public class BusinessEntityIntl extends MizeSceEntity {
 	private static final long serialVersionUID = -1362236702129137109L;
 	private BusinessEntity businessEntity;
 	private String name;
@@ -124,7 +123,7 @@ public class BusinessEntityIntl extends MizeEntity {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result
 				+ ((description == null) ? 0 : description.hashCode());
@@ -142,22 +141,24 @@ public class BusinessEntityIntl extends MizeEntity {
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
-			return true;		
+			return true;
+		if (!super.equals(obj))
+			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		BusinessEntityIntl other = (BusinessEntityIntl) obj;
-		if (Formatter.isNull(description)) {
-			if (Formatter.isNotNull(other.description))
+		if (description == null) {
+			if (other.description != null)
 				return false;
 		} else if (!description.equals(other.description))
 			return false;
-		if (Formatter.isNull(firstName)) {
-			if (Formatter.isNotNull(other.firstName))
+		if (firstName == null) {
+			if (other.firstName != null)
 				return false;
 		} else if (!firstName.equals(other.firstName))
 			return false;
-		if (Formatter.isNull(lastName)) {
-			if (Formatter.isNotNull(other.lastName))
+		if (lastName == null) {
+			if (other.lastName != null)
 				return false;
 		} else if (!lastName.equals(other.lastName))
 			return false;
@@ -166,16 +167,24 @@ public class BusinessEntityIntl extends MizeEntity {
 				return false;
 		} else if (!locale.equals(other.locale))
 			return false;
-		if (Formatter.isNull(middleInitial)) {
-			if (Formatter.isNotNull(other.middleInitial))
+		if (middleInitial == null) {
+			if (other.middleInitial != null)
 				return false;
 		} else if (!middleInitial.equals(other.middleInitial))
 			return false;
-		if (Formatter.isNull(name)) {
-			if (Formatter.isNotNull(other.name))
+		if (name == null) {
+			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "BusinessEntityIntl [name=" + name + ", description="
+				+ description + ", locale=" + locale + ", firstName="
+				+ firstName + ", lastName=" + lastName + ", middleInitial="
+				+ middleInitial + ", id=" + id + "]";
 	}
 }

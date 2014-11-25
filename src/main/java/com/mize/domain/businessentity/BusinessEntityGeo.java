@@ -146,5 +146,4 @@ public class BusinessEntityGeo extends MizeSceEntity implements Comparable<Busin
 	public int compareTo(BusinessEntityGeo arg0) {
 		return 0;
 	}
-	
 }
