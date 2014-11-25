@@ -249,6 +249,10 @@ public final class Formatter {
 		return (mizeDateTime == null ? null : getDBDateTime(mizeDateTime.getDateTime()));
 	}
 	
+	public static String getDBDateTime(MizeDate mizeDate){
+		return (mizeDate == null ? null : getDBDateTime(mizeDate.getDateTime()));
+	}
+	
 	public static String dbDateTime(DateTime dateTime){
 		return (dateTime == null ? null : dateTime.toString(DB_DATE_TIME_FORMAT));
 	}
@@ -276,6 +280,12 @@ public final class Formatter {
 		return toMizeDateTime(dateTime);
 	}
 	
+	public static MizeDate toEndMizeDate(MizeDate mizeDate){
+		DateTime  dateTime = toDateTime(mizeDate);
+		dateTime = toEndDateTime(dateTime);
+		return toMizeDate(dateTime);
+	}
+	
 	public static DateTime toStartDateTime(DateTime dateTime){
 		if(dateTime != null){
 			dateTime = dateTime.withTime(0, 0, 0, 0);
@@ -287,6 +297,12 @@ public final class Formatter {
 		DateTime  dateTime = toDateTime(mizeDateTime);
 		dateTime = toStartDateTime(dateTime);
 		return toMizeDateTime(dateTime);
+	}
+	
+	public static MizeDate toStartMizeDate(MizeDate mizeDate){
+		DateTime  dateTime = toDateTime(mizeDate);
+		dateTime = toStartDateTime(dateTime);
+		return toMizeDate(dateTime);
 	}
 	
 	public static String getDateTime(DateTime dateTime){
@@ -439,6 +455,14 @@ public final class Formatter {
 			time = new DateTime(timestamp);
 		}
 		return time;
+	}
+	
+	public static MizeDate toMizeDate(Timestamp timestamp){
+		MizeDate mizeDate = null;
+		if(timestamp!= null){
+			mizeDate = new MizeDate(new DateTime(timestamp,DateTimeZone.UTC));
+		}
+		return mizeDate;
 	}
 	
 	public static MizeDateTime toMizeDateTime(Timestamp timestamp){
@@ -768,6 +792,13 @@ public final class Formatter {
 		return 0;
 	}
 	
+	public static int compareDates(MizeDate startTime,MizeDate endTime){
+		if(startTime != null && startTime.getDateTime() != null && endTime != null && endTime.getDateTime() != null){
+			return startTime.compareTo(endTime);
+		}
+		return 0;
+	}
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static void populatePagination(PaginationPage page, int pageNo){
 		if(pageNo <= 0){
@@ -1007,8 +1038,29 @@ public final class Formatter {
 	 }
 	 
 	 public static MizeDateTime toMizeDateTime(DateTime dateTime){
-		 if(dateTime !=null){
+		 if(dateTime != null){
 			 return new MizeDateTime(dateTime);
+		 }
+		 return null;
+	 }
+	 
+	 public static MizeDateTime toMizeDateTime(MizeDate dateTime){
+		 if(dateTime != null){
+			 return new MizeDateTime(dateTime.getDateTime());
+		 }
+		 return null;
+	 }
+	 
+	 public static MizeDate toMizeDate(MizeDateTime dateTime){
+		 if(dateTime != null){
+			 return new MizeDate(dateTime.getDateTime());
+		 }
+		 return null;
+	 }
+	 
+	 public static MizeDate toMizeDate(DateTime dateTime){
+		 if(dateTime != null){
+			 return new MizeDate(dateTime);
 		 }
 		 return null;
 	 }
@@ -1020,10 +1072,22 @@ public final class Formatter {
 		 return null;
 	 }
 	 
+	 public static DateTime toDateTime(MizeDate mizeDate){
+		 if(mizeDate !=null){
+			 return mizeDate.getDateTime();
+		 }
+		 return null;
+	 }
+	 
 	 public static void main(String[] args) {
-			DateTimeFormatter  test = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
-			System.out.println(test.getParser().toString());
-			
+		 String df = "MM-dd-yyyy HH:mm:ss";
+		 MizeDateTime dateTime = MizeDateTime.getInstance("11-25-2014", df, DateTimeZone.getDefault());
+		 //System.out.println(dateTime.getDateTime());
+		// System.out.println(DateTime.now());
+		 System.out.println(getDBDateTime(DateTime.now(DateTimeZone.UTC))+" "+getDBDateTime(DateTime.now()));
+		 System.out.println(dateTime.getDateTime().toDateTime(DateTimeZone.UTC));
+		 MizeDateTime dateTime1 = MizeDateTime.getInstance("11-25-2014", df, DateTimeZone.getDefault());
+		 System.out.println(dateTime1.getDateTime());
 	}
 	 
 	 public static final String generateRandomPassword() {
