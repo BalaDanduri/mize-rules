@@ -126,10 +126,9 @@ public class UserGroup extends MizeSceEntity implements Comparable<UserGroup> {
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((groupId == null) ? 0 : groupId.hashCode());
-		result = prime * result
-				+ ((groupName == null) ? 0 : groupName.hashCode());
+		result = prime * result + ((groupName == null) ? 0 : groupName.hashCode());
 		return result;
 	}
 
@@ -137,7 +136,7 @@ public class UserGroup extends MizeSceEntity implements Comparable<UserGroup> {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;

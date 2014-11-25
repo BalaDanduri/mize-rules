@@ -149,6 +149,28 @@ public class UserBrandMapping extends MizeSceEntity implements Comparable<UserBr
 		super.setUpdatedBy(updatedBy);
 	}
 	
+	@Override
+	public void setCreatedByUser(String createdByUser){
+		this.createdByUser=createdByUser;
+	}
+	
+	@Override
+	@Column(name= "created_by_user",updatable=false)
+	public String getCreatedByUser(){
+		return createdByUser;
+	}
+	
+	@Override
+	public void setUpdatedByUser(String updatedByUser){
+		this.updatedByUser=updatedByUser;
+	}
+	
+	@Override
+	@Column(name= "updated_by_user")
+	public String getUpdatedByUser(){
+		return updatedByUser;
+	}
+	
 	@Transient
 	public Brand getUserBrand() {
 		return userBrand;
@@ -173,7 +195,7 @@ public class UserBrandMapping extends MizeSceEntity implements Comparable<UserBr
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result + ((brand == null) ? 0 : brand.hashCode());
 		result = prime * result
