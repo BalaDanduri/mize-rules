@@ -12,7 +12,6 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.mize.domain.util.Formatter;
 
 @Entity
 @Table(name = "state")
@@ -126,23 +125,24 @@ public class State extends MizeSceEntity implements Comparable<State>{
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
-			return true;		
+			return true;
+		if (!super.equals(obj))
+			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		State other = (State) obj;
-		if (Formatter.isNull(code)) {
-			if (Formatter.isNotNull(other.code))
+		if (code == null) {
+			if (other.code != null)
 				return false;
 		} else if (!code.equals(other.code))
 			return false;
-		if (Formatter.isNull(name)) {
-			if (Formatter.isNotNull(other.name))
+		if (name == null) {
+			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
 		return true;
 	}
-	
 	
 	
 }

@@ -216,14 +216,7 @@ public class Brand extends MizeSceEntity implements Comparable<Brand>{
 
 	public void setSearchType(String searchType) {
 		this.searchType = searchType;
-	}
-
-	@Override
-	public int hashCode() {
-		int result = super.hashCode();
-		result = PRIME * result	+ ((name == null) ? 0 : name.hashCode());
-		return result;
-	}
+	}	
 	
 	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL,mappedBy="brand")
 	@JsonSerialize(using=JPASerializer.class)
@@ -235,31 +228,74 @@ public class Brand extends MizeSceEntity implements Comparable<Brand>{
 	public void setUserBrands(List<UserBrandMapping> userBrands) {
 		this.userBrands = userBrands;
 	}
-	
-	
+
+	@Override
+	public int hashCode() {
+		final int prime = PRIME;
+		int result = super.hashCode();
+		result = prime * result
+				+ ((department == null) ? 0 : department.hashCode());
+		result = prime * result
+				+ ((feedbackEmail == null) ? 0 : feedbackEmail.hashCode());
+		result = prime * result
+				+ ((logoName == null) ? 0 : logoName.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result
+				+ ((registered == null) ? 0 : registered.hashCode());
+		result = prime * result
+				+ ((userBrands == null) ? 0 : userBrands.hashCode());
+		result = prime * result + ((website == null) ? 0 : website.hashCode());
+		return result;
+	}
+
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
-		if ( !(obj instanceof Brand))
+		if (getClass() != obj.getClass())
 			return false;
 		Brand other = (Brand) obj;
-		
-		if (id==null) {
-			if (other.id!= null)
+		if (department == null) {
+			if (other.department != null)
 				return false;
-		} else if (!id.equals(other.id)) 
+		} else if (!department.equals(other.department))
 			return false;
-
+		if (feedbackEmail == null) {
+			if (other.feedbackEmail != null)
+				return false;
+		} else if (!feedbackEmail.equals(other.feedbackEmail))
+			return false;
+		if (logoName == null) {
+			if (other.logoName != null)
+				return false;
+		} else if (!logoName.equals(other.logoName))
+			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
+		if (registered == null) {
+			if (other.registered != null)
+				return false;
+		} else if (!registered.equals(other.registered))
+			return false;
+		if (userBrands == null) {
+			if (other.userBrands != null)
+				return false;
+		} else if (!userBrands.containsAll(other.userBrands))
+			return false;
+		if (website == null) {
+			if (other.website != null)
+				return false;
+		} else if (!website.equals(other.website))
+			return false;
 		return true;
 	}
+
 
 	@Override
 	public String toString() {

@@ -7,8 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.mize.domain.util.Formatter;
-
 @Entity
 @Table(name="locale")
 public class Locale extends MizeSceEntity implements Comparable<Locale>{
@@ -93,6 +91,8 @@ public class Locale extends MizeSceEntity implements Comparable<Locale>{
 		result = prime * result
 				+ ((countryCode == null) ? 0 : countryCode.hashCode());
 		result = prime * result
+				+ ((isActive == null) ? 0 : isActive.hashCode());
+		result = prime * result
 				+ ((languageCode == null) ? 0 : languageCode.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
@@ -101,22 +101,29 @@ public class Locale extends MizeSceEntity implements Comparable<Locale>{
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
-			return true;		
+			return true;
+		if (!super.equals(obj))
+			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		Locale other = (Locale) obj;
-		if (Formatter.isNull(countryCode)) {
-			if (Formatter.isNotNull(other.countryCode))
+		if (countryCode == null) {
+			if (other.countryCode != null)
 				return false;
 		} else if (!countryCode.equals(other.countryCode))
 			return false;
-		if (Formatter.isNull(languageCode)) {
-			if (Formatter.isNotNull(other.languageCode))
+		if (isActive == null) {
+			if (other.isActive != null)
+				return false;
+		} else if (!isActive.equals(other.isActive))
+			return false;
+		if (languageCode == null) {
+			if (other.languageCode != null)
 				return false;
 		} else if (!languageCode.equals(other.languageCode))
 			return false;
-		if (Formatter.isNull(name)) {
-			if (Formatter.isNotNull(other.name))
+		if (name == null) {
+			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
 			return false;

@@ -17,7 +17,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
 
 @Entity
@@ -94,8 +93,8 @@ public class Country extends MizeSceEntity implements Comparable<Country>{
 
 	public void setStateList(List<State> stateList) {
 		this.stateList = stateList;
-	}
-
+	}	
+	
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
@@ -103,34 +102,42 @@ public class Country extends MizeSceEntity implements Comparable<Country>{
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result + ((code3 == null) ? 0 : code3.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((states == null) ? 0 : states.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
-			return true;		
+			return true;
+		if (!super.equals(obj))
+			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		Country other = (Country) obj;
-		if (Formatter.isNull(code)) {
-			if (Formatter.isNotNull(other.code))
+		if (code == null) {
+			if (other.code != null)
 				return false;
 		} else if (!code.equals(other.code))
 			return false;
-		if (Formatter.isNull(code3)) {
-			if (Formatter.isNotNull(other.code3))
+		if (code3 == null) {
+			if (other.code3 != null)
 				return false;
 		} else if (!code3.equals(other.code3))
 			return false;
-		if (Formatter.isNull(name)) {
-			if (Formatter.isNotNull(other.name))
+		if (name == null) {
+			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
+		if (states == null) {
+			if (other.states != null)
+				return false;
+		} else if (!states.containsAll(other.states))
+			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Country [code=" + code + ", name=" + name + ", code3=" + code3+ "]";
