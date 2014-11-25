@@ -22,6 +22,7 @@ import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;
+import com.mize.domain.util.MizeDate;
 
 @ContextConfiguration(locations={"/test-context.xml"})
 public class DiscountTest  extends JPATest {
@@ -80,8 +81,8 @@ public class DiscountTest  extends JPATest {
 		discount.setOrderType("LINE");
 		discount.setCreatedDate(Formatter.toMizeDateTime(DateTime.now()));
 		discount.setUpdatedDate(Formatter.toMizeDateTime(DateTime.now()));
-		discount.setStartDate(Formatter.toMizeDateTime(DateTime.now()));
-		discount.setEndDate(Formatter.toMizeDateTime(DateTime.now().plusMonths(2)));
+		discount.setStartDate(MizeDate.now());
+		discount.setEndDate(MizeDate.now());
 		discount.setCreatedBy(779l);
 		discount.setUpdatedBy(779l);
 		discount.setOrderBusinessEntity(businessEntity);
@@ -114,8 +115,8 @@ public class DiscountTest  extends JPATest {
 			discount.setOrderType(rs.getString("order_type"));
 			discount.setCreatedDate(Formatter.toMizeDateTime(rs.getTimestamp("created_date")));
 			discount.setUpdatedDate(Formatter.toMizeDateTime(rs.getTimestamp("updated_date")));
-			discount.setStartDate(Formatter.toMizeDateTime(rs.getTimestamp("start_date")));
-			discount.setEndDate(Formatter.toMizeDateTime(rs.getTimestamp("end_date")));
+			discount.setStartDate(Formatter.toMizeDate(rs.getTimestamp("start_date")));
+			discount.setEndDate(Formatter.toMizeDate(rs.getTimestamp("end_date")));
 			discount.setCreatedBy(rs.getLong("created_by"));
 			discount.setUpdatedBy(rs.getLong("updated_by"));
 			discount.setOrderBusinessEntity(businessEntity);

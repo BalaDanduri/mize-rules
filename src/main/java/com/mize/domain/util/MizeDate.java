@@ -22,6 +22,7 @@ public class MizeDate implements IMizeDate, Comparable<MizeDate>, Cloneable{
 		return new MizeDate();
 	}
 	
+	@Deprecated
 	public static MizeDate getInstance(){
 		return new MizeDate();
 	}
@@ -38,11 +39,25 @@ public class MizeDate implements IMizeDate, Comparable<MizeDate>, Cloneable{
 		return new MizeDate(dateValue,dateFormat);
 	}
 	
+	public static MizeDate getInstance(String dateFormat){
+		return new MizeDate(dateFormat);
+	}
+	
 	protected MizeDate(String dateValue,String dateFormat) {		
 		try{		
 			this.dateValue = dateValue;
 			this.dateFormat = dateFormat;
 			this.dateTime = DateTime.parse(dateValue,DateTimeFormat.forPattern(dateFormat));	
+			this.isValid = true;
+		}catch(Exception e){
+		}
+	}
+	
+	protected MizeDate(String dateFormat) {		
+		try{		
+			this.dateFormat = dateFormat;
+			this.dateTime = DateTime.parse(dateValue,DateTimeFormat.forPattern(dateFormat));
+			this.dateValue = DateTimeFormat.forPattern(dateFormat).print(this.dateTime);
 			this.isValid = true;
 		}catch(Exception e){
 		}

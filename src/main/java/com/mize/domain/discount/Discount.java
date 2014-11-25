@@ -33,6 +33,7 @@ import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
+import com.mize.domain.util.MizeDate;
 import com.mize.domain.util.MizeDateTime;
 
 @Entity
@@ -44,8 +45,8 @@ public class Discount extends MizeSceEntity implements Comparable<Discount> {
 	private String discountNumber;
 	private String orderType;
 	private BusinessEntity orderBusinessEntity;	
-	private MizeDateTime startDate;
-	private MizeDateTime endDate;	
+	private MizeDate startDate;
+	private MizeDate endDate;	
 	private BigDecimal lineDiscountAmount;
 	private BigDecimal lineDiscountPercent;
 	private BigDecimal orderDiscountAmount;
@@ -136,22 +137,22 @@ public class Discount extends MizeSceEntity implements Comparable<Discount> {
 	}
 
 	@Column(name = "start_date", nullable = true)
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getStartDate() {
+	@Type(type = "com.mize.domain.util.MizeDateJPA")
+	public MizeDate getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(MizeDateTime startDate) {
+	public void setStartDate(MizeDate startDate) {
 		this.startDate = startDate;
 	}
 
 	@Column(name = "end_date", nullable = true)
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getEndDate() {
+	@Type(type="com.mize.domain.util.MizeDateJPA")
+	public MizeDate getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(MizeDateTime endDate) {
+	public void setEndDate(MizeDate endDate) {
 		this.endDate = endDate;
 	}
 
