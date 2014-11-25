@@ -150,6 +150,28 @@ public class UserBE extends MizeSceEntity implements Comparable<UserBE>{
 	}
 	
 	@Override
+	public void setCreatedByUser(String createdByUser){
+		this.createdByUser=createdByUser;
+	}
+	
+	@Override
+	@Column(name= "created_by_user",updatable=false)
+	public String getCreatedByUser(){
+		return createdByUser;
+	}
+	
+	@Override
+	public void setUpdatedByUser(String updatedByUser){
+		this.updatedByUser=updatedByUser;
+	}
+	
+	@Override
+	@Column(name= "updated_by_user")
+	public String getUpdatedByUser(){
+		return updatedByUser;
+	}
+	
+	@Override
 	public String toString() {
 		return "UserBE [ jobRole=" + jobRole + ", department=" + department
 				+ "]";
@@ -174,6 +196,46 @@ public class UserBE extends MizeSceEntity implements Comparable<UserBE>{
 
 	public void setBrands(Set<Brand> brands) {
 		this.brands = brands;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = PRIME;
+		int result = super.hashCode();
+		result = prime * result + ((be == null) ? 0 : be.hashCode());
+		result = prime * result + ((department == null) ? 0 : department.hashCode());
+		result = prime * result + ((jobRole == null) ? 0 : jobRole.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UserBE other = (UserBE) obj;
+		if (be == null) {
+			if (other.be != null)
+				return false;
+		} else if (!be.equals(other.be))
+			return false;
+		if (department == null) {
+			if (other.department != null)
+				return false;
+		} else if (!department.equals(other.department))
+			return false;
+		if (jobRole == null) {
+			if (other.jobRole != null)
+				return false;
+		} else if (!jobRole.equals(other.jobRole))
+			return false;
+		return true;
 	}	
+	
+	
+	
 	
 }

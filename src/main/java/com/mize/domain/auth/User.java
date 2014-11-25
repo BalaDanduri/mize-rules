@@ -68,6 +68,9 @@ public class User extends MizeSceEntity implements Comparable<User> {
 	private List<UserAddress> addresses = new ArrayList<UserAddress>();
 	private String isActive;
 	
+	@Transient
+	private User loginUser;
+	
     public enum Case {
 		SIGNUP, LOGIN , LOGOUT
 	}
@@ -178,6 +181,28 @@ public class User extends MizeSceEntity implements Comparable<User> {
 	}
 	public void setEmailValidated(boolean emailValidated) {
 		this.emailValidated = emailValidated;
+	}
+	
+	@Override
+	public void setCreatedByUser(String createdByUser){
+		this.createdByUser=createdByUser;
+	}
+	
+	@Override
+	@Column(name= "created_by_user",updatable=false)
+	public String getCreatedByUser(){
+		return createdByUser;
+	}
+	
+	@Override
+	public void setUpdatedByUser(String updatedByUser){
+		this.updatedByUser=updatedByUser;
+	}
+	
+	@Override
+	@Column(name= "updated_by_user")
+	public String getUpdatedByUser(){
+		return updatedByUser;
 	}
 	
 	@OneToMany(cascade={CascadeType.ALL}, mappedBy="user",orphanRemoval = true)
@@ -447,6 +472,16 @@ public class User extends MizeSceEntity implements Comparable<User> {
 	@Override
 	public int compareTo(User arg0) {
 		return 0;
+	}
+	
+	public void setLoginUser(User loginUser) {
+		this.loginUser = loginUser;
+	}
+	
+	@Transient
+	@JsonIgnore
+	public User getLoginUser() {
+		return loginUser;
 	}
 
 	@Override
