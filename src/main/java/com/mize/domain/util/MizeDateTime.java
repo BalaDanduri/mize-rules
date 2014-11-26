@@ -136,6 +136,7 @@ public class MizeDateTime implements IMizeDate, Comparable<MizeDateTime>, Clonea
 	public MizeDateTime(DateTime dateTime) {
 		this.dateTime = dateTime;
 		this.isValid = true;
+		this.dateTimeZone = dateTime.getZone();
 	}
 	
 	protected MizeDateTime(long millis, DateTimeZone timeZone) {

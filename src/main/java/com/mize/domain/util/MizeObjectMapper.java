@@ -134,7 +134,7 @@ public class MizeObjectMapper extends ObjectMapper {
 				return new MizeDate(parser.getLongValue(), dateTimeZone);
 			}
 			if (isNotNull(parser.getText())) {
-				return new MizeDate(parser.getText().trim(),dateFormat);
+				return new MizeDate(parser.getText().trim(),dateFormat, dateTimeZone);
 			} else {
 				return null;
 			}

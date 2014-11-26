@@ -17,6 +17,7 @@ public class MizeDate implements IMizeDate, Comparable<MizeDate>, Cloneable{
 	private String dateValue;
 	private DateTime dateTime;
 	private boolean isValid;
+	private DateTimeZone dateTimeZone;
 		
 	public static MizeDate now(){
 		return new MizeDate();
@@ -36,28 +37,38 @@ public class MizeDate implements IMizeDate, Comparable<MizeDate>, Cloneable{
 	}
 	
 	public static MizeDate getInstance(String dateValue,String dateFormat){
-		return new MizeDate(dateValue,dateFormat);
+		return new MizeDate(dateValue,dateFormat,DateTimeZone.getDefault());
+	}
+	
+	public static MizeDate getInstance(String dateValue,String dateFormat,DateTimeZone timeZone){
+		return new MizeDate(dateValue,dateFormat,timeZone);
 	}
 	
 	public static MizeDate getInstance(String dateFormat){
-		return new MizeDate(dateFormat);
+		return new MizeDate(dateFormat,DateTimeZone.getDefault());
 	}
 	
-	protected MizeDate(String dateValue,String dateFormat) {		
+	public static MizeDate getInstance(String dateFormat, DateTimeZone timeZone){
+		return new MizeDate(dateFormat,timeZone);
+	}
+	
+	protected MizeDate(String dateValue,String dateFormat,DateTimeZone timeZone) {		
 		try{		
 			this.dateValue = dateValue;
 			this.dateFormat = dateFormat;
 			this.dateTime = DateTime.parse(dateValue,DateTimeFormat.forPattern(dateFormat));	
+			this.dateTimeZone = timeZone;
 			this.isValid = true;
 		}catch(Exception e){
 		}
 	}
 	
-	protected MizeDate(String dateFormat) {		
+	protected MizeDate(String dateFormat, DateTimeZone timeZone) {		
 		try{		
 			this.dateFormat = dateFormat;
-			this.dateTime = DateTime.parse(dateValue,DateTimeFormat.forPattern(dateFormat));
+			this.dateTime = new DateTime(DateTime.now().getMillis(),timeZone);
 			this.dateValue = DateTimeFormat.forPattern(dateFormat).print(this.dateTime);
+			this.dateTimeZone = timeZone;
 			this.isValid = true;
 		}catch(Exception e){
 		}
@@ -71,11 +82,13 @@ public class MizeDate implements IMizeDate, Comparable<MizeDate>, Cloneable{
 	protected MizeDate(long millis, DateTimeZone timeZone) {
 		this.dateTime = new DateTime(millis,timeZone);
 		this.isValid = true;
+		this.dateTimeZone = timeZone;	
 	}
 	
 	protected MizeDate() {
 		this.dateTime = new DateTime();
 		this.isValid = true;
+		this.dateTimeZone = DateTimeZone.getDefault();				
 	}	
 	
 	public int compareTo(MizeDate mizeDateTime) {
@@ -200,6 +213,10 @@ public class MizeDate implements IMizeDate, Comparable<MizeDate>, Cloneable{
 		return DateTimeFormat.forPattern(dateFormat).print(this.dateTime);
 	}
 	
+	public DateTimeZone getDateTimeZone() {
+		return dateTimeZone;
+	}
+
 	@Override
 	public String toString() {
 		if(this.dateTime != null){
