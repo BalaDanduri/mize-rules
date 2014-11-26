@@ -56,7 +56,7 @@ public class MizeDate implements IMizeDate, Comparable<MizeDate>, Cloneable{
 		try{		
 			this.dateValue = dateValue;
 			this.dateFormat = dateFormat;
-			this.dateTime = DateTime.parse(dateValue,DateTimeFormat.forPattern(dateFormat));	
+			this.dateTime = DateTime.parse(dateValue,DateTimeFormat.forPattern(dateFormat).withZone(timeZone));	
 			this.dateTimeZone = timeZone;
 			this.isValid = true;
 		}catch(Exception e){
