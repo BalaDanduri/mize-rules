@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import org.joda.time.DateTime;
 
 import com.mize.domain.util.Formatter;
+import com.mize.domain.util.MizeDate;
 import com.mize.domain.util.MizeDateTime;
 
 public class WorkQueueResults extends MizeSceEntity implements Comparable<WorkQueueResults>{
@@ -128,6 +129,9 @@ public class WorkQueueResults extends MizeSceEntity implements Comparable<WorkQu
 			}else if(fieldValue instanceof MizeDateTime){
 				this.fieldValue = Formatter.getMizeDateTime((MizeDateTime)fieldValue);
 				this.fieldType = MizeDateTime.class.getSimpleName();
+			}else if(fieldValue instanceof MizeDate){
+				this.fieldValue = Formatter.getMizeDate((MizeDate)fieldValue);
+				this.fieldType = MizeDate.class.getSimpleName();
 			}else{
 				this.fieldValue = (String)fieldValue;
 				this.fieldType = String.class.getSimpleName();
