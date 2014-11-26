@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "entity_address_phone" )
-public class EntityAddressPhone extends MizeEntity implements Comparable<EntityAddressPhone> {
+public class EntityAddressPhone extends MizeSceEntity implements Comparable<EntityAddressPhone> {
 
 	private static final long serialVersionUID = 1L;
 	@Transient
