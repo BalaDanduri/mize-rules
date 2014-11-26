@@ -313,6 +313,10 @@ public final class Formatter {
 		return ((mizeDateTime == null || mizeDateTime.getDateTime() == null) ? null : mizeDateTime.getDateTime().toString(DATE_FORMAT));
 	}
 	
+	public static String getMizeDate(MizeDate mizeDate){
+		return ((mizeDate == null || mizeDate.getDateTime() == null) ? null : mizeDate.getDateTime().toString(DATE_FORMAT1));
+	}
+	
 	public static String getDateTimeFormat(DateTime dateTime){
 		return (dateTime == null ? null : dateTime.toString(DATE_FORMAT3));
 	}
@@ -1080,14 +1084,6 @@ public final class Formatter {
 	 }
 	 
 	 public static void main(String[] args) {
-		 String df = "MM-dd-yyyy HH:mm:ss";
-		 MizeDateTime dateTime = MizeDateTime.getInstance("11-25-2014", df, DateTimeZone.getDefault());
-		 //System.out.println(dateTime.getDateTime());
-		// System.out.println(DateTime.now());
-		 System.out.println(getDBDateTime(DateTime.now(DateTimeZone.UTC))+" "+getDBDateTime(DateTime.now()));
-		 System.out.println(dateTime.getDateTime().toDateTime(DateTimeZone.UTC));
-		 MizeDateTime dateTime1 = MizeDateTime.getInstance("11-25-2014", df, DateTimeZone.getDefault());
-		 System.out.println(dateTime1.getDateTime());
 	}
 	 
 	 public static final String generateRandomPassword() {

@@ -75,8 +75,7 @@ public class MizeDateTimeJPA implements UserType{
 	}
 
 	@Override
-	public void nullSafeSet(PreparedStatement st, Object value, int index,
-			SessionImplementor session) throws HibernateException, SQLException {
+	public void nullSafeSet(PreparedStatement st, Object value, int index,SessionImplementor session) throws HibernateException, SQLException {
 		st.setString(index,Formatter.getDBDateTime((MizeDateTime)value));
 		
 	}

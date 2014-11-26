@@ -32,6 +32,8 @@ public class MizeObjectMapper extends ObjectMapper {
 	protected String dateTimeFormat;
 	protected String timeZone;	
 	protected DateTimeZone dateTimeZone;
+	protected String userTimeZone;
+	protected DateTimeZone userDateTimeZone;
 	
 	public MizeObjectMapper() {
 		this(DATE_FORMAT,DATE_TIME_FORMAT);
@@ -42,30 +44,26 @@ public class MizeObjectMapper extends ObjectMapper {
 	}
 	
 	public static MizeObjectMapper getInstance(String dateFormat) {
-		return new MizeObjectMapper(dateFormat, null, null);
+		return new MizeObjectMapper(dateFormat, null, null,null);
 	}
 	
 	public static MizeObjectMapper getInstance(String dateFormat, String dateTimeFormat) {
-		return new MizeObjectMapper(dateFormat, dateTimeFormat, null);
+		return new MizeObjectMapper(dateFormat, dateTimeFormat, null,null);
 	}
 	
 	public static MizeObjectMapper getInstance(MizeDateFormat mizeDateFormat) {
 		if(mizeDateFormat != null){
-			return new MizeObjectMapper(mizeDateFormat.getDateFormat(),mizeDateFormat.getDateTimeFormat(),mizeDateFormat.getTimeZone());
+			return new MizeObjectMapper(mizeDateFormat.getDateFormat(),mizeDateFormat.getDateTimeFormat(),mizeDateFormat.getTimeZone(),mizeDateFormat.getUserTimeZone());
 		}else{
 			return new MizeObjectMapper();
 		}
 	}
-		
-	public MizeObjectMapper(MizeDateFormat mizeDateFormat) {
-		this(mizeDateFormat.getDateFormat(),mizeDateFormat.getDateTimeFormat(),mizeDateFormat.getTimeZone());
-	}
 	
 	public MizeObjectMapper(String dateFormat, String dateTimeFormat) {
-		this(dateFormat, dateTimeFormat, null);
+		this(dateFormat, dateTimeFormat, null,null);
 	}
 	
-	public MizeObjectMapper(String dateFormat, String dateTimeFormat,String timeZone) {
+	public MizeObjectMapper(String dateFormat, String dateTimeFormat,String timeZone,String userTimeZone) {
 		this.dateFormat = dateFormat;
 		this.dateTimeFormat = dateTimeFormat;	
 		if(this.dateFormat == null){
@@ -75,7 +73,9 @@ public class MizeObjectMapper extends ObjectMapper {
 			this.dateTimeFormat = DATE_TIME_FORMAT;
 		}
 		this.timeZone = timeZone;
+		this.userTimeZone = userTimeZone;
 		this.dateTimeZone = getTimeZone();
+		this.userDateTimeZone = getUserTimeZone();
 		registerModule();
 	}
 	
@@ -101,6 +101,16 @@ public class MizeObjectMapper extends ObjectMapper {
 		return  tz;
 	}
 	
+	private DateTimeZone getUserTimeZone(){
+		DateTimeZone tz = null;
+		if(this.userTimeZone == null || this.userTimeZone.isEmpty()){
+			tz = DateTimeZone.getDefault();
+		}else{
+			tz = DateTimeZone.forID(this.userTimeZone);			
+		}
+		return  tz;
+	}
+	
 	public class MizeDateTimeDeserializer extends JsonDeserializer<MizeDateTime> {
 		@Override
 		public MizeDateTime deserialize(JsonParser parser, DeserializationContext context) throws IOException, JsonProcessingException {
@@ -109,7 +119,7 @@ public class MizeObjectMapper extends ObjectMapper {
 				return new MizeDateTime(parser.getLongValue(), dateTimeZone);
 			}
 			if (isNotNull(parser.getText())) {
-				return new MizeDateTime(parser.getText().trim(),dateTimeFormat, dateTimeZone);
+				return new MizeDateTime(parser.getText().trim(),dateTimeFormat, dateTimeZone, userDateTimeZone);
 			} else {
 				return null;
 			}
@@ -124,7 +134,7 @@ public class MizeObjectMapper extends ObjectMapper {
 				return new MizeDate(parser.getLongValue(), dateTimeZone);
 			}
 			if (isNotNull(parser.getText())) {
-				return new MizeDate(parser.getText().trim(),dateFormat);
+				return new MizeDate(parser.getText().trim(),dateFormat, dateTimeZone);
 			} else {
 				return null;
 			}
@@ -161,7 +171,7 @@ public class MizeObjectMapper extends ObjectMapper {
 					gen.writeNumber(mizeDateTime.getMillis());
 				} else {
 					if(mizeDateTime.isValid()){
-						gen.writeString(mizeDateTime.toString(dateTimeFormat, dateTimeZone));
+						gen.writeString(mizeDateTime.toString(dateTimeFormat, userDateTimeZone));
 					}else{
 						gen.writeString(mizeDateTime.getDateTimeValue());
 					}
