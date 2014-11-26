@@ -36,6 +36,8 @@ public class MizeDateFormat extends MizeSceEntity implements Comparable<MizeDate
 	private Long tenantId;
 	@Transient
 	private String timeZone;
+	@Transient
+	private String userTimeZone;
 	
 	public MizeDateFormat(){		
 	}
@@ -185,6 +187,15 @@ public class MizeDateFormat extends MizeSceEntity implements Comparable<MizeDate
 	@JsonInclude(Include.NON_DEFAULT)
 	public MizeDateTime getUpdatedDate() {
 		return updatedDate;
+	}
+
+	@Transient
+	public String getUserTimeZone() {
+		return userTimeZone;
+	}
+
+	public void setUserTimeZone(String userTimeZone) {
+		this.userTimeZone = userTimeZone;
 	}
 
 	@Override

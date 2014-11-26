@@ -185,7 +185,11 @@ public class MizeDate implements IMizeDate, Comparable<MizeDate>, Cloneable{
 
 	public boolean equals(Object object){
 		MizeDate mizeDateTime = (MizeDate)object;
-		return this.dateTime.equals(mizeDateTime.getDateTime());
+		if(this.isValid && mizeDateTime.isValid){
+			return this.dateTime.equals(mizeDateTime.getDateTime());
+		}else{
+			return true;
+		}
 	}
 	
 	public String toDBDateTime(){		
