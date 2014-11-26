@@ -179,6 +179,29 @@ public class WorkQueueAuth extends MizeSceEntity implements Comparable<WorkQueue
 	public void setUpdatedBy(Long updatedBy) {		
 		super.setUpdatedBy(updatedBy);
 	}
+	
+	
+	@Override
+	@Column(name = "created_by_user",updatable = false)
+	public String getCreatedByUser() {
+		return createdByUser;
+	}
+	
+	@Override
+	@Column(name = "updated_by_user")
+	public String getUpdatedByUser() {
+		return updatedByUser;
+	}
+
+	@Override
+	public void setCreatedByUser(String createdByUser) {
+		this.createdByUser = createdByUser;
+	}
+	
+	@Override
+	public void setUpdatedByUser(String updatedByUser) {
+		this.updatedByUser = updatedByUser;
+	}
 
 	@Override
 	public int hashCode() {
@@ -186,9 +209,7 @@ public class WorkQueueAuth extends MizeSceEntity implements Comparable<WorkQueue
 		int result = super.hashCode();
 		result = prime * result + (int) (authId ^ (authId >>> 32));
 		result = prime * result
-				+ ((authType == null) ? 0 : authType.hashCode());
-		result = prime * result
-				+ ((authorization == null) ? 0 : authorization.hashCode());
+				+ ((authType == null) ? 0 : authType.hashCode());		
 		return result;
 	}
 
@@ -207,12 +228,7 @@ public class WorkQueueAuth extends MizeSceEntity implements Comparable<WorkQueue
 			if (other.authType != null)
 				return false;
 		} else if (!authType.equals(other.authType))
-			return false;
-		if (authorization == null) {
-			if (other.authorization != null)
-				return false;
-		} else if (!authorization.equals(other.authorization))
-			return false;
+			return false;		
 		return true;
 	}
 

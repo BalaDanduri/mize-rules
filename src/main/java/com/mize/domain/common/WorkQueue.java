@@ -106,7 +106,7 @@ public class WorkQueue extends MizeSceEntity implements Comparable<WorkQueue>{
 	}
 	
 	@Override	
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@Column(name = "created_date",updatable=false)
 	@JsonIgnore(value=false)
 	public MizeDateTime getCreatedDate() {
@@ -114,7 +114,7 @@ public class WorkQueue extends MizeSceEntity implements Comparable<WorkQueue>{
 	}
 
 	@Override	
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@Column(name = "updated_date")
 	@JsonIgnore(value=false)
 	public MizeDateTime getUpdatedDate() {
@@ -160,15 +160,12 @@ public class WorkQueue extends MizeSceEntity implements Comparable<WorkQueue>{
 	}
      
 	@Override
-	@Column(name="created_date")
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@JsonIgnore(value=false)
 	public void setCreatedDate(MizeDateTime createdDate) {
 		super.createdDate = createdDate;
 	}
 
 	@Override
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@JsonIgnore(value=false)
 	public void setUpdatedDate(MizeDateTime updatedDate) {
 		super.updatedDate = updatedDate;
@@ -205,14 +202,38 @@ public class WorkQueue extends MizeSceEntity implements Comparable<WorkQueue>{
 	public void setAssociateAuth(boolean isAssociateAuth) {
 		this.isAssociateAuth = isAssociateAuth;
 	}
+	
+	@Override
+	@Column(name = "created_by_user",updatable = false)
+	public String getCreatedByUser() {
+		return createdByUser;
+	}
+	
+	@Override
+	@Column(name = "updated_by_user")
+	public String getUpdatedByUser() {
+		return updatedByUser;
+	}
 
+	@Override
+	public void setCreatedByUser(String createdByUser) {
+		this.createdByUser = createdByUser;
+	}
+	
+	@Override
+	public void setUpdatedByUser(String updatedByUser) {
+		this.updatedByUser = updatedByUser;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result + ((desc == null) ? 0 : desc.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((isActive == null) ? 0 : isActive.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());		
+		result = prime * result + ((workQueueAuths == null) ? 0 : workQueueAuths.hashCode());
 		return result;
 	}
 
@@ -235,10 +256,20 @@ public class WorkQueue extends MizeSceEntity implements Comparable<WorkQueue>{
 				return false;
 		} else if (!desc.equals(other.desc))
 			return false;
+		if (isActive == null) {
+			if (other.isActive != null)
+				return false;
+		} else if (!isActive.equals(other.isActive))
+			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
+			return false;		
+		if (workQueueAuths == null) {
+			if (other.workQueueAuths != null)
+				return false;
+		} else if (!workQueueAuths.containsAll(other.workQueueAuths))
 			return false;
 		return true;
 	}
