@@ -133,12 +133,11 @@ public class BusinessEntityRelation extends MizeSceEntity {
 	public void setAddress(EntityAddress address) {
 		this.address = address;
 	}
-
+	
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result
 				+ ((referenceNumber == null) ? 0 : referenceNumber.hashCode());
 		return result;
@@ -153,11 +152,6 @@ public class BusinessEntityRelation extends MizeSceEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		BusinessEntityRelation other = (BusinessEntityRelation) obj;
-		if (address == null) {
-			if (other.address != null)
-				return false;
-		} else if (!address.equals(other.address))
-			return false;
 		if (referenceNumber == null) {
 			if (other.referenceNumber != null)
 				return false;
@@ -169,6 +163,6 @@ public class BusinessEntityRelation extends MizeSceEntity {
 	@Override
 	public String toString() {
 		return "BusinessEntityRelation [referenceNumber=" + referenceNumber
-				+ ", address=" + address + "]";
+				+ "]";
 	}
 }
