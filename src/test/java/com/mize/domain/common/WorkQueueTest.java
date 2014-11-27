@@ -156,7 +156,7 @@ public class WorkQueueTest extends JPATest{
 		{
 			createWorkQueueObject();
 			dbWorkQueue = retrieveWorkQueue();
-			assertTrue(dbWorkQueue.equals(workQueue));
+			assertTrue(dbWorkQueue.getCode().equals(workQueue.getCode()));
 			tearDown();
 		}
 		catch(Throwable th) {
@@ -175,7 +175,7 @@ public class WorkQueueTest extends JPATest{
 			workQueue.setCode("updated code");
 			persist();
 			dbWorkQueue = retrieveWorkQueue();
-			assertTrue(dbWorkQueue.equals(workQueue));
+			assertTrue(dbWorkQueue.getCode().equals(workQueue.getCode()));
 			tearDown();
 		}
 		catch(Throwable th) {
