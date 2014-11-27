@@ -289,7 +289,7 @@ public class Part extends MizeSceEntity implements Comparable<Part>{
 		return updatedDate;
 	}
 	
-	@Column(name = "created_by_user")
+	@Column(name = "created_by_user",updatable=false)
 	public String getCreatedByUser() {
 		return createdByUser;
 	}
