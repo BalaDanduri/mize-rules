@@ -158,7 +158,21 @@ public class PartSubstitute extends MizeSceEntity implements Comparable<PartSubs
 	public Long getUpdatedBy() {		
 		return super.getUpdatedBy();
 	}
-
+	
+	@Override
+	@JsonIgnore
+	@Column(name = "created_by_user",updatable=false)
+	public String getCreatedByUser() {
+		return super.getCreatedByUser();
+	}
+	
+	@Override
+	@JsonIgnore
+	@Column(name = "updated_by_user")
+	public String getUpdatedByUser() {
+		return super.getUpdatedByUser();
+	}
+	
 	@Override
 	public void setId(Long id) {
 		this.id = id;
@@ -207,6 +221,18 @@ public class PartSubstitute extends MizeSceEntity implements Comparable<PartSubs
 	public void setUpdatedBy(Long updatedBy) {		
 		super.setUpdatedBy(updatedBy);
 	}
+	
+	@Override
+	@JsonIgnore
+	public void setCreatedByUser(String createdByUser) {
+		super.setCreatedByUser(createdByUser);
+	}
+	
+	@Override
+	@JsonIgnore
+	public void setUpdatedByUser(String updatedByUser) {
+		super.setUpdatedByUser(updatedByUser);
+	}
  
 	public void setFamilyCode(String familyCode) {
 		this.familyCode = familyCode;
@@ -237,8 +263,12 @@ public class PartSubstitute extends MizeSceEntity implements Comparable<PartSubs
 		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
+		result = prime * result
+				+ ((comments == null) ? 0 : comments.hashCode());
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
+		result = prime * result
+				+ ((entityComment == null) ? 0 : entityComment.hashCode());
 		result = prime * result
 				+ ((familyCode == null) ? 0 : familyCode.hashCode());
 		result = prime * result
@@ -249,7 +279,7 @@ public class PartSubstitute extends MizeSceEntity implements Comparable<PartSubs
 				+ ((substitutedPart == null) ? 0 : substitutedPart.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -264,6 +294,11 @@ public class PartSubstitute extends MizeSceEntity implements Comparable<PartSubs
 				return false;
 		} else if (!code.equals(other.code))
 			return false;
+		if (comments == null) {
+			if (other.comments != null)
+				return false;
+		} else if (!comments.equals(other.comments))
+			return false;
 		if (date == null) {
 			if (other.date != null)
 				return false;
@@ -273,6 +308,11 @@ public class PartSubstitute extends MizeSceEntity implements Comparable<PartSubs
 			if (other.endDate != null)
 				return false;
 		} else if (!endDate.equals(other.endDate))
+			return false;
+		if (entityComment == null) {
+			if (other.entityComment != null)
+				return false;
+		} else if (!entityComment.equals(other.entityComment))
 			return false;
 		if (familyCode == null) {
 			if (other.familyCode != null)

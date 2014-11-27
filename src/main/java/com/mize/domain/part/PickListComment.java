@@ -68,11 +68,9 @@ public class PickListComment  extends MizeSceEntity implements Comparable<PickLi
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
-		result = prime * result
-				+ ((pickList == null) ? 0 : pickList.hashCode());
 		return result;
 	}
 
@@ -89,11 +87,6 @@ public class PickListComment  extends MizeSceEntity implements Comparable<PickLi
 			if (other.comment != null)
 				return false;
 		} else if (!comment.equals(other.comment))
-			return false;
-		if (pickList == null) {
-			if (other.pickList != null)
-				return false;
-		} else if (!pickList.equals(other.pickList))
 			return false;
 		return true;
 	}

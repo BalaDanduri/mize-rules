@@ -14,14 +14,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -31,7 +28,6 @@ import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.MizeDate;
 import com.mize.domain.util.MizeDateTime;
@@ -209,6 +205,32 @@ public class Discount extends MizeSceEntity implements Comparable<Discount> {
 		return super.getUpdatedBy();
 	}
 	
+	@Override
+	@JsonIgnore
+	@Column(name = "created_by_user",updatable=false)
+	public String getCreatedByUser() {
+		return super.getCreatedByUser();
+	}
+	
+	@Override
+	@JsonIgnore
+	public void setCreatedByUser(String createdByUser) {
+		super.setCreatedByUser(createdByUser);
+	}
+	
+	@Override
+	@JsonIgnore
+	@Column(name = "updated_by_user")
+	public String getUpdatedByUser() {
+		return super.getUpdatedByUser();
+	}
+	
+	@Override
+	@JsonIgnore
+	public void setUpdatedByUser(String updatedByUser) {
+		super.setUpdatedByUser(updatedByUser);
+	}
+	
 	public void setCreatedDate(MizeDateTime createdDate) {
 		this.createdDate = createdDate;
 	}
@@ -229,16 +251,6 @@ public class Discount extends MizeSceEntity implements Comparable<Discount> {
 	@JsonInclude(Include.NON_DEFAULT)
 	public MizeDateTime getUpdatedDate() {
 		return updatedDate;
-	}
-	
-	
-	@PrePersist
-	@PreUpdate
-	public void auditFields(){
-		if(createdDate==null && id==null){
-			setCreatedDate(Formatter.toMizeDateTime(DateTime.now()));
-		}
-		setUpdatedDate(Formatter.toMizeDateTime(DateTime.now()));		
 	}
 	
 	@Transient

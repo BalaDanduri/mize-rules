@@ -17,8 +17,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
@@ -309,17 +307,6 @@ public class Part extends MizeSceEntity implements Comparable<Part>{
 		this.updatedByUser = updatedByUser;
 	}
 	
-	@PrePersist
-	@PreUpdate
-	public void auditFields(){
-		if(createdDate==null && id==null){
-			setCreatedDate(MizeDateTime.now());
-		}
-		setUpdatedDate(MizeDateTime.now());		
-	}
-
-
-
 	@Override
 	public String toString() {
 		return "Part [tenant=" + tenant + ", code=" + code + ", type=" + type
@@ -330,11 +317,9 @@ public class Part extends MizeSceEntity implements Comparable<Part>{
 				+ partAttributes  + "]";
 	}
 
-
-
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result
@@ -350,13 +335,17 @@ public class Part extends MizeSceEntity implements Comparable<Part>{
 				+ ((partIntl == null) ? 0 : partIntl.hashCode());
 		result = prime * result
 				+ ((partPrices == null) ? 0 : partPrices.hashCode());
+		result = prime * result
+				+ ((productClass == null) ? 0 : productClass.hashCode());
 		result = prime * result + ((tenant == null) ? 0 : tenant.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		result = prime * result
+				+ ((unitListPrice == null) ? 0 : unitListPrice.hashCode());
+		result = prime * result
+				+ ((unitNetPrice == null) ? 0 : unitNetPrice.hashCode());
 		result = prime * result + ((uom == null) ? 0 : uom.hashCode());
 		return result;
 	}
-
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -407,20 +396,30 @@ public class Part extends MizeSceEntity implements Comparable<Part>{
 				return false;
 		} else if (!partPrices.equals(other.partPrices))
 			return false;
+		if (productClass == null) {
+			if (other.productClass != null)
+				return false;
+		} else if (!productClass.equals(other.productClass))
+			return false;
 		if (tenant == null) {
 			if (other.tenant != null)
 				return false;
-		} else {
-			if(tenant.getId() == null) {
-				if(other.tenant.getId() != null)
-					return false;
-				} else if(!tenant.getId().equals(other.tenant.getId()))
-				return false;
-		}
+		} else if (!tenant.equals(other.tenant))
+			return false;
 		if (type == null) {
 			if (other.type != null)
 				return false;
 		} else if (!type.equals(other.type))
+			return false;
+		if (unitListPrice == null) {
+			if (other.unitListPrice != null)
+				return false;
+		} else if (!unitListPrice.equals(other.unitListPrice))
+			return false;
+		if (unitNetPrice == null) {
+			if (other.unitNetPrice != null)
+				return false;
+		} else if (!unitNetPrice.equals(other.unitNetPrice))
 			return false;
 		if (uom == null) {
 			if (other.uom != null)

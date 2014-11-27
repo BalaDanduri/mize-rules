@@ -14,8 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
@@ -147,6 +145,20 @@ public class PartKit extends MizeSceEntity implements Comparable<PartKit>{
 		return super.getUpdatedBy();
 	}
 	
+	@Override
+	@JsonIgnore
+	@Column(name = "created_by_user",updatable=false)
+	public String getCreatedByUser() {
+		return super.getCreatedByUser();
+	}
+	
+	@Override
+	@JsonIgnore
+	@Column(name = "updated_by_user")
+	public String getUpdatedByUser() {
+		return super.getUpdatedByUser();
+	}
+	
 	@OneToMany(cascade={CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = "partKit" , orphanRemoval= true)
 	@Fetch(FetchMode.SUBSELECT)
 	public List<PartKitItem> getPartKitItems() {
@@ -211,6 +223,18 @@ public class PartKit extends MizeSceEntity implements Comparable<PartKit>{
 		super.setUpdatedBy(updatedBy);
 	}
 	
+	@Override
+	@JsonIgnore
+	public void setCreatedByUser(String createdByUser) {
+		super.setCreatedByUser(createdByUser);
+	}
+	
+	@Override
+	@JsonIgnore
+	public void setUpdatedByUser(String updatedByUser) {
+		super.setUpdatedByUser(updatedByUser);
+	}
+	
 	@Transient	
 	public User getUser() {
 		return user;
@@ -218,16 +242,6 @@ public class PartKit extends MizeSceEntity implements Comparable<PartKit>{
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-
-	@PrePersist
-	@PreUpdate
-	public void auditFields(){
-		if(createdDate==null && id==null){
-			setCreatedDate(MizeDateTime.now());
-		}
-		setUpdatedDate(MizeDateTime.now());
-		
 	}
 	
 	@Transient
@@ -268,12 +282,11 @@ public class PartKit extends MizeSceEntity implements Comparable<PartKit>{
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
 		result = prime * result
 				+ ((isActive == null) ? 0 : isActive.hashCode());
-		result = prime * result + ((part == null && part.getId() == null) ? 0 : part.getId().hashCode());
 		result = prime * result
 				+ ((partKitItems == null) ? 0 : partKitItems.hashCode());
 		result = prime * result
@@ -302,11 +315,6 @@ public class PartKit extends MizeSceEntity implements Comparable<PartKit>{
 			if (other.isActive != null)
 				return false;
 		} else if (!isActive.equals(other.isActive))
-			return false;
-		if (part == null) {
-			if (other.part != null)
-				return false;
-		} else if (!part.getId().equals(other.part.getId()))
 			return false;
 		if (partKitItems == null) {
 			if (other.partKitItems != null)
@@ -341,7 +349,6 @@ public class PartKit extends MizeSceEntity implements Comparable<PartKit>{
 
 	@Override
 	public int compareTo(PartKit o) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 	

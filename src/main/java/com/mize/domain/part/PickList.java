@@ -13,8 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
@@ -168,6 +166,20 @@ public class PickList extends MizeSceEntity implements Comparable<PickList> {
 	public Long getUpdatedBy() {		
 		return super.getUpdatedBy();
 	}
+	
+	@Override
+	@JsonIgnore
+	@Column(name = "created_by_user",updatable=false)
+	public String getCreatedByUser() {
+		return super.getCreatedByUser();
+	}
+	
+	@Override
+	@JsonIgnore
+	@Column(name = "updated_by_user")
+	public String getUpdatedByUser() {
+		return super.getUpdatedByUser();
+	}
 
 	@Override
 	public void setId(Long id) {
@@ -222,6 +234,18 @@ public class PickList extends MizeSceEntity implements Comparable<PickList> {
 		super.setUpdatedBy(updatedBy);
 	}
 	
+	@Override
+	@JsonIgnore
+	public void setCreatedByUser(String createdByUser) {
+		super.setCreatedByUser(createdByUser);
+	}
+	
+	@Override
+	@JsonIgnore
+	public void setUpdatedByUser(String updatedByUser) {
+		super.setUpdatedByUser(updatedByUser);
+	}
+	
 	@Transient	
 	public User getUser() {
 		return user;
@@ -231,27 +255,20 @@ public class PickList extends MizeSceEntity implements Comparable<PickList> {
 		this.user = user;
 	}
 
-	@PrePersist
-	@PreUpdate
-	public void auditFields(){
-		if(createdDate==null && id==null){
-			setCreatedDate(MizeDateTime.now());
-		}
-		setUpdatedDate(MizeDateTime.now());
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime * result
-				+ ((pickListLocation == null) ? 0 : pickListLocation.hashCode());
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result
 				+ ((comments == null) ? 0 : comments.hashCode());
 		result = prime * result
 				+ ((isActive == null) ? 0 : isActive.hashCode());
-		result = prime * result + ((listItems == null) ? 0 : listItems.hashCode());
+		result = prime * result
+				+ ((listItems == null) ? 0 : listItems.hashCode());
+		result = prime
+				* result
+				+ ((pickListLocation == null) ? 0 : pickListLocation.hashCode());
 		result = prime * result + ((tenant == null) ? 0 : tenant.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
@@ -266,11 +283,6 @@ public class PickList extends MizeSceEntity implements Comparable<PickList> {
 		if (getClass() != obj.getClass())
 			return false;
 		PickList other = (PickList) obj;
-		if (pickListLocation == null) {
-			if (other.pickListLocation != null)
-				return false;
-		} else if (!pickListLocation.equals(other.pickListLocation))
-			return false;
 		if (code == null) {
 			if (other.code != null)
 				return false;
@@ -290,6 +302,11 @@ public class PickList extends MizeSceEntity implements Comparable<PickList> {
 			if (other.listItems != null)
 				return false;
 		} else if (!listItems.equals(other.listItems))
+			return false;
+		if (pickListLocation == null) {
+			if (other.pickListLocation != null)
+				return false;
+		} else if (!pickListLocation.equals(other.pickListLocation))
 			return false;
 		if (tenant == null) {
 			if (other.tenant != null)

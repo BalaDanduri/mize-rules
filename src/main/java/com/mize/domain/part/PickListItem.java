@@ -82,10 +82,7 @@ public class PickListItem extends MizeSceEntity implements Comparable<PickListIt
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime * result + ((part == null) ? 0 : part.hashCode());
 		result = prime * result + ((partQty == null) ? 0 : partQty.hashCode());
-		result = prime * result
-				+ ((pickList == null) ? 0 : pickList.hashCode());
 		return result;
 	}
 
@@ -98,20 +95,10 @@ public class PickListItem extends MizeSceEntity implements Comparable<PickListIt
 		if (getClass() != obj.getClass())
 			return false;
 		PickListItem other = (PickListItem) obj;
-		if (part == null) {
-			if (other.part != null)
-				return false;
-		} else if (!part.equals(other.part))
-			return false;
 		if (partQty == null) {
 			if (other.partQty != null)
 				return false;
 		} else if (!partQty.equals(other.partQty))
-			return false;
-		if (pickList == null) {
-			if (other.pickList != null)
-				return false;
-		} else if (!pickList.equals(other.pickList))
 			return false;
 		return true;
 	}

@@ -13,8 +13,6 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -256,7 +254,7 @@ public class PartPrice extends MizeSceEntity implements Comparable<PartPrice>{
 	
 	@Override
 	public int hashCode() {
-		final int prime = PRIME;
+		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ((country == null) ? 0 : country.hashCode());
 		result = prime * result
@@ -266,7 +264,6 @@ public class PartPrice extends MizeSceEntity implements Comparable<PartPrice>{
 				+ ((listPrice == null) ? 0 : listPrice.hashCode());
 		result = prime * result
 				+ ((netPrice == null) ? 0 : netPrice.hashCode());
-		result = prime * result + ((part == null) ? 0 : part.hashCode());
 		result = prime * result
 				+ ((startDate == null) ? 0 : startDate.hashCode());
 		result = prime * result + ((taxId == null) ? 0 : taxId.hashCode());
@@ -309,11 +306,6 @@ public class PartPrice extends MizeSceEntity implements Comparable<PartPrice>{
 				return false;
 		} else if (!netPrice.equals(other.netPrice))
 			return false;
-		if (part == null) {
-			if (other.part != null)
-				return false;
-		} else if (!part.equals(other.part))
-			return false;
 		if (startDate == null) {
 			if (other.startDate != null)
 				return false;
@@ -355,16 +347,6 @@ public class PartPrice extends MizeSceEntity implements Comparable<PartPrice>{
 		builder.append(taxId);
 		builder.append("]");
 		return builder.toString();
-	}
-
-	@PrePersist
-	@PreUpdate
-	public void auditFields(){
-		if(createdDate==null && id==null){
-			setCreatedDate(MizeDateTime.now());
-		}
-		setUpdatedDate(MizeDateTime.now());
-		
 	}
 
 	@Override

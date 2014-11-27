@@ -11,15 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Inheritance
@@ -99,17 +96,6 @@ public class PartIntl extends MizeSceEntity implements Comparable<PartIntl> {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-
-	@PrePersist
-	@PreUpdate
-	public void auditFields(){
-		if(createdDate==null && id==null){
-			setCreatedDate(MizeDateTime.now());
-		}
-		setUpdatedDate(MizeDateTime.now());		
-	}
-	
 
 	@Override
 	public String toString() {
@@ -119,13 +105,12 @@ public class PartIntl extends MizeSceEntity implements Comparable<PartIntl> {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result
 				+ ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((locale == null) ? 0 : locale.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + ((part == null) ? 0 : part.hashCode());
 		return result;
 	}
 
@@ -152,11 +137,6 @@ public class PartIntl extends MizeSceEntity implements Comparable<PartIntl> {
 			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
-			return false;
-		if (part == null) {
-			if (other.part != null)
-				return false;
-		} else if (!part.equals(other.part))
 			return false;
 		return true;
 	}

@@ -11,14 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Inheritance
@@ -96,22 +93,11 @@ public class PartAttribute extends MizeSceEntity implements Comparable<PartAttri
 		this.uom = uom;
 	}
 
-
-	@PrePersist
-	@PreUpdate
-	public void auditFields(){
-		if(createdDate==null && id==null){
-			setCreatedDate(MizeDateTime.now());
-		}
-		setUpdatedDate(MizeDateTime.now());		
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
-		result = prime * result + ((part == null) ? 0 : part.hashCode());
 		result = prime * result + ((uom == null) ? 0 : uom.hashCode());
 		result = prime * result + ((value == null) ? 0 : value.hashCode());
 		return result;
@@ -130,11 +116,6 @@ public class PartAttribute extends MizeSceEntity implements Comparable<PartAttri
 			if (other.code != null)
 				return false;
 		} else if (!code.equals(other.code))
-			return false;
-		if (part == null) {
-			if (other.part != null)
-				return false;
-		} else if (!part.equals(other.part))
 			return false;
 		if (uom == null) {
 			if (other.uom != null)
