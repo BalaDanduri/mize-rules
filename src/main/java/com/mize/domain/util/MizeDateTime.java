@@ -347,7 +347,7 @@ public class MizeDateTime implements IMizeDate, Comparable<MizeDateTime>, Clonea
 	}
 	
 	public String toString(String dateFormat, DateTimeZone dateTimeZone){	
-		if(dateTimeZone != null){
+		if(dateTimeZone == null){
 			return DateTimeFormat.forPattern(dateFormat).print(this.dateTime);
 		}else{
 			return DateTimeFormat.forPattern(dateFormat).withZone(dateTimeZone).print(this.dateTime);
