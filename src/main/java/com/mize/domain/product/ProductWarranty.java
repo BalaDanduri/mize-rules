@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.util.MizeDate;
 
 @Entity
 @Table(name = "prod_warranty")
@@ -28,8 +28,8 @@ public class ProductWarranty extends MizeSceEntity implements Comparable<Product
 	private static final long serialVersionUID = -7775495768578959130L;
 	
 	 private ProductSerial productSerial;
-	 private MizeDateTime startDate;
-	 private MizeDateTime endDate;
+	 private MizeDate startDate;
+	 private MizeDate endDate;
 	 private String coverageType;
 	 private String coverageName;
 	 
@@ -52,15 +52,15 @@ public class ProductWarranty extends MizeSceEntity implements Comparable<Product
 
 	
 	@Column(name = "start_date", nullable = true)
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getStartDate() {
+	@Type(type = "com.mize.domain.util.MizeDateJPA")
+	public MizeDate getStartDate() {
 		return startDate;
 	}
 
 
 	@Column(name = "end_date", nullable = true)
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getEndDate() {
+	@Type(type = "com.mize.domain.util.MizeDateJPA")
+	public MizeDate getEndDate() {
 		return endDate;
 	}
 
@@ -78,11 +78,11 @@ public class ProductWarranty extends MizeSceEntity implements Comparable<Product
 		this.productSerial = productSerial;
 	}
 
-	public void setStartDate(MizeDateTime startDate) {
+	public void setStartDate(MizeDate startDate) {
 		this.startDate = startDate;
 	}
 
-	public void setEndDate(MizeDateTime endDate) {
+	public void setEndDate(MizeDate endDate) {
 		this.endDate = endDate;
 	}
 

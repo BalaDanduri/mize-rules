@@ -34,6 +34,7 @@ import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.form.link.FormDefinitionLink;
 import com.mize.domain.util.JPASerializer;
+import com.mize.domain.util.MizeDate;
 import com.mize.domain.util.MizeDateTime;
 
 @Entity
@@ -52,8 +53,8 @@ public class FormDefinition extends MizeSceEntity implements Comparable<FormDefi
 	private String statusCode;
 	private String formDefinitionData;
 	private String isActive;
-	private MizeDateTime startDate;
-	private MizeDateTime endDate;
+	private MizeDate startDate;
+	private MizeDate endDate;
 	private String isNewVersion;
 	private Form form;
 	private Locale locale;
@@ -74,7 +75,7 @@ public class FormDefinition extends MizeSceEntity implements Comparable<FormDefi
 		messages = new ArrayList<FormDefinitionMessage>();
 	}
 
-	public FormDefinition(FormTemplateDefinition formTemplateDefinition, BusinessEntity tenant, String formCode, String versionNumber, String statusCode, String formDefinitionData, String isActive, MizeDateTime startDate, MizeDateTime endDate) {
+	public FormDefinition(FormTemplateDefinition formTemplateDefinition, BusinessEntity tenant, String formCode, String versionNumber, String statusCode, String formDefinitionData, String isActive, MizeDate startDate, MizeDate endDate) {
 		super();
 		this.formTemplateDefinition = formTemplateDefinition;
 		this.tenant = tenant;
@@ -172,24 +173,24 @@ public class FormDefinition extends MizeSceEntity implements Comparable<FormDefi
 
 	
 	@Column(name = "start_date", nullable = true)
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
+	@Type(type = "com.mize.domain.util.MizeDateJPA")
 	@JsonInclude(Include.NON_DEFAULT)
-	public MizeDateTime getStartDate() {
+	public MizeDate getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(MizeDateTime startDate) {
+	public void setStartDate(MizeDate startDate) {
 		this.startDate = startDate;
 	}
 
 	@Column(name = "end_date", nullable = true)
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
+	@Type(type = "com.mize.domain.util.MizeDateJPA")
 	@JsonInclude(Include.NON_DEFAULT)
-	public MizeDateTime getEndDate() {
+	public MizeDate getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(MizeDateTime endDate) {
+	public void setEndDate(MizeDate endDate) {
 		this.endDate = endDate;
 	}
 

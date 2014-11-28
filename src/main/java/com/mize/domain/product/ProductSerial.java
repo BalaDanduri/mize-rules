@@ -14,8 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
@@ -32,6 +30,7 @@ import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JPASerializer;
+import com.mize.domain.util.MizeDate;
 import com.mize.domain.util.MizeDateTime;
 
 @Entity
@@ -43,16 +42,16 @@ public class ProductSerial extends MizeSceEntity implements Comparable<ProductSe
 	private Product product;
 	private String serialNumber;
 	private BusinessEntity shippedBusinessEntity;
-	private MizeDateTime buildDate;
+	private MizeDate buildDate;
 	@Transient
 	private EntityComment entityComment;
 	private List<ProductSerialComment> comments = new ArrayList<ProductSerialComment>();
 	@Transient
 	private User user;
-	private MizeDateTime shipDate;
+	private MizeDate shipDate;
 	private String isValid;
 	private BusinessEntity invoiceBusinessEntity;
-	private MizeDateTime invoiceDate;
+	private MizeDate invoiceDate;
 	private String invoiceNumber;
 	private List<ProductSerialRelation> productSerialRelations = new ArrayList<ProductSerialRelation>();
 	private List<ProductWarranty> productWarrantyList = new ArrayList<ProductWarranty>();
@@ -62,7 +61,7 @@ public class ProductSerial extends MizeSceEntity implements Comparable<ProductSe
 	}
 
 	public ProductSerial(BusinessEntity tenantId, Product product, String serialNumber,BusinessEntity invoiceBusinessEntity,
-			BusinessEntity shippedBusinessEntity, MizeDateTime deliveryDate, MizeDateTime buildDate) {
+			BusinessEntity shippedBusinessEntity, MizeDate deliveryDate, MizeDate buildDate) {
 		super();
 		this.tenant = tenantId;
 		this.product = product;
@@ -130,23 +129,16 @@ public class ProductSerial extends MizeSceEntity implements Comparable<ProductSe
 
 	
 	@Column(name = "build_date", nullable = true)
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getBuildDate() {
+	@Type(type = "com.mize.domain.util.MizeDateJPA")
+	public MizeDate getBuildDate() {
 		return buildDate;
 	}
 
-	public void setBuildDate(MizeDateTime buildDate) {
+	public void setBuildDate(MizeDate buildDate) {
 		this.buildDate = buildDate;
 	}
 
-	@PrePersist
-	@PreUpdate
-	public void auditFields(){
-		if(createdDate==null && id==null){
-			setCreatedDate(MizeDateTime.now());
-		}
-		setUpdatedDate(MizeDateTime.now());		
-	}
+
 	
 	@Transient
 	public EntityComment getEntityComment() {
@@ -188,12 +180,12 @@ public class ProductSerial extends MizeSceEntity implements Comparable<ProductSe
 	
 	
 	@Column(name = "ship_date", nullable = true)
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getShipDate() {
+	@Type(type = "com.mize.domain.util.MizeDateJPA")
+	public MizeDate getShipDate() {
 		return shipDate;
 	}
 	
-	public void setShipDate(MizeDateTime shipDate) {
+	public void setShipDate(MizeDate shipDate) {
 		this.shipDate = shipDate;
 	}
 	
@@ -211,12 +203,12 @@ public class ProductSerial extends MizeSceEntity implements Comparable<ProductSe
 
 	
 	@Column(name = "invoice_date", nullable = true)
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getInvoiceDate() {
+	@Type(type = "com.mize.domain.util.MizeDateJPA")
+	public MizeDate getInvoiceDate() {
 		return invoiceDate;
 	}
 
-	public void setInvoiceDate(MizeDateTime invoiceDate) {
+	public void setInvoiceDate(MizeDate invoiceDate) {
 		this.invoiceDate = invoiceDate;
 	}
 

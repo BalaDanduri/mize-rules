@@ -14,8 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -36,6 +34,7 @@ import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.DecimalValueDeserializer;
 import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
+import com.mize.domain.util.MizeDate;
 import com.mize.domain.util.MizeDateTime;
 import com.mize.domain.util.NumberValueSerializer;
 
@@ -69,7 +68,7 @@ public class Product  extends MizeSceEntity implements Comparable<Product>{
 	private BusinessEntity tenant;
 	private BusinessEntity manufacturerBE;	
 	private List<ProductIntl> productIntl = new ArrayList<ProductIntl>();	
-	private MizeDateTime releaseDate;
+	private MizeDate releaseDate;
 	@Transient
 	private User user;
 	private List<ProductCategory> categories = new ArrayList<ProductCategory>();
@@ -135,12 +134,12 @@ public class Product  extends MizeSceEntity implements Comparable<Product>{
 	
 	
 	@Column(name = "release_date")
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getReleaseDate() {
+	@Type(type = "com.mize.domain.util.MizeDateJPA")
+	public MizeDate getReleaseDate() {
 		return releaseDate;
 	}
 	
-	public void setReleaseDate(MizeDateTime releaseDate) {
+	public void setReleaseDate(MizeDate releaseDate) {
 		this.releaseDate = releaseDate;
 	}	
 
@@ -213,7 +212,6 @@ public class Product  extends MizeSceEntity implements Comparable<Product>{
 	public String getUpc() {
 		return upc;
 	}
-
 
 	public void setUpc(String upc) {
 		this.upc = upc;
@@ -641,15 +639,7 @@ public class Product  extends MizeSceEntity implements Comparable<Product>{
 		super.setUpdatedBy(updatedBy);
 	}
 
-	@PrePersist
-	@PreUpdate
-	public void auditFields(){
-		if(createdDate==null && id==null){
-			setCreatedDate(MizeDateTime.now());
-		}
-		setUpdatedDate(MizeDateTime.now());		
-	}
-
+	
 	@Override
 	public String toString() {
 		return "Product [id" + id + ", name=" + name + ", brand=" + brand + ", price=" + price + ", category=" + category

@@ -112,7 +112,7 @@ public class ProductTest extends JPATest {
 			product.setManufacturerBE(be);
 			product.setCreatedDate(Formatter.toMizeDateTime(resultSet.getTimestamp("created_date")));
 			product.setCreatedDate(Formatter.toMizeDateTime(resultSet.getTimestamp("updated_date")));				
-			product.setReleaseDate(Formatter.toMizeDateTime(resultSet.getTimestamp("release_date")));
+			product.setReleaseDate(Formatter.toMizeDate(resultSet.getTimestamp("release_date")));
 			
 			return product;
 		}

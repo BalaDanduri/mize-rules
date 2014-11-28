@@ -19,7 +19,7 @@ import org.springframework.test.context.ContextConfiguration;
 
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.util.MizeDate;
 
 @ContextConfiguration(locations={"/test-context.xml"})
 public class FormDefinitionAuditTest extends JPATest {	
@@ -77,7 +77,7 @@ public class FormDefinitionAuditTest extends JPATest {
 	}
 	
 	private FormDefinitionAudit createFormDefAudit(FormDefinition formDef) {
-		FormDefinitionAudit audit = new FormDefinitionAudit(formDef, formDef.getStatusCode(), Formatter.toMizeDateTime(MizeDateTime.now().getDateTime()), 779L,"Process");
+		FormDefinitionAudit audit = new FormDefinitionAudit(formDef, formDef.getStatusCode(), Formatter.toMizeDateTime(MizeDate.now().getDateTime()), 779L,"Process");
 		return audit;
 	}
 	

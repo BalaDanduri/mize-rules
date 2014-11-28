@@ -20,7 +20,7 @@ import org.springframework.test.context.ContextConfiguration;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.util.MizeDate;
 
 @ContextConfiguration(locations={"/test-context.xml"})
 public class FormDefinitionTest extends JPATest {
@@ -62,11 +62,11 @@ public class FormDefinitionTest extends JPATest {
 		formDef.setTenant(tenant);
 		formDef.setFormCode("FORM123");
 		formDef.setIsActive("Y");
-		formDef.setStartDate(Formatter.toMizeDateTime(MizeDateTime.now().getDateTime()));
-		formDef.setEndDate(Formatter.toMizeDateTime(MizeDateTime.now().addYears(1).getDateTime()));
+		formDef.setStartDate(MizeDate.now());
+		formDef.setEndDate(MizeDate.now().addYears(1));
 		formDef.setStatusCode("DRAFT");
-		formDef.setCreatedDate(MizeDateTime.now());
-		formDef.setUpdatedDate(MizeDateTime.now());
+		formDef.setCreatedDate(Formatter.toMizeDateTime(MizeDate.now().getDateTime()));
+		formDef.setUpdatedDate(Formatter.toMizeDateTime(MizeDate.now().getDateTime()));
 		formDef.setCreatedBy(Long.valueOf(779));
 		formDef.setUpdatedBy(Long.valueOf(779));
 		formDef.setFormDefinitionData("formDefinitionData");
@@ -113,8 +113,8 @@ public class FormDefinitionTest extends JPATest {
 			FormTemplateDefinition ftdef = new FormTemplateDefinition();
 			ftdef.setId(rs.getLong("template_defn_id"));
 			formDef.setFormTemplateDefinition(ftdef);
-			formDef.setStartDate(Formatter.toMizeDateTime(rs.getTimestamp("start_date")));
-			formDef.setEndDate(Formatter.toMizeDateTime(rs.getTimestamp("end_date")));
+			formDef.setStartDate(Formatter.toMizeDate(rs.getTimestamp("start_date")));
+			formDef.setEndDate(Formatter.toMizeDate(rs.getTimestamp("end_date")));
 			formDef.setFormDefinitionData(rs.getString("form_defn_data"));
 			formDef.setCreatedDate(Formatter.toMizeDateTime(rs.getTimestamp("created_date")));
 			formDef.setUpdatedDate(Formatter.toMizeDateTime(rs.getTimestamp("updated_date")));

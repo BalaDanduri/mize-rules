@@ -33,6 +33,7 @@ import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.form.FormInstance;
 import com.mize.domain.util.JPASerializer;
+import com.mize.domain.util.MizeDate;
 import com.mize.domain.util.MizeDateTime;
 
 @Entity
@@ -50,7 +51,7 @@ public class InspectionForm extends MizeSceEntity implements Comparable<Inspecti
 	private String inspectionType;
 	private String inspectionStatus;
 	private String inspectionReference;
-	private MizeDateTime inspectionDate;
+	private MizeDate inspectionDate;
 	private String inspectedBy;
 	private Locale locale;
 	private FormInstance formInstance;
@@ -130,13 +131,13 @@ public class InspectionForm extends MizeSceEntity implements Comparable<Inspecti
 
 	
 	@Column(name = "insp_date", nullable = true)
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
+	@Type(type = "com.mize.domain.util.MizeDateJPA")
 	@JsonInclude(Include.NON_NULL)
-	public MizeDateTime getInspectionDate() {
+	public MizeDate getInspectionDate() {
 		return inspectionDate;
 	}
 
-	public void setInspectionDate(MizeDateTime inspectionDate) {
+	public void setInspectionDate(MizeDate inspectionDate) {
 		this.inspectionDate = inspectionDate;
 	}
 

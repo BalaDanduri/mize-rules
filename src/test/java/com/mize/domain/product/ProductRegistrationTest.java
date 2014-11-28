@@ -22,7 +22,7 @@ import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.util.MizeDate;
 
 
 @ContextConfiguration(locations={"/test-context.xml"})
@@ -90,10 +90,10 @@ public class ProductRegistrationTest  extends JPATest {
 		productRegistration.setRegistrationType("STORE");
 		productRegistration.setCustomer(businessEntity);
 		productRegistration.setInvoiceBusinessEntity(businessEntity);
-		productRegistration.setCustomerDeliveryDate(MizeDateTime.now());
+		productRegistration.setCustomerDeliveryDate(MizeDate.now());
 		productRegistration.setPurchasePrice(new BigDecimal(200.00));
-		productRegistration.setCustomerDeliveryDate(MizeDateTime.now().plusDays(3));
-		productRegistration.setWarrantyExpiryDate(MizeDateTime.now().plusMonths(24));
+		productRegistration.setCustomerDeliveryDate(MizeDate.now().plusDays(3));
+		productRegistration.setWarrantyExpiryDate(MizeDate.now().plusMonths(24));
 		productRegistration.setCustomerAddress(entityAddress);
 		return productRegistration;
 		
@@ -130,9 +130,9 @@ public class ProductRegistrationTest  extends JPATest {
 			BusinessEntity be= new BusinessEntity();
 			be.setId(rs.getLong("invoice_be_id"));
 			productRegistration.setInvoiceBusinessEntity(be);
-			productRegistration.setCustomerDeliveryDate(Formatter.toMizeDateTime(rs.getTimestamp("cust_delivery_date")));
+			productRegistration.setCustomerDeliveryDate(Formatter.toMizeDate(rs.getTimestamp("cust_delivery_date")));
 			productRegistration.setPurchasePrice(rs.getBigDecimal("purchase_price"));
-			productRegistration.setWarrantyExpiryDate(Formatter.toMizeDateTime(rs.getTimestamp("warranty_expiry_date")));
+			productRegistration.setWarrantyExpiryDate(Formatter.toMizeDate(rs.getTimestamp("warranty_expiry_date")));
 			
 			EntityAddress customerAddress = new EntityAddress();
 			customerAddress.setId(rs.getLong("cust_address_id"));

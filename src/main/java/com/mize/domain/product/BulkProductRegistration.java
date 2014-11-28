@@ -10,7 +10,7 @@ import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.util.MizeDate;
 
 public class BulkProductRegistration extends MizeSceEntity implements Comparable<BulkProductRegistration> {
 	
@@ -21,7 +21,7 @@ public class BulkProductRegistration extends MizeSceEntity implements Comparable
 	private BusinessEntity invoiceEntity;
 	private BusinessEntity customer;
 	private EntityAddress customerAddress;
-	private MizeDateTime purchaseDate;
+	private MizeDate purchaseDate;
 	private EntityComment entityComment;
 	private List<ProductRegistration> productRegistrations = new ArrayList<ProductRegistration>();
 	private User user;
@@ -58,8 +58,8 @@ public class BulkProductRegistration extends MizeSceEntity implements Comparable
 	}
 	
 	
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getPurchaseDate() {
+	@Type(type = "com.mize.domain.util.MizeDateJPA")
+	public MizeDate getPurchaseDate() {
 		return purchaseDate;
 	}
 
@@ -99,7 +99,7 @@ public class BulkProductRegistration extends MizeSceEntity implements Comparable
 		this.customerAddress = customerAddress;
 	}
 	
-	public void setPurchaseDate(MizeDateTime purchaseDate) {
+	public void setPurchaseDate(MizeDate purchaseDate) {
 		this.purchaseDate = purchaseDate;
 	}
 

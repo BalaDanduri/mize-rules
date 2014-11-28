@@ -664,6 +664,13 @@ public final class Formatter {
 		return 0;		
 	}
 	
+	public static int daysBetween(MizeDate startDate , MizeDate endDate){
+		if(startDate != null && endDate != null){
+			return Days.daysBetween(startDate.getDateTime(), endDate.getDateTime()).getDays();
+		}
+		return 0;		
+	}
+	
 	public static int hoursBetween(DateTime startDate , DateTime endDate){
 		if(startDate != null && endDate != null){
 			return Hours.hoursBetween(startDate, endDate).getHours();

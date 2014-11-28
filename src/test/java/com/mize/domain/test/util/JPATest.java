@@ -40,6 +40,7 @@ import com.mize.domain.serviceentity.ServiceEntityAddress;
 import com.mize.domain.serviceentity.ServiceEntityAudit;
 import com.mize.domain.user.UserProfile;
 import com.mize.domain.util.Formatter;
+import com.mize.domain.util.MizeDate;
 import com.mize.domain.util.MizeDateTime;
 import com.mize.domain.util.MizeObjectMapper;
 
@@ -274,7 +275,7 @@ public class JPATest {
 		product.setManufacturerBE((businessEntity));
 		product.setCreatedDate(MizeDateTime.now());
 		product.setUpdatedDate(MizeDateTime.now());
-		product.setReleaseDate(MizeDateTime.now());
+		product.setReleaseDate(MizeDate.now());
 		
 		return product;
 

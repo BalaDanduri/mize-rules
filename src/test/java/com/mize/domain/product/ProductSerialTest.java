@@ -20,7 +20,7 @@ import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.util.MizeDate;
 
 
 @ContextConfiguration(locations={"/test-context.xml"})
@@ -83,12 +83,12 @@ public class ProductSerialTest extends JPATest {
 		productSerial.setProduct(product);
 		productSerial.setSerialNumber("testAdmin"+System.currentTimeMillis());
 		productSerial.setShippedBusinessEntity(businessEntity);
-		productSerial.setBuildDate(MizeDateTime.now());
+		productSerial.setBuildDate(MizeDate.now());
 		productSerial.setInvoiceBusinessEntity(businessEntity);
 		productSerial.setCreatedBy(776l);
-		productSerial.setCreatedDate(MizeDateTime.now());
+		productSerial.setCreatedDate(Formatter.toMizeDateTime(MizeDate.now().getDateTime()));
 		productSerial.setUpdatedBy(776L);
-		productSerial.setUpdatedDate(MizeDateTime.now());
+		productSerial.setUpdatedDate(Formatter.toMizeDateTime(MizeDate.now().getDateTime()));
 		productSerial.setIsValid("Y");
 		
 		return productSerial;
@@ -137,7 +137,7 @@ public class ProductSerialTest extends JPATest {
 			BusinessEntity businessEntity = new BusinessEntity();
 			businessEntity.setId(rs.getLong("ship_be_id"));
 			prodSerial.setShippedBusinessEntity(businessEntity);
-			prodSerial.setBuildDate(Formatter.toMizeDateTime(rs.getTimestamp("build_date")));
+			prodSerial.setBuildDate(Formatter.toMizeDate(rs.getTimestamp("build_date")));
 			BusinessEntity invoiceBE = new BusinessEntity();
 			invoiceBE.setId(rs.getLong("invoice_be_id"));
 			prodSerial.setInvoiceBusinessEntity(invoiceBE);

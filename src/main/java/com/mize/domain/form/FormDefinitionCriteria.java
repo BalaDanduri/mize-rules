@@ -6,7 +6,7 @@ import com.mize.domain.auth.User;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.product.Product;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.util.MizeDate;
 
 public class FormDefinitionCriteria extends MizeSceEntity implements Comparable<FormDefinitionCriteria> {
 
@@ -15,7 +15,7 @@ public class FormDefinitionCriteria extends MizeSceEntity implements Comparable<
 	
 	private String inspectionType;
 	private Product product;
-	private MizeDateTime inspectionDate;
+	private MizeDate inspectionDate;
 	private User user;
 	private Locale locale;
 	
@@ -45,12 +45,12 @@ public class FormDefinitionCriteria extends MizeSceEntity implements Comparable<
 		this.product = product;
 	}
 
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getInspectionDate() {
+	@Type(type = "com.mize.domain.util.MizeDateJPA")
+	public MizeDate getInspectionDate() {
 		return inspectionDate;
 	}
 
-	public void setInspectionDate(MizeDateTime inspectionDate) {
+	public void setInspectionDate(MizeDate inspectionDate) {
 		this.inspectionDate = inspectionDate;
 	}
 
