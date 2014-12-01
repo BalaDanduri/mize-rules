@@ -43,7 +43,7 @@ public class EntityAddressGeo extends MizeSceEntity implements Comparable<Entity
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return id;
@@ -55,7 +55,7 @@ public class EntityAddressGeo extends MizeSceEntity implements Comparable<Entity
 	}
 
 	@Transient
-	@Column(name="be_address_id",insertable=false,updatable=false)
+	@Column(name="be_address_id")
 	@JsonIgnore
 	public Long getEntityAddressId() {
 		return entityAddressId;
@@ -76,7 +76,7 @@ public class EntityAddressGeo extends MizeSceEntity implements Comparable<Entity
 		this.address = address;
 	}
 
-	@Column(name = "latitude", nullable = true)
+	@Column(name = "latitude")
 	public BigDecimal getLatitude() {
 		return latitude;
 	}
@@ -85,7 +85,7 @@ public class EntityAddressGeo extends MizeSceEntity implements Comparable<Entity
 		this.latitude = latitude;
 	}
 
-	@Column(name = "longitude", nullable = true)
+	@Column(name = "longitude")
 	public BigDecimal getLongitude() {
 		return longitude;
 	}
@@ -166,6 +166,4 @@ public class EntityAddressGeo extends MizeSceEntity implements Comparable<Entity
 		      
 		}
 	};
-
-	
 }

@@ -151,6 +151,46 @@ public class EntityAddress extends MizeSceEntityAudit implements Comparable<Enti
 		this.email = email;
 	}
 
+   /*@Column(name = "updated_by")
+	public Long getUpdatedBy() {
+		return this.updatedBy;
+	}
+	
+	public void setUpdatedBy(Long updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+	
+	@Column(name = "created_by")
+	public Long getCreatedBy() {
+		return this.createdBy;
+	}
+	
+	public void setCreatedBy(Long createdBy) {
+		this.createdBy = createdBy;
+	}*/
+	
+	
+	/*@Column(name = "created_date", updatable=false)
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	@JsonInclude(Include.NON_DEFAULT)
+	public MizeDateTime getCreatedDate() {
+		return this.createdDate;
+	}
+
+	public void setCreatedDate(MizeDateTime createdDate) {
+		this.createdDate = createdDate;
+	}
+	
+	@Column(name = "updated_date")
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	@JsonInclude(Include.NON_DEFAULT)
+	public MizeDateTime getUpdatedDate() {
+		return this.updatedDate;
+	}
+	
+	public void setUpdatedDate(MizeDateTime updatedDate) {
+		this.updatedDate = updatedDate;
+	} */
 	
 	@Column(name = "land_mark")
 	public String getLandmark() {
@@ -183,6 +223,24 @@ public class EntityAddress extends MizeSceEntityAudit implements Comparable<Enti
 	public void setAddressGeo(EntityAddressGeo addressGeo) {
 		this.addressGeo = addressGeo;
 	}
+	
+   /*@Column(name = "created_by_user", updatable=false)
+	public String getCreatedByUser() {
+		return createdByUser;
+	}
+	
+	public void setCreatedByUser(String createdByUser) {
+		this.createdByUser = createdByUser;
+	}
+	
+	@Column(name = "updated_by_user")
+	public String getUpdatedByUser() {
+		return updatedByUser;
+	}
+	
+	public void setUpdatedByUser(String updatedByUser) {
+		this.updatedByUser = updatedByUser;
+	}*/
 	
 	@Override
 	public int hashCode() {

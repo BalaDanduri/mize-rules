@@ -7,17 +7,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.mize.domain.util.MizeDateTime;
-
 /**
  * @author HarishBurra
  * @version 1.0
  */
 @Entity
 @Table(name = "entity_contact")
-public class EntityContact extends MizeSceEntity {
+public class EntityContact extends MizeSceEntityAudit {
 
 	private static final long serialVersionUID = -3798576336173472676L;
 	private String isPrimary;
@@ -43,7 +39,7 @@ public class EntityContact extends MizeSceEntity {
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", unique = true, nullable = false)
+	@Column(name = "id", unique = true)
 	public Long getId() {
 		return id;
 	}
@@ -53,7 +49,7 @@ public class EntityContact extends MizeSceEntity {
 		this.id = id;
 	}
 
-	@Column(name = "is_primary", length = 1)
+	@Column(name = "is_primary")
 	public String getIsPrimary() {
 		return isPrimary;
 	}
@@ -62,7 +58,7 @@ public class EntityContact extends MizeSceEntity {
 		this.isPrimary = isPrimary;
 	}
 
-	@Column(name = "is_active", length = 1)
+	@Column(name = "is_active")
 	public String getIsActive() {
 		return isActive;
 	}
@@ -71,7 +67,7 @@ public class EntityContact extends MizeSceEntity {
 		this.isActive = isActive;
 	}
 
-	@Column(name = "contact_type", length = 50)
+	@Column(name = "contact_type")
 	public String getContactType() {
 		return contactType;
 	}
@@ -80,7 +76,7 @@ public class EntityContact extends MizeSceEntity {
 		this.contactType = contactType;
 	}
 
-	@Column(name = "contact_name", length = 250)
+	@Column(name = "contact_name")
 	public String getContactName() {
 		return contactName;
 	}
@@ -89,7 +85,7 @@ public class EntityContact extends MizeSceEntity {
 		this.contactName = contactName;
 	}
 
-	@Column(name = "first_name", length = 100)
+	@Column(name = "first_name")
 	public String getFirstName() {
 		return firstName;
 	}
@@ -98,7 +94,7 @@ public class EntityContact extends MizeSceEntity {
 		this.firstName = firstName;
 	}
 
-	@Column(name = "last_name", length = 100)
+	@Column(name = "last_name")
 	public String getLastName() {
 		return lastName;
 	}
@@ -107,7 +103,7 @@ public class EntityContact extends MizeSceEntity {
 		this.lastName = lastName;
 	}
 
-	@Column(name = "middle_initial", length = 50)
+	@Column(name = "middle_initial")
 	public String getMiddleInitial() {
 		return middleInitial;
 	}
@@ -116,7 +112,7 @@ public class EntityContact extends MizeSceEntity {
 		this.middleInitial = middleInitial;
 	}
 
-	@Column(name = "phone", length = 50)
+	@Column(name = "phone")
 	public String getPhone() {
 		return phone;
 	}
@@ -125,7 +121,7 @@ public class EntityContact extends MizeSceEntity {
 		this.phone = phone;
 	}
 
-	@Column(name = "phone_ext", length = 10)
+	@Column(name = "phone_ext")
 	public String getPhoneExt() {
 		return phoneExt;
 	}
@@ -134,7 +130,7 @@ public class EntityContact extends MizeSceEntity {
 		this.phoneExt = phoneExt;
 	}
 
-	@Column(name = "alt_phone", length = 50)
+	@Column(name = "alt_phone")
 	public String getAlternatePhone() {
 		return alternatePhone;
 	}
@@ -143,7 +139,7 @@ public class EntityContact extends MizeSceEntity {
 		this.alternatePhone = alternatePhone;
 	}
 
-	@Column(name = "alt_phone_ext", length = 10)
+	@Column(name = "alt_phone_ext")
 	public String getAlternatePhoneExt() {
 		return alternatePhoneExt;
 	}
@@ -152,7 +148,7 @@ public class EntityContact extends MizeSceEntity {
 		this.alternatePhoneExt = alternatePhoneExt;
 	}
 
-	@Column(name = "fax", length = 50)
+	@Column(name = "fax")
 	public String getFax() {
 		return fax;
 	}
@@ -161,7 +157,7 @@ public class EntityContact extends MizeSceEntity {
 		this.fax = fax;
 	}
 
-	@Column(name = "fax_ext", length = 10)
+	@Column(name = "fax_ext")
 	public String getFaxExt() {
 		return faxExt;
 	}
@@ -170,7 +166,7 @@ public class EntityContact extends MizeSceEntity {
 		this.faxExt = faxExt;
 	}
 
-	@Column(name = "email", length = 100)
+	@Column(name = "email")
 	public String getEmail() {
 		return email;
 	}
@@ -179,7 +175,7 @@ public class EntityContact extends MizeSceEntity {
 		this.email = email;
 	}
 
-	@Column(name = "department", length = 50)
+	@Column(name = "department")
 	public String getDepartment() {
 		return department;
 	}
@@ -188,7 +184,7 @@ public class EntityContact extends MizeSceEntity {
 		this.department = department;
 	}
 
-	public void setCreatedDate(MizeDateTime createdDate) {
+	/*public void setCreatedDate(MizeDateTime createdDate) {
 		this.createdDate = createdDate;
 	}
 
@@ -244,7 +240,7 @@ public class EntityContact extends MizeSceEntity {
 	@Column(name = "updated_by")
 	public Long getUpdatedBy() {
 		return updatedBy;
-	}
+	}*/
 	
 
 	@Override

@@ -20,7 +20,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -36,19 +35,18 @@ import com.mize.domain.common.Country;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityAddressGeo;
 import com.mize.domain.common.Locale;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.common.State;
 import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.MizeDate;
-import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Inheritance
 @DiscriminatorColumn(name = "discriminator")
 @DiscriminatorValue("BusinessEntity")
-@Table(name = "business_entity", uniqueConstraints = {@UniqueConstraint (columnNames={"tenant_id", "code"})})
-public class BusinessEntity extends MizeSceEntity implements Comparable<BusinessEntity>, Cloneable{
+@Table(name = "business_entity")
+public class BusinessEntity extends MizeSceEntityAudit implements Comparable<BusinessEntity>, Cloneable{
 	private static final long serialVersionUID = 5842902035928465555L;
 	private String code;
 	private String typeCode;
@@ -84,7 +82,7 @@ public class BusinessEntity extends MizeSceEntity implements Comparable<Business
 		this.id = id;
 	}
 
-	public BusinessEntity(Long id,String code, String typeCode) {
+	public BusinessEntity(Long id, String code, String typeCode) {
 		this.id = id;
 		this.code = code;
 		this.typeCode = typeCode;
@@ -166,7 +164,7 @@ public class BusinessEntity extends MizeSceEntity implements Comparable<Business
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="id",unique=true,nullable=false)
+	@Column(name="id")
 	public Long getId() {
 		return id;
 	}
@@ -176,17 +174,17 @@ public class BusinessEntity extends MizeSceEntity implements Comparable<Business
 		this.id= id;
 	}
 
-	@Column(name = "code",length = 50)
+	@Column(name = "code")
 	public String getCode() {
 		return code;
 	}
 
-	@Column(name = "sub_type_code",length = 50)
+	@Column(name = "sub_type_code")
 	public String getSubTypeCode() {
 		return subTypeCode;
 	}
 
-	@Column(name = "logo", length = 100)
+	@Column(name = "logo")
 	public String getLogo() {
 		return logo;
 	}
@@ -207,12 +205,12 @@ public class BusinessEntity extends MizeSceEntity implements Comparable<Business
 		return parentBE;
 	}
 
-	@Column(name = "active_indicator",length = 1)
+	@Column(name = "active_indicator")
 	public String getIsActive() {
 		return isActive;
 	}
 
-	@Column(name = "currency_code",length = 30)
+	@Column(name = "currency_code")
 	public String getCurrencyCode() {
 		return currencyCode;
 	}
@@ -322,7 +320,7 @@ public class BusinessEntity extends MizeSceEntity implements Comparable<Business
 		}
 	};
 
-	@Column(name="type_code",nullable=true,length=50)
+	@Column(name="type_code")
 	public String getTypeCode() {
 		return typeCode;
 	}
@@ -347,7 +345,7 @@ public class BusinessEntity extends MizeSceEntity implements Comparable<Business
 		this.businessEntityReference = businessEntityReference;
 	}
 
-	@Column(name = "business_entity_reference", length = 100)
+	@Column(name = "business_entity_reference")
 	public String getBusinessEntityReference() {
 		return businessEntityReference;
 	}
@@ -366,12 +364,12 @@ public class BusinessEntity extends MizeSceEntity implements Comparable<Business
 		this.statusCode = statusCode;
 	}
 
-	@Column(name = "status_code", length = 50)
+	@Column(name = "status_code")
 	public String getStatusCode() {
 		return statusCode;
 	}
 
-	@Column(name = "start_date", nullable = true)
+	@Column(name = "start_date")
 	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateJPA")
 	@JsonInclude(Include.NON_DEFAULT)
 	public MizeDate getStartDate() {
@@ -382,7 +380,7 @@ public class BusinessEntity extends MizeSceEntity implements Comparable<Business
 		this.startDate = startDate;
 	}
 
-	@Column(name = "end_date", nullable = true)
+	@Column(name = "end_date")
 	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateJPA")
 	@JsonInclude(Include.NON_DEFAULT)
 	public MizeDate getEndDate() {
@@ -418,7 +416,7 @@ public class BusinessEntity extends MizeSceEntity implements Comparable<Business
 	}
 
 
-	@Column(name = "created_date", updatable=false)
+	/*@Column(name = "created_date", updatable=false)
 	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@JsonInclude(Include.NON_DEFAULT)
 	public MizeDateTime getCreatedDate() {
@@ -474,7 +472,7 @@ public class BusinessEntity extends MizeSceEntity implements Comparable<Business
 
 	public void setUpdatedByUser(String updatedByUser) {
 		this.updatedByUser = updatedByUser;
-	}
+	}*/
 
 
 	@Override

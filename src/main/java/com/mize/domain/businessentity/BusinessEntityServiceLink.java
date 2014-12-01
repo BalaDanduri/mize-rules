@@ -12,20 +12,18 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.brand.Brand;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.product.Product;
 import com.mize.domain.product.ProductCategory;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name = "business_entity_service_link")
-public class BusinessEntityServiceLink extends MizeSceEntity implements Comparable<BusinessEntity>{
+public class BusinessEntityServiceLink extends MizeSceEntityAudit implements Comparable<BusinessEntity>{
 	private static final long serialVersionUID = 7777734836386834403L;
 	private BusinessEntity businessEntity;
 	private Brand brand;
@@ -48,11 +46,10 @@ public class BusinessEntityServiceLink extends MizeSceEntity implements Comparab
 		this.radius = radius;
 		this.radiusUom = radiusUom;
 	}
-
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return id;
@@ -91,12 +88,12 @@ public class BusinessEntityServiceLink extends MizeSceEntity implements Comparab
 		return product;
 	}
 
-	@Column(name ="radius", length = 20)
+	@Column(name ="radius")
 	public Long getRadius() {
 		return radius;
 	}
 
-	@Column(name ="radius_uom", length = 50)
+	@Column(name ="radius_uom")
 	public String getRadiusUom() {
 		return radiusUom;
 	}
@@ -126,7 +123,7 @@ public class BusinessEntityServiceLink extends MizeSceEntity implements Comparab
 	}
 
 	
-	@Column(name = "created_date",updatable=false)
+	/*@Column(name = "created_date",updatable=false)
 	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@JsonInclude(Include.NON_DEFAULT)
 	public MizeDateTime getCreatedDate() {
@@ -183,7 +180,7 @@ public class BusinessEntityServiceLink extends MizeSceEntity implements Comparab
 	
 	public void setUpdatedByUser(String updatedByUser) {
 		this.updatedByUser = updatedByUser;
-	}
+	}*/
 
 	@Override
 	public int hashCode() {

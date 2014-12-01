@@ -40,7 +40,7 @@ public class BusinessEntityContact extends MizeSceEntity implements Comparable<B
 	}
 
 	@Id
-	@Column(name="id",nullable=false,unique=true)
+	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Override
 	public Long getId() {

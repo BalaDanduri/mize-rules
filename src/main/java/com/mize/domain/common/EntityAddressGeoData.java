@@ -10,6 +10,7 @@ public class EntityAddressGeoData implements Serializable {
 	private String distanceText;
 	private String durationText;
 	
+	
 	public EntityAddressGeoData() {
 		
 	}

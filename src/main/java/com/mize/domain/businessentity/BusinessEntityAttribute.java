@@ -38,10 +38,9 @@ public class BusinessEntityAttribute extends MizeSceEntity implements Comparable
 	 private String isPromoted;
 	 private String isServiceProvider;
 	 private String region;
-	
 	 
 	 @Id
-	 @Column(name="id",nullable=false,unique=true)
+	 @Column(name="id")
 	 @GeneratedValue(strategy = GenerationType.AUTO)
 	 @Override
 	public Long getId() {
@@ -64,7 +63,7 @@ public class BusinessEntityAttribute extends MizeSceEntity implements Comparable
 		this.businessEntity = businessEntity;
 	}
 
-	@Column(name="url",nullable=true)
+	@Column(name="url")
 	public String getUrl() {
 		return url;
 	}
@@ -73,7 +72,7 @@ public class BusinessEntityAttribute extends MizeSceEntity implements Comparable
 		this.url = url;
 	}
 
-	@Column(name="tool_tip_logo",nullable=true)
+	@Column(name="tool_tip_logo")
 	public String getToolTipLogo() {
 		return toolTipLogo;
 	}
@@ -82,7 +81,7 @@ public class BusinessEntityAttribute extends MizeSceEntity implements Comparable
 		this.toolTipLogo = toolTipLogo;
 	}
 
-	@Column(name="icon",nullable=true)
+	@Column(name="icon")
 	public String getIcon() {
 		return icon;
 	}
@@ -91,7 +90,7 @@ public class BusinessEntityAttribute extends MizeSceEntity implements Comparable
 		this.icon = icon;
 	}
 
-	@Column(name="hours_of_op",nullable=true)
+	@Column(name="hours_of_op")
 	public String getHoursOfOp() {
 		return hoursOfOp;
 	}
@@ -100,7 +99,7 @@ public class BusinessEntityAttribute extends MizeSceEntity implements Comparable
 		this.hoursOfOp = hoursOfOp;
 	}
 
-	@Column(name="is_credit_onhold",nullable=true)
+	@Column(name="is_credit_onhold")
 	public String getCreditOnHold() {
 		return creditOnHold;
 	}
@@ -109,7 +108,7 @@ public class BusinessEntityAttribute extends MizeSceEntity implements Comparable
 		this.creditOnHold = creditOnHold;
 	}
 	
-	@Column(name="is_promoted", length = 1)
+	@Column(name="is_promoted")
 	public String getIsPromoted() {
 		return isPromoted;
 	}
@@ -118,7 +117,7 @@ public class BusinessEntityAttribute extends MizeSceEntity implements Comparable
 		this.isPromoted = isPromoted;
 	}
 	
-	@Column(name="is_service_provider", length = 1)
+	@Column(name="is_service_provider")
 	public String getIsServiceProvider() {
 		return isServiceProvider;
 	}
@@ -127,7 +126,7 @@ public class BusinessEntityAttribute extends MizeSceEntity implements Comparable
 		this.isServiceProvider = isServiceProvider;
 	}
 	
-	@Column(name="region", length = 50)
+	@Column(name="region")
 	public String getRegion() {
 		return region;
 	}

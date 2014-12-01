@@ -13,6 +13,7 @@ import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
+
 @Entity
 @Table(name = "entity_address_phone" )
 public class EntityAddressPhone extends MizeSceEntity implements Comparable<EntityAddressPhone> {

@@ -11,7 +11,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.brand.Brand;
@@ -21,7 +20,7 @@ import com.mize.domain.common.MizeSceEntity;
 @Inheritance
 @DiscriminatorColumn(name = "discriminator")
 @DiscriminatorValue("BusinessEntityBrand")
-@Table(name="business_entity_brand",uniqueConstraints = { @UniqueConstraint(columnNames = {"be_id","brand_id"} )} )
+@Table(name="business_entity_brand")
 public class BusinessEntityBrand extends MizeSceEntity implements Comparable<BusinessEntityBrand>{
 	private static final long serialVersionUID = -269538922800687629L;
 	private String isActive;
@@ -29,7 +28,7 @@ public class BusinessEntityBrand extends MizeSceEntity implements Comparable<Bus
 	private Brand brand;
 
 	@Id
-	@Column(name="id",nullable=false,unique=true)
+	@Column(name="id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Override
 	public Long getId() {
@@ -41,7 +40,7 @@ public class BusinessEntityBrand extends MizeSceEntity implements Comparable<Bus
 		this.id = id;
 	}
 	
-	@Column(name="is_active",nullable=true)
+	@Column(name="is_active")
 	public String getIsActive() {
 		return isActive;
 	}

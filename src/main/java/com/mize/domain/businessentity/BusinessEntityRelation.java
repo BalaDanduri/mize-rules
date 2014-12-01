@@ -89,7 +89,7 @@ public class BusinessEntityRelation extends MizeSceEntity {
 		this.relatedBusinessEntity = relatedBusinessEntity;
 	}	
 	
-	@Column(name = "rltn_be_reference", length = 100, nullable = false)
+	@Column(name = "rltn_be_reference")
 	public String getReferenceNumber() {
 		return referenceNumber;
 	}

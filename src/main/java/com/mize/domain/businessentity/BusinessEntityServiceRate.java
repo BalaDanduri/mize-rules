@@ -21,16 +21,15 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.brand.Brand;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.product.Product;
 import com.mize.domain.product.ProductCategory;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.MizeDate;
-import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name = "business_entity_service_rate")
-public class BusinessEntityServiceRate extends MizeSceEntity implements Comparable<BusinessEntity>{
+public class BusinessEntityServiceRate extends MizeSceEntityAudit implements Comparable<BusinessEntity>{
 	private static final long serialVersionUID = -434328833392204604L;
 	private BusinessEntity businessEntity;
 	private Brand brand;
@@ -49,7 +48,7 @@ public class BusinessEntityServiceRate extends MizeSceEntity implements Comparab
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return id;
@@ -103,7 +102,7 @@ public class BusinessEntityServiceRate extends MizeSceEntity implements Comparab
 		this.product = product;
 	}
 
-	@Column(name ="service_type", length = 50)
+	@Column(name ="service_type")
 	public String getServiceType() {
 		return serviceType;
 	}
@@ -112,7 +111,7 @@ public class BusinessEntityServiceRate extends MizeSceEntity implements Comparab
 		this.serviceType = serviceType;
 	}
 	
-	@Column(name ="currency_code", length = 50)
+	@Column(name ="currency_code")
 	public String getCurrencyCode() {
 		return currencyCode;
 	}
@@ -132,7 +131,7 @@ public class BusinessEntityServiceRate extends MizeSceEntity implements Comparab
 		this.startDate = startDate;
 	}
 
-	@Column(name = "end_date", nullable = true)
+	@Column(name = "end_date")
 	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateJPA")
 	@JsonInclude(Include.NON_DEFAULT)
 	public MizeDate getEndDate() {
@@ -152,7 +151,7 @@ public class BusinessEntityServiceRate extends MizeSceEntity implements Comparab
 		this.serviceRate = serviceRate;
 	}
 
-	@Column(name = "created_date", updatable=false)
+	/*@Column(name = "created_date", updatable=false)
 	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@JsonInclude(Include.NON_DEFAULT)
     public MizeDateTime getCreatedDate() {
@@ -209,7 +208,7 @@ public class BusinessEntityServiceRate extends MizeSceEntity implements Comparab
 	
 	public void setUpdatedByUser(String updatedByUser) {
 		this.updatedByUser = updatedByUser;
-	}
+	}*/
 	
 	@Transient
 	@JsonIgnore

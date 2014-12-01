@@ -94,7 +94,7 @@ public class BusinessEntityIntl extends MizeSceEntity {
 		this.locale = locale;
 	}
 	
-	@Column(name = "be_first_name", length = 100, nullable = true)
+	@Column(name = "be_first_name")
 	public String getFirstName() {
 		return firstName;
 	}
@@ -103,7 +103,7 @@ public class BusinessEntityIntl extends MizeSceEntity {
 		this.firstName = firstName;
 	}
 	
-	@Column(name = "be_last_name", length = 100, nullable = true)
+	@Column(name = "be_last_name")
 	public String getLastName() {
 		return lastName;
 	}
@@ -112,7 +112,7 @@ public class BusinessEntityIntl extends MizeSceEntity {
 		this.lastName = lastName;
 	}
 	
-	@Column(name = "be_middle_initial", length = 50, nullable = true)
+	@Column(name = "be_middle_initial")
 	public String getMiddleInitial() {
 		return middleInitial;
 	}

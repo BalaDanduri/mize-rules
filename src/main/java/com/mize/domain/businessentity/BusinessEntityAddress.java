@@ -48,7 +48,7 @@ public class BusinessEntityAddress  extends MizeSceEntity  implements Comparable
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id",unique=true,nullable=false)
+    @Column(name="id")
 	@Override
 	public Long getId() {
 		return id;
@@ -58,7 +58,7 @@ public class BusinessEntityAddress  extends MizeSceEntity  implements Comparable
 	}
 	
 	@Transient
-	@Column(name="be_id",insertable=false,updatable=false)
+	@Column(name="be_id")
 	@JsonIgnore
 	public long getBeId() {
 		return beId;
@@ -97,7 +97,7 @@ public class BusinessEntityAddress  extends MizeSceEntity  implements Comparable
 		this.businessEntity = businessEntity;
 	}
 	
-	@Column(name = "is_preferred", length = 1)
+	@Column(name = "is_preferred")
 	public String getIsPreferred() {
 		return isPreferred;
 	}
