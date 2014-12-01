@@ -1,12 +1,5 @@
 package com.mize.domain.common;
 
-import java.math.BigDecimal;
-
-import org.joda.time.DateTime;
-
-import com.mize.domain.util.Formatter;
-import com.mize.domain.util.MizeDate;
-import com.mize.domain.util.MizeDateTime;
 
 public class WorkQueueResults extends MizeSceEntity implements Comparable<WorkQueueResults>{
 	private static final long serialVersionUID = 310189284913911659L;
@@ -108,40 +101,8 @@ public class WorkQueueResults extends MizeSceEntity implements Comparable<WorkQu
 		return true;
 	}
 	
-	public void populateResult(Object fieldName ,Object fieldValue){
-		if(fieldName != null){
-			this.fieldName =   (String)fieldName;
-			if(fieldValue instanceof Integer){
-				this.fieldValue = Formatter.toString((Integer)fieldValue);
-				this.fieldType = Integer.class.getSimpleName();
-			}else if(fieldValue instanceof Long){
-				this.fieldValue = Formatter.toString((Long)fieldValue);
-				this.fieldType = Long.class.getSimpleName();		
-			}else if(fieldValue instanceof Double){
-				this.fieldValue = Formatter.toString((Double)fieldValue);
-				this.fieldType = Double.class.getSimpleName();
-			}else if(fieldValue instanceof BigDecimal){
-				this.fieldValue = Formatter.toString((BigDecimal)fieldValue);
-				this.fieldType = BigDecimal.class.getSimpleName();
-			}else if(fieldValue instanceof DateTime){
-				this.fieldValue = Formatter.getDateTime((DateTime)fieldValue);
-				this.fieldType = DateTime.class.getSimpleName();
-			}else if(fieldValue instanceof MizeDateTime){
-				this.fieldValue = Formatter.getMizeDateTime((MizeDateTime)fieldValue);
-				this.fieldType = MizeDateTime.class.getSimpleName();
-			}else if(fieldValue instanceof MizeDate){
-				this.fieldValue = Formatter.getMizeDate((MizeDate)fieldValue);
-				this.fieldType = MizeDate.class.getSimpleName();
-			}else{
-				this.fieldValue = (String)fieldValue;
-				this.fieldType = String.class.getSimpleName();
-			}
-		}
-	}
-
 	@Override
 	public int compareTo(WorkQueueResults arg0) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
