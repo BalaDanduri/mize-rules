@@ -24,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.util.MizeDate;
 
 /**
  * @author HarishBurra
@@ -39,8 +39,8 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	private ServiceEntity serviceEntity;
 	private String requestType;
 	private String requestCode;
-	private MizeDateTime failureDate;
-	private MizeDateTime repairDate;
+	private MizeDate failureDate;
+	private MizeDate repairDate;
 	private String repairSiteCode;
 	private String complaintCode;
 	private String complaintDescription;
@@ -107,23 +107,23 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	
 	
 	@Column(name = "failure_date", nullable = true)
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getFailureDate() {
+	@Type(type = "com.mize.domain.util.MizeDateJPA")
+	public MizeDate getFailureDate() {
 		return failureDate;
 	}
 	
-	public void setFailureDate(MizeDateTime failureDate) {
+	public void setFailureDate(MizeDate failureDate) {
 		this.failureDate = failureDate;
 	}
 	
 	
 	@Column(name = "repair_date", nullable = true)
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getRepairDate() {
+	@Type(type = "com.mize.domain.util.MizeDateJPA")
+	public MizeDate getRepairDate() {
 		return repairDate;
 	}
 	
-	public void setRepairDate(MizeDateTime repairDate) {
+	public void setRepairDate(MizeDate repairDate) {
 		this.repairDate = repairDate;
 	}
 	

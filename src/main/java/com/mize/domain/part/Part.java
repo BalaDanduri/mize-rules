@@ -19,28 +19,25 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Inheritance
 @DiscriminatorColumn(name = "discriminator")
 @DiscriminatorValue("Part")
-@Table(name = "part", uniqueConstraints = {@UniqueConstraint (columnNames = {"tenant_id", "part_code"})})
-public class Part extends MizeSceEntity implements Comparable<Part>{	
+@Table(name = "part")
+public class Part extends MizeSceEntityAudit implements Comparable<Part>{	
 
 	private static final long serialVersionUID = 2686388059625468728L;
 	private BusinessEntity tenant;
@@ -104,7 +101,7 @@ public class Part extends MizeSceEntity implements Comparable<Part>{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return id;
@@ -118,32 +115,32 @@ public class Part extends MizeSceEntity implements Comparable<Part>{
 		return tenant;
 	}
 
-	@Column(name = "part_code", length = 50, nullable = false)
+	@Column(name = "part_code")
 	public String getCode() {
 		return code;
 	}
 
-	@Column(name = "part_type", length = 50, nullable = true)
+	@Column(name = "part_type")
 	public String getType() {
 		return type;
 	}
 
-	@Column(name = "is_active", length = 1, nullable = true)
+	@Column(name = "is_active")
 	public String getIsActive() {
 		return isActive;
 	}
 
-	@Column(name = "is_kit", length = 1, nullable = true)
+	@Column(name = "is_kit")
 	public String getIsKit() {
 		return isKit;
 	}
 
-	@Column(name = "is_serialized", length = 1, nullable = true)
+	@Column(name = "is_serialized")
 	public String getIsSerialized() {
 		return isSerialized;
 	}
 
-	@Column(name = "is_returnable", length = 1, nullable = true)
+	@Column(name = "is_returnable")
 	public String getIsReturnable() {
 		return isReturnable;
 	}
@@ -156,7 +153,7 @@ public class Part extends MizeSceEntity implements Comparable<Part>{
 		return partAttributes;
 	}
 
-	@Column(name = "uom", length = 50, nullable = true)
+	@Column(name = "uom")
 	public String getUom() {
 		return uom;
 	}
@@ -239,72 +236,6 @@ public class Part extends MizeSceEntity implements Comparable<Part>{
 
 	public void setPartPrices(List<PartPrice> partPrices) {
 		this.partPrices = partPrices;
-	}
-
-	@Column(name = "created_by" , updatable=false)
-	@JsonIgnore
-	public Long getCreatedBy() {
-		return createdBy;
-	}
-	
-	@JsonIgnore
-	public void setCreatedBy(Long createdBy) {		
-		super.setCreatedBy(createdBy);
-	}
-	
-	@JsonIgnore
-	public void setUpdatedBy(Long updatedBy) {
-		this.updatedBy = updatedBy;
-	}
-
-	@Column(name = "updated_by")
-	@JsonIgnore
-	public Long getUpdatedBy() {		
-		return super.getUpdatedBy();
-	}
-	
-	@JsonIgnore(false)
-	public void setCreatedDate(MizeDateTime createdDate) {
-		this.createdDate = createdDate;
-	}
-	
-	@Column(name = "created_date",updatable = false)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@JsonInclude(Include.NON_DEFAULT)
-	@JsonIgnore(value = false)
-	public MizeDateTime getCreatedDate() {
-		return createdDate;
-	}
-
-	@JsonIgnore(false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		this.updatedDate = updatedDate;
-	}
-	
-	@Column(name = "updated_date")
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@JsonInclude(Include.NON_DEFAULT)
-	@JsonIgnore(value = false)
-	public MizeDateTime getUpdatedDate() {
-		return updatedDate;
-	}
-	
-	@Column(name = "created_by_user",updatable=false)
-	public String getCreatedByUser() {
-		return createdByUser;
-	}
-
-	public void setCreatedByUser(String createdByUser) {
-		this.createdByUser = createdByUser;
-	}
-
-	@Column(name = "updated_by_user")
-	public String getUpdatedByUser() {
-		return updatedByUser;
-	}
-
-	public void setUpdatedByUser(String updatedByUser) {
-		this.updatedByUser = updatedByUser;
 	}
 	
 	@Override

@@ -16,25 +16,22 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.Type;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityComment;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.MizeDate;
-import com.mize.domain.util.MizeDateTime;
 
 @Entity
-@Table(name = "discount", uniqueConstraints = { @UniqueConstraint(columnNames = {"id"}) })
-public class Discount extends MizeSceEntity implements Comparable<Discount> {
+@Table(name = "discount")
+public class Discount extends MizeSceEntityAudit implements Comparable<Discount> {
 
 	private static final long serialVersionUID = -5386693947574878416L;	
 	private BusinessEntity tenant;
@@ -73,7 +70,7 @@ public class Discount extends MizeSceEntity implements Comparable<Discount> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return id;
@@ -95,7 +92,7 @@ public class Discount extends MizeSceEntity implements Comparable<Discount> {
 		this.tenant = tenant;
 	}
 
-	@Column(name = "discount_number",length = 250)
+	@Column(name = "discount_number")
 	public String getDiscountNumber() {
 		return this.discountNumber;
 	}
@@ -132,7 +129,7 @@ public class Discount extends MizeSceEntity implements Comparable<Discount> {
 		this.orderType = orderType;
 	}
 
-	@Column(name = "start_date", nullable = true)
+	@Column(name = "start_date")
 	@Type(type = "com.mize.domain.util.MizeDateJPA")
 	public MizeDate getStartDate() {
 		return startDate;
@@ -142,7 +139,7 @@ public class Discount extends MizeSceEntity implements Comparable<Discount> {
 		this.startDate = startDate;
 	}
 
-	@Column(name = "end_date", nullable = true)
+	@Column(name = "end_date")
 	@Type(type="com.mize.domain.util.MizeDateJPA")
 	public MizeDate getEndDate() {
 		return endDate;
@@ -183,74 +180,6 @@ public class Discount extends MizeSceEntity implements Comparable<Discount> {
 
 	public void setComments(List<DiscountComment> comments) {
 		this.comments = comments;
-	}
-	
-	public void setCreatedBy(Long createdBy) {
-		this.createdBy = createdBy;
-	}
-	
-	@Column(name = "created_by" , updatable=false)
-	public Long getCreatedBy() {
-		return createdBy;
-	}
-	
-	@JsonIgnore(value=false)
-	public void setUpdatedBy(Long updatedBy) {
-		this.updatedBy = updatedBy;
-	}
-
-	@JsonIgnore(value=false)
-	@Column(name = "updated_by")
-	public Long getUpdatedBy() {		
-		return super.getUpdatedBy();
-	}
-	
-	@Override
-	@JsonIgnore
-	@Column(name = "created_by_user",updatable=false)
-	public String getCreatedByUser() {
-		return super.getCreatedByUser();
-	}
-	
-	@Override
-	@JsonIgnore
-	public void setCreatedByUser(String createdByUser) {
-		super.setCreatedByUser(createdByUser);
-	}
-	
-	@Override
-	@JsonIgnore
-	@Column(name = "updated_by_user")
-	public String getUpdatedByUser() {
-		return super.getUpdatedByUser();
-	}
-	
-	@Override
-	@JsonIgnore
-	public void setUpdatedByUser(String updatedByUser) {
-		super.setUpdatedByUser(updatedByUser);
-	}
-	
-	public void setCreatedDate(MizeDateTime createdDate) {
-		this.createdDate = createdDate;
-	}
-	
-	@Column(name = "created_date",updatable = false)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@JsonInclude(Include.NON_DEFAULT)
-	public MizeDateTime getCreatedDate() {
-		return createdDate;
-	}
-
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		this.updatedDate = updatedDate;
-	}
-	
-	@Column(name = "updated_date")
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@JsonInclude(Include.NON_DEFAULT)
-	public MizeDateTime getUpdatedDate() {
-		return updatedDate;
 	}
 	
 	@Transient

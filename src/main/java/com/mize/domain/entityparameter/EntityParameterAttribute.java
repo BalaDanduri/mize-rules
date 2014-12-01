@@ -10,13 +10,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.MizeSceEntity;
 
 @Entity
-@Table(name = "entity_parameter_attribute", uniqueConstraints = { @UniqueConstraint(columnNames = {"id"}) })
+@Table(name = "entity_parameter_attribute")
 public class EntityParameterAttribute extends MizeSceEntity implements Comparable<EntityParameterAttribute>{
 
 	private static final long serialVersionUID = -4461151996428842735L;
@@ -43,7 +42,7 @@ public class EntityParameterAttribute extends MizeSceEntity implements Comparabl
 	}
 
 	@Id
-	@Column(name="id",nullable=false,unique=true)
+	@Column(name="id",unique=true)
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Override
 	public Long getId() {
@@ -54,12 +53,12 @@ public class EntityParameterAttribute extends MizeSceEntity implements Comparabl
 		this.id = id;
 	}
 
-	@Column(name = "attribute_code",length = 50)
+	@Column(name = "attribute_code")
 	public String getCode() {
 		return code;
 	}
 
-	@Column(name = "attribute_value",length = 50)
+	@Column(name = "attribute_value")
 	public String getValue() {
 		return value;
 	}

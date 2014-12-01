@@ -18,27 +18,26 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.Type;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.common.EntityComment;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.product.PartSubstituteComment;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.util.MizeDate;
 @Entity
 @Table(name = "part_substitute")
-public class PartSubstitute extends MizeSceEntity implements Comparable<PartSubstitute> {
+public class PartSubstitute extends MizeSceEntityAudit implements Comparable<PartSubstitute> {
 
 	private static final long serialVersionUID = -8910398875058216907L;
 
 	private Part originalPart;
 	private Part substitutedPart;
 	private String code;
-	private MizeDateTime date;
-	private MizeDateTime endDate;
+	private MizeDate date;
+	private MizeDate endDate;
 	private EntityComment entityComment;
 	private List<PartSubstituteComment> comments = new ArrayList<PartSubstituteComment>();
     private String familyCode;
@@ -51,7 +50,7 @@ public class PartSubstitute extends MizeSceEntity implements Comparable<PartSubs
 		super();
 	}
 		
-	public PartSubstitute(Long id,String originalPartCode,String substitutePartCode,String fmailyCode,String code ,MizeDateTime date,MizeDateTime endDate,Integer sequenceNo){
+	public PartSubstitute(Long id,String originalPartCode,String substitutePartCode,String fmailyCode,String code ,MizeDate date,MizeDate endDate,Integer sequenceNo){
 		super();
 		this.id = id;
 		if(originalPartCode != null){
@@ -71,7 +70,7 @@ public class PartSubstitute extends MizeSceEntity implements Comparable<PartSubs
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return id;
@@ -118,59 +117,16 @@ public class PartSubstitute extends MizeSceEntity implements Comparable<PartSubs
 		this.user = user;
 	}
 	
-	@Column(name = "substitute_date", nullable = true)
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getDate() {
+	@Column(name = "substitute_date")
+	@Type(type = "com.mize.domain.util.MizeDateJPA")
+	public MizeDate getDate() {
 		return date;
 	}
 	
-	@Column(name = "end_date", nullable = true)
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getEndDate() {
+	@Column(name = "end_date")
+	@Type(type = "com.mize.domain.util.MizeDateJPA")
+	public MizeDate getEndDate() {
 		return endDate;
-	}
-	@Column(name = "created_date", updatable = false)
-    @org.hibernate.annotations.Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	@JsonIgnore(false)
-    public MizeDateTime getCreatedDate() {
-        return this.createdDate;
-    } 
-
-
-	@Override	
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@Column(name = "updated_date")
-	@JsonIgnore(false)
-	public MizeDateTime getUpdatedDate() {
-		return updatedDate;
-	}
-
-	@Override
-    @JsonIgnore(value=false)
-    @Column(name = "created_by",updatable = false)
-    public Long getCreatedBy() {                      
-        return super.getCreatedBy();
-    }
-	
-	@Override
-	@JsonIgnore
-	@Column(name = "updated_by")
-	public Long getUpdatedBy() {		
-		return super.getUpdatedBy();
-	}
-	
-	@Override
-	@JsonIgnore
-	@Column(name = "created_by_user",updatable=false)
-	public String getCreatedByUser() {
-		return super.getCreatedByUser();
-	}
-	
-	@Override
-	@JsonIgnore
-	@Column(name = "updated_by_user")
-	public String getUpdatedByUser() {
-		return super.getUpdatedByUser();
 	}
 	
 	@Override
@@ -190,50 +146,14 @@ public class PartSubstitute extends MizeSceEntity implements Comparable<PartSubs
 		this.code = code;
 	}
 
-	public void setDate(MizeDateTime date) {
+	public void setDate(MizeDate date) {
 		this.date = date;
 	}
 	
-	public void setEndDate(MizeDateTime endDate) {
+	public void setEndDate(MizeDate endDate) {
 		this.endDate = endDate;
 	}
 
-	@Override
-	@JsonIgnore(false)
-	public void setCreatedDate(MizeDateTime createdDate) {
-		super.createdDate = createdDate;
-	}
-
-	@Override
-	@JsonIgnore(false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		super.updatedDate = updatedDate;
-	}
-
-	@Override
-	@JsonIgnore
-	public void setCreatedBy(Long createdBy) {		
-		super.setCreatedBy(createdBy);
-	}
-
-	@Override
-	@JsonIgnore
-	public void setUpdatedBy(Long updatedBy) {		
-		super.setUpdatedBy(updatedBy);
-	}
-	
-	@Override
-	@JsonIgnore
-	public void setCreatedByUser(String createdByUser) {
-		super.setCreatedByUser(createdByUser);
-	}
-	
-	@Override
-	@JsonIgnore
-	public void setUpdatedByUser(String updatedByUser) {
-		super.setUpdatedByUser(updatedByUser);
-	}
- 
 	public void setFamilyCode(String familyCode) {
 		this.familyCode = familyCode;
 	}

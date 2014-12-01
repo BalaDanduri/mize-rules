@@ -16,33 +16,30 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Type;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.common.Country;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.util.MizeDate;
 
 @Entity
 @Inheritance
 @DiscriminatorColumn(name = "discriminator")
 @DiscriminatorValue("PartPrice")
 @Table(name = "part_price")
-public class PartPrice extends MizeSceEntity implements Comparable<PartPrice>{
+public class PartPrice extends MizeSceEntityAudit implements Comparable<PartPrice>{
 
 	private static final long serialVersionUID = -3133914500164853623L;
 	private Part part;
 	private BigDecimal unitPrice;
 	private BigDecimal listPrice;
 	private BigDecimal netPrice;
-	private MizeDateTime startDate;
-	private MizeDateTime endDate;
+	private MizeDate startDate;
+	private MizeDate endDate;
 	private String currencyCode;
 	private Country country;
 	private Long taxId;
@@ -54,7 +51,7 @@ public class PartPrice extends MizeSceEntity implements Comparable<PartPrice>{
 	}	
 
 	public PartPrice(Part part, BigDecimal unitPrice, BigDecimal listPrice,
-			BigDecimal netPrice, MizeDateTime startDate, MizeDateTime endDate,
+			BigDecimal netPrice, MizeDate startDate, MizeDate endDate,
 			String currencyCode, Country country, Long taxId) {
 		super();
 		this.part = part;
@@ -70,7 +67,7 @@ public class PartPrice extends MizeSceEntity implements Comparable<PartPrice>{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id")
 	@Override
 	public Long getId() {		
 		return id;
@@ -84,32 +81,32 @@ public class PartPrice extends MizeSceEntity implements Comparable<PartPrice>{
 	}
 
 
-	@Column(name = "unit_price", nullable = true)
+	@Column(name = "unit_price")
 	public BigDecimal getUnitPrice() {
 		return unitPrice;
 	}
 	
-	@Column(name = "list_price", nullable = true)
+	@Column(name = "list_price")
 	public BigDecimal getListPrice() {
 		return listPrice;
 	}
 	
-	@Column(name = "net_price", nullable = true)
+	@Column(name = "net_price")
 	public BigDecimal getNetPrice() {
 		return netPrice;
 	}
 	
-	@Column(name = "start_date", nullable = true)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	@Column(name = "start_date")
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateJPA")
     @JsonInclude(Include.NON_DEFAULT)
-	public MizeDateTime getStartDate() {
+	public MizeDate getStartDate() {
 		return startDate;
 	}
 
-	@Column(name = "end_date", nullable = true)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	@Column(name = "end_date")
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateJPA")
     @JsonInclude(Include.NON_DEFAULT)
-	public MizeDateTime getEndDate() {
+	public MizeDate getEndDate() {
 		return endDate;
 	}
     
@@ -121,12 +118,12 @@ public class PartPrice extends MizeSceEntity implements Comparable<PartPrice>{
 		return country;
 	}
 	
-	@Column(name = "currency_code", nullable = true, length = 50)
+	@Column(name = "currency_code")
 	public String getCurrencyCode() {
 		return currencyCode;
 	}
     
-	@Column(name = "tax_id", nullable = true)
+	@Column(name = "tax_id")
 	public Long getTaxId() {
 		return taxId;
 	}
@@ -153,82 +150,12 @@ public class PartPrice extends MizeSceEntity implements Comparable<PartPrice>{
 		this.netPrice = netPrice;
 	}
 
-	public void setStartDate(MizeDateTime startDate) {
+	public void setStartDate(MizeDate startDate) {
 		this.startDate = startDate;
 	}
 
-	public void setEndDate(MizeDateTime endDate) {
+	public void setEndDate(MizeDate endDate) {
 		this.endDate = endDate;
-	}
-	
-	@Override	
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@Column(name = "created_date",updatable=false)
-    @JsonInclude(Include.NON_DEFAULT)
-	@JsonIgnore(false)
-	public MizeDateTime getCreatedDate() {
-		return createdDate;
-	}
-
-	@Override	
-	@Column(name = "updated_date")
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@JsonInclude(Include.NON_DEFAULT)
-	@JsonIgnore(value = false)
-	public MizeDateTime getUpdatedDate() {
-		return updatedDate;
-	}
-	
-	@Override
-	@JsonIgnore(false)
-	public void setCreatedDate(MizeDateTime createdDate) {
-		super.createdDate = createdDate;
-	}
-
-	@Override
-	@JsonIgnore(false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		super.updatedDate = updatedDate;
-	}
-	
-	@Column(name = "created_by" , updatable=false)
-	@JsonIgnore
-	public Long getCreatedBy() {
-		return createdBy;
-	}
-	
-	@JsonIgnore
-	public void setCreatedBy(Long createdBy) {		
-		super.setCreatedBy(createdBy);
-	}
-	
-	@JsonIgnore
-	public void setUpdatedBy(Long updatedBy) {
-		this.updatedBy = updatedBy;
-	}
-
-	@Column(name = "updated_by")
-	@JsonIgnore
-	public Long getUpdatedBy() {		
-		return super.getUpdatedBy();
-	}
-	
-	@Column(name = "created_by_user")
-	public String getCreatedByUser() {
-		return createdByUser;
-	}
-
-	public void setCreatedByUser(String createdByUser) {
-		this.createdByUser = createdByUser;
-	}
-
-	@Column(name = "updated_by_user")
-	public String getUpdatedByUser() {
-		return updatedByUser;
-	}
-
-	public void setUpdatedByUser(String updatedByUser) {
-		this.updatedByUser = updatedByUser;
 	}
 	
 	public void setCurrencyCode(String currencyCode) {

@@ -10,14 +10,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.MizeSceEntity;
 
 @Entity
-@Table(name = "picklist_comment", uniqueConstraints = { @UniqueConstraint(columnNames = {"id"}) })
+@Table(name = "picklist_comment")
 public class PickListComment  extends MizeSceEntity implements Comparable<PickListComment> {
 	private static final long serialVersionUID = 5105389907084215025L;
 	private PickList pickList;
@@ -35,7 +34,7 @@ public class PickListComment  extends MizeSceEntity implements Comparable<PickLi
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return id;

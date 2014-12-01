@@ -13,13 +13,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.MizeSceEntity;
 
 @Entity
-@Table(name = "part_kit_item", uniqueConstraints = {@UniqueConstraint (columnNames = {"part_id", "part_kit_id"})})
+@Table(name = "part_kit_item")
 public class PartKitItem extends MizeSceEntity implements Comparable<PartKitItem>{
 
 	private static final long serialVersionUID = 1L;
@@ -42,7 +41,7 @@ public class PartKitItem extends MizeSceEntity implements Comparable<PartKitItem
    
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return id;
@@ -61,7 +60,7 @@ public class PartKitItem extends MizeSceEntity implements Comparable<PartKitItem
 		return partKit;
 	}
 	
-	@Column(name = "part_qty", nullable = true, length = 30)
+	@Column(name = "part_qty")
 	public BigDecimal getPartQty() {
 		return partQty;
 	}

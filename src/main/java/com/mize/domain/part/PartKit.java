@@ -16,21 +16,19 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
-import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.common.MizeSceEntityAudit;
+import com.mize.domain.util.MizeDate;
 
 @Entity
-@Table(name = "part_kit", uniqueConstraints = {@UniqueConstraint (columnNames = {"part_id"})})
-public class PartKit extends MizeSceEntity implements Comparable<PartKit>{
+@Table(name = "part_kit")
+public class PartKit extends MizeSceEntityAudit implements Comparable<PartKit>{
 
 	private static final long serialVersionUID = 4502594935806813253L;
 	
@@ -38,8 +36,8 @@ public class PartKit extends MizeSceEntity implements Comparable<PartKit>{
 	private String priceMethod;
 	private String type;
 	private String isActive;
-	private MizeDateTime startDate;
-	private MizeDateTime endDate;
+	private MizeDate startDate;
+	private MizeDate endDate;
 	private List<PartKitItem> partKitItems = new ArrayList<PartKitItem>();
 	@Transient
 	private User user;
@@ -57,7 +55,7 @@ public class PartKit extends MizeSceEntity implements Comparable<PartKit>{
 	}
 	
 	public PartKit(Part part, String priceMethod, String type,
-			String isActive, MizeDateTime startDate, MizeDateTime endDate,
+			String isActive, MizeDate startDate, MizeDate endDate,
 			List<PartKitItem> partKitItems) {
 		super();
 		this.part = part;
@@ -71,7 +69,7 @@ public class PartKit extends MizeSceEntity implements Comparable<PartKit>{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return id;
@@ -84,79 +82,33 @@ public class PartKit extends MizeSceEntity implements Comparable<PartKit>{
 		return part;
 	}
 
-	@Column(name = "price_method", length = 50, nullable = false)
+	@Column(name = "price_method")
 	public String getPriceMethod() {
 		return priceMethod;
 	}
 
-	@Column(name = "kit_type", length = 50, nullable = false)
+	@Column(name = "kit_type")
 	public String getType() {
 		return type;
 	}
 
-	@Column(name = "is_active", length = 1, nullable = false)
+	@Column(name = "is_active")
 	public String getIsActive() {
 		return isActive;
 	}
 
 	
-	@Column(name = "start_date", nullable = false)
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getStartDate() {
+	@Column(name = "start_date")
+	@Type(type="com.mize.domain.util.MizeDateJPA")
+	public MizeDate getStartDate() {
 		return startDate;
 	}
 
 	
-	@Column(name = "end_date", nullable = false)
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getEndDate() {
+	@Column(name = "end_date")
+	@Type(type="com.mize.domain.util.MizeDateJPA")
+	public MizeDate getEndDate() {
 		return endDate;
-	}
-	
-	@Override	
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@Column(name = "created_date",updatable=false)
-	@JsonIgnore(false)
-	public MizeDateTime getCreatedDate() {
-		return createdDate;
-	}
-	
-	@Override	
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@Column(name = "updated_date")
-	@JsonIgnore(false)
-	public MizeDateTime getUpdatedDate() {
-		return updatedDate;
-	}
-	
-	
-	@Override
-	@JsonIgnore
-	@Column(name = "created_by",updatable=false)
-	public Long getCreatedBy() {		
-		return super.getCreatedBy();
-	}
-
-	
-	@Override
-	@JsonIgnore
-	@Column(name = "updated_by")
-	public Long getUpdatedBy() {		
-		return super.getUpdatedBy();
-	}
-	
-	@Override
-	@JsonIgnore
-	@Column(name = "created_by_user",updatable=false)
-	public String getCreatedByUser() {
-		return super.getCreatedByUser();
-	}
-	
-	@Override
-	@JsonIgnore
-	@Column(name = "updated_by_user")
-	public String getUpdatedByUser() {
-		return super.getUpdatedByUser();
 	}
 	
 	@OneToMany(cascade={CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = "partKit" , orphanRemoval= true)
@@ -191,48 +143,12 @@ public class PartKit extends MizeSceEntity implements Comparable<PartKit>{
 		this.isActive = isActive;
 	}
 
-	public void setStartDate(MizeDateTime startDate) {
+	public void setStartDate(MizeDate startDate) {
 		this.startDate = startDate;
 	}
 
-	public void setEndDate(MizeDateTime endDate) {
+	public void setEndDate(MizeDate endDate) {
 		this.endDate = endDate;
-	}
-	
-	@Override
-	@JsonIgnore(false)
-	public void setCreatedDate(MizeDateTime createdDate) {
-		super.createdDate = createdDate;
-	}
-	
-	@Override
-	@JsonIgnore(false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		super.updatedDate = updatedDate;
-	}
-	
-	@Override
-	@JsonIgnore
-	public void setCreatedBy(Long createdBy) {		
-		super.setCreatedBy(createdBy);
-	}
-	
-	@Override
-	@JsonIgnore
-	public void setUpdatedBy(Long updatedBy) {		
-		super.setUpdatedBy(updatedBy);
-	}
-	
-	@Override
-	@JsonIgnore
-	public void setCreatedByUser(String createdByUser) {
-		super.setCreatedByUser(createdByUser);
-	}
-	
-	@Override
-	@JsonIgnore
-	public void setUpdatedByUser(String updatedByUser) {
-		super.setUpdatedByUser(updatedByUser);
 	}
 	
 	@Transient	

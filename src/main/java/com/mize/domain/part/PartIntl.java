@@ -12,7 +12,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.Locale;
@@ -22,7 +21,7 @@ import com.mize.domain.common.MizeSceEntity;
 @Inheritance
 @DiscriminatorColumn(name = "discriminator")
 @DiscriminatorValue("PartIntl")
-@Table(name = "part_intl", uniqueConstraints = {@UniqueConstraint (columnNames = {"part_id", "locale_id"})})
+@Table(name = "part_intl")
 public class PartIntl extends MizeSceEntity implements Comparable<PartIntl> {	
 	
 	private static final long serialVersionUID = -1164448119809296797L;
@@ -45,7 +44,7 @@ public class PartIntl extends MizeSceEntity implements Comparable<PartIntl> {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id")
 	@Override
 	public Long getId() {		
 		return id;
@@ -65,12 +64,12 @@ public class PartIntl extends MizeSceEntity implements Comparable<PartIntl> {
 		return locale;
 	}
 
-	@Column(name = "part_name", length = 100, nullable = true)
+	@Column(name = "part_name")
 	public String getName() {
 		return name;
 	}
 	
-	@Column(name = "part_description", length = 500, nullable = true)
+	@Column(name = "part_description")
 	public String getDescription() {
 		return description;
 	}

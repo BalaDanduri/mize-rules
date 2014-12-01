@@ -10,14 +10,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.MizeSceEntity;
 
 @Entity
-@Table(name = "entity_parameter_comment", uniqueConstraints = { @UniqueConstraint(columnNames = {"id"}) })
+@Table(name = "entity_parameter_comment")
 public class EntityParameterComment  extends MizeSceEntity implements Comparable<EntityParameterComment>{
 
 	private static final long serialVersionUID = -1218611300848444271L;
@@ -35,7 +34,7 @@ public class EntityParameterComment  extends MizeSceEntity implements Comparable
 	}
 
 	@Id
-	@Column(name="id",nullable=false,unique=true)
+	@Column(name="id",unique=true)
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Override
 	public Long getId() {

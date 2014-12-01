@@ -81,8 +81,8 @@ public class EntityParameterTest extends JPATest{
 		entityParameter.setTenant(tenant);
 		entityParameter.setType("OrderTypeAndLocation");
 		entityParameter.setCode("Stock");
-		entityParameter.setStartDate(Formatter.toMizeDateTime(DateTime.now()));
-		entityParameter.setEndDate(Formatter.toMizeDateTime(DateTime.now().plusMonths(2)));
+		entityParameter.setStartDate(Formatter.toMizeDate(DateTime.now()));
+		entityParameter.setEndDate(Formatter.toMizeDate(DateTime.now().plusMonths(2)));
 		entityParameter.setCreatedDate(Formatter.toMizeDateTime(DateTime.now()));
 		entityParameter.setUpdatedDate(Formatter.toMizeDateTime(DateTime.now().plusMonths(2)));
 		entityParameter.setUpdatedBy(779L);
@@ -127,8 +127,8 @@ public class EntityParameterTest extends JPATest{
 			entityParameter.setTenant(dbTenant);
 			entityParameter.setType(rs.getString("entity_type"));
 			entityParameter.setCode(rs.getString("entity_code"));
-			entityParameter.setStartDate(Formatter.toMizeDateTime(rs.getTimestamp("start_date")));
-			entityParameter.setEndDate(Formatter.toMizeDateTime(rs.getTimestamp("end_date")));
+			entityParameter.setStartDate(Formatter.toMizeDate(rs.getTimestamp("start_date")));
+			entityParameter.setEndDate(Formatter.toMizeDate(rs.getTimestamp("end_date")));
 			entityParameter.setCreatedDate(Formatter.toMizeDateTime(rs.getTimestamp("created_date")));
 			entityParameter.setUpdatedDate(Formatter.toMizeDateTime(rs.getTimestamp("updated_date")));
 			entityParameter.setUpdatedBy(rs.getLong("updated_by"));

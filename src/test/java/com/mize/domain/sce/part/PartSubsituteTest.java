@@ -23,6 +23,7 @@ import com.mize.domain.part.PartSubstitute;
 import com.mize.domain.product.PartSubstituteComment;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;
+import com.mize.domain.util.MizeDate;
 import com.mize.domain.util.MizeDateTime;
 
 @ContextConfiguration(locations={"/test-context.xml"})
@@ -88,8 +89,8 @@ public class PartSubsituteTest extends JPATest {
 			partSubstitute.setCode("admin"+System.currentTimeMillis());
 			partSubstitute.setCreatedBy(776L);
 			partSubstitute.setCreatedDate(MizeDateTime.now());
-			partSubstitute.setEndDate(MizeDateTime.now());
-			partSubstitute.setDate(MizeDateTime.now());
+			partSubstitute.setEndDate(MizeDate.now());
+			partSubstitute.setDate(MizeDate.now());
 			partSubstitute.setSequenceNo(1);
 			partSubstitute.setUpdatedBy(776l);
 			
@@ -123,8 +124,8 @@ public class PartSubsituteTest extends JPATest {
 				partSubstitute.setCode(rs.getString("substitute_code"));
 				partSubstitute.setCreatedBy(rs.getLong("created_by"));
 				partSubstitute.setCreatedDate(Formatter.toMizeDateTime(rs.getTimestamp("created_date")));
-				partSubstitute.setEndDate(Formatter.toMizeDateTime(rs.getTimestamp("end_date")));
-				partSubstitute.setDate(Formatter.toMizeDateTime(rs.getTimestamp("substitute_date")));
+				partSubstitute.setEndDate(Formatter.toMizeDate(rs.getTimestamp("end_date")));
+				partSubstitute.setDate(Formatter.toMizeDate(rs.getTimestamp("substitute_date")));
 				partSubstitute.setSequenceNo(rs.getInt("sequence_no"));
 				partSubstitute.setUpdatedBy(rs.getLong("updated_by"));
 				

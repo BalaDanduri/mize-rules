@@ -12,7 +12,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.MizeSceEntity;
@@ -21,7 +20,7 @@ import com.mize.domain.common.MizeSceEntity;
 @Inheritance
 @DiscriminatorColumn(name = "discriminator")
 @DiscriminatorValue("PartAttribute")
-@Table(name = "part_attribute", uniqueConstraints = {@UniqueConstraint (columnNames = {"part_id"})})
+@Table(name = "part_attribute")
 public class PartAttribute extends MizeSceEntity implements Comparable<PartAttribute>{
 
 	private static final long serialVersionUID = 5827509183800749241L;
@@ -44,7 +43,7 @@ public class PartAttribute extends MizeSceEntity implements Comparable<PartAttri
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return id;
@@ -57,17 +56,17 @@ public class PartAttribute extends MizeSceEntity implements Comparable<PartAttri
 		return part;
 	}
 
-	@Column(name = "attribute_value", length = 100, nullable = true)
+	@Column(name = "attribute_value")
 	public String getValue() {
 		return value;
 	}
 
-	@Column(name = "attribute_uom", length = 50, nullable = true)
+	@Column(name = "attribute_uom")
 	public String getUom() {
 		return uom;
 	}
 	
-	@Column(name = "attribute_code", length = 50, nullable = true)
+	@Column(name = "attribute_code")
 	public String getCode() {
 		return code;
 	}

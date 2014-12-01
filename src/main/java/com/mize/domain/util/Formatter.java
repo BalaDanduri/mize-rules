@@ -984,6 +984,16 @@ public final class Formatter {
 		}
 		return inBetween(startTime.getDateTime(), endTime.getDateTime(), inputTime.getDateTime());
 	}
+
+	public static boolean inBetween(MizeDate startDate,MizeDate endDate , MizeDate inputDate){
+		if(startDate == null && endDate == null && inputDate == null){
+			return true;
+		}
+		if(startDate == null || endDate == null || inputDate == null){
+			return false;
+		}
+		return (inputDate.compareTo(startDate) >= 0 && inputDate.compareTo(endDate) <= 0);
+	}
 	
 	public static double formattedBigDecimal(BigDecimal value) {
 		if(value == null){

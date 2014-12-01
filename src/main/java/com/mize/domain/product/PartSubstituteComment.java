@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.EntityComment;
@@ -18,7 +17,7 @@ import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.part.PartSubstitute;
 
 @Entity
-@Table(name = "part_substitute_comment", uniqueConstraints = {@UniqueConstraint (columnNames = {"id"})})
+@Table(name = "part_substitute_comment")
 public class PartSubstituteComment extends MizeSceEntity implements Comparable<PartSubstituteComment>{
 	
 	private static final long serialVersionUID = -4772128184803476915L;

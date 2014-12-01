@@ -10,14 +10,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.MizeSceEntity;
 
 @Entity
-@Table(name = "discount_comment", uniqueConstraints = { @UniqueConstraint(columnNames = {"id"}) })
+@Table(name = "discount_comment")
 public class DiscountComment extends MizeSceEntity implements Comparable<DiscountComment> {
 
 	private static final long serialVersionUID = -867858860499195762L;
@@ -36,7 +35,7 @@ public class DiscountComment extends MizeSceEntity implements Comparable<Discoun
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return id;

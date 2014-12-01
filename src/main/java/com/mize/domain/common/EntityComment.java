@@ -6,14 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.mize.domain.util.MizeDateTime;
 
 @Entity
-@Table(name = "entity_comment", uniqueConstraints = {@UniqueConstraint (columnNames = {"id"})})
-public class EntityComment extends MizeSceEntity implements Comparable<EntityComment>{
+@Table(name = "entity_comment")
+public class EntityComment extends MizeSceEntityAudit implements Comparable<EntityComment>{
 
 	private static final long serialVersionUID = -6912661566113329768L;
 	private String commentType;
@@ -35,7 +31,7 @@ public class EntityComment extends MizeSceEntity implements Comparable<EntityCom
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return id;
@@ -45,7 +41,7 @@ public class EntityComment extends MizeSceEntity implements Comparable<EntityCom
 		this.id = id;
 	}
 
-	@Column(name = "comment_type", nullable = false, length = 50)
+	@Column(name = "comment_type")
 	public String getCommentType() {
 		return commentType;
 	}
@@ -54,7 +50,7 @@ public class EntityComment extends MizeSceEntity implements Comparable<EntityCom
 		this.commentType = commentType;
 	}
 
-	@Column(name = "comments", nullable = false, length = 5000)
+	@Column(name = "comments")
 	public String getComments() {
 		return comments;
 	}
@@ -62,70 +58,6 @@ public class EntityComment extends MizeSceEntity implements Comparable<EntityCom
 	public void setComments(String comments) {
 		this.comments = comments;
 	}
-	
-	
-
-	@Override
-	@JsonIgnore(false)
-	public void setCreatedDate(MizeDateTime createdDate) {
-		this.createdDate = createdDate;
-	}
-	
-	@JsonIgnore(value=false)
-	public void setUpdatedBy(Long updatedBy) {
-		this.updatedBy = updatedBy;
-	}
- 
-	@JsonIgnore(value=false)
-	public void setCreatedBy(Long createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	@Override
-	@JsonIgnore(false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		this.updatedDate = updatedDate;
-	}
-	
-	
-	@Column(name = "created_date",updatable = false)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@JsonIgnore(value=false)
-	public MizeDateTime getCreatedDate() {
-		return createdDate;
-	}
-
-	@Column(name = "updated_date")
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@JsonIgnore(value = false)
-	public MizeDateTime getUpdatedDate() {
-		return updatedDate;
-	}
-	
-	@JsonIgnore(value=false)
-	@Column(name = "created_by" , updatable=false)
-	public Long getCreatedBy() {
-		return createdBy;
-	}
-	
-	@JsonIgnore(value=false)
-	@Column(name = "updated_by")
-	public Long getUpdatedBy() {
-		return updatedBy;
-	}
-	
-	@Override
-	@Column(name = "created_by_user" , updatable=false,length=250)
-	public String getCreatedByUser() {
-		return super.getCreatedByUser();
-	}
-	
-	@Override
-	@Column(name = "updated_by_user" , length=250)
-	public String getUpdatedByUser() {
-		return super.getUpdatedByUser();
-	}
-	
 	
 	@Override
 	public int hashCode() {

@@ -15,13 +15,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.Type;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -29,13 +26,12 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityComment;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDateTime;
 
 @Entity
-@Table(name = "picklist", uniqueConstraints = {@UniqueConstraint (columnNames = {"be_id", "picklist_code","tenant_id"})})
-public class PickList extends MizeSceEntity implements Comparable<PickList> {
+@Table(name = "picklist")
+public class PickList extends MizeSceEntityAudit implements Comparable<PickList> {
 
 	private static final long serialVersionUID = 7197887648853141829L;
 	private BusinessEntity pickListLocation;
@@ -72,23 +68,23 @@ public class PickList extends MizeSceEntity implements Comparable<PickList> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return id;
 	}
 
-	@Column(name = "picklist_code", length = 50, nullable = false)
+	@Column(name = "picklist_code")
 	public String getCode() {
 		return code;
 	}
 
-	@Column(name = "picklist_type", length = 50, nullable = true)
+	@Column(name = "picklist_type")
 	public String getType() {
 		return type;
 	}
 
-	@Column(name = "is_active", length = 1, nullable = true)
+	@Column(name = "is_active")
 	public String getIsActive() {
 		return isActive;
 	}
@@ -137,50 +133,6 @@ public class PickList extends MizeSceEntity implements Comparable<PickList> {
 		return pickListLocation;
 	}
 
-	@Override	
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@Column(name = "created_date",updatable = false)
-	@JsonIgnore(false)
-	public MizeDateTime getCreatedDate() {
-		return createdDate;
-	}
-
-	@Override	
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@Column(name = "updated_date")
-	@JsonIgnore(false)
-	public MizeDateTime getUpdatedDate() {
-		return updatedDate;
-	}
-
-	@Override
-	@JsonIgnore
-	@Column(name = "created_by",updatable=false)
-	public Long getCreatedBy() {		
-		return super.getCreatedBy();
-	}
-
-	@Override
-	@JsonIgnore
-	@Column(name = "updated_by")
-	public Long getUpdatedBy() {		
-		return super.getUpdatedBy();
-	}
-	
-	@Override
-	@JsonIgnore
-	@Column(name = "created_by_user",updatable=false)
-	public String getCreatedByUser() {
-		return super.getCreatedByUser();
-	}
-	
-	@Override
-	@JsonIgnore
-	@Column(name = "updated_by_user")
-	public String getUpdatedByUser() {
-		return super.getUpdatedByUser();
-	}
-
 	@Override
 	public void setId(Long id) {
 		this.id = id;
@@ -210,42 +162,6 @@ public class PickList extends MizeSceEntity implements Comparable<PickList> {
 		this.pickListLocation = pickListLocation;
 	}
 
-	@Override
-	@JsonIgnore(false)
-	public void setCreatedDate(MizeDateTime createdDate) {
-		super.createdDate = createdDate;
-	}
-
-	@Override
-	@JsonIgnore(false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		super.updatedDate = updatedDate;
-	}
-
-	@Override
-	@JsonIgnore
-	public void setCreatedBy(Long createdBy) {		
-		super.setCreatedBy(createdBy);
-	}
-
-	@Override
-	@JsonIgnore
-	public void setUpdatedBy(Long updatedBy) {		
-		super.setUpdatedBy(updatedBy);
-	}
-	
-	@Override
-	@JsonIgnore
-	public void setCreatedByUser(String createdByUser) {
-		super.setCreatedByUser(createdByUser);
-	}
-	
-	@Override
-	@JsonIgnore
-	public void setUpdatedByUser(String updatedByUser) {
-		super.setUpdatedByUser(updatedByUser);
-	}
-	
 	@Transient	
 	public User getUser() {
 		return user;

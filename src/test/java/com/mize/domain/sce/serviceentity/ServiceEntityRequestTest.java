@@ -25,6 +25,7 @@ import com.mize.domain.product.Product;
 import com.mize.domain.product.ProductRegistration;
 import com.mize.domain.product.ProductSerial;
 import com.mize.domain.test.util.JPATest;
+import com.mize.domain.util.MizeDate;
 import com.mize.domain.util.MizeDateTime;
 
 @ContextConfiguration(locations={"/test-context.xml"})
@@ -160,8 +161,8 @@ public class ServiceEntityRequestTest extends JPATest {
 		serviceEntityRequest = new ServiceEntityRequest();
 		serviceEntityRequest.setRequestType("Repair");
 		serviceEntityRequest.setRepairSiteCode("RST100");
-		serviceEntityRequest.setRepairDate(MizeDateTime.now().minusDays(3));
-		serviceEntityRequest.setFailureDate(MizeDateTime.now().minusDays(4));
+		serviceEntityRequest.setRepairDate(MizeDate.now().minusDays(3));
+		serviceEntityRequest.setFailureDate(MizeDate.now().minusDays(4));
 		
 		serviceEntityRequest.setCauseCode("CUSC001");
 		serviceEntityRequest.setCauseDescription("Monitor problem");

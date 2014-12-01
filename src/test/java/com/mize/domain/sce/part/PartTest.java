@@ -26,6 +26,7 @@ import com.mize.domain.part.PartIntl;
 import com.mize.domain.part.PartPrice;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;
+import com.mize.domain.util.MizeDate;
 import com.mize.domain.util.MizeDateTime;
 
 @ContextConfiguration(locations = { "/test-context.xml" })
@@ -124,8 +125,8 @@ public class PartTest extends JPATest {
 		partPrice.setTaxId(1l);
 		partPrice.setCreatedDate(MizeDateTime.now());
 		partPrice.setCreatedBy(776l);
-		partPrice.setEndDate(MizeDateTime.now().plusMonths(2));
-		partPrice.setStartDate(MizeDateTime.now());
+		partPrice.setEndDate(MizeDate.now().plusMonths(2));
+		partPrice.setStartDate(MizeDate.now());
 		partPrice.setUpdatedBy(776l);
 		partPrice.setUpdatedDate(MizeDateTime.now().plusMonths(1));
 		partPrices.add(partPrice);
@@ -209,8 +210,8 @@ public class PartTest extends JPATest {
 					.getTimestamp("created_date")));
 			partPrice.setCreatedBy(rs.getLong("created_by"));
 			partPrice
-					.setEndDate(Formatter.toMizeDateTime(rs.getTimestamp("end_date")));
-			partPrice.setStartDate(Formatter.toMizeDateTime(rs
+					.setEndDate(Formatter.toMizeDate(rs.getTimestamp("end_date")));
+			partPrice.setStartDate(Formatter.toMizeDate(rs
 					.getTimestamp("start_date")));
 			partPrice.setUpdatedBy(rs.getLong("updated_by"));
 			partPrice.setUpdatedDate(Formatter.toMizeDateTime(rs
