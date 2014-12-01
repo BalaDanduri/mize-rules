@@ -36,7 +36,6 @@ import com.mize.domain.util.MizeDateTime;
 @Inheritance
 @DiscriminatorColumn(name = "discriminator")
 @DiscriminatorValue("LaborHour")
-//@Table(name = "labor_hour", uniqueConstraints = {@UniqueConstraint (columnNames = {"tenant_id", "labor_code"})})
 public class LaborHour extends MizeSceEntityAudit implements Comparable<LaborHour> {
 
 	private static final long serialVersionUID = 86846948813348698L;
