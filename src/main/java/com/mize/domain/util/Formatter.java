@@ -650,6 +650,12 @@ public final class Formatter {
 		}
 		return 0;	
 	}
+	public static int daysDiff(MizeDate time1,MizeDate time2){
+		if(time1 != null && time2 != null){
+			return time1.compareTo(time2);
+		}
+		return 0;	
+	}
 	public static int daysBetween(DateTime startDate , DateTime endDate){
 		if(startDate != null && endDate != null){
 			return Days.daysBetween(startDate, endDate).getDays();

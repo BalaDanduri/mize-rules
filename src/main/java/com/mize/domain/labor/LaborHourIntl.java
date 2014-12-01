@@ -12,7 +12,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.Locale;
@@ -22,7 +21,7 @@ import com.mize.domain.common.MizeSceEntity;
 @Inheritance
 @DiscriminatorColumn(name = "discriminator")
 @DiscriminatorValue("LaborHourIntl")
-@Table(name = "labor_hour_intl", uniqueConstraints = {@UniqueConstraint (columnNames = {"labor_hour_id", "locale_id"})})
+@Table(name = "labor_hour_intl")
 public class LaborHourIntl extends MizeSceEntity implements Comparable<LaborHourIntl>{
 
 	private static final long serialVersionUID = -1862266220815979799L;
