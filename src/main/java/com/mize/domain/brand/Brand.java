@@ -61,7 +61,7 @@ public class Brand extends MizeSceEntity implements Comparable<Brand>{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "BRAND_ID", unique = true, nullable = false)
+	@Column(name = "BRAND_ID")
 	@Override
 	public Long getId() {
 		return id;
@@ -110,14 +110,14 @@ public class Brand extends MizeSceEntity implements Comparable<Brand>{
 		this.name = brandName;
 	}
 	
-	@Column(name = "BRAND_NAME", unique = true, nullable = false, length = 250)
+	@Column(name = "BRAND_NAME")
 	public String getName() {
 		return name;
 	}
 	public void setName(String brandName) {
 		this.name = brandName;
 	}
-	@Column(name = "department",  nullable = true, length = 50)
+	@Column(name = "department")
 	public String getDepartment() {
 		return department;
 	}
@@ -126,7 +126,7 @@ public class Brand extends MizeSceEntity implements Comparable<Brand>{
 		this.department = department;
 	}
 
-	@Column(name = "BRAND_LINK",  nullable = true, length = 250)
+	@Column(name = "BRAND_LINK")
 	public String getWebsite() {
 		return website;
 	}
@@ -155,7 +155,7 @@ public class Brand extends MizeSceEntity implements Comparable<Brand>{
 	public void setLogoName(String logoName) {
 		this.logoName = logoName;
 	}
-	@Column(name = "FEEDBACK_EMAIL",  nullable = true, length = 50)
+	@Column(name = "FEEDBACK_EMAIL")
 	public String getFeedbackEmail() {
 		return feedbackEmail;
 	}
@@ -191,7 +191,7 @@ public class Brand extends MizeSceEntity implements Comparable<Brand>{
 		this.shippings = shippings;
 	}
 
-	@Column(name = "registered",  nullable = true)
+	@Column(name = "registered")
 	public String getRegistered() {
 		return registered;
 	}

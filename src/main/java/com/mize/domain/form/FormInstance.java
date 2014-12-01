@@ -14,21 +14,16 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Type;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.mize.domain.auth.User;
-import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.common.MizeSceEntityAudit;
 
 @Entity
 @Inheritance
 @DiscriminatorColumn(name = "discriminator")
 @DiscriminatorValue("FormInstance")
 @Table(name = "form_instance")
-public class FormInstance extends MizeSceEntity implements Comparable<FormInstance> {
+public class FormInstance extends MizeSceEntityAudit implements Comparable<FormInstance> {
 	
 	private static final long serialVersionUID = 4640430501517031791L;
 	
@@ -49,7 +44,7 @@ public class FormInstance extends MizeSceEntity implements Comparable<FormInstan
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", unique = true, nullable = false, length = 20)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return super.id;
@@ -57,11 +52,11 @@ public class FormInstance extends MizeSceEntity implements Comparable<FormInstan
 
 	@Override
 	public void setId(Long id) {
-		super.id=id;
+		super.id = id;
 	}
 	
 	@OneToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="form_defn_id", nullable = false)
+	@JoinColumn(name="form_defn_id")
 	public FormDefinition getFormDefinition() {
 		return formDefinition;
 	}
@@ -71,7 +66,7 @@ public class FormInstance extends MizeSceEntity implements Comparable<FormInstan
 	}
 	
 	@JsonIgnore
-	@Column(name = "form_instance_data", nullable = true)
+	@Column(name = "form_instance_data")
 	public String getFormInstanceData() {
 		return formInstanceData;
 	}
@@ -90,84 +85,7 @@ public class FormInstance extends MizeSceEntity implements Comparable<FormInstan
 		this.user = user;
 	}
 	
-	@Override	
-	@Column(name = "created_date", updatable = false)
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@JsonInclude(Include.NON_DEFAULT)
-	@JsonIgnore(value=false)
-	public MizeDateTime getCreatedDate() {
-		return createdDate;
-	}
 	
-	@Override
-	@JsonIgnore(value=false)
-	public void setCreatedDate(MizeDateTime createdDate) {
-		super.createdDate = createdDate;
-	}
-	
-	
-	@Column(name = "updated_date", nullable = true)
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@JsonInclude(Include.NON_DEFAULT)
-	@JsonIgnore(value=false)
-	public MizeDateTime getUpdatedDate() {
-		return updatedDate;
-	}
-	
-	
-	@JsonIgnore(value=false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		super.updatedDate = updatedDate;
-	}
-	
-	@Override
-	@JsonIgnore
-	@Column(name = "created_by", nullable = true, length = 20, updatable = false)
-	public Long getCreatedBy() {		
-		return super.getCreatedBy();
-	}
-	
-	@Override
-	@JsonIgnore
-	public void setCreatedBy(Long createdBy) {		
-		super.setCreatedBy(createdBy);
-	}
-	
-	@Override
-	@JsonIgnore
-	@Column(name = "updated_by", nullable = true, length = 20)
-	public Long getUpdatedBy() {		
-		return super.getUpdatedBy();
-	}
-	
-	@Override
-	@JsonIgnore
-	public void setUpdatedBy(Long updatedBy) {		
-		super.setUpdatedBy(updatedBy);
-	}
-	
-	@Override
-	@Column(name = "created_by_user", length = 250,updatable = false)
-	public String getCreatedByUser() {
-		return super.getCreatedByUser();
-	}
-	
-	@Override
-	public void setCreatedByUser(String createdByUser) {
-		super.setCreatedByUser(createdByUser);
-	}
-	
-	@Override
-	@Column(name = "updated_by_user", length = 250)
-	public String getUpdatedByUser() {
-		return super.getUpdatedByUser();
-	}
-	
-	@Override
-	public void setUpdatedByUser(String updatedByUser) {
-		super.setUpdatedByUser(updatedByUser);
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;

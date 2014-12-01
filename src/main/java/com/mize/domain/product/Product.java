@@ -30,17 +30,16 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.brand.Brand;
 import com.mize.domain.businessentity.BusinessEntity;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.util.DecimalValueDeserializer;
 import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.MizeDate;
-import com.mize.domain.util.MizeDateTime;
 import com.mize.domain.util.NumberValueSerializer;
 
 @javax.persistence.Entity
 @Table(name = "prod")
-public class Product  extends MizeSceEntity implements Comparable<Product>{
+public class Product  extends MizeSceEntityAudit implements Comparable<Product>{
 	
 	private static final long serialVersionUID = 5379538452565383073L;
 	protected String name;
@@ -121,7 +120,7 @@ public class Product  extends MizeSceEntity implements Comparable<Product>{
 	@Id
 	@GenericGenerator(name="prod_id",strategy="increment")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "prod_id", nullable = false, unique = true)
+	@Column(name = "prod_id")
 	@Override	
 	public Long getId() {
 		return id;
@@ -164,7 +163,7 @@ public class Product  extends MizeSceEntity implements Comparable<Product>{
 	}
 	
 
-	@Column(name="prod_name",nullable=true,length=200)
+	@Column(name="prod_name")
 	public String getName() {
 		return name;
 	}
@@ -208,7 +207,7 @@ public class Product  extends MizeSceEntity implements Comparable<Product>{
 		this.category = category;
 	}
 
-	@Column(name="upc",nullable=true,length=20)
+	@Column(name="upc")
 	public String getUpc() {
 		return upc;
 	}
@@ -218,7 +217,7 @@ public class Product  extends MizeSceEntity implements Comparable<Product>{
 	}
 
 
-	@Column(name="qr_code",nullable=true,length=100)
+	@Column(name="qr_code")
 	public String getQrCode() {
 		return qrCode;
 	}
@@ -250,7 +249,7 @@ public class Product  extends MizeSceEntity implements Comparable<Product>{
 		this.productDetails = productDetails;
 	}
 
-	@Column(name="prod_image",nullable=true,length=500)
+	@Column(name="prod_image")
 	public String getImageLink() {
 		return imageLink;
 	}
@@ -259,33 +258,6 @@ public class Product  extends MizeSceEntity implements Comparable<Product>{
 	public void setImageLink(String imageLink) {
 		this.imageLink = imageLink;
 	}
-
-	
-	@Override
-	public void setCreatedByUser(String createdByUser){
-	      this.createdByUser=createdByUser;
-	}
-	
-	@Override
-	@Column(name = "created_by_user" , updatable=false)
-	public String getCreatedByUser(){
-		 return createdByUser;
-		 
-	}
-	
-	@Override
-	@Column(name = "updated_by_user")
-	public String getUpdatedByUser() {
-		return updatedByUser;
-	}
-    
-
-	@Override
-	public void setUpdatedByUser(String updatedByUser) {
-		this.updatedByUser = updatedByUser;
-	}
-	
-	
 
 	@Transient
 	public List<String> getListNames() {
@@ -298,7 +270,7 @@ public class Product  extends MizeSceEntity implements Comparable<Product>{
 	}
 
 
-	@Column(name="model",nullable=true,length=50)
+	@Column(name="model")
 	public String getModel() {
 		return model;
 	}
@@ -308,7 +280,7 @@ public class Product  extends MizeSceEntity implements Comparable<Product>{
 		this.model = model;
 	}
 
-	@Column(name="prod_desc",nullable=true,length=500)
+	@Column(name="prod_desc")
 	public String getShortDescription() {
 		return shortDescription;
 	}
@@ -340,7 +312,7 @@ public class Product  extends MizeSceEntity implements Comparable<Product>{
 		this.productRegisters = productRegisters;
 	}
 	
-	@Column(name="is_active",nullable=true,length=1)
+	@Column(name="is_active")
 	public String getActive() {
 		return active;
 	}
@@ -359,7 +331,7 @@ public class Product  extends MizeSceEntity implements Comparable<Product>{
 		return flag;
 	}
 	
-	@Column(name="mfg_part_no",nullable=true,length=70)
+	@Column(name="mfg_part_no")
 	public String getMpn() {
 		return mpn;
 	}
@@ -584,60 +556,6 @@ public class Product  extends MizeSceEntity implements Comparable<Product>{
 		return 0;
 	}
 	
-	@Override	
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@Column(name = "created_date",updatable=false)
-	@JsonIgnore(false)
-	public MizeDateTime getCreatedDate() {
-		return createdDate;
-	}
-
-	@Override	
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@Column(name = "updated_date")
-	@JsonIgnore(false)
-	public MizeDateTime getUpdatedDate() {
-		return updatedDate;
-	}
-
-	@Override
-	@JsonIgnore
-	@Column(name = "created_by",updatable=false)
-	public Long getCreatedBy() {		
-		return super.getCreatedBy();
-	}
-
-	@Override
-	@JsonIgnore
-	@Column(name = "updated_by")
-	public Long getUpdatedBy() {		
-		return super.getUpdatedBy();
-	}
-
-	
-	@Override
-	@JsonIgnore(false)
-	public void setCreatedDate(MizeDateTime createdDate) {
-		super.createdDate = createdDate;
-	}
-
-	@Override
-	@JsonIgnore(false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		super.updatedDate = updatedDate;
-	}
-
-	@Override
-	@JsonIgnore
-	public void setCreatedBy(Long createdBy) {		
-		super.setCreatedBy(createdBy);
-	}
-
-	@Override
-	@JsonIgnore
-	public void setUpdatedBy(Long updatedBy) {		
-		super.setUpdatedBy(updatedBy);
-	}
 
 	
 	@Override

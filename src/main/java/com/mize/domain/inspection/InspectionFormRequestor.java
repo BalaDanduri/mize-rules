@@ -51,7 +51,7 @@ public class InspectionFormRequestor extends MizeSceEntity implements Comparable
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "id")
 	public Long getId() {
 		return id;
 	}
@@ -94,7 +94,7 @@ public class InspectionFormRequestor extends MizeSceEntity implements Comparable
 		this.requestorId = requestorId;
 	}
 	
-	@Column(name = "rqstr_be_code", length = 50)
+	@Column(name = "rqstr_be_code")
 	public String getCode() {
 		return code;
 	}
@@ -103,7 +103,7 @@ public class InspectionFormRequestor extends MizeSceEntity implements Comparable
 		this.code = code;
 	}
 	
-	@Column(name = "rqstr_be_type_code", length = 50)
+	@Column(name = "rqstr_be_type_code")
 	public String getTypeCode() {
 		return typeCode;
 	}
@@ -113,7 +113,7 @@ public class InspectionFormRequestor extends MizeSceEntity implements Comparable
 	}
 	
 
-	@Column(name = "rqstr_be_sub_type_code", length = 50)
+	@Column(name = "rqstr_be_sub_type_code")
 	public String getSubTypeCode() {
 		return subTypeCode;
 	}
@@ -122,7 +122,7 @@ public class InspectionFormRequestor extends MizeSceEntity implements Comparable
 		this.subTypeCode = subTypeCode;
 	}
 	
-	@Column(name = "rqstr_be_name", length = 250)
+	@Column(name = "rqstr_be_name")
 	public String getName() {
 		return name;
 	}
@@ -131,7 +131,7 @@ public class InspectionFormRequestor extends MizeSceEntity implements Comparable
 		this.name = name;
 	}
 	
-	@Column(name = "rqstr_be_first_name", length = 100)
+	@Column(name = "rqstr_be_first_name")
 	public String getFirstName() {
 		return firstName;
 	}
@@ -141,7 +141,7 @@ public class InspectionFormRequestor extends MizeSceEntity implements Comparable
 	}
 	
 	
-	@Column(name = "rqstr_be_middle_initial", length = 50)
+	@Column(name = "rqstr_be_middle_initial")
 	public String getMiddleInitial() {
 		return middleInitial;
 	}
@@ -150,7 +150,7 @@ public class InspectionFormRequestor extends MizeSceEntity implements Comparable
 		this.middleInitial = middleInitial;
 	}
 	
-	@Column(name = "rqstr_be_last_name", length = 100)
+	@Column(name = "rqstr_be_last_name")
 	public String getLastName() {
 		return lastName;
 	}
@@ -159,7 +159,7 @@ public class InspectionFormRequestor extends MizeSceEntity implements Comparable
 		this.lastName = lastName;
 	}
 	
-	@Column(name = "rqstr_be_reference", length = 100)
+	@Column(name = "rqstr_be_reference")
 	public String getRequestorReference() {
 		return requestorReference;
 	}

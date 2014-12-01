@@ -35,7 +35,7 @@ public class InspectionFormAudit extends MizeAuditEntity implements Comparable<I
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return id;
@@ -50,20 +50,20 @@ public class InspectionFormAudit extends MizeAuditEntity implements Comparable<I
 		return inspectionForm;
 	}
 	
-	@Column(name = "status_code", length = 50)
+	@Column(name = "status_code")
 	public String getStatusCode() {
 		return statusCode;
 	}
 
 	
-	@Column(name = "status_date", nullable = true)
+	@Column(name = "status_date")
 	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
 	@JsonInclude(Include.NON_DEFAULT)
 	public MizeDateTime getStatusDate() {
 		return statusDate;
 	}
 
-	@Column(name = "status_by", length = 20, nullable = true)
+	@Column(name = "status_by")
 	public Long getStatusBy() {
 		return statusBy;
 	}
@@ -91,7 +91,7 @@ public class InspectionFormAudit extends MizeAuditEntity implements Comparable<I
 		this.statusBy = statusBy;
 	}
 	
-	@Column(name = "status_by_user", nullable = true, length = 250)
+	@Column(name = "status_by_user")
 	@Override
 	public String getStatusByUser() {
 		return statusByUser;

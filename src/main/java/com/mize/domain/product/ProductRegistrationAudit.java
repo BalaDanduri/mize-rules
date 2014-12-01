@@ -13,7 +13,6 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mize.domain.common.MizeAuditEntity;
 import com.mize.domain.util.MizeDateTime;
 
@@ -32,7 +31,7 @@ public class ProductRegistrationAudit extends MizeAuditEntity implements Compara
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return id;
@@ -43,7 +42,7 @@ public class ProductRegistrationAudit extends MizeAuditEntity implements Compara
 		this.id = id;
 	}
 	
-	@Column(name="status_code",length = 50)
+	@Column(name="status_code")
 	public String getStatusCode() {
 		return statusCode;
 	}
@@ -55,12 +54,11 @@ public class ProductRegistrationAudit extends MizeAuditEntity implements Compara
 
 	@Column(name = "status_date")
 	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	@JsonIgnore(false)
 	public MizeDateTime getStatusDate() {
 		return statusDate;
 	}
 
-	@JsonIgnore(false)
+
 	public void setStatusDate(MizeDateTime statusDate) {
 		this.statusDate = statusDate;
 	}
@@ -85,7 +83,7 @@ public class ProductRegistrationAudit extends MizeAuditEntity implements Compara
 		this.productRegistration = productRegistration;
 	}
 	
-	@Column(name = "status_by_user", nullable = true, length = 250)
+	@Column(name = "status_by_user")
 	@Override
 	public String getStatusByUser() {
 		return statusByUser;

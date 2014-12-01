@@ -52,7 +52,7 @@ public class InspectionFormEquipmentOwner extends MizeSceEntity implements Compa
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "id")
 	public Long getId() {
 		return id;
 	}
@@ -93,7 +93,7 @@ public class InspectionFormEquipmentOwner extends MizeSceEntity implements Compa
 		this.ownerId = ownerId;
 	}
 
-	@Column(name = "owner_be_code", length = 50)
+	@Column(name = "owner_be_code")
 	public String getCode() {
 		return code;
 	}
@@ -102,7 +102,7 @@ public class InspectionFormEquipmentOwner extends MizeSceEntity implements Compa
 		this.code = code;
 	}
 
-	@Column(name = "owner_be_type_code", length = 50)
+	@Column(name = "owner_be_type_code")
 	public String getTypeCode() {
 		return typeCode;
 	}
@@ -112,7 +112,7 @@ public class InspectionFormEquipmentOwner extends MizeSceEntity implements Compa
 		this.typeCode = typeCode;
 	}
 
-	@Column(name = "owner_be_sub_type_code", length = 50)
+	@Column(name = "owner_be_sub_type_code")
 	public String getSubTypeCode() {
 		return subTypeCode;
 	}
@@ -121,7 +121,7 @@ public class InspectionFormEquipmentOwner extends MizeSceEntity implements Compa
 		this.subTypeCode = subTypeCode;
 	}
 
-	@Column(name = "owner_be_name", length = 250)
+	@Column(name = "owner_be_name")
 	public String getName() {
 		return name;
 	}
@@ -130,7 +130,7 @@ public class InspectionFormEquipmentOwner extends MizeSceEntity implements Compa
 		this.name = name;
 	}
 
-	@Column(name = "owner_be_first_name", length = 100)
+	@Column(name = "owner_be_first_name")
 	public String getFirstName() {
 		return firstName;
 	}
@@ -139,7 +139,7 @@ public class InspectionFormEquipmentOwner extends MizeSceEntity implements Compa
 		this.firstName = firstName;
 	}
 
-	@Column(name = "owner_be_middle_initial", length = 50)
+	@Column(name = "owner_be_middle_initial")
 	public String getMiddleInitial() {
 		return middleInitial;
 	}
@@ -148,7 +148,7 @@ public class InspectionFormEquipmentOwner extends MizeSceEntity implements Compa
 		this.middleInitial = middleInitial;
 	}
 
-	@Column(name = "owner_be_last_name", length = 100)
+	@Column(name = "owner_be_last_name")
 	public String getLastName() {
 		return lastName;
 	}
@@ -157,7 +157,7 @@ public class InspectionFormEquipmentOwner extends MizeSceEntity implements Compa
 		this.lastName = lastName;
 	}
 	
-	@Column(name = "owner_be_reference", length = 100)
+	@Column(name = "owner_be_reference")
 	public String getOwnerReference() {
 		return ownerReference;
 	}

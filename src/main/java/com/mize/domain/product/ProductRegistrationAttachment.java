@@ -31,7 +31,7 @@ public class ProductRegistrationAttachment extends MizeSceEntity implements Comp
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return id;

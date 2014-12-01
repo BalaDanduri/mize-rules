@@ -16,11 +16,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.Type;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -28,14 +26,13 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityComment;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.MizeDate;
-import com.mize.domain.util.MizeDateTime;
 
 @Entity
-@Table(name = "prod_serial", uniqueConstraints = {@UniqueConstraint (columnNames = {"id"})})
-public class ProductSerial extends MizeSceEntity implements Comparable<ProductSerial>{
+@Table(name = "prod_serial")
+public class ProductSerial extends MizeSceEntityAudit implements Comparable<ProductSerial>{
 	
 	private static final long serialVersionUID = 1396934864607540803L;
 	private BusinessEntity tenant;
@@ -73,7 +70,7 @@ public class ProductSerial extends MizeSceEntity implements Comparable<ProductSe
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return id;
@@ -105,7 +102,7 @@ public class ProductSerial extends MizeSceEntity implements Comparable<ProductSe
 		this.product = product;
 	}
 
-	@Column(name = "prod_srl_no", nullable = true)
+	@Column(name = "prod_srl_no")
 	public String getSerialNumber() {
 		return serialNumber;
 	}
@@ -128,7 +125,7 @@ public class ProductSerial extends MizeSceEntity implements Comparable<ProductSe
 
 
 	
-	@Column(name = "build_date", nullable = true)
+	@Column(name = "build_date")
 	@Type(type = "com.mize.domain.util.MizeDateJPA")
 	public MizeDate getBuildDate() {
 		return buildDate;
@@ -169,7 +166,7 @@ public class ProductSerial extends MizeSceEntity implements Comparable<ProductSe
 		this.user = user;
 	}
 	
-	@Column(name= "is_valid", length = 1)
+	@Column(name= "is_valid")
 	public String getIsValid() {
 		return isValid;
 	}
@@ -179,7 +176,7 @@ public class ProductSerial extends MizeSceEntity implements Comparable<ProductSe
 	}
 	
 	
-	@Column(name = "ship_date", nullable = true)
+	@Column(name = "ship_date")
 	@Type(type = "com.mize.domain.util.MizeDateJPA")
 	public MizeDate getShipDate() {
 		return shipDate;
@@ -190,7 +187,7 @@ public class ProductSerial extends MizeSceEntity implements Comparable<ProductSe
 	}
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="invoice_be_id", nullable = true)
+	@JoinColumn(name="invoice_be_id")
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
 	public BusinessEntity getInvoiceBusinessEntity() {
@@ -202,7 +199,7 @@ public class ProductSerial extends MizeSceEntity implements Comparable<ProductSe
 	}
 
 	
-	@Column(name = "invoice_date", nullable = true)
+	@Column(name = "invoice_date")
 	@Type(type = "com.mize.domain.util.MizeDateJPA")
 	public MizeDate getInvoiceDate() {
 		return invoiceDate;
@@ -212,7 +209,7 @@ public class ProductSerial extends MizeSceEntity implements Comparable<ProductSe
 		this.invoiceDate = invoiceDate;
 	}
 
-	@Column(name = "invoice_no", nullable = true)
+	@Column(name = "invoice_no")
 	public String getInvoiceNumber() {
 		return invoiceNumber;
 	}
@@ -233,85 +230,7 @@ public class ProductSerial extends MizeSceEntity implements Comparable<ProductSe
 		this.productSerialRelations = productSerialRelations;
 	}
 
-	@Override	
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@Column(name = "created_date",updatable=false)
-	@JsonIgnore(false)
-	public MizeDateTime getCreatedDate() {
-		return createdDate;
-	}
 
-	@Override	
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@Column(name = "updated_date")
-	@JsonIgnore(false)
-	public MizeDateTime getUpdatedDate() {
-		return updatedDate;
-	}
-	
-	@Override
-	@JsonIgnore(false)
-	public void setCreatedDate(MizeDateTime createdDate) {
-		super.createdDate = createdDate;
-	}
-
-	@Override
-	@JsonIgnore(false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		super.updatedDate = updatedDate;
-	}
-	
-	@Override
-	@JsonIgnore(value=false)
-	@Column(name = "created_by" , updatable=false)
-	public Long getCreatedBy() {
-		return createdBy;
-	}
-	
-	@Override
-	@JsonIgnore(value=false)
-	@Column(name = "updated_by")
-	public Long getUpdatedBy() {
-		return updatedBy;
-	}
-	
-	
-	@Override
-	public void setCreatedByUser(String createdByUser){
-	      this.createdByUser=createdByUser;
-	}
-	@Override
-	@JsonIgnore(value=false)
-	@Column(name = "created_by_user" , updatable=false)
-	public String getCreatedByUser(){
-		 return createdByUser;
-		 
-	}
-	
-	@Override
-	@JsonIgnore(value=false)
-	@Column(name = "updated_by_user")
-	public String getUpdatedByUser() {
-		return updatedByUser;
-	}
-    
-	@JsonIgnore(value=false)
-	@Override
-	public void setUpdatedByUser(String updatedByUser) {
-		this.updatedByUser = updatedByUser;
-	}
-
-	@JsonIgnore(value=false)
-	@Override
-	public void setUpdatedBy(Long updatedBy) {
-		this.updatedBy = updatedBy;
-	}
- 
-	@JsonIgnore(value=false)
-	@Override
-	public void setCreatedBy(Long createdBy) {
-		this.createdBy = createdBy;
-	}
 	
 	@OneToMany(cascade={CascadeType.ALL },fetch = FetchType.LAZY, mappedBy = "productSerial",orphanRemoval= true)
 	@JsonSerialize(using=JPASerializer.class)

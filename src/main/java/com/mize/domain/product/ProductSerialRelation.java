@@ -9,18 +9,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
-
-import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.common.MizeSceEntityAudit;
 
 @Entity
-@Table(name = "prod_serial_rltn", uniqueConstraints = {@UniqueConstraint (columnNames = {"id"})})
-public class ProductSerialRelation extends MizeSceEntity implements Comparable<ProductSerialRelation>{
+@Table(name = "prod_serial_rltn")
+public class ProductSerialRelation extends MizeSceEntityAudit implements Comparable<ProductSerialRelation>{
 	
 	private static final long serialVersionUID = -2610914671026405288L;
 	private ProductSerial productSerial;
@@ -43,7 +38,7 @@ public class ProductSerialRelation extends MizeSceEntity implements Comparable<P
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return id;
@@ -65,32 +60,8 @@ public class ProductSerialRelation extends MizeSceEntity implements Comparable<P
 		this.productSerial = productSerial;
 	}
 
-	@Override
-	public void setCreatedByUser(String createdByUser){
-	      this.createdByUser=createdByUser;
-	}
-	@Override
-	@JsonIgnore(value=false)
-	@Column(name = "created_by_user" , updatable=false)
-	public String getCreatedByUser(){
-		 return createdByUser;
-		 
-	}
-	
-	@Override
-	@JsonIgnore(value=false)
-	@Column(name = "updated_by_user")
-	public String getUpdatedByUser() {
-		return updatedByUser;
-	}
-    
-	@JsonIgnore(value=false)
-	@Override
-	public void setUpdatedByUser(String updatedByUser) {
-		this.updatedByUser = updatedByUser;
-	}
 
-	@Column(name = "relation_type", nullable = true)
+	@Column(name = "relation_type")
 	public String getRelationType() {
 		return relationType;
 	}
@@ -99,7 +70,7 @@ public class ProductSerialRelation extends MizeSceEntity implements Comparable<P
 		this.relationType = relationType;
 	}
 	
-	@Column(name = "parent_prod_serial_id", nullable = true)
+	@Column(name = "parent_prod_serial_id")
 	public Long getParentProductSerialId() {
 		return parentProductSerialId;
 	}
@@ -108,12 +79,12 @@ public class ProductSerialRelation extends MizeSceEntity implements Comparable<P
 		this.parentProductSerialId = parentProductSerialId;
 	}
 
-	@Column(name = "rltd_prod_srl_no", nullable = true,length = 200)
+	@Column(name = "rltd_prod_srl_no")
 	public String getParentSerialNumber() {
 		return parentSerialNumber;
 	}
 
-	@Column(name = "rltd_model", nullable = true ,length = 50)
+	@Column(name = "rltd_model")
 	public String getParentModel() {
 		return parentModel;
 	}
@@ -126,57 +97,6 @@ public class ProductSerialRelation extends MizeSceEntity implements Comparable<P
 		this.parentModel = parentModel;
 	}
 
-	@Override	
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@Column(name = "created_date",updatable=false)
-	@JsonIgnore(false)
-	public MizeDateTime getCreatedDate() {
-		return createdDate;
-	}
-
-	@Override	
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@Column(name = "updated_date")
-	@JsonIgnore(false)
-	public MizeDateTime getUpdatedDate() {
-		return updatedDate;
-	}
-	
-	@Override
-	@JsonIgnore(false)
-	public void setCreatedDate(MizeDateTime createdDate) {
-		super.createdDate = createdDate;
-	}
-
-	@Override
-	@JsonIgnore(false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		super.updatedDate = updatedDate;
-	}
-	
-	@Override
-	@JsonIgnore(value=false)
-	@Column(name = "created_by" , updatable=false)
-	public Long getCreatedBy() {
-		return createdBy;
-	}
-	
-	@Override
-	@JsonIgnore(value=false)
-	@Column(name = "updated_by")
-	public Long getUpdatedBy() {
-		return updatedBy;
-	}
-	
-	@JsonIgnore(value=false)
-	@Override
-	public void setUpdatedBy(Long updatedBy) {
-		this.updatedBy = updatedBy;
-	}
-
-	
-
-	
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;

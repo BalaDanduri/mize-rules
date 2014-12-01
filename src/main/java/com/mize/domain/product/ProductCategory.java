@@ -69,7 +69,7 @@ public class ProductCategory extends MizeSceEntity implements Comparable<Product
 	@Id
 	@GenericGenerator(name="prod_cat_id",strategy="increment")
 	@GeneratedValue
-	@Column(name="prod_cat_id",unique=true,nullable=false,length=20)
+	@Column(name="prod_cat_id")
 	@Override
 	public Long getId() {
 		return id;
@@ -79,7 +79,7 @@ public class ProductCategory extends MizeSceEntity implements Comparable<Product
 		this.id = id;
 	}
 
-	@Column(name="prod_cat_name",nullable=true,length=100)
+	@Column(name="prod_cat_name")
 	public String getName() {
 		return name;
 	}
@@ -100,7 +100,7 @@ public class ProductCategory extends MizeSceEntity implements Comparable<Product
 		this.parent = parent;
 	}
 
-	@Column(name="prod_cat_link",nullable=true,length=250)
+	@Column(name="prod_cat_link")
 	public String getPhotoLink() {
 		return photoLink;
 	}
@@ -109,7 +109,7 @@ public class ProductCategory extends MizeSceEntity implements Comparable<Product
 		this.photoLink = link;
 	}
 
-	@Column(name="is_active",nullable=true,length=1)
+	@Column(name="is_active")
 	@Transient
 	public boolean isActive() {
 		return isActive;
@@ -147,7 +147,7 @@ public class ProductCategory extends MizeSceEntity implements Comparable<Product
 		this.sourceCategory = sourceCategory;
 	}
 
-	@Column(name="cat_level",nullable=true,length=11)
+	@Column(name="cat_level")
 	public Integer getLevel() {
 		return level;
 	}
@@ -165,7 +165,7 @@ public class ProductCategory extends MizeSceEntity implements Comparable<Product
 		this.srcCategoryId = srcCategoryId;
 	}
 
-	@Column(name="display_order",nullable=true,length=11)
+	@Column(name="display_order")
 	public Integer getDisplayOrder() {
 		return displayOrder;
 	}
@@ -174,7 +174,7 @@ public class ProductCategory extends MizeSceEntity implements Comparable<Product
 		this.displayOrder = displayOrder;
 	}
 
-	@Column(name="order_number",nullable=true,length=11)
+	@Column(name="order_number")
 	public Integer getOrderNumber() {
 		return orderNumber;
 	}

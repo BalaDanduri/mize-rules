@@ -30,7 +30,7 @@ public class InspectionFormEquipmentAttribute extends MizeSceEntity implements C
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "id")
 	public Long getId() {
 		return id;
 	}
@@ -52,7 +52,7 @@ public class InspectionFormEquipmentAttribute extends MizeSceEntity implements C
 		this.inspectionFormEquipment = inspectionFormEquipment;
 	}
 
-	@Column(name="attribute_code",length=50 )
+	@Column(name="attribute_code")
 	public String getAttributeCode() {
 		return attributeCode;
 	}
@@ -61,7 +61,7 @@ public class InspectionFormEquipmentAttribute extends MizeSceEntity implements C
 		this.attributeCode = attributeCode;
 	}
 
-	@Column(name="attribute_uom",length=50 )
+	@Column(name="attribute_uom")
 	public String getAttributeUom() {
 		return attributeUom;
 	}
@@ -70,7 +70,7 @@ public class InspectionFormEquipmentAttribute extends MizeSceEntity implements C
 		this.attributeUom = attributeUom;
 	}
 
-	@Column(name="attribute_value",length=100 )
+	@Column(name="attribute_value")
 	public String getAttributeValue() {
 		return attributeValue;
 	}
@@ -79,7 +79,7 @@ public class InspectionFormEquipmentAttribute extends MizeSceEntity implements C
 		this.attributeValue = attributeValue;
 	}
 
-	@Column(name="attribute_data_type",length=50 )
+	@Column(name="attribute_data_type")
 	public String getAttributeDataType() {
 		return attributeDataType;
 	}

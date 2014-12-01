@@ -36,7 +36,7 @@ public class InspectionFormComment extends MizeSceEntity implements Comparable<I
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "id")
 	public Long getId() {
 		return id;
 	}

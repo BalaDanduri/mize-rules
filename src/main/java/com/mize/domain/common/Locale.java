@@ -29,7 +29,7 @@ public class Locale extends MizeSceEntity implements Comparable<Locale>{
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="locale_id",nullable=false)
+	@Column(name="locale_id")
 	public Long getId() {
 		return id;
 	}
@@ -38,28 +38,28 @@ public class Locale extends MizeSceEntity implements Comparable<Locale>{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	@Column(name="is_active",nullable=true,length=1)
+	@Column(name="is_active")
 	public String getIsActive() {
 		return isActive;
 	}
 	public void setIsActive(String isActive) {
 		this.isActive = isActive;
 	}
-	@Column(name="language_code",nullable=true,length=10)
+	@Column(name="language_code")
 	public String getLanguageCode() {
 		return languageCode;
 	}
 	public void setLanguageCode(String languageCode) {
 		this.languageCode = languageCode;
 	}
-	@Column(name="country_code",nullable=true,length=10)
+	@Column(name="country_code")
 	public String getCountryCode() {
 		return countryCode;
 	}
 	public void setCountryCode(String countryCode) {
 		this.countryCode = countryCode;
 	}
-	@Column(name="locale_name",nullable=true,length=80)
+	@Column(name="locale_name")
 	public String getName() {
 		return name;
 	}

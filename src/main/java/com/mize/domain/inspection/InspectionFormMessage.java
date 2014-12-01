@@ -40,7 +40,7 @@ public class InspectionFormMessage extends MizeEntity {
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "id")
 	public Long getId() {
 		return id;
 	}
@@ -80,7 +80,7 @@ public class InspectionFormMessage extends MizeEntity {
 		this.messageSeverity = messageSeverity;
 	}
 	
-	@Column(name = "message_field", length = 250)
+	@Column(name = "message_field")
 	public String getMessageField() {
 		return messageField;
 	}
@@ -89,7 +89,7 @@ public class InspectionFormMessage extends MizeEntity {
 		this.messageField = messageField;
 	}
 	
-	@Column(name = "message_ui_reference", length = 100)
+	@Column(name = "message_ui_reference")
 	public String getMessageUiReference() {
 		return messageUiReference;
 	}
@@ -98,7 +98,7 @@ public class InspectionFormMessage extends MizeEntity {
 		this.messageUiReference = messageUiReference;
 	}
 	
-	@Column(name = "message_value", length = 5000)
+	@Column(name = "message_value")
 	public String getMessageValue() {
 		return messageValue;
 	}
@@ -107,7 +107,7 @@ public class InspectionFormMessage extends MizeEntity {
 		this.messageValue = messageValue;
 	}
 	
-	@Column(name = "message_code", nullable = true, length = 50)
+	@Column(name = "message_code")
 	public String getMessageCode() {
 		return messageCode;
 	}
@@ -116,7 +116,7 @@ public class InspectionFormMessage extends MizeEntity {
 		this.messageCode = messageCode;
 	}
 
-	@Column(name = "short_description", nullable = true, length = 250)
+	@Column(name = "short_description")
 	public String getShortDesc() {
 		return shortDesc;
 	}
@@ -125,7 +125,7 @@ public class InspectionFormMessage extends MizeEntity {
 		this.shortDesc = shortDesc;
 	}
 
-	@Column(name = "long_description", nullable = true, length = 500)
+	@Column(name = "long_description")
 	public String getLongDesc() {
 		return longDesc;
 	}
@@ -138,20 +138,12 @@ public class InspectionFormMessage extends MizeEntity {
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime * result
-				+ ((messageField == null) ? 0 : messageField.hashCode());
-		result = prime * result
-				+ ((messageId == null) ? 0 : messageId.hashCode());
-		result = prime * result
-				+ ((messageSeverity == null) ? 0 : messageSeverity.hashCode());
-		result = prime
-				* result
-				+ ((messageUiReference == null) ? 0 : messageUiReference
-						.hashCode());
-		result = prime * result
-				+ ((messageValue == null) ? 0 : messageValue.hashCode());
-		result = prime * result
-				+ ((inspectionForm == null) ? 0 : inspectionForm.hashCode());
+		result = prime * result + ((messageField == null) ? 0 : messageField.hashCode());
+		result = prime * result + ((messageId == null) ? 0 : messageId.hashCode());
+		result = prime * result + ((messageSeverity == null) ? 0 : messageSeverity.hashCode());
+		result = prime * result + ((messageUiReference == null) ? 0 : messageUiReference.hashCode());
+		result = prime * result + ((messageValue == null) ? 0 : messageValue.hashCode());
+		result = prime * result + ((inspectionForm == null) ? 0 : inspectionForm.hashCode());
 		return result;
 	}
 

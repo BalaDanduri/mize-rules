@@ -23,8 +23,8 @@ import javax.persistence.Transient;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.product.ProductRegistration;
@@ -58,7 +58,7 @@ public class InspectionFormEquipment extends MizeSceEntity implements Comparable
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "id")
 	public Long getId() {
 		return id;
 	}
@@ -89,7 +89,7 @@ public class InspectionFormEquipment extends MizeSceEntity implements Comparable
 		this.equipmentId = equipmentId;
 	}
 
-	@Column(name = "eqpmnt_type",length=50)
+	@Column(name = "eqpmnt_type")
 	public String getEquipmentType() {
 		return equipmentType;
 	}
@@ -98,7 +98,7 @@ public class InspectionFormEquipment extends MizeSceEntity implements Comparable
 		this.equipmentType = equipmentType;
 	}
 
-	@Column(name = "eqpmnt_code",length =100)
+	@Column(name = "eqpmnt_code")
 	public String getEquipmentCode() {
 		return equipmentCode;
 	}
@@ -107,7 +107,7 @@ public class InspectionFormEquipment extends MizeSceEntity implements Comparable
 		this.equipmentCode = equipmentCode;
 	}
 
-	@Column(name = "eqpmnt_brand",length =250)
+	@Column(name = "eqpmnt_brand")
 	public String getEquipmentBrand() {
 		return equipmentBrand;
 	}
@@ -116,7 +116,7 @@ public class InspectionFormEquipment extends MizeSceEntity implements Comparable
 		this.equipmentBrand = equipmentBrand;
 	}
 
-	@Column(name = "eqpmnt_category" ,length =250)
+	@Column(name = "eqpmnt_category")
 	public String getEquipmentCategory() {
 		return equipmentCategory;
 	}
@@ -125,7 +125,7 @@ public class InspectionFormEquipment extends MizeSceEntity implements Comparable
 		this.equipmentCategory = equipmentCategory;
 	}
 
-	@Column(name = "eqpmnt_serial",length =200)
+	@Column(name = "eqpmnt_serial")
 	public String getEquipmentSerial() {
 		return equipmentSerial;
 	}
@@ -134,7 +134,7 @@ public class InspectionFormEquipment extends MizeSceEntity implements Comparable
 		this.equipmentSerial = equipmentSerial;
 	}
 
-	@Column(name = "eqpmnt_model",length =50)
+	@Column(name = "eqpmnt_model")
 	public String getEquipmentModel() {
 		return equipmentModel;
 	}
@@ -143,7 +143,7 @@ public class InspectionFormEquipment extends MizeSceEntity implements Comparable
 		this.equipmentModel = equipmentModel;
 	}
 
-	@Column(name = "eqpmnt_name",length=250)
+	@Column(name = "eqpmnt_name")
 	public String getEquipmentName() {
 		return equipmentName;
 	}
@@ -152,7 +152,7 @@ public class InspectionFormEquipment extends MizeSceEntity implements Comparable
 		this.equipmentName = equipmentName;
 	}
 
-	@Column(name = "eqpmnt_description" ,length=500)
+	@Column(name = "eqpmnt_description")
 	public String getEquipmentDescription() {
 		return equipmentDescription;
 	}
@@ -161,7 +161,7 @@ public class InspectionFormEquipment extends MizeSceEntity implements Comparable
 		this.equipmentDescription = equipmentDescription;
 	}
 
-	@Column(name = "eqpmnt_reference",length=100)
+	@Column(name = "eqpmnt_reference")
 	public String getEquipmentReference() {
 		return equipmentReference;
 	}

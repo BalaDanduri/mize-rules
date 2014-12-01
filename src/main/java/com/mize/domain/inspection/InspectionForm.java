@@ -21,7 +21,6 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.Type;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -30,18 +29,17 @@ import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityOffline;
 import com.mize.domain.common.Locale;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.form.FormInstance;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.MizeDate;
-import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Inheritance
 @DiscriminatorColumn(name = "discriminator")
 @DiscriminatorValue("InspectionForm")
 @Table(name="insp_form")
-public class InspectionForm extends MizeSceEntity implements Comparable<InspectionForm> {
+public class InspectionForm extends MizeSceEntityAudit implements Comparable<InspectionForm> {
 
 	
 	private static final long serialVersionUID = -666112603626187346L;
@@ -70,7 +68,7 @@ public class InspectionForm extends MizeSceEntity implements Comparable<Inspecti
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return id;
@@ -93,7 +91,7 @@ public class InspectionForm extends MizeSceEntity implements Comparable<Inspecti
 		this.tenant = tenant;
 	}
 
-	@Column(name = "insp_code", length = 50)
+	@Column(name = "insp_code")
 	public String getInspectionCode() {
 		return inspectionCode;
 	}
@@ -102,7 +100,7 @@ public class InspectionForm extends MizeSceEntity implements Comparable<Inspecti
 		this.inspectionCode = inspectionCode;
 	}
 
-	@Column(name = "insp_type", length = 50)
+	@Column(name = "insp_type")
 	public String getInspectionType() {
 		return inspectionType;
 	}
@@ -111,7 +109,7 @@ public class InspectionForm extends MizeSceEntity implements Comparable<Inspecti
 		this.inspectionType = inspectionType;
 	}
 
-	@Column(name = "insp_status", length = 50)
+	@Column(name = "insp_status")
 	public String getInspectionStatus() {
 		return inspectionStatus;
 	}
@@ -120,7 +118,7 @@ public class InspectionForm extends MizeSceEntity implements Comparable<Inspecti
 		this.inspectionStatus = inspectionStatus;
 	}
 	
-	@Column(name = "insp_reference", length = 100)
+	@Column(name = "insp_reference")
 	public String getInspectionReference() {
 		return inspectionReference;
 	}
@@ -130,7 +128,7 @@ public class InspectionForm extends MizeSceEntity implements Comparable<Inspecti
 	}
 
 	
-	@Column(name = "insp_date", nullable = true)
+	@Column(name = "insp_date")
 	@Type(type = "com.mize.domain.util.MizeDateJPA")
 	@JsonInclude(Include.NON_NULL)
 	public MizeDate getInspectionDate() {
@@ -141,7 +139,7 @@ public class InspectionForm extends MizeSceEntity implements Comparable<Inspecti
 		this.inspectionDate = inspectionDate;
 	}
 
-	@Column(name = "inspected_by", length = 100)
+	@Column(name = "inspected_by")
 	public String getInspectedBy() {
 		return inspectedBy;
 	}
@@ -163,7 +161,7 @@ public class InspectionForm extends MizeSceEntity implements Comparable<Inspecti
 	}
 
 	@OneToOne(fetch=FetchType.EAGER,cascade={CascadeType.ALL})
-	@JoinColumn(name="form_instance_id", nullable = true)
+	@JoinColumn(name="form_instance_id")
 	public FormInstance getFormInstance() {
 		return formInstance;
 	}
@@ -240,65 +238,7 @@ public class InspectionForm extends MizeSceEntity implements Comparable<Inspecti
 		this.user = user;
 	}
 	
-	
-	@Override	
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@JsonIgnore(false)
-	@Column(name = "created_date",updatable=false)
-	@JsonInclude(Include.NON_NULL)
-	public MizeDateTime getCreatedDate() {
-		return createdDate;
-	}
-
-	@Override	
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@Column(name = "updated_date")
-	@JsonIgnore(false)
-	@JsonInclude(Include.NON_NULL)
-	public MizeDateTime getUpdatedDate() {
-		return updatedDate;
-	}
-
-	@Override
-	@JsonIgnore
-	@Column(name = "created_by",updatable=false)
-	public Long getCreatedBy() {		
-		return super.getCreatedBy();
-	}
-
-	@Override
-	@JsonIgnore
-	@Column(name = "updated_by")
-	public Long getUpdatedBy() {		
-		return super.getUpdatedBy();
-	}
-
-
-	@Override
-	@JsonIgnore(false)
-	public void setCreatedDate(MizeDateTime createdDate) {
-		super.createdDate = createdDate;
-	}
-
-	@Override
-	@JsonIgnore(false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		super.updatedDate = updatedDate;
-	}
-
-	@Override
-	@JsonIgnore
-	public void setCreatedBy(Long createdBy) {		
-		super.setCreatedBy(createdBy);
-	}
-
-	@Override
-	@JsonIgnore
-	public void setUpdatedBy(Long updatedBy) {		
-		super.setUpdatedBy(updatedBy);
-	}
-
-	@Column(name = "insp_source", length = 100)
+	@Column(name = "insp_source")
 	public String getSource() {
 		return source;
 	}
@@ -307,7 +247,7 @@ public class InspectionForm extends MizeSceEntity implements Comparable<Inspecti
 		this.source = source;
 	}
 
-	@Column(name = "insp_sync_status", length = 50)
+	@Column(name = "insp_sync_status")
 	public String getSyncStatus() {
 		return syncStatus;
 	}
@@ -338,29 +278,6 @@ public class InspectionForm extends MizeSceEntity implements Comparable<Inspecti
 		this.entityOffline = entityOffline;
 	}
 
-	
-	@Override
-	@Column(name = "created_by_user", length = 250,updatable = false)
-	public String getCreatedByUser() {
-		return super.getCreatedByUser();
-	}
-	
-	@Override
-	public void setCreatedByUser(String createdByUser) {
-		super.setCreatedByUser(createdByUser);
-	}
-	
-	@Override
-	@Column(name = "updated_by_user", length = 250)
-	public String getUpdatedByUser() {
-		return super.getUpdatedByUser();
-	}
-	
-	@Override
-	public void setUpdatedByUser(String updatedByUser) {
-		super.setUpdatedByUser(updatedByUser);
-	}
-	
 	
 	@Override
 	public int hashCode() {

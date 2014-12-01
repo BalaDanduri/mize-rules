@@ -32,15 +32,14 @@ import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.businessentity.BusinessEntityIntl;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityComment;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.MizeDate;
-import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name = "prod_regn")
-public class ProductRegistration extends MizeSceEntity implements Comparable<ProductRegistration>{
+public class ProductRegistration extends MizeSceEntityAudit implements Comparable<ProductRegistration>{
 
 	private static final long serialVersionUID = 2928234510268602315L;
 	
@@ -184,7 +183,7 @@ public class ProductRegistration extends MizeSceEntity implements Comparable<Pro
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "prod_regn_id", nullable = false, unique = true)
+	@Column(name = "prod_regn_id")
 	@Override
 	public Long getId() {
 		return id;
@@ -208,12 +207,12 @@ public class ProductRegistration extends MizeSceEntity implements Comparable<Pro
 	}
 
 
-	@Column(name = "status_code", nullable = true)
+	@Column(name = "status_code")
 	public String getStatusCode() {
 		return statusCode;
 	}
 
-	@Column(name = "regn_type", nullable = true)
+	@Column(name = "regn_type")
 	public String getRegistrationType() {
 		return registrationType;
 	}
@@ -243,26 +242,26 @@ public class ProductRegistration extends MizeSceEntity implements Comparable<Pro
 	public EntityAddress getCustomerAddress() {
 		return customerAddress;
 	}
-	@Column(name = "cust_delivery_date", nullable = true)
+	@Column(name = "cust_delivery_date")
 	@Type(type = "com.mize.domain.util.MizeDateJPA")
 	public MizeDate getCustomerDeliveryDate() {
 		return customerDeliveryDate;
 	}
 
-	@Column(name = "purchase_date", nullable = true)
+	@Column(name = "purchase_date")
 	@Type(type = "com.mize.domain.util.MizeDateJPA")
 	public MizeDate getPurchaseDate() {
 		return purchaseDate;
 	}
 
-	@Column(name = "warranty_expiry_date", nullable = true)
+	@Column(name = "warranty_expiry_date")
 	@Type(type = "com.mize.domain.util.MizeDateJPA")
 	public MizeDate getWarrantyExpiryDate() {
 		return warrantyExpiryDate;
 	}
 
 
-	@Column(name = "purchase_price", nullable = true)
+	@Column(name = "purchase_price")
 	public BigDecimal getPurchasePrice() {
 		return purchasePrice;
 	}
@@ -279,38 +278,7 @@ public class ProductRegistration extends MizeSceEntity implements Comparable<Pro
 		return comments;
 	}
 
-	@Override	
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@Column(name = "created_date",updatable=false)
-	@JsonIgnore(false)
-	public MizeDateTime getCreatedDate() {
-		return createdDate;
-	}
-
-	@Override	
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@Column(name = "updated_date")
-	@JsonIgnore(false)
-	public MizeDateTime getUpdatedDate() {
-		return updatedDate;
-	}
-
-	@Override
-	@JsonIgnore
-	@Column(name = "created_by",updatable=false)
-	public Long getCreatedBy() {		
-		return super.getCreatedBy();
-	}
-
-	@Override
-	@JsonIgnore
-	@Column(name = "updated_by")
-	public Long getUpdatedBy() {		
-		return super.getUpdatedBy();
-	}
-	
-	
-	@Column(name = "regn_date ", nullable = true)
+	@Column(name = "regn_date")
 	@Type(type = "com.mize.domain.util.MizeDateJPA")
 	public MizeDate getRegistrationDate() {
 		return registrationDate;
@@ -407,34 +375,6 @@ public class ProductRegistration extends MizeSceEntity implements Comparable<Pro
 		this.comments = comments;
 	}
 
-
-	@Override
-	@JsonIgnore(false)
-	public void setCreatedDate(MizeDateTime createdDate) {
-		super.createdDate = createdDate;
-	}
-
-	@Override
-	@JsonIgnore(false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		super.updatedDate = updatedDate;
-	}
-
-
-	@Override
-	@JsonIgnore
-	public void setCreatedBy(Long createdBy) {		
-		super.setCreatedBy(createdBy);
-	}
-
-	@Override
-	@JsonIgnore
-	public void setUpdatedBy(Long updatedBy) {		
-		super.setUpdatedBy(updatedBy);
-	}
-	
-	
-
 	public void setRegistrationDate(MizeDate registrationDate) {
 		this.registrationDate = registrationDate;
 	}
@@ -508,7 +448,7 @@ public class ProductRegistration extends MizeSceEntity implements Comparable<Pro
 		this.additionalInfo = additionalInfo;
 	}
 	
-	@Column(name = "invoice_customer_reference", length = 100, nullable = true)
+	@Column(name = "invoice_customer_reference")
 	public String getDealerCustomerReference() {
 		return dealerCustomerReference;
 	}
@@ -567,29 +507,7 @@ public class ProductRegistration extends MizeSceEntity implements Comparable<Pro
 	}
 
 	
-	@Override
-	@Column(name = "created_by_user",updatable = false)
-	public String getCreatedByUser() {
-		return createdByUser;
-	}
-	
-	@Override
-	@Column(name = "updated_by_user")
-	public String getUpdatedByUser() {
-		return updatedByUser;
-	}
 
-	@Override
-	public void setCreatedByUser(String createdByUser) {
-		this.createdByUser = createdByUser;
-	}
-	
-	@Override
-	public void setUpdatedByUser(String updatedByUser) {
-		this.updatedByUser = updatedByUser;
-	}
-	
-	
 
 	@Override
 	public int compareTo(ProductRegistration o) {
