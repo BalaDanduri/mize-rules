@@ -17,20 +17,17 @@ import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.Type;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.MizeDateTime;
@@ -39,8 +36,8 @@ import com.mize.domain.util.MizeDateTime;
 @Inheritance
 @DiscriminatorColumn(name = "discriminator")
 @DiscriminatorValue("LaborHour")
-@Table(name = "labor_hour", uniqueConstraints = {@UniqueConstraint (columnNames = {"tenant_id", "labor_code"})})
-public class LaborHour extends MizeSceEntity implements Comparable<LaborHour> {
+//@Table(name = "labor_hour", uniqueConstraints = {@UniqueConstraint (columnNames = {"tenant_id", "labor_code"})})
+public class LaborHour extends MizeSceEntityAudit implements Comparable<LaborHour> {
 
 	private static final long serialVersionUID = 86846948813348698L;
 	private BusinessEntity tenant;
@@ -166,48 +163,6 @@ public class LaborHour extends MizeSceEntity implements Comparable<LaborHour> {
 		this.intls = intls;
 	}
 
-	public void setCreatedBy(Long createdBy) {
-		this.createdBy = createdBy;
-	}
-	
-	@Column(name = "created_by" , updatable=false)
-	public Long getCreatedBy() {
-		return createdBy;
-	}
-	
-	@JsonIgnore(value=false)
-	public void setUpdatedBy(Long updatedBy) {
-		this.updatedBy = updatedBy;
-	}
-
-	@JsonIgnore(value=false)
-	@Column(name = "updated_by")
-	public Long getUpdatedBy() {		
-		return super.getUpdatedBy();
-	}
-	
-	public void setCreatedDate(MizeDateTime createdDate) {
-		this.createdDate = createdDate;
-	}
-	
-	@Column(name = "created_date",updatable = false)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@JsonInclude(Include.NON_DEFAULT)
-	public MizeDateTime getCreatedDate() {
-		return createdDate;
-	}
-
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		this.updatedDate = updatedDate;
-	}
-	
-	@Column(name = "updated_date")
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@JsonInclude(Include.NON_DEFAULT)
-	public MizeDateTime getUpdatedDate() {
-		return updatedDate;
-	}
-	
 	@Transient
 	public User getUser() {
 		return user;
