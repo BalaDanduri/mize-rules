@@ -13,27 +13,20 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.persistence.UniqueConstraint;
-
-import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.form.FormDefinition;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Inheritance
 @DiscriminatorColumn(name = "discriminator")
 @DiscriminatorValue("FormDefinitionLink")
-@Table(name = "form_defn_link", uniqueConstraints = {@UniqueConstraint (columnNames = {"id"})})
-public class FormDefinitionLink extends MizeSceEntity implements Comparable<FormDefinitionLink> {
+@Table(name = "form_defn_link")
+public class FormDefinitionLink extends MizeSceEntityAudit implements Comparable<FormDefinitionLink> {
 
 	private static final long serialVersionUID = -5813531097572778442L;
 	
@@ -134,81 +127,6 @@ public class FormDefinitionLink extends MizeSceEntity implements Comparable<Form
 		this.user = user;
 	}
 	
-	@Override	
-	@Column(name = "created_date", updatable = false)
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@JsonInclude(Include.NON_DEFAULT)
-	@JsonIgnore(false)
-	public MizeDateTime getCreatedDate() {
-		return createdDate;
-	}
-	
-	@Override
-	@JsonIgnore(false)
-	public void setCreatedDate(MizeDateTime createdDate) {
-		super.createdDate = createdDate;
-	}
-	
-	@Column(name = "updated_date", nullable = true)
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@JsonInclude(Include.NON_DEFAULT)
-	@JsonIgnore(value=false)
-	public MizeDateTime getUpdatedDate() {
-		return updatedDate;
-	}
-	
-	@JsonIgnore(false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		super.updatedDate = updatedDate;
-	}
-	
-	@Override	
-	@Column(name = "created_by", nullable = true, length = 20, updatable = false)
-	public Long getCreatedBy() {		
-		return super.getCreatedBy();
-	}
-	
-	@Override
-	@JsonIgnore
-	public void setCreatedBy(Long createdBy) {		
-		super.setCreatedBy(createdBy);
-	}
-	
-	@Override
-	@JsonIgnore
-	@Column(name = "updated_by", nullable = true, length = 20)
-	public Long getUpdatedBy() {		
-		return super.getUpdatedBy();
-	}
-	
-	@Override
-	@JsonIgnore
-	public void setUpdatedBy(Long updatedBy) {		
-		super.setUpdatedBy(updatedBy);
-	}
-
-	@Override
-	@Column(name = "created_by_user", length = 250,updatable = false)
-	public String getCreatedByUser() {
-		return super.getCreatedByUser();
-	}
-	
-	@Override
-	public void setCreatedByUser(String createdByUser) {
-		super.setCreatedByUser(createdByUser);
-	}
-	
-	@Override
-	@Column(name = "updated_by_user", length = 250)
-	public String getUpdatedByUser() {
-		return super.getUpdatedByUser();
-	}
-	
-	@Override
-	public void setUpdatedByUser(String updatedByUser) {
-		super.setUpdatedByUser(updatedByUser);
-	}
-	
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
@@ -266,8 +184,15 @@ public class FormDefinitionLink extends MizeSceEntity implements Comparable<Form
 
 	@Override
 	public int compareTo(FormDefinitionLink o) {
-		// TODO Auto-generated method stub
-		return 0;
+		if ( this == o ) 
+			return EQUAL;
+		else if (this.id < o.id) 
+			return BEFORE;
+		else if (o.id == this.id) 
+			return EQUAL;
+		else if (this.id > o.id)
+			return AFTER;
+		return EQUAL;
 	}
 
 }
