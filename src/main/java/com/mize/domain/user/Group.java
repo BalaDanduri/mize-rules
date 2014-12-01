@@ -15,25 +15,22 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDateTime;
 
 @Entity
-@Table(name = "groups", uniqueConstraints = { @UniqueConstraint(columnNames = {"tenant_id", "CODE" }) })
-public class Group extends MizeSceEntity implements Comparable<Group> {
+@Table(name = "groups")
+public class Group extends MizeSceEntityAudit implements Comparable<Group> {
 
 	private static final long serialVersionUID = 4856844676138040686L;
 	private String name;
@@ -83,7 +80,7 @@ public class Group extends MizeSceEntity implements Comparable<Group> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return id;
@@ -94,20 +91,20 @@ public class Group extends MizeSceEntity implements Comparable<Group> {
 		this.id = id;
 	}
 
-	@Column(name = "CODE", nullable = true, length = 20)
+	@Column(name = "CODE")
 	/*@Size(max = 30)*/
 	public String getCode() {
 		return code;
 	}
 
-	@Column(name = "DESCRIPTION", nullable = true, length = 200)
+	@Column(name = "DESCRIPTION")
 	/*@NonEmpty(message = "description.notempty")
 	@Size(max = 200)*/
 	public String getDescription() {
 		return description;
 	}
 
-	@Column(name = "GROUP_NAME", nullable = false, length = 100)
+	@Column(name = "GROUP_NAME")
 	/*@NonEmpty(message = "groupName.notempty")
 	@Size(max = 100)
 	@Pattern(regexp = "^[a-zA-Z][a-zA-Z\\s]+$", message = "groupName.alpha")*/
@@ -120,31 +117,9 @@ public class Group extends MizeSceEntity implements Comparable<Group> {
 		return roles;
 	}
 
-	@Column(name = "ACTIVE_INDICATOR", nullable = true, length = 1)
+	@Column(name = "ACTIVE_INDICATOR")
 	public String getActive() {
 		return active;
-	}
-	
-	@Override
-	public void setCreatedByUser(String createdByUser){
-		this.createdByUser=createdByUser;
-	}
-	
-	@Override
-	@Column(name= "created_by_user",updatable=false)
-	public String getCreatedByUser(){
-		return createdByUser;
-	}
-	
-	@Override
-	public void setUpdatedByUser(String updatedByUser){
-		this.updatedByUser=updatedByUser;
-	}
-	
-	@Override
-	@Column(name= "updated_by_user")
-	public String getUpdatedByUser(){
-		return updatedByUser;
 	}
 	
 
@@ -227,59 +202,6 @@ public class Group extends MizeSceEntity implements Comparable<Group> {
 		this.user = user;
 	}
 	
-	@Override
-	@JsonIgnore(value=false)
-	public void setCreatedDate(MizeDateTime createdDate) {
-		this.createdDate = createdDate;
-	}
-	
-	@Override
-	@JsonIgnore(value=false)
-	public void setUpdatedBy(Long updatedBy) {
-		this.updatedBy = updatedBy;
-	}
- 
-	@Override
-	@JsonIgnore(value=false)
-	public void setCreatedBy(Long createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	@Override
-	@JsonIgnore(value=false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		this.updatedDate = updatedDate;
-	}
-	
-	@Override
-	@Column(name = "created_date",updatable = false)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@JsonIgnore(value=false)
-	public MizeDateTime getCreatedDate() {
-		return createdDate;
-	}
-
-	@Override
-	@Column(name = "updated_date")
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@JsonIgnore(value=false)
-	public MizeDateTime getUpdatedDate() {
-		return updatedDate;
-	}
-	
-	@Override
-	@JsonIgnore(value=false)
-	@Column(name = "created_by" , updatable=false)
-	public Long getCreatedBy() {
-		return createdBy;
-	}
-	
-	@Override
-	@JsonIgnore
-	@Column(name = "updated_by")
-	public Long getUpdatedBy() {		
-		return super.getUpdatedBy();
-	}
 
 	
 	public int compareTo(Group group) {

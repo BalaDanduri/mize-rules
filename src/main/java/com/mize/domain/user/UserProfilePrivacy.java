@@ -12,10 +12,11 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.auth.User;
 import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityAudit;
 
 @Entity
 @Table(name="user_profile_privacy")
-public class UserProfilePrivacy extends MizeSceEntity implements Comparable<UserProfilePrivacy> {
+public class UserProfilePrivacy extends MizeSceEntityAudit implements Comparable<UserProfilePrivacy> {
 	
 	private static final long serialVersionUID = 6808879417363134780L;
 	private String displayBirthYear;
@@ -74,7 +75,7 @@ public class UserProfilePrivacy extends MizeSceEntity implements Comparable<User
 		this.userId = userId;
 	}*/
 	
-	@Column(name="display_birthyear", nullable=true)
+	@Column(name="display_birthyear")
 	public String getDisplayBirthYear() {
 		return displayBirthYear;
 	}
@@ -82,7 +83,7 @@ public class UserProfilePrivacy extends MizeSceEntity implements Comparable<User
 		this.displayBirthYear = displayBirthYear;
 	}
 	
-	@Column(name="email", nullable=true)
+	@Column(name="email")
 	public Long getEmail() {
 		return email;
 	}
@@ -90,7 +91,7 @@ public class UserProfilePrivacy extends MizeSceEntity implements Comparable<User
 		this.email = email;
 	}
 	
-	@Column(name="friends", nullable=true)
+	@Column(name="friends")
 	public Long getFriends() {
 		return friends;
 	}
@@ -98,7 +99,7 @@ public class UserProfilePrivacy extends MizeSceEntity implements Comparable<User
 		this.friends = friends;
 	}
 	
-	@Column(name="activity", nullable=true)
+	@Column(name="activity")
 	public Long getActivity() {
 		return activity;
 	}
@@ -106,7 +107,7 @@ public class UserProfilePrivacy extends MizeSceEntity implements Comparable<User
 		this.activity = activity;
 	}
 	
-	@Column(name="want", nullable=true)
+	@Column(name="want")
 	public Long getWant() {
 		return want;
 	}
@@ -114,7 +115,7 @@ public class UserProfilePrivacy extends MizeSceEntity implements Comparable<User
 		this.want = want;
 	}
 	
-	@Column(name="own", nullable=true)
+	@Column(name="own")
 	public Long getOwn() {
 		return own;
 	}
@@ -122,7 +123,7 @@ public class UserProfilePrivacy extends MizeSceEntity implements Comparable<User
 		this.own = own;
 	}
 	
-	@Column(name="birthdate", nullable=true)
+	@Column(name="birthdate")
 	public Long getBirthDate() {
 		return birthDate;
 	}
@@ -130,7 +131,7 @@ public class UserProfilePrivacy extends MizeSceEntity implements Comparable<User
 		this.birthDate = birthDate;
 	}
 	
-	@Column(name="gender", nullable=true)
+	@Column(name="gender")
 	public Long getGender() {
 		return gender;
 	}
@@ -138,7 +139,7 @@ public class UserProfilePrivacy extends MizeSceEntity implements Comparable<User
 		this.gender = gender;
 	}
 	
-	@Column(name="city_state", nullable=true)
+	@Column(name="city_state")
 	public Long getCityState() {
 		return cityState;
 	}
@@ -146,60 +147,6 @@ public class UserProfilePrivacy extends MizeSceEntity implements Comparable<User
 		this.cityState = cityState;
 	}
 
-/*	@Column(name="created_by", nullable=true)
-	@JsonIgnore
-	public Integer getCreatedBy() {
-		return createdBy;
-	}
-
-	@JsonIgnore
-	public void setCreatedBy(int createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	@Column(name="created_date", nullable=true)
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonIgnore
-	public DateTime getCreatedDate() {
-		return createdDate;
-	}
-
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore
-	public void setCreatedDate(DateTime createdDate) {
-		this.createdDate = createdDate;
-	}
-
-	
-	/*@Column(name="updated_by", nullable=true)
-	@JsonIgnore
-	public Integer getUpdatedBy() {
-		return updatedBy;
-	}
-
-	@JsonIgnore
-	public void setUpdatedBy(int updatedBy) {
-		this.updatedBy = updatedBy;
-	}
-
-	
-	@Column(name="updated_date", nullable=true)
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonIgnore
-	public DateTime getUpdatedDate() {
-		return updatedDate;
-	}
-	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore
-	public void setUpdatedDate(DateTime updatedDate) {
-		this.updatedDate = updatedDate;
-	}
-*/	
 	public int compareTo(UserProfilePrivacy privacy) {
 		if ( this == privacy ) 
 			return EQUAL;

@@ -27,13 +27,14 @@ import com.mize.domain.auth.User;
 import com.mize.domain.brand.Brand;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.MizeDateTime;
 
 
 @Entity
 @Table(name="users_to_be")
-public class UserBE extends MizeSceEntity implements Comparable<UserBE>{
+public class UserBE extends MizeSceEntityAudit implements Comparable<UserBE>{
 	
 	private static final long serialVersionUID = -7447355457187568168L;
 	
@@ -78,7 +79,7 @@ public class UserBE extends MizeSceEntity implements Comparable<UserBE>{
 		this.brands = brands;
 	}
 
-	@Column(name = "department",  nullable = true, length = 100)
+	@Column(name = "department")
 	public String getDepartment() {
 		return department;
 	}
@@ -100,7 +101,7 @@ public class UserBE extends MizeSceEntity implements Comparable<UserBE>{
 		this.id = id;
 	}
 	
-	@Column(name = "JOB_ROLE",  nullable = true, length = 200)
+	@Column(name = "JOB_ROLE")
 	public String getJobRole() {
 		return jobRole;
 	}
@@ -110,67 +111,6 @@ public class UserBE extends MizeSceEntity implements Comparable<UserBE>{
 		this.jobRole = jobRole;
 	}
 
-	@JsonIgnore(value=false)
-	public void setCreatedDate(MizeDateTime createdDate) {
-		this.createdDate = createdDate;
-	}
-	
-	@JsonIgnore(value=false)
-	public void setUpdatedBy(Long updatedBy) {
-		this.updatedBy = updatedBy;
-	}
- 
-	@JsonIgnore(value=false)
-	public void setCreatedBy(Long createdBy) {
-		this.createdBy = createdBy;
-	}
-	@JsonIgnore(value=false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		this.updatedDate = updatedDate;
-	}
-	
-	@Column(name = "created_date",updatable = false)
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@JsonIgnore(value=false)
-	public MizeDateTime getCreatedDate() {
-		return createdDate;
-	}
-
-	@Column(name = "updated_date")
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@JsonIgnore(value=false)
-	public MizeDateTime getUpdatedDate() {
-		return updatedDate;
-	}
-	
-	@JsonIgnore(value=false)
-	@Column(name = "created_by" , updatable=false)
-	public Long getCreatedBy() {
-		return createdBy;
-	}
-	
-	@Override
-	public void setCreatedByUser(String createdByUser){
-		this.createdByUser=createdByUser;
-	}
-	
-	@Override
-	@Column(name= "created_by_user",updatable=false)
-	public String getCreatedByUser(){
-		return createdByUser;
-	}
-	
-	@Override
-	public void setUpdatedByUser(String updatedByUser){
-		this.updatedByUser=updatedByUser;
-	}
-	
-	@Override
-	@Column(name= "updated_by_user")
-	public String getUpdatedByUser(){
-		return updatedByUser;
-	}
-	
 	@Override
 	public String toString() {
 		return "UserBE [ jobRole=" + jobRole + ", department=" + department

@@ -15,12 +15,12 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
 import com.mize.domain.auth.User;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.util.JPASerializer;
 
 @Entity
 @Table(name="user_to_groups")
-public class UserGroup extends MizeSceEntity implements Comparable<UserGroup> {
+public class UserGroup extends MizeSceEntityAudit implements Comparable<UserGroup> {
 
 	private static final long serialVersionUID = -922509907830867390L;
 	private User user;
@@ -95,28 +95,6 @@ public class UserGroup extends MizeSceEntity implements Comparable<UserGroup> {
 		this.userGroup = userGroup;
 	}
 	
-	@Override
-	public void setCreatedByUser(String createdByUser){
-		this.createdByUser=createdByUser;
-	}
-	
-	@Override
-	@Column(name= "created_by_user",updatable=false)
-	public String getCreatedByUser(){
-		return createdByUser;
-	}
-	
-	@Override
-	public void setUpdatedByUser(String updatedByUser){
-		this.updatedByUser=updatedByUser;
-	}
-	
-	@Override
-	@Column(name= "updated_by_user")
-	public String getUpdatedByUser(){
-		return updatedByUser;
-	}
-
 	@Override
 	public String toString() {
 		return "UserGroup [groupId=" + groupId

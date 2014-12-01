@@ -14,19 +14,17 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name = "role")
-public class Role extends MizeSceEntity implements Comparable<Role>{
+public class Role extends MizeSceEntityAudit implements Comparable<Role>{
 
 	private static final long serialVersionUID = 6863889616106407854L;
 	private String name;
@@ -53,7 +51,7 @@ public class Role extends MizeSceEntity implements Comparable<Role>{
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "id", unique = false, nullable = false, length = 11)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return id;
@@ -64,7 +62,7 @@ public class Role extends MizeSceEntity implements Comparable<Role>{
 		this.id = id;
 	}
 	
-	@Column(name = "CODE", nullable = true, length = 20)
+	@Column(name = "CODE")
 	/*@NonEmpty(message="code.notempty")*/
 	@Size(max = 30)
 	public String getCode() {
@@ -75,7 +73,7 @@ public class Role extends MizeSceEntity implements Comparable<Role>{
 		this.code = code;
 	}
 
-	@Column(name = "ROLE_NAME", nullable = false, length = 100)
+	@Column(name = "ROLE_NAME")
 	/*@NonEmpty(message="roleName.notempty")*/
 	@Size(max = 100)
 	public String getName() {
@@ -85,7 +83,7 @@ public class Role extends MizeSceEntity implements Comparable<Role>{
 		this.name = name;
 	}
 	
-	@Column(name = "DESCRIPTION", nullable = true, length = 200)
+	@Column(name = "DESCRIPTION")
 	/*@NonEmpty(message="description.notempty")*/
 	@Size(max = 200)
 	public String getDescription() {
@@ -95,7 +93,7 @@ public class Role extends MizeSceEntity implements Comparable<Role>{
 		this.description = description;
 	}
 	
-	@Column(name = "ACTIVE_INDICATOR", nullable = true, length = 1)
+	@Column(name = "ACTIVE_INDICATOR")
 	public String getActive() {
 		return active;
 	}
@@ -103,29 +101,6 @@ public class Role extends MizeSceEntity implements Comparable<Role>{
 	public void setActive(String active) {
 		this.active = active;
 	}
-	
-	@Override
-	public void setCreatedByUser(String createdByUser){
-		this.createdByUser=createdByUser;
-	}
-	
-	@Override
-	@Column(name= "created_by_user",updatable=false)
-	public String getCreatedByUser(){
-		return createdByUser;
-	}
-	
-	@Override
-	public void setUpdatedByUser(String updatedByUser){
-		this.updatedByUser=updatedByUser;
-	}
-	
-	@Override
-	@Column(name= "updated_by_user")
-	public String getUpdatedByUser(){
-		return updatedByUser;
-	}
-	
 	
 	@OneToMany(fetch = FetchType.LAZY,cascade={CascadeType.ALL}, mappedBy ="role")
 	@JsonSerialize(using=JPASerializer.class)
@@ -148,62 +123,6 @@ public class Role extends MizeSceEntity implements Comparable<Role>{
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	@JsonIgnore(value=false)
-	public void setCreatedDate(MizeDateTime createdDate) {
-		this.createdDate = createdDate;
-	}
-	
-	@JsonIgnore(value=false)
-	public void setUpdatedBy(Long updatedBy) {
-		this.updatedBy = updatedBy;
-	}
- 
-	@JsonIgnore(value=false)
-	public void setCreatedBy(Long createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	@JsonIgnore(value=false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		this.updatedDate = updatedDate;
-	}
-	
-	
-	@Column(name = "created_date",updatable = false)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@JsonIgnore(value=false)
-	public MizeDateTime getCreatedDate() {
-		return createdDate;
-	}
-
-
-	@Column(name = "updated_date")
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@JsonIgnore(value=false)
-	public MizeDateTime getUpdatedDate() {
-		return updatedDate;
-	}
-	
-	@Override
-	@JsonIgnore
-	@Column(name = "created_by", updatable = false)
-	public Long getCreatedBy() {		
-		return super.getCreatedBy();
-	}
-
-	@Override
-	@JsonIgnore
-	@Column(name = "updated_by")
-	public Long getUpdatedBy() {		
-		return super.getUpdatedBy();
-	}
-
-
-	
-	
-	
-	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
@@ -242,7 +161,7 @@ public class Role extends MizeSceEntity implements Comparable<Role>{
 		if (groupsToRole == null) {
 			if (other.groupsToRole != null)
 				return false;
-		} else if (!groupsToRole.equals(other.groupsToRole))
+		} else if (!groupsToRole.containsAll(other.groupsToRole))
 			return false;
 		if (name == null) {
 			if (other.name != null)

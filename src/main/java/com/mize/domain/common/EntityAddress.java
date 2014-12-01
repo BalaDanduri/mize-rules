@@ -22,11 +22,10 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name = "entity_address")
-public class EntityAddress extends MizeSceEntity implements Comparable<EntityAddress>{
+public class EntityAddress extends MizeSceEntityAudit implements Comparable<EntityAddress>{
 	private static final long serialVersionUID = 8115479374038082156L;
 	private String type;
 	private String address1;
@@ -49,7 +48,7 @@ public class EntityAddress extends MizeSceEntity implements Comparable<EntityAdd
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return id;
@@ -60,7 +59,7 @@ public class EntityAddress extends MizeSceEntity implements Comparable<EntityAdd
 		this.id = id;
 	}
 
-	@Column(name = "address_type", nullable = true)
+	@Column(name = "address_type")
 	public String getType() {
 		return type;
 	}
@@ -69,7 +68,7 @@ public class EntityAddress extends MizeSceEntity implements Comparable<EntityAdd
 		this.type = type;
 	}
 
-	@Column(name = "address_1", nullable = true)
+	@Column(name = "address_1")
 	public String getAddress1() {
 		return address1;
 	}
@@ -78,7 +77,7 @@ public class EntityAddress extends MizeSceEntity implements Comparable<EntityAdd
 		this.address1 = address1;
 	}
 
-	@Column(name = "address_2", nullable = true)
+	@Column(name = "address_2")
 	public String getAddress2() {
 		return address2;
 	}
@@ -87,7 +86,7 @@ public class EntityAddress extends MizeSceEntity implements Comparable<EntityAdd
 		this.address2 = address2;
 	}
 
-	@Column(name = "address_3", nullable = true)
+	@Column(name = "address_3")
 	public String getAddress3() {
 		return address3;
 	}
@@ -96,7 +95,7 @@ public class EntityAddress extends MizeSceEntity implements Comparable<EntityAdd
 		this.address3 = address3;
 	}
 
-	@Column(name = "zip", nullable = true)
+	@Column(name = "zip")
 	public String getZip() {
 		return zip;
 	}
@@ -105,7 +104,7 @@ public class EntityAddress extends MizeSceEntity implements Comparable<EntityAdd
 		this.zip = zip;
 	}
 
-	@Column(name = "zip_ext", nullable = true)
+	@Column(name = "zip_ext")
 	public String getZipExt() {
 		return zipExt;
 	}
@@ -114,7 +113,7 @@ public class EntityAddress extends MizeSceEntity implements Comparable<EntityAdd
 		this.zipExt = zipExt;
 	}
 
-	@Column(name = "city", nullable = true)
+	@Column(name = "city")
 	public String getCity() {
 		return city;
 	}
@@ -143,7 +142,7 @@ public class EntityAddress extends MizeSceEntity implements Comparable<EntityAdd
 		this.country = country;
 	}
 
-	@Column(name = "email", nullable = true)
+	@Column(name = "email")
 	public String getEmail() {
 		return email;
 	}
@@ -152,48 +151,8 @@ public class EntityAddress extends MizeSceEntity implements Comparable<EntityAdd
 		this.email = email;
 	}
 
-	@Column(name = "updated_by")
-	public Long getUpdatedBy() {
-		return this.updatedBy;
-	}
 	
-	public void setUpdatedBy(Long updatedBy) {
-		this.updatedBy = updatedBy;
-	}
-	
-	@Column(name = "created_by" , updatable=false)
-	public Long getCreatedBy() {
-		return this.createdBy;
-	}
-	
-	public void setCreatedBy(Long createdBy) {
-		this.createdBy = createdBy;
-	}
-	
-	
-	@Column(name = "created_date", updatable=false)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@JsonInclude(Include.NON_DEFAULT)
-	public MizeDateTime getCreatedDate() {
-		return this.createdDate;
-	}
-
-	public void setCreatedDate(MizeDateTime createdDate) {
-		this.createdDate = createdDate;
-	}
-	
-	@Column(name = "updated_date")
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@JsonInclude(Include.NON_DEFAULT)
-	public MizeDateTime getUpdatedDate() {
-		return this.updatedDate;
-	}
-	
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		this.updatedDate = updatedDate;
-	} 
-	
-	@Column(name = "land_mark", nullable = true)
+	@Column(name = "land_mark")
 	public String getLandmark() {
 		return landmark;
 	}
@@ -223,24 +182,6 @@ public class EntityAddress extends MizeSceEntity implements Comparable<EntityAdd
 
 	public void setAddressGeo(EntityAddressGeo addressGeo) {
 		this.addressGeo = addressGeo;
-	}
-	
-	@Column(name = "created_by_user", updatable=false)
-	public String getCreatedByUser() {
-		return createdByUser;
-	}
-	
-	public void setCreatedByUser(String createdByUser) {
-		this.createdByUser = createdByUser;
-	}
-	
-	@Column(name = "updated_by_user")
-	public String getUpdatedByUser() {
-		return updatedByUser;
-	}
-	
-	public void setUpdatedByUser(String updatedByUser) {
-		this.updatedByUser = updatedByUser;
 	}
 	
 	@Override

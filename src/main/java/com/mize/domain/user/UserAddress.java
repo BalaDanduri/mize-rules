@@ -11,24 +11,21 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.common.Country;
 import com.mize.domain.common.EntityAddress;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.common.State;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name="user_address")
-public class UserAddress extends MizeSceEntity implements Comparable<UserAddress> {	
+public class UserAddress extends MizeSceEntityAudit implements Comparable<UserAddress> {	
 	private static final long serialVersionUID = -7919863139299243311L;
 	
 	private String type;
@@ -62,7 +59,7 @@ public class UserAddress extends MizeSceEntity implements Comparable<UserAddress
 		this.id = id;
 	}
 	
-	@Column(name="address_type",length=20,nullable=true)
+	@Column(name="address_type")
 	public String getType() {
 		return type;
 	}
@@ -71,7 +68,7 @@ public class UserAddress extends MizeSceEntity implements Comparable<UserAddress
 		this.type = type;
 	}
 	
-	@Column(name="address_name",length=50,nullable=true)
+	@Column(name="address_name")
 	public String getName() {
 		return name;
 	}
@@ -80,7 +77,7 @@ public class UserAddress extends MizeSceEntity implements Comparable<UserAddress
 		this.name = name;
 	}
 	
-	@Column(name="address1",length=100,nullable=true)
+	@Column(name="address1")
 	public String getAddress1() {
 		return address1;
 	}
@@ -89,7 +86,7 @@ public class UserAddress extends MizeSceEntity implements Comparable<UserAddress
 		this.address1 = address1;
 	}
 	
-	@Column(name="address2",length=100,nullable=true)
+	@Column(name="address2")
 	public String getAddress2() {
 		return address2;
 	}
@@ -98,7 +95,7 @@ public class UserAddress extends MizeSceEntity implements Comparable<UserAddress
 		this.address2 = address2;
 	}
 	
-	@Column(name="address3",length=100,nullable=true)
+	@Column(name="address3")
 	public String getAddress3() {
 		return address3;
 	}
@@ -107,7 +104,7 @@ public class UserAddress extends MizeSceEntity implements Comparable<UserAddress
 		this.address3 = address3;
 	}
 	
-	@Column(name="city",length=100,nullable=true)
+	@Column(name="city")
 	public String getCity() {
 		return city;
 	}
@@ -116,7 +113,7 @@ public class UserAddress extends MizeSceEntity implements Comparable<UserAddress
 		this.city = city;
 	}
 	
-	@Column(name="postal_code",length=11,nullable=true)
+	@Column(name="postal_code")
 	public String getZipCode() {
 		return zipCode;
 	}
@@ -126,74 +123,6 @@ public class UserAddress extends MizeSceEntity implements Comparable<UserAddress
 	}
 
 
-	@JsonIgnore(value=false)
-	@Transient
-	public Long getCreatedBy() {
-		return createdBy;
-	}
-
-	@JsonIgnore(value=false)
-	public void setCreatedBy(Long createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	
-	@JsonIgnore(value=false)
-	@Transient
-	public MizeDateTime getCreatedDate() {
-		return createdDate;
-	}
-
-	
-	@JsonIgnore(value=false)
-	public void setCreatedDate(MizeDateTime createdDate) {
-		this.createdDate = createdDate;
-	}
-
-	@JsonIgnore(value=false)
-	@Transient
-	public Long getUpdatedBy() {
-		return updatedBy;
-	}
-
-	@JsonIgnore(value=false)
-	public void setUpdatedBy(Long updatedBy) {
-		this.updatedBy = updatedBy;
-	}
-	
-	@Override
-	public void setCreatedByUser(String createdByUser){
-		this.createdByUser=createdByUser;
-	}
-	
-	@Override
-	@Column(name= "created_by_user",updatable=false)
-	public String getCreatedByUser(){
-		return createdByUser;
-	}
-	
-	@Override
-	public void setUpdatedByUser(String updatedByUser){
-		this.updatedByUser=updatedByUser;
-	}
-	
-	@Override
-	@Column(name= "updated_by_user")
-	public String getUpdatedByUser(){
-		return updatedByUser;
-	}
-
-	@JsonIgnore(value=false)
-	@Transient
-	public MizeDateTime getUpdatedDate() {
-		return updatedDate;
-	}
-	
-	@JsonIgnore(value=false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		this.updatedDate = updatedDate;
-	}
-	
 	@OneToOne(fetch=FetchType.EAGER ,cascade =CascadeType.ALL,orphanRemoval = true)
 	@JoinColumn(name="entity_address_id")
 	public EntityAddress getEntityAddress() {

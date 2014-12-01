@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.businessentity.BusinessEntity;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.product.ProductRegister;
 import com.mize.domain.user.Group;
 import com.mize.domain.user.UserAddress;
@@ -41,7 +41,7 @@ import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name="users")
-public class User extends MizeSceEntity implements Comparable<User> {
+public class User extends MizeSceEntityAudit implements Comparable<User> {
 	
 	private static final long serialVersionUID = 6457591358862233006L;
 	private String email;
@@ -119,7 +119,7 @@ public class User extends MizeSceEntity implements Comparable<User> {
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id",unique=true,nullable=false)
+    @Column(name="id")
 	public Long getId() {
 		return id;
 	}
@@ -141,7 +141,7 @@ public class User extends MizeSceEntity implements Comparable<User> {
 		this.tenant = tenant;
 	}
 	
-	@Column(name="email",nullable=true,length=255)
+	@Column(name="email")
 	public String getEmail() {
 		return email;
 	}
@@ -149,7 +149,7 @@ public class User extends MizeSceEntity implements Comparable<User> {
 		this.email = email;
 	}
 	
-	@Column(name="name",nullable=true,length=255)
+	@Column(name="name")
 	public String getName() {
 		return name;
 	}
@@ -157,7 +157,7 @@ public class User extends MizeSceEntity implements Comparable<User> {
 		this.name = name;
 	}
 	
-	@Column(name = "last_login",  nullable = false)
+	@Column(name = "last_login")
 	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	public MizeDateTime getLastLogin() {
 		return lastLogin;
@@ -167,7 +167,7 @@ public class User extends MizeSceEntity implements Comparable<User> {
 		this.lastLogin = lastLogin;
 	}
 	
-	@Column(name="active",nullable=true)
+	@Column(name="active")
 	public boolean isActive() {
 		return active;
 	}
@@ -175,34 +175,12 @@ public class User extends MizeSceEntity implements Comparable<User> {
 		this.active = active;
 	}
 	
-	@Column(name="email_validated", nullable= true)
+	@Column(name="email_validated")
 	public boolean isEmailValidated() {
 		return emailValidated;
 	}
 	public void setEmailValidated(boolean emailValidated) {
 		this.emailValidated = emailValidated;
-	}
-	
-	@Override
-	public void setCreatedByUser(String createdByUser){
-		this.createdByUser=createdByUser;
-	}
-	
-	@Override
-	@Column(name= "created_by_user",updatable=false)
-	public String getCreatedByUser(){
-		return createdByUser;
-	}
-	
-	@Override
-	public void setUpdatedByUser(String updatedByUser){
-		this.updatedByUser=updatedByUser;
-	}
-	
-	@Override
-	@Column(name= "updated_by_user")
-	public String getUpdatedByUser(){
-		return updatedByUser;
 	}
 	
 	@OneToMany(cascade={CascadeType.ALL}, mappedBy="user",orphanRemoval = true)
@@ -309,7 +287,7 @@ public class User extends MizeSceEntity implements Comparable<User> {
 		return userProfile;
 	}
 
-	@Column(name="referral_id",nullable=true,length=20)
+	@Column(name="referral_id")
 	public Long getReferralId() {
 		return referralId;
 	}
@@ -372,52 +350,6 @@ public class User extends MizeSceEntity implements Comparable<User> {
 	public void setUserBrandMapping(List<UserBrandMapping> userBrandMapping) {
 		this.userBrandMapping = userBrandMapping;
 	}
-	
-	@JsonIgnore(false)
-	@Column(name = "updated_by")
-	public Long getUpdatedBy() {
-		return this.updatedBy;
-	}
-	
-	@JsonIgnore(false)
-	public void setUpdatedBy(Long updatedBy) {
-		this.updatedBy = updatedBy;
-	}
-	
-	@JsonIgnore(false)
-	@Column(name = "created_by", updatable = false)
-	public Long getCreatedBy() {
-		return this.createdBy;
-	}
-	
-	@JsonIgnore(false)
-	public void setCreatedBy(Long createdBy) {
-		this.createdBy = createdBy;
-	}
-	
-	@Column(name = "created_date", updatable = false)
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	@JsonIgnore(false)
-	public MizeDateTime getCreatedDate() {
-		return this.createdDate;
-	}
-
-	@JsonIgnore(false)
-	public void setCreatedDate(MizeDateTime createdDate) {
-		this.createdDate = createdDate;
-	}
-	
-	@Column(name = "updated_date")
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	@JsonIgnore(false)
-	public MizeDateTime getUpdatedDate() {
-		return this.updatedDate;
-	}
-	
-	@JsonIgnore(false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		this.updatedDate = updatedDate;
-	}
 
 	@Transient
 	public List<ProductRegister> getProductRegisters() {
@@ -451,7 +383,7 @@ public class User extends MizeSceEntity implements Comparable<User> {
 	}
 
 	
-	@Column(name = "is_active", length = 1, nullable = true)
+	@Column(name = "is_active")
 	public String getIsActive() {
 		return isActive;
 	}

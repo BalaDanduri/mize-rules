@@ -11,22 +11,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Type;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.brand.Brand;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name="users_to_brand")
-public class UserBrandMapping extends MizeSceEntity implements Comparable<UserBrandMapping>{
+public class UserBrandMapping extends MizeSceEntityAudit implements Comparable<UserBrandMapping>{
 
 	private static final long serialVersionUID = -289763682693109655L;
 	
@@ -49,7 +45,7 @@ public class UserBrandMapping extends MizeSceEntity implements Comparable<UserBr
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="id",unique=true,nullable=false,length=20)
+	@Column(name="id")
 	@Override
 	public Long getId() {
 		return id;
@@ -86,7 +82,7 @@ public class UserBrandMapping extends MizeSceEntity implements Comparable<UserBr
 		this.brand = brand;
 	}
 
-	@Column(name="active_indicator",nullable=false)
+	@Column(name="active_indicator")
 	public String getIsActive() {
 		return isActive;
 	}
@@ -95,81 +91,6 @@ public class UserBrandMapping extends MizeSceEntity implements Comparable<UserBr
 		this.isActive = isActive;
 	}
 
-	@Override	
-	@Column(name = "created_date", updatable = false)
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@JsonIgnore(value=false)
-	public MizeDateTime getCreatedDate() {
-		return createdDate;
-	}
-	
-	@Override
-	@JsonIgnore(value=false)
-	public void setCreatedDate(MizeDateTime createdDate) {
-		super.createdDate = createdDate;
-	}
-	
-	
-	@Column(name = "updated_date", nullable = true)
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@JsonIgnore(value=false)
-	public MizeDateTime getUpdatedDate() {
-		return updatedDate;
-	}
-	
-	
-	@JsonIgnore(value=false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		super.updatedDate = updatedDate;
-	}
-	
-	@Override	
-	@JsonIgnore(value=false)
-	@Column(name = "created_by", nullable = true, length = 20, updatable = false)
-	public Long getCreatedBy() {		
-		return super.getCreatedBy();
-	}
-	
-	@Override
-	@JsonIgnore(value=false)
-	public void setCreatedBy(Long createdBy) {		
-		super.setCreatedBy(createdBy);
-	}
-	
-	@Override
-	@JsonIgnore(value=false)
-	@Column(name = "updated_by", nullable = true, length = 20)
-	public Long getUpdatedBy() {		
-		return super.getUpdatedBy();
-	}
-	
-	@Override
-	@JsonIgnore(value=false)
-	public void setUpdatedBy(Long updatedBy) {		
-		super.setUpdatedBy(updatedBy);
-	}
-	
-	@Override
-	public void setCreatedByUser(String createdByUser){
-		this.createdByUser=createdByUser;
-	}
-	
-	@Override
-	@Column(name= "created_by_user",updatable=false)
-	public String getCreatedByUser(){
-		return createdByUser;
-	}
-	
-	@Override
-	public void setUpdatedByUser(String updatedByUser){
-		this.updatedByUser=updatedByUser;
-	}
-	
-	@Override
-	@Column(name= "updated_by_user")
-	public String getUpdatedByUser(){
-		return updatedByUser;
-	}
 	
 	@Transient
 	public Brand getUserBrand() {

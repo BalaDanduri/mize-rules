@@ -11,16 +11,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Type;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.common.MizeSceEntityAudit;
 
 @Entity
 @Table(name="linked_account")
-public class LinkedAccount extends MizeSceEntity implements Comparable<LinkedAccount> {
+public class LinkedAccount extends MizeSceEntityAudit implements Comparable<LinkedAccount> {
 	
 	private static final long serialVersionUID = 1947755331862630858L;
 	public String providerUserId;
@@ -58,7 +54,7 @@ public class LinkedAccount extends MizeSceEntity implements Comparable<LinkedAcc
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return id;
@@ -87,7 +83,7 @@ public class LinkedAccount extends MizeSceEntity implements Comparable<LinkedAcc
 		this.providerUserId = providerUserId;
 	}
 	
-	@Column(name="provider_key",nullable=true,length=255)
+	@Column(name="provider_key")
 	public String getProviderKey() {
 		return providerKey;
 	}
@@ -95,7 +91,7 @@ public class LinkedAccount extends MizeSceEntity implements Comparable<LinkedAcc
 		this.providerKey = providerKey;
 	}
 	
-	@Column(name="access_token",nullable=true,length=255)
+	@Column(name="access_token")
 	public String getAccessToken() {
 		return accessToken;
 	}
@@ -103,7 +99,7 @@ public class LinkedAccount extends MizeSceEntity implements Comparable<LinkedAcc
 		this.accessToken = accessToken;
 	}
 	
-	@Column(name="access_token_secret",nullable=true,length=255)
+	@Column(name="access_token_secret")
 	public String getAccessTokenSecret() {
 		return accessTokenSecret;
 	}
@@ -111,7 +107,7 @@ public class LinkedAccount extends MizeSceEntity implements Comparable<LinkedAcc
 		this.accessTokenSecret = accessTokenSecret;
 	}
 	
-	@Column(name="user_name",nullable=true,length=100)
+	@Column(name="user_name")
 	public String getUserName() {
 		return userName;
 	}
@@ -120,82 +116,13 @@ public class LinkedAccount extends MizeSceEntity implements Comparable<LinkedAcc
 		this.userName = userName;
 	}
 	
-	@Column(name="first_login",nullable=true,length=1)
+	@Column(name="first_login")
 	public String getFirstTime() {
 		return firstTime;
 	}
 
 	public void setFirstTime(String firstTime) {
 		this.firstTime = firstTime;
-	}
-
-	@JsonIgnore(false)
-	@Column(name = "updated_by")
-	public Long getUpdatedBy() {
-		return this.updatedBy;
-	}
-	
-	@JsonIgnore(false)
-	public void setUpdatedBy(Long updatedBy) {
-		this.updatedBy = updatedBy;
-	}
-	
-	@JsonIgnore(false)
-	@Column(name = "created_by", updatable = false)
-	public Long getCreatedBy() {
-		return this.createdBy;
-	}
-	
-	@JsonIgnore(false)
-	public void setCreatedBy(Long createdBy) {
-		this.createdBy = createdBy;
-	}
-	
-	@Override
-	public void setCreatedByUser(String createdByUser){
-		this.createdByUser=createdByUser;
-	}
-	
-	@Override
-	@Column(name= "created_by_user",updatable=false)
-	public String getCreatedByUser(){
-		return createdByUser;
-	}
-	
-	@Override
-	public void setUpdatedByUser(String updatedByUser){
-		this.updatedByUser=updatedByUser;
-	}
-	
-	@Override
-	@Column(name= "updated_by_user")
-	public String getUpdatedByUser(){
-		return updatedByUser;
-	}
-	
-	
-	@Column(name = "created_date", updatable = false)
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	@JsonIgnore(false)
-	public MizeDateTime getCreatedDate() {
-		return this.createdDate;
-	}
-
-	@JsonIgnore(false)
-	public void setCreatedDate(MizeDateTime createdDate) {
-		this.createdDate = createdDate;
-	}
-	
-	@Column(name = "updated_date")
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	@JsonIgnore(false)
-	public MizeDateTime getUpdatedDate() {
-		return this.updatedDate;
-	}
-	
-	@JsonIgnore(false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		this.updatedDate = updatedDate;
 	}
 	
 	@Transient

@@ -40,7 +40,7 @@ public class EntityAddressPhone extends MizeSceEntity implements Comparable<Enti
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return id;
@@ -72,7 +72,7 @@ public class EntityAddressPhone extends MizeSceEntity implements Comparable<Enti
 		this.address = address;
 	}
 
-	@Column(name = "phone_type", nullable = true)
+	@Column(name = "phone_type")
 	public String getPhoneType() {
 		return phoneType;
 	}
@@ -81,7 +81,7 @@ public class EntityAddressPhone extends MizeSceEntity implements Comparable<Enti
 		this.phoneType = phoneType;
 	}
 
-	@Column(name = "phone_value", nullable = true)
+	@Column(name = "phone_value")
 	public String getPhoneValue() {
 		return phoneValue;
 	}
@@ -90,7 +90,7 @@ public class EntityAddressPhone extends MizeSceEntity implements Comparable<Enti
 		this.phoneValue = phoneValue;
 	}
 
-	@Column(name = "phone_ext", nullable = true)
+	@Column(name = "phone_ext")
 	public String getPhoneExt() {
 		return phoneExt;
 	}

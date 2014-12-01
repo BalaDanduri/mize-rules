@@ -21,18 +21,16 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.common.Gender;
 import com.mize.domain.common.Locale;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.common.PostalAddress;
 import com.mize.domain.product.UserProduct;
 import com.mize.domain.util.JPASerializer;
@@ -41,7 +39,7 @@ import com.mize.domain.util.MizeDateTime;
 @Entity
 @Table(name = "user_profile")
 @JsonAutoDetect
-public class UserProfile extends MizeSceEntity implements Serializable, Comparable<UserProfile> {
+public class UserProfile extends MizeSceEntityAudit implements Serializable, Comparable<UserProfile> {
 
 	private static final long serialVersionUID = 1396029824729565589L;
 	private Long userId;
@@ -122,7 +120,7 @@ public class UserProfile extends MizeSceEntity implements Serializable, Comparab
 	@Id
 	@GenericGenerator(name="id",strategy="increment")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="id",unique=true,nullable=false,length=10)
+	@Column(name="id")
 	@Override
 	public Long getId() {
 		return id;
@@ -167,7 +165,7 @@ public class UserProfile extends MizeSceEntity implements Serializable, Comparab
 		this.postalAddress = postalAddress;
 	}
 	
-	@Column(name = "first_name", length = 30, nullable = true)
+	@Column(name = "first_name")
 	public String getFirstName() {
 		return firstName;
 	}
@@ -175,7 +173,7 @@ public class UserProfile extends MizeSceEntity implements Serializable, Comparab
 		this.firstName = firstName;
 	}
 	
-	@Column(name = "middle_name", length = 30, nullable = true)
+	@Column(name = "middle_name")
 	public String getMiddleName() {
 		return middleName;
 	}
@@ -183,7 +181,7 @@ public class UserProfile extends MizeSceEntity implements Serializable, Comparab
 		this.middleName = middleName;
 	}
 	
-	@Column(name = "last_name", length = 30, nullable = true)
+	@Column(name = "last_name")
 	public String getLastName() {
 		return lastName;
 	}
@@ -191,7 +189,7 @@ public class UserProfile extends MizeSceEntity implements Serializable, Comparab
 		this.lastName = lastName;
 	}
 	
-	@Column(name = "birth_day",updatable = false, nullable = true)
+	@Column(name = "birth_day",updatable = false)
 	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	public MizeDateTime getBirthdate() {
 		return birthdate;
@@ -202,7 +200,7 @@ public class UserProfile extends MizeSceEntity implements Serializable, Comparab
 	}
 	
 	@org.hibernate.annotations.Type(type="com.mize.domain.util.GenderJPA")	
-	@Column(name = "gender", nullable = true)
+	@Column(name = "gender")
 	public Gender getGender() {
 		return gender;
 	}
@@ -210,7 +208,7 @@ public class UserProfile extends MizeSceEntity implements Serializable, Comparab
 		this.gender = gender;
 	}
 	
-	@Column(name = "photo_link", nullable = true)
+	@Column(name = "photo_link")
 	public String getPhotoLink() {
 		return photoLink;
 	}
@@ -219,7 +217,7 @@ public class UserProfile extends MizeSceEntity implements Serializable, Comparab
 		this.photoLink = photoLink;
 	}
 	
-	@Column(name = "profile_name", length = 30, nullable = true)
+	@Column(name = "profile_name")
 	public String getProfileName() {
 		return profileName;
 	}
@@ -228,7 +226,7 @@ public class UserProfile extends MizeSceEntity implements Serializable, Comparab
 		this.profileName = profileName;
 	}
 	
-	@Column(name = "phone_mobile", length = 10, nullable = true)
+	@Column(name = "phone_mobile")
 	public String getPhoneMobile() {
 		return phoneMobile;
 	}
@@ -237,7 +235,7 @@ public class UserProfile extends MizeSceEntity implements Serializable, Comparab
 		this.phoneMobile = phoneMobile;
 	}
 	
-	@Column(name = "phone_home", length = 10, nullable = true)
+	@Column(name = "phone_home")
 	public String getPhoneHome() {
 		return phoneHome;
 	}
@@ -245,7 +243,7 @@ public class UserProfile extends MizeSceEntity implements Serializable, Comparab
 		this.phoneHome = phoneHome;
 	}
 	
-	@Column(name = "phone_work", length = 10, nullable = true)
+	@Column(name = "phone_work")
 	public String getPhoneWork() {
 		return phoneWork;
 	}
@@ -262,7 +260,7 @@ public class UserProfile extends MizeSceEntity implements Serializable, Comparab
 		this.jobTitle = jobTitle;
 	}
 	
-	@Column(name = "email_opt_out", nullable = true)
+	@Column(name = "email_opt_out")
 	public String getEmailOptOut() {
 		return emailOptOut;
 	}
@@ -383,30 +381,7 @@ public class UserProfile extends MizeSceEntity implements Serializable, Comparab
 		this.ownCount = ownCount;
 	}
 	
-	@Override
-	public void setCreatedByUser(String createdByUser){
-		this.createdByUser=createdByUser;
-	}
-	
-	@Override
-	@Column(name= "created_by_user",updatable=false)
-	public String getCreatedByUser(){
-		return createdByUser;
-	}
-	
-	@Override
-	public void setUpdatedByUser(String updatedByUser){
-		this.updatedByUser=updatedByUser;
-	}
-	
-	@Override
-	@Column(name= "updated_by_user")
-	public String getUpdatedByUser(){
-		return updatedByUser;
-	}
-	
-
-	@Column(name = "timezone", length = 10, nullable=true)
+	@Column(name = "timezone")
 	public String getTimezone() {
 		return timezone;
 	}
@@ -630,7 +605,7 @@ public class UserProfile extends MizeSceEntity implements Serializable, Comparab
 		this.addresses = addresses;
 	}
 
-	@Column(name = "prompt_app_rating", nullable=true)
+	@Column(name = "prompt_app_rating")
 	public String getPromptForAppRating() {
 		return promptForAppRating;
 	}
@@ -649,61 +624,6 @@ public class UserProfile extends MizeSceEntity implements Serializable, Comparab
 		this.locale = locale;
 	}
 	
-	@JsonIgnore(false)
-	@Column(name = "updated_by")
-	public Long getUpdatedBy() {
-		return this.updatedBy;
-	}
-	
-	@JsonIgnore(false)
-	public void setUpdatedBy(Long updatedBy) {
-		this.updatedBy = updatedBy;
-	}
-	
-	@JsonIgnore(false)
-	@Column(name = "created_by", updatable = false)
-	public Long getCreatedBy() {
-		return this.createdBy;
-	}
-	
-	@JsonIgnore(false)
-	public void setCreatedBy(Long createdBy) {
-		this.createdBy = createdBy;
-	}
-	
-	/*@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using = JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)*/
-	@JsonIgnore(false)
-	@Column(name = "created_date", updatable = false)
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getCreatedDate() {
-		return this.createdDate;
-	}
-
-	/*@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using = JodaDateTimeDeserializer.class)*/
-	@JsonIgnore(false)
-	public void setCreatedDate(MizeDateTime createdDate) {
-		this.createdDate = createdDate;
-	}
-	
-	/*@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using = JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)*/
-	@Column(name = "updated_date")
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	@JsonIgnore(false)
-	public MizeDateTime getUpdatedDate() {
-		return this.updatedDate;
-	}
-	
-	/*@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using = JodaDateTimeDeserializer.class)*/
-	@JsonIgnore(false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		this.updatedDate = updatedDate;
-	}
 
 	
 }
