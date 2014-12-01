@@ -40,6 +40,7 @@ import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.common.State;
 import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
+import com.mize.domain.util.MizeDate;
 import com.mize.domain.util.MizeDateTime;
 
 @Entity
@@ -62,8 +63,8 @@ public class BusinessEntity extends MizeSceEntity implements Comparable<Business
 	@Transient
 	private User user;
 	private String statusCode;
-	private MizeDateTime startDate;
-	private MizeDateTime endDate;	
+	private MizeDate startDate;
+	private MizeDate endDate;	
 	private List<BusinessEntityAddress> addresses = new ArrayList<BusinessEntityAddress>();
 	private List<BusinessEntityIntl> intl = new ArrayList<BusinessEntityIntl>();
 	private List<BusinessEntityBrand> beBrand = new ArrayList<BusinessEntityBrand>();
@@ -371,24 +372,24 @@ public class BusinessEntity extends MizeSceEntity implements Comparable<Business
 	}
 
 	@Column(name = "start_date", nullable = true)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateJPA")
 	@JsonInclude(Include.NON_DEFAULT)
-	public MizeDateTime getStartDate() {
+	public MizeDate getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(MizeDateTime startDate) {
+	public void setStartDate(MizeDate startDate) {
 		this.startDate = startDate;
 	}
 
 	@Column(name = "end_date", nullable = true)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateJPA")
 	@JsonInclude(Include.NON_DEFAULT)
-	public MizeDateTime getEndDate() {
+	public MizeDate getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(MizeDateTime endDate) {
+	public void setEndDate(MizeDate endDate) {
 		this.endDate = endDate;
 	}
 
