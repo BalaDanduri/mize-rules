@@ -346,6 +346,28 @@ public class FormDefinition extends MizeSceEntity implements Comparable<FormDefi
 	public void setUpdatedBy(Long updatedBy) {
 		super.setUpdatedBy(updatedBy);
 	}
+	
+	@Override
+	@Column(name = "created_by_user", length = 250, updatable = false)
+	public String getCreatedByUser() {
+		return super.getCreatedByUser();
+	}
+	
+	@Override
+	public void setCreatedByUser(String createdByUser) {
+		super.setCreatedByUser(createdByUser);
+	}
+	
+	@Override
+	@Column(name = "updated_by_user", length = 250)
+	public String getUpdatedByUser() {
+		return super.getUpdatedByUser();
+	}
+	
+	@Override
+	public void setUpdatedByUser(String updatedByUser) {
+		super.setUpdatedByUser(updatedByUser);
+	}
 
 	@Override
 	public int hashCode() {
