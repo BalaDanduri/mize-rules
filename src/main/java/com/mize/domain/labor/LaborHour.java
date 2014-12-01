@@ -17,6 +17,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.Type;
@@ -36,6 +37,7 @@ import com.mize.domain.util.MizeDateTime;
 @Inheritance
 @DiscriminatorColumn(name = "discriminator")
 @DiscriminatorValue("LaborHour")
+@Table(name = "labor_hour")
 public class LaborHour extends MizeSceEntityAudit implements Comparable<LaborHour> {
 
 	private static final long serialVersionUID = 86846948813348698L;
