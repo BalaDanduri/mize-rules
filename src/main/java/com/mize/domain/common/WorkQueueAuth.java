@@ -12,12 +12,10 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name="work_queue_auth")
-public class WorkQueueAuth extends MizeSceEntity implements Comparable<WorkQueueAuth>{
+public class WorkQueueAuth extends MizeSceEntityAudit implements Comparable<WorkQueueAuth>{
 
 	
 	private static final long serialVersionUID = -1821933287120972826L;
@@ -53,7 +51,7 @@ public class WorkQueueAuth extends MizeSceEntity implements Comparable<WorkQueue
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return id;
@@ -77,7 +75,7 @@ public class WorkQueueAuth extends MizeSceEntity implements Comparable<WorkQueue
 		return workQueue;
 	}
 
-	@Column(name = "auth_type", length = 50, nullable = false)
+	@Column(name = "auth_type")
 	public String getAuthType() {
 		return authType;
 	}
@@ -94,37 +92,6 @@ public class WorkQueueAuth extends MizeSceEntity implements Comparable<WorkQueue
 		return workQueueName;
 	}
 
-	
-	@Override	
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@Column(name = "created_date",updatable = false)
-	@JsonIgnore(value=false)
-	public MizeDateTime getCreatedDate() {
-		return createdDate;
-	}
-
-	@Override	
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@Column(name = "updated_date")
-	@JsonIgnore(value=false)
-	public MizeDateTime getUpdatedDate() {
-		return updatedDate;
-	}
-
-	@Override
-	@JsonIgnore
-	@Column(name = "created_by",updatable = false)
-	public Long getCreatedBy() {		
-		return super.getCreatedBy();
-	}
-
-	@Override
-	@JsonIgnore
-	@Column(name = "updated_by")
-	public Long getUpdatedBy() {		
-		return super.getUpdatedBy();
-	}
-	
 	public void setWorkQueue(WorkQueue workQueue) {
 		this.workQueue = workQueue;
 	}
@@ -154,55 +121,6 @@ public class WorkQueueAuth extends MizeSceEntity implements Comparable<WorkQueue
 		this.id = id;
 	}
  
-	@Override
-	@JsonIgnore(value = false)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public void setCreatedDate(MizeDateTime createdDate) {
-		super.createdDate = createdDate;
-	}
-
-	@Override
-	@JsonIgnore(value = false)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		super.updatedDate = updatedDate;
-	}
-
-	@Override
-	@JsonIgnore(value = false)
-	public void setCreatedBy(Long createdBy) {		
-		super.setCreatedBy(createdBy);
-	}
-
-	@Override
-	@JsonIgnore(value = false)
-	public void setUpdatedBy(Long updatedBy) {		
-		super.setUpdatedBy(updatedBy);
-	}
-	
-	
-	@Override
-	@Column(name = "created_by_user",updatable = false)
-	public String getCreatedByUser() {
-		return createdByUser;
-	}
-	
-	@Override
-	@Column(name = "updated_by_user")
-	public String getUpdatedByUser() {
-		return updatedByUser;
-	}
-
-	@Override
-	public void setCreatedByUser(String createdByUser) {
-		this.createdByUser = createdByUser;
-	}
-	
-	@Override
-	public void setUpdatedByUser(String updatedByUser) {
-		this.updatedByUser = updatedByUser;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;

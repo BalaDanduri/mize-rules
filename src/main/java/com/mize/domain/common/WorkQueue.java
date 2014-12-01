@@ -15,9 +15,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.persistence.UniqueConstraint;
-
-import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -27,11 +24,10 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDateTime;
 
 @Entity
-@Table(name="work_queue", uniqueConstraints = {@UniqueConstraint (columnNames = {"name","tenant_id"})})
-public class WorkQueue extends MizeSceEntity implements Comparable<WorkQueue>{
+@Table(name="work_queue")
+public class WorkQueue extends MizeSceEntityAudit implements Comparable<WorkQueue>{
 	private static final long serialVersionUID = -488011181561672299L;
 	private String name;
 	private String desc;
@@ -58,7 +54,7 @@ public class WorkQueue extends MizeSceEntity implements Comparable<WorkQueue>{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id")
 	@Override
 	public Long getId() {	
 		return id;
@@ -69,22 +65,22 @@ public class WorkQueue extends MizeSceEntity implements Comparable<WorkQueue>{
 		this.id = id;
 	}
 	
-	@Column(name = "name", length = 30, nullable = false)
+	@Column(name = "name")
 	public String getName() {
 		return name;
 	}
   
-	@Column(name = "description", length = 100, nullable = true)
+	@Column(name = "description")
 	public String getDesc() {
 		return desc;
 	}
 
-	@Column(name = "code", length = 30, nullable = false)
+	@Column(name = "code")
 	public String getCode() {
 		return code;
 	}
 	
-	@Column(name = "is_active",  nullable = true, length = 1)
+	@Column(name = "is_active")
 	public String getIsActive() {
 		return isActive;
 	}
@@ -105,36 +101,6 @@ public class WorkQueue extends MizeSceEntity implements Comparable<WorkQueue>{
 		return tenant;
 	}
 	
-	@Override	
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@Column(name = "created_date",updatable=false)
-	@JsonIgnore(value=false)
-	public MizeDateTime getCreatedDate() {
-		return createdDate;
-	}
-
-	@Override	
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@Column(name = "updated_date")
-	@JsonIgnore(value=false)
-	public MizeDateTime getUpdatedDate() {
-		return updatedDate;
-	}
-
-	@Override
-	@JsonIgnore(value=false)
-	@Column(name = "created_by",updatable=false)
-	public Long getCreatedBy() {		
-		return super.getCreatedBy();
-	}
-
-	@Override
-	@JsonIgnore(value=false)
-	@Column(name = "updated_by")
-	public Long getUpdatedBy() {		
-		return super.getUpdatedBy();
-	}
-    
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -159,30 +125,6 @@ public class WorkQueue extends MizeSceEntity implements Comparable<WorkQueue>{
 		this.tenant = tenant;
 	}
      
-	@Override
-	@JsonIgnore(value=false)
-	public void setCreatedDate(MizeDateTime createdDate) {
-		super.createdDate = createdDate;
-	}
-
-	@Override
-	@JsonIgnore(value=false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		super.updatedDate = updatedDate;
-	}
-
-	@Override
-	@JsonIgnore(value=false)
-	public void setCreatedBy(Long createdBy) {		
-		super.setCreatedBy(createdBy);
-	}
-
-	@Override
-	@JsonIgnore(value=false)
-	public void setUpdatedBy(Long updatedBy) {		
-		super.setUpdatedBy(updatedBy);
-	}
-
 	@Transient
 	@JsonIgnore
 	public User getUser() {
@@ -201,28 +143,6 @@ public class WorkQueue extends MizeSceEntity implements Comparable<WorkQueue>{
 
 	public void setAssociateAuth(boolean isAssociateAuth) {
 		this.isAssociateAuth = isAssociateAuth;
-	}
-	
-	@Override
-	@Column(name = "created_by_user",updatable = false)
-	public String getCreatedByUser() {
-		return createdByUser;
-	}
-	
-	@Override
-	@Column(name = "updated_by_user")
-	public String getUpdatedByUser() {
-		return updatedByUser;
-	}
-
-	@Override
-	public void setCreatedByUser(String createdByUser) {
-		this.createdByUser = createdByUser;
-	}
-	
-	@Override
-	public void setUpdatedByUser(String updatedByUser) {
-		this.updatedByUser = updatedByUser;
 	}
 	
 	@Override
