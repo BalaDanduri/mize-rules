@@ -184,65 +184,7 @@ public class EntityContact extends MizeSceEntityAudit {
 		this.department = department;
 	}
 
-	/*public void setCreatedDate(MizeDateTime createdDate) {
-		this.createdDate = createdDate;
-	}
-
-	public void setUpdatedBy(Long updatedBy) {
-		this.updatedBy = updatedBy;
-	}
-
-	public void setCreatedBy(Long createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		this.updatedDate = updatedDate;
-	}
-
-	@Column(name = "created_date", updatable=false)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@JsonInclude(Include.NON_DEFAULT)
-	public MizeDateTime getCreatedDate() {
-		return createdDate;
-	}
-
-	@Column(name = "updated_date")
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@JsonInclude(Include.NON_DEFAULT)
-	public MizeDateTime getUpdatedDate() {
-		return updatedDate;
-	}
-
-	@Column(name = "created_by" , updatable=false)
-	public Long getCreatedBy() {
-		return createdBy;
-	}
-
-	@Column(name = "created_by_user", updatable=false)
-	public String getCreatedByUser() {
-		return createdByUser;
-	}
 	
-	@Column(name = "updated_by_user")
-	public String getUpdatedByUser() {
-		return updatedByUser;
-	}
-	
-	public void setCreatedByUser(String createdByUser) {
-		this.createdByUser = createdByUser;
-	}
-	
-	public void setUpdatedByUser(String updatedByUser) {
-		this.updatedByUser = updatedByUser;
-	}
-	
-	@Column(name = "updated_by")
-	public Long getUpdatedBy() {
-		return updatedBy;
-	}*/
-	
-
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
