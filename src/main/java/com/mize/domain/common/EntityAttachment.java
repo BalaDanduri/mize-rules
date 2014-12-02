@@ -7,12 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.mize.domain.util.MizeDateTime;
-
 @Entity
 @Table(name = "entity_attachment")
-public class EntityAttachment extends MizeSceEntity implements Comparable<EntityAttachment>{	
+public class EntityAttachment extends MizeSceEntityAudit implements Comparable<EntityAttachment>{	
 	
 	private static final long serialVersionUID = -6021050096072684326L;
 	private String type;
@@ -21,7 +18,7 @@ public class EntityAttachment extends MizeSceEntity implements Comparable<Entity
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return id;
@@ -58,58 +55,6 @@ public class EntityAttachment extends MizeSceEntity implements Comparable<Entity
 	public void setUrl(String url) {
 		this.url = url;
 	}	
-
-	@JsonIgnore(value=false)
-	public void setCreatedDate(MizeDateTime createdDate) {
-		this.createdDate = createdDate;
-	}
-	
-	@JsonIgnore(value=false)
-	public void setUpdatedBy(Long updatedBy) {
-		this.updatedBy = updatedBy;
-	}
- 
-	@JsonIgnore(value=false)
-	public void setCreatedBy(Long createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	@JsonIgnore(value=false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		this.updatedDate = updatedDate;
-	}
-	
-	
-	@Column(name = "created_date",updatable = false)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@JsonIgnore(value=false)
-	public MizeDateTime getCreatedDate() {
-		return createdDate;
-	}
-
-	@Column(name = "updated_date")
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getUpdatedDate() {
-		return updatedDate;
-	}
-	
-	@JsonIgnore(value=false)
-	@Column(name = "created_by" , updatable=false)
-	public Long getCreatedBy() {
-		return createdBy;
-	}
-	
-	@Override
-	@Column(name = "created_by_user" , updatable=false,length=250)
-	public String getCreatedByUser() {
-		return super.getCreatedByUser();
-	}
-	
-	@Override
-	@Column(name = "updated_by_user" , length=250)
-	public String getUpdatedByUser() {
-		return super.getUpdatedByUser();
-	}
 	
 	@Override
 	public int hashCode() {
