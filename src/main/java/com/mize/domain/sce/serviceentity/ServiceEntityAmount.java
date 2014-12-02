@@ -39,7 +39,7 @@ public class ServiceEntityAmount extends MizeSceEntity implements Comparable<Ser
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "id")
 	public Long getId() {
 		return id;
 	}

@@ -41,7 +41,7 @@ public class ServiceEntityMessage extends MizeSceEntity implements Comparable<Se
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "id")
 	public Long getId() {
 		return id;
 	}
@@ -81,7 +81,7 @@ public class ServiceEntityMessage extends MizeSceEntity implements Comparable<Se
 		this.messageSeverity = messageSeverity;
 	}
 	
-	@Column(name = "message_field", length = 250)
+	@Column(name = "message_field")
 	public String getMessageField() {
 		return messageField;
 	}
@@ -90,7 +90,7 @@ public class ServiceEntityMessage extends MizeSceEntity implements Comparable<Se
 		this.messageField = messageField;
 	}
 	
-	@Column(name = "message_ui_reference", length = 100)
+	@Column(name = "message_ui_reference")
 	public String getMessageUiReference() {
 		return messageUiReference;
 	}
@@ -99,7 +99,7 @@ public class ServiceEntityMessage extends MizeSceEntity implements Comparable<Se
 		this.messageUiReference = messageUiReference;
 	}
 	
-	@Column(name = "message_value", length = 5000)
+	@Column(name = "message_value")
 	public String getMessageValue() {
 		return messageValue;
 	}

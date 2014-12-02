@@ -39,7 +39,7 @@ public class ServiceEntityAudit extends MizeAuditEntity implements Comparable<Se
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "id")
 	public Long getId() {
 		return id;
 	}
@@ -61,7 +61,7 @@ public class ServiceEntityAudit extends MizeAuditEntity implements Comparable<Se
 		this.serviceEntity = serviceEntity;
 	}
 	
-	@Column(name = "status_code", length= 50)
+	@Column(name = "status_code")
 	public String getStatusCode() {
 		return statusCode;
 	}
@@ -89,7 +89,7 @@ public class ServiceEntityAudit extends MizeAuditEntity implements Comparable<Se
 		this.statusBy = statusBy;
 	}
 	
-	@Column(name = "status_by_user", nullable = true, length = 250)
+	@Column(name = "status_by_user")
 	@Override
 	public String getStatusByUser() {
 		return statusByUser;

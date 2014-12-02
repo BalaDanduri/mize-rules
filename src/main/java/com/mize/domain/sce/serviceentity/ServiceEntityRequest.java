@@ -65,7 +65,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "id")
 	public Long getId() {
 		return id;
 	}
@@ -87,7 +87,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 		this.serviceEntity = serviceEntity;
 	}
 	
-	@Column(name = "request_type", length = 50)
+	@Column(name = "request_type")
 	public String getRequestType() {
 		return requestType;
 	}
@@ -96,7 +96,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 		this.requestType = requestType;
 	}
 	
-	@Column(name = "request_code", length = 50)
+	@Column(name = "request_code")
 	public String getRequestCode() {
 		return requestCode;
 	}
@@ -106,7 +106,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	}
 	
 	
-	@Column(name = "failure_date", nullable = true)
+	@Column(name = "failure_date")
 	@Type(type = "com.mize.domain.util.MizeDateJPA")
 	public MizeDate getFailureDate() {
 		return failureDate;
@@ -117,7 +117,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	}
 	
 	
-	@Column(name = "repair_date", nullable = true)
+	@Column(name = "repair_date")
 	@Type(type = "com.mize.domain.util.MizeDateJPA")
 	public MizeDate getRepairDate() {
 		return repairDate;
@@ -127,7 +127,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 		this.repairDate = repairDate;
 	}
 	
-	@Column(name = "repair_site_code", length = 100)
+	@Column(name = "repair_site_code")
 	public String getRepairSiteCode() {
 		return repairSiteCode;
 	}
@@ -136,7 +136,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 		this.repairSiteCode = repairSiteCode;
 	}
 	
-	@Column(name = "complaint_code", length = 100)
+	@Column(name = "complaint_code")
 	public String getComplaintCode() {
 		return complaintCode;
 	}
@@ -145,7 +145,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 		this.complaintCode = complaintCode;
 	}
 	
-	@Column(name = "complaint_descr", length = 1000)
+	@Column(name = "complaint_descr")
 	public String getComplaintDescription() {
 		return complaintDescription;
 	}
@@ -154,7 +154,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 		this.complaintDescription = complaintDescription;
 	}
 	
-	@Column(name = "cause_code", length = 100)
+	@Column(name = "cause_code")
 	public String getCauseCode() {
 		return causeCode;
 	}
@@ -163,7 +163,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 		this.causeCode = causeCode;
 	}
 	
-	@Column(name = "cause_descr", length = 1000)
+	@Column(name = "cause_descr")
 	public String getCauseDescription() {
 		return causeDescription;
 	}
@@ -172,7 +172,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 		this.causeDescription = causeDescription;
 	}
 	
-	@Column(name = "corrective_action_code", length = 100)
+	@Column(name = "corrective_action_code")
 	public String getCorrectiveActionCode() {
 		return correctiveActionCode;
 	}
@@ -181,7 +181,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 		this.correctiveActionCode = correctiveActionCode;
 	}
 	
-	@Column(name = "corrective_action_descr", length = 1000)
+	@Column(name = "corrective_action_descr")
 	public String getCorrectiveActionDescription() {
 		return correctiveActionDescription;
 	}

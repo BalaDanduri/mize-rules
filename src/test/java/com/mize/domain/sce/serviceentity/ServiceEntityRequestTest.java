@@ -13,6 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
+import org.joda.time.DateTime;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -171,7 +172,7 @@ public class ServiceEntityRequestTest extends JPATest {
 		serviceEntityRequest.setCorrectiveActionCode("CORC001");
 		serviceEntityRequest.setCorrectiveActionDescription("Turn off and on the monitor");
 		serviceEntityRequest.setCreatedBy(779L);
-		serviceEntityRequest.setCreatedDate(MizeDateTime.now());
+		serviceEntityRequest.setCreatedDate(MizeDateTime.getInstance(DateTime.now()));
 		serviceEntityRequest.setServiceEntity(serviceEntity);
 		
 		ServiceEntityAmount partAmount = new ServiceEntityAmount();
@@ -236,7 +237,7 @@ public class ServiceEntityRequestTest extends JPATest {
 	private void createCoverage() {
 		coverage = new ServiceEntityRequestCoverage();
 		coverage.setServiceEntityRequest(serviceEntityRequest);
-		coverage.setCoverageEndDate(MizeDateTime.now().addYears(1));
+		coverage.setCoverageEndDate(MizeDate.now().addYears(1));
 		coverage.setCoverageName("Standard 1 Year Warranty");
 	}
 	

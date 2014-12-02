@@ -24,6 +24,7 @@ import com.mize.domain.product.Product;
 import com.mize.domain.product.ProductSerial;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;
+import com.mize.domain.util.MizeDate;
 import com.mize.domain.util.MizeDateTime;
 
 @ContextConfiguration(locations={"/test-context.xml"})
@@ -114,8 +115,8 @@ public class GoodwillTest extends JPATest {
 		gw.setCurrencyCode("USD");
 		gw.setReference("REF00191");
 		gw.setAuthorisedBy("REF01");
-		gw.setStartDate(MizeDateTime.now());
-		gw.setEndDate(MizeDateTime.now());
+		gw.setStartDate(MizeDate.now());
+		gw.setEndDate(MizeDate.now());
 		BusinessEntity requestor = new BusinessEntity();
 		requestor.setId(8822L);
 		requestor.setCode("SAMREF001");

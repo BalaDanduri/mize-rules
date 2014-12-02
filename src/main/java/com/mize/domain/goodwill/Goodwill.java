@@ -26,15 +26,15 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityComment;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.product.Product;
 import com.mize.domain.product.ProductSerial;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.util.MizeDate;
 
 @Entity
 @Table(name="goodwill")
-public class Goodwill extends MizeSceEntity implements Comparable<Goodwill> {
+public class Goodwill extends MizeSceEntityAudit implements Comparable<Goodwill> {
 	private static final long serialVersionUID = 7577184605741571133L;
 	private BusinessEntity tenant;
 	private String code;
@@ -44,8 +44,8 @@ public class Goodwill extends MizeSceEntity implements Comparable<Goodwill> {
 	private String currencyCode;
 	private String reference;
 	private String authorisedBy;
-	private MizeDateTime startDate;
-	private MizeDateTime endDate;
+	private MizeDate startDate;
+	private MizeDate endDate;
 	private BusinessEntity requestor;
 	private Product product;
 	private ProductSerial productSerial;
@@ -69,7 +69,7 @@ public class Goodwill extends MizeSceEntity implements Comparable<Goodwill> {
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id",unique=true,nullable=false)
+    @Column(name="id")
 	public Long getId() {
 		return id;
 	}
@@ -87,51 +87,51 @@ public class Goodwill extends MizeSceEntity implements Comparable<Goodwill> {
 		return tenant;
 	}
 
-	@Column(name = "goodwill_code", length = 50)
+	@Column(name = "goodwill_code")
 	public String getCode() {
 		return code;
 	}
 
-	@Column(name = "goodwill_status", length = 50)
+	@Column(name = "goodwill_status")
 	public String getStatusCode() {
 		return statusCode;
 	}
 
-	@Column(name = "goodwill_type", length = 50)
+	@Column(name = "goodwill_type")
 	public String getTypeCode() {
 		return typeCode;
 	}
 	
-	@Column(name = "goodwill_description", length = 50)
+	@Column(name = "goodwill_description")
 	public String getDescription() {
 		return description;
 	}
 
-	@Column(name = "currency_code", length = 50)
+	@Column(name = "currency_code")
 	public String getCurrencyCode() {
 		return currencyCode;
 	}
 
-	@Column(name = "goodwill_reference", length = 100)
+	@Column(name = "goodwill_reference")
 	public String getReference() {
 		return reference;
 	}
 
-	@Column(name = "goodwill_auth_by", length = 100)
+	@Column(name = "goodwill_auth_by")
 	public String getAuthorisedBy() {
 		return authorisedBy;
 	}
 
 	
-	@Column(name = "goodwill_start_date", nullable = true)
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getStartDate() {
+	@Column(name = "goodwill_start_date")
+	@Type(type = "com.mize.domain.util.MizeDateJPA")
+	public MizeDate getStartDate() {
 		return startDate;
 	}
 	
-	@Column(name = "goodwill_end_date", nullable = true)
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getEndDate() {
+	@Column(name = "goodwill_end_date")
+	@Type(type = "com.mize.domain.util.MizeDateJPA")
+	public MizeDate getEndDate() {
 		return endDate;
 	}
 
@@ -180,12 +180,12 @@ public class Goodwill extends MizeSceEntity implements Comparable<Goodwill> {
 		return claimedEntityId;
 	}
 	
-	@Column(name = "claimed_entity_code", length = 50)
+	@Column(name = "claimed_entity_code")
 	public String getClaimedEntityCode() {
 		return claimedEntityCode;
 	}
 	
-	@Column(name = "claimed_entity_type", length = 50)
+	@Column(name = "claimed_entity_type")
 	public String getClaimedEntityType() {
 		return claimedEntityType;
 	}
@@ -244,11 +244,11 @@ public class Goodwill extends MizeSceEntity implements Comparable<Goodwill> {
 		this.authorisedBy = authorisedBy;
 	}
 
-	public void setStartDate(MizeDateTime startDate) {
+	public void setStartDate(MizeDate startDate) {
 		this.startDate = startDate;
 	}
 
-	public void setEndDate(MizeDateTime endDate) {
+	public void setEndDate(MizeDate endDate) {
 		this.endDate = endDate;
 	}
 
@@ -296,81 +296,6 @@ public class Goodwill extends MizeSceEntity implements Comparable<Goodwill> {
 		this.entityComment = entityComment;
 	}
 
-	@Override
-	@JsonIgnore(false)
-	public void setCreatedDate(MizeDateTime createdDate) {
-		this.createdDate = createdDate;
-	}
-
-	@JsonIgnore(value=false)
-	public void setUpdatedBy(Long updatedBy) {
-		this.updatedBy = updatedBy;
-	}
-
-	@JsonIgnore(value=false)
-	public void setCreatedBy(Long createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	@Override
-	@JsonIgnore(false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		this.updatedDate = updatedDate;
-	}
-
-	@Column(name = "created_date",updatable = false)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@JsonIgnore(false)
-	public MizeDateTime getCreatedDate() {
-		return createdDate;
-	}
-
-	
-	@Column(name = "updated_date")
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@JsonIgnore(false)
-	public MizeDateTime getUpdatedDate() {
-		return updatedDate;
-	}
-
-	@JsonIgnore(value=false)
-	@Column(name = "created_by" , updatable=false)
-	public Long getCreatedBy() {
-		return createdBy;
-	}
-
-	@JsonIgnore(value=false)
-	@Column(name = "updated_by")
-	public Long getUpdatedBy() {
-		return updatedBy;
-	}
-	
-	@Override
-	@JsonIgnore
-	@Column(name = "created_by_user",updatable=false)
-	public String getCreatedByUser() {
-		return super.getCreatedByUser();
-	}
-	
-	@Override
-	@JsonIgnore
-	@Column(name = "updated_by_user")
-	public String getUpdatedByUser() {
-		return super.getUpdatedByUser();
-	}
-	
-	@Override
-	@JsonIgnore
-	public void setCreatedByUser(String createdByUser) {
-		super.setCreatedByUser(createdByUser);
-	}
-	
-	@Override
-	@JsonIgnore
-	public void setUpdatedByUser(String updatedByUser) {
-		super.setUpdatedByUser(updatedByUser);
-	}
-	
 	@Transient
 	@JsonIgnore
 	public User getUser() {

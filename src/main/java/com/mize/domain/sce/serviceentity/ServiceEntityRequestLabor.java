@@ -49,7 +49,7 @@ public class ServiceEntityRequestLabor extends MizeSceEntity implements Comparab
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "id")
 	public Long getId() {
 		return id;
 	}
@@ -81,7 +81,7 @@ public class ServiceEntityRequestLabor extends MizeSceEntity implements Comparab
 		this.laborHour = laborHour;
 	}
 	
-	@Column(name = "labor_id", nullable = true)
+	@Column(name = "labor_id")
 	public Long getLaborHourId() {
 		return laborHourId;
 	}
@@ -90,7 +90,7 @@ public class ServiceEntityRequestLabor extends MizeSceEntity implements Comparab
 		this.laborHourId = laborHourId;
 	}
 	
-	@Column(name = "labor_type", length = 50)
+	@Column(name = "labor_type")
 	public String getLaborType() {
 		return laborType;
 	}
@@ -99,7 +99,7 @@ public class ServiceEntityRequestLabor extends MizeSceEntity implements Comparab
 		this.laborType = laborType;
 	}
 	
-	@Column(name = "labor_code", length = 100)
+	@Column(name = "labor_code")
 	public String getLaborCode() {
 		return laborCode;
 	}
@@ -108,7 +108,7 @@ public class ServiceEntityRequestLabor extends MizeSceEntity implements Comparab
 		this.laborCode = laborCode;
 	}
 	
-	@Column(name = "labor_name", length = 250)
+	@Column(name = "labor_name")
 	public String getLaborName() {
 		return laborName;
 	}
@@ -117,7 +117,7 @@ public class ServiceEntityRequestLabor extends MizeSceEntity implements Comparab
 		this.laborName = laborName;
 	}
 	
-	@Column(name = "labor_descr", length = 500)
+	@Column(name = "labor_descr")
 	public String getLaborDescription() {
 		return laborDescription;
 	}

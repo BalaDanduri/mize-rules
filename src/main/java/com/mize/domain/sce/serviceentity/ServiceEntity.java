@@ -16,8 +16,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Type;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -26,9 +24,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.Locale;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDateTime;
 
 
 /**
@@ -37,7 +34,7 @@ import com.mize.domain.util.MizeDateTime;
  */
 @Entity
 @Table(name = "srvc_enty")
-public class ServiceEntity extends MizeSceEntity implements Comparable<ServiceEntity> {
+public class ServiceEntity extends MizeSceEntityAudit implements Comparable<ServiceEntity> {
 
 	private static final long serialVersionUID = -1780679493288392673L;
 	
@@ -73,7 +70,7 @@ public class ServiceEntity extends MizeSceEntity implements Comparable<ServiceEn
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "id")
 	public Long getId() {
 		return id;
 	}
@@ -83,7 +80,7 @@ public class ServiceEntity extends MizeSceEntity implements Comparable<ServiceEn
 		this.id = id;
 	}
 	
-	@Column(name = "entity_code", length = 50)
+	@Column(name = "entity_code")
 	public String getEntityCode() {
 		return entityCode;
 	}
@@ -92,7 +89,7 @@ public class ServiceEntity extends MizeSceEntity implements Comparable<ServiceEn
 		this.entityCode = entityCode;
 	}
 	
-	@Column(name = "entity_type", length = 50)
+	@Column(name = "entity_type")
 	public String getEntityType() {
 		return entityType;
 	}
@@ -101,7 +98,7 @@ public class ServiceEntity extends MizeSceEntity implements Comparable<ServiceEn
 		this.entityType = entityType;
 	}
 	
-	@Column(name = "entity_status", length = 50)
+	@Column(name = "entity_status")
 	public String getEntityStatus() {
 		return entityStatus;
 	}
@@ -110,7 +107,7 @@ public class ServiceEntity extends MizeSceEntity implements Comparable<ServiceEn
 		this.entityStatus = entityStatus;
 	}
 	
-	@Column(name = "entity_reference", length = 100)
+	@Column(name = "entity_reference")
 	public String getEntityReference() {
 		return entityReference;
 	}
@@ -143,7 +140,7 @@ public class ServiceEntity extends MizeSceEntity implements Comparable<ServiceEn
 		this.locale = locale;
 	}
 	
-	@Column(name = "currency_code", length = 50)
+	@Column(name = "currency_code")
 	public String getCurrencyCode() {
 		return currencyCode;
 	}
@@ -305,7 +302,7 @@ public class ServiceEntity extends MizeSceEntity implements Comparable<ServiceEn
 		return user;
 	}	
 	
-	@Column(name = "entity_source", length = 100)
+	@Column(name = "entity_source")
 	public String getSource() {
 		return source;
 	}
@@ -317,86 +314,7 @@ public class ServiceEntity extends MizeSceEntity implements Comparable<ServiceEn
 	public void setUser(User user) {
 		this.user = user;
 	}
-
-	@Override	
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@Column(name = "created_date",updatable=false)
-	@JsonIgnore(false)
-	public MizeDateTime getCreatedDate() {
-		return createdDate;
-	}
-
-	@Override	
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@Column(name = "updated_date")
-	@JsonIgnore(false)
-	public MizeDateTime getUpdatedDate() {
-		return updatedDate;
-	}
-
-	@Override
-	@JsonIgnore
-	@Column(name = "created_by",updatable=false)
-	public Long getCreatedBy() {		
-		return super.getCreatedBy();
-	}
-
-	@Override
-	@JsonIgnore
-	@Column(name = "updated_by")
-	public Long getUpdatedBy() {		
-		return super.getUpdatedBy();
-	}
 	
-	@Override
-	@JsonIgnore
-	@Column(name = "created_by_user",updatable=false)
-	public String getCreatedByUser() {
-		return super.getCreatedByUser();
-	}
-	
-	@Override
-	@JsonIgnore
-	@Column(name = "updated_by_user")
-	public String getUpdatedByUser() {
-		return super.getUpdatedByUser();
-	}
-
-	@Override
-	@JsonIgnore(false)
-	public void setCreatedDate(MizeDateTime createdDate) {
-		super.createdDate = createdDate;
-	}
-
-	@Override
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		super.updatedDate = updatedDate;
-	}
-
-	@Override
-	@JsonIgnore
-	public void setCreatedBy(Long createdBy) {		
-		super.setCreatedBy(createdBy);
-	}
-
-	@Override
-	@JsonIgnore
-	public void setUpdatedBy(Long updatedBy) {		
-		super.setUpdatedBy(updatedBy);
-	}
-	
-	@Override
-	@JsonIgnore
-	public void setCreatedByUser(String createdByUser) {
-		super.setCreatedByUser(createdByUser);
-	}
-	
-	@Override
-	@JsonIgnore
-	public void setUpdatedByUser(String updatedByUser) {
-		super.setUpdatedByUser(updatedByUser);
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;

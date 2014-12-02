@@ -53,7 +53,7 @@ public class ServiceEntityRequester extends MizeSceEntity implements Comparable<
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "id")
 	public Long getId() {
 		return id;
 	}
@@ -78,7 +78,7 @@ public class ServiceEntityRequester extends MizeSceEntity implements Comparable<
 	@Transient
 	@JsonIgnore
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "requester_be_id", nullable = true)
+	@JoinColumn(name = "requester_be_id")
 	public BusinessEntity getBusinessEntity() {
 		return businessEntity;
 	}
@@ -96,7 +96,7 @@ public class ServiceEntityRequester extends MizeSceEntity implements Comparable<
 		this.requesterId = requesterId;
 	}
 	
-	@Column(name = "requester_be_code", length = 50)
+	@Column(name = "requester_be_code")
 	public String getCode() {
 		return code;
 	}
@@ -105,7 +105,7 @@ public class ServiceEntityRequester extends MizeSceEntity implements Comparable<
 		this.code = code;
 	}
 	
-	@Column(name = "requester_be_type_code", length = 50)
+	@Column(name = "requester_be_type_code")
 	public String getTypeCode() {
 		return typeCode;
 	}
@@ -114,7 +114,7 @@ public class ServiceEntityRequester extends MizeSceEntity implements Comparable<
 		this.typeCode = typeCode;
 	}
 	
-	@Column(name = "requester_be_name", length = 250)
+	@Column(name = "requester_be_name")
 	public String getName() {
 		return name;
 	}
@@ -123,7 +123,7 @@ public class ServiceEntityRequester extends MizeSceEntity implements Comparable<
 		this.name = name;
 	}
 	
-	@Column(name = "requester_be_first_name", length = 100)
+	@Column(name = "requester_be_first_name")
 	public String getFirstName() {
 		return firstName;
 	}
@@ -132,7 +132,7 @@ public class ServiceEntityRequester extends MizeSceEntity implements Comparable<
 		this.firstName = firstName;
 	}
 	
-	@Column(name = "requester_be_last_name", length = 100)
+	@Column(name = "requester_be_last_name")
 	public String getLastName() {
 		return lastName;
 	}
@@ -141,7 +141,7 @@ public class ServiceEntityRequester extends MizeSceEntity implements Comparable<
 		this.lastName = lastName;
 	}
 	
-	@Column(name = "requester_be_middle_initial", length = 50)
+	@Column(name = "requester_be_middle_initial")
 	public String getMiddleInitial() {
 		return middleInitial;
 	}
@@ -170,7 +170,7 @@ public class ServiceEntityRequester extends MizeSceEntity implements Comparable<
 		this.contact = contact;
 	}
 	
-	@Column(name = "requester_be_reference", length = 100)
+	@Column(name = "requester_be_reference")
 	public String getReference() {
 		return reference;
 	}
@@ -179,7 +179,7 @@ public class ServiceEntityRequester extends MizeSceEntity implements Comparable<
 		this.reference = reference;
 	}
 	
-	@Column(name = "is_new_rqstr", length = 1)
+	@Column(name = "is_new_rqstr")
 	public String getIsNewRequester() {
 		return isNewRequester;
 	}

@@ -53,7 +53,7 @@ public class ServiceEntityRequestPart extends MizeEntity implements Comparable<S
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "id")
 	public Long getId() {
 		return id;
 	}
@@ -85,7 +85,7 @@ public class ServiceEntityRequestPart extends MizeEntity implements Comparable<S
 		this.part = part;
 	}
 	
-	@Column(name = "part_id", nullable = true)
+	@Column(name = "part_id")
 	public Long getPartId() {
 		return partId;
 	}
@@ -94,7 +94,7 @@ public class ServiceEntityRequestPart extends MizeEntity implements Comparable<S
 		this.partId = partId;
 	}
 	
-	@Column(name = "part_type", length = 50)
+	@Column(name = "part_type")
 	public String getPartType() {
 		return partType;
 	}
@@ -103,7 +103,7 @@ public class ServiceEntityRequestPart extends MizeEntity implements Comparable<S
 		this.partType = partType;
 	}
 	
-	@Column(name = "part_code", length = 100)
+	@Column(name = "part_code")
 	public String getPartCode() {
 		return partCode;
 	}
@@ -112,7 +112,7 @@ public class ServiceEntityRequestPart extends MizeEntity implements Comparable<S
 		this.partCode = partCode;
 	}
 	
-	@Column(name = "part_name", length = 250)
+	@Column(name = "part_name")
 	public String getPartName() {
 		return partName;
 	}
@@ -121,7 +121,7 @@ public class ServiceEntityRequestPart extends MizeEntity implements Comparable<S
 		this.partName = partName;
 	}
 	
-	@Column(name = "part_descr", length = 500)
+	@Column(name = "part_descr")
 	public String getPartDescription() {
 		return partDescription;
 	}
@@ -130,7 +130,7 @@ public class ServiceEntityRequestPart extends MizeEntity implements Comparable<S
 		this.partDescription = partDescription;
 	}
 	
-	@Column(name = "part_uom", length = 50)
+	@Column(name = "part_uom")
 	public String getPartUom() {
 		return partUom;
 	}
@@ -139,7 +139,7 @@ public class ServiceEntityRequestPart extends MizeEntity implements Comparable<S
 		this.partUom = partUom;
 	}
 	
-	@Column(name = "part_serial", length = 100)
+	@Column(name = "part_serial")
 	public String getPartSerial() {
 		return partSerial;
 	}

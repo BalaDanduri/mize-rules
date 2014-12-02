@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.util.MizeDate;
 
 /**
  * @author HarishBurra
@@ -31,7 +31,7 @@ public class ServiceEntityRequestCoverage extends MizeSceEntity implements Compa
 	private ServiceEntityRequest serviceEntityRequest;
 	private Long coverageId;
 	private String coverageName;
-	private MizeDateTime coverageEndDate;
+	private MizeDate coverageEndDate;
 
 	public ServiceEntityRequestCoverage() {
 		
@@ -40,7 +40,7 @@ public class ServiceEntityRequestCoverage extends MizeSceEntity implements Compa
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "id")
 	public Long getId() {
 		return id;
 	}
@@ -71,7 +71,7 @@ public class ServiceEntityRequestCoverage extends MizeSceEntity implements Compa
 		this.coverageId = coverageId;
 	}
 	
-	@Column(name = "coverage_name", length = 250)
+	@Column(name = "coverage_name")
 	public String getCoverageName() {
 		return coverageName;
 	}
@@ -82,12 +82,12 @@ public class ServiceEntityRequestCoverage extends MizeSceEntity implements Compa
 	
 	
 	@Column(name = "coverage_end_date")
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getCoverageEndDate() {
+	@Type(type = "com.mize.domain.util.MizeDateJPA")
+	public MizeDate getCoverageEndDate() {
 		return coverageEndDate;
 	}
 	
-	public void setCoverageEndDate(MizeDateTime coverageEndDate) {
+	public void setCoverageEndDate(MizeDate coverageEndDate) {
 		this.coverageEndDate = coverageEndDate;
 	}
 

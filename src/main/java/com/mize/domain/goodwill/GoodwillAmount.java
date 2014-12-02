@@ -28,7 +28,7 @@ public class GoodwillAmount extends MizeSceEntity implements Comparable<Goodwill
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id",unique=true,nullable=false)
+    @Column(name="id")
 	public Long getId() {
 		return id;
 	}
@@ -38,22 +38,22 @@ public class GoodwillAmount extends MizeSceEntity implements Comparable<Goodwill
 	    this.id = id;	
 	}
 	
-	@Column(name = "part_amount", length = 20)
+	@Column(name = "part_amount")
 	public BigDecimal getPartAmount() {
 		return partAmount;
 	}
 
-	@Column(name = "labor_amount", length = 20)
+	@Column(name = "labor_amount")
 	public BigDecimal getLaborAmount() {
 		return laborAmount;
 	}
 
-	@Column(name = "other_amount", length = 20)
+	@Column(name = "other_amount")
 	public BigDecimal getOtherAmount() {
 		return otherAmount;
 	}
 
-	@Column(name = "total_amount", length = 20)
+	@Column(name = "total_amount")
 	public BigDecimal getTotalAmount() {
 		return totalAmount;
 	}

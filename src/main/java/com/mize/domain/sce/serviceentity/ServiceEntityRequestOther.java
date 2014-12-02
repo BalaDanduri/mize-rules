@@ -41,7 +41,7 @@ public class ServiceEntityRequestOther extends MizeSceEntity implements Comparab
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "id")
 	public Long getId() {
 		return id;
 	}
@@ -63,7 +63,7 @@ public class ServiceEntityRequestOther extends MizeSceEntity implements Comparab
 		this.serviceEntityRequest = serviceEntityRequest;
 	}
 	
-	@Column(name = "other_charge_type", length = 50)
+	@Column(name = "other_charge_type")
 	public String getChargeType() {
 		return chargeType;
 	}
@@ -72,7 +72,7 @@ public class ServiceEntityRequestOther extends MizeSceEntity implements Comparab
 		this.chargeType = chargeType;
 	}
 	
-	@Column(name = "other_charge_code", length = 100)
+	@Column(name = "other_charge_code")
 	public String getChargeCode() {
 		return chargeCode;
 	}
@@ -81,7 +81,7 @@ public class ServiceEntityRequestOther extends MizeSceEntity implements Comparab
 		this.chargeCode = chargeCode;
 	}
 	
-	@Column(name = "other_charge_descr", length = 500)
+	@Column(name = "other_charge_descr")
 	public String getChargeDescription() {
 		return chargeDescription;
 	}

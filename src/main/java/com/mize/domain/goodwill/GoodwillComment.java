@@ -38,7 +38,7 @@ public class GoodwillComment extends MizeSceEntity implements Comparable<Goodwil
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id",unique=true,nullable=false)
+    @Column(name="id")
 	public Long getId() {
 		return id;
 	}

@@ -67,7 +67,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "id")
 	public Long getId() {
 		return id;
 	}
@@ -109,7 +109,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 		this.productCategory = productCategory;
 	}
 	
-	@Column(name = "prod_id", nullable = true)
+	@Column(name = "prod_id")
 	public Long getProductId() {
 		return productId;
 	}
@@ -128,7 +128,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 		this.productSerial = productSerial;
 	}
 	
-	@Column(name = "prod_serial_id", nullable = true)
+	@Column(name = "prod_serial_id")
 	public Long getProductSerialId() {
 		return productSerialId;
 	}
@@ -147,7 +147,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 		this.registration = registration;
 	}
 	
-	@Column(name = "prod_regn_id", nullable = true)
+	@Column(name = "prod_regn_id")
 	public Long getProdRegnId() {
 		return prodRegnId;
 	}
@@ -156,7 +156,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 		this.prodRegnId = prodRegnId;
 	}
 	
-	@Column(name = "prod_name", length = 250)
+	@Column(name = "prod_name")
 	public String getProductName() {
 		return productName;
 	}
@@ -165,7 +165,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 		this.productName = productName;
 	}
 	
-	@Column(name = "model", length = 50)
+	@Column(name = "model")
 	public String getModel() {
 		return model;
 	}
@@ -174,7 +174,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 		this.model = model;
 	}
 	
-	@Column(name = "brand_name", length = 250)
+	@Column(name = "brand_name")
 	public String getBrandName() {
 		return brandName;
 	}
@@ -183,7 +183,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 		this.brandName = brandName;
 	}
 	
-	@Column(name = "prod_cat_name", length = 250)
+	@Column(name = "prod_cat_name")
 	public String getCategoryName() {
 		return categoryName;
 	}
@@ -192,7 +192,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 		this.categoryName = categoryName;
 	}
 	
-	@Column(name = "prod_srl_no", length = 200)
+	@Column(name = "prod_srl_no")
 	public String getSerialNumber() {
 		return serialNumber;
 	}
@@ -210,7 +210,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 		this.customerId = customerId;
 	}
 	
-	@Column(name = "customer_be_code", length = 50)
+	@Column(name = "customer_be_code")
 	public String getCustomerCode() {
 		return customerCode;
 	}
@@ -219,7 +219,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 		this.customerCode = customerCode;
 	}
 	
-	@Column(name = "customer_be_type_code", length = 50)
+	@Column(name = "customer_be_type_code")
 	public String getCustomerTypeCode() {
 		return customerTypeCode;
 	}
@@ -228,7 +228,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 		this.customerTypeCode = customerTypeCode;
 	}
 	
-	@Column(name = "customer_be_sub_type_code", length = 50)
+	@Column(name = "customer_be_sub_type_code")
 	public String getCustomerSubTypeCode() {
 		return customerSubTypeCode;
 	}
@@ -238,7 +238,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 		this.customerSubTypeCode = customerSubTypeCode;
 	}
 	
-	@Column(name = "customer_be_name", length = 250)
+	@Column(name = "customer_be_name")
 	public String getCustomerName() {
 		return customerName;
 	}
@@ -247,7 +247,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 		this.customerName = customerName;
 	}
 	
-	@Column(name = "customer_be_first_name", length = 100)
+	@Column(name = "customer_be_first_name")
 	public String getCustomerFirstName() {
 		return customerFirstName;
 	}
@@ -256,7 +256,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 		this.customerFirstName = customerFirstName;
 	}
 	
-	@Column(name = "customer_be_last_name", length = 100)
+	@Column(name = "customer_be_last_name")
 	public String getCustomerLastName() {
 		return customerLastName;
 	}
@@ -265,7 +265,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 		this.customerLastName = customerLastName;
 	}
 	
-	@Column(name = "customer_be_middle_initial", length = 50)
+	@Column(name = "customer_be_middle_initial")
 	public String getCustomerMiddleInitial() {
 		return customerMiddleInitial;
 	}
@@ -274,7 +274,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 		this.customerMiddleInitial = customerMiddleInitial;
 	}
 	
-	@Column(name = "customer_be_reference", length = 100)
+	@Column(name = "customer_be_reference")
 	public String getCustomerReference() {
 		return customerReference;
 	}
@@ -303,7 +303,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 		this.customerContact = customerContact;
 	}
 	
-	@Column(name = "is_new_customer", length = 1)
+	@Column(name = "is_new_customer")
 	public String getIsNewCustomer() {
 		return isNewCustomer;
 	}

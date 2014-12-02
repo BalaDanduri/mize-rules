@@ -22,7 +22,7 @@ import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityContact;
 import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.util.MizeDate;
 
 /**
  * @author HarishBurra
@@ -47,7 +47,7 @@ public class ServiceEntityPayment extends MizeSceEntity implements Comparable<Se
 	private EntityContact payeeContact;
 	private String payeeReference;
 	private String isNewPayee;
-	private MizeDateTime paymentDate;
+	private MizeDate paymentDate;
 	private String paymentType;
 
 	public ServiceEntityPayment() {
@@ -57,7 +57,7 @@ public class ServiceEntityPayment extends MizeSceEntity implements Comparable<Se
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "id")
 	public Long getId() {
 		return id;
 	}
@@ -82,7 +82,7 @@ public class ServiceEntityPayment extends MizeSceEntity implements Comparable<Se
 	@Transient
 	@JsonIgnore
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "payee_be_id", nullable = true)
+	@JoinColumn(name = "payee_be_id")
 	public BusinessEntity getPayeeEntity() {
 		return payeeEntity;
 	}
@@ -193,13 +193,13 @@ public class ServiceEntityPayment extends MizeSceEntity implements Comparable<Se
 	}
 	
 	
-	@Column(name = "pymt_date", nullable = true)
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getPaymentDate() {
+	@Column(name = "pymt_date")
+	@Type(type = "com.mize.domain.util.MizeDateJPA")
+	public MizeDate getPaymentDate() {
 		return paymentDate;
 	}
 	
-	public void setPaymentDate(MizeDateTime paymentDate) {
+	public void setPaymentDate(MizeDate paymentDate) {
 		this.paymentDate = paymentDate;
 	}
 	
