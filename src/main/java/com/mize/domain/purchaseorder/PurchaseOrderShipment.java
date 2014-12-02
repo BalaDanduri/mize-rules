@@ -22,7 +22,7 @@ import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.util.MizeDate;
 
 @Entity
 @Table(name = "purchase_order_shipment")
@@ -67,7 +67,7 @@ public class PurchaseOrderShipment extends MizeSceEntity implements Comparable<P
 	private String priority;
 	private String carrier;
 	private String estimatedShipmentDays;
-	private MizeDateTime estimatedShipmentDate;
+	private MizeDate estimatedShipmentDate;
 	private BigDecimal estimatedShipmentCost;
 	private String shipComplete;
 	@Transient
@@ -81,7 +81,7 @@ public class PurchaseOrderShipment extends MizeSceEntity implements Comparable<P
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return id;
@@ -148,15 +148,15 @@ public class PurchaseOrderShipment extends MizeSceEntity implements Comparable<P
 		this.dropShip = dropShip;
 	}
 
+	@Column(name = "estimated_ship_date")
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateJPA")
 	@JsonInclude(Include.NON_DEFAULT)
 	@JsonIgnore(value=false)
-	@Column(name = "estimated_ship_date")
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getEstimatedShipmentDate() {
+	public MizeDate getEstimatedShipmentDate() {
 		return estimatedShipmentDate;
 	}
 
-	public void setEstimatedShipmentDate(MizeDateTime estimatedShipmentDate) {
+	public void setEstimatedShipmentDate(MizeDate estimatedShipmentDate) {
 		this.estimatedShipmentDate = estimatedShipmentDate;
 	}
 	

@@ -17,7 +17,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -28,13 +27,14 @@ import com.mize.domain.common.EntityAttachment;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeErrorTab;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
+import com.mize.domain.util.MizeDate;
 import com.mize.domain.util.MizeDateTime;
 @Entity
 @Table(name = "purchase_order")
-public class PurchaseOrder extends MizeSceEntity implements Comparable<PurchaseOrder>{	
+public class PurchaseOrder extends MizeSceEntityAudit implements Comparable<PurchaseOrder>{	
 	
 	private static final long serialVersionUID = 6676650598420396291L;
 	private BusinessEntity tenant;
@@ -85,7 +85,7 @@ public class PurchaseOrder extends MizeSceEntity implements Comparable<PurchaseO
 	@Transient
 	private String submittedBy;
 	@Transient
-	private MizeDateTime submittedDate;
+	private MizeDate submittedDate;
 	@Transient
 	private String imageURL;
 	@Transient
@@ -133,7 +133,7 @@ public class PurchaseOrder extends MizeSceEntity implements Comparable<PurchaseO
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return id;
@@ -234,54 +234,6 @@ public class PurchaseOrder extends MizeSceEntity implements Comparable<PurchaseO
 
 	public void setAmount(PurchaseOrderAmount amount) {
 		this.amount = amount;
-	}
-	
-	@JsonIgnore(false)
-	@Column(name = "updated_by")
-	public Long getUpdatedBy() {
-		return this.updatedBy;
-	}
-	
-	@JsonIgnore(false)
-	public void setUpdatedBy(Long updatedBy) {
-		this.updatedBy = updatedBy;
-	}
-	
-	@JsonIgnore(false)
-	@Column(name = "created_by", updatable = false)
-	public Long getCreatedBy() {
-		return this.createdBy;
-	}
-	
-	@JsonIgnore(false)
-	public void setCreatedBy(Long createdBy) {
-		this.createdBy = createdBy;
-	}
-	
-	@JsonInclude(Include.NON_NULL)
-	@JsonIgnore(false)
-	@Column(name = "created_date", updatable = false)
-	@org.hibernate.annotations.Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getCreatedDate() {
-		return this.createdDate;
-	}
-
-	@JsonIgnore(false)
-	public void setCreatedDate(MizeDateTime createdDate) {
-		this.createdDate = createdDate;
-	}
-	
-	@JsonInclude(Include.NON_NULL)
-	@Column(name = "updated_date")
-	@org.hibernate.annotations.Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	@JsonIgnore(false)
-	public MizeDateTime getUpdatedDate() {
-		return this.updatedDate;
-	}
-	
-	@JsonIgnore(false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		this.updatedDate = updatedDate;
 	}
 	
 	@OneToOne(fetch=FetchType.EAGER)
@@ -539,11 +491,11 @@ public class PurchaseOrder extends MizeSceEntity implements Comparable<PurchaseO
 
 	@Transient
     @JsonInclude(Include.NON_NULL)
-	public MizeDateTime getSubmittedDate() {
+	public MizeDate getSubmittedDate() {
 		return submittedDate;
 	}
 	
-	public void setSubmittedDate(MizeDateTime submittedDate) {
+	public void setSubmittedDate(MizeDate submittedDate) {
 		this.submittedDate = submittedDate;
 	}
 	
@@ -566,10 +518,10 @@ public class PurchaseOrder extends MizeSceEntity implements Comparable<PurchaseO
 	}
 	
 	@Transient
-	public String getFormattedDisplayDate(MizeDateTime inputDate) {
+	public String getFormattedDisplayDate(MizeDate inputDate) {
 		String date="";
 		if(inputDate!=null){
-			date = Formatter.getDateTimeFormat(inputDate);
+			date = Formatter.getMizeDate(inputDate);
 		}
 		return date;
 	}

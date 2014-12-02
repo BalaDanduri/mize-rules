@@ -2,13 +2,10 @@ package com.mize.domain.purchaseorder;
 
 import java.math.BigDecimal;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.util.MizeDateTime;
 
-public class OriginalOrder extends MizeSceEntity implements Comparable<OriginalOrder>{
+public class OriginalOrder extends MizeSceEntityAudit implements Comparable<OriginalOrder>{
 	
 	private static final long serialVersionUID = 34019502927801711L;
 	private String number;
@@ -71,30 +68,6 @@ public class OriginalOrder extends MizeSceEntity implements Comparable<OriginalO
 		this.requestType = requestType;
 	}
 	
-	@JsonIgnore(value=false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		this.updatedDate = updatedDate;
-	}
-	
-	@JsonInclude(Include.NON_DEFAULT)
-	@JsonIgnore(value=false)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getCreatedDate() {
-		return createdDate;
-	}
-
-	@JsonInclude(Include.NON_DEFAULT)
-	@JsonIgnore(value=false)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getUpdatedDate() {
-		return updatedDate;
-	}
-		
-	@JsonIgnore(value=false)
-	public void setCreatedDate(MizeDateTime createdDate) {
-		this.createdDate = createdDate;
-	}
-
 	public boolean isValidCombination() {
 		return isValidCombination;
 	}

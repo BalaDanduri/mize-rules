@@ -30,7 +30,7 @@ public class PurchaseOrderItemStatus extends MizeSceEntity implements Comparable
 		
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return id;

@@ -45,7 +45,7 @@ public class PurchaseOrderPayment extends MizeSceEntity implements Comparable<Pu
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return id;

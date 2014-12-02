@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.util.MizeDate;
 
 @Entity
 @Table(name = "purchase_order_audit")
@@ -23,7 +23,7 @@ public class PurchaseOrderAudit extends MizeSceEntity implements Comparable<Purc
 
 	private static final long serialVersionUID = 268638805962518728L;
 	private String statusCode;
-	private MizeDateTime statusDate;
+	private MizeDate statusDate;
 	private Long statusBy;
 	private PurchaseOrder purchaseOrder;
 
@@ -33,7 +33,7 @@ public class PurchaseOrderAudit extends MizeSceEntity implements Comparable<Purc
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return id;
@@ -44,7 +44,7 @@ public class PurchaseOrderAudit extends MizeSceEntity implements Comparable<Purc
 		this.id = id;
 	}
 	
-	@Column(name="status_code",length = 50)
+	@Column(name="status_code")
 	public String getStatusCode() {
 		return statusCode;
 	}
@@ -56,14 +56,12 @@ public class PurchaseOrderAudit extends MizeSceEntity implements Comparable<Purc
 	@JsonInclude(Include.NON_DEFAULT)
 	@Column(name = "status_date")
 	@JsonIgnore(value=false)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getStatusDate() {
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateJPA")
+	public MizeDate getStatusDate() {
 		return statusDate;
 	}
 
-	@JsonIgnore(value=false)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public void setStatusDate(MizeDateTime statusDate) {
+	public void setStatusDate(MizeDate statusDate) {
 		this.statusDate = statusDate;
 	}
 

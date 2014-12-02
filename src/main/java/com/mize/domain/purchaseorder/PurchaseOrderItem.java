@@ -20,19 +20,17 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.part.Part;
 import com.mize.domain.part.PartKit;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name = "purchase_order_item")
-public class PurchaseOrderItem extends MizeSceEntity implements Comparable<PurchaseOrderItem>{	
+public class PurchaseOrderItem extends MizeSceEntityAudit implements Comparable<PurchaseOrderItem>{	
 
 	private static final long serialVersionUID = 26123880591518728L;
 	private PurchaseOrder purchaseOrder;
@@ -72,7 +70,7 @@ public class PurchaseOrderItem extends MizeSceEntity implements Comparable<Purch
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return id;
@@ -128,56 +126,6 @@ public class PurchaseOrderItem extends MizeSceEntity implements Comparable<Purch
 		this.productSerialNumber = productSerialNumber;
 	}	
 	
-	@JsonInclude(Include.NON_DEFAULT)
-	@JsonIgnore(value=false)
-	@Column(name="updated_date")
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getUpdatedDate() {
-		return updatedDate;
-	}
-	
-	@JsonIgnore(value=false)	
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		this.updatedDate = updatedDate;
-	}
-	
-	@JsonInclude(Include.NON_DEFAULT)
-	@JsonIgnore(value=false)
-	@Column(name="created_date",updatable = false)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getCreatedDate() {
-		return createdDate;
-	}
-	
-	@JsonIgnore(value=false)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public void setCreatedDate(MizeDateTime createdDate) {
-		this.createdDate = createdDate;
-	}
-	
-	@JsonIgnore(value=false)	
-	public void setCreatedBy(Long createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	@JsonIgnore(value=false)
-	@Column(name="created_by", updatable = false)
-	public Long getCreatedBy() {
-		return createdBy;
-	}
-	
-	@JsonIgnore(value=false)
-	@Column(name="updated_by")
-	public Long getUpdatedBy() {
-		return updatedBy;
-	}
-
-	@JsonIgnore(value=false)
-	public void setUpdatedBy(Long updatedBy) {
-		this.updatedBy = updatedBy;
-	}	
-
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="order_id")
 	@JsonBackReference(value="item_purchaseOrder")
