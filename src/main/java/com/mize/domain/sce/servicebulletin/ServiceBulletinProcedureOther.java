@@ -44,7 +44,7 @@ public class ServiceBulletinProcedureOther extends MizeSceEntity implements Comp
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "id")
 	public Long getId() {
 		return id;
 	}
@@ -67,7 +67,7 @@ public class ServiceBulletinProcedureOther extends MizeSceEntity implements Comp
 	}
 	
 	
-	@Column(name = "other_charge_type", length = 50)
+	@Column(name = "other_charge_type")
 	public String getChargeType() {
 		return chargeType;
 	}
@@ -76,7 +76,7 @@ public class ServiceBulletinProcedureOther extends MizeSceEntity implements Comp
 		this.chargeType = chargeType;
 	}
 	
-	@Column(name = "other_charge_code", length = 100)
+	@Column(name = "other_charge_code")
 	public String getChargeCode() {
 		return chargeCode;
 	}
@@ -85,7 +85,7 @@ public class ServiceBulletinProcedureOther extends MizeSceEntity implements Comp
 		this.chargeCode = chargeCode;
 	}
 	
-	@Column(name = "other_charge_descr", length = 500)
+	@Column(name = "other_charge_descr")
 	public String getChargeDescription() {
 		return chargeDescription;
 	}
@@ -94,7 +94,7 @@ public class ServiceBulletinProcedureOther extends MizeSceEntity implements Comp
 		this.chargeDescription = chargeDescription;
 	}
 	
-	@Column(name = "other_charge_uom", length = 50)
+	@Column(name = "other_charge_uom")
 	public String getChargeUom() {
 		return chargeUom;
 	}
@@ -103,7 +103,7 @@ public class ServiceBulletinProcedureOther extends MizeSceEntity implements Comp
 		this.chargeUom = chargeUom;
 	}
 	
-	@Column(name = "other_charge_reference", length = 100)
+	@Column(name = "other_charge_reference")
 	public String getChargeReference() {
 		return chargeReference;
 	}

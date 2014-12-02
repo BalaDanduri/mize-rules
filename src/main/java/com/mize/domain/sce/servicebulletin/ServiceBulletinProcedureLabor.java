@@ -52,7 +52,7 @@ public class ServiceBulletinProcedureLabor extends MizeSceEntity implements Comp
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "id")
 	public Long getId() {
 		return id;
 	}
@@ -84,7 +84,7 @@ public class ServiceBulletinProcedureLabor extends MizeSceEntity implements Comp
 		this.laborHour = laborHour;
 	}
 	
-	@Column(name = "labor_id", nullable = true)
+	@Column(name = "labor_id")
 	public Long getLaborHourId() {
 		return laborHourId;
 	}
@@ -93,7 +93,7 @@ public class ServiceBulletinProcedureLabor extends MizeSceEntity implements Comp
 		this.laborHourId = laborHourId;
 	}
 	
-	@Column(name = "labor_type", length = 50)
+	@Column(name = "labor_type")
 	public String getLaborType() {
 		return laborType;
 	}
@@ -102,7 +102,7 @@ public class ServiceBulletinProcedureLabor extends MizeSceEntity implements Comp
 		this.laborType = laborType;
 	}
 	
-	@Column(name = "labor_code", length = 100)
+	@Column(name = "labor_code")
 	public String getLaborCode() {
 		return laborCode;
 	}
@@ -111,7 +111,7 @@ public class ServiceBulletinProcedureLabor extends MizeSceEntity implements Comp
 		this.laborCode = laborCode;
 	}
 	
-	@Column(name = "labor_uom", length = 50)
+	@Column(name = "labor_uom")
 	public String getLaborUom() {
 		return laborUom;
 	}
@@ -120,7 +120,7 @@ public class ServiceBulletinProcedureLabor extends MizeSceEntity implements Comp
 		this.laborUom = laborUom;
 	}
 	
-	@Column(name = "labor_reference", length = 100)
+	@Column(name = "labor_reference")
 	public String getLaborReference() {
 		return laborReference;
 	}
@@ -148,7 +148,7 @@ public class ServiceBulletinProcedureLabor extends MizeSceEntity implements Comp
 		this.isUpdated = isUpdated;
 	}
 	
-	@Column(name="labor_descr", length = 500)
+	@Column(name="labor_descr")
 	public String getDescription() {
 		return description;
 	}
@@ -157,7 +157,7 @@ public class ServiceBulletinProcedureLabor extends MizeSceEntity implements Comp
 		this.description = description;
 	}
 	
-	@Column(name="labor_name", length = 250)
+	@Column(name="labor_name")
 	public String getName() {
 		return name;
 	}

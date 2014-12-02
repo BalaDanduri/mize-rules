@@ -8,14 +8,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
 
 /**
  * @author SrinivasThodupunuri
@@ -46,7 +43,7 @@ public class ServiceBulletinIntl extends MizeSceEntity implements Comparable<Ser
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id")
 	@Override
 	public Long getId() {		
 		return id;
@@ -69,12 +66,12 @@ public class ServiceBulletinIntl extends MizeSceEntity implements Comparable<Ser
 		return locale;
 	}
 
-	@Column(name = "blltn_name", length = 250, nullable = true)
+	@Column(name = "blltn_name")
 	public String getName() {
 		return name;
 	}
 	
-	@Column(name = "blltn_description", length = 1000, nullable = true)
+	@Column(name = "blltn_description")
 	public String getDescription() {
 		return description;
 	}
@@ -96,17 +93,6 @@ public class ServiceBulletinIntl extends MizeSceEntity implements Comparable<Ser
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-
-	@PrePersist
-	@PreUpdate
-	public void auditFields(){
-		if(createdDate==null && id==null){
-			setCreatedDate(MizeDateTime.now());
-		}
-		setUpdatedDate(MizeDateTime.now());		
-	}
-	
 
 	@Override
 	public String toString() {

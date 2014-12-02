@@ -56,7 +56,7 @@ public class ServiceBulletinProcedure extends MizeSceEntity implements Comparabl
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "id")
 	public Long getId() {
 		return id;
 	}
@@ -78,7 +78,7 @@ public class ServiceBulletinProcedure extends MizeSceEntity implements Comparabl
 		this.serviceBulletin = serviceBulletin;
 	}	
 	
-	@Column(name = "proc_code", length = 50)
+	@Column(name = "proc_code")
 	public String getProcedureCode() {
 		return procedureCode;
 	}
@@ -87,7 +87,7 @@ public class ServiceBulletinProcedure extends MizeSceEntity implements Comparabl
 		this.procedureCode = procedureCode;
 	}
 	
-	@Column(name = "proc_reference", length = 100)
+	@Column(name = "proc_reference")
 	public String getProcedureReference() {
 		return procedureReference;
 	}
@@ -96,7 +96,7 @@ public class ServiceBulletinProcedure extends MizeSceEntity implements Comparabl
 		this.procedureReference = procedureReference;
 	}
 	
-	@Column(name = "complaint_code", length = 100)
+	@Column(name = "complaint_code")
 	public String getComplaintCode() {
 		return complaintCode;
 	}
@@ -105,7 +105,7 @@ public class ServiceBulletinProcedure extends MizeSceEntity implements Comparabl
 		this.complaintCode = complaintCode;
 	}
 	
-	@Column(name = "cause_code", length = 100)
+	@Column(name = "cause_code")
 	public String getCauseCode() {
 		return causeCode;
 	}
@@ -114,7 +114,7 @@ public class ServiceBulletinProcedure extends MizeSceEntity implements Comparabl
 		this.causeCode = causeCode;
 	}
 	
-	@Column(name = "corrective_action_code", length = 50)
+	@Column(name = "corrective_action_code")
 	public String getCorrectiveActionCode() {
 		return correctiveActionCode;
 	}

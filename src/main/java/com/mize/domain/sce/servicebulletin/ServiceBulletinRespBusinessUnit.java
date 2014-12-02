@@ -54,7 +54,7 @@ public class ServiceBulletinRespBusinessUnit extends MizeSceEntity implements Co
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "id")
 	public Long getId() {
 		return id;
 	}
@@ -80,7 +80,7 @@ public class ServiceBulletinRespBusinessUnit extends MizeSceEntity implements Co
 	@Transient
 	@JsonIgnore
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "rbu_be_id", nullable = true)
+	@JoinColumn(name = "rbu_be_id")
 	public BusinessEntity getBusinessEntity() {
 		return businessEntity;
 	}
@@ -98,7 +98,7 @@ public class ServiceBulletinRespBusinessUnit extends MizeSceEntity implements Co
 		this.rbuId = rbuId;
 	}
 	
-	@Column(name = "rbu_be_code", length = 50)
+	@Column(name = "rbu_be_code")
 	public String getCode() {
 		return code;
 	}
@@ -107,12 +107,12 @@ public class ServiceBulletinRespBusinessUnit extends MizeSceEntity implements Co
 		this.code = code;
 	}
 	
-	@Column(name = "rbu_be_type_code", length = 50)
+	@Column(name = "rbu_be_type_code")
 	public String getTypeCode() {
 		return typeCode;
 	}
 	
-	@Column(name = "rbu_be_sub_type_code", length = 50)
+	@Column(name = "rbu_be_sub_type_code")
 	public String getSubTypeCode() {
 		return subTypeCode;
 	}
@@ -125,7 +125,7 @@ public class ServiceBulletinRespBusinessUnit extends MizeSceEntity implements Co
 		this.typeCode = typeCode;
 	}
 	
-	@Column(name = "rbu_be_name", length = 250)
+	@Column(name = "rbu_be_name")
 	public String getName() {
 		return name;
 	}
@@ -134,7 +134,7 @@ public class ServiceBulletinRespBusinessUnit extends MizeSceEntity implements Co
 		this.name = name;
 	}
 	
-	@Column(name = "rbu_be_first_name", length = 100)
+	@Column(name = "rbu_be_first_name")
 	public String getFirstName() {
 		return firstName;
 	}
@@ -143,7 +143,7 @@ public class ServiceBulletinRespBusinessUnit extends MizeSceEntity implements Co
 		this.firstName = firstName;
 	}
 	
-	@Column(name = "rbu_be_last_name", length = 100)
+	@Column(name = "rbu_be_last_name")
 	public String getLastName() {
 		return lastName;
 	}
@@ -152,7 +152,7 @@ public class ServiceBulletinRespBusinessUnit extends MizeSceEntity implements Co
 		this.lastName = lastName;
 	}
 	
-	@Column(name = "rbu_be_middle_initial", length = 50)
+	@Column(name = "rbu_be_middle_initial")
 	public String getMiddleInitial() {
 		return middleInitial;
 	}
@@ -181,7 +181,7 @@ public class ServiceBulletinRespBusinessUnit extends MizeSceEntity implements Co
 		this.contact = contact;
 	}
 	
-	@Column(name = "rbu_be_reference", length = 100)
+	@Column(name = "rbu_be_reference")
 	public String getReference() {
 		return reference;
 	}

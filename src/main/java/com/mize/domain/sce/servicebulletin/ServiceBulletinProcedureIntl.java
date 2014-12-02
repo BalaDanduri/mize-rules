@@ -8,14 +8,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
 
 /**
  * @author SrinivasThodupunuri
@@ -53,7 +50,7 @@ public class ServiceBulletinProcedureIntl extends MizeSceEntity implements Compa
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id")
 	@Override
 	public Long getId() {		
 		return id;
@@ -76,7 +73,7 @@ public class ServiceBulletinProcedureIntl extends MizeSceEntity implements Compa
 		return locale;
 	}
 
-	@Column(name = "proc_name", length = 250, nullable = true)
+	@Column(name = "proc_name")
 	public String getProcedureName() {
 		return procedureName;
 	}
@@ -85,7 +82,7 @@ public class ServiceBulletinProcedureIntl extends MizeSceEntity implements Compa
 		this.procedureName = procedureName;
 	}
 	
-	@Column(name = "proc_descr", length = 1000, nullable = true)
+	@Column(name = "proc_descr")
 	public String getProcedureDescription() {
 		return procedureDescription;
 	}
@@ -102,17 +99,8 @@ public class ServiceBulletinProcedureIntl extends MizeSceEntity implements Compa
 	public void setLocale(Locale locale) {
 		this.locale = locale;
 	}
-
-	@PrePersist
-	@PreUpdate
-	public void auditFields(){
-		if(createdDate==null && id==null){
-			setCreatedDate(MizeDateTime.now());
-		}
-		setUpdatedDate(MizeDateTime.now());		
-	}
 	
-	@Column(name = "complaint_descr", length = 1000, nullable = true)
+	@Column(name = "complaint_descr")
 	public String getComplaintDescription() {
 		return complaintDescription;
 	}
@@ -121,7 +109,7 @@ public class ServiceBulletinProcedureIntl extends MizeSceEntity implements Compa
 		this.complaintDescription = complaintDescription;
 	}
 	
-	@Column(name = "cause_descr", length = 1000, nullable = true)
+	@Column(name = "cause_descr")
 	public String getCauseDescription() {
 		return causeDescription;
 	}
@@ -130,7 +118,7 @@ public class ServiceBulletinProcedureIntl extends MizeSceEntity implements Compa
 		this.causeDescription = causeDescription;
 	}
 	
-	@Column(name = "corrective_action_descr", length = 1000, nullable = true)
+	@Column(name = "corrective_action_descr")
 	public String getCorrectiveActionDescription() {
 		return correctiveActionDescription;
 	}

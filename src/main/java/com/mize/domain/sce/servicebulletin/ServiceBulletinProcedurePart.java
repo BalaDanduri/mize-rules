@@ -53,7 +53,7 @@ public class ServiceBulletinProcedurePart extends MizeSceEntity implements Compa
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "id")
 	public Long getId() {
 		return id;
 	}
@@ -85,7 +85,7 @@ public class ServiceBulletinProcedurePart extends MizeSceEntity implements Compa
 		this.part = part;
 	}
 	
-	@Column(name = "part_id", nullable = true)
+	@Column(name = "part_id")
 	public Long getPartId() {
 		return partId;
 	}
@@ -94,7 +94,7 @@ public class ServiceBulletinProcedurePart extends MizeSceEntity implements Compa
 		this.partId = partId;
 	}
 	
-	@Column(name = "part_type", length = 50)
+	@Column(name = "part_type")
 	public String getPartType() {
 		return partType;
 	}
@@ -103,7 +103,7 @@ public class ServiceBulletinProcedurePart extends MizeSceEntity implements Compa
 		this.partType = partType;
 	}
 	
-	@Column(name = "part_code", length = 100)
+	@Column(name = "part_code")
 	public String getPartCode() {
 		return partCode;
 	}
@@ -112,7 +112,7 @@ public class ServiceBulletinProcedurePart extends MizeSceEntity implements Compa
 		this.partCode = partCode;
 	}
 	
-	@Column(name = "part_uom", length = 50)
+	@Column(name = "part_uom")
 	public String getPartUom() {
 		return partUom;
 	}
@@ -121,7 +121,7 @@ public class ServiceBulletinProcedurePart extends MizeSceEntity implements Compa
 		this.partUom = partUom;
 	}
 	
-	@Column(name = "part_reference", length = 100)
+	@Column(name = "part_reference")
 	public String getPartReference() {
 		return partReference;
 	}
@@ -140,7 +140,7 @@ public class ServiceBulletinProcedurePart extends MizeSceEntity implements Compa
 		this.partAmount = partAmount;
 	}
 	
-	@Column(name = "is_returnable", length = 1, nullable = true)
+	@Column(name = "is_returnable")
 	public String getIsReturnable() {
 		return isReturnable;
 	}
@@ -158,7 +158,7 @@ public class ServiceBulletinProcedurePart extends MizeSceEntity implements Compa
 		this.isUpdated = isUpdated;
 	}
 	
-	@Column(name="part_descr", length = 500)
+	@Column(name="part_descr")
 	public String getDescription() {
 		return description;
 	}
@@ -167,7 +167,7 @@ public class ServiceBulletinProcedurePart extends MizeSceEntity implements Compa
 		this.description = description;
 	}
 	
-	@Column(name="part_name", length = 250)
+	@Column(name="part_name")
 	public String getName() {
 		return name;
 	}

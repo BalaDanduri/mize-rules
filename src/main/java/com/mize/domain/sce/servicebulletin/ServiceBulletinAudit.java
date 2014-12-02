@@ -38,7 +38,7 @@ public class ServiceBulletinAudit extends MizeAuditEntity implements Comparable<
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "id")
 	public Long getId() {
 		return id;
 	}
@@ -61,7 +61,7 @@ public class ServiceBulletinAudit extends MizeAuditEntity implements Comparable<
 	}
 	
 	
-	@Column(name = "status_code", length= 50)
+	@Column(name = "status_code")
 	public String getStatusCode() {
 		return statusCode;
 	}
@@ -71,7 +71,7 @@ public class ServiceBulletinAudit extends MizeAuditEntity implements Comparable<
 	}
 	
 	
-	@Column(name = "status_date", nullable = true)
+	@Column(name = "status_date")
 	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
 	public MizeDateTime getStatusDate() {
 		return statusDate;
@@ -90,7 +90,7 @@ public class ServiceBulletinAudit extends MizeAuditEntity implements Comparable<
 		this.statusBy = statusBy;
 	}
 	
-	@Column(name = "status_by_user", nullable = true, length = 250)
+	@Column(name = "status_by_user")
 	@Override
 	public String getStatusByUser() {
 		return statusByUser;

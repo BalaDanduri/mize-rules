@@ -25,9 +25,9 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.util.MizeDate;
 
 
 /**
@@ -36,7 +36,7 @@ import com.mize.domain.util.MizeDateTime;
  */
 @Entity
 @Table(name = "srvc_blltn")
-public class ServiceBulletin extends MizeSceEntity implements Comparable<ServiceBulletin> {
+public class ServiceBulletin extends MizeSceEntityAudit implements Comparable<ServiceBulletin> {
 
 	private static final long serialVersionUID = -1780679493288392673L;
 	
@@ -45,8 +45,8 @@ public class ServiceBulletin extends MizeSceEntity implements Comparable<Service
 	private String bulletinSubType;
 	private String bulletinStatus;
 	private String bulletinReference;
-	private MizeDateTime startDate;
-	private MizeDateTime endDate;
+	private MizeDate startDate;
+	private MizeDate endDate;
 	private BusinessEntity tenant;
 	private String currencyCode;
 	private List<ServiceBulletinProcedure> procedures = new ArrayList<ServiceBulletinProcedure>();
@@ -70,7 +70,7 @@ public class ServiceBulletin extends MizeSceEntity implements Comparable<Service
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "id")
 	public Long getId() {
 		return id;
 	}
@@ -80,7 +80,7 @@ public class ServiceBulletin extends MizeSceEntity implements Comparable<Service
 		this.id = id;
 	}
 	
-	@Column(name = "blltn_code", length = 50)
+	@Column(name = "blltn_code")
 	public String getBulletinCode() {
 		return bulletinCode;
 	}
@@ -89,7 +89,7 @@ public class ServiceBulletin extends MizeSceEntity implements Comparable<Service
 		this.bulletinCode = bulletinCode;
 	}
 
-	@Column(name = "blltn_type", length = 50)
+	@Column(name = "blltn_type")
 	public String getBulletinType() {
 		return bulletinType;
 	}
@@ -98,7 +98,7 @@ public class ServiceBulletin extends MizeSceEntity implements Comparable<Service
 		this.bulletinType = bulletinType;
 	}
 	
-	@Column(name = "blltn_sub_type", length = 50)
+	@Column(name = "blltn_sub_type")
 	public String getBulletinSubType() {
 		return bulletinSubType;
 	}
@@ -107,7 +107,7 @@ public class ServiceBulletin extends MizeSceEntity implements Comparable<Service
 		this.bulletinSubType = bulletinSubType;
 	}
 	
-	@Column(name = "blltn_status", length = 50)
+	@Column(name = "blltn_status")
 	public String getBulletinStatus() {
 		return bulletinStatus;
 	}
@@ -116,7 +116,7 @@ public class ServiceBulletin extends MizeSceEntity implements Comparable<Service
 		this.bulletinStatus = bulletinStatus;
 	}
 
-	@Column(name = "blltn_reference", length = 100)
+	@Column(name = "blltn_reference")
 	public String getBulletinReference() {
 		return bulletinReference;
 	}
@@ -126,24 +126,24 @@ public class ServiceBulletin extends MizeSceEntity implements Comparable<Service
 	}
 	
 	
-	@Column(name = "start_date", nullable = true)
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getStartDate() {
+	@Column(name = "start_date")
+	@Type(type = "com.mize.domain.util.MizeDateJPA")
+	public MizeDate getStartDate() {
 		return startDate;
 	}
 	
-	public void setStartDate(MizeDateTime startDate) {
+	public void setStartDate(MizeDate startDate) {
 		this.startDate = startDate;
 	}
 
 	
-	@Column(name = "end_date", nullable = true)
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getEndDate() {
+	@Column(name = "end_date")
+	@Type(type="com.mize.domain.util.MizeDateJPA")
+	public MizeDate getEndDate() {
 		return endDate;
 	}
 	
-	public void setEndDate(MizeDateTime endDate) {
+	public void setEndDate(MizeDate endDate) {
 		this.endDate = endDate;
 	}
 	
@@ -160,7 +160,7 @@ public class ServiceBulletin extends MizeSceEntity implements Comparable<Service
 		this.tenant = tenant;
 	}
 	
-	@Column(name = "currency_code", length = 50)
+	@Column(name = "currency_code")
 	public String getCurrencyCode() {
 		return currencyCode;
 	}
@@ -305,97 +305,6 @@ public class ServiceBulletin extends MizeSceEntity implements Comparable<Service
 		this.bulletinIntl = bulletinIntl;
 	}
 	
-	/*@Override	
-	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonIgnore(value = false)
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-    @JsonInclude(Include.NON_DEFAULT)*/
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@Column(name = "created_date",updatable=false)
-	public MizeDateTime getCreatedDate() {
-		return createdDate;
-	}
-
-	/*@Override	
-	@DateTimeFormat(pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonIgnore(value = false)
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-    @JsonInclude(Include.NON_DEFAULT)*/
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@Column(name = "updated_date")
-	public MizeDateTime getUpdatedDate() {
-		return updatedDate;
-	}
-
-	@Override
-	@JsonIgnore
-	@Column(name = "created_by",updatable=false)
-	public Long getCreatedBy() {		
-		return super.getCreatedBy();
-	}
-
-	@Override
-	@JsonIgnore
-	@Column(name = "updated_by")
-	public Long getUpdatedBy() {		
-		return super.getUpdatedBy();
-	}
-	
-	@Override
-	@JsonIgnore
-	@Column(name = "created_by_user",updatable=false)
-	public String getCreatedByUser() {
-		return super.getCreatedByUser();
-	}
-	
-	@Override
-	@JsonIgnore
-	@Column(name = "updated_by_user")
-	public String getUpdatedByUser() {
-		return super.getUpdatedByUser();
-	}
-
-
-	/*@Override
-	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore(false)*/
-	public void setCreatedDate(MizeDateTime createdDate) {
-		super.createdDate = createdDate;
-	}
-
-	/*@Override
-	@DateTimeFormat (pattern="MM-dd-yyyy HH:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore(false)*/
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		super.updatedDate = updatedDate;
-	}
-
-	@Override
-	@JsonIgnore
-	public void setCreatedBy(Long createdBy) {		
-		super.setCreatedBy(createdBy);
-	}
-
-	@Override
-	@JsonIgnore
-	public void setUpdatedBy(Long updatedBy) {		
-		super.setUpdatedBy(updatedBy);
-	}
-	
-	@Override
-	@JsonIgnore
-	public void setCreatedByUser(String createdByUser) {
-		super.setCreatedByUser(createdByUser);
-	}
-	
-	@Override
-	@JsonIgnore
-	public void setUpdatedByUser(String updatedByUser) {
-		super.setUpdatedByUser(updatedByUser);
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;

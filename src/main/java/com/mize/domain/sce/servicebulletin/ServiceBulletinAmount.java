@@ -33,7 +33,7 @@ public class ServiceBulletinAmount extends MizeSceEntity implements Comparable<S
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "id")
 	public Long getId() {
 		return id;
 	}
