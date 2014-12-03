@@ -133,8 +133,12 @@ public class Country extends MizeSceEntity implements Comparable<Country>{
 		if (states == null) {
 			if (other.states != null)
 				return false;
-		} else if (!states.containsAll(other.states))
-			return false;
+		} else {
+			if (other.states == null || !(states.size() == other.states.size() && states.containsAll(other.states))){
+				return false;
+			}
+		}
+			
 		return true;
 	}
 
