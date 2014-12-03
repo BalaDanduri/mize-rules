@@ -18,7 +18,8 @@ public class MizeDate implements IMizeDate, Comparable<MizeDate>, Cloneable{
 	private DateTime dateTime;
 	private boolean isValid;
 	private DateTimeZone dateTimeZone;
-		
+	
+	@Deprecated
 	public static MizeDate now(){
 		return new MizeDate();
 	}
