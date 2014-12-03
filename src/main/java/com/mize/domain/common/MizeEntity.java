@@ -12,6 +12,7 @@ import com.mize.domain.exception.UploadError;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
 
+@Deprecated
 public abstract class MizeEntity implements IEntity {
 	
 	private static final long serialVersionUID = 4810418252575043078L;	
