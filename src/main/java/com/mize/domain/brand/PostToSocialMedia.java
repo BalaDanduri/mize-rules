@@ -1,9 +1,9 @@
 package com.mize.domain.brand;
 
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.MizeDateTime;
 
-public class PostToSocialMedia extends MizeEntity implements Comparable<PostToSocialMedia>{
+public class PostToSocialMedia extends MizeSceEntity implements Comparable<PostToSocialMedia>{
 	
 	private static final long serialVersionUID = 4674350998777147719L;
 	String postId;

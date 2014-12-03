@@ -11,14 +11,14 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JPASerializer;
 
 
 
 @Entity
 @Table(name = "insp_form_msg")
-public class InspectionFormMessage extends MizeEntity {
+public class InspectionFormMessage extends MizeSceEntity {
 
 	
 	private static final long serialVersionUID = 8878621032671945424L;

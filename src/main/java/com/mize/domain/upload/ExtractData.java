@@ -1,9 +1,9 @@
 package com.mize.domain.upload;
 
 import com.mize.domain.auth.User;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
-public class ExtractData extends MizeEntity implements Comparable<ExtractData>{
+public class ExtractData extends MizeSceEntity implements Comparable<ExtractData>{
 
 	private static final long serialVersionUID = -1474522071819508558L;
 	private String jobName;

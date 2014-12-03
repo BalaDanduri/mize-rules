@@ -16,7 +16,6 @@ import javax.persistence.Transient;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.mize.domain.common.MizeEntity;
 import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.part.Part;
 import com.mize.domain.util.JPASerializer;
@@ -27,7 +26,7 @@ import com.mize.domain.util.JPASerializer;
  */
 @Entity
 @Table(name = "srvc_enty_rqst_part")
-public class ServiceEntityRequestPart extends MizeEntity implements Comparable<ServiceEntityRequestPart> {
+public class ServiceEntityRequestPart extends MizeSceEntity implements Comparable<ServiceEntityRequestPart> {
 
 	
 	private static final long serialVersionUID = 609285366151566036L;

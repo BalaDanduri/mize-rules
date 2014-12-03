@@ -13,11 +13,11 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.EntityAttachment;
-import com.mize.domain.common.MizeEntity;
+import com.mize.domain.common.MizeSceEntity;
 
 @Entity
 @Table(name = "insp_form_attach")
-public class InspectionFormAttachment extends MizeEntity {
+public class InspectionFormAttachment extends MizeSceEntity {
 
 	
 	private static final long serialVersionUID = -7260590314327288513L;
