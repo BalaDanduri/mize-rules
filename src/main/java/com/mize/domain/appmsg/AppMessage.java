@@ -21,7 +21,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
@@ -347,10 +346,14 @@ public class AppMessage extends MizeSceEntity implements Comparable<AppMessage> 
 		this.isDuplicate = isDuplicate;
 	}
 
+	
+
 	@Override
 	public String toString() {
 		return "AppMessage [code=" + code + ", msgType=" + msgType
-				+ ", severity=" + severity + ", isActive =" + isActive + "]";
+				+ ", severity=" + severity + ", isActive=" + isActive
+				+ ", shortDesc=" + shortDesc + ", longDesc=" + longDesc
+				+ ", field=" + field + ", fieldKey=" + fieldKey + "]";
 	}
 
 	@Transient
