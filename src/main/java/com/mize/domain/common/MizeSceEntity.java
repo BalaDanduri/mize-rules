@@ -1,5 +1,14 @@
 package com.mize.domain.common;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+import org.hibernate.collection.internal.PersistentBag;
+import org.hibernate.collection.internal.PersistentMap;
+import org.hibernate.collection.internal.PersistentSet;
+import org.hibernate.collection.spi.PersistentCollection;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -140,6 +149,48 @@ public abstract class MizeSceEntity implements IEntity {
 			return false;
 		}
 		return true;
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public boolean isProxiesEquals(Object proxy1, Object proxy2){
+		if(proxy1 == null && proxy2 == null){
+			return true;
+		}
+		if(proxy1 != null && proxy2 == null){
+			return false;
+		}
+		if(proxy1 == null && proxy2 != null){
+			return false;
+		}
+		List list1 = toEntityList(proxy1);
+		List list2 = toEntityList(proxy2);
+		return list1.equals(list2);
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public List toEntityList(Object proxy){
+		List list = new ArrayList();
+		if(PersistentCollection.class.isAssignableFrom(proxy.getClass())) {
+			PersistentCollection pcollection = (PersistentCollection) proxy;
+			if (pcollection.wasInitialized()) {				
+				if(PersistentMap.class.isAssignableFrom(proxy.getClass()))  {
+					//need to handle Map data type ... ignoring for now
+				}
+				if(PersistentBag.class.isAssignableFrom(proxy.getClass()))  {
+					Iterator iterator = ((PersistentBag)proxy).iterator();
+					while(iterator.hasNext()){
+						list.add(iterator.next());
+					}
+				}
+				if(PersistentSet.class.isAssignableFrom(proxy.getClass()))  {
+					Iterator iterator = ((PersistentSet)proxy).iterator();
+					while(iterator.hasNext()){
+						list.add(iterator.next());
+					}
+				}
+			}
+		}
+		return list;
 	}
 	
 }
