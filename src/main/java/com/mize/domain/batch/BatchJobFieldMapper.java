@@ -11,16 +11,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Type;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.common.MizeSceEntityAudit;
 
 @Entity
 @Table(name="batch_job_field_mapping")
-public class BatchJobFieldMapper extends MizeSceEntity implements Comparable<BatchJobFieldMapper>{
+public class BatchJobFieldMapper extends MizeSceEntityAudit implements Comparable<BatchJobFieldMapper>{
 
 	/**
 	 * 
@@ -104,60 +100,6 @@ public class BatchJobFieldMapper extends MizeSceEntity implements Comparable<Bat
 
 	public void setAliasName(String aliasName) {
 		this.aliasName = aliasName;
-	}
-	
-	@Override
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@Column(name="created_date",updatable=false)
-	@JsonIgnore(value=false)
-	public MizeDateTime getCreatedDate() {
-		return createdDate;
-	}
-
-	@Override
-	@JsonIgnore(value=false)
-	public void setCreatedDate(MizeDateTime createdDate) {
-		super.createdDate = createdDate;
-	}
-	
-	@Override
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@Column(name="updated_date")
-	@JsonIgnore(value=false)
-	public MizeDateTime getUpdatedDate() {
-		return updatedDate;
-	}
-	
-	@Override
-	@JsonIgnore(value=false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		super.updatedDate = updatedDate;
-	}
-	
-	@Override	
-	@JsonIgnore
-	@Column(name = "created_by", nullable = true, length = 20, updatable = false)
-	public Long getCreatedBy() {		
-		return super.getCreatedBy();
-	}
-	
-	@Override
-	@JsonIgnore
-	public void setCreatedBy(Long createdBy) {		
-		super.setCreatedBy(createdBy);
-	}
-	
-	@Override
-	@JsonIgnore
-	@Column(name = "updated_by", nullable = true, length = 20)
-	public Long getUpdatedBy() {		
-		return super.getUpdatedBy();
-	}
-	
-	@Override
-	@JsonIgnore
-	public void setUpdatedBy(Long updatedBy) {		
-		super.setUpdatedBy(updatedBy);
 	}
 	
 	@Transient

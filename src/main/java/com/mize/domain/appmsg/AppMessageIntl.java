@@ -12,16 +12,14 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.common.Locale;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name="application_messages_intl")
-public class AppMessageIntl extends MizeSceEntity implements Comparable<AppMessageIntl> {
+public class AppMessageIntl extends MizeSceEntityAudit implements Comparable<AppMessageIntl> {
 
 	private static final long serialVersionUID = 3605561224344122428L;
 	private AppMessage appMessage;
@@ -95,57 +93,6 @@ public class AppMessageIntl extends MizeSceEntity implements Comparable<AppMessa
 
 	public void setLocale(Locale locale) {
 		this.locale = locale;
-	}
-	
-	
-	@Column(name = "created_date", updatable = false)
-	@org.hibernate.annotations.Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	@JsonIgnore(false)
-	public MizeDateTime getCreatedDate() {
-		return this.createdDate;
-	}
-
-	@JsonIgnore(false)
-	public void setCreatedDate(MizeDateTime createdDate) {
-		this.createdDate = createdDate;
-	}
-	
-	@Column(name = "updated_date")
-	@org.hibernate.annotations.Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	@JsonIgnore(false)
-	public MizeDateTime getUpdatedDate() {
-		return this.updatedDate;
-	}
-	
-	@JsonIgnore(false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		this.updatedDate = updatedDate;
-	} 
-	
-	@Override
-	@JsonIgnore(value=false)
-	@Column(name = "created_by",updatable = false)
-	public Long getCreatedBy() {		
-		return super.getCreatedBy();
-	}
-	
-	@Override
-	@JsonIgnore(value=false)
-	public void setCreatedBy(Long createdBy) {		
-		super.setCreatedBy(createdBy);
-	}
-	
-	@Override
-	@JsonIgnore(value=false)
-	@Column(name = "updated_by")
-	public Long getUpdatedBy() {		
-		return super.getUpdatedBy();
-	}
-	
-	@Override
-	@JsonIgnore(value=false)
-	public void setUpdatedBy(Long updatedBy) {		
-		super.setUpdatedBy(updatedBy);
 	}
 	
 	@Override

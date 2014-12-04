@@ -15,8 +15,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Type;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -24,13 +22,12 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name = "mize_job")
-public class MizeJob extends MizeSceEntity implements Comparable<MizeJob>{
+public class MizeJob extends MizeSceEntityAudit implements Comparable<MizeJob>{
 
 	/**
 	 * 
@@ -161,60 +158,6 @@ public class MizeJob extends MizeSceEntity implements Comparable<MizeJob>{
 	}
 
 	@Override
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@Column(name="created_date",updatable=false)
-	@JsonIgnore(value=false)
-	public MizeDateTime getCreatedDate() {
-		return createdDate;
-	}
-
-	@Override
-	@JsonIgnore(value=false)
-	public void setCreatedDate(MizeDateTime createdDate) {
-		super.createdDate = createdDate;
-	}
-	
-	@Override
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@Column(name="updated_date")
-	@JsonIgnore(value=false)
-	public MizeDateTime getUpdatedDate() {
-		return updatedDate;
-	}
-	
-	@Override
-	@JsonIgnore(value=false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		super.updatedDate = updatedDate;
-	}
-	
-	@Override	
-	@JsonIgnore
-	@Column(name = "created_by", nullable = true, length = 20, updatable = false)
-	public Long getCreatedBy() {		
-		return super.getCreatedBy();
-	}
-	
-	@Override
-	@JsonIgnore
-	public void setCreatedBy(Long createdBy) {		
-		super.setCreatedBy(createdBy);
-	}
-	
-	@Override
-	@JsonIgnore
-	@Column(name = "updated_by", nullable = true, length = 20)
-	public Long getUpdatedBy() {		
-		return super.getUpdatedBy();
-	}
-	
-	@Override
-	@JsonIgnore
-	public void setUpdatedBy(Long updatedBy) {		
-		super.setUpdatedBy(updatedBy);
-	}
-
-	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
@@ -284,8 +227,15 @@ public class MizeJob extends MizeSceEntity implements Comparable<MizeJob>{
 
 	@Override
 	public int compareTo(MizeJob o) {
-		
-		return 0;
+		if ( this == o ) 
+			return EQUAL;
+		else if (this.id < o.id) 
+			return BEFORE;
+		else if (o.id == this.id) 
+			return EQUAL;
+		else if (this.id > o.id)
+			return AFTER;
+		return EQUAL;
 	}
 	
 }

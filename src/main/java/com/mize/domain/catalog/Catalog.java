@@ -15,25 +15,22 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDateTime;
 
 @Entity
-@Table(name = "catalog", uniqueConstraints = {@UniqueConstraint (columnNames={"tenant_id", "catalog_code"})})
-public class Catalog extends MizeSceEntity implements Comparable<Catalog> {
+@Table(name = "catalog")
+public class Catalog extends MizeSceEntityAudit implements Comparable<Catalog> {
 	
 	private static final long serialVersionUID = -8488237770262609141L;	
 	private BusinessEntity tenant;
@@ -131,58 +128,6 @@ public class Catalog extends MizeSceEntity implements Comparable<Catalog> {
 
 	public void setCatalogEntry(List<CatalogEntry> catalogEntry) {
 		this.catalogEntry = catalogEntry;
-	}
-	
-	
-	@Column(name = "created_date", updatable = false)
-	@org.hibernate.annotations.Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	@JsonIgnore(false)
-	public MizeDateTime getCreatedDate() {
-		return this.createdDate;
-	}
-
-	@JsonIgnore(false)
-	public void setCreatedDate(MizeDateTime createdDate) {
-		this.createdDate = createdDate;
-	}
-	
-	
-	@Column(name = "updated_date")
-	@org.hibernate.annotations.Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	@JsonIgnore(false)
-	public MizeDateTime getUpdatedDate() {
-		return this.updatedDate;
-	}
-	
-	@JsonIgnore(false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		this.updatedDate = updatedDate;
-	} 
-	
-	@Override
-	@JsonIgnore(value=false)
-	@Column(name = "created_by",updatable = false)
-	public Long getCreatedBy() {		
-		return super.getCreatedBy();
-	}
-	
-	@Override
-	@JsonIgnore(value=false)
-	public void setCreatedBy(Long createdBy) {		
-		super.setCreatedBy(createdBy);
-	}
-	
-	@Override
-	@JsonIgnore(value=false)
-	@Column(name = "updated_by")
-	public Long getUpdatedBy() {		
-		return super.getUpdatedBy();
-	}
-	
-	@Override
-	@JsonIgnore(value=false)
-	public void setUpdatedBy(Long updatedBy) {		
-		super.setUpdatedBy(updatedBy);
 	}
 
 	@Transient
@@ -283,7 +228,15 @@ public class Catalog extends MizeSceEntity implements Comparable<Catalog> {
 
 	@Override
 	public int compareTo(Catalog o) {
-		return 0;
+		if ( this == o ) 
+			return EQUAL;
+		else if (this.id < o.id) 
+			return BEFORE;
+		else if (o.id == this.id) 
+			return EQUAL;
+		else if (this.id > o.id)
+			return AFTER;
+		return EQUAL;
 	}
 }
 	

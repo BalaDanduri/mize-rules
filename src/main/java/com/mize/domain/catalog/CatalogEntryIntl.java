@@ -11,14 +11,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mize.domain.common.Locale;
-import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.common.MizeSceEntityAudit;
 
 @Entity
 @Table(name = "catalog_entry_intl")
-public class CatalogEntryIntl extends MizeSceEntity implements Comparable<CatalogEntryIntl> {
+public class CatalogEntryIntl extends MizeSceEntityAudit implements Comparable<CatalogEntryIntl> {
 	
 
 	private static final long serialVersionUID = 3807391169608135552L;
@@ -90,56 +88,6 @@ public class CatalogEntryIntl extends MizeSceEntity implements Comparable<Catalo
 
 	public void setLocale(Locale locale) {
 		this.locale = locale;
-	}
-	
-	@Column(name = "created_date", updatable = false)
-	@org.hibernate.annotations.Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	@JsonIgnore(false)
-	public MizeDateTime getCreatedDate() {
-		return this.createdDate;
-	}
-
-	@JsonIgnore(false)
-	public void setCreatedDate(MizeDateTime createdDate) {
-		this.createdDate = createdDate;
-	}
-	
-	@Column(name = "updated_date")
-	@org.hibernate.annotations.Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	@JsonIgnore(false)
-	public MizeDateTime getUpdatedDate() {
-		return this.updatedDate;
-	}
-	
-	@JsonIgnore(false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		this.updatedDate = updatedDate;
-	} 
-	
-	@Override
-	@JsonIgnore
-	@Column(name = "created_by", updatable = false)
-	public Long getCreatedBy() {		
-		return super.getCreatedBy();
-	}
-	
-	@Override
-	@JsonIgnore
-	public void setCreatedBy(Long createdBy) {		
-		super.setCreatedBy(createdBy);
-	}
-	
-	@Override
-	@JsonIgnore
-	@Column(name = "updated_by")
-	public Long getUpdatedBy() {		
-		return super.getUpdatedBy();
-	}
-	
-	@Override
-	@JsonIgnore
-	public void setUpdatedBy(Long updatedBy) {		
-		super.setUpdatedBy(updatedBy);
 	}
 
 	@Override
