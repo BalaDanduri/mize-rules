@@ -30,7 +30,12 @@ public class MizeDate implements IMizeDate, Comparable<MizeDate>, Cloneable{
 	}
 	
 	public static MizeDate getInstance(DateTime dateTime){
-		return new MizeDate(dateTime);
+		if(dateTime != null){
+			return new MizeDate(dateTime);
+		}else{
+			return null;
+		}
+		
 	}
 	
 	public static MizeDate getInstance(long millis, DateTimeZone timeZone){
@@ -206,11 +211,7 @@ public class MizeDate implements IMizeDate, Comparable<MizeDate>, Cloneable{
 			return true;
 		}
 	}
-	
-	public String toDBDateTime(){		
-		return this.dateTime.toString(DB_DATE_TIME_FORMAT);
-	}
-	
+		
 	public String toString(String dateFormat){		
 		return DateTimeFormat.forPattern(dateFormat).print(this.dateTime);
 	}
