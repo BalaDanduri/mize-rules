@@ -23,7 +23,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -559,7 +558,6 @@ public class ShipmentTracking extends MizeSceEntity implements Comparable<Shipme
 	@OneToMany(cascade={CascadeType.ALL}, mappedBy="shipmentTracking",orphanRemoval = true,fetch=FetchType.LAZY)
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
-	@JsonManagedReference(value="shipment_tracking_attachments")
 	public List<ShipmentTrackingAttachment> getAttachments() {
 		return attachments;
 	}
