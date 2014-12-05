@@ -18,26 +18,21 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityComment;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.util.MizeDate;
 
 @Entity
 @Table(name="shipment_tracking")
-public class ShipmentTracking extends MizeSceEntity implements Comparable<ShipmentTracking>{
+public class ShipmentTracking extends MizeSceEntityAudit implements Comparable<ShipmentTracking>{
 	
 	private static final long serialVersionUID = -3279332499661281505L;	
 	private BusinessEntity tenant;
@@ -52,9 +47,9 @@ public class ShipmentTracking extends MizeSceEntity implements Comparable<Shipme
 	private String priority;
 	private String carrier;
 	private String shipmentCarrierName;
-	private DateTime shipmentDate;
-	private DateTime deliveryDate;
-	private DateTime confirmationDate;
+	private MizeDate shipmentDate;
+	private MizeDate deliveryDate;
+	private MizeDate confirmationDate;
 	private String status;
 	private String label;
 	private String shipmentLinkInfo;
@@ -207,35 +202,26 @@ public class ShipmentTracking extends MizeSceEntity implements Comparable<Shipme
 		this.shipmentCarrierName = shipmentCarrierName;
 	}
 
-	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using = JsonDateTimeSerializer.class)
 	@JsonInclude(Include.NON_DEFAULT)
-	@JsonIgnore(false)
 	@Column(name = "shipment_date")
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	public DateTime getShipmentDate() {
+	@Type(type = "com.mize.domain.util.MizeDateJPA")
+	public MizeDate getShipmentDate() {
 		return shipmentDate;
 	}
 
-	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using = JodaDateTimeDeserializer.class)
-	public void setShipmentDate(DateTime shipmentDate) {
+	public void setShipmentDate(MizeDate shipmentDate) {
 		this.shipmentDate = shipmentDate;
 	}
 
-	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using = JsonDateTimeSerializer.class)
 	@JsonInclude(Include.NON_DEFAULT)
 	@JsonIgnore(false)
 	@Column(name = "delivery_date")
-	@Type(type = "com.mize.domain.util.DateTimeJPA")
-	public DateTime getDeliveryDate() {
+	@Type(type = "com.mize.domain.util.MizeDateJPA")
+	public MizeDate getDeliveryDate() {
 		return deliveryDate;
 	}
 
-	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using = JodaDateTimeDeserializer.class)
-	public void setDeliveryDate(DateTime deliveryDate) {
+	public void setDeliveryDate(MizeDate deliveryDate) {
 		this.deliveryDate = deliveryDate;
 	}
 
@@ -369,40 +355,6 @@ public class ShipmentTracking extends MizeSceEntity implements Comparable<Shipme
 		this.deliveryInstructions = deliveryInstructions;
 	}
 	
-	/*@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using = JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_NULL)
-	@JsonIgnore(false)*/
-	@Column(name = "created_date", updatable = false)
-	@org.hibernate.annotations.Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getCreatedDate() {
-		return this.createdDate;
-	}
-
-	/*@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using = JodaDateTimeDeserializer.class)
-	@JsonIgnore(false)*/
-	public void setCreatedDate(MizeDateTime createdDate) {
-		this.createdDate = createdDate;
-	}
-	
-	/*@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using = JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_NULL)*/
-	@Column(name = "updated_date")
-	@org.hibernate.annotations.Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	@JsonIgnore(false)
-	public MizeDateTime getUpdatedDate() {
-		return this.updatedDate;
-	}
-	
-	/*@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using = JodaDateTimeDeserializer.class)
-	@JsonIgnore(false)*/
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		this.updatedDate = updatedDate;
-	}	
-
 	@Transient
 	public EntityComment getEntityComment() {
 		return entityComment;
@@ -419,28 +371,6 @@ public class ShipmentTracking extends MizeSceEntity implements Comparable<Shipme
 
 	public void setUser(User user) {
 		this.user = user;
-	}
-	
-	@JsonIgnore(false)
-	@Column(name = "updated_by")
-	public Long getUpdatedBy() {
-		return this.updatedBy;
-	}
-	
-	@JsonIgnore(false)
-	public void setUpdatedBy(Long updatedBy) {
-		this.updatedBy = updatedBy;
-	}
-	
-	@JsonIgnore(false)
-	@Column(name = "created_by", updatable = false)
-	public Long getCreatedBy() {
-		return this.createdBy;
-	}
-	
-	@JsonIgnore(false)
-	public void setCreatedBy(Long createdBy) {
-		this.createdBy = createdBy;
 	}
 
 	@Column(name = "total_weight")
@@ -479,18 +409,14 @@ public class ShipmentTracking extends MizeSceEntity implements Comparable<Shipme
 		this.totalWeightUOM = totalWeightUOM;
 	}
 	
-	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using = JsonDateTimeSerializer.class)
 	@JsonInclude(Include.NON_NULL)
 	@Column(name = "confirmation_date")
-	@org.hibernate.annotations.Type(type = "com.mize.domain.util.DateTimeJPA")
-	public DateTime getConfirmationDate() {
+	@Type(type = "com.mize.domain.util.MizeDateJPA")
+	public MizeDate getConfirmationDate() {
 		return confirmationDate;
 	}
 
-	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using = JodaDateTimeDeserializer.class)
-	public void setConfirmationDate(DateTime confirmationDate) {
+	public void setConfirmationDate(MizeDate confirmationDate) {
 		this.confirmationDate = confirmationDate;
 	}
 

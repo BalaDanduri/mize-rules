@@ -12,19 +12,6 @@ public abstract class MizeSceEntityAudit extends MizeSceEntity {
 	
 	private static final long serialVersionUID = 481118252575043078L;
 	
-	/*@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
-	@Override
-	public Long getId() {
-		return id;
-	}
-
-	@Override
-	public void setId(Long id) {
-		this.id = id;
-	}*/
-	
 	@Column(name = "created_by" , updatable=false)
 	public Long getCreatedBy() {
 		return createdBy;
