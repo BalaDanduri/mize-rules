@@ -1088,7 +1088,7 @@ public final class Formatter {
 	 public static MizeDate convertMizeDateTimeToMizeDate(MizeDateTime mizeDateTime){
 		 MizeDate mizeDate = mizeDateTime != null ? new MizeDate(mizeDateTime.getDateTime()) :null;
 		 DateTime dateTime = mizeDate != null ? mizeDate.getDateTime() :null; 
-		 dateTime = dateTime.withTime(0, 0, 0, 0);
+		 dateTime = dateTime!= null ? dateTime.withTime(0, 0, 0, 0):null;
 		 return dateTime!= null? new MizeDate(dateTime) :null;
 	 }
 	 
