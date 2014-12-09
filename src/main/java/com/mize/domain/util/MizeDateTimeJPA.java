@@ -10,9 +10,17 @@ import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SessionImplementor;
 import org.hibernate.usertype.UserType;
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class MizeDateTimeJPA implements UserType{
-
+	
+	private static MizeApplicationProperties mizeApplicationProperties;
+	@Autowired
+	public void setMizeApplicationProperties(MizeApplicationProperties mizeApplicationProperties) {
+		MizeDateTimeJPA.mizeApplicationProperties = mizeApplicationProperties;
+	}
+	
 	@Override
 	public Object assemble(Serializable arg0, Object arg1) throws HibernateException {
 		return arg0;
@@ -70,7 +78,8 @@ public class MizeDateTimeJPA implements UserType{
 		if (rs.wasNull()) {
 			return null;
 		}
-        DateTime dateTime = new DateTime(timestamp);
+		DateTimeZone dateTimeZone = DateTimeZone.forID(mizeApplicationProperties.getDefaultTimeZone());
+        DateTime dateTime = new DateTime(timestamp, dateTimeZone);
         return MizeDateTime.getInstance(dateTime);
 	}
 

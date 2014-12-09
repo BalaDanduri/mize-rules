@@ -9,8 +9,6 @@ import org.joda.time.format.ISODateTimeFormat;
 public class MizeDateTime implements IMizeDate, Comparable<MizeDateTime>, Cloneable{
 	
 	private static final long serialVersionUID = 7257173124058180557L;
-	private static final String DEF_DATE_FORMAT = "MM/dd/yyyy";	
-	private static final String DEF_END_DATE = "12/31/9999";	
 	private static final DateTimeFormatter DB_DATE_TIME_FORMAT = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
 	public static final String DATE_TIME_FORMAT = "MM-dd-yyyy HH:mm:ss";
 	public static final String DATE_FORMAT = "MM-dd-yyyy";
@@ -36,6 +34,7 @@ public class MizeDateTime implements IMizeDate, Comparable<MizeDateTime>, Clonea
 		return new MizeDateTime(dateTime);
 	}
 	
+	@Deprecated
 	public static MizeDateTime getInstance(long millis, DateTimeZone timeZone){
 		return new MizeDateTime(millis, timeZone);
 	}
@@ -75,6 +74,18 @@ public class MizeDateTime implements IMizeDate, Comparable<MizeDateTime>, Clonea
 			this.dateTimeValue = checkAndAppendTime(dateTimeValue);
 			this.dateTimeFormat = dateTimeFormat;
 			this.dateTime = DateTime.parse(this.dateTimeValue,DateTimeFormat.forPattern(dateTimeFormat).withZone(dateTimeZone));
+			this.dateTimeZone = dateTimeZone;
+			this.timeZone = dateTimeZone.getID();
+			this.isValid = true;
+		}catch(Exception e){
+		}
+	}
+	
+	protected MizeDateTime(String dateTimeValue,String dateTimeFormat,DateTime dateTime, DateTimeZone dateTimeZone) {		
+		try{		
+			this.dateTimeValue = checkAndAppendTime(dateTimeValue);
+			this.dateTimeFormat = dateTimeFormat;
+			this.dateTime = dateTime;
 			this.dateTimeZone = dateTimeZone;
 			this.timeZone = dateTimeZone.getID();
 			this.isValid = true;
@@ -182,20 +193,6 @@ public class MizeDateTime implements IMizeDate, Comparable<MizeDateTime>, Clonea
 		} else {
 			return new MizeDateTime(currentTimeInMillis - millis);
 		}
-	}
-		
-	public MizeDateTime defaultEndDate(){
-		DateTimeFormatter simpleDateFormat = DateTimeFormat.forPattern(DEF_DATE_FORMAT);
-		DateTime.parse(DEF_END_DATE);
-		DateTime dateTime = DateTime.parse(DEF_END_DATE,simpleDateFormat);
-		return new MizeDateTime(dateTime);
-	}
-	
-	public MizeDateTime defaultEndDate(String dateTimeFormat){
-		DateTimeFormatter simpleDateFormat = DateTimeFormat.forPattern(dateTimeFormat);
-		DateTime.parse(DEF_END_DATE);
-		DateTime dateTime = DateTime.parse(DEF_END_DATE,simpleDateFormat);
-		return new MizeDateTime(dateTime);
 	}
 	
 	public MizeDateTime nextDay(){
