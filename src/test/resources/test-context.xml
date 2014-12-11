@@ -69,7 +69,21 @@
  		-->	
  	</bean>
  	
+	<bean id="mizeApplicationProperties" class="com.mize.domain.util.MizeApplicationProperties">
+		<property name="pageSize" value="${search.defaultPageSize~~10}"/>
+		<property name="recordCount" value="${search.defaultMaxResultsCount~~1000}"/>
+		<property name="defaultTenantCode" value="${app.defaultTenantCode~~10C000100P}"/>
+		<property name="defaultCurrencyCode" value="${app.defaultCurrencyCode~~USD}"/>
+		<property name="loginType" value="${login.type~~email}"/>
+		<property name="defaultTimeZone" value="${app.defaultTimeZone~~UTC}"/>
+		<property name="defaultEndDate" value="${app.defaultEndDate~~12-31-2025}"/>
+		<property name="defaultLocaleId" value="${app.defaultLocaleId~~1}"/>
+		<property name="createdByUser" value="${app.createdByUser~~userName}"/>
+		<property name="defaultDateTimeFormat" value="${app.dateTimeFormat~~MM-dd-yyyy HH:mm:ss}"/>
+		<property name="defaultDateFormat" value="${app.dateFormat~~MM-dd-yyyy}"/>
+	</bean> 		 
 	
+	<bean id="mizeDateTimeUtils" class="com.mize.domain.util.MizeDateTimeUtils"/>
 	
  	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
 		<constructor-arg ref="dataSource" />
