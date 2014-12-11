@@ -11,6 +11,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
+import org.joda.time.DateTimeZone;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
@@ -88,9 +89,9 @@ public class PartSubsituteTest extends JPATest {
 			partSubstitute.setFamilyCode("KW001");
 			partSubstitute.setCode("admin"+System.currentTimeMillis());
 			partSubstitute.setCreatedBy(776L);
-			partSubstitute.setCreatedDate(MizeDateTime.now());
-			partSubstitute.setEndDate(MizeDate.now());
-			partSubstitute.setDate(MizeDate.now());
+			partSubstitute.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+			partSubstitute.setEndDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+			partSubstitute.setDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 			partSubstitute.setSequenceNo(1);
 			partSubstitute.setUpdatedBy(776l);
 			

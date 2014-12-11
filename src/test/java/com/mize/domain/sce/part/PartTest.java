@@ -12,6 +12,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
+import org.joda.time.DateTimeZone;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
@@ -93,8 +94,8 @@ public class PartTest extends JPATest {
 		part.setIsReturnable("Y");
 		part.setIsSerialized("Y");
 		part.setUom("Each");
-		part.setCreatedDate(MizeDateTime.now());
-		part.setUpdatedDate(MizeDateTime.now().plusMonths(2));
+		part.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		part.setUpdatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC).plusMonths(2));
 		part.setCreatedBy(779l);
 		part.setUpdatedBy(779l);
 		return part;
@@ -123,12 +124,12 @@ public class PartTest extends JPATest {
 		partPrice.setNetPrice(BigDecimal.valueOf(1));
 		partPrice.setCurrencyCode("USD");
 		partPrice.setTaxId(1l);
-		partPrice.setCreatedDate(MizeDateTime.now());
+		partPrice.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		partPrice.setCreatedBy(776l);
-		partPrice.setEndDate(MizeDate.now().plusMonths(2));
-		partPrice.setStartDate(MizeDate.now());
+		partPrice.setEndDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC).plusMonths(2));
+		partPrice.setStartDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		partPrice.setUpdatedBy(776l);
-		partPrice.setUpdatedDate(MizeDateTime.now().plusMonths(1));
+		partPrice.setUpdatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC).plusMonths(1));
 		partPrices.add(partPrice);
 
 		part.setPartPrices(partPrices);

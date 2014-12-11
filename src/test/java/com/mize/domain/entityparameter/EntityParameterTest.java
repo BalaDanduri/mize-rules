@@ -11,7 +11,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
@@ -21,6 +21,8 @@ import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;
+import com.mize.domain.util.MizeDate;
+import com.mize.domain.util.MizeDateTime;
 
 @ContextConfiguration(locations = { "/test-context.xml" })
 public class EntityParameterTest extends JPATest{
@@ -81,10 +83,10 @@ public class EntityParameterTest extends JPATest{
 		entityParameter.setTenant(tenant);
 		entityParameter.setType("OrderTypeAndLocation");
 		entityParameter.setCode("Stock");
-		entityParameter.setStartDate(Formatter.toMizeDate(DateTime.now()));
-		entityParameter.setEndDate(Formatter.toMizeDate(DateTime.now().plusMonths(2)));
-		entityParameter.setCreatedDate(Formatter.toMizeDateTime(DateTime.now()));
-		entityParameter.setUpdatedDate(Formatter.toMizeDateTime(DateTime.now().plusMonths(2)));
+		entityParameter.setStartDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		entityParameter.setEndDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC).plusMonths(2));
+		entityParameter.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		entityParameter.setUpdatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC).plusMonths(2));
 		entityParameter.setUpdatedBy(779L);
 		entityParameter.setCreatedBy(779L);
 		entityParameter.setBeId(businessEntity.getId());

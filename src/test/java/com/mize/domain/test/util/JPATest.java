@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
+import org.joda.time.DateTimeZone;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.runner.RunWith;
@@ -220,8 +221,8 @@ public class JPATest {
 			tenant.setIsActive("Y");
 			tenant.setCreatedBy(1l);
 			tenant.setUpdatedBy(1l);
-			tenant.setCreatedDate(MizeDateTime.now());
-			tenant.setUpdatedDate(MizeDateTime.now());
+			tenant.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+			tenant.setUpdatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 			if (!type.equalsIgnoreCase("company")) {
 				BusinessEntityIntl intl = new BusinessEntityIntl();
 				intl.setName(type);
@@ -241,9 +242,9 @@ public class JPATest {
 		User user = new User();
 		user.setEmail("admin"+System.currentTimeMillis()+"@mize.com");
 		user.setName("Mize");
-		user.setLastLogin(MizeDateTime.now());
-		user.setCreatedDate(MizeDateTime.now());
-		user.setUpdatedDate(MizeDateTime.now());
+		user.setLastLogin(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		user.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		user.setUpdatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		UserProfile userProfile = user.getUserProfile();
 		if(userProfile == null){
 			userProfile = new UserProfile();
@@ -251,7 +252,7 @@ public class JPATest {
 		userProfile.setEmailOptOut("N");
 		userProfile.setFirstName("Test");
 		userProfile.setLastName("Admin");
-		userProfile.setBirthdate(MizeDateTime.now().minusYears(28));
+		userProfile.setBirthdate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC).minusYears(28));
 		userProfile.setGender(Gender.F);
 		userProfile.setUser(user);
 		
@@ -273,9 +274,9 @@ public class JPATest {
 		product.setBrand(brand);
 		product.setTenant(tenant);
 		product.setManufacturerBE((businessEntity));
-		product.setCreatedDate(MizeDateTime.now());
-		product.setUpdatedDate(MizeDateTime.now());
-		product.setReleaseDate(MizeDate.now());
+		product.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		product.setUpdatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		product.setReleaseDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		
 		return product;
 

@@ -12,6 +12,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
+import org.joda.time.DateTimeZone;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
@@ -81,10 +82,10 @@ public class PartKitTest extends JPATest {
 		partKit.setIsActive("Y");
 		partKit.setCreatedBy(776L);
 		partKit.setUpdatedBy(776L);
-		partKit.setCreatedDate(MizeDateTime.now());
-		partKit.setUpdatedDate(MizeDateTime.now());
-		partKit.setStartDate(MizeDate.now());
-		partKit.setEndDate(MizeDate.now());
+		partKit.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		partKit.setUpdatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		partKit.setStartDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		partKit.setEndDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 
 		return partKit;
 	}

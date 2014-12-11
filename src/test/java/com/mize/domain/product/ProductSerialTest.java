@@ -11,6 +11,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
+import org.joda.time.DateTimeZone;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
@@ -21,6 +22,7 @@ import com.mize.domain.common.EntityComment;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;
 import com.mize.domain.util.MizeDate;
+import com.mize.domain.util.MizeDateTime;
 
 
 @ContextConfiguration(locations={"/test-context.xml"})
@@ -83,12 +85,12 @@ public class ProductSerialTest extends JPATest {
 		productSerial.setProduct(product);
 		productSerial.setSerialNumber("testAdmin"+System.currentTimeMillis());
 		productSerial.setShippedBusinessEntity(businessEntity);
-		productSerial.setBuildDate(MizeDate.now());
+		productSerial.setBuildDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		productSerial.setInvoiceBusinessEntity(businessEntity);
 		productSerial.setCreatedBy(776l);
-		productSerial.setCreatedDate(Formatter.toMizeDateTime(MizeDate.now().getDateTime()));
+		productSerial.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		productSerial.setUpdatedBy(776L);
-		productSerial.setUpdatedDate(Formatter.toMizeDateTime(MizeDate.now().getDateTime()));
+		productSerial.setUpdatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		productSerial.setIsValid("Y");
 		
 		return productSerial;

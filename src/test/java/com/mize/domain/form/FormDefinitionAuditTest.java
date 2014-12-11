@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
+import org.joda.time.DateTimeZone;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -19,7 +20,7 @@ import org.springframework.test.context.ContextConfiguration;
 
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;
-import com.mize.domain.util.MizeDate;
+import com.mize.domain.util.MizeDateTime;
 
 @ContextConfiguration(locations={"/test-context.xml"})
 public class FormDefinitionAuditTest extends JPATest {	
@@ -77,7 +78,7 @@ public class FormDefinitionAuditTest extends JPATest {
 	}
 	
 	private FormDefinitionAudit createFormDefAudit(FormDefinition formDef) {
-		FormDefinitionAudit audit = new FormDefinitionAudit(formDef, formDef.getStatusCode(), Formatter.toMizeDateTime(MizeDate.now().getDateTime()), 779L,"Process");
+		FormDefinitionAudit audit = new FormDefinitionAudit(formDef, formDef.getStatusCode(), MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC), 779L,"Process");
 		return audit;
 	}
 	

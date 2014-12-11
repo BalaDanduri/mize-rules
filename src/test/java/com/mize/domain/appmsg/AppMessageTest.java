@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
+import org.joda.time.DateTimeZone;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
@@ -36,12 +37,14 @@ public class AppMessageTest extends JPATest {
 		entityManager = getEntityManager();
 		tenant = findExistingBE(entityManager);
 	}
+	@SuppressWarnings("unused")
 	private void persist() {
 		tx = entityManager.getTransaction();
 		tx.begin();
 		entityManager.persist(appMessage);
 		tx.commit();
 	}
+	@SuppressWarnings("unused")
 	private void createAppMessage() {
 		if (entityManager != null) {
 			tx = entityManager.getTransaction();
@@ -59,8 +62,8 @@ public class AppMessageTest extends JPATest {
 		appMessage.setSeverity(5);
 		appMessage.setCreatedBy(796L);
 		appMessage.setUpdatedBy(796l);
-		appMessage.setCreatedDate(MizeDateTime.now());
-		appMessage.setUpdatedDate(MizeDateTime.now());
+		appMessage.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		appMessage.setUpdatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		appMessage.setMsgType("validation");
 		appMessage.setTenant(tenant);
 		appMessage.setIsActive("Y");
@@ -75,8 +78,8 @@ public class AppMessageTest extends JPATest {
 		appMessageIntl.setAppMessage(appMessage);
 		appMessageIntl.setCreatedBy(796L);
 		appMessageIntl.setUpdatedBy(796L);
-		appMessageIntl.setCreatedDate(MizeDateTime.now());
-		appMessageIntl.setUpdatedDate(MizeDateTime.now());
+		appMessageIntl.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		appMessageIntl.setUpdatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		appMessageIntl.setShortDesc("Valid Location # is required");
 		appMessageIntl.setLongDesc("Valid Location # is required");
 		intls.add(appMessageIntl);

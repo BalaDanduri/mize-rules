@@ -12,6 +12,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
+import org.joda.time.DateTimeZone;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
@@ -90,10 +91,10 @@ public class ProductRegistrationTest  extends JPATest {
 		productRegistration.setRegistrationType("STORE");
 		productRegistration.setCustomer(businessEntity);
 		productRegistration.setInvoiceBusinessEntity(businessEntity);
-		productRegistration.setCustomerDeliveryDate(MizeDate.now());
+		productRegistration.setCustomerDeliveryDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		productRegistration.setPurchasePrice(new BigDecimal(200.00));
-		productRegistration.setCustomerDeliveryDate(MizeDate.now().plusDays(3));
-		productRegistration.setWarrantyExpiryDate(MizeDate.now().plusMonths(24));
+		productRegistration.setCustomerDeliveryDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC).plusDays(3));
+		productRegistration.setWarrantyExpiryDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC).plusMonths(24));
 		productRegistration.setCustomerAddress(entityAddress);
 		return productRegistration;
 		

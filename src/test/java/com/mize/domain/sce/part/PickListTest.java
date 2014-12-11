@@ -12,6 +12,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
+import org.joda.time.DateTimeZone;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
@@ -94,8 +95,8 @@ public class PickListTest extends JPATest {
 		pickList.setIsActive("Y");
 		pickList.setPickListLocation(businessEntity);
 		pickList.setTenant(tenant);
-		pickList.setCreatedDate(MizeDateTime.now());
-		pickList.setUpdatedDate(MizeDateTime.now());
+		pickList.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		pickList.setUpdatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		pickList.setCreatedBy(776l);
 		pickList.setUpdatedBy(776L);
 		return pickList;

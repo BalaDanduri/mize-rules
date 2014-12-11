@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
+import org.joda.time.DateTimeZone;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
@@ -36,12 +37,14 @@ public class ApplicationLabelTest extends JPATest{
 		entityManager = getEntityManager();
 		tenant = findExistingBE(entityManager);
 	}
+	@SuppressWarnings("unused")
 	private void persist() {
 		tx = entityManager.getTransaction();
 		tx.begin();
 		entityManager.persist(appLabel);
 		tx.commit();
 	}
+	@SuppressWarnings("unused")
 	private void createAppLabel() {
 		if (entityManager != null) {
 			tx = entityManager.getTransaction();
@@ -62,8 +65,8 @@ public class ApplicationLabelTest extends JPATest{
 		appLabel.setCategory("application");
 		appLabel.setCreatedBy(796L);
 		appLabel.setUpdatedBy(796L);
-		appLabel.setCreatedDate(MizeDateTime.now());
-		appLabel.setUpdatedDate(MizeDateTime.now());
+		appLabel.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		appLabel.setUpdatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		return appLabel;
 	}
 	private void setAppLabelIntl(ApplicationLabel appLabel2) {
@@ -76,8 +79,8 @@ public class ApplicationLabelTest extends JPATest{
 		appLabelIntl.setDescription("Label Description");
 		appLabelIntl.setCreatedBy(796L);
 		appLabelIntl.setUpdatedBy(796L);
-		appLabelIntl.setCreatedDate(MizeDateTime.now());
-		appLabelIntl.setUpdatedDate(MizeDateTime.now());
+		appLabelIntl.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		appLabelIntl.setUpdatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		intls.add(appLabelIntl);
 		appLabel.setIntls(intls);
 		

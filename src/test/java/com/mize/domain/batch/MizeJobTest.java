@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import org.joda.time.DateTimeZone;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -113,7 +114,7 @@ public class MizeJobTest extends JPATest {
 	}
 	
 	private void populateAuditFields(MizeSceEntity entity) {
-		MizeDateTime dateTime = MizeDateTime.now();
+		MizeDateTime dateTime = MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC);
 		entity.setCreatedDate(dateTime);
 		entity.setUpdatedDate(dateTime);
 		entity.setCreatedBy(Long.valueOf(1162));

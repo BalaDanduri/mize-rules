@@ -12,6 +12,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
+import org.joda.time.DateTimeZone;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -294,7 +295,7 @@ public class ServiceBulletinTest extends JPATest {
 		audit = new ServiceBulletinAudit();
 		audit.setServiceBulletin(serviceBulletin);
 		audit.setStatusCode("DRAFT");
-		audit.setStatusDate(MizeDateTime.now());
+		audit.setStatusDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		audit.setStatusBy(779L);
 		audits = new ArrayList<ServiceBulletinAudit>();
 		audits.add(audit);
@@ -320,9 +321,9 @@ public class ServiceBulletinTest extends JPATest {
 		EntityComment entityComment = new EntityComment();
 		entityComment.setComments("Creating draft claim");
 		entityComment.setCreatedBy(779L);
-		entityComment.setCreatedDate(MizeDateTime.now());
+		entityComment.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		entityComment.setUpdatedBy(779L);
-		entityComment.setUpdatedDate(MizeDateTime.now());
+		entityComment.setUpdatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		entityComment.setCommentType("Internal");
 		comment.setEntityComment(entityComment);
 		comments = new ArrayList<ServiceBulletinComment>();
@@ -338,9 +339,9 @@ public class ServiceBulletinTest extends JPATest {
 		entityAttachment.setName("MachineInternal.jpg");
 		entityAttachment.setUrl("http://amazon.s3.com/image/MachineInternal.jpg");
 		entityAttachment.setCreatedBy(779L);
-		entityAttachment.setCreatedDate(MizeDateTime.now());
+		entityAttachment.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		entityAttachment.setUpdatedBy(779L);
-		entityAttachment.setUpdatedDate(MizeDateTime.now());
+		entityAttachment.setUpdatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		attachment.setEntityAttachment(entityAttachment);
 		attachments = new ArrayList<ServiceBulletinAttachment>();
 		attachments.add(attachment);

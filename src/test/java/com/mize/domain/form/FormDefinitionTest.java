@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
+import org.joda.time.DateTimeZone;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -21,6 +22,7 @@ import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;
 import com.mize.domain.util.MizeDate;
+import com.mize.domain.util.MizeDateTime;
 
 @ContextConfiguration(locations={"/test-context.xml"})
 public class FormDefinitionTest extends JPATest {
@@ -62,11 +64,11 @@ public class FormDefinitionTest extends JPATest {
 		formDef.setTenant(tenant);
 		formDef.setFormCode("FORM123");
 		formDef.setIsActive("Y");
-		formDef.setStartDate(MizeDate.now());
-		formDef.setEndDate(MizeDate.now().addYears(1));
+		formDef.setStartDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		formDef.setEndDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC).addYears(1));
 		formDef.setStatusCode("DRAFT");
-		formDef.setCreatedDate(Formatter.toMizeDateTime(MizeDate.now().getDateTime()));
-		formDef.setUpdatedDate(Formatter.toMizeDateTime(MizeDate.now().getDateTime()));
+		formDef.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		formDef.setUpdatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		formDef.setCreatedBy(Long.valueOf(779));
 		formDef.setUpdatedBy(Long.valueOf(779));
 		formDef.setFormDefinitionData("formDefinitionData");

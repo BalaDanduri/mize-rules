@@ -13,7 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
-import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,7 +27,6 @@ import com.mize.domain.product.ProductRegistration;
 import com.mize.domain.product.ProductSerial;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.MizeDate;
-import com.mize.domain.util.MizeDateTime;
 import com.mize.domain.util.MizeDateTimeUtils;
 
 @ContextConfiguration(locations={"/test-context.xml"})
@@ -163,8 +162,8 @@ public class ServiceEntityRequestTest extends JPATest {
 		serviceEntityRequest = new ServiceEntityRequest();
 		serviceEntityRequest.setRequestType("Repair");
 		serviceEntityRequest.setRepairSiteCode("RST100");
-		serviceEntityRequest.setRepairDate(MizeDate.now().minusDays(3));
-		serviceEntityRequest.setFailureDate(MizeDate.now().minusDays(4));
+		serviceEntityRequest.setRepairDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC).minusDays(3));
+		serviceEntityRequest.setFailureDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC).minusDays(4));
 		
 		serviceEntityRequest.setCauseCode("CUSC001");
 		serviceEntityRequest.setCauseDescription("Monitor problem");
@@ -238,7 +237,7 @@ public class ServiceEntityRequestTest extends JPATest {
 	private void createCoverage() {
 		coverage = new ServiceEntityRequestCoverage();
 		coverage.setServiceEntityRequest(serviceEntityRequest);
-		coverage.setCoverageEndDate(MizeDate.now().addYears(1));
+		coverage.setCoverageEndDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC).addYears(1));
 		coverage.setCoverageName("Standard 1 Year Warranty");
 	}
 	

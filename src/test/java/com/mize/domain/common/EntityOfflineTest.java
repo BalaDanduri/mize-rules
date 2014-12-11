@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
+import org.joda.time.DateTimeZone;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -97,8 +98,8 @@ public class EntityOfflineTest extends JPATest {
 		entity.setEntityId(543L);
 		entity.setEntityType("#INSP#" + System.currentTimeMillis());
 		entity.setEntityCode("InspectionForm");
-		entity.setCreatedDate(MizeDateTime.now());
-		entity.setUpdatedDate(MizeDateTime.now());
+		entity.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		entity.setUpdatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		entity.setUpdatedByUser("shivasheguri@m-ize.com");
 		entity.setCreatedByUser("shivasheguri@m-ize.com");
 		return entity;

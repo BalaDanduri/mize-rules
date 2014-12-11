@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 import javax.persistence.EntityManager;
 
+import org.joda.time.DateTimeZone;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -53,7 +54,7 @@ public class MizeJobInstanceTest extends JPATest {
 		jobInstance.setJob(mizeJob);
 		jobInstance.setInstanceCode("TestMizeJobInst001");
 		jobInstance.setInstanceName("Test Mize Job Inst 001");
-		jobInstance.setNextRunTime(MizeDateTime.now());
+		jobInstance.setNextRunTime(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		jobInstance.setJobStatus("RUNNING");
 		jobInstance.setIsActive("Y");
 		
@@ -105,8 +106,8 @@ public class MizeJobInstanceTest extends JPATest {
 	}
 	
 	private void populateAuditFields(MizeSceEntity entity) {
-		entity.setCreatedDate(MizeDateTime.now());
-		entity.setUpdatedDate(MizeDateTime.now());
+		entity.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		entity.setUpdatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		entity.setCreatedBy(Long.valueOf(779));
 		entity.setUpdatedBy(Long.valueOf(779));
 	}

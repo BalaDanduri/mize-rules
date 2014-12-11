@@ -11,6 +11,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
+import org.joda.time.DateTimeZone;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -110,9 +111,9 @@ public class ReasonTest extends JPATest {
 		reason.setIsActive("Y");
 		
 		reason.setCreatedBy(779L);
-		reason.setCreatedDate(MizeDateTime.now());
+		reason.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		reason.setUpdatedBy(779L);
-		reason.setUpdatedDate(MizeDateTime.now());
+		reason.setUpdatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		
 		ReasonIntl reasonIntl1 = new ReasonIntl(reason,"Support Request Cancelled",new Locale(1L));
 		ReasonIntl reasonIntl2 = new ReasonIntl(reason,"Support Request Cancelled CHN",new Locale(3L));

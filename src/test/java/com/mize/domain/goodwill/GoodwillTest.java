@@ -12,6 +12,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
+import org.joda.time.DateTimeZone;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -115,8 +116,8 @@ public class GoodwillTest extends JPATest {
 		gw.setCurrencyCode("USD");
 		gw.setReference("REF00191");
 		gw.setAuthorisedBy("REF01");
-		gw.setStartDate(MizeDate.now());
-		gw.setEndDate(MizeDate.now());
+		gw.setStartDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		gw.setEndDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		BusinessEntity requestor = new BusinessEntity();
 		requestor.setId(8822L);
 		requestor.setCode("SAMREF001");
@@ -145,7 +146,7 @@ public class GoodwillTest extends JPATest {
 		audit.setGoodwill(gw);
 		audit.setStatus("completed");
 		audit.setStatusBy(123L);
-		audit.setStatusDate(MizeDateTime.now());
+		audit.setStatusDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		auditList.add(audit);
 		gw.setAudits(auditList);
 		

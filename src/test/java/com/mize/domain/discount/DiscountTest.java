@@ -12,7 +12,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
@@ -23,6 +23,7 @@ import com.mize.domain.common.EntityComment;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;
 import com.mize.domain.util.MizeDate;
+import com.mize.domain.util.MizeDateTime;
 
 @ContextConfiguration(locations={"/test-context.xml"})
 public class DiscountTest  extends JPATest {
@@ -79,10 +80,10 @@ public class DiscountTest  extends JPATest {
 		discount.setMinimumQuantity(BigDecimal.valueOf(5));
 		discount.setMaximumQuantity(BigDecimal.valueOf(10));
 		discount.setOrderType("LINE");
-		discount.setCreatedDate(Formatter.toMizeDateTime(DateTime.now()));
-		discount.setUpdatedDate(Formatter.toMizeDateTime(DateTime.now()));
-		discount.setStartDate(MizeDate.now());
-		discount.setEndDate(MizeDate.now());
+		discount.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		discount.setUpdatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		discount.setStartDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		discount.setEndDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		discount.setCreatedBy(779l);
 		discount.setUpdatedBy(779l);
 		discount.setOrderBusinessEntity(businessEntity);
