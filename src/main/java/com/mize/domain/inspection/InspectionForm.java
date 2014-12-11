@@ -33,6 +33,7 @@ import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.form.FormInstance;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.MizeDate;
+import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Inheritance
@@ -65,6 +66,16 @@ public class InspectionForm extends MizeSceEntityAudit implements Comparable<Ins
 	private String syncStatus;
 	
 	private EntityOffline entityOffline;
+	
+	public InspectionForm() {
+		
+	}
+	
+	public InspectionForm(Long id,MizeDateTime updatedDate,String updateByUser) {
+		this.id = id;
+		this.updatedByUser = updateByUser;
+		this.updatedDate = updatedDate;
+	}
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
