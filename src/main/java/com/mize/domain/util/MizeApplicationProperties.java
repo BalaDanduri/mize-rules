@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.joda.time.DateTimeZone;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 public class MizeApplicationProperties {
 	
@@ -33,6 +35,10 @@ public class MizeApplicationProperties {
 	private String defaultDateTimeFormat;
 	private String defaultDateFormat;
 	private DateTimeZone dateTimeZone;
+	private String defaultDBDateTimeFormat;
+	private String defaultDBDateFormat;
+	public DateTimeFormatter  DB_DATE_TIME_FORMAT;
+	public DateTimeFormatter  DB_DATE_FORMAT;
 	
 	public static void loadPropertiesIfRequired(){
 		if(propMap == null || propMap.size() == 0){
@@ -196,6 +202,32 @@ public class MizeApplicationProperties {
 	
 	public DateTimeZone getDefaultDateTimeZone(){
 		return dateTimeZone;
+	}
+
+	public String getDefaultDBDateTimeFormat() {
+		return defaultDBDateTimeFormat;
+	}
+
+	public void setDefaultDBDateTimeFormat(String defaultDBDateTimeFormat) {
+		DB_DATE_TIME_FORMAT = DateTimeFormat.forPattern(defaultDBDateTimeFormat);
+		this.defaultDBDateTimeFormat = defaultDBDateTimeFormat;
+	}
+	
+	public DateTimeFormatter getDBDateTimeFormatter() {
+		return DB_DATE_TIME_FORMAT;
+	}
+	
+	public DateTimeFormatter getDBDateFormatter() {
+		return DB_DATE_FORMAT;
+	}
+
+	public String getDefaultDBDateFormat() {
+		return defaultDBDateFormat;
+	}
+
+	public void setDefaultDBDateFormat(String defaultDBDateFormat) {
+		DB_DATE_FORMAT = DateTimeFormat.forPattern(defaultDBDateFormat);
+		this.defaultDBDateFormat = defaultDBDateFormat;
 	}
 	
 }

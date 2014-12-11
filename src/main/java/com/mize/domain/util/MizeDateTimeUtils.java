@@ -1,14 +1,15 @@
 package com.mize.domain.util;
 
+import java.sql.Timestamp;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
-import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class MizeDateTimeUtils {
 	
-	public static final DateTimeFormatter  DB_DATE_TIME_FORMAT = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+	public static DateTimeFormatter  DB_DATE_TIME_FORMAT;
 	private static MizeApplicationProperties mizeApplicationProperties;
 	
 	@Autowired
@@ -73,7 +74,15 @@ public class MizeDateTimeUtils {
 	}
 	
 	public static String getDBDateTime(DateTime dateTime){
-		return (dateTime == null ? null : dateTime.toString(DB_DATE_TIME_FORMAT));
+		return (dateTime == null ? null : dateTime.toString(mizeApplicationProperties.getDBDateTimeFormatter()));
+	}
+	
+	public static String getDBDateTimeAsString(Timestamp timestamp){
+		return (timestamp == null ? null : new DateTime(timestamp).toString(mizeApplicationProperties.getDBDateTimeFormatter()));
+	}
+	
+	public static String getDBDateAsString(Timestamp timestamp){
+		return (timestamp == null ? null : new DateTime(timestamp).toString(mizeApplicationProperties.getDBDateFormatter()));
 	}
 
 }
