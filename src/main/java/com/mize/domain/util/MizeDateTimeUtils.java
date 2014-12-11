@@ -77,12 +77,12 @@ public class MizeDateTimeUtils {
 		return (dateTime == null ? null : dateTime.toString(mizeApplicationProperties.getDBDateTimeFormatter()));
 	}
 	
-	public static String getDBDateTimeAsString(Timestamp timestamp){
-		return (timestamp == null ? null : new DateTime(timestamp).toString(mizeApplicationProperties.getDBDateTimeFormatter()));
+	public static String getMizeDateTimeAsString(Timestamp timestamp){
+		return (timestamp == null ? null : new DateTime(timestamp).toString(mizeApplicationProperties.getAppDateTimeFormatter()));
 	}
 	
-	public static String getDBDateAsString(Timestamp timestamp){
-		return (timestamp == null ? null : new DateTime(timestamp).toString(mizeApplicationProperties.getDBDateFormatter()));
+	public static String getMizeDateAsString(Timestamp timestamp){
+		return (timestamp == null ? null : new DateTime(timestamp).toString(mizeApplicationProperties.getAppDateFormatter()));
 	}
 
 }

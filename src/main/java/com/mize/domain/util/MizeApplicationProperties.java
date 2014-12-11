@@ -39,6 +39,8 @@ public class MizeApplicationProperties {
 	private String defaultDBDateFormat;
 	public DateTimeFormatter  DB_DATE_TIME_FORMAT;
 	public DateTimeFormatter  DB_DATE_FORMAT;
+	public DateTimeFormatter  APP_DATE_TIME_FORMAT;
+	public DateTimeFormatter  APP_DATE_FORMAT;
 	
 	public static void loadPropertiesIfRequired(){
 		if(propMap == null || propMap.size() == 0){
@@ -189,6 +191,7 @@ public class MizeApplicationProperties {
 	}
 
 	public void setDefaultDateTimeFormat(String defaultDateTimeFormat) {
+		APP_DATE_TIME_FORMAT = DateTimeFormat.forPattern(defaultDateTimeFormat);
 		this.defaultDateTimeFormat = defaultDateTimeFormat;
 	}
 
@@ -197,6 +200,7 @@ public class MizeApplicationProperties {
 	}
 
 	public void setDefaultDateFormat(String defaultDateFormat) {
+		APP_DATE_FORMAT = DateTimeFormat.forPattern(defaultDateFormat);
 		this.defaultDateFormat = defaultDateFormat;
 	}
 	
@@ -228,6 +232,14 @@ public class MizeApplicationProperties {
 	public void setDefaultDBDateFormat(String defaultDBDateFormat) {
 		DB_DATE_FORMAT = DateTimeFormat.forPattern(defaultDBDateFormat);
 		this.defaultDBDateFormat = defaultDBDateFormat;
+	}
+	
+	public DateTimeFormatter getAppDateFormatter() {
+		return APP_DATE_FORMAT;
+	}
+
+	public DateTimeFormatter getAppDateTimeFormatter() {
+		return APP_DATE_TIME_FORMAT;
 	}
 	
 }

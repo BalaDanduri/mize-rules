@@ -68,7 +68,7 @@ public class MizeDateJPA implements UserType{
 		if (rs.wasNull()) {
 			return null;
 		}
-		String date =  MizeDateTimeUtils.getDBDateTimeAsString(timestamp);
+		String date =  MizeDateTimeUtils.getMizeDateAsString(timestamp);
         return MizeDate.getInstance(date, MizeDateTimeUtils.getDateFormat());
 	}
 
