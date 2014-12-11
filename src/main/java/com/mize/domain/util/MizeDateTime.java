@@ -98,8 +98,8 @@ public class MizeDateTime implements IMizeDate, Comparable<MizeDateTime>, Clonea
 	}
 	
 	protected MizeDateTime(long millis, DateTimeZone dateTimeZone) {
-		this.dateTime = new DateTime(millis,MizeDateTimeUtils.getDefaultDateTimeZone());		
-		this.dateTimeZone = MizeDateTimeUtils.getDefaultDateTimeZone();
+		this.dateTime = new DateTime(millis,dateTimeZone);	
+		this.dateTimeZone = dateTimeZone;
 		this.dateTimeFormat = MizeDateTimeUtils.getDateTimeFormat();
 		this.dateTimeValue = toString(this.dateTimeFormat,this.dateTimeZone);
 		this.isValid = true;
