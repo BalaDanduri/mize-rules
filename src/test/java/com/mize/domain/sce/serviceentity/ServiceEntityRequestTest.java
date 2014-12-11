@@ -28,6 +28,7 @@ import com.mize.domain.product.ProductSerial;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.MizeDate;
 import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.util.MizeDateTimeUtils;
 
 @ContextConfiguration(locations={"/test-context.xml"})
 public class ServiceEntityRequestTest extends JPATest {
@@ -172,7 +173,7 @@ public class ServiceEntityRequestTest extends JPATest {
 		serviceEntityRequest.setCorrectiveActionCode("CORC001");
 		serviceEntityRequest.setCorrectiveActionDescription("Turn off and on the monitor");
 		serviceEntityRequest.setCreatedBy(779L);
-		serviceEntityRequest.setCreatedDate(MizeDateTime.getInstance(DateTime.now()));
+		serviceEntityRequest.setCreatedDate(MizeDateTimeUtils.currentMizeDateTime());
 		serviceEntityRequest.setServiceEntity(serviceEntity);
 		
 		ServiceEntityAmount partAmount = new ServiceEntityAmount();

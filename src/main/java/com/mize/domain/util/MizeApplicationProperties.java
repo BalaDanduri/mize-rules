@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import org.joda.time.DateTimeZone;
+
 public class MizeApplicationProperties {
 	
 	private static final Map<String, String> propMap = new HashMap<String, String>();
@@ -30,6 +32,7 @@ public class MizeApplicationProperties {
 	private String defaultEndDate;
 	private String defaultDateTimeFormat;
 	private String defaultDateFormat;
+	private DateTimeZone dateTimeZone;
 	
 	public static void loadPropertiesIfRequired(){
 		if(propMap == null || propMap.size() == 0){
@@ -149,8 +152,9 @@ public class MizeApplicationProperties {
 		return defaultTimeZone;
 	}
 
-	public void setDefaultTimeZone(String defaultTimeZone) {
+	public void setDefaultTimeZone(String defaultTimeZone) {		
 		this.defaultTimeZone = defaultTimeZone;
+		this.dateTimeZone = DateTimeZone.forID(defaultTimeZone);
 	}
 
 	public String getDefaultEndDate() {
@@ -190,5 +194,8 @@ public class MizeApplicationProperties {
 		this.defaultDateFormat = defaultDateFormat;
 	}
 	
+	public DateTimeZone getDefaultDateTimeZone(){
+		return dateTimeZone;
+	}
 	
 }

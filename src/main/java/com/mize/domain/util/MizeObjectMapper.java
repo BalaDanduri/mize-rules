@@ -23,59 +23,47 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 public class MizeObjectMapper extends ObjectMapper {
 
 	private static final long serialVersionUID = -8050459397871080943L;
-	public static final String DATE_FORMAT = "MM-dd-yyyy";
-	public static final String DATE_TIME_FORMAT = "MM-dd-yyyy HH:mm:ss";
-	public static final String DATE_FORMAT1 = "dd-MM-yyyy HH:mm:ss";
-	public static final String DB_DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
-	public static final String DATE_AS_LONG = "LONG";
+	public static final String DATE_FORMAT = "MM-dd-yyyy"; // to support my-products application
+	public static final String DATE_TIME_FORMAT = "MM-dd-yyyy HH:mm:ss"; // to support my-products application
+	private static final String DATE_AS_LONG = "LONG";
 	protected String dateFormat;
 	protected String dateTimeFormat;
-	protected String timeZone;	
-	protected DateTimeZone dateTimeZone;
 	protected String userTimeZone;
 	protected DateTimeZone userDateTimeZone;
+	protected DateTimeFormatter dateTimeFormatter;
 	
 	public MizeObjectMapper() {
-		this(DATE_FORMAT,DATE_TIME_FORMAT);
+		this(DATE_FORMAT,DATE_TIME_FORMAT, null);// to support my-products application -- don't remove arguments
 	}	
 		
 	public static MizeObjectMapper getInstance() {
 		return new MizeObjectMapper();
 	}
-	
-	public static MizeObjectMapper getInstance(String dateFormat) {
-		return new MizeObjectMapper(dateFormat, null, null,null);
-	}
-	
+		
 	public static MizeObjectMapper getInstance(String dateFormat, String dateTimeFormat) {
-		return new MizeObjectMapper(dateFormat, dateTimeFormat, null,null);
+		return new MizeObjectMapper(dateFormat, dateTimeFormat, null);
 	}
 	
 	public static MizeObjectMapper getInstance(MizeDateFormat mizeDateFormat) {
 		if(mizeDateFormat != null){
-			return new MizeObjectMapper(mizeDateFormat.getDateFormat(),mizeDateFormat.getDateTimeFormat(),mizeDateFormat.getTimeZone(),mizeDateFormat.getUserTimeZone());
+			return new MizeObjectMapper(mizeDateFormat.getDateFormat(),mizeDateFormat.getDateTimeFormat(),mizeDateFormat.getUserTimeZone());
 		}else{
 			return new MizeObjectMapper();
 		}
 	}
-	
-	public MizeObjectMapper(String dateFormat, String dateTimeFormat) {
-		this(dateFormat, dateTimeFormat, null,null);
-	}
-	
-	public MizeObjectMapper(String dateFormat, String dateTimeFormat,String timeZone,String userTimeZone) {
+		
+	public MizeObjectMapper(String dateFormat, String dateTimeFormat, String userTimeZone) {
 		this.dateFormat = dateFormat;
 		this.dateTimeFormat = dateTimeFormat;	
 		if(this.dateFormat == null){
-			this.dateFormat = DATE_FORMAT;
+			this.dateFormat = MizeDateTimeUtils.getDateFormat();
 		}
 		if(this.dateTimeFormat == null){
-			this.dateTimeFormat = DATE_TIME_FORMAT;
+			this.dateTimeFormat = MizeDateTimeUtils.getDateTimeFormat();
 		}
-		this.timeZone = timeZone;
 		this.userTimeZone = userTimeZone;
-		this.dateTimeZone = getTimeZone();
-		this.userDateTimeZone = getUserTimeZone();
+		this.userDateTimeZone = MizeDateTimeUtils.getUserTimeZone(this.userTimeZone);
+		this.dateTimeFormatter = getDateTimeFormatter();
 		registerModule();
 	}
 	
@@ -89,37 +77,16 @@ public class MizeObjectMapper extends ObjectMapper {
 		module.addDeserializer(MizeDate.class, new MizeDateDeserializer());	
 		registerModule(module);
 	}
-
-	private DateTimeZone getTimeZone(){
-		DateTimeZone tz = null;
-		if(this.timeZone == null || this.timeZone.isEmpty()){
-			tz = DateTimeZone.UTC;
-		}else{
-			tz = DateTimeZone.forID(this.timeZone);			
-		}
-		tz = (tz == null ? DateTimeZone.UTC : tz);
-		return  tz;
-	}
-	
-	private DateTimeZone getUserTimeZone(){
-		DateTimeZone tz = null;
-		if(this.userTimeZone == null || this.userTimeZone.isEmpty()){
-			tz = DateTimeZone.getDefault();
-		}else{
-			tz = DateTimeZone.forID(this.userTimeZone);			
-		}
-		return  tz;
-	}
 	
 	public class MizeDateTimeDeserializer extends JsonDeserializer<MizeDateTime> {
 		@Override
 		public MizeDateTime deserialize(JsonParser parser, DeserializationContext context) throws IOException, JsonProcessingException {
 			JsonToken t = parser.getCurrentToken();
 			if (t == JsonToken.VALUE_NUMBER_INT) {
-				return new MizeDateTime(parser.getLongValue(), dateTimeZone);
+				return MizeDateTime.getInstance(parser.getLongValue());
 			}
 			if (isNotNull(parser.getText())) {
-				return new MizeDateTime(parser.getText().trim(),dateTimeFormat, dateTimeZone, userDateTimeZone);
+				return MizeDateTime.getInstance(parser.getText().trim(),dateTimeFormat, userDateTimeZone);
 			} else {
 				return null;
 			}
@@ -129,34 +96,25 @@ public class MizeObjectMapper extends ObjectMapper {
 	public class MizeDateDeserializer extends JsonDeserializer<MizeDate> {
 		@Override
 		public MizeDate deserialize(JsonParser parser, DeserializationContext context) throws IOException, JsonProcessingException {
-			JsonToken t = parser.getCurrentToken();
-			if (t == JsonToken.VALUE_NUMBER_INT) {
-				return new MizeDate(parser.getLongValue(), dateTimeZone);
+			if (parser.getCurrentToken() == JsonToken.VALUE_NUMBER_INT) {
+				return MizeDate.getInstance(parser.getLongValue());
 			}
 			if (isNotNull(parser.getText())) {
-				return new MizeDate(parser.getText().trim(),dateFormat, dateTimeZone);
+				return MizeDate.getInstance(parser.getText().trim(), dateFormat);
 			} else {
 				return null;
 			}
 		}
 	}
 	
-	private boolean isNotNull(String val){
-		if(val != null && val.trim().length() > 0){
-			return true;
-		}
-		return false;
-	}
-	
 	public class DateTimeDeserializer extends JsonDeserializer<DateTime> {
 		@Override
 		public DateTime deserialize(JsonParser parser,DeserializationContext context) throws IOException, JsonProcessingException {
-			JsonToken t = parser.getCurrentToken();
-			if (t == JsonToken.VALUE_NUMBER_INT) {
-				return new DateTime(parser.getLongValue(), dateTimeZone);
+			if (parser.getCurrentToken() == JsonToken.VALUE_NUMBER_INT) {
+				return new DateTime(parser.getLongValue(), DateTimeZone.getDefault());
 			}
 			if (isNotNull(parser.getText())) {
-				return getDateTimeFormatter().parseDateTime(parser.getText().trim());
+				return dateTimeFormatter.parseDateTime(parser.getText().trim());
 			} else {
 				return null;
 			}
@@ -167,7 +125,7 @@ public class MizeObjectMapper extends ObjectMapper {
 		@Override
 		public void serialize(MizeDateTime mizeDateTime, JsonGenerator gen, SerializerProvider provider) throws IOException, JsonProcessingException {
 			if(mizeDateTime != null){				
-				if (dateTimeFormat.equalsIgnoreCase(DATE_AS_LONG)) {
+				if (DATE_AS_LONG.equalsIgnoreCase(dateTimeFormat)) {
 					gen.writeNumber(mizeDateTime.getMillis());
 				} else {
 					if(mizeDateTime.isValid()){
@@ -184,11 +142,11 @@ public class MizeObjectMapper extends ObjectMapper {
 		@Override
 		public void serialize(MizeDate mizeDate, JsonGenerator gen, SerializerProvider provider) throws IOException,JsonProcessingException {
 			if(mizeDate != null){
-				if (dateFormat.equalsIgnoreCase(DATE_AS_LONG)) {
+				if (DATE_AS_LONG.equalsIgnoreCase(dateFormat)) {
 					gen.writeNumber(mizeDate.getMillis());
 				} else {
 					if(mizeDate.isValid()){
-						gen.writeString(mizeDate.toString(dateFormat));
+						gen.writeString(mizeDate.toString(dateFormat, null));
 					}else{
 						gen.writeString(mizeDate.getDateValue());
 					}
@@ -200,27 +158,22 @@ public class MizeObjectMapper extends ObjectMapper {
 	public class DateTimeSerializer extends JsonSerializer<DateTime> {
 		@Override
 		public void serialize(DateTime date, JsonGenerator gen, SerializerProvider provider) throws IOException, JsonProcessingException {
-			if (dateTimeFormat.equalsIgnoreCase(DATE_AS_LONG)) {
+			if (DATE_AS_LONG.equalsIgnoreCase(dateTimeFormat)) {
 				gen.writeNumber(date.getMillis());
 			} else {
-				gen.writeString(getDateTimeFormatter().print(date));
+				gen.writeString(dateTimeFormatter.print(date));
 			}
 		}
 	}
-	
-	public String getDateTimeFormat() {
-		return dateTimeFormat;
-	}
-
-	public String getDateFormat() {
-		return dateFormat;
-	}
-	
+		
 	private DateTimeFormatter getDateTimeFormatter() {
 		return DateTimeFormat.forPattern(this.dateTimeFormat);
 	}
 	
-	public DateTimeFormatter getDateFormatter() {
-		return DateTimeFormat.forPattern(this.dateFormat);
+	private boolean isNotNull(String val){
+		if(val != null && val.trim().length() > 0){
+			return true;
+		}
+		return false;
 	}
 }

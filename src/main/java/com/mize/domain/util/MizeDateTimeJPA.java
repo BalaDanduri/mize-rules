@@ -9,18 +9,9 @@ import java.sql.Types;
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SessionImplementor;
 import org.hibernate.usertype.UserType;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class MizeDateTimeJPA implements UserType{
-	
-	private static MizeApplicationProperties mizeApplicationProperties;
-	@Autowired
-	public void setMizeApplicationProperties(MizeApplicationProperties mizeApplicationProperties) {
-		MizeDateTimeJPA.mizeApplicationProperties = mizeApplicationProperties;
-	}
-	
+		
 	@Override
 	public Object assemble(Serializable arg0, Object arg1) throws HibernateException {
 		return arg0;
@@ -55,7 +46,6 @@ public class MizeDateTimeJPA implements UserType{
 	public boolean isMutable() {
 		return false;
 	}
-	
 
 	@Override
 	public Object replace(Object arg0, Object arg1, Object arg2) throws HibernateException {
@@ -78,16 +68,12 @@ public class MizeDateTimeJPA implements UserType{
 		if (rs.wasNull()) {
 			return null;
 		}
-		DateTimeZone dateTimeZone = DateTimeZone.forID(mizeApplicationProperties.getDefaultTimeZone());
-        DateTime dateTime = new DateTime(timestamp, dateTimeZone);
-        return MizeDateTime.getInstance(dateTime);
+        return MizeDateTime.getInstance(timestamp.getTime(),MizeDateTimeUtils.getDefaultDateTimeZone());
 	}
 
 	@Override
 	public void nullSafeSet(PreparedStatement st, Object value, int index,SessionImplementor session) throws HibernateException, SQLException {
-		st.setString(index,Formatter.getDBDateTime((MizeDateTime)value));
-		
+		st.setString(index,MizeDateTimeUtils.getDBDateTime((MizeDateTime)value));
 	}
-
 
 }
