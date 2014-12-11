@@ -11,23 +11,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
 
 @Entity
 @Table(name = "entity_offline")
-public class EntityOffline extends MizeEntity implements Comparable<EntityOffline> {
+public class EntityOffline extends MizeSceEntityAudit implements Comparable<EntityOffline> {
 
 	/**
 	 * 
@@ -105,56 +99,6 @@ public class EntityOffline extends MizeEntity implements Comparable<EntityOfflin
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore(value=false)
-	public void setCreatedDate(DateTime createdDate) {
-		this.createdDate = createdDate;
-	}
-	
-	@JsonIgnore(value=false)
-	public void setUpdatedBy(Long updatedBy) {
-		this.updatedBy = updatedBy;
-	}
- 
-	@JsonIgnore(value=false)
-	public void setCreatedBy(Long createdBy) {
-		this.createdBy = createdBy;
-	}
-
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore(value=false)
-	public void setUpdatedDate(DateTime updatedDate) {
-		this.updatedDate = updatedDate;
-	}
-	
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	@JsonIgnore(value=false)
-	@Column(name = "created_date",updatable = false)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
-	public DateTime getCreatedDate() {
-		return createdDate;
-	}
-
-	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	@Column(name = "updated_date")
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.DateTimeJPA")
-	public DateTime getUpdatedDate() {
-		return updatedDate;
-	}
-	
-	@JsonIgnore(value=false)
-	@Column(name = "created_by" , updatable=false)
-	public Long getCreatedBy() {
-		return createdBy;
-	}
-
 	
 	
 	@Override
