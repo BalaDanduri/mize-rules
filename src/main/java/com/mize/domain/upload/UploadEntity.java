@@ -42,6 +42,8 @@ public final class UploadEntity extends MizeSceEntity implements Comparable<Uplo
 	private Boolean isHistorical;
 	private BusinessEntity tenant;
 	
+	private String ccEmails;
+	
 	public enum Status{
 		IN_PROGRESS,COMPLETED;
 	}
@@ -295,5 +297,14 @@ public final class UploadEntity extends MizeSceEntity implements Comparable<Uplo
 
 	public Map<Integer, ProcessLog> getProcessLogMap() {
 		return processLogMap;
+	}
+
+	public String getCcEmails() {
+		return ccEmails;
+	}
+
+	public void setCcEmails(String ccEmails) {
+		this.ccEmails = ccEmails;
 	}	
+	
 }
