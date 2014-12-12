@@ -81,7 +81,9 @@
 		<property name="createdByUser" value="${app.createdByUser~~userName}"/>
 		<property name="defaultDateTimeFormat" value="${app.dateTimeFormat~~MM-dd-yyyy HH:mm:ss}"/>
 		<property name="defaultDateFormat" value="${app.dateFormat~~MM-dd-yyyy}"/>
-	</bean> 		 
+		<property name="defaultDBDateFormat" value="${app.db.dateFormat~~yyyy-MM-dd}"/>
+		<property name="defaultDBDateTimeFormat" value="${app.db.dateTimeFormat~~yyyy-MM-dd HH:mm:ss}"/>
+	</bean>		 
 	
 	<bean id="mizeDateTimeUtils" class="com.mize.domain.util.MizeDateTimeUtils"/>
 	

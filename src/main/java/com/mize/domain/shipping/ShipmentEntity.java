@@ -12,6 +12,9 @@ public class ShipmentEntity extends MizeSceEntity implements Comparable<Shipment
 	private String status;
 	private String paymentReference;
 	private String paymentMethod;
+	private String carrier;
+	private String method;
+	private String accountNumber;
 	private BusinessEntity businessEntity;
 	
 	public ShipmentEntity(){		
@@ -75,6 +78,30 @@ public class ShipmentEntity extends MizeSceEntity implements Comparable<Shipment
 		this.businessEntity = businessEntity;
 	}
 	
+	public String getCarrier() {
+		return carrier;
+	}
+
+	public void setCarrier(String carrier) {
+		this.carrier = carrier;
+	}
+
+	public String getMethod() {
+		return method;
+	}
+
+	public void setMethod(String method) {
+		this.method = method;
+	}
+
+	public String getAccountNumber() {
+		return accountNumber;
+	}
+
+	public void setAccountNumber(String accountNumber) {
+		this.accountNumber = accountNumber;
+	}
+
 	@Override
 	public String toString() {
 		return "ShipmentEntity [requestType=" + requestType + ", orderType="
