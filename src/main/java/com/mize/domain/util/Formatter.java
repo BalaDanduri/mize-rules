@@ -245,10 +245,14 @@ public final class Formatter {
 		return (dateTime == null ? null : dateTime.toString(DB_DATE_TIME_FORMAT));
 	}
 	
+	// user same method from MizeDateTimeUtils
+	@Deprecated
 	public static String getDBDateTime(MizeDateTime mizeDateTime){
 		return (mizeDateTime == null ? null : getDBDateTime(mizeDateTime.getDateTime()));
 	}
 	
+	// user same method from MizeDateTimeUtils
+	@Deprecated
 	public static String getDBDateTime(MizeDate mizeDate){
 		return (mizeDate == null ? null : getDBDateTime(mizeDate.getDateTime()));
 	}
@@ -1114,6 +1118,10 @@ public final class Formatter {
 	 }
 	 
 	 public static void main(String[] args) {
+		 		 
+		 DateTime dateTime = new DateTime(1418254945000l);
+		 DateTime dateTime1 = new DateTime(1418254945000l,DateTimeZone.forID("America/New_York"));
+		 System.out.println();
 	}
 	 
 	 public static final String generateRandomPassword() {
