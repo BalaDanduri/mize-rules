@@ -59,7 +59,7 @@ public class Catalog extends MizeSceEntityAudit implements Comparable<Catalog> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", unique = true, nullable = false, length = 10)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return super.id;
@@ -82,7 +82,7 @@ public class Catalog extends MizeSceEntityAudit implements Comparable<Catalog> {
 		this.tenant = tenant;
 	}
 
-	@Column(name = "catalog_code",  nullable = true, length = 30)
+	@Column(name = "catalog_code")
 	public String getCatalogCode() {
 		return catalogCode;
 	}
@@ -91,7 +91,7 @@ public class Catalog extends MizeSceEntityAudit implements Comparable<Catalog> {
 		this.catalogCode = catalogCode;
 	}
 
-	@Column(name = "catalog_type",  nullable = true, length = 100)
+	@Column(name = "catalog_type")
 	public String getCatalogType() {
 		return catalogType;
 	}
@@ -100,7 +100,7 @@ public class Catalog extends MizeSceEntityAudit implements Comparable<Catalog> {
 		this.catalogType = catalogType;
 	}
 
-	@Column(name = "is_active",  nullable = true, length = 1)
+	@Column(name = "is_active")
 	public String getIsActive() {
 		return isActive;
 	}
@@ -109,7 +109,7 @@ public class Catalog extends MizeSceEntityAudit implements Comparable<Catalog> {
 		this.isActive = isActive;
 	}
 
-	@Column(name = "catalog_name",  nullable = true, length = 250)
+	@Column(name = "catalog_name")
 	public String getCatalogName() {
 		return catalogName;
 	}

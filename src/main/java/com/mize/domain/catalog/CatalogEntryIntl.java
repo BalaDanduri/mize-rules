@@ -40,7 +40,7 @@ public class CatalogEntryIntl extends MizeSceEntityAudit implements Comparable<C
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return id;
@@ -62,7 +62,7 @@ public class CatalogEntryIntl extends MizeSceEntityAudit implements Comparable<C
 		this.catalogEntry = catalogEntry;
 	}
 	
-	@Column(name = "item_name", nullable = true, length = 100)
+	@Column(name = "item_name")
 	public String getItemName() {
 		return itemName;
 	}
@@ -71,7 +71,7 @@ public class CatalogEntryIntl extends MizeSceEntityAudit implements Comparable<C
 		this.itemName = itemName;
 	}
 	
-	@Column(name = "item_description", nullable = true, length = 500)
+	@Column(name = "item_description")
 	public String getItemDescription() {
 		return itemDescription;
 	}
@@ -95,8 +95,6 @@ public class CatalogEntryIntl extends MizeSceEntityAudit implements Comparable<C
 		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result
-				+ ((catalogEntry == null) ? 0 : catalogEntry.hashCode());
-		result = prime * result
 				+ ((itemDescription == null) ? 0 : itemDescription.hashCode());
 		result = prime * result
 				+ ((itemName == null) ? 0 : itemName.hashCode());
@@ -113,11 +111,6 @@ public class CatalogEntryIntl extends MizeSceEntityAudit implements Comparable<C
 		if (getClass() != obj.getClass())
 			return false;
 		CatalogEntryIntl other = (CatalogEntryIntl) obj;
-		if (catalogEntry == null) {
-			if (other.catalogEntry != null)
-				return false;
-		} else if (!catalogEntry.getId().equals(other.catalogEntry.getId()))
-			return false;
 		if (itemDescription == null) {
 			if (other.itemDescription != null)
 				return false;

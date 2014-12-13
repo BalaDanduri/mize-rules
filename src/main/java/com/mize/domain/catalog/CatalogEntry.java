@@ -55,7 +55,7 @@ public class CatalogEntry extends MizeSceEntityAudit implements Comparable<Catal
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", nullable = false, unique = true)
+	@Column(name = "id")
 	@Override
 	public Long getId() {		
 		return id;
@@ -66,13 +66,13 @@ public class CatalogEntry extends MizeSceEntityAudit implements Comparable<Catal
 		super.id = id;
 	}
 	
-	@Column(name = "item_code", length = 50, nullable = false)
+	@Column(name = "item_code")
 	public String getItemCode() {
 		return itemCode;
 	}
 	
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
-	@JoinColumn(name = "catalog_id", nullable = false)    
+	@JoinColumn(name = "catalog_id")    
 	@JsonBackReference(value="catlog")
 	public Catalog getCatalog() {
 		return catalog;
@@ -86,7 +86,7 @@ public class CatalogEntry extends MizeSceEntityAudit implements Comparable<Catal
 		this.itemCode = itemCode;
 	}
 	
-	@Column(name = "is_active", length = 1)
+	@Column(name = "is_active")
 	public String getIsActive() {
 		return isActive;
 	}
@@ -95,7 +95,7 @@ public class CatalogEntry extends MizeSceEntityAudit implements Comparable<Catal
 		this.isActive = isActive;
 	}		
 	
-	@Column(name = "is_default", length = 1)
+	@Column(name = "is_default")
 	public String getIsDefault() {
 		return isDefault;
 	}
@@ -104,7 +104,7 @@ public class CatalogEntry extends MizeSceEntityAudit implements Comparable<Catal
 		this.isDefault = isDefault;
 	}
 
-	@Column(name = "order_sequence", length = 20)
+	@Column(name = "order_sequence")
 	public Long getOrderSequence() {
 		return orderSequence;
 	}
@@ -130,7 +130,6 @@ public class CatalogEntry extends MizeSceEntityAudit implements Comparable<Catal
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime * result + ((catalog == null) ? 0 : catalog.hashCode());
 		result = prime
 				* result
 				+ ((catalogEntryIntl == null) ? 0 : catalogEntryIntl.hashCode());
@@ -154,11 +153,6 @@ public class CatalogEntry extends MizeSceEntityAudit implements Comparable<Catal
 		if (getClass() != obj.getClass())
 			return false;
 		CatalogEntry other = (CatalogEntry) obj;
-		if (catalog == null) {
-			if (other.catalog != null)
-				return false;
-		} else if (!catalog.getId().equals(other.catalog.getId()))
-			return false;
 		if (catalogEntryIntl == null) {
 			if (other.catalogEntryIntl != null)
 				return false;

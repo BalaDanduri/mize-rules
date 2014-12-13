@@ -150,7 +150,7 @@ public class AppMessage extends MizeSceEntityAudit implements Comparable<AppMess
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", unique = true, nullable = false)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return id;
