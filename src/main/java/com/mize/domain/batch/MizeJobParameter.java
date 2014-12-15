@@ -67,7 +67,7 @@ public class MizeJobParameter extends MizeSceEntityAudit implements Comparable<M
 		this.jobId = jobId;
 	}
 	
-	@Column(name = "instance_id",nullable = true)
+	@Column(name = "instance_id")
 	public Long getJobInstanceId() {
 		return jobInstanceId;
 	}
@@ -76,7 +76,7 @@ public class MizeJobParameter extends MizeSceEntityAudit implements Comparable<M
 		this.jobInstanceId = jobInstanceId;
 	}
 
-	@Column(name = "param_name", nullable = true, length = 50)
+	@Column(name = "param_name")
 	public String getParmName() {
 		return parmName;
 	}
@@ -85,7 +85,7 @@ public class MizeJobParameter extends MizeSceEntityAudit implements Comparable<M
 		this.parmName = parmName;
 	}
 	
-	@Column(name = "param_type", nullable = true, length = 50)
+	@Column(name = "param_type")
 	public String getParmType() {
 		return parmType;
 	}
@@ -94,7 +94,7 @@ public class MizeJobParameter extends MizeSceEntityAudit implements Comparable<M
 		this.parmType = parmType;
 	}
 	
-	@Column(name = "param_value", nullable = true, length = 50)
+	@Column(name = "param_value")
 	public String getParmValue() {
 		return parmValue;
 	}
@@ -105,14 +105,17 @@ public class MizeJobParameter extends MizeSceEntityAudit implements Comparable<M
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime * result + ((job == null) ? 0 : job.hashCode());
 		result = prime * result + ((jobId == null) ? 0 : jobId.hashCode());
-		result = prime * result + ((jobInstanceId == null) ? 0 : jobInstanceId.hashCode());
-		result = prime * result + ((parmName == null) ? 0 : parmName.hashCode());
-		result = prime * result + ((parmType == null) ? 0 : parmType.hashCode());
-		result = prime * result + ((parmValue == null) ? 0 : parmValue.hashCode());
+		result = prime * result
+				+ ((jobInstanceId == null) ? 0 : jobInstanceId.hashCode());
+		result = prime * result
+				+ ((parmName == null) ? 0 : parmName.hashCode());
+		result = prime * result
+				+ ((parmType == null) ? 0 : parmType.hashCode());
+		result = prime * result
+				+ ((parmValue == null) ? 0 : parmValue.hashCode());
 		return result;
 	}
 
@@ -125,11 +128,6 @@ public class MizeJobParameter extends MizeSceEntityAudit implements Comparable<M
 		if (getClass() != obj.getClass())
 			return false;
 		MizeJobParameter other = (MizeJobParameter) obj;
-		if (job == null) {
-			if (other.job != null)
-				return false;
-		} else if (!job.equals(other.job))
-			return false;
 		if (jobId == null) {
 			if (other.jobId != null)
 				return false;
@@ -160,9 +158,9 @@ public class MizeJobParameter extends MizeSceEntityAudit implements Comparable<M
 
 	@Override
 	public String toString() {
-		return "MizeJobParameter [jobId=" + jobId + ", jobInstanceId=" + jobInstanceId 
-				+ ", job=" + job + ", parmName=" + parmName + ", parmType=" + parmType 
-				+ ", parmValue=" + parmValue + ", id=" + id + "]";
+		return "MizeJobParameter [jobId=" + jobId + ", jobInstanceId="
+				+ jobInstanceId + ", parmName=" + parmName + ", parmType="
+				+ parmType + ", parmValue=" + parmValue + "]";
 	}
 
 	@Override

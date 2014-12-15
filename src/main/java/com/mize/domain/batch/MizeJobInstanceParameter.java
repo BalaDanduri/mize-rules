@@ -56,7 +56,7 @@ public class MizeJobInstanceParameter extends MizeSceEntityAudit implements Comp
 		this.jobInstance = jobInstance;
 	}
 
-	@Column(name = "job_id",nullable = false)
+	@Column(name = "job_id")
 	public Long getJobId() {
 		return jobId;
 	}
@@ -65,7 +65,7 @@ public class MizeJobInstanceParameter extends MizeSceEntityAudit implements Comp
 		this.jobId = jobId;
 	}
 
-	@Column(name = "param_name", nullable = true, length = 50)
+	@Column(name = "param_name")
 	public String getParmName() {
 		return parmName;
 	}
@@ -74,7 +74,7 @@ public class MizeJobInstanceParameter extends MizeSceEntityAudit implements Comp
 		this.parmName = parmName;
 	}
 	
-	@Column(name = "param_type", nullable = true, length = 50)
+	@Column(name = "param_type")
 	public String getParmType() {
 		return parmType;
 	}
@@ -83,7 +83,7 @@ public class MizeJobInstanceParameter extends MizeSceEntityAudit implements Comp
 		this.parmType = parmType;
 	}
 	
-	@Column(name = "param_value", nullable = true, length = 50)
+	@Column(name = "param_value")
 	public String getParmValue() {
 		return parmValue;
 	}
@@ -94,18 +94,22 @@ public class MizeJobInstanceParameter extends MizeSceEntityAudit implements Comp
 	
 	@Override
 	public String toString() {
-		return "MizeJobParameter [jobInstance=" + jobInstance + ", parmName=" + parmName 
-				+ ", parmType=" + parmType + ", parmValue=" + parmValue + ", id=" + id + "]";
+		return "MizeJobInstanceParameter [jobId=" + jobId + ", parmName="
+				+ parmName + ", parmType=" + parmType + ", parmValue="
+				+ parmValue + "]";
 	}
 	
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime * result + ((jobInstance == null) ? 0 : jobInstance.hashCode());
-		result = prime * result + ((parmName == null) ? 0 : parmName.hashCode());
-		result = prime * result + ((parmType == null) ? 0 : parmType.hashCode());
-		result = prime * result + ((parmValue == null) ? 0 : parmValue.hashCode());
+		result = prime * result + ((jobId == null) ? 0 : jobId.hashCode());
+		result = prime * result
+				+ ((parmName == null) ? 0 : parmName.hashCode());
+		result = prime * result
+				+ ((parmType == null) ? 0 : parmType.hashCode());
+		result = prime * result
+				+ ((parmValue == null) ? 0 : parmValue.hashCode());
 		return result;
 	}
 	
@@ -118,10 +122,10 @@ public class MizeJobInstanceParameter extends MizeSceEntityAudit implements Comp
 		if (getClass() != obj.getClass())
 			return false;
 		MizeJobInstanceParameter other = (MizeJobInstanceParameter) obj;
-		if (jobInstance == null) {
-			if (other.jobInstance != null)
+		if (jobId == null) {
+			if (other.jobId != null)
 				return false;
-		} else if (!jobInstance.equals(other.jobInstance))
+		} else if (!jobId.equals(other.jobId))
 			return false;
 		if (parmName == null) {
 			if (other.parmName != null)

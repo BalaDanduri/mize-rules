@@ -69,15 +69,17 @@ public class MizeJobSchedule extends MizeSceEntityAudit implements Comparable<Mi
 	
 	@Override
 	public String toString() {
-		return "MizeJobSchedule [jobInstance=" + jobInstance + ", expr=" + expr + ", id=" + id + "]";
+		return "MizeJobSchedule [instanceId=" + instanceId + ", expr=" + expr
+				+ "]";
 	}
 	
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result + ((expr == null) ? 0 : expr.hashCode());
-		result = prime * result + ((jobInstance == null) ? 0 : jobInstance.hashCode());
+		result = prime * result
+				+ ((instanceId == null) ? 0 : instanceId.hashCode());
 		return result;
 	}
 	
@@ -95,10 +97,10 @@ public class MizeJobSchedule extends MizeSceEntityAudit implements Comparable<Mi
 				return false;
 		} else if (!expr.equals(other.expr))
 			return false;
-		if (jobInstance == null) {
-			if (other.jobInstance != null)
+		if (instanceId == null) {
+			if (other.instanceId != null)
 				return false;
-		} else if (!jobInstance.equals(other.jobInstance))
+		} else if (!instanceId.equals(other.instanceId))
 			return false;
 		return true;
 	}
