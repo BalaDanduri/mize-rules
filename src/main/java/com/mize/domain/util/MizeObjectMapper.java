@@ -85,8 +85,9 @@ public class MizeObjectMapper extends ObjectMapper {
 			if (t == JsonToken.VALUE_NUMBER_INT) {
 				return MizeDateTime.getInstance(parser.getLongValue());
 			}
-			if (isNotNull(parser.getText())) {
-				return MizeDateTime.getInstance(parser.getText().trim(),dateTimeFormat, userDateTimeZone);
+			String value = parser.getText();
+			if (isNotNull(value)) {
+				return MizeDateTime.getInstance(value.trim(),dateTimeFormat, userDateTimeZone);
 			} else {
 				return null;
 			}
@@ -99,8 +100,9 @@ public class MizeObjectMapper extends ObjectMapper {
 			if (parser.getCurrentToken() == JsonToken.VALUE_NUMBER_INT) {
 				return MizeDate.getInstance(parser.getLongValue());
 			}
-			if (isNotNull(parser.getText())) {
-				return MizeDate.getInstance(parser.getText().trim(), dateFormat);
+			String value = parser.getText();
+			if (isNotNull(value)) {
+				return MizeDate.getInstance(value.trim(), dateFormat);
 			} else {
 				return null;
 			}
