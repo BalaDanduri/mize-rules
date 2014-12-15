@@ -219,7 +219,8 @@ public class LaborHour extends MizeSceEntityAudit implements Comparable<LaborHou
 				return false;
 		} else if (!type.equals(other.type))
 			return false;
-		return true;
+		
+		return isProxiesEquals(intls, other.intls);
 	}
 
 	@Override
