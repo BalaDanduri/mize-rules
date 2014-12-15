@@ -69,7 +69,7 @@ public class MizeJob extends MizeSceEntityAudit implements Comparable<MizeJob>{
 		this.id = id;
 	}
 	
-	@Column(name = "job_code",nullable = false,length = 50)
+	@Column(name = "job_code")
 	public String getJobCode() {
 		return jobCode;
 	}
@@ -78,7 +78,7 @@ public class MizeJob extends MizeSceEntityAudit implements Comparable<MizeJob>{
 		this.jobCode = jobCode;
 	}
 	
-	@Column(name = "job_name",nullable = true,length = 50)
+	@Column(name = "job_name")
 	public String getJobName() {
 		return jobName;
 	}
@@ -87,7 +87,7 @@ public class MizeJob extends MizeSceEntityAudit implements Comparable<MizeJob>{
 		this.jobName = jobName;
 	}
 	
-	@Column(name = "job_description",nullable = true,length = 150)
+	@Column(name = "job_description")
 	public String getJobDescription() {
 		return jobDescription;
 	}
@@ -114,7 +114,7 @@ public class MizeJob extends MizeSceEntityAudit implements Comparable<MizeJob>{
 		this.active = active;
 	}
 
-	@Column(name = "is_active",nullable = true,length = 1)
+	@Column(name = "is_active")
 	public String getIsActive() {
 		return isActive;
 	}

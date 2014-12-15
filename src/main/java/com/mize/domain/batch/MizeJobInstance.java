@@ -109,7 +109,7 @@ public class MizeJobInstance extends MizeSceEntityAudit implements Comparable<Mi
 		this.schedule = schedule;
 	}
 	
-	@Column(name = "job_status",nullable = true,length = 20)
+	@Column(name = "job_status")
 	public String getJobStatus() {
 		return jobStatus;
 	}
@@ -140,7 +140,7 @@ public class MizeJobInstance extends MizeSceEntityAudit implements Comparable<Mi
 		this.transientJob = transientJob;
 	}
 
-	@Column(name = "instance_code",nullable = false,length = 50)
+	@Column(name = "instance_code")
 	public String getInstanceCode() {
 		return instanceCode;
 	}
@@ -149,7 +149,7 @@ public class MizeJobInstance extends MizeSceEntityAudit implements Comparable<Mi
 		this.instanceCode = instanceCode;
 	}
 	
-	@Column(name = "instance_name",nullable = true,length = 150)
+	@Column(name = "instance_name")
 	public String getInstanceName() {
 		return instanceName;
 	}
@@ -177,7 +177,7 @@ public class MizeJobInstance extends MizeSceEntityAudit implements Comparable<Mi
 	}
 	
 	
-	@Column(name = "last_run",  nullable = true)
+	@Column(name = "last_run")
 	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	public MizeDateTime getLastRunTime() {
 		return lastRunTime;
@@ -187,7 +187,7 @@ public class MizeJobInstance extends MizeSceEntityAudit implements Comparable<Mi
 		this.lastRunTime = lastRunTime;
 	}
 
-	@Column(name = "next_run",  nullable = true)
+	@Column(name = "next_run")
 	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	public MizeDateTime getNextRunTime() {
 		return nextRunTime;
@@ -197,7 +197,7 @@ public class MizeJobInstance extends MizeSceEntityAudit implements Comparable<Mi
 		this.nextRunTime = nextRunTime;
 	}
 
-	@Column(name = "is_active",nullable = true,length = 1)
+	@Column(name = "is_active")
 	public String getIsActive() {
 		return isActive;
 	}
