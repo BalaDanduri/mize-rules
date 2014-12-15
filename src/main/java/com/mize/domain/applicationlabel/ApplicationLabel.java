@@ -59,7 +59,7 @@ public class ApplicationLabel extends MizeSceEntityAudit  implements Comparable<
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", unique = true, nullable = false)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return id;
@@ -91,7 +91,7 @@ public class ApplicationLabel extends MizeSceEntityAudit  implements Comparable<
 		this.code = code;
 	}
 
-	@Column(name = "is_active",  nullable = true, length = 1)
+	@Column(name = "is_active")
 	public String getIsActive() {
 		return isActive;
 	}
@@ -100,7 +100,7 @@ public class ApplicationLabel extends MizeSceEntityAudit  implements Comparable<
 		this.isActive = isActive;
 	}
 
-	@Column(name = "is_default",  nullable = true, length = 1)
+	@Column(name = "is_default")
 	public String getIsDefault() {
 		return isDefault;
 	}
@@ -121,7 +121,7 @@ public class ApplicationLabel extends MizeSceEntityAudit  implements Comparable<
 		this.intls = intls;
 	}
 
-	@Column(name = "label_category", nullable = true, length = 50)
+	@Column(name = "label_category")
 	public String getCategory() {
 		return category;
 	}
@@ -149,15 +149,11 @@ public class ApplicationLabel extends MizeSceEntityAudit  implements Comparable<
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime * result
-				+ ((isActive == null) ? 0 : isActive.hashCode());
-		result = prime * result
-				+ ((isDefault == null) ? 0 : isDefault.hashCode());
-		result = prime * result
-				+ ((code == null) ? 0 : code.hashCode());
-		result = prime * result
-				+ ((category == null) ? 0 : category.hashCode());
-		result = prime * result + ((tenant == null) ? 0 : tenant.hashCode());
+		result = prime * result + ((category == null) ? 0 : category.hashCode());
+		result = prime * result + ((code == null) ? 0 : code.hashCode());
+		result = prime * result + ((intls == null) ? 0 : intls.hashCode());
+		result = prime * result + ((isActive == null) ? 0 : isActive.hashCode());
+		result = prime * result + ((isDefault == null) ? 0 : isDefault.hashCode());
 		return result;
 	}
 
@@ -170,6 +166,21 @@ public class ApplicationLabel extends MizeSceEntityAudit  implements Comparable<
 		if (getClass() != obj.getClass())
 			return false;
 		ApplicationLabel other = (ApplicationLabel) obj;
+		if (category == null) {
+			if (other.category != null)
+				return false;
+		} else if (!category.equals(other.category))
+			return false;
+		if (code == null) {
+			if (other.code != null)
+				return false;
+		} else if (!code.equals(other.code))
+			return false;
+		if (intls == null) {
+			if (other.intls != null)
+				return false;
+		} else if (!intls.equals(other.intls))
+			return false;
 		if (isActive == null) {
 			if (other.isActive != null)
 				return false;
@@ -179,21 +190,6 @@ public class ApplicationLabel extends MizeSceEntityAudit  implements Comparable<
 			if (other.isDefault != null)
 				return false;
 		} else if (!isDefault.equals(other.isDefault))
-			return false;
-		if (code == null) {
-			if (other.code != null)
-				return false;
-		} else if (!code.equals(other.code))
-			return false;
-		if (category == null) {
-			if (other.category != null)
-				return false;
-		} else if (!category.equals(other.category))
-			return false;
-		if (tenant == null) {
-			if (other.tenant != null)
-				return false;
-		} else if (!tenant.equals(other.tenant))
 			return false;
 		return true;
 	}
