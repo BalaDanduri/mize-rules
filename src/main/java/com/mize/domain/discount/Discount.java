@@ -28,6 +28,7 @@ import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.MizeDate;
+import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name = "discount")
@@ -66,6 +67,46 @@ public class Discount extends MizeSceEntityAudit implements Comparable<Discount>
 	
 	public Discount() {
 		super();
+	}
+	
+	public Discount(Long id,String discountNumber, String orderType,
+			MizeDate startDate, MizeDate endDate,
+			BigDecimal lineDiscountAmount, BigDecimal lineDiscountPercent,
+			BigDecimal orderDiscountAmount, BigDecimal orderDiscountPercent,
+			BigDecimal orderMinimumLines, BigDecimal orderMaximumLines,
+			BigDecimal orderMinimumAmount, BigDecimal orderMaximumAmount,
+			BigDecimal shippingDiscountAmount,
+			BigDecimal shippingDiscountPercent,
+			BigDecimal shippingMinimumAmount, BigDecimal shippingMaximumAmount,
+			BigDecimal shippingMinimumLines, BigDecimal shippingMaximumLines,
+			String shippingMethod, BigDecimal minimumQuantity,
+			BigDecimal maximumQuantity, BigDecimal maximumAmountAllowed,MizeDateTime createdDate, MizeDateTime updatedDate) {
+		super();
+		this.id = id;
+		this.discountNumber = discountNumber;
+		this.orderType = orderType;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.lineDiscountAmount = lineDiscountAmount;
+		this.lineDiscountPercent = lineDiscountPercent;
+		this.orderDiscountAmount = orderDiscountAmount;
+		this.orderDiscountPercent = orderDiscountPercent;
+		this.orderMinimumLines = orderMinimumLines;
+		this.orderMaximumLines = orderMaximumLines;
+		this.orderMinimumAmount = orderMinimumAmount;
+		this.orderMaximumAmount = orderMaximumAmount;
+		this.shippingDiscountAmount = shippingDiscountAmount;
+		this.shippingDiscountPercent = shippingDiscountPercent;
+		this.shippingMinimumAmount = shippingMinimumAmount;
+		this.shippingMaximumAmount = shippingMaximumAmount;
+		this.shippingMinimumLines = shippingMinimumLines;
+		this.shippingMaximumLines = shippingMaximumLines;
+		this.shippingMethod = shippingMethod;
+		this.minimumQuantity = minimumQuantity;
+		this.maximumQuantity = maximumQuantity;
+		this.maximumAmountAllowed = maximumAmountAllowed;
+		this.createdDate = createdDate;
+		this.updatedDate = updatedDate;
 	}
 
 	@Id
