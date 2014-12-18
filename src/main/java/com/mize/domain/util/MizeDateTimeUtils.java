@@ -84,5 +84,9 @@ public class MizeDateTimeUtils {
 	public static String getMizeDateAsString(Timestamp timestamp){
 		return (timestamp == null ? null : new DateTime(timestamp).toString(mizeApplicationProperties.getAppDateFormatter()));
 	}
+	public static MizeDateTime getMizeDateTime(Timestamp timestamp){
+		String datetime =  MizeDateTimeUtils.getMizeDateTimeAsString(timestamp);
+		return MizeDateTime.getInstance(datetime,MizeDateTimeUtils.getDateTimeFormat(),MizeDateTimeUtils.getDefaultDateTimeZone());
+	}
 
 }
