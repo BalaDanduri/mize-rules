@@ -209,6 +209,10 @@ public class MizeDateTime implements IMizeDate, Comparable<MizeDateTime>, Clonea
 		return dateTime;
 	}
 	
+	public void setDateTime(DateTime dateTime) {
+		this.dateTime = dateTime;
+	}
+
 	public DateTimeZone getDateTimeZone() {
 		return dateTimeZone;
 	}

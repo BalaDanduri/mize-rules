@@ -25,6 +25,7 @@ import com.mize.domain.common.Country;
 import com.mize.domain.common.Gender;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;
+import com.mize.domain.util.MizeDateTime;
 
 @ContextConfiguration(locations = { "/test-context.xml" })
 public class UserTest extends JPATest {
@@ -105,7 +106,7 @@ public class UserTest extends JPATest {
 			userProfile.setFirstName(rs.getString("first_name"));
 			userProfile.setLastName(rs.getString("last_name"));
 			userProfile
-					.setBirthdate(Formatter.toMizeDateTime(Formatter.date2((rs.getDate("birth_day")))));
+					.setBirthdate(new MizeDateTime(Formatter.date2((rs.getDate("birth_day")))));
 			userProfile.setGender(Gender.getGender(rs.getString("gender")));
 
 			userProfile.setUser(user);

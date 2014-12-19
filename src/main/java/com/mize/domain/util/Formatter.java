@@ -278,10 +278,14 @@ public final class Formatter {
 		return dateTime;
 	}
 	
+	@Deprecated
 	public static MizeDateTime toEndMizeDateTime(MizeDateTime mizeDateTime){
 		DateTime  dateTime = toDateTime(mizeDateTime);
 		dateTime = toEndDateTime(dateTime);
-		return toMizeDateTime(dateTime);
+		if(dateTime != null){
+			mizeDateTime.setDateTime(dateTime);
+		}
+		return mizeDateTime;
 	}
 	
 	public static MizeDate toEndMizeDate(MizeDate mizeDate){
@@ -297,10 +301,14 @@ public final class Formatter {
 		return dateTime;
 	}
 	
+	@Deprecated
 	public static MizeDateTime toStartMizeDateTime(MizeDateTime mizeDateTime){
 		DateTime  dateTime = toDateTime(mizeDateTime);
 		dateTime = toStartDateTime(dateTime);
-		return toMizeDateTime(dateTime);
+		if(dateTime != null){
+			mizeDateTime.setDateTime(dateTime);
+		}
+		return mizeDateTime;
 	}
 	
 	public static MizeDate toStartMizeDate(MizeDate mizeDate){
@@ -1068,13 +1076,6 @@ public final class Formatter {
 		 return result.toString();
 	 }
 	 
-	 public static MizeDateTime toMizeDateTime(DateTime dateTime){
-		 if(dateTime != null){
-			 return new MizeDateTime(dateTime);
-		 }
-		 return null;
-	 }
-	 
 	 public static MizeDateTime toMizeDateTime(MizeDate dateTime){
 		 if(dateTime != null){
 			 return new MizeDateTime(dateTime.getDateTime());
@@ -1090,7 +1091,7 @@ public final class Formatter {
 	 }
 	 
 	 public static MizeDate convertMizeDateTimeToMizeDate(MizeDateTime mizeDateTime){
-		 MizeDate mizeDate = mizeDateTime != null ? new MizeDate(mizeDateTime.getDateTime()) :null;
+		 MizeDate mizeDate = mizeDateTime != null ? new MizeDate(new DateTime(mizeDateTime.getMillis())) :null;
 		 DateTime dateTime = mizeDate != null ? mizeDate.getDateTime() :null; 
 		 dateTime = dateTime!= null ? dateTime.withTime(0, 0, 0, 0):null;
 		 return dateTime!= null? new MizeDate(dateTime) :null;
@@ -1118,11 +1119,10 @@ public final class Formatter {
 	 }
 	 
 	 public static void main(String[] args) {
-		 		 
 		 DateTime dateTime = new DateTime(1418254945000l);
 		 DateTime dateTime1 = new DateTime(1418254945000l,DateTimeZone.forID("America/New_York"));
 		 System.out.println();
-	}
+	 }
 	 
 	 public static final String generateRandomPassword() {
 			final String ALPHA_NUMERIC = "12345690abcdefghijklmnopqrstuvwxyz";
