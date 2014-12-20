@@ -2,6 +2,7 @@ package com.mize.domain.entity;
 
 import com.mize.domain.auth.User;
 import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.MizeDateTime;
 
 public class EntityStatus extends MizeSceEntity {
 
@@ -14,6 +15,16 @@ public class EntityStatus extends MizeSceEntity {
 	
 	private User user;
 	
+	public EntityStatus(){
+		
+	}
+	
+	public EntityStatus(Long id,MizeDateTime updatedDate,String updatedByUser,String entityName){
+		this.id = id;
+		this.updatedDate = updatedDate;
+		this.updatedByUser = updatedByUser;
+		this.entityName = entityName;
+	}
 	
 	@Override
 	public Long getId() {
