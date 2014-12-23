@@ -122,66 +122,6 @@ public class BusinessEntityServiceLink extends MizeSceEntityAudit implements Com
 		this.radiusUom = radiusUom;
 	}
 
-	
-	/*@Column(name = "created_date",updatable=false)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@JsonInclude(Include.NON_DEFAULT)
-	public MizeDateTime getCreatedDate() {
-		return createdDate;
-	}
-
-	@Column(name = "updated_date")
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@JsonInclude(Include.NON_DEFAULT)
-	public MizeDateTime getUpdatedDate() {
-		return updatedDate;
-	}
-
-	public void setCreatedDate(MizeDateTime createdDate) {
-		super.createdDate = createdDate;
-	}
-
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		super.updatedDate = updatedDate;
-	}
-
-	@Column(name = "created_by" ,updatable=false)
-	public Long getCreatedBy() {
-		return createdBy;
-	}
-
-	@Column(name = "updated_by")
-	public Long getUpdatedBy() {
-		return updatedBy;
-	}
-
-	@JsonIgnore(value=false)
-	public void setUpdatedBy(Long updatedBy) {
-		this.updatedBy = updatedBy;
-	}
-
-	public void setCreatedBy(Long createdBy) {
-		this.createdBy = createdBy;
-	}
-	
-	@Column(name = "created_by_user", updatable=false)
-	public String getCreatedByUser() {
-		return createdByUser;
-	}
-	
-	@Column(name = "updated_by_user")
-	public String getUpdatedByUser() {
-		return updatedByUser;
-	}
-	
-	public void setCreatedByUser(String createdByUser) {
-		this.createdByUser = createdByUser;
-	}
-	
-	public void setUpdatedByUser(String updatedByUser) {
-		this.updatedByUser = updatedByUser;
-	}*/
-
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
