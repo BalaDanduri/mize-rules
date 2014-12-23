@@ -17,11 +17,11 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.Locale;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityAudit;
 
 @Entity
 @Table(name = "mize_date_format")
-public class MizeDateFormat extends MizeSceEntity implements Comparable<MizeDateFormat>{
+public class MizeDateFormat extends MizeSceEntityAudit implements Comparable<MizeDateFormat>{
 
 	private static final long serialVersionUID = 848292818865493379L;
 	private String dateFormat;
@@ -138,45 +138,6 @@ public class MizeDateFormat extends MizeSceEntity implements Comparable<MizeDate
 		this.isActive = isActive;
 	}
 	
-	public void setCreatedBy(Long createdBy) {
-		this.createdBy = createdBy;
-	}
-	
-	@Column(name = "created_by" , updatable=false)
-	public Long getCreatedBy() {
-		return createdBy;
-	}
-	
-	public void setUpdatedBy(Long updatedBy) {
-		this.updatedBy = updatedBy;
-	}
-
-	@Column(name = "updated_by")
-	public Long getUpdatedBy() {		
-		return super.getUpdatedBy();
-	}
-	
-	public void setCreatedDate(MizeDateTime createdDate) {
-		this.createdDate = createdDate;
-	}
-	
-	@Column(name = "created_date",updatable = false)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@JsonInclude(Include.NON_DEFAULT)
-	public MizeDateTime getCreatedDate() {
-		return createdDate;
-	}
-
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		this.updatedDate = updatedDate;
-	}
-	
-	@Column(name = "updated_date")
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	@JsonInclude(Include.NON_DEFAULT)
-	public MizeDateTime getUpdatedDate() {
-		return updatedDate;
-	}
 
 	@Transient
 	public String getUserTimeZone() {
