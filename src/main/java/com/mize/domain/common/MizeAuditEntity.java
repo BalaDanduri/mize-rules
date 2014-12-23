@@ -1,10 +1,16 @@
 package com.mize.domain.common;
 
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
+
 import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.mize.domain.util.MizeDateTime;
 
+@MappedSuperclass
 public abstract class MizeAuditEntity extends MizeSceEntity {
 
 	/**
@@ -12,6 +18,7 @@ public abstract class MizeAuditEntity extends MizeSceEntity {
 	 */
 	private static final long serialVersionUID = 4275213588169261386L;
 
+	protected String statusCode;
 	protected MizeDateTime statusDate;
 	protected Long statusBy;
 	protected String statusByUser;
@@ -20,8 +27,10 @@ public abstract class MizeAuditEntity extends MizeSceEntity {
 		super();
 	}
 
+	@Column(name = "status_date",updatable = false)
 	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
 	@JsonIgnore(false)
+	@JsonInclude(Include.NON_DEFAULT)
 	public MizeDateTime getStatusDate() {
 		return statusDate;
 	}
@@ -30,6 +39,7 @@ public abstract class MizeAuditEntity extends MizeSceEntity {
 		this.statusDate = statusDate;
 	}
 
+	@Column(name = "status_by")
 	public Long getStatusBy() {
 		return statusBy;
 	}
@@ -38,12 +48,24 @@ public abstract class MizeAuditEntity extends MizeSceEntity {
 		this.statusBy = statusBy;
 	}
 
+	
+	@Column(name = "status_by_user")
 	public String getStatusByUser() {
 		return statusByUser;
 	}
 
 	public void setStatusByUser(String statusByUser) {
 		this.statusByUser = statusByUser;
+	}
+	
+
+	@Column(name = "status_code")
+	public String getStatusCode() {
+		return statusCode;
+	}
+
+	public void setStatusCode(String statusCode) {
+		this.statusCode = statusCode;
 	}
 
 	@Override
@@ -52,6 +74,7 @@ public abstract class MizeAuditEntity extends MizeSceEntity {
 		int result = super.hashCode();
 		result = prime * result + ((statusBy == null) ? 0 : statusBy.hashCode());
 		result = prime * result + ((statusByUser == null) ? 0 : statusByUser.hashCode());
+		result = prime * result + ((statusCode == null) ? 0 : statusCode.hashCode());
 		result = prime * result + ((statusDate == null) ? 0 : statusDate.hashCode());
 		return result;
 	}
@@ -75,6 +98,11 @@ public abstract class MizeAuditEntity extends MizeSceEntity {
 				return false;
 		} else if (!statusByUser.equals(other.statusByUser))
 			return false;
+		if (statusCode == null) {
+			if (other.statusCode != null)
+				return false;
+		} else if (!statusCode.equals(other.statusCode))
+			return false;
 		if (statusDate == null) {
 			if (other.statusDate != null)
 				return false;
@@ -82,10 +110,11 @@ public abstract class MizeAuditEntity extends MizeSceEntity {
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
-		return "MizeAuditEntity [statusDate=" + statusDate + ", statusBy=" + statusBy + ", statusByUser=" + statusByUser + "]";
+		return "MizeAuditEntity [statusCode=" + statusCode + ", statusDate=" + statusDate + ", statusBy=" + statusBy
+				+ ", statusByUser=" + statusByUser + "]";
 	}
-
+	
 }

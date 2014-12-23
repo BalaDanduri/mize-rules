@@ -85,7 +85,7 @@ public class PurchaseOrder extends MizeSceEntityAudit implements Comparable<Purc
 	@Transient
 	private String submittedBy;
 	@Transient
-	private MizeDate submittedDate;
+	private MizeDateTime submittedDate;
 	@Transient
 	private String imageURL;
 	@Transient
@@ -488,17 +488,17 @@ public class PurchaseOrder extends MizeSceEntityAudit implements Comparable<Purc
 	public void setSubmittedBy(String submittedBy) {
 		this.submittedBy = submittedBy;
 	}
-
+	
 	@Transient
     @JsonInclude(Include.NON_NULL)
-	public MizeDate getSubmittedDate() {
+	public MizeDateTime getSubmittedDate() {
 		return submittedDate;
 	}
-	
-	public void setSubmittedDate(MizeDate submittedDate) {
+
+	public void setSubmittedDate(MizeDateTime submittedDate) {
 		this.submittedDate = submittedDate;
 	}
-	
+
 	@Transient
 	public String getImageURL() {
 		return imageURL;

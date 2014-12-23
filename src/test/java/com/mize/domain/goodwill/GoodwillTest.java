@@ -144,7 +144,7 @@ public class GoodwillTest extends JPATest {
 		List<GoodwillAudit> auditList = new ArrayList<GoodwillAudit>();
 		GoodwillAudit audit = new GoodwillAudit();
 		audit.setGoodwill(gw);
-		audit.setStatus("completed");
+		audit.setStatusCode("completed");
 		audit.setStatusBy(123L);
 		audit.setStatusDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		auditList.add(audit);

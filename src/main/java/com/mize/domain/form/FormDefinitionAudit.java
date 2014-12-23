@@ -10,12 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Type;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.mize.domain.common.MizeAuditEntity;
 import com.mize.domain.util.MizeDateTime;
 
@@ -26,8 +21,6 @@ public class FormDefinitionAudit extends MizeAuditEntity {
 	private static final long serialVersionUID = 8404321187371760846L;
 	
 	private FormDefinition formDefinition;
-	
-	private String statusCode;
 	
 	public FormDefinitionAudit() {
 		super();
@@ -65,79 +58,6 @@ public class FormDefinitionAudit extends MizeAuditEntity {
 
 	public void setFormDefinition(FormDefinition formDefinition) {
 		this.formDefinition = formDefinition;
-	}
-	
-	@Column(name = "status_code", nullable = true, length = 50)
-	public String getStatusCode() {
-		return statusCode;
-	}
-
-	public void setStatusCode(String statusCode) {
-		this.statusCode = statusCode;
-	}
-	
-	
-	@Override
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	@Column(name = "status_date")
-	@JsonIgnore(value = false)
-	@JsonInclude(Include.NON_DEFAULT)
-	public MizeDateTime getStatusDate() {
-		return statusDate;
-	}
-
-	public void setStatusDate(MizeDateTime statusDate) {
-		this.statusDate = statusDate;
-	}
-
-	@Column(name = "status_by", nullable = true, length = 20)
-	@Override
-	public Long getStatusBy() {
-		return statusBy;
-	}
-
-	public void setStatusBy(Long statusBy) {
-		this.statusBy = statusBy;
-	}
-
-	@Column(name = "status_by_user", nullable = true, length = 250)
-	@Override
-	public String getStatusByUser() {
-		return statusByUser;
-	}
-
-	public void setStatusByUser(String statusByUser) {
-		this.statusByUser = statusByUser;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = PRIME;
-		int result = super.hashCode();
-		result = prime * result + ((statusCode == null) ? 0 : statusCode.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		FormDefinitionAudit other = (FormDefinitionAudit) obj;
-		if (statusCode == null) {
-			if (other.statusCode != null)
-				return false;
-		} else if (!statusCode.equals(other.statusCode))
-			return false;
-		return true;
-	}
-	
-	@Override
-	public String toString() {
-		return "FormDefinitionAudit [statusCode=" + statusCode + "]";
 	}
 
 }
