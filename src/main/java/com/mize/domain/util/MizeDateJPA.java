@@ -69,12 +69,14 @@ public class MizeDateJPA implements UserType{
 			return null;
 		}
 		String date =  MizeDateTimeUtils.getMizeDateAsString(timestamp);
-        return MizeDate.getInstance(date, MizeDateTimeUtils.getDateFormat());
+		MizeDate mizeDate = MizeDate.getInstance(date, MizeDateTimeUtils.getDateFormat());
+		return mizeDate;
 	}
 
 	@Override
 	public void nullSafeSet(PreparedStatement st, Object value, int index, SessionImplementor session) throws HibernateException, SQLException {
-		st.setString(index,MizeDateTimeUtils.getDBDateTime((MizeDate)value));
+		String dateValue = MizeDateTimeUtils.getDBDateTime((MizeDate)value);
+		st.setString(index, dateValue);
 	}
 
 }

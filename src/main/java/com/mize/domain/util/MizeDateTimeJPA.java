@@ -69,12 +69,14 @@ public class MizeDateTimeJPA implements UserType{
 			return null;
 		}
 		String datetime =  MizeDateTimeUtils.getMizeDateTimeAsString(timestamp);
-		return MizeDateTime.getInstance(datetime,MizeDateTimeUtils.getDateTimeFormat(),MizeDateTimeUtils.getDefaultDateTimeZone());
+		MizeDateTime mizeDateTime = MizeDateTime.getInstance(datetime,MizeDateTimeUtils.getDateTimeFormat(),MizeDateTimeUtils.getDefaultDateTimeZone());
+		return mizeDateTime;
 	}
 
 	@Override
 	public void nullSafeSet(PreparedStatement st, Object value, int index,SessionImplementor session) throws HibernateException, SQLException {
-		st.setString(index,MizeDateTimeUtils.getDBDateTime((MizeDateTime)value));
+		String dateTimeValue = MizeDateTimeUtils.getDBDateTime((MizeDateTime)value);
+		st.setString(index, dateTimeValue);
 	}
 
 }
