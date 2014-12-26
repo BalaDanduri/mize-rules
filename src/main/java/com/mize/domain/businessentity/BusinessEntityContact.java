@@ -34,6 +34,7 @@ public class BusinessEntityContact extends MizeSceEntity implements Comparable<B
 	private static final long serialVersionUID = -1908157637318196738L;
 	private BusinessEntity businessEntity;
 	private EntityContact entityContact;
+	private String certificationInfo;
 
 	public BusinessEntityContact(){
 		super();
@@ -76,11 +77,24 @@ public class BusinessEntityContact extends MizeSceEntity implements Comparable<B
 	public void setEntityContact(EntityContact entityContact) {
 		this.entityContact = entityContact;
 	}
+		
+	@Column(name = "crtfctn_info")
+	public String getCertificationInfo() {
+		return certificationInfo;
+	}
+
+	public void setCertificationInfo(String certificationInfo) {
+		this.certificationInfo = certificationInfo;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
+		result = prime
+				* result
+				+ ((certificationInfo == null) ? 0 : certificationInfo
+						.hashCode());
 		result = prime * result
 				+ ((entityContact == null) ? 0 : entityContact.hashCode());
 		return result;
@@ -95,6 +109,11 @@ public class BusinessEntityContact extends MizeSceEntity implements Comparable<B
 		if (getClass() != obj.getClass())
 			return false;
 		BusinessEntityContact other = (BusinessEntityContact) obj;
+		if (certificationInfo == null) {
+			if (other.certificationInfo != null)
+				return false;
+		} else if (!certificationInfo.equals(other.certificationInfo))
+			return false;
 		if (entityContact == null) {
 			if (other.entityContact != null)
 				return false;
@@ -106,7 +125,7 @@ public class BusinessEntityContact extends MizeSceEntity implements Comparable<B
 	@Override
 	public String toString() {
 		return "BusinessEntityContact [entityContact=" + entityContact
-				+ ", id=" + id + "]";
+				+ ", certificationInfo=" + certificationInfo + "]";
 	}
 
 	@Override

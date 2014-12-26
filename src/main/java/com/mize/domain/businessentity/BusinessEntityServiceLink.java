@@ -1,5 +1,4 @@
 package com.mize.domain.businessentity;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,13 +9,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.brand.Brand;
+import com.mize.domain.common.Country;
 import com.mize.domain.common.MizeSceEntityAudit;
+import com.mize.domain.common.State;
 import com.mize.domain.product.Product;
 import com.mize.domain.product.ProductCategory;
 import com.mize.domain.util.JPASerializer;
@@ -31,13 +31,19 @@ public class BusinessEntityServiceLink extends MizeSceEntityAudit implements Com
 	private Product product;
 	private Long radius;
 	private String radiusUom;
+	private String geoType;
+	private String geoValue;
+	private String serviceArea;
+	private State state;
+	private Country country;
 
 	public BusinessEntityServiceLink(){
 	}
 	
 	public BusinessEntityServiceLink(BusinessEntity businessEntity,
 			Brand brand, ProductCategory productCategory, Product product,
-			Long radius, String radiusUom) {
+			Long radius, String radiusUom, String geoType, String geoValue,
+			String serviceArea, State state, Country country) {
 		super();
 		this.businessEntity = businessEntity;
 		this.brand = brand;
@@ -45,6 +51,11 @@ public class BusinessEntityServiceLink extends MizeSceEntityAudit implements Com
 		this.product = product;
 		this.radius = radius;
 		this.radiusUom = radiusUom;
+		this.geoType = geoType;
+		this.geoValue = geoValue;
+		this.serviceArea = serviceArea;
+		this.state = state;
+		this.country = country;
 	}
 	
 	@Id
@@ -97,6 +108,33 @@ public class BusinessEntityServiceLink extends MizeSceEntityAudit implements Com
 	public String getRadiusUom() {
 		return radiusUom;
 	}
+	
+	@Column(name = "geo_type")
+	public String getGeoType() {
+		return geoType;
+	}
+	
+	@Column(name = "geo_value")
+	public String getGeoValue() {
+		return geoValue;
+	}
+	
+	@Column(name = "srvc_area")
+	public String getServiceArea() {
+		return serviceArea;
+	}
+	
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "country_id")
+	public Country getCountry() {
+		return country;
+	}
+	
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "state_id")
+	public State getState() {
+		return state;
+	}
 
 	public void setBusinessEntity(BusinessEntity businessEntity) {
 		this.businessEntity = businessEntity;
@@ -121,18 +159,46 @@ public class BusinessEntityServiceLink extends MizeSceEntityAudit implements Com
 	public void setRadiusUom(String radiusUom) {
 		this.radiusUom = radiusUom;
 	}
+	
+	public void setGeoType(String geoType) {
+		this.geoType = geoType;
+	}
+	
+	public void setGeoValue(String geoValue) {
+		this.geoValue = geoValue;
+	}
+	
+	public void setServiceArea(String serviceArea) {
+		this.serviceArea = serviceArea;
+	}
+	
+	public void setState(State state) {
+		this.state = state;
+	}
+	
+	public void setCountry(Country country) {
+		this.country = country;
+	}
+	
 
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result + ((brand == null) ? 0 : brand.hashCode());
+		result = prime * result + ((country == null) ? 0 : country.hashCode());
+		result = prime * result + ((geoType == null) ? 0 : geoType.hashCode());
+		result = prime * result
+				+ ((geoValue == null) ? 0 : geoValue.hashCode());
 		result = prime * result + ((product == null) ? 0 : product.hashCode());
 		result = prime * result
 				+ ((productCategory == null) ? 0 : productCategory.hashCode());
 		result = prime * result + ((radius == null) ? 0 : radius.hashCode());
 		result = prime * result
 				+ ((radiusUom == null) ? 0 : radiusUom.hashCode());
+		result = prime * result
+				+ ((serviceArea == null) ? 0 : serviceArea.hashCode());
+		result = prime * result + ((state == null) ? 0 : state.hashCode());
 		return result;
 	}
 
@@ -149,6 +215,21 @@ public class BusinessEntityServiceLink extends MizeSceEntityAudit implements Com
 			if (other.brand != null)
 				return false;
 		} else if (!brand.equals(other.brand))
+			return false;
+		if (country == null) {
+			if (other.country != null)
+				return false;
+		} else if (!country.equals(other.country))
+			return false;
+		if (geoType == null) {
+			if (other.geoType != null)
+				return false;
+		} else if (!geoType.equals(other.geoType))
+			return false;
+		if (geoValue == null) {
+			if (other.geoValue != null)
+				return false;
+		} else if (!geoValue.equals(other.geoValue))
 			return false;
 		if (product == null) {
 			if (other.product != null)
@@ -170,15 +251,27 @@ public class BusinessEntityServiceLink extends MizeSceEntityAudit implements Com
 				return false;
 		} else if (!radiusUom.equals(other.radiusUom))
 			return false;
+		if (serviceArea == null) {
+			if (other.serviceArea != null)
+				return false;
+		} else if (!serviceArea.equals(other.serviceArea))
+			return false;
+		if (state == null) {
+			if (other.state != null)
+				return false;
+		} else if (!state.equals(other.state))
+			return false;
 		return true;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "BusinessEntityServiceLink [brand=" + brand
 				+ ", productCategory=" + productCategory + ", product="
 				+ product + ", radius=" + radius + ", radiusUom=" + radiusUom
-				+ ", id=" + id + "]";
+				+ ", geoType=" + geoType + ", geoValue=" + geoValue
+				+ ", serviceArea=" + serviceArea + ", state=" + state
+				+ ", country=" + country + "]";
 	}
 
 	@Override

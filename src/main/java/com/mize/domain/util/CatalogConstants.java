@@ -109,6 +109,7 @@ public abstract class CatalogConstants implements Serializable{
 	
 	public static final String ENTITY_SOURCE = "EntitySource";
 	public static final String INIT_DATA_EXPORT_TYPE = "InitDataExportType";
+	public static final String SERVICE_AREA_TYPE = "ServiceAreaType";
 	
 	
 }
