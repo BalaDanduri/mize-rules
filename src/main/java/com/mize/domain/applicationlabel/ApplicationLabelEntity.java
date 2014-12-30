@@ -4,17 +4,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
 
 public class ApplicationLabelEntity extends MizeSceEntity implements Serializable {
 
 	private static final long serialVersionUID = -3154049662206787600L;
+
 	private String code;
 	private String isActive;
 	private String isDefault;
@@ -24,12 +21,14 @@ public class ApplicationLabelEntity extends MizeSceEntity implements Serializabl
 	private List<ApplicationLabel> applicationLabels;
 	private BusinessEntity tenant;
 	private User user;
+	private String lastAccessedTime;
 
 	public ApplicationLabelEntity() {
 		super();
 		applicationLabels = new ArrayList<ApplicationLabel>();
 	}
 	
+	@Override
 	public Long getId() {
 		return id;
 	}
@@ -110,28 +109,25 @@ public class ApplicationLabelEntity extends MizeSceEntity implements Serializabl
 		this.user = user;
 	}
 
-	@Override
-	@JsonIgnore(false)
-	@JsonInclude(Include.NON_DEFAULT)
-	public MizeDateTime getUpdatedDate() {
-		return updatedDate;
+	public String getLastAccessedTime() {
+		return lastAccessedTime;
 	}
 
-	@Override
-	@JsonIgnore(false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		this.updatedDate = updatedDate;
+	public void setLastAccessedTime(String lastAccessedTime) {
+		this.lastAccessedTime = lastAccessedTime;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = super.hashCode();
+		int result = 1;
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result + ((countryCode == null) ? 0 : countryCode.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((isActive == null) ? 0 : isActive.hashCode());
 		result = prime * result + ((isDefault == null) ? 0 : isDefault.hashCode());
 		result = prime * result + ((languageCode == null) ? 0 : languageCode.hashCode());
+		result = prime * result + ((lastAccessedTime == null) ? 0 : lastAccessedTime.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
@@ -140,7 +136,7 @@ public class ApplicationLabelEntity extends MizeSceEntity implements Serializabl
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!super.equals(obj))
+		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -154,6 +150,11 @@ public class ApplicationLabelEntity extends MizeSceEntity implements Serializabl
 			if (other.countryCode != null)
 				return false;
 		} else if (!countryCode.equals(other.countryCode))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		if (isActive == null) {
 			if (other.isActive != null)
@@ -170,6 +171,11 @@ public class ApplicationLabelEntity extends MizeSceEntity implements Serializabl
 				return false;
 		} else if (!languageCode.equals(other.languageCode))
 			return false;
+		if (lastAccessedTime == null) {
+			if (other.lastAccessedTime != null)
+				return false;
+		} else if (!lastAccessedTime.equals(other.lastAccessedTime))
+			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
@@ -180,8 +186,8 @@ public class ApplicationLabelEntity extends MizeSceEntity implements Serializabl
 
 	@Override
 	public String toString() {
-		return "ApplicationLabelEntity [code=" + code + ", isActive=" + isActive + ", isDefault=" + isDefault 
-				+ ", name=" + name + ", languageCode=" + languageCode + ", countryCode=" + countryCode + "]";
+		return "ApplicationLabelEntity [id=" + id + ", code=" + code + ", isActive=" + isActive + ", isDefault=" + isDefault + ", name=" + name 
+				+ ", languageCode=" + languageCode + ", countryCode=" + countryCode + ", lastAccessedTime=" + lastAccessedTime + "]";
 	}
 	
 }

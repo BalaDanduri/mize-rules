@@ -4,17 +4,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
 
 public class AppMessageEntity extends MizeSceEntity implements Serializable {
 
 	private static final long serialVersionUID = 16153638967617947L;
+	
 	private String code;
 	private String msgType;
 	private Integer severity;
@@ -23,6 +20,7 @@ public class AppMessageEntity extends MizeSceEntity implements Serializable {
 	private String shortDesc;
 	private String languageCode;
     private String countryCode;
+    private String lastAccessedTime;
 	private List<AppMessage> appMessages;
 	private BusinessEntity tenant;
 	private User user;
@@ -37,6 +35,7 @@ public class AppMessageEntity extends MizeSceEntity implements Serializable {
 		this.isExists = isExists;
 	}
 
+	@Override
 	public Long getId() {
 		return id;
 	}
@@ -133,28 +132,25 @@ public class AppMessageEntity extends MizeSceEntity implements Serializable {
 		this.countryCode = countryCode;
 	}
 
-	@Override
-	@JsonIgnore(false)
-	@JsonInclude(Include.NON_DEFAULT)
-	public MizeDateTime getUpdatedDate() {
-		return updatedDate;
+	public String getLastAccessedTime() {
+		return lastAccessedTime;
 	}
 
-	@Override
-	@JsonIgnore(false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		this.updatedDate = updatedDate;
+	public void setLastAccessedTime(String lastAccessedTime) {
+		this.lastAccessedTime = lastAccessedTime;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = super.hashCode();
+		int result = 1;
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result + ((countryCode == null) ? 0 : countryCode.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((isActive == null) ? 0 : isActive.hashCode());
 		result = prime * result + (isExists ? 1231 : 1237);
 		result = prime * result + ((languageCode == null) ? 0 : languageCode.hashCode());
+		result = prime * result + ((lastAccessedTime == null) ? 0 : lastAccessedTime.hashCode());
 		result = prime * result + ((msgType == null) ? 0 : msgType.hashCode());
 		result = prime * result + ((severity == null) ? 0 : severity.hashCode());
 		result = prime * result + ((shortDesc == null) ? 0 : shortDesc.hashCode());
@@ -165,7 +161,7 @@ public class AppMessageEntity extends MizeSceEntity implements Serializable {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (!super.equals(obj))
+		if (obj == null)
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -180,6 +176,11 @@ public class AppMessageEntity extends MizeSceEntity implements Serializable {
 				return false;
 		} else if (!countryCode.equals(other.countryCode))
 			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
 		if (isActive == null) {
 			if (other.isActive != null)
 				return false;
@@ -191,6 +192,11 @@ public class AppMessageEntity extends MizeSceEntity implements Serializable {
 			if (other.languageCode != null)
 				return false;
 		} else if (!languageCode.equals(other.languageCode))
+			return false;
+		if (lastAccessedTime == null) {
+			if (other.lastAccessedTime != null)
+				return false;
+		} else if (!lastAccessedTime.equals(other.lastAccessedTime))
 			return false;
 		if (msgType == null) {
 			if (other.msgType != null)
@@ -212,8 +218,9 @@ public class AppMessageEntity extends MizeSceEntity implements Serializable {
 
 	@Override
 	public String toString() {
-		return "AppMessageEntity [code=" + code + ", msgType=" + msgType + ", severity=" + severity + ", isExists=" + isExists + ", isActive=" 
-				+ isActive + ", shortDesc=" + shortDesc + ", languageCode=" + languageCode + ", countryCode=" + countryCode + "]";
+		return "AppMessageEntity [id=" + id + ", code=" + code + ", msgType=" + msgType + ", severity=" + severity + ", isExists=" + isExists 
+				+ ", isActive=" + isActive + ", shortDesc=" + shortDesc + ", languageCode=" + languageCode + ", countryCode=" + countryCode 
+				+ ", lastAccessedTime=" + lastAccessedTime + "]";
 	}
 
 }

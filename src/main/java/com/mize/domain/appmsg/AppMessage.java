@@ -59,6 +59,7 @@ public class AppMessage extends MizeSceEntityAudit implements Comparable<AppMess
 	private boolean isDuplicate;
 	@Transient
 	private Map<String,Object> hotSpotMap;
+	private String lastAccessedTime;
 
 	public enum Severity {
 		one(1),two(2),three(3),four(4),five(5),dummy(100);
@@ -293,6 +294,15 @@ public class AppMessage extends MizeSceEntityAudit implements Comparable<AppMess
 
 	public void setDuplicate(boolean isDuplicate) {
 		this.isDuplicate = isDuplicate;
+	}
+
+	@Transient
+	public String getLastAccessedTime() {
+		return lastAccessedTime;
+	}
+
+	public void setLastAccessedTime(String lastAccessedTime) {
+		this.lastAccessedTime = lastAccessedTime;
 	}
 
 	@Override

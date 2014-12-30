@@ -39,6 +39,7 @@ public class Catalog extends MizeSceEntityAudit implements Comparable<Catalog> {
 	private String isActive;
 	private String catalogName;
 	private List<CatalogEntry> catalogEntry =  new ArrayList<CatalogEntry>();
+	private String lastAccessedTime;
 	@Transient
 	private User user;
 	
@@ -118,6 +119,15 @@ public class Catalog extends MizeSceEntityAudit implements Comparable<Catalog> {
 		this.catalogName = catalogName;
 	}
 	
+	@Transient
+	public String getLastAccessedTime() {
+		return lastAccessedTime;
+	}
+
+	public void setLastAccessedTime(String lastAccessedTime) {
+		this.lastAccessedTime = lastAccessedTime;
+	}
+
 	@OneToMany(cascade={CascadeType.ALL}, fetch= FetchType.EAGER, mappedBy = "catalog", orphanRemoval = true)
 	@Fetch(FetchMode.SUBSELECT)
 	@JsonManagedReference(value="catlog")

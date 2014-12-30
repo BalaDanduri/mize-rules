@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
 
 public class CatalogEntity extends MizeSceEntity implements Serializable{
 	
@@ -23,11 +22,13 @@ public class CatalogEntity extends MizeSceEntity implements Serializable{
 	private User user;
 	private String languageCode;
 	private String countryCode;
+	private String lastAccessedTime;
+
 	@Override
 	public Long getId() {
 		return id;
 	}
-	@Override
+
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -100,17 +101,87 @@ public class CatalogEntity extends MizeSceEntity implements Serializable{
 	public void setCountryCode(String countryCode) {
 		this.countryCode = countryCode;
 	}
-	
-	@Override	
-	@JsonIgnore(false)
-	public MizeDateTime getUpdatedDate() {
-		return updatedDate;
+
+	public String getLastAccessedTime() {
+		return lastAccessedTime;
 	}
-	
-	@Override	
-	@JsonIgnore(false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		this.updatedDate = updatedDate;
+
+	public void setLastAccessedTime(String lastAccessedTime) {
+		this.lastAccessedTime = lastAccessedTime;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((catalogEntryCaches == null) ? 0 : catalogEntryCaches.hashCode());
+		result = prime * result + ((catalogId == null) ? 0 : catalogId.hashCode());
+		result = prime * result + ((catalogName == null) ? 0 : catalogName.hashCode());
+		result = prime * result + ((countryCode == null) ? 0 : countryCode.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((isActive == null) ? 0 : isActive.hashCode());
+		result = prime * result + ((languageCode == null) ? 0 : languageCode.hashCode());
+		result = prime * result + ((lastAccessedTime == null) ? 0 : lastAccessedTime.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CatalogEntity other = (CatalogEntity) obj;
+		if (catalogEntryCaches == null) {
+			if (other.catalogEntryCaches != null)
+				return false;
+		} else if (!catalogEntryCaches.equals(other.catalogEntryCaches))
+			return false;
+		if (catalogId == null) {
+			if (other.catalogId != null)
+				return false;
+		} else if (!catalogId.equals(other.catalogId))
+			return false;
+		if (catalogName == null) {
+			if (other.catalogName != null)
+				return false;
+		} else if (!catalogName.equals(other.catalogName))
+			return false;
+		if (countryCode == null) {
+			if (other.countryCode != null)
+				return false;
+		} else if (!countryCode.equals(other.countryCode))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (isActive == null) {
+			if (other.isActive != null)
+				return false;
+		} else if (!isActive.equals(other.isActive))
+			return false;
+		if (languageCode == null) {
+			if (other.languageCode != null)
+				return false;
+		} else if (!languageCode.equals(other.languageCode))
+			return false;
+		if (lastAccessedTime == null) {
+			if (other.lastAccessedTime != null)
+				return false;
+		} else if (!lastAccessedTime.equals(other.lastAccessedTime))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "CatalogEntity [id=" + id + ", catalogName=" + catalogName + ", catalogId=" + catalogId + ", isActive=" + isActive 
+				+ ", catalogEntryCaches=" + catalogEntryCaches + ", languageCode=" + languageCode + ", countryCode=" + countryCode 
+				+ ", lastAccessedTime=" + lastAccessedTime + "]";
 	}
 	
 }

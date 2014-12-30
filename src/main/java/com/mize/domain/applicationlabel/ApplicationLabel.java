@@ -35,6 +35,7 @@ public class ApplicationLabel extends MizeSceEntityAudit  implements Comparable<
 	private String isActive;
 	private String isDefault;
 	private String category;
+	private String lastAccessedTime;
 	private List<ApplicationLabelIntl> intls;
 	@Transient
 	private User user;
@@ -128,6 +129,15 @@ public class ApplicationLabel extends MizeSceEntityAudit  implements Comparable<
 
 	public void setCategory(String category) {
 		this.category = category;
+	}
+
+	@Transient
+	public String getLastAccessedTime() {
+		return lastAccessedTime;
+	}
+
+	public void setLastAccessedTime(String lastAccessedTime) {
+		this.lastAccessedTime = lastAccessedTime;
 	}
 
 	@Transient
