@@ -79,6 +79,8 @@ public class UserProfile extends MizeSceEntityAudit implements Serializable, Com
 	private Map<String, URL> photoURLMap = new HashMap<String, URL>();
 	private User user;
 	private Locale locale;
+	@Transient
+	private UserPreference userPreference;
 	
 	public enum UserProfileResult {
 		PROFILE_CREATED, PROFILE_UPDATED
@@ -622,6 +624,15 @@ public class UserProfile extends MizeSceEntityAudit implements Serializable, Com
 
 	public void setLocale(Locale locale) {
 		this.locale = locale;
+	}
+
+	@Transient
+	public UserPreference getUserPreference() {
+		return userPreference;
+	}
+
+	public void setUserPreference(UserPreference userPreference) {
+		this.userPreference = userPreference;
 	}
 	
 

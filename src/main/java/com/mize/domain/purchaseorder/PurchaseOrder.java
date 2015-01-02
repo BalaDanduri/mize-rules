@@ -28,10 +28,10 @@ import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeErrorTab;
 import com.mize.domain.common.MizeSceEntityAudit;
-import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.MizeDate;
 import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.util.MizeDateTimeUtils;
 @Entity
 @Table(name = "purchase_order")
 public class PurchaseOrder extends MizeSceEntityAudit implements Comparable<PurchaseOrder>{	
@@ -521,7 +521,7 @@ public class PurchaseOrder extends MizeSceEntityAudit implements Comparable<Purc
 	public String getFormattedDisplayDate(MizeDate inputDate) {
 		String date="";
 		if(inputDate!=null){
-			date = Formatter.getMizeDate(inputDate);
+			date = MizeDateTimeUtils.formattedMizeDate(inputDate,user);
 		}
 		return date;
 	}

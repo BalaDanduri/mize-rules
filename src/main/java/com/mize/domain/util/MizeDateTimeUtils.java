@@ -7,6 +7,8 @@ import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.mize.domain.auth.User;
+
 public class MizeDateTimeUtils {
 	
 	public static DateTimeFormatter  DB_DATE_TIME_FORMAT;
@@ -99,6 +101,43 @@ public class MizeDateTimeUtils {
 		String datetime =  getMizeDateTimeAsString(timestamp);
 		MizeDateTime mizeDateTime = MizeDateTime.getInstance(datetime,getDateTimeFormat(),getDefaultDateTimeZone());
 		return mizeDateTime;
+	}
+	
+	public static String formattedMizeDate(MizeDate mizeDate, User user) {
+		return formattedMizeDate(mizeDate, user, true);
+	}
+	
+	public static String formattedMizeDate(MizeDate mizeDate, User user, boolean fallback) {
+		String dateFormat = null;
+		if(user!=null && user.getUserProfile()!=null && user.getUserProfile().getUserPreference()!=null && user.getUserProfile().getUserPreference().getDateFormat()!=null){
+			dateFormat = user.getUserProfile().getUserPreference().getDateFormat();
+		}
+		if(Formatter.isNull(dateFormat) && fallback){
+			dateFormat = getDateTimeFormat();
+		}
+		return mizeDate.toString(dateFormat, null);
+	}
+	
+	public static String formattedMizeDateTime(MizeDateTime mizeDateTime, User user) {
+		return formattedMizeDateTime(mizeDateTime, user, true);
+	}
+	
+	public static String formattedMizeDateTime(MizeDateTime mizeDateTime, User user, boolean fallback) {
+		String dateTimeFormat = null;
+		String dateTimeZone = null;
+		if(user!=null && user.getUserProfile()!=null && user.getUserProfile().getTimezone() != null){
+			dateTimeZone = user.getUserProfile().getTimezone();
+		}
+		if(user!=null && user.getUserProfile()!=null && user.getUserProfile().getUserPreference()!=null && user.getUserProfile().getUserPreference().getDateTimeFormat()!=null){
+			dateTimeFormat = user.getUserProfile().getUserPreference().getDateTimeFormat();
+		}
+		if(Formatter.isNull(dateTimeFormat) && fallback){
+			dateTimeFormat = getDateTimeFormat();
+		}
+		if(Formatter.isNull(dateTimeZone) && fallback){
+			dateTimeZone = getDefaultTimeZone();
+		}
+		return mizeDateTime.toString(dateTimeFormat, DateTimeZone.forID(dateTimeZone));
 	}
 
 }
