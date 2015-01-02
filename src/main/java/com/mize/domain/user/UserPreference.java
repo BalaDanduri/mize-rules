@@ -8,6 +8,11 @@ public class UserPreference extends MizeSceEntity implements  Comparable<UserPre
 	private String dateFormat;
 	private String dateTimeFormat;
 	private Locale locale;
+	
+	public UserPreference(){
+		super();
+	}
+	
 	public String getDateFormat() {
 		return dateFormat;
 	}
@@ -26,10 +31,7 @@ public class UserPreference extends MizeSceEntity implements  Comparable<UserPre
 	public void setLocale(Locale locale) {
 		this.locale = locale;
 	}
-	@Override
-	public int compareTo(UserPreference o) {
-		return 0;
-	}
+	
 	@Override
 	public Long getId() {
 		return id;
@@ -38,4 +40,56 @@ public class UserPreference extends MizeSceEntity implements  Comparable<UserPre
 	public void setId(Long id) {
 		this.id  = id;
 	}
+	
+	@Override
+	public int compareTo(UserPreference o) {
+		return 0;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = PRIME;
+		int result = super.hashCode();
+		result = prime * result
+				+ ((dateFormat == null) ? 0 : dateFormat.hashCode());
+		result = prime * result
+				+ ((dateTimeFormat == null) ? 0 : dateTimeFormat.hashCode());
+		result = prime * result + ((locale == null) ? 0 : locale.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UserPreference other = (UserPreference) obj;
+		if (dateFormat == null) {
+			if (other.dateFormat != null)
+				return false;
+		} else if (!dateFormat.equals(other.dateFormat))
+			return false;
+		if (dateTimeFormat == null) {
+			if (other.dateTimeFormat != null)
+				return false;
+		} else if (!dateTimeFormat.equals(other.dateTimeFormat))
+			return false;
+		if (locale == null) {
+			if (other.locale != null)
+				return false;
+		} else if (!locale.equals(other.locale))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "UserPreference [dateFormat=" + dateFormat + ", dateTimeFormat="
+				+ dateTimeFormat + ", locale=" + locale + "]";
+	}
+	
+	
 }
