@@ -247,13 +247,13 @@ public final class Formatter {
 	
 	// user same method from MizeDateTimeUtils
 	@Deprecated
-	public static String getDBDateTime(MizeDateTime mizeDateTime){
+	public static String getDBDateTime(MizeDateTime mizeDateTime){ // MizeDateTimeUtils.getDBDateTime
 		return (mizeDateTime == null ? null : getDBDateTime(mizeDateTime.getDateTime()));
 	}
 	
 	// user same method from MizeDateTimeUtils
 	@Deprecated
-	public static String getDBDateTime(MizeDate mizeDate){
+	public static String getDBDateTime(MizeDate mizeDate){ // // MizeDateTimeUtils.getDBDateTime
 		return (mizeDate == null ? null : getDBDateTime(mizeDate.getDateTime()));
 	}
 	
@@ -279,7 +279,7 @@ public final class Formatter {
 	}
 	
 	@Deprecated
-	public static MizeDateTime toEndMizeDateTime(MizeDateTime mizeDateTime){
+	public static MizeDateTime toEndMizeDateTime(MizeDateTime mizeDateTime){// don't change 
 		DateTime  dateTime = toDateTime(mizeDateTime);
 		dateTime = toEndDateTime(dateTime);
 		if(dateTime != null){
@@ -321,16 +321,14 @@ public final class Formatter {
 		return (dateTime == null ? null : dateTime.toString(DATE_FORMAT));
 	}
 	
-	public static String getMizeDateTime(MizeDateTime mizeDateTime){
+	@Deprecated
+	public static String getMizeDateTime(MizeDateTime mizeDateTime){ // don't change
 		return ((mizeDateTime == null || mizeDateTime.getDateTime() == null) ? null : mizeDateTime.getDateTime().toString(DATE_FORMAT));
 	}
 	
-	public static String getMizeDate(MizeDate mizeDate){
+	@Deprecated
+	public static String getMizeDate(MizeDate mizeDate){ // don't change
 		return ((mizeDate == null || mizeDate.getDateTime() == null) ? null : mizeDate.getDateTime().toString(DATE_FORMAT1));
-	}
-	
-	public static String getDateTimeFormat(DateTime dateTime){
-		return (dateTime == null ? null : dateTime.toString(DATE_FORMAT3));
 	}
 	
 	public static String getDateTimeFormat(MizeDateTime mizeDateTime){
@@ -473,7 +471,8 @@ public final class Formatter {
 		return time;
 	}
 	
-	public static MizeDate toMizeDate(Timestamp timestamp){
+	@Deprecated
+	public static MizeDate toMizeDate(Timestamp timestamp){ // MizeDateTimeUtils.toMizeDate
 		MizeDate mizeDate = null;
 		if(timestamp!= null){
 			mizeDate = new MizeDate(new DateTime(timestamp,DateTimeZone.UTC));
@@ -481,7 +480,8 @@ public final class Formatter {
 		return mizeDate;
 	}
 	
-	public static MizeDateTime toMizeDateTime(Timestamp timestamp){
+	@Deprecated
+	public static MizeDateTime toMizeDateTime(Timestamp timestamp){  // MizeDateTimeUtils.toMizeDateTime
 		MizeDateTime mizeDateTime = null;
 		if(timestamp!= null){
 			mizeDateTime = new MizeDateTime(new DateTime(timestamp,DateTimeZone.UTC));

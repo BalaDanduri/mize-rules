@@ -88,6 +88,10 @@ public class ShipmentTracking extends MizeSceEntityAudit implements Comparable<S
 	private String shipmentImporter;
 	private List<ShipmentTrackingAttachment> attachments = new ArrayList<ShipmentTrackingAttachment>();
 	
+	public ShipmentTracking(){
+		super();
+	}
+	
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)

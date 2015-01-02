@@ -85,8 +85,20 @@ public class MizeDateTimeUtils {
 		return (timestamp == null ? null : new DateTime(timestamp).toString(mizeApplicationProperties.getAppDateFormatter()));
 	}
 	public static MizeDateTime getMizeDateTime(Timestamp timestamp){
-		String datetime =  MizeDateTimeUtils.getMizeDateTimeAsString(timestamp);
-		return MizeDateTime.getInstance(datetime,MizeDateTimeUtils.getDateTimeFormat(),MizeDateTimeUtils.getDefaultDateTimeZone());
+		String datetime =  getMizeDateTimeAsString(timestamp);
+		return MizeDateTime.getInstance(datetime,getDateTimeFormat(),getDefaultDateTimeZone());
+	}
+	
+	public MizeDate toMizeDate(Timestamp timestamp){
+		String date =  getMizeDateAsString(timestamp);
+		MizeDate mizeDate = MizeDate.getInstance(date, getDateFormat());
+		return mizeDate;
+	}
+	
+	public MizeDateTime toMizeDateTime(Timestamp timestamp){
+		String datetime =  getMizeDateTimeAsString(timestamp);
+		MizeDateTime mizeDateTime = MizeDateTime.getInstance(datetime,getDateTimeFormat(),getDefaultDateTimeZone());
+		return mizeDateTime;
 	}
 
 }
