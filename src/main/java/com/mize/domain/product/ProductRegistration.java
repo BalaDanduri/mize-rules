@@ -65,6 +65,7 @@ public class ProductRegistration extends MizeSceEntityAudit implements Comparabl
 	private String invoiceNumber;
 	private String salesPerson;
 	private boolean registered;
+	private Long previousRegistrationId;
 	private List<ProductRegistrationAudit> audits = new ArrayList<ProductRegistrationAudit>();
 	
 	private List<ProductRegistrationWarranty> warrantyList = new ArrayList<ProductRegistrationWarranty>();
@@ -496,6 +497,14 @@ public class ProductRegistration extends MizeSceEntityAudit implements Comparabl
 		this.registered = registered;
 	}
 	
+	@Transient
+	public Long getPreviousRegistrationId() {
+		return previousRegistrationId;
+	}
+	
+	public void setPreviousRegistrationId(Long previousRegistrationId) {
+		this.previousRegistrationId = previousRegistrationId;
+	}
 	
 	@Transient
 	public Long getCount() {
