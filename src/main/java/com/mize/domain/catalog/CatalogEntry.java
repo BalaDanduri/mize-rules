@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -118,6 +119,7 @@ public class CatalogEntry extends MizeSceEntityAudit implements Comparable<Catal
 	@JsonManagedReference(value="catlog_entry")
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
+	@BatchSize(size = 30)
 	public List<CatalogEntryIntl> getCatalogEntryIntl() {
 		return catalogEntryIntl;
 	}

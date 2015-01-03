@@ -17,6 +17,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -248,6 +252,8 @@ public class AppMessage extends MizeSceEntityAudit implements Comparable<AppMess
 	@JsonManagedReference(value="intl")
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
+	@Fetch(FetchMode.SELECT)
+	@BatchSize(size = 30)
 	public List<AppMessageIntl> getIntls() {
 		return intls;
 	}
