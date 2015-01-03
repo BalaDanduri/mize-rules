@@ -17,8 +17,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
@@ -153,7 +151,8 @@ public class Product  extends MizeSceEntityAudit implements Comparable<Product>{
 	}	
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "product",orphanRemoval= true)
-	@Fetch(FetchMode.SUBSELECT)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public List<ProductIntl> getProductIntl() {
 		return productIntl;
 	}

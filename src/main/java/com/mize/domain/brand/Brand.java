@@ -134,11 +134,7 @@ public class Brand extends MizeSceEntity implements Comparable<Brand>{
 	public void setWebsite(String website) {
 		this.website = website;
 	}
-	
-//	@OneToMany(fetch = FetchType.EAGER,cascade=CascadeType.ALL,mappedBy = "brand")
-//	@Fetch(value=FetchMode.SUBSELECT)
-//	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
-//	@JsonManagedReference(value="brand_support")
+
 	@Transient
 	public List<BrandSupport> getBrandSupports() {
 		return brandSupports;
@@ -165,10 +161,6 @@ public class Brand extends MizeSceEntity implements Comparable<Brand>{
 	}
 	
 	
-//	@OneToMany(fetch = FetchType.LAZY,cascade=CascadeType.ALL,mappedBy = "brand")
-//	@Fetch(value=FetchMode.SUBSELECT)
-//	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
-//	@JsonManagedReference(value="brand_feed")
 	@Transient
 	public List<BrandFeed> getBrandFeeds() {
 		return brandFeeds;
@@ -178,10 +170,6 @@ public class Brand extends MizeSceEntity implements Comparable<Brand>{
 		this.brandFeeds = brandFeeds;
 	}
 
-//	@OneToMany(fetch = FetchType.LAZY,cascade=CascadeType.ALL,mappedBy = "brand")
-//	@Fetch(value=FetchMode.SUBSELECT)
-//	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
-//	@JsonManagedReference(value="brand_shippings")
 	@Transient
 	public List<ProductRepeatOrderShipOptions> getShippings() {
 		return shippings;

@@ -19,8 +19,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -204,7 +202,6 @@ public class FormDefinition extends MizeSceEntityAudit implements Comparable<For
 
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "formDefinition", orphanRemoval = true)
 	@JsonManagedReference(value = "form_def")
-	@Fetch(FetchMode.SUBSELECT)
 	@JsonSerialize(using = JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
 	public List<FormDefinitionAudit> getAudits() {

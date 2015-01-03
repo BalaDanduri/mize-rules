@@ -16,9 +16,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -118,9 +115,9 @@ public class PickList extends MizeSceEntityAudit implements Comparable<PickList>
 	}
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "pickList", orphanRemoval= true)
-	@Fetch(FetchMode.SUBSELECT)
 	@JsonManagedReference(value="pickListItem")
-
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public List<PickListItem> getListItems() {
 		return listItems;
 	}

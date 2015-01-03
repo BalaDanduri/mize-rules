@@ -17,13 +17,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeSceEntityAudit;
+import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.MizeDate;
 
 @Entity
@@ -112,7 +114,8 @@ public class PartKit extends MizeSceEntityAudit implements Comparable<PartKit>{
 	}
 	
 	@OneToMany(cascade={CascadeType.ALL}, fetch = FetchType.EAGER, mappedBy = "partKit" , orphanRemoval= true)
-	@Fetch(FetchMode.SUBSELECT)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public List<PartKitItem> getPartKitItems() {
 		return partKitItems;
 	}

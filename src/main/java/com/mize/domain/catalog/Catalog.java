@@ -16,9 +16,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -129,8 +126,9 @@ public class Catalog extends MizeSceEntityAudit implements Comparable<Catalog> {
 	}
 
 	@OneToMany(cascade={CascadeType.ALL}, fetch= FetchType.EAGER, mappedBy = "catalog", orphanRemoval = true)
-	@Fetch(FetchMode.SUBSELECT)
 	@JsonManagedReference(value="catlog")
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public List<CatalogEntry> getCatalogEntry() {
 		return catalogEntry;
 	}
