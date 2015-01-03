@@ -42,6 +42,8 @@ public class MizeApplicationProperties {
 	public DateTimeFormatter  APP_DATE_TIME_FORMAT;
 	public DateTimeFormatter  APP_DATE_FORMAT;
 	
+	public boolean indexProductListSolr;
+	
 	public static void loadPropertiesIfRequired(){
 		if(propMap == null || propMap.size() == 0){
 			loadProperties();
@@ -241,5 +243,19 @@ public class MizeApplicationProperties {
 	public DateTimeFormatter getAppDateTimeFormatter() {
 		return APP_DATE_TIME_FORMAT;
 	}
+
+	public boolean isIndexProductListSolr() {
+		return indexProductListSolr;
+	}
+
+	public void setIndexProductListSolr(boolean indexProductListSolr) {
+		this.indexProductListSolr = indexProductListSolr;
+	}
+
+	
+
+	
+	
+	
 	
 }

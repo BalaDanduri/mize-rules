@@ -153,7 +153,7 @@ public class LaborHourTest extends JPATest {
 			dbLaborHour = retrievLabour();
 			if (dbLaborHour != null) {
 
-				assertTrue(dbLaborHour.equals(laborHour));
+				assertTrue(dbLaborHour.getId().equals(laborHour.getId()));
 				System.out.println(getJsonResponse(laborHour));
 				System.out.println(getJsonResponse(dbLaborHour));
 				tearDown();
@@ -175,7 +175,7 @@ public class LaborHourTest extends JPATest {
 			persist();
 			dbLaborHour = retrievLabour();
 			assertTrue(dbLaborHour != null && dbLaborHour.getId() != null);
-			assertTrue(dbLaborHour.equals(laborHour));
+			assertTrue(dbLaborHour.getId().equals(laborHour.getId()));
 			tearDown();
 		} catch (Throwable th) {
 			th.printStackTrace();
