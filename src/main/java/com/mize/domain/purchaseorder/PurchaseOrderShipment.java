@@ -35,8 +35,6 @@ public class PurchaseOrderShipment extends MizeSceEntity implements Comparable<P
 	private EntityAddress address;	
 	private String dropShip;	
 	@Transient
-	private String updateMasterAddress;	
-	@Transient
 	private Long shipmentBeAddressId;	
 	private String beCode;
 	private String beTypeCode;
@@ -210,15 +208,6 @@ public class PurchaseOrderShipment extends MizeSceEntity implements Comparable<P
 
 	public void setShipmentBeAddressId(Long shipmentBeAddressId) {
 		this.shipmentBeAddressId = shipmentBeAddressId;
-	}
-
-	@Transient
-	public String getUpdateMasterAddress() {
-		return updateMasterAddress;
-	}
-
-	public void setUpdateMasterAddress(String updateMasterAddress) {
-		this.updateMasterAddress = updateMasterAddress;
 	}
 
 	@Column(name = "is_free_shipping")
@@ -512,7 +501,6 @@ public class PurchaseOrderShipment extends MizeSceEntity implements Comparable<P
 	@Override
 	public String toString() {
 		return "PurchaseOrderShipment [dropShip=" + dropShip
-				+ ", updateMasterAddress=" + updateMasterAddress
 				+ ", shipmentBeAddressId=" + shipmentBeAddressId + ", beCode="
 				+ beCode + ", beTypeCode=" + beTypeCode + ", beSubTypeCode="
 				+ beSubTypeCode + ", beName=" + beName + ", beFirstName="
