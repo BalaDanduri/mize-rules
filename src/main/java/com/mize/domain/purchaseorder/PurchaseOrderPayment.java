@@ -2,11 +2,14 @@ package com.mize.domain.purchaseorder;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -18,6 +21,9 @@ import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.MizeSceEntity;
 
 @Entity
+@Inheritance
+@DiscriminatorColumn(name = "discriminator")
+@DiscriminatorValue("PurchaseOrderPayment")
 @Table(name = "purchase_order_payment")
 public class PurchaseOrderPayment extends MizeSceEntity implements Comparable<PurchaseOrderPayment>{	
 

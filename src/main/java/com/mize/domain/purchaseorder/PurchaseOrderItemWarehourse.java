@@ -3,11 +3,14 @@ package com.mize.domain.purchaseorder;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -19,6 +22,9 @@ import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.MizeDate;
 
 @Entity
+@Inheritance
+@DiscriminatorColumn(name = "discriminator")
+@DiscriminatorValue("PurchaseOrderItemWarehourse")
 @Table(name = "purchase_order_item_warehouse")
 public class PurchaseOrderItemWarehourse extends MizeSceEntity implements Comparable<PurchaseOrderItemWarehourse> {
 
