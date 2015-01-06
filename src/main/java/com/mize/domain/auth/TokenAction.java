@@ -16,12 +16,12 @@ import org.joda.time.DateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name="token_action")
-public class TokenAction extends MizeSceEntity implements Comparable<TokenAction> {
+public class TokenAction extends MizeSceEntityAudit implements Comparable<TokenAction> {
 	
 	private static final long serialVersionUID = 7260474936022570280L;
 	private String token;
@@ -144,52 +144,6 @@ public class TokenAction extends MizeSceEntity implements Comparable<TokenAction
 	@JsonIgnore
 	public boolean isValid() {
 		return ((this.expires!=null && this.expires.getDateTime() != null)?this.expires.getDateTime().isAfter(DateTime.now()) : false);
-	}
-
-	@JsonIgnore(value=false)
-	@Column(name = "updated_by")
-	public Long getUpdatedBy() {
-		return this.updatedBy;
-	}
-	
-	@JsonIgnore(value=false)
-	public void setUpdatedBy(Long updatedBy) {
-		this.updatedBy = updatedBy;
-	}
-	
-	@JsonIgnore(value=false)
-	@Column(name = "created_by", updatable = false)
-	public Long getCreatedBy() {
-		return this.createdBy;
-	}
-	
-	@JsonIgnore(value=false)
-	public void setCreatedBy(Long createdBy) {
-		this.createdBy = createdBy;
-	}
-	
-	@Column(name = "created_date", updatable = false)
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	@JsonIgnore(value=false)
-	public MizeDateTime getCreatedDate() {
-		return this.createdDate;
-	}
-	
-	@JsonIgnore(value=false)
-	public void setCreatedDate(MizeDateTime createdDate) {
-		this.createdDate = createdDate;
-	}
-	
-	@Column(name = "updated_date")
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	@JsonIgnore(value=false)
-	public MizeDateTime getUpdatedDate() {
-		return this.updatedDate;
-	}
-	
-	@JsonIgnore(value=false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		this.updatedDate = updatedDate;
 	}
 	
 	@Override
