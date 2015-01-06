@@ -26,9 +26,9 @@ import com.mize.domain.part.PartAttribute;
 import com.mize.domain.part.PartIntl;
 import com.mize.domain.part.PartPrice;
 import com.mize.domain.test.util.JPATest;
-import com.mize.domain.util.Formatter;
 import com.mize.domain.util.MizeDate;
 import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.util.MizeDateTimeUtils;
 
 @ContextConfiguration(locations = { "/test-context.xml" })
 public class PartTest extends JPATest {
@@ -157,9 +157,9 @@ public class PartTest extends JPATest {
 			part.setIsSerialized(resultSet.getString("is_serialized"));
 			part.setIsReturnable(resultSet.getString("is_returnable"));
 			part.setUom(resultSet.getString("uom"));
-			part.setCreatedDate(Formatter.toMizeDateTime(resultSet
+			part.setCreatedDate(MizeDateTimeUtils.toMizeDateTime(resultSet
 					.getTimestamp("created_date")));
-			part.setUpdatedDate(Formatter.toMizeDateTime(resultSet
+			part.setUpdatedDate(MizeDateTimeUtils.toMizeDateTime(resultSet
 					.getTimestamp("updated_date")));
 			BusinessEntity beEntity = new BusinessEntity();
 			beEntity.setId(resultSet.getLong("tenant_id"));
@@ -207,15 +207,15 @@ public class PartTest extends JPATest {
 			partPrice.setNetPrice(rs.getBigDecimal("net_price"));
 			partPrice.setCurrencyCode(rs.getString("currency_code"));
 			partPrice.setTaxId(rs.getLong("tax_id"));
-			partPrice.setCreatedDate(Formatter.toMizeDateTime(rs
+			partPrice.setCreatedDate(MizeDateTimeUtils.toMizeDateTime(rs
 					.getTimestamp("created_date")));
 			partPrice.setCreatedBy(rs.getLong("created_by"));
 			partPrice
-					.setEndDate(Formatter.toMizeDate(rs.getTimestamp("end_date")));
-			partPrice.setStartDate(Formatter.toMizeDate(rs
+					.setEndDate(MizeDateTimeUtils.toMizeDate(rs.getTimestamp("end_date")));
+			partPrice.setStartDate(MizeDateTimeUtils.toMizeDate(rs
 					.getTimestamp("start_date")));
 			partPrice.setUpdatedBy(rs.getLong("updated_by"));
-			partPrice.setUpdatedDate(Formatter.toMizeDateTime(rs
+			partPrice.setUpdatedDate(MizeDateTimeUtils.toMizeDateTime(rs
 					.getTimestamp("updated_date")));
 
 			return partPrice;

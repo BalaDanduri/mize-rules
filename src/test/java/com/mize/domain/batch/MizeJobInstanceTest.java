@@ -20,8 +20,8 @@ import org.springframework.test.context.ContextConfiguration;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.test.util.JPATest;
-import com.mize.domain.util.Formatter;
 import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.util.MizeDateTimeUtils;
 
 @ContextConfiguration(locations={"/test-context.xml"})
 public class MizeJobInstanceTest extends JPATest {
@@ -97,8 +97,8 @@ public class MizeJobInstanceTest extends JPATest {
 			jobInstance.setId(rs.getLong("id"));
 			jobInstance.setInstanceCode(rs.getString("instance_code"));
 			jobInstance.setInstanceName(rs.getString("instance_name"));
-			jobInstance.setLastRunTime(Formatter.toMizeDateTime(rs.getTimestamp("last_run")));
-			jobInstance.setNextRunTime(Formatter.toMizeDateTime(rs.getTimestamp("next_run")));
+			jobInstance.setLastRunTime(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("last_run")));
+			jobInstance.setNextRunTime(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("next_run")));
 			jobInstance.setJobStatus(rs.getString("job_status"));
 			jobInstance.setIsActive(rs.getString("is_active"));
 			return jobInstance;

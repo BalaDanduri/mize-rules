@@ -22,9 +22,9 @@ import com.mize.domain.part.Part;
 import com.mize.domain.part.PartKit;
 import com.mize.domain.part.PartKitItem;
 import com.mize.domain.test.util.JPATest;
-import com.mize.domain.util.Formatter;
 import com.mize.domain.util.MizeDate;
 import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.util.MizeDateTimeUtils;
 
 @ContextConfiguration(locations = { "/test-context.xml" })
 public class PartKitTest extends JPATest {
@@ -128,13 +128,13 @@ public class PartKitTest extends JPATest {
 			partKit.setIsActive(rs.getString("is_active"));
 			partKit.setCreatedBy(rs.getLong("created_by"));
 			partKit.setUpdatedBy(rs.getLong("updated_by"));
-			partKit.setCreatedDate(Formatter.toMizeDateTime(rs
+			partKit.setCreatedDate(MizeDateTimeUtils.toMizeDateTime(rs
 					.getTimestamp("created_date")));
-			partKit.setUpdatedDate(Formatter.toMizeDateTime(rs
+			partKit.setUpdatedDate(MizeDateTimeUtils.toMizeDateTime(rs
 					.getTimestamp("updated_date")));
-			partKit.setStartDate(Formatter.toMizeDate(rs
+			partKit.setStartDate(MizeDateTimeUtils.toMizeDate(rs
 					.getTimestamp("start_date")));
-			partKit.setEndDate(Formatter.toMizeDate(rs.getTimestamp("end_date")));
+			partKit.setEndDate(MizeDateTimeUtils.toMizeDate(rs.getTimestamp("end_date")));
 
 			return partKit;
 		}

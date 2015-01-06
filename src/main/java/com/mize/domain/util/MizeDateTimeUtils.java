@@ -91,15 +91,21 @@ public class MizeDateTimeUtils {
 		return MizeDateTime.getInstance(datetime,getDateTimeFormat(),getDefaultDateTimeZone());
 	}
 	
-	public MizeDate toMizeDate(Timestamp timestamp){
-		String date =  getMizeDateAsString(timestamp);
-		MizeDate mizeDate = MizeDate.getInstance(date, getDateFormat());
+	public static MizeDate toMizeDate(Timestamp timestamp){
+		MizeDate mizeDate = null;
+		if(timestamp != null){
+			String date =  getMizeDateAsString(timestamp);
+			mizeDate = MizeDate.getInstance(date, getDateFormat());
+		}
 		return mizeDate;
 	}
 	
-	public MizeDateTime toMizeDateTime(Timestamp timestamp){
-		String datetime =  getMizeDateTimeAsString(timestamp);
-		MizeDateTime mizeDateTime = MizeDateTime.getInstance(datetime,getDateTimeFormat(),getDefaultDateTimeZone());
+	public static MizeDateTime toMizeDateTime(Timestamp timestamp){
+		MizeDateTime mizeDateTime = null;
+		if(timestamp != null){
+			String datetime =  getMizeDateTimeAsString(timestamp);
+			mizeDateTime = MizeDateTime.getInstance(datetime,getDateTimeFormat(),getDefaultDateTimeZone());
+		}
 		return mizeDateTime;
 	}
 	

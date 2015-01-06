@@ -26,6 +26,7 @@ import com.mize.domain.common.Gender;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;
 import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.util.MizeDateTimeUtils;
 
 @ContextConfiguration(locations = { "/test-context.xml" })
 public class UserTest extends JPATest {
@@ -86,8 +87,8 @@ public class UserTest extends JPATest {
 			user.setId(rs.getLong("id"));
 			user.setEmail(rs.getString("email"));
 			user.setName(rs.getString("name"));
-			user.setLastLogin(Formatter.toMizeDateTime(rs.getTimestamp("last_login")));
-			user.setCreatedDate(Formatter.toMizeDateTime(rs
+			user.setLastLogin(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("last_login")));
+			user.setCreatedDate(MizeDateTimeUtils.toMizeDateTime(rs
 					.getTimestamp("created_date")));
 
 			return user;

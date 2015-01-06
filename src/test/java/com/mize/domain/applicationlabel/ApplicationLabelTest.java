@@ -19,8 +19,8 @@ import org.springframework.test.context.ContextConfiguration;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.Locale;
 import com.mize.domain.test.util.JPATest;
-import com.mize.domain.util.Formatter;
 import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.util.MizeDateTimeUtils;
 @ContextConfiguration(locations={"/test-context.xml"})
 public class ApplicationLabelTest extends JPATest{
 
@@ -101,8 +101,8 @@ public class ApplicationLabelTest extends JPATest{
 			appLabel.setIsDefault(rs.getString("is_default"));
 			appLabel.setCreatedBy(rs.getLong("created_by"));
 			appLabel.setUpdatedBy(rs.getLong("updated_by"));
-			appLabel.setCreatedDate(Formatter.toMizeDateTime(rs.getTimestamp("created_date")));
-			appLabel.setUpdatedDate(Formatter.toMizeDateTime(rs.getTimestamp("updated_date")));	
+			appLabel.setCreatedDate(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("created_date")));
+			appLabel.setUpdatedDate(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("updated_date")));	
 			return appLabel;
 		}	
 	}
@@ -122,8 +122,8 @@ public class ApplicationLabelTest extends JPATest{
 			appLabelIntl.setDescription(rs.getString("label_description"));
 			appLabelIntl.setCreatedBy(rs.getLong("created_by"));
 			appLabelIntl.setUpdatedBy(rs.getLong("updated_by"));
-			appLabelIntl.setCreatedDate(Formatter.toMizeDateTime(rs.getTimestamp("created_date")));
-			appLabelIntl.setUpdatedDate(Formatter.toMizeDateTime(rs.getTimestamp("updated_date")));
+			appLabelIntl.setCreatedDate(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("created_date")));
+			appLabelIntl.setUpdatedDate(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("updated_date")));
 			return appLabelIntl;
 		}
 		

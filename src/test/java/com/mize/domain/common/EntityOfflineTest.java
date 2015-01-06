@@ -21,6 +21,7 @@ import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;
 import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.util.MizeDateTimeUtils;
 
 @ContextConfiguration(locations={"/test-context.xml"})
 public class EntityOfflineTest extends JPATest {
@@ -82,8 +83,8 @@ public class EntityOfflineTest extends JPATest {
 			offline.setEntityId(rs.getLong("entity_id"));
 			offline.setEntityType(rs.getString("entity_type"));
 			offline.setEntityCode(rs.getString("entity_code"));
-			offline.setCreatedDate(Formatter.toMizeDateTime(rs.getTimestamp("created_date")));
-			offline.setUpdatedDate(Formatter.toMizeDateTime(rs.getTimestamp("updated_date")));
+			offline.setCreatedDate(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("created_date")));
+			offline.setUpdatedDate(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("updated_date")));
 			offline.setUpdatedByUser(rs.getString("updated_by_user"));
 			offline.setCreatedByUser(rs.getString("created_by_user"));
 			return offline;

@@ -20,9 +20,9 @@ import org.springframework.test.context.ContextConfiguration;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.test.util.JPATest;
-import com.mize.domain.util.Formatter;
 import com.mize.domain.util.MizeDate;
 import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.util.MizeDateTimeUtils;
 
 @ContextConfiguration(locations = { "/test-context.xml" })
 public class EntityParameterTest extends JPATest{
@@ -129,10 +129,10 @@ public class EntityParameterTest extends JPATest{
 			entityParameter.setTenant(dbTenant);
 			entityParameter.setType(rs.getString("entity_type"));
 			entityParameter.setCode(rs.getString("entity_code"));
-			entityParameter.setStartDate(Formatter.toMizeDate(rs.getTimestamp("start_date")));
-			entityParameter.setEndDate(Formatter.toMizeDate(rs.getTimestamp("end_date")));
-			entityParameter.setCreatedDate(Formatter.toMizeDateTime(rs.getTimestamp("created_date")));
-			entityParameter.setUpdatedDate(Formatter.toMizeDateTime(rs.getTimestamp("updated_date")));
+			entityParameter.setStartDate(MizeDateTimeUtils.toMizeDate(rs.getTimestamp("start_date")));
+			entityParameter.setEndDate(MizeDateTimeUtils.toMizeDate(rs.getTimestamp("end_date")));
+			entityParameter.setCreatedDate(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("created_date")));
+			entityParameter.setUpdatedDate(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("updated_date")));
 			entityParameter.setUpdatedBy(rs.getLong("updated_by"));
 			entityParameter.setCreatedBy(rs.getLong("created_by"));
 			entityParameter.setBeId(rs.getLong("entity_be_id"));

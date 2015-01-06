@@ -20,9 +20,9 @@ import org.springframework.test.context.ContextConfiguration;
 
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.test.util.JPATest;
-import com.mize.domain.util.Formatter;
 import com.mize.domain.util.MizeDate;
 import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.util.MizeDateTimeUtils;
 
 @ContextConfiguration(locations={"/test-context.xml"})
 public class FormDefinitionTest extends JPATest {
@@ -115,11 +115,11 @@ public class FormDefinitionTest extends JPATest {
 			FormTemplateDefinition ftdef = new FormTemplateDefinition();
 			ftdef.setId(rs.getLong("template_defn_id"));
 			formDef.setFormTemplateDefinition(ftdef);
-			formDef.setStartDate(Formatter.toMizeDate(rs.getTimestamp("start_date")));
-			formDef.setEndDate(Formatter.toMizeDate(rs.getTimestamp("end_date")));
+			formDef.setStartDate(MizeDateTimeUtils.toMizeDate(rs.getTimestamp("start_date")));
+			formDef.setEndDate(MizeDateTimeUtils.toMizeDate(rs.getTimestamp("end_date")));
 			formDef.setFormDefinitionData(rs.getString("form_defn_data"));
-			formDef.setCreatedDate(Formatter.toMizeDateTime(rs.getTimestamp("created_date")));
-			formDef.setUpdatedDate(Formatter.toMizeDateTime(rs.getTimestamp("updated_date")));
+			formDef.setCreatedDate(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("created_date")));
+			formDef.setUpdatedDate(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("updated_date")));
 			formDef.setCreatedBy(rs.getLong("created_by"));
 			formDef.setUpdatedBy(rs.getLong("updated_by"));
 			return formDef;

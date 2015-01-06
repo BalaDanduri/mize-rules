@@ -246,16 +246,16 @@ public final class Formatter {
 	}
 	
 	// user same method from MizeDateTimeUtils
-	@Deprecated
+	/*@Deprecated
 	public static String getDBDateTime(MizeDateTime mizeDateTime){ // MizeDateTimeUtils.getDBDateTime
 		return (mizeDateTime == null ? null : getDBDateTime(mizeDateTime.getDateTime()));
 	}
-	
+	*/
 	// user same method from MizeDateTimeUtils
-	@Deprecated
+	/*@Deprecated
 	public static String getDBDateTime(MizeDate mizeDate){ // // MizeDateTimeUtils.getDBDateTime
 		return (mizeDate == null ? null : getDBDateTime(mizeDate.getDateTime()));
-	}
+	}*/
 	
 	public static String dbDateTime(DateTime dateTime){
 		return (dateTime == null ? null : dateTime.toString(DB_DATE_TIME_FORMAT));
@@ -301,7 +301,7 @@ public final class Formatter {
 		return dateTime;
 	}
 	
-	@Deprecated
+	/*@Deprecated
 	public static MizeDateTime toStartMizeDateTime(MizeDateTime mizeDateTime){
 		DateTime  dateTime = toDateTime(mizeDateTime);
 		dateTime = toStartDateTime(dateTime);
@@ -309,7 +309,7 @@ public final class Formatter {
 			mizeDateTime.setDateTime(dateTime);
 		}
 		return mizeDateTime;
-	}
+	}*/
 	
 	public static MizeDate toStartMizeDate(MizeDate mizeDate){
 		DateTime  dateTime = toDateTime(mizeDate);
@@ -471,7 +471,7 @@ public final class Formatter {
 		return time;
 	}
 	
-	@Deprecated
+	/*@Deprecated
 	public static MizeDate toMizeDate(Timestamp timestamp){ // MizeDateTimeUtils.toMizeDate
 		MizeDate mizeDate = null;
 		if(timestamp!= null){
@@ -487,7 +487,7 @@ public final class Formatter {
 			mizeDateTime = new MizeDateTime(new DateTime(timestamp,DateTimeZone.UTC));
 		}
 		return mizeDateTime;
-	}
+	}*/
 
 	public static String toLowerCase(String value){
 		return value == null ? EMPTY : value.trim().toLowerCase();	

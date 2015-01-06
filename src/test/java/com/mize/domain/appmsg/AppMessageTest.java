@@ -19,8 +19,8 @@ import org.springframework.test.context.ContextConfiguration;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.Locale;
 import com.mize.domain.test.util.JPATest;
-import com.mize.domain.util.Formatter;
 import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.util.MizeDateTimeUtils;
 @ContextConfiguration(locations={"/test-context.xml"})
 public class AppMessageTest extends JPATest {
 
@@ -97,8 +97,8 @@ public class AppMessageTest extends JPATest {
 			appMessage.setSeverity(rs.getInt("message_severity"));
 			appMessage.setCreatedBy(rs.getLong("created_by"));
 			appMessage.setUpdatedBy(rs.getLong("updated_by"));
-			appMessage.setCreatedDate(Formatter.toMizeDateTime(rs.getTimestamp("created_date")));
-			appMessage.setUpdatedDate(Formatter.toMizeDateTime(rs.getTimestamp("updated_date")));
+			appMessage.setCreatedDate(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("created_date")));
+			appMessage.setUpdatedDate(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("updated_date")));
 			appMessage.setMsgType(rs.getString("message_type"));
 			BusinessEntity tenant = new BusinessEntity();
 			tenant.setId(rs.getLong("tenant_id"));
@@ -123,8 +123,8 @@ public class AppMessageTest extends JPATest {
 			appMessageIntl.setAppMessage(appMessage);
 			appMessageIntl.setCreatedBy(rs.getLong("created_by"));
 			appMessageIntl.setUpdatedBy(rs.getLong("updated_by"));
-			appMessageIntl.setCreatedDate(Formatter.toMizeDateTime(rs.getTimestamp("created_date")));
-			appMessageIntl.setUpdatedDate(Formatter.toMizeDateTime(rs.getTimestamp("updated_date")));
+			appMessageIntl.setCreatedDate(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("created_date")));
+			appMessageIntl.setUpdatedDate(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("updated_date")));
 			appMessageIntl.setShortDesc(rs.getString("short_description"));
 			appMessageIntl.setLongDesc(rs.getString("long_description"));	
 			return appMessageIntl;

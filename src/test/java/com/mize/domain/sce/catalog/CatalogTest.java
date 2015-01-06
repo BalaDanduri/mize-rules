@@ -21,8 +21,8 @@ import com.mize.domain.catalog.CatalogEntry;
 import com.mize.domain.catalog.CatalogEntryIntl;
 import com.mize.domain.common.Locale;
 import com.mize.domain.test.util.JPATest;
-import com.mize.domain.util.Formatter;
 import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.util.MizeDateTimeUtils;
 
 @ContextConfiguration(locations={"/test-context.xml"})
 public class CatalogTest extends JPATest {
@@ -122,8 +122,8 @@ public class CatalogTest extends JPATest {
 			catalogEntry.setCatalog(catalog);
 			catalogEntry.setItemCode(rs.getString("item_code"));
 			catalogEntry.setIsActive(rs.getString("is_active"));
-			catalogEntry.setCreatedDate(Formatter.toMizeDateTime(rs.getTimestamp("created_date")));
-			catalogEntry.setUpdatedDate(Formatter.toMizeDateTime(rs.getTimestamp("updated_date")));
+			catalogEntry.setCreatedDate(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("created_date")));
+			catalogEntry.setUpdatedDate(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("updated_date")));
 			catalogEntry.setCreatedBy(rs.getLong("created_by"));
 			catalogEntry.setUpdatedBy(rs.getLong("updated_by"));
 			catalogEntry.setIsDefault(rs.getString("is_default"));
@@ -149,8 +149,8 @@ public class CatalogTest extends JPATest {
 			catalog.setTenant(tenant);
 			catalog.setCreatedBy(rs.getLong("created_by"));
 			catalog.setUpdatedBy(rs.getLong("updated_by"));
-			catalog.setUpdatedDate(Formatter.toMizeDateTime(rs.getTimestamp("updated_date")));
-			catalog.setCreatedDate(Formatter.toMizeDateTime(rs.getTimestamp("created_date")));
+			catalog.setUpdatedDate(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("updated_date")));
+			catalog.setCreatedDate(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("created_date")));
 			return catalog;
 		
 		}
@@ -173,8 +173,8 @@ public class CatalogTest extends JPATest {
 			catalogEntryIntl.setItemDescription(rs.getString("item_description"));
 			catalogEntryIntl.setCreatedBy(rs.getLong("created_by"));
 			catalogEntryIntl.setUpdatedBy(rs.getLong("updated_by"));
-			catalogEntryIntl.setCreatedDate(Formatter.toMizeDateTime(rs.getTimestamp("created_date")));
-			catalogEntryIntl.setUpdatedDate(Formatter.toMizeDateTime(rs.getTimestamp("updated_date")));
+			catalogEntryIntl.setCreatedDate(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("created_date")));
+			catalogEntryIntl.setUpdatedDate(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("updated_date")));
 			
 			return catalogEntryIntl;
 		}

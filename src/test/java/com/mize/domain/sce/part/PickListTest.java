@@ -25,8 +25,8 @@ import com.mize.domain.part.PickList;
 import com.mize.domain.part.PickListComment;
 import com.mize.domain.part.PickListItem;
 import com.mize.domain.test.util.JPATest;
-import com.mize.domain.util.Formatter;
 import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.util.MizeDateTimeUtils;
 
 @ContextConfiguration(locations={"/test-context.xml"})
 public class PickListTest extends JPATest {
@@ -135,8 +135,8 @@ public class PickListTest extends JPATest {
 			pickList.setType(rs.getString("picklist_type"));
 			pickList.setCreatedBy(rs.getLong("created_by"));
 			pickList.setUpdatedBy(rs.getLong("updated_by"));
-			pickList.setCreatedDate(Formatter.toMizeDateTime(rs.getTimestamp("created_date")));
-			pickList.setUpdatedDate(Formatter.toMizeDateTime(rs.getTimestamp("updated_date")));
+			pickList.setCreatedDate(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("created_date")));
+			pickList.setUpdatedDate(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("updated_date")));
 			return pickList;
 		}
 	}

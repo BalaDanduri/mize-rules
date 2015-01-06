@@ -22,8 +22,8 @@ import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.test.util.JPATest;
-import com.mize.domain.util.Formatter;
 import com.mize.domain.util.MizeDate;
+import com.mize.domain.util.MizeDateTimeUtils;
 
 
 @ContextConfiguration(locations={"/test-context.xml"})
@@ -131,9 +131,9 @@ public class ProductRegistrationTest  extends JPATest {
 			BusinessEntity be= new BusinessEntity();
 			be.setId(rs.getLong("invoice_be_id"));
 			productRegistration.setInvoiceBusinessEntity(be);
-			productRegistration.setCustomerDeliveryDate(Formatter.toMizeDate(rs.getTimestamp("cust_delivery_date")));
+			productRegistration.setCustomerDeliveryDate(MizeDateTimeUtils.toMizeDate(rs.getTimestamp("cust_delivery_date")));
 			productRegistration.setPurchasePrice(rs.getBigDecimal("purchase_price"));
-			productRegistration.setWarrantyExpiryDate(Formatter.toMizeDate(rs.getTimestamp("warranty_expiry_date")));
+			productRegistration.setWarrantyExpiryDate(MizeDateTimeUtils.toMizeDate(rs.getTimestamp("warranty_expiry_date")));
 			
 			EntityAddress customerAddress = new EntityAddress();
 			customerAddress.setId(rs.getLong("cust_address_id"));
