@@ -86,7 +86,7 @@
 		<property name="googlePrivateKey" value="${google.api.privateKey~~S_qiDFZTnbmOzUo2adofIW1Aagk=}"/>
 		<property name="googleChannelName" value="${google.api.channel~~CustomerCentral}"/>
 		<property name="googleClientId" value="${google.api.clientId~~gme-mizeinc}"/>
-		<property name="useGoogleLicensedKey" value="${google.api.useSignedURL~~N}" />
+		<property name="useGoogleLicensedKey" value="${google.api.useLicensedKey~~false}" />
 	</bean>		 
 	
 	<bean id="mizeDateTimeUtils" class="com.mize.domain.util.MizeDateTimeUtils"/>
