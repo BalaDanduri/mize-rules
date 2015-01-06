@@ -54,7 +54,7 @@ public class MizeApplicationProperties {
 	private String googlePrivateKey;
 	private String googleChannelName;
 	private String googleClientId;
-	private String useGoogleLicensedKey;
+	private boolean useGoogleLicensedKey;
 	
 	public static void loadPropertiesIfRequired(){
 		if(propMap == null || propMap.size() == 0){
@@ -288,12 +288,13 @@ public class MizeApplicationProperties {
 		this.googleClientId = googleClientId;
 	}
 
-	public String getUseGoogleLicensedKey() {
+	public boolean isUseGoogleLicensedKey() {
 		return useGoogleLicensedKey;
 	}
 
-	public void setUseGoogleLicensedKey(String useGoogleLicensedKey) {
+	public void setUseGoogleLicensedKey(boolean useGoogleLicensedKey) {
 		this.useGoogleLicensedKey = useGoogleLicensedKey;
 	}
+	
 	
 }
