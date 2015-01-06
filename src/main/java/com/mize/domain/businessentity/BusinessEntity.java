@@ -34,6 +34,7 @@ import com.mize.domain.brand.Brand;
 import com.mize.domain.common.Country;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityAddressGeo;
+import com.mize.domain.common.EntityContact;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.common.State;
@@ -99,7 +100,9 @@ public class BusinessEntity extends MizeSceEntityAudit implements Comparable<Bus
 
 	public BusinessEntity(Long id, String code, String name, String typeCode, String bename, String firstName,String lastName,String middleInitial, Locale locale, Long beaId,
 			Long eaId, String addressType, String address1, String address2, String address3, String zip, String zipExt, String city, String stateCode,
-			String stateName,String countryCode, String countryName, String countryCode3, String email, String landMark, 
+			String stateName,String countryCode, String countryName, String countryCode3, String email, String landMark,Long becId, String certificationInfo,
+			Long ecId, String isActive, String contactType, String contactName, String cfirstName, String clastName, String cmiddleInitial, String phone, String phoneExt,
+			String alternatePhone,String alternatePhoneExt, String fax, String faxExt, String cemail, String department, 
 			BigDecimal latitude, BigDecimal longitude, Long geoId, String url, String isPromoted, String hoursOfOp) {
 		super();
 		this.id = id;
@@ -136,7 +139,34 @@ public class BusinessEntity extends MizeSceEntityAudit implements Comparable<Bus
 		entityAddress.setAddressGeo(addressGeo);
 		address.setEntityAddress(entityAddress);		
 		this.addresses = new ArrayList<BusinessEntityAddress>();
-		this.addresses.add(address);				
+		this.addresses.add(address);
+		
+		BusinessEntityContact contact = new BusinessEntityContact();
+		contact.setId(becId);
+		contact.setCertificationInfo(certificationInfo);
+		EntityContact entityContact = new EntityContact();
+		entityContact.setId(ecId);
+		entityContact.setIsActive(isActive);
+		entityContact.setContactType(contactType);
+		entityContact.setContactName(contactName);
+		entityContact.setFirstName(cfirstName);
+		entityContact.setLastName(clastName);
+		entityContact.setMiddleInitial(cmiddleInitial);
+		entityContact.setPhone(phone);
+		entityContact.setPhoneExt(phoneExt);
+		entityContact.setAlternatePhone(alternatePhone);
+		entityContact.setAlternatePhoneExt(alternatePhoneExt);
+		entityContact.setFax(fax);
+		entityContact.setFaxExt(faxExt);
+		entityContact.setEmail(cemail);
+		entityContact.setDepartment(department);
+		
+		contact.setEntityContact(entityContact);		
+		this.beContact = new ArrayList<BusinessEntityContact>();
+		if(Formatter.isNotNull(entityContact.getContactType())){
+			this.beContact.add(contact);
+		}
+		
 		BusinessEntityIntl beIntl = new BusinessEntityIntl();
 		beIntl.setName(bename);
 		beIntl.setFirstName(firstName);

@@ -83,6 +83,10 @@
 		<property name="defaultDateFormat" value="${app.dateFormat~~MM-dd-yyyy}"/>
 		<property name="defaultDBDateFormat" value="${app.db.dateFormat~~yyyy-MM-dd}"/>
 		<property name="defaultDBDateTimeFormat" value="${app.db.dateTimeFormat~~yyyy-MM-dd HH:mm:ss}"/>
+		<property name="googlePrivateKey" value="${google.api.privateKey~~S_qiDFZTnbmOzUo2adofIW1Aagk=}"/>
+		<property name="googleChannelName" value="${google.api.channel~~CustomerCentral}"/>
+		<property name="googleClientId" value="${google.api.clientId~~gme-mizeinc}"/>
+		<property name="useGoogleLicensedKey" value="${google.api.useSignedURL~~N}" />
 	</bean>		 
 	
 	<bean id="mizeDateTimeUtils" class="com.mize.domain.util.MizeDateTimeUtils"/>

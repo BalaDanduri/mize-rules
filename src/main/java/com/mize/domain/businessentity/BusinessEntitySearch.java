@@ -17,6 +17,8 @@ public class BusinessEntitySearch {
 	private BusinessEntity tenant;
 	private String serialNumber;
 	private Long localeId;
+	private String serviceArea;
+	private String territory;
 	
 	public BusinessEntitySearch() {
 		
@@ -132,6 +134,22 @@ public class BusinessEntitySearch {
 	
 	public void setLocaleId(Long localeId) {
 		this.localeId = localeId;
+	}
+
+	public String getServiceArea() {
+		return serviceArea;
+	}
+
+	public void setServiceArea(String serviceArea) {
+		this.serviceArea = serviceArea;
+	}
+
+	public String getTerritory() {
+		return territory;
+	}
+
+	public void setTerritory(String territory) {
+		this.territory = territory;
 	}
 	
 

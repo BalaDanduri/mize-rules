@@ -8,6 +8,8 @@ import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class MizeApplicationProperties {
 	
 	private static final Map<String, String> propMap = new HashMap<String, String>();
@@ -34,15 +36,25 @@ public class MizeApplicationProperties {
 	private String defaultEndDate;
 	private String defaultDateTimeFormat;
 	private String defaultDateFormat;
+	@JsonIgnore
 	private DateTimeZone dateTimeZone;
 	private String defaultDBDateTimeFormat;
 	private String defaultDBDateFormat;
+	@JsonIgnore
 	public DateTimeFormatter  DB_DATE_TIME_FORMAT;
+	@JsonIgnore
 	public DateTimeFormatter  DB_DATE_FORMAT;
+	@JsonIgnore
 	public DateTimeFormatter  APP_DATE_TIME_FORMAT;
+	@JsonIgnore
 	public DateTimeFormatter  APP_DATE_FORMAT;
 	
 	public boolean indexProductListSolr;
+	
+	private String googlePrivateKey;
+	private String googleChannelName;
+	private String googleClientId;
+	private String useGoogleLicensedKey;
 	
 	public static void loadPropertiesIfRequired(){
 		if(propMap == null || propMap.size() == 0){
@@ -205,7 +217,7 @@ public class MizeApplicationProperties {
 		APP_DATE_FORMAT = DateTimeFormat.forPattern(defaultDateFormat);
 		this.defaultDateFormat = defaultDateFormat;
 	}
-	
+	@JsonIgnore
 	public DateTimeZone getDefaultDateTimeZone(){
 		return dateTimeZone;
 	}
@@ -218,11 +230,11 @@ public class MizeApplicationProperties {
 		DB_DATE_TIME_FORMAT = DateTimeFormat.forPattern(defaultDBDateTimeFormat);
 		this.defaultDBDateTimeFormat = defaultDBDateTimeFormat;
 	}
-	
+	@JsonIgnore
 	public DateTimeFormatter getDBDateTimeFormatter() {
 		return DB_DATE_TIME_FORMAT;
 	}
-	
+	@JsonIgnore
 	public DateTimeFormatter getDBDateFormatter() {
 		return DB_DATE_FORMAT;
 	}
@@ -235,15 +247,15 @@ public class MizeApplicationProperties {
 		DB_DATE_FORMAT = DateTimeFormat.forPattern(defaultDBDateFormat);
 		this.defaultDBDateFormat = defaultDBDateFormat;
 	}
-	
+	@JsonIgnore
 	public DateTimeFormatter getAppDateFormatter() {
 		return APP_DATE_FORMAT;
 	}
-
+	@JsonIgnore
 	public DateTimeFormatter getAppDateTimeFormatter() {
 		return APP_DATE_TIME_FORMAT;
 	}
-
+	
 	public boolean isIndexProductListSolr() {
 		return indexProductListSolr;
 	}
@@ -251,11 +263,37 @@ public class MizeApplicationProperties {
 	public void setIndexProductListSolr(boolean indexProductListSolr) {
 		this.indexProductListSolr = indexProductListSolr;
 	}
+	@JsonIgnore
+	public String getGooglePrivateKey() {
+		return googlePrivateKey;
+	}
 
-	
+	public void setGooglePrivateKey(String googlePrivateKey) {
+		this.googlePrivateKey = googlePrivateKey;
+	}
 
-	
-	
-	
+	public String getGoogleChannelName() {
+		return googleChannelName;
+	}
+
+	public void setGoogleChannelName(String googleChannelName) {
+		this.googleChannelName = googleChannelName;
+	}
+
+	public String getGoogleClientId() {
+		return googleClientId;
+	}
+
+	public void setGoogleClientId(String googleClientId) {
+		this.googleClientId = googleClientId;
+	}
+
+	public String getUseGoogleLicensedKey() {
+		return useGoogleLicensedKey;
+	}
+
+	public void setUseGoogleLicensedKey(String useGoogleLicensedKey) {
+		this.useGoogleLicensedKey = useGoogleLicensedKey;
+	}
 	
 }
