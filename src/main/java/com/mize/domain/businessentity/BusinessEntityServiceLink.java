@@ -36,6 +36,8 @@ public class BusinessEntityServiceLink extends MizeSceEntityAudit implements Com
 	private String serviceArea;
 	private State state;
 	private Country country;
+	private String isPromoted;
+	
 
 	public BusinessEntityServiceLink(){
 	}
@@ -43,7 +45,7 @@ public class BusinessEntityServiceLink extends MizeSceEntityAudit implements Com
 	public BusinessEntityServiceLink(BusinessEntity businessEntity,
 			Brand brand, ProductCategory productCategory, Product product,
 			Long radius, String radiusUom, String geoType, String geoValue,
-			String serviceArea, State state, Country country) {
+			String serviceArea, State state, Country country, String isPromoted) {
 		super();
 		this.businessEntity = businessEntity;
 		this.brand = brand;
@@ -56,6 +58,7 @@ public class BusinessEntityServiceLink extends MizeSceEntityAudit implements Com
 		this.serviceArea = serviceArea;
 		this.state = state;
 		this.country = country;
+		this.isPromoted = isPromoted;
 	}
 	
 	@Id
@@ -135,6 +138,11 @@ public class BusinessEntityServiceLink extends MizeSceEntityAudit implements Com
 	public State getState() {
 		return state;
 	}
+	
+	@Column(name = "is_promoted")
+	public String getIsPromoted() {
+		return isPromoted;
+	}
 
 	public void setBusinessEntity(BusinessEntity businessEntity) {
 		this.businessEntity = businessEntity;
@@ -180,7 +188,12 @@ public class BusinessEntityServiceLink extends MizeSceEntityAudit implements Com
 		this.country = country;
 	}
 	
+	public void setIsPromoted(String isPromoted) {
+		this.isPromoted = isPromoted;
+	}
 
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
@@ -190,6 +203,8 @@ public class BusinessEntityServiceLink extends MizeSceEntityAudit implements Com
 		result = prime * result + ((geoType == null) ? 0 : geoType.hashCode());
 		result = prime * result
 				+ ((geoValue == null) ? 0 : geoValue.hashCode());
+		result = prime * result
+				+ ((isPromoted == null) ? 0 : isPromoted.hashCode());
 		result = prime * result + ((product == null) ? 0 : product.hashCode());
 		result = prime * result
 				+ ((productCategory == null) ? 0 : productCategory.hashCode());
@@ -231,6 +246,11 @@ public class BusinessEntityServiceLink extends MizeSceEntityAudit implements Com
 				return false;
 		} else if (!geoValue.equals(other.geoValue))
 			return false;
+		if (isPromoted == null) {
+			if (other.isPromoted != null)
+				return false;
+		} else if (!isPromoted.equals(other.isPromoted))
+			return false;
 		if (product == null) {
 			if (other.product != null)
 				return false;
@@ -263,7 +283,7 @@ public class BusinessEntityServiceLink extends MizeSceEntityAudit implements Com
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "BusinessEntityServiceLink [brand=" + brand
@@ -271,7 +291,7 @@ public class BusinessEntityServiceLink extends MizeSceEntityAudit implements Com
 				+ product + ", radius=" + radius + ", radiusUom=" + radiusUom
 				+ ", geoType=" + geoType + ", geoValue=" + geoValue
 				+ ", serviceArea=" + serviceArea + ", state=" + state
-				+ ", country=" + country + "]";
+				+ ", country=" + country + ", isPromoted=" + isPromoted + "]";
 	}
 
 	@Override
