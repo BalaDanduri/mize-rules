@@ -55,6 +55,7 @@ public class MizeApplicationProperties {
 	private String googleChannelName;
 	private String googleClientId;
 	private boolean useGoogleLicensedKey;
+	private String environment;
 	
 	public static void loadPropertiesIfRequired(){
 		if(propMap == null || propMap.size() == 0){
@@ -295,6 +296,15 @@ public class MizeApplicationProperties {
 	public void setUseGoogleLicensedKey(boolean useGoogleLicensedKey) {
 		this.useGoogleLicensedKey = useGoogleLicensedKey;
 	}
+
+	public String getEnvironment() {
+		return environment;
+	}
+
+	public void setEnvironment(String environment) {
+		this.environment = environment;
+	}
+	
 	
 	
 }
