@@ -24,6 +24,7 @@ public abstract class MizeSceEntity implements IEntity {
 	public static final int PRIME = 31;	
 	public static final int HASH_CODE_START = 17;
 	protected UploadError uploadError;
+	protected int uploadRecordNumber;
 	@JsonIgnore
 	protected Boolean isValid = Boolean.TRUE;
 			
@@ -91,7 +92,16 @@ public abstract class MizeSceEntity implements IEntity {
 		this.uploadError = uploadError;
 	}
 	
-	
+	@JsonIgnore
+	public int getUploadRecordNumber() {
+		return uploadRecordNumber;
+	}
+
+	@JsonIgnore
+	public void setUploadRecordNumber(int uploadRecordNumber) {
+		this.uploadRecordNumber = uploadRecordNumber;
+	}
+
 	public String getCreatedByUser() {
 		return createdByUser;
 	}
@@ -192,5 +202,6 @@ public abstract class MizeSceEntity implements IEntity {
 		}
 		return list;
 	}
+	
 	
 }
