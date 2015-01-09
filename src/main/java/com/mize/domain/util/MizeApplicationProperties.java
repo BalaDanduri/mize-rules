@@ -56,7 +56,7 @@ public class MizeApplicationProperties {
 	private String googleClientId;
 	private boolean useGoogleLicensedKey;
 	private String environment;
-	private String entityLockTime;
+	private Long entityLockTime;
 	
 	public static void loadPropertiesIfRequired(){
 		if(propMap == null || propMap.size() == 0){
@@ -306,11 +306,11 @@ public class MizeApplicationProperties {
 		this.environment = environment;
 	}
 
-	public String getEntityLockTime() {
+	public Long getEntityLockTime() {
 		return entityLockTime;
 	}
 
-	public void setEntityLockTime(String entityLockTime) {
+	public void setEntityLockTime(Long entityLockTime) {
 		this.entityLockTime = entityLockTime;
 	}
 	
