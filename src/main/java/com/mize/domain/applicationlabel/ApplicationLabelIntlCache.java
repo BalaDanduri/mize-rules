@@ -56,6 +56,7 @@ public class ApplicationLabelIntlCache implements Comparable<ApplicationLabelInt
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((localeId == null) ? 0 : localeId.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
@@ -75,6 +76,11 @@ public class ApplicationLabelIntlCache implements Comparable<ApplicationLabelInt
 				return false;
 		} else if (!description.equals(other.description))
 			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
 		if (localeId == null) {
 			if (other.localeId != null)
 				return false;
@@ -90,6 +96,6 @@ public class ApplicationLabelIntlCache implements Comparable<ApplicationLabelInt
 
 	@Override
 	public String toString() {
-		return "ApplicationLabelIntlCache [name=" + name + ", description=" + description + ", localeId=" + localeId + "]";
+		return "ApplicationLabelIntlCache [id=" + id + ", name=" + name + ", description=" + description + ", localeId=" + localeId + "]";
 	}
 }

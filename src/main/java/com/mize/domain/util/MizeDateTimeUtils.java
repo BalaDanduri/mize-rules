@@ -145,5 +145,13 @@ public class MizeDateTimeUtils {
 		}
 		return mizeDateTime.toString(dateTimeFormat, DateTimeZone.forID(dateTimeZone));
 	}
+	
+	public static MizeDate getDefaultEndDate() {
+		MizeDate endDate = null;
+		if (Formatter.isNotNull(mizeApplicationProperties.getDefaultEndDate())) {
+			endDate = MizeDate.getInstance(mizeApplicationProperties.getDefaultEndDate(), getDateFormat());
+		}
+		return endDate;
+	}
 
 }

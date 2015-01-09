@@ -16,7 +16,6 @@ public class ApplicationLabelCache implements Comparable<ApplicationLabelCache>,
 	private String isActive;
 	private String isDefault;
 	private Long tenantId;
-	private MizeDateTime createdDate;
 	private MizeDateTime updatedDate;
 	private Map<Long, ApplicationLabelIntlCache> intlMap = new ConcurrentHashMap<Long, ApplicationLabelIntlCache>();
 
@@ -72,14 +71,6 @@ public class ApplicationLabelCache implements Comparable<ApplicationLabelCache>,
 		this.tenantId = tenantId;
 	}
 
-	public MizeDateTime getCreatedDate() {
-		return createdDate;
-	}
-
-	public void setCreatedDate(MizeDateTime createdDate) {
-		this.createdDate = createdDate;
-	}
-
 	public MizeDateTime getUpdatedDate() {
 		return updatedDate;
 	}
@@ -104,18 +95,14 @@ public class ApplicationLabelCache implements Comparable<ApplicationLabelCache>,
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((category == null) ? 0 : category.hashCode());
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
-		result = prime * result
-				+ ((createdDate == null) ? 0 : createdDate.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result
-				+ ((isActive == null) ? 0 : isActive.hashCode());
-		result = prime * result
-				+ ((isDefault == null) ? 0 : isDefault.hashCode());
-		result = prime * result
-				+ ((tenantId == null) ? 0 : tenantId.hashCode());
-		result = prime * result
-				+ ((updatedDate == null) ? 0 : updatedDate.hashCode());
+		result = prime * result + ((intlMap == null) ? 0 : intlMap.hashCode());
+		result = prime * result + ((isActive == null) ? 0 : isActive.hashCode());
+		result = prime * result + ((isDefault == null) ? 0 : isDefault.hashCode());
+		result = prime * result + ((tenantId == null) ? 0 : tenantId.hashCode());
+		result = prime * result + ((updatedDate == null) ? 0 : updatedDate.hashCode());
 		return result;
 	}
 
@@ -128,20 +115,25 @@ public class ApplicationLabelCache implements Comparable<ApplicationLabelCache>,
 		if (getClass() != obj.getClass())
 			return false;
 		ApplicationLabelCache other = (ApplicationLabelCache) obj;
+		if (category == null) {
+			if (other.category != null)
+				return false;
+		} else if (!category.equals(other.category))
+			return false;
 		if (code == null) {
 			if (other.code != null)
 				return false;
 		} else if (!code.equals(other.code))
 			return false;
-		if (createdDate == null) {
-			if (other.createdDate != null)
-				return false;
-		} else if (!createdDate.equals(other.createdDate))
-			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
+			return false;
+		if (intlMap == null) {
+			if (other.intlMap != null)
+				return false;
+		} else if (!intlMap.equals(other.intlMap))
 			return false;
 		if (isActive == null) {
 			if (other.isActive != null)
@@ -168,10 +160,8 @@ public class ApplicationLabelCache implements Comparable<ApplicationLabelCache>,
 
 	@Override
 	public String toString() {
-		return "ApplicationLabelCache [id=" + id + ", code=" + code
-				+ ", isActive=" + isActive + ", isDefault=" + isDefault
-				+ ", tenantId=" + tenantId + ", createdDate=" + createdDate
-				+ ", updatedDate=" + updatedDate + ", intlMap=" + intlMap + "]";
+		return "ApplicationLabelCache [id=" + id + ", code=" + code + ", category=" + category + ", isActive=" + isActive 
+				+ ", isDefault=" + isDefault + ", tenantId=" + tenantId + ", updatedDate=" + updatedDate + ", intlMap=" + intlMap + "]";
 	}
 
 	@Override
