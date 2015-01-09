@@ -241,36 +241,29 @@ public final class Formatter {
 		return (map == null || map.isEmpty());
 	}
 	
+	@Deprecated
 	public static String getDBDateTime(DateTime dateTime){
 		return (dateTime == null ? null : dateTime.toString(DB_DATE_TIME_FORMAT));
 	}
 	
-	// user same method from MizeDateTimeUtils
-	/*@Deprecated
-	public static String getDBDateTime(MizeDateTime mizeDateTime){ // MizeDateTimeUtils.getDBDateTime
-		return (mizeDateTime == null ? null : getDBDateTime(mizeDateTime.getDateTime()));
-	}
-	*/
-	// user same method from MizeDateTimeUtils
-	/*@Deprecated
-	public static String getDBDateTime(MizeDate mizeDate){ // // MizeDateTimeUtils.getDBDateTime
-		return (mizeDate == null ? null : getDBDateTime(mizeDate.getDateTime()));
-	}*/
-	
+	@Deprecated
 	public static String dbDateTime(DateTime dateTime){
 		return (dateTime == null ? null : dateTime.toString(DB_DATE_TIME_FORMAT));
 	}
 	
+	@Deprecated
 	public static String getDBEndDateTime(DateTime dateTime){
 		dateTime = dateTime.withTime(23, 59, 59, 999);
 		return (dateTime == null ? null : dateTime.toString(DB_DATE_TIME_FORMAT));
 	}
 	
+	@Deprecated
 	public static String getDBEndDateTime(MizeDateTime mizeDateTime){		 
 		return (mizeDateTime == null ? null : getDBEndDateTime(mizeDateTime.getDateTime()));
 		
 	}
 	
+	@Deprecated
 	public static DateTime toEndDateTime(DateTime dateTime){
 		if(dateTime != null){
 			dateTime = dateTime.withTime(23, 59, 59, 999);
@@ -300,16 +293,6 @@ public final class Formatter {
 		}
 		return dateTime;
 	}
-	
-	/*@Deprecated
-	public static MizeDateTime toStartMizeDateTime(MizeDateTime mizeDateTime){
-		DateTime  dateTime = toDateTime(mizeDateTime);
-		dateTime = toStartDateTime(dateTime);
-		if(dateTime != null){
-			mizeDateTime.setDateTime(dateTime);
-		}
-		return mizeDateTime;
-	}*/
 	
 	public static MizeDate toStartMizeDate(MizeDate mizeDate){
 		DateTime  dateTime = toDateTime(mizeDate);
@@ -463,6 +446,7 @@ public final class Formatter {
 		return time;
 	}
 	
+	@Deprecated
 	public static DateTime dateTime(Timestamp timestamp){
 		DateTime time = null;
 		if(timestamp!= null){
@@ -470,24 +454,6 @@ public final class Formatter {
 		}
 		return time;
 	}
-	
-	/*@Deprecated
-	public static MizeDate toMizeDate(Timestamp timestamp){ // MizeDateTimeUtils.toMizeDate
-		MizeDate mizeDate = null;
-		if(timestamp!= null){
-			mizeDate = new MizeDate(new DateTime(timestamp,DateTimeZone.UTC));
-		}
-		return mizeDate;
-	}
-	
-	@Deprecated
-	public static MizeDateTime toMizeDateTime(Timestamp timestamp){  // MizeDateTimeUtils.toMizeDateTime
-		MizeDateTime mizeDateTime = null;
-		if(timestamp!= null){
-			mizeDateTime = new MizeDateTime(new DateTime(timestamp,DateTimeZone.UTC));
-		}
-		return mizeDateTime;
-	}*/
 
 	public static String toLowerCase(String value){
 		return value == null ? EMPTY : value.trim().toLowerCase();	

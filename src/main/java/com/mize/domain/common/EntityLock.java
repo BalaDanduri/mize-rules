@@ -33,6 +33,18 @@ public class EntityLock extends MizeSceEntity implements Comparable<EntityLock>{
 	private Long entityId;
 	private MizeDateTime lockDate;
 
+	public EntityLock(){
+		super();
+	}
+	
+	public EntityLock(Long id, String entityType, String entityCode, Long entityId, MizeDateTime lockDate){
+		super();
+		this.id = id;
+		this.entityType = entityType;
+		this.entityCode = entityCode;
+		this.entityId = entityId;
+		this.lockDate = lockDate;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
