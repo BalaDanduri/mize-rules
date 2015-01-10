@@ -50,13 +50,19 @@ public class MizeApplicationProperties {
 	public DateTimeFormatter  APP_DATE_FORMAT;
 	
 	public boolean indexProductListSolr;
+	private String environment;
+	private Long entityLockTime;
 	
 	private String googlePrivateKey;
 	private String googleChannelName;
 	private String googleClientId;
 	private boolean useGoogleLicensedKey;
-	private String environment;
-	private Long entityLockTime;
+	private String googleAPIURL;
+	private String geoCodeURL;
+	private String distanceGeoURL;
+	private String googleAPIdefaultKey;
+	private String defaultSearchRadius;
+	private String defaultcharEncoding;
 	
 	public static void loadPropertiesIfRequired(){
 		if(propMap == null || propMap.size() == 0){
@@ -265,6 +271,23 @@ public class MizeApplicationProperties {
 	public void setIndexProductListSolr(boolean indexProductListSolr) {
 		this.indexProductListSolr = indexProductListSolr;
 	}
+	
+	public String getEnvironment() {
+		return environment;
+	}
+
+	public void setEnvironment(String environment) {
+		this.environment = environment;
+	}
+
+	public Long getEntityLockTime() {
+		return entityLockTime;
+	}
+
+	public void setEntityLockTime(Long entityLockTime) {
+		this.entityLockTime = entityLockTime;
+	}
+	
 	@JsonIgnore
 	public String getGooglePrivateKey() {
 		return googlePrivateKey;
@@ -297,21 +320,54 @@ public class MizeApplicationProperties {
 	public void setUseGoogleLicensedKey(boolean useGoogleLicensedKey) {
 		this.useGoogleLicensedKey = useGoogleLicensedKey;
 	}
-
-	public String getEnvironment() {
-		return environment;
+		
+	public String getGoogleAPIURL() {
+		return googleAPIURL;
 	}
 
-	public void setEnvironment(String environment) {
-		this.environment = environment;
+	public void setGoogleAPIURL(String googleAPIURL) {
+		this.googleAPIURL = googleAPIURL;
 	}
 
-	public Long getEntityLockTime() {
-		return entityLockTime;
+	public String getGeoCodeURL() {
+		return geoCodeURL;
 	}
 
-	public void setEntityLockTime(Long entityLockTime) {
-		this.entityLockTime = entityLockTime;
+	public void setGeoCodeURL(String geoCodeURL) {
+		this.geoCodeURL = geoCodeURL;
 	}
-	
+
+	public String getDistanceGeoURL() {
+		return distanceGeoURL;
+	}
+
+	public void setDistanceGeoURL(String distanceGeoURL) {
+		this.distanceGeoURL = distanceGeoURL;
+	}
+
+	public String getGoogleAPIdefaultKey() {
+		return googleAPIdefaultKey;
+	}
+
+	public void setGoogleAPIdefaultKey(String googleAPIdefaultKey) {
+		this.googleAPIdefaultKey = googleAPIdefaultKey;
+	}
+
+	public String getDefaultSearchRadius() {
+		return defaultSearchRadius;
+	}
+
+	public void setDefaultSearchRadius(String defaultSearchRadius) {
+		this.defaultSearchRadius = defaultSearchRadius;
+	}
+
+	public String getDefaultcharEncoding() {
+		return defaultcharEncoding;
+	}
+
+	public void setDefaultcharEncoding(String defaultcharEncoding) {
+		this.defaultcharEncoding = defaultcharEncoding;
+	}
+
+		
 }

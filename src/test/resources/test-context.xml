@@ -87,6 +87,12 @@
 		<property name="googleChannelName" value="${google.api.channel~~CustomerCentral}"/>
 		<property name="googleClientId" value="${google.api.clientId~~gme-mizeinc}"/>
 		<property name="useGoogleLicensedKey" value="${google.api.useLicensedKey~~false}" />
+		<property name="googleAPIURL" value="${google.api.geoCodeURL~~https://maps.googleapis.com/maps/api/}" />
+		<property name="geoCodeURL" value="${google.api.geoCodeURL~~geocode}" />
+		<property name="distanceGeoURL" value="${google.api.distanceGeoURL~~distancematrix}" />
+		<property name="googleAPIdefaultKey" value="${google.api.defaultKey~~AIzaSyCGjITDrVhByTqGN2DdMDDAr-qaHkEVV3k}" />
+		<property name="defaultSearchRadius" value="${google.api.defaultSearchRadius~~25}" />
+		<property name="defaultcharEncoding" value="${app.defaultcharEncoding~~UTF-8}" />
 	</bean>		 
 	
 	<bean id="mizeDateTimeUtils" class="com.mize.domain.util.MizeDateTimeUtils"/>
