@@ -82,7 +82,8 @@
 				<entry key="useGoogleLicensedKey" value="${google.api.useLicensedKey~~false}"  />
 				<entry key="googleChannelName" value="${google.api.channel~~CustomerCentral}"  />
 				<entry key="googleAPIURL" value="${google.api.geoCodeURL~~https://maps.googleapis.com/maps/api/}"  />
-				<entry key="googleAPIdefaultKey" value="${google.api.defaultKey~~AIzaSyCGjITDrVhByTqGN2DdMDDAr-qaHkEVV3k}"  />
+				<entry key="googleAPIdefaultKey" value="${google.api.defaultKey~~}"  />
+				<entry key="googleWebAPIdefaultKey" value="${google.api.webdefaultKey~~AIzaSyBOp1kF-SjfhWmuPM7gjVkEfhy1u_0PHSY}"  />
 			</map>
 		</property>
 		<property name="serverProperties">
