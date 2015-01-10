@@ -69,31 +69,42 @@
  		-->	
  	</bean>
  	
-	<bean id="mizeApplicationProperties" class="com.mize.domain.util.MizeApplicationProperties">
-		<property name="pageSize" value="${search.defaultPageSize~~10}"/>
-		<property name="recordCount" value="${search.defaultMaxResultsCount~~1000}"/>
-		<property name="defaultTenantCode" value="${app.defaultTenantCode~~10C000100P}"/>
-		<property name="defaultCurrencyCode" value="${app.defaultCurrencyCode~~USD}"/>
-		<property name="loginType" value="${login.type~~email}"/>
-		<property name="defaultTimeZone" value="${app.defaultTimeZone~~UTC}"/>
-		<property name="defaultEndDate" value="${app.defaultEndDate~~12-31-2025}"/>
-		<property name="defaultLocaleId" value="${app.defaultLocaleId~~1}"/>
-		<property name="createdByUser" value="${app.createdByUser~~userName}"/>
-		<property name="defaultDateTimeFormat" value="${app.dateTimeFormat~~MM-dd-yyyy HH:mm:ss}"/>
-		<property name="defaultDateFormat" value="${app.dateFormat~~MM-dd-yyyy}"/>
-		<property name="defaultDBDateFormat" value="${app.db.dateFormat~~yyyy-MM-dd}"/>
-		<property name="defaultDBDateTimeFormat" value="${app.db.dateTimeFormat~~yyyy-MM-dd HH:mm:ss}"/>
-		<property name="googlePrivateKey" value="${google.api.privateKey~~S_qiDFZTnbmOzUo2adofIW1Aagk=}"/>
-		<property name="googleChannelName" value="${google.api.channel~~CustomerCentral}"/>
-		<property name="googleClientId" value="${google.api.clientId~~gme-mizeinc}"/>
-		<property name="useGoogleLicensedKey" value="${google.api.useLicensedKey~~false}" />
-		<property name="googleAPIURL" value="${google.api.geoCodeURL~~https://maps.googleapis.com/maps/api/}" />
-		<property name="geoCodeURL" value="${google.api.geoCodeURL~~geocode}" />
-		<property name="distanceGeoURL" value="${google.api.distanceGeoURL~~distancematrix}" />
-		<property name="googleAPIdefaultKey" value="${google.api.defaultKey~~AIzaSyCGjITDrVhByTqGN2DdMDDAr-qaHkEVV3k}" />
-		<property name="defaultSearchRadius" value="${google.api.defaultSearchRadius~~25}" />
-		<property name="defaultcharEncoding" value="${app.defaultcharEncoding~~UTF-8}" />
-	</bean>		 
+ 	<bean id="mizeApplicationProperties" class="com.mize.domain.util.MizeApplicationProperties">
+		<property name="clientProperties">
+			<map>				
+				<entry key="defaultCurrencyCode" value="${app.defaultCurrencyCode~~USD}"  />				
+				<entry key="defaultTimeZone" value="${app.defaultTimeZone~~UTC}"  />
+				<entry key="defaultEndDate" value="${app.defaultEndDate~~12-31-2025}"  />
+				<entry key="defaultLocaleId" value="${app.defaultLocaleId~~1}"  />				
+				<entry key="defaultDateTimeFormat" value="${app.dateTimeFormat~~MM-dd-yyyy HH:mm:ss}"  />
+				<entry key="defaultDateFormat" value="${app.dateFormat~~MM-dd-yyyy}"  />
+				<entry key="googleClientId" value="${google.api.clientId~~gme-mizeinc}"  />
+				<entry key="useGoogleLicensedKey" value="${google.api.useLicensedKey~~false}"  />
+				<entry key="googleChannelName" value="${google.api.channel~~CustomerCentral}"  />
+				<entry key="googleAPIURL" value="${google.api.geoCodeURL~~https://maps.googleapis.com/maps/api/}"  />
+				<entry key="googleAPIdefaultKey" value="${google.api.defaultKey~~AIzaSyCGjITDrVhByTqGN2DdMDDAr-qaHkEVV3k}"  />
+			</map>
+		</property>
+		<property name="serverProperties">
+			<map>
+				<entry key="defaultTenantCode" value="${app.defaultTenantCode~~10C000100P}"  />
+				<entry key="loginType" value="${login.type~~email}"  />
+				<entry key="pageSize" value="${search.defaultPageSize~~10}" />
+				<entry key="recordCount" value="${search.defaultMaxResultsCount~~1000}"  />
+				<entry key="createdByUser" value="${app.createdByUser~~userName}"  />							
+				<entry key="defaultDBDateFormat" value="${app.db.dateFormat~~yyyy-MM-dd}"  />
+				<entry key="defaultDBDateTimeFormat" value="${app.db.dateTimeFormat~~yyyy-MM-dd HH:mm:ss}"  />
+				<entry key="indexProductListSolr" value="${app.indexProductListSolr~~true}"  />
+				<entry key="googlePrivateKey" value="${google.api.privateKey~~S_qiDFZTnbmOzUo2adofIW1Aagk=}" />				
+				<entry key="environment" value="${app.environment~~Dev}"  />				
+				<entry key="geoCodeURL" value="${google.api.geoCodeURL~~geocode}"  />
+				<entry key="distanceGeoURL" value="${google.api.distanceGeoURL~~distancematrix}"  />
+				<entry key="defaultSearchRadius" value="${google.api.defaultSearchRadius~~25}"  />
+				<entry key="defaultcharEncoding" value="${app.defaultcharEncoding~~UTF-8}"  />
+				
+			</map>
+		</property>
+	</bean>
 	
 	<bean id="mizeDateTimeUtils" class="com.mize.domain.util.MizeDateTimeUtils"/>
 	
