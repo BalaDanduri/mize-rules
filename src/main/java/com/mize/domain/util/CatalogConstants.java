@@ -47,6 +47,7 @@ public abstract class CatalogConstants implements Serializable{
 	public static final String FORM_FIELD_TYPES = "FormFieldTypes";
 	public static final String SERVICE_TYPE = "LaborType";
 	public static final String INSPECTION_TYPE = "InspectionType";
+	public static final String USER_INSPECTION_TYPE ="UserInspectionType";
 	public static final String INSPECTION_LOCATION_TYPE = "InspectionLocationType";
 	public static final String PART_ATTRIBUTE_TYPE  = "PartAttributeType";
 	public static final String PART_ATTRIBUTE_UOM  = "PartAttributeUOM";
