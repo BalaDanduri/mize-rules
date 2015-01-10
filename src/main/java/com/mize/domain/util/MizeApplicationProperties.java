@@ -2,44 +2,23 @@ package com.mize.domain.util;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import org.springframework.beans.factory.InitializingBean;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class MizeApplicationProperties {
+public class MizeApplicationProperties implements InitializingBean {	
 	
-	private static final Map<String, String> propMap = new HashMap<String, String>();
 	public final static String DEF_DATE_FORMAT = "MM/dd/yyyy";
 	public final static String DEF_TIME_FORMAT = "HH:mm:ss";
 	public static final String LOGIN_TYPE_LOGIN_ID = "loginId";
 	public static final String LOGIN_TYPE_EMAIL = "email"; 
 	
-	private int pageSize;
-	
-	private int recordCount;
-	
-	private Long defaultLocaleId;
-	
-	private String defaultTenantCode;
-	
-	private String defaultCurrencyCode;
-	private String defaultTimeZone;
-	
-	private String createdByUser;
-	
-	private String loginType;
-	
-	private String defaultEndDate;
-	private String defaultDateTimeFormat;
-	private String defaultDateFormat;
 	@JsonIgnore
-	private DateTimeZone dateTimeZone;
-	private String defaultDBDateTimeFormat;
-	private String defaultDBDateFormat;
+	private DateTimeZone dateTimeZone;	
 	@JsonIgnore
 	public DateTimeFormatter  DB_DATE_TIME_FORMAT;
 	@JsonIgnore
@@ -49,325 +28,248 @@ public class MizeApplicationProperties {
 	@JsonIgnore
 	public DateTimeFormatter  APP_DATE_FORMAT;
 	
-	public boolean indexProductListSolr;
-	private String environment;
-	private Long entityLockTime;
+	private final Map<String, String> properties = new HashMap<String, String>();
+	private Map<String, String> clientProperties = new HashMap<String, String>();
+	private Map<String, String> serverProperties = new HashMap<String, String>();	
 	
-	private String googlePrivateKey;
-	private String googleChannelName;
-	private String googleClientId;
-	private boolean useGoogleLicensedKey;
-	private String googleAPIURL;
-	private String geoCodeURL;
-	private String distanceGeoURL;
-	private String googleAPIdefaultKey;
-	private String defaultSearchRadius;
-	private String defaultcharEncoding;
-	
-	public static void loadPropertiesIfRequired(){
-		if(propMap == null || propMap.size() == 0){
-			loadProperties();
-		}
+	@JsonIgnore
+	public Map<String, String> getProperties() {
+		return properties;
 	}
 	
-	public static void loadProperties() {
-		String path = null;
-		try {
-			Properties properties = new Properties();
-			path = "application"+Formatter.makeNotNullString(System.getProperty("CONFIG_ENV"))+".properties";
-			properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream(path));
-			for (String key : properties.stringPropertyNames()) {
-				propMap.put(key, properties.getProperty(key));
-			}
-			System.out.println("Loaded Properties File "+path);
-			//logger.info("Loaded Properties File "+path);
-		} catch (Exception e) {
-			e.printStackTrace();
-			//logger.error("Failed to load peroperties", e);
-			System.out.println("Failed to load peroperties "+path);
+	public void setProperties(Map<String, String> properties) {
+		if(this.properties != null) {
+			this.properties.putAll(properties);
 		}
+	}	 
+	
+	public Map<String, String> getClientProperties() {
+		return clientProperties;
+	}	
+	
+	public void setClientProperties(Map<String, String> clientProperties) {
+		this.clientProperties = clientProperties;
 	}
 	
-	public String getPropertyValue(String key){
-		loadPropertiesIfRequired();
-		if(propMap != null){
-			return propMap.get(key);
-		}
-		return null;
-	}
-	
-	public Long getPropertyValueAsLong(String key){
-		loadPropertiesIfRequired();
-		if(propMap != null && propMap.get(key) != null){
-			return Formatter.longValue(propMap.get(key));
-		}
-		return null;
-	}
-	
-	public Integer getPropertyValueAsInteger(String key){
-		loadPropertiesIfRequired();
-		if(propMap != null && propMap.get(key) != null){
-			return Formatter.intValue(propMap.get(key));
-		}
-		return null;
+	@JsonIgnore
+	public Map<String, String> getServerProperties() {
+		return serverProperties;
 	}
 
-	public int getDefaultPageSize() {
-		return pageSize;
-	}
-	
-	public int getDefaultMaxRecordsCount() {
-		return recordCount;
-	}
-	
-	public void setPageSize(int pageSize) {
-		this.pageSize = pageSize;
-	}
+	public void setServerProperties(Map<String, String> serverProperties) {
+		this.serverProperties = serverProperties;
+	}	
 
-	public void setRecordCount(int recordCount) {
-		this.recordCount = recordCount;
+	@JsonIgnore
+	public Integer getDefaultPageSize() {		
+		if(getPropertyValue("pageSize") != null) {
+			return  Integer.valueOf(getPropertyValue("pageSize"));
+		}else {
+			return null;
+		}
 	}
 	
+	@JsonIgnore
+	public Integer getDefaultMaxRecordsCount() {
+		if(getPropertyValue("recordCount") != null) {
+			return Integer.valueOf(getPropertyValue("recordCount"));
+		}else {
+			return null;
+		}
+	}	
+	
+	@JsonIgnore
 	public Long getDefaultLocaleId() {
-		return defaultLocaleId;
-	}
-
-	public void setDefaultLocaleId(Long defaultLocaleId) {
-		this.defaultLocaleId = defaultLocaleId;
-	}
-
-	public String getDefaultTenantCode() {
-		return defaultTenantCode;
-	}
-
-	public void setDefaultTenantCode(String defaultTenantCode) {
-		this.defaultTenantCode = defaultTenantCode;
-	}
-	
-	public String getDefaultCurrencyCode() {
-		return defaultCurrencyCode;
-	}
-	
-	public void setDefaultCurrencyCode(String defaultCurrencyCode) {
-		this.defaultCurrencyCode = defaultCurrencyCode;
-	}
-	
-	
-	public static String getDateFormatt(String countryCode){
-		loadPropertiesIfRequired();
-		String dateFormatt = DEF_DATE_FORMAT; 
-		if(propMap != null && propMap.get(countryCode) != null){
-			dateFormatt = propMap.get(countryCode);
+		if(getPropertyValue("defaultLocaleId") != null) {
+			return  Long.valueOf(getPropertyValue("defaultLocaleId"));
+		}else {
+			return null;
 		}
-		return dateFormatt;
-	}
-
-	public void setLoginType(String loginType) {
-		this.loginType = loginType;
-	}
-
+	}	
+	
+	@JsonIgnore
+	public String getDefaultTenantCode() {		
+		return getPropertyValue("defaultTenantCode");		
+	}	
+	
+	@JsonIgnore
+	public String getDefaultCurrencyCode() {
+		return getPropertyValue("defaultCurrencyCode");		
+	}	
+	
+	@JsonIgnore
 	public String getLoginType() {
-		return loginType;
+		return getPropertyValue("loginType");		
 	}
 	
-	public boolean isLoginById() {
-		return Formatter.equalIgnoreCase(LOGIN_TYPE_LOGIN_ID, this.loginType); 
+	@JsonIgnore
+	public boolean isLoginById() {		
+		return Formatter.equalIgnoreCase(LOGIN_TYPE_LOGIN_ID, getLoginType()); 
 	}
 	
+	@JsonIgnore
 	public boolean isLoginByEmail() {
-		return Formatter.equalIgnoreCase(LOGIN_TYPE_EMAIL, this.loginType); 
+		return Formatter.equalIgnoreCase(LOGIN_TYPE_EMAIL, getLoginType()); 
 	}
 	
+	@JsonIgnore
 	public String getDefaultTimeZone() {
-		return defaultTimeZone;
+		return getPropertyValue("defaultTimeZone");		
 	}
-
-	public void setDefaultTimeZone(String defaultTimeZone) {		
-		this.defaultTimeZone = defaultTimeZone;
-		this.dateTimeZone = DateTimeZone.forID(defaultTimeZone);
-	}
-
+	
+	@JsonIgnore
 	public String getDefaultEndDate() {
-		return defaultEndDate;
-	}
-
-	public void setDefaultEndDate(String defaultEndDate) {
-		this.defaultEndDate = defaultEndDate;
-	}
-
+		return getPropertyValue("defaultEndDate");		
+	}	
+	
+	@JsonIgnore
 	public String getCreatedByUser() {
-		return createdByUser;
-	}
-
-	public void setCreatedByUser(String createdByUser) {
-		this.createdByUser = createdByUser;
+		return getPropertyValue("createdByUser");		
 	}
 	
-	
+	@JsonIgnore
 	public boolean isAuditByUserName(){
-		return !"loginId".equalsIgnoreCase(createdByUser);
+		return !"loginId".equalsIgnoreCase(getCreatedByUser());
 	}
-
+	
+	@JsonIgnore
 	public String getDefaultDateTimeFormat() {
-		return defaultDateTimeFormat;
+		return getPropertyValue("defaultDateTimeFormat");		
 	}
-
-	public void setDefaultDateTimeFormat(String defaultDateTimeFormat) {
-		APP_DATE_TIME_FORMAT = DateTimeFormat.forPattern(defaultDateTimeFormat);
-		this.defaultDateTimeFormat = defaultDateTimeFormat;
-	}
-
+	
+	@JsonIgnore
 	public String getDefaultDateFormat() {
-		return defaultDateFormat;
+		return getPropertyValue("defaultDateFormat");		
 	}
-
-	public void setDefaultDateFormat(String defaultDateFormat) {
-		APP_DATE_FORMAT = DateTimeFormat.forPattern(defaultDateFormat);
-		this.defaultDateFormat = defaultDateFormat;
-	}
+	
 	@JsonIgnore
 	public DateTimeZone getDefaultDateTimeZone(){
+		dateTimeZone = DateTimeZone.forID(getDefaultTimeZone());		
 		return dateTimeZone;
 	}
-
+	
+	@JsonIgnore
 	public String getDefaultDBDateTimeFormat() {
-		return defaultDBDateTimeFormat;
+		return getPropertyValue("defaultDBDateTimeFormat");		
 	}
-
-	public void setDefaultDBDateTimeFormat(String defaultDBDateTimeFormat) {
-		DB_DATE_TIME_FORMAT = DateTimeFormat.forPattern(defaultDBDateTimeFormat);
-		this.defaultDBDateTimeFormat = defaultDBDateTimeFormat;
-	}
+	
 	@JsonIgnore
 	public DateTimeFormatter getDBDateTimeFormatter() {
+		DB_DATE_TIME_FORMAT = DateTimeFormat.forPattern(getDefaultDBDateTimeFormat());
 		return DB_DATE_TIME_FORMAT;
 	}
+	
 	@JsonIgnore
 	public DateTimeFormatter getDBDateFormatter() {
+		DB_DATE_FORMAT = DateTimeFormat.forPattern(getDefaultDBDateFormat());
 		return DB_DATE_FORMAT;
 	}
 
+	@JsonIgnore
 	public String getDefaultDBDateFormat() {
-		return defaultDBDateFormat;
+		return getPropertyValue("defaultDBDateFormat");				
 	}
-
-	public void setDefaultDBDateFormat(String defaultDBDateFormat) {
-		DB_DATE_FORMAT = DateTimeFormat.forPattern(defaultDBDateFormat);
-		this.defaultDBDateFormat = defaultDBDateFormat;
-	}
+	
 	@JsonIgnore
 	public DateTimeFormatter getAppDateFormatter() {
+		APP_DATE_FORMAT = DateTimeFormat.forPattern(getDefaultDateFormat());
 		return APP_DATE_FORMAT;
 	}
+	
 	@JsonIgnore
 	public DateTimeFormatter getAppDateTimeFormatter() {
+		APP_DATE_TIME_FORMAT = DateTimeFormat.forPattern(getDefaultDateTimeFormat());
 		return APP_DATE_TIME_FORMAT;
 	}
 	
-	public boolean isIndexProductListSolr() {
-		return indexProductListSolr;
-	}
-
-	public void setIndexProductListSolr(boolean indexProductListSolr) {
-		this.indexProductListSolr = indexProductListSolr;
-	}
-	
-	public String getEnvironment() {
-		return environment;
-	}
-
-	public void setEnvironment(String environment) {
-		this.environment = environment;
-	}
-
-	public Long getEntityLockTime() {
-		return entityLockTime;
-	}
-
-	public void setEntityLockTime(Long entityLockTime) {
-		this.entityLockTime = entityLockTime;
+	@JsonIgnore
+	public boolean isIndexProductListSolr() {		
+		if(getPropertyValue("indexProductListSolr") != null) {
+			return Boolean.valueOf(getPropertyValue("indexProductListSolr"));
+		}else {
+			return false;
+		}
 	}
 	
 	@JsonIgnore
 	public String getGooglePrivateKey() {
-		return googlePrivateKey;
+		return getPropertyValue("googlePrivateKey");
+		
 	}
-
-	public void setGooglePrivateKey(String googlePrivateKey) {
-		this.googlePrivateKey = googlePrivateKey;
-	}
-
+	
+	@JsonIgnore
 	public String getGoogleChannelName() {
-		return googleChannelName;
-	}
-
-	public void setGoogleChannelName(String googleChannelName) {
-		this.googleChannelName = googleChannelName;
-	}
-
+		return getPropertyValue("googleChannelName");
+	}	
+	
+	@JsonIgnore
 	public String getGoogleClientId() {
-		return googleClientId;
+		return getPropertyValue("googleClientId");		
 	}
-
-	public void setGoogleClientId(String googleClientId) {
-		this.googleClientId = googleClientId;
+	
+	@JsonIgnore
+	public boolean isUseGoogleLicensedKey() {		
+		if(getPropertyValue("useGoogleLicensedKey") != null) {
+			return Boolean.valueOf(getPropertyValue("useGoogleLicensedKey"));
+		}else {
+			return false;
+		}
 	}
-
-	public boolean isUseGoogleLicensedKey() {
-		return useGoogleLicensedKey;
+	
+	@JsonIgnore
+	public String getEnvironment() {
+		return getPropertyValue("environment");		
 	}
-
-	public void setUseGoogleLicensedKey(boolean useGoogleLicensedKey) {
-		this.useGoogleLicensedKey = useGoogleLicensedKey;
+	
+	@JsonIgnore
+	public Long getEntityLockTime() {
+		if(getPropertyValue("entityLockTime") != null) {
+			return Long.valueOf(getPropertyValue("entityLockTime"));
+		}else {
+			return null;
+		}
 	}
-		
+	
+	@JsonIgnore
 	public String getGoogleAPIURL() {
-		return googleAPIURL;
+		return getPropertyValue("googleAPIURL");
 	}
-
-	public void setGoogleAPIURL(String googleAPIURL) {
-		this.googleAPIURL = googleAPIURL;
-	}
-
+	
+	@JsonIgnore
 	public String getGeoCodeURL() {
-		return geoCodeURL;
+		return getPropertyValue("geoCodeURL");
 	}
-
-	public void setGeoCodeURL(String geoCodeURL) {
-		this.geoCodeURL = geoCodeURL;
-	}
-
+	
+	@JsonIgnore
 	public String getDistanceGeoURL() {
-		return distanceGeoURL;
+		return getPropertyValue("distanceGeoURL");
 	}
-
-	public void setDistanceGeoURL(String distanceGeoURL) {
-		this.distanceGeoURL = distanceGeoURL;
-	}
-
+	
+	@JsonIgnore
 	public String getGoogleAPIdefaultKey() {
-		return googleAPIdefaultKey;
+		return getPropertyValue("googleAPIdefaultKey");
 	}
-
-	public void setGoogleAPIdefaultKey(String googleAPIdefaultKey) {
-		this.googleAPIdefaultKey = googleAPIdefaultKey;
-	}
-
+	
+	@JsonIgnore
 	public String getDefaultSearchRadius() {
-		return defaultSearchRadius;
+		return getPropertyValue("defaultSearchRadius");
 	}
-
-	public void setDefaultSearchRadius(String defaultSearchRadius) {
-		this.defaultSearchRadius = defaultSearchRadius;
-	}
-
+	
+	@JsonIgnore
 	public String getDefaultcharEncoding() {
-		return defaultcharEncoding;
+		return getPropertyValue("defaultcharEncoding");
 	}
 
-	public void setDefaultcharEncoding(String defaultcharEncoding) {
-		this.defaultcharEncoding = defaultcharEncoding;
+	@Override
+	@JsonIgnore
+	public void afterPropertiesSet() throws Exception {
+		properties.putAll(serverProperties);
+		properties.putAll(clientProperties);		
 	}
-
-		
+	
+	private String getPropertyValue(String propertyName) {		
+		return properties.get(propertyName);
+	}
+	
+	
 }
