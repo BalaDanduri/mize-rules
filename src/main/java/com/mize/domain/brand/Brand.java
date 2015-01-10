@@ -4,6 +4,7 @@ package com.mize.domain.brand;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Cacheable;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,6 +26,7 @@ import com.mize.domain.user.UserBrandMapping;
 import com.mize.domain.util.JPASerializer;
 
 @Entity
+@Cacheable(true)
 @Table(name = "brand")
 public class Brand extends MizeSceEntity implements Comparable<Brand>{
 	

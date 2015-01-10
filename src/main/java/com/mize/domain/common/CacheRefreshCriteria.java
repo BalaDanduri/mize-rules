@@ -5,26 +5,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
-import com.mize.domain.util.JodaDateTimeDeserializer;
-import com.mize.domain.util.JsonDateTimeSerializer;
+import com.mize.domain.util.MizeDateTime;
 
-public class CacheRefreshCriteria extends MizeEntity implements Comparable<CacheRefreshCriteria>{
+public class CacheRefreshCriteria extends MizeSceEntity implements Comparable<CacheRefreshCriteria>{
 	
 	private static final long serialVersionUID = -6647895629560783567L;
 	private String entityName;
 	private String entityAliasName;
-	private DateTime startDate;
-	private DateTime endDate;
+	private MizeDateTime startDate;
+	private MizeDateTime endDate;
 	private Long fromEntityID;
 	private Long toEntityID;
 	private String inCluseIDs;
@@ -53,7 +47,7 @@ public class CacheRefreshCriteria extends MizeEntity implements Comparable<Cache
 		this.criteria = criteria;
 	}
 	public enum Criteria {
-		Between,InClause,Equals,DateRange,UpdatedDate,CreatedDate,JpqlQuery,NativeQuery,ByName,InitialLoad;
+		Between,InClause,Equals,DateRange,UpdatedDate,CreatedDate,JpqlQuery,NativeQuery,ByName,InitialLoad,ClearSecondLevelCache;
 	}
 	
 	public String getEntityName() {
@@ -63,29 +57,24 @@ public class CacheRefreshCriteria extends MizeEntity implements Comparable<Cache
 		this.entityName = entityName;
 	}
 	
-	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using = JsonDateTimeSerializer.class)
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getStartDate() {
+	public MizeDateTime getStartDate() {
 		return startDate;
 	}
 	
-	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using = JodaDateTimeDeserializer.class)
-	public void setStartDate(DateTime startDate) {
+
+	public void setStartDate(MizeDateTime startDate) {
 		this.startDate = startDate;
 	}
 	
-	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using = JsonDateTimeSerializer.class)
+	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@JsonInclude(Include.NON_DEFAULT)
-	public DateTime getEndDate() {
+	public MizeDateTime getEndDate() {
 		return endDate;
 	}
 	
-	@DateTimeFormat(pattern = "MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using = JodaDateTimeDeserializer.class)
-	public void setEndDate(DateTime endDate) {
+	public void setEndDate(MizeDateTime endDate) {
 		this.endDate = endDate;
 	}
 	public String getEntityAliasName() {

@@ -1,5 +1,6 @@
 package com.mize.domain.common;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,6 +15,7 @@ import javax.persistence.Transient;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
+@Cacheable(true)
 @Table(name = "state")
 public class State extends MizeSceEntity implements Comparable<State>{
 	
