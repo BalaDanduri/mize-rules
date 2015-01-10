@@ -1,5 +1,7 @@
 package com.mize.domain.common;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Type;
 
@@ -32,6 +35,7 @@ public class EntityLock extends MizeSceEntity implements Comparable<EntityLock>{
 	private String entityCode;
 	private Long entityId;
 	private MizeDateTime lockDate;
+	private List<Long> entityLockIds;
 
 	public EntityLock(){
 		super();
@@ -122,6 +126,15 @@ public class EntityLock extends MizeSceEntity implements Comparable<EntityLock>{
 		this.lockDate = lockDate;
 	}
 
+	@Transient
+	public List<Long> getEntityLockIds() {
+		return entityLockIds;
+	}
+
+	public void setEntityLockIds(List<Long> entityLockIds) {
+		this.entityLockIds = entityLockIds;
+	}
+	
 	@Override
 	public int compareTo(EntityLock arg0) {
 		return 0;
@@ -181,7 +194,5 @@ public class EntityLock extends MizeSceEntity implements Comparable<EntityLock>{
 			return false;
 		return true;
 	}
-
-	
 
 }
