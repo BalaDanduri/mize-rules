@@ -78,6 +78,7 @@ public class PurchaseOrderShipment extends MizeSceEntity implements Comparable<P
 	private EntityComment entityComment;
 	private String fromBEReferenceNumber;
 	private String beReferenceNumber;
+	private String updateMasterAddress;	
 	
 	public PurchaseOrderShipment(){
 		super();
@@ -424,6 +425,15 @@ public class PurchaseOrderShipment extends MizeSceEntity implements Comparable<P
 
 	public void setBeReferenceNumber(String beReferenceNumber) {
 		this.beReferenceNumber = beReferenceNumber;
+	}
+
+	@Transient
+	public String getUpdateMasterAddress() {
+		return updateMasterAddress;
+	}
+
+	public void setUpdateMasterAddress(String updateMasterAddress) {
+		this.updateMasterAddress = updateMasterAddress;
 	}
 
 	@Override
