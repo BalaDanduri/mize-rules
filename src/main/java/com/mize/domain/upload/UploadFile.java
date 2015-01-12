@@ -22,9 +22,17 @@ public class UploadFile extends MizeSceEntity implements Comparable<UploadFile>{
 	private File file;
 	private String fileType;
 	private BatchJobMapper batchJobMapper;
+	private String deviceId;
 
 	public static final String INPUT_TYPE_S3 = "S3";
 	public static final String INPUT_TYPE_FILE = "file";
+	
+	public String getDeviceId() {
+		return deviceId;
+	}
+	public void setDeviceId(String deviceId) {
+		this.deviceId = deviceId;
+	}
 
 	public String getFileFormat() {
 		return fileFormat;

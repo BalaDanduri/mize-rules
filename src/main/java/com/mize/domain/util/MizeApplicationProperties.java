@@ -32,6 +32,7 @@ public class MizeApplicationProperties implements InitializingBean {
 	private Map<String, String> clientProperties = new HashMap<String, String>();
 	private Map<String, String> serverProperties = new HashMap<String, String>();	
 	
+	
 	@JsonIgnore
 	public Map<String, String> getProperties() {
 		return properties;
@@ -96,6 +97,11 @@ public class MizeApplicationProperties implements InitializingBean {
 	public String getDefaultCurrencyCode() {
 		return getPropertyValue("defaultCurrencyCode");		
 	}	
+	
+	@JsonIgnore
+	public String getDeviceFolder() {
+		return getPropertyValue("deviceFolder");
+	}
 	
 	@JsonIgnore
 	public String getLoginType() {
