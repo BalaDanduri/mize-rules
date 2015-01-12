@@ -131,7 +131,7 @@ public class MizeDateTime implements IMizeDate, Comparable<MizeDateTime>, Clonea
 		return null;
 	}
 	
-	private MizeDateTime createNewMizeDateTime(DateTime dateTime){
+	public MizeDateTime createNewMizeDateTime(DateTime dateTime){
 		MizeDateTime mizeDateTime = new MizeDateTime(dateTime);
 		mizeDateTime.dateTime = dateTime;
 		mizeDateTime.dateTimeFormat = this.dateTimeFormat;

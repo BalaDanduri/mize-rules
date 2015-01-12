@@ -158,7 +158,7 @@ public class MizeDate implements IMizeDate, Comparable<MizeDate>, Cloneable{
 		return createNewMizeDate(this.dateTime.minusDays(1));
 	}	
 	
-	private MizeDate createNewMizeDate(DateTime dateTime){
+	public MizeDate createNewMizeDate(DateTime dateTime){
 		MizeDate mizeDate = new MizeDate(dateTime);
 		mizeDate.dateTime = dateTime;
 		mizeDate.dateFormat = this.dateFormat;
