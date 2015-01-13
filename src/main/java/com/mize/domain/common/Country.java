@@ -3,6 +3,7 @@ package com.mize.domain.common;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,28 +11,43 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.mize.domain.auth.User;
+import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.util.JPASerializer;
 
 @Entity
 @Cacheable(true)
 @Table(name = "country")
-public class Country extends MizeSceEntity implements Comparable<Country>{
+public class Country extends MizeSceEntityAudit implements Comparable<Country>{
 
 	private static final long serialVersionUID = 3412102873370612905L;
 	
+	private User user;
 	private String code;
+	@Deprecated
 	private String name;
 	private String code3;
+	private String isActive;
+	private BusinessEntity tenant;
 	private List<State> states = new ArrayList<State>();
+	@Deprecated
 	private List<State> stateList;
+	
+	private List<CountryIntl> intls = new ArrayList<CountryIntl>();
 	
 	public Country(){
 		super();
@@ -49,7 +65,16 @@ public class Country extends MizeSceEntity implements Comparable<Country>{
 		this.name = name;
 		this.code3 = code3;
 	}
-	
+	@Deprecated
+	public Country(Long id,String code, String code3, String yOrN, String name) {
+		super();
+		this.id = id;
+		this.code = code;
+		this.code3 = code3;
+		this.isActive = yOrN;
+		this.name = name;
+	}
+
 	public Country(String code, String code3) {
 		super();
 		this.code = code;
@@ -57,6 +82,14 @@ public class Country extends MizeSceEntity implements Comparable<Country>{
 	}
 	
 	
+	@Transient
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -78,6 +111,15 @@ public class Country extends MizeSceEntity implements Comparable<Country>{
 	public void setCode(String code) {
 		this.code = code;
 	}
+	
+	@Column(name="is_active")
+	public String getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(String isActive) {
+		this.isActive = isActive;
+	}
 
 	@Column(name="country_name",nullable=false)
 	public String getName() {
@@ -97,14 +139,30 @@ public class Country extends MizeSceEntity implements Comparable<Country>{
 		this.stateList = stateList;
 	}	
 	
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "country" ,orphanRemoval= true)
+	@Fetch(FetchMode.SELECT)
+	@JsonManagedReference(value="countryIntl")
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	public List<CountryIntl> getIntls() {
+		return intls;
+	}
+
+	public void setIntls(List<CountryIntl> countryIntlList) {
+		this.intls = countryIntlList;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
 		result = prime * result + ((code3 == null) ? 0 : code3.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((intls == null) ? 0 : intls.hashCode());
+		result = prime * result
+				+ ((isActive == null) ? 0 : isActive.hashCode());
 		result = prime * result + ((states == null) ? 0 : states.hashCode());
+		result = prime * result + ((tenant == null) ? 0 : tenant.hashCode());
 		return result;
 	}
 
@@ -127,10 +185,15 @@ public class Country extends MizeSceEntity implements Comparable<Country>{
 				return false;
 		} else if (!code3.equals(other.code3))
 			return false;
-		if (name == null) {
-			if (other.name != null)
+		if (intls == null) {
+			if (other.intls != null)
 				return false;
-		} else if (!name.equals(other.name))
+		} else if (!intls.equals(other.intls))
+			return false;
+		if (isActive == null) {
+			if (other.isActive != null)
+				return false;
+		} else if (!isActive.equals(other.isActive))
 			return false;
 		if (states == null) {
 			if (other.states != null)
@@ -140,15 +203,20 @@ public class Country extends MizeSceEntity implements Comparable<Country>{
 				return false;
 			}
 		}
-			
+		if (tenant == null) {
+			if (other.tenant != null)
+				return false;
+		} else if (!tenant.equals(other.tenant))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Country [code=" + code + ", name=" + name + ", code3=" + code3+ "]";
+		return "Country [code=" + code + ", code3=" + code3 + ", isActive="
+				+ isActive + ", tenant=" + tenant + " intls="+intls+"]";
 	}
-	
+
 	public int compareTo(Country country) {
 		if ( this == country ) 
 			return EQUAL;
@@ -161,9 +229,10 @@ public class Country extends MizeSceEntity implements Comparable<Country>{
 		return EQUAL;		
 	}
 
-	@OneToMany(fetch= FetchType.LAZY , mappedBy ="country")
+	@OneToMany(cascade={CascadeType.ALL}, fetch= FetchType.LAZY , mappedBy ="country" ,orphanRemoval= true)
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
+	@JsonManagedReference(value="country")
 	@JsonBackReference(value="country_states")
 	public List<State> getStates() {
 		return states;
@@ -180,6 +249,18 @@ public class Country extends MizeSceEntity implements Comparable<Country>{
 
 	public void setCode3(String code3) {
 		this.code3 = code3;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "tenant_id", nullable = true)
+	@JsonSerialize(using = JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	public BusinessEntity getTenant() {
+		return tenant;
+	}
+
+	public void setTenant(BusinessEntity tenant) {
+		this.tenant = tenant;
 	}		
 	
 }

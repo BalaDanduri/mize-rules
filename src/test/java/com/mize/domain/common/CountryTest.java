@@ -18,6 +18,7 @@ import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.ContextConfiguration;
 
+import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.test.util.JPATest;
 @ContextConfiguration(locations={"/test-context.xml"})
 public class CountryTest extends JPATest{
@@ -27,8 +28,11 @@ public class CountryTest extends JPATest{
 	EntityTransaction tx;
 	Country country;
 	Country dbCountry;
-	State state; 
-
+	State state;
+	State state2;
+	StateIntl stateIntl;
+	CountryIntl countryIntl;
+	BusinessEntity tenant = null;
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -50,46 +54,68 @@ public class CountryTest extends JPATest{
 		tx.begin();
 		if(country.getId() == null){
 			entityManager.persist(country);	
+			entityManager.flush();
 		}else{
 			country = entityManager.merge(country);
-		}		
+		}	
 		tx.commit();
 	}
 	
 	private Country getCountryOjectToSave(Country country) {
-		// TODO Auto-generated method stub
 		country = new Country();
-		country.setName("AUSTRALIA");
 		country.setCode3("AUS");
 		country.setCode("AU");
-		
-		
-		getStateObjectToBeSaved(country);
-		
-		
+		country.setIsActive("Y");
+		tenant  = findExistingBE(entityManager);
+		getCountryIntlToBeSaved(country);
+		getStateObjectNotToBeSaved(country);
 		return country;
 	}
+	
 
-   private void getStateObjectToBeSaved(Country country) {
-		 state = new State();
-		List<State> stateList = new ArrayList<State>();
-		state.setCode("SYD");
-		state.setCountry(country);
-		state.setName("SYD");
-		stateList.add(state);
-		country.setStates(stateList);
+    private void getCountryIntlToBeSaved(Country country) {
+    	
+ 	   List<CountryIntl> countryIntlList = new ArrayList<CountryIntl>();
+ 	   countryIntl = new CountryIntl();
+ 	   Locale locale = findLocaleObjectFromDB();
+ 	   countryIntl.setLocale(locale);
+ 	   countryIntl.setCountry(country);
+ 	   countryIntl.setName("testCountryIntl");
+ 	   countryIntl.setDescription("testCountryIntlDescription");
+ 	   countryIntlList.add(countryIntl);
+ 	   country.setIntls(countryIntlList);
 	}
 
+    private void getStateObjectNotToBeSaved(Country country) {
+		state2 = new State();
+		List<State> stateList = new ArrayList<State>();
+		state2.setCode("MEL");
+		stateList.add(state);
+		state2.setCountry(country);
+		country.setStates(stateList);
+		getStateIntlObjectToBeSaved(state2);
+	}
+    
+
+    private void getStateIntlObjectToBeSaved(State state) {
+    	List<StateIntl> stateIntlList = new ArrayList<StateIntl>();
+		stateIntl = new StateIntl();
+		Locale locale = findLocaleObjectFromDB();
+		stateIntl.setLocale(locale);
+		stateIntl.setState(state);
+		stateIntl.setName("testStateIntl");
+		stateIntl.setDescription("testStateIntlDescription");
+		stateIntlList.add(stateIntl);
+		state.setIntls(stateIntlList);
+	}
 	
    public class CountryRowMapper implements RowMapper<Country>
    {
 
 	@Override
 	public Country mapRow(ResultSet rs, int arg1) throws SQLException {
-		// TODO Auto-generated method stub
 		Country contry = new Country();
 		contry.setId(rs.getLong("country_id"));
-		contry.setName(rs.getString("country_name"));
 		contry.setCode3(rs.getString("country_code_3"));
 		contry.setCode(rs.getString("country_code"));
 		return contry;
@@ -118,12 +144,23 @@ public class CountryTest extends JPATest{
 		}
 		catch(Exception e)
 		{
-		fail("Not yet implemented");
+			e.printStackTrace();
+		fail(e.toString());
 		}
 	}
 	
 	
 	public void tearDown() throws Exception {
+		if(countryIntl!=null) {
+			tx.begin();
+			entityManager.remove(countryIntl);
+			tx.commit();			
+		}
+		if(stateIntl!=null) {
+			tx.begin();
+			entityManager.remove(stateIntl);
+			tx.commit();			
+		}
 		if(state!=null ){
 			tx.begin();
 			entityManager.remove(state);

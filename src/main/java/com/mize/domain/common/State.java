@@ -1,6 +1,10 @@
 package com.mize.domain.common;
 
+import java.util.List;
+import java.util.ArrayList;
+
 import javax.persistence.Cacheable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,21 +13,39 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.mize.domain.auth.User;
+import com.mize.domain.util.JPASerializer;
 
 @Entity
 @Cacheable(true)
 @Table(name = "state")
-public class State extends MizeSceEntity implements Comparable<State>{
+public class State extends MizeSceEntityAudit implements Comparable<State>{
 	
 	private static final long serialVersionUID = -1518811417788517045L;
+	private User user;
+	@Deprecated
 	private String name;
 	private String code;
+	private String isActive;
 	private Country country;
+	// need to remove
+	@Deprecated
 	private Country stateCountry;
+	private List<StateIntl> intls = new ArrayList<StateIntl>();
+	
+	
 	
 	public State() {
 		super();		
@@ -45,6 +67,15 @@ public class State extends MizeSceEntity implements Comparable<State>{
 		this.id = id;
 		this.code = code;
 		this.name = name;		
+	}
+
+	@Transient
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Id
@@ -76,7 +107,16 @@ public class State extends MizeSceEntity implements Comparable<State>{
 	
 	public void setCode(String code) {
 		this.code = code;
-	}	
+	}
+	
+	@Column(name="is_active",nullable=false)
+	public String getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(String isActive) {
+		this.isActive = isActive;
+	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "country_id")
@@ -98,11 +138,19 @@ public class State extends MizeSceEntity implements Comparable<State>{
 		this.stateCountry = stateCountry;
 	}
 
-	@Override
-	public String toString() {
-		return "State [name=" + name + ", code=" + code + ", id=" + id + "]";
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "state" ,orphanRemoval= true)
+	@Fetch(FetchMode.SELECT)
+	@JsonManagedReference(value="stateIntl")
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	public List<StateIntl> getIntls() {
+		return intls;
 	}
-	
+
+	public void setIntls(List<StateIntl> stateIntlList) {
+		this.intls = stateIntlList;
+	}
+
 	public int compareTo(State state) {
 		if ( this == state ) 
 			return EQUAL;
@@ -116,11 +164,18 @@ public class State extends MizeSceEntity implements Comparable<State>{
 	}
 
 	@Override
+	public String toString() {
+		return "State [code=" + code + ", stateIntlList=" + intls + "]";
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((intls == null) ? 0 : intls.hashCode());
+		result = prime * result
+				+ ((isActive == null) ? 0 : isActive.hashCode());
 		return result;
 	}
 
@@ -138,13 +193,18 @@ public class State extends MizeSceEntity implements Comparable<State>{
 				return false;
 		} else if (!code.equals(other.code))
 			return false;
-		if (name == null) {
-			if (other.name != null)
+		if (intls == null) {
+			if (other.intls != null)
 				return false;
-		} else if (!name.equals(other.name))
+		} else if (!intls.equals(other.intls))
+			return false;
+		if (isActive == null) {
+			if (other.isActive != null)
+				return false;
+		} else if (!isActive.equals(other.isActive))
 			return false;
 		return true;
 	}
-	
-	
+
+
 }
