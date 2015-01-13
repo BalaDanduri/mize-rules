@@ -221,11 +221,11 @@ public class ServiceEntityRequestTest extends JPATest {
 		requestProduct.setModel("SCS900");
 		Product product = new Product();
 		product.setId(3042637L);
-		requestProduct.setProduct(product);
+		//requestProduct.setProduct(product);
 		requestProduct.setSerialNumber("SCS900100");
 		ProductSerial serial = new ProductSerial();
 		serial.setId(163L);
-		requestProduct.setProductSerial(serial);
+		//requestProduct.setProductSerial(serial);
 		requestProduct.setBrandName("Trimble");
 		requestProduct.setCategoryName("Machines");			
 		ProductRegistration registration = new ProductRegistration();

@@ -18,10 +18,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityContact;
 import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.product.Product;
-import com.mize.domain.product.ProductCategory;
 import com.mize.domain.product.ProductRegistration;
-import com.mize.domain.product.ProductSerial;
 import com.mize.domain.util.JPASerializer;
 
 /**
@@ -35,10 +32,10 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 	private static final long serialVersionUID = -1812475489451721317L;
 	
 	private ServiceEntityRequest serviceEntityRequest;
-	private Product product;
-	private ProductCategory productCategory;
+	//private Product product;
+	//private ProductCategory productCategory;
 	private Long productId;
-	private ProductSerial productSerial;
+	//private ProductSerial productSerial;
 	private Long productSerialId;
 	private ProductRegistration registration;
 	private Long prodRegnId;
@@ -89,7 +86,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 		this.serviceEntityRequest = serviceEntityRequest;
 	}
 	
-	@Transient
+	/*@Transient
 	@JsonIgnore
 	public Product getProduct() {
 		return product;
@@ -107,7 +104,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 	
 	public void setProductCategory(ProductCategory productCategory) {
 		this.productCategory = productCategory;
-	}
+	}*/
 	
 	@Column(name = "prod_id")
 	public Long getProductId() {
@@ -118,7 +115,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 		this.productId = productId;
 	}
 	
-	@Transient
+	/*@Transient
 	@JsonIgnore
 	public ProductSerial getProductSerial() {
 		return productSerial;
@@ -126,7 +123,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 	
 	public void setProductSerial(ProductSerial productSerial) {
 		this.productSerial = productSerial;
-	}
+	}*/
 	
 	@Column(name = "prod_serial_id")
 	public Long getProductSerialId() {
@@ -357,15 +354,15 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 		result = prime * result + ((model == null) ? 0 : model.hashCode());
 		result = prime * result
 				+ ((prodRegnId == null) ? 0 : prodRegnId.hashCode());
-		result = prime * result + ((product == null) ? 0 : product.hashCode());
+		/*result = prime * result + ((product == null) ? 0 : product.hashCode());
 		result = prime * result
-				+ ((productCategory == null) ? 0 : productCategory.hashCode());
+				+ ((productCategory == null) ? 0 : productCategory.hashCode());*/
 		result = prime * result
 				+ ((productId == null) ? 0 : productId.hashCode());
 		result = prime * result
 				+ ((productName == null) ? 0 : productName.hashCode());
-		result = prime * result
-				+ ((productSerial == null) ? 0 : productSerial.hashCode());
+		/*result = prime * result
+				+ ((productSerial == null) ? 0 : productSerial.hashCode());*/
 		result = prime * result
 				+ ((productSerialId == null) ? 0 : productSerialId.hashCode());
 		result = prime * result
@@ -464,7 +461,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 				return false;
 		} else if (!prodRegnId.equals(other.prodRegnId))
 			return false;
-		if (product == null) {
+		/*if (product == null) {
 			if (other.product != null)
 				return false;
 		} else if (!product.equals(other.product))
@@ -473,7 +470,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 			if (other.productCategory != null)
 				return false;
 		} else if (!productCategory.equals(other.productCategory))
-			return false;
+			return false;*/
 		if (productId == null) {
 			if (other.productId != null)
 				return false;
@@ -484,11 +481,11 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 				return false;
 		} else if (!productName.equals(other.productName))
 			return false;
-		if (productSerial == null) {
+		/*if (productSerial == null) {
 			if (other.productSerial != null)
 				return false;
 		} else if (!productSerial.equals(other.productSerial))
-			return false;
+			return false;*/
 		if (productSerialId == null) {
 			if (other.productSerialId != null)
 				return false;
@@ -515,23 +512,34 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 
 	@Override
 	public String toString() {
-		return "ServiceEntityRequestProduct [product=" + product
-				+ ", productCategory=" + productCategory + ", productId="
-				+ productId + ", productSerial=" + productSerial
-				+ ", productSerialId=" + productSerialId + ", registration="
-				+ registration + ", prodRegnId=" + prodRegnId
-				+ ", productName=" + productName + ", model=" + model
-				+ ", brandName=" + brandName + ", categoryName=" + categoryName
-				+ ", serialNumber=" + serialNumber + ", customerId="
-				+ customerId + ", customerCode=" + customerCode
-				+ ", customerTypeCode=" + customerTypeCode
-				+ ", customerSubTypeCode=" + customerSubTypeCode
-				+ ", customerName=" + customerName + ", customerFirstName="
-				+ customerFirstName + ", customerLastName=" + customerLastName
-				+ ", customerMiddleInitial=" + customerMiddleInitial
-				+ ", customerReference=" + customerReference
-				+ ", customerAddress=" + customerAddress + ", customerContact="
-				+ customerContact + ", isNewCustomer=" + isNewCustomer + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("ServiceEntityRequestProduct [");
+		//builder.append("/product=").append(product);
+		//builder.append(", productCategory=").append(productCategory);
+		builder.append(", productId=").append(productId);
+		//builder.append(", productSerial=").append(productSerial);		
+		builder.append(", productSerialId=").append(productSerialId);
+		builder.append(", prodRegnId=").append(registration);
+		builder.append(", productSerial=").append(prodRegnId);
+		builder.append(", productName=").append(productName);
+		builder.append(", model=").append(model);
+		builder.append(", brandName=").append(brandName);
+		builder.append(", categoryName=").append(categoryName);		
+		builder.append(", serialNumber=").append(serialNumber);
+		builder.append(", customerId=").append(customerId);
+		builder.append(", customerCode=").append(customerCode);
+		builder.append(", customerTypeCode=").append(customerTypeCode);
+		builder.append(", customerSubTypeCode=").append(customerSubTypeCode);
+		builder.append(", customerName=").append(customerName);
+		builder.append(", customerFirstName=").append(customerFirstName);
+		builder.append(", customerLastName=").append(customerLastName);
+		builder.append(", customerMiddleInitial=").append(customerMiddleInitial);
+		builder.append(", customerReference=").append(customerReference);		
+		builder.append(", customerAddress=").append(customerAddress);
+		builder.append(", customerContact=").append(customerContact);
+		builder.append(", isNewCustomer=").append(isNewCustomer);
+		builder.append("]");
+		return builder.toString();
 	}	
 	
 

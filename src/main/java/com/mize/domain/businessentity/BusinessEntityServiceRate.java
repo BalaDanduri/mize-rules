@@ -46,6 +46,12 @@ public class BusinessEntityServiceRate extends MizeSceEntityAudit implements Com
 	public BusinessEntityServiceRate(){
 	}
 	
+	public BusinessEntityServiceRate(Long id,String serviceType,BigDecimal serviceRate){
+		this.id = id;
+		this.serviceType = serviceType;
+		this.serviceRate = serviceRate;
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
