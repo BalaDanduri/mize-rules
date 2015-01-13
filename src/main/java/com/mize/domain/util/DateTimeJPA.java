@@ -89,7 +89,7 @@ public class DateTimeJPA implements UserType{
 
 	@Override
 	public void nullSafeSet(PreparedStatement arg0, Object arg1, int arg2,SessionImplementor arg3) throws HibernateException, SQLException {
-		arg0.setString(arg2,Formatter.getDBDateTime((DateTime)arg1));
+		arg0.setString(arg2,MizeDateTimeUtils.getDBDateTime((DateTime)arg1));
 		
 	}
 

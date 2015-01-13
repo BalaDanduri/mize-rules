@@ -241,7 +241,7 @@ public final class Formatter {
 		return (map == null || map.isEmpty());
 	}
 	
-	@Deprecated
+	@Deprecated 
 	public static String getDBDateTime(DateTime dateTime){
 		return (dateTime == null ? null : dateTime.toString(DB_DATE_TIME_FORMAT));
 	}
@@ -257,7 +257,7 @@ public final class Formatter {
 		return (dateTime == null ? null : dateTime.toString(DB_DATE_TIME_FORMAT));
 	}
 	
-	@Deprecated
+	@Deprecated 
 	public static String getDBEndDateTime(MizeDateTime mizeDateTime){		 
 		return (mizeDateTime == null ? null : getDBEndDateTime(mizeDateTime.getDateTime()));
 		
@@ -271,7 +271,7 @@ public final class Formatter {
 		return dateTime;
 	}
 	
-	@Deprecated
+	@Deprecated 
 	public static MizeDateTime toEndMizeDateTime(MizeDateTime mizeDateTime){// don't change 
 		DateTime  dateTime = toDateTime(mizeDateTime);
 		dateTime = toEndDateTime(dateTime);
@@ -281,12 +281,14 @@ public final class Formatter {
 		return mizeDateTime;
 	}
 	
+	@Deprecated 
 	public static MizeDate toEndMizeDate(MizeDate mizeDate){
 		DateTime  dateTime = toDateTime(mizeDate);
 		dateTime = toEndDateTime(dateTime);
 		return toMizeDate(dateTime);
 	}
 	
+	@Deprecated 
 	public static DateTime toStartDateTime(DateTime dateTime){
 		if(dateTime != null){
 			dateTime = dateTime.withTime(0, 0, 0, 0);
@@ -294,6 +296,7 @@ public final class Formatter {
 		return dateTime;
 	}
 	
+	@Deprecated 
 	public static MizeDate toStartMizeDate(MizeDate mizeDate){
 		DateTime  dateTime = toDateTime(mizeDate);
 		dateTime = toStartDateTime(dateTime);
@@ -304,12 +307,12 @@ public final class Formatter {
 		return (dateTime == null ? null : dateTime.toString(DATE_FORMAT));
 	}
 	
-	@Deprecated
+	@Deprecated 
 	public static String getMizeDateTime(MizeDateTime mizeDateTime){ // don't change
 		return ((mizeDateTime == null || mizeDateTime.getDateTime() == null) ? null : mizeDateTime.getDateTime().toString(DATE_FORMAT));
 	}
 	
-	@Deprecated
+	@Deprecated 
 	public static String getMizeDate(MizeDate mizeDate){ // don't change
 		return ((mizeDate == null || mizeDate.getDateTime() == null) ? null : mizeDate.getDateTime().toString(DATE_FORMAT1));
 	}

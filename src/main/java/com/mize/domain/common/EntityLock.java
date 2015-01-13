@@ -30,18 +30,27 @@ public class EntityLock extends MizeSceEntity implements Comparable<EntityLock>{
 	private static final long serialVersionUID = -4595805163290064209L;
 	
 	private BusinessEntity tenant;
-	private User user;
+	private Long lockedBy;
+	private String lockedByUser;
+	private String loginId; 
+	private Long entityId;
 	private String entityType;
 	private String entityCode;
-	private Long entityId;
+	private String lockAction;
 	private MizeDateTime lockDate;
+	private MizeDateTime inactiveStartTime;
+	@Transient
 	private List<Long> entityLockIds;
-
+	@Transient
+	private User user;
+	
 	public EntityLock(){
 		super();
 	}
 	
-	public EntityLock(Long id, String entityType, String entityCode, Long entityId, MizeDateTime lockDate){
+	
+	
+	public EntityLock(Long id,  String entityType, String entityCode, Long entityId,MizeDateTime lockDate) {
 		super();
 		this.id = id;
 		this.entityType = entityType;
@@ -50,6 +59,25 @@ public class EntityLock extends MizeSceEntity implements Comparable<EntityLock>{
 		this.lockDate = lockDate;
 	}
 
+
+
+	public EntityLock(BusinessEntity tenant, Long lockedBy, String lockedByUser, String loginId, Long entityId,
+			String entityType, String entityCode, String lockAction, MizeDateTime lockDate,
+			MizeDateTime inactiveStartTime, List<Long> entityLockIds) {
+		super();
+		this.tenant = tenant;
+		this.lockedBy = lockedBy;
+		this.lockedByUser = lockedByUser;
+		this.loginId = loginId;
+		this.entityId = entityId;
+		this.entityType = entityType;
+		this.entityCode = entityCode;
+		this.lockAction = lockAction;
+		this.lockDate = lockDate;
+		this.inactiveStartTime = inactiveStartTime;
+		this.entityLockIds = entityLockIds;
+	}
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id")
@@ -57,11 +85,10 @@ public class EntityLock extends MizeSceEntity implements Comparable<EntityLock>{
 	public Long getId() {
 		return id;
 	}
-
+	
 	@Override
 	public void setId(Long id) {
 		this.id = id;
-		
 	}
 	
 	@OneToOne(fetch=FetchType.EAGER)
@@ -71,15 +98,105 @@ public class EntityLock extends MizeSceEntity implements Comparable<EntityLock>{
 	public BusinessEntity getTenant() {
 		return tenant;
 	}
-
+	
 	public void setTenant(BusinessEntity tenant) {
 		this.tenant = tenant;
 	}
-
-	@OneToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="user_id")
-	@JsonSerialize(using=JPASerializer.class)
+	
+	@Column(name="locked_by")
+	public Long getLockedBy() {
+		return lockedBy;
+	}
+	
+	public void setLockedBy(Long lockedBy) {
+		this.lockedBy = lockedBy;
+	}
+	
+	@Column(name="locked_by_user", length=250)
+	public String getLockedByUser() {
+		return lockedByUser;
+	}
+	
+	public void setLockedByUser(String lockedByUser) {
+		this.lockedByUser = lockedByUser;
+	}
+	
+	@Column(name="login_id")
+	public String getLoginId() {
+		return loginId;
+	}
+	
+	public void setLoginId(String loginId) {
+		this.loginId = loginId;
+	}
+	
+	@Column(name="entity_id")
+	public Long getEntityId() {
+		return entityId;
+	}
+	
+	public void setEntityId(Long entityId) {
+		this.entityId = entityId;
+	}
+	
+	@Column(name = "entity_type", length = 50)
+	public String getEntityType() {
+		return entityType;
+	}
+	
+	public void setEntityType(String entityType) {
+		this.entityType = entityType;
+	}
+	
+	@Column(name = "entity_code", length = 50)
+	public String getEntityCode() {
+		return entityCode;
+	}
+	
+	public void setEntityCode(String entityCode) {
+		this.entityCode = entityCode;
+	}
+	
+	@Column(name = "lock_action", length = 50)
+	public String getLockAction() {
+		return lockAction;
+	}
+	
+	public void setLockAction(String lockAction) {
+		this.lockAction = lockAction;
+	}
+	
 	@JsonInclude(Include.NON_NULL)
+	@Column(name = "lock_date")
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getLockDate() {
+		return lockDate;
+	}
+	
+	public void setLockDate(MizeDateTime lockDate) {
+		this.lockDate = lockDate;
+	}
+	
+	@JsonInclude(Include.NON_NULL)
+	@Column(name = "inactive_start_time")
+	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
+	public MizeDateTime getInactiveStartTime() {
+		return inactiveStartTime;
+	}
+	
+	public void setInactiveStartTime(MizeDateTime inactiveStartTime) {
+		this.inactiveStartTime = inactiveStartTime;
+	}
+	
+	@Transient
+	public List<Long> getEntityLockIds() {
+		return entityLockIds;
+	}
+	public void setEntityLockIds(List<Long> entityLockIds) {
+		this.entityLockIds = entityLockIds;
+	}
+	
+	@Transient
 	public User getUser() {
 		return user;
 	}
@@ -88,57 +205,14 @@ public class EntityLock extends MizeSceEntity implements Comparable<EntityLock>{
 		this.user = user;
 	}
 
-	@Column(name = "entity_type", length = 50)
-	public String getEntityType() {
-		return entityType;
-	}
 
-	public void setEntityType(String entityType) {
-		this.entityType = entityType;
-	}
 
-	@Column(name = "entity_code", length = 50)
-	public String getEntityCode() {
-		return entityCode;
-	}
-
-	public void setEntityCode(String entityCode) {
-		this.entityCode = entityCode;
-	}
-
-	@Column(name="entity_id")
-	public Long getEntityId() {
-		return entityId;
-	}
-
-	public void setEntityId(Long entityId) {
-		this.entityId = entityId;
-	}
-
-	@JsonInclude(Include.NON_NULL)
-	@Column(name = "lock_date")
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getLockDate() {
-		return lockDate;
-	}
-
-	public void setLockDate(MizeDateTime lockDate) {
-		this.lockDate = lockDate;
-	}
-
-	@Transient
-	public List<Long> getEntityLockIds() {
-		return entityLockIds;
-	}
-
-	public void setEntityLockIds(List<Long> entityLockIds) {
-		this.entityLockIds = entityLockIds;
-	}
-	
 	@Override
 	public int compareTo(EntityLock arg0) {
 		return 0;
 	}
+
+
 
 	@Override
 	public int hashCode() {
@@ -147,11 +221,16 @@ public class EntityLock extends MizeSceEntity implements Comparable<EntityLock>{
 		result = prime * result + ((entityCode == null) ? 0 : entityCode.hashCode());
 		result = prime * result + ((entityId == null) ? 0 : entityId.hashCode());
 		result = prime * result + ((entityType == null) ? 0 : entityType.hashCode());
+		result = prime * result + ((inactiveStartTime == null) ? 0 : inactiveStartTime.hashCode());
+		result = prime * result + ((lockAction == null) ? 0 : lockAction.hashCode());
 		result = prime * result + ((lockDate == null) ? 0 : lockDate.hashCode());
-		result = prime * result + ((tenant == null) ? 0 : tenant.hashCode());
-		result = prime * result + ((user == null) ? 0 : user.hashCode());
+		result = prime * result + ((lockedBy == null) ? 0 : lockedBy.hashCode());
+		result = prime * result + ((lockedByUser == null) ? 0 : lockedByUser.hashCode());
+		result = prime * result + ((loginId == null) ? 0 : loginId.hashCode());
 		return result;
 	}
+
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -177,22 +256,50 @@ public class EntityLock extends MizeSceEntity implements Comparable<EntityLock>{
 				return false;
 		} else if (!entityType.equals(other.entityType))
 			return false;
+		if (inactiveStartTime == null) {
+			if (other.inactiveStartTime != null)
+				return false;
+		} else if (!inactiveStartTime.equals(other.inactiveStartTime))
+			return false;
+		if (lockAction == null) {
+			if (other.lockAction != null)
+				return false;
+		} else if (!lockAction.equals(other.lockAction))
+			return false;
 		if (lockDate == null) {
 			if (other.lockDate != null)
 				return false;
 		} else if (!lockDate.equals(other.lockDate))
 			return false;
-		if (tenant == null) {
-			if (other.tenant != null)
+		if (lockedBy == null) {
+			if (other.lockedBy != null)
 				return false;
-		} else if (!tenant.equals(other.tenant))
+		} else if (!lockedBy.equals(other.lockedBy))
 			return false;
-		if (user == null) {
-			if (other.user != null)
+		if (lockedByUser == null) {
+			if (other.lockedByUser != null)
 				return false;
-		} else if (!user.equals(other.user))
+		} else if (!lockedByUser.equals(other.lockedByUser))
+			return false;
+		if (loginId == null) {
+			if (other.loginId != null)
+				return false;
+		} else if (!loginId.equals(other.loginId))
 			return false;
 		return true;
 	}
 
+
+
+	@Override
+	public String toString() {
+		return "EntityLock [lockedBy=" + lockedBy + ", lockedByUser=" + lockedByUser + ", loginId=" + loginId
+				+ ", entityId=" + entityId + ", entityType=" + entityType + ", entityCode=" + entityCode
+				+ ", lockAction=" + lockAction + ", lockDate=" + lockDate + ", inactiveStartTime=" + inactiveStartTime
+				+ "]";
+	}
+	
+	
+	
+	
 }

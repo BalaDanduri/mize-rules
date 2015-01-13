@@ -6,9 +6,11 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.mize.domain.auth.User;
 
+@Component
 public class MizeDateTimeUtils {
 	
 	public static DateTimeFormatter  DB_DATE_TIME_FORMAT;
@@ -113,14 +115,28 @@ public class MizeDateTimeUtils {
 		return formattedMizeDate(mizeDate, user, true);
 	}
 	
-	public static String formattedMizeDate(MizeDate mizeDate, User user, boolean fallback) {
+	public static String formattedMizeDate(MizeDateTime mizeDateTime, User user) {
+		return formattedMizeDate(mizeDateTime, user, true);
+	}
+	
+	public static String formattedMizeDate(MizeDateTime mizeDateTime, User user, boolean fallback) {
+		String dateFormat = getUserDateFormat(user, fallback);
+		return mizeDateTime.toString(dateFormat, null);
+	}
+
+	public static String getUserDateFormat(User user, boolean fallback) {
 		String dateFormat = null;
 		if(user!=null && user.getUserProfile()!=null && user.getUserProfile().getUserPreference()!=null && user.getUserProfile().getUserPreference().getDateFormat()!=null){
 			dateFormat = user.getUserProfile().getUserPreference().getDateFormat();
 		}
 		if(Formatter.isNull(dateFormat) && fallback){
-			dateFormat = getDateTimeFormat();
+			dateFormat = getDateFormat();
 		}
+		return dateFormat;
+	}
+	
+	public static String formattedMizeDate(MizeDate mizeDate, User user, boolean fallback) {
+		String dateFormat = getUserDateFormat(user, fallback);
 		return mizeDate.toString(dateFormat, null);
 	}
 	
@@ -129,21 +145,31 @@ public class MizeDateTimeUtils {
 	}
 	
 	public static String formattedMizeDateTime(MizeDateTime mizeDateTime, User user, boolean fallback) {
-		String dateTimeFormat = null;
+		String dateTimeFormat = getUserDateTimeFormat(user, fallback);
+		String dateTimeZone = getUserDateTimeZone(user, fallback);
+		return mizeDateTime.toString(dateTimeFormat, DateTimeZone.forID(dateTimeZone));
+	}
+	
+	public static String getUserDateTimeZone(User user, boolean fallback) {
 		String dateTimeZone = null;
-		if(user!=null && user.getUserProfile()!=null && user.getUserProfile().getTimezone() != null){
+		if(user != null && user.getUserProfile() != null && user.getUserProfile().getTimezone() != null){
 			dateTimeZone = user.getUserProfile().getTimezone();
 		}
-		if(user!=null && user.getUserProfile()!=null && user.getUserProfile().getUserPreference()!=null && user.getUserProfile().getUserPreference().getDateTimeFormat()!=null){
+		if(Formatter.isNull(dateTimeZone) && fallback){
+			dateTimeZone = getDefaultTimeZone();
+		}
+		return dateTimeZone;
+	}
+	
+	public static String getUserDateTimeFormat(User user, boolean fallback) {
+		String dateTimeFormat = null;
+		if(user != null && user.getUserProfile() != null && user.getUserProfile().getUserPreference() != null && user.getUserProfile().getUserPreference().getDateTimeFormat() != null){
 			dateTimeFormat = user.getUserProfile().getUserPreference().getDateTimeFormat();
 		}
 		if(Formatter.isNull(dateTimeFormat) && fallback){
 			dateTimeFormat = getDateTimeFormat();
 		}
-		if(Formatter.isNull(dateTimeZone) && fallback){
-			dateTimeZone = getDefaultTimeZone();
-		}
-		return mizeDateTime.toString(dateTimeFormat, DateTimeZone.forID(dateTimeZone));
+		return dateTimeFormat;
 	}
 	
 	public static MizeDate getDefaultEndDate() {
@@ -152,6 +178,66 @@ public class MizeDateTimeUtils {
 			endDate = MizeDate.getInstance(mizeApplicationProperties.getDefaultEndDate(), getDateFormat());
 		}
 		return endDate;
+	}
+	
+	public static String getDBEndDateTime(MizeDateTime mizeDateTime){	
+		if(mizeDateTime != null && mizeDateTime.getDateTime() != null){
+			return getDBDateTime(toEndDateTime(mizeDateTime));
+		}else{
+			return null;
+		}
+	}
+	
+	public static MizeDateTime toEndDateTime(MizeDateTime mizeDateTime){	
+		if(mizeDateTime != null && mizeDateTime.getDateTime() != null){
+			DateTime endDate = mizeDateTime.getDateTime().withTime(23, 59, 59, 999);
+			if(mizeDateTime.getDateTimeFormat() == null){
+				mizeDateTime.setDateTimeFormat(mizeApplicationProperties.getDefaultDateTimeFormat());
+			}
+			MizeDateTime endMizeDateTime = mizeDateTime.createNewMizeDateTime(endDate);
+			return endMizeDateTime;
+		}else{
+			return null;
+		}
+	}
+	
+	public static MizeDate toEndDate(MizeDate mizeDate){	
+		if(mizeDate != null && mizeDate.getDateTime() != null){
+			DateTime endDate = mizeDate.getDateTime().withTime(23, 59, 59, 999);
+			if(mizeDate.getDateFormat() == null){
+				mizeDate.setDateFormat(mizeApplicationProperties.getDefaultDateFormat());
+			}
+			MizeDate endMizeDate = mizeDate.createNewMizeDate(endDate);
+			return endMizeDate;
+		}else{
+			return null;
+		}
+	}
+	
+	public static MizeDateTime toStartDateTime(MizeDateTime mizeDateTime){	
+		if(mizeDateTime != null && mizeDateTime.getDateTime() != null){
+			DateTime endDate = mizeDateTime.getDateTime().withTime(0, 0, 0, 0);
+			if(mizeDateTime.getDateTimeFormat() == null){
+				mizeDateTime.setDateTimeFormat(mizeApplicationProperties.getDefaultDateTimeFormat());
+			}
+			MizeDateTime endMizeDateTime = mizeDateTime.createNewMizeDateTime(endDate);
+			return endMizeDateTime;
+		}else{
+			return null;
+		}
+	}
+	
+	public static MizeDate toStartDate(MizeDate mizeDate){	
+		if(mizeDate != null && mizeDate.getDateTime() != null){
+			DateTime endDate = mizeDate.getDateTime().withTime(0, 0, 0, 0);
+			if(mizeDate.getDateFormat() == null){
+				mizeDate.setDateFormat(mizeApplicationProperties.getDefaultDateFormat());
+			}
+			MizeDate endMizeDate = mizeDate.createNewMizeDate(endDate);
+			return endMizeDate;
+		}else{
+			return null;
+		}
 	}
 
 }
