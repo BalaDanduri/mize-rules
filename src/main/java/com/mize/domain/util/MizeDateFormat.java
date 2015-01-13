@@ -26,7 +26,6 @@ public class MizeDateFormat extends MizeSceEntityAudit implements Comparable<Miz
 	private static final long serialVersionUID = 848292818865493379L;
 	private String dateFormat;
 	private String dateTimeFormat;
-	private String isDefault;
 	private String isActive;
 	private BusinessEntity tenant;
 	private Locale locale;
@@ -44,7 +43,6 @@ public class MizeDateFormat extends MizeSceEntityAudit implements Comparable<Miz
 		super();
 		this.dateFormat = dateFormat;
 		this.dateTimeFormat = dateTimeFormat;
-		this.isDefault = isDefault;
 		this.isActive = isActive;
 		this.locale = locale;
 	}
@@ -78,15 +76,6 @@ public class MizeDateFormat extends MizeSceEntityAudit implements Comparable<Miz
 
 	public void setDateTimeFormat(String dateTimeFormat) {
 		this.dateTimeFormat = dateTimeFormat;
-	}
-
-	@Column(name = "is_default")
-	public String getIsDefault() {
-		return isDefault;
-	}
-
-	public void setIsDefault(String isDefault) {
-		this.isDefault = isDefault;
 	}
 
 	@OneToOne(fetch = FetchType.EAGER)
@@ -156,8 +145,6 @@ public class MizeDateFormat extends MizeSceEntityAudit implements Comparable<Miz
 				+ ((dateFormat == null) ? 0 : dateFormat.hashCode());
 		result = prime * result
 				+ ((dateTimeFormat == null) ? 0 : dateTimeFormat.hashCode());
-		result = prime * result
-				+ ((isDefault == null) ? 0 : isDefault.hashCode());
 		result = prime * result + ((locale == null) ? 0 : locale.hashCode());
 		result = prime * result
 				+ ((tenantId == null) ? 0 : tenantId.hashCode());
@@ -183,11 +170,6 @@ public class MizeDateFormat extends MizeSceEntityAudit implements Comparable<Miz
 				return false;
 		} else if (!dateTimeFormat.equals(other.dateTimeFormat))
 			return false;
-		if (isDefault == null) {
-			if (other.isDefault != null)
-				return false;
-		} else if (!isDefault.equals(other.isDefault))
-			return false;
 		if (locale == null) {
 			if (other.locale != null)
 				return false;
@@ -208,10 +190,8 @@ public class MizeDateFormat extends MizeSceEntityAudit implements Comparable<Miz
 
 	@Override
 	public String toString() {
-		return "MizeDateFormat [dateFormat=" + dateFormat + ", dateTimeFormat="
-				+ dateTimeFormat + ", isDefault=" + isDefault + ", isActive="
-				+ isActive + ", locale=" + locale + ", tenantId=" + tenantId
-				+ ", userTimeZone=" + userTimeZone + "]";
+		return "MizeDateFormat [dateFormat=" + dateFormat + ", dateTimeFormat=" + dateTimeFormat + ", isActive=" + isActive 
+				+ ", locale=" + locale + ", tenantId=" + tenantId + ", userTimeZone=" + userTimeZone + "]";
 	}
 
 	
