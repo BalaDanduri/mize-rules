@@ -19,7 +19,6 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
 import org.joda.time.Days;
 import org.joda.time.Hours;
 import org.joda.time.Minutes;
@@ -241,81 +240,10 @@ public final class Formatter {
 		return (map == null || map.isEmpty());
 	}
 	
-	/*@Deprecated // MizeDateTimeUtils.getDBDateTime(DateTime);
-	public static String getDBDateTime(DateTime dateTime){
-		return (dateTime == null ? null : dateTime.toString(DB_DATE_TIME_FORMAT));
-	}*/
-	
-	/*@Deprecated// MizeDateTimeUtils.getDBDateTime(DateTime);
-	public static String dbDateTime(DateTime dateTime){
-		return (dateTime == null ? null : dateTime.toString(DB_DATE_TIME_FORMAT));
-	}*/
-	
 	@Deprecated
-	public static String getDBEndDateTime(DateTime dateTime){
-		dateTime = dateTime.withTime(23, 59, 59, 999);
-		return (dateTime == null ? null : dateTime.toString(DB_DATE_TIME_FORMAT));
-	}
-	/*
-	@Deprecated // MizeDateTimeUtils.getDBEndDateTime()
-	public static String getDBEndDateTime(MizeDateTime mizeDateTime){		 
-		return (mizeDateTime == null ? null : getDBEndDateTime(mizeDateTime.getDateTime()));
-		
-	}*/
-	
-	@Deprecated
-	public static DateTime toEndDateTime(DateTime dateTime){
-		if(dateTime != null){
-			dateTime = dateTime.withTime(23, 59, 59, 999);
-		}
-		return dateTime;
-	}
-	
-	/*@Deprecated //MizeDateTimeUtils.toEndDateTime
-	public static MizeDateTime toEndMizeDateTime(MizeDateTime mizeDateTime){// don't change 
-		DateTime  dateTime = toDateTime(mizeDateTime);
-		dateTime = toEndDateTime(dateTime);
-		if(dateTime != null){
-			mizeDateTime.setDateTime(dateTime);
-		}
-		return mizeDateTime;
-	}*/
-	
-	/*@Deprecated //MizeDateTimeUtils.toEndDate
-	public static MizeDate toEndMizeDate(MizeDate mizeDate){
-		DateTime  dateTime = toDateTime(mizeDate);
-		dateTime = toEndDateTime(dateTime);
-		return toMizeDate(dateTime);
-	}*/
-	
-	/*@Deprecated //MizeDateTimeUtils.toStartDateTime
-	public static DateTime toStartDateTime(DateTime dateTime){
-		if(dateTime != null){
-			dateTime = dateTime.withTime(0, 0, 0, 0);
-		}
-		return dateTime;
-	}*/
-	
-	/*@Deprecated ////MizeDateTimeUtils.toStartDate
-	public static MizeDate toStartMizeDate(MizeDate mizeDate){
-		DateTime  dateTime = toDateTime(mizeDate);
-		dateTime = toStartDateTime(dateTime);
-		return toMizeDate(dateTime);
-	}*/
-	
 	public static String getDateTime(DateTime dateTime){
 		return (dateTime == null ? null : dateTime.toString(DATE_FORMAT));
 	}
-/*	
-	@Deprecated //MizeDateTimeUtils.formattedMizeDateTime(MizeDate mizeDate, User user)
-	public static String getMizeDateTime(MizeDateTime mizeDateTime){ // don't change
-		return ((mizeDateTime == null || mizeDateTime.getDateTime() == null) ? null : mizeDateTime.getDateTime().toString(DATE_FORMAT));
-	}
-	
-	@Deprecated //MizeDateTimeUtils.formattedMizeDateTime(MizeDate mizeDate, User user)
-	public static String getMizeDate(MizeDate mizeDate){ // don't change
-		return ((mizeDate == null || mizeDate.getDateTime() == null) ? null : mizeDate.getDateTime().toString(DATE_FORMAT1));
-	}*/
 	
 	public static String getDateTimeFormat(MizeDateTime mizeDateTime){
 		return (mizeDateTime == null ? null : mizeDateTime.getDateTime().toString(DATE_FORMAT3));
@@ -378,6 +306,7 @@ public final class Formatter {
 		return value == null ? Double.valueOf(0):value.doubleValue();	
 	}
 	
+	@Deprecated
 	public static DateTime dateTime(String dateTime){
 		DateTime time = null;
 		if(dateTime!= null){
@@ -389,6 +318,7 @@ public final class Formatter {
 		return time;
 	}
 	
+	@Deprecated
 	public static DateTime dateTime(String dateTime, String format){
 		DateTime time = null;
 		if(dateTime!= null && format != null){
@@ -416,6 +346,7 @@ public final class Formatter {
 		return result;
 	}
 
+	@Deprecated
 	public static DateTime date(String dateTime){
 		DateTime time = null;
 		if(dateTime!= null){
@@ -1088,8 +1019,6 @@ public final class Formatter {
 	 }
 	 
 	 public static void main(String[] args) {
-		 DateTime dateTime = new DateTime(1418254945000l);
-		 DateTime dateTime1 = new DateTime(1418254945000l,DateTimeZone.forID("America/New_York"));
 		 System.out.println();
 	 }
 	 
