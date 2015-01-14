@@ -48,8 +48,6 @@ public class EntityLock extends MizeSceEntity implements Comparable<EntityLock>{
 		super();
 	}
 	
-	
-	
 	public EntityLock(Long id,  String entityType, String entityCode, Long entityId,MizeDateTime lockDate) {
 		super();
 		this.id = id;
@@ -58,8 +56,15 @@ public class EntityLock extends MizeSceEntity implements Comparable<EntityLock>{
 		this.entityId = entityId;
 		this.lockDate = lockDate;
 	}
-
-
+	
+	public EntityLock(String entityType, String entityCode, Long entityId, User user, BusinessEntity tenant) {
+		super();
+		this.entityType = entityType;
+		this.entityCode = entityCode;
+		this.entityId = entityId;
+		this.user = user;
+		this.tenant = tenant;
+	}
 
 	public EntityLock(BusinessEntity tenant, Long lockedBy, String lockedByUser, String loginId, Long entityId,
 			String entityType, String entityCode, String lockAction, MizeDateTime lockDate,
