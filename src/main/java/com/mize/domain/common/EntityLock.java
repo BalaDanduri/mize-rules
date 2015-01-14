@@ -43,6 +43,8 @@ public class EntityLock extends MizeSceEntity implements Comparable<EntityLock>{
 	private List<Long> entityLockIds;
 	@Transient
 	private User user;
+	@Transient
+	private String entityStatus;
 	
 	public EntityLock(){
 		super();
@@ -56,31 +58,15 @@ public class EntityLock extends MizeSceEntity implements Comparable<EntityLock>{
 		this.entityId = entityId;
 		this.lockDate = lockDate;
 	}
-	
-	public EntityLock(String entityType, String entityCode, Long entityId, User user, BusinessEntity tenant) {
+
+	public EntityLock(String entityType, String entityCode, Long entityId,String entityStatus, User user, BusinessEntity tenant) {
 		super();
 		this.entityType = entityType;
 		this.entityCode = entityCode;
 		this.entityId = entityId;
+		this.entityStatus = entityStatus;
 		this.user = user;
 		this.tenant = tenant;
-	}
-
-	public EntityLock(BusinessEntity tenant, Long lockedBy, String lockedByUser, String loginId, Long entityId,
-			String entityType, String entityCode, String lockAction, MizeDateTime lockDate,
-			MizeDateTime inactiveStartTime, List<Long> entityLockIds) {
-		super();
-		this.tenant = tenant;
-		this.lockedBy = lockedBy;
-		this.lockedByUser = lockedByUser;
-		this.loginId = loginId;
-		this.entityId = entityId;
-		this.entityType = entityType;
-		this.entityCode = entityCode;
-		this.lockAction = lockAction;
-		this.lockDate = lockDate;
-		this.inactiveStartTime = inactiveStartTime;
-		this.entityLockIds = entityLockIds;
 	}
 	
 	@Id
@@ -210,7 +196,14 @@ public class EntityLock extends MizeSceEntity implements Comparable<EntityLock>{
 		this.user = user;
 	}
 
+	@Transient
+	public String getEntityStatus() {
+		return entityStatus;
+	}
 
+	public void setEntityStatus(String entityStatus) {
+		this.entityStatus = entityStatus;
+	}
 
 	@Override
 	public int compareTo(EntityLock arg0) {
