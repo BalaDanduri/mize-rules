@@ -2,7 +2,6 @@ package com.mize.domain.util;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -306,7 +305,7 @@ public final class Formatter {
 		return value == null ? Double.valueOf(0):value.doubleValue();	
 	}
 	
-	@Deprecated
+	/*@Deprecated
 	public static DateTime dateTime(String dateTime){
 		DateTime time = null;
 		if(dateTime!= null){
@@ -317,8 +316,8 @@ public final class Formatter {
 		}		
 		return time;
 	}
-	
-	@Deprecated
+	*/
+/*	@Deprecated
 	public static DateTime dateTime(String dateTime, String format){
 		DateTime time = null;
 		if(dateTime!= null && format != null){
@@ -332,7 +331,7 @@ public final class Formatter {
 			}
 		}		
 		return time;
-	}
+	}*/
 	
 	public static String trimLength(String input,int length){
 		String result = null;
@@ -346,7 +345,7 @@ public final class Formatter {
 		return result;
 	}
 
-	@Deprecated
+	/*@Deprecated
 	public static DateTime date(String dateTime){
 		DateTime time = null;
 		if(dateTime!= null){
@@ -356,7 +355,7 @@ public final class Formatter {
 			}
 		}		
 		return time;
-	}
+	}*/
 	
 	public static DateTime date1(String dateTime){
 		DateTime time = null;
@@ -380,7 +379,7 @@ public final class Formatter {
 		return time;
 	}
 	
-	@Deprecated
+	/*@Deprecated
 	public static DateTime dateTime(Timestamp timestamp){
 		DateTime time = null;
 		if(timestamp!= null){
@@ -388,7 +387,7 @@ public final class Formatter {
 		}
 		return time;
 	}
-
+*/
 	public static String toLowerCase(String value){
 		return value == null ? EMPTY : value.trim().toLowerCase();	
 	}
