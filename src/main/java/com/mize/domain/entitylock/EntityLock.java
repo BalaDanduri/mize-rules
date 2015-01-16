@@ -1,4 +1,4 @@
-package com.mize.domain.common;
+package com.mize.domain.entitylock;
 
 import java.util.List;
 
@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
+import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.MizeDateTime;
 

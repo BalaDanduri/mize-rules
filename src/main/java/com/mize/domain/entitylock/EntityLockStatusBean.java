@@ -1,4 +1,4 @@
-package com.mize.domain.common;
+package com.mize.domain.entitylock;
 
 import java.io.Serializable;
 
