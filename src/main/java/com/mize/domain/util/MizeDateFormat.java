@@ -35,6 +35,7 @@ public class MizeDateFormat extends MizeSceEntityAudit implements Comparable<Miz
 	private Long tenantId;
 	@Transient
 	private String userTimeZone;
+	private String lastAccessedTime;
 	
 	public MizeDateFormat(){		
 	}
@@ -135,6 +136,14 @@ public class MizeDateFormat extends MizeSceEntityAudit implements Comparable<Miz
 
 	public void setUserTimeZone(String userTimeZone) {
 		this.userTimeZone = userTimeZone;
+	}
+
+	public String getLastAccessedTime() {
+		return lastAccessedTime;
+	}
+
+	public void setLastAccessedTime(String lastAccessedTime) {
+		this.lastAccessedTime = lastAccessedTime;
 	}
 
 	@Override

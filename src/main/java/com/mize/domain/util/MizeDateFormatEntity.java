@@ -2,8 +2,6 @@ package com.mize.domain.util;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeSceEntity;
@@ -24,6 +22,7 @@ public class MizeDateFormatEntity extends MizeSceEntity {
 	private BusinessEntity tenant;
 	private User user;
 	private List<MizeDateFormat> dateFormats;
+	private String lastAccessedTime;
 	
 	@Override
 	public Long getId() {
@@ -107,13 +106,12 @@ public class MizeDateFormatEntity extends MizeSceEntity {
 		this.dateFormats = dateFormats;
 	}
 	
-	@JsonInclude(Include.NON_DEFAULT)
-	public MizeDateTime getUpdatedDate() {
-		return updatedDate;
+	public String getLastAccessedTime() {
+		return lastAccessedTime;
 	}
-	
-	public void setUpdatedDate(MizeDateTime updatedDate) {
-		this.updatedDate = updatedDate;
+
+	public void setLastAccessedTime(String lastAccessedTime) {
+		this.lastAccessedTime = lastAccessedTime;
 	}
 
 	@Override
