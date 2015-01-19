@@ -228,9 +228,9 @@ public class MizeApplicationProperties implements InitializingBean {
 	}
 	
 	@JsonIgnore
-	public Long getEntityLockTime() {
+	public Integer getEntityLockTime() {
 		if(getPropertyValue("entityLockTime") != null) {
-			return Long.valueOf(getPropertyValue("entityLockTime"));
+			return Integer.valueOf(getPropertyValue("entityLockTime"));
 		}else {
 			return null;
 		}

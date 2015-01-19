@@ -185,6 +185,14 @@ public class MizeDateTime implements IMizeDate, Comparable<MizeDateTime>, Clonea
 		return createNewMizeDateTime(this.dateTime.minusDays(days));
 	}
 	
+	public MizeDateTime minusMinutes(int minutes){
+		return createNewMizeDateTime(this.dateTime.minusMinutes(minutes));
+	}
+	
+	public MizeDateTime plusMinutes(int minutes){
+		return createNewMizeDateTime(this.dateTime.plusMinutes(minutes));
+	}
+	
 	public MizeDateTime previousDay(){
 		return createNewMizeDateTime(this.dateTime.minusDays(1));
 	}	
