@@ -1,5 +1,7 @@
 package com.mize.domain.businessentity;
 
+import java.util.List;
+
 
 public class BusinessEntitySearch {
 	
@@ -19,6 +21,9 @@ public class BusinessEntitySearch {
 	private Long localeId;
 	private String serviceArea;
 	private String territory;
+	private List<Long> categoryIds;
+	private Long countryId;
+	private Long stateId;
 	
 	public BusinessEntitySearch() {
 		
@@ -152,5 +157,28 @@ public class BusinessEntitySearch {
 		this.territory = territory;
 	}
 	
+	public List<Long> getCategoryIds() {
+		return categoryIds;
+	}
+	
+	public void setCategoryIds(List<Long> categoryIds) {
+		this.categoryIds = categoryIds;
+	}
+	
+	public Long getCountryId() {
+		return countryId;
+	}
+	
+	public void setCountryId(Long countryId) {
+		this.countryId = countryId;
+	}
+	
+	public Long getStateId() {
+		return stateId;
+	}
+	
+	public void setStateId(Long stateId) {
+		this.stateId = stateId;
+	}
 
 }

@@ -102,6 +102,7 @@
 				<entry key="distanceGeoURL" value="${google.api.distanceGeoURL~~distancematrix}"  />
 				<entry key="defaultSearchRadius" value="${google.api.defaultSearchRadius~~25}"  />
 				<entry key="defaultcharEncoding" value="${app.defaultcharEncoding~~UTF-8}"  />
+				<entry key="isPreferredFromBE" value="${locator.isPreferredFromBE~~false}"/>
 				
 			</map>
 		</property>

@@ -273,6 +273,15 @@ public class MizeApplicationProperties implements InitializingBean {
 		properties.putAll(clientProperties);		
 	}
 	
+	@JsonIgnore
+	public boolean isPreferredFromBE() {		
+		if(getPropertyValue("isPreferredFromBE") != null) {
+			return Boolean.valueOf(getPropertyValue("isPreferredFromBE"));
+		}else {
+			return false;
+		}
+	}
+	
 	private String getPropertyValue(String propertyName) {		
 		return properties.get(propertyName);
 	}
