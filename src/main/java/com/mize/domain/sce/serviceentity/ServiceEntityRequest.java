@@ -33,9 +33,9 @@ import com.mize.domain.util.MizeDate;
 @Entity
 @Table(name = "srvc_enty_rqst")
 public class ServiceEntityRequest extends MizeSceEntity implements Comparable<ServiceEntityRequest> {
-	
+
 	private static final long serialVersionUID = -7125659097589369685L;
-	
+
 	private ServiceEntity serviceEntity;
 	private String requestType;
 	private String requestCode;
@@ -58,27 +58,33 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	private ServiceEntityAmount otherAmount;
 	private ServiceEntityAmount totalAmount;
 
+	private MizeDate requestedDate;
+	private MizeDate promisedDate;
+	private MizeDate resolvedDate;
+	private String requestStatus;
+	private String priority;
+
 	public ServiceEntityRequest() {
-		
+
 	}
 
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+	@Column(name = "id")
 	public Long getId() {
 		return id;
 	}
 
 	@Override
-	public void setId(Long id) {		
+	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "service_entity_id")
-	@JsonBackReference(value="service_entity_request")
-	@JsonSerialize(using=JPASerializer.class)
+	@JsonBackReference(value = "service_entity_request")
+	@JsonSerialize(using = JPASerializer.class)
 	public ServiceEntity getServiceEntity() {
 		return serviceEntity;
 	}
@@ -86,7 +92,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	public void setServiceEntity(ServiceEntity serviceEntity) {
 		this.serviceEntity = serviceEntity;
 	}
-	
+
 	@Column(name = "request_type")
 	public String getRequestType() {
 		return requestType;
@@ -95,38 +101,36 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	public void setRequestType(String requestType) {
 		this.requestType = requestType;
 	}
-	
+
 	@Column(name = "request_code")
 	public String getRequestCode() {
 		return requestCode;
 	}
-	
+
 	public void setRequestCode(String requestCode) {
 		this.requestCode = requestCode;
 	}
-	
-	
+
 	@Column(name = "failure_date")
 	@Type(type = "com.mize.domain.util.MizeDateJPA")
 	public MizeDate getFailureDate() {
 		return failureDate;
 	}
-	
+
 	public void setFailureDate(MizeDate failureDate) {
 		this.failureDate = failureDate;
 	}
-	
-	
+
 	@Column(name = "repair_date")
 	@Type(type = "com.mize.domain.util.MizeDateJPA")
 	public MizeDate getRepairDate() {
 		return repairDate;
 	}
-	
+
 	public void setRepairDate(MizeDate repairDate) {
 		this.repairDate = repairDate;
 	}
-	
+
 	@Column(name = "repair_site_code")
 	public String getRepairSiteCode() {
 		return repairSiteCode;
@@ -135,7 +139,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	public void setRepairSiteCode(String repairSiteCode) {
 		this.repairSiteCode = repairSiteCode;
 	}
-	
+
 	@Column(name = "complaint_code")
 	public String getComplaintCode() {
 		return complaintCode;
@@ -144,7 +148,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	public void setComplaintCode(String complaintCode) {
 		this.complaintCode = complaintCode;
 	}
-	
+
 	@Column(name = "complaint_descr")
 	public String getComplaintDescription() {
 		return complaintDescription;
@@ -153,7 +157,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	public void setComplaintDescription(String complaintDescription) {
 		this.complaintDescription = complaintDescription;
 	}
-	
+
 	@Column(name = "cause_code")
 	public String getCauseCode() {
 		return causeCode;
@@ -162,7 +166,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	public void setCauseCode(String causeCode) {
 		this.causeCode = causeCode;
 	}
-	
+
 	@Column(name = "cause_descr")
 	public String getCauseDescription() {
 		return causeDescription;
@@ -171,7 +175,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	public void setCauseDescription(String causeDescription) {
 		this.causeDescription = causeDescription;
 	}
-	
+
 	@Column(name = "corrective_action_code")
 	public String getCorrectiveActionCode() {
 		return correctiveActionCode;
@@ -180,7 +184,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	public void setCorrectiveActionCode(String correctiveActionCode) {
 		this.correctiveActionCode = correctiveActionCode;
 	}
-	
+
 	@Column(name = "corrective_action_descr")
 	public String getCorrectiveActionDescription() {
 		return correctiveActionDescription;
@@ -188,11 +192,11 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 
 	public void setCorrectiveActionDescription(String correctiveActionDescription) {
 		this.correctiveActionDescription = correctiveActionDescription;
-	}	
-	
-	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "serviceEntityRequest" , orphanRemoval = true)
-	@JsonSerialize(using=JPASerializer.class)
-	@JsonManagedReference(value="service_request_parts")
+	}
+
+	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "serviceEntityRequest", orphanRemoval = true)
+	@JsonSerialize(using = JPASerializer.class)
+	@JsonManagedReference(value = "service_request_parts")
 	public List<ServiceEntityRequestPart> getParts() {
 		return parts;
 	}
@@ -200,10 +204,10 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	public void setParts(List<ServiceEntityRequestPart> parts) {
 		this.parts = parts;
 	}
-	
-	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "serviceEntityRequest" , orphanRemoval = true)
-	@JsonSerialize(using=JPASerializer.class)
-	@JsonManagedReference(value="service_request_labors")
+
+	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "serviceEntityRequest", orphanRemoval = true)
+	@JsonSerialize(using = JPASerializer.class)
+	@JsonManagedReference(value = "service_request_labors")
 	public List<ServiceEntityRequestLabor> getLabors() {
 		return labors;
 	}
@@ -211,21 +215,21 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	public void setLabors(List<ServiceEntityRequestLabor> labors) {
 		this.labors = labors;
 	}
-	
-	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "serviceEntityRequest" , orphanRemoval = true)
-	@JsonSerialize(using=JPASerializer.class)
-	@JsonManagedReference(value="service_request_otherCharges")
+
+	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "serviceEntityRequest", orphanRemoval = true)
+	@JsonSerialize(using = JPASerializer.class)
+	@JsonManagedReference(value = "service_request_otherCharges")
 	public List<ServiceEntityRequestOther> getOtherCharges() {
 		return otherCharges;
 	}
 
 	public void setOtherCharges(List<ServiceEntityRequestOther> otherCharges) {
 		this.otherCharges = otherCharges;
-	}	
-	
+	}
+
 	@OneToOne(mappedBy = "serviceEntityRequest", cascade = CascadeType.ALL)
-	@JsonManagedReference(value="service_request_product")
-	@JsonSerialize(using=JPASerializer.class)
+	@JsonManagedReference(value = "service_request_product")
+	@JsonSerialize(using = JPASerializer.class)
 	public ServiceEntityRequestProduct getProduct() {
 		return product;
 	}
@@ -233,10 +237,10 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	public void setProduct(ServiceEntityRequestProduct product) {
 		this.product = product;
 	}
-	
+
 	@OneToOne(mappedBy = "serviceEntityRequest", cascade = CascadeType.ALL)
-	@JsonManagedReference(value="service_request_coverage")
-	@JsonSerialize(using=JPASerializer.class)
+	@JsonManagedReference(value = "service_request_coverage")
+	@JsonSerialize(using = JPASerializer.class)
 	public ServiceEntityRequestCoverage getCoverage() {
 		return coverage;
 	}
@@ -245,9 +249,9 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 		this.coverage = coverage;
 	}
 
-	@OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name="part_amount_id")
-	@JsonSerialize(using=JPASerializer.class)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "part_amount_id")
+	@JsonSerialize(using = JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
 	public ServiceEntityAmount getPartAmount() {
 		return partAmount;
@@ -256,10 +260,10 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	public void setPartAmount(ServiceEntityAmount partAmount) {
 		this.partAmount = partAmount;
 	}
-	
-	@OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name="labor_amount_id")
-	@JsonSerialize(using=JPASerializer.class)
+
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "labor_amount_id")
+	@JsonSerialize(using = JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
 	public ServiceEntityAmount getLaborAmount() {
 		return laborAmount;
@@ -268,10 +272,10 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	public void setLaborAmount(ServiceEntityAmount laborAmount) {
 		this.laborAmount = laborAmount;
 	}
-	
-	@OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name="other_amount_id")
-	@JsonSerialize(using=JPASerializer.class)
+
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "other_amount_id")
+	@JsonSerialize(using = JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
 	public ServiceEntityAmount getOtherAmount() {
 		return otherAmount;
@@ -280,10 +284,10 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	public void setOtherAmount(ServiceEntityAmount otherAmount) {
 		this.otherAmount = otherAmount;
 	}
-	
-	@OneToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name="total_amount_id")
-	@JsonSerialize(using=JPASerializer.class)
+
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "total_amount_id")
+	@JsonSerialize(using = JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
 	public ServiceEntityAmount getTotalAmount() {
 		return totalAmount;
@@ -293,54 +297,76 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 		this.totalAmount = totalAmount;
 	}
 
+	@Column(name = "srvc_requested_date")
+	@Type(type = "com.mize.domain.util.MizeDateJPA")
+	public MizeDate getRequestedDate() {
+		return requestedDate;
+	}
+
+	public void setRequestedDate(MizeDate requestedDate) {
+		this.requestedDate = requestedDate;
+	}
+
+	@Column(name = "srvc_promised_date")
+	@Type(type = "com.mize.domain.util.MizeDateJPA")
+	public MizeDate getPromisedDate() {
+		return promisedDate;
+	}
+
+	public void setPromisedDate(MizeDate promisedDate) {
+		this.promisedDate = promisedDate;
+	}
+
+	@Column(name = "srvc_resolved_date")
+	@Type(type = "com.mize.domain.util.MizeDateJPA")
+	public MizeDate getResolvedDate() {
+		return resolvedDate;
+	}
+
+	public void setResolvedDate(MizeDate resolvedDate) {
+		this.resolvedDate = resolvedDate;
+	}
+	@Column(name = "srvc_request_status")
+	public String getRequestStatus() {
+		return requestStatus;
+	}
+
+	public void setRequestStatus(String requestStatus) {
+		this.requestStatus = requestStatus;
+	}
+	@Column(name = "srvc_priority")
+	public String getPriority() {
+		return priority;
+	}
+
+	public void setPriority(String priority) {
+		this.priority = priority;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime * result
-				+ ((causeCode == null) ? 0 : causeCode.hashCode());
-		result = prime
-				* result
-				+ ((causeDescription == null) ? 0 : causeDescription.hashCode());
-		result = prime * result
-				+ ((complaintCode == null) ? 0 : complaintCode.hashCode());
-		result = prime
-				* result
-				+ ((complaintDescription == null) ? 0 : complaintDescription
-						.hashCode());
-		result = prime
-				* result
-				+ ((correctiveActionCode == null) ? 0 : correctiveActionCode
-						.hashCode());
-		result = prime
-				* result
-				+ ((correctiveActionDescription == null) ? 0
-						: correctiveActionDescription.hashCode());
-		result = prime * result
-				+ ((coverage == null) ? 0 : coverage.hashCode());
-		result = prime * result
-				+ ((failureDate == null) ? 0 : failureDate.hashCode());
-		result = prime * result
-				+ ((laborAmount == null) ? 0 : laborAmount.hashCode());
+		result = prime * result + ((causeCode == null) ? 0 : causeCode.hashCode());
+		result = prime * result + ((causeDescription == null) ? 0 : causeDescription.hashCode());
+		result = prime * result + ((complaintCode == null) ? 0 : complaintCode.hashCode());
+		result = prime * result + ((complaintDescription == null) ? 0 : complaintDescription.hashCode());
+		result = prime * result + ((correctiveActionCode == null) ? 0 : correctiveActionCode.hashCode());
+		result = prime * result + ((correctiveActionDescription == null) ? 0 : correctiveActionDescription.hashCode());
+		result = prime * result + ((coverage == null) ? 0 : coverage.hashCode());
+		result = prime * result + ((failureDate == null) ? 0 : failureDate.hashCode());
+		result = prime * result + ((laborAmount == null) ? 0 : laborAmount.hashCode());
 		result = prime * result + ((labors == null) ? 0 : labors.hashCode());
-		result = prime * result
-				+ ((otherAmount == null) ? 0 : otherAmount.hashCode());
-		result = prime * result
-				+ ((otherCharges == null) ? 0 : otherCharges.hashCode());
-		result = prime * result
-				+ ((partAmount == null) ? 0 : partAmount.hashCode());
+		result = prime * result + ((otherAmount == null) ? 0 : otherAmount.hashCode());
+		result = prime * result + ((otherCharges == null) ? 0 : otherCharges.hashCode());
+		result = prime * result + ((partAmount == null) ? 0 : partAmount.hashCode());
 		result = prime * result + ((parts == null) ? 0 : parts.hashCode());
 		result = prime * result + ((product == null) ? 0 : product.hashCode());
-		result = prime * result
-				+ ((repairDate == null) ? 0 : repairDate.hashCode());
-		result = prime * result
-				+ ((repairSiteCode == null) ? 0 : repairSiteCode.hashCode());
-		result = prime * result
-				+ ((requestCode == null) ? 0 : requestCode.hashCode());
-		result = prime * result
-				+ ((requestType == null) ? 0 : requestType.hashCode());
-		result = prime * result
-				+ ((totalAmount == null) ? 0 : totalAmount.hashCode());
+		result = prime * result + ((repairDate == null) ? 0 : repairDate.hashCode());
+		result = prime * result + ((repairSiteCode == null) ? 0 : repairSiteCode.hashCode());
+		result = prime * result + ((requestCode == null) ? 0 : requestCode.hashCode());
+		result = prime * result + ((requestType == null) ? 0 : requestType.hashCode());
+		result = prime * result + ((totalAmount == null) ? 0 : totalAmount.hashCode());
 		return result;
 	}
 
@@ -381,8 +407,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 		if (correctiveActionDescription == null) {
 			if (other.correctiveActionDescription != null)
 				return false;
-		} else if (!correctiveActionDescription
-				.equals(other.correctiveActionDescription))
+		} else if (!correctiveActionDescription.equals(other.correctiveActionDescription))
 			return false;
 		if (coverage == null) {
 			if (other.coverage != null)
@@ -464,22 +489,30 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 
 	@Override
 	public String toString() {
-		return "ServiceEntityRequest [requestType=" + requestType
-				+ ", requestCode=" + requestCode + ", failureDate="
-				+ failureDate + ", repairDate=" + repairDate
-				+ ", repairSiteCode=" + repairSiteCode + ", complaintCode="
-				+ complaintCode + ", complaintDescription="
-				+ complaintDescription + ", causeCode=" + causeCode
-				+ ", causeDescription=" + causeDescription
-				+ ", correctiveActionCode=" + correctiveActionCode
-				+ ", correctiveActionDescription="
-				+ correctiveActionDescription + ", parts=" + parts
-				+ ", labors=" + labors + ", otherCharges=" + otherCharges
-				+ ", product=" + product + ", coverage=" + coverage
-				+ ", partAmount=" + partAmount + ", laborAmount=" + laborAmount
-				+ ", otherAmount=" + otherAmount + ", totalAmount="
-				+ totalAmount + "]";
-	}	
-	
+		StringBuilder builder = new StringBuilder();
+		builder.append("ServiceEntityRequest [");
+		builder.append("requestType=").append(requestType);
+		builder.append(", requestCode=").append(requestCode);
+		builder.append(", failureDate=").append(failureDate);
+		builder.append(", repairDate=").append(repairDate);
+		builder.append(", repairSiteCode=").append(repairSiteCode);
+		builder.append(", complaintCode=").append(complaintCode);
+		builder.append(", complaintDescription=").append(complaintDescription);
+		builder.append(", causeDescription=").append(causeDescription);
+		builder.append(", correctiveActionCode=").append(correctiveActionCode);
+		builder.append(", correctiveActionDescription=").append(correctiveActionDescription);
+		builder.append(", parts=").append(parts);
+		builder.append(", labors=").append(labors);
+		builder.append(", otherCharges=").append(otherCharges);
+		builder.append(", product=").append(product);
+		builder.append(", otherCharges=").append(otherCharges);
+		builder.append(", coverage=").append(coverage);
+		builder.append(", partAmount=").append(partAmount);
+		builder.append(", laborAmount=").append(laborAmount);
+		builder.append(", otherAmount=").append(otherAmount);
+		builder.append(", totalAmount=").append(totalAmount);
+		builder.append("]");
+		return builder.toString();
+	}
 
 }

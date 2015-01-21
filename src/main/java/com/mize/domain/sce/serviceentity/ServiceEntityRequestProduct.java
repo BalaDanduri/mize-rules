@@ -12,6 +12,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Type;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -20,6 +22,7 @@ import com.mize.domain.common.EntityContact;
 import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.product.ProductRegistration;
 import com.mize.domain.util.JPASerializer;
+import com.mize.domain.util.MizeDate;
 
 /**
  * @author HarishBurra
@@ -30,12 +33,9 @@ import com.mize.domain.util.JPASerializer;
 public class ServiceEntityRequestProduct extends MizeSceEntity implements Comparable<ServiceEntityRequestProduct> {
 
 	private static final long serialVersionUID = -1812475489451721317L;
-	
+
 	private ServiceEntityRequest serviceEntityRequest;
-	//private Product product;
-	//private ProductCategory productCategory;
 	private Long productId;
-	//private ProductSerial productSerial;
 	private Long productSerialId;
 	private ProductRegistration registration;
 	private Long prodRegnId;
@@ -57,27 +57,30 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 	private EntityContact customerContact;
 	private String isNewCustomer;
 
+	private MizeDate purchaseDate;
+	private MizeDate registrationDate;
+
 	public ServiceEntityRequestProduct() {
-		
+
 	}
 
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
+	@Column(name = "id")
 	public Long getId() {
 		return id;
 	}
 
 	@Override
-	public void setId(Long id) {		
+	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "service_request_id")
-	@JsonBackReference(value="service_request_product")
-	@JsonSerialize(using=JPASerializer.class)
+	@JsonBackReference(value = "service_request_product")
+	@JsonSerialize(using = JPASerializer.class)
 	public ServiceEntityRequest getServiceEntityRequest() {
 		return serviceEntityRequest;
 	}
@@ -85,55 +88,25 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 	public void setServiceEntityRequest(ServiceEntityRequest serviceEntityRequest) {
 		this.serviceEntityRequest = serviceEntityRequest;
 	}
-	
-	/*@Transient
-	@JsonIgnore
-	public Product getProduct() {
-		return product;
-	}
 
-	public void setProduct(Product product) {
-		this.product = product;
-	}
-	
-	@Transient
-	@JsonIgnore
-	public ProductCategory getProductCategory() {
-		return productCategory;
-	}
-	
-	public void setProductCategory(ProductCategory productCategory) {
-		this.productCategory = productCategory;
-	}*/
-	
 	@Column(name = "prod_id")
 	public Long getProductId() {
 		return productId;
 	}
-	
+
 	public void setProductId(Long productId) {
 		this.productId = productId;
 	}
-	
-	/*@Transient
-	@JsonIgnore
-	public ProductSerial getProductSerial() {
-		return productSerial;
-	}	
-	
-	public void setProductSerial(ProductSerial productSerial) {
-		this.productSerial = productSerial;
-	}*/
-	
+
 	@Column(name = "prod_serial_id")
 	public Long getProductSerialId() {
 		return productSerialId;
 	}
-	
+
 	public void setProductSerialId(Long productSerialId) {
 		this.productSerialId = productSerialId;
 	}
-	
+
 	@Transient
 	@JsonIgnore
 	public ProductRegistration getRegistration() {
@@ -143,16 +116,16 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 	public void setRegistration(ProductRegistration registration) {
 		this.registration = registration;
 	}
-	
+
 	@Column(name = "prod_regn_id")
 	public Long getProdRegnId() {
 		return prodRegnId;
 	}
-	
+
 	public void setProdRegnId(Long prodRegnId) {
 		this.prodRegnId = prodRegnId;
 	}
-	
+
 	@Column(name = "prod_name")
 	public String getProductName() {
 		return productName;
@@ -161,7 +134,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
-	
+
 	@Column(name = "model")
 	public String getModel() {
 		return model;
@@ -170,7 +143,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 	public void setModel(String model) {
 		this.model = model;
 	}
-	
+
 	@Column(name = "brand_name")
 	public String getBrandName() {
 		return brandName;
@@ -179,7 +152,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 	public void setBrandName(String brandName) {
 		this.brandName = brandName;
 	}
-	
+
 	@Column(name = "prod_cat_name")
 	public String getCategoryName() {
 		return categoryName;
@@ -188,7 +161,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
-	
+
 	@Column(name = "prod_srl_no")
 	public String getSerialNumber() {
 		return serialNumber;
@@ -196,8 +169,8 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 
 	public void setSerialNumber(String serialNumber) {
 		this.serialNumber = serialNumber;
-	}	
-	
+	}
+
 	@Column(name = "customer_be_id")
 	public Long getCustomerId() {
 		return customerId;
@@ -206,7 +179,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 	public void setCustomerId(Long customerId) {
 		this.customerId = customerId;
 	}
-	
+
 	@Column(name = "customer_be_code")
 	public String getCustomerCode() {
 		return customerCode;
@@ -215,7 +188,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 	public void setCustomerCode(String customerCode) {
 		this.customerCode = customerCode;
 	}
-	
+
 	@Column(name = "customer_be_type_code")
 	public String getCustomerTypeCode() {
 		return customerTypeCode;
@@ -224,17 +197,16 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 	public void setCustomerTypeCode(String customerTypeCode) {
 		this.customerTypeCode = customerTypeCode;
 	}
-	
+
 	@Column(name = "customer_be_sub_type_code")
 	public String getCustomerSubTypeCode() {
 		return customerSubTypeCode;
 	}
-	
-	
+
 	public void setCustomerSubTypeCode(String customerSubTypeCode) {
 		this.customerSubTypeCode = customerSubTypeCode;
 	}
-	
+
 	@Column(name = "customer_be_name")
 	public String getCustomerName() {
 		return customerName;
@@ -243,7 +215,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
 	}
-	
+
 	@Column(name = "customer_be_first_name")
 	public String getCustomerFirstName() {
 		return customerFirstName;
@@ -252,7 +224,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 	public void setCustomerFirstName(String customerFirstName) {
 		this.customerFirstName = customerFirstName;
 	}
-	
+
 	@Column(name = "customer_be_last_name")
 	public String getCustomerLastName() {
 		return customerLastName;
@@ -261,7 +233,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 	public void setCustomerLastName(String customerLastName) {
 		this.customerLastName = customerLastName;
 	}
-	
+
 	@Column(name = "customer_be_middle_initial")
 	public String getCustomerMiddleInitial() {
 		return customerMiddleInitial;
@@ -270,7 +242,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 	public void setCustomerMiddleInitial(String customerMiddleInitial) {
 		this.customerMiddleInitial = customerMiddleInitial;
 	}
-	
+
 	@Column(name = "customer_be_reference")
 	public String getCustomerReference() {
 		return customerReference;
@@ -279,7 +251,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 	public void setCustomerReference(String customerReference) {
 		this.customerReference = customerReference;
 	}
-	
+
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	@JoinColumn(name = "customer_address_id")
 	public EntityAddress getCustomerAddress() {
@@ -289,7 +261,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 	public void setCustomerAddress(EntityAddress customerAddress) {
 		this.customerAddress = customerAddress;
 	}
-	
+
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
 	@JoinColumn(name = "customer_contact_id")
 	public EntityContact getCustomerContact() {
@@ -299,7 +271,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 	public void setCustomerContact(EntityContact customerContact) {
 		this.customerContact = customerContact;
 	}
-	
+
 	@Column(name = "is_new_customer")
 	public String getIsNewCustomer() {
 		return isNewCustomer;
@@ -309,66 +281,51 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 		this.isNewCustomer = isNewCustomer;
 	}
 
+	@Column(name = "purchase_date")
+	@Type(type = "com.mize.domain.util.MizeDateJPA")
+	public MizeDate getPurchaseDate() {
+		return purchaseDate;
+	}
+
+	public void setPurchaseDate(MizeDate purchaseDate) {
+		this.purchaseDate = purchaseDate;
+	}
+
+	@Column(name = "regn_date")
+	@Type(type = "com.mize.domain.util.MizeDateJPA")
+	public MizeDate getRegistrationDate() {
+		return registrationDate;
+	}
+
+	public void setRegistrationDate(MizeDate registrationDate) {
+		this.registrationDate = registrationDate;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime * result
-				+ ((brandName == null) ? 0 : brandName.hashCode());
-		result = prime * result
-				+ ((categoryName == null) ? 0 : categoryName.hashCode());
-		result = prime * result
-				+ ((customerAddress == null) ? 0 : customerAddress.hashCode());
-		result = prime * result
-				+ ((customerCode == null) ? 0 : customerCode.hashCode());
-		result = prime * result
-				+ ((customerContact == null) ? 0 : customerContact.hashCode());
-		result = prime
-				* result
-				+ ((customerFirstName == null) ? 0 : customerFirstName
-						.hashCode());
-		result = prime * result
-				+ ((customerId == null) ? 0 : customerId.hashCode());
-		result = prime
-				* result
-				+ ((customerLastName == null) ? 0 : customerLastName.hashCode());
-		result = prime
-				* result
-				+ ((customerMiddleInitial == null) ? 0 : customerMiddleInitial
-						.hashCode());
-		result = prime * result
-				+ ((customerName == null) ? 0 : customerName.hashCode());
-		result = prime
-				* result
-				+ ((customerReference == null) ? 0 : customerReference
-						.hashCode());
-		result = prime
-				* result
-				+ ((customerSubTypeCode == null) ? 0 : customerSubTypeCode
-						.hashCode());
-		result = prime
-				* result
-				+ ((customerTypeCode == null) ? 0 : customerTypeCode.hashCode());
-		result = prime * result
-				+ ((isNewCustomer == null) ? 0 : isNewCustomer.hashCode());
+		result = prime * result + ((brandName == null) ? 0 : brandName.hashCode());
+		result = prime * result + ((categoryName == null) ? 0 : categoryName.hashCode());
+		result = prime * result + ((customerAddress == null) ? 0 : customerAddress.hashCode());
+		result = prime * result + ((customerCode == null) ? 0 : customerCode.hashCode());
+		result = prime * result + ((customerContact == null) ? 0 : customerContact.hashCode());
+		result = prime * result + ((customerFirstName == null) ? 0 : customerFirstName.hashCode());
+		result = prime * result + ((customerId == null) ? 0 : customerId.hashCode());
+		result = prime * result + ((customerLastName == null) ? 0 : customerLastName.hashCode());
+		result = prime * result + ((customerMiddleInitial == null) ? 0 : customerMiddleInitial.hashCode());
+		result = prime * result + ((customerName == null) ? 0 : customerName.hashCode());
+		result = prime * result + ((customerReference == null) ? 0 : customerReference.hashCode());
+		result = prime * result + ((customerSubTypeCode == null) ? 0 : customerSubTypeCode.hashCode());
+		result = prime * result + ((customerTypeCode == null) ? 0 : customerTypeCode.hashCode());
+		result = prime * result + ((isNewCustomer == null) ? 0 : isNewCustomer.hashCode());
 		result = prime * result + ((model == null) ? 0 : model.hashCode());
-		result = prime * result
-				+ ((prodRegnId == null) ? 0 : prodRegnId.hashCode());
-		/*result = prime * result + ((product == null) ? 0 : product.hashCode());
-		result = prime * result
-				+ ((productCategory == null) ? 0 : productCategory.hashCode());*/
-		result = prime * result
-				+ ((productId == null) ? 0 : productId.hashCode());
-		result = prime * result
-				+ ((productName == null) ? 0 : productName.hashCode());
-		/*result = prime * result
-				+ ((productSerial == null) ? 0 : productSerial.hashCode());*/
-		result = prime * result
-				+ ((productSerialId == null) ? 0 : productSerialId.hashCode());
-		result = prime * result
-				+ ((registration == null) ? 0 : registration.hashCode());
-		result = prime * result
-				+ ((serialNumber == null) ? 0 : serialNumber.hashCode());
+		result = prime * result + ((prodRegnId == null) ? 0 : prodRegnId.hashCode());		
+		result = prime * result + ((productId == null) ? 0 : productId.hashCode());
+		result = prime * result + ((productName == null) ? 0 : productName.hashCode());		
+		result = prime * result + ((productSerialId == null) ? 0 : productSerialId.hashCode());
+		result = prime * result + ((registration == null) ? 0 : registration.hashCode());
+		result = prime * result + ((serialNumber == null) ? 0 : serialNumber.hashCode());
 		return result;
 	}
 
@@ -460,17 +417,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 			if (other.prodRegnId != null)
 				return false;
 		} else if (!prodRegnId.equals(other.prodRegnId))
-			return false;
-		/*if (product == null) {
-			if (other.product != null)
-				return false;
-		} else if (!product.equals(other.product))
-			return false;
-		if (productCategory == null) {
-			if (other.productCategory != null)
-				return false;
-		} else if (!productCategory.equals(other.productCategory))
-			return false;*/
+			return false;		
 		if (productId == null) {
 			if (other.productId != null)
 				return false;
@@ -480,12 +427,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 			if (other.productName != null)
 				return false;
 		} else if (!productName.equals(other.productName))
-			return false;
-		/*if (productSerial == null) {
-			if (other.productSerial != null)
-				return false;
-		} else if (!productSerial.equals(other.productSerial))
-			return false;*/
+			return false;		
 		if (productSerialId == null) {
 			if (other.productSerialId != null)
 				return false;
@@ -513,18 +455,15 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("ServiceEntityRequestProduct [");
-		//builder.append("/product=").append(product);
-		//builder.append(", productCategory=").append(productCategory);
-		builder.append(", productId=").append(productId);
-		//builder.append(", productSerial=").append(productSerial);		
+		builder.append("ServiceEntityRequestProduct [");		
+		builder.append(", productId=").append(productId);		
 		builder.append(", productSerialId=").append(productSerialId);
 		builder.append(", prodRegnId=").append(registration);
 		builder.append(", productSerial=").append(prodRegnId);
 		builder.append(", productName=").append(productName);
 		builder.append(", model=").append(model);
 		builder.append(", brandName=").append(brandName);
-		builder.append(", categoryName=").append(categoryName);		
+		builder.append(", categoryName=").append(categoryName);
 		builder.append(", serialNumber=").append(serialNumber);
 		builder.append(", customerId=").append(customerId);
 		builder.append(", customerCode=").append(customerCode);
@@ -534,13 +473,12 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 		builder.append(", customerFirstName=").append(customerFirstName);
 		builder.append(", customerLastName=").append(customerLastName);
 		builder.append(", customerMiddleInitial=").append(customerMiddleInitial);
-		builder.append(", customerReference=").append(customerReference);		
+		builder.append(", customerReference=").append(customerReference);
 		builder.append(", customerAddress=").append(customerAddress);
 		builder.append(", customerContact=").append(customerContact);
 		builder.append(", isNewCustomer=").append(isNewCustomer);
 		builder.append("]");
 		return builder.toString();
-	}	
-	
+	}
 
 }
