@@ -285,6 +285,10 @@ public class MizeApplicationProperties implements InitializingBean {
 	private String getPropertyValue(String propertyName) {		
 		return properties.get(propertyName);
 	}
+	@JsonIgnore
+	public String getPreCustomerFolder() {
+		return getPropertyValue("preCustomerFolder");
+	}
 	
 	
 }
