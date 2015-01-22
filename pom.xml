@@ -19,7 +19,7 @@
 		<hibernate-version>4.2.7.Final</hibernate-version>
 		<mysql-version>5.1.33</mysql-version>
 		<milyn-smooks-version>1.5.1</milyn-smooks-version>
-		<spring-version>3.2.8.RELEASE</spring-version>
+		<spring-version>3.2.11.RELEASE</spring-version>
 		<jackson-version>2.2.2</jackson-version>
 		<guava-version>13.0</guava-version>
 		<joda-time-version>2.1</joda-time-version>
