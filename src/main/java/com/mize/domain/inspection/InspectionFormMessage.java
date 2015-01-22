@@ -1,16 +1,20 @@
 package com.mize.domain.inspection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.mize.domain.common.EntityErrorMessage;
 import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JPASerializer;
 
@@ -18,20 +22,15 @@ import com.mize.domain.util.JPASerializer;
 
 @Entity
 @Table(name = "insp_form_msg")
-public class InspectionFormMessage extends MizeSceEntity {
+public class InspectionFormMessage extends MizeSceEntity implements Comparable<InspectionFormMessage> {
 
 	
-	private static final long serialVersionUID = 8878621032671945424L;
-	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3777376798221094439L;
 	private InspectionForm inspectionForm;
-	private Long messageId;
-	private Integer messageSeverity;
-	private String messageField;
-	private String messageUiReference;
-	private String messageValue;
-	private String messageCode;
-	private String shortDesc;
-	private String longDesc;
+	private EntityErrorMessage entityErrorMessage;
 
 	public InspectionFormMessage() {
 		
@@ -61,89 +60,22 @@ public class InspectionFormMessage extends MizeSceEntity {
 	public void setInspectionForm(InspectionForm inspectionForm) {
 		this.inspectionForm = inspectionForm;
 	}
-	
-	@Column(name = "message_id")
-	public Long getMessageId() {
-		return messageId;
+
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "error_message_id")
+	public EntityErrorMessage getEntityErrorMessage() {
+		return entityErrorMessage;
 	}
 
-	public void setMessageId(Long messageId) {
-		this.messageId = messageId;
-	}
-	
-	@Column(name = "message_severity")
-	public Integer getMessageSeverity() {
-		return messageSeverity;
-	}
-	
-	public void setMessageSeverity(Integer messageSeverity) {
-		this.messageSeverity = messageSeverity;
-	}
-	
-	@Column(name = "message_field")
-	public String getMessageField() {
-		return messageField;
-	}
-
-	public void setMessageField(String messageField) {
-		this.messageField = messageField;
-	}
-	
-	@Column(name = "message_ui_reference")
-	public String getMessageUiReference() {
-		return messageUiReference;
-	}
-
-	public void setMessageUiReference(String messageUiReference) {
-		this.messageUiReference = messageUiReference;
-	}
-	
-	@Column(name = "message_value")
-	public String getMessageValue() {
-		return messageValue;
-	}
-
-	public void setMessageValue(String messageValue) {
-		this.messageValue = messageValue;
-	}
-	
-	@Column(name = "message_code")
-	public String getMessageCode() {
-		return messageCode;
-	}
-
-	public void setMessageCode(String messageCode) {
-		this.messageCode = messageCode;
-	}
-
-	@Column(name = "short_description")
-	public String getShortDesc() {
-		return shortDesc;
-	}
-
-	public void setShortDesc(String shortDesc) {
-		this.shortDesc = shortDesc;
-	}
-
-	@Column(name = "long_description")
-	public String getLongDesc() {
-		return longDesc;
-	}
-
-	public void setLongDesc(String longDesc) {
-		this.longDesc = longDesc;
+	public void setEntityErrorMessage(EntityErrorMessage entityErrorMessage) {
+		this.entityErrorMessage = entityErrorMessage;
 	}
 
 	@Override
 	public int hashCode() {
-		final int prime = PRIME;
+		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((messageField == null) ? 0 : messageField.hashCode());
-		result = prime * result + ((messageId == null) ? 0 : messageId.hashCode());
-		result = prime * result + ((messageSeverity == null) ? 0 : messageSeverity.hashCode());
-		result = prime * result + ((messageUiReference == null) ? 0 : messageUiReference.hashCode());
-		result = prime * result + ((messageValue == null) ? 0 : messageValue.hashCode());
-		result = prime * result + ((inspectionForm == null) ? 0 : inspectionForm.hashCode());
+		result = prime * result + ((entityErrorMessage == null) ? 0 : entityErrorMessage.hashCode());
 		return result;
 	}
 
@@ -156,44 +88,23 @@ public class InspectionFormMessage extends MizeSceEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		InspectionFormMessage other = (InspectionFormMessage) obj;
-		if (messageField == null) {
-			if (other.messageField != null)
+		if (entityErrorMessage == null) {
+			if (other.entityErrorMessage != null)
 				return false;
-		} else if (!messageField.equals(other.messageField))
+		} else if (!entityErrorMessage.equals(other.entityErrorMessage))
 			return false;
-		if (messageId == null) {
-			if (other.messageId != null)
-				return false;
-		} else if (!messageId.equals(other.messageId))
-			return false;
-		if (messageSeverity == null) {
-			if (other.messageSeverity != null)
-				return false;
-		} else if (!messageSeverity.equals(other.messageSeverity))
-			return false;
-		if (messageUiReference == null) {
-			if (other.messageUiReference != null)
-				return false;
-		} else if (!messageUiReference.equals(other.messageUiReference))
-			return false;
-		if (messageValue == null) {
-			if (other.messageValue != null)
-				return false;
-		} else if (!messageValue.equals(other.messageValue))
-			return false;
-		if (shortDesc == null) {
-			if (other.shortDesc != null)
-				return false;
-		} else if (!shortDesc.equals(other.shortDesc))
-			return false;
-		if (longDesc == null) {
-			if (other.longDesc != null)
-				return false;
-		} else if (!longDesc.equals(other.longDesc)){
-			return false;
-		}
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "InspectionFormMessage [entityErrorMessage=" + entityErrorMessage + "]";
+	}
 	
+	@Override
+	public int compareTo(InspectionFormMessage o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 }

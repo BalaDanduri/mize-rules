@@ -23,6 +23,7 @@ import com.mize.domain.common.Country;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.EntityContact;
+import com.mize.domain.common.EntityErrorMessage;
 import com.mize.domain.common.State;
 import com.mize.domain.form.FormDefinition;
 import com.mize.domain.form.FormInstance;
@@ -280,11 +281,12 @@ public class InspectionFormTest extends JPATest {
 	private void prepareMessages() {
 		message = new InspectionFormMessage();
 		message.setInspectionForm(inspectionForm);
-		message.setMessageSeverity(5);
-		message.setMessageValue("Invalid Address Type");
-		message.setMessageId(462L);
-		message.setMessageUiReference("Address");
-		message.setMessageField("address_type");
+		EntityErrorMessage errorMessage = new EntityErrorMessage();
+		errorMessage.setSeverity(5);
+		errorMessage.setValue("Invalid Address Type");
+		errorMessage.setUiReference("Address");
+		errorMessage.setField("address_type");
+		message.setEntityErrorMessage(errorMessage);
 		messages = new ArrayList<InspectionFormMessage>();
 		messages.add(message);
 		inspectionForm.setMessages(messages);
