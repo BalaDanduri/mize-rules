@@ -290,5 +290,21 @@ public class MizeApplicationProperties implements InitializingBean {
 		return getPropertyValue("preCustomerFolder");
 	}
 	
+	@JsonIgnore
+	public boolean isSRDisplayRequester() {
+		if(getPropertyValue("SRDisplayRequester") != null) {
+			return Boolean.valueOf(getPropertyValue("SRDisplayRequester"));
+		}else {
+			return false;
+		}
+	}
 	
+	@JsonIgnore
+	public boolean isSRCustomerRequired() {
+		if(getPropertyValue("SRCustomerRequired") != null) {
+			return Boolean.valueOf(getPropertyValue("SRCustomerRequired"));
+		}else {
+			return false;
+		}
+	}
 }
