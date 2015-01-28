@@ -121,8 +121,7 @@ public abstract class CatalogConstants implements Serializable{
 	public static final String  SR_COMMENT_TYPE= "SRCommentType";
 	public static final String  SR_PRIORITY= "SRPriority";
 	public static final String  SR_SOURCE= "SRSource";	
-	
-	
+	public static final String ENTITYLOCK_ENTITY_TYPE = "EntityLockEntityType";
 	
 }
 
