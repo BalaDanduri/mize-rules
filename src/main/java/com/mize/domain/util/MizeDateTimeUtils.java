@@ -12,7 +12,7 @@ import com.mize.domain.auth.User;
 
 @Component
 public class MizeDateTimeUtils {
-	
+	//MizeDateTime to MizeDate and vice versa
 	public static DateTimeFormatter  DB_DATE_TIME_FORMAT;
 	private static MizeApplicationProperties mizeApplicationProperties;
 	
