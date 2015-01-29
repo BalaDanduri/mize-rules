@@ -6,11 +6,14 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -39,6 +42,9 @@ import com.mize.domain.util.MizeDate;
 
 @Entity
 @Table(name = "prod_regn")
+@Inheritance
+@DiscriminatorColumn(name = "discriminator")
+@DiscriminatorValue("ProductRegistration")
 public class ProductRegistration extends MizeSceEntityAudit implements Comparable<ProductRegistration>{
 
 	private static final long serialVersionUID = 2928234510268602315L;

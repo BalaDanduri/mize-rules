@@ -7,10 +7,13 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -37,6 +40,9 @@ import com.mize.domain.util.NumberValueSerializer;
 
 @javax.persistence.Entity
 @Table(name = "prod")
+@Inheritance
+@DiscriminatorColumn(name = "discriminator")
+@DiscriminatorValue("Product")
 public class Product  extends MizeSceEntityAudit implements Comparable<Product>{
 	
 	private static final long serialVersionUID = 5379538452565383073L;
