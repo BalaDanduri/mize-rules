@@ -23,6 +23,7 @@
 		<jackson-version>2.2.2</jackson-version>
 		<guava-version>13.0</guava-version>
 		<joda-time-version>2.1</joda-time-version>
+		<jackson-datatype-joda-version>2.4.1</jackson-datatype-joda-version>
 	</properties>
 	<distributionManagement>
 		<repository>
@@ -205,10 +206,10 @@
 			<version>${beanutils-version}</version>
 		</dependency>
 		<dependency>
-	  <groupId>com.fasterxml.jackson.datatype</groupId>
-	  <artifactId>jackson-datatype-joda</artifactId>
-	  <version>2.4.1</version>
-</dependency>  
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-joda</artifactId>
+			<version>${jackson-datatype-joda-version}</version>
+		</dependency>  
 	</dependencies>
 
 	<build>
