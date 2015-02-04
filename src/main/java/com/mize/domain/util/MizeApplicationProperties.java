@@ -307,4 +307,13 @@ public class MizeApplicationProperties implements InitializingBean {
 			return false;
 		}
 	}
+	
+	@JsonIgnore
+	public boolean isAllowClaimMultiRequest() {		
+		if(getPropertyValue("allowClaimMultiServiceRequest") != null) {
+			return Boolean.valueOf(getPropertyValue("allowClaimMultiServiceRequest"));
+		}else {
+			return false;
+		}
+	}
 }
