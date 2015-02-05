@@ -32,7 +32,6 @@ import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeErrorTab;
 import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDate;
 import com.mize.domain.util.MizeDateTime;
 import com.mize.domain.util.MizeDateTimeUtils;
 
@@ -525,7 +524,7 @@ public class PurchaseOrder extends MizeSceEntityAudit implements Comparable<Purc
 	}
 	
 	@Transient
-	public String getFormattedDisplayDate(MizeDate inputDate) {
+	public String getFormattedDisplayDate(MizeDateTime inputDate) {
 		String date="";
 		if(inputDate!=null){
 			date = MizeDateTimeUtils.formattedMizeDate(inputDate,user);
