@@ -30,6 +30,7 @@ public class UserBrandMapping extends MizeSceEntityAudit implements Comparable<U
 	private Brand brand;
 	private String isActive;
 	private Brand userBrand;
+	private String isDefault;
 	
 	public UserBrandMapping(User user,Brand brand,String isActive) {
 			super();
@@ -101,14 +102,21 @@ public class UserBrandMapping extends MizeSceEntityAudit implements Comparable<U
 		this.userBrand = userBrand;
 	}	
 
-	
+	@Column(name="is_default")
+	public String getIsDefault() {
+		return isDefault;
+	}
+
+	public void setIsDefault(String isDefault) {
+		this.isDefault = isDefault;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime * result
-				+ ((isActive == null) ? 0 : isActive.hashCode());
+		result = prime * result + ((isActive == null) ? 0 : isActive.hashCode());
+		result = prime * result + ((isDefault == null) ? 0 : isDefault.hashCode());
 		return result;
 	}
 
@@ -126,6 +134,11 @@ public class UserBrandMapping extends MizeSceEntityAudit implements Comparable<U
 				return false;
 		} else if (!isActive.equals(other.isActive))
 			return false;
+		if (isDefault == null) {
+			if (other.isDefault != null)
+				return false;
+		} else if (!isDefault.equals(other.isDefault))
+			return false;
 		return true;
 	}
 
@@ -142,12 +155,9 @@ public class UserBrandMapping extends MizeSceEntityAudit implements Comparable<U
 		return EQUAL;		
 	}
 
-	
-
 	@Override
 	public String toString() {
-		return "UserBrandMapping [user=" + user + ", brand=" + brand
-				+ ", isActive=" + isActive + "]";
+		return "UserBrandMapping [user=" + user + ", brand=" + brand + ", isActive=" + isActive + ", isDefault=" + isDefault + "]";
 	}
 	
 	
