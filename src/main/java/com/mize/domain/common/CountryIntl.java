@@ -10,13 +10,18 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, include="all")
 @Table(name="country_intl")
 public class CountryIntl extends MizeSceEntityAudit implements Comparable<CountryIntl> {
 
 	private static final long serialVersionUID = 251263039560820237L;
+
 	Country country;
 	Locale locale;
 	String name;
@@ -51,6 +56,7 @@ public class CountryIntl extends MizeSceEntityAudit implements Comparable<Countr
 	
 	@JsonBackReference(value="countryIntl")
 	@ManyToOne(fetch = FetchType.EAGER ,optional = true)
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	@JoinColumn(name = "country_id")
 	public Country getCountry() {
 		return country;

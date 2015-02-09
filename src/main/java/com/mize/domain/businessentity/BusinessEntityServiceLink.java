@@ -9,7 +9,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -20,6 +23,8 @@ import com.mize.domain.common.State;
 import com.mize.domain.product.Product;
 import com.mize.domain.product.ProductCategory;
 import com.mize.domain.util.JPASerializer;
+import com.mize.domain.util.PopulateCountry;
+import com.mize.domain.util.PopulateState;
 
 @Entity
 @Table(name = "business_entity_service_link")
@@ -34,8 +39,12 @@ public class BusinessEntityServiceLink extends MizeSceEntityAudit implements Com
 	private String geoType;
 	private String geoValue;
 	private String serviceArea;
+	@PopulateState
 	private State state;
+	private Long stateId;
+	@PopulateCountry
 	private Country country;
+	private Long countryId;
 	private String isPromoted;
 	
 
@@ -127,14 +136,16 @@ public class BusinessEntityServiceLink extends MizeSceEntityAudit implements Com
 		return serviceArea;
 	}
 	
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "country_id")
+	/*@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "country_id")*/
+	@Transient
 	public Country getCountry() {
 		return country;
 	}
 	
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "state_id")
+	/*@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "state_id")*/
+	@Transient
 	public State getState() {
 		return state;
 	}
@@ -298,4 +309,25 @@ public class BusinessEntityServiceLink extends MizeSceEntityAudit implements Com
 	public int compareTo(BusinessEntity arg0) {
 		return 0;
 	}
+	
+	@Column(name = "country_id")
+	@JsonIgnore
+	public Long getCountryId() {
+		return countryId;
+	}
+
+	public void setCountryId(Long countryId) {
+		this.countryId = countryId;
+	}
+	
+	@Column(name = "state_id")
+	@JsonIgnore
+	public Long getStateId() {
+		return stateId;
+	}
+
+	public void setStateId(Long stateId) {
+		this.stateId = stateId;
+	}
+
 }

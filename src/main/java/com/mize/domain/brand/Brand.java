@@ -16,6 +16,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -26,7 +29,7 @@ import com.mize.domain.user.UserBrandMapping;
 import com.mize.domain.util.JPASerializer;
 
 @Entity
-@Cacheable(true)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, include="all")
 @Table(name = "brand")
 public class Brand extends MizeSceEntity implements Comparable<Brand>{
 	

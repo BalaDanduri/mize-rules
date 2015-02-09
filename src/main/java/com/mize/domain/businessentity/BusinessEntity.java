@@ -41,6 +41,7 @@ import com.mize.domain.common.State;
 import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.MizeDate;
+import com.mize.domain.util.CachedEntity;
 
 @Entity
 @Inheritance
@@ -63,17 +64,20 @@ public class BusinessEntity extends MizeSceEntityAudit implements Comparable<Bus
 	private User user;
 	private String statusCode;
 	private MizeDate startDate;
-	private MizeDate endDate;	
+	private MizeDate endDate;
+	@CachedEntity
 	private List<BusinessEntityAddress> addresses = new ArrayList<BusinessEntityAddress>();
 	private List<BusinessEntityIntl> intl = new ArrayList<BusinessEntityIntl>();
 	private List<BusinessEntityBrand> beBrand = new ArrayList<BusinessEntityBrand>();
 	private List<BusinessEntityContact> beContact = new ArrayList<BusinessEntityContact>();
 	private BusinessEntityAttribute beAttribute;
 	private List<BusinessEntityRelation> relatedEntities = new ArrayList<BusinessEntityRelation>();
+	@CachedEntity
 	private List<BusinessEntityServiceLink> beServiceLinks = new ArrayList<BusinessEntityServiceLink>();
 	private List<BusinessEntityServiceRate> beServiceRates = new ArrayList<BusinessEntityServiceRate>();
 	private BusinessEntityRelation customerEntityRelation;
 	private String referenceNumber;
+	
 	private List<Brand> brandList = new ArrayList<Brand>();
 
 	public BusinessEntity() {
@@ -99,8 +103,8 @@ public class BusinessEntity extends MizeSceEntityAudit implements Comparable<Bus
 	}
 
 	public BusinessEntity(Long id, String code, String name, String typeCode, String bename, String firstName,String lastName,String middleInitial, Locale locale, Long beaId,
-			Long eaId, String addressType, String address1, String address2, String address3, String zip, String zipExt, String city, String stateCode,
-			String stateName,String countryCode, String countryName, String countryCode3, String email, String landMark,Long becId, String certificationInfo,
+			Long eaId, String addressType, String address1, String address2, String address3, String zip, String zipExt, String city, Long stateId,
+			Long countryId, String email, String landMark,Long becId, String certificationInfo,
 			Long ecId, String isActive, String contactType, String contactName, String cfirstName, String clastName, String cmiddleInitial, String phone, String phoneExt,
 			String alternatePhone,String alternatePhoneExt, String fax, String faxExt, String cemail, String department, 
 			BigDecimal latitude, BigDecimal longitude, Long geoId, String url, String isPromoted, String hoursOfOp) {
@@ -121,15 +125,18 @@ public class BusinessEntity extends MizeSceEntityAudit implements Comparable<Bus
 		entityAddress.setZip(zip);
 		entityAddress.setZipExt(zipExt);
 		entityAddress.setCity(city);
-		State state = new State();
-		state.setCode(stateCode);
-		state.setName(stateName);
-		Country country = new Country();
+		entityAddress.setStateId(stateId);
+		entityAddress.setCountryId(countryId);
+		/*State state = new State();
+		state.setId(geoId)*/
+		/*state.setCode(stateCode);
+		state.setName(stateName);*/
+		/*Country country = new Country();
 		country.setCode(countryCode);
 		country.setName(countryName);
 		country.setCode3(countryCode3);
 		entityAddress.setState(state);
-		entityAddress.setCountry(country);
+		entityAddress.setCountry(country);*/
 		entityAddress.setEmail(email);
 		entityAddress.setLandmark(landMark);		
 		EntityAddressGeo addressGeo = new EntityAddressGeo();

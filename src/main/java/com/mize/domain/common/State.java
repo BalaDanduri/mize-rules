@@ -17,6 +17,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -29,7 +31,7 @@ import com.mize.domain.auth.User;
 import com.mize.domain.util.JPASerializer;
 
 @Entity
-@Cacheable(true)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, include="all")
 @Table(name = "state")
 public class State extends MizeSceEntityAudit implements Comparable<State>{
 	
@@ -118,7 +120,8 @@ public class State extends MizeSceEntityAudit implements Comparable<State>{
 		this.isActive = isActive;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	@JoinColumn(name = "country_id")
 	@JsonBackReference(value="country")
 	public Country getCountry() {
@@ -140,6 +143,7 @@ public class State extends MizeSceEntityAudit implements Comparable<State>{
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "state" ,orphanRemoval= true)
 	@Fetch(FetchMode.SELECT)
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	@JsonManagedReference(value="stateIntl")
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)

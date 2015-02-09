@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -20,6 +22,7 @@ import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name = "brand_feed")
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, include="all")
 public class BrandFeed extends MizeSceEntity implements Comparable<BrandFeed>{
 	
 	private static final long serialVersionUID = -8006941720446513027L;

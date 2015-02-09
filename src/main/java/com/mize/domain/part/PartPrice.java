@@ -17,6 +17,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -25,6 +26,7 @@ import com.mize.domain.common.Country;
 import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.MizeDate;
+import com.mize.domain.util.PopulateCountry;
 
 @Entity
 @Inheritance
@@ -41,7 +43,9 @@ public class PartPrice extends MizeSceEntityAudit implements Comparable<PartPric
 	private MizeDate startDate;
 	private MizeDate endDate;
 	private String currencyCode;
+	@PopulateCountry
 	private Country country;
+	private Long countryId;
 	private Long taxId;
 	@Transient
 	private User user;
@@ -110,10 +114,10 @@ public class PartPrice extends MizeSceEntityAudit implements Comparable<PartPric
 		return endDate;
 	}
     
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "country_id")
+
 	@JsonSerialize(using=JPASerializer.class)
     @JsonInclude(Include.NON_NULL)
+	@Transient
 	public Country getCountry() {
 		return country;
 	}
@@ -177,6 +181,16 @@ public class PartPrice extends MizeSceEntityAudit implements Comparable<PartPric
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	@Column(name = "country_id")
+	@JsonIgnore
+	public Long getCountryId() {
+		return countryId;
+	}
+
+	public void setCountryId(Long countryId) {
+		this.countryId = countryId;
 	}
 	
 	@Override

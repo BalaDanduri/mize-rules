@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,10 +16,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.IndexColumn;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -30,7 +31,7 @@ import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.util.JPASerializer;
 
 @Entity
-@Cacheable(true)
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, include="all")
 @Table(name = "country")
 public class Country extends MizeSceEntityAudit implements Comparable<Country>{
 
@@ -38,11 +39,12 @@ public class Country extends MizeSceEntityAudit implements Comparable<Country>{
 	
 	private User user;
 	private String code;
-	@Deprecated
 	private String name;
 	private String code3;
 	private String isActive;
+	
 	private BusinessEntity tenant;
+	
 	private List<State> states = new ArrayList<State>();
 	@Deprecated
 	private List<State> stateList;
@@ -141,6 +143,7 @@ public class Country extends MizeSceEntityAudit implements Comparable<Country>{
 	
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "country" ,orphanRemoval= true)
 	@Fetch(FetchMode.SELECT)
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	@JsonManagedReference(value="countryIntl")
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
@@ -229,10 +232,12 @@ public class Country extends MizeSceEntityAudit implements Comparable<Country>{
 		return EQUAL;		
 	}
 
-	@OneToMany(cascade={CascadeType.ALL}, fetch= FetchType.LAZY , mappedBy ="country" ,orphanRemoval= true)
+	@OneToMany(cascade={CascadeType.ALL}, fetch= FetchType.EAGER , mappedBy ="country" ,orphanRemoval= true)
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
 	@JsonManagedReference(value="country")
+	@IndexColumn(name="state_id")
 	@JsonBackReference(value="country_states")
 	public List<State> getStates() {
 		return states;

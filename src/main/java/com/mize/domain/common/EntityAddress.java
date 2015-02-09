@@ -11,10 +11,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -22,6 +22,8 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.util.JPASerializer;
+import com.mize.domain.util.PopulateCountry;
+import com.mize.domain.util.PopulateState;
 
 @Entity
 @Table(name = "entity_address")
@@ -34,8 +36,12 @@ public class EntityAddress extends MizeSceEntityAudit implements Comparable<Enti
 	private String zip;
 	private String zipExt;
 	private String city;
+	@PopulateState
 	private State state;
+	private Long stateId;
+	@PopulateCountry
 	private Country country;
+	private Long countryId;
 	private String email;
 	private String landmark;
 	List<EntityAddressPhone> addressPhones = new ArrayList<EntityAddressPhone>();
@@ -121,9 +127,8 @@ public class EntityAddress extends MizeSceEntityAudit implements Comparable<Enti
 	public void setCity(String city) {
 		this.city = city;
 	}
-
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "state_id")
+	
+	@Transient
 	public State getState() {
 		return state;
 	}
@@ -131,9 +136,8 @@ public class EntityAddress extends MizeSceEntityAudit implements Comparable<Enti
 	public void setState(State state) {
 		this.state = state;
 	}
-
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "country_id")
+	
+	@Transient
 	public Country getCountry() {
 		return country;
 	}
@@ -302,6 +306,26 @@ public class EntityAddress extends MizeSceEntityAudit implements Comparable<Enti
 		return 0;
 	}
 	
+	@Column(name = "country_id")
+	@JsonIgnore
+	public Long getCountryId() {
+		return countryId;
+	}
+
+	public void setCountryId(Long countryId) {
+		this.countryId = countryId;
+	}
+
+	@Column(name = "state_id")
+	@JsonIgnore
+	public Long getStateId() {
+		return stateId;
+	}
+
+	public void setStateId(Long stateId) {
+		this.stateId = stateId;
+	}
+
 	@JsonIgnore
 	public static Comparator<EntityAddress> EntityAddressGeoDistanceComparator = new  Comparator<EntityAddress>() {
 		public int compare(EntityAddress addr1, EntityAddress addr2) {

@@ -26,6 +26,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JPASerializer;
+import com.mize.domain.util.CachedEntity;
 
 @Entity(name="com.mize.domain.businessentity.BusinessEntityAddress")
 @Inheritance
@@ -39,6 +40,7 @@ public class BusinessEntityAddress  extends MizeSceEntity  implements Comparable
 	private static final long serialVersionUID = 8062274530036956916L;
 	private Long beId;
 	private BusinessEntity businessEntity;
+	@CachedEntity
 	private EntityAddress entityAddress;
 	private String isPreferred;
 	
