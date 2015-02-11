@@ -1,0 +1,36 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ehcache.xsd" name="sce_secondlevel_cache_playconfig_mgr">
+	<!-- <terracottaConfig url="dev-cache-server:9510,dev-cache-server:9511" 
+		rejoin="true" /> -->
+	<!-- <terracottaConfig url="localhost:9510,localhost:9511"
+		rejoin="true" /> -->
+		
+	<diskStore path="/pathtostore" />
+
+	<defaultCache name="default" maxEntriesLocalHeap="1000"
+		eternal="true">
+	<!-- 	<terracotta consistency="Strong" clustered="true">
+			<nonstop immediateTimeout="false" timeoutMillis="2000">
+				<timeoutBehavior type="noop" />
+			</nonstop>
+		</terracotta> -->
+	</defaultCache>
+	<cache name="org.hibernate.cache.StandardQueryCache"
+		maxEntriesLocalHeap="1000" eternal="true">
+	<!-- 	<terracotta consistency="Strong" clustered="true">
+			<nonstop immediateTimeout="false" timeoutMillis="2000">
+				<timeoutBehavior type="noop" />
+			</nonstop>
+		</terracotta> -->
+	</cache>
+
+	<cache name="org.hibernate.cache.UpdateTimestampsCache"
+		maxEntriesLocalHeap="1000" eternal="true">
+		<!-- <terracotta consistency="Strong" clustered="true">
+			<nonstop immediateTimeout="false" timeoutMillis="2000">
+				<timeoutBehavior type="noop" />
+			</nonstop>
+		</terracotta> -->
+	</cache>
+
+</ehcache>
