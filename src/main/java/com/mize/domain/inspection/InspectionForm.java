@@ -31,6 +31,7 @@ import com.mize.domain.common.EntityOffline;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.form.FormInstance;
+import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.MizeDate;
 import com.mize.domain.util.MizeDateTime;
@@ -54,6 +55,7 @@ public class InspectionForm extends MizeSceEntityAudit implements Comparable<Ins
 	private String inspectedBy;
 	private Locale locale;
 	private FormInstance formInstance;
+	@CachedEntity
 	private InspectionFormRequestor requestor;
 	private List<InspectionFormEquipment> inspectionEquipments = new ArrayList<InspectionFormEquipment>();
 	private List<InspectionFormAudit> audits = new ArrayList<InspectionFormAudit>();

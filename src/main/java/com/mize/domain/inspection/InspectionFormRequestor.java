@@ -22,6 +22,7 @@ import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityContact;
 import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.JPASerializer;
 
 @Entity
@@ -45,6 +46,7 @@ public class InspectionFormRequestor extends MizeSceEntity implements Comparable
 	private String middleInitial;
 	private String lastName;
 	private String requestorReference;
+	@CachedEntity
 	private EntityAddress requestorAddress;
 	private EntityContact requestorContact;
 	
