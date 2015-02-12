@@ -47,6 +47,9 @@ public class EntityLock extends MizeSceEntity implements Comparable<EntityLock>{
 	@Transient
 	private String entityStatus;
 	
+	 private Long beId;
+	
+	
 	public EntityLock(){
 		super();
 	}
@@ -207,19 +210,29 @@ public class EntityLock extends MizeSceEntity implements Comparable<EntityLock>{
 		this.entityStatus = entityStatus;
 	}
 
+	@Column(name = "be_id")
+	public Long getBeId() {
+		return beId;
+	}
+
+	public void setBeId(Long beId) {
+		this.beId = beId;
+	}
+
 	@Override
 	public int compareTo(EntityLock arg0) {
 		return 0;
 	}
 
-
-
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
+		result = prime * result + ((beId == null) ? 0 : beId.hashCode());
 		result = prime * result + ((entityCode == null) ? 0 : entityCode.hashCode());
 		result = prime * result + ((entityId == null) ? 0 : entityId.hashCode());
+		result = prime * result + ((entityLockIds == null) ? 0 : entityLockIds.hashCode());
+		result = prime * result + ((entityStatus == null) ? 0 : entityStatus.hashCode());
 		result = prime * result + ((entityType == null) ? 0 : entityType.hashCode());
 		result = prime * result + ((inactiveStartTime == null) ? 0 : inactiveStartTime.hashCode());
 		result = prime * result + ((lockAction == null) ? 0 : lockAction.hashCode());
@@ -230,8 +243,6 @@ public class EntityLock extends MizeSceEntity implements Comparable<EntityLock>{
 		return result;
 	}
 
-
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -241,6 +252,11 @@ public class EntityLock extends MizeSceEntity implements Comparable<EntityLock>{
 		if (getClass() != obj.getClass())
 			return false;
 		EntityLock other = (EntityLock) obj;
+		if (beId == null) {
+			if (other.beId != null)
+				return false;
+		} else if (!beId.equals(other.beId))
+			return false;
 		if (entityCode == null) {
 			if (other.entityCode != null)
 				return false;
@@ -250,6 +266,16 @@ public class EntityLock extends MizeSceEntity implements Comparable<EntityLock>{
 			if (other.entityId != null)
 				return false;
 		} else if (!entityId.equals(other.entityId))
+			return false;
+		if (entityLockIds == null) {
+			if (other.entityLockIds != null)
+				return false;
+		} else if (!entityLockIds.equals(other.entityLockIds))
+			return false;
+		if (entityStatus == null) {
+			if (other.entityStatus != null)
+				return false;
+		} else if (!entityStatus.equals(other.entityStatus))
 			return false;
 		if (entityType == null) {
 			if (other.entityType != null)
@@ -289,17 +315,12 @@ public class EntityLock extends MizeSceEntity implements Comparable<EntityLock>{
 		return true;
 	}
 
-
-
 	@Override
 	public String toString() {
 		return "EntityLock [lockedBy=" + lockedBy + ", lockedByUser=" + lockedByUser + ", loginId=" + loginId
 				+ ", entityId=" + entityId + ", entityType=" + entityType + ", entityCode=" + entityCode
 				+ ", lockAction=" + lockAction + ", lockDate=" + lockDate + ", inactiveStartTime=" + inactiveStartTime
-				+ "]";
+				+ ", entityLockIds=" + entityLockIds + ", entityStatus=" + entityStatus + ", beId=" + beId + "]";
 	}
-	
-	
-	
 	
 }
