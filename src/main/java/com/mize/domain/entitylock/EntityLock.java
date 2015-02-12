@@ -47,7 +47,7 @@ public class EntityLock extends MizeSceEntity implements Comparable<EntityLock>{
 	@Transient
 	private String entityStatus;
 	
-	 private Long beId;
+	private BusinessEntity businessEntity;
 	
 	
 	public EntityLock(){
@@ -210,13 +210,14 @@ public class EntityLock extends MizeSceEntity implements Comparable<EntityLock>{
 		this.entityStatus = entityStatus;
 	}
 
-	@Column(name = "be_id")
-	public Long getBeId() {
-		return beId;
+	@OneToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="be_id")
+	public BusinessEntity getBusinessEntity() {
+		return businessEntity;
 	}
 
-	public void setBeId(Long beId) {
-		this.beId = beId;
+	public void setBusinessEntity(BusinessEntity businessEntity) {
+		this.businessEntity = businessEntity;
 	}
 
 	@Override
@@ -227,8 +228,7 @@ public class EntityLock extends MizeSceEntity implements Comparable<EntityLock>{
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
-		int result = super.hashCode();
-		result = prime * result + ((beId == null) ? 0 : beId.hashCode());
+		int result = super.hashCode();		
 		result = prime * result + ((entityCode == null) ? 0 : entityCode.hashCode());
 		result = prime * result + ((entityId == null) ? 0 : entityId.hashCode());
 		result = prime * result + ((entityLockIds == null) ? 0 : entityLockIds.hashCode());
@@ -251,12 +251,7 @@ public class EntityLock extends MizeSceEntity implements Comparable<EntityLock>{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		EntityLock other = (EntityLock) obj;
-		if (beId == null) {
-			if (other.beId != null)
-				return false;
-		} else if (!beId.equals(other.beId))
-			return false;
+		EntityLock other = (EntityLock) obj;		
 		if (entityCode == null) {
 			if (other.entityCode != null)
 				return false;
@@ -320,7 +315,7 @@ public class EntityLock extends MizeSceEntity implements Comparable<EntityLock>{
 		return "EntityLock [lockedBy=" + lockedBy + ", lockedByUser=" + lockedByUser + ", loginId=" + loginId
 				+ ", entityId=" + entityId + ", entityType=" + entityType + ", entityCode=" + entityCode
 				+ ", lockAction=" + lockAction + ", lockDate=" + lockDate + ", inactiveStartTime=" + inactiveStartTime
-				+ ", entityLockIds=" + entityLockIds + ", entityStatus=" + entityStatus + ", beId=" + beId + "]";
+				+ ", entityLockIds=" + entityLockIds + ", entityStatus=" + entityStatus + "]";
 	}
 	
 }
