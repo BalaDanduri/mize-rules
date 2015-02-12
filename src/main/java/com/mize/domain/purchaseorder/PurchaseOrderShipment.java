@@ -25,6 +25,7 @@ import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.MizeDate;
 
 @Entity
@@ -38,6 +39,7 @@ public class PurchaseOrderShipment extends MizeSceEntity implements Comparable<P
 	private PurchaseOrder purchaseOrder;
 	//shipTolocaton
 	private BusinessEntity businessEntity;
+	@CachedEntity
 	private EntityAddress address;	
 	private String dropShip;	
 	@Transient
@@ -52,6 +54,7 @@ public class PurchaseOrderShipment extends MizeSceEntity implements Comparable<P
 	
 	//shipFromlocaton
 	private BusinessEntity shipmentFromBE;
+	@CachedEntity
 	private EntityAddress shipmentFromAddress;
 	@Transient
 	private Long shipmentFromBeAddressId;

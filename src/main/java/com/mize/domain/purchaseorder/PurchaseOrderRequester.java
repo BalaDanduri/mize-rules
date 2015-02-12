@@ -25,6 +25,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.JPASerializer;
 
 @Entity
@@ -37,6 +38,7 @@ public class PurchaseOrderRequester extends MizeSceEntity implements Comparable<
 	private static final long serialVersionUID = 444432988617420731L;
 	private PurchaseOrder purchaseOrder;
 	private BusinessEntity businessEntity;
+	@CachedEntity
 	private EntityAddress address;
 	private String updateAddress;
 	@Transient
