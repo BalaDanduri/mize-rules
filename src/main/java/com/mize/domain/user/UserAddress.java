@@ -21,6 +21,7 @@ import com.mize.domain.common.Country;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.common.State;
+import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.JPASerializer;
 
 @Entity
@@ -38,6 +39,7 @@ public class UserAddress extends MizeSceEntityAudit implements Comparable<UserAd
 	private Country country;
 	private String zipCode;
 	private User user;
+	@CachedEntity
 	private EntityAddress entityAddress = new EntityAddress();
 	
 	public UserAddress(){

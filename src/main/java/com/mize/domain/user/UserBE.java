@@ -28,6 +28,7 @@ import com.mize.domain.brand.Brand;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.common.MizeSceEntityAudit;
+import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.MizeDateTime;
 
@@ -41,7 +42,9 @@ public class UserBE extends MizeSceEntityAudit implements Comparable<UserBE>{
 	private String jobRole;
 	private String department;
 	private Set<Brand> brands;
+	@CachedEntity
 	private User user;
+	@CachedEntity
 	private BusinessEntity be;
 	
 	@OneToOne(fetch=FetchType.EAGER)

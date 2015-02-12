@@ -10,14 +10,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mize.domain.common.Country;
 import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.common.State;
+import com.mize.domain.util.PopulateCountry;
+import com.mize.domain.util.PopulateState;
 
 @Entity
 @Table(name="shipment_item")
@@ -27,8 +29,12 @@ public class ShipmentItem extends MizeSceEntity implements Comparable<ShipmentIt
 	private Long itemId;
 	private String itemNumber;
 	private String itemDescription;
-	private Country country;
+	@PopulateState
 	private State state;
+	private Long stateId;
+	@PopulateCountry
+	private Country country;
+	private Long countryId;
 	private BigDecimal weight;
 	private String weightUOM;	
 	private BigDecimal quantity;
@@ -99,8 +105,7 @@ public class ShipmentItem extends MizeSceEntity implements Comparable<ShipmentIt
 		this.itemNumber = itemNumber;
 	}
 
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "country_id")
+	@Transient
 	public Country getCountry() {
 		return country;
 	}
@@ -109,8 +114,7 @@ public class ShipmentItem extends MizeSceEntity implements Comparable<ShipmentIt
 		this.country = country;
 	}
 
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "state_id")
+	@Transient
 	public State getState() {
 		return state;
 	}
@@ -185,6 +189,26 @@ public class ShipmentItem extends MizeSceEntity implements Comparable<ShipmentIt
 	@Override
 	public int compareTo(ShipmentItem o) {
 		return 0;
+	}
+	
+	@Column(name = "state_id")
+	@JsonIgnore
+	public Long getStateId() {
+		return stateId;
+	}
+	
+	public void setStateId(Long stateId) {
+		this.stateId = stateId;
+	}
+	
+	@Column(name = "country_id")
+	@JsonIgnore
+	public Long getCountryId() {
+		return countryId;
+	}
+
+	public void setCountryId(Long countryId) {
+		this.countryId = countryId;
 	}
 
 	@Override

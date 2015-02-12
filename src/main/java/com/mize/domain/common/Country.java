@@ -23,6 +23,7 @@ import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.IndexColumn;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -86,6 +87,7 @@ public class Country extends MizeSceEntityAudit implements Comparable<Country>{
 	
 	
 	@Transient
+	@JsonIgnore
 	public User getUser() {
 		return user;
 	}
@@ -257,10 +259,10 @@ public class Country extends MizeSceEntityAudit implements Comparable<Country>{
 		this.code3 = code3;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "tenant_id", nullable = true)
-	@JsonSerialize(using = JPASerializer.class)
-	@JsonInclude(Include.NON_NULL)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_DEFAULT)
+	@JoinColumn(name = "tenant_id")
 	public BusinessEntity getTenant() {
 		return tenant;
 	}

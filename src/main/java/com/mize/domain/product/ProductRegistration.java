@@ -54,7 +54,9 @@ public class ProductRegistration extends MizeSceEntityAudit implements Comparabl
     private ProductSerial productSerial;
     private String statusCode;
 	private String registrationType;
+	@CachedEntity
 	private BusinessEntity customer;
+	@CachedEntity
 	private BusinessEntity invoiceBusinessEntity;
 	@CachedEntity
 	private EntityAddress customerAddress;

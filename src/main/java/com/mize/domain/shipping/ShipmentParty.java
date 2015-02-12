@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.JPASerializer;
 
 @Entity
@@ -36,6 +37,7 @@ public class ShipmentParty extends MizeSceEntity implements Comparable<ShipmentP
 	private String lastName;
 	private String middleInitial;
 	private String contactName;
+	@CachedEntity
 	private EntityAddress address;	
 
 	@Override

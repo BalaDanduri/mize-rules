@@ -35,6 +35,7 @@ import com.mize.domain.user.UserBrandMapping;
 import com.mize.domain.user.UserGroup;
 import com.mize.domain.user.UserProfile;
 import com.mize.domain.user.UserProfilePrivacy;
+import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.MizeDateTime;
@@ -65,6 +66,7 @@ public class User extends MizeSceEntityAudit implements Comparable<User> {
     @Transient
 	private List<ProductRegister> productRegisters = new ArrayList<ProductRegister>();
 	private List<UserBrandMapping> userBrandMapping = new ArrayList<UserBrandMapping>();
+	@CachedEntity
 	private List<UserAddress> addresses = new ArrayList<UserAddress>();
 	private String isActive;
 	

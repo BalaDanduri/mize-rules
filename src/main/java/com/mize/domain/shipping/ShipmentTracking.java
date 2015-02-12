@@ -30,6 +30,7 @@ import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.MizeSceEntityAudit;
+import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.MizeDate;
 
@@ -42,6 +43,7 @@ public class ShipmentTracking extends MizeSceEntityAudit implements Comparable<S
 	
 	private static final long serialVersionUID = -3279332499661281505L;	
 	private BusinessEntity tenant;
+	@CachedEntity
 	private List<ShipmentParty> parties = new ArrayList<ShipmentParty>();
 	private List<ShipmentPackage> packages = new ArrayList<ShipmentPackage>();
 	private List<ShipmentComment> comments = new ArrayList<ShipmentComment>();
