@@ -19,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.CachedEntity;
 
 @Entity
 @Inheritance
@@ -29,6 +30,7 @@ public class PurchaseOrderPayment extends MizeSceEntity implements Comparable<Pu
 
 	private static final long serialVersionUID = 261638805962518728L;
 	private BusinessEntity businessEntity;
+	@CachedEntity
 	private EntityAddress address;
 	private String method;
 	private PurchaseOrder purchaseOrder;

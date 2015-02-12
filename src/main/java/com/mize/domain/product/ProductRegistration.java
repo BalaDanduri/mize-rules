@@ -39,6 +39,7 @@ import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.MizeDate;
+import com.mize.domain.util.CachedEntity;
 
 @Entity
 @Table(name = "prod_regn")
@@ -55,6 +56,7 @@ public class ProductRegistration extends MizeSceEntityAudit implements Comparabl
 	private String registrationType;
 	private BusinessEntity customer;
 	private BusinessEntity invoiceBusinessEntity;
+	@CachedEntity
 	private EntityAddress customerAddress;
 	private MizeDate customerDeliveryDate;
 	private MizeDate purchaseDate;

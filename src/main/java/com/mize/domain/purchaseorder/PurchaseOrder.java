@@ -31,6 +31,7 @@ import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeErrorTab;
 import com.mize.domain.common.MizeSceEntityAudit;
+import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.MizeDateTime;
 import com.mize.domain.util.MizeDateTimeUtils;
@@ -54,8 +55,11 @@ public class PurchaseOrder extends MizeSceEntityAudit implements Comparable<Purc
 	private String salesPerson;
 	private Long discountId;
 	private PurchaseOrderAmount amount = new PurchaseOrderAmount();
+	@CachedEntity
 	private PurchaseOrderRequester requester;
+	@CachedEntity
 	private PurchaseOrderPayment payment;
+	@CachedEntity
 	private PurchaseOrderShipment shipment;
 	private List<PurchaseOrderAudit> audits = new ArrayList<PurchaseOrderAudit>();
 	private List<PurchaseOrderAttachment> attachments = new ArrayList<PurchaseOrderAttachment>();

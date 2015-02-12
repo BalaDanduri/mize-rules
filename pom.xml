@@ -24,6 +24,8 @@
 		<guava-version>13.0</guava-version>
 		<joda-time-version>2.1</joda-time-version>
 		<jackson-datatype-joda-version>2.4.1</jackson-datatype-joda-version>
+		<hibernate-ehcache.version>4.2.7.Final</hibernate-ehcache.version>
+		<ehcache.version>2.6.7</ehcache.version>
 	</properties>
 	<distributionManagement>
 		<repository>
@@ -209,7 +211,18 @@
 			<groupId>com.fasterxml.jackson.datatype</groupId>
 			<artifactId>jackson-datatype-joda</artifactId>
 			<version>${jackson-datatype-joda-version}</version>
-		</dependency>  
+		</dependency> 
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache</artifactId>
+			<version>${ehcache.version}</version>
+			<type>pom</type>
+		</dependency>	 
+		<dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-ehcache</artifactId>
+            <version>${hibernate-ehcache.version}</version>
+        </dependency>
 	</dependencies>
 
 	<build>
