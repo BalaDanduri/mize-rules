@@ -30,6 +30,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeSceEntityAudit;
+import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.JPASerializer;
 
 @Entity
@@ -49,7 +50,9 @@ public class Part extends MizeSceEntityAudit implements Comparable<Part>{
 	private String isReturnable;
 	private String uom;
 	private List<PartIntl> partIntl = new ArrayList<PartIntl>();
+	@CachedEntity
 	private List<PartPrice> partPrices = new ArrayList<PartPrice>();
+	@CachedEntity
 	private List<PartAttribute> partAttributes = new ArrayList<PartAttribute>();
 	private BigDecimal unitListPrice;
 	private BigDecimal unitNetPrice;

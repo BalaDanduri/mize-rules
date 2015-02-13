@@ -14,11 +14,13 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.CachedEntity;
 
 @Entity
 @Table(name = "picklist_item")
 public class PickListItem extends MizeSceEntity implements Comparable<PickListItem> {
 	private static final long serialVersionUID = 7119442643057089063L;
+	@CachedEntity
 	private Part part;
 	private PickList pickList;
 	private BigDecimal partQty;

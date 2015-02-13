@@ -24,6 +24,7 @@ import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.MizeSceEntityAudit;
+import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.JPASerializer;
 
 @Entity
@@ -31,6 +32,7 @@ import com.mize.domain.util.JPASerializer;
 public class PickList extends MizeSceEntityAudit implements Comparable<PickList> {
 
 	private static final long serialVersionUID = 7197887648853141829L;
+	@CachedEntity
 	private BusinessEntity pickListLocation;
 	private String code;
 	private String type;
@@ -41,6 +43,7 @@ public class PickList extends MizeSceEntityAudit implements Comparable<PickList>
 	private EntityComment entityComment;
 	private List<PickListComment> comments = new ArrayList<PickListComment>();
 	private BusinessEntity tenant;
+	@CachedEntity
 	private List<PickListItem> listItems;
 
 	public PickList(){

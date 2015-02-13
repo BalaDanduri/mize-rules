@@ -25,6 +25,7 @@ import com.mize.domain.auth.User;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.product.PartSubstituteComment;
+import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.MizeDate;
 @Entity
@@ -32,8 +33,9 @@ import com.mize.domain.util.MizeDate;
 public class PartSubstitute extends MizeSceEntityAudit implements Comparable<PartSubstitute> {
 
 	private static final long serialVersionUID = -8910398875058216907L;
-
+	@CachedEntity
 	private Part originalPart;
+	@CachedEntity
 	private Part substitutedPart;
 	private String code;
 	private MizeDate date;

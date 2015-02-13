@@ -16,12 +16,14 @@ import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.CachedEntity;
 
 @Entity
 @Table(name = "part_kit_item")
 public class PartKitItem extends MizeSceEntity implements Comparable<PartKitItem>{
 
 	private static final long serialVersionUID = 1L;
+	@CachedEntity
 	private Part part;
 	private PartKit partKit;
 	private BigDecimal partQty;
