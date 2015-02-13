@@ -46,6 +46,8 @@ public class EntityLock extends MizeSceEntity implements Comparable<EntityLock>{
 	private User user;
 	@Transient
 	private String entityStatus;
+	@Transient
+	private String entityTypeName;
 	
 	private BusinessEntity businessEntity;
 	
@@ -192,6 +194,15 @@ public class EntityLock extends MizeSceEntity implements Comparable<EntityLock>{
 		this.entityLockIds = entityLockIds;
 	}
 	
+	@Transient
+	public String getEntityTypeName() {
+		return entityTypeName;
+	}
+
+	public void setEntityTypeName(String entityTypeName) {
+		this.entityTypeName = entityTypeName;
+	}
+
 	@Transient
 	public User getUser() {
 		return user;
