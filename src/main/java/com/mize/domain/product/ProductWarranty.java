@@ -19,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.MizeDate;
@@ -38,6 +39,13 @@ public class ProductWarranty extends MizeSceEntity implements Comparable<Product
 	 private MizeDate endDate;
 	 private String coverageType;
 	 private String coverageName;
+	 private String partCode;
+	 private String partDescription;
+	 private String salesOrderNumber;
+	 private String purcahseOrderNumber;
+	 private MizeDate soldDate;
+	 private BusinessEntity customer;
+	 private BusinessEntity invoiceBE;
 	 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -106,12 +114,96 @@ public class ProductWarranty extends MizeSceEntity implements Comparable<Product
 	}
 
 	@Override
+	public int compareTo(ProductWarranty o) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Column(name = "wrrnty_part_cd")
+	public String getPartCode() {
+		return partCode;
+	}
+
+	public void setPartCode(String partCode) {
+		this.partCode = partCode;
+	}
+
+	@Column(name = "wrrnty_part_desc")
+	public String getPartDescription() {
+		return partDescription;
+	}
+
+	
+	public void setPartDescription(String partDescription) {
+		this.partDescription = partDescription;
+	}
+
+	@Column(name = "wrrnty_so_num")
+	public String getSalesOrderNumber() {
+		return salesOrderNumber;
+	}
+
+	public void setSalesOrderNumber(String salesOrderNumber) {
+		this.salesOrderNumber = salesOrderNumber;
+	}
+
+	@Column(name = "wrrnty_po_num")
+	public String getPurcahseOrderNumber() {
+		return purcahseOrderNumber;
+	}
+
+	public void setPurcahseOrderNumber(String purcahseOrderNumber) {
+		this.purcahseOrderNumber = purcahseOrderNumber;
+	}
+
+	@Column(name = "wrrnty_sold_date")
+	@Type(type = "com.mize.domain.util.MizeDateJPA")
+	public MizeDate getSoldDate() {
+		return soldDate;
+	}
+
+	public void setSoldDate(MizeDate soldDate) {
+		this.soldDate = soldDate;
+	}
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="invoice_cust_id", nullable = true)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	public BusinessEntity getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(BusinessEntity customer) {
+		this.customer = customer;
+	}
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="invoice_be_id", nullable = true)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	public BusinessEntity getInvoiceBE() {
+		return invoiceBE;
+	}
+
+	public void setInvoiceBE(BusinessEntity invoiceBE) {
+		this.invoiceBE = invoiceBE;
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result + ((coverageName == null) ? 0 : coverageName.hashCode());
 		result = prime * result + ((coverageType == null) ? 0 : coverageType.hashCode());
+		result = prime * result + ((customer == null) ? 0 : customer.hashCode());
 		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
+		result = prime * result + ((invoiceBE == null) ? 0 : invoiceBE.hashCode());
+		result = prime * result + ((partCode == null) ? 0 : partCode.hashCode());
+		result = prime * result + ((partDescription == null) ? 0 : partDescription.hashCode());
+		result = prime * result + ((purcahseOrderNumber == null) ? 0 : purcahseOrderNumber.hashCode());
+		result = prime * result + ((salesOrderNumber == null) ? 0 : salesOrderNumber.hashCode());
+		result = prime * result + ((soldDate == null) ? 0 : soldDate.hashCode());
 		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
 		return result;
 	}
@@ -142,11 +234,60 @@ public class ProductWarranty extends MizeSceEntity implements Comparable<Product
 		} else if (!coverageType.equals(other.coverageType)) {
 			return false;
 		}
+		if (customer == null) {
+			if (other.customer != null) {
+				return false;
+			}
+		} else if (!customer.equals(other.customer)) {
+			return false;
+		}
 		if (endDate == null) {
 			if (other.endDate != null) {
 				return false;
 			}
 		} else if (!endDate.equals(other.endDate)) {
+			return false;
+		}
+		if (invoiceBE == null) {
+			if (other.invoiceBE != null) {
+				return false;
+			}
+		} else if (!invoiceBE.equals(other.invoiceBE)) {
+			return false;
+		}
+		if (partCode == null) {
+			if (other.partCode != null) {
+				return false;
+			}
+		} else if (!partCode.equals(other.partCode)) {
+			return false;
+		}
+		if (partDescription == null) {
+			if (other.partDescription != null) {
+				return false;
+			}
+		} else if (!partDescription.equals(other.partDescription)) {
+			return false;
+		}
+		if (purcahseOrderNumber == null) {
+			if (other.purcahseOrderNumber != null) {
+				return false;
+			}
+		} else if (!purcahseOrderNumber.equals(other.purcahseOrderNumber)) {
+			return false;
+		}
+		if (salesOrderNumber == null) {
+			if (other.salesOrderNumber != null) {
+				return false;
+			}
+		} else if (!salesOrderNumber.equals(other.salesOrderNumber)) {
+			return false;
+		}
+		if (soldDate == null) {
+			if (other.soldDate != null) {
+				return false;
+			}
+		} else if (!soldDate.equals(other.soldDate)) {
 			return false;
 		}
 		if (startDate == null) {
@@ -161,18 +302,19 @@ public class ProductWarranty extends MizeSceEntity implements Comparable<Product
 
 	@Override
 	public String toString() {
-		return "ProductWarranty [id=" + id + ", coverageName=" + coverageName
-				+ ", coverageType=" + coverageType + ", endDate=" + endDate
-				+ ", productSerial=" + productSerial + ", startDate="
-				+ startDate + "]";
+		return "ProductWarranty [productSerial=" + productSerial
+				+ ", startDate=" + startDate + ", endDate=" + endDate
+				+ ", coverageType=" + coverageType + ", coverageName="
+				+ coverageName + ", partCode=" + partCode
+				+ ", partDescription=" + partDescription
+				+ ", salesOrderNumber=" + salesOrderNumber
+				+ ", purcahseOrderNumber=" + purcahseOrderNumber
+				+ ", soldDate=" + soldDate + ", customer=" + customer
+				+ ", invoice=" + invoiceBE + "]";
 	}
 
-	@Override
-	public int compareTo(ProductWarranty o) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
+	
+	
 	
 	
 }
