@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.JPASerializer;
 
 @Entity
@@ -31,6 +32,7 @@ public class BusinessEntityRelation extends MizeSceEntity {
 	private User user;
 	private BusinessEntity tenant;
 	private String source;
+	@CachedEntity
 	private EntityAddress address;
 	
 	public BusinessEntityRelation() {

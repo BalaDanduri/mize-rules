@@ -21,6 +21,7 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.Type;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -68,6 +69,8 @@ public class InspectionForm extends MizeSceEntityAudit implements Comparable<Ins
 	private String syncStatus;
 	
 	private EntityOffline entityOffline;
+	private Integer errorSeverity;
+	private Double progress;
 	
 	public InspectionForm() {
 		
@@ -290,6 +293,25 @@ public class InspectionForm extends MizeSceEntityAudit implements Comparable<Ins
 	public void setEntityOffline(EntityOffline entityOffline) {
 		this.entityOffline = entityOffline;
 	}
+	
+	@Column(name = "error_severity")
+	public Integer getErrorSeverity() {
+		return errorSeverity;
+	}
+
+	public void setErrorSeverity(Integer errorSeverity) {
+		this.errorSeverity = errorSeverity;
+	}
+	
+	@JsonIgnore
+	@Transient
+	public Double getProgress() {
+		return progress;
+	}
+
+	public void setProgress(Double progress) {
+		this.progress = progress;
+	}
 
 	
 	@Override
@@ -313,6 +335,7 @@ public class InspectionForm extends MizeSceEntityAudit implements Comparable<Ins
 		result = prime * result + ((source == null) ? 0 : source.hashCode());
 		result = prime * result + ((syncStatus == null) ? 0 : syncStatus.hashCode());
 		result = prime * result + ((attachments == null) ? 0 : attachments.hashCode());
+		result = prime * result + ((errorSeverity == null) ? 0 : errorSeverity.hashCode());
 		return result;
 	}
 
@@ -463,6 +486,13 @@ public class InspectionForm extends MizeSceEntityAudit implements Comparable<Ins
 		} else if (!attachments.equals(other.attachments)) {
 			return false;
 		}
+		if (errorSeverity == null) {
+			if(other.errorSeverity != null) {
+				return false;
+			}
+		}else if (!errorSeverity.equals(other.errorSeverity)) {
+			return false;
+		}
 		return true;
 	}
 
@@ -471,6 +501,5 @@ public class InspectionForm extends MizeSceEntityAudit implements Comparable<Ins
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
-	
+
 }
