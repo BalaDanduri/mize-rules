@@ -30,6 +30,12 @@ public class MizeAsset extends MizeSceEntity implements Comparable<MizeAsset>{
 	
 	private BusinessEntity tenant;
 	private String name;
+	@Transient
+	private String brand;
+	@Transient
+	private String model;
+	@Transient
+	private String category;
 	private String type;
 	private String contentType;
 	private String storageType;
@@ -44,6 +50,12 @@ public class MizeAsset extends MizeSceEntity implements Comparable<MizeAsset>{
 	@Transient
 	private User user;
 
+	@Transient
+	private String baseAccessURL;
+
+	@Transient
+	private String downloadURL;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", unique = true, nullable = false)
@@ -114,6 +126,51 @@ public class MizeAsset extends MizeSceEntity implements Comparable<MizeAsset>{
 	public void setUser(User user) {
 		this.user = user;
 	}
+	@Transient
+	public String getBrand() {
+		return brand;
+	}
+	@Transient
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+	@Transient
+	public String getModel() {
+		return model;
+	}
+	@Transient
+	public void setModel(String model) {
+		this.model = model;
+	}
+	@Transient
+	public String getCategory() {
+		return category;
+	}
+	@Transient
+	public void setCategory(String category) {
+		this.category = category;
+	}
+		
+	@Transient
+	public String getBaseAccessURL() {
+		return baseAccessURL;
+	}
+	
+	@Transient
+	public void setBaseAccessURL(String baseAccessURL) {
+		this.baseAccessURL = baseAccessURL;
+	}
+	
+	@Transient
+	public String getDownloadURL() {
+		return downloadURL;
+	}
+	
+	@Transient
+	public void setDownloadURL(String downloadURL) {
+		this.downloadURL = downloadURL;
+	}
+	
 	@Override
 	public int compareTo(MizeAsset asset) {
 		if ( this == asset ) 
