@@ -23,6 +23,7 @@ import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityContact;
 import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.JPASerializer;
 
 @Entity
@@ -46,6 +47,7 @@ public class InspectionFormEquipmentOwner extends MizeSceEntity implements Compa
 	private String middleInitial;
 	private String lastName;
 	private String ownerReference;
+	@CachedEntity
 	private EntityAddress ownerAddress;
 	private EntityContact ownerContact;
 	

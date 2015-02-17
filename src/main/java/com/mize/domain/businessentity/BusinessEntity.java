@@ -31,17 +31,15 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.brand.Brand;
-import com.mize.domain.common.Country;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityAddressGeo;
 import com.mize.domain.common.EntityContact;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeSceEntityAudit;
-import com.mize.domain.common.State;
+import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.MizeDate;
-import com.mize.domain.util.CachedEntity;
 
 @Entity
 @Inheritance
@@ -71,10 +69,12 @@ public class BusinessEntity extends MizeSceEntityAudit implements Comparable<Bus
 	private List<BusinessEntityBrand> beBrand = new ArrayList<BusinessEntityBrand>();
 	private List<BusinessEntityContact> beContact = new ArrayList<BusinessEntityContact>();
 	private BusinessEntityAttribute beAttribute;
+	@CachedEntity
 	private List<BusinessEntityRelation> relatedEntities = new ArrayList<BusinessEntityRelation>();
 	@CachedEntity
 	private List<BusinessEntityServiceLink> beServiceLinks = new ArrayList<BusinessEntityServiceLink>();
 	private List<BusinessEntityServiceRate> beServiceRates = new ArrayList<BusinessEntityServiceRate>();
+	@CachedEntity
 	private BusinessEntityRelation customerEntityRelation;
 	private String referenceNumber;
 	
