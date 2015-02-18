@@ -41,6 +41,8 @@ public class ShipmentItem extends MizeSceEntity implements Comparable<ShipmentIt
 	private String quantityUOM;
 	private BigDecimal unitPrice;
 	private String tariffCode;	
+	private BigDecimal requestedQuantity;
+	private String isReturnable;
 
 	public ShipmentItem(){
 		super();
@@ -209,6 +211,24 @@ public class ShipmentItem extends MizeSceEntity implements Comparable<ShipmentIt
 
 	public void setCountryId(Long countryId) {
 		this.countryId = countryId;
+	}
+
+	@Transient
+	public BigDecimal getRequestedQuantity() {
+		return requestedQuantity;
+	}
+
+	public void setRequestedQuantity(BigDecimal requestedQuantity) {
+		this.requestedQuantity = requestedQuantity;
+	}
+
+	@Transient
+	public String getIsReturnable() {
+		return isReturnable;
+	}
+
+	public void setIsReturnable(String isReturnable) {
+		this.isReturnable = isReturnable;
 	}
 
 	@Override
