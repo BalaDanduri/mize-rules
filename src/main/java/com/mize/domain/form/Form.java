@@ -17,6 +17,8 @@ public class Form extends FormElement{
 	
 	private List<ApplicationLabel> appLabels;
 	
+	private Integer maxSeverity;
+	
 	public Form() {
 		super();
 		sectionGroups = new ArrayList<SectionGroup>();
@@ -45,6 +47,7 @@ public class Form extends FormElement{
 		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result + ((sectionGroups == null) ? 0 : sectionGroups.hashCode());
+		result = prime * result + ((maxSeverity == null) ? 0 : maxSeverity.hashCode());
 		return result;
 	}
 
@@ -62,12 +65,25 @@ public class Form extends FormElement{
 				return false;
 		} else if (!sectionGroups.equals(other.sectionGroups))
 			return false;
+		if (maxSeverity == null) {
+			if (other.maxSeverity != null)
+				return false;
+		} else if (!maxSeverity.equals(other.maxSeverity))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
 		return "Form [sectionGroups=" + sectionGroups + "]";
+	}
+
+	public Integer getMaxSeverity() {
+		return maxSeverity;
+	}
+
+	public void setMaxSeverity(Integer maxSeverity) {
+		this.maxSeverity = maxSeverity;
 	}
 
 }
