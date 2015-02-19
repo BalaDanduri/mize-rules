@@ -71,7 +71,7 @@ public class BusinessEntityIntl extends MizeSceEntity {
 		return description;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "locale_id")
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	public Locale getLocale() {

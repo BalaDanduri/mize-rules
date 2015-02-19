@@ -65,7 +65,7 @@ public class ProductIntl extends MizeSceEntity implements Comparable<ProductIntl
 		return description;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "locale_id")
 	public Locale getLocale() {
 		return locale;

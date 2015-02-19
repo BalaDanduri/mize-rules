@@ -73,7 +73,7 @@ public class ReasonIntl extends MizeSceEntity implements Comparable<ReasonIntl> 
 		this.description = desc;
 	}
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "locale_id")
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
