@@ -91,7 +91,7 @@ public class MizeDateFormat extends MizeSceEntityAudit implements Comparable<Miz
 		this.tenant = tenant;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "locale_id")
 	public Locale getLocale() {
 		return locale;

@@ -82,7 +82,7 @@ public class ApplicationLabelIntl extends MizeSceEntityAudit implements Comparab
 		this.description = description;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "locale_id")
 	@JsonSerialize(using=JPASerializer.class)
 	public Locale getLocale() {

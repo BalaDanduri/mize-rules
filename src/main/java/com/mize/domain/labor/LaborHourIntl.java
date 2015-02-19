@@ -66,7 +66,7 @@ public class LaborHourIntl extends MizeSceEntity implements Comparable<LaborHour
 		this.laborHour = laborHour;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY,optional = true)
+	@ManyToOne(fetch = FetchType.EAGER,optional = true)
 	@JoinColumn(name = "locale_id")
 	public Locale getLocale() {
 		return locale;

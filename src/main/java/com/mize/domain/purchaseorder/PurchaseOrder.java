@@ -199,7 +199,7 @@ public class PurchaseOrder extends MizeSceEntityAudit implements Comparable<Purc
 		this.status = status;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "locale_id")
 	public Locale getLocale() {
 		return locale;
