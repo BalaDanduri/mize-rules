@@ -58,7 +58,7 @@ public class PartIntl extends MizeSceEntity implements Comparable<PartIntl> {
 	}
 	
 
-	@ManyToOne(fetch = FetchType.EAGER ,optional = true)
+	@ManyToOne(fetch = FetchType.LAZY ,optional = true)
 	@JoinColumn(name = "locale_id")
 	public Locale getLocale() {
 		return locale;

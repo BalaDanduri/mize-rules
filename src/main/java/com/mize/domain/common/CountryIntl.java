@@ -66,7 +66,7 @@ public class CountryIntl extends MizeSceEntityAudit implements Comparable<Countr
 		this.country = country;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER ,optional = true)
+	@ManyToOne(fetch = FetchType.LAZY ,optional = true)
 	@JoinColumn(name = "locale_id")
 	public Locale getLocale() {
 		return locale;

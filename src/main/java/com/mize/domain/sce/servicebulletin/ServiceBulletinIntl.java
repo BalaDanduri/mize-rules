@@ -60,7 +60,7 @@ public class ServiceBulletinIntl extends MizeSceEntity implements Comparable<Ser
 		this.serviceBulletin = serviceBulletin;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER ,optional = true)
+	@ManyToOne(fetch = FetchType.LAZY ,optional = true)
 	@JoinColumn(name = "locale_id")
 	public Locale getLocale() {
 		return locale;

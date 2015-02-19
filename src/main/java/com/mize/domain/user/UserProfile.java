@@ -616,7 +616,7 @@ public class UserProfile extends MizeSceEntityAudit implements Serializable, Com
 		this.promptForAppRating = promptForAppRating;
 	}
 
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "locale_id")
 	public Locale getLocale() {
 		return locale;

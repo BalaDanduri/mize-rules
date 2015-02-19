@@ -80,7 +80,7 @@ public class CatalogEntryIntl extends MizeSceEntityAudit implements Comparable<C
 		this.itemDescription = itemDescription;
 	}
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "locale_id")
 	public Locale getLocale() {
 		return locale;

@@ -83,7 +83,7 @@ public class AppMessageIntl extends MizeSceEntityAudit implements Comparable<App
 		this.longDesc = longDesc;
 	}
 
-	@OneToOne(fetch = FetchType.EAGER)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "locale_id")
 	@JsonSerialize(using=JPASerializer.class)
 //	@JsonInclude(Include.NON_NULL)

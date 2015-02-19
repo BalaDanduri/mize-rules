@@ -23,6 +23,12 @@ public class Locale extends MizeSceEntity implements Comparable<Locale>{
    
     public Locale(){
     	super();
+    	
+		/*
+		 * don't remove this line in domains locale was configured to lazy below
+		 * line will auto fetch details without initialization.
+		 */
+    	getLanguageCode();
     }
     
     public Locale(Long id){
