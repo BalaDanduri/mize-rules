@@ -23,6 +23,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.MizeDate;
 
@@ -51,6 +52,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	private List<ServiceEntityRequestPart> parts;
 	private List<ServiceEntityRequestLabor> labors;
 	private List<ServiceEntityRequestOther> otherCharges;
+	@CachedEntity
 	private ServiceEntityRequestProduct product;
 	private ServiceEntityRequestCoverage coverage;
 	private ServiceEntityAmount partAmount;

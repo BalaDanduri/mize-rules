@@ -21,6 +21,7 @@ import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityContact;
 import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.product.ProductRegistration;
+import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.MizeDate;
 
@@ -53,6 +54,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 	private String customerLastName;
 	private String customerMiddleInitial;
 	private String customerReference;
+	@CachedEntity
 	private EntityAddress customerAddress;
 	private EntityContact customerContact;
 	private String isNewCustomer;

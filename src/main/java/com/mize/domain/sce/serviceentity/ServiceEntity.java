@@ -25,6 +25,7 @@ import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeSceEntityAudit;
+import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.JPASerializer;
 
 
@@ -45,6 +46,7 @@ public class ServiceEntity extends MizeSceEntityAudit implements Comparable<Serv
 	private BusinessEntity tenant;
 	private Locale locale;
 	private String currencyCode;
+	@CachedEntity
 	private List<ServiceEntityRequest> serviceRequests = new ArrayList<ServiceEntityRequest>();
 	private ServiceEntityRequester requester;
 	private ServiceEntityProvider provider;
