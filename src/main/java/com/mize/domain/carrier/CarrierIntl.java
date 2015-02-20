@@ -11,6 +11,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeSceEntity;
@@ -82,6 +85,7 @@ public class CarrierIntl extends MizeSceEntity implements Comparable<CarrierIntl
 	}
 	
 	@ManyToOne(fetch = FetchType.EAGER,optional = true)
+	@Fetch(FetchMode.SELECT)
 	@JoinColumn(name = "locale_id")
 	public Locale getLocale() {
 		return locale;

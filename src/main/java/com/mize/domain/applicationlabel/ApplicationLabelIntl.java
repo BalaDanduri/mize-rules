@@ -11,6 +11,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.common.Locale;
@@ -83,6 +86,7 @@ public class ApplicationLabelIntl extends MizeSceEntityAudit implements Comparab
 	}
 
 	@OneToOne(fetch = FetchType.EAGER)
+	@Fetch(FetchMode.SELECT) 
 	@JoinColumn(name = "locale_id")
 	@JsonSerialize(using=JPASerializer.class)
 	public Locale getLocale() {

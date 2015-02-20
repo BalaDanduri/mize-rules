@@ -11,6 +11,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -74,6 +77,7 @@ public class ReasonIntl extends MizeSceEntity implements Comparable<ReasonIntl> 
 	}
 	
 	@OneToOne(fetch = FetchType.EAGER)
+	@Fetch(FetchMode.SELECT)
 	@JoinColumn(name = "locale_id")
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)

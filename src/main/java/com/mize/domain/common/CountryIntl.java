@@ -12,6 +12,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -67,6 +69,7 @@ public class CountryIntl extends MizeSceEntityAudit implements Comparable<Countr
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER ,optional = true)
+	@Fetch(FetchMode.SELECT)
 	@JoinColumn(name = "locale_id")
 	public Locale getLocale() {
 		return locale;

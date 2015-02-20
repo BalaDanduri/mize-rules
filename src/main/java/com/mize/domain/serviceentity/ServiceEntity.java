@@ -18,6 +18,9 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mize.domain.auth.User;
 import com.mize.domain.common.Locale;
@@ -170,7 +173,8 @@ public class ServiceEntity extends MizeSceEntity implements Comparable<ServiceEn
 	}
 
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
+	@Fetch(FetchMode.SELECT)
 	@JoinColumn(name = "locale_id")
 	public Locale getLocale() {
 		return locale;

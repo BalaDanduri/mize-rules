@@ -14,6 +14,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeSceEntity;
@@ -66,6 +69,7 @@ public class ProductIntl extends MizeSceEntity implements Comparable<ProductIntl
 	}
 
 	@OneToOne(fetch = FetchType.EAGER)
+	@Fetch(FetchMode.SELECT)
 	@JoinColumn(name = "locale_id")
 	public Locale getLocale() {
 		return locale;

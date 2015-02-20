@@ -20,6 +20,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -617,6 +619,7 @@ public class UserProfile extends MizeSceEntityAudit implements Serializable, Com
 	}
 
 	@OneToOne(fetch = FetchType.EAGER)
+	@Fetch(FetchMode.SELECT)
 	@JoinColumn(name = "locale_id")
 	public Locale getLocale() {
 		return locale;
