@@ -20,7 +20,6 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.IndexColumn;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -236,11 +235,11 @@ public class Country extends MizeSceEntityAudit implements Comparable<Country>{
 	}
 
 	@OneToMany(cascade={CascadeType.ALL}, fetch= FetchType.EAGER , mappedBy ="country" ,orphanRemoval= true)
+	@Fetch(FetchMode.SELECT)
 	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
 	@JsonManagedReference(value="country")
-	@IndexColumn(name="state_id")
 	@JsonBackReference(value="country_states")
 	public List<State> getStates() {
 		return states;
