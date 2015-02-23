@@ -17,6 +17,8 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -24,8 +26,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.common.MizeSceEntityAudit;
-import com.mize.domain.product.ProductRegister;
-import com.mize.domain.product.ProductRepeatOrderShipOptions;
 import com.mize.domain.user.UserBrandMapping;
 import com.mize.domain.util.JPASerializer;
 
@@ -46,8 +46,6 @@ public class Brand extends MizeSceEntityAudit implements Comparable<Brand>{
 	private String registered;
 	private List<BrandSupport> brandSupports = new ArrayList<BrandSupport>();
 	private List<BrandFeed> brandFeeds = new ArrayList<BrandFeed>();
-	private List<ProductRepeatOrderShipOptions> shippings = new ArrayList<ProductRepeatOrderShipOptions>();
-	private List<ProductRegister> productRegisters = new ArrayList<ProductRegister>();
 	private String searchType;
 	private List<UserBrandMapping> userBrands = new ArrayList<UserBrandMapping>();
 	private String code;
@@ -195,15 +193,6 @@ public class Brand extends MizeSceEntityAudit implements Comparable<Brand>{
 		this.brandFeeds = brandFeeds;
 	}
 
-	@Transient
-	public List<ProductRepeatOrderShipOptions> getShippings() {
-		return shippings;
-	}
-
-	public void setShippings(List<ProductRepeatOrderShipOptions> shippings) {
-		this.shippings = shippings;
-	}
-
 	@Column(name = "registered")
 	public String getRegistered() {
 		return registered;
@@ -213,15 +202,6 @@ public class Brand extends MizeSceEntityAudit implements Comparable<Brand>{
 		this.registered = registered;
 	}
 	
-	@Transient
-	public List<ProductRegister> getProductRegisters() {
-		return productRegisters;
-	}
-
-	public void setProductRegisters(List<ProductRegister> productRegisters) {
-		this.productRegisters = productRegisters;
-	}
-
 	@Transient
 	public String getSearchType() {
 		return searchType;
@@ -266,7 +246,8 @@ public class Brand extends MizeSceEntityAudit implements Comparable<Brand>{
 		this.intls = intls;
 	}
 	
-	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "brand", orphanRemoval = true)
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "brand", orphanRemoval = true)
+	@Fetch(FetchMode.SELECT)
 	@JsonManagedReference(value="intl")
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
