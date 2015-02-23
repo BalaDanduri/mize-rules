@@ -1,36 +1,42 @@
 package com.mize.domain.product;
 
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.util.JPASerializer;
 
 
 @JsonPropertyOrder ({"id", "name", "link", "parent"})
 @Entity
 @Table(name = "prod_cat")
-
-public class ProductCategory extends MizeSceEntity implements Comparable<ProductCategory>{
+public class ProductCategory extends MizeSceEntityAudit implements Comparable<ProductCategory>{
 
 	private static final long serialVersionUID = -2450196415219764436L;
 	@JsonIgnore
@@ -52,24 +58,44 @@ public class ProductCategory extends MizeSceEntity implements Comparable<Product
 	@JsonIgnore
 	private Integer active;
 	private BusinessEntity tenant;
+	private String categoryCode;
+	private List<ProductCategoryIntl> intls = new ArrayList<ProductCategoryIntl>();
 	
-	
-	public String getDepartment() {
-		return department;
-	}
-
-	public void setDepartment(String department) {
-		this.department = department;
-	}	
+	@Transient
+	private User user;
 	
 	public ProductCategory() {
-		
+		super();
 	}
 	
+	public ProductCategory(Long srcCategoryId, String name, String photoLink,
+			ProductCategory parent, Set<ProductCategory> children,
+			ProdCategorySource sourceCategory, String department,
+			Integer level, Integer displayOrder, Integer orderNumber,
+			boolean isActive, Integer active, BusinessEntity tenant,
+			String categoryCode, List<ProductCategoryIntl> intls) {
+		super();
+		this.srcCategoryId = srcCategoryId;
+		this.name = name;
+		this.photoLink = photoLink;
+		this.parent = parent;
+		this.children = children;
+		this.sourceCategory = sourceCategory;
+		this.department = department;
+		this.level = level;
+		this.displayOrder = displayOrder;
+		this.orderNumber = orderNumber;
+		this.isActive = isActive;
+		this.active = active;
+		this.tenant = tenant;
+		this.categoryCode = categoryCode;
+		this.intls = intls;
+	}
+
+	
 	@Id
-	@GenericGenerator(name="prod_cat_id",strategy="increment")
-	@GeneratedValue
-	@Column(name="prod_cat_id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name="prod_cat_id", nullable = false, unique = true)
 	@Override
 	public Long getId() {
 		return id;
@@ -79,7 +105,7 @@ public class ProductCategory extends MizeSceEntity implements Comparable<Product
 		this.id = id;
 	}
 
-	@Column(name="prod_cat_name")
+	@Column(name="prod_cat_name", length = 100)
 	public String getName() {
 		return name;
 	}
@@ -100,7 +126,7 @@ public class ProductCategory extends MizeSceEntity implements Comparable<Product
 		this.parent = parent;
 	}
 
-	@Column(name="prod_cat_link")
+	@Column(name="prod_cat_link", length = 250)
 	public String getPhotoLink() {
 		return photoLink;
 	}
@@ -207,27 +233,78 @@ public class ProductCategory extends MizeSceEntity implements Comparable<Product
 	public void setTenant(BusinessEntity tenant) {
 		this.tenant = tenant;
 	}
-
-	@Override
-	public String toString() {
-		return "ProductCategory [id=" + id + ", name=" + name + ", photoLink="
-				+ photoLink + ","
-				+ ", sourceCategory=" + sourceCategory + ", department="
-				+ department + ", isActive=" + isActive + "]";
+	
+	@Column(name = "prod_cat_code", length = 100, nullable = true)
+	public String getCategoryCode() {
+		return categoryCode;
 	}
+
+	public void setCategoryCode(String categoryCode) {
+		this.categoryCode = categoryCode;
+	}
+
+	@Column(name = "department", length = 25, nullable = true)
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
+	}	
+	
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "productCategory" ,orphanRemoval= true)
+	@Fetch(FetchMode.SELECT)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
+	public List<ProductCategoryIntl> getIntls() {
+		return intls;
+	}
+
+	public void setIntls(List<ProductCategoryIntl> intls) {
+		this.intls = intls;
+	}
+	
+	@Transient
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	
 
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
-		int result = 1;
+		int result = super.hashCode();
+		result = prime * result + ((active == null) ? 0 : active.hashCode());
+		result = prime * result
+				+ ((categoryCode == null) ? 0 : categoryCode.hashCode());
+		result = prime * result
+				+ ((children == null) ? 0 : children.hashCode());
 		result = prime * result
 				+ ((department == null) ? 0 : department.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result
+				+ ((displayOrder == null) ? 0 : displayOrder.hashCode());
+		result = prime * result + (isActive ? 1231 : 1237);
+		result = prime * result + ((level == null) ? 0 : level.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result
+				+ ((orderNumber == null) ? 0 : orderNumber.hashCode());
+		result = prime * result + ((parent == null) ? 0 : parent.hashCode());
+		result = prime * result
 				+ ((photoLink == null) ? 0 : photoLink.hashCode());
+		result = prime
+				* result
+				+ ((intls == null) ? 0 : intls
+						.hashCode());
 		result = prime * result
 				+ ((sourceCategory == null) ? 0 : sourceCategory.hashCode());
+		result = prime * result
+				+ ((srcCategoryId == null) ? 0 : srcCategoryId.hashCode());
+		result = prime * result + ((tenant == null) ? 0 : tenant.hashCode());
 		return result;
 	}
 
@@ -235,11 +312,21 @@ public class ProductCategory extends MizeSceEntity implements Comparable<Product
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		ProductCategory other = (ProductCategory) obj;
+		if (active == null) {
+			if (other.active != null)
+				return false;
+		} else if (!active.equals(other.active))
+			return false;
+		if (categoryCode == null) {
+			if (other.categoryCode != null)
+				return false;
+		} else if (!categoryCode.equals(other.categoryCode))
+			return false;
 		if (children == null) {
 			if (other.children != null)
 				return false;
@@ -250,17 +337,27 @@ public class ProductCategory extends MizeSceEntity implements Comparable<Product
 				return false;
 		} else if (!department.equals(other.department))
 			return false;
-		if (id == null) {
-			if (other.id != null)
+		if (displayOrder == null) {
+			if (other.displayOrder != null)
 				return false;
-		} else if (!id.equals(other.id))
+		} else if (!displayOrder.equals(other.displayOrder))
 			return false;
 		if (isActive != other.isActive)
+			return false;
+		if (level == null) {
+			if (other.level != null)
+				return false;
+		} else if (!level.equals(other.level))
 			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
+			return false;
+		if (orderNumber == null) {
+			if (other.orderNumber != null)
+				return false;
+		} else if (!orderNumber.equals(other.orderNumber))
 			return false;
 		if (parent == null) {
 			if (other.parent != null)
@@ -272,12 +369,39 @@ public class ProductCategory extends MizeSceEntity implements Comparable<Product
 				return false;
 		} else if (!photoLink.equals(other.photoLink))
 			return false;
+		if (intls == null) {
+			if (other.intls != null)
+				return false;
+		} else if (!intls.equals(other.intls))
+			return false;
 		if (sourceCategory == null) {
 			if (other.sourceCategory != null)
 				return false;
 		} else if (!sourceCategory.equals(other.sourceCategory))
 			return false;
+		if (srcCategoryId == null) {
+			if (other.srcCategoryId != null)
+				return false;
+		} else if (!srcCategoryId.equals(other.srcCategoryId))
+			return false;
+		if (tenant == null) {
+			if (other.tenant != null)
+				return false;
+		} else if (!tenant.equals(other.tenant))
+			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "ProductCategory [srcCategoryId=" + srcCategoryId + ", name="
+				+ name + ", photoLink=" + photoLink + ", parent=" + parent
+				+ ", children=" + children + ", sourceCategory="
+				+ sourceCategory + ", department=" + department + ", level="
+				+ level + ", displayOrder=" + displayOrder + ", orderNumber="
+				+ orderNumber + ", isActive=" + isActive + ", active=" + active
+				+ ", tenant=" + tenant + ", categoryCode=" + categoryCode
+				+ ", prodCategoryIntls=" + intls + "]";
 	}
 
 	@Override
