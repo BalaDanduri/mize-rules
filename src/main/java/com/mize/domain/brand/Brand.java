@@ -17,8 +17,6 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -246,8 +244,7 @@ public class Brand extends MizeSceEntityAudit implements Comparable<Brand>{
 		this.intls = intls;
 	}
 	
-	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "brand", orphanRemoval = true)
-	@Fetch(FetchMode.SELECT)
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "brand", orphanRemoval = true)
 	@JsonManagedReference(value="intl")
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
