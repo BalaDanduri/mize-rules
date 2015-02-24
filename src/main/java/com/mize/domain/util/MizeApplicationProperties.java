@@ -316,4 +316,10 @@ public class MizeApplicationProperties implements InitializingBean {
 			return false;
 		}
 	}
+	
+	@JsonIgnore
+	public boolean isIndexWithDefaultLocale() {
+		return Boolean.valueOf(getPropertyValue("indexWithDefaultLocale"));
+	}
+	
 }
