@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -18,6 +20,7 @@ import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeSceEntity;
 
 @Entity
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, include="all")
 @Table(name = "brand_intl")
 public class BrandIntl extends MizeSceEntity implements Comparable<BrandIntl> {
 
