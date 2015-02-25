@@ -89,7 +89,8 @@ public class ShipmentTracking extends MizeSceEntityAudit implements Comparable<S
 	private String payeePartyType;
 	private String shipmentImporter;
 	private List<ShipmentTrackingAttachment> attachments = new ArrayList<ShipmentTrackingAttachment>();
-	
+	private ShipmentSpecialOptions specialOptions;
+	private String specialOptionsValue;
 	public ShipmentTracking(){
 		super();
 	}
@@ -504,6 +505,25 @@ public class ShipmentTracking extends MizeSceEntityAudit implements Comparable<S
 		this.attachments = attachments;
 	}
 	
+	@Transient
+	public ShipmentSpecialOptions getSpecialOptions() {
+		return specialOptions;
+	}
+
+	public void setSpecialOptions(ShipmentSpecialOptions specialOptions) {
+		this.specialOptions = specialOptions;
+	}
+	
+	@Transient
+	//@Column(name="shipment_spl_options")
+	public String getSpecialOptionsValue() {
+		return specialOptionsValue;
+	}
+
+	public void setSpecialOptionsValue(String specialOptionsValue) {
+		this.specialOptionsValue = specialOptionsValue;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;

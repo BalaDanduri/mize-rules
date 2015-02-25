@@ -40,7 +40,9 @@ public class ShipmentPackage extends MizeSceEntity implements Comparable<Shipmen
 	private BigDecimal shippingAmount;
 	private String shipmentLabel;
 	private String shipmentLabelPath;
-	private List<ShipmentPackageAttribute> attributes = new ArrayList<ShipmentPackageAttribute>();	
+	private List<ShipmentPackageAttribute> attributes = new ArrayList<ShipmentPackageAttribute>();
+	private PackageSpecialOptions packageSpecialOptions;
+	private String packageSpecialOptionsValue;
 	
 	@Override
 	@Id
@@ -165,6 +167,25 @@ public class ShipmentPackage extends MizeSceEntity implements Comparable<Shipmen
 
 	public void setShipmentLabelPath(String shipmentLabelPath) {
 		this.shipmentLabelPath = shipmentLabelPath;
+	}
+
+	@Transient
+	public PackageSpecialOptions getPackageSpecialOptions() {
+		return packageSpecialOptions;
+	}
+
+	public void setPackageSpecialOptions(PackageSpecialOptions packageSpecialOptions) {
+		this.packageSpecialOptions = packageSpecialOptions;
+	}
+
+	@Transient
+	//@Column(name="pkg_spl_options")
+	public String getPackageSpecialOptionsValue() {
+		return packageSpecialOptionsValue;
+	}
+
+	public void setPackageSpecialOptionsValue(String packageSpecialOptionsValue) {
+		this.packageSpecialOptionsValue = packageSpecialOptionsValue;
 	}
 
 	@Override
