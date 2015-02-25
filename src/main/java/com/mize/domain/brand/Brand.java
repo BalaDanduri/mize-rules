@@ -116,6 +116,7 @@ public class Brand extends MizeSceEntityAudit implements Comparable<Brand>{
 		this.id = id;
 		this.code = code;
 		this.isActive =isActive;
+		this.name = name;
 		this.intls = new ArrayList<BrandIntl>();
 		BrandIntl brandIntl = new BrandIntl();
 		brandIntl.setName(name);
