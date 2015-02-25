@@ -74,6 +74,8 @@ public class ApplicationFormat extends MizeSceEntityAudit implements Comparable<
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	@Column(name = "tenant_id")
 	public Long getTenantId() {
 		return tenantId;
 	}
