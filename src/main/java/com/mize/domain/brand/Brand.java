@@ -17,6 +17,8 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -24,7 +26,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.common.MizeSceEntityAudit;
-import com.mize.domain.user.UserBrandMapping;
 import com.mize.domain.util.JPASerializer;
 
 @Entity
@@ -45,7 +46,6 @@ public class Brand extends MizeSceEntityAudit implements Comparable<Brand>{
 	private List<BrandSupport> brandSupports = new ArrayList<BrandSupport>();
 	private List<BrandFeed> brandFeeds = new ArrayList<BrandFeed>();
 	private String searchType;
-	private List<UserBrandMapping> userBrands = new ArrayList<UserBrandMapping>();
 	private String code;
 	@Transient
 	private User user;
@@ -210,17 +210,6 @@ public class Brand extends MizeSceEntityAudit implements Comparable<Brand>{
 		this.searchType = searchType;
 	}	
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL,mappedBy="brand")
-	@JsonSerialize(using=JPASerializer.class)
-	@JsonInclude(Include.NON_NULL)
-	public List<UserBrandMapping> getUserBrands() {
-		return userBrands;
-	}
-	
-	public void setUserBrands(List<UserBrandMapping> userBrands) {
-		this.userBrands = userBrands;
-	}
-	
 	@Column(name = "brand_code")
 	public String getCode() {
 		return code;
@@ -245,19 +234,23 @@ public class Brand extends MizeSceEntityAudit implements Comparable<Brand>{
 		this.intls = intls;
 	}
 	
-	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "brand", orphanRemoval = true)
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "brand", orphanRemoval = true)
+	@Fetch(FetchMode.SELECT)
 	@JsonManagedReference(value="intl")
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	public List<BrandIntl> getIntls() {
 		return intls;
 	}
 	
 	
-	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "brand", orphanRemoval = true)
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "brand", orphanRemoval = true)
+	@Fetch(FetchMode.SELECT)
 	@JsonManagedReference(value="skins")
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	public List<BrandSkin> getSkins() {
 		return skins;
 	}
@@ -316,8 +309,6 @@ public class Brand extends MizeSceEntityAudit implements Comparable<Brand>{
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result
 				+ ((registered == null) ? 0 : registered.hashCode());
-		result = prime * result
-				+ ((userBrands == null) ? 0 : userBrands.hashCode());
 		result = prime * result + ((website == null) ? 0 : website.hashCode());
 		result = prime * result + ((intls == null) ? 0 : intls.hashCode());
 		result = prime * result + ((skins == null) ? 0 : skins.hashCode());
@@ -373,11 +364,6 @@ public class Brand extends MizeSceEntityAudit implements Comparable<Brand>{
 			if (other.registered != null)
 				return false;
 		} else if (!registered.equals(other.registered))
-			return false;
-		if (userBrands == null) {
-			if (other.userBrands != null)
-				return false;
-		} else if (!userBrands.containsAll(other.userBrands))
 			return false;
 		if (website == null) {
 			if (other.website != null)
