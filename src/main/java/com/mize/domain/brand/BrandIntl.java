@@ -12,17 +12,15 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.Locale;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityIntl;
 
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, include="all")
 @Table(name = "brand_intl")
-public class BrandIntl extends MizeSceEntity implements Comparable<BrandIntl> {
+public class BrandIntl extends MizeSceEntityIntl implements Comparable<BrandIntl> {
 
 	/**
 	 * 
@@ -31,7 +29,6 @@ public class BrandIntl extends MizeSceEntity implements Comparable<BrandIntl> {
 	private Brand brand;
 	private String name;
 	private String desc;
-	private Locale locale;
 
 	public BrandIntl() {
 		super();
@@ -43,10 +40,8 @@ public class BrandIntl extends MizeSceEntity implements Comparable<BrandIntl> {
 		this.brand = brand;
 		this.name = name;
 		this.desc = desc;
-		this.locale = locale;
+		super.locale = locale;
 	}
-	
-	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -74,7 +69,7 @@ public class BrandIntl extends MizeSceEntity implements Comparable<BrandIntl> {
 	
 	
 	
-	@Column(name = "brand_name", length = 250, nullable = true)
+	@Column(name = "brand_name")
 	public String getName() {
 		return name;
 	}
@@ -83,24 +78,13 @@ public class BrandIntl extends MizeSceEntity implements Comparable<BrandIntl> {
 		this.name = name;
 	}
 	
-	@Column(name = "brand_description", length = 500, nullable = true)
+	@Column(name = "brand_description")
 	public String getDesc() {
 		return desc;
 	}
 	
 	public void setDesc(String desc) {
 		this.desc = desc;
-	}
-
-	@ManyToOne(fetch = FetchType.EAGER, optional = true)
-	@Fetch(FetchMode.SELECT)
-	@JoinColumn(name = "locale_id")
-	public Locale getLocale() {
-		return locale;
-	}
-
-	public void setLocale(Locale locale) {
-		this.locale = locale;
 	}
 
 	@Override
