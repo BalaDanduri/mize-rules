@@ -322,4 +322,8 @@ public class MizeApplicationProperties implements InitializingBean {
 		return Boolean.valueOf(getPropertyValue("indexWithDefaultLocale"));
 	}
 	
+	@JsonIgnore
+	public boolean isAllowAddressValidations() {
+		return Boolean.valueOf(getPropertyValue("allowAddressValidations"));
+	}
 }
