@@ -2,6 +2,8 @@ package com.mize.domain.businessentity;
 
 import java.util.List;
 
+import com.mize.domain.auth.User;
+
 
 public class BusinessEntitySearch {
 	
@@ -24,6 +26,7 @@ public class BusinessEntitySearch {
 	private List<Long> categoryIds;
 	private Long countryId;
 	private Long stateId;
+	private User user;
 	
 	public BusinessEntitySearch() {
 		
@@ -180,5 +183,14 @@ public class BusinessEntitySearch {
 	public void setStateId(Long stateId) {
 		this.stateId = stateId;
 	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+	
 
 }
