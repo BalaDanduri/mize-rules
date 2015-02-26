@@ -13,15 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
-import com.mize.domain.common.Locale;
-import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.JPASerializer;
+import com.mize.domain.common.MizeSceEntityIntl;
 /**
  * @author Raghavendra Serikar
  * @version 1.0
@@ -31,12 +24,11 @@ import com.mize.domain.util.JPASerializer;
 @DiscriminatorColumn(name = "discriminator")
 @DiscriminatorValue("BusinessEntityIntl")
 @Table(name="business_entity_intl")
-public class BusinessEntityIntl extends MizeSceEntity {
+public class BusinessEntityIntl extends MizeSceEntityIntl {
 	private static final long serialVersionUID = -1362236702129137109L;
 	private BusinessEntity businessEntity;
 	private String name;
 	private String description;
-	private Locale locale;
 	private String firstName;
 	private String lastName;
 	private String middleInitial;
@@ -74,14 +66,6 @@ public class BusinessEntityIntl extends MizeSceEntity {
 		return description;
 	}
 
-	@ManyToOne(fetch = FetchType.EAGER)
-	@Fetch(FetchMode.SELECT)
-	@JoinColumn(name = "locale_id")
-	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
-	public Locale getLocale() {
-		return locale;
-	}
-
 	public void setBusinessEntity(BusinessEntity businessEntity) {
 		this.businessEntity = businessEntity;
 	}
@@ -92,10 +76,6 @@ public class BusinessEntityIntl extends MizeSceEntity {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public void setLocale(Locale locale) {
-		this.locale = locale;
 	}
 	
 	@Column(name = "be_first_name")
