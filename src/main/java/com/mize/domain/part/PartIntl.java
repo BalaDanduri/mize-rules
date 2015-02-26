@@ -13,23 +13,19 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.Locale;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityIntl;
 
 @Entity
 @Inheritance
 @DiscriminatorColumn(name = "discriminator")
 @DiscriminatorValue("PartIntl")
 @Table(name = "part_intl")
-public class PartIntl extends MizeSceEntity implements Comparable<PartIntl> {	
+public class PartIntl extends MizeSceEntityIntl implements Comparable<PartIntl> {	
 	
 	private static final long serialVersionUID = -1164448119809296797L;
 	private Part part;
-	private Locale locale;
 	private String name;
 	private String description;
 	
@@ -40,7 +36,7 @@ public class PartIntl extends MizeSceEntity implements Comparable<PartIntl> {
 	public PartIntl(Part part, Locale locale, String partName,
 			String partDescription) {
 		this.part = part;
-		this.locale = locale;
+		super.locale = locale;
 		this.name = partName;
 		this.description = partDescription;
 	}
@@ -61,13 +57,6 @@ public class PartIntl extends MizeSceEntity implements Comparable<PartIntl> {
 	}
 	
 
-	@ManyToOne(fetch = FetchType.EAGER ,optional = true)
-	@Fetch(FetchMode.SELECT)
-	@JoinColumn(name = "locale_id")
-	public Locale getLocale() {
-		return locale;
-	}
-
 	@Column(name = "part_name")
 	public String getName() {
 		return name;
@@ -86,10 +75,6 @@ public class PartIntl extends MizeSceEntity implements Comparable<PartIntl> {
 
 	public void setPart(Part part) {
 		this.part = part;
-	}
-
-	public void setLocale(Locale locale) {
-		this.locale = locale;
 	}
 
 	public void setName(String name) {
