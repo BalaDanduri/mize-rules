@@ -12,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.brand.Brand;
 import com.mize.domain.common.MizeSceEntity;
@@ -51,6 +54,7 @@ public class BusinessEntityBrand extends MizeSceEntity implements Comparable<Bus
 
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="be_id")
+	@Fetch(FetchMode.SELECT)
 	@JsonBackReference(value="be_brand")
 	public BusinessEntity getBusinessEntity() {
 		return businessEntity;
@@ -62,6 +66,7 @@ public class BusinessEntityBrand extends MizeSceEntity implements Comparable<Bus
 
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="brand_id")
+	@Fetch(FetchMode.SELECT)
 	public Brand getBrand() {
 		return brand;
 	}
