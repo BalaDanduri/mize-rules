@@ -89,7 +89,7 @@ public class FormDefinition extends MizeSceEntityAudit implements Comparable<For
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", unique = true, nullable = false, length = 20)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return super.id;
@@ -113,7 +113,7 @@ public class FormDefinition extends MizeSceEntityAudit implements Comparable<For
 	}
 
 	@OneToOne()
-	@JoinColumn(name = "tenant_id", nullable = true)
+	@JoinColumn(name = "tenant_id")
 	public BusinessEntity getTenant() {
 		return tenant;
 	}
@@ -122,7 +122,7 @@ public class FormDefinition extends MizeSceEntityAudit implements Comparable<For
 		this.tenant = tenant;
 	}
 
-	@Column(name = "form_code", nullable = true, length = 50)
+	@Column(name = "form_code")
 	public String getFormCode() {
 		return formCode;
 	}
@@ -131,7 +131,7 @@ public class FormDefinition extends MizeSceEntityAudit implements Comparable<For
 		this.formCode = formCode;
 	}
 
-	@Column(name = "version_number", nullable = true, length = 50)
+	@Column(name = "version_number")
 	public String getVersionNumber() {
 		return versionNumber;
 	}
@@ -140,7 +140,7 @@ public class FormDefinition extends MizeSceEntityAudit implements Comparable<For
 		this.versionNumber = versionNumber;
 	}
 
-	@Column(name = "status_code", nullable = true, length = 50)
+	@Column(name = "status_code")
 	public String getStatusCode() {
 		return statusCode;
 	}
@@ -150,7 +150,7 @@ public class FormDefinition extends MizeSceEntityAudit implements Comparable<For
 	}
 
 	@JsonIgnore
-	@Column(name = "form_defn_data", nullable = true)
+	@Column(name = "form_defn_data")
 	public String getFormDefinitionData() {
 		return formDefinitionData;
 	}
@@ -159,7 +159,7 @@ public class FormDefinition extends MizeSceEntityAudit implements Comparable<For
 		this.formDefinitionData = formDefinitionData;
 	}
 
-	@Column(name = "is_active", nullable = true, length = 1)
+	@Column(name = "is_active")
 	public String getIsActive() {
 		return isActive;
 	}
@@ -169,7 +169,7 @@ public class FormDefinition extends MizeSceEntityAudit implements Comparable<For
 	}
 
 	
-	@Column(name = "start_date", nullable = true)
+	@Column(name = "start_date")
 	@Type(type = "com.mize.domain.util.MizeDateJPA")
 	@JsonInclude(Include.NON_DEFAULT)
 	public MizeDate getStartDate() {
@@ -180,7 +180,7 @@ public class FormDefinition extends MizeSceEntityAudit implements Comparable<For
 		this.startDate = startDate;
 	}
 
-	@Column(name = "end_date", nullable = true)
+	@Column(name = "end_date")
 	@Type(type = "com.mize.domain.util.MizeDateJPA")
 	@JsonInclude(Include.NON_DEFAULT)
 	public MizeDate getEndDate() {
@@ -253,7 +253,7 @@ public class FormDefinition extends MizeSceEntityAudit implements Comparable<For
 		this.locale = locale;
 	}
 
-	@Column(name = "form_source", nullable = true, length = 100)
+	@Column(name = "form_source")
 	public String getSource() {
 		return source;
 	}
@@ -262,7 +262,7 @@ public class FormDefinition extends MizeSceEntityAudit implements Comparable<For
 		this.source = source;
 	}
 
-	@Column(name = "form_reference", nullable = true, length = 100)
+	@Column(name = "form_reference")
 	public String getReference() {
 		return reference;
 	}
