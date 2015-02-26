@@ -11,31 +11,27 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.Locale;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityIntl;
 
 @Entity
 @Table(name="prod_intl")
 @Inheritance
 @DiscriminatorColumn(name = "discriminator")
 @DiscriminatorValue("ProductIntl")
-public class ProductIntl extends MizeSceEntity implements Comparable<ProductIntl>{
+public class ProductIntl extends MizeSceEntityIntl implements Comparable<ProductIntl>{
 	
 	private static final long serialVersionUID = -6977239159157170676L;
 	private Product product;
 	private String name;
 	private String description;
-	private Locale locale = new Locale();	
 	
 	public ProductIntl() {
 		super();
+		super.locale = new Locale();
 	}
 
 	@Id
@@ -68,13 +64,6 @@ public class ProductIntl extends MizeSceEntity implements Comparable<ProductIntl
 		return description;
 	}
 
-	@OneToOne(fetch = FetchType.EAGER)
-	@Fetch(FetchMode.SELECT)
-	@JoinColumn(name = "locale_id")
-	public Locale getLocale() {
-		return locale;
-	}
-
 	public void setProduct(Product product) {
 		this.product = product;
 	}
@@ -85,10 +74,6 @@ public class ProductIntl extends MizeSceEntity implements Comparable<ProductIntl
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public void setLocale(Locale locale) {
-		this.locale = locale;
 	}
 
 	@Override
