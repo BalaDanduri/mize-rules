@@ -50,7 +50,7 @@ public class FormDefinitionLink extends MizeSceEntityAudit implements Comparable
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", unique = true, nullable = false, length = 20)
+	@Column(name = "id")
 	@Override
 	public Long getId() {
 		return super.id;
@@ -73,7 +73,7 @@ public class FormDefinitionLink extends MizeSceEntityAudit implements Comparable
 		this.formDefinition = formDefinition;
 	}
 
-	@Column(name ="insp_type", length = 50)
+	@Column(name ="insp_type")
 	public String getInspectionType() {
 		return inspectionType;
 	}
@@ -82,7 +82,7 @@ public class FormDefinitionLink extends MizeSceEntityAudit implements Comparable
 		this.inspectionType = inspectionType;
 	}
 
-	@Column(name ="be_type", length = 50)
+	@Column(name ="be_type")
 	public String getBusinessEntityType() {
 		return businessEntityType;
 	}
@@ -91,7 +91,7 @@ public class FormDefinitionLink extends MizeSceEntityAudit implements Comparable
 		this.businessEntityType = businessEntityType;
 	}
 
-	@Column(name ="model", length = 50)
+	@Column(name ="model")
 	public String getModel() {
 		return model;
 	}
@@ -100,7 +100,7 @@ public class FormDefinitionLink extends MizeSceEntityAudit implements Comparable
 		this.model = model;
 	}
 
-	@Column(name ="brand_name", length = 250)
+	@Column(name ="brand_name")
 	public String getBrandName() {
 		return brandName;
 	}
@@ -109,7 +109,7 @@ public class FormDefinitionLink extends MizeSceEntityAudit implements Comparable
 		this.brandName = brandName;
 	}
 
-	@Column(name ="category", length = 250)
+	@Column(name ="category")
 	public String getCategoryName() {
 		return categoryName;
 	}

@@ -11,16 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.common.Locale;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityIntl;
 import com.mize.domain.util.JPASerializer;
 
 @Entity
@@ -28,30 +24,32 @@ import com.mize.domain.util.JPASerializer;
 @DiscriminatorColumn(name = "discriminator")
 @DiscriminatorValue("FormDefinitionIntl")
 @Table(name = "form_defn_intl")
-public class FormDefinitionIntl extends MizeSceEntity implements Comparable<FormDefinitionIntl> {
+public class FormDefinitionIntl extends MizeSceEntityIntl implements Comparable<FormDefinitionIntl> {
 
 	private static final long serialVersionUID = 1899101185232987319L;
+	
 	private FormDefinition formDefinition;
+	
 	private String name;
+	
 	private String description;
-	private Locale locale;
-
+	
 	public FormDefinitionIntl() {
 		super();
-		locale = new Locale();
+		super.locale = new Locale();
 	}
 
 	@Override
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = false)
+    @Column(name = "id")
 	public Long getId() {
-		return id;
+		return super.id;
 	}
-
+	
 	@Override
 	public void setId(Long id) {
-		this.id = id;
+		super.id = id;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -66,7 +64,7 @@ public class FormDefinitionIntl extends MizeSceEntity implements Comparable<Form
 		this.formDefinition = formDefinition;
 	}
 
-	@Column(name = "form_name", length = 250)
+	@Column(name = "form_name")
 	public String getName() {
 		return name;
 	}
@@ -75,7 +73,7 @@ public class FormDefinitionIntl extends MizeSceEntity implements Comparable<Form
 		this.name = name;
 	}
 
-	@Column(name = "form_description", length = 500)
+	@Column(name = "form_description")
 	public String getDescription() {
 		return description;
 	}
@@ -84,31 +82,13 @@ public class FormDefinitionIntl extends MizeSceEntity implements Comparable<Form
 		this.description = description;
 	}
 
-	@OneToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="locale_id")
-	@JsonSerialize(using=JPASerializer.class)
-	@JsonInclude(Include.NON_NULL)
-	public Locale getLocale() {
-		return locale;
-	}
-
-	public void setLocale(Locale locale) {
-		this.locale = locale;
-	}
-	
-	@Override
-	@JsonIgnore
-	public void setUpdatedBy(Long updatedBy) {		
-		super.setUpdatedBy(updatedBy);
-	}
-	
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((locale == null) ? 0 : locale.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((super.locale == null) ? 0 : super.locale.hashCode());
 		return result;
 	}
 
@@ -126,10 +106,10 @@ public class FormDefinitionIntl extends MizeSceEntity implements Comparable<Form
 				return false;
 		} else if (!description.equals(other.description))
 			return false;
-		if (locale == null) {
+		if (super.locale == null) {
 			if (other.locale != null)
 				return false;
-		} else if (!locale.equals(other.locale))
+		} else if (!super.locale.equals(other.locale))
 			return false;
 		if (name == null) {
 			if (other.name != null)
@@ -141,7 +121,7 @@ public class FormDefinitionIntl extends MizeSceEntity implements Comparable<Form
 
 	@Override
 	public String toString() {
-		return "FormDefinitionIntl [name=" + name + ", description=" + description + ", locale=" + locale + "]";
+		return "FormDefinitionIntl [name=" + name + ", description=" + description + ", locale=" + super.locale + "]";
 	}
 
 	@Override
