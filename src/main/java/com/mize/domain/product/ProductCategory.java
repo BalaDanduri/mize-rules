@@ -92,10 +92,9 @@ public class ProductCategory extends MizeSceEntityAudit implements Comparable<Pr
 		this.intls = intls;
 	}
 
-	public ProductCategory(Long id, String code, Integer isActive,String name,String desc) {
+	public ProductCategory(Long id, String code ,String name,String desc) {
 		this.id = id;
 		this.categoryCode = code;
-		this.active = isActive;
 		this.name = name;
 		this.intls = new ArrayList<ProductCategoryIntl>();
 		ProductCategoryIntl categoryIntl = new ProductCategoryIntl();
