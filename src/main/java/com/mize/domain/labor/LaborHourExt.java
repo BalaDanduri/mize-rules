@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.datetime.DateTime;
 
 @Entity
 @DiscriminatorColumn(name="LaborHourExt")
@@ -26,7 +26,7 @@ public class LaborHourExt extends LaborHour {
 		super();
 	}
 	
-	public LaborHourExt(Long id , String code, String type, MizeDateTime startDate,	MizeDateTime endDate, BigDecimal hours, String isActive) {		
+	public LaborHourExt(Long id , String code, String type, DateTime startDate,	DateTime endDate, BigDecimal hours, String isActive) {		
 		super(id, code, type, startDate, endDate, hours);
 		this.isActive = isActive;
 	}

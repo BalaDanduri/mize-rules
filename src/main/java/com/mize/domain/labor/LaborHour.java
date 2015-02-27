@@ -29,9 +29,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeSceEntityAudit;
+import com.mize.domain.datetime.DateTime;
 import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Inheritance
@@ -44,8 +44,8 @@ public class LaborHour extends MizeSceEntityAudit implements Comparable<LaborHou
 	private BusinessEntity tenant;
 	private String type;
 	private String code;
-	private MizeDateTime startDate;
-	private MizeDateTime endDate;
+	private DateTime startDate;
+	private DateTime endDate;
 	private BigDecimal hours;
 	private List<LaborHourIntl> intls=new ArrayList<LaborHourIntl>();
 	
@@ -55,8 +55,8 @@ public class LaborHour extends MizeSceEntityAudit implements Comparable<LaborHou
 	public LaborHour() {
 	}
 	
-	public LaborHour(Long id , String code, String type, MizeDateTime startDate,
-			MizeDateTime endDate, BigDecimal hours) {
+	public LaborHour(Long id , String code, String type, DateTime startDate,
+			DateTime endDate, BigDecimal hours) {
 		super();
 		this.id = id;
 		this.type = type;
@@ -67,7 +67,7 @@ public class LaborHour extends MizeSceEntityAudit implements Comparable<LaborHou
 	}
 
 	public LaborHour(BusinessEntity tenant, String type, String code,
-			MizeDateTime startDate, MizeDateTime endDate, BigDecimal hours,
+			DateTime startDate, DateTime endDate, BigDecimal hours,
 			List<LaborHourIntl> intls, User user) {
 		super();
 		this.tenant = tenant;
@@ -124,22 +124,22 @@ public class LaborHour extends MizeSceEntityAudit implements Comparable<LaborHou
 	}
 
 	@Column(name = "start_date", nullable = true)
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getStartDate() {
+	@Type(type="com.mize.domain.datetime.DateTimeJPA")
+	public DateTime getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(MizeDateTime startDate) {
+	public void setStartDate(DateTime startDate) {
 		this.startDate = startDate;
 	}
 
 	@Column(name = "end_date", nullable = true)
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getEndDate() {
+	@Type(type="com.mize.domain.datetime.DateTimeJPA")
+	public DateTime getEndDate() {
 		return endDate;
 	}
-
-	public void setEndDate(MizeDateTime endDate) {
+	
+	public void setEndDate(DateTime endDate) {
 		this.endDate = endDate;
 	}
 

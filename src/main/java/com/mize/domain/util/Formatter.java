@@ -3,12 +3,14 @@ package com.mize.domain.util;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -26,6 +28,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import com.mize.domain.common.PaginationPage;
+import com.mize.domain.labor.LaborHour;
 
 public final class Formatter {
 	public static final String EMPTY = "";
@@ -720,6 +723,14 @@ public final class Formatter {
 		return 0;
 	}
 	
+	// remove corresponding MizeDateTime method
+	public static int compareDates(com.mize.domain.datetime.DateTime startTime, com.mize.domain.datetime.DateTime endTime){
+		if(startTime != null && startTime.getDateTime() != null && endTime != null && endTime.getDateTime() != null){
+			return startTime.compareTo(endTime);
+		}
+		return 0;
+	}
+	
 	public static int compareDates(MizeDate startTime,MizeDate endTime){
 		if(startTime != null && startTime.getDateTime() != null && endTime != null && endTime.getDateTime() != null){
 			return startTime.compareTo(endTime);
@@ -1009,6 +1020,13 @@ public final class Formatter {
 		 }
 		 return null;
 	 }
+	 // remove corresponding MizeDateTime method
+	 public static DateTime toDateTime(com.mize.domain.datetime.DateTime dateTime){
+		 if(dateTime !=null){
+			 return dateTime.getDateTime();
+		 }
+		 return null;
+	 }
 	 
 	 public static DateTime toDateTime(MizeDate mizeDate){
 		 if(mizeDate !=null){
@@ -1018,7 +1036,19 @@ public final class Formatter {
 	 }
 	 
 	 public static void main(String[] args) {
-		 System.out.println();
+		 try{
+			 MizeObjectMapper mapper = MizeObjectMapper.getInstance();
+			 System.out.println(mapper.writeValueAsString(new LaborHour()));
+			 Locale locale = new Locale("en", "US");
+			 NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
+			 Number d = fmt.parse("$120,000,000.1511111");
+			 BigDecimal bd = BigDecimal.valueOf(d.doubleValue());
+			 System.out.println(d);
+			 System.out.println(bd);
+			 System.out.println(fmt.format(120000000));
+		 }catch(Exception e){
+			 e.printStackTrace();
+		 }
 	 }
 	 
 	 public static final String generateRandomPassword() {

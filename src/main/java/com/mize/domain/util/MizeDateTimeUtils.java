@@ -37,6 +37,14 @@ public class MizeDateTimeUtils {
 		return MizeDateTime.getInstance(getDateTimeFormat(), getTimeZone());
 	}
 	
+	public static com.mize.domain.datetime.DateTime currentDate(){		
+		return com.mize.domain.datetime.DateTime.getInstance(getDateFormat(), getTimeZone());
+	}
+	
+	public static com.mize.domain.datetime.DateTime currentDateTime(){		
+		return com.mize.domain.datetime.DateTime.getInstance(getDateTimeFormat(), getTimeZone());
+	}
+	
 	public static MizeDate currentMizeDate(){		
 		return MizeDate.getInstance(getDateFormat(),getTimeZone());
 	}

@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.mize.domain.datetime.Date;
 
 public class MizeObjectMapper extends ObjectMapper {
 
@@ -74,7 +75,14 @@ public class MizeObjectMapper extends ObjectMapper {
 		module.addSerializer(MizeDateTime.class, new MizeDateTimeSerializer());
 		module.addDeserializer(MizeDateTime.class, new MizeDateTimeDeserializer());	
 		module.addSerializer(MizeDate.class, new MizeDateSerializer());
-		module.addDeserializer(MizeDate.class, new MizeDateDeserializer());	
+		module.addDeserializer(MizeDate.class, new MizeDateDeserializer());
+		
+		module.addSerializer(com.mize.domain.datetime.DateTime.class, new DateTimeNewSerializer());
+		module.addDeserializer(com.mize.domain.datetime.DateTime.class, new DateTimeNewDeserializer());	
+		
+		module.addSerializer(Date.class, new DateSerializer());
+		module.addDeserializer(Date.class, new DateDeserializer());	
+		
 		registerModule(module);
 	}
 	
@@ -164,6 +172,71 @@ public class MizeObjectMapper extends ObjectMapper {
 				gen.writeNumber(date.getMillis());
 			} else {
 				gen.writeString(dateTimeFormatter.print(date));
+			}
+		}
+	}
+	
+	public class DateTimeNewDeserializer extends JsonDeserializer<com.mize.domain.datetime.DateTime> {
+		@Override
+		public com.mize.domain.datetime.DateTime deserialize(JsonParser parser,DeserializationContext context) throws IOException, JsonProcessingException {
+			JsonToken t = parser.getCurrentToken();
+			if (t == JsonToken.VALUE_NUMBER_INT) {
+				return com.mize.domain.datetime.DateTime.getInstance(parser.getLongValue());
+			}
+			String value = parser.getText();
+			if (isNotNull(value)) {
+				return com.mize.domain.datetime.DateTime.getInstance(value.trim(),dateTimeFormat, userDateTimeZone);
+			} else {
+				return null;
+			}
+		}
+	}
+	
+	public class DateTimeNewSerializer extends JsonSerializer<com.mize.domain.datetime.DateTime> {
+		@Override
+		public void serialize(com.mize.domain.datetime.DateTime dateTime, JsonGenerator gen, SerializerProvider provider) throws IOException, JsonProcessingException {
+			if(dateTime != null){				
+				if (DATE_AS_LONG.equalsIgnoreCase(dateTimeFormat)) {
+					gen.writeNumber(dateTime.getMillis());
+				} else {
+					if(dateTime.isValid()){
+						gen.writeString(dateTime.toString(dateTimeFormat, userDateTimeZone));
+					}else{
+						gen.writeString(dateTime.getDateTimeValue());
+					}
+				}
+			}
+		}
+	}
+	
+	public class DateSerializer extends JsonSerializer<Date> {
+		@Override
+		public void serialize(Date date, JsonGenerator gen, SerializerProvider provider) throws IOException, JsonProcessingException {
+			if(date != null){
+				if (DATE_AS_LONG.equalsIgnoreCase(dateFormat)) {
+					gen.writeNumber(date.getMillis());
+				} else {
+					if(date.isValid()){
+						gen.writeString(date.toString(dateFormat, null));
+					}else{
+						gen.writeString(date.getDateValue());
+					}
+				}
+			}
+		}
+	}
+	
+	public class DateDeserializer extends JsonDeserializer<Date> {
+		@Override
+		public Date deserialize(JsonParser parser, DeserializationContext context) throws IOException, JsonProcessingException {
+			if (parser.getCurrentToken() == JsonToken.VALUE_NUMBER_INT) {
+				return Date.getInstance(parser.getLongValue());
+			}
+			String value = parser.getText();
+			if (isNotNull(value)) {
+				return Date.getInstance(value.trim(), dateFormat);
+			} else {
+				return null;
 			}
 		}
 	}
