@@ -26,13 +26,11 @@ public class ApplicationFormat extends MizeSceEntityAudit implements Comparable<
 	private String formatValue;
 	private String isActive;
 	private String tenantCode;
-	
+	private String formatTypeName;
 	@Transient
 	public User user;
-	
 
 	public ApplicationFormat() {
-		
 	}
 	
 	public ApplicationFormat(Long id,String formatType, Locale locale,String formatValue, String isActive) {
@@ -118,6 +116,15 @@ public class ApplicationFormat extends MizeSceEntityAudit implements Comparable<
 
 	public void setLocale(Locale locale) {
 		this.locale = locale;
+	}
+
+	@Transient
+	public String getFormatTypeName() {
+		return formatTypeName;
+	}
+
+	public void setFormatTypeName(String formatTypeName) {
+		this.formatTypeName = formatTypeName;
 	}
 
 	@Override
