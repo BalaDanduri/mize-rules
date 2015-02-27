@@ -56,7 +56,7 @@ public class LaborHourTest extends JPATest {
 		lHour.setTenant(beEntity);
 		lHour.setCode("code8");
 		lHour.setType("Type7");
-		lHour.setHours(BigDecimal.valueOf(300));
+		lHour.setHours(com.mize.domain.common.BigDecimal.getInstance(BigDecimal.valueOf(300)));
 		lHour.setCreatedBy(12L);
 		lHour.setUpdatedBy(12L);
 
@@ -119,7 +119,7 @@ public class LaborHourTest extends JPATest {
 			labourHour.setTenant(tenant);
 			labourHour.setType(resultSet.getString("labor_type"));
 			labourHour.setCode(resultSet.getString("labor_code"));
-			labourHour.setHours(resultSet.getBigDecimal("labor_hours"));
+			labourHour.setHours(com.mize.domain.common.BigDecimal.getInstance(resultSet.getBigDecimal("labor_hours")));
 			labourHour.setCreatedBy(resultSet.getLong("created_by"));
 			labourHour.setUpdatedBy(resultSet.getLong("updated_by"));
 

@@ -1,6 +1,5 @@
 package com.mize.domain.labor;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,9 +27,9 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
+import com.mize.domain.common.BigDecimal;
 import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.datetime.DateTime;
-import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
 
 @Entity
@@ -144,6 +143,7 @@ public class LaborHour extends MizeSceEntityAudit implements Comparable<LaborHou
 	}
 
 	@Column(name = "labor_hours", nullable = true)
+	@Type(type="com.mize.domain.common.BigDecimalJPA")
 	public BigDecimal getHours() {
 		return hours;
 	}
@@ -207,7 +207,7 @@ public class LaborHour extends MizeSceEntityAudit implements Comparable<LaborHou
 		if (hours == null) {
 			if (other.hours != null)
 				return false;
-		} else if (!Formatter.equal(hours, other.hours))
+		} else if (!(hours.equals(other.hours)))
 			return false;
 		if (startDate == null) {
 			if (other.startDate != null)

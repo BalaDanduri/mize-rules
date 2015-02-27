@@ -258,9 +258,9 @@ public class DateTime implements IDateTime, Comparable<DateTime>, Cloneable{
 	}
 
 	public boolean equals(Object object){
-		DateTime dateTime = (DateTime)object;
-		if(this.isValid && dateTime.isValid){
-			return this.dateTime.equals(dateTime.getDateTime());
+		DateTime other = (DateTime)object;
+		if(this.isValid && other.isValid){
+			return this.dateTime.equals(other.getDateTime());
 		}else{
 			return true;
 		}

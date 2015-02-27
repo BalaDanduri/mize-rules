@@ -1,6 +1,5 @@
 package com.mize.domain.labor;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +10,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.mize.domain.common.BigDecimal;
 import com.mize.domain.datetime.DateTime;
 
 @Entity

@@ -3,14 +3,12 @@ package com.mize.domain.util;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -28,7 +26,6 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import com.mize.domain.common.PaginationPage;
-import com.mize.domain.labor.LaborHour;
 
 public final class Formatter {
 	public static final String EMPTY = "";
@@ -811,6 +808,13 @@ public final class Formatter {
 		return value.doubleValue();
 	}
 	
+	public static double bigDecimalValue(com.mize.domain.common.BigDecimal value){
+		if(value == null || value.getBaseValue() == null){
+			return Double.valueOf(0);
+		}
+		return value.getBaseValue().doubleValue();
+	}
+	
 	public static BigDecimal addBigDecimals(BigDecimal val1,BigDecimal val2){
 		if(val1 == null){
 			val1 = BigDecimal.ZERO;
@@ -1037,15 +1041,6 @@ public final class Formatter {
 	 
 	 public static void main(String[] args) {
 		 try{
-			 MizeObjectMapper mapper = MizeObjectMapper.getInstance();
-			 System.out.println(mapper.writeValueAsString(new LaborHour()));
-			 Locale locale = new Locale("en", "US");
-			 NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
-			 Number d = fmt.parse("$120,000,000.1511111");
-			 BigDecimal bd = BigDecimal.valueOf(d.doubleValue());
-			 System.out.println(d);
-			 System.out.println(bd);
-			 System.out.println(fmt.format(120000000));
 		 }catch(Exception e){
 			 e.printStackTrace();
 		 }

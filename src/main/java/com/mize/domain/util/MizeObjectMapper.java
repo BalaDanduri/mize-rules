@@ -1,6 +1,7 @@
 package com.mize.domain.util;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -19,6 +20,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.mize.domain.applicationformat.ApplicationFormat;
+import com.mize.domain.common.BigDecimal;
 import com.mize.domain.datetime.Date;
 
 public class MizeObjectMapper extends ObjectMapper {
@@ -32,6 +35,8 @@ public class MizeObjectMapper extends ObjectMapper {
 	protected String userTimeZone;
 	protected DateTimeZone userDateTimeZone;
 	protected DateTimeFormatter dateTimeFormatter;
+	protected DecimalFormat decimalFormatter;
+	protected String decimalFormat;
 	
 	public MizeObjectMapper() {
 		this(DATE_FORMAT,DATE_TIME_FORMAT, null);// to support my-products application -- don't remove arguments
@@ -52,6 +57,15 @@ public class MizeObjectMapper extends ObjectMapper {
 			return new MizeObjectMapper();
 		}
 	}
+	
+	public static MizeObjectMapper getInstance(ApplicationFormat applicationFormat) {
+		if(applicationFormat != null){
+			//return new MizeObjectMapper(applicationFormat.getDateFormat(),mizeDateFormat.getDateTimeFormat(),mizeDateFormat.getUserTimeZone());
+		}else{
+			return new MizeObjectMapper();
+		}
+		return null;
+	}
 		
 	public MizeObjectMapper(String dateFormat, String dateTimeFormat, String userTimeZone) {
 		this.dateFormat = dateFormat;
@@ -62,9 +76,14 @@ public class MizeObjectMapper extends ObjectMapper {
 		if(this.dateTimeFormat == null){
 			this.dateTimeFormat = MizeDateTimeUtils.getDateTimeFormat();
 		}
+		if(this.decimalFormat == null){
+			this.decimalFormat = "#,##,###.00";
+		}
+		
 		this.userTimeZone = userTimeZone;
 		this.userDateTimeZone = MizeDateTimeUtils.getUserTimeZone(this.userTimeZone);
 		this.dateTimeFormatter = getDateTimeFormatter();
+		this.decimalFormatter = getDecimalFormatter();
 		registerModule();
 	}
 	
@@ -82,6 +101,9 @@ public class MizeObjectMapper extends ObjectMapper {
 		
 		module.addSerializer(Date.class, new DateSerializer());
 		module.addDeserializer(Date.class, new DateDeserializer());	
+		
+		module.addSerializer(BigDecimal.class, new BigDecimalSerializer());
+		module.addDeserializer(BigDecimal.class, new BigDecimalDeserializer());
 		
 		registerModule(module);
 	}
@@ -240,9 +262,38 @@ public class MizeObjectMapper extends ObjectMapper {
 			}
 		}
 	}
+	
+	public class BigDecimalSerializer extends JsonSerializer<BigDecimal> {
+		@Override
+		public void serialize(BigDecimal bigDecimal, JsonGenerator gen, SerializerProvider provider) throws IOException, JsonProcessingException {
+			if(bigDecimal != null){
+				if(bigDecimal.isValid()){
+					gen.writeString(bigDecimal.toString(decimalFormatter));
+				}else{
+					gen.writeString(bigDecimal.getDecimalValue());
+				}
+			}
+		}
+	}
+	
+	public class BigDecimalDeserializer extends JsonDeserializer<BigDecimal> {
+		@Override
+		public BigDecimal deserialize(JsonParser parser, DeserializationContext context) throws IOException, JsonProcessingException {
+			String value = parser.getText();
+			if (isNotNull(value)) {
+				return BigDecimal.getInstance(value.trim(), decimalFormat, decimalFormatter);
+			} else {
+				return null;
+			}
+		}
+	}
 		
 	private DateTimeFormatter getDateTimeFormatter() {
 		return DateTimeFormat.forPattern(this.dateTimeFormat);
+	}
+	
+	private DecimalFormat getDecimalFormatter() {
+		return new DecimalFormat(this.decimalFormat);
 	}
 	
 	private boolean isNotNull(String val){
