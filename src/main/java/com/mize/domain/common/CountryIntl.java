@@ -12,20 +12,17 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, include="all")
 @Table(name="country_intl")
-public class CountryIntl extends MizeSceEntityAudit implements Comparable<CountryIntl> {
+public class CountryIntl extends MizeSceEntityIntl implements Comparable<CountryIntl> {
 
 	private static final long serialVersionUID = 251263039560820237L;
 
 	Country country;
-	Locale locale;
 	String name;
 	String description;
 	
@@ -38,7 +35,7 @@ public class CountryIntl extends MizeSceEntityAudit implements Comparable<Countr
 			String description) {
 		super();
 		this.country = country;
-		this.locale = locale;
+		super.locale = locale;
 		this.name = name;
 		this.description = description;
 	}
@@ -66,18 +63,6 @@ public class CountryIntl extends MizeSceEntityAudit implements Comparable<Countr
 
 	public void setCountry(Country country) {
 		this.country = country;
-	}
-
-	@ManyToOne(fetch = FetchType.EAGER ,optional = true)
-	@Fetch(FetchMode.SELECT)
-	@JoinColumn(name = "locale_id")
-	public Locale getLocale() {
-		return locale;
-	}
-
-
-	public void setLocale(Locale locale) {
-		this.locale = locale;
 	}
 	
 	@Column(name = "country_name")
