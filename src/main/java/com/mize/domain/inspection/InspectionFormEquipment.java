@@ -45,13 +45,19 @@ public class InspectionFormEquipment extends MizeSceEntity implements Comparable
 	private Long   equipmentId;
 	private String equipmentType;
 	private String equipmentCode;
+	private Long equipmentBrandId;
 	private String equipmentBrand;
+	private String equipmentBrandName;
+	private Long equipmentCategoryId;
 	private String equipmentCategory;
+	private String equipmentCategoryName;
+	private Long equipmentSerialId;
 	private String equipmentSerial;
 	private String equipmentModel;
 	private String equipmentName;
 	private String equipmentDescription;
 	private String equipmentReference;
+	private Long productRegistrationId;
 	private List<InspectionFormEquipmentAttribute> equipmentAttributes = new ArrayList<InspectionFormEquipmentAttribute>();
 	private InspectionFormEquipmentOwner equipmentOwner;
 	
@@ -193,125 +199,184 @@ public class InspectionFormEquipment extends MizeSceEntity implements Comparable
 		this.equipmentOwner = equipmentOwner;
 	}
 
+	@Column(name="eqpmnt_brand_id")
+	public Long getEquipmentBrandId() {
+		return equipmentBrandId;
+	}
+
+	public void setEquipmentBrandId(Long equipmentBrandId) {
+		this.equipmentBrandId = equipmentBrandId;
+	}
+
+	@Column(name="eqpmnt_brand_name")
+	public String getEquipmentBrandName() {
+		return equipmentBrandName;
+	}
+
+	public void setEquipmentBrandName(String equipmentBrandName) {
+		this.equipmentBrandName = equipmentBrandName;
+	}
+
+	@Column(name="eqpmnt_category_id")
+	public Long getEquipmentCategoryId() {
+		return equipmentCategoryId;
+	}
+
+	public void setEquipmentCategoryId(Long equipmentCategoryId) {
+		this.equipmentCategoryId = equipmentCategoryId;
+	}
+
+	@Column(name="eqpmnt_category_name")
+	public String getEquipmentCategoryName() {
+		return equipmentCategoryName;
+	}
+
+	public void setEquipmentCategoryName(String equipmentCategoryName) {
+		this.equipmentCategoryName = equipmentCategoryName;
+	}
+
+	@Column(name="eqpmnt_serial_id")
+	public Long getEquipmentSerialId() {
+		return equipmentSerialId;
+	}
+
+	public void setEquipmentSerialId(Long equipmentSerialId) {
+		this.equipmentSerialId = equipmentSerialId;
+	}
+
+	@Column(name="eqpmnt_regn_id")
+	public Long getProductRegistrationId() {
+		return productRegistrationId;
+	}
+
+	public void setProductRegistrationId(Long productRegistrationId) {
+		this.productRegistrationId = productRegistrationId;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result + ((equipmentAttributes == null) ? 0 : equipmentAttributes.hashCode());
 		result = prime * result + ((equipmentBrand == null) ? 0 : equipmentBrand.hashCode());
+		result = prime * result + ((equipmentBrandId == null) ? 0 : equipmentBrandId.hashCode());
+		result = prime * result + ((equipmentBrandName == null) ? 0 : equipmentBrandName.hashCode());
 		result = prime * result + ((equipmentCategory == null) ? 0 : equipmentCategory.hashCode());
+		result = prime * result + ((equipmentCategoryId == null) ? 0 : equipmentCategoryId.hashCode());
+		result = prime * result + ((equipmentCategoryName == null) ? 0 : equipmentCategoryName.hashCode());
+		result = prime * result + ((equipmentCode == null) ? 0 : equipmentCode.hashCode());
 		result = prime * result + ((equipmentDescription == null) ? 0 : equipmentDescription.hashCode());
 		result = prime * result + ((equipmentId == null) ? 0 : equipmentId.hashCode());
-		result = prime * result + ((equipmentName == null) ? 0 : equipmentName.hashCode());
-		result = prime * result + ((equipmentCode == null) ? 0 : equipmentCode.hashCode());
-		result = prime * result + ((equipmentType == null) ? 0 : equipmentType.hashCode());
 		result = prime * result + ((equipmentModel == null) ? 0 : equipmentModel.hashCode());
+		result = prime * result + ((equipmentName == null) ? 0 : equipmentName.hashCode());
 		result = prime * result + ((equipmentOwner == null) ? 0 : equipmentOwner.hashCode());
 		result = prime * result + ((equipmentReference == null) ? 0 : equipmentReference.hashCode());
 		result = prime * result + ((equipmentSerial == null) ? 0 : equipmentSerial.hashCode());
+		result = prime * result + ((equipmentSerialId == null) ? 0 : equipmentSerialId.hashCode());
+		result = prime * result + ((equipmentType == null) ? 0 : equipmentType.hashCode());
+		result = prime * result + ((productRegistrationId == null) ? 0 : productRegistrationId.hashCode());
 		return result;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
+		if (this == obj)
 			return true;
-		}
-		if (!super.equals(obj)) {
+		if (!super.equals(obj))
 			return false;
-		}
-		if (!(obj instanceof InspectionFormEquipment)) {
+		if (getClass() != obj.getClass())
 			return false;
-		}
 		InspectionFormEquipment other = (InspectionFormEquipment) obj;
 		if (equipmentAttributes == null) {
-			if (other.equipmentAttributes != null) {
+			if (other.equipmentAttributes != null)
 				return false;
-			}
-		} else if (!equipmentAttributes.equals(other.equipmentAttributes)) {
+		} else if (!equipmentAttributes.equals(other.equipmentAttributes))
 			return false;
-		}
 		if (equipmentBrand == null) {
-			if (other.equipmentBrand != null) {
+			if (other.equipmentBrand != null)
 				return false;
-			}
-		} else if (!equipmentBrand.equals(other.equipmentBrand)) {
+		} else if (!equipmentBrand.equals(other.equipmentBrand))
 			return false;
-		}
+		if (equipmentBrandId == null) {
+			if (other.equipmentBrandId != null)
+				return false;
+		} else if (!equipmentBrandId.equals(other.equipmentBrandId))
+			return false;
+		if (equipmentBrandName == null) {
+			if (other.equipmentBrandName != null)
+				return false;
+		} else if (!equipmentBrandName.equals(other.equipmentBrandName))
+			return false;
 		if (equipmentCategory == null) {
-			if (other.equipmentCategory != null) {
+			if (other.equipmentCategory != null)
 				return false;
-			}
-		} else if (!equipmentCategory.equals(other.equipmentCategory)) {
+		} else if (!equipmentCategory.equals(other.equipmentCategory))
 			return false;
-		}
-		if (equipmentDescription == null) {
-			if (other.equipmentDescription != null) {
+		if (equipmentCategoryId == null) {
+			if (other.equipmentCategoryId != null)
 				return false;
-			}
-		} else if (!equipmentDescription.equals(other.equipmentDescription)) {
+		} else if (!equipmentCategoryId.equals(other.equipmentCategoryId))
 			return false;
-		}
-		if (equipmentId == null) {
-			if (other.equipmentId != null) {
+		if (equipmentCategoryName == null) {
+			if (other.equipmentCategoryName != null)
 				return false;
-			}
-		} else if (!equipmentId.equals(other.equipmentId)) {
+		} else if (!equipmentCategoryName.equals(other.equipmentCategoryName))
 			return false;
-		}
-		if (equipmentName == null) {
-			if (other.equipmentName != null) {
-				return false;
-			}
-		} else if (!equipmentName.equals(other.equipmentName)) {
-			return false;
-		}
 		if (equipmentCode == null) {
-			if (other.equipmentCode != null) {
+			if (other.equipmentCode != null)
 				return false;
-			}
-		} else if (!equipmentCode.equals(other.equipmentCode)) {
+		} else if (!equipmentCode.equals(other.equipmentCode))
 			return false;
-		}
-		if (equipmentType == null) {
-			if (other.equipmentType != null) {
+		if (equipmentDescription == null) {
+			if (other.equipmentDescription != null)
 				return false;
-			}
-		} else if (!equipmentType.equals(other.equipmentType)) {
+		} else if (!equipmentDescription.equals(other.equipmentDescription))
 			return false;
-		}
+		if (equipmentId == null) {
+			if (other.equipmentId != null)
+				return false;
+		} else if (!equipmentId.equals(other.equipmentId))
+			return false;
 		if (equipmentModel == null) {
-			if (other.equipmentModel != null) {
+			if (other.equipmentModel != null)
 				return false;
-			}
-		} else if (!equipmentModel.equals(other.equipmentModel)) {
+		} else if (!equipmentModel.equals(other.equipmentModel))
 			return false;
-		}
+		if (equipmentName == null) {
+			if (other.equipmentName != null)
+				return false;
+		} else if (!equipmentName.equals(other.equipmentName))
+			return false;
 		if (equipmentOwner == null) {
-			if (other.equipmentOwner != null) {
+			if (other.equipmentOwner != null)
 				return false;
-			}
-		} else {
-			if(equipmentOwner.getId() == null) {
-				if(other.equipmentOwner.getId() != null)
-					return false;
-			} else if(!equipmentOwner.getId().equals(other.equipmentOwner.getId()))
-				return false;
-		} 
+		} else if (!equipmentOwner.equals(other.equipmentOwner))
+			return false;
 		if (equipmentReference == null) {
-			if (other.equipmentReference != null) {
+			if (other.equipmentReference != null)
 				return false;
-			}
-		} else if (!equipmentReference.equals(other.equipmentReference)) {
+		} else if (!equipmentReference.equals(other.equipmentReference))
 			return false;
-		}
 		if (equipmentSerial == null) {
-			if (other.equipmentSerial != null) {
+			if (other.equipmentSerial != null)
 				return false;
-			}
-		} else if (!equipmentSerial.equals(other.equipmentSerial)) {
+		} else if (!equipmentSerial.equals(other.equipmentSerial))
 			return false;
-		}
+		if (equipmentSerialId == null) {
+			if (other.equipmentSerialId != null)
+				return false;
+		} else if (!equipmentSerialId.equals(other.equipmentSerialId))
+			return false;
+		if (equipmentType == null) {
+			if (other.equipmentType != null)
+				return false;
+		} else if (!equipmentType.equals(other.equipmentType))
+			return false;
+		if (productRegistrationId == null) {
+			if (other.productRegistrationId != null)
+				return false;
+		} else if (!productRegistrationId.equals(other.productRegistrationId))
+			return false;
 		return true;
 	}
 
@@ -327,17 +392,14 @@ public class InspectionFormEquipment extends MizeSceEntity implements Comparable
 
 	@Override
 	public String toString() {
-		return "InspectionFormEquipment [id=" + id + ", equipmentAttributes="
-				+ equipmentAttributes + ", equipmentBrand=" + equipmentBrand
-				+ ", equipmentCategory=" + equipmentCategory
-				+ ", equipmentCode=" + equipmentCode
-				+ ", equipmentDescription=" + equipmentDescription
-				+ ", equipmentId=" + equipmentId + ", equipmentModel="
-				+ equipmentModel + ", equipmentName=" + equipmentName
-				+ ", equipmentOwner=" + equipmentOwner
-				+ ", equipmentReference=" + equipmentReference
-				+ ", equipmentSerial=" + equipmentSerial + ", equipmentType="
-				+ equipmentType + "]";
+		return "InspectionFormEquipment [equipmentId=" + equipmentId + ", equipmentType=" + equipmentType + ", equipmentCode=" + equipmentCode 
+				+ ", equipmentBrandId=" + equipmentBrandId + ", equipmentBrand=" + equipmentBrand + ", equipmentBrandName=" + equipmentBrandName 
+				+ ", equipmentCategoryId=" + equipmentCategoryId + ", equipmentCategory=" + equipmentCategory 
+				+ ", equipmentCategoryName=" + equipmentCategoryName + ", equipmentSerialId=" + equipmentSerialId 
+				+ ", equipmentSerial=" + equipmentSerial + ", equipmentModel=" + equipmentModel + ", equipmentName=" + equipmentName 
+				+ ", equipmentDescription=" + equipmentDescription + ", equipmentReference=" + equipmentReference 
+				+ ", productRegistrationId=" + productRegistrationId + ", equipmentAttributes=" + equipmentAttributes 
+				+ ", equipmentOwner=" + equipmentOwner + "]";
 	}
 
 	@Override
@@ -345,9 +407,5 @@ public class InspectionFormEquipment extends MizeSceEntity implements Comparable
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
-	
-	
-	
 	
 }
