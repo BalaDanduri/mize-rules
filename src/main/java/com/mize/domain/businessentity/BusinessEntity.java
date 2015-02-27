@@ -69,12 +69,10 @@ public class BusinessEntity extends MizeSceEntityAudit implements Comparable<Bus
 	private List<BusinessEntityBrand> beBrand = new ArrayList<BusinessEntityBrand>();
 	private List<BusinessEntityContact> beContact = new ArrayList<BusinessEntityContact>();
 	private BusinessEntityAttribute beAttribute;
-	@CachedEntity
 	private List<BusinessEntityRelation> relatedEntities = new ArrayList<BusinessEntityRelation>();
 	@CachedEntity
 	private List<BusinessEntityServiceLink> beServiceLinks = new ArrayList<BusinessEntityServiceLink>();
 	private List<BusinessEntityServiceRate> beServiceRates = new ArrayList<BusinessEntityServiceRate>();
-	@CachedEntity
 	private BusinessEntityRelation customerEntityRelation;
 	private String referenceNumber;
 	

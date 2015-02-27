@@ -42,7 +42,6 @@ public class UserBE extends MizeSceEntityAudit implements Comparable<UserBE>{
 	private String jobRole;
 	private String department;
 	private Set<Brand> brands;
-	@CachedEntity
 	private User user;
 	@CachedEntity
 	private BusinessEntity be;
