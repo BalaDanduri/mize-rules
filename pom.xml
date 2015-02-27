@@ -26,6 +26,7 @@
 		<jackson-datatype-joda-version>2.4.1</jackson-datatype-joda-version>
 		<hibernate-ehcache.version>4.2.7.Final</hibernate-ehcache.version>
 		<ehcache.version>2.6.7</ehcache.version>
+		<org-reflections-version>0.9.9</org-reflections-version>
 	</properties>
 	<distributionManagement>
 		<repository>
@@ -50,6 +51,11 @@
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
 			<version>${joda-time-version}</version>
+		</dependency>
+		<dependency>
+    		<groupId>org.reflections</groupId>
+    		<artifactId>reflections</artifactId>
+    		<version>${org-reflections-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.guava</groupId>
