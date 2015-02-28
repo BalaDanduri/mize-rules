@@ -1,11 +1,17 @@
 package com.mize.domain.datetime;
 
+import javax.persistence.MappedSuperclass;
+
+import org.hibernate.annotations.TypeDef;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.ISODateTimeFormat;
 
+import com.mize.domain.jpa.DateJPA;
 import com.mize.domain.util.MizeDateTimeUtils;
 
+@TypeDef(name = "date", defaultForType = Date.class, typeClass = DateJPA.class)
+@MappedSuperclass
 public class Date implements IDateTime, Comparable<Date>, Cloneable{
 	
 	private static final long serialVersionUID = 7257173124058180557L;

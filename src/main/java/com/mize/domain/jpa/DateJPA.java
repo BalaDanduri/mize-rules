@@ -1,4 +1,4 @@
-package com.mize.domain.datetime;
+package com.mize.domain.jpa;
 
 import java.io.Serializable;
 import java.sql.PreparedStatement;
@@ -11,6 +11,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SessionImplementor;
 import org.hibernate.usertype.UserType;
 
+import com.mize.domain.datetime.Date;
 import com.mize.domain.util.MizeDateTimeUtils;
 
 public class DateJPA implements UserType {
@@ -56,8 +57,8 @@ public class DateJPA implements UserType {
 	}
 
 	@Override
-	public Class<DateTime> returnedClass() {		
-		return DateTime.class;
+	public Class<Date> returnedClass() {		
+		return Date.class;
 	}
 
 	@Override
@@ -80,7 +81,7 @@ public class DateJPA implements UserType {
 	public void nullSafeSet(PreparedStatement st, Object value, int index, SessionImplementor session) throws HibernateException, SQLException {
 		String dateValue = null;
 		if(value != null){
-			DateTime dateTime = (DateTime)value;
+			Date dateTime = (Date)value;
 			if(dateTime != null){
 				dateValue = MizeDateTimeUtils.getDBDateTime(dateTime.getBaseValue());
 			}

@@ -1,18 +1,19 @@
-package com.mize.domain.datetime;
+package com.mize.domain.jpa;
 import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.sql.Types;
 
 import org.hibernate.HibernateException;
+import org.hibernate.annotations.TypeDef;
 import org.hibernate.engine.spi.SessionImplementor;
 import org.hibernate.usertype.UserType;
 
-import com.mize.domain.util.MizeDateTimeUtils;
+import com.mize.domain.common.BigDecimal;
 
-public class DateTimeJPA implements UserType {
+@TypeDef(name = "bigDecimal", defaultForType = BigDecimal.class, typeClass = BigDecimalJPA.class)
+public class BigDecimalJPA implements UserType {
 		
 	@Override
 	public Object assemble(Serializable arg0, Object arg1) throws HibernateException {
@@ -55,8 +56,8 @@ public class DateTimeJPA implements UserType {
 	}
 
 	@Override
-	public Class<DateTime> returnedClass() {		
-		return DateTime.class;
+	public Class<BigDecimal> returnedClass() {		
+		return BigDecimal.class;
 	}
 
 	@Override
@@ -66,25 +67,24 @@ public class DateTimeJPA implements UserType {
 
 	@Override
 	public Object nullSafeGet(ResultSet rs, String[] names,SessionImplementor session, Object owner) throws HibernateException, SQLException {
-		Timestamp timestamp = rs.getTimestamp(names[0]);
+		java.math.BigDecimal baseValue = rs.getBigDecimal(names[0]);
 		if (rs.wasNull()) {
 			return null;
 		}
-		String dateTimeValue =  MizeDateTimeUtils.getMizeDateTimeAsString(timestamp);
-		DateTime dateTime = DateTime.getInstance(dateTimeValue, MizeDateTimeUtils.getDateTimeFormat(), MizeDateTimeUtils.getDefaultDateTimeZone());
-		return dateTime;
+		BigDecimal bigDecimal = BigDecimal.getInstance(baseValue);
+		return bigDecimal;
 	}
 
 	@Override
 	public void nullSafeSet(PreparedStatement st, Object value, int index,SessionImplementor session) throws HibernateException, SQLException {
-		String dateTimeValue = null;
+		java.math.BigDecimal baseValue = null;
 		if(value != null){
-			DateTime dateTime = (DateTime)value;
-			if(dateTime != null){
-				dateTimeValue = MizeDateTimeUtils.getDBDateTime(dateTime.getBaseValue());
+			BigDecimal bigDecimal = (BigDecimal)value;
+			if(bigDecimal != null){
+				baseValue = bigDecimal.getBaseValue();
 			}
 		}
-		st.setString(index, dateTimeValue);
+		st.setBigDecimal(index, baseValue);
 	}
 
 }

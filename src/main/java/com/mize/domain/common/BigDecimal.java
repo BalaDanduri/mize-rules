@@ -2,6 +2,12 @@ package com.mize.domain.common;
 
 import java.text.DecimalFormat;
 
+import javax.persistence.MappedSuperclass;
+
+import org.hibernate.annotations.TypeDef;
+
+@TypeDef(name = "bigDecimal", defaultForType = BigDecimal.class, typeClass = BigDecimalJPA.class)
+@MappedSuperclass
 public class BigDecimal implements Comparable<BigDecimal>{
 	
 	private java.math.BigDecimal baseValue;
