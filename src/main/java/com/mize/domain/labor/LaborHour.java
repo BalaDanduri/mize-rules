@@ -124,6 +124,7 @@ public class LaborHour extends MizeSceEntityAudit implements Comparable<LaborHou
 
 	@Column(name = "start_date", nullable = true)
 	//@Type(type="dateTime")
+	@Type(type="com.mize.domain.datetime.DateTimeJPA")
 	public DateTime getStartDate() {
 		return startDate;
 	}
@@ -133,7 +134,7 @@ public class LaborHour extends MizeSceEntityAudit implements Comparable<LaborHou
 	}
 
 	@Column(name = "end_date", nullable = true)
-	//@Type(type="com.mize.domain.datetime.DateTimeJPA")
+	@Type(type="com.mize.domain.datetime.DateTimeJPA")
 	public DateTime getEndDate() {
 		return endDate;
 	}
