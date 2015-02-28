@@ -32,6 +32,11 @@ import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.datetime.DateTime;
 import com.mize.domain.util.JPASerializer;
 
+/*@TypeDef(
+        name = "dateTime",
+        defaultForType = com.mize.domain.datetime.DateTime.class,
+        typeClass = com.mize.domain.datetime.DateTimeJPA.class
+)*/
 @Entity
 @Inheritance
 @DiscriminatorColumn(name = "discriminator")

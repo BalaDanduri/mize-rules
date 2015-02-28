@@ -722,7 +722,7 @@ public final class Formatter {
 	
 	// remove corresponding MizeDateTime method
 	public static int compareDates(com.mize.domain.datetime.DateTime startTime, com.mize.domain.datetime.DateTime endTime){
-		if(startTime != null && startTime.getDateTime() != null && endTime != null && endTime.getDateTime() != null){
+		if(startTime != null && startTime.getBaseValue() != null && endTime != null && endTime.getBaseValue() != null){
 			return startTime.compareTo(endTime);
 		}
 		return 0;
@@ -1027,7 +1027,7 @@ public final class Formatter {
 	 // remove corresponding MizeDateTime method
 	 public static DateTime toDateTime(com.mize.domain.datetime.DateTime dateTime){
 		 if(dateTime !=null){
-			 return dateTime.getDateTime();
+			 return dateTime.getBaseValue();
 		 }
 		 return null;
 	 }

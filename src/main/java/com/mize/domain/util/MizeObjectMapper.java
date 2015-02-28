@@ -139,6 +139,7 @@ public class MizeObjectMapper extends ObjectMapper {
 		}
 	}
 	
+	@Deprecated
 	public class DateTimeDeserializer extends JsonDeserializer<DateTime> {
 		@Override
 		public DateTime deserialize(JsonParser parser,DeserializationContext context) throws IOException, JsonProcessingException {
@@ -187,6 +188,7 @@ public class MizeObjectMapper extends ObjectMapper {
 		}
 	}
 	
+	@Deprecated
 	public class DateTimeSerializer extends JsonSerializer<DateTime> {
 		@Override
 		public void serialize(DateTime date, JsonGenerator gen, SerializerProvider provider) throws IOException, JsonProcessingException {

@@ -82,7 +82,7 @@ public class DateJPA implements UserType {
 		if(value != null){
 			DateTime dateTime = (DateTime)value;
 			if(dateTime != null){
-				dateValue = MizeDateTimeUtils.getDBDateTime(dateTime.getDateTime());
+				dateValue = MizeDateTimeUtils.getDBDateTime(dateTime.getBaseValue());
 			}
 		}
 		st.setString(index, dateValue);

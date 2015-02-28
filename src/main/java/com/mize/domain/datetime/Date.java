@@ -11,7 +11,7 @@ public class Date implements IDateTime, Comparable<Date>, Cloneable{
 	private static final long serialVersionUID = 7257173124058180557L;
 	private String dateFormat;
 	private String dateValue;
-	private org.joda.time.DateTime dateTime;
+	private org.joda.time.DateTime baseValue;
 	private DateTimeZone dateTimeZone;
 	private boolean isValid;
 	
@@ -27,8 +27,8 @@ public class Date implements IDateTime, Comparable<Date>, Cloneable{
 	public void setDateValue(String dateValue) {
 		this.dateValue = dateValue;
 	}
-	public org.joda.time.DateTime getDateTime() {
-		return dateTime;
+	public org.joda.time.DateTime getBaseValue() {
+		return baseValue;
 	}
 	
 	public boolean isValid() {
@@ -48,9 +48,9 @@ public class Date implements IDateTime, Comparable<Date>, Cloneable{
 		return new Date();
 	}
 	
-	public static Date getInstance(org.joda.time.DateTime dateTime){
-		if(dateTime != null){
-			return new Date(dateTime);
+	public static Date getInstance(org.joda.time.DateTime baseValue){
+		if(baseValue != null){
+			return new Date(baseValue);
 		}else{
 			return null;
 		}
@@ -73,7 +73,7 @@ public class Date implements IDateTime, Comparable<Date>, Cloneable{
 		try{		
 			this.dateValue = dateValue;
 			this.dateFormat = dateFormat;
-			this.dateTime = org.joda.time.DateTime.parse(dateValue,DateTimeFormat.forPattern(dateFormat).withZone(timeZone));	
+			this.baseValue = org.joda.time.DateTime.parse(dateValue,DateTimeFormat.forPattern(dateFormat).withZone(timeZone));	
 			this.dateTimeZone = timeZone;
 			this.isValid = true;
 		}catch(Exception e){
@@ -88,31 +88,30 @@ public class Date implements IDateTime, Comparable<Date>, Cloneable{
 		try{		
 			this.dateFormat = dateFormat;
 			if(millis == null || millis.longValue() == 0){
-				this.dateTime = new org.joda.time.DateTime(org.joda.time.DateTime.now().getMillis(),timeZone);
+				this.baseValue = new org.joda.time.DateTime(org.joda.time.DateTime.now().getMillis(),timeZone);
 			}else{
-				this.dateTime = new org.joda.time.DateTime(millis,timeZone);
+				this.baseValue = new org.joda.time.DateTime(millis,timeZone);
 			}
-			this.dateValue = DateTimeFormat.forPattern(dateFormat).print(this.dateTime);
-			this.dateTime = org.joda.time.DateTime.parse(this.dateValue,DateTimeFormat.forPattern(dateFormat).withZone(timeZone));	
+			this.dateValue = DateTimeFormat.forPattern(dateFormat).print(this.baseValue);
+			this.baseValue = org.joda.time.DateTime.parse(this.dateValue,DateTimeFormat.forPattern(dateFormat).withZone(timeZone));	
 			this.dateTimeZone = timeZone;
 			this.isValid = true;
 		}catch(Exception e){
 		}
 	}
 	
-	public Date(org.joda.time.DateTime dateTime) {
-		this.dateTime = dateTime;
+	public Date(org.joda.time.DateTime baseValue) {
+		this.baseValue = baseValue;
 		this.isValid = true;
+		this.dateTimeZone = DateTimeZone.getDefault();	
 	}
 		
 	public Date() {
-		this.dateTime = new org.joda.time.DateTime();
-		this.isValid = true;
-		this.dateTimeZone = DateTimeZone.getDefault();				
+		this(new org.joda.time.DateTime());				
 	}	
 	
-	public int compareTo(Date mizeDateTime) {
-		return dateTime.compareTo(mizeDateTime.getDateTime());
+	public int compareTo(Date date) {
+		return baseValue.compareTo(date.baseValue);
 	}
 	
 	public Date(long millis) {
@@ -128,51 +127,51 @@ public class Date implements IDateTime, Comparable<Date>, Cloneable{
 	}
 
 	public Date nextDay(){
-		return createNewMizeDate(this.dateTime.plusDays(1));
+		return createNewDate(this.baseValue.plusDays(1));
 	}
 	
 	public Date plusDays(int days){
-		return createNewMizeDate(this.dateTime.plusDays(days));
+		return createNewDate(this.baseValue.plusDays(days));
 	}
 	
 	public Date minusMonths(int months){
-		return createNewMizeDate(this.dateTime.minusMonths(months));
+		return createNewDate(this.baseValue.minusMonths(months));
 	}
 	
 	public Date plusMonths(int months){
-		return createNewMizeDate(this.dateTime.plusMonths(months));
+		return createNewDate(this.baseValue.plusMonths(months));
 	}
 	
 	public Date addYears(int years){
-		return createNewMizeDate(this.dateTime.plusYears(years));
+		return createNewDate(this.baseValue.plusYears(years));
 	}
 	
 	public Date minusYears(int years){
-		return createNewMizeDate(this.dateTime.minusYears(years));
+		return createNewDate(this.baseValue.minusYears(years));
 	}
 	
 	public Date minusDays(int days){
-		return createNewMizeDate(this.dateTime.minusDays(days));
+		return createNewDate(this.baseValue.minusDays(days));
 	}
 	
 	public Date previousDay(){
-		return createNewMizeDate(this.dateTime.minusDays(1));
+		return createNewDate(this.baseValue.minusDays(1));
 	}	
 	
-	public Date createNewMizeDate(org.joda.time.DateTime dateTime){
-		Date mizeDate = new Date(dateTime);
-		mizeDate.dateTime = dateTime;
-		mizeDate.dateFormat = this.dateFormat;
-		mizeDate.dateValue = toString(this.dateFormat,this.dateTimeZone);
-		mizeDate.dateTimeZone = this.dateTimeZone;
-		mizeDate.isValid = this.isValid;
-		return mizeDate;
+	public Date createNewDate(org.joda.time.DateTime baseValue){
+		Date date = new Date(baseValue);
+		date.baseValue = baseValue;
+		date.dateFormat = this.dateFormat;
+		date.dateValue = toString(this.dateFormat,this.dateTimeZone);
+		date.dateTimeZone = this.dateTimeZone;
+		date.isValid = this.isValid;
+		return date;
 	}
 	
 	public boolean equals(Object object){
-		Date mizeDateTime = (Date)object;
-		if(this.isValid && mizeDateTime.isValid){
-			return this.dateTime.equals(mizeDateTime.getDateTime());
+		Date other = (Date)object;
+		if(this.isValid && other != null && other.isValid){
+			return this.baseValue.equals(other.baseValue);
 		}else{
 			return true;
 		}
@@ -180,24 +179,24 @@ public class Date implements IDateTime, Comparable<Date>, Cloneable{
 	
 	public String toString(String dateFormat, DateTimeZone dateTimeZone){	
 		if(dateTimeZone == null){
-			return DateTimeFormat.forPattern(dateFormat).print(this.dateTime);
+			return DateTimeFormat.forPattern(dateFormat).print(this.baseValue);
 		}else{
-			return DateTimeFormat.forPattern(dateFormat).withZone(dateTimeZone).print(this.dateTime);
+			return DateTimeFormat.forPattern(dateFormat).withZone(dateTimeZone).print(this.baseValue);
 		}
 	}
 	
 	public Object clone() {
-		return new Date(dateTime.getMillis());
+		return new Date(baseValue.getMillis());
 	}
 	
 	public long getMillis() {
-		return dateTime.getMillis();
+		return baseValue.getMillis();
 	}
 	
 	@Override
 	public String toString() {
-		if(this.dateTime != null){
-			return ISODateTimeFormat.dateTime().print(this.dateTime);
+		if(this.baseValue != null){
+			return ISODateTimeFormat.dateTime().print(this.baseValue);
 		}else{
 			return this.dateValue;
 		}
@@ -205,12 +204,12 @@ public class Date implements IDateTime, Comparable<Date>, Cloneable{
 	
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		final int prime = 31*13;
 		int result = 1;
 		result = prime * result
 				+ ((dateFormat == null) ? 0 : dateFormat.hashCode());
 		result = prime * result
-				+ ((dateTime == null) ? 0 : dateTime.hashCode());
+				+ ((baseValue == null) ? 0 : baseValue.hashCode());
 		result = prime * result
 				+ ((dateValue == null) ? 0 : dateValue.hashCode());
 		return result;
