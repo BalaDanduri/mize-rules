@@ -1,4 +1,4 @@
-@MappedSuperclass // HACK TO CAUSE HIBERNATE TO NOTICE THESE TYPE DEFS
+@MappedSuperclass 
 @TypeDefs(
 		{
 			@TypeDef(
