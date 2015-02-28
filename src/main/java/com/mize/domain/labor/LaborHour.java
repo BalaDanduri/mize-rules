@@ -32,11 +32,6 @@ import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.datetime.DateTime;
 import com.mize.domain.util.JPASerializer;
 
-/*@TypeDef(
-        name = "dateTime",
-        defaultForType = com.mize.domain.datetime.DateTime.class,
-        typeClass = com.mize.domain.datetime.DateTimeJPA.class
-)*/
 @Entity
 @Inheritance
 @DiscriminatorColumn(name = "discriminator")
@@ -128,7 +123,7 @@ public class LaborHour extends MizeSceEntityAudit implements Comparable<LaborHou
 	}
 
 	@Column(name = "start_date", nullable = true)
-	@Type(type="com.mize.domain.datetime.DateTimeJPA")
+	//@Type(type="dateTime")
 	public DateTime getStartDate() {
 		return startDate;
 	}
@@ -138,7 +133,7 @@ public class LaborHour extends MizeSceEntityAudit implements Comparable<LaborHou
 	}
 
 	@Column(name = "end_date", nullable = true)
-	@Type(type="com.mize.domain.datetime.DateTimeJPA")
+	//@Type(type="com.mize.domain.datetime.DateTimeJPA")
 	public DateTime getEndDate() {
 		return endDate;
 	}

@@ -1,3 +1,4 @@
+@MappedSuperclass
 @TypeDefs(
 		{
 			@TypeDef(
@@ -9,7 +10,9 @@
 		)
 	
   
-package com.mize.domain.datetime;
+package com.mize.domain;
+import javax.persistence.MappedSuperclass;
+
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
 
