@@ -9,7 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -29,7 +31,6 @@ public class UserBrandMapping extends MizeSceEntityAudit implements Comparable<U
 	private User user;
 	private Brand brand;
 	private String isActive;
-	private Brand userBrand;
 	private String isDefault;
 	
 	public UserBrandMapping(User user,Brand brand,String isActive) {
@@ -70,11 +71,11 @@ public class UserBrandMapping extends MizeSceEntityAudit implements Comparable<U
 		this.user = user;
 	}
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
+	@Fetch(FetchMode.SELECT)
 	@JoinColumn(name="brand_id")
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
-	@JsonBackReference(value="brand_userbrandMapping")
 	public Brand getBrand() {
 		return brand;
 	}
@@ -91,17 +92,7 @@ public class UserBrandMapping extends MizeSceEntityAudit implements Comparable<U
 	public void setIsActive(String isActive) {
 		this.isActive = isActive;
 	}
-
 	
-	@Transient
-	public Brand getUserBrand() {
-		return userBrand;
-	}
-
-	public void setUserBrand(Brand userBrand) {
-		this.userBrand = userBrand;
-	}	
-
 	@Column(name="is_default")
 	public String getIsDefault() {
 		return isDefault;

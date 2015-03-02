@@ -20,6 +20,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -47,7 +48,6 @@ public class Brand extends MizeSceEntityAudit implements Comparable<Brand>{
 	private List<BrandFeed> brandFeeds = new ArrayList<BrandFeed>();
 	private String searchType;
 	private String code;
-	@Transient
 	private User user;
 	private Long tenantId;
 	private String isActive;
@@ -220,6 +220,7 @@ public class Brand extends MizeSceEntityAudit implements Comparable<Brand>{
 	}
 	
 	@Transient
+	@JsonIgnore
 	public User getUser() {
 		return user;
 	}
