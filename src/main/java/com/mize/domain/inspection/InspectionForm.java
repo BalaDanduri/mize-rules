@@ -36,6 +36,7 @@ import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.MizeDate;
 import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.util.TenantSerializer;
 
 @Entity
 @Inheritance
@@ -97,7 +98,7 @@ public class InspectionForm extends MizeSceEntityAudit implements Comparable<Ins
 
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="tenant_id")
-	@JsonSerialize(using=JPASerializer.class)
+	@JsonSerialize(using=TenantSerializer.class)
 	@JsonInclude(Include.NON_NULL)
 	public BusinessEntity getTenant() {
 		return tenant;
@@ -222,9 +223,7 @@ public class InspectionForm extends MizeSceEntityAudit implements Comparable<Ins
 	}
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "inspectionForm" , orphanRemoval = true)
-	@JsonSerialize(using=JPASerializer.class)
-	@JsonManagedReference(value="insp_form_messages")
-	@JsonInclude(Include.NON_EMPTY)
+	@JsonIgnore
 	public List<InspectionFormMessage> getMessages() {
 		return messages;
 	}
@@ -246,6 +245,7 @@ public class InspectionForm extends MizeSceEntityAudit implements Comparable<Ins
 	}
 
 	@Transient
+	@JsonIgnore
 	public User getUser() {
 		return user;
 	}

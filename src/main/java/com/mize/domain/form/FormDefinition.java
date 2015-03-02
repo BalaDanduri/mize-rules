@@ -33,6 +33,7 @@ import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.form.link.FormDefinitionLink;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.MizeDate;
+import com.mize.domain.util.TenantSerializer;
 
 @Entity
 @Inheritance
@@ -112,8 +113,10 @@ public class FormDefinition extends MizeSceEntityAudit implements Comparable<For
 		this.formTemplateDefinition = formTemplateDefinition;
 	}
 
-	@OneToOne()
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "tenant_id")
+	@JsonSerialize(using = TenantSerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public BusinessEntity getTenant() {
 		return tenant;
 	}
@@ -282,6 +285,7 @@ public class FormDefinition extends MizeSceEntityAudit implements Comparable<For
 	}
 
 	@Transient
+	@JsonIgnore
 	public User getUser() {
 		return user;
 	}
