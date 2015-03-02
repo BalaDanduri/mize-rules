@@ -6,13 +6,11 @@ import java.sql.SQLException;
 import java.sql.Types;
 
 import org.hibernate.HibernateException;
-import org.hibernate.annotations.TypeDef;
 import org.hibernate.engine.spi.SessionImplementor;
 import org.hibernate.usertype.UserType;
 
 import com.mize.domain.common.BigDecimal;
 
-@TypeDef(name = "bigDecimal", defaultForType = BigDecimal.class, typeClass = BigDecimalJPA.class)
 public class BigDecimalJPA implements UserType {
 		
 	@Override
