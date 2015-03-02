@@ -17,9 +17,12 @@ import javax.persistence.Inheritance;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -29,10 +32,12 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityComment;
+import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.MizeDate;
+import com.mize.domain.util.TenantSerializer;
 
 @Entity
 @Inheritance
@@ -91,6 +96,8 @@ public class ShipmentTracking extends MizeSceEntityAudit implements Comparable<S
 	private List<ShipmentTrackingAttachment> attachments = new ArrayList<ShipmentTrackingAttachment>();
 	private ShipmentSpecialOptions specialOptions;
 	private String specialOptionsValue;
+	private Locale locale;
+	
 	public ShipmentTracking(){
 		super();
 	}
@@ -109,7 +116,7 @@ public class ShipmentTracking extends MizeSceEntityAudit implements Comparable<S
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JsonSerialize(using=JPASerializer.class)
+	@JsonSerialize(using=TenantSerializer.class)
 	@JsonInclude(Include.NON_DEFAULT)
 	@JoinColumn(name = "tenant_id")
 	public BusinessEntity getTenant() {
@@ -378,6 +385,7 @@ public class ShipmentTracking extends MizeSceEntityAudit implements Comparable<S
 	}
 
 	@Transient
+	@JsonIgnore
 	public User getUser() {
 		return user;
 	}
@@ -730,6 +738,17 @@ public class ShipmentTracking extends MizeSceEntityAudit implements Comparable<S
 		} else if (!trackingNumber.equals(other.trackingNumber))
 			return false;
 		return true;
+	}
+
+	@OneToOne(fetch = FetchType.EAGER)
+	@Fetch(FetchMode.SELECT)
+	@JoinColumn(name = "locale_id")
+	public Locale getLocale() {
+		return locale;
+	}
+
+	public void setLocale(Locale locale) {
+		this.locale = locale;
 	}
 
 }
