@@ -27,6 +27,7 @@ import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.JPASerializer;
+import com.mize.domain.util.TenantSerializer;
 
 
 /**
@@ -120,7 +121,7 @@ public class ServiceEntity extends MizeSceEntityAudit implements Comparable<Serv
 	
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="tenant_id")
-	@JsonSerialize(using=JPASerializer.class)
+	@JsonSerialize(using=TenantSerializer.class)
 	@JsonInclude(Include.NON_NULL)
 	public BusinessEntity getTenant() {
 		return tenant;

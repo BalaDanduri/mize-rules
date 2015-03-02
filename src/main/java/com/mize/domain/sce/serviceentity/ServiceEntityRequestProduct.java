@@ -42,7 +42,11 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 	private Long prodRegnId;
 	private String productName;
 	private String model;
+	private Long brandId;
+	private String brandCode;
 	private String brandName;
+	private Long categoryId;
+	private String categoryCode;
 	private String categoryName;
 	private String serialNumber;
 	private Long customerId;
@@ -301,6 +305,38 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 
 	public void setRegistrationDate(MizeDate registrationDate) {
 		this.registrationDate = registrationDate;
+	}
+	@Column(name = "brand_id")
+	public Long getBrandId() {
+		return brandId;
+	}
+
+	public void setBrandId(Long brandId) {
+		this.brandId = brandId;
+	}
+	@Column(name = "brand_code")
+	public String getBrandCode() {
+		return brandCode;
+	}
+
+	public void setBrandCode(String brandCode) {
+		this.brandCode = brandCode;
+	}
+	@Column(name = "prod_cat_id")
+	public Long getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
+	}
+	@Column(name = "prod_cat_code")
+	public String getCategoryCode() {
+		return categoryCode;
+	}
+
+	public void setCategoryCode(String categoryCode) {
+		this.categoryCode = categoryCode;
 	}
 
 	@Override
