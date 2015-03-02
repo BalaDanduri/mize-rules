@@ -248,6 +248,11 @@ public final class Formatter {
 		return (mizeDateTime == null ? null : mizeDateTime.getDateTime().toString(DATE_FORMAT3));
 	}
 	
+	// remove public static String getDateTimeFormat(MizeDateTime mizeDateTime)
+	public static String getDateTimeFormat(com.mize.domain.datetime.DateTime dateTime){
+		return (dateTime == null ? null : dateTime.getBaseValue().toString(DATE_FORMAT3));
+	}
+	
 	public static String formStringInClause(List<String> list){
 		StringBuffer sb = new StringBuffer(EMPTY);
 		if(list == null)
@@ -567,6 +572,23 @@ public final class Formatter {
 		}
 		return 0;	
 	}
+	
+	// remove public static int daysDiff(MizeDateTime time1,MizeDateTime time2)
+	public static int daysDiff(com.mize.domain.datetime.DateTime time1, com.mize.domain.datetime.DateTime time2){
+		if(time1 != null && time2 != null){
+			return time1.compareTo(time2);
+		}
+		return 0;	
+	}
+	
+	//remove public static int daysDiff(MizeDate time1,MizeDate time2)
+	public static int daysDiff(Date time1, Date time2){
+		if(time1 != null && time2 != null){
+			return time1.compareTo(time2);
+		}
+		return 0;	
+	}
+	
 	public static int daysBetween(DateTime startDate , DateTime endDate){
 		if(startDate != null && endDate != null){
 			return Days.daysBetween(startDate, endDate).getDays();
@@ -581,9 +603,25 @@ public final class Formatter {
 		return 0;		
 	}
 	
+	// public static int daysBetween(MizeDateTime startDate , MizeDateTime endDate)
+	public static int daysBetween(com.mize.domain.datetime.DateTime startDate , com.mize.domain.datetime.DateTime endDate){
+		if(startDate != null && endDate != null){
+			return Days.daysBetween(startDate.getBaseValue(), endDate.getBaseValue()).getDays();
+		}
+		return 0;		
+	}
+	
 	public static int daysBetween(MizeDate startDate , MizeDate endDate){
 		if(startDate != null && endDate != null){
 			return Days.daysBetween(startDate.getDateTime(), endDate.getDateTime()).getDays();
+		}
+		return 0;		
+	}
+	
+	// public static int daysBetween(MizeDate startDate , MizeDate endDate)
+	public static int daysBetween(com.mize.domain.datetime.Date startDate , com.mize.domain.datetime.Date endDate){
+		if(startDate != null && endDate != null){
+			return Days.daysBetween(startDate.getBaseValue(), endDate.getBaseValue()).getDays();
 		}
 		return 0;		
 	}
@@ -613,14 +651,14 @@ public final class Formatter {
 		if(intVal == null){
 			return EMPTY;
 		}else {
-			return EMPTY+intValue(intVal);
+			return EMPTY+intVal.intValue();
 		}
 	}
 	public static String toString(Long longVal){
 		if(longVal == null){
 			return EMPTY;
 		}else {
-			return EMPTY+longValue(longVal);
+			return EMPTY+longVal.longValue();
 		}
 	}
 	
@@ -628,7 +666,7 @@ public final class Formatter {
 		if(doubleVal == null){
 			return EMPTY;
 		}else {
-			return EMPTY+doubleValue(doubleVal);
+			return EMPTY+doubleVal.doubleValue();
 		}
 	}
 	
@@ -921,6 +959,25 @@ public final class Formatter {
 		return (inputDate.compareTo(startDate) >= 0 && inputDate.compareTo(endDate) <= 0);
 	}
 	
+	//public static boolean inBetween(MizeDateTime startTime,MizeDateTime endTime , MizeDateTime inputTime)
+	public static boolean inBetween(com.mize.domain.datetime.DateTime startTime,com.mize.domain.datetime.DateTime endTime , com.mize.domain.datetime.DateTime inputTime){
+		if(startTime == null && endTime == null && inputTime == null){
+			return true;
+		}
+		return inBetween(startTime.getBaseValue(), endTime.getBaseValue(), inputTime.getBaseValue());
+	}
+
+	//public static boolean inBetween(MizeDate startDate,MizeDate endDate , MizeDate inputDate)
+	public static boolean inBetween(com.mize.domain.datetime.Date startDate, com.mize.domain.datetime.Date endDate , com.mize.domain.datetime.Date inputDate){
+		if(startDate == null && endDate == null && inputDate == null){
+			return true;
+		}
+		if(startDate == null || endDate == null || inputDate == null){
+			return false;
+		}
+		return (inputDate.compareTo(startDate) >= 0 && inputDate.compareTo(endDate) <= 0);
+	}
+	
 	public static double formattedBigDecimal(BigDecimal value) {
 		if(value == null){
 			value = BigDecimal.ZERO;
@@ -990,6 +1047,7 @@ public final class Formatter {
 		 return result.toString();
 	 }
 	 
+	 @Deprecated
 	 public static MizeDateTime toMizeDateTime(MizeDate dateTime){
 		 if(dateTime != null){
 			 return new MizeDateTime(dateTime.getDateTime());
@@ -997,6 +1055,7 @@ public final class Formatter {
 		 return null;
 	 }
 	 
+	 @Deprecated
 	 public static MizeDate toMizeDate(MizeDateTime dateTime){
 		 if(dateTime != null){
 			 return new MizeDate(dateTime.getDateTime());
@@ -1011,6 +1070,16 @@ public final class Formatter {
 		 return dateTime!= null? new MizeDate(dateTime) :null;
 	 }
 	 
+	 //public static MizeDate convertMizeDateTimeToMizeDate(MizeDateTime mizeDateTime)
+	 public static com.mize.domain.datetime.Date convertMizeDateTimeToMizeDate(com.mize.domain.datetime.DateTime dateTime){
+		 com.mize.domain.datetime.Date date = dateTime != null ? new com.mize.domain.datetime.Date(new DateTime(dateTime.getMillis())) :null;
+		 DateTime dateTime1 = date != null ? date.getBaseValue() :null; 
+		 dateTime1 = dateTime1!= null ? dateTime1.withTime(0, 0, 0, 0):null;
+		 return dateTime1!= null ? new com.mize.domain.datetime.Date(dateTime1) :null;
+	 }
+	 
+	 @Deprecated
+	 // use DateTimeUtils.currentDate
 	 public static MizeDate toMizeDate(DateTime dateTime){
 		 if(dateTime != null){
 			 return new MizeDate(dateTime);
@@ -1018,6 +1087,7 @@ public final class Formatter {
 		 return null;
 	 }
 	 
+	 @Deprecated
 	 public static DateTime toDateTime(MizeDateTime mizeDateTime){
 		 if(mizeDateTime !=null){
 			 return mizeDateTime.getDateTime();
@@ -1035,6 +1105,13 @@ public final class Formatter {
 	 public static DateTime toDateTime(MizeDate mizeDate){
 		 if(mizeDate !=null){
 			 return mizeDate.getDateTime();
+		 }
+		 return null;
+	 }
+	 // public static DateTime toDateTime(MizeDate mizeDate)
+	 public static DateTime toDateTime(com.mize.domain.datetime.Date date){
+		 if(date !=null){
+			 return date.getBaseValue();
 		 }
 		 return null;
 	 }
