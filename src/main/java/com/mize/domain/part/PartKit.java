@@ -19,6 +19,7 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.Type;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -28,6 +29,7 @@ import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.MizeDate;
+import com.mize.domain.util.TenantSerializer;
 
 @Entity
 @Table(name = "part_kit")
@@ -157,6 +159,7 @@ public class PartKit extends MizeSceEntityAudit implements Comparable<PartKit>{
 		this.endDate = endDate;
 	}
 	
+	@JsonIgnore
 	@Transient	
 	public User getUser() {
 		return user;
@@ -167,6 +170,7 @@ public class PartKit extends MizeSceEntityAudit implements Comparable<PartKit>{
 	}
 	
 	@Transient
+	@JsonSerialize(using=TenantSerializer.class)
 	public BusinessEntity getTenant() {
 		return tenant;
 	}

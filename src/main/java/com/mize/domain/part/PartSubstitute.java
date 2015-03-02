@@ -18,6 +18,7 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.Type;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -110,6 +111,7 @@ public class PartSubstitute extends MizeSceEntityAudit implements Comparable<Par
 		this.sequenceNo = sequenceNo;
 	}
 
+	@JsonIgnore
 	@Transient
 	public User getUser() {
 		return user;
