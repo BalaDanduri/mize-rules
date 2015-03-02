@@ -39,6 +39,7 @@ import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.util.TenantSerializer;
 
 @Entity
 @Table(name="users")
@@ -132,7 +133,7 @@ public class User extends MizeSceEntityAudit implements Comparable<User> {
 	}
     
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JsonSerialize(using=JPASerializer.class)
+	@JsonSerialize(using = TenantSerializer.class)
 	@JsonInclude(Include.NON_DEFAULT)
 	@JoinColumn(name = "tenant_id")
 	public BusinessEntity getTenant() {
