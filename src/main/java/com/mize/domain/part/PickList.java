@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -26,6 +27,7 @@ import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.JPASerializer;
+import com.mize.domain.util.TenantSerializer;
 
 @Entity
 @Table(name = "picklist")
@@ -111,7 +113,7 @@ public class PickList extends MizeSceEntityAudit implements Comparable<PickList>
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "tenant_id")
-	@JsonSerialize(using=JPASerializer.class)
+	@JsonSerialize(using=TenantSerializer.class)
 	@JsonInclude(Include.NON_NULL)
 	public BusinessEntity getTenant() {
 		return tenant;
@@ -162,6 +164,7 @@ public class PickList extends MizeSceEntityAudit implements Comparable<PickList>
 		this.pickListLocation = pickListLocation;
 	}
 
+	@JsonIgnore
 	@Transient	
 	public User getUser() {
 		return user;

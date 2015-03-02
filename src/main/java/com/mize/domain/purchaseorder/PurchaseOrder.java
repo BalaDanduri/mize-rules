@@ -23,6 +23,7 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -38,6 +39,7 @@ import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.MizeDateTime;
 import com.mize.domain.util.MizeDateTimeUtils;
+import com.mize.domain.util.TenantSerializer;
 
 @Entity
 @Inheritance
@@ -114,7 +116,7 @@ public class PurchaseOrder extends MizeSceEntityAudit implements Comparable<Purc
 		super();
 	}
 	
-	public PurchaseOrder(Long id,String number,String status,String type,String requestType,MizeDateTime createdDate,MizeDateTime updatedDate){
+	public PurchaseOrder(Long id,String number,String status,String type,String requestType,MizeDateTime createdDate,MizeDateTime updatedDate,Locale locale){
 		super();
 		this.id = id;
 		this.number = number;
@@ -123,6 +125,7 @@ public class PurchaseOrder extends MizeSceEntityAudit implements Comparable<Purc
 		this.status = status;	
 		this.createdDate = createdDate;
 		this.updatedDate = updatedDate;
+		this.locale = locale;
 	}
 	
 	public PurchaseOrder(Long id,String number,String status,String type,String requestType,
@@ -176,6 +179,7 @@ public class PurchaseOrder extends MizeSceEntityAudit implements Comparable<Purc
 	}
 
 	@Transient
+	@JsonIgnore
 	public User getUser() {
 		return user;
 	}
@@ -252,7 +256,7 @@ public class PurchaseOrder extends MizeSceEntityAudit implements Comparable<Purc
 	
 	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="tenant_id")
-	@JsonSerialize(using=JPASerializer.class)
+	@JsonSerialize(using=TenantSerializer.class)
 	@JsonInclude(Include.NON_NULL)
 	public BusinessEntity getTenant() {
 		return tenant;
