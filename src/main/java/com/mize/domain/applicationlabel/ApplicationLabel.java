@@ -20,6 +20,7 @@ import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -28,6 +29,7 @@ import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.util.JPASerializer;
+import com.mize.domain.util.TenantSerializer;
 
 @Entity
 @Table(name="application_labels")
@@ -77,7 +79,7 @@ public class ApplicationLabel extends MizeSceEntityAudit  implements Comparable<
 
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="tenant_id")
-	@JsonSerialize(using=JPASerializer.class)
+	@JsonSerialize(using=TenantSerializer.class)
 	@JsonInclude(Include.NON_DEFAULT)
 	public BusinessEntity getTenant() {
 		return tenant;
@@ -147,6 +149,7 @@ public class ApplicationLabel extends MizeSceEntityAudit  implements Comparable<
 	}
 
 	@Transient
+	@JsonIgnore
 	public User getUser() {
 		return user;
 	}

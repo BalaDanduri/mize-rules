@@ -31,6 +31,7 @@ import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.util.JPASerializer;
+import com.mize.domain.util.TenantSerializer;
 
 @Entity
 @Table(name="application_messages")
@@ -264,7 +265,7 @@ public class AppMessage extends MizeSceEntityAudit implements Comparable<AppMess
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="tenant_id")
-	@JsonSerialize(using=JPASerializer.class)
+	@JsonSerialize(using=TenantSerializer.class)
 	@JsonInclude(Include.NON_DEFAULT)
 	public BusinessEntity getTenant() {
 		return tenant;
@@ -284,6 +285,7 @@ public class AppMessage extends MizeSceEntityAudit implements Comparable<AppMess
 	}
 	
 	@Transient
+	@JsonIgnore
 	public User getUser() {
 		return user;
 	}
