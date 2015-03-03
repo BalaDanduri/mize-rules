@@ -326,4 +326,13 @@ public class MizeApplicationProperties implements InitializingBean {
 	public boolean isAllowAddressValidations() {
 		return Boolean.valueOf(getPropertyValue("allowAddressValidations"));
 	}
+	
+	@JsonIgnore
+	public Integer getFormProgressMaxSeverity() {
+		if(getPropertyValue("formProgressMaxSeverity") != null) {
+			return  Integer.valueOf(getPropertyValue("formProgressMaxSeverity"));
+		}else {
+			return null;
+		}
+	}
 }
