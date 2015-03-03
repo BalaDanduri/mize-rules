@@ -24,6 +24,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.util.JPASerializer;
+import com.mize.domain.util.TenantSerializer;
 
 @Entity
 @Table(name="work_queue")
@@ -95,7 +96,7 @@ public class WorkQueue extends MizeSceEntityAudit implements Comparable<WorkQueu
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "tenant_id")
-	@JsonSerialize(using=JPASerializer.class)
+	@JsonSerialize(using=TenantSerializer.class)
 	@JsonInclude(Include.NON_NULL)
 	public BusinessEntity getTenant() {
 		return tenant;
