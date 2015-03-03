@@ -28,6 +28,10 @@ public class BigDecimal implements Comparable<BigDecimal>{
 	public boolean isValid() {
 		return isValid;
 	}
+	
+	public boolean isInValid() {
+		return !isValid();
+	}
 
 	public String getDecimalFormat() {
 		return decimalFormat;

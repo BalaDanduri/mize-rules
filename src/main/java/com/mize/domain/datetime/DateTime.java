@@ -234,6 +234,10 @@ public class DateTime implements IDateTime, Comparable<DateTime>, Cloneable{
 	public boolean isValid() {
 		return isValid;
 	}
+	
+	public boolean isInValid() {
+		return !isValid();
+	}
 		
 	@Override
 	public String toString() {

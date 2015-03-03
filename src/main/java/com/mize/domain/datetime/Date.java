@@ -40,6 +40,11 @@ public class Date implements IDateTime, Comparable<Date>, Cloneable{
 	public boolean isValid() {
 		return isValid;
 	}
+	
+	public boolean isInValid() {
+		return !isValid();
+	}
+	
 	public DateTimeZone getDateTimeZone() {
 		return dateTimeZone;
 	}
