@@ -30,6 +30,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.util.JPASerializer;
+import com.mize.domain.util.TenantSerializer;
 
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, include="all")
@@ -259,7 +260,7 @@ public class Country extends MizeSceEntityAudit implements Comparable<Country>{
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JsonSerialize(using=JPASerializer.class)
+	@JsonSerialize(using=TenantSerializer.class)
 	@JsonInclude(Include.NON_DEFAULT)
 	@JoinColumn(name = "tenant_id")
 	public BusinessEntity getTenant() {
