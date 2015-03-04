@@ -12,7 +12,7 @@ public class ApplicationFormatCache implements Serializable, Comparable<Applicat
 	private String isActive;
 	private String formatTypeName;
 	private Long id;
-	private String isRegEXp;
+	private String regExp;
 
 	public ApplicationFormatCache() {
 	}
@@ -81,12 +81,12 @@ public class ApplicationFormatCache implements Serializable, Comparable<Applicat
 		this.formatTypeName = formatTypeName;
 	}
 
-	public String getIsRegEXp() {
-		return isRegEXp;
+	public String getRegEXp() {
+		return regExp;
 	}
 
-	public void setIsRegEXp(String isRegEXp) {
-		this.isRegEXp = isRegEXp;
+	public void setRegEXp(String regExp) {
+		this.regExp = regExp;
 	}
 
 	@Override
@@ -103,7 +103,7 @@ public class ApplicationFormatCache implements Serializable, Comparable<Applicat
 		result = prime * result
 				+ ((isActive == null) ? 0 : isActive.hashCode());
 		result = prime * result
-				+ ((isRegEXp == null) ? 0 : isRegEXp.hashCode());
+				+ ((regExp == null) ? 0 : regExp.hashCode());
 		result = prime * result
 				+ ((localeId == null) ? 0 : localeId.hashCode());
 		result = prime * result
@@ -145,10 +145,10 @@ public class ApplicationFormatCache implements Serializable, Comparable<Applicat
 				return false;
 		} else if (!isActive.equals(other.isActive))
 			return false;
-		if (isRegEXp == null) {
-			if (other.isRegEXp != null)
+		if (regExp == null) {
+			if (other.regExp != null)
 				return false;
-		} else if (!isRegEXp.equals(other.isRegEXp))
+		} else if (!regExp.equals(other.regExp))
 			return false;
 		if (localeId == null) {
 			if (other.localeId != null)
@@ -169,7 +169,7 @@ public class ApplicationFormatCache implements Serializable, Comparable<Applicat
 				+ ", tenantId=" + tenantId + ", localeId=" + localeId
 				+ ", formatValue=" + formatValue + ", isActive=" + isActive
 				+ ", formatTypeName=" + formatTypeName + ", id=" + id
-				+ ", isRegEXp=" + isRegEXp + "]";
+				+ ", regExp=" + regExp + "]";
 	}
 
 	@Override
