@@ -31,6 +31,7 @@ import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.util.JPASerializer;
+import com.mize.domain.util.TenantSerializer;
 
 
 @JsonPropertyOrder ({"id", "name", "link", "parent"})
@@ -61,7 +62,6 @@ public class ProductCategory extends MizeSceEntityAudit implements Comparable<Pr
 	private String categoryCode;
 	private List<ProductCategoryIntl> intls = new ArrayList<ProductCategoryIntl>();
 	
-	@Transient
 	private User user;
 	
 	public ProductCategory() {
@@ -123,10 +123,7 @@ public class ProductCategory extends MizeSceEntityAudit implements Comparable<Pr
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	//@OneToOne(fetch = FetchType.EAGER)
-	//@JoinColumn(name="prod_cat_id")
-	//@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
+	
 	@Transient
 	public ProductCategory getParent() {
 		return parent;
@@ -233,7 +230,7 @@ public class ProductCategory extends MizeSceEntityAudit implements Comparable<Pr
 	}
 
 	@OneToOne(fetch = FetchType.LAZY)
-	@JsonSerialize(using=JPASerializer.class)
+	@JsonSerialize(using = TenantSerializer.class)
 	@JsonInclude(Include.NON_NULL)
 	@JoinColumn(name="tenant_id") 
 	public BusinessEntity getTenant() {
@@ -262,7 +259,7 @@ public class ProductCategory extends MizeSceEntityAudit implements Comparable<Pr
 		this.department = department;
 	}	
 	
-	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "productCategory" ,orphanRemoval= true)
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "productCategory" ,orphanRemoval= true)
 	@Fetch(FetchMode.SELECT)
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
@@ -275,6 +272,7 @@ public class ProductCategory extends MizeSceEntityAudit implements Comparable<Pr
 	}
 	
 	@Transient
+	@JsonIgnore
 	public User getUser() {
 		return user;
 	}
