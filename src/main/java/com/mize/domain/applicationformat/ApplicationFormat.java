@@ -27,7 +27,7 @@ public class ApplicationFormat extends MizeSceEntityAudit implements Comparable<
 	private String isActive;
 	private String tenantCode;
 	private String formatTypeName;
-	private String isRegEXp;
+	private String regExp;
 
 	@Transient
 	public User user;
@@ -130,14 +130,15 @@ public class ApplicationFormat extends MizeSceEntityAudit implements Comparable<
 	}
 	
 
-	@Column(name = "is_reg_exp")
-	public String getIsRegEXp() {
-		return isRegEXp;
+	@Column(name = "reg_exp")
+	public String getRegExp() {
+		return regExp;
 	}
 
-	public void setIsRegEXp(String isRegEXp) {
-		this.isRegEXp = isRegEXp;
+	public void setRegExp(String regExp) {
+		this.regExp = regExp;
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
