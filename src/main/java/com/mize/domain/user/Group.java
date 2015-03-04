@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -189,6 +190,7 @@ public class Group extends MizeSceEntityAudit implements Comparable<Group> {
 	}
 	
 	@Transient
+	@JsonIgnore
 	public User getUser() {
 		return user;
 	}
