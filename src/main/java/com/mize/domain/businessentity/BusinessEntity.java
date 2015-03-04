@@ -40,6 +40,7 @@ import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.MizeDate;
+import com.mize.domain.util.TenantSerializer;
 
 @Entity
 @Inheritance
@@ -226,7 +227,7 @@ public class BusinessEntity extends MizeSceEntityAudit implements Comparable<Bus
 
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="tenant_id")
-	@JsonSerialize(using=JPASerializer.class)
+	@JsonSerialize(using=TenantSerializer.class)
 	@JsonInclude(Include.NON_NULL)
 	public BusinessEntity getTenant() {
 		return tenant;
