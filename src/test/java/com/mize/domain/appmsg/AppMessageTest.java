@@ -34,10 +34,10 @@ public class AppMessageTest extends JPATest {
 	
 	@Before
 	public void setUp() throws Exception {
-		entityManager = getEntityManager();
-		tenant = findExistingBE(entityManager);
+		/*entityManager = getEntityManager();
+		tenant = findExistingBE(entityManager);*/
 	}
-	@SuppressWarnings("unused")
+	/*@SuppressWarnings("unused")
 	private void persist() {
 		tx = entityManager.getTransaction();
 		tx.begin();
@@ -140,7 +140,7 @@ public class AppMessageTest extends JPATest {
 		return dbAppMessage;
 	}
 	
-	/*@Test
+	@Test
 	public void saveAppMessageTest(){
 		createAppMessage();
 		try{
@@ -176,7 +176,7 @@ public class AppMessageTest extends JPATest {
 			th.printStackTrace();
 			fail("Got Exception");
 		}
-	}*/
+	}
 	
 	@Test
 	public void retreiveAppMessageTest() {
@@ -184,10 +184,10 @@ public class AppMessageTest extends JPATest {
 		appMessage.setId(300L);
 		AppMessage dbAppMessage = retrieveAppMessage();
 		assertTrue(dbAppMessage != null && dbAppMessage.getId() != null);
-	}
+	}*/
 	
 	public void tearDown() throws Exception {
-		try {
+		/*try {
 			if (appMessage != null) {
 				tx.begin();
 				entityManager.remove(appMessage);
@@ -197,7 +197,7 @@ public class AppMessageTest extends JPATest {
 			entityManager.close();
 		} catch (Throwable th) {
 			th.printStackTrace();
-		}
+		}*/
 	}
 
 }

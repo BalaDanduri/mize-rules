@@ -23,7 +23,7 @@ import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;
 
 @ContextConfiguration(locations = { "/test-context.xml" })
-public class GroupTest extends JPATest {
+public class GroupTest extends JPATest {/*
 
 	
 	private static final String GROUP_QUERY = "select * from groups where id=?";
@@ -280,4 +280,4 @@ private class GroupRoleMappingRowMapper implements RowMapper<GroupRoleMapping> {
 		role.setUpdatedBy(1l);
 		return role;
 	}
-}
+*/}
