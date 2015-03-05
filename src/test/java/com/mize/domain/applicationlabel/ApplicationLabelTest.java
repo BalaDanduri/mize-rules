@@ -32,7 +32,7 @@ public class ApplicationLabelTest extends JPATest{
 	ApplicationLabel appLabel = null;
 	ApplicationLabel dbAppLabel = null;
 	
-	@Before
+	/*@Before
 	public void setUp() throws Exception {
 		entityManager = getEntityManager();
 		tenant = findExistingBE(entityManager);
@@ -137,7 +137,7 @@ public class ApplicationLabelTest extends JPATest{
 		return dbAppLabel;
 	}
 	
-	/*@Test
+	@Test
 	public void saveAppLabelTest(){
 		createAppLabel();
 		try{
@@ -174,7 +174,7 @@ public class ApplicationLabelTest extends JPATest{
 			fail("Got Exception");
 		}
 		
-	}*/
+	}
 	
 	@Test
 	public void retreiveAppLabelTest() {
@@ -196,6 +196,6 @@ public class ApplicationLabelTest extends JPATest{
 		} catch (Throwable th) {
 			th.printStackTrace();
 		}
-	}
+	}*/
 	
 }
