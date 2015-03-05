@@ -251,7 +251,6 @@ public class Brand extends MizeSceEntityAudit implements Comparable<Brand>{
 	@JsonManagedReference(value="skins")
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
-	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	public List<BrandSkin> getSkins() {
 		return skins;
 	}

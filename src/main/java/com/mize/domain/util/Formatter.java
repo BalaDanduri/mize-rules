@@ -1137,5 +1137,29 @@ public final class Formatter {
 			}
 			return sb.toString();
 		}
+	 
+	public static boolean isOneOf(String var1, String... var2) {
+
+		if (var1 != null) {
+			for (String value : var2) {
+
+				if (var1.equals(value))
+					return true;
+			}
+		}
+		return false;
+	}
+	
+	public static boolean isOneOfIgnoreCase(String var1, String... var2) {
+
+		if (var1 != null) {
+			for (String value : var2) {
+
+				if (var1.equalsIgnoreCase(value))
+					return true;
+			}
+		}
+		return false;
+	}
 	
 }

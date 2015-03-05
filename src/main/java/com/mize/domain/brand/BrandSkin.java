@@ -20,7 +20,6 @@ import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeSceEntity;
 
 @Entity
-@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, include="all")
 @Table(name = "brand_skin")
 public class BrandSkin extends MizeSceEntity implements Comparable<BrandSkin> {
 
