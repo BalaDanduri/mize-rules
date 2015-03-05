@@ -144,6 +144,11 @@ public class MizeApplicationProperties implements InitializingBean {
 	}
 	
 	@JsonIgnore
+	public String getDefaultDecimalFormat() {
+		return getPropertyValue("defaultDecimalFormat");		
+	}
+	
+	@JsonIgnore
 	public String getDefaultDateFormat() {
 		return getPropertyValue("defaultDateFormat");		
 	}

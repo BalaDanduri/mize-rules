@@ -10,8 +10,8 @@ import com.mize.domain.jpa.BigDecimalJPA;
 
 @TypeDef(name = "bigDecimal", defaultForType = BigDecimal.class, typeClass = BigDecimalJPA.class)
 @MappedSuperclass
-public class BigDecimal implements Comparable<BigDecimal>{
-	
+public class BigDecimal implements java.io.Serializable,Comparable<BigDecimal>{
+	private static final long serialVersionUID = 4496100137434567327L;
 	private java.math.BigDecimal baseValue;
 	private String decimalValue;
 	private boolean isValid;
