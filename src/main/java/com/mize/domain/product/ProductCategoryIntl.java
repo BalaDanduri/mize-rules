@@ -12,19 +12,20 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.Locale;
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.MizeSceEntityIntl;
 
 @Entity
 @Table(name = "prod_cat_intl")
-public class ProductCategoryIntl extends MizeSceEntity implements Comparable<ProductCategoryIntl>{
+public class ProductCategoryIntl extends MizeSceEntityIntl implements Comparable<ProductCategoryIntl>{
 
 	private static final long serialVersionUID = -1862266220815979799L;
 	private ProductCategory productCategory;
-	private Locale locale;
 	private String name;
 	private String description;
 
 	public ProductCategoryIntl() {
+		super();
+		super.locale = new Locale();
 	}
 	
 	public ProductCategoryIntl(ProductCategory productCategory, Locale locale, String name,
@@ -58,16 +59,6 @@ public class ProductCategoryIntl extends MizeSceEntity implements Comparable<Pro
 
 	public void setProductCategory(ProductCategory productCategory) {
 		this.productCategory = productCategory;
-	}
-	
-	@ManyToOne(fetch = FetchType.EAGER,optional = true)
-	@JoinColumn(name = "locale_id")
-	public Locale getLocale() {
-		return locale;
-	}
-
-	public void setLocale(Locale locale) {
-		this.locale = locale;
 	}
 
 	@Column(name = "prod_cat_name", length = 250, nullable = true)
