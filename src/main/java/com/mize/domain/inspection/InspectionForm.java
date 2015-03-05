@@ -71,7 +71,7 @@ public class InspectionForm extends MizeSceEntityAudit implements Comparable<Ins
 	
 	private EntityOffline entityOffline;
 	private Integer errorSeverity;
-	private Double progress;
+	
 	
 	public InspectionForm() {
 		
@@ -302,17 +302,6 @@ public class InspectionForm extends MizeSceEntityAudit implements Comparable<Ins
 	public void setErrorSeverity(Integer errorSeverity) {
 		this.errorSeverity = errorSeverity;
 	}
-	
-	@JsonIgnore
-	@Transient
-	public Double getProgress() {
-		return progress;
-	}
-
-	public void setProgress(Double progress) {
-		this.progress = progress;
-	}
-
 	
 	@Override
 	public int hashCode() {

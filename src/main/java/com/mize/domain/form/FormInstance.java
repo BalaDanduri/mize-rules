@@ -30,7 +30,7 @@ public class FormInstance extends MizeSceEntityAudit implements Comparable<FormI
 	private FormDefinition formDefinition;
 	private String formInstanceData;
 	private User user;
-	
+	private Double progress;
 	
 	public FormInstance() {
 		formDefinition = new FormDefinition();
@@ -85,6 +85,14 @@ public class FormInstance extends MizeSceEntityAudit implements Comparable<FormI
 		this.user = user;
 	}
 	
+	@Transient
+	public Double getProgress() {
+		return progress;
+	}
+
+	public void setProgress(Double progress) {
+		this.progress = progress;
+	}
 	
 	@Override
 	public int hashCode() {
@@ -134,9 +142,6 @@ public class FormInstance extends MizeSceEntityAudit implements Comparable<FormI
 	public int compareTo(FormInstance arg0) {
 		// TODO Auto-generated method stub
 		return 0;
-	}
-
-	
-	
+	}	
 
 }
