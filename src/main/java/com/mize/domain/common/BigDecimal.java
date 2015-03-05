@@ -73,9 +73,13 @@ public class BigDecimal implements Comparable<BigDecimal>{
 		this.decimalFormat = decimalFormat;
 		try{
 			DecimalFormat df = new DecimalFormat(decimalFormat);
-			baseValue = new java.math.BigDecimal(df.format(df.parse(decimalValue)));
+			String convertedValue = df.format(df.parse(decimalValue)); // user entered value to user format value
+			this.decimalValue = convertedValue;
+			Number num = df.parse(convertedValue); // getting Number from formatted value
+			baseValue = new java.math.BigDecimal(num.toString());
 			this.isValid = true;
 		}catch(Exception e){
+			e.printStackTrace();
 		}
 	}
 	
@@ -83,7 +87,10 @@ public class BigDecimal implements Comparable<BigDecimal>{
 		this.decimalValue = decimalValue;
 		this.decimalFormat = decimalFormat;
 		try{
-			baseValue = new java.math.BigDecimal(df.format(df.parse(decimalValue)));
+			String convertedValue = df.format(df.parse(decimalValue)); // user entered value to user format value
+			this.decimalValue = convertedValue;
+			Number num = df.parse(convertedValue); // getting Number from formatted value
+			baseValue = new java.math.BigDecimal(num.toString());
 			this.isValid = true;
 		}catch(Exception e){
 		}
