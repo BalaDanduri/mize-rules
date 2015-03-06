@@ -6,12 +6,14 @@ public class ShipmentSpecialOptions extends MizeSceEntity implements Comparable<
 
 	private static final long serialVersionUID = 7024994176092778875L;
 
-	private String staturdayDelivery;
+	private String saturdayDelivery;
+	private String saturdayPickup;
 	private String pickUpAtUPSFacility;
 	private String dropOfAtUPSFacility;
 	private ShipmentHoldAtLocation holdAtLocation;
-	private ShipmentEmailNotications emailNotications;
+	private ShipmentEmailNotifications emailNotifications;
 	private ShipmentCashOnDelivery cashOnDelivery;
+	private ShipmentReturnService returnService;
 	
 	public ShipmentSpecialOptions() {
 		super();
@@ -27,12 +29,20 @@ public class ShipmentSpecialOptions extends MizeSceEntity implements Comparable<
 		this.id = id;
 	}
 	
-	public String getStaturdayDelivery() {
-		return staturdayDelivery;
+	public String getSaturdayDelivery() {
+		return saturdayDelivery;
 	}
 
-	public void setStaturdayDelivery(String staturdayDelivery) {
-		this.staturdayDelivery = staturdayDelivery;
+	public void setSaturdayDelivery(String saturdayDelivery) {
+		this.saturdayDelivery = saturdayDelivery;
+	}
+	
+	public String getSaturdayPickup() {
+		return saturdayPickup;
+	}
+
+	public void setSaturdayPickup(String saturdayPickup) {
+		this.saturdayPickup = saturdayPickup;
 	}
 
 	public String getPickUpAtUPSFacility() {
@@ -59,12 +69,12 @@ public class ShipmentSpecialOptions extends MizeSceEntity implements Comparable<
 		this.holdAtLocation = holdAtLocation;
 	}
 
-	public ShipmentEmailNotications getEmailNotications() {
-		return emailNotications;
+	public ShipmentEmailNotifications getEmailNotifications() {
+		return emailNotifications;
 	}
 
-	public void setEmailNotications(ShipmentEmailNotications emailNotications) {
-		this.emailNotications = emailNotications;
+	public void setEmailNotifications(ShipmentEmailNotifications emailNotifications) {
+		this.emailNotifications = emailNotifications;
 	}
 
 	public ShipmentCashOnDelivery getCashOnDelivery() {
@@ -74,7 +84,16 @@ public class ShipmentSpecialOptions extends MizeSceEntity implements Comparable<
 	public void setCashOnDelivery(ShipmentCashOnDelivery cashOnDelivery) {
 		this.cashOnDelivery = cashOnDelivery;
 	}
+	
+	public ShipmentReturnService getReturnService() {
+		return returnService;
+	}
 
+	public void setReturnService(ShipmentReturnService returnService) {
+		this.returnService = returnService;
+	}
+
+	
 	@Override
 	public int compareTo(ShipmentSpecialOptions o) {
 		return 0;

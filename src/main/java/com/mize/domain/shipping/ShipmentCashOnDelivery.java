@@ -10,18 +10,20 @@ public class ShipmentCashOnDelivery extends MizeSceEntity implements Comparable<
 	private String collectionType;
 	private BigDecimal amount;
 	private String addTransportCost;
-	private BigDecimal charges;
+	private String charges;
+	private String currencyCode;
 	
 	public ShipmentCashOnDelivery() {
 		super();
 	}
 	
-	public ShipmentCashOnDelivery(String collectionType, BigDecimal amount,String addTransportCost, BigDecimal charges) {
+	public ShipmentCashOnDelivery(String collectionType, BigDecimal amount,String addTransportCost, String charges,String currencyCode) {
 		super();
 		this.collectionType = collectionType;
 		this.amount = amount;
 		this.addTransportCost = addTransportCost;
 		this.charges = charges;
+		this.currencyCode = currencyCode;
 	}
 
 	@Override
@@ -58,12 +60,20 @@ public class ShipmentCashOnDelivery extends MizeSceEntity implements Comparable<
 		this.addTransportCost = addTransportCost;
 	}
 
-	public BigDecimal getCharges() {
+	public String getCharges() {
 		return charges;
 	}
 
-	public void setCharges(BigDecimal charges) {
+	public void setCharges(String charges) {
 		this.charges = charges;
+	}
+	
+	public String getCurrencyCode() {
+		return currencyCode;
+	}
+
+	public void setCurrencyCode(String currencyCode) {
+		this.currencyCode = currencyCode;
 	}
 
 	@Override

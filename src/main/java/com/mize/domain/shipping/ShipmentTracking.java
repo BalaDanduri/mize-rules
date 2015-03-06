@@ -522,8 +522,7 @@ public class ShipmentTracking extends MizeSceEntityAudit implements Comparable<S
 		this.specialOptions = specialOptions;
 	}
 	
-	@Transient
-	//@Column(name="shipment_spl_options")
+	@Column(name="shipment_spl_options")
 	public String getSpecialOptionsValue() {
 		return specialOptionsValue;
 	}

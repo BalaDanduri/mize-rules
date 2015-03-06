@@ -7,8 +7,6 @@ public class PackageSpecialOptions extends MizeSceEntity implements Comparable<P
 	private static final long serialVersionUID = -7225407340276787225L;
 
 	private String deliveryConfirmation;
-	private String saturdayDelivery;
-	private String saturdayPickup;
 	private ShipmentReturnService returnService;
 	private ShipmentCashOnDelivery cashOnDelivery;
 	
@@ -16,11 +14,9 @@ public class PackageSpecialOptions extends MizeSceEntity implements Comparable<P
 		super();
 	}
 	
-	public PackageSpecialOptions(String deliveryConfirmation, String saturdayDelivery, String saturdayPickup) {
+	public PackageSpecialOptions(String deliveryConfirmation) {
 		super();
 		this.deliveryConfirmation = deliveryConfirmation;
-		this.saturdayDelivery = saturdayDelivery;
-		this.saturdayPickup = saturdayPickup;
 	}
 
 
@@ -41,22 +37,6 @@ public class PackageSpecialOptions extends MizeSceEntity implements Comparable<P
 
 	public void setDeliveryConfirmation(String deliveryConfirmation) {
 		this.deliveryConfirmation = deliveryConfirmation;
-	}
-
-	public String getSaturdayDelivery() {
-		return saturdayDelivery;
-	}
-
-	public void setSaturdayDelivery(String saturdayDelivery) {
-		this.saturdayDelivery = saturdayDelivery;
-	}
-
-	public String getSaturdayPickup() {
-		return saturdayPickup;
-	}
-
-	public void setSaturdayPickup(String saturdayPickup) {
-		this.saturdayPickup = saturdayPickup;
 	}
 
 	public ShipmentReturnService getReturnService() {

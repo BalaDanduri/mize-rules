@@ -1,21 +1,28 @@
 package com.mize.domain.shipping;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.mize.domain.common.MizeSceEntity;
 
 public class ShipmentEmailNotification extends MizeSceEntity implements Comparable<ShipmentEmailNotification>{
 	
 	private static final long serialVersionUID = -350317419410443313L;
-	private String reciepentType;
+	private String recipientType;
+	private String notificationCode;
 	private String email;
+	private List<NotificationType>  notificationTypes = new ArrayList<NotificationType>();
 	
 	public ShipmentEmailNotification() {
 		super();
 	}
-	
-	public ShipmentEmailNotification(String reciepentType, String email) {
+
+	public ShipmentEmailNotification(String recipientType, String notificationCode, String email,List<NotificationType> notificationTypes) {
 		super();
-		this.reciepentType = reciepentType;
+		this.recipientType = recipientType;
+		this.notificationCode = notificationCode;
 		this.email = email;
+		this.notificationTypes = notificationTypes;
 	}
 
 	@Override
@@ -28,12 +35,20 @@ public class ShipmentEmailNotification extends MizeSceEntity implements Comparab
 		this.id = id;
 	}
 
-	public String getReciepentType() {
-		return reciepentType;
+	public String getRecipientType() {
+		return recipientType;
 	}
 
-	public void setReciepentType(String reciepentType) {
-		this.reciepentType = reciepentType;
+	public void setRecipientType(String recipientType) {
+		this.recipientType = recipientType;
+	}
+
+	public String getNotificationCode() {
+		return notificationCode;
+	}
+
+	public void setNotificationCode(String notificationCode) {
+		this.notificationCode = notificationCode;
 	}
 
 	public String getEmail() {
@@ -42,6 +57,13 @@ public class ShipmentEmailNotification extends MizeSceEntity implements Comparab
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public List<NotificationType> getNotificationTypes() {
+		return notificationTypes;
+	}
+	public void setNotificationTypes(List<NotificationType> notificationTypes) {
+		this.notificationTypes = notificationTypes;
 	}
 	
 	@Override

@@ -178,8 +178,7 @@ public class ShipmentPackage extends MizeSceEntity implements Comparable<Shipmen
 		this.packageSpecialOptions = packageSpecialOptions;
 	}
 
-	@Transient
-	//@Column(name="pkg_spl_options")
+	@Column(name="pkg_spl_options")
 	public String getPackageSpecialOptionsValue() {
 		return packageSpecialOptionsValue;
 	}
