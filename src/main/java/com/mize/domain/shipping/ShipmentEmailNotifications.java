@@ -67,4 +67,10 @@ public class ShipmentEmailNotifications extends MizeSceEntity implements Compara
 		return 0;
 	}
 
+	@Override
+	public String toString() {
+		return "ShipmentEmailNotifications [notifications=" + notifications
+				+ "]";
+	}
+
 }

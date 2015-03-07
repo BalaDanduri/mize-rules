@@ -10,6 +10,10 @@ public class NotificationType extends MizeSceEntity implements Comparable<Notifi
 	private String value;
 	private String code;
 	
+	public NotificationType() {
+		super();
+	}
+	
 	public NotificationType(String value, String code) {
 		super();
 		this.value = value;
@@ -47,5 +51,40 @@ public class NotificationType extends MizeSceEntity implements Comparable<Notifi
 		return 0;
 	}
 
-	
+	@Override
+	public int hashCode() {
+		final int prime = PRIME;
+		int result = super.hashCode();
+		result = prime * result + ((code == null) ? 0 : code.hashCode());
+		result = prime * result + ((value == null) ? 0 : value.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		NotificationType other = (NotificationType) obj;
+		if (code == null) {
+			if (other.code != null)
+				return false;
+		} else if (!code.equals(other.code))
+			return false;
+		if (value == null) {
+			if (other.value != null)
+				return false;
+		} else if (!value.equals(other.value))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "NotificationType [value=" + value + ", code=" + code + "]";
+	}
+
 }

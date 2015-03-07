@@ -59,6 +59,55 @@ public class PackageSpecialOptions extends MizeSceEntity implements Comparable<P
 	public int compareTo(PackageSpecialOptions o) {
 		return 0;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = PRIME;
+		int result = super.hashCode();
+		result = prime * result
+				+ ((cashOnDelivery == null) ? 0 : cashOnDelivery.hashCode());
+		result = prime
+				* result
+				+ ((deliveryConfirmation == null) ? 0 : deliveryConfirmation
+						.hashCode());
+		result = prime * result
+				+ ((returnService == null) ? 0 : returnService.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PackageSpecialOptions other = (PackageSpecialOptions) obj;
+		if (cashOnDelivery == null) {
+			if (other.cashOnDelivery != null)
+				return false;
+		} else if (!cashOnDelivery.equals(other.cashOnDelivery))
+			return false;
+		if (deliveryConfirmation == null) {
+			if (other.deliveryConfirmation != null)
+				return false;
+		} else if (!deliveryConfirmation.equals(other.deliveryConfirmation))
+			return false;
+		if (returnService == null) {
+			if (other.returnService != null)
+				return false;
+		} else if (!returnService.equals(other.returnService))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "PackageSpecialOptions [deliveryConfirmation="
+				+ deliveryConfirmation + ", returnService=" + returnService
+				+ ", cashOnDelivery=" + cashOnDelivery + "]";
+	}
 	
 	
 }

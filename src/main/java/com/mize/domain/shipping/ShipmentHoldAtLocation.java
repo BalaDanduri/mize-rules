@@ -82,7 +82,11 @@ public class ShipmentHoldAtLocation extends MizeSceEntity implements Comparable<
 			return false;
 		return true;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "ShipmentHoldAtLocation [customerPhone=" + customerPhone
+				+ ", locationType=" + locationType + "]";
+	}
 	
 }

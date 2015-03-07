@@ -98,5 +98,17 @@ public class ShipmentSpecialOptions extends MizeSceEntity implements Comparable<
 	public int compareTo(ShipmentSpecialOptions o) {
 		return 0;
 	}
+
+	@Override
+	public String toString() {
+		return "ShipmentSpecialOptions [saturdayDelivery=" + saturdayDelivery
+				+ ", saturdayPickup=" + saturdayPickup
+				+ ", pickUpAtUPSFacility=" + pickUpAtUPSFacility
+				+ ", dropOfAtUPSFacility=" + dropOfAtUPSFacility
+				+ ", holdAtLocation=" + holdAtLocation
+				+ ", emailNotifications=" + emailNotifications
+				+ ", cashOnDelivery=" + cashOnDelivery + ", returnService="
+				+ returnService + "]";
+	}
 	
 }

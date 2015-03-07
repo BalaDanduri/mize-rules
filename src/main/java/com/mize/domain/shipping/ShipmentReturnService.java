@@ -1,17 +1,17 @@
 package com.mize.domain.shipping;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.MizeDate;
 
 public class ShipmentReturnService extends MizeSceEntity implements Comparable<ShipmentReturnService>{
 	
 	private static final long serialVersionUID = -350317419410443313L;
-	private Date shippingDate;
+	private MizeDate shippingDate;
 	private String returnType;
 	private String reason;
 	private List<SpecialServiceCode>  specialServiceCodes = new ArrayList<SpecialServiceCode>();
@@ -20,7 +20,7 @@ public class ShipmentReturnService extends MizeSceEntity implements Comparable<S
 		super();
 	}
 	
-	public ShipmentReturnService(Date shippingDate,String returnType, String reason) {
+	public ShipmentReturnService(MizeDate shippingDate,String returnType, String reason) {
 		super();
 		this.shippingDate = shippingDate;
 		this.returnType = returnType;
@@ -37,11 +37,11 @@ public class ShipmentReturnService extends MizeSceEntity implements Comparable<S
 		this.id = id;
 	}
 
-	public Date getShippingDate() {
+	public MizeDate getShippingDate() {
 		return shippingDate;
 	}
 
-	public void setShippingDate(Date shippingDate) {
+	public void setShippingDate(MizeDate shippingDate) {
 		this.shippingDate = shippingDate;
 	}
 
@@ -112,5 +112,14 @@ public class ShipmentReturnService extends MizeSceEntity implements Comparable<S
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "ShipmentReturnService [shippingDate=" + shippingDate
+				+ ", returnType=" + returnType + ", reason=" + reason
+				+ ", specialServiceCodes=" + specialServiceCodes + "]";
+	}
+	
+	
 
 }
