@@ -3,6 +3,8 @@ package com.mize.domain.shipping;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.mize.domain.common.MizeSceEntity;
 
 public class ShipmentEmailNotifications extends MizeSceEntity implements Comparable<ShipmentEmailNotifications>{
@@ -25,6 +27,7 @@ public class ShipmentEmailNotifications extends MizeSceEntity implements Compara
 		this.id = id;
 	}
 	
+	@JsonInclude(Include.NON_DEFAULT)
 	public List<ShipmentEmailNotification> getNotifications() {
 		return notifications;
 	}

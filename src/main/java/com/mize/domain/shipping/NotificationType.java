@@ -10,6 +10,12 @@ public class NotificationType extends MizeSceEntity implements Comparable<Notifi
 	private String value;
 	private String code;
 	
+	public NotificationType(String value, String code) {
+		super();
+		this.value = value;
+		this.code = code;
+	}
+
 	@Override
 	public Long getId() {
 		return id;

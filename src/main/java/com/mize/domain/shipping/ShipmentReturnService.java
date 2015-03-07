@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.mize.domain.common.MizeSceEntity;
 
 public class ShipmentReturnService extends MizeSceEntity implements Comparable<ShipmentReturnService>{
@@ -13,6 +15,7 @@ public class ShipmentReturnService extends MizeSceEntity implements Comparable<S
 	private String returnType;
 	private String reason;
 	private List<SpecialServiceCode>  specialServiceCodes = new ArrayList<SpecialServiceCode>();
+	
 	public ShipmentReturnService() {
 		super();
 	}
@@ -58,6 +61,7 @@ public class ShipmentReturnService extends MizeSceEntity implements Comparable<S
 		this.reason = reason;
 	}
 	
+	@JsonInclude(Include.NON_DEFAULT)
 	public List<SpecialServiceCode> getSpecialServiceCodes() {
 		return specialServiceCodes;
 	}

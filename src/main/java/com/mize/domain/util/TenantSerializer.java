@@ -54,6 +54,7 @@ public class TenantSerializer extends JsonSerializer<BusinessEntity> {
 		jgen.writeStartObject();
 		jgen.writeNumberField("id", tenant.getId());
 		jgen.writeStringField("code", tenant.getCode());
+		jgen.writeStringField("typeCode", tenant.getTypeCode());
 		jgen.writeEndObject();
 		}
 	}
