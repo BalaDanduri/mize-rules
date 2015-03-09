@@ -11,6 +11,8 @@ public class Section extends FormElement{
 	private static final long serialVersionUID = -1131177443126701114L;
 	
 	private List<Field> fields;
+	private Integer totalCount;
+	private Integer doneCount;
 	
 	public Section() {
 		super();
@@ -23,6 +25,22 @@ public class Section extends FormElement{
 	
 	public void setFields(List<Field> fields) {
 		this.fields = fields;
+	}
+
+	public Integer getTotalCount() {
+		return totalCount;
+	}
+
+	public void setTotalCount(Integer totalCount) {
+		this.totalCount = totalCount;
+	}
+
+	public Integer getDoneCount() {
+		return doneCount;
+	}
+
+	public void setDoneCount(Integer doneCount) {
+		this.doneCount = doneCount;
 	}
 
 	@Override

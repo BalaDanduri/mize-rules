@@ -10,6 +10,8 @@ public class SectionGroup extends FormElement{
 	private static final long serialVersionUID = -3738122979818002211L;
 	
 	private List<Section> sections;
+	private Integer totalCount;
+	private Integer doneCount;
 	
 	public SectionGroup() {
 		super();
@@ -22,6 +24,22 @@ public class SectionGroup extends FormElement{
 	
 	public void setSections(List<Section> sections) {
 		this.sections = sections;
+	}
+
+	public Integer getTotalCount() {
+		return totalCount;
+	}
+
+	public void setTotalCount(Integer totalCount) {
+		this.totalCount = totalCount;
+	}
+
+	public Integer getDoneCount() {
+		return doneCount;
+	}
+
+	public void setDoneCount(Integer doneCount) {
+		this.doneCount = doneCount;
 	}
 
 	@Override
