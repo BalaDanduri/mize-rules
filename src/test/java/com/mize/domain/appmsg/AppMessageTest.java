@@ -37,6 +37,10 @@ public class AppMessageTest extends JPATest {
 		/*entityManager = getEntityManager();
 		tenant = findExistingBE(entityManager);*/
 	}
+	@Test
+	public void test(){
+		
+	}
 	/*@SuppressWarnings("unused")
 	private void persist() {
 		tx = entityManager.getTransaction();

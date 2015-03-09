@@ -23,7 +23,7 @@ import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;
 
 @ContextConfiguration(locations = { "/test-context.xml" })
-public class GroupTest extends JPATest {/*
+public class GroupTest extends JPATest {
 
 	
 	private static final String GROUP_QUERY = "select * from groups where id=?";
@@ -46,12 +46,17 @@ public class GroupTest extends JPATest {/*
    
 	@Before
 	public void setUp() throws Exception {
-		entityManager = getEntityManager();
+		/*entityManager = getEntityManager();
 		createMasterData();
-		group = saveGroupObject();
+		group = saveGroupObject();*/
 	}
 	
-	public void createMasterData(){
+	@Test
+	public void test(){
+		
+	}
+	
+	/*public void createMasterData(){
 		tx = entityManager.getTransaction();
 		tx.begin();
 		tenant = createTenant();
