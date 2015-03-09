@@ -124,5 +124,8 @@ public abstract class CatalogConstants implements Serializable{
 	public static final String ENTITYLOCK_ENTITY_TYPE = "EntityLockEntityType";
 	public static final String APPLICATION_FORMAT_TYPE = "ApplicationFormatType";
 	
+	public static final String  ENTITY_XREF_TYPE = "EntityXRefType";
+	public static final String  ENTITY_XREF_CRITERIA_TYPE= "EntityXRefCriteriaType";
+	
 }
 
