@@ -13,6 +13,8 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.MizeSceEntity;
@@ -222,6 +224,7 @@ public class BrandSupport extends MizeSceEntity implements Comparable<BrandSuppo
 	}
 	
 	@ManyToOne(fetch = FetchType.LAZY)
+	@Fetch(FetchMode.SELECT)
 	@JoinColumn(name = "BRAND_ID", nullable = false)
 	@JsonBackReference(value="brand_support")
 	public Brand getBrand() {

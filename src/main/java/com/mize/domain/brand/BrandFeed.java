@@ -13,6 +13,8 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -79,6 +81,7 @@ public class BrandFeed extends MizeSceEntity implements Comparable<BrandFeed>{
 	}
 	
 	@ManyToOne(fetch = FetchType.LAZY)
+	@Fetch(FetchMode.SELECT)
 	@JoinColumn(name = "BRAND_ID", nullable = true)
 	@JsonBackReference(value="brand_feed")
 	public Brand getBrand() {

@@ -17,6 +17,8 @@ import javax.persistence.Transient;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
@@ -148,6 +150,7 @@ public class Engagement extends MizeSceEntity implements Comparable<Engagement> 
 	}
 
 	@ManyToOne(fetch = FetchType.EAGER)
+	@Fetch(FetchMode.SELECT)
 	@JoinColumn(name = "brand_id", nullable = true)
 	public Brand getBrand() {
 		return brand;

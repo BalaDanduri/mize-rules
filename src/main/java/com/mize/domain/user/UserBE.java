@@ -16,6 +16,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -130,6 +132,7 @@ public class UserBE extends MizeSceEntityAudit implements Comparable<UserBE>{
 	}
 
 	@ManyToMany(cascade = {CascadeType.ALL}, fetch=FetchType.EAGER)
+	@Fetch(FetchMode.SELECT)
 	@JoinTable(name = "users_to_brand" , joinColumns = { @JoinColumn(name="user_id")}, inverseJoinColumns = {@JoinColumn(name="brand_id")} )
 	@Transient
 	public Set<Brand> getBrands() {

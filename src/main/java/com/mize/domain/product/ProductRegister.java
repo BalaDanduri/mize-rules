@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
@@ -104,6 +106,7 @@ public class ProductRegister extends MizeSceEntity implements Comparable<Product
 	}
 	
 	@ManyToOne(fetch = FetchType.LAZY)
+	@Fetch(FetchMode.SELECT)
 	@JoinColumn(name = "brand_id", nullable = true)
 	@JsonSerialize(using=JPASerializer.class,include=Inclusion.NON_NULL)
 	@JsonBackReference(value="productRegisters")

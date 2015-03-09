@@ -11,6 +11,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -58,6 +60,7 @@ public class ProductToCategory extends MizeSceEntity implements Comparable<Produ
 	}
 
 	@OneToOne(fetch = FetchType.EAGER)
+	@Fetch(FetchMode.SELECT)
 	@JoinColumn(name="prod_cat_id")
 	public ProductCategory getProductCategory() {
 		return productCategory;

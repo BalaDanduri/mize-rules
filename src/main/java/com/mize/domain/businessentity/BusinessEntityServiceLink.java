@@ -11,6 +11,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -93,14 +96,15 @@ public class BusinessEntityServiceLink extends MizeSceEntityAudit implements Com
 	}
 
 	@OneToOne(fetch = FetchType.EAGER)
+	@Fetch(FetchMode.SELECT)
 	@JoinColumn(name="brand_id")
 	public Brand getBrand() {
 		return brand;
 	}
 
 	@OneToOne(fetch = FetchType.EAGER)
+	@Fetch(FetchMode.SELECT)
 	@JoinColumn(name="prod_cat_id")
-	
 	public ProductCategory getProductCategory() {
 		return productCategory;
 	}

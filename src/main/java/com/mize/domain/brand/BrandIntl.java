@@ -12,6 +12,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.Locale;
@@ -57,6 +59,7 @@ public class BrandIntl extends MizeSceEntityIntl implements Comparable<BrandIntl
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@Fetch(FetchMode.SELECT)
 	@JoinColumn(name = "brand_id")
 	@JsonBackReference(value = "intl")
 	public Brand getBrand() {

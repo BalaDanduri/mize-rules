@@ -20,6 +20,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
@@ -179,6 +181,7 @@ public class Product  extends MizeSceEntityAudit implements Comparable<Product>{
 	}
 
 	@OneToOne(fetch = FetchType.EAGER)
+	@Fetch(FetchMode.SELECT)
 	@JoinColumn(name="brand_id") 
 	public Brand getBrand() {
 		return brand;

@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.mize.domain.brand.Brand;
@@ -33,6 +35,7 @@ public class DeviceList extends MizeSceEntity implements Comparable<DeviceList>{
 	private String prodImage;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
+	@Fetch(FetchMode.SELECT)
 	@JoinColumn(name = "brand_id", nullable = true)
 	public Brand getBrand() {
 		return brand;

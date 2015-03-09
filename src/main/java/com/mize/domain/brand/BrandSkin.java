@@ -61,6 +61,7 @@ public class BrandSkin extends MizeSceEntity implements Comparable<BrandSkin> {
 		super.id = id;
 	}
 	@ManyToOne(fetch = FetchType.LAZY)
+	@Fetch(FetchMode.SELECT)
 	@JoinColumn(name = "brand_id")
 	@JsonBackReference(value = "skins")
 	public Brand getBrand() {

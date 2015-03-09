@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -75,6 +77,7 @@ public class ProductRepeatOrderShipOptions extends MizeSceEntity implements Comp
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@Fetch(FetchMode.SELECT)
 	@JoinColumn(name = "brand_id", nullable = true)
 	@JsonBackReference(value="brand_shippings")
 	public Brand getBrand() {
