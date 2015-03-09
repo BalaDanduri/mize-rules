@@ -10,11 +10,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeSceEntityIntl;
 
 @Entity
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, include="all")
 @Table(name = "prod_cat_intl")
 public class ProductCategoryIntl extends MizeSceEntityIntl implements Comparable<ProductCategoryIntl>{
 

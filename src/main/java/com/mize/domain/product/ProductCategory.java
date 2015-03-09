@@ -19,6 +19,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -36,6 +38,7 @@ import com.mize.domain.util.TenantSerializer;
 
 @JsonPropertyOrder ({"id", "name", "link", "parent"})
 @Entity
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, include="all")
 @Table(name = "prod_cat")
 public class ProductCategory extends MizeSceEntityAudit implements Comparable<ProductCategory>{
 
@@ -261,6 +264,7 @@ public class ProductCategory extends MizeSceEntityAudit implements Comparable<Pr
 	
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "productCategory" ,orphanRemoval= true)
 	@Fetch(FetchMode.SELECT)
+	@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
 	public List<ProductCategoryIntl> getIntls() {
