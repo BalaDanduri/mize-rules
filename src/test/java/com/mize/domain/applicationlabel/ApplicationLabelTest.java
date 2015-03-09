@@ -21,7 +21,7 @@ import com.mize.domain.common.Locale;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.MizeDateTime;
 import com.mize.domain.util.MizeDateTimeUtils;
-//@ContextConfiguration(locations={"/test-context.xml"})
+@ContextConfiguration(locations={"/test-context.xml"})
 public class ApplicationLabelTest extends JPATest{
 
 	private static final String APPLABEL_QUERY = "select * from application_labels where id=?";
@@ -32,12 +32,16 @@ public class ApplicationLabelTest extends JPATest{
 	ApplicationLabel appLabel = null;
 	ApplicationLabel dbAppLabel = null;
 	
-	/*@Before
+	@Before
 	public void setUp() throws Exception {
-		entityManager = getEntityManager();
-		tenant = findExistingBE(entityManager);
+		/*entityManager = getEntityManager();
+		tenant = findExistingBE(entityManager);*/
 	}
-	@SuppressWarnings("unused")
+	@Test
+	public void test(){
+		
+	}
+	/*@SuppressWarnings("unused")
 	private void persist() {
 		tx = entityManager.getTransaction();
 		tx.begin();
