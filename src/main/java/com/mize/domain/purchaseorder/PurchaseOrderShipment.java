@@ -1,7 +1,5 @@
 package com.mize.domain.purchaseorder;
 
-import java.math.BigDecimal;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
@@ -75,7 +73,6 @@ public class PurchaseOrderShipment extends MizeSceEntity implements Comparable<P
 	private String carrier;
 	private String estimatedShipmentDays;
 	private MizeDate estimatedShipmentDate;
-	private BigDecimal estimatedShipmentCost;
 	private String shipComplete;
 	@Transient
 	private EntityComment entityComment;
@@ -186,15 +183,6 @@ public class PurchaseOrderShipment extends MizeSceEntity implements Comparable<P
 
 	public void setEstimatedShipmentDays(String estimatedShipmentDays) {
 		this.estimatedShipmentDays = estimatedShipmentDays;
-	}
-
-	@Column(name="estimated_ship_cost")
-	public BigDecimal getEstimatedShipmentCost() {
-		return estimatedShipmentCost;
-	}
-
-	public void setEstimatedShipmentCost(BigDecimal estimatedShipmentCost) {
-		this.estimatedShipmentCost = estimatedShipmentCost;
 	}
 		
 	@Override
@@ -449,10 +437,6 @@ public class PurchaseOrderShipment extends MizeSceEntity implements Comparable<P
 				+ ((dropShip == null) ? 0 : dropShip.hashCode());
 		result = prime
 				* result
-				+ ((estimatedShipmentCost == null) ? 0 : estimatedShipmentCost
-						.hashCode());
-		result = prime
-				* result
 				+ ((estimatedShipmentDate == null) ? 0 : estimatedShipmentDate
 						.hashCode());
 		result = prime
@@ -488,11 +472,6 @@ public class PurchaseOrderShipment extends MizeSceEntity implements Comparable<P
 			if (other.dropShip != null)
 				return false;
 		} else if (!dropShip.equals(other.dropShip))
-			return false;
-		if (estimatedShipmentCost == null) {
-			if (other.estimatedShipmentCost != null)
-				return false;
-		} else if (!estimatedShipmentCost.equals(other.estimatedShipmentCost))
 			return false;
 		if (estimatedShipmentDate == null) {
 			if (other.estimatedShipmentDate != null)
@@ -537,7 +516,6 @@ public class PurchaseOrderShipment extends MizeSceEntity implements Comparable<P
 				+ priority + ", carrier=" + carrier
 				+ ", estimatedShipmentDays=" + estimatedShipmentDays
 				+ ", estimatedShipmentDate=" + estimatedShipmentDate
-				+ ", estimatedShipmentCost=" + estimatedShipmentCost
 				+ ", shipComplete=" + shipComplete + ", fromBEReferenceNumber="
 				+ fromBEReferenceNumber + ", beReferenceNumber="
 				+ beReferenceNumber + "]";
