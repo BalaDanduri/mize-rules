@@ -115,6 +115,7 @@ public class MizeAsset extends MizeSceEntity implements Comparable<MizeAsset>{
 		this.type = type;
 	}
 	
+	@Column (name = "name")
 	public String getName() {
 		return name;
 	}
@@ -161,7 +162,7 @@ public class MizeAsset extends MizeSceEntity implements Comparable<MizeAsset>{
 		this.accessURL = accessURL;
 	}
 	
-	
+	@Column (name = "brand_name")
 	public String getBrandName() {
 		return brandName;
 	}

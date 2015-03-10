@@ -40,7 +40,7 @@ public class AssetModel extends MizeSceEntity implements Comparable<AssetModel>{
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "mize_asset_id")
+	@JoinColumn(name = "asset_id")
 	@JsonBackReference(value ="assetModel")
 	public MizeAsset getAsset() {
 		return asset;
