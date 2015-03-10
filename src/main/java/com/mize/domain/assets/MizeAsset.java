@@ -1,5 +1,8 @@
 package com.mize.domain.assets;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,10 +11,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
@@ -30,16 +38,24 @@ public class MizeAsset extends MizeSceEntity implements Comparable<MizeAsset>{
 	
 	private BusinessEntity tenant;
 	private String name;
-	@Transient
-	private String brand;
-	@Transient
-	private String model;
-	@Transient
-	private String category;
+	private List<AssetModel> assetModels;
 	private String type;
+	private Long brandId;
+	private String brandName;
 	private String contentType;
 	private String storageType;
 	private String filePath;
+	private String accessURL;
+	
+	
+	@Transient
+	private String model;
+	@Transient
+	private String category;	
+	@Transient
+	private String entryFile;
+	
+	
 
 	public static final String DYNAMIC_FIELD_PREFIX = "s_";
 	public static final String STORAGE_TYPE_S3 = "S3";
@@ -79,6 +95,18 @@ public class MizeAsset extends MizeSceEntity implements Comparable<MizeAsset>{
 		this.tenant = tenant;
 	}
 
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "asset" ,orphanRemoval= true)
+	@Fetch(FetchMode.SELECT)
+	@JsonManagedReference(value="assetModel")
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
+
+	public List<AssetModel> getAssetModels() {
+		return assetModels;
+	}
+	public void setAssetModels(List<AssetModel> assetModels) {
+		this.assetModels = assetModels;
+	}
 	@Column (name = "type")
 	public String getType() {
 		return type;
@@ -117,6 +145,29 @@ public class MizeAsset extends MizeSceEntity implements Comparable<MizeAsset>{
 		this.filePath = filePath;
 	}
 	
+	@Column (name = "brand_id")
+	public Long getBrandId() {
+		return brandId;
+	}
+	public void setBrandId(Long brandId) {
+		this.brandId = brandId;
+	}
+	
+	@Column (name = "access_url")
+	public String getAccessURL() {
+		return accessURL;
+	}
+	public void setAccessURL(String accessURL) {
+		this.accessURL = accessURL;
+	}
+	
+	
+	public String getBrandName() {
+		return brandName;
+	}
+	public void setBrandName(String brandName) {
+		this.brandName = brandName;
+	}
 	@Transient
 	public User getUser() {
 		return user;
@@ -125,14 +176,6 @@ public class MizeAsset extends MizeSceEntity implements Comparable<MizeAsset>{
 	@Transient
 	public void setUser(User user) {
 		this.user = user;
-	}
-	@Transient
-	public String getBrand() {
-		return brand;
-	}
-	@Transient
-	public void setBrand(String brand) {
-		this.brand = brand;
 	}
 	@Transient
 	public String getModel() {
@@ -171,6 +214,16 @@ public class MizeAsset extends MizeSceEntity implements Comparable<MizeAsset>{
 		this.downloadURL = downloadURL;
 	}
 	
+	
+	@Transient
+	public String getEntryFile() {
+		return entryFile;
+	}
+	
+	@Transient
+	public void setEntryFile(String entryFile) {
+		this.entryFile = entryFile;
+	}
 	@Override
 	public int compareTo(MizeAsset asset) {
 		if ( this == asset ) 
