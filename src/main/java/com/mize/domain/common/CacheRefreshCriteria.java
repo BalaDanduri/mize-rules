@@ -47,7 +47,7 @@ public class CacheRefreshCriteria extends MizeSceEntity implements Comparable<Ca
 		this.criteria = criteria;
 	}
 	public enum Criteria {
-		Between,InClause,Equals,DateRange,UpdatedDate,CreatedDate,JpqlQuery,NativeQuery,ByName,InitialLoad,ClearSecondLevelCache,RefreshSecondLevelCache;
+		Between,InClause,Equals,DateRange,UpdatedDate,CreatedDate,JpqlQuery,NativeQuery,ByName,InitialLoad,ClearSecondLevelCache;
 	}
 	
 	public String getEntityName() {
