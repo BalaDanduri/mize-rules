@@ -85,7 +85,7 @@ public class FormInstance extends MizeSceEntityAudit implements Comparable<FormI
 		this.user = user;
 	}
 	
-	@Transient
+	@Column(name = "form_progress")
 	public Double getProgress() {
 		return progress;
 	}
