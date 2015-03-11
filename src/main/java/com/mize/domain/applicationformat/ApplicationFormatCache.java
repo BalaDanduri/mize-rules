@@ -1,113 +1,122 @@
 package com.mize.domain.applicationformat;
 
-import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
-public class ApplicationFormatCache implements Serializable, Comparable<ApplicationFormatCache> {
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.Formatter;
+
+public class ApplicationFormatCache extends MizeSceEntity implements Comparable<ApplicationFormatCache> {
 	
 	private static final long serialVersionUID = 848292818865493379L;
-	private String formatType;
-    private Long tenantId;
-	private Long localeId;
-	private String formatValue;
-	private String isActive;
-	private String formatTypeName;
-	private Long id;
-	private String regExp;
-
+	private List<ApplicationFormat> formats = new ArrayList<ApplicationFormat>();
+	
 	public ApplicationFormatCache() {
-	}
-	
-	public ApplicationFormatCache(Long id,String formatType, Long localeId,String formatValue, String isActive) {
 		super();
-		this.id = id;
-		this.formatType = formatType;
-		this.localeId = localeId;
-		this.formatValue = formatValue;
-		this.isActive = isActive;
 	}
 	
+	public ApplicationFormatCache(List<ApplicationFormat> formats) {
+		super();
+		this.formats = formats;
+	}
+
+	@Override
 	public Long getId() {
 		return id;
 	}
-	
+
+	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}
 	
-	public Long getTenantId() {
-		return tenantId;
+	public List<ApplicationFormat> getFormats() {
+		return formats;
 	}
 
-	public void setTenantId(Long tenantId) {
-		this.tenantId = tenantId;
-	}
-	public String getFormatType() {
-		return formatType;
+	public void setFormats(List<ApplicationFormat> formats) {
+		this.formats = formats;
 	}
 
-	public void setFormatType(String formatType) {
-		this.formatType = formatType;
-	}
-
-	public String getFormatValue() {
-		return formatValue;
-	}
-
-	public void setFormatValue(String formatValue) {
-		this.formatValue = formatValue;
-	}
-
-	public String getIsActive() {
-		return isActive;
-	}
-
-	public void setIsActive(String isActive) {
-		this.isActive = isActive;
+	@JsonIgnore
+	public String getUserDateTimeFormat(){
+		if(formats != null){
+			for(ApplicationFormat format : formats){
+				if(Formatter.equalIgnoreCase(format.getFormatType(), ApplicationFormatConstants.DATE_TIME_FORMAT)){
+					return format.getFormatValue();
+				}
+			}
+		}
+		return null;
 	}
 	
-	public Long getLocaleId() {
-		return localeId;
+	@JsonIgnore
+	public ApplicationFormat getApplcationFormat(String formatType){
+		if(formats != null){
+			for(ApplicationFormat format : formats){
+				if(Formatter.equalIgnoreCase(format.getFormatType(), formatType)){
+					return format;
+				}
+			}
+		}
+		return null;
+	}
+	
+	@JsonIgnore
+	public String getUserDateFormat(){
+		if(formats != null){
+			for(ApplicationFormat format : formats){
+				if(Formatter.equalIgnoreCase(format.getFormatType(), ApplicationFormatConstants.DATE_FORMAT)){
+					return format.getFormatValue();
+				}
+			}
+		}
+		return null;
+	}
+	
+	@JsonIgnore
+	public String getUserDecimalFormat(){
+		if(formats != null){
+			for(ApplicationFormat format : formats){
+				if(Formatter.equalIgnoreCase(format.getFormatType(), ApplicationFormatConstants.DECIMAL_FORMAT)){
+					return format.getFormatValue();
+				}
+			}
+		}
+		return null;
 	}
 
-	public void setLocaleId(Long localeId) {
-		this.localeId = localeId;
+	@JsonIgnore
+	public boolean addFormat(String formatType,ApplicationFormat inputFormat){
+		boolean isExists = false;
+		if(formats != null){
+			for(ApplicationFormat format : formats){
+				if(Formatter.equalIgnoreCase(format.getFormatType(), ApplicationFormatConstants.DECIMAL_FORMAT)){
+					isExists = true;
+					break;
+				}
+			}
+			if(isExists == false){
+				formats.add(inputFormat);
+			}
+		}else{
+			formats = new ArrayList<ApplicationFormat>();
+			formats.add(inputFormat);
+		}
+		return isExists;
 	}
-
-	public String getFormatTypeName() {
-		return formatTypeName;
-	}
-
-	public void setFormatTypeName(String formatTypeName) {
-		this.formatTypeName = formatTypeName;
-	}
-
-	public String getRegEXp() {
-		return regExp;
-	}
-
-	public void setRegEXp(String regExp) {
-		this.regExp = regExp;
+	
+	@Override
+	public int compareTo(ApplicationFormatCache o) {
+		return 0;
 	}
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((formatType == null) ? 0 : formatType.hashCode());
-		result = prime * result
-				+ ((formatTypeName == null) ? 0 : formatTypeName.hashCode());
-		result = prime * result
-				+ ((formatValue == null) ? 0 : formatValue.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result
-				+ ((isActive == null) ? 0 : isActive.hashCode());
-		result = prime * result
-				+ ((regExp == null) ? 0 : regExp.hashCode());
-		result = prime * result
-				+ ((localeId == null) ? 0 : localeId.hashCode());
-		result = prime * result
-				+ ((tenantId == null) ? 0 : tenantId.hashCode());
+		final int prime = PRIME;
+		int result = super.hashCode();
+		result = prime * result + ((formats == null) ? 0 : formats.hashCode());
 		return result;
 	}
 
@@ -115,74 +124,22 @@ public class ApplicationFormatCache implements Serializable, Comparable<Applicat
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
 		ApplicationFormatCache other = (ApplicationFormatCache) obj;
-		if (formatType == null) {
-			if (other.formatType != null)
+		if (formats == null) {
+			if (other.formats != null)
 				return false;
-		} else if (!formatType.equals(other.formatType))
-			return false;
-		if (formatTypeName == null) {
-			if (other.formatTypeName != null)
-				return false;
-		} else if (!formatTypeName.equals(other.formatTypeName))
-			return false;
-		if (formatValue == null) {
-			if (other.formatValue != null)
-				return false;
-		} else if (!formatValue.equals(other.formatValue))
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (isActive == null) {
-			if (other.isActive != null)
-				return false;
-		} else if (!isActive.equals(other.isActive))
-			return false;
-		if (regExp == null) {
-			if (other.regExp != null)
-				return false;
-		} else if (!regExp.equals(other.regExp))
-			return false;
-		if (localeId == null) {
-			if (other.localeId != null)
-				return false;
-		} else if (!localeId.equals(other.localeId))
-			return false;
-		if (tenantId == null) {
-			if (other.tenantId != null)
-				return false;
-		} else if (!tenantId.equals(other.tenantId))
+		} else if (!formats.equals(other.formats))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "ApplicationFormatCache [formatType=" + formatType
-				+ ", tenantId=" + tenantId + ", localeId=" + localeId
-				+ ", formatValue=" + formatValue + ", isActive=" + isActive
-				+ ", formatTypeName=" + formatTypeName + ", id=" + id
-				+ ", regExp=" + regExp + "]";
-	}
-
-	@Override
-	public int compareTo(ApplicationFormatCache applicationFormat) {
-		if ( this == applicationFormat ) 
-			return 0;
-		else if (this.id < applicationFormat.id) 
-			return -1;
-		else if (applicationFormat.id == this.id) 
-			return 0;
-		else if (this.id > applicationFormat.id)
-			return 1;
-		return 0;
+		return "ApplicationFormatCache [formats=" + formats + "]";
 	}
 
 }

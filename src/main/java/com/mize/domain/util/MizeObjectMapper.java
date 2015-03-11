@@ -60,49 +60,17 @@ public class MizeObjectMapper extends ObjectMapper {
 		}
 	}
 	
-	public static MizeObjectMapper getInstance(Map<String,ApplicationFormatCache> applicationFormatMap,String userTimeZone) {
-		if(applicationFormatMap != null){
-			String dateTimeFormat = getUserDateTimeFormat(applicationFormatMap);
-			String dateFormat = getUserDateFormat(applicationFormatMap);
-			String decimalFormat = getUserDecimalFormat(applicationFormatMap);
+	public static MizeObjectMapper getInstance(ApplicationFormatCache formatCache,String userTimeZone) {
+		if(formatCache != null){
+			String dateTimeFormat = formatCache.getUserDateTimeFormat();
+			String dateFormat = formatCache.getUserDateFormat();
+			String decimalFormat = formatCache.getUserDecimalFormat();
 			return new MizeObjectMapper(dateFormat,dateTimeFormat,userTimeZone,decimalFormat);
 		}else{
 			return new MizeObjectMapper();
 		}
 	}
 	
-	public static String getUserDateTimeFormat(Map<String,ApplicationFormatCache> applicationFormatMap){
-		try{
-			ApplicationFormatCache formatCache = applicationFormatMap.get(ApplicationFormatConstants.DATE_TIME_FORMAT);
-			if(formatCache != null){
-				return formatCache.getFormatValue();
-			}
-		}catch(Exception e){
-		}
-		return null;
-	}
-	
-	public static String getUserDateFormat(Map<String,ApplicationFormatCache> applicationFormatMap){
-		try{
-			ApplicationFormatCache formatCache = applicationFormatMap.get(ApplicationFormatConstants.DATE_FORMAT);
-			if(formatCache != null){
-				return formatCache.getFormatValue();
-			}
-		}catch(Exception e){
-		}
-		return null;
-	}
-	
-	public static String getUserDecimalFormat(Map<String,ApplicationFormatCache> applicationFormatMap){
-		try{
-			ApplicationFormatCache formatCache = applicationFormatMap.get(ApplicationFormatConstants.DECIMAL_FORMAT);
-			if(formatCache != null){
-				return formatCache.getFormatValue();
-			}
-		}catch(Exception e){
-		}
-		return null;
-	}
 	public MizeObjectMapper(String dateFormat, String dateTimeFormat, String userTimeZone, String decimalFormat) {
 		this.dateFormat = dateFormat;
 		this.dateTimeFormat = dateTimeFormat;
