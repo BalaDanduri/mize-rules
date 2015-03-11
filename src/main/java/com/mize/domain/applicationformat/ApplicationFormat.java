@@ -192,4 +192,13 @@ public class ApplicationFormat extends MizeSceEntityAudit implements Comparable<
 		return EQUAL;
 	}
 
+	@Override
+	public String toString() {
+		return "ApplicationFormat [formatType=" + formatType + ", tenantId="
+				+ tenantId + ", locale=" + locale + ", formatValue="
+				+ formatValue + ", isActive=" + isActive + ", tenantCode="
+				+ tenantCode + ", formatTypeName=" + formatTypeName
+				+ ", regExp=" + regExp + "]";
+	}
+
 }
