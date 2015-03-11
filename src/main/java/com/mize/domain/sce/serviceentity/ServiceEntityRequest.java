@@ -15,17 +15,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Type;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.datetime.Date;
 import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDate;
 
 /**
  * @author HarishBurra
@@ -40,8 +38,8 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	private ServiceEntity serviceEntity;
 	private String requestType;
 	private String requestCode;
-	private MizeDate failureDate;
-	private MizeDate repairDate;
+	private Date failureDate;
+	private Date repairDate;
 	private String repairSiteCode;
 	private String complaintCode;
 	private String complaintDescription;
@@ -60,9 +58,9 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	private ServiceEntityAmount otherAmount;
 	private ServiceEntityAmount totalAmount;
 
-	private MizeDate requestedDate;
-	private MizeDate promisedDate;
-	private MizeDate resolvedDate;
+	private Date requestedDate;
+	private Date promisedDate;
+	private Date resolvedDate;
 	private String requestStatus;
 	private String priority;
 
@@ -114,22 +112,20 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	}
 
 	@Column(name = "failure_date")
-	@Type(type = "com.mize.domain.util.MizeDateJPA")
-	public MizeDate getFailureDate() {
+	public Date getFailureDate() {
 		return failureDate;
 	}
 
-	public void setFailureDate(MizeDate failureDate) {
+	public void setFailureDate(Date failureDate) {
 		this.failureDate = failureDate;
 	}
 
 	@Column(name = "repair_date")
-	@Type(type = "com.mize.domain.util.MizeDateJPA")
-	public MizeDate getRepairDate() {
+	public Date getRepairDate() {
 		return repairDate;
 	}
 
-	public void setRepairDate(MizeDate repairDate) {
+	public void setRepairDate(Date repairDate) {
 		this.repairDate = repairDate;
 	}
 
@@ -300,32 +296,29 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	}
 
 	@Column(name = "srvc_requested_date")
-	@Type(type = "com.mize.domain.util.MizeDateJPA")
-	public MizeDate getRequestedDate() {
+	public Date getRequestedDate() {
 		return requestedDate;
 	}
 
-	public void setRequestedDate(MizeDate requestedDate) {
+	public void setRequestedDate(Date requestedDate) {
 		this.requestedDate = requestedDate;
 	}
 
 	@Column(name = "srvc_promised_date")
-	@Type(type = "com.mize.domain.util.MizeDateJPA")
-	public MizeDate getPromisedDate() {
+	public Date getPromisedDate() {
 		return promisedDate;
 	}
 
-	public void setPromisedDate(MizeDate promisedDate) {
+	public void setPromisedDate(Date promisedDate) {
 		this.promisedDate = promisedDate;
 	}
 
 	@Column(name = "srvc_resolved_date")
-	@Type(type = "com.mize.domain.util.MizeDateJPA")
-	public MizeDate getResolvedDate() {
+	public Date getResolvedDate() {
 		return resolvedDate;
 	}
 
-	public void setResolvedDate(MizeDate resolvedDate) {
+	public void setResolvedDate(Date resolvedDate) {
 		this.resolvedDate = resolvedDate;
 	}
 	@Column(name = "srvc_request_status")

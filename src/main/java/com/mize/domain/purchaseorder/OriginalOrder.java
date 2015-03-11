@@ -3,7 +3,7 @@ package com.mize.domain.purchaseorder;
 import java.math.BigDecimal;
 
 import com.mize.domain.common.MizeSceEntityAudit;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.datetime.DateTime;
 
 public class OriginalOrder extends MizeSceEntityAudit implements Comparable<OriginalOrder>{
 	
@@ -21,7 +21,7 @@ public class OriginalOrder extends MizeSceEntityAudit implements Comparable<Orig
 		super();
 	}
 	
-	public OriginalOrder(Long id,String number, String status, String type,	String requestType,MizeDateTime createdDate,MizeDateTime updatedDate,BigDecimal requestedQuantity,String returnReason) {
+	public OriginalOrder(Long id,String number, String status, String type,	String requestType,DateTime createdDate,DateTime updatedDate,BigDecimal requestedQuantity,String returnReason) {
 		super();
 		this.id = id;
 		this.number = number;

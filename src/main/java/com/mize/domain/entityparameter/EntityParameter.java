@@ -16,8 +16,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Type;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -27,8 +25,8 @@ import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.EntityReference;
 import com.mize.domain.common.MizeSceEntityAudit;
+import com.mize.domain.datetime.Date;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDate;
 import com.mize.domain.util.TenantSerializer;
 
 @Entity
@@ -39,8 +37,8 @@ public class EntityParameter extends MizeSceEntityAudit implements Comparable<En
 	private String type;
 	private String code;
 	private Long beId;
-	private MizeDate startDate;
-	private MizeDate endDate;
+	private Date startDate;
+	private Date endDate;
 	@Transient
 	private User user;
 	@Transient
@@ -98,22 +96,20 @@ public class EntityParameter extends MizeSceEntityAudit implements Comparable<En
 	}
 	
 	@Column(name = "start_date")
-	@Type(type = "com.mize.domain.util.MizeDateJPA")
-	public MizeDate getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(MizeDate startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
 	@Column(name = "end_date")
-	@Type(type="com.mize.domain.util.MizeDateJPA")
-	public MizeDate getEndDate() {
+	public Date getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(MizeDate endDate) {
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 

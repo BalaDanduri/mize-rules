@@ -17,8 +17,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Type;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -27,9 +25,9 @@ import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.MizeSceEntityAudit;
+import com.mize.domain.datetime.Date;
+import com.mize.domain.datetime.DateTime;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDate;
-import com.mize.domain.util.MizeDateTime;
 import com.mize.domain.util.TenantSerializer;
 
 @Entity
@@ -41,8 +39,8 @@ public class Discount extends MizeSceEntityAudit implements Comparable<Discount>
 	private String discountNumber;
 	private String orderType;
 	private BusinessEntity orderBusinessEntity;	
-	private MizeDate startDate;
-	private MizeDate endDate;	
+	private Date startDate;
+	private Date endDate;	
 	private BigDecimal lineDiscountAmount;
 	private BigDecimal lineDiscountPercent;
 	private BigDecimal orderDiscountAmount;
@@ -72,7 +70,7 @@ public class Discount extends MizeSceEntityAudit implements Comparable<Discount>
 	}
 	
 	public Discount(Long id,String discountNumber, String orderType,
-			MizeDate startDate, MizeDate endDate,
+			Date startDate, Date endDate,
 			BigDecimal lineDiscountAmount, BigDecimal lineDiscountPercent,
 			BigDecimal orderDiscountAmount, BigDecimal orderDiscountPercent,
 			BigDecimal orderMinimumLines, BigDecimal orderMaximumLines,
@@ -82,7 +80,7 @@ public class Discount extends MizeSceEntityAudit implements Comparable<Discount>
 			BigDecimal shippingMinimumAmount, BigDecimal shippingMaximumAmount,
 			BigDecimal shippingMinimumLines, BigDecimal shippingMaximumLines,
 			String shippingMethod, BigDecimal minimumQuantity,
-			BigDecimal maximumQuantity, BigDecimal maximumAmountAllowed,MizeDateTime createdDate, MizeDateTime updatedDate) {
+			BigDecimal maximumQuantity, BigDecimal maximumAmountAllowed,DateTime createdDate, DateTime updatedDate) {
 		super();
 		this.id = id;
 		this.discountNumber = discountNumber;
@@ -173,22 +171,20 @@ public class Discount extends MizeSceEntityAudit implements Comparable<Discount>
 	}
 
 	@Column(name = "start_date")
-	@Type(type = "com.mize.domain.util.MizeDateJPA")
-	public MizeDate getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(MizeDate startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
 	@Column(name = "end_date")
-	@Type(type="com.mize.domain.util.MizeDateJPA")
-	public MizeDate getEndDate() {
+	public Date getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(MizeDate endDate) {
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 

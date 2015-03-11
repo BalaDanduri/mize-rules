@@ -25,11 +25,11 @@ import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.EntityContact;
 import com.mize.domain.common.EntityErrorMessage;
 import com.mize.domain.common.State;
+import com.mize.domain.datetime.Date;
+import com.mize.domain.datetime.DateTime;
 import com.mize.domain.form.FormDefinition;
 import com.mize.domain.form.FormInstance;
 import com.mize.domain.test.util.JPATest;
-import com.mize.domain.util.MizeDate;
-import com.mize.domain.util.MizeDateTime;
 
 @ContextConfiguration(locations={"/test-context.xml"})
 public class InspectionFormTest extends JPATest {
@@ -226,12 +226,12 @@ public class InspectionFormTest extends JPATest {
 		inspectionForm.setInspectedBy("FRM"+System.currentTimeMillis());
 		inspectionForm.setCreatedBy(776l);
 		inspectionForm.setUpdatedBy(776l);
-		inspectionForm.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
-		inspectionForm.setUpdatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		inspectionForm.setCreatedDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		inspectionForm.setUpdatedDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		inspectionForm.setFormInstance(getFormInstance());
 		inspectionForm.setTenant(getTenant());
 		inspectionForm.setLocale(findLocaleObjectFromDB());
-		inspectionForm.setInspectionDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		inspectionForm.setInspectionDate(Date.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		inspectionForm.setInspectionReference("FRM-#"+System.currentTimeMillis());
 		
 	}
@@ -257,9 +257,9 @@ public class InspectionFormTest extends JPATest {
 		EntityComment entityComment = new EntityComment();
 		entityComment.setComments("Creating draft claim");
 		entityComment.setCreatedBy(779L);
-		entityComment.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		entityComment.setCreatedDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		entityComment.setUpdatedBy(779L);
-		entityComment.setUpdatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		entityComment.setUpdatedDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		entityComment.setCommentType("Internal");
 		comment.setEntityComment(entityComment);
 		comments = new ArrayList<InspectionFormComment>();
@@ -271,7 +271,7 @@ public class InspectionFormTest extends JPATest {
 		audit = new InspectionFormAudit();
 		audit.setInspectionForm(inspectionForm);
 		audit.setStatusCode("DRAFT");
-		audit.setStatusDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		audit.setStatusDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		audit.setStatusBy(779L);	
 		audits = new ArrayList<InspectionFormAudit>();
 		audits.add(audit);

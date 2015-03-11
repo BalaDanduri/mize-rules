@@ -20,14 +20,14 @@ import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.ContextConfiguration;
 
+import com.mize.domain.datetime.Date;
 import com.mize.domain.labor.LaborHour;
 import com.mize.domain.part.Part;
 import com.mize.domain.product.Product;
 import com.mize.domain.product.ProductRegistration;
 import com.mize.domain.product.ProductSerial;
 import com.mize.domain.test.util.JPATest;
-import com.mize.domain.util.MizeDate;
-import com.mize.domain.util.MizeDateTimeUtils;
+import com.mize.domain.util.DateTimeUtils;
 
 @ContextConfiguration(locations={"/test-context.xml"})
 public class ServiceEntityRequestTest extends JPATest {
@@ -162,8 +162,8 @@ public class ServiceEntityRequestTest extends JPATest {
 		serviceEntityRequest = new ServiceEntityRequest();
 		serviceEntityRequest.setRequestType("Repair");
 		serviceEntityRequest.setRepairSiteCode("RST100");
-		serviceEntityRequest.setRepairDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC).minusDays(3));
-		serviceEntityRequest.setFailureDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC).minusDays(4));
+		serviceEntityRequest.setRepairDate(Date.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC).minusDays(3));
+		serviceEntityRequest.setFailureDate(Date.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC).minusDays(4));
 		
 		serviceEntityRequest.setCauseCode("CUSC001");
 		serviceEntityRequest.setCauseDescription("Monitor problem");
@@ -172,7 +172,7 @@ public class ServiceEntityRequestTest extends JPATest {
 		serviceEntityRequest.setCorrectiveActionCode("CORC001");
 		serviceEntityRequest.setCorrectiveActionDescription("Turn off and on the monitor");
 		serviceEntityRequest.setCreatedBy(779L);
-		serviceEntityRequest.setCreatedDate(MizeDateTimeUtils.currentMizeDateTime());
+		serviceEntityRequest.setCreatedDate(DateTimeUtils.currentDateTime());
 		serviceEntityRequest.setServiceEntity(serviceEntity);
 		
 		ServiceEntityAmount partAmount = new ServiceEntityAmount();
@@ -237,7 +237,7 @@ public class ServiceEntityRequestTest extends JPATest {
 	private void createCoverage() {
 		coverage = new ServiceEntityRequestCoverage();
 		coverage.setServiceEntityRequest(serviceEntityRequest);
-		coverage.setCoverageEndDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC).addYears(1));
+		coverage.setCoverageEndDate(Date.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC).addYears(1));
 		coverage.setCoverageName("Standard 1 Year Warranty");
 	}
 	

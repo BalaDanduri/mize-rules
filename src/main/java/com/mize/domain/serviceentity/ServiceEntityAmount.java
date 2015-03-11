@@ -12,7 +12,7 @@ import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.datetime.DateTime;
 
 @Entity(name = "se.ServiceEntityAmount")
 @Table(name = "service_entity_amount")
@@ -120,14 +120,14 @@ public class ServiceEntityAmount extends MizeSceEntity implements Comparable<Ser
 	@JsonInclude(Include.NON_DEFAULT)
 	@JsonIgnore(value=false)*/
 	@Transient
-	public MizeDateTime getUpdatedDate() {
+	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
 	
 	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(value=false)*/
-	public void setUpdatedDate(MizeDateTime updatedDate) {
+	public void setUpdatedDate(DateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}
 	
@@ -136,14 +136,14 @@ public class ServiceEntityAmount extends MizeSceEntity implements Comparable<Ser
 	@JsonInclude(Include.NON_DEFAULT)
 	@JsonIgnore(value=false)
 */	@Transient
-	public MizeDateTime getCreatedDate() {
+	public DateTime getCreatedDate() {
 		return createdDate;
 	}
 
 	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(value=false)*/
-	public void setCreatedDate(MizeDateTime createdDate) {
+	public void setCreatedDate(DateTime createdDate) {
 		this.createdDate = createdDate;
 	}
 	

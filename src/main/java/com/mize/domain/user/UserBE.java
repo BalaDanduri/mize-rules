@@ -32,7 +32,6 @@ import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDateTime;
 
 
 @Entity

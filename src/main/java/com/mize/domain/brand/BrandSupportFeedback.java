@@ -3,7 +3,7 @@ package com.mize.domain.brand;
 import java.util.List;
 
 import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.datetime.DateTime;
 
 public class BrandSupportFeedback extends MizeSceEntity implements Comparable<BrandSupportFeedback>{
 
@@ -17,18 +17,18 @@ public class BrandSupportFeedback extends MizeSceEntity implements Comparable<Br
 	private int rating;
 	private String feedback;
 	private boolean resolved;	
-	private MizeDateTime feedbackDate;
+	private DateTime feedbackDate;
 	private String ticketNo;
 	private Long brandSupportId;
 	private List<PostToSocialMedia> socialMediaPosts;
-	private MizeDateTime startDate;
+	private DateTime startDate;
 
 	public BrandSupportFeedback(){
 		
 	}
 
 	public BrandSupportFeedback(long supportLogId, long id, Brand brand, long brandSupportId, long userId, String userName, String supportType, int rating,
-			String feedback, boolean resolved, MizeDateTime feedbackDate, String ticketNo, List<PostToSocialMedia> socialMediaPosts) {
+			String feedback, boolean resolved, DateTime feedbackDate, String ticketNo, List<PostToSocialMedia> socialMediaPosts) {
 		this.supportLogId = supportLogId;
 		this.id = id;
 		this.brand = brand;
@@ -45,10 +45,10 @@ public class BrandSupportFeedback extends MizeSceEntity implements Comparable<Br
 	}
 	
 
-	public MizeDateTime getStartDate() {
+	public DateTime getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(MizeDateTime startDate) {
+	public void setStartDate(DateTime startDate) {
 		this.startDate = startDate;
 	}
 
@@ -125,11 +125,11 @@ public class BrandSupportFeedback extends MizeSceEntity implements Comparable<Br
 		this.resolved = resolved;
 	}
 	
-	public MizeDateTime getFeedbackDate() {
+	public DateTime getFeedbackDate() {
 		return feedbackDate;
 	}
 
-	public void setFeedbackDate(MizeDateTime feedbackDate) {
+	public void setFeedbackDate(DateTime feedbackDate) {
 		this.feedbackDate = feedbackDate;
 	}
 

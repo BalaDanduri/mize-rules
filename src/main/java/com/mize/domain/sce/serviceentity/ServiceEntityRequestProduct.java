@@ -12,18 +12,16 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Type;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityContact;
 import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.datetime.Date;
 import com.mize.domain.product.ProductRegistration;
 import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDate;
 
 /**
  * @author HarishBurra
@@ -63,8 +61,8 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 	private EntityContact customerContact;
 	private String isNewCustomer;
 
-	private MizeDate purchaseDate;
-	private MizeDate registrationDate;
+	private Date purchaseDate;
+	private Date registrationDate;
 
 	public ServiceEntityRequestProduct() {
 
@@ -288,22 +286,20 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 	}
 
 	@Column(name = "purchase_date")
-	@Type(type = "com.mize.domain.util.MizeDateJPA")
-	public MizeDate getPurchaseDate() {
+	public Date getPurchaseDate() {
 		return purchaseDate;
 	}
 
-	public void setPurchaseDate(MizeDate purchaseDate) {
+	public void setPurchaseDate(Date purchaseDate) {
 		this.purchaseDate = purchaseDate;
 	}
 
 	@Column(name = "regn_date")
-	@Type(type = "com.mize.domain.util.MizeDateJPA")
-	public MizeDate getRegistrationDate() {
+	public Date getRegistrationDate() {
 		return registrationDate;
 	}
 
-	public void setRegistrationDate(MizeDate registrationDate) {
+	public void setRegistrationDate(Date registrationDate) {
 		this.registrationDate = registrationDate;
 	}
 	@Column(name = "brand_id")

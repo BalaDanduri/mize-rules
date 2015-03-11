@@ -23,8 +23,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.brand.Brand;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.datetime.DateTime;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name = "coverage_link")
@@ -171,30 +171,28 @@ public class CoverageLink extends MizeSceEntity implements Comparable<CoverageLi
 
 
 	@Override	
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@Column(name = "created_date",updatable=false)
 	@JsonIgnore(false)
-	public MizeDateTime getCreatedDate() {
+	public DateTime getCreatedDate() {
 		return createdDate;
 	}
 
 	@Override	
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@Column(name = "updated_date")
 	@JsonIgnore(false)
-	public MizeDateTime getUpdatedDate() {
+	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
 
 	@Override
 	@JsonIgnore(false)
-	public void setCreatedDate(MizeDateTime createdDate) {
+	public void setCreatedDate(DateTime createdDate) {
 		super.createdDate = createdDate;
 	}
 
 	@Override
 	@JsonIgnore(false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
+	public void setUpdatedDate(DateTime updatedDate) {
 		super.updatedDate = updatedDate;
 	}
 

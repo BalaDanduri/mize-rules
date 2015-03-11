@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.mize.domain.auth.User;
 import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.datetime.DateTime;
 
 public class UserComment extends MizeSceEntity implements Comparable<UserComment>{
 	
@@ -78,12 +78,12 @@ public class UserComment extends MizeSceEntity implements Comparable<UserComment
 
 	@JsonIgnore(value=false)
 	@JsonInclude(Include.NON_DEFAULT)
-	public MizeDateTime getUpdatedDate() {
+	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
 	
 	@JsonIgnore(value=false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
+	public void setUpdatedDate(DateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}
 

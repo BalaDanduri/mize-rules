@@ -29,9 +29,9 @@ import com.mize.domain.auth.User;
 import com.mize.domain.brand.Brand;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.datetime.DateTime;
 import com.mize.domain.user.UserAddress;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name = "prod_regn")
@@ -43,10 +43,10 @@ public class ProductRegister extends MizeSceEntity implements Comparable<Product
 	private Product product;
 	private User user;
 	private String serialNumber;
-	private MizeDateTime purchaseDate;
+	private DateTime purchaseDate;
 	private Double purchasePrice;
 	private String purchaseStore;
-	private MizeDateTime warrantyExpiryDate;
+	private DateTime warrantyExpiryDate;
 	private String additionalInfo;
 	private String firstName;
 	private String lastName;	
@@ -70,13 +70,13 @@ public class ProductRegister extends MizeSceEntity implements Comparable<Product
 	private String template = "json";
 	
 	@Transient
-	private MizeDateTime createdDateFrom;
+	private DateTime createdDateFrom;
 	@Transient
-	private MizeDateTime createdDateTo;
+	private DateTime createdDateTo;
 	@Transient
-	private MizeDateTime updatedDateFrom;
+	private DateTime updatedDateFrom;
 	@Transient
-	private MizeDateTime updatedDateTo;
+	private DateTime updatedDateTo;
 	
 	private Long addressId;
 	@Transient
@@ -156,13 +156,12 @@ public class ProductRegister extends MizeSceEntity implements Comparable<Product
 	}
 	
 	@Column(name = "purchase_date",  nullable = true)
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@JsonInclude(Include.NON_DEFAULT)
-	public MizeDateTime getPurchaseDate() {
+	public DateTime getPurchaseDate() {
 		return purchaseDate;
 	}
 	
-	public void setPurchaseDate(MizeDateTime purchaseDate) {
+	public void setPurchaseDate(DateTime purchaseDate) {
 		this.purchaseDate = purchaseDate;
 	}
 	
@@ -183,12 +182,11 @@ public class ProductRegister extends MizeSceEntity implements Comparable<Product
 	}
 	
 	@Column(name = "warranty_expiry_date",  nullable = true)
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@JsonInclude(Include.NON_DEFAULT)
-	public MizeDateTime getWarrantyExpiryDate() {
+	public DateTime getWarrantyExpiryDate() {
 		return warrantyExpiryDate;
 	}
-	public void setWarrantyExpiryDate(MizeDateTime warrantyExpiryDate) {
+	public void setWarrantyExpiryDate(DateTime warrantyExpiryDate) {
 		this.warrantyExpiryDate = warrantyExpiryDate;
 	}
 	
@@ -583,44 +581,44 @@ public class ProductRegister extends MizeSceEntity implements Comparable<Product
 	
 	@Transient
 	@JsonInclude(Include.NON_DEFAULT)
-	public MizeDateTime getCreatedDateFrom() {
+	public DateTime getCreatedDateFrom() {
 		return createdDateFrom;
 	}
 
 	
-	public void setCreatedDateFrom(MizeDateTime createdDateFrom) {
+	public void setCreatedDateFrom(DateTime createdDateFrom) {
 		this.createdDateFrom = createdDateFrom;
 	}
 
 	@Transient
 	@JsonInclude(Include.NON_DEFAULT)
-	public MizeDateTime getCreatedDateTo() {
+	public DateTime getCreatedDateTo() {
 		return createdDateTo;
 	}
 
 	
-	public void setCreatedDateTo(MizeDateTime createdDateTo) {
+	public void setCreatedDateTo(DateTime createdDateTo) {
 		this.createdDateTo = createdDateTo;
 	}
 
 	@Transient
 	@JsonInclude(Include.NON_DEFAULT)
-	public MizeDateTime getUpdatedDateFrom() {
+	public DateTime getUpdatedDateFrom() {
 		return updatedDateFrom;
 	}
 
-	public void setUpdatedDateFrom(MizeDateTime updatedDateFrom) {
+	public void setUpdatedDateFrom(DateTime updatedDateFrom) {
 		this.updatedDateFrom = updatedDateFrom;
 	}
 
 	@Transient
 	@JsonInclude(Include.NON_DEFAULT)
-	public MizeDateTime getUpdatedDateTo() {
+	public DateTime getUpdatedDateTo() {
 		return updatedDateTo;
 	}
 
 	
-	public void setUpdatedDateTo(MizeDateTime updatedDateTo) {
+	public void setUpdatedDateTo(DateTime updatedDateTo) {
 		this.updatedDateTo = updatedDateTo;
 	}
 

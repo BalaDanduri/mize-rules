@@ -7,7 +7,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.datetime.DateTime;
 
 public class AppMessageCache implements Comparable<AppMessageCache> , Serializable {
 
@@ -18,8 +18,8 @@ public class AppMessageCache implements Comparable<AppMessageCache> , Serializab
 	private Integer severity;
 	private boolean isExists;
 	private Long tenantId;
-	private MizeDateTime createdDate;
-	private MizeDateTime updatedDate;
+	private DateTime createdDate;
+	private DateTime updatedDate;
 	private Map<Long,AppMessageIntlCache> intlMap = new ConcurrentHashMap<Long, AppMessageIntlCache>();
 	private String isActive;
 	
@@ -73,21 +73,21 @@ public class AppMessageCache implements Comparable<AppMessageCache> , Serializab
 	}
 
 	@JsonIgnore(false)
-	public MizeDateTime getCreatedDate() {
+	public DateTime getCreatedDate() {
 		return this.createdDate;
 	}
 
 	@JsonIgnore(false)
-	public void setCreatedDate(MizeDateTime createdDate) {
+	public void setCreatedDate(DateTime createdDate) {
 		this.createdDate = createdDate;
 	}
 	
 	@JsonInclude(Include.NON_DEFAULT)
-	public MizeDateTime getUpdatedDate() {
+	public DateTime getUpdatedDate() {
 		return this.updatedDate;
 	}
 	
-	public void setUpdatedDate(MizeDateTime updatedDate) {
+	public void setUpdatedDate(DateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	} 
 	

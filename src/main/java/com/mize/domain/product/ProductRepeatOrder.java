@@ -15,11 +15,10 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.datetime.DateTime;
 
 @Entity
 @Table(name = "prod_repeat_order")
@@ -31,10 +30,10 @@ public class ProductRepeatOrder extends MizeSceEntity implements Comparable<Prod
 	private Product product;
 	private ProductRepeatOrderType productRepeatOrderType;
 	private ProductRepeatOrderShipOptions productRepeatOrderShipOptions;
-	private MizeDateTime startDate;
-	private MizeDateTime endDate;
-	private MizeDateTime lastOrderDate;
-	private MizeDateTime nextOrderDate;
+	private DateTime startDate;
+	private DateTime endDate;
+	private DateTime lastOrderDate;
+	private DateTime nextOrderDate;
 	private String active;
 	private Double quantity;
 	private Double unitAmount;
@@ -102,43 +101,39 @@ public class ProductRepeatOrder extends MizeSceEntity implements Comparable<Prod
 	}
 	
 	@Column(name = "start_date",  nullable = true)
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getStartDate() {
+	public DateTime getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(MizeDateTime startDate) {
+	public void setStartDate(DateTime startDate) {
 		this.startDate = startDate;
 	}
 	@Column(name = "end_date",  nullable = true)
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getEndDate() {
+	public DateTime getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(MizeDateTime endDate) {
+	public void setEndDate(DateTime endDate) {
 		this.endDate = endDate;
 	}
 
 	
 	@Column(name = "last_order_date",  nullable = true)
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getLastOrderDate() {
+	public DateTime getLastOrderDate() {
 		return lastOrderDate;
 	}
 
-	public void setLastOrderDate(MizeDateTime lastOrderDate) {
+	public void setLastOrderDate(DateTime lastOrderDate) {
 		this.lastOrderDate = lastOrderDate;
 	}
 
 	@Column(name = "next_order_date",  nullable = true)
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getNextOrderDate() {
+	public DateTime getNextOrderDate() {
 		return nextOrderDate;
 	}
 	
 
-	public void setNextOrderDate(MizeDateTime nextOrderDate) {
+	public void setNextOrderDate(DateTime nextOrderDate) {
 		this.nextOrderDate = nextOrderDate;
 	}
 

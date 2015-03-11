@@ -2,7 +2,7 @@ package com.mize.domain.brand;
 
 
 import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.datetime.DateTime;
 
 public class BrandUserSupportLog extends MizeSceEntity implements Comparable<BrandUserSupportLog>{
 
@@ -12,8 +12,8 @@ public class BrandUserSupportLog extends MizeSceEntity implements Comparable<Bra
 	private Long userId;
 	private String supportType;
 	private String countryCode;
-	private MizeDateTime startTime;
-	private MizeDateTime endTime;
+	private DateTime startTime;
+	private DateTime endTime;
 	private long brandSupportId;
 	
 	public BrandUserSupportLog(){
@@ -21,8 +21,8 @@ public class BrandUserSupportLog extends MizeSceEntity implements Comparable<Bra
 	}
 	
 	public BrandUserSupportLog(long brandId, long id,
-			long userId, String supportType, String countryCode, MizeDateTime startTime,
-			MizeDateTime endTime, long brandSupportId) {
+			long userId, String supportType, String countryCode, DateTime startTime,
+			DateTime endTime, long brandSupportId) {
 		this.brandId = brandId;
 		this.id = id;
 		this.userId = userId;
@@ -65,19 +65,19 @@ public class BrandUserSupportLog extends MizeSceEntity implements Comparable<Bra
 		this.countryCode = countryCode;
 	}
 	
-	public MizeDateTime getStartTime() {
+	public DateTime getStartTime() {
 		return startTime;
 	}
 	
-	public void setStartTime(MizeDateTime startTime) {
+	public void setStartTime(DateTime startTime) {
 		this.startTime = startTime;
 	}
 	
-	public MizeDateTime getEndTime() {
+	public DateTime getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(MizeDateTime endTime) {
+	public void setEndTime(DateTime endTime) {
 		this.endTime = endTime;
 	}
 

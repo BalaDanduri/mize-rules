@@ -1,12 +1,10 @@
 package com.mize.domain.form;
 
-import org.hibernate.annotations.Type;
-
 import com.mize.domain.auth.User;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.datetime.Date;
 import com.mize.domain.product.Product;
-import com.mize.domain.util.MizeDate;
 
 public class FormDefinitionCriteria extends MizeSceEntity implements Comparable<FormDefinitionCriteria> {
 
@@ -15,7 +13,7 @@ public class FormDefinitionCriteria extends MizeSceEntity implements Comparable<
 	
 	private String inspectionType;
 	private Product product;
-	private MizeDate inspectionDate;
+	private Date inspectionDate;
 	private User user;
 	private Locale locale;
 	
@@ -45,12 +43,11 @@ public class FormDefinitionCriteria extends MizeSceEntity implements Comparable<
 		this.product = product;
 	}
 
-	@Type(type = "com.mize.domain.util.MizeDateJPA")
-	public MizeDate getInspectionDate() {
+	public Date getInspectionDate() {
 		return inspectionDate;
 	}
 
-	public void setInspectionDate(MizeDate inspectionDate) {
+	public void setInspectionDate(Date inspectionDate) {
 		this.inspectionDate = inspectionDate;
 	}
 

@@ -21,9 +21,9 @@ import org.springframework.test.context.ContextConfiguration;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityComment;
+import com.mize.domain.datetime.Date;
 import com.mize.domain.test.util.JPATest;
-import com.mize.domain.util.MizeDate;
-import com.mize.domain.util.MizeDateTimeUtils;
+import com.mize.domain.util.DateTimeUtils;
 
 
 @ContextConfiguration(locations={"/test-context.xml"})
@@ -91,10 +91,10 @@ public class ProductRegistrationTest  extends JPATest {
 		productRegistration.setRegistrationType("STORE");
 		productRegistration.setCustomer(businessEntity);
 		productRegistration.setInvoiceBusinessEntity(businessEntity);
-		productRegistration.setCustomerDeliveryDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		productRegistration.setCustomerDeliveryDate(Date.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		productRegistration.setPurchasePrice(new BigDecimal(200.00));
-		productRegistration.setCustomerDeliveryDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC).plusDays(3));
-		productRegistration.setWarrantyExpiryDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC).plusMonths(24));
+		productRegistration.setCustomerDeliveryDate(Date.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC).plusDays(3));
+		productRegistration.setWarrantyExpiryDate(Date.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC).plusMonths(24));
 		productRegistration.setCustomerAddress(entityAddress);
 		return productRegistration;
 		
@@ -131,9 +131,9 @@ public class ProductRegistrationTest  extends JPATest {
 			BusinessEntity be= new BusinessEntity();
 			be.setId(rs.getLong("invoice_be_id"));
 			productRegistration.setInvoiceBusinessEntity(be);
-			productRegistration.setCustomerDeliveryDate(MizeDateTimeUtils.toMizeDate(rs.getTimestamp("cust_delivery_date")));
+			productRegistration.setCustomerDeliveryDate(DateTimeUtils.toDate(rs.getTimestamp("cust_delivery_date")));
 			productRegistration.setPurchasePrice(rs.getBigDecimal("purchase_price"));
-			productRegistration.setWarrantyExpiryDate(MizeDateTimeUtils.toMizeDate(rs.getTimestamp("warranty_expiry_date")));
+			productRegistration.setWarrantyExpiryDate(DateTimeUtils.toDate(rs.getTimestamp("warranty_expiry_date")));
 			
 			EntityAddress customerAddress = new EntityAddress();
 			customerAddress.setId(rs.getLong("cust_address_id"));

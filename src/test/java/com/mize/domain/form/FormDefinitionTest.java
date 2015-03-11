@@ -19,10 +19,10 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.ContextConfiguration;
 
 import com.mize.domain.businessentity.BusinessEntity;
+import com.mize.domain.datetime.Date;
+import com.mize.domain.datetime.DateTime;
 import com.mize.domain.test.util.JPATest;
-import com.mize.domain.util.MizeDate;
-import com.mize.domain.util.MizeDateTime;
-import com.mize.domain.util.MizeDateTimeUtils;
+import com.mize.domain.util.DateTimeUtils;
 
 @ContextConfiguration(locations={"/test-context.xml"})
 public class FormDefinitionTest extends JPATest {
@@ -64,11 +64,11 @@ public class FormDefinitionTest extends JPATest {
 		formDef.setTenant(tenant);
 		formDef.setFormCode("FORM123");
 		formDef.setIsActive("Y");
-		formDef.setStartDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
-		formDef.setEndDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC).addYears(1));
+		formDef.setStartDate(Date.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		formDef.setEndDate(Date.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC).addYears(1));
 		formDef.setStatusCode("DRAFT");
-		formDef.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
-		formDef.setUpdatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		formDef.setCreatedDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		formDef.setUpdatedDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		formDef.setCreatedBy(Long.valueOf(779));
 		formDef.setUpdatedBy(Long.valueOf(779));
 		formDef.setFormDefinitionData("formDefinitionData");
@@ -115,11 +115,11 @@ public class FormDefinitionTest extends JPATest {
 			FormTemplateDefinition ftdef = new FormTemplateDefinition();
 			ftdef.setId(rs.getLong("template_defn_id"));
 			formDef.setFormTemplateDefinition(ftdef);
-			formDef.setStartDate(MizeDateTimeUtils.toMizeDate(rs.getTimestamp("start_date")));
-			formDef.setEndDate(MizeDateTimeUtils.toMizeDate(rs.getTimestamp("end_date")));
+			formDef.setStartDate(DateTimeUtils.toDate(rs.getTimestamp("start_date")));
+			formDef.setEndDate(DateTimeUtils.toDate(rs.getTimestamp("end_date")));
 			formDef.setFormDefinitionData(rs.getString("form_defn_data"));
-			formDef.setCreatedDate(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("created_date")));
-			formDef.setUpdatedDate(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("updated_date")));
+			formDef.setCreatedDate(DateTimeUtils.toDateTime(rs.getTimestamp("created_date")));
+			formDef.setUpdatedDate(DateTimeUtils.toDateTime(rs.getTimestamp("updated_date")));
 			formDef.setCreatedBy(rs.getLong("created_by"));
 			formDef.setUpdatedBy(rs.getLong("updated_by"));
 			return formDef;

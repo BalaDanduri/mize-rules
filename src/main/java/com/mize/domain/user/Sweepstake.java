@@ -7,11 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Type;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.datetime.DateTime;
 
 @Entity
 @Table(name = "sweepstake")
@@ -21,8 +19,8 @@ public class Sweepstake extends MizeSceEntity implements Comparable<Sweepstake>{
 	private String code;
 	private String name;
 	private String description;
-	private MizeDateTime startDate;
-	private MizeDateTime endDate;	
+	private DateTime startDate;
+	private DateTime endDate;	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -65,22 +63,20 @@ public class Sweepstake extends MizeSceEntity implements Comparable<Sweepstake>{
 	}
 
 	@Column(name = "start_date",  nullable = true)
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getStartDate() {
+	public DateTime getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(MizeDateTime startDate) {
+	public void setStartDate(DateTime startDate) {
 		this.startDate = startDate;
 	}
 
 	@Column(name = "end_date",  nullable = true)
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getEndDate() {
+	public DateTime getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(MizeDateTime endDate) {
+	public void setEndDate(DateTime endDate) {
 		this.endDate = endDate;
 	}
 	

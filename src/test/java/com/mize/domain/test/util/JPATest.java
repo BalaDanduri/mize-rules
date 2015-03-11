@@ -33,6 +33,8 @@ import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.Gender;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.State;
+import com.mize.domain.datetime.Date;
+import com.mize.domain.datetime.DateTime;
 import com.mize.domain.form.FormDefinition;
 import com.mize.domain.form.FormTemplateDefinition;
 import com.mize.domain.product.Product;
@@ -41,8 +43,6 @@ import com.mize.domain.serviceentity.ServiceEntityAddress;
 import com.mize.domain.serviceentity.ServiceEntityAudit;
 import com.mize.domain.user.UserProfile;
 import com.mize.domain.util.Formatter;
-import com.mize.domain.util.MizeDate;
-import com.mize.domain.util.MizeDateTime;
 import com.mize.domain.util.MizeObjectMapper;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -221,8 +221,8 @@ public class JPATest {
 			tenant.setIsActive("Y");
 			tenant.setCreatedBy(1l);
 			tenant.setUpdatedBy(1l);
-			tenant.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
-			tenant.setUpdatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+			tenant.setCreatedDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+			tenant.setUpdatedDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 			if (!type.equalsIgnoreCase("company")) {
 				BusinessEntityIntl intl = new BusinessEntityIntl();
 				intl.setName(type);
@@ -242,9 +242,9 @@ public class JPATest {
 		User user = new User();
 		user.setEmail("admin"+System.currentTimeMillis()+"@mize.com");
 		user.setName("Mize");
-		user.setLastLogin(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
-		user.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
-		user.setUpdatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		user.setLastLogin(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		user.setCreatedDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		user.setUpdatedDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		UserProfile userProfile = user.getUserProfile();
 		if(userProfile == null){
 			userProfile = new UserProfile();
@@ -252,7 +252,7 @@ public class JPATest {
 		userProfile.setEmailOptOut("N");
 		userProfile.setFirstName("Test");
 		userProfile.setLastName("Admin");
-		userProfile.setBirthdate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC).minusYears(28));
+		userProfile.setBirthdate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC).minusYears(28));
 		userProfile.setGender(Gender.F);
 		userProfile.setUser(user);
 		
@@ -274,9 +274,9 @@ public class JPATest {
 		product.setBrand(brand);
 		product.setTenant(tenant);
 		product.setManufacturerBE((businessEntity));
-		product.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
-		product.setUpdatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
-		product.setReleaseDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		product.setCreatedDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		product.setUpdatedDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		product.setReleaseDate(Date.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		
 		return product;
 

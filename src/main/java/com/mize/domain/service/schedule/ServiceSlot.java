@@ -1,25 +1,25 @@
 package com.mize.domain.service.schedule;
 
 import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.datetime.DateTime;
 
 public class ServiceSlot  extends MizeSceEntity implements Comparable<ServiceSlot>{
 	
 	private static final long serialVersionUID = 4264889614013460395L;
 
 	//@DateTimeFormat (pattern="dd-MM-yyyy")
-	private MizeDateTime date;
+	private DateTime date;
 	
 	private String startTime;
 	
 	private String endTime;
 	
 	//@JsonSerialize(using=JsonDateSerializer.class)
-	public MizeDateTime getDate() {
+	public DateTime getDate() {
 		return date;
 	}
 	//@JsonDeserialize(using=JodaDateDeserializer.class)
-	public void setDate(MizeDateTime date) {
+	public void setDate(DateTime date) {
 		this.date = date;
 	}
 		

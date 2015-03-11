@@ -34,9 +34,9 @@ import com.mize.domain.common.Gender;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.common.PostalAddress;
+import com.mize.domain.datetime.DateTime;
 import com.mize.domain.product.UserProduct;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name = "user_profile")
@@ -61,7 +61,7 @@ public class UserProfile extends MizeSceEntityAudit implements Serializable, Com
 	private String firstName;
 	private String middleName;
 	private String lastName;	
-	private MizeDateTime birthdate;
+	private DateTime birthdate;
 	private Gender gender;
 	private String cityState;
 	private List<User> friends = new ArrayList<User>();
@@ -96,7 +96,7 @@ public class UserProfile extends MizeSceEntityAudit implements Serializable, Com
 	}
 	
 	public UserProfile(Long userId, UserType userType, PostalAddress postalAddress,
-			String firstName, String lastName, MizeDateTime birthdate, Gender gender,String photoLink, String jobTitle) {
+			String firstName, String lastName, DateTime birthdate, Gender gender,String photoLink, String jobTitle) {
 		
 		this.userId = userId;
 		this.userType = userType;
@@ -110,7 +110,7 @@ public class UserProfile extends MizeSceEntityAudit implements Serializable, Com
 	}
 	
 	public UserProfile(Long userId, UserType userType, PostalAddress postalAddress,
-			String firstName, String lastName, MizeDateTime birthdate, Gender gender) {
+			String firstName, String lastName, DateTime birthdate, Gender gender) {
 		
 		this.userId = userId;
 		this.userType = userType;
@@ -194,12 +194,11 @@ public class UserProfile extends MizeSceEntityAudit implements Serializable, Com
 	}
 	
 	@Column(name = "birth_day",updatable = false)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getBirthdate() {
+	public DateTime getBirthdate() {
 		return birthdate;
 	}
 	
-	public void setBirthdate(MizeDateTime birthdate) {
+	public void setBirthdate(DateTime birthdate) {
 		this.birthdate = birthdate;
 	}
 	

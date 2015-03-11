@@ -21,8 +21,8 @@ import org.springframework.test.context.ContextConfiguration;
 
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.datetime.DateTime;
 import com.mize.domain.test.util.JPATest;
-import com.mize.domain.util.MizeDateTime;
 
 @ContextConfiguration(locations={"/test-context.xml"})
 public class MizeJobTest extends JPATest {
@@ -114,7 +114,7 @@ public class MizeJobTest extends JPATest {
 	}
 	
 	private void populateAuditFields(MizeSceEntity entity) {
-		MizeDateTime dateTime = MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC);
+	    DateTime dateTime = DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC);
 		entity.setCreatedDate(dateTime);
 		entity.setUpdatedDate(dateTime);
 		entity.setCreatedBy(Long.valueOf(1162));

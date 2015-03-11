@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.datetime.DateTime;
 import com.mize.domain.product.ProductCategory;
 import com.mize.domain.product.ProductContent;
-import com.mize.domain.util.MizeDateTime;
 
 public class Product extends MizeSceEntity{
 
@@ -19,7 +19,7 @@ public class Product extends MizeSceEntity{
 	private Long categoryId;
 	private Integer isAccesory;
 	private Long brandId;
-	protected MizeDateTime modifiedDate;
+	protected DateTime modifiedDate;
 	private List<ProductAccessories> accessories = new ArrayList<ProductAccessories>();
 	private ProductDescription prdDescription;
 	private List<ProductImages>  images = new ArrayList<ProductImages>();
@@ -144,11 +144,11 @@ public class Product extends MizeSceEntity{
 		this.similarProducts = similarProducts;
 	}
 	
-	public MizeDateTime getModifiedDate() {
+	public DateTime getModifiedDate() {
 		return modifiedDate;
 	}
 	
-	public void setModifiedDate(MizeDateTime modifiedDate) {
+	public void setModifiedDate(DateTime modifiedDate) {
 		this.modifiedDate = modifiedDate;
 	}
 

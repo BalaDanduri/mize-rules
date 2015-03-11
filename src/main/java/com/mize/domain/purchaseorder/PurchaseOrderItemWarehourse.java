@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDate;
+import com.mize.domain.datetime.Date;
 
 @Entity
 @Inheritance
@@ -37,7 +37,7 @@ public class PurchaseOrderItemWarehourse extends MizeSceEntity implements Compar
 	private BigDecimal requestedQuantity;
 	private BigDecimal backorderQuantity;
 	private BigDecimal estimatedShipmentCost;
-	private MizeDate estimatedShipmentDate;
+	private Date estimatedShipmentDate;
 	private String binLocation;
 
 	@Id
@@ -120,12 +120,11 @@ public class PurchaseOrderItemWarehourse extends MizeSceEntity implements Compar
 
 	@Column(name = "estimated_ship_date")
 	@JsonInclude(Include.NON_DEFAULT)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateJPA")
-	public MizeDate getEstimatedShipmentDate() {
+	public Date getEstimatedShipmentDate() {
 		return estimatedShipmentDate;
 	}
 
-	public void setEstimatedShipmentDate(MizeDate estimatedShipmentDate) {
+	public void setEstimatedShipmentDate(Date estimatedShipmentDate) {
 		this.estimatedShipmentDate = estimatedShipmentDate;
 	}
 

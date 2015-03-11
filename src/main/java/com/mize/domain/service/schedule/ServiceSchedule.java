@@ -13,16 +13,15 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
 
 import com.mize.domain.auth.User;
 import com.mize.domain.brand.Brand;
 import com.mize.domain.common.Country;
 import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.common.State;
+import com.mize.domain.datetime.DateTime;
 import com.mize.domain.product.Product;
 import com.mize.domain.user.UserAddress;
-import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name="service_schedule")
@@ -41,7 +40,7 @@ public class ServiceSchedule  extends MizeSceEntity  implements Comparable<Servi
 	private String problem;
 	Long productCategoryId;
 	private Long productSubCategoryId;		
-	private MizeDateTime scheduledDate;
+	private DateTime scheduledDate;
 	private String startTime;
 	private String endTime;
 	private String address1;
@@ -96,7 +95,7 @@ public class ServiceSchedule  extends MizeSceEntity  implements Comparable<Servi
 	public ServiceSchedule(User user, Brand brand, String serviceFormat,
 			Long beId, String serviceType, String problem,
 			Long productCategoryId, Long productSubCategoryId,
-			MizeDateTime scheduledDate, String startTime, String endTime,
+			DateTime scheduledDate, String startTime, String endTime,
 			String address1, String address2, String address3, String city,
 			State state, Country country, String email, String zipCode,
 			String mobilePhone, String homePhone, String workPhone,
@@ -238,14 +237,13 @@ public class ServiceSchedule  extends MizeSceEntity  implements Comparable<Servi
 	@JsonSerialize(using = JsonDateSerializer.class)
 	@JsonInclude(Include.NON_NULL)*/
 	@Column(name="scheduled_date",nullable=true)
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getScheduledDate() {
+	public DateTime getScheduledDate() {
 		return scheduledDate;
 	}
 	
 	/*@DateTimeFormat(pattern="MM-dd-yyyy")
 	@JsonDeserialize(using=JodaDateDeserializer.class)*/
-	public void setScheduledDate(MizeDateTime scheduledDate) {
+	public void setScheduledDate(DateTime scheduledDate) {
 		this.scheduledDate = scheduledDate;
 	}
 

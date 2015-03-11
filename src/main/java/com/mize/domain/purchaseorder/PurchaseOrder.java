@@ -35,10 +35,10 @@ import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeErrorTab;
 import com.mize.domain.common.MizeSceEntityAudit;
+import com.mize.domain.datetime.DateTime;
 import com.mize.domain.util.CachedEntity;
+import com.mize.domain.util.DateTimeUtils;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDateTime;
-import com.mize.domain.util.MizeDateTimeUtils;
 import com.mize.domain.util.TenantSerializer;
 
 @Entity
@@ -100,7 +100,7 @@ public class PurchaseOrder extends MizeSceEntityAudit implements Comparable<Purc
 	@Transient
 	private String submittedBy;
 	@Transient
-	private MizeDateTime submittedDate;
+	private DateTime submittedDate;
 	@Transient
 	private String imageURL;
 	@Transient
@@ -116,7 +116,7 @@ public class PurchaseOrder extends MizeSceEntityAudit implements Comparable<Purc
 		super();
 	}
 	
-	public PurchaseOrder(Long id,String number,String status,String type,String requestType,MizeDateTime createdDate,MizeDateTime updatedDate,Locale locale){
+	public PurchaseOrder(Long id,String number,String status,String type,String requestType,DateTime createdDate,DateTime updatedDate,Locale locale){
 		super();
 		this.id = id;
 		this.number = number;
@@ -129,7 +129,7 @@ public class PurchaseOrder extends MizeSceEntityAudit implements Comparable<Purc
 	}
 	
 	public PurchaseOrder(Long id,String number,String status,String type,String requestType,
-			MizeDateTime createdDate,MizeDateTime updatedDate,String itemNumber,BigDecimal quantity,String isReturnable,String originalOrderNumber){
+			DateTime createdDate,DateTime updatedDate,String itemNumber,BigDecimal quantity,String isReturnable,String originalOrderNumber){
 		super();
 		this.id = id;
 		this.number = number;
@@ -509,11 +509,11 @@ public class PurchaseOrder extends MizeSceEntityAudit implements Comparable<Purc
 	
 	@Transient
     @JsonInclude(Include.NON_NULL)
-	public MizeDateTime getSubmittedDate() {
+	public DateTime getSubmittedDate() {
 		return submittedDate;
 	}
 
-	public void setSubmittedDate(MizeDateTime submittedDate) {
+	public void setSubmittedDate(DateTime submittedDate) {
 		this.submittedDate = submittedDate;
 	}
 
@@ -536,10 +536,10 @@ public class PurchaseOrder extends MizeSceEntityAudit implements Comparable<Purc
 	}
 	
 	@Transient
-	public String getFormattedDisplayDate(MizeDateTime inputDate) {
+	public String getFormattedDisplayDate(DateTime inputDate) {
 		String date="";
 		if(inputDate!=null){
-			date = MizeDateTimeUtils.formattedMizeDate(inputDate,user);
+			date = DateTimeUtils.formattedDate(inputDate,user);
 		}
 		return date;
 	}

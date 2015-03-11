@@ -19,9 +19,9 @@ import org.springframework.test.context.ContextConfiguration;
 
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.datetime.DateTime;
 import com.mize.domain.test.util.JPATest;
-import com.mize.domain.util.MizeDateTime;
-import com.mize.domain.util.MizeDateTimeUtils;
+import com.mize.domain.util.DateTimeUtils;
 
 @ContextConfiguration(locations={"/test-context.xml"})
 public class MizeJobInstanceTest extends JPATest {
@@ -54,7 +54,7 @@ public class MizeJobInstanceTest extends JPATest {
 		jobInstance.setJob(mizeJob);
 		jobInstance.setInstanceCode("TestMizeJobInst001");
 		jobInstance.setInstanceName("Test Mize Job Inst 001");
-		jobInstance.setNextRunTime(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		jobInstance.setNextRunTime(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		jobInstance.setJobStatus("RUNNING");
 		jobInstance.setIsActive("Y");
 		
@@ -97,8 +97,8 @@ public class MizeJobInstanceTest extends JPATest {
 			jobInstance.setId(rs.getLong("id"));
 			jobInstance.setInstanceCode(rs.getString("instance_code"));
 			jobInstance.setInstanceName(rs.getString("instance_name"));
-			jobInstance.setLastRunTime(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("last_run")));
-			jobInstance.setNextRunTime(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("next_run")));
+			jobInstance.setLastRunTime(DateTimeUtils.toDateTime(rs.getTimestamp("last_run")));
+			jobInstance.setNextRunTime(DateTimeUtils.toDateTime(rs.getTimestamp("next_run")));
 			jobInstance.setJobStatus(rs.getString("job_status"));
 			jobInstance.setIsActive(rs.getString("is_active"));
 			return jobInstance;
@@ -106,8 +106,8 @@ public class MizeJobInstanceTest extends JPATest {
 	}
 	
 	private void populateAuditFields(MizeSceEntity entity) {
-		entity.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
-		entity.setUpdatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		entity.setCreatedDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		entity.setUpdatedDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		entity.setCreatedBy(Long.valueOf(779));
 		entity.setUpdatedBy(Long.valueOf(779));
 	}

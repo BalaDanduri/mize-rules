@@ -29,10 +29,10 @@ import com.mize.domain.common.EntityAttachment;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.State;
+import com.mize.domain.datetime.DateTime;
 import com.mize.domain.labor.LaborHour;
 import com.mize.domain.part.Part;
 import com.mize.domain.test.util.JPATest;
-import com.mize.domain.util.MizeDateTime;
 import com.mize.domain.util.MizeObjectMapper;
 
 @ContextConfiguration(locations = { "/test-context.xml" })
@@ -295,7 +295,7 @@ public class ServiceBulletinTest extends JPATest {
 		audit = new ServiceBulletinAudit();
 		audit.setServiceBulletin(serviceBulletin);
 		audit.setStatusCode("DRAFT");
-		audit.setStatusDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		audit.setStatusDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		audit.setStatusBy(779L);
 		audits = new ArrayList<ServiceBulletinAudit>();
 		audits.add(audit);
@@ -321,9 +321,9 @@ public class ServiceBulletinTest extends JPATest {
 		EntityComment entityComment = new EntityComment();
 		entityComment.setComments("Creating draft claim");
 		entityComment.setCreatedBy(779L);
-		entityComment.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		entityComment.setCreatedDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		entityComment.setUpdatedBy(779L);
-		entityComment.setUpdatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		entityComment.setUpdatedDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		entityComment.setCommentType("Internal");
 		comment.setEntityComment(entityComment);
 		comments = new ArrayList<ServiceBulletinComment>();
@@ -339,9 +339,9 @@ public class ServiceBulletinTest extends JPATest {
 		entityAttachment.setName("MachineInternal.jpg");
 		entityAttachment.setUrl("http://amazon.s3.com/image/MachineInternal.jpg");
 		entityAttachment.setCreatedBy(779L);
-		entityAttachment.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		entityAttachment.setCreatedDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		entityAttachment.setUpdatedBy(779L);
-		entityAttachment.setUpdatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		entityAttachment.setUpdatedDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		attachment.setEntityAttachment(entityAttachment);
 		attachments = new ArrayList<ServiceBulletinAttachment>();
 		attachments.add(attachment);

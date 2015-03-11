@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.mize.domain.auth.User;
 import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.datetime.DateTime;
 
 public final class UploadSearchCriteria extends MizeSceEntity implements Comparable<UploadSearchCriteria> {
 
@@ -13,10 +13,8 @@ public final class UploadSearchCriteria extends MizeSceEntity implements Compara
 	
 	private String entityType;
 	private String fileType;
-	//@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private MizeDateTime fromDate;
-//	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private MizeDateTime toDate;
+	private DateTime fromDate;
+	private DateTime toDate;
 	private String status;
 	private String fileName;
 	private User user;
@@ -35,29 +33,19 @@ public final class UploadSearchCriteria extends MizeSceEntity implements Compara
 		this.id = id;
 	}
 
-	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)*/
-	public MizeDateTime getFromDate() {
+	public DateTime getFromDate() {
 		return fromDate;
 	}
 
-	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	*/
-	public void setFromDate(MizeDateTime fromDate) {
+	public void setFromDate(DateTime fromDate) {
 		this.fromDate = fromDate;
 	}
 
-	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)*/
-	public MizeDateTime getToDate() {
+	public DateTime getToDate() {
 		return toDate;
 	}
 
-	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	*/
-	public void setToDate(MizeDateTime toDate) {
+	public void setToDate(DateTime toDate) {
 		this.toDate = toDate;
 	}
 	

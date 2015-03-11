@@ -21,14 +21,14 @@ import org.springframework.test.context.ContextConfiguration;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.Country;
 import com.mize.domain.common.Locale;
+import com.mize.domain.datetime.Date;
+import com.mize.domain.datetime.DateTime;
 import com.mize.domain.part.Part;
 import com.mize.domain.part.PartAttribute;
 import com.mize.domain.part.PartIntl;
 import com.mize.domain.part.PartPrice;
 import com.mize.domain.test.util.JPATest;
-import com.mize.domain.util.MizeDate;
-import com.mize.domain.util.MizeDateTime;
-import com.mize.domain.util.MizeDateTimeUtils;
+import com.mize.domain.util.DateTimeUtils;
 
 @ContextConfiguration(locations = { "/test-context.xml" })
 public class PartTest extends JPATest {
@@ -94,8 +94,8 @@ public class PartTest extends JPATest {
 		part.setIsReturnable("Y");
 		part.setIsSerialized("Y");
 		part.setUom("Each");
-		part.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
-		part.setUpdatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC).plusMonths(2));
+		part.setCreatedDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		part.setUpdatedDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC).plusMonths(2));
 		part.setCreatedBy(779l);
 		part.setUpdatedBy(779l);
 		return part;
@@ -124,12 +124,12 @@ public class PartTest extends JPATest {
 		partPrice.setNetPrice(BigDecimal.valueOf(1));
 		partPrice.setCurrencyCode("USD");
 		partPrice.setTaxId(1l);
-		partPrice.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		partPrice.setCreatedDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		partPrice.setCreatedBy(776l);
-		partPrice.setEndDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC).plusMonths(2));
-		partPrice.setStartDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		partPrice.setEndDate(Date.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC).plusMonths(2));
+		partPrice.setStartDate(Date.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		partPrice.setUpdatedBy(776l);
-		partPrice.setUpdatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC).plusMonths(1));
+		partPrice.setUpdatedDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC).plusMonths(1));
 		partPrices.add(partPrice);
 
 		part.setPartPrices(partPrices);
@@ -157,9 +157,9 @@ public class PartTest extends JPATest {
 			part.setIsSerialized(resultSet.getString("is_serialized"));
 			part.setIsReturnable(resultSet.getString("is_returnable"));
 			part.setUom(resultSet.getString("uom"));
-			part.setCreatedDate(MizeDateTimeUtils.toMizeDateTime(resultSet
+			part.setCreatedDate(DateTimeUtils.toDateTime(resultSet
 					.getTimestamp("created_date")));
-			part.setUpdatedDate(MizeDateTimeUtils.toMizeDateTime(resultSet
+			part.setUpdatedDate(DateTimeUtils.toDateTime(resultSet
 					.getTimestamp("updated_date")));
 			BusinessEntity beEntity = new BusinessEntity();
 			beEntity.setId(resultSet.getLong("tenant_id"));
@@ -207,15 +207,15 @@ public class PartTest extends JPATest {
 			partPrice.setNetPrice(rs.getBigDecimal("net_price"));
 			partPrice.setCurrencyCode(rs.getString("currency_code"));
 			partPrice.setTaxId(rs.getLong("tax_id"));
-			partPrice.setCreatedDate(MizeDateTimeUtils.toMizeDateTime(rs
+			partPrice.setCreatedDate(DateTimeUtils.toDateTime(rs
 					.getTimestamp("created_date")));
 			partPrice.setCreatedBy(rs.getLong("created_by"));
 			partPrice
-					.setEndDate(MizeDateTimeUtils.toMizeDate(rs.getTimestamp("end_date")));
-			partPrice.setStartDate(MizeDateTimeUtils.toMizeDate(rs
+					.setEndDate(DateTimeUtils.toDate(rs.getTimestamp("end_date")));
+			partPrice.setStartDate(DateTimeUtils.toDate(rs
 					.getTimestamp("start_date")));
 			partPrice.setUpdatedBy(rs.getLong("updated_by"));
-			partPrice.setUpdatedDate(MizeDateTimeUtils.toMizeDateTime(rs
+			partPrice.setUpdatedDate(DateTimeUtils.toDateTime(rs
 					.getTimestamp("updated_date")));
 
 			return partPrice;

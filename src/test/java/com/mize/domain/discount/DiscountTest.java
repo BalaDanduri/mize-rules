@@ -20,10 +20,10 @@ import org.springframework.test.context.ContextConfiguration;
 
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityComment;
+import com.mize.domain.datetime.Date;
+import com.mize.domain.datetime.DateTime;
 import com.mize.domain.test.util.JPATest;
-import com.mize.domain.util.MizeDate;
-import com.mize.domain.util.MizeDateTime;
-import com.mize.domain.util.MizeDateTimeUtils;
+import com.mize.domain.util.DateTimeUtils;
 
 @ContextConfiguration(locations={"/test-context.xml"})
 public class DiscountTest  extends JPATest {
@@ -80,10 +80,10 @@ public class DiscountTest  extends JPATest {
 		discount.setMinimumQuantity(BigDecimal.valueOf(5));
 		discount.setMaximumQuantity(BigDecimal.valueOf(10));
 		discount.setOrderType("LINE");
-		discount.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
-		discount.setUpdatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
-		discount.setStartDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
-		discount.setEndDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		discount.setCreatedDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		discount.setUpdatedDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		discount.setStartDate(Date.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		discount.setEndDate(Date.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		discount.setCreatedBy(779l);
 		discount.setUpdatedBy(779l);
 		discount.setOrderBusinessEntity(businessEntity);
@@ -114,10 +114,10 @@ public class DiscountTest  extends JPATest {
 			discount.setMinimumQuantity(rs.getBigDecimal("minimum_quantity"));
 			discount.setMaximumQuantity(rs.getBigDecimal("maximum_quantity"));
 			discount.setOrderType(rs.getString("order_type"));
-			discount.setCreatedDate(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("created_date")));
-			discount.setUpdatedDate(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("updated_date")));
-			discount.setStartDate(MizeDateTimeUtils.toMizeDate(rs.getTimestamp("start_date")));
-			discount.setEndDate(MizeDateTimeUtils.toMizeDate(rs.getTimestamp("end_date")));
+			discount.setCreatedDate(DateTimeUtils.toDateTime(rs.getTimestamp("created_date")));
+			discount.setUpdatedDate(DateTimeUtils.toDateTime(rs.getTimestamp("updated_date")));
+			discount.setStartDate(DateTimeUtils.toDate(rs.getTimestamp("start_date")));
+			discount.setEndDate(DateTimeUtils.toDate(rs.getTimestamp("end_date")));
 			discount.setCreatedBy(rs.getLong("created_by"));
 			discount.setUpdatedBy(rs.getLong("updated_by"));
 			discount.setOrderBusinessEntity(businessEntity);

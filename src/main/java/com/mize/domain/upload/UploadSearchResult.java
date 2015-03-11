@@ -1,7 +1,7 @@
 package com.mize.domain.upload;
 
 import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.datetime.DateTime;
 
 public final class UploadSearchResult extends MizeSceEntity implements Comparable<UploadSearchResult> {
 
@@ -9,10 +9,8 @@ public final class UploadSearchResult extends MizeSceEntity implements Comparabl
 	
 	private String entityType;
 	private String fileType;
-//	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private MizeDateTime startTime;
-//	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private MizeDateTime endTime;
+	private DateTime startTime;
+	private DateTime endTime;
 	private String status;
 	private String fileName;
 	private Integer recordCount;
@@ -33,29 +31,19 @@ public final class UploadSearchResult extends MizeSceEntity implements Comparabl
 		this.id = id;
 	}
 	
-	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)*/
-	public MizeDateTime getStartTime() {
+	public DateTime getStartTime() {
 		return startTime;
 	}
 
-	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	*/
-	public void setStartTime(MizeDateTime startTime) {
+	public void setStartTime(DateTime startTime) {
 		this.startTime = startTime;
 	}
 
-	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)*/
-	public MizeDateTime getEndTime() {
+	public DateTime getEndTime() {
 		return endTime;
 	}
 
-	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	*/
-	public void setEndTime(MizeDateTime endTime) {
+	public void setEndTime(DateTime endTime) {
 		this.endTime = endTime;
 	}
 	

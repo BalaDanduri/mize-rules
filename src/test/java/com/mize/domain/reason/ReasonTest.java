@@ -20,8 +20,8 @@ import org.springframework.test.context.ContextConfiguration;
 
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.Locale;
+import com.mize.domain.datetime.DateTime;
 import com.mize.domain.test.util.JPATest;
-import com.mize.domain.util.MizeDateTime;
 
 @ContextConfiguration(locations={"/test-context.xml"})
 public class ReasonTest extends JPATest {
@@ -111,9 +111,9 @@ public class ReasonTest extends JPATest {
 		reason.setIsActive("Y");
 		
 		reason.setCreatedBy(779L);
-		reason.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		reason.setCreatedDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		reason.setUpdatedBy(779L);
-		reason.setUpdatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		reason.setUpdatedDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		
 		ReasonIntl reasonIntl1 = new ReasonIntl(reason,"Support Request Cancelled",new Locale(1L));
 		ReasonIntl reasonIntl2 = new ReasonIntl(reason,"Support Request Cancelled CHN",new Locale(3L));

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.datetime.DateTime;
 
 public class ServiceEntitySearch extends MizeSceEntity implements Comparable<ServiceEntitySearch> {
 
@@ -14,7 +14,7 @@ public class ServiceEntitySearch extends MizeSceEntity implements Comparable<Ser
 	private ServiceEntityAddress address;
 	private String type;
 //	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private MizeDateTime createdDate;
+	private DateTime createdDate;
 	private Long createdBy;
 	private Long submittedBy;
 	
@@ -55,13 +55,13 @@ public class ServiceEntitySearch extends MizeSceEntity implements Comparable<Ser
 	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class)
 	@JsonInclude(Include.NON_DEFAULT)*/
-	public MizeDateTime getCreatedDate() {
+	public DateTime getCreatedDate() {
 		return createdDate;
 	}
 
 	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	*/
-	public void setCreatedDate(MizeDateTime createdDate) {
+	public void setCreatedDate(DateTime createdDate) {
 		this.createdDate = createdDate;
 	}
 

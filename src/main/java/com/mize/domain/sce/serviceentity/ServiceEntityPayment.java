@@ -12,8 +12,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Type;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -21,8 +19,8 @@ import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityContact;
 import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.datetime.Date;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDate;
 
 /**
  * @author HarishBurra
@@ -47,7 +45,7 @@ public class ServiceEntityPayment extends MizeSceEntity implements Comparable<Se
 	private EntityContact payeeContact;
 	private String payeeReference;
 	private String isNewPayee;
-	private MizeDate paymentDate;
+	private Date paymentDate;
 	private String paymentType;
 
 	public ServiceEntityPayment() {
@@ -194,12 +192,11 @@ public class ServiceEntityPayment extends MizeSceEntity implements Comparable<Se
 	
 	
 	@Column(name = "pymt_date")
-	@Type(type = "com.mize.domain.util.MizeDateJPA")
-	public MizeDate getPaymentDate() {
+	public Date getPaymentDate() {
 		return paymentDate;
 	}
 	
-	public void setPaymentDate(MizeDate paymentDate) {
+	public void setPaymentDate(Date paymentDate) {
 		this.paymentDate = paymentDate;
 	}
 	

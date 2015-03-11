@@ -19,8 +19,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Type;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -30,9 +28,9 @@ import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeSceEntityAudit;
+import com.mize.domain.datetime.Date;
 import com.mize.domain.form.link.FormDefinitionLink;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDate;
 import com.mize.domain.util.TenantSerializer;
 
 @Entity
@@ -51,8 +49,8 @@ public class FormDefinition extends MizeSceEntityAudit implements Comparable<For
 	private String statusCode;
 	private String formDefinitionData;
 	private String isActive;
-	private MizeDate startDate;
-	private MizeDate endDate;
+	private Date startDate;
+	private Date endDate;
 	private String isNewVersion;
 	private Form form;
 	private Locale locale;
@@ -73,7 +71,7 @@ public class FormDefinition extends MizeSceEntityAudit implements Comparable<For
 		messages = new ArrayList<FormDefinitionMessage>();
 	}
 
-	public FormDefinition(FormTemplateDefinition formTemplateDefinition, BusinessEntity tenant, String formCode, String versionNumber, String statusCode, String formDefinitionData, String isActive, MizeDate startDate, MizeDate endDate) {
+	public FormDefinition(FormTemplateDefinition formTemplateDefinition, BusinessEntity tenant, String formCode, String versionNumber, String statusCode, String formDefinitionData, String isActive, Date startDate, Date endDate) {
 		super();
 		this.formTemplateDefinition = formTemplateDefinition;
 		this.tenant = tenant;
@@ -173,24 +171,22 @@ public class FormDefinition extends MizeSceEntityAudit implements Comparable<For
 
 	
 	@Column(name = "start_date")
-	@Type(type = "com.mize.domain.util.MizeDateJPA")
 	@JsonInclude(Include.NON_DEFAULT)
-	public MizeDate getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(MizeDate startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
 	@Column(name = "end_date")
-	@Type(type = "com.mize.domain.util.MizeDateJPA")
 	@JsonInclude(Include.NON_DEFAULT)
-	public MizeDate getEndDate() {
+	public Date getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(MizeDate endDate) {
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 

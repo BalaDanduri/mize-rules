@@ -2,6 +2,7 @@ package com.mize.domain.util;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.Map;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -20,7 +21,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.mize.domain.applicationformat.ApplicationFormat;
+import com.mize.domain.applicationformat.ApplicationFormatCache;
+import com.mize.domain.applicationformat.ApplicationFormatConstants;
 import com.mize.domain.common.BigDecimal;
 import com.mize.domain.datetime.Date;
 
@@ -58,18 +60,53 @@ public class MizeObjectMapper extends ObjectMapper {
 		}
 	}
 	
-	public static MizeObjectMapper getInstance(ApplicationFormat applicationFormat) {
-		if(applicationFormat != null){
-			//return new MizeObjectMapper(applicationFormat.getDateFormat(),mizeDateFormat.getDateTimeFormat(),mizeDateFormat.getUserTimeZone());
+	public static MizeObjectMapper getInstance(Map<String,ApplicationFormatCache> applicationFormatMap,String userTimeZone) {
+		if(applicationFormatMap != null){
+			String dateTimeFormat = getUserDateTimeFormat(applicationFormatMap);
+			String dateFormat = getUserDateFormat(applicationFormatMap);
+			String decimalFormat = getUserDecimalFormat(applicationFormatMap);
+			return new MizeObjectMapper(dateFormat,dateTimeFormat,userTimeZone,decimalFormat);
 		}else{
 			return new MizeObjectMapper();
 		}
+	}
+	
+	public static String getUserDateTimeFormat(Map<String,ApplicationFormatCache> applicationFormatMap){
+		try{
+			ApplicationFormatCache formatCache = applicationFormatMap.get(ApplicationFormatConstants.DATE_TIME_FORMAT);
+			if(formatCache != null){
+				return formatCache.getFormatValue();
+			}
+		}catch(Exception e){
+		}
 		return null;
 	}
-		
-	public MizeObjectMapper(String dateFormat, String dateTimeFormat, String userTimeZone) {
+	
+	public static String getUserDateFormat(Map<String,ApplicationFormatCache> applicationFormatMap){
+		try{
+			ApplicationFormatCache formatCache = applicationFormatMap.get(ApplicationFormatConstants.DATE_FORMAT);
+			if(formatCache != null){
+				return formatCache.getFormatValue();
+			}
+		}catch(Exception e){
+		}
+		return null;
+	}
+	
+	public static String getUserDecimalFormat(Map<String,ApplicationFormatCache> applicationFormatMap){
+		try{
+			ApplicationFormatCache formatCache = applicationFormatMap.get(ApplicationFormatConstants.DECIMAL_FORMAT);
+			if(formatCache != null){
+				return formatCache.getFormatValue();
+			}
+		}catch(Exception e){
+		}
+		return null;
+	}
+	public MizeObjectMapper(String dateFormat, String dateTimeFormat, String userTimeZone, String decimalFormat) {
 		this.dateFormat = dateFormat;
-		this.dateTimeFormat = dateTimeFormat;	
+		this.dateTimeFormat = dateTimeFormat;
+		this.decimalFormat = decimalFormat;
 		if(this.dateFormat == null){
 			this.dateFormat = MizeDateTimeUtils.getDateFormat();
 		}
@@ -77,7 +114,7 @@ public class MizeObjectMapper extends ObjectMapper {
 			this.dateTimeFormat = MizeDateTimeUtils.getDateTimeFormat();
 		}
 		if(this.decimalFormat == null){
-			this.decimalFormat = "#,##,###.00";
+			this.decimalFormat = "#,##,##,###.00";
 		}
 		
 		this.userTimeZone = userTimeZone;
@@ -85,6 +122,10 @@ public class MizeObjectMapper extends ObjectMapper {
 		this.dateTimeFormatter = getDateTimeFormatter();
 		this.decimalFormatter = getDecimalFormatter();
 		registerModule();
+	}
+	
+	public MizeObjectMapper(String dateFormat, String dateTimeFormat, String userTimeZone) {
+		this(dateFormat, dateTimeFormat, userTimeZone, null);
 	}
 	
 	public void registerModule() {

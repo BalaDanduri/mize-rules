@@ -13,6 +13,7 @@ import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.datetime.DateTime;
 import com.mize.domain.util.MizeDateTime;
 
 @Entity(name = "se.ServiceEntityAudit")
@@ -86,7 +87,7 @@ public class ServiceEntityAudit extends MizeSceEntity implements Comparable<Serv
 	@JsonSerialize(using=JsonDateTimeSerializer.class)
 	@JsonInclude(Include.NON_DEFAULT)
 	@JsonIgnore(value=false)*/
-	public MizeDateTime getUpdatedDate() {
+	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
 	
@@ -94,7 +95,7 @@ public class ServiceEntityAudit extends MizeSceEntity implements Comparable<Serv
 	@JsonSerialize(using=JsonDateTimeSerializer.class)
 	@JsonInclude(Include.NON_DEFAULT)
 	@JsonIgnore(value=false)*/
-	public MizeDateTime getCreatedDate() {
+	public DateTime getCreatedDate() {
 		return createdDate;
 	}
 	
@@ -142,14 +143,14 @@ public class ServiceEntityAudit extends MizeSceEntity implements Comparable<Serv
 	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(value=false)*/
-	public void setUpdatedDate(MizeDateTime updatedDate) {
+	public void setUpdatedDate(DateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}
 	
 	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(value=false)*/
-	public void setCreatedDate(MizeDateTime createdDate) {
+	public void setCreatedDate(DateTime createdDate) {
 		this.createdDate = createdDate;
 	}
 

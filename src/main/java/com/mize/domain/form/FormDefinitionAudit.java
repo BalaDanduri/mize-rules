@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.MizeAuditEntity;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.datetime.DateTime;
 
 @Entity
 @Table(name = "form_defn_audit")
@@ -28,7 +28,7 @@ public class FormDefinitionAudit extends MizeAuditEntity {
 	}
 
 	public FormDefinitionAudit(FormDefinition formDefinition,
-			String statusCode, MizeDateTime statusDate, Long statusBy, String statusByUser) {
+			String statusCode, DateTime statusDate, Long statusBy, String statusByUser) {
 		this.statusCode = statusCode;
 		super.statusDate = statusDate;
 		super.statusBy = statusBy;

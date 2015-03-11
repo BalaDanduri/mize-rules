@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.datetime.DateTime;
 
 public class ApplicationLabelCache implements Comparable<ApplicationLabelCache>, Serializable {
 
@@ -16,7 +16,7 @@ public class ApplicationLabelCache implements Comparable<ApplicationLabelCache>,
 	private String isActive;
 	private String isDefault;
 	private Long tenantId;
-	private MizeDateTime updatedDate;
+	private DateTime updatedDate;
 	private Map<Long, ApplicationLabelIntlCache> intlMap = new ConcurrentHashMap<Long, ApplicationLabelIntlCache>();
 
 	public ApplicationLabelCache() {
@@ -71,11 +71,11 @@ public class ApplicationLabelCache implements Comparable<ApplicationLabelCache>,
 		this.tenantId = tenantId;
 	}
 
-	public MizeDateTime getUpdatedDate() {
+	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
 
-	public void setUpdatedDate(MizeDateTime updatedDate) {
+	public void setUpdatedDate(DateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}
 

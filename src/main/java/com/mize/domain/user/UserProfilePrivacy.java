@@ -11,7 +11,6 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.auth.User;
-import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.common.MizeSceEntityAudit;
 
 @Entity

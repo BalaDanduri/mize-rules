@@ -150,6 +150,14 @@ public final class Formatter {
 		return value;
 	}
 	
+	public static double doubleValue(com.mize.domain.common.BigDecimal decimal){
+		double value = 0.0;
+		if(decimal != null && decimal.isInValid() && decimal.getBaseValue() != null){
+			value = decimal.getBaseValue().doubleValue();
+		}		
+		return value;
+	}
+	
 	public static int intValue(String intStr){
 		int value = 0;
 		try{
@@ -582,7 +590,7 @@ public final class Formatter {
 	}
 	
 	//remove public static int daysDiff(MizeDate time1,MizeDate time2)
-	public static int daysDiff(Date time1, Date time2){
+	public static int daysDiff(com.mize.domain.datetime.Date time1, com.mize.domain.datetime.Date time2){
 		if(time1 != null && time2 != null){
 			return time1.compareTo(time2);
 		}
@@ -768,6 +776,13 @@ public final class Formatter {
 	
 	public static int compareDates(MizeDate startTime,MizeDate endTime){
 		if(startTime != null && startTime.getDateTime() != null && endTime != null && endTime.getDateTime() != null){
+			return startTime.compareTo(endTime);
+		}
+		return 0;
+	}
+	
+	public static int compareDates(com.mize.domain.datetime.Date startTime,com.mize.domain.datetime.Date endTime){
+		if(startTime != null && startTime.getBaseValue() != null && endTime != null && endTime.getBaseValue() != null){
 			return startTime.compareTo(endTime);
 		}
 		return 0;

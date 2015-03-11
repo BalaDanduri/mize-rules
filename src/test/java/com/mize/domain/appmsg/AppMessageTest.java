@@ -19,8 +19,6 @@ import org.springframework.test.context.ContextConfiguration;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.Locale;
 import com.mize.domain.test.util.JPATest;
-import com.mize.domain.util.MizeDateTime;
-import com.mize.domain.util.MizeDateTimeUtils;
 @ContextConfiguration(locations={"/test-context.xml"})
 public class AppMessageTest extends JPATest {
 

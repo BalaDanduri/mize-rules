@@ -9,10 +9,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
 
 import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.datetime.DateTime;
 
 @Entity
 @Table(name = "prod_repeat_order_history")
@@ -21,9 +20,9 @@ public class ProductRepeatOrderHistory extends MizeSceEntity implements Comparab
 	private static final long serialVersionUID = -3861494853684026293L;
 	
 	private ProductRepeatOrder productRepeatOrder;
-	private MizeDateTime orderDate;
+	private DateTime orderDate;
 	private ProductRepeatOrder orderSnapshot;
-	private MizeDateTime createdDate;
+	private DateTime createdDate;
 	
 	
 	@ManyToOne
@@ -37,12 +36,11 @@ public class ProductRepeatOrderHistory extends MizeSceEntity implements Comparab
 	}
 
 	@Column(name = "order_date",  nullable = true)
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getOrderDate() {
+	public DateTime getOrderDate() {
 		return orderDate;
 	}
 
-	public void setOrderDate(MizeDateTime orderDate) {
+	public void setOrderDate(DateTime orderDate) {
 		this.orderDate = orderDate;
 	}
 
@@ -56,12 +54,11 @@ public class ProductRepeatOrderHistory extends MizeSceEntity implements Comparab
 	}
 
 	@Column(name = "created_date",  nullable = true)
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getCreatedDate() {
+	public DateTime getCreatedDate() {
 		return createdDate;
 	}
 
-	public void setCreatedDate(MizeDateTime createdDate) {
+	public void setCreatedDate(DateTime createdDate) {
 		this.createdDate = createdDate;
 	}
 

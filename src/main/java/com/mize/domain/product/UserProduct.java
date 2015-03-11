@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.mize.domain.auth.User;
 import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.datetime.DateTime;
 
 public class UserProduct extends MizeSceEntity implements Comparable<UserProduct>{
 
@@ -109,14 +109,14 @@ public class UserProduct extends MizeSceEntity implements Comparable<UserProduct
 	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonSerialize(using=JsonDateTimeSerializer.class)	
 	@JsonIgnore(value=false)*/
-	public MizeDateTime getCreatedDate() {
+	public DateTime getCreatedDate() {
 		return createdDate;
 	}
 
 /*	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(value=false)*/
-	public void setCreatedDate(MizeDateTime createdDate) {
+	public void setCreatedDate(DateTime createdDate) {
 		this.createdDate = createdDate;
 	}
 	
@@ -124,14 +124,14 @@ public class UserProduct extends MizeSceEntity implements Comparable<UserProduct
 	@JsonSerialize(using=JsonDateTimeSerializer.class)	
 	@JsonIgnore(value=false)
 	@JsonInclude(Include.NON_DEFAULT)*/
-	public MizeDateTime getUpdatedDate() {
+	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
 
 	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(value=false)*/
-	public void setUpdatedDate(MizeDateTime updatedDate) {
+	public void setUpdatedDate(DateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}
 

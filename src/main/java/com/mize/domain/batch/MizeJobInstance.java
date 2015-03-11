@@ -17,8 +17,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Type;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -28,8 +26,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeSceEntityAudit;
+import com.mize.domain.datetime.DateTime;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name="mize_job_instance")
@@ -44,8 +42,8 @@ public class MizeJobInstance extends MizeSceEntityAudit implements Comparable<Mi
 	private String instanceName;
 	private Date lastRun;
 	private Date nextRun;
-	private MizeDateTime lastRunTime;
-	private MizeDateTime nextRunTime;
+	private DateTime lastRunTime;
+	private DateTime nextRunTime;
 	private String jobStatus;
 	private List<MizeJobInstanceParameter> jobParameters;
 	private MizeJobSchedule schedule;
@@ -61,7 +59,7 @@ public class MizeJobInstance extends MizeSceEntityAudit implements Comparable<Mi
 		
 	}
 
-	public MizeJobInstance(Long id, String instanceCode, String instanceName, MizeDateTime lastRunTime, MizeDateTime nextRunTime, String jobStatus, String isActive) {
+	public MizeJobInstance(Long id, String instanceCode, String instanceName, DateTime lastRunTime, DateTime nextRunTime, String jobStatus, String isActive) {
 		super();
 		super.id = id;
 		this.instanceCode = instanceCode;
@@ -178,22 +176,20 @@ public class MizeJobInstance extends MizeSceEntityAudit implements Comparable<Mi
 	
 	
 	@Column(name = "last_run")
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getLastRunTime() {
+	public DateTime getLastRunTime() {
 		return lastRunTime;
 	}
 
-	public void setLastRunTime(MizeDateTime lastRunTime) {
+	public void setLastRunTime(DateTime lastRunTime) {
 		this.lastRunTime = lastRunTime;
 	}
 
 	@Column(name = "next_run")
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getNextRunTime() {
+	public DateTime getNextRunTime() {
 		return nextRunTime;
 	}
 
-	public void setNextRunTime(MizeDateTime nextRunTime) {
+	public void setNextRunTime(DateTime nextRunTime) {
 		this.nextRunTime = nextRunTime;
 	}
 

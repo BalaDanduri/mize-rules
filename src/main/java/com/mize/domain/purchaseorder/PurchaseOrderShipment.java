@@ -23,8 +23,8 @@ import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.datetime.Date;
 import com.mize.domain.util.CachedEntity;
-import com.mize.domain.util.MizeDate;
 
 @Entity
 @Inheritance
@@ -72,7 +72,7 @@ public class PurchaseOrderShipment extends MizeSceEntity implements Comparable<P
 	private String priority;
 	private String carrier;
 	private String estimatedShipmentDays;
-	private MizeDate estimatedShipmentDate;
+	private Date estimatedShipmentDate;
 	private String shipComplete;
 	@Transient
 	private EntityComment entityComment;
@@ -154,14 +154,13 @@ public class PurchaseOrderShipment extends MizeSceEntity implements Comparable<P
 	}
 
 	@Column(name = "estimated_ship_date")
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateJPA")
 	@JsonInclude(Include.NON_DEFAULT)
 	@JsonIgnore(value=false)
-	public MizeDate getEstimatedShipmentDate() {
+	public Date getEstimatedShipmentDate() {
 		return estimatedShipmentDate;
 	}
 
-	public void setEstimatedShipmentDate(MizeDate estimatedShipmentDate) {
+	public void setEstimatedShipmentDate(Date estimatedShipmentDate) {
 		this.estimatedShipmentDate = estimatedShipmentDate;
 	}
 	

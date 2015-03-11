@@ -9,10 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.datetime.DateTime;
 
 @Entity
 @Table(name = "event")
@@ -24,13 +23,13 @@ public class Event extends MizeSceEntity implements Comparable<Event>{
 	private String eventType;
 	private String description;
 	private String eventStatus;
-	private MizeDateTime startDate;
-	private MizeDateTime endDate;
+	private DateTime startDate;
+	private DateTime endDate;
 	private String active;
 	private Integer frequencyValue;
 	private Unit frequencyUnit;
-	private MizeDateTime lastEventDate;
-	private MizeDateTime nextEventDate;
+	private DateTime lastEventDate;
+	private DateTime nextEventDate;
 	
 	public enum Unit{
 		DAYS,WEEKS,MONTHS,YEARS
@@ -82,23 +81,21 @@ public class Event extends MizeSceEntity implements Comparable<Event>{
 	}
 
 	@Column(name = "start_date",  nullable = true)
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getStartDate() {
+	public DateTime getStartDate() {
 		return startDate;
 	}
 
 	
-	public void setStartDate(MizeDateTime startDate) {
+	public void setStartDate(DateTime startDate) {
 		this.startDate = startDate;
 	}
 
 	@Column(name = "end_date",  nullable = true)
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getEndDate() {
+	public DateTime getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(MizeDateTime endDate) {
+	public void setEndDate(DateTime endDate) {
 		this.endDate = endDate;
 	}
 
@@ -129,22 +126,20 @@ public class Event extends MizeSceEntity implements Comparable<Event>{
 	}
 
 	@Column(name = "last_event_date",  nullable = true)
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getLastEventDate() {
+	public DateTime getLastEventDate() {
 		return lastEventDate;
 	}
 
-	public void setLastEventDate(MizeDateTime lastEventDate) {
+	public void setLastEventDate(DateTime lastEventDate) {
 		this.lastEventDate = lastEventDate;
 	}
 
 	@Column(name = "next_event_date",  nullable = true)
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getNextEventDate() {
+	public DateTime getNextEventDate() {
 		return nextEventDate;
 	}
 
-	public void setNextEventDate(MizeDateTime nextEventDate) {
+	public void setNextEventDate(DateTime nextEventDate) {
 		this.nextEventDate = nextEventDate;
 	}
 	

@@ -23,10 +23,10 @@ import com.mize.domain.brand.Brand;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.Country;
 import com.mize.domain.common.Gender;
+import com.mize.domain.datetime.DateTime;
 import com.mize.domain.test.util.JPATest;
+import com.mize.domain.util.DateTimeUtils;
 import com.mize.domain.util.Formatter;
-import com.mize.domain.util.MizeDateTime;
-import com.mize.domain.util.MizeDateTimeUtils;
 
 @ContextConfiguration(locations = { "/test-context.xml" })
 public class UserTest extends JPATest {
@@ -87,8 +87,8 @@ public class UserTest extends JPATest {
 			user.setId(rs.getLong("id"));
 			user.setEmail(rs.getString("email"));
 			user.setName(rs.getString("name"));
-			user.setLastLogin(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("last_login")));
-			user.setCreatedDate(MizeDateTimeUtils.toMizeDateTime(rs
+			user.setLastLogin(DateTimeUtils.toDateTime(rs.getTimestamp("last_login")));
+			user.setCreatedDate(DateTimeUtils.toDateTime(rs
 					.getTimestamp("created_date")));
 
 			return user;
@@ -107,7 +107,7 @@ public class UserTest extends JPATest {
 			userProfile.setFirstName(rs.getString("first_name"));
 			userProfile.setLastName(rs.getString("last_name"));
 			userProfile
-					.setBirthdate(new MizeDateTime(Formatter.date2((rs.getDate("birth_day")))));
+					.setBirthdate(new DateTime(Formatter.date2((rs.getDate("birth_day")))));
 			userProfile.setGender(Gender.getGender(rs.getString("gender")));
 
 			userProfile.setUser(user);

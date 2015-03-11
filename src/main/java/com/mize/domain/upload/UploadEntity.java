@@ -10,7 +10,7 @@ import com.mize.domain.auth.User;
 import com.mize.domain.batch.IBatchBean;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.datetime.DateTime;
 
 public final class UploadEntity extends MizeSceEntity implements Comparable<UploadEntity> {
 
@@ -21,10 +21,8 @@ public final class UploadEntity extends MizeSceEntity implements Comparable<Uplo
 	private Integer recordCount;
 	private Integer successCount;
 	private Integer failureCount;
-//	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private MizeDateTime startTime;
-//	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	private MizeDateTime endTime;
+	private DateTime startTime;
+	private DateTime endTime;
 	private String status;
 	private String fileName;
 	private Object entity;
@@ -73,29 +71,18 @@ public final class UploadEntity extends MizeSceEntity implements Comparable<Uplo
 		this.id = id;
 	}
 
-	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)*/
-	public MizeDateTime getStartTime() {
+	public DateTime getStartTime() {
 		return startTime;
 	}
-
-	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	*/
-	public void setStartTime(MizeDateTime startTime) {
+	public void setStartTime(DateTime startTime) {
 		this.startTime = startTime;
 	}
 
-	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)*/
-	public MizeDateTime getEndTime() {
+	public DateTime getEndTime() {
 		return endTime;
 	}
 
-	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	*/
-	public void setEndTime(MizeDateTime endTime) {
+	public void setEndTime(DateTime endTime) {
 		this.endTime = endTime;
 	}
 	

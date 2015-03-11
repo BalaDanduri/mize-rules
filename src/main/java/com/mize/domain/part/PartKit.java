@@ -17,8 +17,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Type;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -26,9 +24,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeSceEntityAudit;
+import com.mize.domain.datetime.Date;
 import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDate;
 import com.mize.domain.util.TenantSerializer;
 
 @Entity
@@ -41,8 +39,8 @@ public class PartKit extends MizeSceEntityAudit implements Comparable<PartKit>{
 	private String priceMethod;
 	private String type;
 	private String isActive;
-	private MizeDate startDate;
-	private MizeDate endDate;
+	private Date startDate;
+	private Date endDate;
 	@CachedEntity
 	private List<PartKitItem> partKitItems = new ArrayList<PartKitItem>();
 	@Transient
@@ -62,7 +60,7 @@ public class PartKit extends MizeSceEntityAudit implements Comparable<PartKit>{
 	}
 	
 	public PartKit(Part part, String priceMethod, String type,
-			String isActive, MizeDate startDate, MizeDate endDate,
+			String isActive, Date startDate, Date endDate,
 			List<PartKitItem> partKitItems) {
 		super();
 		this.part = part;
@@ -106,15 +104,13 @@ public class PartKit extends MizeSceEntityAudit implements Comparable<PartKit>{
 
 	
 	@Column(name = "start_date")
-	@Type(type="com.mize.domain.util.MizeDateJPA")
-	public MizeDate getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
 
 	
 	@Column(name = "end_date")
-	@Type(type="com.mize.domain.util.MizeDateJPA")
-	public MizeDate getEndDate() {
+	public Date getEndDate() {
 		return endDate;
 	}
 	
@@ -151,11 +147,11 @@ public class PartKit extends MizeSceEntityAudit implements Comparable<PartKit>{
 		this.isActive = isActive;
 	}
 
-	public void setStartDate(MizeDate startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
-	public void setEndDate(MizeDate endDate) {
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 	

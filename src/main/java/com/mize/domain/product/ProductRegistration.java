@@ -22,7 +22,6 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -36,10 +35,10 @@ import com.mize.domain.businessentity.BusinessEntityIntl;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.MizeSceEntityAudit;
+import com.mize.domain.datetime.Date;
+import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDate;
-import com.mize.domain.util.CachedEntity;
 
 @Entity
 @Table(name = "prod_regn")
@@ -60,11 +59,11 @@ public class ProductRegistration extends MizeSceEntityAudit implements Comparabl
 	private BusinessEntity invoiceBusinessEntity;
 	@CachedEntity
 	private EntityAddress customerAddress;
-	private MizeDate customerDeliveryDate;
-	private MizeDate purchaseDate;
-	private MizeDate warrantyExpiryDate;
+	private Date customerDeliveryDate;
+	private Date purchaseDate;
+	private Date warrantyExpiryDate;
 	private BigDecimal purchasePrice;
-	private MizeDate registrationDate;
+	private Date registrationDate;
 	private String registrationRef;
 	private String registrationSource;
 	private String registrationApplication;
@@ -107,7 +106,7 @@ public class ProductRegistration extends MizeSceEntityAudit implements Comparabl
 		this.count = count;
 	}
 	
-	public ProductRegistration(Long id,String statusCode,String registrationType,MizeDate purchaseDate,MizeDate registrationDate){
+	public ProductRegistration(Long id,String statusCode,String registrationType,Date purchaseDate,Date registrationDate){
 		this.id = id;
 		this.statusCode = statusCode;
 		this.registrationType = registrationType;
@@ -122,7 +121,7 @@ public class ProductRegistration extends MizeSceEntityAudit implements Comparabl
 		this.audits = audits;
 	}
 	
-	public ProductRegistration(Long id,String statusCode,String serialNumber,MizeDate shipDate, String brandName,String model,String productName,String productDesc) {
+	public ProductRegistration(Long id,String statusCode,String serialNumber,Date shipDate, String brandName,String model,String productName,String productDesc) {
 		this.id = id;
 		this.statusCode = statusCode;
 		ProductSerial productSerial = new ProductSerial();
@@ -155,7 +154,7 @@ public class ProductRegistration extends MizeSceEntityAudit implements Comparabl
 	}
 	
 		
-	public ProductRegistration(Long id,String statusCode,String serialNumber,MizeDate shipDate, String brandName,String model,String productName,String productDesc,String invoiceBeType,String invoiceBeCode,String invoiceBEName,String shippedBeType,String shippedBeCode,String shippedBeName) {
+	public ProductRegistration(Long id,String statusCode,String serialNumber,Date shipDate, String brandName,String model,String productName,String productDesc,String invoiceBeType,String invoiceBeCode,String invoiceBEName,String shippedBeType,String shippedBeCode,String shippedBeName) {
 		this.id = id;
 		this.statusCode = statusCode;
 		ProductSerial productSerial = new ProductSerial();
@@ -254,20 +253,17 @@ public class ProductRegistration extends MizeSceEntityAudit implements Comparabl
 		return customerAddress;
 	}
 	@Column(name = "cust_delivery_date")
-	@Type(type = "com.mize.domain.util.MizeDateJPA")
-	public MizeDate getCustomerDeliveryDate() {
+	public Date getCustomerDeliveryDate() {
 		return customerDeliveryDate;
 	}
 
 	@Column(name = "purchase_date")
-	@Type(type = "com.mize.domain.util.MizeDateJPA")
-	public MizeDate getPurchaseDate() {
+	public Date getPurchaseDate() {
 		return purchaseDate;
 	}
 
 	@Column(name = "warranty_expiry_date")
-	@Type(type = "com.mize.domain.util.MizeDateJPA")
-	public MizeDate getWarrantyExpiryDate() {
+	public Date getWarrantyExpiryDate() {
 		return warrantyExpiryDate;
 	}
 
@@ -290,8 +286,7 @@ public class ProductRegistration extends MizeSceEntityAudit implements Comparabl
 	}
 
 	@Column(name = "regn_date")
-	@Type(type = "com.mize.domain.util.MizeDateJPA")
-	public MizeDate getRegistrationDate() {
+	public Date getRegistrationDate() {
 		return registrationDate;
 	}
 
@@ -360,16 +355,16 @@ public class ProductRegistration extends MizeSceEntityAudit implements Comparabl
 	}
 
 	
-	public void setCustomerDeliveryDate(MizeDate customerDeliveryDate) {
+	public void setCustomerDeliveryDate(Date customerDeliveryDate) {
 		this.customerDeliveryDate = customerDeliveryDate;
 	}
 
-	public void setPurchaseDate(MizeDate purchaseDate) {
+	public void setPurchaseDate(Date purchaseDate) {
 		this.purchaseDate = purchaseDate;
 	}
 
 	
-	public void setWarrantyExpiryDate(MizeDate warrantyExpireDate) {
+	public void setWarrantyExpiryDate(Date warrantyExpireDate) {
 		this.warrantyExpiryDate = warrantyExpireDate;
 	}
 
@@ -386,7 +381,7 @@ public class ProductRegistration extends MizeSceEntityAudit implements Comparabl
 		this.comments = comments;
 	}
 
-	public void setRegistrationDate(MizeDate registrationDate) {
+	public void setRegistrationDate(Date registrationDate) {
 		this.registrationDate = registrationDate;
 	}
 

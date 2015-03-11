@@ -5,8 +5,8 @@ import java.util.List;
 
 import com.mize.domain.auth.User;
 import com.mize.domain.common.Entity;
+import com.mize.domain.datetime.DateTime;
 import com.mize.domain.product.Product;
-import com.mize.domain.util.MizeDateTime;
 
 public class UserActivityLog extends Entity{
 	
@@ -17,8 +17,8 @@ public class UserActivityLog extends Entity{
 	private Integer activityAction;
 	private String activityStatus;
 	private String activityComments;
-	protected MizeDateTime firstActivityTime;
-	protected MizeDateTime lastActivityTime;
+	protected DateTime firstActivityTime;
+	protected DateTime lastActivityTime;
 	private String userGroupName;
 	private String activityName;
 	private Integer mutualFriendsCount;
@@ -68,19 +68,19 @@ public class UserActivityLog extends Entity{
 	}
 	
 
-	public MizeDateTime getFirstActivityTime() {
+	public DateTime getFirstActivityTime() {
 		return firstActivityTime;
 	}
 	
-	public void setFirstActivityTime(MizeDateTime firstActivityTime) {
+	public void setFirstActivityTime(DateTime firstActivityTime) {
 		this.firstActivityTime = firstActivityTime;
 	}
 	
-	public MizeDateTime getLastActivityTime() {
+	public DateTime getLastActivityTime() {
 		return lastActivityTime;
 	}
 	
-	public void setLastActivityTime(MizeDateTime lastActivityTime) {
+	public void setLastActivityTime(DateTime lastActivityTime) {
 		this.lastActivityTime = lastActivityTime;
 	}
 	

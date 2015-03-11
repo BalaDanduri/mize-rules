@@ -7,8 +7,9 @@ import javax.persistence.Transient;
 
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.businessentity.BusinessEntityIntl;
+import com.mize.domain.datetime.DateTime;
 import com.mize.domain.product.ProductSerial;
-import com.mize.domain.util.MizeDateTime;
+
 
 public class WorkQueueResult extends MizeSceEntity {
 
@@ -24,8 +25,8 @@ public class WorkQueueResult extends MizeSceEntity {
 	private String orderType;
 	private String ref;
 	private String serviceProductName;
-	private MizeDateTime serviceDate;
-	private MizeDateTime serviceUpdatedDate;
+	private DateTime serviceDate;
+	private DateTime serviceUpdatedDate;
 	public BusinessEntity businessEntity;
 	public ProductSerial productSerial;
 	private String requesterCode;
@@ -36,7 +37,7 @@ public class WorkQueueResult extends MizeSceEntity {
     }
 
 	public WorkQueueResult(Long id,Long entityId, String entityType,String status,String serviceType,String serviceCode,
-			MizeDateTime serviceDate,BusinessEntity businessEntity,ProductSerial productSerial) {
+			DateTime serviceDate,BusinessEntity businessEntity,ProductSerial productSerial) {
 		super();
 		this.id = id;
 		this.entityId = entityId;
@@ -50,7 +51,7 @@ public class WorkQueueResult extends MizeSceEntity {
 	}
 	
 	public WorkQueueResult(Long id,Long entityId, String entityType,String status,String serviceType,String serviceCode,String providerName,
-			MizeDateTime serviceDate,BusinessEntity businessEntity,ProductSerial productSerial) {
+			DateTime serviceDate,BusinessEntity businessEntity,ProductSerial productSerial) {
 		super();
 		this.id = id;
 		this.entityId = entityId;
@@ -66,7 +67,7 @@ public class WorkQueueResult extends MizeSceEntity {
 	
 
 	public WorkQueueResult(Long id,Long entityId, String entityType,String entityCode,String status,String orderType,String requestType,
-			MizeDateTime serviceDate,MizeDateTime updatedDate,String beCode,String beName) {
+			DateTime serviceDate,DateTime updatedDate,String beCode,String beName) {
 		super();
 		this.id = id;
 		this.entityId = entityId;
@@ -109,7 +110,7 @@ public class WorkQueueResult extends MizeSceEntity {
 		return serviceProductName;
 	}
 
-	public MizeDateTime getServiceDate() {
+	public DateTime getServiceDate() {
 		return serviceDate;
 	}
 	
@@ -162,15 +163,15 @@ public class WorkQueueResult extends MizeSceEntity {
 		this.serviceProductName = serviceProductName;
 	}
 
-	public void setServiceDate(MizeDateTime serviceDate) {
+	public void setServiceDate(DateTime serviceDate) {
 		this.serviceDate = serviceDate;
 	}
 	
-	public MizeDateTime getServiceUpdatedDate() {
+	public DateTime getServiceUpdatedDate() {
 		return serviceUpdatedDate;
 	}
 
-	public void setServiceUpdatedDate(MizeDateTime serviceUpdatedDate) {
+	public void setServiceUpdatedDate(DateTime serviceUpdatedDate) {
 		this.serviceUpdatedDate = serviceUpdatedDate;
 	}
 

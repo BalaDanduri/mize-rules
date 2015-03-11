@@ -18,13 +18,13 @@ import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.ContextConfiguration;
 
+import com.mize.domain.datetime.Date;
+import com.mize.domain.datetime.DateTime;
 import com.mize.domain.part.Part;
 import com.mize.domain.part.PartKit;
 import com.mize.domain.part.PartKitItem;
 import com.mize.domain.test.util.JPATest;
-import com.mize.domain.util.MizeDate;
-import com.mize.domain.util.MizeDateTime;
-import com.mize.domain.util.MizeDateTimeUtils;
+import com.mize.domain.util.DateTimeUtils;
 
 @ContextConfiguration(locations = { "/test-context.xml" })
 public class PartKitTest extends JPATest {
@@ -82,10 +82,10 @@ public class PartKitTest extends JPATest {
 		partKit.setIsActive("Y");
 		partKit.setCreatedBy(776L);
 		partKit.setUpdatedBy(776L);
-		partKit.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
-		partKit.setUpdatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
-		partKit.setStartDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
-		partKit.setEndDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		partKit.setCreatedDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		partKit.setUpdatedDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		partKit.setStartDate(Date.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		partKit.setEndDate(Date.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 
 		return partKit;
 	}
@@ -128,13 +128,13 @@ public class PartKitTest extends JPATest {
 			partKit.setIsActive(rs.getString("is_active"));
 			partKit.setCreatedBy(rs.getLong("created_by"));
 			partKit.setUpdatedBy(rs.getLong("updated_by"));
-			partKit.setCreatedDate(MizeDateTimeUtils.toMizeDateTime(rs
+			partKit.setCreatedDate(DateTimeUtils.toDateTime(rs
 					.getTimestamp("created_date")));
-			partKit.setUpdatedDate(MizeDateTimeUtils.toMizeDateTime(rs
+			partKit.setUpdatedDate(DateTimeUtils.toDateTime(rs
 					.getTimestamp("updated_date")));
-			partKit.setStartDate(MizeDateTimeUtils.toMizeDate(rs
+			partKit.setStartDate(DateTimeUtils.toDate(rs
 					.getTimestamp("start_date")));
-			partKit.setEndDate(MizeDateTimeUtils.toMizeDate(rs.getTimestamp("end_date")));
+			partKit.setEndDate(DateTimeUtils.toDate(rs.getTimestamp("end_date")));
 
 			return partKit;
 		}

@@ -13,16 +13,14 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Type;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.datetime.DateTime;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name="entity_lock")
@@ -38,8 +36,8 @@ public class EntityLock extends MizeSceEntity implements Comparable<EntityLock>{
 	private String entityType;
 	private String entityCode;
 	private String lockAction;
-	private MizeDateTime lockDate;
-	private MizeDateTime inactiveStartTime;
+	private DateTime lockDate;
+	private DateTime inactiveStartTime;
 	@Transient
 	private List<Long> entityLockIds;
 	@Transient
@@ -56,7 +54,7 @@ public class EntityLock extends MizeSceEntity implements Comparable<EntityLock>{
 		super();
 	}
 	
-	public EntityLock(Long id,  String entityType, String entityCode, Long entityId,MizeDateTime lockDate,String lockedByUser) {
+	public EntityLock(Long id,  String entityType, String entityCode, Long entityId,DateTime lockDate,String lockedByUser) {
 		super();
 		this.id = id;
 		this.entityType = entityType;
@@ -166,23 +164,21 @@ public class EntityLock extends MizeSceEntity implements Comparable<EntityLock>{
 	
 	@JsonInclude(Include.NON_NULL)
 	@Column(name = "lock_date")
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getLockDate() {
+	public DateTime getLockDate() {
 		return lockDate;
 	}
 	
-	public void setLockDate(MizeDateTime lockDate) {
+	public void setLockDate(DateTime lockDate) {
 		this.lockDate = lockDate;
 	}
 	
 	@JsonInclude(Include.NON_NULL)
 	@Column(name = "inactive_start_time")
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getInactiveStartTime() {
+	public DateTime getInactiveStartTime() {
 		return inactiveStartTime;
 	}
 	
-	public void setInactiveStartTime(MizeDateTime inactiveStartTime) {
+	public void setInactiveStartTime(DateTime inactiveStartTime) {
 		this.inactiveStartTime = inactiveStartTime;
 	}
 	

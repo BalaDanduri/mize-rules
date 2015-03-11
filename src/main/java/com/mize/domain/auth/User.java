@@ -18,7 +18,6 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.apache.commons.lang.WordUtils;
-import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -27,6 +26,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeSceEntityAudit;
+import com.mize.domain.datetime.DateTime;
 import com.mize.domain.product.ProductRegister;
 import com.mize.domain.user.Group;
 import com.mize.domain.user.UserAddress;
@@ -38,7 +38,6 @@ import com.mize.domain.user.UserProfilePrivacy;
 import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDateTime;
 import com.mize.domain.util.TenantSerializer;
 
 @Entity
@@ -48,7 +47,7 @@ public class User extends MizeSceEntityAudit implements Comparable<User> {
 	private static final long serialVersionUID = 6457591358862233006L;
 	private String email;
 	private String name;
-	private MizeDateTime lastLogin;
+	private DateTime lastLogin;
 	private boolean active;
 	private boolean emailValidated;
 	private BusinessEntity tenant;
@@ -90,7 +89,7 @@ public class User extends MizeSceEntityAudit implements Comparable<User> {
     	userProfile = new UserProfile();
     }
     
-	public User(Long id, String email, String name, MizeDateTime lastLogin,boolean active, boolean emailValidated,List<LinkedAccount> linkedAccounts) {
+	public User(Long id, String email, String name, DateTime lastLogin,boolean active, boolean emailValidated,List<LinkedAccount> linkedAccounts) {
 		this.id = id;
 		this.email = email;
 		this.name = name;
@@ -161,12 +160,11 @@ public class User extends MizeSceEntityAudit implements Comparable<User> {
 	}
 	
 	@Column(name = "last_login")
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getLastLogin() {
+	public DateTime getLastLogin() {
 		return lastLogin;
 	}
 	
-	public void setLastLogin(MizeDateTime lastLogin) {
+	public void setLastLogin(DateTime lastLogin) {
 		this.lastLogin = lastLogin;
 	}
 	

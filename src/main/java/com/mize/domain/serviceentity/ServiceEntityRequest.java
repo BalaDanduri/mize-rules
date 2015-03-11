@@ -30,7 +30,6 @@ import com.mize.domain.product.Product;
 import com.mize.domain.product.ProductRegister;
 import com.mize.domain.util.JodaDateTimeDeserializer;
 import com.mize.domain.util.JsonDateTimeSerializer;
-import com.mize.domain.util.MizeDateTime;
 
 @Entity(name = "se.ServiceEntityRequest")
 @Table(name = "service_entity_request")
@@ -361,8 +360,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	@JsonIgnore(value=false)*/
 	@Column(name = "created_date",updatable = false)
 	@Transient
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getCreatedDate() {
+	public com.mize.domain.datetime.DateTime getCreatedDate() {
 		return createdDate;
 	}
 
@@ -371,7 +369,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	@Column(name = "updated_date")
 	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@Transient
-	public MizeDateTime getUpdatedDate() {
+	public com.mize.domain.datetime.DateTime getUpdatedDate() {
 		return updatedDate;
 	}
 	
@@ -392,7 +390,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(value=false)*/
-	public void setCreatedDate(MizeDateTime createdDate) {
+	public void setCreatedDate(com.mize.domain.datetime.DateTime createdDate) {
 		this.createdDate = createdDate;
 	}
 	
@@ -409,7 +407,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
 	@JsonIgnore(value=false)*/
-	public void setUpdatedDate(MizeDateTime updatedDate) {
+	public void setUpdatedDate(com.mize.domain.datetime.DateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}
 	

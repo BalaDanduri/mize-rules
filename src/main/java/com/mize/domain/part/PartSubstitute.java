@@ -16,8 +16,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Type;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -25,10 +23,10 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.MizeSceEntityAudit;
+import com.mize.domain.datetime.Date;
 import com.mize.domain.product.PartSubstituteComment;
 import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDate;
 @Entity
 @Table(name = "part_substitute")
 public class PartSubstitute extends MizeSceEntityAudit implements Comparable<PartSubstitute> {
@@ -39,8 +37,8 @@ public class PartSubstitute extends MizeSceEntityAudit implements Comparable<Par
 	@CachedEntity
 	private Part substitutedPart;
 	private String code;
-	private MizeDate date;
-	private MizeDate endDate;
+	private Date date;
+	private Date endDate;
 	private EntityComment entityComment;
 	private List<PartSubstituteComment> comments = new ArrayList<PartSubstituteComment>();
     private String familyCode;
@@ -53,7 +51,7 @@ public class PartSubstitute extends MizeSceEntityAudit implements Comparable<Par
 		super();
 	}
 		
-	public PartSubstitute(Long id,String originalPartCode,String substitutePartCode,String fmailyCode,String code ,MizeDate date,MizeDate endDate,Integer sequenceNo){
+	public PartSubstitute(Long id,String originalPartCode,String substitutePartCode,String fmailyCode,String code ,Date date,Date endDate,Integer sequenceNo){
 		super();
 		this.id = id;
 		if(originalPartCode != null){
@@ -122,14 +120,12 @@ public class PartSubstitute extends MizeSceEntityAudit implements Comparable<Par
 	}
 	
 	@Column(name = "substitute_date")
-	@Type(type = "com.mize.domain.util.MizeDateJPA")
-	public MizeDate getDate() {
+	public Date getDate() {
 		return date;
 	}
 	
 	@Column(name = "end_date")
-	@Type(type = "com.mize.domain.util.MizeDateJPA")
-	public MizeDate getEndDate() {
+	public Date getEndDate() {
 		return endDate;
 	}
 	
@@ -150,11 +146,11 @@ public class PartSubstitute extends MizeSceEntityAudit implements Comparable<Par
 		this.code = code;
 	}
 
-	public void setDate(MizeDate date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 	
-	public void setEndDate(MizeDate endDate) {
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 

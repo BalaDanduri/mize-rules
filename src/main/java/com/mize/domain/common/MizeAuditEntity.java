@@ -3,12 +3,10 @@ package com.mize.domain.common;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
-import org.hibernate.annotations.Type;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.datetime.DateTime;
 
 @MappedSuperclass
 public abstract class MizeAuditEntity extends MizeSceEntity {
@@ -19,7 +17,7 @@ public abstract class MizeAuditEntity extends MizeSceEntity {
 	private static final long serialVersionUID = 4275213588169261386L;
 
 	protected String statusCode;
-	protected MizeDateTime statusDate;
+	protected DateTime statusDate;
 	protected Long statusBy;
 	protected String statusByUser;
 
@@ -28,14 +26,13 @@ public abstract class MizeAuditEntity extends MizeSceEntity {
 	}
 
 	@Column(name = "status_date",updatable = false)
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
 	@JsonIgnore(false)
 	@JsonInclude(Include.NON_DEFAULT)
-	public MizeDateTime getStatusDate() {
+	public DateTime getStatusDate() {
 		return statusDate;
 	}
 
-	public void setStatusDate(MizeDateTime statusDate) {
+	public void setStatusDate(DateTime statusDate) {
 		this.statusDate = statusDate;
 	}
 

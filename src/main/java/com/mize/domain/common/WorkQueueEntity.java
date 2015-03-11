@@ -13,16 +13,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Type;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.businessentity.BusinessEntityIntl;
+import com.mize.domain.datetime.DateTime;
 import com.mize.domain.product.Product;
 import com.mize.domain.product.ProductSerial;
 import com.mize.domain.service.schedule.ServiceSchedule;
-import com.mize.domain.util.MizeDateTime;
 
 @Entity
 @Table(name="work_queue_entity")
@@ -51,20 +49,20 @@ public class WorkQueueEntity extends MizeSceEntity implements Comparable<WorkQue
 		super();
 	}
 	
-	public WorkQueueEntity(Long id,Long entityId, String entityType,String status,String serviceType,String serviceCode,MizeDateTime serviceDate,BusinessEntity businessEntity,ProductSerial productSerial) {
+	public WorkQueueEntity(Long id,Long entityId, String entityType,String status,String serviceType,String serviceCode,DateTime serviceDate,BusinessEntity businessEntity,ProductSerial productSerial) {
 		result = new WorkQueueResult(id,entityId, entityType,status,serviceType,serviceCode,serviceDate,businessEntity,productSerial);
 	}
 	
-	public WorkQueueEntity(Long id,Long entityId, String entityType,String status,String serviceType,String serviceCode,String providerName,MizeDateTime serviceDate,BusinessEntity businessEntity,ProductSerial productSerial) {
+	public WorkQueueEntity(Long id,Long entityId, String entityType,String status,String serviceType,String serviceCode,String providerName,DateTime serviceDate,BusinessEntity businessEntity,ProductSerial productSerial) {
 		result = new WorkQueueResult(id,entityId, entityType,status,serviceType,serviceCode,providerName,serviceDate,businessEntity,productSerial);
 	}
 	
 	
-	public WorkQueueEntity(Long id,Long entityId, String entityType,String entityCode,String status,String orderType,String requestType,MizeDateTime serviceDate,MizeDateTime serviceUpdatedDate,String beCode,String beName) {
+	public WorkQueueEntity(Long id,Long entityId, String entityType,String entityCode,String status,String orderType,String requestType,DateTime serviceDate,DateTime serviceUpdatedDate,String beCode,String beName) {
 		result = new WorkQueueResult(id,entityId, entityType,entityCode,status,orderType,requestType,serviceDate,serviceUpdatedDate,beCode,beName);
 	}
 	
-	public WorkQueueEntity(Long id,Long entityId, String entityType,String status,String serviceType,String serviceCode,String providerName,MizeDateTime serviceDate,String model,String serialNumber, String customerName) {
+	public WorkQueueEntity(Long id,Long entityId, String entityType,String status,String serviceType,String serviceCode,String providerName,DateTime serviceDate,String model,String serialNumber, String customerName) {
 		Product product = new Product(model);
 		ProductSerial productSerial = new ProductSerial();
 		productSerial.setProduct(product);
@@ -117,18 +115,16 @@ public class WorkQueueEntity extends MizeSceEntity implements Comparable<WorkQue
 	}
 
 	@Override	
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@Column(name = "created_date",updatable = false)
 	@JsonIgnore(false)
-	public MizeDateTime getCreatedDate() {
+	public DateTime getCreatedDate() {
 		return createdDate;
 	}
 
 	@Override	
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@Column(name = "updated_date")
 	@JsonIgnore(false)
-	public MizeDateTime getUpdatedDate() {
+	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
 
@@ -178,16 +174,14 @@ public class WorkQueueEntity extends MizeSceEntity implements Comparable<WorkQue
 	}
 	
 	@Override
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@JsonIgnore(value = false)
-	public void setCreatedDate(MizeDateTime createdDate) {
+	public void setCreatedDate(DateTime createdDate) {
 		super.createdDate = createdDate;
 	}
 
 	@Override
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@JsonIgnore(value = false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
+	public void setUpdatedDate(DateTime updatedDate) {
 		super.updatedDate = updatedDate;
 	}
 

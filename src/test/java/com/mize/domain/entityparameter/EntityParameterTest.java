@@ -19,10 +19,10 @@ import org.springframework.test.context.ContextConfiguration;
 
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityComment;
+import com.mize.domain.datetime.Date;
+import com.mize.domain.datetime.DateTime;
 import com.mize.domain.test.util.JPATest;
-import com.mize.domain.util.MizeDate;
-import com.mize.domain.util.MizeDateTime;
-import com.mize.domain.util.MizeDateTimeUtils;
+import com.mize.domain.util.DateTimeUtils;
 
 @ContextConfiguration(locations = { "/test-context.xml" })
 public class EntityParameterTest extends JPATest{
@@ -83,10 +83,10 @@ public class EntityParameterTest extends JPATest{
 		entityParameter.setTenant(tenant);
 		entityParameter.setType("OrderTypeAndLocation");
 		entityParameter.setCode("Stock");
-		entityParameter.setStartDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
-		entityParameter.setEndDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC).plusMonths(2));
-		entityParameter.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
-		entityParameter.setUpdatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC).plusMonths(2));
+		entityParameter.setStartDate(Date.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		entityParameter.setEndDate(Date.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC).plusMonths(2));
+		entityParameter.setCreatedDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		entityParameter.setUpdatedDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC).plusMonths(2));
 		entityParameter.setUpdatedBy(779L);
 		entityParameter.setCreatedBy(779L);
 		entityParameter.setBeId(businessEntity.getId());
@@ -129,10 +129,10 @@ public class EntityParameterTest extends JPATest{
 			entityParameter.setTenant(dbTenant);
 			entityParameter.setType(rs.getString("entity_type"));
 			entityParameter.setCode(rs.getString("entity_code"));
-			entityParameter.setStartDate(MizeDateTimeUtils.toMizeDate(rs.getTimestamp("start_date")));
-			entityParameter.setEndDate(MizeDateTimeUtils.toMizeDate(rs.getTimestamp("end_date")));
-			entityParameter.setCreatedDate(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("created_date")));
-			entityParameter.setUpdatedDate(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("updated_date")));
+			entityParameter.setStartDate(DateTimeUtils.toDate(rs.getTimestamp("start_date")));
+			entityParameter.setEndDate(DateTimeUtils.toDate(rs.getTimestamp("end_date")));
+			entityParameter.setCreatedDate(DateTimeUtils.toDateTime(rs.getTimestamp("created_date")));
+			entityParameter.setUpdatedDate(DateTimeUtils.toDateTime(rs.getTimestamp("updated_date")));
 			entityParameter.setUpdatedBy(rs.getLong("updated_by"));
 			entityParameter.setCreatedBy(rs.getLong("created_by"));
 			entityParameter.setBeId(rs.getLong("entity_be_id"));

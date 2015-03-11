@@ -19,10 +19,10 @@ import org.springframework.test.context.ContextConfiguration;
 
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityComment;
+import com.mize.domain.datetime.Date;
+import com.mize.domain.datetime.DateTime;
 import com.mize.domain.test.util.JPATest;
-import com.mize.domain.util.MizeDate;
-import com.mize.domain.util.MizeDateTime;
-import com.mize.domain.util.MizeDateTimeUtils;
+import com.mize.domain.util.DateTimeUtils;
 
 
 @ContextConfiguration(locations={"/test-context.xml"})
@@ -85,12 +85,12 @@ public class ProductSerialTest extends JPATest {
 		productSerial.setProduct(product);
 		productSerial.setSerialNumber("testAdmin"+System.currentTimeMillis());
 		productSerial.setShippedBusinessEntity(businessEntity);
-		productSerial.setBuildDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		productSerial.setBuildDate(Date.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		productSerial.setInvoiceBusinessEntity(businessEntity);
 		productSerial.setCreatedBy(776l);
-		productSerial.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		productSerial.setCreatedDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		productSerial.setUpdatedBy(776L);
-		productSerial.setUpdatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		productSerial.setUpdatedDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		productSerial.setIsValid("Y");
 		
 		return productSerial;
@@ -139,14 +139,14 @@ public class ProductSerialTest extends JPATest {
 			BusinessEntity businessEntity = new BusinessEntity();
 			businessEntity.setId(rs.getLong("ship_be_id"));
 			prodSerial.setShippedBusinessEntity(businessEntity);
-			prodSerial.setBuildDate(MizeDateTimeUtils.toMizeDate(rs.getTimestamp("build_date")));
+			prodSerial.setBuildDate(DateTimeUtils.toDate(rs.getTimestamp("build_date")));
 			BusinessEntity invoiceBE = new BusinessEntity();
 			invoiceBE.setId(rs.getLong("invoice_be_id"));
 			prodSerial.setInvoiceBusinessEntity(invoiceBE);
 			prodSerial.setCreatedBy(rs.getLong("created_by"));
 			prodSerial.setUpdatedBy(rs.getLong("updated_by"));
-			prodSerial.setCreatedDate(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("created_date")));
-			prodSerial.setUpdatedDate(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("updated_date")));
+			prodSerial.setCreatedDate(DateTimeUtils.toDateTime(rs.getTimestamp("created_date")));
+			prodSerial.setUpdatedDate(DateTimeUtils.toDateTime(rs.getTimestamp("updated_date")));
 			prodSerial.setIsValid(rs.getString("is_valid"));
 			return prodSerial;
 		}

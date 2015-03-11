@@ -34,9 +34,9 @@ import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeSceEntityAudit;
+import com.mize.domain.datetime.Date;
 import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDate;
 import com.mize.domain.util.TenantSerializer;
 
 @Entity
@@ -60,9 +60,9 @@ public class ShipmentTracking extends MizeSceEntityAudit implements Comparable<S
 	private String priority;
 	private String carrier;
 	private String shipmentCarrierName;
-	private MizeDate shipmentDate;
-	private MizeDate deliveryDate;
-	private MizeDate confirmationDate;
+	private Date shipmentDate;
+	private Date deliveryDate;
+	private Date confirmationDate;
 	private String status;
 	private String label;
 	private String shipmentLinkInfo;
@@ -224,24 +224,22 @@ public class ShipmentTracking extends MizeSceEntityAudit implements Comparable<S
 
 	@JsonInclude(Include.NON_DEFAULT)
 	@Column(name = "shipment_date")
-	@Type(type = "com.mize.domain.util.MizeDateJPA")
-	public MizeDate getShipmentDate() {
+	public Date getShipmentDate() {
 		return shipmentDate;
 	}
 
-	public void setShipmentDate(MizeDate shipmentDate) {
+	public void setShipmentDate(Date shipmentDate) {
 		this.shipmentDate = shipmentDate;
 	}
 
 	@JsonInclude(Include.NON_DEFAULT)
 	@JsonIgnore(false)
 	@Column(name = "delivery_date")
-	@Type(type = "com.mize.domain.util.MizeDateJPA")
-	public MizeDate getDeliveryDate() {
+	public Date getDeliveryDate() {
 		return deliveryDate;
 	}
 
-	public void setDeliveryDate(MizeDate deliveryDate) {
+	public void setDeliveryDate(Date deliveryDate) {
 		this.deliveryDate = deliveryDate;
 	}
 
@@ -432,12 +430,11 @@ public class ShipmentTracking extends MizeSceEntityAudit implements Comparable<S
 	
 	@JsonInclude(Include.NON_NULL)
 	@Column(name = "confirmation_date")
-	@Type(type = "com.mize.domain.util.MizeDateJPA")
-	public MizeDate getConfirmationDate() {
+	public Date getConfirmationDate() {
 		return confirmationDate;
 	}
 
-	public void setConfirmationDate(MizeDate confirmationDate) {
+	public void setConfirmationDate(Date confirmationDate) {
 		this.confirmationDate = confirmationDate;
 	}
 

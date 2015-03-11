@@ -1,7 +1,7 @@
 package com.mize.domain.user;
 
 import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.datetime.DateTime;
 
 public class FriendInvitation extends MizeSceEntity implements Comparable<FriendInvitation>{
 
@@ -10,8 +10,8 @@ public class FriendInvitation extends MizeSceEntity implements Comparable<Friend
 	private String sentTo;
 	private String channel;
 	private String successfulConversion;
-	private MizeDateTime sendDate;
-	private MizeDateTime successfulConversionDate ;	
+	private DateTime sendDate;
+	private DateTime successfulConversionDate ;	
 
 	@Override
 	public Long getId() {
@@ -38,19 +38,19 @@ public class FriendInvitation extends MizeSceEntity implements Comparable<Friend
 	public void setSuccessfulConversion(String successfulConversion) {
 		this.successfulConversion = successfulConversion;
 	}
-	public MizeDateTime getSendDate() {
+	public DateTime getSendDate() {
 		return sendDate;
 	}
 
-	public void setSendDate(MizeDateTime sendDate) {
+	public void setSendDate(DateTime sendDate) {
 		this.sendDate = sendDate;
 	}
 
-	public MizeDateTime getSuccessfulConversionDate() {
+	public DateTime getSuccessfulConversionDate() {
 		return successfulConversionDate;
 	}
 
-	public void setSuccessfulConversionDate(MizeDateTime successfulConversionDate) {
+	public void setSuccessfulConversionDate(DateTime successfulConversionDate) {
 		this.successfulConversionDate = successfulConversionDate;
 	}
 

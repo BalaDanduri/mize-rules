@@ -19,8 +19,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Type;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -31,11 +29,11 @@ import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityOffline;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeSceEntityAudit;
+import com.mize.domain.datetime.Date;
+import com.mize.domain.datetime.DateTime;
 import com.mize.domain.form.FormInstance;
 import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDate;
-import com.mize.domain.util.MizeDateTime;
 import com.mize.domain.util.TenantSerializer;
 
 @Entity
@@ -53,7 +51,7 @@ public class InspectionForm extends MizeSceEntityAudit implements Comparable<Ins
 	private String inspectionType;
 	private String inspectionStatus;
 	private String inspectionReference;
-	private MizeDate inspectionDate;
+	private Date inspectionDate;
 	private String inspectedBy;
 	private Locale locale;
 	private FormInstance formInstance;
@@ -77,7 +75,7 @@ public class InspectionForm extends MizeSceEntityAudit implements Comparable<Ins
 		
 	}
 	
-	public InspectionForm(Long id,MizeDateTime updatedDate,String updateByUser) {
+	public InspectionForm(Long id,DateTime updatedDate,String updateByUser) {
 		this.id = id;
 		this.updatedByUser = updateByUser;
 		this.updatedDate = updatedDate;
@@ -146,13 +144,12 @@ public class InspectionForm extends MizeSceEntityAudit implements Comparable<Ins
 
 	
 	@Column(name = "insp_date")
-	@Type(type = "com.mize.domain.util.MizeDateJPA")
 	@JsonInclude(Include.NON_NULL)
-	public MizeDate getInspectionDate() {
+	public Date getInspectionDate() {
 		return inspectionDate;
 	}
 
-	public void setInspectionDate(MizeDate inspectionDate) {
+	public void setInspectionDate(Date inspectionDate) {
 		this.inspectionDate = inspectionDate;
 	}
 

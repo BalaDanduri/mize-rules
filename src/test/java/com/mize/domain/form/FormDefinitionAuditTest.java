@@ -18,9 +18,9 @@ import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.ContextConfiguration;
 
+import com.mize.domain.datetime.DateTime;
 import com.mize.domain.test.util.JPATest;
-import com.mize.domain.util.MizeDateTime;
-import com.mize.domain.util.MizeDateTimeUtils;
+import com.mize.domain.util.DateTimeUtils;
 
 @ContextConfiguration(locations={"/test-context.xml"})
 public class FormDefinitionAuditTest extends JPATest {	
@@ -78,7 +78,7 @@ public class FormDefinitionAuditTest extends JPATest {
 	}
 	
 	private FormDefinitionAudit createFormDefAudit(FormDefinition formDef) {
-		FormDefinitionAudit audit = new FormDefinitionAudit(formDef, formDef.getStatusCode(), MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC), 779L,"Process");
+		FormDefinitionAudit audit = new FormDefinitionAudit(formDef, formDef.getStatusCode(), DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC), 779L,"Process");
 		return audit;
 	}
 	
@@ -93,7 +93,7 @@ public class FormDefinitionAuditTest extends JPATest {
 			audit.setFormDefinition(formDef);
 			audit.setStatusBy(rs.getLong("status_by"));
 			audit.setStatusCode(rs.getString("status_code"));
-			audit.setStatusDate(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("status_date")));
+			audit.setStatusDate(DateTimeUtils.toDateTime(rs.getTimestamp("status_date")));
 			return audit;
 		}
 		

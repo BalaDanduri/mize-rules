@@ -25,6 +25,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.brand.Brand;
 import com.mize.domain.common.MizeSceEntityAudit;
+import com.mize.domain.datetime.Date;
 import com.mize.domain.product.Product;
 import com.mize.domain.product.ProductCategory;
 import com.mize.domain.util.JPASerializer;
@@ -40,8 +41,8 @@ public class BusinessEntityServiceRate extends MizeSceEntityAudit implements Com
 	private Product product;
 	private String serviceType;
 	private String currencyCode;
-	private MizeDate startDate;
-	private MizeDate endDate;
+	private Date startDate;
+	private Date endDate;
 	private BigDecimal serviceRate;
 	@Transient
 	private User user;
@@ -132,24 +133,22 @@ public class BusinessEntityServiceRate extends MizeSceEntityAudit implements Com
 	}
 
 	@Column(name = "start_date")
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateJPA")
 	@JsonInclude(Include.NON_DEFAULT)
-	public MizeDate getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(MizeDate startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
 	@Column(name = "end_date")
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateJPA")
 	@JsonInclude(Include.NON_DEFAULT)
-	public MizeDate getEndDate() {
+	public Date getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(MizeDate endDate) {
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 	

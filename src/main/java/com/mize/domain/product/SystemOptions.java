@@ -7,11 +7,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.datetime.DateTime;
 
 @Entity
 @Table(name = "system_options")
@@ -51,14 +50,13 @@ public class SystemOptions extends MizeSceEntity implements Comparable<SystemOpt
 	}
 	
 	@Column(name = "created_date",  nullable = true)
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@JsonIgnore(value=false)
-	public MizeDateTime getCreatedDate() {
+	public DateTime getCreatedDate() {
 		return createdDate;
 	}
 
 	@JsonIgnore(false)
-	public void setCreatedDate(MizeDateTime createdDate) {
+	public void setCreatedDate(DateTime createdDate) {
 		this.createdDate = createdDate;
 	}
 	
@@ -74,14 +72,13 @@ public class SystemOptions extends MizeSceEntity implements Comparable<SystemOpt
 	}
 	
 	@Column(name = "updated_date",  nullable = true)
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@JsonIgnore(false)
-	public MizeDateTime getUpdatedDate() {
+	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
 	
 	@JsonIgnore(false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
+	public void setUpdatedDate(DateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}
 

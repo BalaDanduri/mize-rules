@@ -3,7 +3,7 @@ package com.mize.domain.product;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mize.domain.auth.User;
 import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.datetime.DateTime;
 
 public class UserProductFeedback  extends MizeSceEntity implements Comparable<UserProdFeedback>{
 	
@@ -86,22 +86,22 @@ public class UserProductFeedback  extends MizeSceEntity implements Comparable<Us
 	}
 
 	@JsonIgnore(false)
-	public MizeDateTime getCreatedDate() {
+	public DateTime getCreatedDate() {
 		return createdDate;
 	}
 
 	@JsonIgnore(false)
-	public void setCreatedDate(MizeDateTime createdDate) {
+	public void setCreatedDate(DateTime createdDate) {
 		this.createdDate = createdDate;
 	}
 	
 	@JsonIgnore(false)
-	public MizeDateTime getUpdatedDate() {
+	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
 	
 	@JsonIgnore(false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
+	public void setUpdatedDate(DateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}
 	

@@ -7,7 +7,7 @@ import java.util.Map;
 
 import com.mize.domain.auth.User;
 import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.datetime.DateTime;
 
 public class ExportDataCriteria extends MizeSceEntity implements Comparable<ExportDataCriteria>{
 	
@@ -17,8 +17,8 @@ public class ExportDataCriteria extends MizeSceEntity implements Comparable<Expo
 	private Long fromEntityID;
 	private Long toEntityID;
 	private String inCluseIDs;
-	private MizeDateTime startDate;
-	private MizeDateTime endDate;
+	private DateTime startDate;
+	private DateTime endDate;
 	private String criteria;
 	private List<Long> entityIDList;
 	private List<Long> inCluseIDsList = new ArrayList<Long>();
@@ -41,19 +41,19 @@ public class ExportDataCriteria extends MizeSceEntity implements Comparable<Expo
 		this.entityName = entityName;
 	}
 	
-	public MizeDateTime getStartDate() {
+	public DateTime getStartDate() {
 		return startDate;
 	}
 	
-	public void setStartDate(MizeDateTime startDate) {
+	public void setStartDate(DateTime startDate) {
 		this.startDate = startDate;
 	}
 	
-	public MizeDateTime getEndDate() {
+	public DateTime getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(MizeDateTime endDate) {
+	public void setEndDate(DateTime endDate) {
 		this.endDate = endDate;
 	}
 	public Long getFromEntityID() {

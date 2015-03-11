@@ -20,7 +20,7 @@ import com.mize.domain.brand.Brand;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.Locale;
 import com.mize.domain.test.util.JPATest;
-import com.mize.domain.util.MizeDateTimeUtils;
+import com.mize.domain.util.DateTimeUtils;
 
 
 @ContextConfiguration(locations={"/test-context.xml"})
@@ -110,9 +110,9 @@ public class ProductTest extends JPATest {
 			BusinessEntity be = new BusinessEntity();
 			be.setId(resultSet.getLong("manufacturer_be_id"));
 			product.setManufacturerBE(be);
-			product.setCreatedDate(MizeDateTimeUtils.toMizeDateTime(resultSet.getTimestamp("created_date")));
-			product.setCreatedDate(MizeDateTimeUtils.toMizeDateTime(resultSet.getTimestamp("updated_date")));				
-			product.setReleaseDate(MizeDateTimeUtils.toMizeDate(resultSet.getTimestamp("release_date")));
+			product.setCreatedDate(DateTimeUtils.toDateTime(resultSet.getTimestamp("created_date")));
+			product.setCreatedDate(DateTimeUtils.toDateTime(resultSet.getTimestamp("updated_date")));				
+			product.setReleaseDate(DateTimeUtils.toDate(resultSet.getTimestamp("release_date")));
 			
 			return product;
 		}

@@ -20,13 +20,13 @@ import org.springframework.test.context.ContextConfiguration;
 
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityComment;
+import com.mize.domain.datetime.DateTime;
 import com.mize.domain.part.Part;
 import com.mize.domain.part.PickList;
 import com.mize.domain.part.PickListComment;
 import com.mize.domain.part.PickListItem;
 import com.mize.domain.test.util.JPATest;
-import com.mize.domain.util.MizeDateTime;
-import com.mize.domain.util.MizeDateTimeUtils;
+import com.mize.domain.util.DateTimeUtils;
 
 @ContextConfiguration(locations={"/test-context.xml"})
 public class PickListTest extends JPATest {
@@ -95,8 +95,8 @@ public class PickListTest extends JPATest {
 		pickList.setIsActive("Y");
 		pickList.setPickListLocation(businessEntity);
 		pickList.setTenant(tenant);
-		pickList.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
-		pickList.setUpdatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		pickList.setCreatedDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		pickList.setUpdatedDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		pickList.setCreatedBy(776l);
 		pickList.setUpdatedBy(776L);
 		return pickList;
@@ -135,8 +135,8 @@ public class PickListTest extends JPATest {
 			pickList.setType(rs.getString("picklist_type"));
 			pickList.setCreatedBy(rs.getLong("created_by"));
 			pickList.setUpdatedBy(rs.getLong("updated_by"));
-			pickList.setCreatedDate(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("created_date")));
-			pickList.setUpdatedDate(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("updated_date")));
+			pickList.setCreatedDate(DateTimeUtils.toDateTime(rs.getTimestamp("created_date")));
+			pickList.setUpdatedDate(DateTimeUtils.toDateTime(rs.getTimestamp("updated_date")));
 			return pickList;
 		}
 	}

@@ -2,7 +2,7 @@ package com.mize.domain.entity;
 
 import com.mize.domain.auth.User;
 import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.datetime.DateTime;
 
 public class EntityStatus extends MizeSceEntity {
 
@@ -19,7 +19,7 @@ public class EntityStatus extends MizeSceEntity {
 		
 	}
 	
-	public EntityStatus(Long id,MizeDateTime updatedDate,String updatedByUser,String entityName){
+	public EntityStatus(Long id,DateTime updatedDate,String updatedByUser,String entityName){
 		this.id = id;
 		this.updatedDate = updatedDate;
 		this.updatedByUser = updatedByUser;

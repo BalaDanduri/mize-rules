@@ -1,6 +1,7 @@
 package com.mize.domain.service.schedule;
 
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.datetime.DateTime;
+
 
 public class ServiceScheduleSearch {
 	
@@ -20,7 +21,7 @@ public class ServiceScheduleSearch {
 	Long productId;
 	String productName;
 	String productSerialNumber;		
-	MizeDateTime scheduleDate;
+	DateTime scheduleDate;
 	String startTime;
 	String endTime;
 	Double latitude;
@@ -167,13 +168,13 @@ public class ServiceScheduleSearch {
 	
 	/*@DateTimeFormat(pattern="MM-dd-yyyy")
 	@JsonSerialize(using = JsonDateSerializer.class)*/
-	public MizeDateTime getScheduleDate() {
+	public DateTime getScheduleDate() {
 		return scheduleDate;
 	}
 	
 	/*@DateTimeFormat(pattern="MM-dd-yyyy")
 	@JsonDeserialize(using=JodaDateDeserializer.class)*/
-	public void setScheduleDate(MizeDateTime scheduleDate) {
+	public void setScheduleDate(DateTime scheduleDate) {
 		this.scheduleDate = scheduleDate;
 	}
 

@@ -1,13 +1,13 @@
 package com.mize.domain.brand;
 
 import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.datetime.DateTime;
 
 public class PostToSocialMedia extends MizeSceEntity implements Comparable<PostToSocialMedia>{
 	
 	private static final long serialVersionUID = 4674350998777147719L;
 	String postId;
-	MizeDateTime postedDate;
+	DateTime postedDate;
 	String postData;
 	String socialMedia;
 	Long feedbackId;
@@ -31,11 +31,11 @@ public class PostToSocialMedia extends MizeSceEntity implements Comparable<PostT
 		this.postId = postId;
 	}
 
-	public MizeDateTime getPostedDate() {
+	public DateTime getPostedDate() {
 		return postedDate;
 	}
 
-	public void setPostedDate(MizeDateTime postedDate) {
+	public void setPostedDate(DateTime postedDate) {
 		this.postedDate = postedDate;
 	}
 

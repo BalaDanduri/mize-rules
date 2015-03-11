@@ -20,8 +20,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Type;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -30,8 +28,8 @@ import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.MizeSceEntityAudit;
+import com.mize.domain.datetime.Date;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDate;
 
 @Entity
 @Inheritance
@@ -45,16 +43,16 @@ public class ProductSerial extends MizeSceEntityAudit implements Comparable<Prod
 	private Product product;
 	private String serialNumber;
 	private BusinessEntity shippedBusinessEntity;
-	private MizeDate buildDate;
+	private Date buildDate;
 	@Transient
 	private EntityComment entityComment;
 	private List<ProductSerialComment> comments = new ArrayList<ProductSerialComment>();
 	@Transient
 	private User user;
-	private MizeDate shipDate;
+	private Date shipDate;
 	private String isValid;
 	private BusinessEntity invoiceBusinessEntity;
-	private MizeDate invoiceDate;
+	private Date invoiceDate;
 	private String invoiceNumber;
 	private List<ProductSerialRelation> productSerialRelations = new ArrayList<ProductSerialRelation>();
 	private List<ProductWarranty> productWarrantyList = new ArrayList<ProductWarranty>();
@@ -64,7 +62,7 @@ public class ProductSerial extends MizeSceEntityAudit implements Comparable<Prod
 	}
 
 	public ProductSerial(BusinessEntity tenantId, Product product, String serialNumber,BusinessEntity invoiceBusinessEntity,
-			BusinessEntity shippedBusinessEntity, MizeDate deliveryDate, MizeDate buildDate) {
+			BusinessEntity shippedBusinessEntity, Date deliveryDate, Date buildDate) {
 		super();
 		this.tenant = tenantId;
 		this.product = product;
@@ -132,12 +130,11 @@ public class ProductSerial extends MizeSceEntityAudit implements Comparable<Prod
 
 	
 	@Column(name = "build_date")
-	@Type(type = "com.mize.domain.util.MizeDateJPA")
-	public MizeDate getBuildDate() {
+	public Date getBuildDate() {
 		return buildDate;
 	}
 
-	public void setBuildDate(MizeDate buildDate) {
+	public void setBuildDate(Date buildDate) {
 		this.buildDate = buildDate;
 	}
 
@@ -183,12 +180,11 @@ public class ProductSerial extends MizeSceEntityAudit implements Comparable<Prod
 	
 	
 	@Column(name = "ship_date")
-	@Type(type = "com.mize.domain.util.MizeDateJPA")
-	public MizeDate getShipDate() {
+	public Date getShipDate() {
 		return shipDate;
 	}
 	
-	public void setShipDate(MizeDate shipDate) {
+	public void setShipDate(Date shipDate) {
 		this.shipDate = shipDate;
 	}
 	
@@ -206,12 +202,11 @@ public class ProductSerial extends MizeSceEntityAudit implements Comparable<Prod
 
 	
 	@Column(name = "invoice_date")
-	@Type(type = "com.mize.domain.util.MizeDateJPA")
-	public MizeDate getInvoiceDate() {
+	public Date getInvoiceDate() {
 		return invoiceDate;
 	}
 
-	public void setInvoiceDate(MizeDate invoiceDate) {
+	public void setInvoiceDate(Date invoiceDate) {
 		this.invoiceDate = invoiceDate;
 	}
 

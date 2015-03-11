@@ -1,12 +1,13 @@
 package com.mize.domain.prod.bby;
 
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.datetime.DateTime;
+
 
 public class Product {
 	private long sku;
 	private float salePrice;
 	private String upc;
-	private MizeDateTime priceUpdateDate;
+	private DateTime priceUpdateDate;
 	
 	public long getSku() {
 		return sku;
@@ -26,10 +27,10 @@ public class Product {
 	public void setUpc(String upc) {
 		this.upc = upc;
 	}
-	public MizeDateTime getPriceUpdateDate() {
+	public DateTime getPriceUpdateDate() {
 		return priceUpdateDate;
 	}
-	public void setPriceUpdateDate(MizeDateTime priceUpdateDate) {
+	public void setPriceUpdateDate(DateTime priceUpdateDate) {
 		this.priceUpdateDate = priceUpdateDate;
 	}
 	

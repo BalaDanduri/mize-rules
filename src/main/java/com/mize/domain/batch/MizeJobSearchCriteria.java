@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDate;
+import com.mize.domain.datetime.Date;
 
 public class MizeJobSearchCriteria extends MizeSceEntity implements Comparable<MizeJobSearchCriteria>{
 
@@ -17,10 +17,10 @@ public class MizeJobSearchCriteria extends MizeSceEntity implements Comparable<M
 	private String jobName;
 	private Long instanceId;
 	private String instanceCode;
-	private MizeDate jobFromDate;
-	private MizeDate jobToDate;
-	private MizeDate instanceFromDate;
-	private MizeDate instanceToDate;
+	private Date jobFromDate;
+	private Date jobToDate;
+	private Date instanceFromDate;
+	private Date instanceToDate;
 	private Boolean jobActive;
 	private Boolean instanceActive;
 	private List<String> roles = new ArrayList<String>();
@@ -54,28 +54,28 @@ public class MizeJobSearchCriteria extends MizeSceEntity implements Comparable<M
 	public void setInstanceCode(String instanceCode) {
 		this.instanceCode = instanceCode;
 	}
-	public MizeDate getJobFromDate() {
+	public Date getJobFromDate() {
 		return jobFromDate;
 	}
-	public void setJobFromDate(MizeDate jobFromDate) {
+	public void setJobFromDate(Date jobFromDate) {
 		this.jobFromDate = jobFromDate;
 	}
-	public MizeDate getJobToDate() {
+	public Date getJobToDate() {
 		return jobToDate;
 	}
-	public void setJobToDate(MizeDate jobToDate) {
+	public void setJobToDate(Date jobToDate) {
 		this.jobToDate = jobToDate;
 	}
-	public MizeDate getInstanceFromDate() {
+	public Date getInstanceFromDate() {
 		return instanceFromDate;
 	}
-	public void setInstanceFromDate(MizeDate instanceFromDate) {
+	public void setInstanceFromDate(Date instanceFromDate) {
 		this.instanceFromDate = instanceFromDate;
 	}
-	public MizeDate getInstanceToDate() {
+	public Date getInstanceToDate() {
 		return instanceToDate;
 	}
-	public void setInstanceToDate(MizeDate instanceToDate) {
+	public void setInstanceToDate(Date instanceToDate) {
 		this.instanceToDate = instanceToDate;
 	}
 	public Boolean getJobActive() {

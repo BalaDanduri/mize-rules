@@ -2,7 +2,6 @@ package com.mize.domain.util;
 
 import java.sql.Timestamp;
 
-//import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +10,7 @@ import org.springframework.stereotype.Component;
 import com.mize.domain.auth.User;
 import com.mize.domain.datetime.Date;
 import com.mize.domain.datetime.DateTime;
+//import org.joda.time.DateTime;
 
 @Component
 public class DateTimeUtils {
@@ -35,8 +35,8 @@ public class DateTimeUtils {
 		return mizeApplicationProperties.getDefaultDateFormat();
 	}
 	
-	public static DateTime currentDate(){		
-		return DateTime.getInstance(getDateFormat(), getTimeZone());
+	public static Date currentDate(){		
+		return Date.getInstance(getDateFormat(), getTimeZone());
 	}
 	
 	public static DateTime currentDateTime(){		

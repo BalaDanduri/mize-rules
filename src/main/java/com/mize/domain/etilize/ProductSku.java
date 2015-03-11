@@ -1,7 +1,7 @@
 package com.mize.domain.etilize;
 
 import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.datetime.DateTime;
 
 
 
@@ -9,8 +9,8 @@ public class ProductSku extends MizeSceEntity{
 	private static final long serialVersionUID = -6722341511569003526L;	
 	
 	private Long prodId;
-	private MizeDateTime discontinueDate;
-	private MizeDateTime addedDate;
+	private DateTime discontinueDate;
+	private DateTime addedDate;
 	private String name;
 	private String sku;
 	private Long localeId;
@@ -31,21 +31,21 @@ public class ProductSku extends MizeSceEntity{
 		this.prodId = prodId;
 	}
 	
-	public MizeDateTime getAddedDate() {
+	public DateTime getAddedDate() {
 		return addedDate;
 	}
 	
-	public void setAddedDate(MizeDateTime addedDate) {
+	public void setAddedDate(DateTime addedDate) {
 		this.addedDate = addedDate;
 	}
 
 	
-	public MizeDateTime getDiscontinueDate() {
+	public DateTime getDiscontinueDate() {
 		return discontinueDate;
 	}
 	
 	
-	public void setDiscontinueDate(MizeDateTime discontinueDate) {
+	public void setDiscontinueDate(DateTime discontinueDate) {
 		this.discontinueDate = discontinueDate;
 	}
 	public String getName() {

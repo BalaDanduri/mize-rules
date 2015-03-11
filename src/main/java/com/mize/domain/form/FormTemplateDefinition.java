@@ -9,10 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Type;
-
 import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.datetime.DateTime;
 
 @Entity
 @Table(name = "form_template_defn")
@@ -22,15 +20,15 @@ public class FormTemplateDefinition extends MizeSceEntity implements Comparable<
 	
 	private String templateDefinitionData;
 	private BigDecimal versionNumber;
-	private MizeDateTime startDate;
-	private MizeDateTime endDate;
+	private DateTime startDate;
+	private DateTime endDate;
 	
 	public FormTemplateDefinition() {
 		
 	}		
 
 	public FormTemplateDefinition(String templateDefinitionData,
-			BigDecimal versionNumber, MizeDateTime startDate, MizeDateTime endDate) {
+			BigDecimal versionNumber, DateTime startDate, DateTime endDate) {
 		super();
 		this.templateDefinitionData = templateDefinitionData;
 		this.versionNumber = versionNumber;
@@ -70,22 +68,20 @@ public class FormTemplateDefinition extends MizeSceEntity implements Comparable<
 	}
 
 	@Column(name = "start_date",  nullable = true)
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getStartDate() {
+	public DateTime getStartDate() {
 		return startDate;
 	}
 	
-	public void setStartDate(MizeDateTime startDate) {
+	public void setStartDate(DateTime startDate) {
 		this.startDate = startDate;
 	}
 	
 	@Column(name = "end_date",  nullable = true)
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getEndDate() {
+	public DateTime getEndDate() {
 		return endDate;
 	}
 	
-	public void setEndDate(MizeDateTime endDate) {
+	public void setEndDate(DateTime endDate) {
 		this.endDate = endDate;
 	}
 

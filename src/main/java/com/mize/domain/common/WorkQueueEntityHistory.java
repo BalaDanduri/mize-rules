@@ -11,12 +11,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Type;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.datetime.DateTime;
 
 @Entity
 @Table(name="work_queue_entity_history")
@@ -29,8 +27,8 @@ public class WorkQueueEntityHistory extends MizeSceEntity implements Comparable<
 	private String entityCode;
 	private Long entityId;
 	private String status;
-	private MizeDateTime entityInDate;
-	private MizeDateTime entityOutDate;	
+	private DateTime entityInDate;
+	private DateTime entityOutDate;	
 	@Transient
 	private User user;
 	@Transient
@@ -71,18 +69,16 @@ public class WorkQueueEntityHistory extends MizeSceEntity implements Comparable<
 	}
 
 	@Override	
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@Column(name = "created_date",updatable = false)
 	@JsonIgnore(value = false)
-	public MizeDateTime getCreatedDate() {
+	public DateTime getCreatedDate() {
 		return createdDate;
 	}
 
 	@Override	
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@Column(name = "updated_date")
 	@JsonIgnore(value = false)
-	public MizeDateTime getUpdatedDate() {
+	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
 
@@ -122,16 +118,14 @@ public class WorkQueueEntityHistory extends MizeSceEntity implements Comparable<
 	}
 	
 	@Override
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@JsonIgnore(value = false)
-	public void setCreatedDate(MizeDateTime createdDate) {
+	public void setCreatedDate(DateTime createdDate) {
 		super.createdDate = createdDate;
 	}
 
 	@Override
-	@Type(type="com.mize.domain.util.DateTimeJPA")
 	@JsonIgnore(value = false)
-	public void setUpdatedDate(MizeDateTime updatedDate) {
+	public void setUpdatedDate(DateTime updatedDate) {
 		super.updatedDate = updatedDate;
 	}
 
@@ -181,25 +175,21 @@ public class WorkQueueEntityHistory extends MizeSceEntity implements Comparable<
 		this.tenant = tenant;
 	}
 
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@Column(name = "entity_in_date",updatable = false)
-	public MizeDateTime getEntityInDate() {
+	public DateTime getEntityInDate() {
 		return entityInDate;
 	}
 
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public void setEntityInDate(MizeDateTime entityInDate) {
+	public void setEntityInDate(DateTime entityInDate) {
 		this.entityInDate = entityInDate;
 	}
 
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@Column(name = "entity_out_date")
-	public MizeDateTime getEntityOutDate() {
+	public DateTime getEntityOutDate() {
 		return entityOutDate;
 	}
 
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public void setEntityOutDate(MizeDateTime entityOutDate) {
+	public void setEntityOutDate(DateTime entityOutDate) {
 		this.entityOutDate = entityOutDate;
 	}
 

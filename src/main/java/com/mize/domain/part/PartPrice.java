@@ -24,8 +24,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.auth.User;
 import com.mize.domain.common.Country;
 import com.mize.domain.common.MizeSceEntityAudit;
+import com.mize.domain.datetime.Date;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDate;
 import com.mize.domain.util.PopulateCountry;
 
 @Entity
@@ -40,8 +40,8 @@ public class PartPrice extends MizeSceEntityAudit implements Comparable<PartPric
 	private BigDecimal unitPrice;
 	private BigDecimal listPrice;
 	private BigDecimal netPrice;
-	private MizeDate startDate;
-	private MizeDate endDate;
+	private Date startDate;
+	private Date endDate;
 	private String currencyCode;
 	@PopulateCountry
 	private Country country;
@@ -55,7 +55,7 @@ public class PartPrice extends MizeSceEntityAudit implements Comparable<PartPric
 	}	
 
 	public PartPrice(Part part, BigDecimal unitPrice, BigDecimal listPrice,
-			BigDecimal netPrice, MizeDate startDate, MizeDate endDate,
+			BigDecimal netPrice, Date startDate, Date endDate,
 			String currencyCode, Country country, Long taxId) {
 		super();
 		this.part = part;
@@ -101,16 +101,14 @@ public class PartPrice extends MizeSceEntityAudit implements Comparable<PartPric
 	}
 	
 	@Column(name = "start_date")
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateJPA")
     @JsonInclude(Include.NON_DEFAULT)
-	public MizeDate getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
 
 	@Column(name = "end_date")
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateJPA")
     @JsonInclude(Include.NON_DEFAULT)
-	public MizeDate getEndDate() {
+	public Date getEndDate() {
 		return endDate;
 	}
     
@@ -154,11 +152,11 @@ public class PartPrice extends MizeSceEntityAudit implements Comparable<PartPric
 		this.netPrice = netPrice;
 	}
 
-	public void setStartDate(MizeDate startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
-	public void setEndDate(MizeDate endDate) {
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 	

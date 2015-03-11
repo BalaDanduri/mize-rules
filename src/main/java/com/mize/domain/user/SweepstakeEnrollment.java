@@ -1,8 +1,8 @@
 package com.mize.domain.user;
 
 import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.datetime.DateTime;
 import com.mize.domain.util.Formatter;
-import com.mize.domain.util.MizeDateTime;
 
 public class SweepstakeEnrollment extends MizeSceEntity implements Comparable<SweepstakeEnrollment>{
 
@@ -10,7 +10,7 @@ public class SweepstakeEnrollment extends MizeSceEntity implements Comparable<Sw
 	private Long sweepstakeId;
 	private Long userId;
 	private String email;
-	private MizeDateTime enrollmentDate;	
+	private DateTime enrollmentDate;	
 	private String emailValidated;
 	private Sweepstake sweepstake;
 	private Integer invitationCount;
@@ -51,11 +51,11 @@ public class SweepstakeEnrollment extends MizeSceEntity implements Comparable<Sw
 		this.email = email;
 	}
 
-	public MizeDateTime getEnrollmentDate() {
+	public DateTime getEnrollmentDate() {
 		return enrollmentDate;
 	}
 
-	public void setEnrollmentDate(MizeDateTime enrollmentDate) {
+	public void setEnrollmentDate(DateTime enrollmentDate) {
 		this.enrollmentDate = enrollmentDate;
 	}
 	

@@ -10,13 +10,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Type;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.datetime.Date;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDate;
 
 /**
  * @author HarishBurra
@@ -31,7 +29,7 @@ public class ServiceEntityRequestCoverage extends MizeSceEntity implements Compa
 	private ServiceEntityRequest serviceEntityRequest;
 	private Long coverageId;
 	private String coverageName;
-	private MizeDate coverageEndDate;
+	private Date coverageEndDate;
 
 	public ServiceEntityRequestCoverage() {
 		
@@ -82,12 +80,11 @@ public class ServiceEntityRequestCoverage extends MizeSceEntity implements Compa
 	
 	
 	@Column(name = "coverage_end_date")
-	@Type(type = "com.mize.domain.util.MizeDateJPA")
-	public MizeDate getCoverageEndDate() {
+	public Date getCoverageEndDate() {
 		return coverageEndDate;
 	}
 	
-	public void setCoverageEndDate(MizeDate coverageEndDate) {
+	public void setCoverageEndDate(Date coverageEndDate) {
 		this.coverageEndDate = coverageEndDate;
 	}
 

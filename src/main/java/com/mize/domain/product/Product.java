@@ -34,10 +34,10 @@ import com.mize.domain.auth.User;
 import com.mize.domain.brand.Brand;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeSceEntityAudit;
+import com.mize.domain.datetime.Date;
 import com.mize.domain.util.DecimalValueDeserializer;
 import com.mize.domain.util.Formatter;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDate;
 import com.mize.domain.util.NumberValueSerializer;
 
 @javax.persistence.Entity
@@ -73,7 +73,7 @@ public class Product  extends MizeSceEntityAudit implements Comparable<Product>{
 	private BusinessEntity tenant;
 	private BusinessEntity manufacturerBE;	
 	private List<ProductIntl> productIntl = new ArrayList<ProductIntl>();	
-	private MizeDate releaseDate;
+	private Date releaseDate;
 	@Transient
 	private User user;
 	private List<ProductCategory> categories = new ArrayList<ProductCategory>();
@@ -139,12 +139,11 @@ public class Product  extends MizeSceEntityAudit implements Comparable<Product>{
 	
 	
 	@Column(name = "release_date")
-	@Type(type = "com.mize.domain.util.MizeDateJPA")
-	public MizeDate getReleaseDate() {
+	public Date getReleaseDate() {
 		return releaseDate;
 	}
 	
-	public void setReleaseDate(MizeDate releaseDate) {
+	public void setReleaseDate(Date releaseDate) {
 		this.releaseDate = releaseDate;
 	}	
 

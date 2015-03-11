@@ -12,8 +12,8 @@ import org.hibernate.collection.spi.PersistentCollection;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.mize.domain.datetime.DateTime;
 import com.mize.domain.exception.UploadError;
-import com.mize.domain.util.MizeDateTime;
 
 public abstract class MizeSceEntity implements IEntity {
 	
@@ -29,9 +29,9 @@ public abstract class MizeSceEntity implements IEntity {
 	protected Boolean isValid = Boolean.TRUE;
 			
 	protected Long createdBy;
-	protected MizeDateTime createdDate;	
+	protected DateTime createdDate;	
 	protected Long updatedBy;
-	protected MizeDateTime updatedDate;	
+	protected DateTime updatedDate;	
 	protected Long id;
 	
 	protected String createdByUser;
@@ -56,11 +56,11 @@ public abstract class MizeSceEntity implements IEntity {
 		this.createdBy = createdBy;
 	}
 
-	public MizeDateTime getCreatedDate() {
+	public DateTime getCreatedDate() {
 		return createdDate;
 	}
 	
-	public void setCreatedDate(MizeDateTime createdDate) {
+	public void setCreatedDate(DateTime createdDate) {
 		this.createdDate = createdDate;
 	}
 	
@@ -73,11 +73,11 @@ public abstract class MizeSceEntity implements IEntity {
 	}
 	
 	@JsonInclude(Include.NON_DEFAULT)
-	public MizeDateTime getUpdatedDate() {
+	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
 	
-	public void setUpdatedDate(MizeDateTime updatedDate) {
+	public void setUpdatedDate(DateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}
 

@@ -3,6 +3,7 @@ package com.mize.domain.util;
 import java.io.Serializable;
 
 import com.mize.domain.common.Locale;
+import com.mize.domain.datetime.DateTime;
 
 public class MizeDateFormatCache implements Serializable {
 
@@ -18,7 +19,7 @@ public class MizeDateFormatCache implements Serializable {
 	private String isActive;
 	private Locale locale;
 	private Long tenantId;
-	private MizeDateTime updatedDate;
+	private DateTime updatedDate;
 
 	public MizeDateFormatCache() {
 		// TODO Auto-generated constructor stub
@@ -80,11 +81,11 @@ public class MizeDateFormatCache implements Serializable {
 		this.userTimeZone = userTimeZone;
 	}
 
-	public MizeDateTime getUpdatedDate() {
+	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
 
-	public void setUpdatedDate(MizeDateTime updatedDate) {
+	public void setUpdatedDate(DateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}
 

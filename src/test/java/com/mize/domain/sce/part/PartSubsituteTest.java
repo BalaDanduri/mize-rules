@@ -19,14 +19,13 @@ import org.springframework.test.context.ContextConfiguration;
 
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityComment;
+import com.mize.domain.datetime.Date;
+import com.mize.domain.datetime.DateTime;
 import com.mize.domain.part.Part;
 import com.mize.domain.part.PartSubstitute;
 import com.mize.domain.product.PartSubstituteComment;
 import com.mize.domain.test.util.JPATest;
-import com.mize.domain.util.Formatter;
-import com.mize.domain.util.MizeDate;
-import com.mize.domain.util.MizeDateTime;
-import com.mize.domain.util.MizeDateTimeUtils;
+import com.mize.domain.util.DateTimeUtils;
 
 @ContextConfiguration(locations={"/test-context.xml"})
 public class PartSubsituteTest extends JPATest {
@@ -90,9 +89,9 @@ public class PartSubsituteTest extends JPATest {
 			partSubstitute.setFamilyCode("KW001");
 			partSubstitute.setCode("admin"+System.currentTimeMillis());
 			partSubstitute.setCreatedBy(776L);
-			partSubstitute.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
-			partSubstitute.setEndDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
-			partSubstitute.setDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+			partSubstitute.setCreatedDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+			partSubstitute.setEndDate(Date.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+			partSubstitute.setDate(Date.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 			partSubstitute.setSequenceNo(1);
 			partSubstitute.setUpdatedBy(776l);
 			
@@ -125,9 +124,9 @@ public class PartSubsituteTest extends JPATest {
 				partSubstitute.setFamilyCode(rs.getString("family_code"));
 				partSubstitute.setCode(rs.getString("substitute_code"));
 				partSubstitute.setCreatedBy(rs.getLong("created_by"));
-				partSubstitute.setCreatedDate(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("created_date")));
-				partSubstitute.setEndDate(MizeDateTimeUtils.toMizeDate(rs.getTimestamp("end_date")));
-				partSubstitute.setDate(MizeDateTimeUtils.toMizeDate(rs.getTimestamp("substitute_date")));
+				partSubstitute.setCreatedDate(DateTimeUtils.toDateTime(rs.getTimestamp("created_date")));
+				partSubstitute.setEndDate(DateTimeUtils.toDate(rs.getTimestamp("end_date")));
+				partSubstitute.setDate(DateTimeUtils.toDate(rs.getTimestamp("substitute_date")));
 				partSubstitute.setSequenceNo(rs.getInt("sequence_no"));
 				partSubstitute.setUpdatedBy(rs.getLong("updated_by"));
 				

@@ -21,12 +21,12 @@ import org.springframework.test.context.ContextConfiguration;
 
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityComment;
+import com.mize.domain.datetime.Date;
+import com.mize.domain.datetime.DateTime;
 import com.mize.domain.product.Product;
 import com.mize.domain.product.ProductSerial;
 import com.mize.domain.test.util.JPATest;
 import com.mize.domain.util.Formatter;
-import com.mize.domain.util.MizeDate;
-import com.mize.domain.util.MizeDateTime;
 
 @ContextConfiguration(locations={"/test-context.xml"})
 public class GoodwillTest extends JPATest {
@@ -116,8 +116,8 @@ public class GoodwillTest extends JPATest {
 		gw.setCurrencyCode("USD");
 		gw.setReference("REF00191");
 		gw.setAuthorisedBy("REF01");
-		gw.setStartDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
-		gw.setEndDate(MizeDate.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		gw.setStartDate(Date.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		gw.setEndDate(Date.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		BusinessEntity requestor = new BusinessEntity();
 		requestor.setId(8822L);
 		requestor.setCode("SAMREF001");
@@ -146,7 +146,7 @@ public class GoodwillTest extends JPATest {
 		audit.setGoodwill(gw);
 		audit.setStatusCode("completed");
 		audit.setStatusBy(123L);
-		audit.setStatusDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		audit.setStatusDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		auditList.add(audit);
 		gw.setAudits(auditList);
 		

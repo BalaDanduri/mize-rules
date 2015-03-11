@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.datetime.DateTime;
 
 public class CatalogCache implements Serializable{
 	
@@ -14,7 +14,7 @@ public class CatalogCache implements Serializable{
 	private String isActive;
 	private List<CatalogEntryCache> catalogEntryCaches = new ArrayList<CatalogEntryCache>();
 	private Long tenantId;
-	private MizeDateTime updatedDate;	
+	private DateTime updatedDate;	
 	
 	public Long getCatalogId() {
 		return catalogId;
@@ -44,12 +44,12 @@ public class CatalogCache implements Serializable{
 	}
 	
 	
-	public MizeDateTime getUpdatedDate() {
+	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
 	
 
-	public void setUpdatedDate(MizeDateTime updatedDate) {
+	public void setUpdatedDate(DateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}
 	

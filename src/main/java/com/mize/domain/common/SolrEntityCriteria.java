@@ -10,15 +10,15 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.datetime.DateTime;
 
 public class SolrEntityCriteria extends MizeSceEntity implements Comparable<SolrEntityCriteria>{
 	
 	private static final long serialVersionUID = -6647895629560783567L;
 	private String entityName;
 	private String entityAliasName;
-	private MizeDateTime startDate;
-	private MizeDateTime endDate;
+	private DateTime startDate;
+	private DateTime endDate;
 	private Long fromEntityID;
 	private Long toEntityID;
 	private String inCluseIDs;
@@ -54,23 +54,21 @@ public class SolrEntityCriteria extends MizeSceEntity implements Comparable<Solr
 	}	
 	
 	
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@JsonInclude(Include.NON_DEFAULT)
-	public MizeDateTime getStartDate() {
+	public DateTime getStartDate() {
 		return startDate;
 	}	
 	
-	public void setStartDate(MizeDateTime startDate) {
+	public void setStartDate(DateTime startDate) {
 		this.startDate = startDate;
 	}
 	
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@JsonInclude(Include.NON_DEFAULT)
-	public MizeDateTime getEndDate() {
+	public DateTime getEndDate() {
 		return endDate;
 	}	
 	
-	public void setEndDate(MizeDateTime endDate) {
+	public void setEndDate(DateTime endDate) {
 		this.endDate = endDate;
 	}
 	public String getEntityAliasName() {

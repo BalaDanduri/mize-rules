@@ -1,7 +1,7 @@
 package com.mize.domain.entity;
 
 import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.datetime.DateTime;
 
 public class EntityLock extends MizeSceEntity {
 
@@ -9,7 +9,7 @@ public class EntityLock extends MizeSceEntity {
 
 	private Boolean islocked;
 	private String lockedBy;
-	private MizeDateTime lockedDate;
+	private DateTime lockedDate;
 	
 	@Override
 	public Long getId() {
@@ -29,11 +29,11 @@ public class EntityLock extends MizeSceEntity {
 		this.lockedBy = lockedBy;
 	}
 
-	public MizeDateTime getLockedDate() {
+	public DateTime getLockedDate() {
 		return lockedDate;
 	}
 
-	public void setLockedDate(MizeDateTime lockedDate) {
+	public void setLockedDate(DateTime lockedDate) {
 		this.lockedDate = lockedDate;
 	}
 

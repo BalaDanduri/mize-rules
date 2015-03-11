@@ -25,8 +25,8 @@ import org.hibernate.annotations.Type;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mize.domain.brand.Brand;
 import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.datetime.DateTime;
 import com.mize.domain.util.EmptyOrAlpha;
-import com.mize.domain.util.MizeDateTime;
 import com.mize.domain.util.NonEmpty;
 import com.mize.domain.util.ValidateOnDependentFeild;
 
@@ -61,8 +61,8 @@ public class Engagement extends MizeSceEntity implements Comparable<Engagement> 
 	private Integer maxRedemptions;
 	private Integer redemptions;
 	private Integer useLimit;
-	private MizeDateTime startDate;
-	private MizeDateTime endDate;
+	private DateTime startDate;
+	private DateTime endDate;
 	private List<EngagementLink> engagementLinks = new ArrayList<EngagementLink>();
 	@Transient
 	private Integer pageIndex;
@@ -77,7 +77,7 @@ public class Engagement extends MizeSceEntity implements Comparable<Engagement> 
 	public Engagement(String type, String code, Brand brand, String title, String description, String imagePath,
 			String imageTitle, String url, String urlTitle, String redeemInstructions, String termsConditions,
 			String discountType, Double discountValue, Integer maxRedemptions, Integer redemptions, Integer useLimit,
-			MizeDateTime startDate, MizeDateTime endDate, List<EngagementLink> engagementLinks, Integer pageIndex, String status) {
+			DateTime startDate, DateTime endDate, List<EngagementLink> engagementLinks, Integer pageIndex, String status) {
 		super();
 		this.type = type;
 		this.code = code;
@@ -290,23 +290,21 @@ public class Engagement extends MizeSceEntity implements Comparable<Engagement> 
 	}
 
 	@Column(name = "start_date",  nullable = true)
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getStartDate() {
+	public DateTime getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(MizeDateTime startDate) {
+	public void setStartDate(DateTime startDate) {
 		this.startDate = startDate;
 	}
 
 	@Column(name = "end_date",  nullable = true)
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@NonEmpty(message="end_date.notempty")
-	public MizeDateTime getEndDate() {
+	public DateTime getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(MizeDateTime endDate) {
+	public void setEndDate(DateTime endDate) {
 		this.endDate = endDate;
 	}
 

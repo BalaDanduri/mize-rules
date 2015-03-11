@@ -20,7 +20,7 @@ import org.hibernate.annotations.Type;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.datetime.DateTime;
 
 @Entity
 @Table(name = "brand_feed")
@@ -32,8 +32,8 @@ public class BrandFeed extends MizeSceEntity implements Comparable<BrandFeed>{
 	private String feedType;
 	private String feedDesc;
 	private String feedTitle;
-	private MizeDateTime startTime;
-	private MizeDateTime endTime;
+	private DateTime startTime;
+	private DateTime endTime;
 	@Transient
 	private Integer pageIndex;
 	
@@ -46,7 +46,7 @@ public class BrandFeed extends MizeSceEntity implements Comparable<BrandFeed>{
 		this.brand = brand;
 	}
 
-	public BrandFeed(Brand brand, String feedType, String feedDesc, MizeDateTime startTime, MizeDateTime endTime,Integer pageIndex) {
+	public BrandFeed(Brand brand, String feedType, String feedDesc, DateTime startTime, DateTime endTime,Integer pageIndex) {
 		super();
 		this.brand = brand;
 		this.feedType = feedType;
@@ -56,7 +56,7 @@ public class BrandFeed extends MizeSceEntity implements Comparable<BrandFeed>{
 		this.pageIndex = pageIndex;
 	}
 
-	public BrandFeed(Long id,Brand brand, String feedType, String feedDesc, MizeDateTime startTime, MizeDateTime endTime,Integer pageIndex) {
+	public BrandFeed(Long id,Brand brand, String feedType, String feedDesc, DateTime startTime, DateTime endTime,Integer pageIndex) {
 		this.id = id;
 		this.brand = brand;
 		this.feedType = feedType;
@@ -109,24 +109,22 @@ public class BrandFeed extends MizeSceEntity implements Comparable<BrandFeed>{
 	
 	
 	@Column(name = "start_time",  nullable = true)
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getStartTime() {
+	public DateTime getStartTime() {
 		return startTime;
 	}
 	
-	public void setStartTime(MizeDateTime startTime) {
+	public void setStartTime(DateTime startTime) {
 		this.startTime = startTime;
 	}
 	
 	
 	@Column(name = "end_time",  nullable = true)
-	@Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getEndTime() {
+	public DateTime getEndTime() {
 		return endTime;
 	}
 	
 	
-	public void setEndTime(MizeDateTime endTime) {
+	public void setEndTime(DateTime endTime) {
 		this.endTime = endTime;
 	}
 	

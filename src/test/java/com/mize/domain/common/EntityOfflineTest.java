@@ -18,10 +18,10 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.ContextConfiguration;
 
 import com.mize.domain.businessentity.BusinessEntity;
+import com.mize.domain.datetime.DateTime;
 import com.mize.domain.test.util.JPATest;
+import com.mize.domain.util.DateTimeUtils;
 import com.mize.domain.util.Formatter;
-import com.mize.domain.util.MizeDateTime;
-import com.mize.domain.util.MizeDateTimeUtils;
 
 @ContextConfiguration(locations={"/test-context.xml"})
 public class EntityOfflineTest extends JPATest {
@@ -83,8 +83,8 @@ public class EntityOfflineTest extends JPATest {
 			offline.setEntityId(rs.getLong("entity_id"));
 			offline.setEntityType(rs.getString("entity_type"));
 			offline.setEntityCode(rs.getString("entity_code"));
-			offline.setCreatedDate(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("created_date")));
-			offline.setUpdatedDate(MizeDateTimeUtils.toMizeDateTime(rs.getTimestamp("updated_date")));
+			offline.setCreatedDate(DateTimeUtils.toDateTime(rs.getTimestamp("created_date")));
+			offline.setUpdatedDate(DateTimeUtils.toDateTime(rs.getTimestamp("updated_date")));
 			offline.setUpdatedByUser(rs.getString("updated_by_user"));
 			offline.setCreatedByUser(rs.getString("created_by_user"));
 			return offline;
@@ -99,8 +99,8 @@ public class EntityOfflineTest extends JPATest {
 		entity.setEntityId(543L);
 		entity.setEntityType("#INSP#" + System.currentTimeMillis());
 		entity.setEntityCode("InspectionForm");
-		entity.setCreatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
-		entity.setUpdatedDate(MizeDateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		entity.setCreatedDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
+		entity.setUpdatedDate(DateTime.getInstance("dd/MM/yyyy HH:mm:ss",DateTimeZone.UTC));
 		entity.setUpdatedByUser("shivasheguri@m-ize.com");
 		entity.setCreatedByUser("shivasheguri@m-ize.com");
 		return entity;

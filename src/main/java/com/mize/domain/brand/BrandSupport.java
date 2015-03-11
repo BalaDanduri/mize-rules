@@ -18,7 +18,7 @@ import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.datetime.DateTime;
 
 @Entity
 @Table(name = "brand_support")
@@ -37,7 +37,7 @@ public class BrandSupport extends MizeSceEntity implements Comparable<BrandSuppo
 	private String type;
 	private Boolean validated;
 	private Integer validatedBy;
-	private MizeDateTime validatedDate;
+	private DateTime validatedDate;
 	private String twitter;
 	private String facebook;
 	private String countryCode;
@@ -64,9 +64,9 @@ public class BrandSupport extends MizeSceEntity implements Comparable<BrandSuppo
 	public BrandSupport(Long brandId, Long id, String phone, String email,
 			String site, String chatUrl, String tollFreePhone,
 			String hoursOfOp, String qualifier, String type, Boolean validated,
-			Integer validatedBy, MizeDateTime validatedDate, String twitter,String facebook,
-			String countryCode, Long createdBy, MizeDateTime createdDate,
-			Long updatedBy, MizeDateTime updatedDate) {
+			Integer validatedBy, DateTime validatedDate, String twitter,String facebook,
+			String countryCode, Long createdBy, DateTime createdDate,
+			Long updatedBy, DateTime updatedDate) {
 		this.brandId = brandId;
 		this.id = id;
 		this.phone = phone;
@@ -180,11 +180,11 @@ public class BrandSupport extends MizeSceEntity implements Comparable<BrandSuppo
 	}
 
 	@Column(name = "validated_on",  nullable = true)
-	public MizeDateTime getValidatedDate() {
+	public DateTime getValidatedDate() {
 		return validatedDate;
 	}
 
-	public void setValidatedDate(MizeDateTime validatedDate) {
+	public void setValidatedDate(DateTime validatedDate) {
 		this.validatedDate = validatedDate;
 	}
 

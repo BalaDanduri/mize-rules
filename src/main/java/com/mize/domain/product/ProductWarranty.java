@@ -13,16 +13,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Type;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.datetime.Date;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDate;
 
 @Entity
 @Table(name = "prod_warranty")
@@ -35,15 +33,15 @@ public class ProductWarranty extends MizeSceEntity implements Comparable<Product
 	private static final long serialVersionUID = -7775495768578959130L;
 	
 	 private ProductSerial productSerial;
-	 private MizeDate startDate;
-	 private MizeDate endDate;
+	 private Date startDate;
+	 private Date endDate;
 	 private String coverageType;
 	 private String coverageName;
 	 private String partCode;
 	 private String partDescription;
 	 private String salesOrderNumber;
 	 private String purcahseOrderNumber;
-	 private MizeDate soldDate;
+	 private Date soldDate;
 	 private BusinessEntity customer;
 	 private BusinessEntity invoiceBE;
 	 
@@ -66,15 +64,13 @@ public class ProductWarranty extends MizeSceEntity implements Comparable<Product
 
 	
 	@Column(name = "start_date", nullable = true)
-	@Type(type = "com.mize.domain.util.MizeDateJPA")
-	public MizeDate getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
 
 
 	@Column(name = "end_date", nullable = true)
-	@Type(type = "com.mize.domain.util.MizeDateJPA")
-	public MizeDate getEndDate() {
+	public Date getEndDate() {
 		return endDate;
 	}
 
@@ -92,11 +88,11 @@ public class ProductWarranty extends MizeSceEntity implements Comparable<Product
 		this.productSerial = productSerial;
 	}
 
-	public void setStartDate(MizeDate startDate) {
+	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
-	public void setEndDate(MizeDate endDate) {
+	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 
@@ -157,12 +153,11 @@ public class ProductWarranty extends MizeSceEntity implements Comparable<Product
 	}
 
 	@Column(name = "wrrnty_sold_date")
-	@Type(type = "com.mize.domain.util.MizeDateJPA")
-	public MizeDate getSoldDate() {
+	public Date getSoldDate() {
 		return soldDate;
 	}
 
-	public void setSoldDate(MizeDate soldDate) {
+	public void setSoldDate(Date soldDate) {
 		this.soldDate = soldDate;
 	}
 

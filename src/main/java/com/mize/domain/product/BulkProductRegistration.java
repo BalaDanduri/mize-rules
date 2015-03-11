@@ -3,14 +3,12 @@ package com.mize.domain.product;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.annotations.Type;
-
 import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityComment;
 import com.mize.domain.common.MizeSceEntity;
-import com.mize.domain.util.MizeDate;
+import com.mize.domain.datetime.Date;
 
 public class BulkProductRegistration extends MizeSceEntity implements Comparable<BulkProductRegistration> {
 	
@@ -21,7 +19,7 @@ public class BulkProductRegistration extends MizeSceEntity implements Comparable
 	private BusinessEntity invoiceEntity;
 	private BusinessEntity customer;
 	private EntityAddress customerAddress;
-	private MizeDate purchaseDate;
+	private Date purchaseDate;
 	private EntityComment entityComment;
 	private List<ProductRegistration> productRegistrations = new ArrayList<ProductRegistration>();
 	private User user;
@@ -58,8 +56,7 @@ public class BulkProductRegistration extends MizeSceEntity implements Comparable
 	}
 	
 	
-	@Type(type = "com.mize.domain.util.MizeDateJPA")
-	public MizeDate getPurchaseDate() {
+	public Date getPurchaseDate() {
 		return purchaseDate;
 	}
 
@@ -99,7 +96,7 @@ public class BulkProductRegistration extends MizeSceEntity implements Comparable
 		this.customerAddress = customerAddress;
 	}
 	
-	public void setPurchaseDate(MizeDate purchaseDate) {
+	public void setPurchaseDate(Date purchaseDate) {
 		this.purchaseDate = purchaseDate;
 	}
 

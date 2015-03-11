@@ -11,13 +11,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.mize.domain.common.MizeSceEntityAudit;
-import com.mize.domain.util.MizeDateTime;
+import com.mize.domain.datetime.DateTime;
+
 
 @Entity
 @Table(name="token_action")
@@ -27,8 +25,8 @@ public class TokenAction extends MizeSceEntityAudit implements Comparable<TokenA
 	private String token;
 	private User targetUser;
 	private TokenType type;
-	private MizeDateTime created;
-	private MizeDateTime expires;
+	private DateTime created;
+	private DateTime expires;
 	private String tokenType;
 	public TokenAction() {		
 	}
@@ -55,7 +53,7 @@ public class TokenAction extends MizeSceEntityAudit implements Comparable<TokenA
 	}
 	
 	public TokenAction(Long id, String token, User targetUser, TokenType type,
-			MizeDateTime created, MizeDateTime expires) {
+			DateTime created, DateTime expires) {
 		this.id = id;
 		this.token = token;
 		this.targetUser = targetUser;
@@ -119,23 +117,20 @@ public class TokenAction extends MizeSceEntityAudit implements Comparable<TokenA
 	
 	
 	@Column(name="expires")
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getExpires() {
+	public DateTime getExpires() {
 		return expires;
 	}
 	
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	public void setExpires(MizeDateTime expires) {
+	public void setExpires(DateTime expires) {
 		this.expires = expires;
 	}
 	
 	@Column(name="created",updatable = false)
-	@Type(type = "com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getCreated() {
+	public DateTime getCreated() {
 		return created;
 	}
 
-	public void setCreated(MizeDateTime created) {
+	public void setCreated(DateTime created) {
 		this.created = created;
 	}
 	
@@ -143,7 +138,7 @@ public class TokenAction extends MizeSceEntityAudit implements Comparable<TokenA
 	@JsonProperty("wrapper")
 	@JsonIgnore
 	public boolean isValid() {
-		return ((this.expires!=null && this.expires.getDateTime() != null)?this.expires.getDateTime().isAfter(DateTime.now()) : false);
+		return ((this.expires!=null && this.expires.getBaseValue() != null)?this.expires.getBaseValue().isAfter(org.joda.time.DateTime.now()) : false);
 	}
 	
 	@Override
