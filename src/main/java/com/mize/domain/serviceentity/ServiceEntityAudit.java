@@ -14,7 +14,6 @@ import javax.persistence.Transient;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.datetime.DateTime;
-import com.mize.domain.util.MizeDateTime;
 
 @Entity(name = "se.ServiceEntityAudit")
 @Table(name = "service_entity_audit")
@@ -25,7 +24,7 @@ public class ServiceEntityAudit extends MizeSceEntity implements Comparable<Serv
 	private Long entityId;
 	private ServiceEntity serviceEntity;
 	private String statusCode;
-	private MizeDateTime statusDate;
+	private DateTime statusDate;
 	private Long statusBy;
 	@Transient
 	private String userName;
@@ -35,7 +34,7 @@ public class ServiceEntityAudit extends MizeSceEntity implements Comparable<Serv
 	}
 	
 	public ServiceEntityAudit(Long entityId, ServiceEntity serviceEntity,
-			String statusCode, MizeDateTime statusDate, Long statusBy,
+			String statusCode, DateTime statusDate, Long statusBy,
 			String userName) {
 		super();
 		this.entityId = entityId;
@@ -70,8 +69,7 @@ public class ServiceEntityAudit extends MizeSceEntity implements Comparable<Serv
 	}
 
 	@Column(name = "status_date")
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
-	public MizeDateTime getStatusDate() {
+	public DateTime getStatusDate() {
 		return statusDate;
 	}
 
@@ -119,7 +117,7 @@ public class ServiceEntityAudit extends MizeSceEntity implements Comparable<Serv
 		this.statusCode = statusCode;
 	}
 	
-	public void setStatusDate(MizeDateTime statusDate) {
+	public void setStatusDate(DateTime statusDate) {
 		this.statusDate = statusDate;
 	}
 	

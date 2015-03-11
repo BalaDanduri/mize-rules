@@ -29,7 +29,6 @@ import com.mize.domain.datetime.Date;
 import com.mize.domain.product.Product;
 import com.mize.domain.product.ProductCategory;
 import com.mize.domain.util.JPASerializer;
-import com.mize.domain.util.MizeDate;
 
 @Entity
 @Table(name = "business_entity_service_rate")

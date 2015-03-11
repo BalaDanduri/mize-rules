@@ -362,7 +362,6 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	}
 
 	@Column(name = "updated_date")
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	@Transient
 	public com.mize.domain.datetime.DateTime getUpdatedDate() {
 		return updatedDate;

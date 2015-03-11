@@ -105,13 +105,11 @@ public class ServiceEntityLabor extends MizeSceEntity implements Comparable<Serv
 	
 
 	@Column(name = "created_date",updatable = false)
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
 
 	@Column(name = "updated_date")
-	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}

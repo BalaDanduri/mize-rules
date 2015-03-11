@@ -10,7 +10,7 @@ public class Employee extends MizeSceEntity implements Comparable<Employee>{
 	private String name;
 	private Long id;
 	private DateTime joinDate;
-	private MizeDateTime mizeDateTime;
+	private com.mize.domain.datetime.DateTime mizeDateTime;
 	
 	public Employee(){			
 	}
@@ -36,11 +36,11 @@ public class Employee extends MizeSceEntity implements Comparable<Employee>{
 		this.joinDate = joinDate;
 	}
 
-	public MizeDateTime getMizeDateTime() {
+	public com.mize.domain.datetime.DateTime getMizeDateTime() {
 		return mizeDateTime;
 	}
 
-	public void setMizeDateTime(MizeDateTime mizeDateTime) {
+	public void setMizeDateTime(com.mize.domain.datetime.DateTime mizeDateTime) {
 		this.mizeDateTime = mizeDateTime;
 	}
 
