@@ -114,35 +114,20 @@ public class ServiceEntityAmount extends MizeSceEntity implements Comparable<Ser
 	public void setTotalAmount(BigDecimal totalAmount) {
 		this.totalAmount = totalAmount;
 	}
-	
-	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	@JsonIgnore(value=false)*/
 	@Transient
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
 	
-	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore(value=false)*/
 	public void setUpdatedDate(DateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}
 	
-	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	@JsonIgnore(value=false)
-*/	@Transient
+	@Transient
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
 
-	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore(value=false)*/
 	public void setCreatedDate(DateTime createdDate) {
 		this.createdDate = createdDate;
 	}

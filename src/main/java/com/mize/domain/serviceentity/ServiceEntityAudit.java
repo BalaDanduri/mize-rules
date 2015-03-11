@@ -25,7 +25,6 @@ public class ServiceEntityAudit extends MizeSceEntity implements Comparable<Serv
 	private Long entityId;
 	private ServiceEntity serviceEntity;
 	private String statusCode;
-//	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private MizeDateTime statusDate;
 	private Long statusBy;
 	@Transient
@@ -70,8 +69,6 @@ public class ServiceEntityAudit extends MizeSceEntity implements Comparable<Serv
 		return statusCode;
 	}
 
-	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class,include=Inclusion.NON_DEFAULT)*/
 	@Column(name = "status_date")
 	@org.hibernate.annotations.Type(type="com.mize.domain.util.MizeDateTimeJPA")
 	public MizeDateTime getStatusDate() {
@@ -83,18 +80,10 @@ public class ServiceEntityAudit extends MizeSceEntity implements Comparable<Serv
 		return statusBy;
 	}
 	
-	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	@JsonIgnore(value=false)*/
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
 	
-	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	@JsonIgnore(value=false)*/
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
@@ -130,8 +119,6 @@ public class ServiceEntityAudit extends MizeSceEntity implements Comparable<Serv
 		this.statusCode = statusCode;
 	}
 	
-	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	*/
 	public void setStatusDate(MizeDateTime statusDate) {
 		this.statusDate = statusDate;
 	}
@@ -140,16 +127,10 @@ public class ServiceEntityAudit extends MizeSceEntity implements Comparable<Serv
 		this.statusBy = statusBy;
 	}
 	
-	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore(value=false)*/
 	public void setUpdatedDate(DateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}
 	
-	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore(value=false)*/
 	public void setCreatedDate(DateTime createdDate) {
 		this.createdDate = createdDate;
 	}

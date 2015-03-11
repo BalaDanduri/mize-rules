@@ -166,14 +166,10 @@ public class ServiceScheduleSearch {
 		this.productSerialNumber = productSerialNumber;
 	}
 	
-	/*@DateTimeFormat(pattern="MM-dd-yyyy")
-	@JsonSerialize(using = JsonDateSerializer.class)*/
 	public DateTime getScheduleDate() {
 		return scheduleDate;
 	}
 	
-	/*@DateTimeFormat(pattern="MM-dd-yyyy")
-	@JsonDeserialize(using=JodaDateDeserializer.class)*/
 	public void setScheduleDate(DateTime scheduleDate) {
 		this.scheduleDate = scheduleDate;
 	}

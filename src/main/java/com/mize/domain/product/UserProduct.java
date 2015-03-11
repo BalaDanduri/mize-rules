@@ -106,31 +106,18 @@ public class UserProduct extends MizeSceEntity implements Comparable<UserProduct
 				+ ", productList=" + listName + "]";
 	}
 
-	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)	
-	@JsonIgnore(value=false)*/
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
 
-/*	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore(value=false)*/
 	public void setCreatedDate(DateTime createdDate) {
 		this.createdDate = createdDate;
 	}
 	
-	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)	
-	@JsonIgnore(value=false)
-	@JsonInclude(Include.NON_DEFAULT)*/
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
 
-	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore(value=false)*/
 	public void setUpdatedDate(DateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}

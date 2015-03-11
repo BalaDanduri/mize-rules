@@ -13,7 +13,6 @@ public class ServiceEntitySearch extends MizeSceEntity implements Comparable<Ser
 	private String status;
 	private ServiceEntityAddress address;
 	private String type;
-//	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
 	private DateTime createdDate;
 	private Long createdBy;
 	private Long submittedBy;
@@ -52,15 +51,10 @@ public class ServiceEntitySearch extends MizeSceEntity implements Comparable<Ser
 		this.type = type;
 	}
 
-	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)*/
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
 
-	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	*/
 	public void setCreatedDate(DateTime createdDate) {
 		this.createdDate = createdDate;
 	}

@@ -68,18 +68,12 @@ public class ServiceEntityNotes extends MizeSceEntity implements Comparable<Serv
 		return serviceEntity;
 	}
 
-	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)*/
 	@Column(name = "updated_date")
 	@Transient
 	public DateTime getUpdatedDate() {
 		return updatedDate;
 	}
 	
-	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)*/
 	@Column(name = "created_date")
 	@Transient
 	public DateTime getCreatedDate() {
@@ -111,16 +105,10 @@ public class ServiceEntityNotes extends MizeSceEntity implements Comparable<Serv
 		this.id = id;
 	}
 
-/*	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore(value=false)*/
 	public void setUpdatedDate(DateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}
 
-	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore(value=false)*/
 	public void setCreatedDate(DateTime createdDate) {
 		this.createdDate = createdDate;
 	}

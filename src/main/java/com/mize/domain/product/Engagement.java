@@ -20,7 +20,6 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mize.domain.brand.Brand;
@@ -260,7 +259,6 @@ public class Engagement extends MizeSceEntity implements Comparable<Engagement> 
 
 	@Column(name = "max_redemptions",nullable = true, length = 11)
 	@NonEmpty(message="max_redemptions.notempty")
-	//@Pattern(regexp = "[0-9]", message="max_redemptions.numeric")
 	public Integer getMaxRedemptions() {
 		return maxRedemptions;
 	}
@@ -271,7 +269,6 @@ public class Engagement extends MizeSceEntity implements Comparable<Engagement> 
 
 	@Column(name = "redemptions",nullable = true, length = 11)
 	@NonEmpty(message="redemptions.notempty")
-	//@Pattern(regexp = ".*[^0-9].*", message="redemptions.numeric")
 	public Integer getRedemptions() {
 		return redemptions;
 	}

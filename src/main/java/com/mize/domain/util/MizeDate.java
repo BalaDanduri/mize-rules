@@ -5,6 +5,7 @@ import org.joda.time.DateTimeZone;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.ISODateTimeFormat;
 
+@Deprecated
 public class MizeDate implements IMizeDate, Comparable<MizeDate>, Cloneable{
 	
 	private static final long serialVersionUID = 7257173124058180557L;

@@ -108,18 +108,11 @@ public class ServiceEntityOtherCharge extends MizeSceEntity implements Comparabl
 		this.request = request;
 	}
 
-	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)
-	@JsonIgnore(value=false)*/
 	@Column(name = "created_date",updatable = false)
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
 
-	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonSerialize(using=JsonDateTimeSerializer.class)
-	@JsonInclude(Include.NON_DEFAULT)*/
 	@Column(name = "updated_date")
 	public DateTime getUpdatedDate() {
 		return updatedDate;
@@ -137,9 +130,6 @@ public class ServiceEntityOtherCharge extends MizeSceEntity implements Comparabl
 		return updatedBy;
 	}
 
-/*	@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore(value=false)*/
 	public void setCreatedDate(DateTime createdDate) {
 		this.createdDate = createdDate;
 	}
@@ -154,9 +144,6 @@ public class ServiceEntityOtherCharge extends MizeSceEntity implements Comparabl
 		this.createdBy = createdBy;
 	}
 
-	/*@DateTimeFormat (pattern="MM-dd-yyyy h:mm:ss")
-	@JsonDeserialize(using=JodaDateTimeDeserializer.class)	
-	@JsonIgnore(value=false)*/
 	public void setUpdatedDate(DateTime updatedDate) {
 		this.updatedDate = updatedDate;
 	}

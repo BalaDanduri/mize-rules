@@ -9,7 +9,7 @@ import java.sql.Types;
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SessionImplementor;
 import org.hibernate.usertype.UserType;
-
+@Deprecated
 public class MizeDateTimeJPA implements UserType{
 		
 	@Override

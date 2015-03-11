@@ -1,28 +1,20 @@
 package com.mize.domain.applicationlabel;
 
-import static org.junit.Assert.assertTrue;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import org.joda.time.DateTimeZone;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.ContextConfiguration;
 
 import com.mize.domain.businessentity.BusinessEntity;
-import com.mize.domain.common.Locale;
 import com.mize.domain.test.util.JPATest;
 @ContextConfiguration(locations={"/test-context.xml"})
 public class ApplicationLabelTest extends JPATest{
 
+	@SuppressWarnings("unused")
 	private static final String APPLABEL_QUERY = "select * from application_labels where id=?";
+	@SuppressWarnings("unused")
 	private static final String APPLABEL_INTL_QUERY = "select * from application_labels_intl where label_id=?";
 	EntityManager entityManager;
 	EntityTransaction tx;

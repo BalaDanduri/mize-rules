@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.mize.domain.auth.User;
 
+@Deprecated
 @Component
 public class MizeDateTimeUtils {
 	//MizeDateTime to MizeDate and vice versa
