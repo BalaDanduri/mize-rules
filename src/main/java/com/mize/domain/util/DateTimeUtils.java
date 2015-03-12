@@ -64,6 +64,9 @@ public class DateTimeUtils {
 	}
 	
 	public static DateTimeZone getUserTimeZone(String userTimeZone){
+		if(userTimeZone == null){
+			userTimeZone = getDefaultTimeZone();
+		}
 		return DateTimeZone.forID(userTimeZone);
 	}
 	

@@ -57,6 +57,9 @@ public class MizeObjectMapper extends ObjectMapper {
 			return new MizeObjectMapper();
 		}
 	}
+	public static MizeObjectMapper getInstance(ApplicationFormatCache formatCache) {
+		return getInstance(formatCache, null);
+	}
 	
 	public static MizeObjectMapper getInstance(ApplicationFormatCache formatCache,String userTimeZone) {
 		if(formatCache != null){
