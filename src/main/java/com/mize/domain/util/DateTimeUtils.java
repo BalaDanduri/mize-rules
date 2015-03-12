@@ -55,7 +55,7 @@ public class DateTimeUtils {
 		return Date.getInstance(getDateFormat(), DateTimeZone.forID(dateTimeZone));
 	}
 	
-	public static Date currentMizeDate(DateTimeZone dateTimeZone){		
+	public static Date currentDate(DateTimeZone dateTimeZone){		
 		return Date.getInstance(getDateFormat(), dateTimeZone);
 	}
 	

@@ -1086,7 +1086,7 @@ public final class Formatter {
 	 }
 	 
 	 //public static MizeDate convertMizeDateTimeToMizeDate(MizeDateTime mizeDateTime)
-	 public static com.mize.domain.datetime.Date convertMizeDateTimeToMizeDate(com.mize.domain.datetime.DateTime dateTime){
+	 public static com.mize.domain.datetime.Date convertDateTimeToDate(com.mize.domain.datetime.DateTime dateTime){
 		 com.mize.domain.datetime.Date date = dateTime != null ? new com.mize.domain.datetime.Date(new DateTime(dateTime.getMillis())) :null;
 		 DateTime dateTime1 = date != null ? date.getBaseValue() :null; 
 		 dateTime1 = dateTime1!= null ? dateTime1.withTime(0, 0, 0, 0):null;

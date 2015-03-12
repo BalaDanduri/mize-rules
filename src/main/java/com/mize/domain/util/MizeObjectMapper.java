@@ -2,7 +2,6 @@ package com.mize.domain.util;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
-import java.util.Map;
 
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -22,7 +21,6 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.mize.domain.applicationformat.ApplicationFormatCache;
-import com.mize.domain.applicationformat.ApplicationFormatConstants;
 import com.mize.domain.common.BigDecimal;
 import com.mize.domain.datetime.Date;
 
@@ -76,17 +74,17 @@ public class MizeObjectMapper extends ObjectMapper {
 		this.dateTimeFormat = dateTimeFormat;
 		this.decimalFormat = decimalFormat;
 		if(this.dateFormat == null){
-			this.dateFormat = MizeDateTimeUtils.getDateFormat();
+			this.dateFormat = DateTimeUtils.getDateFormat();
 		}
 		if(this.dateTimeFormat == null){
-			this.dateTimeFormat = MizeDateTimeUtils.getDateTimeFormat();
+			this.dateTimeFormat =DateTimeUtils.getDateTimeFormat();
 		}
 		if(this.decimalFormat == null){
 			this.decimalFormat = "#,##,##,###.00";
 		}
 		
 		this.userTimeZone = userTimeZone;
-		this.userDateTimeZone = MizeDateTimeUtils.getUserTimeZone(this.userTimeZone);
+		this.userDateTimeZone = DateTimeUtils.getUserTimeZone(this.userTimeZone);
 		this.dateTimeFormatter = getDateTimeFormatter();
 		this.decimalFormatter = getDecimalFormatter();
 		registerModule();
@@ -100,10 +98,10 @@ public class MizeObjectMapper extends ObjectMapper {
 		configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);			
 		@SuppressWarnings("deprecation")
 		SimpleModule module = new SimpleModule("MizeDeserializerModule",new Version(1, 0, 0, null));
-		module.addSerializer(MizeDateTime.class, new MizeDateTimeSerializer());
-		module.addDeserializer(MizeDateTime.class, new MizeDateTimeDeserializer());	
-		module.addSerializer(MizeDate.class, new MizeDateSerializer());
-		module.addDeserializer(MizeDate.class, new MizeDateDeserializer());
+		module.addSerializer(com.mize.domain.datetime.DateTime.class, new MizeDateTimeSerializer());
+		module.addDeserializer(com.mize.domain.datetime.DateTime.class, new MizeDateTimeDeserializer());	
+		module.addSerializer(Date.class, new MizeDateSerializer());
+		module.addDeserializer(Date.class, new MizeDateDeserializer());
 		
 		module.addSerializer(com.mize.domain.datetime.DateTime.class, new DateTimeNewSerializer());
 		module.addDeserializer(com.mize.domain.datetime.DateTime.class, new DateTimeNewDeserializer());	
@@ -117,31 +115,31 @@ public class MizeObjectMapper extends ObjectMapper {
 		registerModule(module);
 	}
 	
-	public class MizeDateTimeDeserializer extends JsonDeserializer<MizeDateTime> {
+	public class MizeDateTimeDeserializer extends JsonDeserializer<com.mize.domain.datetime.DateTime> {
 		@Override
-		public MizeDateTime deserialize(JsonParser parser, DeserializationContext context) throws IOException, JsonProcessingException {
+		public com.mize.domain.datetime.DateTime deserialize(JsonParser parser, DeserializationContext context) throws IOException, JsonProcessingException {
 			JsonToken t = parser.getCurrentToken();
 			if (t == JsonToken.VALUE_NUMBER_INT) {
-				return MizeDateTime.getInstance(parser.getLongValue());
+				return com.mize.domain.datetime.DateTime.getInstance(parser.getLongValue());
 			}
 			String value = parser.getText();
 			if (isNotNull(value)) {
-				return MizeDateTime.getInstance(value.trim(),dateTimeFormat, userDateTimeZone);
+				return com.mize.domain.datetime.DateTime.getInstance(value.trim(),dateTimeFormat, userDateTimeZone);
 			} else {
 				return null;
 			}
 		}
 	}
 	
-	public class MizeDateDeserializer extends JsonDeserializer<MizeDate> {
+	public class MizeDateDeserializer extends JsonDeserializer<Date> {
 		@Override
-		public MizeDate deserialize(JsonParser parser, DeserializationContext context) throws IOException, JsonProcessingException {
+		public Date deserialize(JsonParser parser, DeserializationContext context) throws IOException, JsonProcessingException {
 			if (parser.getCurrentToken() == JsonToken.VALUE_NUMBER_INT) {
-				return MizeDate.getInstance(parser.getLongValue());
+				return Date.getInstance(parser.getLongValue());
 			}
 			String value = parser.getText();
 			if (isNotNull(value)) {
-				return MizeDate.getInstance(value.trim(), dateFormat);
+				return Date.getInstance(value.trim(), dateFormat);
 			} else {
 				return null;
 			}
@@ -163,9 +161,9 @@ public class MizeObjectMapper extends ObjectMapper {
 		}
 	}
 
-	public class MizeDateTimeSerializer extends JsonSerializer<MizeDateTime> {
+	public class MizeDateTimeSerializer extends JsonSerializer<com.mize.domain.datetime.DateTime> {
 		@Override
-		public void serialize(MizeDateTime mizeDateTime, JsonGenerator gen, SerializerProvider provider) throws IOException, JsonProcessingException {
+		public void serialize(com.mize.domain.datetime.DateTime mizeDateTime, JsonGenerator gen, SerializerProvider provider) throws IOException, JsonProcessingException {
 			if(mizeDateTime != null){				
 				if (DATE_AS_LONG.equalsIgnoreCase(dateTimeFormat)) {
 					gen.writeNumber(mizeDateTime.getMillis());
@@ -180,9 +178,9 @@ public class MizeObjectMapper extends ObjectMapper {
 		}
 	}
 	
-	public class MizeDateSerializer extends JsonSerializer<MizeDate> {
+	public class MizeDateSerializer extends JsonSerializer<Date> {
 		@Override
-		public void serialize(MizeDate mizeDate, JsonGenerator gen, SerializerProvider provider) throws IOException,JsonProcessingException {
+		public void serialize(Date mizeDate, JsonGenerator gen, SerializerProvider provider) throws IOException,JsonProcessingException {
 			if(mizeDate != null){
 				if (DATE_AS_LONG.equalsIgnoreCase(dateFormat)) {
 					gen.writeNumber(mizeDate.getMillis());
