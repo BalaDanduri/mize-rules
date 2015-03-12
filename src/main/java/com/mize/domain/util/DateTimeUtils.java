@@ -71,7 +71,10 @@ public class DateTimeUtils {
 	}
 	
 	public static String getDefaultTimeZone() {
-		return mizeApplicationProperties.getDefaultTimeZone();
+		if(mizeApplicationProperties != null){ // exceptional case handled
+			return mizeApplicationProperties.getDefaultTimeZone();
+		}
+		return null;
 	}
 	
 	public static String getDBDateTime(DateTime dateTime){
