@@ -7,6 +7,7 @@ public class PackageSpecialOptions extends MizeSceEntity implements Comparable<P
 	private static final long serialVersionUID = -7225407340276787225L;
 
 	private String deliveryConfirmation;
+	private Double declaredValue;	
 	private ShipmentReturnService returnService;
 	private ShipmentCashOnDelivery cashOnDelivery;
 	
@@ -14,9 +15,10 @@ public class PackageSpecialOptions extends MizeSceEntity implements Comparable<P
 		super();
 	}
 	
-	public PackageSpecialOptions(String deliveryConfirmation) {
+	public PackageSpecialOptions(String deliveryConfirmation, Double declaredValue) {
 		super();
 		this.deliveryConfirmation = deliveryConfirmation;
+		this.declaredValue = declaredValue;
 	}
 
 
@@ -37,6 +39,14 @@ public class PackageSpecialOptions extends MizeSceEntity implements Comparable<P
 
 	public void setDeliveryConfirmation(String deliveryConfirmation) {
 		this.deliveryConfirmation = deliveryConfirmation;
+	}
+
+	public Double getDeclaredValue() {
+		return declaredValue;
+	}
+
+	public void setDeclaredValue(Double declaredValue) {
+		this.declaredValue = declaredValue;
 	}
 
 	public ShipmentReturnService getReturnService() {
@@ -66,6 +76,8 @@ public class PackageSpecialOptions extends MizeSceEntity implements Comparable<P
 		int result = super.hashCode();
 		result = prime * result
 				+ ((cashOnDelivery == null) ? 0 : cashOnDelivery.hashCode());
+		result = prime * result
+				+ ((declaredValue == null) ? 0 : declaredValue.hashCode());
 		result = prime
 				* result
 				+ ((deliveryConfirmation == null) ? 0 : deliveryConfirmation
@@ -89,6 +101,11 @@ public class PackageSpecialOptions extends MizeSceEntity implements Comparable<P
 				return false;
 		} else if (!cashOnDelivery.equals(other.cashOnDelivery))
 			return false;
+		if (declaredValue == null) {
+			if (other.declaredValue != null)
+				return false;
+		} else if (!declaredValue.equals(other.declaredValue))
+			return false;
 		if (deliveryConfirmation == null) {
 			if (other.deliveryConfirmation != null)
 				return false;
@@ -105,9 +122,9 @@ public class PackageSpecialOptions extends MizeSceEntity implements Comparable<P
 	@Override
 	public String toString() {
 		return "PackageSpecialOptions [deliveryConfirmation="
-				+ deliveryConfirmation + ", returnService=" + returnService
-				+ ", cashOnDelivery=" + cashOnDelivery + "]";
+				+ deliveryConfirmation + ", declaredValue=" + declaredValue
+				+ ", returnService=" + returnService + ", cashOnDelivery="
+				+ cashOnDelivery + "]";
 	}
-	
-	
+
 }
