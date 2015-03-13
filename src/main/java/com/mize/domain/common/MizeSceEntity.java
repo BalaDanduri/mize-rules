@@ -56,6 +56,7 @@ public abstract class MizeSceEntity implements IEntity {
 		this.createdBy = createdBy;
 	}
 
+	@JsonInclude(Include.NON_DEFAULT)
 	public DateTime getCreatedDate() {
 		return createdDate;
 	}
