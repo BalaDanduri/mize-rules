@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.Formatter;
 
@@ -31,6 +33,7 @@ public class ApplicationFormatCache extends MizeSceEntity implements Comparable<
 		this.id = id;
 	}
 	
+	@JsonInclude(Include.NON_NULL)
 	public List<ApplicationFormat> getFormats() {
 		return formats;
 	}
