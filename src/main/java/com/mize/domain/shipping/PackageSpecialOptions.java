@@ -1,5 +1,7 @@
 package com.mize.domain.shipping;
 
+import java.math.BigDecimal;
+
 import com.mize.domain.common.MizeSceEntity;
 
 public class PackageSpecialOptions extends MizeSceEntity implements Comparable<PackageSpecialOptions>{
@@ -7,7 +9,7 @@ public class PackageSpecialOptions extends MizeSceEntity implements Comparable<P
 	private static final long serialVersionUID = -7225407340276787225L;
 
 	private String deliveryConfirmation;
-	private Double declaredValue;	
+	private BigDecimal declaredValue;	
 	private ShipmentReturnService returnService;
 	private ShipmentCashOnDelivery cashOnDelivery;
 	
@@ -15,7 +17,7 @@ public class PackageSpecialOptions extends MizeSceEntity implements Comparable<P
 		super();
 	}
 	
-	public PackageSpecialOptions(String deliveryConfirmation, Double declaredValue) {
+	public PackageSpecialOptions(String deliveryConfirmation, BigDecimal declaredValue) {
 		super();
 		this.deliveryConfirmation = deliveryConfirmation;
 		this.declaredValue = declaredValue;
@@ -41,11 +43,11 @@ public class PackageSpecialOptions extends MizeSceEntity implements Comparable<P
 		this.deliveryConfirmation = deliveryConfirmation;
 	}
 
-	public Double getDeclaredValue() {
+	public BigDecimal getDeclaredValue() {
 		return declaredValue;
 	}
 
-	public void setDeclaredValue(Double declaredValue) {
+	public void setDeclaredValue(BigDecimal declaredValue) {
 		this.declaredValue = declaredValue;
 	}
 
