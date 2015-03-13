@@ -247,7 +247,6 @@ public class Brand extends MizeSceEntityAudit implements Comparable<Brand>{
 	
 	
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "brand", orphanRemoval = true)
-	@Fetch(FetchMode.SELECT)
 	@JsonManagedReference(value="skins")
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
