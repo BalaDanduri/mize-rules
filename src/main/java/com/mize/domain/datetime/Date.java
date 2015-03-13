@@ -8,8 +8,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.ISODateTimeFormat;
 
 import com.mize.domain.jpa.DateJPA;
-import com.mize.domain.util.MizeDateTimeUtils;
-
+import com.mize.domain.util.DateTimeUtils;
 @TypeDef(name = "date", defaultForType = Date.class, typeClass = DateJPA.class)
 @MappedSuperclass
 public class Date implements IDateTime, Comparable<Date>, Cloneable{
@@ -73,7 +72,7 @@ public class Date implements IDateTime, Comparable<Date>, Cloneable{
 	}
 	
 	public static Date getInstance(String dateValue,String dateFormat){
-		return getInstance(dateValue,dateFormat, MizeDateTimeUtils.getDefaultDateTimeZone());
+		return getInstance(dateValue,dateFormat, DateTimeUtils.getDefaultDateTimeZone());
 	}
 		
 	public static Date getInstance(String dateFormat, DateTimeZone timeZone){
@@ -126,15 +125,15 @@ public class Date implements IDateTime, Comparable<Date>, Cloneable{
 	}
 	
 	public Date(long millis) {
-		this(MizeDateTimeUtils.getDateFormat(),MizeDateTimeUtils.getDefaultDateTimeZone(), millis);
+		this(DateTimeUtils.getDateFormat(),DateTimeUtils.getDefaultDateTimeZone(), millis);
 	}
 		
 	public static Date getInstance(long millis) {
-		return getInstance(millis, MizeDateTimeUtils.getDefaultDateTimeZone());
+		return getInstance(millis, DateTimeUtils.getDefaultDateTimeZone());
 	}
 	
 	public static Date getInstance(long millis, DateTimeZone dateTimeZone) {
-		return new Date(MizeDateTimeUtils.getDateFormat(), dateTimeZone, millis);
+		return new Date(DateTimeUtils.getDateFormat(), dateTimeZone, millis);
 	}
 
 	public Date nextDay(){

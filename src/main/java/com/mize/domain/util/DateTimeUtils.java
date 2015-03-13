@@ -88,16 +88,12 @@ public class DateTimeUtils {
 	public static String getDBDateTime(org.joda.time.DateTime dateTime){
 		return (dateTime == null ? null : dateTime.toString(mizeApplicationProperties.getDBDateTimeFormatter()));
 	}
-	
-	public static String getDateAsString(Timestamp timestamp){
-		return (timestamp == null ? null : new org.joda.time.DateTime(timestamp).toString(mizeApplicationProperties.getAppDateTimeFormatter()));
-	}
-	
+		
 	public static String getDateTimeAsString(Timestamp timestamp){
 		return (timestamp == null ? null : new org.joda.time.DateTime(timestamp).toString(mizeApplicationProperties.getAppDateTimeFormatter()));
 	}
 	
-	public static String getMizeDateAsString(Timestamp timestamp){
+	public static String getDateAsString(Timestamp timestamp){
 		return (timestamp == null ? null : new org.joda.time.DateTime(timestamp).toString(mizeApplicationProperties.getAppDateFormatter()));
 	}
 	public static DateTime getDateTime(Timestamp timestamp){

@@ -8,7 +8,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.ISODateTimeFormat;
 
 import com.mize.domain.jpa.DateTimeJPA;
-import com.mize.domain.util.MizeDateTimeUtils;
+import com.mize.domain.util.DateTimeUtils;
 
 @TypeDef(name = "dateTime", defaultForType = DateTime.class, typeClass = DateTimeJPA.class)
 @MappedSuperclass
@@ -32,7 +32,7 @@ public class DateTime implements IDateTime, Comparable<DateTime>, Cloneable{
 	}
 		
 	public static DateTime getInstance(String dateTimeValue,String dateTimeFormat){
-		return getInstance(dateTimeValue,dateTimeFormat,MizeDateTimeUtils.getDefaultDateTimeZone());
+		return getInstance(dateTimeValue,dateTimeFormat,DateTimeUtils.getDefaultDateTimeZone());
 	}
 	
 	public static DateTime getInstance(String dateTimeFormat,DateTimeZone dateTimeZone){
@@ -40,14 +40,14 @@ public class DateTime implements IDateTime, Comparable<DateTime>, Cloneable{
 	}
 			
 	public static DateTime getInstance(String dateTimeValue,String dateTimeFormat, DateTimeZone userTimeZone){
-		return new DateTime(dateTimeValue,dateTimeFormat,MizeDateTimeUtils.getDefaultDateTimeZone(),userTimeZone);
+		return new DateTime(dateTimeValue,dateTimeFormat,DateTimeUtils.getDefaultDateTimeZone(),userTimeZone);
 	}
 	
 	private DateTime(String dateTimeValue,String dateTimeFormat,DateTimeZone dateTimeZone,DateTimeZone userTimeZone) {		
 		try{		
 			this.dateTimeValue = checkAndAppendTime(dateTimeValue);
 			if(dateTimeFormat == null){
-				dateTimeFormat = MizeDateTimeUtils.getDateTimeFormat();
+				dateTimeFormat = DateTimeUtils.getDateTimeFormat();
 			}
 			this.dateTimeFormat = dateTimeFormat;
 			this.baseValue = org.joda.time.DateTime.parse(this.dateTimeValue,DateTimeFormat.forPattern(dateTimeFormat).withZone(userTimeZone));
@@ -100,20 +100,20 @@ public class DateTime implements IDateTime, Comparable<DateTime>, Cloneable{
 	}
 	
 	public static DateTime getInstance(long millis) {
-		return new DateTime(millis, MizeDateTimeUtils.getDefaultDateTimeZone());
+		return new DateTime(millis, DateTimeUtils.getDefaultDateTimeZone());
 	}
 	
 	protected DateTime(long millis, DateTimeZone dateTimeZone) {
 		this.baseValue = new org.joda.time.DateTime(millis,dateTimeZone);	
 		this.dateTimeZone = dateTimeZone;
-		this.dateTimeFormat = MizeDateTimeUtils.getDateTimeFormat();
+		this.dateTimeFormat = DateTimeUtils.getDateTimeFormat();
 		this.dateTimeValue = toString(this.dateTimeFormat,this.dateTimeZone);
 		this.isValid = true;
 	}
 	
 	public DateTime() {
-		this.baseValue = new org.joda.time.DateTime(MizeDateTimeUtils.getDefaultDateTimeZone());
-		this.dateTimeFormat = MizeDateTimeUtils.getDateTimeFormat();
+		this.baseValue = new org.joda.time.DateTime(DateTimeUtils.getDefaultDateTimeZone());
+		this.dateTimeFormat = DateTimeUtils.getDateTimeFormat();
 		this.dateTimeZone = this.baseValue.getZone();
 		this.dateTimeValue = toString(this.dateTimeFormat,this.dateTimeZone);
 		this.isValid = true;

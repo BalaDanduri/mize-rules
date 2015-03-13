@@ -12,7 +12,7 @@ import org.hibernate.engine.spi.SessionImplementor;
 import org.hibernate.usertype.UserType;
 
 import com.mize.domain.datetime.DateTime;
-import com.mize.domain.util.MizeDateTimeUtils;
+import com.mize.domain.util.DateTimeUtils;
 
 public class DateTimeJPA implements UserType {
 		
@@ -72,8 +72,8 @@ public class DateTimeJPA implements UserType {
 		if (rs.wasNull()) {
 			return null;
 		}
-		String dateTimeValue =  MizeDateTimeUtils.getMizeDateTimeAsString(timestamp);
-		DateTime dateTime = DateTime.getInstance(dateTimeValue, MizeDateTimeUtils.getDateTimeFormat(), MizeDateTimeUtils.getDefaultDateTimeZone());
+		String dateTimeValue =  DateTimeUtils.getDateTimeAsString(timestamp);
+		DateTime dateTime = DateTime.getInstance(dateTimeValue, DateTimeUtils.getDateTimeFormat(), DateTimeUtils.getDefaultDateTimeZone());
 		return dateTime;
 	}
 
@@ -83,7 +83,7 @@ public class DateTimeJPA implements UserType {
 		if(value != null){
 			DateTime dateTime = (DateTime)value;
 			if(dateTime != null){
-				dateTimeValue = MizeDateTimeUtils.getDBDateTime(dateTime.getBaseValue());
+				dateTimeValue = DateTimeUtils.getDBDateTime(dateTime.getBaseValue());
 			}
 		}
 		st.setString(index, dateTimeValue);
