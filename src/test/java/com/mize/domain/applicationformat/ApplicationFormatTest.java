@@ -1,21 +1,11 @@
 package com.mize.domain.applicationformat;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import org.junit.Before;
-import org.junit.Test;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.test.context.ContextConfiguration;
 
-import com.mize.domain.businessentity.BusinessEntity;
-import com.mize.domain.common.Locale;
 import com.mize.domain.test.util.JPATest;
 
 @ContextConfiguration(locations = { "/test-context.xml" })
@@ -25,15 +15,15 @@ public class ApplicationFormatTest  extends JPATest{
 	ApplicationFormat appFormat = null;
 	ApplicationFormat applicationFormatDB = null;
 	EntityTransaction tx;
-	private static final String APPLICATION_QUERY = "select * from application_formats where id = ?";
+	//private static final String APPLICATION_QUERY = "select * from application_formats where id = ?";
 	
 	@Before
 	public void setUp() throws Exception {
-		entityManager = getEntityManager();
-		appFormat = applicationFormatObjectTobeSaved(appFormat);
+		//entityManager = getEntityManager();
+		//appFormat = applicationFormatObjectTobeSaved(appFormat);
 	}
 	
-	public  void persist() {
+	/*public  void persist() {
 		tx = entityManager.getTransaction();
 		tx.begin();
 		entityManager.persist(appFormat);
@@ -112,6 +102,6 @@ public class ApplicationFormatTest  extends JPATest{
 			fail("Got Exception");
 			throw th;
 		}
-	}
+	}*/
 
 }
