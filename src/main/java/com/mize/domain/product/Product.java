@@ -100,6 +100,11 @@ public class Product  extends MizeSceEntityAudit implements Comparable<Product>{
 		this.model = model;
 	}
 	
+	public Product(String model, String imageLink) {
+		this.model = model;
+		this.imageLink = imageLink;
+	}
+	
 	public Product(Long id, String model) {
 		this.id = id;
 		this.model = model;
