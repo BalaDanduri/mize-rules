@@ -31,6 +31,18 @@ import com.mize.domain.util.JPASerializer;
 @Table(name="mize_asset")
 public class MizeAsset extends MizeSceEntity implements Comparable<MizeAsset>{
 	
+	@Override
+	public String toString() {
+		return "MizeAsset [tenant=" + tenant + ", name=" + name
+				+ ", assetModels=" + assetModels + ", type=" + type
+				+ ", brandId=" + brandId + ", brandName=" + brandName
+				+ ", contentType=" + contentType + ", storageType="
+				+ storageType + ", filePath=" + filePath + ", accessURL="
+				+ accessURL + ", model=" + model + ", category=" + category
+				+ ", entryFile=" + entryFile + ", id=" + id + ", user=" + user
+				+ ", baseAccessURL=" + baseAccessURL + ", downloadURL="
+				+ downloadURL + "]";
+	}
 	/**
 	 * 
 	 */
