@@ -43,12 +43,17 @@ public class UserTest extends JPATest {
 
 	@Before
 	public void setUp() throws Exception {
-		entityManager = getEntityManager();
-		createMasterData();
+		/*entityManager = getEntityManager();
+		createMasterData();*/
 
 	}
+	
+	@Test
+	public void test(){
+		
+	}
 
-	private void persist() {
+	/*private void persist() {
 		tx = entityManager.getTransaction();
 		tx.begin();
 		entityManager.persist(user);
@@ -156,12 +161,12 @@ public class UserTest extends JPATest {
 	}
 
 	public Group createGroup() {
-		/*Group group = new Group();
+		Group group = new Group();
 		group.setOwner(tenant);
 		group.setName("Test Admin Group");
 		group.setCode("TA" + System.currentTimeMillis());
 		group.setActive("Y");
-		group.setDescription("Test Admin Group Desc");*/
+		group.setDescription("Test Admin Group Desc");
 
 		return null;
 	}
@@ -275,5 +280,5 @@ public class UserTest extends JPATest {
 		} catch (Throwable th) {
 			th.printStackTrace();
 		}
-	}
+	}*/
 }
