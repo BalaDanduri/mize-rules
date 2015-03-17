@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import org.junit.Before;
+import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
 
 import com.mize.domain.test.util.JPATest;
@@ -21,6 +22,11 @@ public class ApplicationFormatTest  extends JPATest{
 	public void setUp() throws Exception {
 		//entityManager = getEntityManager();
 		//appFormat = applicationFormatObjectTobeSaved(appFormat);
+	}
+	
+	@Test
+	public void test(){
+		
 	}
 	
 	/*public  void persist() {
