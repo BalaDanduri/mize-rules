@@ -156,14 +156,14 @@ public class UserTest extends JPATest {
 	}
 
 	public Group createGroup() {
-		Group group = new Group();
+		/*Group group = new Group();
 		group.setOwner(tenant);
 		group.setName("Test Admin Group");
 		group.setCode("TA" + System.currentTimeMillis());
 		group.setActive("Y");
-		group.setDescription("Test Admin Group Desc");
+		group.setDescription("Test Admin Group Desc");*/
 
-		return group;
+		return null;
 	}
 
 	public void setUserToGroup(User user) {
@@ -171,7 +171,7 @@ public class UserTest extends JPATest {
 		UserGroup userGroup = new UserGroup();
 		userGroup.setUser(user);
 		group = createGroup();
-		entityManager.persist(group);
+		//entityManager.persist(group);
 		userGroup.setGroup(group);
 		userGroups.add(userGroup);
 		user.setUserGroups(userGroups);
