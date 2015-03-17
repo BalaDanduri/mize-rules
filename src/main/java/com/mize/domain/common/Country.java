@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Fetch;
@@ -150,6 +151,7 @@ public class Country extends MizeSceEntityAudit implements Comparable<Country>{
 	@JsonManagedReference(value="countryIntl")
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
+	@BatchSize(size = 500)
 	public List<CountryIntl> getIntls() {
 		return intls;
 	}
@@ -242,6 +244,7 @@ public class Country extends MizeSceEntityAudit implements Comparable<Country>{
 	@JsonInclude(Include.NON_NULL)
 	@JsonManagedReference(value="country")
 	@JsonBackReference(value="country_states")
+	@BatchSize(size = 500)
 	public List<State> getStates() {
 		return states;
 	}
