@@ -50,13 +50,6 @@ public class MizeObjectMapper extends ObjectMapper {
 		return new MizeObjectMapper(dateFormat, dateTimeFormat, null);
 	}
 	
-	public static MizeObjectMapper getInstance(MizeDateFormat mizeDateFormat) {
-		if(mizeDateFormat != null){
-			return new MizeObjectMapper(mizeDateFormat.getDateFormat(),mizeDateFormat.getDateTimeFormat(),mizeDateFormat.getUserTimeZone());
-		}else{
-			return new MizeObjectMapper();
-		}
-	}
 	public static MizeObjectMapper getInstance(ApplicationFormatCache formatCache) {
 		return getInstance(formatCache, null);
 	}
