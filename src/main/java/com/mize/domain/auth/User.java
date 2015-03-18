@@ -69,6 +69,7 @@ public class User extends MizeSceEntityAudit implements Comparable<User> {
 	@CachedEntity
 	private List<UserAddress> addresses = new ArrayList<UserAddress>();
 	private String isActive;
+	private String token;
 	
 	@Transient
 	private User loginUser;
@@ -415,6 +416,16 @@ public class User extends MizeSceEntityAudit implements Comparable<User> {
 	@JsonIgnore
 	public User getLoginUser() {
 		return loginUser;
+	}
+	
+	@Transient
+	@JsonIgnore
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 	@Override

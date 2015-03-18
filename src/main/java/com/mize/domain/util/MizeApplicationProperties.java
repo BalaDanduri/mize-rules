@@ -340,4 +340,30 @@ public class MizeApplicationProperties implements InitializingBean {
 			return null;
 		}
 	}
+
+	@JsonIgnore
+	public Integer getTokenExpireTime() {
+		if(getPropertyValue("tokenExpireTime") != null) {
+			return Integer.valueOf(getPropertyValue("tokenExpireTime"));
+		}else {
+			return null;
+		}
+	}
+	
+	
+	@JsonIgnore
+	public String getTokenDatatype() {
+		return getPropertyValue("tokenDatatype");
+	}
+	
+	@JsonIgnore
+	public Integer getTokenLength() {
+		if(getPropertyValue("tokenLength") != null) {
+			return Integer.valueOf(getPropertyValue("tokenLength"));
+		}else {
+			return null;
+		}
+	}	
+	
+	
 }

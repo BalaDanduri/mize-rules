@@ -28,6 +28,8 @@ public class TokenAction extends MizeSceEntityAudit implements Comparable<TokenA
 	private DateTime created;
 	private DateTime expires;
 	private String tokenType;
+	@Transient
+	private String key;
 	public TokenAction() {		
 	}
 	
@@ -141,6 +143,15 @@ public class TokenAction extends MizeSceEntityAudit implements Comparable<TokenA
 		return ((this.expires!=null && this.expires.getBaseValue() != null)?this.expires.getBaseValue().isAfter(org.joda.time.DateTime.now()) : false);
 	}
 	
+	@Transient
+	public String getKey() {
+		return key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
+	}
+
 	@Override
 	public String toString() {
 		return "TokenAction [id=" + id + ", token=" + token + ", type=" + type + ", created=" + created
