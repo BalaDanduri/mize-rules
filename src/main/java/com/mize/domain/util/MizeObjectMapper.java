@@ -94,10 +94,6 @@ public class MizeObjectMapper extends ObjectMapper {
 		configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);			
 		@SuppressWarnings("deprecation")
 		SimpleModule module = new SimpleModule("MizeDeserializerModule",new Version(1, 0, 0, null));
-		module.addSerializer(com.mize.domain.datetime.DateTime.class, new MizeDateTimeSerializer());
-		module.addDeserializer(com.mize.domain.datetime.DateTime.class, new MizeDateTimeDeserializer());	
-		module.addSerializer(Date.class, new MizeDateSerializer());
-		module.addDeserializer(Date.class, new MizeDateDeserializer());
 		
 		module.addSerializer(com.mize.domain.datetime.DateTime.class, new DateTimeNewSerializer());
 		module.addDeserializer(com.mize.domain.datetime.DateTime.class, new DateTimeNewDeserializer());	
@@ -110,38 +106,7 @@ public class MizeObjectMapper extends ObjectMapper {
 		
 		registerModule(module);
 	}
-	
-	public class MizeDateTimeDeserializer extends JsonDeserializer<com.mize.domain.datetime.DateTime> {
-		@Override
-		public com.mize.domain.datetime.DateTime deserialize(JsonParser parser, DeserializationContext context) throws IOException, JsonProcessingException {
-			JsonToken t = parser.getCurrentToken();
-			if (t == JsonToken.VALUE_NUMBER_INT) {
-				return com.mize.domain.datetime.DateTime.getInstance(parser.getLongValue());
-			}
-			String value = parser.getText();
-			if (isNotNull(value)) {
-				return com.mize.domain.datetime.DateTime.getInstance(value.trim(),dateTimeFormat, userDateTimeZone);
-			} else {
-				return null;
-			}
-		}
-	}
-	
-	public class MizeDateDeserializer extends JsonDeserializer<Date> {
-		@Override
-		public Date deserialize(JsonParser parser, DeserializationContext context) throws IOException, JsonProcessingException {
-			if (parser.getCurrentToken() == JsonToken.VALUE_NUMBER_INT) {
-				return Date.getInstance(parser.getLongValue());
-			}
-			String value = parser.getText();
-			if (isNotNull(value)) {
-				return Date.getInstance(value.trim(), dateFormat);
-			} else {
-				return null;
-			}
-		}
-	}
-	
+		
 	@Deprecated
 	public class DateTimeDeserializer extends JsonDeserializer<DateTime> {
 		@Override
@@ -153,40 +118,6 @@ public class MizeObjectMapper extends ObjectMapper {
 				return dateTimeFormatter.parseDateTime(parser.getText().trim());
 			} else {
 				return null;
-			}
-		}
-	}
-
-	public class MizeDateTimeSerializer extends JsonSerializer<com.mize.domain.datetime.DateTime> {
-		@Override
-		public void serialize(com.mize.domain.datetime.DateTime mizeDateTime, JsonGenerator gen, SerializerProvider provider) throws IOException, JsonProcessingException {
-			if(mizeDateTime != null){				
-				if (DATE_AS_LONG.equalsIgnoreCase(dateTimeFormat)) {
-					gen.writeNumber(mizeDateTime.getMillis());
-				} else {
-					if(mizeDateTime.isValid()){
-						gen.writeString(mizeDateTime.toString(dateTimeFormat, userDateTimeZone));
-					}else{
-						gen.writeString(mizeDateTime.getDateTimeValue());
-					}
-				}
-			}
-		}
-	}
-	
-	public class MizeDateSerializer extends JsonSerializer<Date> {
-		@Override
-		public void serialize(Date mizeDate, JsonGenerator gen, SerializerProvider provider) throws IOException,JsonProcessingException {
-			if(mizeDate != null){
-				if (DATE_AS_LONG.equalsIgnoreCase(dateFormat)) {
-					gen.writeNumber(mizeDate.getMillis());
-				} else {
-					if(mizeDate.isValid()){
-						gen.writeString(mizeDate.toString(dateFormat, null));
-					}else{
-						gen.writeString(mizeDate.getDateValue());
-					}
-				}
 			}
 		}
 	}
