@@ -22,7 +22,6 @@ import com.mize.domain.auth.User;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeSceEntityAudit;
-import com.mize.domain.util.JPASerializer;
 import com.mize.domain.util.TenantSerializer;
 
 @Entity
@@ -160,7 +159,7 @@ public class EntityXRef extends MizeSceEntityAudit implements Comparable<EntityX
 
 	@Override
 	public String toString() {
-		return "Carrier [carrierCode=" + code + ", type=" + type + ", isActive=" + isActive + "]";
+		return "EntityXRef [code=" + code + ", type=" + type + ", isActive=" + isActive + "]";
 	}
 
 	@Override
