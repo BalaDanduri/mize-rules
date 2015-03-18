@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -22,6 +23,7 @@ import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.util.JPASerializer;
+import com.mize.domain.util.TenantSerializer;
 
 @Entity
 @Table(name = "entity_xref")
@@ -40,7 +42,7 @@ public class EntityXRef extends MizeSceEntityAudit implements Comparable<EntityX
 	private List<EntityXRefCriteria> criteriaList = new ArrayList<EntityXRefCriteria>();
 	@Transient
 	private List<EntityXRefResult> resultList = new ArrayList<EntityXRefResult>();
-	@Transient
+
 	private User user;
 	@Transient
 	private Locale locale;
@@ -63,9 +65,9 @@ public class EntityXRef extends MizeSceEntityAudit implements Comparable<EntityX
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "tenant_id")
-	@JsonSerialize(using = JPASerializer.class)
+	@JoinColumn(name = "tenant_id")	
 	@JsonInclude(Include.NON_DEFAULT)
+	@JsonSerialize(using=TenantSerializer.class)
 	public BusinessEntity getTenant() {
 		return tenant;
 	}
@@ -147,6 +149,7 @@ public class EntityXRef extends MizeSceEntityAudit implements Comparable<EntityX
 	}
 
 	@Transient
+	@JsonIgnore
 	public User getUser() {
 		return user;
 	}
