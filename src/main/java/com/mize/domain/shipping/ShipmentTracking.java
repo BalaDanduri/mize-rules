@@ -96,6 +96,8 @@ public class ShipmentTracking extends MizeSceEntityAudit implements Comparable<S
 	private ShipmentSpecialOptions specialOptions;
 	private String specialOptionsValue;
 	private Locale locale;
+	@Transient
+	private String retrieveAllItems;
 	
 	public ShipmentTracking(){
 		super();
@@ -525,6 +527,15 @@ public class ShipmentTracking extends MizeSceEntityAudit implements Comparable<S
 
 	public void setSpecialOptionsValue(String specialOptionsValue) {
 		this.specialOptionsValue = specialOptionsValue;
+	}
+	
+	@Transient
+	public String getRetrieveAllItems() {
+		return retrieveAllItems;
+	}
+
+	public void setRetrieveAllItems(String retrieveAllItems) {
+		this.retrieveAllItems = retrieveAllItems;
 	}
 
 	@Override
