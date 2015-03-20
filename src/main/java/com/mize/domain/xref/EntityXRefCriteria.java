@@ -1,19 +1,15 @@
 package com.mize.domain.xref;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.io.Serializable;
 
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.IEntity;
 
-@Entity
-public class EntityXRefCriteria extends MizeSceEntity implements Comparable<EntityXRefCriteria> {
+public class EntityXRefCriteria implements IEntity, Serializable {
 
 	private static final long serialVersionUID = -3193421149712191082L;
 
 	private EntityXRef entityXRef;
+	private String key;
 	private String code;
 	private String type;
 
@@ -21,25 +17,20 @@ public class EntityXRefCriteria extends MizeSceEntity implements Comparable<Enti
 		super();
 	}
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
-	@Override
-	public Long getId() {
-		return id;
-	}
-
-	@Override
-	public void setId(Long id) {
-		super.id = id;
-	}
-	
 	public EntityXRef getEntityXRef() {
 		return entityXRef;
 	}
 
 	public void setEntityXRef(EntityXRef entityXRef) {
 		this.entityXRef = entityXRef;
+	}
+
+	public String getKey() {
+		return key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
 	}
 
 	public String getCode() {
@@ -65,10 +56,10 @@ public class EntityXRefCriteria extends MizeSceEntity implements Comparable<Enti
 
 	@Override
 	public int hashCode() {
-		final int prime = PRIME;
+		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
-		result = prime * result + ((type == null) ? 0 : type.hashCode());		
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
 
@@ -90,21 +81,7 @@ public class EntityXRefCriteria extends MizeSceEntity implements Comparable<Enti
 			if (other.type != null)
 				return false;
 		} else if (!type.equals(other.type))
-			return false;		
+			return false;
 		return true;
 	}
-
-	@Override
-	public int compareTo(EntityXRefCriteria entityXRefCriteria) {
-		if (this == entityXRefCriteria)
-			return EQUAL;
-		else if (this.id < entityXRefCriteria.id)
-			return BEFORE;
-		else if (entityXRefCriteria.id == this.id)
-			return EQUAL;
-		else if (this.id > entityXRefCriteria.id)
-			return AFTER;
-		return EQUAL;
-	}
-
 }

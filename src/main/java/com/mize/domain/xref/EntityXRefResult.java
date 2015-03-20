@@ -1,15 +1,10 @@
 package com.mize.domain.xref;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.io.Serializable;
 
-import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.common.IEntity;
 
-@Entity
-public class EntityXRefResult extends MizeSceEntity implements Comparable<EntityXRefResult> {
+public class EntityXRefResult implements IEntity, Serializable {
 
 	private static final long serialVersionUID = -3193421149712191082L;
 
@@ -21,19 +16,6 @@ public class EntityXRefResult extends MizeSceEntity implements Comparable<Entity
 		super();
 	}
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
-	@Override
-	public Long getId() {
-		return id;
-	}
-
-	@Override
-	public void setId(Long id) {
-		super.id = id;
-	}
-	
 	public EntityXRef getEntityXRef() {
 		return entityXRef;
 	}
@@ -49,7 +31,6 @@ public class EntityXRefResult extends MizeSceEntity implements Comparable<Entity
 	public void setCode(String code) {
 		this.code = code;
 	}
-	
 
 	public String getName() {
 		return name;
@@ -66,10 +47,10 @@ public class EntityXRefResult extends MizeSceEntity implements Comparable<Entity
 
 	@Override
 	public int hashCode() {
-		final int prime = PRIME;
+		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ((code == null) ? 0 : code.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());		
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
 
@@ -91,21 +72,8 @@ public class EntityXRefResult extends MizeSceEntity implements Comparable<Entity
 			if (other.name != null)
 				return false;
 		} else if (!name.equals(other.name))
-			return false;		
+			return false;
 		return true;
-	}
-
-	@Override
-	public int compareTo(EntityXRefResult entityXRefResult) {
-		if (this == entityXRefResult)
-			return EQUAL;
-		else if (this.id < entityXRefResult.id)
-			return BEFORE;
-		else if (entityXRefResult.id == this.id)
-			return EQUAL;
-		else if (this.id > entityXRefResult.id)
-			return AFTER;
-		return EQUAL;
 	}
 
 }
