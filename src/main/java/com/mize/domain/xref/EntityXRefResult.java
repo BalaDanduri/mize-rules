@@ -6,22 +6,12 @@ import com.mize.domain.common.IEntity;
 
 public class EntityXRefResult implements IEntity, Serializable {
 
-	private static final long serialVersionUID = -3193421149712191082L;
-
-	private EntityXRef entityXRef;
+	private static final long serialVersionUID = -3193421149712191082L;	
 	private String code;
 	private String name;
 
 	public EntityXRefResult() {
 		super();
-	}
-
-	public EntityXRef getEntityXRef() {
-		return entityXRef;
-	}
-
-	public void setEntityXRef(EntityXRef entityXRef) {
-		this.entityXRef = entityXRef;
 	}
 
 	public String getCode() {

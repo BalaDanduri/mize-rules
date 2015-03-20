@@ -2,13 +2,13 @@ package com.mize.domain.xref;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mize.domain.common.IEntity;
 
 public class EntityXRefCriteria implements IEntity, Serializable {
 
 	private static final long serialVersionUID = -3193421149712191082L;
-
-	private EntityXRef entityXRef;
+	
 	private String key;
 	private String code;
 	private String type;
@@ -16,15 +16,8 @@ public class EntityXRefCriteria implements IEntity, Serializable {
 	public EntityXRefCriteria() {
 		super();
 	}
-
-	public EntityXRef getEntityXRef() {
-		return entityXRef;
-	}
-
-	public void setEntityXRef(EntityXRef entityXRef) {
-		this.entityXRef = entityXRef;
-	}
-
+	
+	@JsonIgnore
 	public String getKey() {
 		return key;
 	}
