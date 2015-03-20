@@ -352,18 +352,30 @@ public class MizeApplicationProperties implements InitializingBean {
 	
 	
 	@JsonIgnore
-	public String getTokenDatatype() {
-		return getPropertyValue("tokenDatatype");
-	}
-	
-	@JsonIgnore
 	public Integer getTokenLength() {
 		if(getPropertyValue("tokenLength") != null) {
 			return Integer.valueOf(getPropertyValue("tokenLength"));
 		}else {
 			return null;
 		}
-	}	
+	}
 	
+	@JsonIgnore
+	public boolean isCharactersOnly() {
+		if(getPropertyValue("charactersOnly") != null) {
+			return Boolean.valueOf(getPropertyValue("charactersOnly"));
+		}else {
+			return false;
+		}
+	}
+
+	@JsonIgnore
+	public boolean isNumbersOnly() {
+		if(getPropertyValue("numbersOnly") != null) {
+			return Boolean.valueOf(getPropertyValue("numbersOnly"));
+		}else {
+			return false;
+		}
+	}
 	
 }
