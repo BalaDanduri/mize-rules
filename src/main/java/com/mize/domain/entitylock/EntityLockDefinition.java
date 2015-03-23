@@ -28,8 +28,6 @@ public class EntityLockDefinition extends MizeSceEntityAudit implements Comparab
 	
 	private static final long serialVersionUID = -4595805163290064209L;
 	private Long tenantId;
-	private String entityType;
-	private String entityTypeName;
 	private String entityClass;
 	private String renewLock;
 	private String isActive;
@@ -46,7 +44,6 @@ public class EntityLockDefinition extends MizeSceEntityAudit implements Comparab
 		super();
 		this.id = id;
 		this.tenantId = tenantId;
-		this.entityType = entityType;
 		this.entityClass = entityClass;
 		this.renewLock = renewLock;
 		this.isActive = isActive;
@@ -72,15 +69,7 @@ public class EntityLockDefinition extends MizeSceEntityAudit implements Comparab
 	public void setTenantId(Long tenantId) {
 		this.tenantId = tenantId;
 	}
-	
-	@Column(name = "entity_type")
-	public String getEntityType() {
-		return entityType;
-	}
-	public void setEntityType(String entityType) {
-		this.entityType = entityType;
-	}
-	
+		
 	@Column(name = "entity_class")
 	public String getEntityClass() {
 		return entityClass;
@@ -126,15 +115,6 @@ public class EntityLockDefinition extends MizeSceEntityAudit implements Comparab
 	}
 
 	@Transient
-	public String getEntityTypeName() {
-		return entityTypeName;
-	}
-
-	public void setEntityTypeName(String entityTypeName) {
-		this.entityTypeName = entityTypeName;
-	}
-
-	@Transient
 	public String getEntityDefinition() {
 		return entityDefinition;
 	}
@@ -159,8 +139,6 @@ public class EntityLockDefinition extends MizeSceEntityAudit implements Comparab
 		result = prime * result
 				+ ((entityClass == null) ? 0 : entityClass.hashCode());
 		result = prime * result
-				+ ((entityType == null) ? 0 : entityType.hashCode());
-		result = prime * result
 				+ ((isActive == null) ? 0 : isActive.hashCode());
 		result = prime * result
 				+ ((renewLock == null) ? 0 : renewLock.hashCode());
@@ -183,11 +161,6 @@ public class EntityLockDefinition extends MizeSceEntityAudit implements Comparab
 				return false;
 		} else if (!entityClass.equals(other.entityClass))
 			return false;
-		if (entityType == null) {
-			if (other.entityType != null)
-				return false;
-		} else if (!entityType.equals(other.entityType))
-			return false;
 		if (isActive == null) {
 			if (other.isActive != null)
 				return false;
@@ -209,7 +182,6 @@ public class EntityLockDefinition extends MizeSceEntityAudit implements Comparab
 	@Override
 	public String toString() {
 		return "EntityLockDefinition [tenantId=" + tenantId + ", entityType="
-				+ entityType + ", entityTypeName=" + entityTypeName
 				+ ", entityClass=" + entityClass + ", renewLock=" + renewLock
 				+ ", isActive=" + isActive + ", entityDefinition="
 				+ entityDefinition + ", entityLockResultDef=" + entityLockResultDef
