@@ -33,6 +33,8 @@ public class EntityLockDefinition extends MizeSceEntityAudit implements Comparab
 	private String entityClass;
 	private String renewLock;
 	private String isActive;
+	private String entityDefinition;
+	private String entityLockResultDef;
 	private List<EntityLockCriteria> lockCriterias = new ArrayList<EntityLockCriteria>();
 	private User user;
 	
@@ -112,7 +114,7 @@ public class EntityLockDefinition extends MizeSceEntityAudit implements Comparab
 		this.user = user;
 	}
 
-	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "entityLockDefinition",orphanRemoval= true)
+	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "entityLockDefinition",orphanRemoval= true)
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonInclude(Include.NON_NULL)
 	public List<EntityLockCriteria> getLockCriterias() {
@@ -130,6 +132,24 @@ public class EntityLockDefinition extends MizeSceEntityAudit implements Comparab
 
 	public void setEntityTypeName(String entityTypeName) {
 		this.entityTypeName = entityTypeName;
+	}
+
+	@Transient
+	public String getEntityDefinition() {
+		return entityDefinition;
+	}
+
+	public void setEntityDefinition(String entityDefinition) {
+		this.entityDefinition = entityDefinition;
+	}
+
+	@Transient
+	public String getEntityLockResultDef() {
+		return entityLockResultDef;
+	}
+
+	public void setEntityLockResultDef(String entityLockResultDef) {
+		this.entityLockResultDef = entityLockResultDef;
 	}
 
 	@Override
@@ -189,9 +209,11 @@ public class EntityLockDefinition extends MizeSceEntityAudit implements Comparab
 	@Override
 	public String toString() {
 		return "EntityLockDefinition [tenantId=" + tenantId + ", entityType="
-				+ entityType + ", entityClass=" + entityClass + ", renewLock="
-				+ renewLock + ", isActive=" + isActive + ", lockCriterias="
-				+ lockCriterias + "]";
+				+ entityType + ", entityTypeName=" + entityTypeName
+				+ ", entityClass=" + entityClass + ", renewLock=" + renewLock
+				+ ", isActive=" + isActive + ", entityDefinition="
+				+ entityDefinition + ", entityLockResultDef=" + entityLockResultDef
+				+ ", lockCriterias=" + lockCriterias + "]";
 	}
 
 	@Override
