@@ -46,7 +46,8 @@ public class EntityLock extends MizeSceEntity implements Comparable<EntityLock>{
 	private String entityStatus;
 	@Transient
 	private String entityTypeName;
-	
+	@Transient
+	private String renewLock;
 	private BusinessEntity businessEntity;
 	
 	
@@ -227,6 +228,15 @@ public class EntityLock extends MizeSceEntity implements Comparable<EntityLock>{
 		this.businessEntity = businessEntity;
 	}
 
+	@Transient
+	public String getRenewLock() {
+		return renewLock;
+	}
+
+	public void setRenewLock(String renewLock) {
+		this.renewLock = renewLock;
+	}
+
 	@Override
 	public int compareTo(EntityLock arg0) {
 		return 0;
@@ -322,7 +332,7 @@ public class EntityLock extends MizeSceEntity implements Comparable<EntityLock>{
 		return "EntityLock [lockedBy=" + lockedBy + ", lockedByUser=" + lockedByUser + ", loginId=" + loginId
 				+ ", entityId=" + entityId + ", entityType=" + entityType + ", entityCode=" + entityCode
 				+ ", lockAction=" + lockAction + ", lockDate=" + lockDate + ", inactiveStartTime=" + inactiveStartTime
-				+ ", entityLockIds=" + entityLockIds + ", entityStatus=" + entityStatus + "]";
+				+ ", entityLockIds=" + entityLockIds + ", entityStatus=" + entityStatus + ", renewLock=" + renewLock+"]";
 	}
 	
 }
