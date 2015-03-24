@@ -28,6 +28,7 @@ public class EntityLockDefinition extends MizeSceEntityAudit implements Comparab
 	
 	private static final long serialVersionUID = -4595805163290064209L;
 	private Long tenantId;
+	private String entityType;
 	private String entityClass;
 	private String renewLock;
 	private String isActive;
@@ -130,6 +131,15 @@ public class EntityLockDefinition extends MizeSceEntityAudit implements Comparab
 
 	public void setEntityLockResultDef(String entityLockResultDef) {
 		this.entityLockResultDef = entityLockResultDef;
+	}
+
+	@Column(name = "entity_type")
+	public String getEntityType() {
+		return entityType;
+	}
+
+	public void setEntityType(String entityType) {
+		this.entityType = entityType;
 	}
 
 	@Override
