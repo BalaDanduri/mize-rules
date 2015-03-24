@@ -314,34 +314,6 @@ public final class Formatter {
 		return value == null ? Double.valueOf(0):value.doubleValue();	
 	}
 	
-	/*@Deprecated
-	public static DateTime dateTime(String dateTime){
-		DateTime time = null;
-		if(dateTime!= null){
-			try{
-				time = DateTime.parse(dateTime,DATE_FORMAT);
-			}catch(Exception e){
-			}
-		}		
-		return time;
-	}
-	*/
-/*	@Deprecated
-	public static DateTime dateTime(String dateTime, String format){
-		DateTime time = null;
-		if(dateTime!= null && format != null){
-			try{
-				DateTimeFormatter  FORMAT = DateTimeFormat.forPattern(format);
-				if (dateTime.length() > format.length()) {
-					dateTime = dateTime.substring(0, format.length());
-				}
-				time = DateTime.parse(dateTime,FORMAT);
-			}catch(Exception e){
-			}
-		}		
-		return time;
-	}*/
-	
 	public static String trimLength(String input,int length){
 		String result = null;
 		try{
@@ -354,18 +326,6 @@ public final class Formatter {
 		return result;
 	}
 
-	/*@Deprecated
-	public static DateTime date(String dateTime){
-		DateTime time = null;
-		if(dateTime!= null){
-			try{
-				time = DateTime.parse(dateTime,DATE_FORMAT1);
-			}catch(Exception e){
-			}
-		}		
-		return time;
-	}*/
-	
 	public static DateTime date1(String dateTime){
 		DateTime time = null;
 		if(dateTime!= null){
@@ -388,15 +348,6 @@ public final class Formatter {
 		return time;
 	}
 	
-	/*@Deprecated
-	public static DateTime dateTime(Timestamp timestamp){
-		DateTime time = null;
-		if(timestamp!= null){
-			time = new DateTime(timestamp);
-		}
-		return time;
-	}
-*/
 	public static String toLowerCase(String value){
 		return value == null ? EMPTY : value.trim().toLowerCase();	
 	}
@@ -442,19 +393,19 @@ public final class Formatter {
 	}
 	
 	public static BigInteger toBigInt(int value) {
-		return value == 0 ? BigInteger.ZERO : new BigInteger(String.valueOf(value))  ;
+		return value == 0 ? BigInteger.ZERO : new BigInteger(String.valueOf(value));
 	}
 	
 	public static int convertDollortoPennies(String value) {
-		return value == null ? 0 : Integer.parseInt(value) * 100   ;
+		return value == null ? 0 : Integer.parseInt(value) * 100;
 	}
 	
 	public static int convertPenniesDollorto(String value) {
-		return value == null ? 0 : Integer.parseInt(value) / 100   ;
+		return value == null ? 0 : Integer.parseInt(value) / 100;
 	}
 	
 	public static Double convertToByHundered(Double value) {
-		return value == null ? 0 :value / 100   ;
+		return value == null ? 0 :value / 100;
 	}
 
 	public static String likeString(String value){		
@@ -1024,6 +975,9 @@ public final class Formatter {
 	 
 	 public static void main(String[] args) {
 		 try{
+			 Object o = "new String";
+			 String s = "new String";
+			 System.out.println(o.equals(s));
 		 }catch(Exception e){
 			 e.printStackTrace();
 		 }
