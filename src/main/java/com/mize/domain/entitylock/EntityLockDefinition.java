@@ -114,7 +114,7 @@ public class EntityLockDefinition extends MizeSceEntityAudit implements Comparab
 		this.lockCriterias = lockCriterias;
 	}
 
-	@Transient
+	@Column(name = "entity_defn")
 	public String getEntityDefinition() {
 		return entityDefinition;
 	}
@@ -123,7 +123,7 @@ public class EntityLockDefinition extends MizeSceEntityAudit implements Comparab
 		this.entityDefinition = entityDefinition;
 	}
 
-	@Transient
+	@Column(name = "lock_result_defn")
 	public String getEntityLockResultDef() {
 		return entityLockResultDef;
 	}
