@@ -202,6 +202,16 @@ public class EntityXRef extends MizeSceEntityAudit implements Comparable<EntityX
 				return false;
 		} else if (!isActive.equals(other.isActive))
 			return false;
+		if (criteria == null) {
+			if (other.criteria != null)
+				return false;
+		} else if (!criteria.equals(other.criteria))
+			return false;
+		if (result == null) {
+			if (other.result != null)
+				return false;
+		} else if (!result.equals(other.result))
+			return false;
 		return true;
 	}
 
