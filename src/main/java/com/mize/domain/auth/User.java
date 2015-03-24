@@ -71,6 +71,10 @@ public class User extends MizeSceEntityAudit implements Comparable<User> {
 	private String isActive;
 	private String token;
 	
+	private String deviceToken;
+	private String deviceOS; 
+	
+	
 	@Transient
 	private User loginUser;
 	
@@ -426,6 +430,27 @@ public class User extends MizeSceEntityAudit implements Comparable<User> {
 
 	public void setToken(String token) {
 		this.token = token;
+	}
+	
+	
+	@Transient
+	@JsonIgnore
+	public String getDeviceToken() {
+		return deviceToken;
+	}
+
+	public void setDeviceToken(String deviceToken) {
+		this.deviceToken = deviceToken;
+	}
+
+	@Transient
+	@JsonIgnore
+	public String getDeviceOS() {
+		return deviceOS;
+	}
+
+	public void setDeviceOS(String deviceOS) {
+		this.deviceOS = deviceOS;
 	}
 
 	@Override
