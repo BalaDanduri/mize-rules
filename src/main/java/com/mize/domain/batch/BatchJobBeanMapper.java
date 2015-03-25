@@ -40,6 +40,7 @@ public class BatchJobBeanMapper extends MizeSceEntityAudit implements Comparable
 	private List<BatchJobFieldMapper> batchJobFieldMappers;
 	private String isActive;
 	private boolean isUpdated;
+	private String methodName;
 	
 	@Override
 	@Id
@@ -91,6 +92,15 @@ public class BatchJobBeanMapper extends MizeSceEntityAudit implements Comparable
 
 	public void setAliasName(String aliasName) {
 		this.aliasName = aliasName;
+	}
+	
+	@Column(name = "method_name")
+	public String getMethodName() {
+		return methodName;
+	}
+
+	public void setMethodName(String methodName) {
+		this.methodName = methodName;
 	}
 
 	@OneToMany(cascade={CascadeType.ALL}, mappedBy="batchJobBeanMapper",orphanRemoval = true)
