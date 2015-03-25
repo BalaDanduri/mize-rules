@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -301,6 +302,18 @@ public final class Formatter {
 			}
 		}
 		return sb.toString();		
+	}
+	
+	@SuppressWarnings("rawtypes")
+	public static String formInClause(String value, Class type){
+		if(value == null){
+			return EMPTY;
+		}
+		if(type.getSuperclass().equals(Number.class)){
+			return formInClause(Arrays.asList(value.split(",")));
+		}else{
+			return formStringInClause(Arrays.asList(value.split(",")));
+		}
 	}
 	
 	public static double convertedPrice(BigInteger value){
