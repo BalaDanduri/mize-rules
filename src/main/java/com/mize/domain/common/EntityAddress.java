@@ -36,17 +36,18 @@ public class EntityAddress extends MizeSceEntityAudit implements Comparable<Enti
 	private String zip;
 	private String zipExt;
 	private String city;
+	private String email;
+	private String landmark;	
+	private Long stateId;
+	private Long countryId;
+	
 	@PopulateState
 	private State state;
-	private Long stateId;
 	@PopulateCountry
 	private Country country;
-	private Long countryId;
-	private String email;
-	private String landmark;
-	List<EntityAddressPhone> addressPhones = new ArrayList<EntityAddressPhone>();
-	EntityAddressGeo addressGeo = null;
+	private EntityAddressGeo addressGeo = null;
 	
+	private List<EntityAddressPhone> addressPhones = new ArrayList<EntityAddressPhone>();
 	
 	public EntityAddress(){
 		super();

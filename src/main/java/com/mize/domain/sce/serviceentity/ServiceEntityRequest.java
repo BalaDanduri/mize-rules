@@ -1,5 +1,6 @@
 package com.mize.domain.sce.serviceentity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -36,6 +37,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	private static final long serialVersionUID = -7125659097589369685L;
 
 	private ServiceEntity serviceEntity;
+	
 	private String requestType;
 	private String requestCode;
 	private Date failureDate;
@@ -47,9 +49,12 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	private String causeDescription;
 	private String correctiveActionCode;
 	private String correctiveActionDescription;
-	private List<ServiceEntityRequestPart> parts;
-	private List<ServiceEntityRequestLabor> labors;
-	private List<ServiceEntityRequestOther> otherCharges;
+	private Date requestedDate;
+	private Date promisedDate;
+	private Date resolvedDate;
+	private String requestStatus;
+	private String priority;
+	
 	@CachedEntity
 	private ServiceEntityRequestProduct product;
 	private ServiceEntityRequestCoverage coverage;
@@ -57,12 +62,10 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	private ServiceEntityAmount laborAmount;
 	private ServiceEntityAmount otherAmount;
 	private ServiceEntityAmount totalAmount;
-
-	private Date requestedDate;
-	private Date promisedDate;
-	private Date resolvedDate;
-	private String requestStatus;
-	private String priority;
+	
+	private List<ServiceEntityRequestPart> parts = new ArrayList<ServiceEntityRequestPart>();
+	private List<ServiceEntityRequestLabor> labors = new ArrayList<ServiceEntityRequestLabor>();
+	private List<ServiceEntityRequestOther> otherCharges = new ArrayList<ServiceEntityRequestOther>();
 
 	public ServiceEntityRequest() {
 
@@ -103,6 +106,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	}
 
 	@Column(name = "request_code")
+	@JsonInclude(Include.NON_NULL)
 	public String getRequestCode() {
 		return requestCode;
 	}
@@ -112,6 +116,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	}
 
 	@Column(name = "failure_date")
+	@JsonInclude(Include.NON_NULL)
 	public Date getFailureDate() {
 		return failureDate;
 	}
@@ -121,6 +126,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	}
 
 	@Column(name = "repair_date")
+	@JsonInclude(Include.NON_NULL)
 	public Date getRepairDate() {
 		return repairDate;
 	}
@@ -130,6 +136,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	}
 
 	@Column(name = "repair_site_code")
+	@JsonInclude(Include.NON_NULL)
 	public String getRepairSiteCode() {
 		return repairSiteCode;
 	}
@@ -139,6 +146,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	}
 
 	@Column(name = "complaint_code")
+	@JsonInclude(Include.NON_NULL)
 	public String getComplaintCode() {
 		return complaintCode;
 	}
@@ -148,6 +156,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	}
 
 	@Column(name = "complaint_descr")
+	@JsonInclude(Include.NON_NULL)
 	public String getComplaintDescription() {
 		return complaintDescription;
 	}
@@ -157,6 +166,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	}
 
 	@Column(name = "cause_code")
+	@JsonInclude(Include.NON_NULL)
 	public String getCauseCode() {
 		return causeCode;
 	}
@@ -166,6 +176,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	}
 
 	@Column(name = "cause_descr")
+	@JsonInclude(Include.NON_NULL)
 	public String getCauseDescription() {
 		return causeDescription;
 	}
@@ -175,6 +186,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	}
 
 	@Column(name = "corrective_action_code")
+	@JsonInclude(Include.NON_NULL)
 	public String getCorrectiveActionCode() {
 		return correctiveActionCode;
 	}
@@ -184,6 +196,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	}
 
 	@Column(name = "corrective_action_descr")
+	@JsonInclude(Include.NON_NULL)
 	public String getCorrectiveActionDescription() {
 		return correctiveActionDescription;
 	}
@@ -195,6 +208,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "serviceEntityRequest", orphanRemoval = true)
 	@JsonSerialize(using = JPASerializer.class)
 	@JsonManagedReference(value = "service_request_parts")
+	@JsonInclude(Include.NON_DEFAULT)
 	public List<ServiceEntityRequestPart> getParts() {
 		return parts;
 	}
@@ -206,6 +220,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "serviceEntityRequest", orphanRemoval = true)
 	@JsonSerialize(using = JPASerializer.class)
 	@JsonManagedReference(value = "service_request_labors")
+	@JsonInclude(Include.NON_DEFAULT)
 	public List<ServiceEntityRequestLabor> getLabors() {
 		return labors;
 	}
@@ -217,6 +232,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.LAZY, mappedBy = "serviceEntityRequest", orphanRemoval = true)
 	@JsonSerialize(using = JPASerializer.class)
 	@JsonManagedReference(value = "service_request_otherCharges")
+	@JsonInclude(Include.NON_DEFAULT)
 	public List<ServiceEntityRequestOther> getOtherCharges() {
 		return otherCharges;
 	}
@@ -228,6 +244,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	@OneToOne(mappedBy = "serviceEntityRequest", cascade = CascadeType.ALL)
 	@JsonManagedReference(value = "service_request_product")
 	@JsonSerialize(using = JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public ServiceEntityRequestProduct getProduct() {
 		return product;
 	}
@@ -239,6 +256,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	@OneToOne(mappedBy = "serviceEntityRequest", cascade = CascadeType.ALL)
 	@JsonManagedReference(value = "service_request_coverage")
 	@JsonSerialize(using = JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public ServiceEntityRequestCoverage getCoverage() {
 		return coverage;
 	}
@@ -296,6 +314,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	}
 
 	@Column(name = "srvc_requested_date")
+	@JsonInclude(Include.NON_NULL)
 	public Date getRequestedDate() {
 		return requestedDate;
 	}
@@ -305,6 +324,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	}
 
 	@Column(name = "srvc_promised_date")
+	@JsonInclude(Include.NON_NULL)
 	public Date getPromisedDate() {
 		return promisedDate;
 	}
@@ -314,6 +334,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	}
 
 	@Column(name = "srvc_resolved_date")
+	@JsonInclude(Include.NON_NULL)
 	public Date getResolvedDate() {
 		return resolvedDate;
 	}
@@ -322,6 +343,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 		this.resolvedDate = resolvedDate;
 	}
 	@Column(name = "srvc_request_status")
+	@JsonInclude(Include.NON_NULL)
 	public String getRequestStatus() {
 		return requestStatus;
 	}
@@ -330,6 +352,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 		this.requestStatus = requestStatus;
 	}
 	@Column(name = "srvc_priority")
+	@JsonInclude(Include.NON_NULL)
 	public String getPriority() {
 		return priority;
 	}

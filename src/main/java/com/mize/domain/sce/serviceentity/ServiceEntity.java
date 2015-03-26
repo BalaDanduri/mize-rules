@@ -40,15 +40,17 @@ public class ServiceEntity extends MizeSceEntityAudit implements Comparable<Serv
 
 	private static final long serialVersionUID = -1780679493288392673L;
 	
+	private BusinessEntity tenant;
+	private User user;
+	private Locale locale;
+	
 	private String entityCode;
 	private String entityType;
 	private String entityStatus;
-	private String entityReference;
-	private BusinessEntity tenant;
-	private Locale locale;
+	private String entityReference;		
 	private String currencyCode;
-	@CachedEntity
-	private List<ServiceEntityRequest> serviceRequests = new ArrayList<ServiceEntityRequest>();
+	private String source;
+	
 	private ServiceEntityRequester requester;
 	private ServiceEntityProvider provider;
 	private ServiceEntityPayment payment;
@@ -56,15 +58,15 @@ public class ServiceEntity extends MizeSceEntityAudit implements Comparable<Serv
 	private ServiceEntityAmount laborAmount;
 	private ServiceEntityAmount otherAmount;
 	private ServiceEntityAmount totalAmount;
+	
+	
+	@CachedEntity
+	private List<ServiceEntityRequest> serviceRequests = new ArrayList<ServiceEntityRequest>();
 	private List<ServiceEntityAudit> audits = new ArrayList<ServiceEntityAudit>();
 	private List<ServiceEntityRelation> entityRelations = new ArrayList<ServiceEntityRelation>();
 	private List<ServiceEntityMessage> messages = new ArrayList<ServiceEntityMessage>();
 	private List<ServiceEntityComment> comments = new ArrayList<ServiceEntityComment>();
-	private List<ServiceEntityAttachment> attachments = new ArrayList<ServiceEntityAttachment>();
-	private String source;	
-	
-	private User user;
-	
+	private List<ServiceEntityAttachment> attachments = new ArrayList<ServiceEntityAttachment>();	
 
 	public ServiceEntity() {
 		super();
@@ -84,6 +86,7 @@ public class ServiceEntity extends MizeSceEntityAudit implements Comparable<Serv
 	}
 	
 	@Column(name = "entity_code")
+	@JsonInclude(Include.NON_NULL)
 	public String getEntityCode() {
 		return entityCode;
 	}
@@ -93,6 +96,7 @@ public class ServiceEntity extends MizeSceEntityAudit implements Comparable<Serv
 	}
 	
 	@Column(name = "entity_type")
+	@JsonInclude(Include.NON_NULL)
 	public String getEntityType() {
 		return entityType;
 	}
@@ -102,6 +106,7 @@ public class ServiceEntity extends MizeSceEntityAudit implements Comparable<Serv
 	}
 	
 	@Column(name = "entity_status")
+	@JsonInclude(Include.NON_NULL)
 	public String getEntityStatus() {
 		return entityStatus;
 	}
@@ -111,6 +116,7 @@ public class ServiceEntity extends MizeSceEntityAudit implements Comparable<Serv
 	}
 	
 	@Column(name = "entity_reference")
+	@JsonInclude(Include.NON_NULL)
 	public String getEntityReference() {
 		return entityReference;
 	}
@@ -144,6 +150,7 @@ public class ServiceEntity extends MizeSceEntityAudit implements Comparable<Serv
 	}
 	
 	@Column(name = "currency_code")
+	@JsonInclude(Include.NON_NULL)
 	public String getCurrencyCode() {
 		return currencyCode;
 	}
@@ -155,6 +162,7 @@ public class ServiceEntity extends MizeSceEntityAudit implements Comparable<Serv
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "serviceEntity" , orphanRemoval = true)
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonManagedReference(value="service_entity_request")
+	@JsonInclude(Include.NON_EMPTY)
 	public List<ServiceEntityRequest> getServiceRequests() {
 		return serviceRequests;
 	}
@@ -166,6 +174,7 @@ public class ServiceEntity extends MizeSceEntityAudit implements Comparable<Serv
 	@OneToOne(mappedBy = "serviceEntity",cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonManagedReference(value = "service_entity_requester")
 	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public ServiceEntityRequester getRequester() {
 		return requester;
 	}
@@ -177,6 +186,7 @@ public class ServiceEntity extends MizeSceEntityAudit implements Comparable<Serv
 	@OneToOne(mappedBy = "serviceEntity",cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonManagedReference(value = "service_entity_provider")
 	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public ServiceEntityProvider getProvider() {
 		return provider;
 	}
@@ -188,6 +198,7 @@ public class ServiceEntity extends MizeSceEntityAudit implements Comparable<Serv
 	@OneToOne(mappedBy = "serviceEntity",cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonManagedReference(value = "service_entity_payment")
 	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public ServiceEntityPayment getPayment() {
 		return payment;
 	}
@@ -247,6 +258,7 @@ public class ServiceEntity extends MizeSceEntityAudit implements Comparable<Serv
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "serviceEntity" , orphanRemoval = true)
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonManagedReference(value="service_entity_audits")
+	@JsonInclude(Include.NON_EMPTY)
 	public List<ServiceEntityAudit> getAudits() {
 		return audits;
 	}
@@ -258,6 +270,7 @@ public class ServiceEntity extends MizeSceEntityAudit implements Comparable<Serv
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "serviceEntity" , orphanRemoval = true)
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonManagedReference(value="service_entity_relations")
+	@JsonInclude(Include.NON_DEFAULT)	
 	public List<ServiceEntityRelation> getEntityRelations() {
 		return entityRelations;
 	}
@@ -269,6 +282,7 @@ public class ServiceEntity extends MizeSceEntityAudit implements Comparable<Serv
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "serviceEntity" , orphanRemoval = true)
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonManagedReference(value="service_entity_messages")
+	@JsonInclude(Include.NON_DEFAULT)	
 	public List<ServiceEntityMessage> getMessages() {
 		return messages;
 	}
@@ -280,6 +294,7 @@ public class ServiceEntity extends MizeSceEntityAudit implements Comparable<Serv
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "serviceEntity" , orphanRemoval = true)
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonManagedReference(value="service_entity_comments")
+	@JsonInclude(Include.NON_DEFAULT)	
 	public List<ServiceEntityComment> getComments() {
 		return comments;
 	}
@@ -291,6 +306,7 @@ public class ServiceEntity extends MizeSceEntityAudit implements Comparable<Serv
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.LAZY, mappedBy = "serviceEntity" , orphanRemoval = true)
 	@JsonSerialize(using=JPASerializer.class)
 	@JsonManagedReference(value="service_entity_attachments")
+	@JsonInclude(Include.NON_DEFAULT)
 	public List<ServiceEntityAttachment> getAttachments() {
 		return attachments;
 	}
@@ -306,6 +322,7 @@ public class ServiceEntity extends MizeSceEntityAudit implements Comparable<Serv
 	}	
 	
 	@Column(name = "entity_source")
+	@JsonInclude(Include.NON_NULL)
 	public String getSource() {
 		return source;
 	}

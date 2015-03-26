@@ -34,19 +34,21 @@ public class ServiceEntityPayment extends MizeSceEntity implements Comparable<Se
 	
 	private ServiceEntity serviceEntity;
 	private BusinessEntity payeeEntity;
+	
 	private Long payeeId;
 	private String payeeCode;
 	private String payeeTypeCode;
 	private String payeeName;
 	private String payeeFirstName;
 	private String payeeLastName;
-	private String payeeMiddleInitial;
-	private EntityAddress payeeAddress;
-	private EntityContact payeeContact;
+	private String payeeMiddleInitial;	
 	private String payeeReference;
 	private String isNewPayee;
 	private Date paymentDate;
 	private String paymentType;
+	
+	private EntityAddress payeeAddress;
+	private EntityContact payeeContact;
 
 	public ServiceEntityPayment() {
 		

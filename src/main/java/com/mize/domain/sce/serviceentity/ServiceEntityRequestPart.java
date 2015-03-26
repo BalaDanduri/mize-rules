@@ -32,14 +32,16 @@ public class ServiceEntityRequestPart extends MizeSceEntity implements Comparabl
 	private static final long serialVersionUID = 609285366151566036L;
 	
 	private ServiceEntityRequest serviceEntityRequest;
-	private Part part;
+	
 	private Long partId;
 	private String partType;
 	private String partCode;
 	private String partName;
 	private String partDescription;
 	private String partUom;
-	private String partSerial;	
+	private String partSerial;
+	
+	private Part part;
 	private ServiceEntityAmount partAmount;
 	
 	private boolean isUpdated;

@@ -35,8 +35,7 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 
 	private ServiceEntityRequest serviceEntityRequest;
 	private Long productId;
-	private Long productSerialId;
-	private ProductRegistration registration;
+	private Long productSerialId;	
 	private Long prodRegnId;
 	private String productName;
 	private String model;
@@ -55,15 +54,16 @@ public class ServiceEntityRequestProduct extends MizeSceEntity implements Compar
 	private String customerFirstName;
 	private String customerLastName;
 	private String customerMiddleInitial;
-	private String customerReference;
+	private String customerReference;	
+	private String isNewCustomer;
+	private Date purchaseDate;
+	private Date registrationDate;
+	
+	private ProductRegistration registration;
 	@CachedEntity
 	private EntityAddress customerAddress;
 	private EntityContact customerContact;
-	private String isNewCustomer;
-
-	private Date purchaseDate;
-	private Date registrationDate;
-
+	
 	public ServiceEntityRequestProduct() {
 
 	}
