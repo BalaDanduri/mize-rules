@@ -85,6 +85,7 @@ public class ShipmentTracking extends MizeSceEntityAudit implements Comparable<S
 	private ShipmentEntity shipmentEntity;
 	@Transient
 	private String fromEntity;
+	@CachedEntity
 	private List<ShipmentItem> shipmentItems = new ArrayList<ShipmentItem>();
 	private String reasonForExport;
 	@Transient
