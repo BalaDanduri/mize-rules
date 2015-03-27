@@ -2,11 +2,14 @@ package com.mize.domain.xref;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mize.domain.common.IEntity;
+import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.datetime.DateTime;
 
-public class EntityXRefResult implements IEntity, Serializable {
+public class EntityXRefResult extends MizeSceEntity implements IEntity, Serializable {
 
-	private static final long serialVersionUID = -3193421149712191082L;	
+	private static final long serialVersionUID = -3193421149712191082L;
 	private String code;
 	private String name;
 
@@ -28,6 +31,69 @@ public class EntityXRefResult implements IEntity, Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@JsonIgnore
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	@JsonIgnore
+	public String getCreatedByUser() {
+		return createdByUser;
+	}
+
+	public void setCreatedByUser(String createdByUser) {
+		this.createdByUser = createdByUser;
+	}
+
+	@JsonIgnore
+	public String getUpdatedByUser() {
+		return updatedByUser;
+	}
+
+	public void setUpdatedByUser(String updatedByUser) {
+		this.updatedByUser = updatedByUser;
+	}
+
+	@JsonIgnore
+	public Long getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(Long createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	@JsonIgnore
+	public DateTime getCreatedDate() {
+		return createdDate;
+	}
+
+	public void setCreatedDate(DateTime createdDate) {
+		this.createdDate = createdDate;
+	}
+
+	@JsonIgnore
+	public Long getUpdatedBy() {
+		return updatedBy;
+	}
+
+	public void setUpdatedBy(Long updatedBy) {
+		this.updatedBy = updatedBy;
+	}
+
+	@JsonIgnore
+	public DateTime getUpdatedDate() {
+		return updatedDate;
+	}
+
+	public void setUpdatedDate(DateTime updatedDate) {
+		this.updatedDate = updatedDate;
 	}
 
 	@Override
