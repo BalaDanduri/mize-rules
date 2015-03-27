@@ -5,7 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mize.domain.auth.User;
+import com.mize.domain.common.IEntity;
 import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.datetime.DateTime;
 
@@ -23,6 +25,7 @@ public class ExportDataCriteria extends MizeSceEntity implements Comparable<Expo
 	private List<Long> entityIDList;
 	private List<Long> inCluseIDsList = new ArrayList<Long>();
 	private Map<String,List<Long>> entityIDsMap;  
+	private List<IEntity> entities = new ArrayList<IEntity>();
 	private User user;
 	
 	public enum Criteria {
@@ -144,6 +147,19 @@ public class ExportDataCriteria extends MizeSceEntity implements Comparable<Expo
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	@JsonIgnore
+	public List<IEntity> getEntities() {
+		if(entities == null){
+			entities = new ArrayList<IEntity>();
+		}
+		return entities;
+	}
+	
+	public void setEntities(List<IEntity> entities) {
+		this.entities = entities;
+	}
+	
 	@Override
 	public String toString() {
 		return "SolrEntityCriteria [entityName=" + entityName
