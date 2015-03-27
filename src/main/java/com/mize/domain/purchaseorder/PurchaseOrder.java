@@ -109,6 +109,7 @@ public class PurchaseOrder extends MizeSceEntityAudit implements Comparable<Purc
 	private List<MizeErrorTab> errorTabs = new ArrayList<MizeErrorTab>();
 	@Transient
 	private String dbStatus;
+	@CachedEntity
 	private List<PurchaseOrderTracking> orderTrackings = new ArrayList<PurchaseOrderTracking>();
 	private String email;
 	

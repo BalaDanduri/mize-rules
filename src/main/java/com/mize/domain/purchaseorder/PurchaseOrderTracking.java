@@ -13,12 +13,14 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.shipping.ShipmentTracking;
+import com.mize.domain.util.CachedEntity;
 
 @Entity
 @Table(name="purchase_order_tracking")
 public class PurchaseOrderTracking extends MizeSceEntity implements Comparable<PurchaseOrderTracking> {
 	private static final long serialVersionUID = -1717047364038293135L;
 
+	@CachedEntity
 	private ShipmentTracking shipment;
 	private PurchaseOrder purchaseOrder;
 	
