@@ -2,6 +2,7 @@ package com.mize.domain.upload;
 
 import java.io.File;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mize.domain.auth.User;
 import com.mize.domain.batch.BatchJobMapper;
 import com.mize.domain.common.MizeSceEntity;
@@ -94,6 +95,7 @@ public class UploadFile extends MizeSceEntity implements Comparable<UploadFile>{
 		this.url = url;
 	}
 	
+	@JsonIgnore
 	public File getFile() {
 		return file;
 	}
