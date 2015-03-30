@@ -37,7 +37,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	private static final long serialVersionUID = -7125659097589369685L;
 
 	private ServiceEntity serviceEntity;
-	
+
 	private String requestType;
 	private String requestCode;
 	private Date failureDate;
@@ -54,7 +54,23 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	private Date resolvedDate;
 	private String requestStatus;
 	private String priority;
-	
+
+	private Long servicePartId;
+	private String servicePartType;
+	private String servicePartCode;
+	private String servicePartName;
+	private String servicePartDescription;
+	private String servicePartSerial;
+	private String servicePartStructureCode;
+	private String servicePartStructureName;
+	private String servicePartPstnCode;
+	private String servicePartPstnName;
+	private Long serviceResponsibleBeId;
+	private String serviceResponsibleBeCode;
+	private String serviceResponsibleBeTypeCode;
+	private String serviceResponsibleBeName;
+	private String serviceResponsibleBeReference;
+
 	@CachedEntity
 	private ServiceEntityRequestProduct product;
 	private ServiceEntityRequestCoverage coverage;
@@ -62,7 +78,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	private ServiceEntityAmount laborAmount;
 	private ServiceEntityAmount otherAmount;
 	private ServiceEntityAmount totalAmount;
-	
+
 	private List<ServiceEntityRequestPart> parts = new ArrayList<ServiceEntityRequestPart>();
 	private List<ServiceEntityRequestLabor> labors = new ArrayList<ServiceEntityRequestLabor>();
 	private List<ServiceEntityRequestOther> otherCharges = new ArrayList<ServiceEntityRequestOther>();
@@ -342,6 +358,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	public void setResolvedDate(Date resolvedDate) {
 		this.resolvedDate = resolvedDate;
 	}
+
 	@Column(name = "srvc_request_status")
 	@JsonInclude(Include.NON_NULL)
 	public String getRequestStatus() {
@@ -351,6 +368,7 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	public void setRequestStatus(String requestStatus) {
 		this.requestStatus = requestStatus;
 	}
+
 	@Column(name = "srvc_priority")
 	@JsonInclude(Include.NON_NULL)
 	public String getPriority() {
@@ -359,6 +377,156 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 
 	public void setPriority(String priority) {
 		this.priority = priority;
+	}
+
+	@Column(name = "srvc_part_id")
+	@JsonInclude(Include.NON_NULL)
+	public Long getServicePartId() {
+		return servicePartId;
+	}
+
+	public void setServicePartId(Long servicePartId) {
+		this.servicePartId = servicePartId;
+	}
+
+	@Column(name = "srvc_part_type")
+	@JsonInclude(Include.NON_NULL)
+	public String getServicePartType() {
+		return servicePartType;
+	}
+
+	public void setServicePartType(String servicePartType) {
+		this.servicePartType = servicePartType;
+	}
+
+	@Column(name = "srvc_part_code")
+	@JsonInclude(Include.NON_NULL)
+	public String getServicePartCode() {
+		return servicePartCode;
+	}
+
+	public void setServicePartCode(String servicePartCode) {
+		this.servicePartCode = servicePartCode;
+	}
+
+	@Column(name = "srvc_part_name")
+	@JsonInclude(Include.NON_NULL)
+	public String getServicePartName() {
+		return servicePartName;
+	}
+
+	public void setServicePartName(String servicePartName) {
+		this.servicePartName = servicePartName;
+	}
+
+	@Column(name = "srvc_part_descr")
+	@JsonInclude(Include.NON_NULL)
+	public String getServicePartDescription() {
+		return servicePartDescription;
+	}
+
+	public void setServicePartDescription(String servicePartDescription) {
+		this.servicePartDescription = servicePartDescription;
+	}
+
+	@Column(name = "srvc_part_serial")
+	@JsonInclude(Include.NON_NULL)
+	public String getServicePartSerial() {
+		return servicePartSerial;
+	}
+
+	public void setServicePartSerial(String servicePartSerial) {
+		this.servicePartSerial = servicePartSerial;
+	}
+
+	@Column(name = "srvc_part_str_code")
+	@JsonInclude(Include.NON_NULL)
+	public String getServicePartStructureCode() {
+		return servicePartStructureCode;
+	}
+
+	public void setServicePartStructureCode(String servicePartStructureCode) {
+		this.servicePartStructureCode = servicePartStructureCode;
+	}
+
+	@Column(name = "srvc_part_str_name")
+	@JsonInclude(Include.NON_NULL)
+	public String getServicePartStructureName() {
+		return servicePartStructureName;
+	}
+
+	public void setServicePartStructureName(String servicePartStructureName) {
+		this.servicePartStructureName = servicePartStructureName;
+	}
+
+	@Column(name = "srvc_part_pstn_code")
+	@JsonInclude(Include.NON_NULL)
+	public String getServicePartPstnCode() {
+		return servicePartPstnCode;
+	}
+
+	public void setServicePartPstnCode(String servicePartPstnCode) {
+		this.servicePartPstnCode = servicePartPstnCode;
+	}
+
+	@Column(name = "srvc_part_pstn_name")
+	@JsonInclude(Include.NON_NULL)
+	public String getServicePartPstnName() {
+		return servicePartPstnName;
+	}
+
+	public void setServicePartPstnName(String servicePartPstnName) {
+		this.servicePartPstnName = servicePartPstnName;
+	}
+
+	@Column(name = "srvc_rspnsbl_be_id")
+	@JsonInclude(Include.NON_NULL)
+	public Long getServiceResponsibleBeId() {
+		return serviceResponsibleBeId;
+	}
+
+	public void setServiceResponsibleBeId(Long serviceResponsibleBeId) {
+		this.serviceResponsibleBeId = serviceResponsibleBeId;
+	}
+
+	@Column(name = "srvc_rspnsbl_be_code")
+	@JsonInclude(Include.NON_NULL)
+	public String getServiceResponsibleBeCode() {
+		return serviceResponsibleBeCode;
+	}
+
+	public void setServiceResponsibleBeCode(String serviceResponsibleBeCode) {
+		this.serviceResponsibleBeCode = serviceResponsibleBeCode;
+	}
+
+	@Column(name = "srvc_rspnsbl_be_type_code")
+	@JsonInclude(Include.NON_NULL)
+	public String getServiceResponsibleBeTypeCode() {
+		return serviceResponsibleBeTypeCode;
+	}
+
+	public void setServiceResponsibleBeTypeCode(String serviceResponsibleBeTypeCode) {
+		this.serviceResponsibleBeTypeCode = serviceResponsibleBeTypeCode;
+	}
+
+	@Column(name = "srvc_rspnsbl_be_name")
+	@JsonInclude(Include.NON_NULL)
+	public String getServiceResponsibleBeName() {
+		return serviceResponsibleBeName;
+	}
+
+	public void setServiceResponsibleBeName(String serviceResponsibleBeName) {
+		this.serviceResponsibleBeName = serviceResponsibleBeName;
+	}
+
+	@Column(name = "srvc_rspnsbl_be_reference")
+	@JsonInclude(Include.NON_NULL)
+	public String getServiceResponsibleBeReference() {
+		return serviceResponsibleBeReference;
+	}
+
+	public void setServiceResponsibleBeReference(String serviceResponsibleBeReference) {
+		this.serviceResponsibleBeReference = serviceResponsibleBeReference;
 	}
 
 	@Override
@@ -385,6 +553,17 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 		result = prime * result + ((requestCode == null) ? 0 : requestCode.hashCode());
 		result = prime * result + ((requestType == null) ? 0 : requestType.hashCode());
 		result = prime * result + ((totalAmount == null) ? 0 : totalAmount.hashCode());
+		result = prime * result + ((totalAmount == null) ? 0 : totalAmount.hashCode());
+
+		result = prime * result + ((servicePartType == null) ? 0 : servicePartType.hashCode());
+		result = prime * result + ((servicePartCode == null) ? 0 : servicePartCode.hashCode());
+
+		result = prime * result + ((serviceResponsibleBeCode == null) ? 0 : serviceResponsibleBeCode.hashCode());
+		result = prime * result + ((serviceResponsibleBeTypeCode == null) ? 0 : serviceResponsibleBeTypeCode.hashCode());
+
+		result = prime * result + ((servicePartSerial == null) ? 0 : servicePartSerial.hashCode());
+		result = prime * result + ((servicePartStructureCode == null) ? 0 : servicePartStructureCode.hashCode());
+		result = prime * result + ((servicePartPstnCode == null) ? 0 : servicePartPstnCode.hashCode());
 		return result;
 	}
 
@@ -497,6 +676,55 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 				return false;
 		} else if (!totalAmount.equals(other.totalAmount))
 			return false;
+		if (servicePartType == null) {
+			if (other.servicePartType != null) {
+				return false;
+			}
+		} else if (!servicePartType.equals(other.servicePartType)) {
+			return false;
+		}
+		if (servicePartCode == null) {
+			if (other.servicePartCode != null) {
+				return false;
+			}
+		} else if (!servicePartCode.equals(other.servicePartCode)) {
+			return false;
+		}
+		if (serviceResponsibleBeCode == null) {
+			if (other.serviceResponsibleBeCode != null) {
+				return false;
+			}
+		} else if (!serviceResponsibleBeCode.equals(other.serviceResponsibleBeCode)) {
+			return false;
+		}
+		if (serviceResponsibleBeTypeCode == null) {
+			if (other.serviceResponsibleBeTypeCode != null) {
+				return false;
+			}
+		} else if (!serviceResponsibleBeTypeCode.equals(other.serviceResponsibleBeTypeCode)) {
+			return false;
+		}
+		if (servicePartSerial == null) {
+			if (other.servicePartSerial != null) {
+				return false;
+			}
+		} else if (!servicePartSerial.equals(other.servicePartSerial)) {
+			return false;
+		}
+		if (servicePartStructureCode == null) {
+			if (other.servicePartStructureCode != null) {
+				return false;
+			}
+		} else if (!servicePartStructureCode.equals(other.servicePartStructureCode)) {
+			return false;
+		}
+		if (servicePartPstnCode == null) {
+			if (other.servicePartPstnCode != null) {
+				return false;
+			}
+		} else if (!servicePartPstnCode.equals(other.servicePartPstnCode)) {
+			return false;
+		}
 		return true;
 	}
 
@@ -529,6 +757,14 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 		builder.append(", laborAmount=").append(laborAmount);
 		builder.append(", otherAmount=").append(otherAmount);
 		builder.append(", totalAmount=").append(totalAmount);
+		
+		builder.append(", servicePartType=").append(servicePartType);
+		builder.append(", servicePartCode=").append(servicePartCode);
+		builder.append(", serviceResponsibleBeCode=").append(serviceResponsibleBeCode);
+		builder.append(", serviceResponsibleBeTypeCode=").append(serviceResponsibleBeTypeCode);
+		builder.append(", servicePartSerial=").append(servicePartSerial);
+		builder.append(", servicePartStructureCode=").append(servicePartStructureCode);
+		builder.append(", servicePartPstnCode=").append(servicePartPstnCode);		
 		builder.append("]");
 		return builder.toString();
 	}
