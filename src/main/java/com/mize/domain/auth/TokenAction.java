@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.MizeSceEntityAudit;
 import com.mize.domain.datetime.DateTime;
 
@@ -85,6 +86,7 @@ public class TokenAction extends MizeSceEntityAudit implements Comparable<TokenA
 	
 	@JoinColumn(name="target_user_id")
 	@ManyToOne(fetch = FetchType.EAGER)
+	@JsonBackReference(value="user_tokenAction")
 	public User getTargetUser() {
 		return targetUser;
 	}

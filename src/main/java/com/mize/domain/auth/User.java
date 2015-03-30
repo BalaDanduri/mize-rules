@@ -423,7 +423,9 @@ public class User extends MizeSceEntityAudit implements Comparable<User> {
 		this.userDevice = userDevice;
 	}
 
-	@OneToMany(cascade={CascadeType.ALL}, mappedBy="user",orphanRemoval = true)
+	@OneToMany(fetch = FetchType.LAZY,cascade={CascadeType.ALL}, mappedBy="user",orphanRemoval = true)
+	@JsonSerialize(using=JPASerializer.class)
+	@JsonInclude(Include.NON_NULL)
 	public List<UserDevice> getUserDevices() {
 		return userDevices;
 	}
