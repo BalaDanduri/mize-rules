@@ -28,6 +28,7 @@ public class ApplicationFormat extends MizeSceEntityAudit implements Comparable<
 	private String tenantCode;
 	private String formatTypeName;
 	private String regExp;
+	private String formatName;
 
 	@Transient
 	public User user;
@@ -35,9 +36,10 @@ public class ApplicationFormat extends MizeSceEntityAudit implements Comparable<
 	public ApplicationFormat() {
 	}
 	
-	public ApplicationFormat(Long id,String formatType, Locale locale,String formatValue, String isActive) {
+	public ApplicationFormat(Long id,String formatName,String formatType, Locale locale,String formatValue, String isActive) {
 		super();
 		this.id = id;
+		this.formatName=formatName;
 		this.formatType = formatType;
 		this.locale = locale;
 		this.formatValue = formatValue;
@@ -127,6 +129,15 @@ public class ApplicationFormat extends MizeSceEntityAudit implements Comparable<
 
 	public void setFormatTypeName(String formatTypeName) {
 		this.formatTypeName = formatTypeName;
+	}
+	
+	@Column(name= "format_name")
+	public String getFormatName() {
+		return formatName;
+	}
+
+	public void setFormatName(String formatName) {
+		this.formatName = formatName;
 	}
 	
 
