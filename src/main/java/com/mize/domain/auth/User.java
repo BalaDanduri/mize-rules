@@ -69,12 +69,9 @@ public class User extends MizeSceEntityAudit implements Comparable<User> {
 	@CachedEntity
 	private List<UserAddress> addresses = new ArrayList<UserAddress>();
 	private String isActive;
-	private String token;
-	
-	private String deviceToken;
-	private String deviceOS; 
-	
-	
+	private UserDevice userDevice;
+	private List<UserDevice> userDevices = new ArrayList<UserDevice>();
+	private TokenAction tokenAction;
 	@Transient
 	private User loginUser;
 	
@@ -406,11 +403,6 @@ public class User extends MizeSceEntityAudit implements Comparable<User> {
 	public void setLoginId(String loginId) {
 		this.loginId = loginId;
 	}
-
-	@Override
-	public int compareTo(User arg0) {
-		return 0;
-	}
 	
 	public void setLoginUser(User loginUser) {
 		this.loginUser = loginUser;
@@ -421,36 +413,32 @@ public class User extends MizeSceEntityAudit implements Comparable<User> {
 	public User getLoginUser() {
 		return loginUser;
 	}
-	
+
 	@Transient
-	@JsonIgnore
-	public String getToken() {
-		return token;
+	public UserDevice getUserDevice() {
+		return userDevice;
 	}
 
-	public void setToken(String token) {
-		this.token = token;
-	}
-	
-	
-	@Transient
-	@JsonIgnore
-	public String getDeviceToken() {
-		return deviceToken;
+	public void setUserDevice(UserDevice userDevice) {
+		this.userDevice = userDevice;
 	}
 
-	public void setDeviceToken(String deviceToken) {
-		this.deviceToken = deviceToken;
+	@OneToMany(cascade={CascadeType.ALL}, mappedBy="user",orphanRemoval = true)
+	public List<UserDevice> getUserDevices() {
+		return userDevices;
+	}
+
+	public void setUserDevices(List<UserDevice> userDevices) {
+		this.userDevices = userDevices;
 	}
 
 	@Transient
-	@JsonIgnore
-	public String getDeviceOS() {
-		return deviceOS;
+	public TokenAction getTokenAction() {
+		return tokenAction;
 	}
 
-	public void setDeviceOS(String deviceOS) {
-		this.deviceOS = deviceOS;
+	public void setTokenAction(TokenAction tokenAction) {
+		this.tokenAction = tokenAction;
 	}
 
 	@Override
@@ -517,7 +505,10 @@ public class User extends MizeSceEntityAudit implements Comparable<User> {
 				+ emailValidated + ", loginId=" + loginId + ", referralId="
 				+ referralId + "]";
 	}
-	
-	
+
+	@Override
+	public int compareTo(User o) {
+		return 0;
+	}
 	
 }

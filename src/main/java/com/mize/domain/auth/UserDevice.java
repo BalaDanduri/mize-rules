@@ -2,12 +2,15 @@ package com.mize.domain.auth;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.mize.domain.common.MizeSceEntityAudit;
 
 @Entity
@@ -16,20 +19,10 @@ public class UserDevice extends MizeSceEntityAudit implements Comparable<UserDev
 
 	private static final long serialVersionUID = 4316489367828861386L;
 	
-	private String deviceToken;
+	private String deviceUID;
 	private String deviceOS;
-	private Long userId;
 	private String  isActive;
 	private User user;
-
-	@Transient
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
 
 	@Column(name="is_active")
 	public String getIsActive() {
@@ -53,13 +46,13 @@ public class UserDevice extends MizeSceEntityAudit implements Comparable<UserDev
 		this.id = id;
 	}
 	
-	@Column(name="device_token")
-	public String getDeviceToken() {
-		return deviceToken;
+	@Column(name="device_uid")
+	public String getDeviceUID() {
+		return deviceUID;
 	}
 
-	public void setDeviceToken(String deviceToken) {
-		this.deviceToken = deviceToken;
+	public void setDeviceUID(String deviceUID) {
+		this.deviceUID = deviceUID;
 	}
 
 	@Column(name="device_os")
@@ -71,23 +64,24 @@ public class UserDevice extends MizeSceEntityAudit implements Comparable<UserDev
 		this.deviceOS = deviceOS;
 	}
 
-	@Column(name="user_id")
-	public Long getUserId() {
-		return userId;
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name ="user_id")
+	@JsonBackReference(value="user_userDevice")
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
 		int result = super.hashCode();
 		result = prime * result + ((isActive == null) ? 0 : deviceOS.hashCode());
 		result = prime * result + ((deviceOS == null) ? 0 : deviceOS.hashCode());
-		result = prime * result + ((deviceToken == null) ? 0 : deviceToken.hashCode());
-		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+		result = prime * result + ((deviceUID == null) ? 0 : deviceUID.hashCode());
 		return result;
 	}
 
@@ -107,31 +101,23 @@ public class UserDevice extends MizeSceEntityAudit implements Comparable<UserDev
 				return false;
 		} else if (!deviceOS.equals(other.deviceOS))
 			return false;
-		if (deviceToken == null) {
-			if (other.deviceToken != null)
+		if (deviceUID == null) {
+			if (other.deviceUID != null)
 				return false;
-		} else if (!deviceToken.equals(other.deviceToken))
-			return false;
-		if (userId == null) {
-			if (other.userId != null)
-				return false;
-		} else if (!userId.equals(other.userId))
+		} else if (!deviceUID.equals(other.deviceUID))
 			return false;
 		return true;
 	}
 	
 	@Override
 	public String toString() {
-		return "UserDevice [deviceToken=" + deviceToken + ", deviceOS=" + deviceOS + ", userId=" + userId + ", active="
+		return "UserDevice [deviceToken=" + deviceUID + ", deviceOS=" + deviceOS + ", active="
 				+ isActive + "]";
 	}
 
 	@Override
 	public int compareTo(UserDevice arg0) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
-	
-	
 
 }
