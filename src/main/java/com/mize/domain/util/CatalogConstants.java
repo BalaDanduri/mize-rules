@@ -128,5 +128,8 @@ public abstract class CatalogConstants implements Serializable{
 	public static final String  ENTITY_XREF_CRITERIA_TYPE= "EntityXRefCriteriaType";
 	public static final String INSP_FORM_CUSTOMER_TYPE = "InspectionFormCustomerType";
 	
+	public static final String  SERVICE_RESPONSIBLE_BE_TYPE= "ServiceResponsibleBEType";
+	
+	
 }
 
