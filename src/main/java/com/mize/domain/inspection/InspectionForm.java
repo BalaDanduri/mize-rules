@@ -57,6 +57,7 @@ public class InspectionForm extends MizeSceEntityAudit implements Comparable<Ins
 	private FormInstance formInstance;
 	@CachedEntity
 	private InspectionFormRequestor requestor;
+	@CachedEntity
 	private List<InspectionFormEquipment> inspectionEquipments = new ArrayList<InspectionFormEquipment>();
 	private List<InspectionFormAudit> audits = new ArrayList<InspectionFormAudit>();
 	private List<InspectionFormMessage> messages = new ArrayList<InspectionFormMessage>();

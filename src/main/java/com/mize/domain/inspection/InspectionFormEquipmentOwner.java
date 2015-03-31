@@ -16,12 +16,16 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityContact;
+import com.mize.domain.common.Locale;
 import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.JPASerializer;
@@ -50,6 +54,7 @@ public class InspectionFormEquipmentOwner extends MizeSceEntity implements Compa
 	@CachedEntity
 	private EntityAddress ownerAddress;
 	private EntityContact ownerContact;
+	private Locale ownerLocale;
 	
 	@Override
 	@Id
@@ -188,8 +193,19 @@ public class InspectionFormEquipmentOwner extends MizeSceEntity implements Compa
 	public void setOwnerContact(EntityContact ownerContact) {
 		this.ownerContact = ownerContact;
 	}
-
 	
+	@OneToOne(fetch = FetchType.EAGER)
+	@Fetch(FetchMode.SELECT) 
+	@JoinColumn(name = "locale_id")
+	@JsonSerialize(using=JPASerializer.class)
+	public Locale getOwnerLocale() {
+		return ownerLocale;
+	}
+
+	public void setOwnerLocale(Locale ownerLocale) {
+		this.ownerLocale = ownerLocale;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;

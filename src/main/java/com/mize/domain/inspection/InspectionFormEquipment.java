@@ -28,6 +28,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.product.ProductRegistration;
+import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.JPASerializer;
 
 @Entity
@@ -59,6 +60,7 @@ public class InspectionFormEquipment extends MizeSceEntity implements Comparable
 	private String equipmentReference;
 	private Long productRegistrationId;
 	private List<InspectionFormEquipmentAttribute> equipmentAttributes = new ArrayList<InspectionFormEquipmentAttribute>();
+	@CachedEntity
 	private InspectionFormEquipmentOwner equipmentOwner;
 	
 	@Override
