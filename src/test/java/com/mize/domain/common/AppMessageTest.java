@@ -1,30 +1,22 @@
 package com.mize.domain.common;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.test.context.ContextConfiguration;
 
 import com.mize.domain.appmsg.AppMessage;
 import com.mize.domain.appmsg.AppMessageIntl;
 import com.mize.domain.businessentity.BusinessEntity;
-import com.mize.domain.test.util.JPATest;
-import com.mize.domain.util.Formatter;
 
-@ContextConfiguration(locations={"/test-context.xml"})
-public class AppMessageTest extends JPATest  {
+
+public class AppMessageTest  {
 	private static final String APP_MESSAGE_QUERY = "select * from application_messages where id = ?";
 	EntityManager entityManager = null;
 	AppMessage appMessage = null;
