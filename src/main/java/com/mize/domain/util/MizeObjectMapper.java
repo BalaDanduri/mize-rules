@@ -208,7 +208,7 @@ public class MizeObjectMapper extends ObjectMapper {
 		public void serialize(BigDecimal bigDecimal, JsonGenerator gen, SerializerProvider provider) throws IOException, JsonProcessingException {
 			if(bigDecimal != null){
 				if(bigDecimal.isValid()){
-					gen.writeString(bigDecimal.toString(decimalFormatter));
+					gen.writeString(bigDecimal.print(decimalFormatter));
 				}else{
 					gen.writeString(bigDecimal.getDecimalValue());
 				}

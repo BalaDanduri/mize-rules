@@ -98,8 +98,21 @@ public class BigDecimal implements java.io.Serializable,Comparable<BigDecimal>{
 		}
 	}
 	
-	public String toString(DecimalFormat df) {
-		return this.decimalValue;
+	public String print(DecimalFormat df) {
+		try{
+			return df.format(this.baseValue);
+		}catch(Exception e){
+		}
+		return null;
+	}
+	
+	public String print(String dateTimeFormat) {
+		try{
+			DecimalFormat df = new DecimalFormat(decimalFormat);
+			return df.format(this.baseValue);
+		}catch(Exception e){
+		}
+		return null;
 	}
 	
 	@Override

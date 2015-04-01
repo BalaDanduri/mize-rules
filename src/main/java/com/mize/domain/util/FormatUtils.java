@@ -218,7 +218,7 @@ public class FormatUtils {
 			return EMPTY;
 		}else{
 			String decimalFormat = getUserDecimalFormat(user, fallback);
-			return bigDecimal.toString(getDecimalFormatter(decimalFormat));
+			return bigDecimal.print(getDecimalFormatter(decimalFormat));
 		}
 	}
 	
