@@ -14,6 +14,8 @@ import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityAddress;
@@ -34,17 +36,20 @@ public class ServiceEntityRequester extends MizeSceEntity implements Comparable<
 	
 	private ServiceEntity serviceEntity;
 	private BusinessEntity businessEntity;
+	
 	private Long requesterId;
 	private String code;
 	private String typeCode;
 	private String name;
 	private String firstName;
 	private String lastName;
-	private String middleInitial;
-	private EntityAddress address;
-	private EntityContact contact;
+	private String middleInitial;	
 	private String reference;
 	private String isNewRequester;
+	private String isCustomer;
+	
+	private EntityAddress address;
+	private EntityContact contact;
 
 	public ServiceEntityRequester() {
 		
@@ -186,6 +191,16 @@ public class ServiceEntityRequester extends MizeSceEntity implements Comparable<
 
 	public void setIsNewRequester(String isNewRequester) {
 		this.isNewRequester = isNewRequester;
+	}
+
+	@Column(name = "is_customer")
+	@JsonInclude(Include.NON_NULL)
+	public String getIsCustomer() {
+		return isCustomer;
+	}
+
+	public void setIsCustomer(String isCustomer) {
+		this.isCustomer = isCustomer;
 	}
 
 	@Override

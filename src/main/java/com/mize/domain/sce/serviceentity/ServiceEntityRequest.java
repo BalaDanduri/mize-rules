@@ -70,7 +70,9 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 	private String serviceResponsibleBeTypeCode;
 	private String serviceResponsibleBeName;
 	private String serviceResponsibleBeReference;
-
+	private String reasonRepairCode;
+	private String reasonRepairDescription;
+	
 	@CachedEntity
 	private ServiceEntityRequestProduct product;
 	private ServiceEntityRequestCoverage coverage;
@@ -527,6 +529,25 @@ public class ServiceEntityRequest extends MizeSceEntity implements Comparable<Se
 
 	public void setServiceResponsibleBeReference(String serviceResponsibleBeReference) {
 		this.serviceResponsibleBeReference = serviceResponsibleBeReference;
+	}
+	@Column(name = "reason_repair_code")
+	@JsonInclude(Include.NON_NULL)
+	public String getReasonRepairCode() {
+		return reasonRepairCode;
+	}
+
+	public void setReasonRepairCode(String reasonRepairCode) {
+		this.reasonRepairCode = reasonRepairCode;
+	}
+	
+	@Column(name = "reason_repair_descr")
+	@JsonInclude(Include.NON_NULL)
+	public String getReasonRepairDescription() {
+		return reasonRepairDescription;
+	}
+
+	public void setReasonRepairDescription(String reasonRepairDescription) {
+		this.reasonRepairDescription = reasonRepairDescription;
 	}
 
 	@Override
