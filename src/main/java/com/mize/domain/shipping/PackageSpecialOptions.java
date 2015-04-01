@@ -12,15 +12,17 @@ public class PackageSpecialOptions extends MizeSceEntity implements Comparable<P
 	private BigDecimal declaredValue;	
 	private ShipmentReturnService returnService;
 	private ShipmentCashOnDelivery cashOnDelivery;
+	private String upsPremiumCareIndicator;
 	
 	public PackageSpecialOptions() {
 		super();
 	}
 	
-	public PackageSpecialOptions(String deliveryConfirmation, BigDecimal declaredValue) {
+	public PackageSpecialOptions(String deliveryConfirmation, BigDecimal declaredValue, String upsPremiumCareIndicator) {
 		super();
 		this.deliveryConfirmation = deliveryConfirmation;
 		this.declaredValue = declaredValue;
+		this.upsPremiumCareIndicator = upsPremiumCareIndicator;
 	}
 
 
@@ -66,6 +68,14 @@ public class PackageSpecialOptions extends MizeSceEntity implements Comparable<P
 	public void setCashOnDelivery(ShipmentCashOnDelivery cashOnDelivery) {
 		this.cashOnDelivery = cashOnDelivery;
 	}
+	
+	public String getUpsPremiumCareIndicator() {
+		return upsPremiumCareIndicator;
+	}
+
+	public void setUpsPremiumCareIndicator(String upsPremiumCareIndicator) {
+		this.upsPremiumCareIndicator = upsPremiumCareIndicator;
+	}
 
 	@Override
 	public int compareTo(PackageSpecialOptions o) {
@@ -86,6 +96,10 @@ public class PackageSpecialOptions extends MizeSceEntity implements Comparable<P
 						.hashCode());
 		result = prime * result
 				+ ((returnService == null) ? 0 : returnService.hashCode());
+		result = prime
+				* result
+				+ ((upsPremiumCareIndicator == null) ? 0
+						: upsPremiumCareIndicator.hashCode());
 		return result;
 	}
 
@@ -118,6 +132,12 @@ public class PackageSpecialOptions extends MizeSceEntity implements Comparable<P
 				return false;
 		} else if (!returnService.equals(other.returnService))
 			return false;
+		if (upsPremiumCareIndicator == null) {
+			if (other.upsPremiumCareIndicator != null)
+				return false;
+		} else if (!upsPremiumCareIndicator
+				.equals(other.upsPremiumCareIndicator))
+			return false;
 		return true;
 	}
 
@@ -126,7 +146,8 @@ public class PackageSpecialOptions extends MizeSceEntity implements Comparable<P
 		return "PackageSpecialOptions [deliveryConfirmation="
 				+ deliveryConfirmation + ", declaredValue=" + declaredValue
 				+ ", returnService=" + returnService + ", cashOnDelivery="
-				+ cashOnDelivery + "]";
+				+ cashOnDelivery + ", upsPremiumCareIndicator="
+				+ upsPremiumCareIndicator + "]";
 	}
 
 }
