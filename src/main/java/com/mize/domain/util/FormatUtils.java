@@ -21,7 +21,7 @@ public class FormatUtils {
 		FormatUtils.mizeApplicationProperties = mizeApplicationProperties;
 	}
 	
-	private static BigDecimal getBigDecimal(){
+	private static BigDecimal bigDecimal(){
 		return BigDecimal.getInstance(java.math.BigDecimal.ZERO, mizeApplicationProperties.getDefaultDecimalFormat());
 	}
 	
@@ -65,7 +65,7 @@ public class FormatUtils {
 	
 	public static BigDecimal multiplyBigDecimals(BigDecimal ...values){
 		if(values == null || values.length == 0){
-			return getBigDecimal();
+			return bigDecimal();
 		}
 		BigDecimal bigDecimal = null;
 		for(BigDecimal val : values){
@@ -82,7 +82,7 @@ public class FormatUtils {
 		
 	public static double formattedBigDecimal(BigDecimal value) {
 		if(value == null || value.getBaseValue() == null){
-			value = getBigDecimal();		
+			value = bigDecimal();		
 		}
 		double returnValue = Math.round(value.getBaseValue().doubleValue() * 100) / 100.0;
 		return returnValue;
@@ -90,7 +90,7 @@ public class FormatUtils {
 	
 	public static BigDecimal roundBigDecimal(BigDecimal value) {
 		if(value == null || value.getBaseValue() == null){
-			return getBigDecimal();
+			return bigDecimal();
 		}
 		double returnValue = Math.round(value.getBaseValue().doubleValue() * 100) / 100.0;
 		return value.createNewBigDecimal(java.math.BigDecimal.valueOf(returnValue));
@@ -98,14 +98,14 @@ public class FormatUtils {
 	
 	public static BigDecimal safeBigDecimal(BigDecimal value) {
 		if(value == null || value.getBaseValue() == null){
-			value = getBigDecimal();
+			value = bigDecimal();
 		}
 		return value;
 	}
 	
 	public static String formattedBigDecimal2(BigDecimal value) {
 		if(value == null || value.getBaseValue() == null){
-			value = getBigDecimal();
+			value = bigDecimal();
 		}
 		DecimalFormat decimalFormat = new DecimalFormat();
 		decimalFormat.setMinimumFractionDigits(2);
