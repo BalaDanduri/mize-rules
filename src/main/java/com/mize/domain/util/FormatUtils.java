@@ -11,7 +11,6 @@ import com.mize.domain.common.Number;
 
 @Component
 public class FormatUtils {
-	protected static java.math.BigDecimal ZERO = java.math.BigDecimal.ZERO;
 	public static final String EMPTY = "";
 	public static final String YES = "Y";
 	public static final String NO = "N";
@@ -20,6 +19,14 @@ public class FormatUtils {
 	@Autowired
 	public void setMizeApplicationProperties(MizeApplicationProperties mizeApplicationProperties) {
 		FormatUtils.mizeApplicationProperties = mizeApplicationProperties;
+	}
+	
+	private static BigDecimal getBigDecimal(){
+		return BigDecimal.getInstance(java.math.BigDecimal.ZERO, mizeApplicationProperties.getDefaultDecimalFormat());
+	}
+	
+	public static BigDecimal getBigDecimal(java.math.BigDecimal bigDecimal){
+		return BigDecimal.getInstance(bigDecimal, mizeApplicationProperties.getDefaultDecimalFormat());
 	}
 	
 	public static BigDecimal addBigDecimals(BigDecimal ...values){
@@ -32,7 +39,7 @@ public class FormatUtils {
 				if(bigDecimal == null){
 					bigDecimal = val;
 				}else{
-					bigDecimal.add(val);
+					bigDecimal=bigDecimal.add(val);
 				}
 			}
 		}
@@ -49,7 +56,7 @@ public class FormatUtils {
 				if(bigDecimal == null){
 					bigDecimal = val;
 				}else{
-					bigDecimal.subtract(val);
+					bigDecimal = bigDecimal.subtract(val);
 				}
 			}
 		}
@@ -58,7 +65,7 @@ public class FormatUtils {
 	
 	public static BigDecimal multiplyBigDecimals(BigDecimal ...values){
 		if(values == null || values.length == 0){
-			return BigDecimal.getInstance(ZERO);
+			return getBigDecimal();
 		}
 		BigDecimal bigDecimal = null;
 		for(BigDecimal val : values){
@@ -66,7 +73,7 @@ public class FormatUtils {
 				if(bigDecimal == null){
 					bigDecimal = val;
 				}else{
-					bigDecimal.multiply(val);
+					bigDecimal = bigDecimal.multiply(val);
 				}
 			}
 		}
@@ -75,7 +82,7 @@ public class FormatUtils {
 		
 	public static double formattedBigDecimal(BigDecimal value) {
 		if(value == null || value.getBaseValue() == null){
-			value = BigDecimal.getInstance(ZERO);		
+			value = getBigDecimal();		
 		}
 		double returnValue = Math.round(value.getBaseValue().doubleValue() * 100) / 100.0;
 		return returnValue;
@@ -83,7 +90,7 @@ public class FormatUtils {
 	
 	public static BigDecimal roundBigDecimal(BigDecimal value) {
 		if(value == null || value.getBaseValue() == null){
-			return BigDecimal.getInstance(ZERO);
+			return getBigDecimal();
 		}
 		double returnValue = Math.round(value.getBaseValue().doubleValue() * 100) / 100.0;
 		return value.createNewBigDecimal(java.math.BigDecimal.valueOf(returnValue));
@@ -91,14 +98,14 @@ public class FormatUtils {
 	
 	public static BigDecimal safeBigDecimal(BigDecimal value) {
 		if(value == null || value.getBaseValue() == null){
-			value = BigDecimal.getInstance(ZERO);
+			value = getBigDecimal();
 		}
 		return value;
 	}
 	
 	public static String formattedBigDecimal2(BigDecimal value) {
 		if(value == null || value.getBaseValue() == null){
-			value = BigDecimal.getInstance(ZERO);
+			value = getBigDecimal();
 		}
 		DecimalFormat decimalFormat = new DecimalFormat();
 		decimalFormat.setMinimumFractionDigits(2);
@@ -128,6 +135,14 @@ public class FormatUtils {
 			return EMPTY;
 		}else {
 			return String.valueOf(value.getBaseValue().longValue());
+		}
+	}
+	
+	public static String doubleString(BigDecimal value){
+		if(value == null || value.getBaseValue() == null){
+			return EMPTY;
+		}else {
+			return String.valueOf(value.getBaseValue().doubleValue());
 		}
 	}
 	
@@ -185,8 +200,33 @@ public class FormatUtils {
 		return returnValue;
 	}
 	
+	public static BigDecimal toBigDecimal(java.math.BigDecimal value) {
+		BigDecimal returnValue = null;
+		if (value != null) {
+			try {
+				returnValue = BigDecimal.getInstance(value);
+			} catch(Exception e) {
+			}
+		}
+		return returnValue;
+	}
+	
 	public static Number toBigInteger(Long value) {
 		return Number.getInstance(value);
+	}
+	
+	public static int intValue(BigDecimal value) {
+		if(value != null && value.getBaseValue() != null){
+			return value.getBaseValue().intValue();
+		}
+		return 0;
+	}
+	
+	public static long longValue(BigDecimal value) {
+		if(value != null && value.getBaseValue() != null){
+			return value.getBaseValue().longValue();
+		}
+		return 0;
 	}
 	
 	public static Number toNumber(Long value) {

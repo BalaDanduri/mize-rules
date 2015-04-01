@@ -17,6 +17,8 @@ public class Number implements java.io.Serializable,Comparable<Number>{
 	private Long baseValue;
 	private String numberValue;
 	private boolean isValid;
+	public static Number ONE = ONE();
+	public static Number ZERO = ZERO();
 	
 	public Number(){
 		super();
@@ -99,6 +101,14 @@ public class Number implements java.io.Serializable,Comparable<Number>{
 	
 	public String print() {
 		return this.baseValue.toString();
+	}
+	
+	private static Number ZERO(){
+		return getInstance(0);
+	}
+	
+	private static Number ONE(){
+		return getInstance(1);
 	}
 	
 	@Override

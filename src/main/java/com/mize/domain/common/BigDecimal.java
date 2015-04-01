@@ -18,11 +18,21 @@ public class BigDecimal implements java.io.Serializable,Comparable<BigDecimal>{
 	private String decimalValue;
 	private boolean isValid;
 	private String decimalFormat;
+	public static BigDecimal ZERO = ZERO();
+	public static BigDecimal ONE = ONE();
 	
 	public BigDecimal(){
 		super();
 	}
 	
+	private static BigDecimal ONE() {
+		return getInstance(java.math.BigDecimal.ZERO);
+	}
+
+	private static BigDecimal ZERO() {
+		return getInstance(java.math.BigDecimal.ONE);
+	}
+
 	public String getDecimalValue() {
 		return decimalValue;
 	}
@@ -51,11 +61,15 @@ public class BigDecimal implements java.io.Serializable,Comparable<BigDecimal>{
 		return new BigDecimal(decimalValue, decimalFormat);
 	}
 	
-	public static BigDecimal getInstance(java.math.BigDecimal baseValue){
+	public static BigDecimal getInstance(java.math.BigDecimal baseValue, String decimalFormat){
 		if(baseValue != null){
 			return new BigDecimal(baseValue);
 		}
 		return null;
+	}
+	
+	public static BigDecimal getInstance(java.math.BigDecimal baseValue){
+		return getInstance(baseValue, null);
 	}
 	
 	public static BigDecimal getInstance(String decimalValue, String decimalFormat, DecimalFormat df){
@@ -63,9 +77,14 @@ public class BigDecimal implements java.io.Serializable,Comparable<BigDecimal>{
 	}
 	
 	public BigDecimal(java.math.BigDecimal baseValue){
+		this(baseValue, null);
+	}
+	
+	public BigDecimal(java.math.BigDecimal baseValue, String decimalFormat){
 		this.baseValue = baseValue;
 		if(baseValue != null){
 			this.decimalValue = baseValue.toPlainString();
+			this.decimalFormat = decimalFormat;
 			this.isValid = true;
 		}
 	}
