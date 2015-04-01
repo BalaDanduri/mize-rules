@@ -5,7 +5,7 @@ import java.text.DecimalFormat;
 import org.springframework.stereotype.Component;
 
 import com.mize.domain.common.BigDecimal;
-import com.mize.domain.common.BigInteger;
+import com.mize.domain.common.Number;
 
 @Component
 public class FormatUtils {
@@ -31,7 +31,7 @@ public class FormatUtils {
 		return bigDecimal;		
 	}
 	
-	public static com.mize.domain.common.BigDecimal subtractBigDecimals(BigDecimal ...values){
+	public static BigDecimal subtractBigDecimals(BigDecimal ...values){
 		if(values == null || values.length == 0){
 			return null;
 		}
@@ -48,7 +48,7 @@ public class FormatUtils {
 		return bigDecimal;	
 	}
 	
-	public static com.mize.domain.common.BigDecimal multiplyBigDecimals(BigDecimal ...values){
+	public static BigDecimal multiplyBigDecimals(BigDecimal ...values){
 		if(values == null || values.length == 0){
 			return BigDecimal.getInstance(ZERO);
 		}
@@ -67,7 +67,7 @@ public class FormatUtils {
 		
 	public static double formattedBigDecimal(BigDecimal value) {
 		if(value == null || value.getBaseValue() == null){
-			value = com.mize.domain.common.BigDecimal.getInstance(ZERO);		
+			value = BigDecimal.getInstance(ZERO);		
 		}
 		double returnValue = Math.round(value.getBaseValue().doubleValue() * 100) / 100.0;
 		return returnValue;
@@ -107,7 +107,7 @@ public class FormatUtils {
 		}
 	}
 	
-	public static String toString(BigInteger value){
+	public static String toString(Number value){
 		if(value == null || value.getBaseValue() == null){
 			return EMPTY;
 		}else {
@@ -131,11 +131,11 @@ public class FormatUtils {
 		return value <= 0;
 	}
 	
-	public static boolean isNotNull(BigInteger number){
+	public static boolean isNotNull(Number number){
 		return !isNull(number);
 	}
 	
-	public static boolean isNull(BigInteger number){
+	public static boolean isNull(Number number){
 		long value = 0;
 		if(number != null && number.getBaseValue() != null){
 			value = number.getBaseValue().longValue();
@@ -177,18 +177,15 @@ public class FormatUtils {
 		return returnValue;
 	}
 	
-	public static BigInteger toBigInteger(Long value) {
-		BigInteger returnValue = null;
-		if (value != null) {
-			try {
-				returnValue = BigInteger.getInstance(java.math.BigInteger.valueOf(value));
-			} catch(Exception e) {
-			}
-		}
-		return returnValue;
+	public static Number toBigInteger(Long value) {
+		return Number.getInstance(value);
 	}
 	
-	public static long longValue(BigInteger value) {
+	public static Number toNumber(Long value) {
+		return Number.getInstance(value);
+	}
+	
+	public static long longValue(Number value) {
 		long val = 0;
 		if (value != null && value.getBaseValue() != null) {
 			val = value.getBaseValue().longValue();
@@ -196,7 +193,7 @@ public class FormatUtils {
 		return val;
 	}
 	
-	public static int intValue(BigInteger value) {
+	public static int intValue(Number value) {
 		int val = 0;
 		if (value != null && value.getBaseValue() != null) {
 			val = value.getBaseValue().intValue();

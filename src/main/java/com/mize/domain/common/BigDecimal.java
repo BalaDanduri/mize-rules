@@ -77,7 +77,7 @@ public class BigDecimal implements java.io.Serializable,Comparable<BigDecimal>{
 			DecimalFormat df = new DecimalFormat(decimalFormat);
 			String convertedValue = df.format(df.parse(decimalValue)); // user entered value to user format value
 			this.decimalValue = convertedValue;
-			Number num = df.parse(convertedValue); // getting Number from formatted value
+			java.lang.Number num = df.parse(convertedValue); // getting Number from formatted value
 			baseValue = new java.math.BigDecimal(num.toString());
 			this.isValid = true;
 		}catch(Exception e){
@@ -91,7 +91,7 @@ public class BigDecimal implements java.io.Serializable,Comparable<BigDecimal>{
 		try{
 			String convertedValue = df.format(df.parse(decimalValue)); // user entered value to user format value
 			this.decimalValue = convertedValue;
-			Number num = df.parse(convertedValue); // getting Number from formatted value
+			java.lang.Number num = df.parse(convertedValue); // getting Number from formatted value
 			baseValue = new java.math.BigDecimal(num.toString());
 			this.isValid = true;
 		}catch(Exception e){

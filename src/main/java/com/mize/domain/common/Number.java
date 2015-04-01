@@ -3,21 +3,23 @@ package com.mize.domain.common;
 import java.text.DecimalFormat;
 
 import javax.persistence.MappedSuperclass;
+import javax.xml.bind.annotation.XmlType;
 
 import org.hibernate.annotations.TypeDef;
 
-import com.mize.domain.jpa.BigIntegerJPA;
+import com.mize.domain.jpa.NumberJPA;
 
-@TypeDef(name = "bigInteger", defaultForType = BigInteger.class, typeClass = BigIntegerJPA.class)
+@XmlType(name="appNumber")
+@TypeDef(name = "number", defaultForType = Number.class, typeClass = NumberJPA.class)
 @MappedSuperclass
-public class BigInteger implements java.io.Serializable,Comparable<BigInteger>{
-	private static final long serialVersionUID = 4496100137434567327L;
-	private java.math.BigInteger baseValue;
+public class Number implements java.io.Serializable,Comparable<Number>{
+	private static final long serialVersionUID = 449610013741237327L;
+	private Long baseValue;
 	private String numberValue;
 	private boolean isValid;
 	private String decimalFormat;
 	
-	public BigInteger(){
+	public Number(){
 		super();
 	}
 		
@@ -33,28 +35,24 @@ public class BigInteger implements java.io.Serializable,Comparable<BigInteger>{
 		return decimalFormat;
 	}
 	
-	public java.math.BigInteger getBaseValue() {
+	public Long getBaseValue() {
 		return baseValue;
 	}
 
-	public void setBaseValue(java.math.BigInteger baseValue) {
+	public void setBaseValue(Long baseValue) {
 		this.baseValue = baseValue;
 	}
-/*
-	public static BigInteger getInstance(String decimalValue, String decimalFormat){
-		return new BigInteger(decimalValue, decimalFormat);
-	}*/
 	
-	public static BigInteger getInstance(java.math.BigInteger baseValue){
+	public static Number getInstance(Long baseValue){
 		if(baseValue != null){
-			return new BigInteger(baseValue);
+			return new Number(baseValue);
 		}
 		return null;
 	}
 	
-	public static BigInteger getInstance(Long baseValue){
+	public static Number getInstance(Integer baseValue){
 		if(baseValue != null){
-			return new BigInteger(java.math.BigInteger.valueOf(baseValue));
+			return new Number(baseValue);
 		}
 		return null;
 	}
@@ -63,9 +61,17 @@ public class BigInteger implements java.io.Serializable,Comparable<BigInteger>{
 		return new BigInteger(decimalValue, decimalFormat, df);
 	}
 	*/
-	public BigInteger(java.math.BigInteger baseValue){
+	public Number(Long baseValue){
 		this.baseValue = baseValue;
 		if(baseValue != null){
+			this.numberValue = baseValue.toString();
+			this.isValid = true;
+		}
+	}
+	
+	public Number(Integer baseValue){
+		if(baseValue != null){
+			this.baseValue = baseValue.longValue();
 			this.numberValue = baseValue.toString();
 			this.isValid = true;
 		}
@@ -104,12 +110,12 @@ public class BigInteger implements java.io.Serializable,Comparable<BigInteger>{
 	}
 	
 	@Override
-	public int compareTo(BigInteger val) {
+	public int compareTo(Number val) {
 		return baseValue.compareTo(val.baseValue);
 	}
 	
 	public boolean equals(Object object){
-		BigInteger other = (BigInteger)object;
+		Number other = (Number)object;
 		if(this.isValid && other.isValid){
 			return this.baseValue.equals(other.getBaseValue());
 		}else{

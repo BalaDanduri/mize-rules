@@ -10,9 +10,9 @@ import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SessionImplementor;
 import org.hibernate.usertype.UserType;
 
-import com.mize.domain.common.BigInteger;
+import com.mize.domain.common.Number;
 
-public class BigIntegerJPA implements UserType {
+public class NumberJPA implements UserType {
 		
 	@Override
 	public Object assemble(Serializable arg0, Object arg1) throws HibernateException {
@@ -55,8 +55,8 @@ public class BigIntegerJPA implements UserType {
 	}
 
 	@Override
-	public Class<BigInteger> returnedClass() {		
-		return BigInteger.class;
+	public Class<Number> returnedClass() {		
+		return Number.class;
 	}
 
 	@Override
@@ -66,33 +66,25 @@ public class BigIntegerJPA implements UserType {
 
 	@Override
 	public Object nullSafeGet(ResultSet rs, String[] names,SessionImplementor session, Object owner) throws HibernateException, SQLException {
-		java.math.BigDecimal baseValue = rs.getBigDecimal(names[0]);
+		Long baseValue = rs.getLong(names[0]);
 		if (rs.wasNull()) {
 			return null;
 		}
-		BigInteger bigInteger = null;
+		Number number = null;
 		if(baseValue != null){
-			
-			bigInteger = BigInteger.getInstance(java.math.BigInteger.valueOf(baseValue.longValue()));
+			number = Number.getInstance(baseValue);
 		}
-		return bigInteger;
+		return number;
 	}
 
 	@Override
 	public void nullSafeSet(PreparedStatement st, Object value, int index,SessionImplementor session) throws HibernateException, SQLException {
-		java.math.BigInteger baseValue = null;
+		Long baseValue = null;
 		if(value != null){
-			BigInteger bigInteger = (BigInteger)value;
-			if(bigInteger != null){
-				baseValue = bigInteger.getBaseValue();
-			}
+			baseValue = ((Number)value).getBaseValue();
 			baseValue.longValue();
 		}
-		if(baseValue != null){
-			st.setBigDecimal(index, BigDecimal.valueOf(baseValue.longValue()));
-		}else{
-			st.setBigDecimal(index, null);
-		}
+		st.setBigDecimal(index, BigDecimal.valueOf(baseValue.longValue()));
 	}
 
 }
