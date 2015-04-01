@@ -33,7 +33,8 @@ public class TokenAction extends MizeSceEntityAudit implements Comparable<TokenA
 	
 	public enum TokenType {
 		EV("EV"),
-		PR("PR");
+		PR("PR"),
+		AT("AT");
 
 		private String tokenType;
 		private TokenType(String tokenType) {
