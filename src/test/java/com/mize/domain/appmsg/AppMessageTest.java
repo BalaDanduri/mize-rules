@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.test.util.JPATest;
-public class AppMessageTest extends JPATest {
+public class AppMessageTest  {
 
 	private static final String APPMESSAGE_QUERY = "select * from application_messages where id =?";
 	private static final String APPMESSAGE_INTL_QUERY = "select * from application_messages_intl where message_id =?";
