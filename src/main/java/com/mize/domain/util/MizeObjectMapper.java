@@ -22,6 +22,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.mize.domain.applicationformat.ApplicationFormatCache;
 import com.mize.domain.common.BigDecimal;
+import com.mize.domain.common.Number;
 import com.mize.domain.datetime.Date;
 
 public class MizeObjectMapper extends ObjectMapper {
@@ -103,6 +104,9 @@ public class MizeObjectMapper extends ObjectMapper {
 		
 		module.addSerializer(BigDecimal.class, new BigDecimalSerializer());
 		module.addDeserializer(BigDecimal.class, new BigDecimalDeserializer());
+		
+		module.addSerializer(Number.class, new NumberSerializer());
+		module.addDeserializer(Number.class, new NumberDeserializer());
 		
 		registerModule(module);
 	}
@@ -218,6 +222,31 @@ public class MizeObjectMapper extends ObjectMapper {
 			String value = parser.getText();
 			if (isNotNull(value)) {
 				return BigDecimal.getInstance(value.trim(), decimalFormat, decimalFormatter);
+			} else {
+				return null;
+			}
+		}
+	}
+	
+	public class NumberSerializer extends JsonSerializer<Number> {
+		@Override
+		public void serialize(Number number, JsonGenerator gen, SerializerProvider provider) throws IOException, JsonProcessingException {
+			if(number != null){
+				if(number.isValid()){
+					gen.writeString(number.print());
+				}else{
+					gen.writeString(number.getNumberValue());
+				}
+			}
+		}
+	}
+	
+	public class NumberDeserializer extends JsonDeserializer<Number> {
+		@Override
+		public Number deserialize(JsonParser parser, DeserializationContext context) throws IOException, JsonProcessingException {
+			String value = parser.getText();
+			if (isNotNull(value)) {
+				return Number.getInstance(value.trim());
 			} else {
 				return null;
 			}

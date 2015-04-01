@@ -1,6 +1,6 @@
 package com.mize.domain.jpa;
+
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -82,9 +82,8 @@ public class NumberJPA implements UserType {
 		Long baseValue = null;
 		if(value != null){
 			baseValue = ((Number)value).getBaseValue();
-			baseValue.longValue();
 		}
-		st.setBigDecimal(index, BigDecimal.valueOf(baseValue.longValue()));
+		st.setLong(index, baseValue);
 	}
 
 }

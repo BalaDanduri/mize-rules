@@ -17,7 +17,6 @@ public class Number implements java.io.Serializable,Comparable<Number>{
 	private Long baseValue;
 	private String numberValue;
 	private boolean isValid;
-	private String decimalFormat;
 	
 	public Number(){
 		super();
@@ -30,10 +29,6 @@ public class Number implements java.io.Serializable,Comparable<Number>{
 	public boolean isInValid() {
 		return !isValid();
 	}
-
-	public String getDecimalFormat() {
-		return decimalFormat;
-	}
 	
 	public Long getBaseValue() {
 		return baseValue;
@@ -43,9 +38,29 @@ public class Number implements java.io.Serializable,Comparable<Number>{
 		this.baseValue = baseValue;
 	}
 	
+	public String getNumberValue() {
+		return numberValue;
+	}
+
+	public void setNumberValue(String numberValue) {
+		this.numberValue = numberValue;
+	}
+
 	public static Number getInstance(Long baseValue){
 		if(baseValue != null){
 			return new Number(baseValue);
+		}
+		return null;
+	}
+	
+	public static Number getInstance(String baseValue){
+		Long val = null;
+		try{
+			val = Long.parseLong(baseValue);
+		}catch(Exception e){
+		}
+		if(val != null){
+			return new Number(val);
 		}
 		return null;
 	}
@@ -61,7 +76,7 @@ public class Number implements java.io.Serializable,Comparable<Number>{
 		return new BigInteger(decimalValue, decimalFormat, df);
 	}
 	*/
-	public Number(Long baseValue){
+	private Number(Long baseValue){
 		this.baseValue = baseValue;
 		if(baseValue != null){
 			this.numberValue = baseValue.toString();
@@ -69,7 +84,7 @@ public class Number implements java.io.Serializable,Comparable<Number>{
 		}
 	}
 	
-	public Number(Integer baseValue){
+	private Number(Integer baseValue){
 		if(baseValue != null){
 			this.baseValue = baseValue.longValue();
 			this.numberValue = baseValue.toString();
@@ -109,6 +124,10 @@ public class Number implements java.io.Serializable,Comparable<Number>{
 		return this.numberValue;
 	}
 	
+	public String print() {
+		return this.baseValue.toString();
+	}
+	
 	@Override
 	public int compareTo(Number val) {
 		return baseValue.compareTo(val.baseValue);
@@ -116,7 +135,7 @@ public class Number implements java.io.Serializable,Comparable<Number>{
 	
 	public boolean equals(Object object){
 		Number other = (Number)object;
-		if(this.isValid && other.isValid){
+		if(this.isValid && other.isValid && this.baseValue != null){
 			return this.baseValue.equals(other.getBaseValue());
 		}else{
 			return true;
@@ -126,8 +145,7 @@ public class Number implements java.io.Serializable,Comparable<Number>{
 	@Override
 	public String toString() {
 		return "BigDecimal [baseValue=" + baseValue + ", numberValue="
-				+ numberValue + ", isValid=" + isValid + ", decimalFormat="
-				+ decimalFormat + "]";
+				+ numberValue + ", isValid=" + isValid +"]";
 	}
 	
 }

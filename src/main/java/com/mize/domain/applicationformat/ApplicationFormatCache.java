@@ -43,6 +43,30 @@ public class ApplicationFormatCache extends MizeSceEntity implements Comparable<
 	}
 
 	@JsonIgnore
+	public String getNumberFormat(){
+		if(formats != null){
+			for(ApplicationFormat format : formats){
+				if(Formatter.equalIgnoreCase(format.getFormatType(), ApplicationFormatConstants.NUMBER_FORMAT)){
+					return format.getFormatValue();
+				}
+			}
+		}
+		return null;
+	}
+	
+	@JsonIgnore
+	public String getDecimalFormat(){
+		if(formats != null){
+			for(ApplicationFormat format : formats){
+				if(Formatter.equalIgnoreCase(format.getFormatType(), ApplicationFormatConstants.DECIMAL_FORMAT)){
+					return format.getFormatValue();
+				}
+			}
+		}
+		return null;
+	}
+	
+	@JsonIgnore
 	public String getUserDateTimeFormat(){
 		if(formats != null){
 			for(ApplicationFormat format : formats){
