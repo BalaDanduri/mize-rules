@@ -1,6 +1,7 @@
 package com.mize.domain.datetime;
 
 import javax.persistence.MappedSuperclass;
+import javax.xml.bind.annotation.XmlType;
 
 import org.hibernate.annotations.TypeDef;
 import org.joda.time.DateTimeZone;
@@ -9,6 +10,8 @@ import org.joda.time.format.ISODateTimeFormat;
 
 import com.mize.domain.jpa.DateJPA;
 import com.mize.domain.util.DateTimeUtils;
+
+@XmlType(name="appDate")
 @TypeDef(name = "date", defaultForType = Date.class, typeClass = DateJPA.class)
 @MappedSuperclass
 public class Date implements IDateTime, Comparable<Date>, Cloneable{

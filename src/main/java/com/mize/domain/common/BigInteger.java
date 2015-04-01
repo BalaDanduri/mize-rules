@@ -52,6 +52,13 @@ public class BigInteger implements java.io.Serializable,Comparable<BigInteger>{
 		return null;
 	}
 	
+	public static BigInteger getInstance(Long baseValue){
+		if(baseValue != null){
+			return new BigInteger(java.math.BigInteger.valueOf(baseValue));
+		}
+		return null;
+	}
+	
 	/*public static BigInteger getInstance(String decimalValue, String decimalFormat, DecimalFormat df){
 		return new BigInteger(decimalValue, decimalFormat, df);
 	}

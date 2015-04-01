@@ -3,11 +3,13 @@ package com.mize.domain.common;
 import java.text.DecimalFormat;
 
 import javax.persistence.MappedSuperclass;
+import javax.xml.bind.annotation.XmlType;
 
 import org.hibernate.annotations.TypeDef;
 
 import com.mize.domain.jpa.BigDecimalJPA;
 
+@XmlType(name="appBigDecimal")
 @TypeDef(name = "bigDecimal", defaultForType = BigDecimal.class, typeClass = BigDecimalJPA.class)
 @MappedSuperclass
 public class BigDecimal implements java.io.Serializable,Comparable<BigDecimal>{
@@ -112,6 +114,62 @@ public class BigDecimal implements java.io.Serializable,Comparable<BigDecimal>{
 		}else{
 			return true;
 		}
+	}
+	
+	public BigDecimal add(BigDecimal bigDecimal){
+		java.math.BigDecimal bvalue = null;
+		if(this.isValid()){
+			if(this.baseValue == null){
+				bvalue = java.math.BigDecimal.ZERO;
+			}else{
+				bvalue = this.baseValue;
+			}
+			if(bigDecimal != null && bigDecimal.getBaseValue() != null){
+				bvalue = bvalue.add(bigDecimal.getBaseValue());
+			}
+		}
+		return createNewBigDecimal(bvalue);
+	}
+	
+	public BigDecimal subtract(BigDecimal bigDecimal){
+		java.math.BigDecimal bvalue = null;
+		if(this.isValid()){
+			if(this.baseValue == null){
+				bvalue = java.math.BigDecimal.ZERO;
+			}else{
+				bvalue = this.baseValue;
+			}
+			if(bigDecimal != null && bigDecimal.getBaseValue() != null){
+				bvalue = bvalue.subtract(bigDecimal.getBaseValue());
+			}
+		}
+		return createNewBigDecimal(bvalue);
+	}
+
+	public BigDecimal multiply(BigDecimal bigDecimal){
+		java.math.BigDecimal bvalue = null;
+		if(this.isValid()){
+			if(this.baseValue == null){
+				bvalue = java.math.BigDecimal.ZERO;
+			}else{
+				bvalue = this.baseValue;
+			}
+			if(bigDecimal != null && bigDecimal.getBaseValue() != null){
+				bvalue = bvalue.multiply(bigDecimal.getBaseValue());
+			}
+		}
+		return createNewBigDecimal(bvalue);
+	}
+	
+	public BigDecimal createNewBigDecimal(java.math.BigDecimal baseValue){
+		BigDecimal bigDecimal = null;
+		if(baseValue != null){
+			bigDecimal = new BigDecimal(baseValue);
+			bigDecimal.isValid = this.isValid;
+			bigDecimal.decimalFormat = this.decimalFormat;
+			bigDecimal.decimalValue = baseValue.toPlainString();
+		}
+		return bigDecimal;
 	}
 	
 	@Override
