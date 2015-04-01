@@ -54,13 +54,8 @@ public class Number implements java.io.Serializable,Comparable<Number>{
 	}
 	
 	public static Number getInstance(String baseValue){
-		Long val = null;
-		try{
-			val = Long.parseLong(baseValue);
-		}catch(Exception e){
-		}
-		if(val != null){
-			return new Number(val);
+		if(baseValue != null){
+			return new Number(baseValue);
 		}
 		return null;
 	}
@@ -72,10 +67,16 @@ public class Number implements java.io.Serializable,Comparable<Number>{
 		return null;
 	}
 	
-	/*public static BigInteger getInstance(String decimalValue, String decimalFormat, DecimalFormat df){
-		return new BigInteger(decimalValue, decimalFormat, df);
+	private Number(String strValue){
+		try{
+			this.numberValue = strValue;
+			Long val = Long.parseLong(strValue);
+			this.baseValue = val;
+			this.isValid = true;
+		}catch(Exception e){
+		}
 	}
-	*/
+	
 	private Number(Long baseValue){
 		this.baseValue = baseValue;
 		if(baseValue != null){
@@ -91,34 +92,6 @@ public class Number implements java.io.Serializable,Comparable<Number>{
 			this.isValid = true;
 		}
 	}
-	/*
-	public BigInteger(String numberValue, String decimalFormat){
-		this.numberValue = numberValue;
-		this.decimalFormat = decimalFormat;
-		try{
-			DecimalFormat df = new DecimalFormat(decimalFormat);
-			String convertedValue = df.format(df.parse(decimalValue)); // user entered value to user format value
-			this.decimalValue = convertedValue;
-			Number num = df.parse(convertedValue); // getting Number from formatted value
-			baseValue = new java.math.BigDecimal(num.toString());
-			this.isValid = true;
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-	}*/
-	/*
-	public BigInteger(String decimalValue, String decimalFormat, DecimalFormat df){
-		this.decimalValue = decimalValue;
-		this.decimalFormat = decimalFormat;
-		try{
-			String convertedValue = df.format(df.parse(decimalValue)); // user entered value to user format value
-			this.decimalValue = convertedValue;
-			Number num = df.parse(convertedValue); // getting Number from formatted value
-			baseValue = new java.math.BigDecimal(num.toString());
-			this.isValid = true;
-		}catch(Exception e){
-		}
-	}*/
 	
 	public String toString(DecimalFormat df) {
 		return this.numberValue;
