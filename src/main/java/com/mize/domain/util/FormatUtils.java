@@ -2,8 +2,10 @@ package com.mize.domain.util;
 
 import java.text.DecimalFormat;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.mize.domain.auth.User;
 import com.mize.domain.common.BigDecimal;
 import com.mize.domain.common.Number;
 
@@ -13,6 +15,12 @@ public class FormatUtils {
 	public static final String EMPTY = "";
 	public static final String YES = "Y";
 	public static final String NO = "N";
+	private static MizeApplicationProperties mizeApplicationProperties;	
+	
+	@Autowired
+	public void setMizeApplicationProperties(MizeApplicationProperties mizeApplicationProperties) {
+		FormatUtils.mizeApplicationProperties = mizeApplicationProperties;
+	}
 	
 	public static BigDecimal addBigDecimals(BigDecimal ...values){
 		if(values == null || values.length == 0){
@@ -199,5 +207,37 @@ public class FormatUtils {
 			val = value.getBaseValue().intValue();
 		}
 		return val;
+	}
+	
+	public static String formattedBigDecimal(BigDecimal bigDecimal, User user) {
+		return formattedBigDecimal(bigDecimal, user, true);
+	}
+	
+	public static String formattedBigDecimal(BigDecimal bigDecimal, User user, boolean fallback) {
+		if(bigDecimal == null){
+			return EMPTY;
+		}else{
+			String decimalFormat = getUserDecimalFormat(user, fallback);
+			return bigDecimal.toString(getDecimalFormatter(decimalFormat));
+		}
+	}
+	
+	public static DecimalFormat getDecimalFormatter(String decimalFormat) {
+		return new DecimalFormat(decimalFormat);
+	}
+	
+	private static String getUserDecimalFormat(User user, boolean fallback) {
+		String decimalFormat = null;
+		if(user != null && user.getUserProfile() != null && user.getUserProfile().getUserPreference() != null && user.getUserProfile().getUserPreference().getDateTimeFormat() != null){
+			decimalFormat = user.getUserProfile().getUserPreference().getDecimalFormat();
+		}
+		if(Formatter.isNull(decimalFormat) && fallback){
+			decimalFormat = getDecimalFormat();
+		}
+		return decimalFormat;
+	}
+	
+	public static String getDecimalFormat(){
+		return mizeApplicationProperties.getDefaultDecimalFormat();
 	}
 }

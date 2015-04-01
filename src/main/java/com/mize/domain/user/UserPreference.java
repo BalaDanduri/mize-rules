@@ -8,6 +8,7 @@ public class UserPreference extends MizeSceEntity implements  Comparable<UserPre
 	private String dateFormat;
 	private String dateTimeFormat;
 	private Locale locale;
+	private String decimalFormat;
 	
 	public UserPreference(){
 		super();
@@ -41,6 +42,14 @@ public class UserPreference extends MizeSceEntity implements  Comparable<UserPre
 		this.id  = id;
 	}
 	
+	public String getDecimalFormat() {
+		return decimalFormat;
+	}
+
+	public void setDecimalFormat(String decimalFormat) {
+		this.decimalFormat = decimalFormat;
+	}
+
 	@Override
 	public int compareTo(UserPreference o) {
 		return 0;
@@ -88,8 +97,8 @@ public class UserPreference extends MizeSceEntity implements  Comparable<UserPre
 	@Override
 	public String toString() {
 		return "UserPreference [dateFormat=" + dateFormat + ", dateTimeFormat="
-				+ dateTimeFormat + ", locale=" + locale + "]";
+				+ dateTimeFormat + ", locale=" + locale + ", decimalFormat="
+				+ decimalFormat + "]";
 	}
-	
-	
+
 }
