@@ -33,7 +33,7 @@ import com.mize.domain.util.CachedEntity;
 @DiscriminatorColumn(name = "discriminator")
 @DiscriminatorValue("BusinessEntityAddress")
 @Table(name="business_entity_address")
-public class BusinessEntityAddress  extends MizeSceEntity  implements Comparable<BusinessEntityAddress>{
+public class BusinessEntityAddress  extends MizeSceEntity implements Comparable<BusinessEntityAddress>{
 	/**
 	 * 
 	 */
@@ -151,8 +151,7 @@ public class BusinessEntityAddress  extends MizeSceEntity  implements Comparable
 	
 	@Override
 	public String toString() {
-		return "BusinessEntityAddress [beId=" + beId + ", businessEntity="
-				+ businessEntity + ", entityAddress=" + entityAddress
+		return "BusinessEntityAddress [beId=" + beId + ", entityAddress=" + entityAddress
 				+ ", isPreferred=" + isPreferred + ", id=" + id + "]";
 	}
 

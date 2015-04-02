@@ -211,8 +211,7 @@ public class BusinessEntityAttribute extends MizeSceEntity implements Comparable
 
 	@Override
 	public String toString() {
-		return "BusinessEntityAttribute [businessEntity=" + businessEntity
-				+ ", url=" + url + ", toolTipLogo=" + toolTipLogo + ", icon="
+		return "BusinessEntityAttribute [ url=" + url + ", toolTipLogo=" + toolTipLogo + ", icon="
 				+ icon + ", hoursOfOp=" + hoursOfOp + ", creditOnHold="
 				+ creditOnHold + ", isPromoted=" + isPromoted
 				+ ", isServiceProvider=" + isServiceProvider + ", region="
