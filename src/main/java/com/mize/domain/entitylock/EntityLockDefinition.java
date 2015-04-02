@@ -106,7 +106,7 @@ public class EntityLockDefinition extends MizeSceEntityAudit implements Comparab
 
 	@OneToMany(cascade={CascadeType.ALL},fetch = FetchType.EAGER, mappedBy = "entityLockDefinition",orphanRemoval= true)
 	@JsonSerialize(using=JPASerializer.class)
-	@JsonInclude(Include.NON_NULL)
+	@JsonInclude(Include.NON_DEFAULT)
 	public List<EntityLockCriteria> getLockCriterias() {
 		return lockCriterias;
 	}
