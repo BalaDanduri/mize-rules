@@ -64,9 +64,9 @@ public class EntityXRef extends MizeSceEntityAudit implements Comparable<EntityX
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "tenant_id")	
+	@JoinColumn(name = "tenant_id")
 	@JsonInclude(Include.NON_DEFAULT)
-	@JsonSerialize(using=TenantSerializer.class)
+	@JsonSerialize(using = TenantSerializer.class)
 	public BusinessEntity getTenant() {
 		return tenant;
 	}
@@ -103,6 +103,7 @@ public class EntityXRef extends MizeSceEntityAudit implements Comparable<EntityX
 	}
 
 	@Column(name = "xref_criteria", nullable = true)
+	@JsonIgnore
 	public String getCriteria() {
 		return criteria;
 	}
@@ -112,6 +113,7 @@ public class EntityXRef extends MizeSceEntityAudit implements Comparable<EntityX
 	}
 
 	@Column(name = "xref_result", nullable = true)
+	@JsonIgnore
 	public String getResult() {
 		return result;
 	}
@@ -139,6 +141,7 @@ public class EntityXRef extends MizeSceEntityAudit implements Comparable<EntityX
 	}
 
 	@Transient
+	@JsonInclude(Include.NON_NULL)
 	public Locale getLocale() {
 		return locale;
 	}
