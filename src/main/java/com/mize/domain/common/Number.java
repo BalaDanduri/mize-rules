@@ -57,7 +57,7 @@ public class Number implements java.io.Serializable,Comparable<Number>{
 	
 	public static Number getInstance(String baseValue){
 		if(baseValue != null){
-			return new Number(baseValue);
+			return new Number(baseValue.trim());
 		}
 		return null;
 	}
