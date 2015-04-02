@@ -47,12 +47,12 @@ public class DateTimeUtils {
 		return DateTime.getInstance(getDateTimeFormat(), dateTimeZone);
 	}
 	
-	public static DateTime currentDateTime(String dateTimeZone){		
-		return DateTime.getInstance(getDateTimeFormat(), DateTimeZone.forID(dateTimeZone));
+	public static DateTime currentDateTime(String dateTimeFormat){		
+		return DateTime.getInstance(dateTimeFormat, getTimeZone());
 	}
-	
-	public static Date currentDate(String dateTimeZone){		
-		return Date.getInstance(getDateFormat(), DateTimeZone.forID(dateTimeZone));
+		
+	public static Date currentDate(String dateFormat){		
+		return Date.getInstance(dateFormat, getTimeZone());
 	}
 	
 	public static Date currentDate(DateTimeZone dateTimeZone){		

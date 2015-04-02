@@ -60,7 +60,7 @@ public class BigDecimalJPA implements UserType {
 
 	@Override
 	public int[] sqlTypes() {
-		 return new int[] {Types.TIMESTAMP};
+		 return new int[] {Types.DECIMAL};
 	}
 
 	@Override

@@ -8,11 +8,12 @@ import java.sql.Types;
 
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SessionImplementor;
+import org.hibernate.id.ResultSetIdentifierConsumer;
 import org.hibernate.usertype.UserType;
 
 import com.mize.domain.common.Number;
 
-public class NumberJPA implements UserType {
+public class NumberJPA implements UserType, ResultSetIdentifierConsumer {
 		
 	@Override
 	public Object assemble(Serializable arg0, Object arg1) throws HibernateException {
@@ -61,7 +62,7 @@ public class NumberJPA implements UserType {
 
 	@Override
 	public int[] sqlTypes() {
-		 return new int[] {Types.TIMESTAMP};
+		 return new int[] {Types.BIGINT};
 	}
 
 	@Override
@@ -84,6 +85,17 @@ public class NumberJPA implements UserType {
 			baseValue = ((Number)value).getBaseValue();
 		}
 		st.setLong(index, baseValue);
+	}
+	
+	@Override
+	public Serializable consumeIdentifier(ResultSet resultSet){
+		try {
+			Number number = Number.getInstance(resultSet.getLong(1));
+			return number;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }
