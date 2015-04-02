@@ -51,8 +51,11 @@ public class ServiceEntity extends MizeSceEntityAudit implements Comparable<Serv
 	private String currencyCode;
 	private String source;
 	
-	private ServiceEntityRequester requester;
+	@CachedEntity
+	private ServiceEntityRequester requester;	
+	@CachedEntity
 	private ServiceEntityProvider provider;
+	@CachedEntity
 	private ServiceEntityPayment payment;
 	private ServiceEntityAmount partAmount;
 	private ServiceEntityAmount laborAmount;
