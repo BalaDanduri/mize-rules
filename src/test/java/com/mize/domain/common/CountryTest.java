@@ -44,21 +44,21 @@ public class CountryTest extends JPATest{
 
 	@Before
 	public void setUp() throws Exception {
-		entityManager = getEntityManager();
+		/*entityManager = getEntityManager();
 		tx = entityManager.getTransaction();
-		country = getCountryOjectToSave(country);
+		country = getCountryOjectToSave(country);*/
 	}
 
 	public void persist()
 	{
-		tx.begin();
+		/*tx.begin();
 		if(country.getId() == null){
 			entityManager.persist(country);	
 			entityManager.flush();
 		}else{
 			country = entityManager.merge(country);
 		}	
-		tx.commit();
+		tx.commit();*/
 	}
 	
 	private Country getCountryOjectToSave(Country country) {
@@ -124,16 +124,16 @@ public class CountryTest extends JPATest{
    }
 
 
-	private Country retrieveCountry() {
+	/*private Country retrieveCountry() {
 		
 		dbCountry = jdbcTemplate.queryForObject(COUNTRY_QUERY,
 				new Object[] { country.getId() }, new CountryRowMapper());	
 		
 		return dbCountry;
-	}
+	}*/
 	
 	
-	@Test
+	/*@Test
 	public void testSaveCountry() {
 		try
 		{
@@ -147,11 +147,11 @@ public class CountryTest extends JPATest{
 			e.printStackTrace();
 		fail(e.toString());
 		}
-	}
+	}*/
 	
 	
 	public void tearDown() throws Exception {
-		if(countryIntl!=null) {
+		/*if(countryIntl!=null) {
 			tx.begin();
 			entityManager.remove(countryIntl);
 			tx.commit();			
@@ -171,7 +171,7 @@ public class CountryTest extends JPATest{
 			entityManager.remove(country);
 			tx.commit();
 		}
-		entityManager.close();
+		entityManager.close();*/
 	}
 
 }
