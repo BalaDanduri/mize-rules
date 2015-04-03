@@ -124,7 +124,13 @@ public class Date implements IDateTime, Comparable<Date>, Cloneable{
 	}	
 	
 	public int compareTo(Date date) {
-		return baseValue.compareTo(date.baseValue);
+		if(this.baseValue == null && date.baseValue == null){
+			return 0;
+		}
+		if(this.baseValue != null){
+			return this.baseValue.compareTo(date.baseValue);
+		}
+		return 0;
 	}
 	
 	public Date(long millis) {
@@ -181,13 +187,17 @@ public class Date implements IDateTime, Comparable<Date>, Cloneable{
 		return date;
 	}
 	
-	public boolean equals(Object object){
-		Date other = (Date)object;
-		if(this.isValid && other != null && other.isValid){
-			return this.baseValue.equals(other.baseValue);
-		}else{
-			return true;
+	public boolean equals(Object obj){
+		if(obj instanceof Date){
+			Date other = (Date)obj;
+			if(this.baseValue == null && other.getBaseValue() == null){
+				return true;
+			}
+			if(this.baseValue != null){
+				return this.baseValue.equals(other.getBaseValue());
+			}
 		}
+		return false;
 	}
 	
 	public String toString(String dateFormat, DateTimeZone dateTimeZone){	
@@ -217,15 +227,7 @@ public class Date implements IDateTime, Comparable<Date>, Cloneable{
 	
 	@Override
 	public int hashCode() {
-		final int prime = 31*13;
-		int result = 1;
-		result = prime * result
-				+ ((dateFormat == null) ? 0 : dateFormat.hashCode());
-		result = prime * result
-				+ ((baseValue == null) ? 0 : baseValue.hashCode());
-		result = prime * result
-				+ ((dateValue == null) ? 0 : dateValue.hashCode());
-		return result;
+		return (baseValue == null) ? 0 : baseValue.hashCode();
 	}
 	
 }

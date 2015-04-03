@@ -21,6 +21,7 @@ import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityContact;
 import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.JPASerializer;
 
 /**
@@ -47,7 +48,7 @@ public class ServiceEntityRequester extends MizeSceEntity implements Comparable<
 	private String reference;
 	private String isNewRequester;
 	private String isCustomer;
-	
+	@CachedEntity
 	private EntityAddress address;
 	private EntityContact contact;
 

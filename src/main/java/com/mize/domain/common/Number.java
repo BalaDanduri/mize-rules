@@ -1,5 +1,6 @@
 package com.mize.domain.common;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 
 import javax.persistence.MappedSuperclass;
@@ -12,7 +13,7 @@ import com.mize.domain.jpa.NumberJPA;
 @XmlType(name="appNumber")
 @TypeDef(name = "number", defaultForType = Number.class, typeClass = NumberJPA.class)
 @MappedSuperclass
-public class Number implements java.io.Serializable,Comparable<Number>{
+public class Number implements Serializable, Comparable<Number>, Cloneable{
 	private static final long serialVersionUID = 449610013741237327L;
 	private Long baseValue;
 	private String numberValue;
@@ -113,16 +114,26 @@ public class Number implements java.io.Serializable,Comparable<Number>{
 	
 	@Override
 	public int compareTo(Number val) {
-		return baseValue.compareTo(val.baseValue);
+		if(this.baseValue == null && val.baseValue == null){
+			return 0;
+		}
+		if(this.baseValue != null){
+			return this.baseValue.compareTo(val.baseValue);
+		}
+		return 0;
 	}
 	
-	public boolean equals(Object object){
-		Number other = (Number)object;
-		if(this.isValid && other.isValid && this.baseValue != null){
-			return this.baseValue.equals(other.getBaseValue());
-		}else{
-			return true;
+	public boolean equals(Object obj){
+		if(obj instanceof Number){
+			Number other = (Number)obj;
+			if(this.baseValue == null && other.getBaseValue() == null){
+				return true;
+			}
+			if(this.baseValue != null){
+				return this.baseValue.equals(other.getBaseValue());
+			}
 		}
+		return false;
 	}
 	
 	@Override
@@ -131,4 +142,14 @@ public class Number implements java.io.Serializable,Comparable<Number>{
 				+ numberValue + ", isValid=" + isValid +"]";
 	}
 	
+	@Override
+	public Object clone(){
+		return getInstance(this.baseValue);
+	}
+	
+	@Override
+	public int hashCode() {
+		return (baseValue == null) ? 0 : baseValue.hashCode();
+	}
+			
 }

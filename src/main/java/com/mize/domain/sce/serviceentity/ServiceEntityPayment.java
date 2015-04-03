@@ -20,6 +20,7 @@ import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityContact;
 import com.mize.domain.common.MizeSceEntity;
 import com.mize.domain.datetime.Date;
+import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.JPASerializer;
 
 /**
@@ -46,7 +47,7 @@ public class ServiceEntityPayment extends MizeSceEntity implements Comparable<Se
 	private String isNewPayee;
 	private Date paymentDate;
 	private String paymentType;
-	
+	@CachedEntity
 	private EntityAddress payeeAddress;
 	private EntityContact payeeContact;
 
