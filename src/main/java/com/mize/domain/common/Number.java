@@ -114,7 +114,13 @@ public class Number implements Serializable, Comparable<Number>, Cloneable{
 	
 	@Override
 	public int compareTo(Number val) {
-		return baseValue.compareTo(val.baseValue);
+		if(this.baseValue == null && val.baseValue == null){
+			return 0;
+		}
+		if(this.baseValue != null){
+			return this.baseValue.compareTo(val.baseValue);
+		}
+		return 0;
 	}
 	
 	public boolean equals(Object obj){

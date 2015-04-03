@@ -137,7 +137,13 @@ public class BigDecimal implements Serializable, Comparable<BigDecimal>, Cloneab
 	
 	@Override
 	public int compareTo(BigDecimal val) {
-		return baseValue.compareTo(val.baseValue);
+		if(this.baseValue == null && val.baseValue == null){
+			return 0;
+		}
+		if(this.baseValue != null){
+			return this.baseValue.compareTo(val.baseValue);
+		}
+		return 0;
 	}
 	
 	public boolean equals(Object obj){

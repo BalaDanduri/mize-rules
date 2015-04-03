@@ -124,7 +124,13 @@ public class Date implements IDateTime, Comparable<Date>, Cloneable{
 	}	
 	
 	public int compareTo(Date date) {
-		return baseValue.compareTo(date.baseValue);
+		if(this.baseValue == null && date.baseValue == null){
+			return 0;
+		}
+		if(this.baseValue != null){
+			return this.baseValue.compareTo(date.baseValue);
+		}
+		return 0;
 	}
 	
 	public Date(long millis) {

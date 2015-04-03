@@ -122,7 +122,13 @@ public class DateTime implements IDateTime, Comparable<DateTime>, Cloneable{
 	}	
 	
 	public int compareTo(DateTime dateTime) {
-		return this.baseValue.compareTo(dateTime.baseValue);
+		if(this.baseValue == null && dateTime.baseValue == null){
+			return 0;
+		}
+		if(this.baseValue != null){
+			return this.baseValue.compareTo(dateTime.baseValue);
+		}
+		return 0;
 	}
 	
 	public long getMillis() {
