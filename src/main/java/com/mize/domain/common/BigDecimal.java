@@ -1,5 +1,6 @@
 package com.mize.domain.common;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 
 import javax.persistence.MappedSuperclass;
@@ -12,7 +13,7 @@ import com.mize.domain.jpa.BigDecimalJPA;
 @XmlType(name="appBigDecimal")
 @TypeDef(name = "bigDecimal", defaultForType = BigDecimal.class, typeClass = BigDecimalJPA.class)
 @MappedSuperclass
-public class BigDecimal implements java.io.Serializable,Comparable<BigDecimal>{
+public class BigDecimal implements Serializable, Comparable<BigDecimal>, Cloneable{
 	private static final long serialVersionUID = 4496100137434567327L;
 	private java.math.BigDecimal baseValue;
 	private String decimalValue;
@@ -139,13 +140,17 @@ public class BigDecimal implements java.io.Serializable,Comparable<BigDecimal>{
 		return baseValue.compareTo(val.baseValue);
 	}
 	
-	public boolean equals(Object object){
-		BigDecimal other = (BigDecimal)object;
-		if(this.isValid && other.isValid){
-			return this.baseValue.equals(other.getBaseValue());
-		}else{
-			return true;
+	public boolean equals(Object obj){
+		if(obj instanceof BigDecimal){
+			BigDecimal other = (BigDecimal)obj;
+			if(this.baseValue == null && other.getBaseValue() == null){
+				return true;
+			}
+			if(this.baseValue != null){
+				return this.baseValue.equals(other.getBaseValue());
+			}
 		}
+		return false;
 	}
 	
 	public BigDecimal add(BigDecimal bigDecimal){
@@ -209,6 +214,16 @@ public class BigDecimal implements java.io.Serializable,Comparable<BigDecimal>{
 		return "BigDecimal [baseValue=" + baseValue + ", decimalValue="
 				+ decimalValue + ", isValid=" + isValid + ", decimalFormat="
 				+ decimalFormat + "]";
+	}
+	
+	@Override
+	public Object clone(){
+		return createNewBigDecimal(this.baseValue);
+	}
+	
+	@Override
+	public int hashCode() {
+		return (baseValue == null) ? 0 : baseValue.hashCode();
 	}
 	
 }

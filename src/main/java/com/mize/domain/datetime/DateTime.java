@@ -258,24 +258,20 @@ public class DateTime implements IDateTime, Comparable<DateTime>, Cloneable{
 	
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result
-				+ ((dateTimeFormat == null) ? 0 : dateTimeFormat.hashCode());
-		result = prime * result
-				+ ((baseValue == null) ? 0 : baseValue.hashCode());
-		result = prime * result
-				+ ((dateTimeValue == null) ? 0 : dateTimeValue.hashCode());
-		return result;
+		return (baseValue == null) ? 0 : baseValue.hashCode();
 	}
 
-	public boolean equals(Object object){
-		DateTime other = (DateTime)object;
-		if(this.isValid && other.isValid){
-			return this.baseValue.equals(other.baseValue);
-		}else{
-			return true;
+	public boolean equals(Object obj){
+		if(obj instanceof DateTime){
+			DateTime other = (DateTime)obj;
+			if(this.baseValue == null && other.getBaseValue() == null){
+				return true;
+			}
+			if(this.baseValue != null){
+				return this.baseValue.equals(other.getBaseValue());
+			}
 		}
+		return false;
 	}
 		
 	public String toString(String dateTimeFormat, DateTimeZone dateTimeZone){	

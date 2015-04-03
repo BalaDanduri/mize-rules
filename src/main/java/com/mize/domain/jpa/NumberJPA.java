@@ -42,7 +42,11 @@ public class NumberJPA implements UserType, ResultSetIdentifierConsumer {
 
 	@Override
 	public int hashCode(Object arg0) throws HibernateException {
-		return 0;
+		if(arg0 != null){
+			return arg0.hashCode();
+		}else{
+			return 0;
+		}
 	}
 
 	@Override
