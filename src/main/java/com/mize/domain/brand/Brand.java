@@ -54,6 +54,7 @@ public class Brand extends MizeSceEntityAudit implements Comparable<Brand>{
 	private String tenantCode;
 	private List<BrandIntl> intls = new ArrayList<BrandIntl>();
 	private List<BrandSkin> skins = new ArrayList<BrandSkin>();
+	private String isDefault;
 	
 	public enum SearchType{
 		equals,like;	
@@ -289,6 +290,17 @@ public class Brand extends MizeSceEntityAudit implements Comparable<Brand>{
 		this.isActive = isActive;
 	}
 	
+	@Transient
+	public String getIsDefault() {
+		return isDefault;
+	}
+
+
+	public void setIsDefault(String isDefault) {
+		this.isDefault = isDefault;
+	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = PRIME;
