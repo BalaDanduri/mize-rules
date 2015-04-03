@@ -72,8 +72,7 @@ public class FormDefinitionCriteria extends MizeSceEntity implements Comparable<
 	@Override
 	public String toString() {
 		return "FormDefinitionCriteria [inspectionType=" + inspectionType
-				+ ", product=" + product + ", inspectionDate=" + inspectionDate
-				+ ", user=" + user + "]";
+				+ ", product=" + product + ", inspectionDate=" + inspectionDate + "]";
 	}
 
 	@Override

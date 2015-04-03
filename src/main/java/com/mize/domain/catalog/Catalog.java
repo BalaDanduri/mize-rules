@@ -227,9 +227,7 @@ public class Catalog extends MizeSceEntityAudit implements Comparable<Catalog> {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Catalog [tenant=");
-		builder.append(tenant);
-		builder.append(", catalogCode=");
+		builder.append("Catalog [catalogCode=");
 		builder.append(catalogCode);
 		builder.append(", catalogType=");
 		builder.append(catalogType);

@@ -144,7 +144,7 @@ public class CompanyUser extends Entity {
 
 	@Override
 	public String toString() {
-		return "CompanyUser [user=" + user + ", company=" + company
+		return "CompanyUser [company=" + company
 				+ ", isValidated=" + isValidated + ", validatedBy="
 				+ validatedBy + ", validatedDate=" + validatedDate
 				+ ", internalComments=" + internalComments + "]";

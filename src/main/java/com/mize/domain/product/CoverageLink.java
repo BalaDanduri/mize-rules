@@ -323,8 +323,7 @@ public class CoverageLink extends MizeSceEntity implements Comparable<CoverageLi
 				+ coverageTriggerType + ", coverageTriggerUOM="
 				+ coverageTriggerUOM + ", coverageType=" + coverageType
 				+ ", coverageUOM=" + coverageUOM + ", product=" + product
-				+ ", productCategory=" + productCategory + ", tenant=" + tenant
-				+ "]";
+				+ ", productCategory=" + productCategory + "]";
 	}
 
 	@Override

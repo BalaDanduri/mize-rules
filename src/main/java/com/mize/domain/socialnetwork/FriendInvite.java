@@ -25,8 +25,8 @@ public class FriendInvite {
 	}
 	@Override
 	public String toString() {
-		return "FriendInvite [provider=" + provider + ", providerIds=" + providerIds + ", searchString=" + searchString
-				+ ", user=" + user + ", inviteUserList=" + inviteUserList + ", friendInviteUserList="
+		return "FriendInvite [provider=" + provider + ", providerIds=" + providerIds + ", searchString=" + searchString 
+				+", inviteUserList=" + inviteUserList + ", friendInviteUserList="
 				+ friendInviteUserList + ", subject=" + subject + ", inviteMessage=" + inviteMessage
 				+ ", twitterInviteMessage=" + twitterInviteMessage + "]";
 	}

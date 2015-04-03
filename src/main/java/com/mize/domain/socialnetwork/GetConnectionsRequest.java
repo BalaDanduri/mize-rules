@@ -42,7 +42,7 @@ public class GetConnectionsRequest {
 	
 	@Override
 	public String toString() {
-		return "GetConnectionsRequest [user=" + user + ", provider=" + provider + ", searchString=" + searchString
+		return "GetConnectionsRequest [ provider=" + provider + ", searchString=" + searchString
 				+ ", status=" + status + ", index=" + pageIndex + "]";
 	}
 	

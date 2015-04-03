@@ -639,7 +639,6 @@ public class BusinessEntity extends MizeSceEntityAudit implements Comparable<Bus
 	public String toString() {
 		return "BusinessEntity [code=" + code + ", typeCode=" + typeCode
 				+ ", subTypeCode=" + subTypeCode + ", logo=" + logo
-				+ ", tenant=" + tenant + ", parentBE=" + parentBE
 				+ ", isActive=" + isActive + ", currencyCode=" + currencyCode
 				+ ", name=" + name + ", businessEntityReference="
 				+ businessEntityReference + ", statusCode=" + statusCode

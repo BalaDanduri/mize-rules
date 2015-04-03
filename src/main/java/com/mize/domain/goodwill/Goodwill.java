@@ -465,7 +465,7 @@ public class Goodwill extends MizeSceEntityAudit implements Comparable<Goodwill>
 
 	@Override
 	public String toString() {
-		return "Goodwill [tenant=" + tenant + ", code=" + code
+		return "Goodwill [code=" + code
 				+ ", statusCode=" + statusCode + ", typeCode=" + typeCode
 				+ ", description=" + description + ", currencyCode="
 				+ currencyCode + ", reference=" + reference + ", authorisedBy="
@@ -476,8 +476,7 @@ public class Goodwill extends MizeSceEntityAudit implements Comparable<Goodwill>
 				+ ", claimedEntityCode=" + claimedEntityCode
 				+ ", claimedEntityType=" + claimedEntityType
 				+ ", claimedEntityId=" + claimedEntityId + ", audits=" + audits
-				+ ", comments=" + comments + ", entityComment=" + entityComment
-				+ ", user=" + user + "]";
+				+ ", comments=" + comments + ", entityComment=" + entityComment +"]";
 	}
 
 

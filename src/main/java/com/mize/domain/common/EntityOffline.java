@@ -167,8 +167,7 @@ public class EntityOffline extends MizeSceEntityAudit implements Comparable<Enti
 	@Override
 	public String toString() {
 		return "EntityOffline [id=" + id + ", entityCode=" + entityCode
-				+ ", entityId=" + entityId + ", entityType=" + entityType
-				+ ", tenant=" + tenant + "]";
+				+ ", entityId=" + entityId + ", entityType=" + entityType + "]";
 	}
 
 	

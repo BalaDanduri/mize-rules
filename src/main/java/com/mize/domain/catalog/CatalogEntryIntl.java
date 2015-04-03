@@ -136,9 +136,7 @@ public class CatalogEntryIntl extends MizeSceEntityAudit implements Comparable<C
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("CatalogEntryIntl [catalogEntry=");
-		builder.append(catalogEntry);
-		builder.append(", itemName=");
+		builder.append("CatalogEntryIntl [itemName=");
 		builder.append(itemName);
 		builder.append(", itemDescription=");
 		builder.append(itemDescription);

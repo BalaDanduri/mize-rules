@@ -64,7 +64,7 @@ public class AppMessages extends MizeSceEntity implements Comparable<AppMessages
 
 	@Override
 	public String toString() {
-		return "AppMessages [appMessages=" + appMessages + "]";
+		return "";
 	}
 	 
 }

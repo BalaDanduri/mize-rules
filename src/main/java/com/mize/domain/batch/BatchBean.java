@@ -78,8 +78,7 @@ public class BatchBean implements IBatchBean{
 		return "BatchBean [className=" + className + ", fieldNames="
 				+ Arrays.toString(fieldNames) + ", keyNames="
 				+ Arrays.toString(keyNames) + ", multiRecord=" + multiRecord
-				+ ", sequence=" + sequence + ", childBeanMap=" + childBeanMap
-				+ ", method=" + method + "]";
+				+ ", sequence=" + sequence + ", method=" + method + "]";
 	}
 
 	

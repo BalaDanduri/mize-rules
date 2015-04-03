@@ -222,7 +222,7 @@ public class Country extends MizeSceEntityAudit implements Comparable<Country>{
 	@Override
 	public String toString() {
 		return "Country [code=" + code + ", code3=" + code3 + ", isActive="
-				+ isActive + ", tenant=" + tenant + " intls="+intls+"]";
+				+ isActive +"]";
 	}
 
 	public int compareTo(Country country) {

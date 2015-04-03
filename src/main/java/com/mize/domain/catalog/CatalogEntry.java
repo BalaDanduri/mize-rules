@@ -186,9 +186,7 @@ public class CatalogEntry extends MizeSceEntityAudit implements Comparable<Catal
 	@Override
 	public String toString() {
 		StringBuffer builder = new StringBuffer();
-		builder.append("CatalogEntry [catalog=");
-		builder.append(catalog);
-		builder.append(", itemCode=");
+		builder.append("CatalogEntry [itemCode=");
 		builder.append(itemCode);
 		builder.append(", isActive=");
 		builder.append(isActive);
