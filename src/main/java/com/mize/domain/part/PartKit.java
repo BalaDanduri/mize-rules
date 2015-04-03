@@ -263,7 +263,7 @@ public class PartKit extends MizeSceEntityAudit implements Comparable<PartKit>{
 
 	@Override
 	public String toString() {
-		return "PartKit [part=" + part + ", priceMethod=" + priceMethod
+		return "PartKit [priceMethod=" + priceMethod
 				+ ", type=" + type + ", isActive=" + isActive + ", startDate="
 				+ startDate + ", endDate=" + endDate + ", partKitItems="
 				+ partKitItems + "]";

@@ -146,10 +146,9 @@ public class ProductRepeatOrderAddress extends MizeSceEntity implements Comparab
 
 	@Override
 	public String toString() {
-		return "ProductRepeatOrderAddress [repeatOrder=" + repeatOrder + ", productRepeatOrderId="
+		return "ProductRepeatOrderAddress [ productRepeatOrderId="
 				+ productRepeatOrderId + ", billingAddressId=" + billingAddressId + ", billingAddress="
-				+ billingAddress + ", shippingAddressId=" + shippingAddressId + ", shippingAddress=" + shippingAddress
-				+ "]";
+				+ billingAddress + ", shippingAddressId=" + shippingAddressId + "]";
 	}
 
 	@Override

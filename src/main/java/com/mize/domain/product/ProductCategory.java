@@ -407,12 +407,12 @@ public class ProductCategory extends MizeSceEntityAudit implements Comparable<Pr
 	@Override
 	public String toString() {
 		return "ProductCategory [srcCategoryId=" + srcCategoryId + ", name="
-				+ name + ", photoLink=" + photoLink + ", parent=" + parent
+				+ name + ", photoLink=" + photoLink 
 				+ ", children=" + children + ", sourceCategory="
 				+ sourceCategory + ", department=" + department + ", level="
 				+ level + ", displayOrder=" + displayOrder + ", orderNumber="
 				+ orderNumber + ", isActive=" + isActive + ", active=" + active
-				+ ", tenant=" + tenant + ", categoryCode=" + categoryCode
+				+", categoryCode=" + categoryCode
 				+ ", prodCategoryIntls=" + intls + "]";
 	}
 

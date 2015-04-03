@@ -230,7 +230,7 @@ public class MizeJobInstance extends MizeSceEntityAudit implements Comparable<Mi
 		return "MizeJobInstance [job=" + job + ", instanceCode=" + instanceCode + ", instanceName=" + instanceName 
 				+ ", lastRunTime=" + lastRunTime + ", nextRunTime=" + nextRunTime + ", jobStatus=" + jobStatus 
 				+ ", jobParameters=" + jobParameters + ", schedule=" + schedule + ", isActive=" + isActive 
-				+ ", tenant=" + tenant + ", id=" + id + "]";
+				+ ", id=" + id + "]";
 	}
 	
 	@Override

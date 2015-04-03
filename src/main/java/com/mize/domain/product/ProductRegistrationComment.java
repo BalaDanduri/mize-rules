@@ -101,8 +101,7 @@ public class ProductRegistrationComment extends MizeSceEntity implements Compara
 
 	@Override
 	public String toString() {
-		return "ProductRegistrationComment [productRegistration="
-				+ productRegistration + ", comment=" + comment + "]";
+		return "ProductRegistrationComment [ comment=" + comment + "]";
 	}
 
 	@Override

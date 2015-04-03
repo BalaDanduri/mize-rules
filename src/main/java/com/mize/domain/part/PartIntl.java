@@ -87,7 +87,7 @@ public class PartIntl extends MizeSceEntityIntl implements Comparable<PartIntl> 
 
 	@Override
 	public String toString() {
-		return "PartIntl [part=" + part + ", locale=" + locale + ", name="
+		return "PartIntl [locale=" + locale + ", name="
 				+ name + ", description=" + description + "]";
 	}
 

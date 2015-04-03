@@ -466,7 +466,7 @@ public class PurchaseOrderItem extends MizeSceEntityAudit implements Comparable<
 
 	@Override
 	public String toString() {
-		return "PurchaseOrderItem [purchaseOrder=" + purchaseOrder + ", type="
+		return "PurchaseOrderItem [type="
 				+ type + ", number=" + number + ", serial=" + serial + ", name="
 				+ name + ", description=" + description + ", uom=" + uom
 				+ ", status=" + status + ", priceCode=" + priceCode

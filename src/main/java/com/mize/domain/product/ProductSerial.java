@@ -307,7 +307,7 @@ public class ProductSerial extends MizeSceEntityAudit implements Comparable<Prod
 
 	@Override
 	public String toString() {
-		return "ProductSerial [tenant=" + tenant + ", product=" + product
+		return "ProductSerial [product=" + product
 				+ ", serialNumber=" + serialNumber + ", invoiceBE="
 				+ invoiceBusinessEntity + ",deliveryBE="
 				+ shippedBusinessEntity + ", buildDate=" + buildDate + "]";

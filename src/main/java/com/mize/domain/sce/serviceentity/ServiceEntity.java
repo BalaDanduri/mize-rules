@@ -511,7 +511,7 @@ public class ServiceEntity extends MizeSceEntityAudit implements Comparable<Serv
 				+ totalAmount + ", audits=" + audits + ", entityRelations="
 				+ entityRelations + ", messages=" + messages + ", comments="
 				+ comments + ", attachments=" + attachments + ", source="
-				+ source + ", user=" + user + "]";
+				+ source +"]";
 	}
 
 }

@@ -214,8 +214,6 @@ public class ServiceEntityAudit extends MizeSceEntity implements Comparable<Serv
 		StringBuilder builder = new StringBuilder();
 		builder.append("SEAudit [entityId=");
 		builder.append(entityId);
-		builder.append(", serviceEntity=");
-		builder.append(serviceEntity);
 		builder.append(", statusCode=");
 		builder.append(statusCode);
 		builder.append(", statusDate=");

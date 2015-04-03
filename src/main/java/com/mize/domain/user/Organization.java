@@ -41,7 +41,7 @@ public class Organization extends MizeSceEntity implements Comparable<Organizati
 	
 	@Override
 	public String toString() {
-		return "Organization [name=" + name + ", address=" + address + ", parent=" + parent + ", id=" + id + "]";
+		return "Organization [name=" + name + ", address=" + address + " id=" + id + "]";
 	}
 	
 	@Override

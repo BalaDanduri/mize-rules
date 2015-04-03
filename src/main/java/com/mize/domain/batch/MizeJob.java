@@ -222,7 +222,7 @@ public class MizeJob extends MizeSceEntityAudit implements Comparable<MizeJob>{
 	public String toString() {
 		return "MizeJob [jobCode=" + jobCode + ", jobName=" + jobName + ", jobDescription=" + jobDescription 
 				+ ", jobInstances=" + jobInstances + ", isActive=" + isActive + ", jobParameters=" + jobParameters 
-				+ ", tenant=" + tenant + ", id=" + id + "]";
+				+ ", id=" + id + "]";
 	}
 
 	@Override

@@ -200,8 +200,6 @@ public class ServiceEntityAttachment extends MizeSceEntity implements Comparable
 		StringBuilder builder = new StringBuilder();
 		builder.append("SEAttachment [entityId=");
 		builder.append(entityId);
-		builder.append(", serviceEntity=");
-		builder.append(serviceEntity);
 		builder.append(", typeCode=");
 		builder.append(typeCode);
 		builder.append(", name=");

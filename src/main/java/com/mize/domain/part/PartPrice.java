@@ -266,9 +266,8 @@ public class PartPrice extends MizeSceEntityAudit implements Comparable<PartPric
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("PartPrice [part=");
-		builder.append(part);
-		builder.append(", unitPrice=");
+		builder.append("PartPrice [");
+		builder.append(" unitPrice=");
 		builder.append(unitPrice);
 		builder.append(", listPrice=");
 		builder.append(listPrice);

@@ -166,7 +166,7 @@ public class ProductFeedback extends MizeSceEntity implements Comparable<Product
 	@Override
 	public String toString() {
 		return "ProductFeedback [feedback=" + feedback + ", feebackTitle="
-				+ feebackTitle + ", rating=" + rating + ", user=" + user
+				+ feebackTitle + ", rating=" + rating 
 				+ ", review=" + review + ", comments=" + comments
 				+ ", countOfComments=" + countOfComments + ", countOfThumbsUp="
 				+ countOfThumbsUp + ", countOfThumbsDown=" + countOfThumbsDown

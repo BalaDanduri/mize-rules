@@ -131,7 +131,7 @@ public class PartAttribute extends MizeSceEntity implements Comparable<PartAttri
 
 	@Override
 	public String toString() {
-		return "PartAttribute [part=" + part + ", code=" + code + ", value="
+		return "PartAttribute [code=" + code + ", value="
 				+ value + ", uom=" + uom + "]";
 	}
 

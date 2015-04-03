@@ -293,8 +293,7 @@ public class InspectionFormEquipmentOwner extends MizeSceEntity implements Compa
 
 	@Override
 	public String toString() {
-		return "InspectionFormEquipmentOwner [id=" + id + ", businessEntity="
-				+ businessEntity + ", code=" + code + ", firstName="
+		return "InspectionFormEquipmentOwner [id=" + id + ", code=" + code + ", firstName="
 				+ firstName + ", lastName=" + lastName + ", middleInitial="
 				+ middleInitial + ", name=" + name + ", ownerAddress="
 				+ ownerAddress + ", ownerContact=" + ownerContact

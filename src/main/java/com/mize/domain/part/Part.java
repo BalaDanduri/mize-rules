@@ -245,7 +245,7 @@ public class Part extends MizeSceEntityAudit implements Comparable<Part>{
 	
 	@Override
 	public String toString() {
-		return "Part [tenant=" + tenant + ", code=" + code + ", type=" + type
+		return "Part [code=" + code + ", type=" + type
 				+ ", isActive=" + isActive + ", isKit=" + isKit
 				+ ", isSerialized=" + isSerialized + ", isReturnable="
 				+ isReturnable + ", uom=" + uom + ", partIntl=" + partIntl

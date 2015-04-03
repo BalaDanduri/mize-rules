@@ -33,14 +33,14 @@ public class MizeAsset extends MizeSceEntity implements Comparable<MizeAsset>{
 	
 	@Override
 	public String toString() {
-		return "MizeAsset [tenant=" + tenant + ", name=" + name
+		return "MizeAsset [name=" + name
 				+ ", assetModels=" + assetModels + ", type=" + type
 				+ ", brandId=" + brandId + ", brandName=" + brandName
 				+ ", contentType=" + contentType + ", storageType="
 				+ storageType + ", filePath=" + filePath + ", accessURL="
 				+ accessURL + ", model=" + model + ", category=" + category
-				+ ", entryFile=" + entryFile + ", id=" + id + ", user=" + user
-				+ ", baseAccessURL=" + baseAccessURL + ", downloadURL="
+				+ ", entryFile=" + entryFile + ", id=" + id 
+				+  ", baseAccessURL=" + baseAccessURL + ", downloadURL="
 				+ downloadURL + "]";
 	}
 	/**

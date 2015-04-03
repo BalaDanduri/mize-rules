@@ -451,7 +451,7 @@ public class ServiceBulletin extends MizeSceEntityAudit implements Comparable<Se
 				+ bulletinIntl + ", audits=" + audits + ", messages="
 				+ messages + ", comments=" + comments + ", attachments="
 				+ attachments + ", respBusinessUnit=" + respBusinessUnit
-				+ ", user=" + user + "]";
+				+ "]";
 	}
 
 	@Override

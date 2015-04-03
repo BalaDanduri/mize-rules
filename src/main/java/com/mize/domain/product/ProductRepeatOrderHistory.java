@@ -122,8 +122,8 @@ public class ProductRepeatOrderHistory extends MizeSceEntity implements Comparab
 
 	@Override
 	public String toString() {
-		return "ProductRepeatOrderHistory [productRepeatOrder=" + productRepeatOrder + ", orderDate=" + orderDate
-				+ ", orderSnapshot=" + orderSnapshot + ", createdDate=" + createdDate + "]";
+		return "ProductRepeatOrderHistory [orderDate=" + orderDate
+				+", createdDate=" + createdDate + "]";
 	}
 
 	@Override

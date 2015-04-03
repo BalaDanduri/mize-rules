@@ -341,7 +341,7 @@ public class ProductRegister extends MizeSceEntity implements Comparable<Product
 	@Override
 	public String toString() {
 		return "ProductRegister [brand=" + brand + ", businessEntity="
-				+ businessEntity + ", product=" + product + ", user=" + user
+				+ businessEntity + ", user=" + user
 				+ ", serialNumber=" + serialNumber + ", purchaseDate="
 				+ purchaseDate + ", purchasePrice=" + purchasePrice
 				+ ", purchaseStore=" + purchaseStore + ", warrantyExpiryDate="

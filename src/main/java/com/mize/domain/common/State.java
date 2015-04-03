@@ -170,7 +170,7 @@ public class State extends MizeSceEntityAudit implements Comparable<State>{
 
 	@Override
 	public String toString() {
-		return "State [code=" + code + ", stateIntlList=" + intls + "]";
+		return "State [id" + id + ",code=" + code + "]";
 	}
 
 	@Override
