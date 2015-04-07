@@ -32,12 +32,14 @@ public class ServiceEntityRequestLabor extends MizeSceEntity implements Comparab
 	private static final long serialVersionUID = 7457276515383997804L;
 	
 	private ServiceEntityRequest serviceEntityRequest;
-	private LaborHour laborHour;
+	
 	private Long laborHourId;
 	private String laborType;
 	private String laborCode;
 	private String laborName;
 	private String laborDescription;
+	
+	private LaborHour laborHour;
 	private ServiceEntityAmount laborAmount;
 	
 	private boolean isUpdated;

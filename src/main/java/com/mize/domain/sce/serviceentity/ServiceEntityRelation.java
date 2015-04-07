@@ -2,14 +2,13 @@ package com.mize.domain.sce.serviceentity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -27,8 +26,13 @@ public class ServiceEntityRelation extends MizeSceEntity implements Comparable<S
 	private static final long serialVersionUID = 1131204751473949728L;
 	
 	private ServiceEntity serviceEntity;
-	private ServiceEntity relatedEntity;
+	//private ServiceEntity relatedEntity;
+	
+	
+	private Long entityCode;	
+	private Long relatedEntityId;
 	private String relationType;
+	
 
 	public ServiceEntityRelation() {
 		
@@ -59,7 +63,7 @@ public class ServiceEntityRelation extends MizeSceEntity implements Comparable<S
 		this.serviceEntity = serviceEntity;
 	}
 	
-	@OneToOne(fetch = FetchType.LAZY )
+	/*@OneToOne(fetch = FetchType.LAZY )
 	@JoinColumn(name = "service_entity_rltn_id")
 	@JsonSerialize(using=JPASerializer.class)
 	public ServiceEntity getRelatedEntity() {
@@ -68,7 +72,7 @@ public class ServiceEntityRelation extends MizeSceEntity implements Comparable<S
 	
 	public void setRelatedEntity(ServiceEntity relatedEntity) {
 		this.relatedEntity = relatedEntity;
-	}
+	}*/
 	
 	@Column(name = "srvc_enty_rltn_type")
 	public String getRelationType() {
@@ -77,6 +81,24 @@ public class ServiceEntityRelation extends MizeSceEntity implements Comparable<S
 
 	public void setRelationType(String relationType) {
 		this.relationType = relationType;
+	}
+	
+	@Transient
+	public Long getEntityCode() {
+		return entityCode;
+	}
+
+	public void setEntityCode(Long entityCode) {
+		this.entityCode = entityCode;
+	}
+	
+	@Column(name = "service_entity_rltn_id")
+	public Long getRelatedEntityId() {
+		return relatedEntityId;
+	}
+
+	public void setRelatedEntityId(Long relatedEntityId) {
+		this.relatedEntityId = relatedEntityId;
 	}
 
 	@Override

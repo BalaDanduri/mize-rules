@@ -19,6 +19,7 @@ import com.mize.domain.businessentity.BusinessEntity;
 import com.mize.domain.common.EntityAddress;
 import com.mize.domain.common.EntityContact;
 import com.mize.domain.common.MizeSceEntity;
+import com.mize.domain.util.CachedEntity;
 import com.mize.domain.util.JPASerializer;
 
 /**
@@ -33,18 +34,20 @@ public class ServiceEntityProvider extends MizeSceEntity implements Comparable<S
 	
 	private ServiceEntity serviceEntity;
 	private BusinessEntity businessEntity;
+	
 	private Long providerId;
 	private String code;
 	private String typeCode;
 	private String name;
 	private String firstName;
 	private String lastName;
-	private String middleInitial;
-	private EntityAddress address;
-	private EntityContact contact;
+	private String middleInitial;	
 	private String reference;
 	private String isNewProvider;
-
+	@CachedEntity
+	private EntityAddress address;
+	private EntityContact contact;
+	
 	public ServiceEntityProvider() {
 		
 	}
